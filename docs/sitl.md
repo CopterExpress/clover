@@ -1,7 +1,7 @@
 Симуляция PX4
 ===
 
-Симуляция PX4 возможна в ОС Linux и OS X с использованием систем симуляции физической среды [jMavSim](https://pixhawk.org/dev/hil/jmavsim) и [Gazebo](http://gazebosim.org).
+Симуляция PX4 возможна в ОС Linux и macOS с использованием систем симуляции физической среды [jMavSim](https://pixhawk.org/dev/hil/jmavsim) и [Gazebo](http://gazebosim.org).
 
 jMavSim является легковесной средой, предназначенной только для тестирование мультироторных летательных систем; Gazbo – универсальная среда для любых типов роботов.
 
@@ -11,7 +11,7 @@ jMavSim является легковесной средой, предназна
 1. Склонировать репозиторий с PX4.
 
 ```bash
-https://github.com/PX4/Firmware.git
+git clone https://github.com/PX4/Firmware.git
 cd Firmware
 ```
 
