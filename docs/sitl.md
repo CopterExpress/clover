@@ -37,9 +37,11 @@ Gazebo
 brew install gazebo7
 ```
 
-На Linux:
+На Linux (Debian):
 
-TODO
+```bash
+sudo apt-get install gazebo7 libgazebo7-dev
+```
 
 Запустите симуляцию, находясь в папке Firmware:
 
