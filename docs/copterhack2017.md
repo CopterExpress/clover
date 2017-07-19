@@ -7,4 +7,9 @@ Copter Hack 2017
 Полезные статьи
 ---
 
+
+Ссылка на записи лекций:
+
+https://copterexpress.timepad.ru/event/510375/
+
 * [Настройка коптера](docs/setup.md)
