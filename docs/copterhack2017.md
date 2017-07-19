@@ -6,16 +6,16 @@ Copter Hack 2017
 
 Полезные статьи
 ---
-Неплохая вводная статья
+* Неплохая вводная статья
 https://habrahabr.ru/post/227425/ 
 
-Сигналы, применяющиеся в дронах
+* Сигналы, применяющиеся в дронах
 https://geektimes.ru/post/258186/ 
 
-Хорошая статья про ПИДы
+* Хорошая статья про ПИДы
 https://habrahabr.ru/company/technoworks/blog/216437/
 
-Запись видеолекций
+* Запись видеолекций
 https://copterexpress.timepad.ru/event/510375/
 
 * [Настройка коптера](docs/setup.md)
