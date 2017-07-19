@@ -18,4 +18,9 @@ https://habrahabr.ru/company/technoworks/blog/216437/
 * Запись видеолекций
 https://copterexpress.timepad.ru/event/510375/
 
+
+Ссылка на записи лекций:
+
+https://copterexpress.timepad.ru/event/510375/
+
 * [Настройка коптера](docs/setup.md)
