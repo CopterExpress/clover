@@ -21,3 +21,5 @@ https://copterexpress.timepad.ru/event/510375/
 * [Настройка коптера](setup.md)
 
 * [Aubio](https://aubio.org), библиотека для анализа звука (музыки)
+
+* Пакеты для работы с музыкой для Python https://wiki.python.org/moin/PythonInMusic
