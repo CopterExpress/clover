@@ -18,6 +18,6 @@ https://habrahabr.ru/company/technoworks/blog/216437/
 * Запись видеолекций
 https://copterexpress.timepad.ru/event/510375/
 
-* [Настройка коптера](docs/setup.md)
+* [Настройка коптера](setup.md)
 
 * [Aubio](https://aubio.org), библиотека для анализа звука (музыки)
