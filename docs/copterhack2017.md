@@ -19,3 +19,5 @@ https://habrahabr.ru/company/technoworks/blog/216437/
 https://copterexpress.timepad.ru/event/510375/
 
 * [Настройка коптера](docs/setup.md)
+
+* [Aubio](https://aubio.org), библиотека для анализа звука (музыки)
