@@ -7,11 +7,9 @@ Copter Hack 2017
 Модули
 ---
 
-* ROS-модуль для взаимодействия с сервером воспроизведения музыки
-https://github.com/CopterExpress/copter_hack_music
+* ROS-модуль для взаимодействия с сервером воспроизведения музыки https://github.com/CopterExpress/copter_hack_music
 
-* Исходник сервера воспроизведения музыки
-https://github.com/CopterExpress/copter_hack_music_server
+* Исходник сервера воспроизведения музыки https://github.com/CopterExpress/copter_hack_music_server
 
 Полезные статьи
 ---
