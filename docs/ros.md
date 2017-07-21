@@ -26,4 +26,4 @@ TODO
 Mavros
 ---
 
-TODO
+Основная статья: http://wiki.ros.org/mavros
