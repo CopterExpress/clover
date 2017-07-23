@@ -13,6 +13,13 @@ Copter Hack 2017
 
 Полезные статьи
 ---
+
+* [Настройка коптера](setup.md)
+
+* [Полетные режимы](modes.md)
+
+* [Пакет MAVRos](mavros.md)
+
 * Неплохая вводная статья
 https://habrahabr.ru/post/227425/ 
 
@@ -24,8 +31,6 @@ https://habrahabr.ru/company/technoworks/blog/216437/
 
 * Запись видеолекций
 https://copterexpress.timepad.ru/event/510375/
-
-* [Настройка коптера](setup.md)
 
 * [Aubio](https://aubio.org), библиотека для анализа звука (музыки)
 
