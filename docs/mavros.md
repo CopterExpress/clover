@@ -23,7 +23,7 @@ roslaunch mavros px4.launch fcu_url:=udp://@<ip>:14557
 Основные сервисы
 ---
 
-```/mavros/set_mode``` – установить полетный режим контроллера. Обычно устанавливается режим OFFBOARD (для управления с Raspberry Pi).
+```/mavros/set_mode``` – установить [полетный режим](modes.md) контроллера. Обычно устанавливается режим OFFBOARD (для управления с Raspberry Pi).
 
 ```/mavros/cmd/arming``` - включить или выключить моторы беспилотника (изменить armed-статус).
 
@@ -38,7 +38,7 @@ roslaunch mavros px4.launch fcu_url:=udp://@<ip>:14557
 
 ```/mavros/global_position/global``` – текущая глобальная позиция (широта, долгота, высота).
 
-```/mavros/global_position/local``` - глобальная позиция в системе координат UTM.
+```/mavros/global_position/local``` - глобальная позиция в системе координат [UTM](https://ru.wikipedia.org/wiki/Система_координат_UTM).
 
 ```/mavros/global_position/rel_alt``` – относительная высота (относительно высота включения моторов).
 
