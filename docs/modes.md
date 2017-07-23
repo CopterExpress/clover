@@ -34,3 +34,11 @@ TODO
 ### Управление с внешнего компьютера
 
 * OFFBOARD — режим для полета по командам MAVLink. Управление с внешнего компьютера (например, Raspberry Pi).
+
+Основные используемые пакеты MAVLink:
+
+* MAV_CMD_COMPONENT_ARM_DISARM
+* [SET_POSITION_TARGET_LOCAL_NED](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED)
+* [SET_ATTITUDE_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET)
+
+См: [Управление коптером с помощью пакета MAVROS](mavros.md)
