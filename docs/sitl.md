@@ -18,7 +18,7 @@ cd Firmware
 jMavSim
 --
 
-Основная статья: https://dev.px4.io/en/simulation/sitl.html
+Основная статья: https://dev.px4.io/en/simulation/jmavsim.html
 
 Для симуляции с использованием легковесной среды jMavSim используйте команду:
 
