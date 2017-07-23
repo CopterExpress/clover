@@ -26,7 +26,7 @@ jMavSim
 make posix_sitl_default jmavsim
 ```
 
-Для использования модуля рассчета позиции LPE вместо EKF2, используйте:
+Для использования модуля расчета позиции LPE вместо EKF2, используйте:
 
 ```bash
 make posix_sitl_lpe jmavsim
