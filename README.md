@@ -33,7 +33,7 @@ Raspberry Pi — это один из самых известных однопл
 
 * [Работа с симулятором (SITL)](docs/sitl.md)
 * [Настройка инструментов для программного управления PX4](docs/setup.md)
-* [Полное описание протокола сообщений MavLink](https://pixhawk.ethz.ch/mavlink/)
+* [Полное описание протокола MAVLink](https://pixhawk.ethz.ch/mavlink/)
 * [Информация о фреймворке ROS](https://github.com/CopterExpress/clever/blob/master/docs/ros.md)
 * [Пакет MAVROS](docs/mavros.md)
 * Использование модуля камеры
