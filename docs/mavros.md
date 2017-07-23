@@ -40,7 +40,7 @@ roslaunch mavros px4.launch fcu_url:=udp://@<ip>:14557
 
 ```/mavros/global_position/local``` — глобальная позиция в системе координат [UTM](https://ru.wikipedia.org/wiki/Система_координат_UTM).
 
-```/mavros/global_position/rel_alt``` — относительная высота (относительно высота включения моторов).
+```/mavros/global_position/rel_alt``` — относительная высота (относительно высоты включения моторов).
 
 Основные топики для публикации
 ---
