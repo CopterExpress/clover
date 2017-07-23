@@ -59,4 +59,4 @@ roslaunch mavros px4.launch fcu_url:=udp://@<ip>:14557
 
 ```/mavros/setpoint_raw/attitude``` — отправка пакета [SET_ATTITUDE_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET). Позвлояет установить целевую ориенатацию /угловые скорости и уровень газа. Выбор устанавливаемых величин осуществляется с помощью поля ``type_mask``
 
-```/mavros/setpoint_raw/global``` — отправка пакета [SET_POSITION_TARGET_GLOBAL_INT](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах (ширина, долгота, высота), а также скорости полета. **Не поддерживается в PX4** ([Issue](https://github.com/PX4/Firmware/issues/7552)).
+```/mavros/setpoint_raw/global``` — отправка пакета [SET_POSITION_TARGET_GLOBAL_INT](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах (ширина, долгота, высота), а также скорости полета. **Не поддерживается в PX4** (issue](https://github.com/PX4/Firmware/issues/7552)).
