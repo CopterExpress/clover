@@ -10,6 +10,17 @@ Copter Hack 2017
 
 * Исходник сервера воспроизведения музыки https://github.com/CopterExpress/copter_hack_music_server
 
+Просмотр видео с камеры
+---
+
+Выполнить на Raspberry:
+
+```bash
+rosrun web_video_server web_video_server
+```
+
+Открыть в браузере странцу http://<ip raspberry>:8080
+
 Полезные статьи
 ---
 
