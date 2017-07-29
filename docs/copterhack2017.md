@@ -7,7 +7,9 @@ Copter Hack 2017
 Модули
 ---
 
-* ROS-модуль для взаимодействия с сервером воспроизведения музыки https://github.com/CopterExpress/copter_hack_music
+* Навигация в поле маркеров и упрощенное управление коптером: https://github.com/CopterExpress/marker_navigator (установлено на флешке)
+
+* ROS-модуль для взаимодействия с сервером воспроизведения музыки https://github.com/CopterExpress/copter_hack_music (установлено на флешке)
 
 * Исходник сервера воспроизведения музыки https://github.com/CopterExpress/copter_hack_music_server
 
