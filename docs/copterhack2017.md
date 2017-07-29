@@ -21,6 +21,11 @@ rosrun web_video_server web_video_server
 
 Открыть в браузере странцу http://<ip raspberry>:8080
 
+SSID Wi-Fi
+---
+
+Чтобы изменить SSID раздаваемого Wi-Fi необходимо любым способом изменить параметр ssid в файле ``/etc/hostapd/hostapd.conf``.
+
 Полезные статьи
 ---
 
