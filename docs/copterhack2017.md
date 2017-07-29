@@ -19,7 +19,7 @@ Copter Hack 2017
 rosrun web_video_server web_video_server
 ```
 
-Открыть в браузере странцу http://<ip raspberry>:8080
+Открыть в браузере странцу ``http://<ip raspberry>:8080``.
 
 SSID Wi-Fi
 ---
