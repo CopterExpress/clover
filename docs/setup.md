@@ -35,3 +35,13 @@ rostopic echo /mavros/state
 9. Отключить Safety Switch, если он не установлен, поменяв параметр CBRK_IO_SAFETY на 22027.
 
 10. Включить land detector (если необходим режим AUTO.LAND), изменив значения параметра COM_DISARM_LAND. Подробнее: https://dev.px4.io/en/tutorials/land_detector.html
+
+Настройка PX4 для использования marker_navigator
+===
+
+Для полетов по полю маркеров убедиться, что:
+
+* SYS_MC_EST_GROUP = local_position_estimator
+* В LPE_FUSION установлены **только** vision position, vision yaw, land detector. При желании, можно включить Baro (барометр).
+* Выкючен компас: ATT_W_MAG = 0
+* Ориентация по Yaw по зрению: ATT_EXT_HDG_M = Vision
