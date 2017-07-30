@@ -44,4 +44,4 @@ rostopic echo /mavros/state
 * SYS_MC_EST_GROUP = local_position_estimator
 * В LPE_FUSION установлены **только** vision position, vision yaw, land detector. При желании, можно включить Baro (барометр).
 * Выключен компас: ATT_W_MAG = 0
-* Ориентация по Yaw по зрению: ATT_EXT_HDG_M = Vision
+* Включена ориентация по Yaw по зрению: ATT_EXT_HDG_M = Vision
