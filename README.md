@@ -1,4 +1,4 @@
-# Клевер Sense
+# Клевер
 
 <img src="img/clever.jpg" align=right width="300px">
 
