@@ -1,5 +1,5 @@
-"Клевер"
-=======
+Клевер
+======
 
 <img src="img/clever.jpg" align="right" width="300px" alt="Клевер">
 
