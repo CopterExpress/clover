@@ -106,4 +106,4 @@
 
 ![Вращение моторов](../img/brrc2205ondeck.png)
 
-
+vnvjm
