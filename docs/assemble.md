@@ -77,7 +77,6 @@
 17. Ручка B (VrB).
 
 ![radio Transmitter](../img/radioTransmitter.png)
-//добавить обозначения 
 
 
 Дополнительное оборудование
