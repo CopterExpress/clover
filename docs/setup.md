@@ -3,7 +3,8 @@
 
 ### 1. Состав пульта FLYSKY i6
 ---------------------
-![Состав пульта] (../img/consistofTransmitter.jpg)
+![Состав пульта](../img/consistofTransmitter.jpg)
+
 
 ### 2. Установка QGroundCongtrol
 * Скачиваем установочный файл для Windows/iOS по ссылке [QGroundCongtrol](http://qgroundcontrol.com/downloads/).
@@ -19,7 +20,7 @@
 
 ### 4. Обновление прошивки Pixhawk
 
-![Обновление прошивки] (../img/firmwarePX4.jpg)
+![Обновление прошивки](../img/firmwarePX4.jpg)
 
 1. Заходим в Vehicle Setup.
 2. Выбираем Firmware.
@@ -32,7 +33,7 @@
 
 ### 5. Настройка Pixhawk
 
-![Главное окно] (../img/mainWindow.jpg)
+![Главное окно](../img/mainWindow.jpg)
 
 1. Системы, нуждающиеся в настройке: Airframe, Radio, Sensors, Flight Mode
 2. Текущая прошивка контроллера.
@@ -41,14 +42,14 @@
 
 ### 6. Выбор рамы
 
-![ Выбор рамы] (../img/airframeSetup.jpg)
+![ Выбор рамы](../img/airframeSetup.jpg)
 
 1. Заходим в меню Airframe.
 2. Выбираем тип рамы Quadrotor X.
 3. Выбираем тип навесных элементов Generic Quadrotor X config
 4. Перемещаемся в начало списка и сохраняем настройки Apply and Restart
 
-![Внимание!] (../img/attentionSave.jpg)
+![Внимание!](../img/attentionSave.jpg)
 
 5. Повторно подтверждаем Apply
 6. Ждем, пока Pixhawk  выполнит сохранение и перезагрузится
@@ -66,7 +67,7 @@
   ![ Индикация пульта] (../img/unblockView.jpg)
   * Светодиод на приемнике горит непрерывно красным
   
- При наличиии проблем с подключением щелкните ![здесь] (../notes/radierrors.md)
+ При наличиии проблем с подключением щелкните ![здесь](../notes/radierrors.md)
 
 
 
