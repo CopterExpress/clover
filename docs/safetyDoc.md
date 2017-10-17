@@ -28,7 +28,7 @@
 
 ![Паяльник состав](../img/solderConsist.jpg)
 
-
+![Подробнее](../docs/tb.md)
 
 
 
