@@ -3,5 +3,5 @@
     "description": "Конструктор квадрокоптера «Клевер»",
     "author": "Copter Express",
     "language": "ru",
-    "plugins": ["youtube"]
+    "plugins": ["youtube", "richquotes"]
 }
