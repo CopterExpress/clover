@@ -1,4 +1,26 @@
-# Summary
+# Клевер
 
 * [Введение](README.md)
 * [Сборка](docs/assemble.md)
+* [Первоначальная настройка](docs/setup.md)
+* [Полетные режимы](docs/modes.md)
+* [Неисправности радиоаппарутары](docs/radioerrors.md)
+* [Raspberry Pi](docs/raspberry.md)
+* [SSH-доступ](docs/ssh.md)
+* [Безопасность](docs/safety.md)
+* [Техника безопасности по пайке](docs/tb.md)
+* [Работа с ROS](docs/ros.md)
+* [MAVROS](docs/mavros.md)
+* [Работа с SITL](docs/sitl.md)
+* Учебник
+    * [Урок 1](docs/les1.md)
+    * [Урок 2](docs/les2.md)
+    * [Урок 7](docs/les7.md)
+    * [Урок 8](docs/les8.md)
+    * [Урок 9](docs/les9.md)
+    * [Урок 11](docs/les11.md)
+    * [Урок 13](docs/les13.md)
+    * [Урок 15](docs/les15.md)
+    * [Урок 16](docs/les16.md)
+* [Полезные ссылки](docs/links.md)
+* [CopterHack-2017](docs/copterhack2017.md)

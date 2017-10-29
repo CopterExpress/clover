@@ -1,5 +1,6 @@
 {
     "title": "Clever",
     "author": "Copter Express",
-    "language": "ru"
+    "language": "ru",
+    "plugins": ["youtube"]
 }
