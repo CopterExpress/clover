@@ -1,6 +1,8 @@
 Copter Hack 2017
 ===
 
+{% youtube src="https://www.youtube.com/watch?v=xgXheg3TTs4" %}{% endyoutube %}
+
 Модули
 ---
 
