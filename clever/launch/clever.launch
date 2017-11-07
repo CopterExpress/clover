@@ -1,7 +1,7 @@
 <launch>
     <arg name="fcu_conn" default="uart"/>
     <arg name="bridge" default="false"/>
-    <arg name="viz" default="false"/>
+    <arg name="viz" default="true"/>
     <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
