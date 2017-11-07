@@ -1,0 +1,11 @@
+[Unit]
+Description=Launcher for the ROS master, parameter server and rosout logging node
+After=network.target
+
+[Service]
+EnvironmentFile=/home/pi/catkin_ws/src/clever/deploy/roscore.env
+ExecStart=/opt/ros/kinetic/bin/roslaunch clever clever.launch
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

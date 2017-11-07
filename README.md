@@ -1,3 +1,34 @@
 # clever_bundle
 
-Здесь будет великая вещь.
+Пакет программ и библиотек для Клевера.
+
+Установка
+---------
+
+Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever` (**важно**):
+
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/CopterExpress/clever_bundle.git clever
+```
+
+Пересобрать ROS-пакеты:
+
+```bash
+cd ~/catkin_ws
+catkin_make -j1
+```
+
+Включить сервис roscore (если он не включен):
+
+```bash
+sudo systemctl enable catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl start roscore
+```
+
+Включить сервис clever:
+
+```bash
+sudo systemctl enable catkin_ws/src/clever/deploy/clever.service
+sudo systemctl start clever
+```
