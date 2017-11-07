@@ -1,0 +1,32 @@
+<launch>
+    <arg name="fcu_conn" default="uart"/>
+    <arg name="bridge" default="false"/>
+    <arg name="viz" default="false"/>
+    <arg name="web_server" default="true"/>
+    <arg name="web_video_server" default="true"/>
+    <arg name="rosbridge" default="true"/>
+    <arg name="camera" default="false"/>
+
+    <!-- mavros -->
+    <include file="$(find clever)/launch/mavros.launch">
+        <arg name="fcu_conn" value="$(arg fcu_conn)"/>
+        <arg name="bridge" value="$(arg bridge)"/>
+        <arg name="viz" value="$(arg viz)"/>
+    </include>
+
+    <!-- web server -->
+    <include file="$(find clever)/launch/web_server.launch" if="$(arg web_server)"/>
+
+    <!-- web video server -->
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)"/>
+
+    <!-- TODO: marker position estimator -->
+
+    <!-- TODO: simplified offboard control -->
+    <!--<node name="offboard" pkg="clever" type="offboard.py" output="screen"/>-->
+
+    <include file="$(find clever)/launch/bottom_camera.launch" if="$(arg camera)"/>
+
+    <!-- rosbridge -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(arg rosbridge)"/>
+</launch>
