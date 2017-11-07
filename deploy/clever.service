@@ -1,6 +1,7 @@
 [Unit]
 Description=Launcher for the ROS master, parameter server and rosout logging node
-After=network.target
+Requires=roscore
+After=roscore
 
 [Service]
 EnvironmentFile=/home/pi/catkin_ws/src/clever/deploy/roscore.env
