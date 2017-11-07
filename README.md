@@ -32,3 +32,19 @@ sudo systemctl start roscore
 sudo systemctl enable catkin_ws/src/clever/deploy/clever.service
 sudo systemctl start clever
 ```
+
+Зависимости
+-----------
+
+Необходимые для работы ROS-пакеты:
+
+* `mavros`
+* `rosbridge_suite`
+* `web_video_server`
+* `cv_camera`
+* `nodelet`
+* `dynamic_reconfigure`
+* `bondcpp`, ветка `master`
+* `roslint`
+
+TODO: внести в package.xml
