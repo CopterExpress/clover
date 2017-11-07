@@ -1,0 +1,25 @@
+<launch>
+    <arg name="fcu_conn" default="uart"/>
+    <arg name="bridge" default="false"/>
+    <arg name="viz" default="true"/>
+
+    <include file="$(find mavros)/launch/px4.launch">
+        <!-- UART connection -->
+        <arg name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
+
+        <!-- USB connection TODO: check-->
+        <arg name="fcu_url" value="/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00" if="$(eval fcu_conn == 'usb')"/>
+
+        <!-- TODO: fix -->
+        <arg name="gcs_url" value="udp://@192.168.11.14:14550" if="$(arg bridge)"/>
+    </include>
+
+    <!-- Copter visualization -->
+    <include file="$(find clever)/launch/copter_visualization.launch" if="$(arg viz)"/>
+
+    <param name="mavros/local_position/frame_id" value="local_origin"/>
+    <param name="mavros/local_position/tf/send" value="true"/>
+    <param name="mavros/local_position/tf/frame_id" value="local_origin"/>
+    <param name="mavros/local_position/tf/child_frame_id" value="fcu"/>
+    <param name="mavros/global_position/tf/send" value="false"/>
+</launch>
