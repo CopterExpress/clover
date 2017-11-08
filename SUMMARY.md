@@ -3,6 +3,7 @@
 * [Введение](README.md)
 * [Сборка](docs/assemble.md)
 * [Первоначальная настройка](docs/setup.md)
+* [Образ операционной системы на RPI](docs/microsd_images.md)
 * [Полетные режимы](docs/modes.md)
 * [Неисправности радиоаппарутары](docs/radioerrors.md)
 * [Raspberry Pi](docs/raspberry.md)

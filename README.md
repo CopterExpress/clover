@@ -24,6 +24,7 @@ Raspberry Pi — это один из самых известных однопл
 * [Общая информация о Raspberry Pi](docs/raspberry.md)
 * [Доступ по SSH к Raspberry Pi](docs/ssh.md)
 * [Настройка Wi-Fi](docs/wifi.md)
+* [Установка образа операционной системы на RPI](docs/microsd_images.md)
 
 Сборка
 ------
