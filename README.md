@@ -46,5 +46,6 @@ sudo systemctl start clever
 * `dynamic_reconfigure`
 * `bondcpp`, ветка `master`
 * `roslint`
+* `rosserial`
 
 TODO: внести в package.xml
