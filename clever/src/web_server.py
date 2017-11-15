@@ -7,7 +7,7 @@ from flask import Flask, send_from_directory, send_file
 rospy.init_node('web_server', disable_signals=True)
 
 
-port = rospy.get_param('~port', 8080)
+port = rospy.get_param('~port', 7070)
 host = rospy.get_param('~host', '0.0.0.0')
 serve_path = rospy.get_param('~path')
 app = Flask(__name__)
