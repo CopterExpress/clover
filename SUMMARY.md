@@ -13,6 +13,8 @@
 * [Работа с ROS](docs/ros.md)
 * [MAVROS](docs/mavros.md)
 * [Работа с SITL](docs/sitl.md)
+* [Взаимодействие с Arduino](docs/arduino.md)
+* [Системы координат](docs/frames.md)
 * Учебник
   * [Урок 1](docs/les1.md)
   * [Урок 2](docs/les2.md)
