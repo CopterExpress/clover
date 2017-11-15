@@ -8,7 +8,8 @@
 ## Образы MicroSD
 Ниже представлен список настроенных образов для установки на SD карту RPI.
 
-### First release 13092017 [[скачать]](https://drive.google.com/open?id=0B3h5BTtcX6gwMWtnc3J6eHIyb2M)
+### First release 13092017
+Скачать [ [2GB со сжатием (.zip)](https://drive.google.com/open?id=1_z3pf1BshIutqmmhkMpuGdNS_8fcxNlH) / [7.4GB без сжатия (.img)](https://drive.google.com/open?id=0B3h5BTtcX6gwMWtnc3J6eHIyb2M) ]
 * Настроена сеть 192.168.11.1, настроен wifi (CLEVER-XXXX)
 * Настроен ROS и локальное окружение
 * Установлен marker_navigator
