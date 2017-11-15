@@ -19,7 +19,7 @@ Arudino необходимо установить на Клевер и подк�
 
 `~/catkin_ws/src/clever/clever/clever.launch`:
 
-```
+```xml
 <arg name="arduino" default="true"/>
 ```
 
