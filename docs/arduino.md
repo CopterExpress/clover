@@ -15,9 +15,7 @@ Arudino необходимо установить на Клевер и подк�
 Настройка Raspberry Pi
 ---
 
-Необходимо убедиться с в launch-файле Клевера (включен запуск Arduino rosserial.
-
-`~/catkin_ws/src/clever/clever/clever.launch`:
+Необходимо убедиться с в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) включен запуск Arduino rosserial:
 
 ```xml
 <arg name="arduino" default="true"/>
