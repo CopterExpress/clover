@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Usage
+# fpv_camera <video_device> <http port>
+
+echo "Starting FPV camera $1 on :$2"
+cd /home/pi/mjpg-streamer/mjpg-streamer-experimental
+./mjpg_streamer -i "./input_uvc.so -d $1 -r 1024x720 -f 30" -o "./output_http.so -w ./www -p $2"
