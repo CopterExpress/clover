@@ -12,6 +12,12 @@ TCP-бридж
 <arg name="gcs_bridge" default="tcp"/>
 ```
 
+При изменени launch-файла необходимо перезагрузить сервис `clever`:
+
+```bash
+sudo systemctl restart clever
+```
+
 Затем в программе QGroundControl нужно выбрать Application Settings -> Comm Links -> Add. Создать подключение со следующими настройками:
 
 ![](/assets/bridge_tcp.png)
