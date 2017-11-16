@@ -1,6 +1,6 @@
 <launch>
     <arg name="fcu_conn" default="uart"/>
-    <arg name="bridge" default="false"/>
+    <arg name="gcs_bridge" default="tcp"/>
     <arg name="viz" default="true"/>
     <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
@@ -13,7 +13,7 @@
     <!-- mavros -->
     <include file="$(find clever)/launch/mavros.launch">
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
-        <arg name="bridge" value="$(arg bridge)"/>
+        <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
         <arg name="viz" value="$(arg viz)"/>
     </include>
 
