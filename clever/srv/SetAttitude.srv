@@ -1,0 +1,9 @@
+float32 pitch
+float32 roll
+float32 yaw
+float32 thrust
+string frame_id
+bool update_frame
+---
+bool success
+string message

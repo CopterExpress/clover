@@ -1,0 +1,9 @@
+float32 vx
+float32 vy
+float32 vz
+float32 yaw_rate
+string frame_id
+bool update_frame
+---
+bool success
+string message

@@ -1,0 +1,9 @@
+float32 x
+float32 y
+float32 z
+float32 yaw
+string frame_id
+bool update_frame
+---
+bool success
+string message
