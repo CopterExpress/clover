@@ -3,6 +3,8 @@ Copter Hack 2017
 
 {% youtube src="https://www.youtube.com/watch?v=xgXheg3TTs4" %}{% endyoutube %}
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xgXheg3TTs4?rel=0" frameborder="0" allowfullscreen></iframe>
+
 Модули
 ---
 
