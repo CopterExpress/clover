@@ -1,5 +1,6 @@
 <launch>
     <arg name="fcu_conn" default="uart"/>
+    <arg name="fcu_ip" default="127.0.0.1"/>
     <arg name="gcs_bridge" default="tcp"/>
     <arg name="viz" default="true"/>
 
@@ -9,6 +10,9 @@
 
         <!-- USB connection TODO: check-->
         <arg name="fcu_url" value="/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00" if="$(eval fcu_conn == 'usb')"/>
+
+        <!-- sitl -->
+        <arg name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
 
         <arg name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
         <arg name="gcs_url" value="udp://@192.168.11.14:14550" if="$(eval gcs_bridge == 'udp')"/> <!-- TODO: fix -->
