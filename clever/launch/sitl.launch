@@ -1,6 +1,7 @@
 <launch>
     <!-- Clever configuration for testing in sitl -->
     <arg name="ip" default="127.0.0.1"/>
+    <arg name="rosbridge" default="true"/>
 
     <include file="$(find clever)/launch/clever.launch">
         <arg name="fcu_conn" value="udp"/>
@@ -9,5 +10,6 @@
         <arg name="web_video_server" default="false"/>
         <arg name="camera" default="false"/>
         <arg name="fpv_camera" default="false"/>
+        <arg name="rosbridge" value="$(arg rosbridge)"/>
     </include>
 </launch>
