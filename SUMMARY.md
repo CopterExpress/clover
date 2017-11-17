@@ -6,7 +6,7 @@
 * [Образ операционной системы на RPI](docs/microsd_images.md)
 * [Работа с QGroundControl через Wi-Fi](docs/gcs_bridge.md)
 * [Полетные режимы](docs/modes.md)
-* [Неисправности радиоаппаратура](docs/radioerrors.md)
+* [Неисправности радиоаппаратуры](docs/radioerrors.md)
 * [Raspberry Pi](docs/raspberry.md)
 * [SSH-доступ](docs/ssh.md)
 * [Безопасность](docs/safety.md)
