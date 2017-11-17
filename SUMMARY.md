@@ -13,7 +13,7 @@
 * [Техника безопасности по пайке](docs/tb.md)
 * [Работа с ROS](docs/ros.md)
 * [MAVROS](docs/mavros.md)
-* [Simple OFFBOARD](docs/simple_offboard.md)
+* [Полет в OFFBOARD](docs/simple_offboard.md)
 * [Работа с SITL](docs/sitl.md)
 * [Взаимодействие с Arduino](docs/arduino.md)
 * [Системы координат](docs/frames.md)
