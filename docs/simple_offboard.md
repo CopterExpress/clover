@@ -104,7 +104,7 @@ set_position(x=2, y=2, z=3, frame_id='marker_map', update_frame=True)  #  пол
 set_position_global(lat=55.707033, lon=37.725010, z=0, frame_id='fcu_horiz')
 ```
 
-# set_position_global_yaw_rate
+### set_position_global_yaw_rate
 
 Полет в позицию в глобальной системе координат вращаясь с заданной скоростью по рысканью.
 
