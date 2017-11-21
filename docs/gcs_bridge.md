@@ -6,7 +6,7 @@
 TCP-бридж
 ---
 
-Необходимо убедиться с в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) включен TCP GCS Bridge:
+Необходимо убедиться с в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) включен TCP GCS Bridge:
 
 ```xml
 <arg name="gcs_bridge" default="tcp"/>
