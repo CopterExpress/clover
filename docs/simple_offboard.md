@@ -22,7 +22,7 @@ Simple offboard
 
 ```python
 import rospy
-from marker_navigator.srv import SetPosition, \
+from clever.srv import SetPosition, \
     SetPositionYawRate, \
     SetPositionGlobal, \
     SetPositionGlobalYawRate, \
