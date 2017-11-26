@@ -28,7 +28,7 @@
     <!-- TODO: marker position estimator -->
 
     <!-- simplified offboard control -->
-    <node name="simple_offboard" pkg="clever" type="simple_offboard.py"/>
+    <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
 
     <!-- bottom camera -->
     <include file="$(find clever)/launch/bottom_camera.launch" if="$(arg camera)"/>
