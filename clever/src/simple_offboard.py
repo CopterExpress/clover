@@ -236,21 +236,25 @@ handle_lock = Lock()
 
 def handle(req):
     global current_pub, current_msg, current_req
-    with handle_lock:
-        try:
-            stamp = rospy.get_rostime()
-            current_pub, current_msg = get_publisher_and_message(req, stamp)
-            rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
 
-            current_msg.header.stamp = stamp
-            current_pub.publish(current_msg)
+    if not state.connected:
+        return {'message': 'No connection to the FCU'}
 
-            offboard_and_arm()
-            return {'success': True}
+    try:
+        with handle_lock:
+                stamp = rospy.get_rostime()
+                current_pub, current_msg = get_publisher_and_message(req, stamp)
+                rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
 
-        except Exception as e:
-            rospy.logerr(str(e))
-            return {'success': False, 'message': str(e)}
+                current_msg.header.stamp = stamp
+                current_pub.publish(current_msg)
+
+        offboard_and_arm()
+        return {'success': True}
+
+    except Exception as e:
+        rospy.logerr(str(e))
+        return {'success': False, 'message': str(e)}
 
 
 def release(req):
