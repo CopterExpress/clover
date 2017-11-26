@@ -2,7 +2,7 @@
     <!-- the bottom facing camera -->
 
     <!-- TODO: use quaternion for orientation -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 0 -1.5707963 0 3.1415926 fcu bottom_camera"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 0 -1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
 
     <node pkg="cv_camera" type="cv_camera_node" name="bottom_camera">
         <param name="frame_id" value="bottom_camera"/>
