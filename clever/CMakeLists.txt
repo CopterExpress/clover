@@ -11,6 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  geometry_msgs
+  sensor_msgs
+  geographic_msgs
 )
 
 
@@ -57,6 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
+  GetTelemetry.srv
   SetPosition.srv
   SetPositionYawRate.srv
   SetPositionGlobal.srv
@@ -80,6 +84,7 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   std_msgs  # Or other packages containing msgs
+  mavros_msgs
 )
 
 ################################################
