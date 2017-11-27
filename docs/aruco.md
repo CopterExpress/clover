@@ -83,6 +83,8 @@ TODO: иллюстрация.
 # и появился фрейм aruco_map:
 set_position(x=0, y=0, z=3, frame_id='fcu_horiz')  #  взлет на 3 метра
 
+time.sleep(5)
+
 # Полет в координату 2:2 маркерного поля, высота 3 метра
 set_position(x=2, y=2, z=3, frame_id='aruco_map', update_frame=True)  #  полет в координату 2:2, высота 3 метра
 ```
