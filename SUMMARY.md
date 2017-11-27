@@ -11,6 +11,7 @@
 * [SSH-доступ](docs/ssh.md)
 * [Безопасность](docs/safety.md)
 * [Техника безопасности по пайке](docs/tb.md)
+* [Просмотр видеострима с камер](docs/web_video_server.md)
 * [Веб-пульт управления](docs/web_rc.md)
 * [Работа с ROS](docs/ros.md)
 * [MAVROS](docs/mavros.md)
