@@ -1,12 +1,6 @@
-Настройка Wi-Fi на Raspberry Pi
+Использование Wi-Fi с Клевером
 ===
 
-Точка доступа
----
+На [образе для RPi](/docs/microsd_images.md) преднастроена раздача Wi-Fi с SSID `CLEVER-xxxx`, где xxxx – 4 случайных цифры, назначаемых при первом включении Raspberry Pi.
 
-TODO
-
-Подключение к Wi-Fi-сети
----
-
-TODO
+TODO: иллюстрация.
