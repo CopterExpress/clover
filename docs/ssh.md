@@ -1,16 +1,16 @@
 Доступ по SSH к Raspberry Pi
 ===
 
-Основная статья: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
+На [образе для RPi](/docs/microsd_images.md) преднастроен доступ по SSH для редактирования файлов, загрузки данных и запуска программ.
 
-Если SSH не включен, его можно включить положив в boot-раздел на SD-карте файл с названием ``ssh``. При загрузке SSHD включится автоматически.
-
-Для доступа к Raspberry Pi по SSH из Linux или macOS необходимо выполнить команду:
+Для доступа к Raspberry Pi на Клевере по SSH из Linux или macOS необходимо запустить Терминал и выполнить команду:
 
 ```bash
-ssh pi@<ip-адрес-raspberry>
+ssh pi@192.168.11.1
 ```
 
 Пароль: ``raspberry``.
 
 Для доступа по SSH из Windows можно использовать [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
+
+Подробнее: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
