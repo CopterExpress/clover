@@ -18,6 +18,7 @@
 * [Работа с SITL](docs/sitl.md)
 * [Взаимодействие с Arduino](docs/arduino.md)
 * [Системы координат](docs/frames.md)
+* [Визуализация с помощью rviz](docs/rviz.md)
 * [Подключение GPS](docs/gps.md)
 * [Использование 3G-модема](docs/3g.md)
 * Учебник
