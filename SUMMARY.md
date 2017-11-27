@@ -11,7 +11,7 @@
 * [SSH-доступ](docs/ssh.md)
 * [Безопасность](docs/safety.md)
 * [Техника безопасности по пайке](docs/tb.md)
-* [Веб-пульт управления](docs/web_rc.html)
+* [Веб-пульт управления](docs/web_rc.md)
 * [Работа с ROS](docs/ros.md)
 * [MAVROS](docs/mavros.md)
 * [Полет в OFFBOARD](docs/simple_offboard.md)
