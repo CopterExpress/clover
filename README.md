@@ -27,14 +27,14 @@ catkin_make -j1
 Включить сервис roscore (если он не включен):
 
 ```bash
-sudo systemctl enable catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service
 sudo systemctl start roscore
 ```
 
 Включить сервис clever:
 
 ```bash
-sudo systemctl enable catkin_ws/src/clever/deploy/clever.service
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 sudo systemctl start clever
 ```
 
