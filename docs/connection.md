@@ -6,7 +6,7 @@
 Подключение по USB
 ---
 
-Соедините PixHawk/PixRacer и Raspberry Pi PX4 Micro-USB to USB кабелем.
+Соедините PixHawk/PixRacer и Raspberry Pi micro-USB to USB кабелем.
 
 Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) тип подключения установлен на USB:
 
