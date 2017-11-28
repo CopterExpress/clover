@@ -8,8 +8,8 @@
         <!-- UART connection -->
         <arg name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
 
-        <!-- USB connection TODO: check-->
-        <arg name="fcu_url" value="/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00" if="$(eval fcu_conn == 'usb')"/>
+        <!-- USB connection -->
+        <arg name="fcu_url" value="/dev/ttyACM0" if="$(eval fcu_conn == 'usb')"/>
 
         <!-- sitl -->
         <arg name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
