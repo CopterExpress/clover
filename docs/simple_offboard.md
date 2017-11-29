@@ -70,7 +70,7 @@ release = rospy.ServiceProxy('/release', Trigger)
 Задание позиции относительно коптера:
 
 ```python
-set_position(x=0, y=0, z=3, frame_id='fcu_horiz')  #  взлет на 3 метра
+set_position(x=0, y=0, z=3, frame_id='fcu_horiz', auto_arm=true)  #  взлет на 3 метра
 ```
 
 ```python
