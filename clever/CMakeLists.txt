@@ -71,6 +71,7 @@ add_service_files(
   SetAttitudeYawRate.srv
   SetRatesYaw.srv
   SetRates.srv
+  GetTelemetry.srv
 )
 
 ## Generate actions in the 'action' folder

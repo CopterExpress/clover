@@ -2,7 +2,7 @@
 from __future__ import division
 
 import rospy
-from geometry_msgs.msg import TransformStamped, PoseStamped, Point, Vector3, Vector3Stamped, TwistStamped
+from geometry_msgs.msg import TransformStamped, PoseStamped, Point, PointStamped, Vector3, Vector3Stamped, TwistStamped, QuaternionStamped
 from sensor_msgs.msg import NavSatFix, BatteryState
 import tf2_ros
 import tf2_geometry_msgs
