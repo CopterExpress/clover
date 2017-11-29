@@ -80,10 +80,13 @@ void setup()
   sp_req.y = 0;
   sp_req.z = 2;
   sp_req.frame_id = "fcu_horiz";
+  sp_req.auto_arm = true;
   setPosition.call(sp_req, sp_res);
 
  // Ждем 5 секунд
   delay(5000);
+  
+  sp.req.auto_arm = false;
 
   // Пролет вперед на 3 метра:
   nh.loginfo("Fly forward");
