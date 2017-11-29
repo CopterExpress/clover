@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager">
+        <param name="frame_id" value="aruco_map_raw"/>
+        <param name="type" value="gridboard"/>
+        <param name="markers_x" value="1"/>
+        <param name="markers_y" value="6"/>
+        <param name="first_marker" value="240"/>
+        <param name="markers_side" value="0.3362"/>
+        <param name="markers_sep" value="0.46"/>
+    </node>
+
+    <node pkg="clever" type="aruco_vpe.py" name="aruco_vpe" output="screen"/>
+</launch>

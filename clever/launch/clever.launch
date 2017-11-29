@@ -7,6 +7,7 @@
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="camera" default="false"/>
+    <arg name="aruco" default="false"/>
     <arg name="fpv_camera" default="true"/>
     <arg name="fpv_camera_device" default="/dev/v4l/by-id/usb-HD_Camera_Manufacturer_USB_2.0_Camera-video-index0"/>
     <arg name="arduino" default="false"/>
@@ -25,7 +26,7 @@
     <!-- web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)"/>
 
-    <!-- TODO: marker position estimator -->
+    <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
