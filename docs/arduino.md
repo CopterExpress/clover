@@ -36,7 +36,7 @@ sudo systemctl restart clever
 Работа с Клевером
 ---
 
-Набор сервисов и топиков аналогичен обычному набору в `simple_offboard` и `mavros`.
+Набор сервисов и топиков аналогичен обычному набору в [simple_offboard](/docs/simple_offboard.md) и [mavros](/docs/mavros.md).
 
 Пример программы, контролирующей коптер по позиции, с использованием сервисов `set_position` и `set_mode`:
 
