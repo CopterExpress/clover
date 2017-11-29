@@ -84,7 +84,6 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   std_msgs  # Or other packages containing msgs
-  mavros_msgs
 )
 
 ################################################
