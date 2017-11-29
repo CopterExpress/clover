@@ -4,6 +4,7 @@ float32 vz
 float32 yaw
 string frame_id
 bool update_frame
+bool auto_arm
 ---
 bool success
 string message
