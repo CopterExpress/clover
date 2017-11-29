@@ -1,4 +1,7 @@
 <launch>
+    <remap from="image" to="bottom_camera/image_raw"/>
+    <remap from="camera_info" to="bottom_camera/camera_info"/>
+
     <node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager">
         <param name="frame_id" value="aruco_map_raw"/>
         <param name="type" value="gridboard"/>
