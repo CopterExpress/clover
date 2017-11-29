@@ -278,7 +278,7 @@ def handle(req):
                 current_msg.header.stamp = stamp
                 current_pub.publish(current_msg)
 
-        if req.auto_offboard:
+        if req.auto_arm:
             offboard_and_arm()
 
         return {'success': True}
