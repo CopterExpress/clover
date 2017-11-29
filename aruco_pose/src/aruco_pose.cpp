@@ -27,7 +27,7 @@ class ArucoPose : public nodelet::Nodelet {
     tf::TransformBroadcaster br;
     cv::Ptr<cv::aruco::Dictionary> dictionary;
     cv::Ptr<cv::aruco::DetectorParameters> parameters;
-    cv::Ptr<cv::aruco::GridBoard> board;
+    cv::Ptr<cv::aruco::Board> board;
     std::string frame_id_;
     image_transport::CameraSubscriber img_sub;
     image_transport::Publisher img_pub;
@@ -72,9 +72,45 @@ void ArucoPose::onInit() {
     ROS_INFO("aruco_pose nodelet inited");
 }
 
+cv::Ptr<cv::aruco::Board> createCustomBoard(int markersX, int markersY, float markerLength, float markerSeparation,
+                            const cv::Ptr<cv::aruco::Dictionary> &dictionary, std::vector<int> ids) {
+
+    CV_Assert(markersX > 0 && markersY > 0 && markerLength > 0 && markerSeparation > 0);
+
+    cv::Ptr<cv::aruco::Board> res = cv::makePtr<cv::aruco::Board>();
+
+    res->dictionary = dictionary;
+
+    size_t totalMarkers = (size_t) markersX * markersY;
+    res->ids = ids;
+    res->objPoints.reserve(totalMarkers);
+
+    // calculate Board objPoints
+    float maxY = (float)markersY * markerLength + (markersY - 1) * markerSeparation;
+    for(int y = 0; y < markersY; y++) {
+        for(int x = 0; x < markersX; x++) {
+            std::vector< cv::Point3f > corners;
+            corners.resize(4);
+            corners[0] = cv::Point3f(x * (markerLength + markerSeparation),
+                                 maxY - y * (markerLength + markerSeparation), 0);
+            corners[1] = corners[0] + cv::Point3f(markerLength, 0, 0);
+            corners[2] = corners[0] + cv::Point3f(markerLength, -markerLength, 0);
+            corners[3] = corners[0] + cv::Point3f(0, -markerLength, 0);
+            res->objPoints.push_back(corners);
+        }
+    }
+
+    return res;
+}
+
 void ArucoPose::createBoard()
 {
+    static auto map_image_pub = nh_priv_.advertise<sensor_msgs::Image>("map_image", 1, true);
+    cv_bridge::CvImage map_image_msg;
+    cv::Mat map_image;
+
     std::string type;
+
     nh_priv_.param<std::string>("type", type, "gridboard");
     if (type == "gridboard")
     {
@@ -82,6 +118,7 @@ void ArucoPose::createBoard()
 
         int markers_x, markers_y, first_marker;
         float markers_side, markers_sep;
+        std::vector<int> marker_ids;
         nh_priv_.param<int>("markers_x", markers_x, 10);
         nh_priv_.param<int>("markers_y", markers_y, 10);
         nh_priv_.param<int>("first_marker", first_marker, 0);
@@ -92,18 +129,30 @@ void ArucoPose::createBoard()
         if (!nh_priv_.getParam("markers_sep", markers_sep))
             ROS_ERROR("gridboard: required parameter ~markers_sep is not set.");
 
-        board = cv::aruco::GridBoard::create(markers_x, markers_y, markers_side, markers_sep, dictionary, first_marker);
+        if (nh_priv_.getParam("marker_ids", marker_ids)) {
+            if (markers_x * markers_y != marker_ids.size()) {
+                ROS_FATAL("~marker_ids length should be equal to ~markers_x * ~markers_y");
+                exit(1);
+            }
+            board = createCustomBoard(markers_x, markers_y, markers_side, markers_sep, dictionary, marker_ids);
+        }
+        else {
+            board = cv::aruco::GridBoard::create(markers_x, markers_y, markers_side, markers_sep, dictionary, first_marker);
+        }
 
         // Publish map image for debugging
-        cv::Mat map_image;
-        board->draw( cv::Size(2000, 2000), map_image, 0, 1);
+        cv::aruco::drawPlanarBoard(board, cv::Size(2000, 2000), map_image, 50, 1);
+
         cv::cvtColor(map_image, map_image, CV_GRAY2BGR);
 
-        static auto map_image_pub = nh_priv_.advertise<sensor_msgs::Image>("map_image", 1, true);
-        cv_bridge::CvImage map_image_msg;
         map_image_msg.encoding = sensor_msgs::image_encodings::BGR8;
         map_image_msg.image = map_image;
         map_image_pub.publish(map_image_msg.toImageMsg());
+    }
+    else if (type == "custom")
+    {
+        // Not implemented yet
+        ROS_FATAL("Custom boards are not implemented yet.")
     }
     else
     {
