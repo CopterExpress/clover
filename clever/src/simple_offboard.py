@@ -2,7 +2,8 @@
 from __future__ import division
 
 import rospy
-from geometry_msgs.msg import TransformStamped, PoseStamped, Point, Vector3, Vector3Stamped
+from geometry_msgs.msg import TransformStamped, PoseStamped, Point, PointStamped, Vector3, Vector3Stamped, TwistStamped, QuaternionStamped
+from sensor_msgs.msg import NavSatFix, BatteryState
 import tf2_ros
 import tf2_geometry_msgs
 from mavros_msgs.msg import PositionTarget, AttitudeTarget, State
@@ -53,7 +54,26 @@ arming = rospy.ServiceProxy('/mavros/cmd/arming', CommandBool)
 set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
 
 
+pose = None
+global_position = None
+velocity = None
 state = None
+battery = None
+
+
+def pose_update(data):
+    global pose
+    pose = data
+
+
+def global_position_update(data):
+    global global_position
+    global_position = data
+
+
+def velocity_update(data):
+    global velocity
+    velocity = data
 
 
 def state_update(data):
@@ -61,7 +81,16 @@ def state_update(data):
     state = data
 
 
+def battery_update(data):
+    global battery
+    battery = data
+
+
 rospy.Subscriber('/mavros/state', State, state_update)
+rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('/mavros/global_position/global', NavSatFix, global_position_update)
+rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
 
 
 AUTO_OFFBOARD = rospy.get_param('~auto_offboard', True)
@@ -271,6 +300,70 @@ rospy.Service('set_attitude/yaw_rate', srv.SetAttitudeYawRate, handle)
 rospy.Service('set_rates', srv.SetRates, handle)
 rospy.Service('set_rates/yaw', srv.SetRatesYaw, handle)
 rospy.Service('release', Trigger, release)
+
+
+def get_telemetry(req):
+    res = {
+        'frame_id': req.frame_id or 'local_origin',
+        'x': float('nan'),
+        'y': float('nan'),
+        'z': float('nan'),
+        'lat': float('nan'),
+        'lon': float('nan'),
+        'vx': float('nan'),
+        'vy': float('nan'),
+        'vz': float('nan'),
+        'pitch': float('nan'),
+        'roll': float('nan'),
+        'yaw': float('nan'),
+        'pitch_rate': float('nan'),
+        'roll_rate': float('nan'),
+        'yaw_rate': float('nan'),
+        'voltage': float('nan'),
+        'cell_voltage': float('nan')
+    }
+    frame_id = req.frame_id or 'local_origin'
+    stamp = rospy.get_rostime()
+
+    if pose:
+        p = tf_buffer.transform(pose, frame_id, TRANSFORM_TIMEOUT)
+        res['x'] = p.pose.position.x
+        res['y'] = p.pose.position.y
+        res['z'] = p.pose.position.z
+        # Get yaw in the request's frame_in
+        _, _, res['yaw'] = euler_from_orientation(p.pose.orientation)
+        # Calculate pitch and roll as angles between the pose and fcu_horiz
+        attitude_pose = tf_buffer.transform(pose, 'fcu_horiz', TRANSFORM_TIMEOUT)
+        res['pitch'], res['roll'], _ = euler_from_orientation(attitude_pose.pose.orientation)
+
+    if velocity:
+        v = Vector3Stamped()
+        v.header.stamp = velocity.header.stamp
+        v.header.frame_id = velocity.header.frame_id
+        v.vector = velocity.twist.linear
+        linear = tf_buffer.transform(v, frame_id, TRANSFORM_TIMEOUT)
+        res['vx'] = linear.vector.x
+        res['vy'] = linear.vector.y
+        res['vz'] = linear.vector.z
+        # TODO pitch_rate, roll_rate, yaw_rate
+
+    if global_position and stamp - global_position.header.stamp < rospy.Duration(5):
+        res['lat'] = global_position.latitude
+        res['lon'] = global_position.longitude
+
+    if state:
+        res['connected'] = state.connected
+        res['armed'] = state.armed
+        res['mode'] = state.mode
+
+    if battery:
+        res['voltage'] = battery.voltage
+        res['cell_voltage'] = battery.cell_voltage[0]
+
+    return res
+
+
+rospy.Service('get_telemetry', srv.GetTelemetry, get_telemetry)
 
 
 rospy.loginfo('simple_offboard inited')
