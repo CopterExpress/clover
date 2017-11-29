@@ -32,7 +32,8 @@ from clever.srv import SetPosition, \
     SetAttitude, \
     SetAttitudeYawRate, \
     SetRatesYaw, \
-    SetRates
+    SetRates, \
+    GetTelemetry
 from std_srvs.srv import Trigger
 
 rospy.init_node('foo')
@@ -55,12 +56,41 @@ set_attitude_yaw_rate = rospy.ServiceProxy('/set_attitude/yaw_rate', Setattitude
 set_rates_yaw = rospy.ServiceProxy('/set_rates/yaw', SetRatesYaw)
 set_rates = rospy.ServiceProxy('/set_rates', SetRates)
 
+get_telemetry = rospy.ServiceProxy('/get_telemetry', get_telemetry)
 release = rospy.ServiceProxy('/release', Trigger)
 ```
 
 Список сервисов
 ---
 
+### get_telemetry
+
+Получить полную телеметрию коптеру. Параметр: `frame_id` – фрейм для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`.
+
+Ответ:
+
+* `frame_id` – фрейм
+* `connected` – есть ли подключение к FCU
+* `armed` – состояние `armed` винтов (винты включены, если true)
+* `mode` - текущий [полетный режим](/docs/modes.md)
+* `x, y, z` – локальная позиция коптера
+* `lat, lon` – широта, долгота (при наличии [gps](/docs/gps.md))
+* `vx, vy, vz` – скорость коптера
+* `pitch` – угол по тангажу (радианы)
+* `roll` – угол по крену (радианы)
+* `yaw` – угол по рысканью в фрейме `frame_id`
+* `pitch_rate` – угловая скорость по тангажу
+* `roll_rate` – угловая скорость по крену
+* `yaw_rate` – угловая скорость по рысканью
+* `voltage – общее напряжение аккумулятор
+* `cell_voltage` – напряжение аккумулятора на ячейку
+
+Пример. Вывести координаты x, y и z коптера:
+
+```python
+telemetry = get_telemetry()
+print telemetry.x, telemetry.y, telemetry.z
+```
 ### set_position
 
 Установить позицию и рысканье.
