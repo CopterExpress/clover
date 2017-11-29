@@ -39,7 +39,19 @@ sudo systemctl restart clever
 
 В качестве карты меток можно использовать автоматически сгенерированный [ArUco-board](https://docs.opencv.org/trunk/db/da9/tutorial_aruco_board_detection.html).
 
-TODO
+Настройка карты меток производится с помощью файла `~/catkin_ws/src/clever/clever/aruco.launch`. Для использования AruCo-board введите его параметры:
+
+```xml
+<node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager">
+    <param name="frame_id" value="aruco_map_raw"/>
+    <param name="type" value="gridboard"/> <!-- тип маркерного поля -->
+    <param name="markers_x" value="1"/> <!-- количество маркеров по x -->
+    <param name="markers_y" value="6"/> <!-- количество маркеров по y -->
+    <param name="first_marker" value="240"/> <!-- ID маркера первого маркера (левого верхнего) -->
+    <param name="markers_side" value="0.3362"/> <!-- длина стороны маркера в метрах -->
+    <param name="markers_sep" value="0.46"/> <!-- растояние между маркерами -->
+</node>
+```
 
 Для контроля карты, по которой в данный момент коптер осуществляет навигацию, можно просмотре содержимое топика `aruco_pose/map_image`. Через браузер его можно просмотреть при помощи [web_video_server](/docs/web_video_server.md) по ссылке http://192.168.11.1:8080/snapshot?topic=/aruco_pose/map_image:
 
