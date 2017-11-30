@@ -272,6 +272,7 @@ def handle(req):
     try:
         with handle_lock:
                 stamp = rospy.get_rostime()
+                current_req = req
                 current_pub, current_msg = get_publisher_and_message(req, stamp)
                 rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
 
