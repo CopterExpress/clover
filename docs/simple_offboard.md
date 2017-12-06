@@ -237,3 +237,5 @@ set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)  # объявляем
 
 set_mode(base_mode=0, custom_mode='AUTO.LAND')  # включаем режим посадки
 ```
+
+Для полетов в поле ArUco-макеров см. [навигация по ArUco](/docs/aruco.md).
