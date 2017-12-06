@@ -85,13 +85,13 @@ void setup()
 
   // Взлет на 2 метра:
   nh.loginfo("Take off");
-  sp_req.yaw = 0;
-  sp_req.x = 0;
-  sp_req.y = 0;
-  sp_req.z = 2;
-  sp_req.frame_id = "fcu_horiz";
-  sp_req.auto_arm = true;
-  setPosition.call(sp_req, sp_res);
+  nav_req.auto_arm = false;
+  nav_req.x = 0;
+  nav_req.y = 0;
+  nav_req.z = 2;
+  nav_req.frame_id = "fcu_horiz";
+  nav_req.speed = 0.5;
+  navigate.call(nav_req, nav_res);
 
  // Ждем 5 секунд
   delay(5000);
@@ -100,10 +100,13 @@ void setup()
 
   // Пролет вперед на 3 метра:
   nh.loginfo("Fly forward");
-  sp_req.x = 3;
-  sp_req.y = 0;
-  sp_req.z = 0;
-  setPosition.call(sp_req, sp_res);
+  nav_req.auto_arm = false;
+  nav_req.x = 3;
+  nav_req.y = 0;
+  nav_req.z = 0;
+  nav_req.frame_id = "fcu_horiz";
+  nav_req.speed = 0.8;
+  navigate.call(nav_req, nav_res);
   
   // Полет в точку 1:0:2 по маркерному полю
   nh.loginfo("Fly on point");
@@ -113,7 +116,7 @@ void setup()
   nav_req.z = 2;
   nav_req.frame_id = "aruco_map";
   nav_req.update_frame = true;
-  nav_req.speed = 0.5;
+  nav_req.speed = 0.8;
   navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
