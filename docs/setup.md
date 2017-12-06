@@ -293,23 +293,9 @@ TODO
 
 5. Провести калибровки IMU, компаса, радиопульта.
 
-TODO
+6. Отключить Safety Switch, если он не установлен, поменяв параметр CBRK_IO_SAFETY на 22027.
 
-Настройка для автономных полетов с использованием companion-computer (Raspberry Pi 3)
-===
+7. Включить land detector (если необходим режим AUTO.LAND), изменив значения параметра COM_DISARM_LAND. Подробнее: https://dev.px4.io/en/tutorials/land_detector.html
 
-Основная статья: https://dev.px4.io/en/ros/offboard_control.html
 
-6. Убедиться в коррекном подключении Raspberry Pi и PixHawk по UART.
-
-7. Установить значение SYS_COMPANION на 921600 в параметрах.
-
-8. Убедиться в работоспособности подключения, выполнив с Raspberry Pi:
-
-```bash
-rostopic echo /mavros/state
-```
-
-9. Отключить Safety Switch, если он не установлен, поменяв параметр CBRK_IO_SAFETY на 22027.
-
-10. Включить land detector (если необходим режим AUTO.LAND), изменив значения параметра COM_DISARM_LAND. Подробнее: https://dev.px4.io/en/tutorials/land_detector.html
+Далее: [Подключение Raspberry Pi к PixHawk](/docs/connection.md).
