@@ -102,7 +102,7 @@ print telemetry.x, telemetry.y, telemetry.z
 Примеры:
 
 ```python
-# Плавно взлететь на высоту 1.5 м со скоростью взлета 0.5 м/с
+# плавно взлететь на высоту 1.5 м со скоростью взлета 0.5 м/с
 navigate(0, 0, 1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
 ```
 
