@@ -46,7 +46,6 @@ sudo systemctl restart clever
 
 // Подключение заголовочных файлов сообщений пакета Clever и MAVROS
 #include <clever/Navigate.h>
-#include <clever/SetPosition.h>
 #include <mavros_msgs/SetMode.h>
 
 using namespace clever;
@@ -56,7 +55,6 @@ ros::NodeHandle nh;
 
 // Объявление сервисов
 ros::ServiceClient<Navigate::Request, Navigate::Response> navigate("/navigate");
-ros::ServiceClient<SetPosition::Request, SetPosition::Response> setPosition("/set_position");
 ros::ServiceClient<SetMode::Request, SetMode::Response> setMode("/mavros/set_mode");
 
 void setup()
@@ -66,7 +64,6 @@ void setup()
 
   // Инициализация сервисов
   nh.serviceClient(navigate);
-  nh.serviceClient(setPosition);
   nh.serviceClient(setMode);
 
   // Ожидание подключение к Raspberry Pi
@@ -79,8 +76,6 @@ void setup()
   // Тестовая программа
   Navigate::Request nav_req;
   Navigate::Response nav_res;
-  SetPosition::Request sp_req;
-  SetPosition::Response sp_res;
   SetMode::Request sm_req;
   SetMode::Response sm_res;
 
