@@ -9,7 +9,7 @@
 rostopic echo /mavros/state
 ```
 
-Поле Connected должно содержать значение True.
+Поле `Connected` должно содержать значение `True`.
 
 
 Подключение по USB
