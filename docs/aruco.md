@@ -86,10 +86,11 @@ TODO
 Для правильной работы Vision Position Estimation необходимо (через [QGroundControl](/docs/gcs_bridge.md)) убедиться, что:
 
 * Для PixHawk: Установлена прошивка с LPE (local position estimator). Для PixRacer: параметр `SYS_MC_EST_GROUP` установлен в `local_position_estimator, attitude_estimator_q`.
-* В параметре `LPE_FUSION` включены **только** флажки `vision position`, `vision yaw`, `land detector`. Опционально можно включить барометр (baro). 
+* В параметре `LPE_FUSION` включены **только** флажки `vision position`, `vision yaw`, `land detector`. Итоговое значение _28_.
 * Выключен компас: `ATT_W_MAG` = 0
+* Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
 * Включена ориентация по Yaw по зрению: `ATT_EXT_HDG_M` = `Vision`.
-* Настройки VPE: `LPE_VIS_DELAY` = 0.03 sec, `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.15 m.
+* Настройки VPE: `LPE_VIS_DELAY` = 0 sec, `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.15 m.
 * Рекомендуемые настройки контроллера: 
 * * Максимальная скорость по позиции: ``MPC_XY_VEL_MAX`` = 1 m/s
 * * Настройки PID-регуляторов: `MPC_XY_P` = 0.12, `MPC_XY_VEL_P` = 0.12.
