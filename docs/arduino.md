@@ -45,6 +45,7 @@ sudo systemctl restart clever
 #include <ros.h>
 
 // Подключение заголовочных файлов сообщений пакета Clever и MAVROS
+#include <clever/Navigate.h>
 #include <clever/SetPosition.h>
 #include <mavros_msgs/SetMode.h>
 
