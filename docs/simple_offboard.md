@@ -112,6 +112,12 @@ navigate(0, 0, 1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
 navigate(5, 0, 3, speed=0.8)
 ```
 
+
+```python
+# пролететь вправо относительно коптера на 3 м
+navigate(0, -1, 0, speed=1, frame_id='fcu_horiz')
+```
+
 ```python
 # прилететь в точку 3:2 (высота 2) в системе координат маркерного поля
 # со скоростью 1 м/с
