@@ -104,7 +104,7 @@ TODO
 ```python
 # Вначале необходимо взлететь, чтобы коптер увидел карту меток
 # и появился фрейм aruco_map:
-navifate(0, 0, 2, frame_id='fcu_horiz', speed=0.5, auto_arm=True) #  взлет на 2 метра
+navigate(0, 0, 2, frame_id='fcu_horiz', speed=0.5, auto_arm=True) #  взлет на 2 метра
 
 time.sleep(5)
 
