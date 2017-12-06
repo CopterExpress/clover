@@ -40,9 +40,14 @@ def send_transform(transform, child_frame_id):
     tf_broadcaster.sendTransform(transform)
 
 
+vpe_posted = False
+
+
 def publish_vpe(pose):
-    global last_published
     stamp = pose.header.stamp
+
+    global last_published, vpe_posted
+    vpe_posted = True
 
     def lookup_transform(target_frame, source_frame):
         return tf_buffer.lookup_transform(target_frame, source_frame, stamp, LOOKUP_TIMEOUT)
@@ -76,5 +81,26 @@ def publish_vpe(pose):
 
 
 rospy.Subscriber('aruco_pose/pose', PoseStamped, publish_vpe, queue_size=1)
+
+
+local_pose = None
+
+
+def handle_pose(data):
+    global local_pose
+    local_pose = data
+
+
+rospy.Subscriber('mavros/local_position/pose', PoseStamped, handle_pose, queue_size=1)
+
+
 rospy.loginfo('aruco_vpe inited')
-rospy.spin()
+r = rospy.Rate(5)
+
+
+while not rospy.is_shutdown():
+    if not vpe_posted and not local_pose:
+        ps.header.stamp = rospy.get_rostime()
+        vision_position_pub.publish(ps)
+
+    r.sleep()
