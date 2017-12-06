@@ -54,6 +54,8 @@ get_telemetry = rospy.ServiceProxy('/get_telemetry', srv.get_telemetry)
 release = rospy.ServiceProxy('/release', Trigger)
 ```
 
+Неиспользуемые фукнции-прокси можно удалить из кода.
+
 Список сервисов
 ---
 
