@@ -23,7 +23,8 @@ Simple offboard
 
 ```python
 import rospy
-from clever.srv import SetPosition, \
+from clever.srv import Navigate, \
+    SetPosition, \
     SetPositionYawRate, \
     SetPositionGlobal, \
     SetPositionGlobalYawRate, \
@@ -39,6 +40,8 @@ from std_srvs.srv import Trigger
 rospy.init_node('foo')
 
 # Создаем прокси ко всем сервисам:
+
+set_position = rospy.ServiceProxy('/navigate', Navigate)
 
 set_position = rospy.ServiceProxy('/set_position', SetPosition)
 set_position_yaw_rate = 
@@ -91,9 +94,35 @@ release = rospy.ServiceProxy('/release', Trigger)
 telemetry = get_telemetry()
 print telemetry.x, telemetry.y, telemetry.z
 ```
+
+### navigate
+
+Прилететь в обозначенную точку по прямой.
+
+Параметры:
+
+* x, y, z – координаты в системе `frame_id`
+* yaw – угол по рысканью
+* speed – скорость полета (скорость движения setpoint)
+* frame_id, update_frame, auto_arm.
+
+Примеры:
+
+```python
+# прилететь по прямой в точку 5:0 (высота 2)
+# в локальной системе координат со скоростью 0.8 м/с
+navigate(5, 0, 3, speed=0.8)
+```
+
+```python
+# прилететь в точку 3:2 (высота 2) в системе координат маркерного поля
+# со скоростью 1 м/с
+navigate(3, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)
+```
+
 ### set_position
 
-Установить позицию и рысканье.
+Установить цель по позиции и рысканью. Для полета на точку по прямой используйте `navigate`.
 
 Параметры: x, y, z, yaw, frame_id, update_frame
 
@@ -112,10 +141,10 @@ set_position(x=0, y=-1, z=0, frame_id='fcu_horiz')  # пролететь впр�
 ```
 
 Задание позиции относительно системы маркеров
-(фрейм marker_map не будет опубликован, пока коптер хоть раз не увидит один из маркеров):
+(фрейм `aruco_map` не будет опубликован, пока коптер хоть раз не увидит один из маркеров):
 
 ```python
-set_position(x=2, y=2, z=3, frame_id='marker_map', update_frame=True)  #  полет в координату 2:2, высота 3 метра
+set_position(x=2, y=2, z=3, frame_id='aruco_map', update_frame=True)  #  полет в координату 2:2, высота 3 метра
 ```
 
 ### set_position_yaw_rate
