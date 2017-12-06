@@ -52,8 +52,8 @@ position_pub = rospy.Publisher('/mavros/setpoint_raw/local', PositionTarget, que
 attitude_pub = rospy.Publisher('/mavros/setpoint_raw/attitude', AttitudeTarget, queue_size=1)
 target_pub = rospy.Publisher('~target', PoseStamped, queue_size=1)
 
-arming = rospy.ServiceProxy('/mavros/cmd/arming', CommandBool)
-set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
+arming = rospy.ServiceProxy('/mavros/cmd/arming', CommandBool, persistent=True)
+set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode, persistent=True)
 
 
 pose = None
