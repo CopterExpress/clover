@@ -23,43 +23,32 @@ Simple offboard
 
 ```python
 import rospy
-from clever.srv import Navigate, \
-    SetPosition, \
-    SetPositionYawRate, \
-    SetPositionGlobal, \
-    SetPositionGlobalYawRate, \
-    SetVelocity, \
-    SetVelocityYawRate, \
-    SetAttitude, \
-    SetAttitudeYawRate, \
-    SetRatesYaw, \
-    SetRates, \
-    GetTelemetry
+from clever import srv
 from std_srvs.srv import Trigger
 
 rospy.init_node('foo')
 
 # Создаем прокси ко всем сервисам:
 
-set_position = rospy.ServiceProxy('/navigate', Navigate)
+set_position = rospy.ServiceProxy('/navigate', srv.Navigate)
 
-set_position = rospy.ServiceProxy('/set_position', SetPosition)
+set_position = rospy.ServiceProxy('/set_position', srv.SetPosition)
 set_position_yaw_rate = 
-rospy.ServiceProxy('/set_position/yaw_rate', SetPositionYawRate)
+rospy.ServiceProxy('/set_position/yaw_rate', srv.SetPositionYawRate)
 
-set_position_global = rospy.ServiceProxy('/set_position_global', SetPositionGlobal)
-set_position_global_yaw_rate = rospy.ServiceProxy('/set_position_global/yaw_rate', SetPositionGlobalYawRate)
+set_position_global = rospy.ServiceProxy('/set_position_global', srv.SetPositionGlobal)
+set_position_global_yaw_rate = rospy.ServiceProxy('/set_position_global/yaw_rate', srv.SetPositionGlobalYawRate)
 
-set_velocity = rospy.ServiceProxy('/set_velocity', SetVelocity)
-set_velocity_yaw_rate = rospy.ServiceProxy('/set_Velocity/yaw_rate', SetVelocityYawRate)
+set_velocity = rospy.ServiceProxy('/set_velocity', srv.SetVelocity)
+set_velocity_yaw_rate = rospy.ServiceProxy('/set_Velocity/yaw_rate', srv.SetVelocityYawRate)
 
-set_attitude = rospy.ServiceProxy('/set_attitude', SetAttitude)
-set_attitude_yaw_rate = rospy.ServiceProxy('/set_attitude/yaw_rate', SetattitudeYawRate)
+set_attitude = rospy.ServiceProxy('/set_attitude', srv.SetAttitude)
+set_attitude_yaw_rate = rospy.ServiceProxy('/set_attitude/yaw_rate', srv.SetAttitudeYawRate)
 
-set_rates_yaw = rospy.ServiceProxy('/set_rates/yaw', SetRatesYaw)
-set_rates = rospy.ServiceProxy('/set_rates', SetRates)
+set_rates_yaw = rospy.ServiceProxy('/set_rates/yaw', srv.SetRatesYaw)
+set_rates = rospy.ServiceProxy('/set_rates', srv.SetRates)
 
-get_telemetry = rospy.ServiceProxy('/get_telemetry', get_telemetry)
+get_telemetry = rospy.ServiceProxy('/get_telemetry', srv.get_telemetry)
 release = rospy.ServiceProxy('/release', Trigger)
 ```
 
