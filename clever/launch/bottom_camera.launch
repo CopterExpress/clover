@@ -10,6 +10,11 @@
         <param name="frame_id" value="bottom_camera_optical"/>
         <param name="camera_info_url" value="file://$(find clever)/camera_info/fisheye_cam_320.yaml"/>
         <param name="rate" value="30"/>
+
+        <!-- for bigger FPS use: -->
+        <!--<param name="rate" value="60"/>-->
+        <!--<param name="cv_cap_prop_fps" value="60"/>-->
+
         <param name="image_width" value="320"/>
         <param name="image_height" value="240"/>
     </node>
