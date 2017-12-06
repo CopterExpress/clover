@@ -131,11 +131,67 @@ ps = PoseStamped()
 vs = Vector3Stamped()
 
 
-def get_publisher_and_message(req, stamp):
+BRAKE_TIME = rospy.Duration(2)
+
+
+def get_navigate_setpoint(stamp, start, finish, start_stamp, speed):
+    distance = math.sqrt((finish.z - start.z)**2 + (finish.x - start.x)**2 + (finish.y - start.y)**2)
+    time = rospy.Duration(distance / speed)
+    k = (stamp - start_stamp) / time
+    time_left = start_stamp + time - stamp
+
+    if BRAKE_TIME and time_left < BRAKE_TIME:
+        # time to brake
+        time_before_braking = time - BRAKE_TIME
+        brake_time_passed = (stamp - start_stamp - time_before_braking)
+
+        if brake_time_passed > 2 * BRAKE_TIME:
+            # finish
+            k = 1
+        else:
+            # brake!
+            k_before_braking = time_before_braking / time
+            k_after_braking = (speed * brake_time_passed.to_sec() - brake_time_passed.to_sec() ** 2 * speed / 4 / BRAKE_TIME.to_sec()) / distance
+            k = k_before_braking + k_after_braking
+
+    k = min(k, 1)
+
+    p = Point()
+    p.x = start.x + (finish.x - start.x) * k
+    p.y = start.y + (finish.y - start.y) * k
+    p.z = start.z + (finish.z - start.z) * k
+    return p
+
+
+def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     ps.header.stamp = stamp
     vs.header.stamp = stamp
 
-    if isinstance(req, srv.SetPositionRequest):
+    if isinstance(req, srv.NavigateRequest):
+        global current_nav_start, current_nav_start_stamp, current_nav_finish
+
+        if update_frame:
+            ps.header.frame_id = req.frame_id or 'local_origin'
+            ps.pose.position = Point(req.x, req.y, req.z)
+            ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
+            current_nav_finish = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+
+        if not continued:
+            current_nav_start = pose.pose.position
+            current_nav_start_stamp = stamp
+
+        setpoint = get_navigate_setpoint(stamp, current_nav_start, current_nav_finish.pose.position,
+                                         current_nav_start_stamp, req.speed)
+
+        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
+                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
+                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
+                                       PositionTarget.IGNORE_YAW_RATE,
+                             position=setpoint,
+                             yaw=euler_from_orientation(current_nav_finish.pose.orientation)[2] - math.pi / 2)
+        return position_pub, msg
+
+    elif isinstance(req, srv.SetPositionRequest):
         ps.header.frame_id = req.frame_id or 'local_origin'
         ps.pose.position = Point(req.x, req.y, req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
@@ -260,6 +316,9 @@ def get_publisher_and_message(req, stamp):
 current_pub = None
 current_msg = None
 current_req = None
+current_nav_start = None
+current_nav_finish = None
+current_nav_start_stamp = None
 handle_lock = Lock()
 
 
@@ -269,11 +328,15 @@ def handle(req):
     if not state.connected:
         return {'message': 'No connection to the FCU'}
 
+    if isinstance(req, srv.NavigateRequest) and req.speed <= 0:
+        rospy.logwarn('Navigate speed must be greater than zero, %s passed')
+        return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
+
     try:
         with handle_lock:
                 stamp = rospy.get_rostime()
                 current_req = req
-                current_pub, current_msg = get_publisher_and_message(req, stamp)
+                current_pub, current_msg = get_publisher_and_message(req, stamp, False)
                 rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
 
                 current_msg.header.stamp = stamp
@@ -296,6 +359,7 @@ def release(req):
     return {'success': True}
 
 
+rospy.Service('navigate', srv.Navigate, handle)
 rospy.Service('set_position', srv.SetPosition, handle)
 rospy.Service('set_position/yaw_rate', srv.SetPositionYawRate, handle)
 rospy.Service('set_position_global', srv.SetPositionGlobal, handle)
@@ -386,8 +450,9 @@ def start_loop():
                 try:
                     stamp = rospy.get_rostime()
 
-                    if getattr(current_req, 'update_frame', False):
-                        current_pub, current_msg = get_publisher_and_message(current_req, stamp)
+                    if getattr(current_req, 'update_frame', False) or isinstance(current_req, srv.NavigateRequest):
+                        current_pub, current_msg = get_publisher_and_message(current_req, stamp, True,
+                                                                             getattr(current_req, 'update_frame', False))
 
                     current_msg.header.stamp = stamp
                     current_pub.publish(current_msg)

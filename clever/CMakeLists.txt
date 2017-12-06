@@ -61,6 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   GetTelemetry.srv
+  Navigate.srv
   SetPosition.srv
   SetPositionYawRate.srv
   SetPositionGlobal.srv
