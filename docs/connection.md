@@ -36,3 +36,8 @@ TODO
 ```bash
 sudo systemctl restart clever
 ```
+
+> **[info] Внимание**
+>
+> Для корректной работы подключения Raspberry Pi и PixHawk по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.
+
