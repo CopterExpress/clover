@@ -133,7 +133,7 @@ ps = PoseStamped()
 vs = Vector3Stamped()
 
 
-BRAKE_TIME = rospy.Duration(2)
+BRAKE_TIME = rospy.Duration(2.5)
 
 
 def get_navigate_setpoint(stamp, start, finish, start_stamp, speed):
