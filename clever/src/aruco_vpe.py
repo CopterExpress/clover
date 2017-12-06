@@ -55,20 +55,20 @@ def publish_vpe(pose):
 
     aruco_map_in_reference = lookup_transform('aruco_map_reference', 'aruco_map_raw')
     aruco_map_in_reference.header.frame_id = 'aruco_map_reference_horiz'
-    send_transform(aruco_map_in_reference, 'aruco_map')
+    send_transform(aruco_map_in_reference, 'aruco_map_vision')
 
     # Reset VPE
     if last_published is None or stamp - last_published > rospy.Duration(2):
         rospy.loginfo('Reset VPE')
-        aruco_map_in_local_origin = lookup_transform('local_origin', 'aruco_map')
-        aruco_map_in_local_origin.child_frame_id = 'vpe_origin'
+        aruco_map_in_local_origin = lookup_transform('local_origin', 'aruco_map_vision')
+        aruco_map_in_local_origin.child_frame_id = 'aruco_map'
         static_tf_broadcaster.sendTransform(aruco_map_in_local_origin)
 
     # Calculate VPE
     ps.header.frame_id = 'fcu_horiz'
     ps.header.stamp = stamp
-    vpe_raw = tf_buffer.transform(ps, 'aruco_map', LOOKUP_TIMEOUT)
-    vpe_raw.header.frame_id = 'vpe_origin'
+    vpe_raw = tf_buffer.transform(ps, 'aruco_map_vision', LOOKUP_TIMEOUT)
+    vpe_raw.header.frame_id = 'aruco_map'
     vpe = tf_buffer.transform(vpe_raw, 'local_origin', LOOKUP_TIMEOUT)
     _vision_position_pub.publish(vpe_raw)
     vision_position_pub.publish(vpe)
