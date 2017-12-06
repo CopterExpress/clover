@@ -116,7 +116,7 @@ navigate(3, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)
 
 ### set_position
 
-Установить цель по позиции и рысканью. Для полета на точку по прямой используйте `navigate`.
+Установить цель по позиции и рысканью. Для полета на точку по прямой или взлета используйте `navigate`.
 
 Параметры: x, y, z, yaw, frame_id, update_frame
 
