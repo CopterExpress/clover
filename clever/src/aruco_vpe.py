@@ -99,7 +99,7 @@ r = rospy.Rate(5)
 
 
 while not rospy.is_shutdown():
-    if not vpe_posted and not local_pose:
+    if not vpe_posted:
         ps.header.stamp = rospy.get_rostime()
         vision_position_pub.publish(ps)
 
