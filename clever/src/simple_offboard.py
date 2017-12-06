@@ -465,7 +465,7 @@ def start_loop():
                         p.header.frame_id = 'local_origin'
                         p.header.stamp = stamp
                         p.pose.position = current_msg.position
-                        p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw)
+                        p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw + math.pi / 2)
                         target_pub.publish(p)
 
                 except Exception as e:
