@@ -81,7 +81,7 @@ release = rospy.ServiceProxy('/release', Trigger)
 * `voltage` – общее напряжение аккумулятор
 * `cell_voltage` – напряжение аккумулятора на ячейку
 
-Пример. Вывести координаты x, y и z коптера:
+Пример. Вывести координаты x, y и z коптера в локальной системе координат:
 
 ```python
 telemetry = get_telemetry()
