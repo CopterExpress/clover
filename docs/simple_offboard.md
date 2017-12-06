@@ -98,6 +98,11 @@ print telemetry.x, telemetry.y, telemetry.z
 Примеры:
 
 ```python
+# Плавно взлететь на высоту 1.5 м со скоростью взлета 0.5 м/с
+navigate(0, 0, 1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+```
+
+```python
 # прилететь по прямой в точку 5:0 (высота 2)
 # в локальной системе координат со скоростью 0.8 м/с
 navigate(5, 0, 3, speed=0.8)
