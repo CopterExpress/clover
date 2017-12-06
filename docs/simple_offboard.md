@@ -224,7 +224,7 @@ set_velocity_yaw_rate(vx=0.2, vy=0.0, vz=0, yaw_rate=0.5, frame_id: 'fcu_horiz',
 Посадка
 -------
 
-Для посадки можно использовать режим ``AUTO.LAND``. Land detector должен быть включен и указан в ``LPE_FUSION``.
+Для посадки можно использовать режим ``AUTO.LAND``. Land detector должен быть включен и указан в ``LPE_FUSION``. Параметр `COM_DISARM_LAND` должен быть установлен в значение > 0.
 
 ```python
 from mavros_msgs.srv import SetMode
