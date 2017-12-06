@@ -45,4 +45,4 @@ PX4
 * [SET_POSITION_TARGET_LOCAL_NED](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED)
 * [SET_ATTITUDE_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET)
 
-См: [Автономные полеты коптера в режиме OFFBOARD](offboard.md).
+См: [автономные полеты коптера в режиме OFFBOARD](offboard.md).
