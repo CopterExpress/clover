@@ -23,7 +23,7 @@ sudo systemctl restart clever
 Подключение по UART
 ---
 
-TODO
+TODO схема подключения
 
 Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) тип подключения установлен на UART:
 
