@@ -54,6 +54,7 @@ using namespace mavros_msgs;
 ros::NodeHandle nh;
 
 // Объявление сервисов
+ros::ServiceClient<Navigate::Request, Navigate::Response> navigate("/navigate");
 ros::ServiceClient<SetPosition::Request, SetPosition::Response> setPosition("/set_position");
 ros::ServiceClient<SetMode::Request, SetMode::Response> setMode("/mavros/set_mode");
 
@@ -63,6 +64,7 @@ void setup()
   nh.initNode();
 
   // Инициализация сервисов
+  nh.serviceClient(navigate);
   nh.serviceClient(setPosition);
   nh.serviceClient(setMode);
 
@@ -74,6 +76,8 @@ void setup()
   // <...>
 
   // Тестовая программа
+  Navigate::Request nav_req;
+  Navigate::Response nav_res;
   SetPosition::Request sp_req;
   SetPosition::Response sp_res;
   SetMode::Request sm_req;
@@ -100,13 +104,24 @@ void setup()
   sp_req.y = 0;
   sp_req.z = 0;
   setPosition.call(sp_req, sp_res);
+  
+  // Полет в точку 1:0:2 по маркерному полю
+  nh.loginfo("Fly on point");
+  nav_req.auto_arm = false;
+  nav_req.x = 1;
+  nav_req.y = 0;
+  nav_req.z = 2;
+  nav_req.frame_id = "aruco_map";
+  nav_req.update_frame = true;
+  nav_req.speed = 0.5;
+  navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
   delay(5000);
 
   // Посадка
   nh.loginfo("Land");
-  sm_req.custom_mode = "OFFBOARD";
+  sm_req.custom_mode = "AUTO.LAND";
   setMode.call(sm_req, sm_res);
 }
 
