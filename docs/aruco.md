@@ -111,3 +111,5 @@ time.sleep(5)
 # Полет в координату 2:2 маркерного поля, высота 2 метра
 navigate(2, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)  #  полет в координату 2:2, высота 3 метра
 ```
+
+См. [другие функции](/docs/simple_offboard.md) simple offboard.
