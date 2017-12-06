@@ -212,14 +212,18 @@ void ArucoPose::detect(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs:
                 // Publish debug image
                 cv::aruco::drawDetectedMarkers(image, markerCorners, markerIds);
                 cv::aruco::drawAxis(image, cameraMatrix, distCoeffs, rvec, tvec, 0.3);
-                cv_bridge::CvImage out_msg;
-                out_msg.header.frame_id = msg->header.frame_id;
-                out_msg.header.stamp = msg->header.stamp;
-                out_msg.encoding = sensor_msgs::image_encodings::BGR8;
-                out_msg.image = image;
-                img_pub.publish(out_msg.toImageMsg());
             }
         }
+    }
+
+    if (img_pub.getNumSubscribers() > 0)
+    {
+        cv_bridge::CvImage out_msg;
+        out_msg.header.frame_id = msg->header.frame_id;
+        out_msg.header.stamp = msg->header.stamp;
+        out_msg.encoding = sensor_msgs::image_encodings::BGR8;
+        out_msg.image = image;
+        img_pub.publish(out_msg.toImageMsg());
     }
 }
 
