@@ -7,7 +7,7 @@
 
 https://copterexpress.gitbooks.io/clever/content/
 
-**Готовый образ** с предустановленным и преднастроенным clever_bundle можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
+**Готовый образ** для RPi 3 с предустановленным и преднастроенным clever_bundle можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
 
 Установка
 ---------
