@@ -50,6 +50,8 @@ init_fcu_horiz()
 
 position_pub = rospy.Publisher('/mavros/setpoint_raw/local', PositionTarget, queue_size=1)
 attitude_pub = rospy.Publisher('/mavros/setpoint_raw/attitude', AttitudeTarget, queue_size=1)
+target_pub = rospy.Publisher('~target', PoseStamped, queue_size=1)
+
 arming = rospy.ServiceProxy('/mavros/cmd/arming', CommandBool)
 set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
 
@@ -456,6 +458,15 @@ def start_loop():
 
                     current_msg.header.stamp = stamp
                     current_pub.publish(current_msg)
+
+                    # For monitoring
+                    if isinstance(current_msg, PositionTarget):
+                        p = PoseStamped()
+                        p.header.frame_id = 'local_origin'
+                        p.header.stamp = stamp
+                        p.pose.position = current_msg.position
+                        p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw)
+                        target_pub.publish(p)
 
                 except Exception as e:
                     rospy.logwarn_throttle(10, str(e))
