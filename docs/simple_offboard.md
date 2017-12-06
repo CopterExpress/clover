@@ -30,7 +30,7 @@ rospy.init_node('foo')
 
 # Создаем прокси ко всем сервисам:
 
-set_position = rospy.ServiceProxy('/navigate', srv.Navigate)
+navigate = rospy.ServiceProxy('/navigate', srv.Navigate)
 
 set_position = rospy.ServiceProxy('/set_position', srv.SetPosition)
 set_position_yaw_rate = 
