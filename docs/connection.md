@@ -3,6 +3,15 @@
 
 Для программирования [автономных полетов](/docs/simple_offboard.md), [работы с PixHawk по Wi-Fi](/docs/gcs_bridge.md), использования [веб-пульта](/docs/web_rc.md) и других функций необходимо подсоединить Raspberry Pi к PixHawk.
 
+Убедиться в работоспособности подключения, выполнив на Raspberry Pi:
+
+```
+rostopic echo /mavros/state
+```
+
+Поле Connected должно содержать значение True.
+
+
 Подключение по USB
 ---
 
