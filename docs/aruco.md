@@ -94,6 +94,11 @@ TODO
 * Рекомендуемые настройки контроллера: 
   * Максимальная скорость по позиции: ``MPC_XY_VEL_MAX`` = 3 m/s
   * Настройки PID-регуляторов: `MPC_XY_P` = 0.95, `MPC_XY_VEL_P` = 0.15.
+* Рекомендуемые настройки land detector'а:
+  * `LNDMC_ROT_MAX` = 45 deg
+  * `LNDMC_THR_RANGE` = 0.5
+  * `LNDMC_Z_VEL_MAX` = 1 m/s.
+  
 
 ### Полет
 
