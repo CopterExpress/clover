@@ -66,7 +66,7 @@ release = rospy.ServiceProxy('/release', Trigger)
 Ответ:
 
 * `frame_id` – фрейм
-* `connected` – есть ли подключение к FCU
+* `connected` – есть ли подключение к <abbr title="Flight Control Unit, полетный контроллер">FCU</abbr>
 * `armed` – состояние `armed` винтов (винты включены, если true)
 * `mode` - текущий [полетный режим](/docs/modes.md)
 * `x, y, z` – локальная позиция коптера
