@@ -88,6 +88,12 @@ telemetry = get_telemetry()
 print telemetry.x, telemetry.y, telemetry.z
 ```
 
+Вывод текущей телеметрии из консоли:
+
+```bash
+rosservice call /get_telemetry "{frame_id: ''}"
+```
+
 ### navigate
 
 Прилететь в обозначенную точку по прямой.
