@@ -91,6 +91,8 @@ cv::Ptr<cv::aruco::Board> createCustomBoard(int markersX, int markersY, float ma
     return res;
 }
 
+#include "fix.cpp"
+
 void ArucoPose::createBoard()
 {
     static auto map_image_pub = nh_priv_.advertise<sensor_msgs::Image>("map_image", 1, true);
@@ -129,7 +131,7 @@ void ArucoPose::createBoard()
         }
 
         // Publish map image for debugging
-        cv::aruco::drawPlanarBoard(board, cv::Size(2000, 2000), map_image, 50, 1);
+        _drawPlanarBoard(board,  cv::Size(2000, 2000), map_image, 50, 1);
 
         cv::cvtColor(map_image, map_image, CV_GRAY2BGR);
 
@@ -161,8 +163,6 @@ cv::Point3f ArucoPose::getObjPointsCenter(cv::Mat objPoints) {
     cv::Point3f res((min_x + max_x) / 2, (min_y + max_y) / 2, 0);
     return res;
 }
-
-#include "fix.cpp"
 
 void ArucoPose::detect(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr &cinfo) {
     cv::Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
