@@ -38,7 +38,7 @@ sudo systemctl restart clever
 
 Набор сервисов и топиков аналогичен обычному набору в [simple_offboard](/docs/simple_offboard.md) и [mavros](/docs/mavros.md).
 
-Пример программы, контролирующей коптер по позиции, с использованием сервисов `set_position` и `set_mode`:
+Пример программы, контролирующей коптер по позиции, с использованием сервисов `navigate` и `set_mode`:
 
 ```cpp
 // Подключение библиотек для работы с rosseral
