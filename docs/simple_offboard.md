@@ -143,7 +143,7 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, speed: 0.5, frame_id
 
 Параметры: x, y, z, yaw, frame_id, update_frame
 
-Задание позиции относительно коптера:
+Задание позиции относительно текущей позиции коптера:
 
 ```python
 set_position(x=0, y=0, z=3, frame_id='fcu_horiz', auto_arm=true)  #  взлет на 3 метра
