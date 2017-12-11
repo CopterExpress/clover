@@ -45,8 +45,11 @@ sudo systemctl start clever
 Зависимости
 -----------
 
+ROS Kinetic.
+
 Необходимые для работы ROS-пакеты:
 
+* `opencv3`
 * `mavros`
 * `rosbridge_suite`
 * `web_video_server`
