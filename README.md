@@ -45,7 +45,7 @@ sudo systemctl start clever
 Зависимости
 -----------
 
-ROS Kinetic.
+[ROS Kinetic](http://wiki.ros.org/kinetic).
 
 Необходимые для работы ROS-пакеты:
 
