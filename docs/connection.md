@@ -17,7 +17,7 @@ rostopic echo /mavros/state
 
 Соедините PixHawk/PixRacer и Raspberry Pi micro-USB to USB кабелем.
 
-Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) тип подключения установлен на USB:
+Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения установлен на USB:
 
 ```xml
 <arg name="fcu_conn" default="usb"/>
