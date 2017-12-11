@@ -2,6 +2,22 @@
 
 При подключении к Клеверу по Wi-Fi (`CLEVER-xxxx`) по адресу [192.168.11.1:7070](http://192.168.11.1:7070) открывается web-приложение – пульт управления квадрокоптером.
 
+Для работы пульта необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) включены аргументы `web_server` и `rosbridge`.
+
+```xml
+<arg name="rosbridge" default="true"/>
+```
+
+```xml
+<arg name="web_server" default="true"/>
+```
+
+При изменении launch-файла необходимо перезапустить сервис `clever`:
+
+```bash
+sudo systemctl restart clever
+```
+
 ## Стартовый экран
 
 При загрузке приложения, автоматически устанавливается соединение с сервером ROS.
