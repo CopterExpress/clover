@@ -24,7 +24,7 @@
     <include file="$(find clever)/launch/web_server.launch" if="$(arg web_server)"/>
 
     <!-- web video server -->
-    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" respawn="true" respawn_delay="5"/>
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>
 
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
