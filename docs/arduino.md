@@ -92,7 +92,7 @@ void setup()
   // Ждем 5 секунд
   delay(5000);
   
-  sp.req.auto_arm = false;
+  nav_req.auto_arm = false;
 
   // Пролет вперед на 3 метра:
   nh.loginfo("Fly forward");
