@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
         <param name="num_worker_threads" value="2"/>
     </node>
 
@@ -8,7 +8,7 @@
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>-->
     <node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
 
-    <node pkg="nodelet" type="nodelet" name="bottom_camera" args="load cv_camera/CvCameraNodelet nodelet_manager">
+    <node pkg="nodelet" type="nodelet" name="bottom_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" clear_params="true">
         <param name="frame_id" value="bottom_camera_optical"/>
         <param name="camera_info_url" value="file://$(find clever)/camera_info/fisheye_cam_320.yaml"/>
 
