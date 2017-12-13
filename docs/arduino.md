@@ -96,7 +96,7 @@ void setup()
 
   // Пролет вперед на 3 метра:
   nh.loginfo("Fly forward");
-  nav_req.auto_arm = false;
+  nav_req.auto_arm = true;
   nav_req.x = 3;
   nav_req.y = 0;
   nav_req.z = 0;
