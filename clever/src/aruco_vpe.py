@@ -12,7 +12,7 @@ from util import orientation_from_euler, euler_from_orientation
 rospy.init_node('aruco_vpe')
 
 
-LOOKUP_TIMEOUT = rospy.Duration(.1)
+LOOKUP_TIMEOUT = rospy.Duration(.05)
 CAMERA_FRAME_ID = rospy.get_param('~camera_frame_id', 'bottom_camera_optical')
 
 
