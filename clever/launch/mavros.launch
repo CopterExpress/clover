@@ -26,4 +26,22 @@
     <param name="mavros/local_position/tf/frame_id" value="local_origin"/>
     <param name="mavros/local_position/tf/child_frame_id" value="fcu"/>
     <param name="mavros/global_position/tf/send" value="false"/>
+    <rosparam param="mavros/plugin_blacklist">
+        - safety_area
+        - image_pub
+        - vibration
+        - distance_sensor
+        - rangefinder
+        - 3dr_radio
+        - actuator_control
+        - hil_controls
+        - manual_control
+        - vfr_hud
+        - px4flow
+        - vision_speed_estimate
+        - fake_gps
+        - cam_imu_sync
+        - hil
+        - adsb
+    </rosparam>
 </launch>
