@@ -1,4 +1,4 @@
-Управление коптером с Arudino
+Управление коптером с Arduino
 ===
 
 Для взаимодействия с ROS-топиками и сервисами на Raspberry Pi можно использовать библиотеку [rosserial_arduino](http://wiki.ros.org/rosserial_arduino).
