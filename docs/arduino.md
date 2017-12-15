@@ -7,7 +7,7 @@
 
 Arudino необходимо установить на Клевер и подключить по USB-порту.
 
-Настройка Aruino IDE
+Настройка Arduino IDE
 ---
 
 Необходимо скачать и скопировать [библиотеку ROS-сообщений Клевера](https://github.com/CopterExpress/clever_bundle/blob/master/deploy/clever_arudino.tar.gz?raw=true) (`ros_lib`) в `<папку скетчей>/libraries`.
