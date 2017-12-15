@@ -14,5 +14,5 @@
 * ROS Kinetic
 * [Пакет ПО для Клевера](https://github.com/CopterExpress/clever_bundle)
 
-Скачать образ: https://drive.google.com/open?id=1Gtj\_0iB7dFuorfUKAUUV8ImjmkZCkvc7
+Скачать образ: [https://drive.google.com/open?id=1Gtj\_0iB7dFuorfUKAUUV8ImjmkZCkvc7](https://drive.google.com/open?id=1Gtj_0iB7dFuorfUKAUUV8ImjmkZCkvc7)
 
