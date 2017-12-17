@@ -13,11 +13,11 @@ aruco_pose
 
 Модуль `aruco_pose` позволяет восстанавливать позицию коптера относительно карты ArUco-маркеров и сообщать ее полетному контролеру, используя механизм [Vision Position Estimation](https://dev.px4.io/en/ros/external_position_estimation.html).
 
-При наличия источника положения коптера по маркерам, появляется возможность производить точную автономную indoor-навигацию по позициям при помощи модуля [simple_offboard](/docs/simple_offboard.md).
+При наличии источника положения коптера по маркерам появляется возможность производить точную автономную indoor-навигацию по позициям при помощи модуля [simple_offboard](/docs/simple_offboard.md).
 
 ### Включение
 
-Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) включен запуск aruco_pose и нижней камеры для компьютерного зрения:
+Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) включен запуск aruco_pose и нижней камеры для компьютерного зрения:
 
 ```xml
 <arg name="bottom_camera" default="true"/>
