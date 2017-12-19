@@ -157,8 +157,8 @@ cv::Point3f ArucoPose::getObjPointsCenter(cv::Mat objPoints) {
     for (int i = 0; i < objPoints.rows; i++) {
         max_x = std::max(max_x, objPoints.at<float>(i, 0));
         max_y = std::max(max_y, objPoints.at<float>(i, 1));
-        min_x = std::min(max_x, objPoints.at<float>(i, 0));
-        min_y = std::min(max_y, objPoints.at<float>(i, 1));
+        min_x = std::min(min_x, objPoints.at<float>(i, 0));
+        min_y = std::min(min_y, objPoints.at<float>(i, 1));
     }
     cv::Point3f res((min_x + max_x) / 2, (min_y + max_y) / 2, 0);
     return res;
