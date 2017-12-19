@@ -28,26 +28,6 @@ tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 
-def init_fcu_horiz():
-    # `fcu_horiz` frame publishing
-
-    tr = TransformStamped()
-    tr.header.frame_id = 'local_origin'
-    tr.child_frame_id = 'fcu_horiz'
-
-    def update_pose(data):
-        tr.header.stamp = data.header.stamp
-        tr.transform.translation = vector3_from_point(data.pose.position)
-        yaw = euler_from_orientation(data.pose.orientation)[2]
-        tr.transform.rotation = orientation_from_euler(0, 0, yaw)
-        tf_broadcaster.sendTransform(tr)
-
-    rospy.Subscriber('/mavros/local_position/pose', PoseStamped, update_pose)
-
-
-init_fcu_horiz()
-
-
 position_pub = rospy.Publisher('/mavros/setpoint_raw/local', PositionTarget, queue_size=1)
 attitude_pub = rospy.Publisher('/mavros/setpoint_raw/attitude', AttitudeTarget, queue_size=1)
 target_pub = rospy.Publisher('~target', PoseStamped, queue_size=1)

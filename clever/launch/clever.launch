@@ -28,6 +28,8 @@
 
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
+    <node pkg="nodelet" type="nodelet" name="fcu_horiz" args="standalone clever/fcu_horiz" output="screen" clear_params="true"/>
+
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
 
