@@ -4,6 +4,8 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 
+#include "util.h"
+
 class FcuHoriz : public nodelet::Nodelet
 {
     geometry_msgs::TransformStamped t_;
@@ -11,11 +13,18 @@ class FcuHoriz : public nodelet::Nodelet
     void handlePose(const geometry_msgs::PoseStampedConstPtr& msg)
     {
         static tf2_ros::TransformBroadcaster br;
+        double roll, pitch, yaw;
+
         t_.header.stamp = msg->header.stamp;
         t_.header.frame_id = msg->header.frame_id;
         t_.transform.translation.x = msg->pose.position.x;
         t_.transform.translation.y = msg->pose.position.y;
         t_.transform.translation.z = msg->pose.position.z;
+
+        // Warning: this is not thead-safe
+        quaternionToEuler(msg->pose.orientation, roll, pitch, yaw);
+        eulerToQuaternion(t_.transform.rotation, 0, 0, yaw);
+
         br.sendTransform(t_);
     }
 
