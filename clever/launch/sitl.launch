@@ -13,6 +13,5 @@
         <arg name="rosbridge" value="$(arg rosbridge)"/>
         <arg name="web_server" default="false"/>
         <arg name="aruco" default="false"/>
-        <arg name="gcs_bridge" default="false"/>
     </include>
 </launch>
