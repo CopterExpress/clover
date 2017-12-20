@@ -1,4 +1,4 @@
-# Клевер
+# Summary
 
 * [Введение](README.md)
 * [Сборка](docs/assemble.md)
@@ -37,3 +37,5 @@
   * [Урок 16](docs/les16.md)
 * [Полезные ссылки](docs/links.md)
 * [CopterHack-2017](docs/copterhack2017.md)
+* [Прошивка ESC контроллеров с помощью Arduino](proshivka-esc-kontrollerov-s-pomoschyu-arduino.md)
+
