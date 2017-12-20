@@ -1,8 +1,4 @@
 <launch>
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
-        <param name="num_worker_threads" value="2"/>
-    </node>
-
     <!-- the bottom facing camera -->
 
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>-->

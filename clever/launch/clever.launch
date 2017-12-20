@@ -26,8 +26,14 @@
     <!-- web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>
 
+    <!-- aruco vpe -->
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
+    <!-- fcu_horiz frame -->
     <node pkg="nodelet" type="nodelet" name="fcu_horiz" args="standalone clever/fcu_horiz" output="screen" clear_params="true"/>
 
     <!-- simplified offboard control -->
