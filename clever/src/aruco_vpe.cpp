@@ -37,9 +37,13 @@ private:
         ros::NodeHandle& nh = getNodeHandle();
         ros::NodeHandle& nh_priv = getPrivateNodeHandle();
 
+        nh_priv.param<string>("aruco_orientation", aruco_orientation_, "local_origin");
+        bool use_mocap;
+        nh_priv.param<bool>("use_mocap", use_mocap, false);
+
         static ros::Subscriber pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
-        vision_position_pub_ = nh.advertise<PoseStamped>("mavros/vision_pose/pose", 1);
-        nh_priv.param<std::string>("aruco_orientation", aruco_orientation_, "local_origin");
+
+        vision_position_pub_ = nh.advertise<PoseStamped>(use_mocap ? "mavros/mocap/pose" : "mavros/vision_pose/pose", 1);
 
         ROS_INFO("aruco orientation frame: %s", aruco_orientation_.c_str());
 
