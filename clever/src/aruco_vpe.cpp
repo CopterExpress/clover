@@ -15,6 +15,7 @@
 using namespace tf2_ros;
 using geometry_msgs::PoseStamped;
 using geometry_msgs::TransformStamped;
+using std::string;
 
 class ArucoVPE : public nodelet::Nodelet
 {
@@ -29,12 +30,18 @@ private:
     ros::Duration lookup_timeout_;
     ros::Publisher vision_position_pub_;
     ros::Timer dummy_vision_timer_;
+    string aruco_orientation_;
 
     void onInit()
     {
         ros::NodeHandle& nh = getNodeHandle();
+        ros::NodeHandle& nh_priv = getPrivateNodeHandle();
+
         static ros::Subscriber pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
         vision_position_pub_ = nh.advertise<PoseStamped>("mavros/vision_pose/pose", 1);
+        nh_priv.param<std::string>("aruco_orientation", aruco_orientation_, "local_origin");
+
+        ROS_INFO("aruco orientation frame: %s", aruco_orientation_.c_str());
 
         dummy_vision_timer_ = nh.createTimer(ros::Duration(0.5), &ArucoVPE::publishDummy, this);
 
@@ -66,7 +73,7 @@ private:
         {
             // Refine aruco map pose
             // Reference in local origin
-            t = tf_buffer.lookupTransform("local_origin", "aruco_map_reference", stamp, lookup_timeout_);
+            t = tf_buffer.lookupTransform(aruco_orientation_, "aruco_map_reference", stamp, lookup_timeout_);
             quaternionToEuler(t.transform.rotation, roll, pitch, yaw);
             eulerToQuaternion(t.transform.rotation, 0, 0, yaw);
             t.child_frame_id = "aruco_map_reference_horiz";

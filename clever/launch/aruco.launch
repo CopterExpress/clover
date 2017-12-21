@@ -15,5 +15,8 @@
         <!--<rosparam param="marker_ids">[6, 5, 4, 3, 2, 1]</rosparam>-->
     </node>
 
-    <node pkg="clever" type="aruco_vpe.py" name="aruco_vpe" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="aruco_vpe" args="load clever/aruco_vpe nodelet_manager" clear_params="true">
+        <param name="aruco_orientation" value="local_origin"/>
+        <!--<param name="aruco_orientation" value="local_origin_upside_down"/>-->
+    </node>
 </launch>

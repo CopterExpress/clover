@@ -3,3 +3,8 @@
       <description/>
    </class>
 </library>
+<library path="lib/libaruco_vpe">
+   <class name="clever/aruco_vpe" type="ArucoVPE" base_class_type="nodelet::Nodelet">
+      <description/>
+   </class>
+</library>

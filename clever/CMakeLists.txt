@@ -17,6 +17,9 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   sensor_msgs
   geographic_msgs
+  tf
+  tf2
+  tf2_geometry_msgs
 )
 
 
@@ -142,6 +145,10 @@ add_library(fcu_horiz
   src/fcu_horiz.cpp
 )
 
+add_library(aruco_vpe
+  src/aruco_vpe.cpp
+)
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -166,6 +173,10 @@ add_library(fcu_horiz
 target_link_libraries(fcu_horiz
   ${catkin_LIBRARIES}
   "/opt/ros/kinetic/lib/libtf2_ros.so"
+)
+
+target_link_libraries(aruco_vpe
+  ${catkin_LIBRARIES}
 )
 
 #############
