@@ -80,7 +80,7 @@ AUTO_ARM = AUTO_OFFBOARD and rospy.get_param('~auto_arm', True)
 OFFBOARD_TIMEOUT = rospy.Duration(rospy.get_param('~offboard_timeout', 3))
 ARM_TIMEOUT = rospy.Duration(rospy.get_param('~arm_timeout', 5))
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
-SETPOINT_RATE = rospy.get_param('~setpoint_rate', 50)
+SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
 
 
 def offboard_and_arm():
