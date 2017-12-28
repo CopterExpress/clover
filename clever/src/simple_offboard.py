@@ -307,7 +307,7 @@ handle_lock = Lock()
 def handle(req):
     global current_pub, current_msg, current_req
 
-    if not state.connected:
+    if not state or not state.connected:
         return {'message': 'No connection to the FCU'}
 
     if isinstance(req, srv.NavigateRequest) and req.speed <= 0:
