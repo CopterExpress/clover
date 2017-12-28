@@ -416,7 +416,10 @@ def get_telemetry(req):
 
     if battery:
         res['voltage'] = battery.voltage
-        res['cell_voltage'] = battery.cell_voltage[0]
+        try:
+            res['cell_voltage'] = battery.cell_voltage[0]
+        except:
+            pass
 
     return res
 
