@@ -69,10 +69,10 @@ void ArucoPose::onInit() {
     ROS_INFO("aruco_pose nodelet inited");
 }
 
-cv::Ptr<cv::aruco::Board> createCustomBoard(int markersX, int markersY, float markerLength, float markerSeparation,
+cv::Ptr<cv::aruco::Board> createCustomGridBoard(int markersX, int markersY, float markerLength, float markerSeparationX, float markerSeparationY,
                             const cv::Ptr<cv::aruco::Dictionary> &dictionary, std::vector<int> ids) {
 
-    CV_Assert(markersX > 0 && markersY > 0 && markerLength > 0 && markerSeparation > 0);
+    CV_Assert(markersX > 0 && markersY > 0 && markerLength > 0 && markerSeparationX > 0 && markerSeparationY > 0);
 
     cv::Ptr<cv::aruco::Board> res = cv::makePtr<cv::aruco::Board>();
 
@@ -83,13 +83,13 @@ cv::Ptr<cv::aruco::Board> createCustomBoard(int markersX, int markersY, float ma
     res->objPoints.reserve(totalMarkers);
 
     // calculate Board objPoints
-    float maxY = (float)markersY * markerLength + (markersY - 1) * markerSeparation;
+    float maxY = (float)markersY * markerLength + (markersY - 1) * markerSeparationY;
     for(int y = 0; y < markersY; y++) {
         for(int x = 0; x < markersX; x++) {
             std::vector< cv::Point3f > corners;
             corners.resize(4);
-            corners[0] = cv::Point3f(x * (markerLength + markerSeparation),
-                                 maxY - y * (markerLength + markerSeparation), 0);
+            corners[0] = cv::Point3f(x * (markerLength + markerSeparationX),
+                                 maxY - y * (markerLength + markerSeparationY), 0);
             corners[1] = corners[0] + cv::Point3f(markerLength, 0, 0);
             corners[2] = corners[0] + cv::Point3f(markerLength, -markerLength, 0);
             corners[3] = corners[0] + cv::Point3f(0, -markerLength, 0);
@@ -116,28 +116,56 @@ void ArucoPose::createBoard()
         ROS_INFO("Initialize gridboard");
 
         int markers_x, markers_y, first_marker;
-        float markers_side, markers_sep;
+        float markers_side, markers_sep_x, markers_sep_y;
         std::vector<int> marker_ids;
         nh_priv_.param<int>("markers_x", markers_x, 10);
         nh_priv_.param<int>("markers_y", markers_y, 10);
         nh_priv_.param<int>("first_marker", first_marker, 0);
 
         if (!nh_priv_.getParam("markers_side", markers_side))
+        {
             ROS_ERROR("gridboard: required parameter ~markers_side is not set.");
+            exit(1);
+        }
 
-        if (!nh_priv_.getParam("markers_sep", markers_sep))
-            ROS_ERROR("gridboard: required parameter ~markers_sep is not set.");
+        if (!nh_priv_.getParam("markers_sep_x", markers_sep_x))
+        {
+            if (!nh_priv_.getParam("markers_sep", markers_sep_x))
+            {
+               ROS_ERROR("gridboard: ~markers_sep_x or ~markers_sep parameters are required");
+               exit(1);
+            }
+        }
 
-        if (nh_priv_.getParam("marker_ids", marker_ids)) {
-            if (markers_x * markers_y != marker_ids.size()) {
+        if (!nh_priv_.getParam("markers_sep_y", markers_sep_y))
+        {
+            if (!nh_priv_.getParam("markers_sep", markers_sep_y))
+            {
+               ROS_ERROR("gridboard: ~markers_sep_y or ~markers_sep parameters are required");
+               exit(1);
+            }
+        }
+
+        if (nh_priv_.getParam("marker_ids", marker_ids))
+        {
+            if (markers_x * markers_y != marker_ids.size())
+            {
                 ROS_FATAL("~marker_ids length should be equal to ~markers_x * ~markers_y");
                 exit(1);
             }
-            board = createCustomBoard(markers_x, markers_y, markers_side, markers_sep, dictionary, marker_ids);
         }
-        else {
-            board = cv::aruco::GridBoard::create(markers_x, markers_y, markers_side, markers_sep, dictionary, first_marker);
+        else
+        {
+            // Fill marker_ids automatically
+            marker_ids.resize(markers_x * markers_y);
+            for(int i = 0; i < markers_x * markers_y; i++)
+            {
+                marker_ids.at(i) = first_marker++;
+            }
         }
+
+        // Create grid board
+        board = createCustomGridBoard(markers_x, markers_y, markers_side, markers_sep_x, markers_sep_y, dictionary, marker_ids);
 
         // Publish map image for debugging
         _drawPlanarBoard(board,  cv::Size(2000, 2000), map_image, 50, 1);
