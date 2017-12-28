@@ -31,6 +31,7 @@ private:
     ros::Publisher vision_position_pub_;
     ros::Timer dummy_vision_timer_;
     string aruco_orientation_;
+    bool reset_vpe_;
 
     void onInit()
     {
@@ -40,6 +41,7 @@ private:
         nh_priv.param<string>("aruco_orientation", aruco_orientation_, "local_origin");
         bool use_mocap;
         nh_priv.param<bool>("use_mocap", use_mocap, false);
+        nh_priv.param<bool>("reset_vpe", reset_vpe_, !use_mocap);
 
         static ros::Subscriber pose_sub = nh.subscribe("mavros/local_position/pose", 1, &ArucoVPE::handlePose, this);
         static ros::Subscriber aruco_pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
@@ -97,8 +99,8 @@ private:
             t.child_frame_id = "aruco_map_vision";
             br.sendTransform(t);
 
-            // Reset VPE
-            if (!last_published_.isValid() or ros::Time::now() - last_published_ > ros::Duration(2))
+            if (last_published_.toSec() == 0 || // no vpe has been posted
+               (reset_vpe_ && (ros::Time::now() - last_published_ > ros::Duration(2)))) // vpe origin outdated
             {
                 ROS_INFO("Reset VPE");
                 t = tf_buffer.lookupTransform("local_origin", "aruco_map_vision", stamp, lookup_timeout_);
