@@ -326,6 +326,11 @@ def handle(req):
 
         if req.auto_arm:
             offboard_and_arm()
+        else:
+            if state.mode != 'OFFBOARD':
+                return {'message': 'Copter is not in OFFBOARD mode, use auto_arm?'}
+            if not state.armed:
+                return {'message': 'Copter is not armed, use auto_arm?'}
 
         return {'success': True}
 
