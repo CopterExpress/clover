@@ -41,7 +41,8 @@ private:
         bool use_mocap;
         nh_priv.param<bool>("use_mocap", use_mocap, false);
 
-        static ros::Subscriber pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
+        static ros::Subscriber pose_sub = nh.subscribe("mavros/local_position/pose", 1, &ArucoVPE::handlePose, this);
+        static ros::Subscriber aruco_pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
 
         vision_position_pub_ = nh.advertise<PoseStamped>(use_mocap ? "mavros/mocap/pose" : "mavros/vision_pose/pose", 1);
 
@@ -59,6 +60,13 @@ private:
         ps.header.stamp = ros::Time::now();
         ps.pose.orientation.w = 1;
         vision_position_pub_.publish(ps);
+    }
+
+    void  handlePose(const geometry_msgs::PoseStampedConstPtr& pose)
+    {
+        // local position is inited, stop posting dummy position
+        ROS_INFO_ONCE("Got local position, stop publishing zeroes");
+        dummy_vision_timer_.stop();
     }
 
     void handleArucoPose(const geometry_msgs::PoseStampedConstPtr& pose)
