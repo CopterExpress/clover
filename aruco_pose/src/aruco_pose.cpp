@@ -47,7 +47,16 @@ void ArucoPose::onInit() {
 
     dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_1000);
     parameters = cv::aruco::DetectorParameters::create();
-    createBoard();
+
+    try
+    {
+        createBoard();
+    }
+    catch (const std::exception &exc)
+    {
+        std::cerr << exc.what();
+        exit(0);
+    }
 
     image_transport::ImageTransport it(nh_);
     img_sub = it.subscribeCamera("image", 1, &ArucoPose::detect, this);
