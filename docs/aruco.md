@@ -152,7 +152,7 @@ navigate(2, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)  #  поле
 <param name="aruco_orientation" value="local_origin_upside_down"/>
 ```
 
-При задании вышеуказанного параметр, фрейм aruco_map также окажется "перевернутым". Таким образом, на высоту 2 метра относительно потолка, `z` нужно указать в 2:
+При задании вышеуказанного параметр, фрейм aruco_map также окажется "перевернутым". Таким образом, для полета на высоту 2 метра относительно потолка, `z` нужно указать в 2:
 
 ```python
 print navigate(x=1, y=2, z=1.1, speed=0.5, frame_id='aruco_map')
