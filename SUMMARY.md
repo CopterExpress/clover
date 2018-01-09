@@ -38,6 +38,6 @@
   * [Урок 16](docs/les16.md)
 * Другое
   * [CopterHack-2017](docs/copterhack2017.md)
-  * [Прошивка ESC контроллеров с помощью Arduino](proshivka-esc-kontrollerov-s-pomoschyu-arduino.md)
+  * [Прошивка ESC контроллеров с помощью Arduino](docs/esc_firmware.md)
 * [Полезные ссылки](docs/links.md)
 
