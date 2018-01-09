@@ -1,12 +1,13 @@
-# Подготовка образа для RPI
+# Образ для Raspberry Pi
 
 ## Установка образа операционной системы на MicroSD карту
 
-![Etcher](https://etcher.io/static/screenshot.gif)
+Для установки образа воспользуйтесь утилитой [Etcher](https://etcher.io):
 
-Для установки образа рекомендуем воспользоваться утилитой Etcher [\[скачать\]](https://etcher.io/)
+[![Etcher](https://etcher.io/static/screenshot.gif)
+](https://etcher.io)
 
-## Образы MicroSD
+## Образы
 
 На образе установлены:
 
@@ -14,5 +15,6 @@
 * ROS Kinetic
 * [Пакет ПО для Клевера](https://github.com/CopterExpress/clever_bundle)
 
-Скачать образ: [https://drive.google.com/open?id=1Gtj\_0iB7dFuorfUKAUUV8ImjmkZCkvc7](https://drive.google.com/open?id=1Gtj_0iB7dFuorfUKAUUV8ImjmkZCkvc7)
-
+|Версия|Дата|Ссылка|Примечания|
+|-|-|-|-|
+|0.1|15.12.17|[Скачать](https://drive.google.com/open?id=1Gtj_0iB7dFuorfUKAUUV8ImjmkZCkvc7)||
