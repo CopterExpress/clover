@@ -11,7 +11,6 @@
 * [Работа с QGroundControl через Wi-Fi](docs/gcs_bridge.md)
 * [SSH-доступ](docs/ssh.md)
 * [Неисправности радиоаппаратуры](docs/radioerrors.md)
-* [Прошивка ESC контроллеров с помощью Arduino](proshivka-esc-kontrollerov-s-pomoschyu-arduino.md)
 * [Безопасность](docs/safety.md)
 * [Техника безопасности по пайке](docs/tb.md)
 * [Просмотр видеострима с камер](docs/web_video_server.md)
@@ -37,6 +36,8 @@
   * [Урок 13](docs/les13.md)
   * [Урок 15](docs/les15.md)
   * [Урок 16](docs/les16.md)
+* Другое
+  * [CopterHack-2017](docs/copterhack2017.md)
+  * [Прошивка ESC контроллеров с помощью Arduino](proshivka-esc-kontrollerov-s-pomoschyu-arduino.md)
 * [Полезные ссылки](docs/links.md)
-* [CopterHack-2017](docs/copterhack2017.md)
 
