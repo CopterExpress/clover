@@ -42,12 +42,23 @@ sudo systemctl restart clever
 ```xml
 <node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager">
     <param name="frame_id" value="aruco_map_raw"/>
-    <param name="type" value="gridboard"/> <!-- тип маркерного поля -->
-    <param name="markers_x" value="1"/> <!-- количество маркеров по x -->
-    <param name="markers_y" value="6"/> <!-- количество маркеров по y -->
-    <param name="first_marker" value="240"/> <!-- ID маркера первого маркера (левого верхнего) -->
-    <param name="markers_side" value="0.3362"/> <!-- длина стороны маркера в метрах -->
-    <param name="markers_sep" value="0.46"/> <!-- растояние между маркерами -->
+    <!-- тип маркерного поля -->
+    <param name="type" value="gridboard"/>
+    
+    <!-- количество маркеров по x -->
+    <param name="markers_x" value="1"/>
+    
+    <!-- количество маркеров по y -->
+    <param name="markers_y" value="6"/>
+    
+    <!-- ID маркера первого маркера (левого верхнего) -->
+    <param name="first_marker" value="240"/>
+
+    <!-- длина стороны маркера в метрах -->
+    <param name="markers_side" value="0.3362"/>
+    
+    <!-- растояние между маркерами -->
+    <param name="markers_sep" value="0.46"/>
 </node>
 ```
 
