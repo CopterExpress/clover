@@ -19,11 +19,11 @@
 ### Клевер 3, камера вниз
 
 ```xml
-<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>
 ```
 
 ### Клевер 3, камера вверх
 
 ```xml
-<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu bottom_camera_optical"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>
 ```
