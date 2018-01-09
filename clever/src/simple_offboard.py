@@ -308,6 +308,7 @@ def handle(req):
     global current_pub, current_msg, current_req
 
     if not state or not state.connected:
+        rospy.logwarn('No connection to the FCU')
         return {'message': 'No connection to the FCU'}
 
     if isinstance(req, srv.NavigateRequest) and req.speed <= 0:
