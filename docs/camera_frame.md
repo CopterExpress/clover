@@ -1,6 +1,6 @@
 # Настройка расположения основной камеры
 
-Расположение и ориентация основной камеры задается в файле `~/catkin_ws/src/clever/clever/launch/main_camera.launch` в строке:
+Расположение и ориентация основной камеры задается в файле `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
