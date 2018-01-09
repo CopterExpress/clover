@@ -17,10 +17,10 @@ aruco_pose
 
 ### Включение
 
-Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) включен запуск aruco_pose и нижней камеры для компьютерного зрения:
+Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) включен запуск aruco_pose и [камеры для компьютерного зрения](/docs/camera.md):
 
 ```xml
-<arg name="bottom_camera" default="true"/>
+<arg name="main_camera" default="true"/>
 ```
 
 ```xml
