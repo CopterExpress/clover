@@ -6,7 +6,7 @@
     <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
-    <arg name="bottom_camera" default="false"/>
+    <arg name="main_camera" default="true"/>
     <arg name="aruco" default="false"/>
     <arg name="fpv_camera" default="false"/>
     <arg name="fpv_camera_device" default="/dev/v4l/by-id/usb-HD_Camera_Manufacturer_USB_2.0_Camera-video-index0"/>
@@ -42,8 +42,8 @@
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
 
-    <!-- bottom camera -->
-    <include file="$(find clever)/launch/bottom_camera.launch" if="$(arg bottom_camera)"/>
+    <!-- main camera -->
+    <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
 
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(arg rosbridge)"/>

@@ -1,8 +1,13 @@
 <launch>
     <!-- the bottom facing camera -->
 
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>-->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu bottom_camera_optical"/>-->
+
+    <!-- clever 3 -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu bottom_camera_optical"/>-->
+
+    <!-- upwards -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bottom_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu bottom_camera_optical"/>
 
     <node pkg="nodelet" type="nodelet" name="bottom_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" clear_params="true">
         <param name="frame_id" value="bottom_camera_optical"/>
