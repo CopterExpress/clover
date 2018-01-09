@@ -146,7 +146,7 @@ navigate(2, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)  #  поле
 
 Для навигации по маркерам, расположенным на потолке, необходимо поставить основную камеру так, чтобы она смотрела вверх и [установить соответствующий фрейм камеры](/docs/camera_frame.md).
 
-Чтобы задавать карту маркеров в "перевернутой" системе координат, необходимо установить параметр aruco_orientation в файле `~/catkin_ws/src/clever/clever/aruco.launch`:
+Чтобы задавать карту маркеров в "перевернутой" системе координат, необходимо установить параметр `aruco_orientation` в файле `~/catkin_ws/src/clever/clever/aruco.launch`:
 
 ```xml
 <param name="aruco_orientation" value="local_origin_upside_down"/>
