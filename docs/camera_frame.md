@@ -3,10 +3,10 @@
 Расположение и ориентация основной камеры задается в файле `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
 ```xml
-<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu bottom_camera_optical"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
 ```
 
-Эта строка задает статическую трансформацию между фреймом `fcu` ([соответствует корпусу полетного контроллера](/docs/frames.md)) и камерой в формате:
+Эта строка задает статическую трансформацию между фреймом `fcu` ([соответствует корпусу полетного контроллера](/docs/frames.md)) и камерой (`main_camera_optical`) в формате:
 
 ```
 сдвиг_x сдвиг_y сдвиг_z угол_рысканье угол_тангаж угол_крен
