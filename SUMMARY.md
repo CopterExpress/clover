@@ -22,6 +22,7 @@
 * [Взаимодействие с Arduino](docs/arduino.md)
 * [Системы координат](docs/frames.md)
 * [Работа с камерой (компьютерное зрение)](docs/camera.md)
+* [Ориентация камеры](docs/camera_frame.md)
 * [Визуализация с помощью rviz](docs/rviz.md)
 * [Работа с SITL](docs/sitl.md)
 * [Подключение GPS](docs/gps.md)
