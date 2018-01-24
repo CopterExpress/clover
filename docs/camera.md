@@ -35,7 +35,7 @@ from cv_bridge import CvBridge
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
-def image_callback(self, data):
+def image_callback(data):
     cv_image = self.bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     # Do any image processing with cv2...
 
