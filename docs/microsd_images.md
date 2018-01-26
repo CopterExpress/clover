@@ -17,4 +17,5 @@
 
 |Версия|Дата|Ссылка|Примечания|
 |-|-|-|-|
-|0.1|15.12.17|[Скачать](https://drive.google.com/open?id=1Gtj_0iB7dFuorfUKAUUV8ImjmkZCkvc7)||
+|0.2|24.01.18|[Скачать](https://yadi.sk/d/n_Krnor03RkntU)|–|
+|0.1|15.12.17|[Скачать](https://drive.google.com/open?id=1Gtj_0iB7dFuorfUKAUUV8ImjmkZCkvc7)|–|
