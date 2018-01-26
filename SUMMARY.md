@@ -5,7 +5,7 @@
 * [Первоначальная настройка](docs/setup.md)
 * [Полетные режимы](docs/modes.md)
 * [Raspberry Pi](docs/raspberry.md)
-* [Образ операционной системы на RPI](docs/microsd_images.md)
+* [Образ операционной системы на RPi](docs/microsd_images.md)
 * [Подключение Raspberry Pi к PixHawk](docs/connection.md)
 * [Подключение по Wi-Fi](docs/wifi.md)
 * [Работа с QGroundControl через Wi-Fi](docs/gcs_bridge.md)
