@@ -26,7 +26,7 @@ http://192.168.11.1:8080/stream_viewer?topic=/main_camera/image_raw&quality=1
 
 По URL выше будет доступен стрим с основной камеры в минимальном возможном качестве.
 
-Подробнее о `web_video_server`: http://wiki.ros.org/web_video_server.
+Также доступны параметры `width`, `height` и другие. Подробнее о `web_video_server`: http://wiki.ros.org/web_video_server.
 
 TODO: иллюстрации.
 
