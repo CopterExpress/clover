@@ -52,7 +52,7 @@ set_attitude_yaw_rate = rospy.ServiceProxy('/set_attitude/yaw_rate', srv.SetAtti
 set_rates_yaw = rospy.ServiceProxy('/set_rates/yaw', srv.SetRatesYaw)
 set_rates = rospy.ServiceProxy('/set_rates', srv.SetRates)
 
-get_telemetry = rospy.ServiceProxy('/get_telemetry', srv.get_telemetry)
+get_telemetry = rospy.ServiceProxy('/get_telemetry', srv.GetTelemetry)
 release = rospy.ServiceProxy('/release', Trigger)
 ```
 
