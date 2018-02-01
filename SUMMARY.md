@@ -20,13 +20,13 @@
 * [Навигация по ArUco-маркерам](docs/aruco.md)
 * [Взаимодействие с Arduino](docs/arduino.md)
 * [Системы координат](docs/frames.md)
-* [Работа с камерой (компьютерное зрение)](docs/camera.md)
+* [Работа с камерой \(компьютерное зрение\)](docs/camera.md)
 * [Ориентация камеры](docs/camera_frame.md)
 * [Визуализация с помощью rviz](docs/rviz.md)
 * [Работа с SITL](docs/sitl.md)
 * [Подключение GPS](docs/gps.md)
 * [Использование 3G-модема](docs/3g.md)
-* Примеры программ
+* [Примеры программ](primeri-programm.md)
 * Учебник
   * [Урок 1](docs/les1.md)
   * [Урок 2](docs/les2.md)
