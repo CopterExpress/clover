@@ -1,0 +1,4 @@
+[submodule "clever/static"]
+	path = clever/static
+	url = https://github.com/CopterExpress/clever-rc.git
+	branch = build
