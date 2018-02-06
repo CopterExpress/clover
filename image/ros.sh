@@ -150,7 +150,7 @@ mkdir -p /home/pi/catkin_ws/src \
 echo -e "\033[0;31m\033[1m$(date) | #14 Install CLEVER-BUNDLE\033[0m\033[0m"
 
 cd /home/pi/catkin_ws/src \
-  && git clone https://github.com/CopterExpress/clever_bundle.git clever \
+  && git clone https://github.com/CopterExpress/clever.git clever \
   && pip install wheel \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
