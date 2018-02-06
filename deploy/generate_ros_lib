@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# This script generates ros_lib library for Arduino for using with rosseial_arduino:
+# http://wiki.ros.org/rosserial_arduino/Tutorials
+# https://copterexpress.gitbooks.io/clever/content/docs/arduino.html
+
+rm -rf ros_lib
+rosrun rosserial_arduino make_libraries.py .
+tar czf clever_arudino.tar.gz ros_lib
