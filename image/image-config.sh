@@ -41,7 +41,6 @@ get_image() {
   cp -f $1/$4 $1/$5
 }
 
-
 resize_fs() {
 
   # STATIC
@@ -109,6 +108,25 @@ publish_image2() {
     && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
     && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
     && curl -d "$(echo $DATA)" -u "LOGIN:PASS" --request PATCH https://api.github.com/repos/ONWER/REPO/releases/$5
+}
+
+burn_image() {
+
+# STATIC
+# TEMPLATE: burn_image $IMAGE_PATH $MICROSD_DEV
+
+  echo -e "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
+    && dd if=$1 of=$2 \
+    && echo -e "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
+}
+
+burn_and_reboot() {
+
+# STATIC
+# TEMPLATE: burn_and_reboot $IMAGE_PATH $MICROSD_DEV
+
+  burn_image $1 $2 \
+    && reboot
 }
 
 mount_system() {
@@ -181,7 +199,7 @@ mount_system() {
 mount_system2() {
 
   # STATIC
-  # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
 
   echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
@@ -218,7 +236,7 @@ mount_system2() {
   cp -L /etc/resolv.conf $2/etc/resolv.conf
 
   echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  chroot $2 /bin/bash -c "$3"
+  chroot $2 /bin/bash -c "$5"
 }
 
 umount_system() {
@@ -447,8 +465,8 @@ echo "\$6: $6"
 # configure_system
 
 case "$1" in
-  enter)
-    enter;;
+  enter) # enter $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+    enter $2 $3 $4 $5;;
 
   get_image) # get_image $JENKINS_HOME $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
     get_image $2 $3 $4 $5 $6;;
