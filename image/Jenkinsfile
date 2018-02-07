@@ -33,7 +33,7 @@ pipeline {
         EXECUTE_FILE = 'apps.sh'
       }
       steps {
-        sh '# $WORKSPACE/image/image-config.sh execute $JENKINS_HOME/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $JENKINS_HOME/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Install ROS') {
@@ -41,7 +41,7 @@ pipeline {
         EXECUTE_FILE = 'ros.sh'
       }
       steps {
-        sh '# $WORKSPACE/image/image-config.sh execute $JENKINS_HOME/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $JENKINS_HOME/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Publish image') {
