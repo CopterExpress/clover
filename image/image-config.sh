@@ -88,9 +88,9 @@ publish_image() {
   echo 'Zip image' \
     && zip $1/$2.zip $1/$2 \
     && echo 'Upload image' \
-    && local IMAGE_LINK=$($3/deploy/yadisk.py $1/$4 $1/$2.zip) \
+    && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
-    && $3/deploy/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
+    && $3/image/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
 }
 
 publish_image2() {
@@ -104,7 +104,7 @@ publish_image2() {
   echo 'Zip image' \
     && zip $1/$2.zip $1/$2 \
     && echo 'Upload image' \
-    && local IMAGE_LINK=$($3/deploy/yadisk.py $1/$4 $1/$2.zip) \
+    && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
     && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
     && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
