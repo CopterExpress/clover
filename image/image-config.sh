@@ -48,6 +48,8 @@ resize_fs() {
   # STATIC
   # TEMPLATE: resize_fs $SIZE $JENKINS_HOME $IMAGE_NAME $DEV_ROOTFS
 
+  set +e
+
   # https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D0%B6%D1%91%D0%BD%D0%BD%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB
 
   # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
@@ -76,6 +78,8 @@ resize_fs() {
     && resize2fs $4 \
     && echo -e "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
     && losetup -d $DEV_IMAGE
+
+  set -e
 }
 
 publish_image() {
