@@ -1,6 +1,8 @@
 #!/bin/bash
 #!/bin/sh
 
+set -e
+
 #
 # Script for image configure
 # @smirart Smirnov Artem
