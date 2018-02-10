@@ -16,7 +16,7 @@ echo -e "\033[0;31m\033[1m$(date) | #1 Install dirmngr & add key to apt-key\033[
 
 # по умолчанию dirmngr отсуствует на образе и требуется для установки ключа
 # http://wpblogger.su/tags/apt/
-apt install dirmngr
+apt-get install dirmngr
 # setup keys
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
@@ -29,7 +29,7 @@ echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.li
 echo -e "\033[0;31m\033[1m$(date) | #2 apt update && apt upgrade\033[0m\033[0m"
 
 # install bootstrap tools
-apt update
+apt-get update
 # && apt upgrade -y
 
 
