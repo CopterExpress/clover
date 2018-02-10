@@ -20,7 +20,7 @@ https://copterexpress.gitbooks.io/clever/content/
 
 [Описание API](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html) для автономных полетов.
 
-Установка
+Ручная установка
 ---------
 
 Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever` (**важно**):
