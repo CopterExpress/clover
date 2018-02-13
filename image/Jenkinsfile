@@ -9,7 +9,7 @@ pipeline {
         RPI_IMAGE_NAME = '2017-11-29-raspbian-stretch-lite.img'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh get_image $BUID_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME'
+        sh '$WORKSPACE/image/image-config.sh get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME'
       }
     }
     stage('Resize FS') {
@@ -17,7 +17,7 @@ pipeline {
         SIZE = '7G'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh resize_fs $SIZE $BUID_DIRECTORY $IMAGE_NAME $DEV_ROOTFS'
+        sh '$WORKSPACE/image/image-config.sh resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS'
       }
     }
     stage('Configure interfaces') {
@@ -25,7 +25,7 @@ pipeline {
         EXECUTE_FILE = 'iface.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUID_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Install Apps') {
@@ -33,7 +33,7 @@ pipeline {
         EXECUTE_FILE = 'apps.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUID_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Install ROS') {
@@ -41,7 +41,7 @@ pipeline {
         EXECUTE_FILE = 'ros.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUID_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Publish image') {
@@ -49,12 +49,12 @@ pipeline {
         CONFIG_FILE = 'coex-ci.conf'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh publish_image $BUID_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY'
+        sh '$WORKSPACE/image/image-config.sh publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY'
       }
     }
   }
   environment {
-	BUID_DIRECTORY = '/home/pi/clever_builder/temp'
+    BUILD_DIRECTORY = '/home/pi/clever_builder/temp'
     PREFIX_PATH = '/mnt'
     DEV_BOOT = '/dev/disk/by-uuid/CDD4-B453'
     DEV_ROOTFS = '/dev/disk/by-uuid/72bfc10d-73ec-4d9e-a54a-1cc507ee7ed2'
