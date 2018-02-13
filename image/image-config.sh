@@ -251,7 +251,7 @@ umount_system() {
   # TEMPLATE: umount_system $PREFIX_PATH
 
   echo -e "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
-  umount -R $1
+  umount -fR $1
   echo -e "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
   losetup -d $DEV_IMAGE
 }
@@ -262,7 +262,7 @@ umount_system2() {
   # TEMPLATE: umount_system $PREFIX_PATH
   
   echo -e "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
-  umount -R $1
+  umount -fR $1
   echo -e "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
   losetup -D
 }
