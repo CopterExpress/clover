@@ -24,7 +24,8 @@ apt-get install --no-install-recommends -y \
   python-pip \
   git \
   isc-dhcp-server \
-  tmux
+  tmux \
+  vim
 
 
 
