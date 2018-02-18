@@ -111,25 +111,25 @@ rosservice call /get_telemetry "{frame_id: ''}"
 
 ```python
 # плавно взлететь на высоту 1.5 м со скоростью взлета 0.5 м/с
-navigate(0, 0, 1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
 ```
 
 ```python
 # прилететь по прямой в точку 5:0 (высота 2)
 # в локальной системе координат со скоростью 0.8 м/с
-navigate(5, 0, 3, speed=0.8)
+navigate(x=5, y=0, z=3, speed=0.8)
 ```
 
 
 ```python
 # пролететь вправо относительно коптера на 3 м
-navigate(0, -1, 0, speed=1, frame_id='fcu_horiz')
+navigate(x=0, y=-1, z=0, speed=1, frame_id='fcu_horiz')
 ```
 
 ```python
 # прилететь в точку 3:2 (высота 2) в системе координат маркерного поля
 # со скоростью 1 м/с
-navigate(3, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)
+navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map', update_frame=True)
 ```
 
 Пример взлета на коптере на 2 метра из командной строки:
