@@ -63,7 +63,7 @@ release = rospy.ServiceProxy('/release', Trigger)
 
 ### get_telemetry
 
-Получить полную телеметрию коптеру. Параметр: `frame_id` – фрейм для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`.
+Получить полную телеметрию коптера. Параметр: `frame_id` – фрейм для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`.
 
 Ответ:
 
