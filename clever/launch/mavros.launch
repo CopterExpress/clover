@@ -37,7 +37,6 @@
                 - 3dr_radio
                 - actuator_control
                 - hil_controls
-                - manual_control
                 - vfr_hud
                 - px4flow
                 - vision_speed_estimate

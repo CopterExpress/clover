@@ -48,6 +48,9 @@
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(arg rosbridge)"/>
 
+    <!-- rc backend -->
+    <!--<node name="rc" pkg="clever" type="rc" output="screen"/>-->
+
     <!-- FPV video streaming -->
     <include file="$(find clever)/launch/fpv_camera.launch" if="$(arg fpv_camera)">
         <arg name="device" value="$(arg fpv_camera_device)"/>
