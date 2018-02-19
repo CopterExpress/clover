@@ -48,7 +48,7 @@ print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
 while True:
     telem = get_telemetry(frame_id=frame_id)
     # Вычисляем расстояние до заданной точки
-    if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < TOLERANCE:
+    if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
         # Долетели до необходимой точки
         break
     rospy.sleep(0.2)
