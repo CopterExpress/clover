@@ -16,18 +16,19 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 Взлет и ожидание окончания взлета:
 
 ```python
+z = 2  # высота
 tolerance = 0.2  # точность проверки высоты (м)
 
 # Запоминаем изначальную точку
 start = get_telemetry()
 
 # Взлетаем на 2 м
-print navigate(z=2, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+print navigate(z=z, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
 
 # Ожидаем взлета
 while True:
     # Проверяем текущую высоту
-    if get_telemetry().z - start.z < tolerance:
+    if get_telemetry().z - start.z + z < tolerance:
         # Взлет завершен
         break
     rospy.sleep(0.2)
