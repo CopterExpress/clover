@@ -1,7 +1,7 @@
 Клевер
 ======
 
-<img src="img/clever.jpg" align="right" width="300px" alt="Клевер">
+<img src="assets/clever.jpg" align="right" width="300px" alt="Клевер">
 
 «Клевер» — это учебный конструктор программируемого квадрокоптера, состоящего из популярных открытых компонентов, а также набор необходимой документации и библиотек для работы с ним.
 
@@ -11,4 +11,73 @@
 
 Для того, чтобы научиться собирать, настраивать, пилотировать и программировать автономный дрон «Клевер», воспользуйтесь этим учебником.
 
-Оглавление находится в файле [SUMMARY.md](/SUMMARY.md).
+Основная документация
+---------------------
+
+https://copterexpress.gitbooks.io/clever/content/
+
+**Образ ОС** для RPi 3 с предустановленным и преднастроенным ПО можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
+
+Образ включает в себя:
+
+* Raspbian Stretch
+* ROS Kinetic
+* Настроенную работу с сетью
+* OpenCV
+* mavros
+* Набор ПО для работы с Клевером
+
+[Описание API](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html) для автономных полетов.
+
+Ручная установка
+---------
+
+Установить ROS Kinetic согласно [инструкциям](http://wiki.ros.org/kinetic/Installation).
+
+Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever`:
+
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/CopterExpress/clever.git clever
+```
+
+Пересобрать ROS-пакеты:
+
+```bash
+cd ~/catkin_ws
+catkin_make -j1
+```
+
+Включить сервис roscore (если он не включен):
+
+```bash
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl start roscore
+```
+
+Включить сервис clever:
+
+```bash
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
+sudo systemctl start clever
+```
+
+Зависимости
+-----------
+
+[ROS Kinetic](http://wiki.ros.org/kinetic).
+
+Необходимые для работы ROS-пакеты:
+
+* `opencv3`
+* `mavros`
+* `rosbridge_suite`
+* `web_video_server`
+* `cv_camera`
+* `nodelet`
+* `dynamic_reconfigure`
+* `bondcpp`, ветка `master`
+* `roslint`
+* `rosserial`
+
+TODO: внести в package.xml

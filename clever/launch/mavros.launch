@@ -1,0 +1,52 @@
+<launch>
+    <arg name="fcu_conn" default="uart"/>
+    <arg name="fcu_ip" default="127.0.0.1"/>
+    <arg name="gcs_bridge" default="tcp"/>
+    <arg name="viz" default="true"/>
+
+    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" output="screen">
+            <!-- UART connection -->
+            <param name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
+
+            <!-- USB connection -->
+            <param name="fcu_url" value="/dev/ttyACM0" if="$(eval fcu_conn == 'usb')"/>
+
+            <!-- sitl -->
+            <param name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
+
+            <!-- gcs bridge -->
+            <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
+            <param name="gcs_url" value="udp://@192.168.11.14:14550" if="$(eval gcs_bridge == 'udp')"/> <!-- TODO: fix -->
+            <param name="gcs_url" value="" if="$(eval not gcs_bridge)"/>
+
+            <!-- default px4 params -->
+            <rosparam command="load" file="$(find mavros)/launch/px4_config.yaml"/>
+
+            <!-- additional params -->
+            <param name="local_position/frame_id" value="local_origin"/>
+            <param name="local_position/tf/send" value="true"/>
+            <param name="local_position/tf/frame_id" value="local_origin"/>
+            <param name="local_position/tf/child_frame_id" value="fcu"/>
+            <param name="global_position/tf/send" value="false"/>
+            <rosparam param="plugin_blacklist">
+                - safety_area
+                - image_pub
+                - vibration
+                - distance_sensor
+                - rangefinder
+                - 3dr_radio
+                - actuator_control
+                - hil_controls
+                - vfr_hud
+                - px4flow
+                - vision_speed_estimate
+                - fake_gps
+                - cam_imu_sync
+                - hil
+                - adsb
+            </rosparam>
+    </node>
+
+    <!-- Copter visualization -->
+    <include file="$(find clever)/launch/copter_visualization.launch" if="$(arg viz)"/>
+</launch>
