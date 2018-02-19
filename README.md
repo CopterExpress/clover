@@ -16,18 +16,29 @@
 
 https://copterexpress.gitbooks.io/clever/content/
 
-**Готовый образ ОС** для RPi 3 с предустановленным и преднастроенным ПО можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
+**Образ ОС** для RPi 3 с предустановленным и преднастроенным ПО можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
+
+Образ включает в себя:
+
+* Raspbian Stretch
+* ROS Kinetic
+* Настроенную работу с сетью
+* OpenCV
+* mavros
+* Набор ПО для работы с Клевером
 
 [Описание API](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html) для автономных полетов.
 
 Ручная установка
 ---------
 
-Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever` (**важно**):
+Установить ROS Kinetic согласно [инструкциям](http://wiki.ros.org/kinetic/Installation).
+
+Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever`:
 
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/CopterExpress/clever_bundle.git clever
+git clone https://github.com/CopterExpress/clever.git clever
 ```
 
 Пересобрать ROS-пакеты:
