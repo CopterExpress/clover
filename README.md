@@ -32,11 +32,13 @@ https://copterexpress.gitbooks.io/clever/content/
 Ручная установка
 ---------
 
-Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever` (**важно**):
+Установить ROS Kinetic согласно [инструкциям](http://wiki.ros.org/kinetic/Installation).
+
+Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever`:
 
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/CopterExpress/clever_bundle.git clever
+git clone https://github.com/CopterExpress/clever.git clever
 ```
 
 Пересобрать ROS-пакеты:
