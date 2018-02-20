@@ -58,6 +58,7 @@ private:
         unknown_state.connected = true;
         unknown_state.mode = "UNKNOWN";
         state_pub.publish(unknown_state);
+        state_msg = nullptr;
     }
 
     void initLatchedState()

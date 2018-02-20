@@ -15,6 +15,7 @@
 		7C51654B20139237004D1F4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C51654920139237004D1F4D /* LaunchScreen.storyboard */; };
 		7C516553201526BA004D1F4D /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7C516552201526BA004D1F4D /* index.html */; };
 		7C51655520153180004D1F4D /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 7C51655420153180004D1F4D /* main.js */; };
+		7C7DECC2203CBCC4000C1C51 /* roslib.js in Resources */ = {isa = PBXBuildFile; fileRef = 7C45DCE9203A75A2009C73F5 /* roslib.js */; };
 		7CA401E22033CE17009FAA3B /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E12033CE17009FAA3B /* main.css */; };
 		7CA401E42033FA34009FAA3B /* telemetry.js in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E32033FA34009FAA3B /* telemetry.js */; };
 		7CA401E6203471D9009FAA3B /* clever.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E5203471D8009FAA3B /* clever.svg */; };
@@ -173,6 +174,7 @@
 				7C51654B20139237004D1F4D /* LaunchScreen.storyboard in Resources */,
 				7CA401E6203471D9009FAA3B /* clever.svg in Resources */,
 				7CA401E42033FA34009FAA3B /* telemetry.js in Resources */,
+				7C7DECC2203CBCC4000C1C51 /* roslib.js in Resources */,
 				7C516553201526BA004D1F4D /* index.html in Resources */,
 				7C51654820139237004D1F4D /* Assets.xcassets in Resources */,
 				7CA401E22033CE17009FAA3B /* main.css in Resources */,
