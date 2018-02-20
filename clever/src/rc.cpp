@@ -34,10 +34,14 @@ private:
     ros::NodeHandle nh, nh_priv;
     ros::Subscriber state_sub;
     ros::Publisher state_pub;
+    ros::Timer state_timeout_timer;
     mavros_msgs::StateConstPtr state_msg;
 
     void handleState(const mavros_msgs::StateConstPtr& state)
     {
+        state_timeout_timer.setPeriod(ros::Duration(3), true);
+        state_timeout_timer.start();
+
         if (!state_msg ||
             state->connected != state_msg->connected ||
             state->mode != state_msg->mode ||
@@ -47,10 +51,20 @@ private:
             }
     }
 
+    void stateTimedOut(const ros::TimerEvent&)
+    {
+        ROS_INFO("State timeout");
+        mavros_msgs::State unknown_state;
+        unknown_state.connected = true;
+        unknown_state.mode = "UNKNOWN";
+        state_pub.publish(unknown_state);
+    }
+
     void initLatchedState()
     {
         state_sub = nh.subscribe("mavros/state", 1, &RC::handleState, this);
         state_pub = nh.advertise<mavros_msgs::State>("state_latched", 1, true);
+        state_timeout_timer = nh.createTimer(ros::Duration(0), &RC::stateTimedOut, this, true, false);
     }
 
     int createSocket(int port)
