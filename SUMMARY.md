@@ -26,7 +26,7 @@
 * [Работа с SITL](docs/sitl.md)
 * [Подключение GPS](docs/gps.md)
 * [Использование 3G-модема](docs/3g.md)
-* [Примеры программ](primeri-programm.md)
+* [Примеры программ](docs/snippets.md)
 * Учебник
   * [Урок 1](docs/les1.md)
   * [Урок 2](docs/les2.md)
