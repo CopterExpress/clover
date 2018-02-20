@@ -36,6 +36,10 @@ class ViewController: UIViewController, WKScriptMessageHandler {
 
         // Setup UDP broadcasting
         udpSocket.enableBroadcast()
+
+        // Set UDP broadcasting interface
+        var wifiInterface = if_nametoindex("en0");
+        setsockopt(udpSocket.fd!, IPPROTO_IP, IP_BOUND_IF, &wifiInterface, socklen_t(MemoryLayout<UInt32>.size));
     }
 
     override func didReceiveMemoryWarning() {
