@@ -37,8 +37,9 @@
   * [Урок 13](docs/les13.md)
   * [Урок 15](docs/les15.md)
   * [Урок 16](docs/les16.md)
-* Другое
+* [Другое](drugoe.md)
   * [CopterHack-2017](docs/copterhack2017.md)
   * [Прошивка ESC контроллеров с помощью Arduino](docs/esc_firmware.md)
+  * [Работа со светодиодной лентой](docs/rabota-so-svetodiodnoi-lentoi.md)
 * [Полезные ссылки](docs/links.md)
 
