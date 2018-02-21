@@ -55,8 +55,6 @@ private:
     {
         ROS_INFO("State timeout");
         mavros_msgs::State unknown_state;
-        unknown_state.connected = true;
-        unknown_state.mode = "UNKNOWN";
         state_pub.publish(unknown_state);
         state_msg = nullptr;
     }
@@ -66,6 +64,10 @@ private:
         state_sub = nh.subscribe("mavros/state", 1, &RC::handleState, this);
         state_pub = nh.advertise<mavros_msgs::State>("state_latched", 1, true);
         state_timeout_timer = nh.createTimer(ros::Duration(0), &RC::stateTimedOut, this, true, false);
+
+        // Publish initial state
+        mavros_msgs::State unknown_state;
+        state_pub.publish(unknown_state);
     }
 
     int createSocket(int port)
