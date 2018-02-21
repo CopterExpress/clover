@@ -98,6 +98,106 @@ sudo python strandtest.py
 
 Права администратора необходимы для выполнения скрипта, т.к. без них нет доступа к функциям прерывания, которые использует библиотека для работы с лентой.
 
+#### Функции для работы со светодиодной лентой
+
+Для подключения библиотеки и её корректной работы требуется подключить следующие модули: neopixels - для работы ленты, time - для управления задержками, sys и signal для прерываний и формирования управляющего сигнала.
+
+```
+from neopixels import *
+import time
+import signal
+import sys
+```
+
+Для работы с лентой необходимо создать объект типа **Adafruit\_NeoPixel **и инициализировать библиотеку:
+
+```
+# Создание объекта NeoPixel c заданной конфигурацией
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT)
+# Инициализация библиотеки, должна быть выполнена перед другими функциями
+strip.begin()
+```
+
+Основные функции, которые используются для управления лентой:
+
+*  **numPixels\(\) ** - Возвращает количество пикселей в ленте. Удобно для цикличного управления всей лентой целиком.
+* **setPixelColor\(pos, color\) ** - Устанавливает цвет пикселя в позиции **pos** в цвет **color**. Цвет должен быть 24 битным значением, где первые 8 бит - красный цвет \(red\), следующие 8 бит - зелёный цвет \(green\) и последние 8 бит - голубой \(blue\). Для получения значения **color **можно использовать функцию **Color\(red, green, blue\),** которая составляет это значение из 3х компонент. Каждый компонент должен находиться в диапазоне 0-255, где 0 - отсутствие цвета, а 255 - наибольшая доступная яркость компонента в светодиодном модуле.
+* **setPixelColorRGB\(pos, red, green, blue\) ** - Устанавливает цвет пикселя в позиции pos в цвет, состоящий из компонент **red, green, blue.** Каждый компонент должен находиться в диапазоне 0-255, где 0 - отсутствие цвета, а 255 - наибольшая доступная яркость компонента в светодиодном модуле.
+* **show\(\) **- Обновляет состояние ленты. Только после её использования все программные изменения перемещаются на светодиодную ленту.
+
+Остальные функции можно обнаружить, вызвав команду
+
+```
+pydoc neopixel
+```
+
+Результат выполнения команды:
+
+```
+    Help on module neopixel:
+     
+    NAME
+        neopixel
+     
+    DESCRIPTION
+        # Adafruit NeoPixel library port to the rpi_ws281x library.
+        # Author: Tony DiCola (tony@tonydicola.com)
+     
+    CLASSES
+        __builtin__.object
+            Adafruit_NeoPixel
+        
+        class Adafruit_NeoPixel(__builtin__.object)
+         |  Methods defined here:
+         |  
+         |  __del__(self)
+         |  
+         |  __init__(self, num, pin, freq_hz=800000, dma=5, invert=False)
+         |      Class to represent a NeoPixel/WS281x LED display.  Num should be the
+         |      number of pixels in the display, and pin should be the GPIO pin connected
+         |      to the display signal line (must be a PWM pin like 18!).  Optional
+         |      parameters are freq, the frequency of the display signal in hertz (default
+         |      800khz), dma, the DMA channel to use (default 5), and invert, a boolean
+         |      specifying if the signal line should be inverted (default False).
+         |  
+         |  begin(self)
+         |      Initialize library, must be called once before other functions are
+         |      called.
+         |  
+         |  getPixelColor(self, n)
+         |      Get the 24-bit RGB color value for the LED at position n.
+         |  
+         |  getPixels(self)
+         |      Return an object which allows access to the LED display data as if 
+         |      it were a sequence of 24-bit RGB values.
+         |  
+         |  numPixels(self)
+         |      Return the number of pixels in the display.
+         |  
+         |  setBrightness(self, brightness)
+         |      Scale each LED in the buffer by the provided brightness.  A brightness
+         |      of 0 is the darkest and 255 is the brightest.  Note that scaling can have
+         |      quantization issues (i.e. blowing out to white or black) if used repeatedly!
+         |  
+         |  setPixelColor(self, n, color)
+         |      Set LED at position n to the provided 24-bit color value (in RGB order).
+         |  
+         |  setPixelColorRGB(self, n, red, green, blue)
+         |      Set LED at position n to the provided red, green, and blue color.
+         |      Each color component should be a value from 0 to 255 (where 0 is the
+         |      lowest intensity and 255 is the highest intensity).
+         |  
+         |  show(self)
+         |      Update the display with the data from the LED buffer.
+         |  
+     
+    FUNCTIONS
+        Color(red, green, blue)
+            Convert the provided red, green, blue color to a 24-bit color value.
+            Each color component should be a value 0-255 where 0 is the lowest intensity
+            and 255 is the highest intensity.
+```
+
 #### Почему именно так и можно ли по-другому
 
 Основные типы лент, которые используются для Clever3, это WS2812, WS2812B и SK6812 \(аналог WS2812B\). Они управляются по одному и тому же принципу: для массива светодиодов в ленте отправляется пакет данных по 24 бита на светодиод; каждый светодиод считывает первые 24 бита из пришедших к нему данных и устанавливает соответствующий цвет, остальные данные он отправляет следующему светодиоду в ленте. Нули и единицы задаются разными сочетаниями длительностей высокого и низкого уровня в импульсе.
