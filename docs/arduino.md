@@ -33,6 +33,30 @@ roslaunch clever arduino.launch
 sudo systemctl restart clever
 ```
 
+Задержки
+---
+
+При использовании `rosserial_arduino` микроконтроллер Arduino не должен быть заблокирован больше чем на несколько секунд (например, с использованием функции `delay`); иначе связь между Raspberry Pi и Arduino будет разорвана. 
+
+При реализации долгих циклов `while` обеспечьте периодический вызов функции `hn.spinOnce`:
+
+```cpp
+while(/* условие */) {
+  // ... Произвести необходимые действия
+  nh.spinOnce();
+}
+```
+
+Для огранизации долгих задержек используйте задержки в цикле с периодическим вызовом функции `hn.spinOnce()`:
+
+```cpp
+// Задержка на 8 секунд
+for(int i=0; i<8; i++) {
+	delay(1000);
+	nh.spinOnce();
+}
+```
+
 Работа с Клевером
 ---
 
@@ -90,8 +114,11 @@ void setup()
   navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
-  delay(5000);
-  
+  for(int i=0; i<5; i++) {
+  	delay(1000);
+  	nh.spinOnce();
+  }
+    
   nav_req.auto_arm = false;
 
   // Пролет вперед на 3 метра:
@@ -105,7 +132,10 @@ void setup()
   navigate.call(nav_req, nav_res);
   
   // Ждем 5 секунд
-  delay(5000);
+  for(int i=0; i<5; i++) {
+    delay(1000);
+    nh.spinOnce();
+  }  
   
   // Полет в точку 1:0:2 по маркерному полю
   nh.loginfo("Fly on point");
@@ -119,7 +149,10 @@ void setup()
   navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
-  delay(5000);
+  for(int i=0; i<5; i++) {
+    delay(1000);
+    nh.spinOnce();
+  }
 
   // Посадка
   nh.loginfo("Land");
