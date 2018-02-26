@@ -165,6 +165,38 @@ void loop()
 }
 ```
 
+Получение телеметрии
+---
+
+С Arduino можно использовать [сервис](/docs/simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
+
+```cpp
+#include <clever/GetTelemetry.h>
+
+// ...
+
+ros::ServiceClient<GetTelemetry::Request, GetTelemetry::Response> getTelemetry("/get_telemetry");
+
+// ...
+
+nh.serviceClient(getTelemetry);
+
+// ...
+
+GetTelemetry::Request gt_req;
+GetTelemetry::Response gt_res;
+
+
+// ...
+
+gt_req.frame_id = "aruco_map"; // фрейм для значений x, y, z
+getTelemetry.call(gt_req, gt_res);
+
+// gt_res.x - положение коптера по x
+// gt_res.y - положение коптера по y
+// gt_res.z - положение коптера по z
+```
+
 При использовании Arudino Nano может не хватать оперативной памяти (RAM). В таком случае в Aruino IDE будут появляться сообщения, типа:
 
 ```
