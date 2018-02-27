@@ -216,3 +216,16 @@ getTelemetry.call(gt_req, gt_res);
 ```cpp
 #define __AVR_ATmega168__ 1
 ```
+
+Можно уменьшить количество занятой памяти еще сильнее, если вручную настроить количество publisher'ов и subscriber'ов, а также размеры буферов памяти, выделяемой для сообщений, например:
+
+```cpp
+#include <ros.h>
+
+// ...
+
+typedef ros::NodeHandle_<ArduinoHardware, 3, 3, 100, 100> NodeHandle;
+
+// ...
+NodeHandle nh;
+```
