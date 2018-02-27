@@ -171,6 +171,10 @@ void loop()
 С Arduino можно использовать [сервис](/docs/simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
 
 ```cpp
+#include <ros.h>
+
+// ...
+
 #include <clever/GetTelemetry.h>
 
 // ...
