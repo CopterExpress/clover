@@ -69,6 +69,7 @@ add_service_files(
   FILES
   GetTelemetry.srv
   Navigate.srv
+  NavigateGlobal.srv
   SetPosition.srv
   SetPositionYawRate.srv
   SetPositionGlobal.srv

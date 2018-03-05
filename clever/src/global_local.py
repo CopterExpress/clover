@@ -9,8 +9,15 @@ from sensor_msgs.msg import NavSatFix
 def global_to_local(lat, lon):
     # TODO: refactor
 
-    position_global = rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=5)
-    pose = rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=5)
+    try:
+        position_global = rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=0.5)
+    except rospy.exceptions.ROSException:
+        raise Exception('No global position')
+
+    try:
+        pose = rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=0.5)
+    except rospy.exceptions.ROSException:
+        raise Exception('No local position')
 
     d = math.hypot(pose.pose.position.x, pose.pose.position.y)
 

@@ -154,14 +154,19 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     ps.header.stamp = stamp
     vs.header.stamp = stamp
 
-    if isinstance(req, srv.NavigateRequest):
+    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
         global current_nav_start, current_nav_start_stamp, current_nav_finish
 
         if update_frame:
             ps.header.frame_id = req.frame_id or LOCAL_FRAME
-            ps.pose.position = Point(req.x, req.y, req.z)
+            ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
             ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
             current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+
+            if isinstance(req, srv.NavigateGlobalRequest):
+                # Recalculate x and y from lat and lon
+                current_nav_finish.pose.position.x, current_nav_finish.pose.position.y = \
+                    global_to_local(req.lat, req.lon)
 
         if not continued:
             current_nav_start = pose.pose.position
@@ -319,7 +324,7 @@ def handle(req):
         rospy.logwarn('No connection to the FCU')
         return {'message': 'No connection to the FCU'}
 
-    if isinstance(req, srv.NavigateRequest) and req.speed <= 0:
+    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and req.speed <= 0:
         rospy.logwarn('Navigate speed must be greater than zero, %s passed')
         return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
 
@@ -371,6 +376,7 @@ def release(req):
 
 
 rospy.Service('navigate', srv.Navigate, handle)
+rospy.Service('navigate_global', srv.NavigateGlobal, handle)
 rospy.Service('set_position', srv.SetPosition, handle)
 rospy.Service('set_position/yaw_rate', srv.SetPositionYawRate, handle)
 rospy.Service('set_position_global', srv.SetPositionGlobal, handle)
@@ -465,7 +471,8 @@ def start_loop():
                 try:
                     stamp = rospy.get_rostime()
 
-                    if getattr(current_req, 'update_frame', False) or isinstance(current_req, srv.NavigateRequest):
+                    if getattr(current_req, 'update_frame', False) or \
+                            isinstance(current_req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
                         current_pub, current_msg = get_publisher_and_message(current_req, stamp, True,
                                                                              getattr(current_req, 'update_frame', False))
 
