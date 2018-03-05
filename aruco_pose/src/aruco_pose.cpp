@@ -16,6 +16,11 @@
 #include <stdio.h>
 #include <tf/transform_broadcaster.h>
 
+#include "util.h"
+
+using std::vector;
+using std::string;
+
 namespace aruco_pose {
 
 class ArucoPose : public nodelet::Nodelet {
@@ -100,6 +105,45 @@ cv::Ptr<cv::aruco::Board> createCustomGridBoard(int markersX, int markersY, floa
     return res;
 }
 
+cv::Ptr<cv::aruco::Board> createCustomBoard(std::map<string, string> markers, const cv::Ptr<cv::aruco::Dictionary> &dictionary) {
+    cv::Ptr<cv::aruco::Board> res = cv::makePtr<cv::aruco::Board>();
+
+    res->dictionary = dictionary;
+
+    size_t total_markers = markers.size();
+    res->ids.reserve(total_markers);
+    res->objPoints.reserve(total_markers);
+
+    // Generate ids and objPoints
+    for(auto const &marker : markers) {
+        res->ids.push_back(std::stoi(marker.first));
+
+        vector<string> parts;
+        parts = strSplit(marker.second, " ");
+
+        float size = std::stof(parts.at(0));
+        float x = std::stof(parts.at(1));
+        float y = std::stof(parts.at(2));
+        float z = std::stof(parts.at(3));
+        float yaw = std::stof(parts.at(4));
+        float pitch = std::stof(parts.at(5));
+        float roll = std::stof(parts.at(6));
+
+        vector<cv::Point3f> corners;
+        corners.resize(4);
+        corners[0] = cv::Point3f(x - size / 2, y + size / 2, 0);
+        corners[1] = corners[0] + cv::Point3f(size, 0, 0);
+        corners[2] = corners[0] + cv::Point3f(size, -size, 0);
+        corners[3] = corners[0] + cv::Point3f(0, -size, 0);
+
+        // TODO: process yaw, pitch, roll
+
+        res->objPoints.push_back(corners);
+    }
+
+    return res;
+}
+
 #include "fix.cpp"
 
 void ArucoPose::createBoard()
@@ -178,8 +222,22 @@ void ArucoPose::createBoard()
     }
     else if (type == "custom")
     {
-        // Not implemented yet
-        ROS_FATAL("Custom boards are not implemented yet.");
+        ROS_INFO("Initialize a custom board");
+
+        std::map<string, string> markers;
+        nh_priv_.getParam("markers", markers);
+
+        board = createCustomBoard(markers, dictionary);
+
+        ROS_INFO("Draw a custom board");
+        // Publish map image for debugging
+        _drawPlanarBoard(board,  cv::Size(2000, 2000), map_image, 50, 1);
+
+        cv::cvtColor(map_image, map_image, CV_GRAY2BGR);
+
+        map_image_msg.encoding = sensor_msgs::image_encodings::BGR8;
+        map_image_msg.image = map_image;
+        map_image_pub.publish(map_image_msg.toImageMsg());
     }
     else
     {
