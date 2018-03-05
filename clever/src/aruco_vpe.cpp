@@ -20,14 +20,15 @@ using std::string;
 class ArucoVPE : public nodelet::Nodelet
 {
 public:
-    ArucoVPE() : 
+    ArucoVPE() :
         last_published_(0),
         lookup_timeout_(0.05)
     {}
 
-private:    
+private:
     ros::Time last_published_;
     ros::Duration lookup_timeout_;
+    ros::Duration reset_timeout_;
     ros::Publisher vision_position_pub_;
     ros::Timer dummy_vision_timer_;
     string aruco_orientation_;
@@ -42,6 +43,9 @@ private:
         bool use_mocap;
         nh_priv.param<bool>("use_mocap", use_mocap, false);
         nh_priv.param<bool>("reset_vpe", reset_vpe_, !use_mocap);
+        double reset_timeout;
+        nh_priv.param("reset_timeout", reset_timeout, 2.0);
+        reset_timeout_ = ros::Duration(reset_timeout);
 
         static ros::Subscriber pose_sub = nh.subscribe("mavros/local_position/pose", 1, &ArucoVPE::handlePose, this);
         static ros::Subscriber aruco_pose_sub = nh.subscribe("aruco_pose/pose", 1, &ArucoVPE::handleArucoPose, this);
@@ -100,7 +104,7 @@ private:
             br.sendTransform(t);
 
             if (last_published_.toSec() == 0 || // no vpe has been posted
-               (reset_vpe_ && (ros::Time::now() - last_published_ > ros::Duration(2)))) // vpe origin outdated
+               (reset_vpe_ && (ros::Time::now() - last_published_ > reset_timeout_))) // vpe origin outdated
             {
                 ROS_INFO("Reset VPE");
                 t = tf_buffer.lookupTransform("local_origin", "aruco_map_vision", stamp, lookup_timeout_);
