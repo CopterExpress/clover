@@ -142,9 +142,15 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, speed: 0.5, frame_id
 
 > **Info** Образ версии >0.5.
 
-Полет по прямой в позицию в глобальной системе координат (широта/долгота).
+Полет по прямой в точку в глобальной системе координат (широта/долгота).
 
-Параметры: lat (широта), lon (долгота), z (высота в системе координат frame_id), yaw (рысканье в системе координат frame_id), update_frame.
+Параметры:
+
+* lat, lon – широта и долгота
+* z – высота в системе координат `frame_id`
+* yaw – угол по рысканью
+* speed – скорость полета (скорость движения setpoint)
+* frame_id, update_frame, auto_arm.
 
 Объявление прокси к сервису:
 
@@ -156,6 +162,12 @@ navigate_global = rospy.ServiceProxy('/navigate_global', srv.NavigateGlobal)
 
 ```python
 navigate_global(lat=55.707033, lon=37.725010, z=0, frame_id='fcu_horiz')
+```
+
+Пример полета в глобальную точку из командной строки:
+
+```bash
+rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, speed: 3.0, frame_id: 'fcu_horiz', update_frame: false, auto_arm: false}"
 ```
 
 ### set_position
