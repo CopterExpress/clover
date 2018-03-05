@@ -83,6 +83,8 @@ NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', F
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
 SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
 LOCAL_FRAME = rospy.get_param('~local_frame', 'local_origin')
+LAND_MODE = rospy.get_param('~land_mode', 'AUTO.LAND')
+LAND_TIMEOUT = rospy.Duration(rospy.get_param('~land_timeout', 2))
 
 
 def offboard_and_arm():
@@ -346,6 +348,21 @@ def handle(req):
         return {'success': False, 'message': str(e)}
 
 
+def land(req):
+    rospy.loginfo('request %s mode' % LAND_MODE)
+    res = set_mode(custom_mode=LAND_MODE)
+    if not res.mode_sent:
+        return {'message': 'Cannot send %s mode request' % LAND_MODE}
+
+    start = rospy.get_rostime()
+    while True:
+        if state.mode == LAND_MODE:
+            return {'success': True}
+        if rospy.get_rostime() - start > LAND_TIMEOUT:
+            return {'message': '%s mode request timed out' % LAND_MODE}
+        rospy.sleep(0.1)
+
+
 def release(req):
     global current_pub
     current_pub = None
@@ -364,6 +381,7 @@ rospy.Service('set_attitude', srv.SetAttitude, handle)
 rospy.Service('set_attitude/yaw_rate', srv.SetAttitudeYawRate, handle)
 rospy.Service('set_rates', srv.SetRates, handle)
 rospy.Service('set_rates/yaw', srv.SetRatesYaw, handle)
+rospy.Service('land', Trigger, land)
 rospy.Service('release', Trigger, release)
 
 
