@@ -33,6 +33,30 @@ roslaunch clever arduino.launch
 sudo systemctl restart clever
 ```
 
+Задержки
+---
+
+При использовании `rosserial_arduino` микроконтроллер Arduino не должен быть заблокирован больше чем на несколько секунд (например, с использованием функции `delay`); иначе связь между Raspberry Pi и Arduino будет разорвана. 
+
+При реализации долгих циклов `while` обеспечьте периодический вызов функции `hn.spinOnce`:
+
+```cpp
+while(/* условие */) {
+  // ... Произвести необходимые действия
+  nh.spinOnce();
+}
+```
+
+Для огранизации долгих задержек используйте задержки в цикле с периодическим вызовом функции `hn.spinOnce()`:
+
+```cpp
+// Задержка на 8 секунд
+for(int i=0; i<8; i++) {
+	delay(1000);
+	nh.spinOnce();
+}
+```
+
 Работа с Клевером
 ---
 
@@ -90,8 +114,11 @@ void setup()
   navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
-  delay(5000);
-  
+  for(int i=0; i<5; i++) {
+  	delay(1000);
+  	nh.spinOnce();
+  }
+    
   nav_req.auto_arm = false;
 
   // Пролет вперед на 3 метра:
@@ -105,7 +132,10 @@ void setup()
   navigate.call(nav_req, nav_res);
   
   // Ждем 5 секунд
-  delay(5000);
+  for(int i=0; i<5; i++) {
+    delay(1000);
+    nh.spinOnce();
+  }  
   
   // Полет в точку 1:0:2 по маркерному полю
   nh.loginfo("Fly on point");
@@ -119,7 +149,10 @@ void setup()
   navigate.call(nav_req, nav_res);
 
   // Ждем 5 секунд
-  delay(5000);
+  for(int i=0; i<5; i++) {
+    delay(1000);
+    nh.spinOnce();
+  }
 
   // Посадка
   nh.loginfo("Land");
@@ -132,6 +165,45 @@ void loop()
 }
 ```
 
+Получение телеметрии
+---
+
+С Arduino можно использовать [сервис](/docs/simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
+
+```cpp
+#include <ros.h>
+
+// ...
+
+#include <clever/GetTelemetry.h>
+
+// ...
+
+ros::ServiceClient<GetTelemetry::Request, GetTelemetry::Response> getTelemetry("/get_telemetry");
+
+// ...
+
+nh.serviceClient(getTelemetry);
+
+// ...
+
+GetTelemetry::Request gt_req;
+GetTelemetry::Response gt_res;
+
+
+// ...
+
+gt_req.frame_id = "aruco_map"; // фрейм для значений x, y, z
+getTelemetry.call(gt_req, gt_res);
+
+// gt_res.x - положение коптера по x
+// gt_res.y - положение коптера по y
+// gt_res.z - положение коптера по z
+```
+
+Проблемы
+---
+
 При использовании Arudino Nano может не хватать оперативной памяти (RAM). В таком случае в Aruino IDE будут появляться сообщения, типа:
 
 ```
@@ -143,4 +215,17 @@ void loop()
 
 ```cpp
 #define __AVR_ATmega168__ 1
+```
+
+Можно уменьшить количество занятой памяти еще сильнее, если вручную настроить количество publisher'ов и subscriber'ов, а также размеры буферов памяти, выделяемой для сообщений, например:
+
+```cpp
+#include <ros.h>
+
+// ...
+
+typedef ros::NodeHandle_<ArduinoHardware, 3, 3, 100, 100> NodeHandle;
+
+// ...
+NodeHandle nh;
 ```
