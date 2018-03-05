@@ -82,6 +82,7 @@ ARM_TIMEOUT = rospy.Duration(rospy.get_param('~arm_timeout', 5))
 NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', False))
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
 SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
+LOCAL_FRAME = rospy.get_param('~local_frame', 'local_origin')
 
 
 def offboard_and_arm():
@@ -154,10 +155,10 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         global current_nav_start, current_nav_start_stamp, current_nav_finish
 
         if update_frame:
-            ps.header.frame_id = req.frame_id or 'local_origin'
+            ps.header.frame_id = req.frame_id or LOCAL_FRAME
             ps.pose.position = Point(req.x, req.y, req.z)
             ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-            current_nav_finish = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+            current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
 
         if not continued:
             current_nav_start = pose.pose.position
@@ -178,10 +179,10 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         return position_pub, msg
 
     elif isinstance(req, srv.SetPositionRequest):
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(req.x, req.y, req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
 
         msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
                              type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
@@ -192,9 +193,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         return position_pub, msg
 
     elif isinstance(req, srv.SetPositionYawRateRequest):
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(req.x, req.y, req.z)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
                              type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
                                        PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
@@ -206,10 +207,10 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     elif isinstance(req, srv.SetPositionGlobalRequest):
         x, y = global_to_local(req.lat, req.lon)
 
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(0, 0, req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         pose_local.pose.position.x = x
         pose_local.pose.position.y = y
 
@@ -224,9 +225,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     elif isinstance(req, srv.SetPositionGlobalYawRateRequest):
         x, y = global_to_local(req.lat, req.lon)
 
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(0, 0, req.z)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         pose_local.pose.position.x = x
         pose_local.pose.position.y = y
 
@@ -240,11 +241,11 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
 
     elif isinstance(req, srv.SetVelocityRequest):
         vs.vector = Vector3(req.vx, req.vy, req.vz)
-        vs.header.frame_id = req.frame_id or 'local_origin'
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        vs.header.frame_id = req.frame_id or LOCAL_FRAME
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
-        vector_local = tf_buffer.transform(vs, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
                              type_mask=PositionTarget.IGNORE_PX + PositionTarget.IGNORE_PY + PositionTarget.IGNORE_PZ +
                                        PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
@@ -255,8 +256,8 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
 
     elif isinstance(req, srv.SetVelocityYawRateRequest):
         vs.vector = Vector3(req.vx, req.vy, req.vz)
-        vs.header.frame_id = req.frame_id or 'local_origin'
-        vector_local = tf_buffer.transform(vs, 'local_origin', TRANSFORM_TIMEOUT)
+        vs.header.frame_id = req.frame_id or LOCAL_FRAME
+        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
                              type_mask=PositionTarget.IGNORE_PX + PositionTarget.IGNORE_PY + PositionTarget.IGNORE_PZ +
                                        PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
@@ -266,9 +267,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         return position_pub, msg
 
     elif isinstance(req, srv.SetAttitudeRequest):
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(req.roll, req.pitch, req.yaw)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = AttitudeTarget(orientation=pose_local.pose.orientation,
                              thrust=req.thrust,
                              type_mask=AttitudeTarget.IGNORE_YAW_RATE + AttitudeTarget.IGNORE_PITCH_RATE +
@@ -283,9 +284,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         return attitude_pub, msg
 
     elif isinstance(req, srv.SetRatesYawRequest):
-        ps.header.frame_id = req.frame_id or 'local_origin'
+        ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, 'local_origin', TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = AttitudeTarget(orientation=pose_local.pose.orientation,
                              thrust=req.thrust,
                              type_mask=AttitudeTarget.IGNORE_YAW_RATE,
@@ -367,7 +368,7 @@ rospy.Service('release', Trigger, release)
 
 def get_telemetry(req):
     res = {
-        'frame_id': req.frame_id or 'local_origin',
+        'frame_id': req.frame_id or LOCAL_FRAME,
         'x': float('nan'),
         'y': float('nan'),
         'z': float('nan'),
@@ -385,7 +386,7 @@ def get_telemetry(req):
         'voltage': float('nan'),
         'cell_voltage': float('nan')
     }
-    frame_id = req.frame_id or 'local_origin'
+    frame_id = req.frame_id or LOCAL_FRAME
     stamp = rospy.get_rostime()
 
     if pose:
@@ -455,7 +456,7 @@ def start_loop():
                     # For monitoring
                     if isinstance(current_msg, PositionTarget):
                         p = PoseStamped()
-                        p.header.frame_id = 'local_origin'
+                        p.header.frame_id = LOCAL_FRAME
                         p.header.stamp = stamp
                         p.pose.position = current_msg.position
                         p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw + math.pi / 2)
