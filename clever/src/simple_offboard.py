@@ -97,6 +97,7 @@ def offboard_and_arm():
                 break
             if rospy.get_rostime() - start > OFFBOARD_TIMEOUT:
                 raise Exception('OFFBOARD request timed out')
+            rospy.sleep(0.01)
 
     if AUTO_ARM and not state.armed:
         rospy.loginfo('Arming')
@@ -106,9 +107,9 @@ def offboard_and_arm():
         while True:
             if state.armed:
                 return True
-
             if rospy.get_rostime() - start > ARM_TIMEOUT:
                 raise Exception('Arming timed out')
+            rospy.sleep(0.01)
 
 
 ps = PoseStamped()
