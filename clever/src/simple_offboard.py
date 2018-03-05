@@ -79,6 +79,7 @@ AUTO_OFFBOARD = rospy.get_param('~auto_offboard', True)
 AUTO_ARM = AUTO_OFFBOARD and rospy.get_param('~auto_arm', True)
 OFFBOARD_TIMEOUT = rospy.Duration(rospy.get_param('~offboard_timeout', 3))
 ARM_TIMEOUT = rospy.Duration(rospy.get_param('~arm_timeout', 5))
+NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', False))
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
 SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
 
@@ -160,6 +161,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
 
         if not continued:
             current_nav_start = pose.pose.position
+            current_nav_start_stamp = stamp
+
+        if NAVIGATE_AFTER_ARMED and not state.armed:
             current_nav_start_stamp = stamp
 
         setpoint = get_navigate_setpoint(stamp, current_nav_start, current_nav_finish.pose.position,
