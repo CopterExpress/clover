@@ -75,6 +75,8 @@ rospy.Subscriber('/mavros/global_position/global', NavSatFix, global_position_up
 rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
 
 
+PT = PositionTarget
+AT = AttitudeTarget
 AUTO_OFFBOARD = rospy.get_param('~auto_offboard', True)
 AUTO_ARM = AUTO_OFFBOARD and rospy.get_param('~auto_arm', True)
 OFFBOARD_TIMEOUT = rospy.Duration(rospy.get_param('~offboard_timeout', 3))
@@ -178,72 +180,32 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         setpoint = get_navigate_setpoint(stamp, current_nav_start, current_nav_finish.pose.position,
                                          current_nav_start_stamp, req.speed)
 
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW_RATE,
+        yaw_rate_flag = math.isnan(req.yaw)
+        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
+                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
+                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
+                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=setpoint,
-                             yaw=euler_from_orientation(current_nav_finish.pose.orientation)[2] - math.pi / 2)
-        return position_pub, msg
-
-    elif isinstance(req, srv.SetPositionRequest):
-        ps.header.frame_id = req.frame_id or LOCAL_FRAME
-        ps.pose.position = Point(req.x, req.y, req.z)
-        ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW_RATE,
-                             position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2)
-        return position_pub, msg
-
-    elif isinstance(req, srv.SetPositionYawRateRequest):
-        ps.header.frame_id = req.frame_id or LOCAL_FRAME
-        ps.pose.position = Point(req.x, req.y, req.z)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW,
-                             position=pose_local.pose.position,
+                             yaw=euler_from_orientation(current_nav_finish.pose.orientation)[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
-    elif isinstance(req, srv.SetPositionGlobalRequest):
-        x, y = global_to_local(req.lat, req.lon)
-
+    elif isinstance(req, (srv.SetPositionRequest, srv.SetPositionGlobalRequest)):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
-        ps.pose.position = Point(0, 0, req.z)
+        ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
         pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        pose_local.pose.position.x = x
-        pose_local.pose.position.y = y
 
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW_RATE,
+        if isinstance(req, srv.SetPositionGlobalRequest):
+            pose_local.pose.position.x, pose_local.pose.position.y = global_to_local(req.lat, req.lon)
+
+        yaw_rate_flag = math.isnan(req.yaw)
+        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
+                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
+                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
+                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2)
-        return position_pub, msg
-
-    elif isinstance(req, srv.SetPositionGlobalYawRateRequest):
-        x, y = global_to_local(req.lat, req.lon)
-
-        ps.header.frame_id = req.frame_id or LOCAL_FRAME
-        ps.pose.position = Point(0, 0, req.z)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        pose_local.pose.position.x = x
-        pose_local.pose.position.y = y
-
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_VX + PositionTarget.IGNORE_VY + PositionTarget.IGNORE_VZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW,
-                             position=pose_local.pose.position,
+                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -254,23 +216,14 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
         pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_PX + PositionTarget.IGNORE_PY + PositionTarget.IGNORE_PZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW_RATE,
-                             velocity=vector_local.vector,
-                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2)
-        return position_pub, msg
 
-    elif isinstance(req, srv.SetVelocityYawRateRequest):
-        vs.vector = Vector3(req.vx, req.vy, req.vz)
-        vs.header.frame_id = req.frame_id or LOCAL_FRAME
-        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = PositionTarget(coordinate_frame=PositionTarget.FRAME_LOCAL_NED,
-                             type_mask=PositionTarget.IGNORE_PX + PositionTarget.IGNORE_PY + PositionTarget.IGNORE_PZ +
-                                       PositionTarget.IGNORE_AFX + PositionTarget.IGNORE_AFY + PositionTarget.IGNORE_AFZ +
-                                       PositionTarget.IGNORE_YAW,
+        yaw_rate_flag = math.isnan(req.yaw)
+        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
+                             type_mask=PT.IGNORE_PX + PT.IGNORE_PY + PT.IGNORE_PZ +
+                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
+                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              velocity=vector_local.vector,
+                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -280,25 +233,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
         msg = AttitudeTarget(orientation=pose_local.pose.orientation,
                              thrust=req.thrust,
-                             type_mask=AttitudeTarget.IGNORE_YAW_RATE + AttitudeTarget.IGNORE_PITCH_RATE +
-                                       AttitudeTarget.IGNORE_ROLL_RATE)
-        return attitude_pub, msg
-
-    elif isinstance(req, srv.SetAttitudeYawRateRequest):
-        msg = AttitudeTarget(orientation=orientation_from_euler(req.roll, req.pitch, 0),
-                             thrust=req.thrust,
-                             type_mask=AttitudeTarget.IGNORE_PITCH_RATE + AttitudeTarget.IGNORE_ROLL_RATE)
-        msg.body_rate.z = req.yaw_rate
-        return attitude_pub, msg
-
-    elif isinstance(req, srv.SetRatesYawRequest):
-        ps.header.frame_id = req.frame_id or LOCAL_FRAME
-        ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = AttitudeTarget(orientation=pose_local.pose.orientation,
-                             thrust=req.thrust,
-                             type_mask=AttitudeTarget.IGNORE_YAW_RATE,
-                             body_rate=Vector3(req.roll_rate, req.pitch_rate, 0))
+                             type_mask=AT.IGNORE_YAW_RATE + AT.IGNORE_PITCH_RATE + AT.IGNORE_ROLL_RATE)
         return attitude_pub, msg
 
     elif isinstance(req, srv.SetRatesRequest):
@@ -327,6 +262,14 @@ def handle(req):
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and req.speed <= 0:
         rospy.logwarn('Navigate speed must be greater than zero, %s passed')
         return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
+
+    if getattr(req, 'yaw_rate', 0) != 0 and not math.isnan(getattr(req, 'yaw')):
+        rospy.logwarn('Yaw value should be NaN for setting yaw rate')
+        return {'message': 'Yaw value should be NaN for setting yaw rate'}
+
+    if math.isnan(getattr(req, 'yaw', 0)) and math.isnan(getattr(req, 'yaw_rate', 0)):
+        rospy.logwarn('Both yaw and yaw_rate cannot be NaN')
+        return {'message': 'Both yaw and yaw_rate cannot be NaN'}
 
     try:
         with handle_lock:
@@ -378,15 +321,10 @@ def release(req):
 rospy.Service('navigate', srv.Navigate, handle)
 rospy.Service('navigate_global', srv.NavigateGlobal, handle)
 rospy.Service('set_position', srv.SetPosition, handle)
-rospy.Service('set_position/yaw_rate', srv.SetPositionYawRate, handle)
 rospy.Service('set_position_global', srv.SetPositionGlobal, handle)
-rospy.Service('set_position_global/yaw_rate', srv.SetPositionGlobalYawRate, handle)
 rospy.Service('set_velocity', srv.SetVelocity, handle)
-rospy.Service('set_velocity/yaw_rate', srv.SetVelocityYawRate, handle)
 rospy.Service('set_attitude', srv.SetAttitude, handle)
-rospy.Service('set_attitude/yaw_rate', srv.SetAttitudeYawRate, handle)
 rospy.Service('set_rates', srv.SetRates, handle)
-rospy.Service('set_rates/yaw', srv.SetRatesYaw, handle)
 rospy.Service('land', Trigger, land)
 rospy.Service('release', Trigger, release)
 

@@ -2,6 +2,7 @@ float32 lat
 float32 lon
 float32 z
 float32 yaw
+float32 yaw_rate
 float32 speed
 string frame_id
 bool update_frame
