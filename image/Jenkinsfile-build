@@ -1,0 +1,57 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'IMAGE_NAME', defaultValue: 'CLEVER-JENKINS-FILE.img', description: 'IMAGE_NAME')
+    //string(name: 'WORKSPACE', defaultValue: '', description: 'WORKSPACE')
+  }
+  environment {
+    BUILD_DIRECTORY = '/home/pi/temp'
+    PREFIX_PATH = '/mnt'
+    DEV_BOOT = '/dev/disk/by-uuid/CDD4-B453'
+    DEV_ROOTFS = '/dev/disk/by-uuid/72bfc10d-73ec-4d9e-a54a-1cc507ee7ed2'
+  }
+  stages {
+    stage('Get image') {
+      environment {
+        RPI_DONWLOAD_URL = 'https://downloads.raspberrypi.org/raspbian_lite_latest'
+        RPI_ZIP_NAME = 'raspbian_lite_latest.zip'
+        RPI_IMAGE_NAME = '2017-11-29-raspbian-stretch-lite.img'
+      }
+      steps {
+        sh "$WORKSPACE/image/image-config.sh get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME ${params.IMAGE_NAME}"
+      }
+    }
+    stage('Resize FS') {
+      environment {
+        SIZE = '7G'
+      }
+      steps {
+        sh "$WORKSPACE/image/image-config.sh resize_fs $SIZE $BUILD_DIRECTORY ${params.IMAGE_NAME} $DEV_ROOTFS"
+      }
+    }
+    stage('Configure interfaces') {
+      environment {
+        EXECUTE_FILE = 'iface.sh'
+      }
+      steps {
+        sh "$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/${params.IMAGE_NAME} $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE"
+      }
+    }
+    stage('Install Apps') {
+      environment {
+        EXECUTE_FILE = 'apps.sh'
+      }
+      steps {
+        sh "$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/${params.IMAGE_NAME} $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE"
+      }
+    }
+    stage('Install ROS') {
+      environment {
+        EXECUTE_FILE = 'ros.sh'
+      }
+      steps {
+        sh "$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/${params.IMAGE_NAME} $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE"
+      }
+    }
+  }
+}
