@@ -95,6 +95,7 @@ publish_image() {
     && echo 'Upload image' \
     && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
+    && echo "Make downloads in GH-release" \
     && $3/image/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
 }
 
