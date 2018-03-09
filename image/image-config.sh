@@ -85,7 +85,7 @@ resize_fs() {
 publish_image() {
 
 # STATIC
-# TEMPLATE: publish_image $JENKINS_HOME $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# TEMPLATE: publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
@@ -480,7 +480,10 @@ case "$1" in
   resize_fs) # resize_fs $SIZE $JENKINS_HOME $IMAGE_NAME $DEV_ROOTFS
     resize_fs $2 $3 $4 $5;;
 
-  publish_image) # publish_image $JENKINS_HOME $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+  publish_image) # publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image $2 $3 $4 $5 $6 $7;;
+
+  publish_image2) # publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
     publish_image $2 $3 $4 $5 $6 $7;;
 
   execute) # execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
