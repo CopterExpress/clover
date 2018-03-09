@@ -8,7 +8,7 @@ pipeline {
         RPI_IMAGE_NAME = '2017-11-29-raspbian-stretch-lite.img'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME'
+        sh "$WORKSPACE/image/image-config.sh get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME"
       }
     }
     stage('Resize FS') {
