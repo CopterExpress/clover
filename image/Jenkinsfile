@@ -2,7 +2,6 @@ pipeline {
   agent any
   stages {
     stage('Get image') {
-      agent any
       environment {
         RPI_DONWLOAD_URL = 'https://downloads.raspberrypi.org/raspbian_lite_latest'
         RPI_ZIP_NAME = 'raspbian_lite_latest.zip'
