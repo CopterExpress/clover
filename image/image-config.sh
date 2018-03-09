@@ -464,6 +464,7 @@ echo "\$3: $3"
 echo "\$4: $4"
 echo "\$5: $5"
 echo "\$6: $6"
+echo "\$7: $7"
 
 
 # test_docker
