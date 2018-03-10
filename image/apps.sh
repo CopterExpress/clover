@@ -18,6 +18,8 @@ apt-get update
 echo -e "\033[0;31m\033[1m$(date) | #2 Install programs\033[0m\033[0m"
 
 apt-get install --no-install-recommends -y \
+  unzip \
+  zip \
   ipython \
   screen \
   byobu \
