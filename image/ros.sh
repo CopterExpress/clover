@@ -69,17 +69,17 @@ mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
 
 
 
-echo -e "\033[0;31m\033[1m$(date) | #6 Install assimp-3.1.1 to /home/pi/ros_catkin_ws/external_src\033[0m\033[0m"
+#echo -e "\033[0;31m\033[1m$(date) | #6 Install assimp-3.1.1 to /home/pi/ros_catkin_ws/external_src\033[0m\033[0m"
 
 # Unavailable Dependencies
-mkdir -p /home/pi/ros_catkin_ws/external_src \
-    && cd /home/pi/ros_catkin_ws/external_src \
-    && wget http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no_test_models.zip/download -O assimp-3.1.1_no_test_models.zip \
-    && unzip assimp-3.1.1_no_test_models.zip \
-    && cd assimp-3.1.1 \
-    && cmake . \
-    && make \
-    && make install
+#mkdir -p /home/pi/ros_catkin_ws/external_src \
+#    && cd /home/pi/ros_catkin_ws/external_src \
+#    && wget http://sourceforge.net/projects/assimp/files/assimp-3.1/assimp-3.1.1_no_test_models.zip/download -O assimp-3.1.1_no_test_models.zip \
+#    && unzip assimp-3.1.1_no_test_models.zip \
+#    && cd assimp-3.1.1 \
+#    && cmake . -Wattributes \
+#    && make \
+#    && make install
 
 
 
