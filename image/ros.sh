@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 ##################################################################################################################################
 # ROS for user pi
@@ -140,7 +140,7 @@ echo -e "\033[0;31m\033[1m$(date) | #13 Create catkin_ws\033[0m\033[0m"
 
 mkdir -p /home/pi/catkin_ws/src \
   && cd /home/pi/catkin_ws \
-  && source /opt/ros/kinetic/setup.bash \
+  && . /opt/ros/kinetic/setup.sh \
   && catkin init \
   && wstool init /home/pi/catkin_ws/src
 
@@ -154,7 +154,7 @@ cd /home/pi/catkin_ws/src \
   && pip install wheel \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
-  && source /opt/ros/kinetic/setup.bash \
+  && . /opt/ros/kinetic/setup.sh \
   && catkin_make -j1 \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service

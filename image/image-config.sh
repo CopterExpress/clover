@@ -1,4 +1,3 @@
-#!/bin/bash
 #!/bin/sh
 
 set -e
@@ -243,7 +242,7 @@ mount_system2() {
   cp -L /etc/resolv.conf $2/etc/resolv.conf
 
   echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  chroot $2 /bin/bash -c "$5"
+  chroot $2 /bin/sh -c "$5"
 }
 
 umount_system() {
