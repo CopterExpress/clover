@@ -43,14 +43,14 @@ CONFIG=/boot/config.txt
 # 2. Изменить необходимые настройки
 
 #   2.1. Включить sshd
-echo -e "\033[0;31m\033[1m$(date) | #11 Turn on sshd\033[0m\033[0m"
+echo "\033[0;31m\033[1m$(date) | #11 Turn on sshd\033[0m\033[0m"
 touch /boot/ssh
 
 #   2.2. Включить GPIO
 # Включено по умолчанию
 
 #   2.3. Включить I2C
-echo -e "\033[0;31m\033[1m$(date) | #12 Turn on I2C\033[0m\033[0m"
+echo "\033[0;31m\033[1m$(date) | #12 Turn on I2C\033[0m\033[0m"
 
 set_config_var dtparam=i2c_arm on $CONFIG &&
   if ! [ -e $BLACKLIST ]; then
@@ -63,7 +63,7 @@ set_config_var dtparam=i2c_arm on $CONFIG &&
   fi
 
 #   2.4. Включить SPI
-echo -e "\033[0;31m\033[1m$(date) | #13 Turn on SPI\033[0m\033[0m"
+echo "\033[0;31m\033[1m$(date) | #13 Turn on SPI\033[0m\033[0m"
 
 set_config_var dtparam=spi on $CONFIG &&
   if ! [ -e $BLACKLIST ]; then
@@ -72,7 +72,7 @@ set_config_var dtparam=spi on $CONFIG &&
   sed $BLACKLIST -i -e "s/^\(blacklist[[:space:]]*spi[-_]bcm2708\)/#\1/"
 
 #   2.5. Включить raspicam
-echo -e "\033[0;31m\033[1m$(date) | #14 Turn on raspicam\033[0m\033[0m"
+echo "\033[0;31m\033[1m$(date) | #14 Turn on raspicam\033[0m\033[0m"
 
 get_config_var() {
   lua - "$1" "$2" <<EOF
@@ -137,4 +137,4 @@ fi
 #   2.8. Настроить DHCPd на wlan
 
 
-echo -e "\033[0;31m\033[1m$(date) | #15 End of configuring interfaces\033[0m\033[0m"
+echo "\033[0;31m\033[1m$(date) | #15 End of configuring interfaces\033[0m\033[0m"
