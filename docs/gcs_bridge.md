@@ -26,6 +26,23 @@ sudo systemctl restart clever
 
 ![](/assets/qground.png)
 
+UDP broadcast-бридж
+---
+
+Для использования UDP broadcast-бриджа необходимо установить параметр `gcs_bridge` в значение `udp-b`:
+
+```xml
+<arg name="gcs_bridge" default="udp-b"/>
+```
+
+При изменени launch-файла необходимо перезагрузить сервис `clever`:
+
+```bash
+sudo systemctl restart clever
+```
+
+При использовании UDB broadcast-бриджа достаточно подключиться к Wi-Fi сети Клевера. QGroundControl должен подключиться к коптеру автоматически.
+
 UDP-бридж
 ---
 
