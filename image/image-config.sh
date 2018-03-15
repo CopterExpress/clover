@@ -485,7 +485,7 @@ case "$1" in
     publish_image $2 $3 $4 $5 $6 $7;;
 
   publish_image2) # publish_image2 $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image $2 $3 $4 $5 $6 $7;;
+    publish_image2 $2 $3 $4 $5 $6 $7;;
 
   execute) # execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
     execute $2 $3 $4 $5 $6;;
