@@ -1,73 +1,72 @@
-Клевер
+CLEVER
 ======
 
-<img src="assets/clever.jpg" align="right" width="300px" alt="Клевер">
+<img src="assets/clever.jpg" align="right" width="300px" alt="CLEVER drone">
 
-«Клевер» — это учебный конструктор программируемого квадрокоптера, состоящего из популярных открытых компонентов, а также набор необходимой документации и библиотек для работы с ним.
+CLEVER is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. Kit includes Pixhawk/Pixracer autopilot running PX4 firmware, Raspberry Pi 3 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
-Набор включает в себя полетный контроллер PixHawk/PixRacer с полетным стеком PX4, Raspberry Pi 3 в качестве управлящего бортового компьютера, модуль камеры для реализации полетов с использованием компьютерного зрения, а также набор различных датчиков и другой периферии.
+Copter Express has implemented a large number of different autonomous drone projects using exactly the same platform: [automated pizza delivery](https://www.youtube.com/watch?v=hmkAoZOtF58) in Samara and Kazan, coffee delivery in Skolkovo Innovation Center, [autonomous quadcopter with charging station](https://www.youtube.com/watch?v=RjX6nUqw1mI) for site monitoring and security, winning drones on [Robokross-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU) and [Robokross-2017](https://youtu.be/AQnd2CRczbQ) competitions and many others.
 
-На базе точно такой же платформы были созданы многие «большие» проекты компании Copter Express, например, дроны для [пиар-акций по автономной доставке пиццы](https://www.youtube.com/watch?v=hmkAoZOtF58) (Самара, Казань); дрон-доставщик кофе в Сколково, мониторинговый дрон с зарядной станцией, дроны-победители на полевых испытаниях «[Робокросс-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU)», «[Робокросс-2017](https://youtu.be/AQnd2CRczbQ)» и многие другие.
+**The main documentation in Russian is available on our Gitbook:**
+**https://copterexpress.gitbooks.io/clever/content/**
 
-Для того, чтобы научиться собирать, настраивать, пилотировать и программировать автономный дрон «Клевер», воспользуйтесь этим учебником.
+Use it to learn how to assemble, configure, pilot and program autonomous CLEVER drone.
 
-Основная документация
----------------------
+Preconfigured RPi 3 image
+-------------------------
 
-https://copterexpress.gitbooks.io/clever/content/
+Preconfigured image for Raspberry Pi 3 with installed and configured software, ready to fly, is available [here](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
 
-**Образ ОС** для RPi 3 с предустановленным и преднастроенным ПО можно скачать [здесь](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
-
-Образ включает в себя:
+Image includes:
 
 * Raspbian Stretch
 * ROS Kinetic
-* Настроенную работу с сетью
+* Configured networking
 * OpenCV
 * mavros
-* Набор ПО для работы с Клевером
+* CLEVER software bundle for autonomous drone control
 
-[Описание API](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html) для автономных полетов.
+API description in Russian for autonomous flights is available [here](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html).
 
-Ручная установка
----------
+Manual installation
+-------------------
 
-Установить ROS Kinetic согласно [инструкциям](http://wiki.ros.org/kinetic/Installation).
+Install ROS Kinetic according to the [documentation](http://wiki.ros.org/kinetic/Installation).
 
-Склонировать репозиторий в папку `/home/pi/catkin_ws/src/clever`:
+Clone repo to directory `/home/pi/catkin_ws/src/clever`:
 
 ```bash
 cd ~/catkin_ws/src
 git clone https://github.com/CopterExpress/clever.git clever
 ```
 
-Пересобрать ROS-пакеты:
+Build ROS packages:
 
 ```bash
 cd ~/catkin_ws
 catkin_make -j1
 ```
 
-Включить сервис roscore (если он не включен):
+Enable systemd service `roscore` (if not enabled):
 
 ```bash
 sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service
 sudo systemctl start roscore
 ```
 
-Включить сервис clever:
+Enable systemd service `clever`:
 
 ```bash
 sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 sudo systemctl start clever
 ```
 
-Зависимости
------------
+Dependencies
+------------
 
 [ROS Kinetic](http://wiki.ros.org/kinetic).
 
-Необходимые для работы ROS-пакеты:
+Necessary ROS packages:
 
 * `opencv3`
 * `mavros`
@@ -76,8 +75,6 @@ sudo systemctl start clever
 * `cv_camera`
 * `nodelet`
 * `dynamic_reconfigure`
-* `bondcpp`, ветка `master`
+* `bondcpp`, branch `master`
 * `roslint`
 * `rosserial`
-
-TODO: внести в package.xml
