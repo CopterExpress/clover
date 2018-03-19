@@ -1,7 +1,7 @@
 Подключение PixHawk/PixRacer к Raspberry Pi
 ===
 
-Для программирования [автономных полетов](/docs/simple_offboard.md), [работы с PixHawk по Wi-Fi](/docs/gcs_bridge.md), использования [веб-пульта](/docs/web_rc.md) и других функций необходимо подсоединить Raspberry Pi к PixHawk.
+Для программирования [автономных полетов](simple_offboard.md), [работы с PixHawk по Wi-Fi](gcs_bridge.md), использования [веб-пульта](web_rc.md) и других функций необходимо подсоединить Raspberry Pi к PixHawk.
 
 Убедиться в работоспособности подключения, выполнив на Raspberry Pi:
 
@@ -53,7 +53,7 @@ sudo systemctl restart clever
 Подключение к SITL
 ---
 
-Для того, чтобы подсоединиться к локально/удаленно запущенному [SITL](/docs/sitl.md), необходимо установить аргумент `fcu_conn` в `udp`, и `fcu_ip` в IP-адрес машины, где запущен SITL (`127.0.0.1` для локального):
+Для того, чтобы подсоединиться к локально/удаленно запущенному [SITL](sitl.md), необходимо установить аргумент `fcu_conn` в `udp`, и `fcu_ip` в IP-адрес машины, где запущен SITL (`127.0.0.1` для локального):
 
 ```xml
 <arg name="fcu_conn" default="udp"/>

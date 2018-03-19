@@ -1,4 +1,3 @@
-#!/bin/bash
 #!/bin/sh
 
 set -e
@@ -25,7 +24,7 @@ set -e
 get_image() {
 
 # STATIC
-# TEMPLATE: get_image $JENKINS_HOME $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
+# TEMPLATE: get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
 
   echo 'Download RaspbianOS'
   echo "$(date) | 1. Download raspbian lite"
@@ -46,7 +45,7 @@ get_image() {
 resize_fs() {
 
   # STATIC
-  # TEMPLATE: resize_fs $SIZE $JENKINS_HOME $IMAGE_NAME $DEV_ROOTFS
+  # TEMPLATE: resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
 
   set +e
 
@@ -64,19 +63,19 @@ resize_fs() {
   # ", +" : расширяет раздел до размеров образа
   # -N 2  : выбирает раздел 2 для работы
 
-  echo -e "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
+  echo "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
     && truncate -s$1 $2/$3 \
     && echo "Mount loop-image: $2/$3" \
     && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
     && sleep 0.5 \
-    && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
+    && echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
     && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
     && sleep 0.5 \
-    && echo -e "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
+    && echo "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
     && e2fsck -fvy $4 \
-    && echo -e "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
+    && echo "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
     && resize2fs $4 \
-    && echo -e "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
+    && echo "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
     && losetup -d $DEV_IMAGE
 
   set -e
@@ -85,7 +84,7 @@ resize_fs() {
 publish_image() {
 
 # STATIC
-# TEMPLATE: publish_image $JENKINS_HOME $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# TEMPLATE: publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
@@ -95,13 +94,14 @@ publish_image() {
     && echo 'Upload image' \
     && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
+    && echo "Make downloads in GH-release" \
     && $3/image/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
 }
 
 publish_image2() {
 
 # STATIC
-# TEMPLATE: publish_image $JENKINS_HOME $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# TEMPLATE: publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
@@ -121,9 +121,9 @@ burn_image() {
 # STATIC
 # TEMPLATE: burn_image $IMAGE_PATH $MICROSD_DEV
 
-  echo -e "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
+  echo "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
     && dd if=$1 of=$2 \
-    && echo -e "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
+    && echo "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
 }
 
 burn_and_reboot() {
@@ -146,15 +146,15 @@ mount_system() {
   #          например /dev/loop0p1 и /dev/loop0p2
   # --show : печатает имя устройства, например /dev/loop4
 
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
   mount $3 $2
   mount $4 $2/boot
 
-  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   # https://github.com/debian-pi/raspbian-ua-netinst/issues/314
   echo "Mounting /proc in chroot... "
   if [ ! -d $2/proc ] ; then
@@ -189,7 +189,7 @@ mount_system() {
   # mount -t sysfs sys $2/sys
   # mount --bind /dev $2/dev
 
-  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
+  echo "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
   cp -L /etc/resolv.conf $2/etc/resolv.conf
 
   # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
@@ -198,7 +198,7 @@ mount_system() {
   # https://losst.ru/vosstanovlenie-grub2
   # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
   # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
-  echo -e "\033[0;31m\033[1mEnter chroot\033[0m\033[0m"
+  echo "\033[0;31m\033[1mEnter chroot\033[0m\033[0m"
   chroot $2 /bin/bash
 }
 
@@ -207,15 +207,15 @@ mount_system2() {
   # STATIC
   # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
 
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
   mount $3 $2
   mount $4 $2/boot
 
-  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   echo "Mounting /proc in chroot... "
   if [ ! -d $2/proc ] ; then
       mkdir -p $2/proc
@@ -238,11 +238,11 @@ mount_system2() {
   mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts
   echo "OK"
 
-  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
+  echo "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
   cp -L /etc/resolv.conf $2/etc/resolv.conf
 
-  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  chroot $2 /bin/bash -c "$5"
+  echo "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
+  chroot $2 /bin/sh -c "$5"
 }
 
 umount_system() {
@@ -250,9 +250,9 @@ umount_system() {
   # STATIC
   # TEMPLATE: umount_system $PREFIX_PATH
 
-  echo -e "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
+  echo "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
   umount -fR $1
-  echo -e "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
+  echo "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
   losetup -d $DEV_IMAGE
 }
 
@@ -261,9 +261,9 @@ umount_system2() {
   # STATIC
   # TEMPLATE: umount_system $PREFIX_PATH
   
-  echo -e "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
+  echo "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
   umount -fR $1
-  echo -e "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
+  echo "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
   losetup -D
 }
 
@@ -312,25 +312,25 @@ configure_system() {
   # -P     : losetup монтирует разделы в образе как отдельные подразделы,
   #          например /dev/loop0p1 и /dev/loop0p2
   # --show : печатает имя устройства, например /dev/loop4
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
   mount $3 $2
   mount $4 $2/boot
 
   # 2. Изменить необходимые настройки
 
   #   2.1. Включить sshd
-  echo -e "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
+  echo "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
   touch $2/boot/ssh
 
   #   2.2. Включить GPIO
   # Включено по умолчанию
 
   #   2.3. Включить I2C
-  echo -e "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
+  echo "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
 
   set_config_var dtparam=i2c_arm on $CONFIG &&
     if ! [ -e $BLACKLIST ]; then
@@ -343,7 +343,7 @@ configure_system() {
     fi
 
   #   2.4. Включить SPI
-  echo -e "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
+  echo "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
 
   set_config_var dtparam=spi on $CONFIG &&
     if ! [ -e $BLACKLIST ]; then
@@ -463,6 +463,7 @@ echo "\$3: $3"
 echo "\$4: $4"
 echo "\$5: $5"
 echo "\$6: $6"
+echo "\$7: $7"
 
 
 # test_docker
@@ -474,14 +475,17 @@ case "$1" in
   enter) # enter $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
     enter $2 $3 $4 $5;;
 
-  get_image) # get_image $JENKINS_HOME $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
+  get_image) # get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
     get_image $2 $3 $4 $5 $6;;
 
-  resize_fs) # resize_fs $SIZE $JENKINS_HOME $IMAGE_NAME $DEV_ROOTFS
+  resize_fs) # resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
     resize_fs $2 $3 $4 $5;;
 
-  publish_image) # publish_image $JENKINS_HOME $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+  publish_image) # publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
     publish_image $2 $3 $4 $5 $6 $7;;
+
+  publish_image2) # publish_image2 $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image2 $2 $3 $4 $5 $6 $7;;
 
   execute) # execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
     execute $2 $3 $4 $5 $6;;
