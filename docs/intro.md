@@ -26,3 +26,5 @@
 * Набор ПО для работы с Клевером
 
 [Описание API](simple_offboard.html) для автономных полетов.
+
+Исходный код сборщика образа и всего ПО можно найти на [GitHub](https://github.com/CopterExpress/clever).
