@@ -81,6 +81,7 @@ AUTO_OFFBOARD = rospy.get_param('~auto_offboard', True)
 AUTO_ARM = AUTO_OFFBOARD and rospy.get_param('~auto_arm', True)
 OFFBOARD_TIMEOUT = rospy.Duration(rospy.get_param('~offboard_timeout', 3))
 ARM_TIMEOUT = rospy.Duration(rospy.get_param('~arm_timeout', 5))
+LOCAL_POSITION_TIMEOUT = rospy.Duration(rospy.get_param('~local_position_timeout', 0.5))
 NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', False))
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
 SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
@@ -262,6 +263,11 @@ def handle(req):
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and req.speed <= 0:
         rospy.logwarn('Navigate speed must be greater than zero, %s passed')
         return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
+
+    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and \
+            (pose is None or rospy.get_rostime() - pose.header.stamp > LOCAL_POSITION_TIMEOUT):
+        rospy.logwarn('No local position')
+        return {'message': 'No local position'}
 
     if getattr(req, 'yaw_rate', 0) != 0 and not math.isnan(getattr(req, 'yaw')):
         rospy.logwarn('Yaw value should be NaN for setting yaw rate')
