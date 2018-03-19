@@ -51,6 +51,8 @@ release = rospy.ServiceProxy('release', Trigger)
 Описание API
 ---
 
+> **Note** Незаполненные числовые параметры устанавливаются в значение 0.
+
 ### get_telemetry
 
 Получить полную телеметрию коптера.
@@ -77,6 +79,8 @@ release = rospy.ServiceProxy('release', Trigger)
 * `voltage` – общее напряжение аккумулятора;
 * `cell_voltage` – напряжение аккумулятора на ячейку;
 
+> **Note** Недоступные по каким-то причинам значения будут содержать в себе `NaN`.
+
 Вывод координат `x`, `y` и `z` коптера в локальной системе координат:
 
 ```python
@@ -89,6 +93,16 @@ print telemetry.x, telemetry.y, telemetry.z
 ```python
 telemetry = get_telemetry(frame_id='aruco_map')
 print telemetry.z
+```
+
+Проверка доступности глобальной позиции:
+
+```python
+import math
+if not math.isnan(get_telemetry().lat):
+    print 'Global position presents'
+else:
+    print 'No global position'
 ```
 
 Вывод текущей телеметрии (командная строка):
@@ -110,43 +124,43 @@ rosservice call /get_telemetry "{frame_id: ''}"
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит, если находится на полу!**);
 * `frame_id`, `update_frame`.
 
-Взлететь на высоту 1.5 м со скоростью взлета 0.5 м/с:
+Взлет на высоту 1.5 м со скоростью взлета 0.5 м/с:
 
 ```python
 navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
 ```
 
-Прилететь по прямой в точку 5:0 (высота 2) в локальной системе координат со скоростью 0.8 м/с:
+Полет по прямой в точку 5:0 (высота 2) в локальной системе координат со скоростью 0.8 м/с:
 
 ```python
 navigate(x=5, y=0, z=3, speed=0.8)
 ```
 
-Пролететь вправо относительно коптера на 3 м:
+Полет вправо относительно коптера на 3 м:
 
 ```python
-navigate(x=0, y=-1, z=0, speed=1, frame_id='fcu_horiz')
+navigate(x=0, y=-3, z=0, speed=1, frame_id='fcu_horiz')
 ```
 
-Прилететь в точку 3:2 (высота 2) в системе координат [маркерного поля](aruco.md) со скоростью 1 м/с:
+Полет в точку 3:2 (высота 2) в системе координат [маркерного поля](aruco.md) со скоростью 1 м/с:
 
 ```python
 navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map', update_frame=True)
 ```
 
-Вращение на месте со скоростью 0.5 рад/c:
+Вращение на месте со скоростью 0.5 рад/c (против часовой):
 
 ```python
-navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
+navigate(x=0, y=0, z=0, speed=1, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
 ```
 
-Пролететь вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:
+Полет вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:
 
 ```python
 navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='fcu_horiz')
 ```
 
-Взлететь на высоту 2 м (командная строка):
+Взлет на высоту 2 м (командная строка):
 
 ```bash
 rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'fcu_horiz', update_frame: false, auto_arm: true}"
@@ -168,16 +182,16 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит, если находится на полу!**);
 * `frame_id`, `update_frame`.
 
-Полет в глобальную точку по прямой (оставаясь на текущей высоте):
+Полет в глобальную точку со скоростью 5 м/с (оставаясь на текущей высоте):
 
 ```python
-navigate_global(lat=55.707033, lon=37.725010, z=0, frame_id='fcu_horiz')
+navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='fcu_horiz')
 ```
 
 Полет в глобальную точку (командная строка):
 
 ```bash
-rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 3.0, frame_id: 'fcu_horiz', update_frame: false, auto_arm: false}"
+rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'fcu_horiz', update_frame: false, auto_arm: false}"
 ```
 
 ### set_position
@@ -194,6 +208,12 @@ rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 
 * `speed` – скорость полета (скорость движения setpoint);
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит, если находится на полу!**);
 * `frame_id`, `update_frame`.
+
+Зависнуть на месте:
+
+```python
+set_position(frame_id='fcu_horiz')
+```
 
 Назначить целевую точку на 3 м выше текущей позиции:
 
@@ -228,13 +248,13 @@ set_position(x=0, y=0, z=0, frame_id='fcu_horiz', yaw=float('nan'), yaw_rate=0.5
 Полет вперед (относительно коптера) со скоростью 1 м/с:
 
 ```python
-set_velocity(vx=1, vy=0.0, vz=0, frame_id: 'fcu_horiz')
+set_velocity(vx=1, vy=0.0, vz=0, frame_id='fcu_horiz')
 ```
 
 Один из вариантов полета по кругу:
 
 ```python
-set_velocity(vx=0.2, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.5, frame_id: 'fcu_horiz', update_frame: True)
+set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='fcu_horiz', update_frame=True)
 ```
 
 ### set_attitude
@@ -272,8 +292,7 @@ set_velocity(vx=0.2, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.5, frame_id: 'fc
 res = land()
 
 if res.success:
-    # коптер успешно переведен в режим AUTO.LAND
-    # ...
+    print 'Copter is landing'
 ```
 
 Посадка коптера (командная строка):
