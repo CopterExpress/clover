@@ -2,7 +2,8 @@
 from __future__ import division
 
 import rospy
-from geometry_msgs.msg import TransformStamped, PoseStamped, Point, PointStamped, Vector3, Vector3Stamped, TwistStamped, QuaternionStamped
+from geometry_msgs.msg import TransformStamped, PoseStamped, Point, PointStamped, Vector3, \
+    Vector3Stamped, TwistStamped, QuaternionStamped
 from sensor_msgs.msg import NavSatFix, BatteryState
 import tf2_ros
 import tf2_geometry_msgs
@@ -303,7 +304,11 @@ def handle(req):
 
 
 def land(req):
-    rospy.loginfo('request %s mode' % LAND_MODE)
+    if not state or not state.connected:
+        rospy.logwarn('No connection to the FCU')
+        return {'message': 'No connection to the FCU'}
+
+    rospy.loginfo('Set %s mode', LAND_MODE)
     res = set_mode(custom_mode=LAND_MODE)
     if not res.mode_sent:
         return {'message': 'Cannot send %s mode request' % LAND_MODE}
