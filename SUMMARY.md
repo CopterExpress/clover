@@ -1,6 +1,6 @@
 # Summary
 
-* [Введение](README.md)
+* [Введение](docs/intro.md)
 * [Сборка](docs/assemble.md)
 * [Первоначальная настройка](docs/setup.md)
 * [Полетные режимы](docs/modes.md)

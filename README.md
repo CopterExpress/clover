@@ -61,8 +61,7 @@ sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 sudo systemctl start clever
 ```
 
-Dependencies
-------------
+### Dependencies
 
 [ROS Kinetic](http://wiki.ros.org/kinetic).
 
