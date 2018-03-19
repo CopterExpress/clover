@@ -1,7 +1,7 @@
 CLEVER
 ======
 
-<img src="docs/assets/clever.jpg" align="right" width="300px" alt="CLEVER drone">
+<img src="docs/assets/clever3.png" align="right" width="300px" alt="CLEVER drone">
 
 CLEVER is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. Kit includes Pixhawk/Pixracer autopilot running PX4 firmware, Raspberry Pi 3 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
