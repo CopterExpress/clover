@@ -6,7 +6,7 @@
 <arg name="main_camera" default="true"/>
 ```
 
-Также нужно убедиться, что для камеры [указано корректное расположение и ориентация](/docs/camera_frame.md).
+Также нужно убедиться, что для камеры [указано корректное расположение и ориентация](camera_frame.md).
 
 При изменении launch-файла необходимо перезапустить пакет `clever`:
 
@@ -14,11 +14,11 @@
 sudo systemctl restart clever
 ```
 
-Для мониторинга изображения с камеры можно использовать rqt или [web_video_server](/docs/web_video_server.md).
+Для мониторинга изображения с камеры можно использовать rqt или [web_video_server](web_video_server.md).
 
 ## Компьютерное зрение
 
-Для реализации алгоритмов компьютерного зрения рекомендуется использовать предустановленную на [образ SD-карты](/docs/microsd_images.md) библиотеку [OpenCV](https://opencv.org).
+Для реализации алгоритмов компьютерного зрения рекомендуется использовать предустановленную на [образ SD-карты](microsd_images.md) библиотеку [OpenCV](https://opencv.org).
 
 ### Python
 
@@ -56,4 +56,4 @@ image_pub = rospy.Publisher('~debug', Image)
 image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 ```
 
-Получаемые изображения можно просматривать используя [web_video_server](/docs/web_video_server.md).
+Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md).

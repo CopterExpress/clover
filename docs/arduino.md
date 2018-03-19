@@ -60,7 +60,7 @@ for(int i=0; i<8; i++) {
 Работа с Клевером
 ---
 
-Набор сервисов и топиков аналогичен обычному набору в [simple_offboard](/docs/simple_offboard.md) и [mavros](/docs/mavros.md).
+Набор сервисов и топиков аналогичен обычному набору в [simple_offboard](simple_offboard.md) и [mavros](mavros.md).
 
 Пример программы, контролирующей коптер по позиции, с использованием сервисов `navigate` и `set_mode`:
 
@@ -168,7 +168,7 @@ void loop()
 Получение телеметрии
 ---
 
-С Arduino можно использовать [сервис](/docs/simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
+С Arduino можно использовать [сервис](simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
 
 ```cpp
 #include <ros.h>
