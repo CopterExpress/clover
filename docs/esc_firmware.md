@@ -19,19 +19,19 @@
 Создание программатора на примере Arduino Mega.
 
 1. Запустить программу BLHeliSuite и выбрать вкладку Make interfaces.  
-   ![](/assets/BLHeliSuiteSiLabs ESC Setup_171207_1.png)
+   ![](assets/BLHeliSuiteSiLabs ESC Setup_171207_1.png)
 
 2. Нажать Arduino 4way-interface в разделе Make Arduino Interface Boards и выбрать файл прошивки  
-   ![](/assets/BLHeliSuiteMake interfaces_171206_2.png)![](/assets/BLHeliSuite interface options.png)![](/assets/BLHeliSuite arduino select firmware.png)
+   ![](assets/BLHeliSuiteMake interfaces_171206_2.png)![](assets/BLHeliSuite interface options.png)![](assets/BLHeliSuite arduino select firmware.png)
 
 3. После прошивки Arduino вернуться на вкладку Silabs ESC Setup и подключиться к Arduino, предварительно выбрав интерфейс программатора 4way-if и COM порт Arduino.  
-   ![](/assets/BLHeliSuite 4way-if select.png)![](/assets/BLHeliSuite ESC setup Connect.png)
+   ![](assets/BLHeliSuite 4way-if select.png)![](assets/BLHeliSuite ESC setup Connect.png)
 
 #### Подключение ESC регуляторов к Arduino.
 
 Для прошивки или изменения настроек регуляторов необходимо подключить сигнальные порты ESC регуляторов к портам Arduino, предварительно посмотрев в мануале, какие порты используются для прошивки. Так же нужно не забыть соединить GND Arduino с землёй одного из регуляторов. Регуляторы должны быть подключены к питанию, в случае если к регуляторам подключены моторы, **на них не должно быть винтов**.
 
-![](/assets/BLHeliSuite Arduino pinout for 4way-if.png)
+![](assets/BLHeliSuite Arduino pinout for 4way-if.png)
 
 В случае с Arduino Mega, регуляторы подключаются к портам D43-D49 и D51.
 
@@ -39,7 +39,7 @@
 
 Для загрузки информации о версии прошивки и настроек регуляторов нужно нажать на кнопку Check.
 
-![](/assets/BLHeliSuite ESC Setup Check.png)![](/assets/BLHeliSuiteSiLabs ESC Setup_171206_1.png)
+![](assets/BLHeliSuite ESC Setup Check.png)![](assets/BLHeliSuiteSiLabs ESC Setup_171206_1.png)
 
 Основные параметры, которые нас интересуют, это:
 
@@ -51,7 +51,7 @@
 
 Самый левый мотор в списке моторов \(Multiple ESC\) считается главным \(мастер\). Нажимая на номера моторов, можно включать/выключать возможность записи в них настроек. После изменения необходимых параметров можно записать в нужные моторы настройки, нажав на кнопку Write Setup.
 
-![](/assets/BLHeliSuite ESC Setup Write Setup.png)
+![](assets/BLHeliSuite ESC Setup Write Setup.png)
 
 Для отображения настроек со всех регуляторов одновременно можно воспользоваться вкладкой ESC Overview.
 

@@ -1,7 +1,7 @@
 Системы координат (фреймы)
 ===
 
-![](/assets/frames.png)
+![](assets/frames.png)
 
 Основные фреймы в пакете `clever`:
 
