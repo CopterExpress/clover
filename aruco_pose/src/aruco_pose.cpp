@@ -272,10 +272,12 @@ void ArucoPose::detect(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs:
     cv::Mat distCoeffs(8, 1, CV_64F);
     parseCameraInfo(cinfo, cameraMatrix, distCoeffs);
 
+    int valid = 0;
+    cv::Mat rvec, tvec, objPoints;
+
     if (markerIds.size() > 0) {
 
-        cv::Mat rvec, tvec, objPoints;
-        int valid = _estimatePoseBoard(markerCorners, markerIds, board, cameraMatrix, distCoeffs,
+        valid = _estimatePoseBoard(markerCorners, markerIds, board, cameraMatrix, distCoeffs,
                                        rvec, tvec, false, objPoints);
 
         if (valid) {
@@ -301,18 +303,16 @@ void ArucoPose::detect(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs:
             ref_transform.setOrigin(ref_vector3);
             ref_transform.setRotation(q);
             br.sendTransform(ref_transform);
-
-            if(img_pub.getNumSubscribers() > 0)
-            {
-                // Publish debug image
-                cv::aruco::drawDetectedMarkers(image, markerCorners, markerIds);
-                cv::aruco::drawAxis(image, cameraMatrix, distCoeffs, rvec, tvec, 0.3);
-            }
         }
     }
 
     if (img_pub.getNumSubscribers() > 0)
     {
+        cv::aruco::drawDetectedMarkers(image, markerCorners, markerIds); // draw markers
+        if (valid)
+        {
+            cv::aruco::drawAxis(image, cameraMatrix, distCoeffs, rvec, tvec, 0.3); // draw board axis
+        }
         cv_bridge::CvImage out_msg;
         out_msg.header.frame_id = msg->header.frame_id;
         out_msg.header.stamp = msg->header.stamp;
