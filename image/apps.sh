@@ -30,7 +30,8 @@ apt-get install --no-install-recommends -y \
   isc-dhcp-server \
   tmux \
   vim \
-  libpoco-dev
+  libpoco-dev \
+  tcpdump
 
 
 
