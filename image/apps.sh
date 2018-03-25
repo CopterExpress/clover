@@ -29,7 +29,8 @@ apt-get install --no-install-recommends -y \
   git \
   isc-dhcp-server \
   tmux \
-  vim
+  vim \
+  libpoco-dev
 
 
 
