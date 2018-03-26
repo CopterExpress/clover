@@ -29,7 +29,9 @@ apt-get install --no-install-recommends -y \
   git \
   isc-dhcp-server \
   tmux \
-  vim
+  vim \
+  libpoco-dev \
+  tcpdump
 
 
 
@@ -97,6 +99,13 @@ RENAME_SSID="sudo sed -i.OLD \"s/CLEVER/CLEVER-\$(head -c 100 /dev/urandom | xxd
 
 
 sed -i "19a$RENAME_SSID" /etc/rc.local
+
+
+echo "\033[0;31m\033[1m$(date) | #9 Setup vim"
+
+echo "set mouse-=a
+syntax on
+" > /home/pi/.vimrc
 
 
 

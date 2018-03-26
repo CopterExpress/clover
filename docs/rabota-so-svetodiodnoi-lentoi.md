@@ -47,8 +47,8 @@ scons
 
 ```(bash)
 cd python
-python ./setup.py build
-python ./setup.py install
+sudo python ./setup.py build
+sudo python ./setup.py install
 ```
 
 #### Пример программы для светодиодной ленты на RPI3
