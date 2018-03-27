@@ -4,7 +4,9 @@
 * [Сборка](assemble.md)
   * [Состав конструктора](kit.md)
   * [Установка моторов](mount_motors.md)
-  *
+  * [Монтаж разъемов питания](mount_connector.md)
+  * [Монтаж платы распределения питания](mount_pdb.md)
+  * [Монтаж отсека акб](mount_batterycase.md)
 * [Первоначальная настройка](setup.md)
 * [Полетные режимы](modes.md)
 * [Raspberry Pi](raspberry.md)
