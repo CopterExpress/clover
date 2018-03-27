@@ -29,7 +29,11 @@ PX4
 
 ### Автоматический полет (AUTO)
 
-TODO
+В режиме автоматического полета квадрокоптер игнорирует сигналы с пульта.
+
+* **AUTO.MISSION** – PX4 выполняет заранее загруженную в квадрокоптер миссию (миссия загружается с помощью QGroundControl, или по MAVLINK используя MAVROS).
+* **AUTO.RTL** – коптер автоматически вовращается в точку взлета.
+* **AUTO.LAND** – коптер выполняет посадку.
 
 ### Управление с внешнего компьютера
 
@@ -41,4 +45,4 @@ TODO
 * [SET_POSITION_TARGET_LOCAL_NED](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED)
 * [SET_ATTITUDE_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET)
 
-См: [Управление коптером с помощью пакета MAVROS](mavros.md)
+См.: [автономные полеты коптера в режиме OFFBOARD](simple_offboard.md).

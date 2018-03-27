@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C0AB7AB202A744400BAED27 /* BinUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0AB7AA202A744400BAED27 /* BinUtils.swift */; };
+		7C51654120139237004D1F4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51654020139237004D1F4D /* AppDelegate.swift */; };
+		7C51654320139237004D1F4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C51654220139237004D1F4D /* ViewController.swift */; };
+		7C51654620139237004D1F4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C51654420139237004D1F4D /* Main.storyboard */; };
+		7C51654820139237004D1F4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C51654720139237004D1F4D /* Assets.xcassets */; };
+		7C51654B20139237004D1F4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C51654920139237004D1F4D /* LaunchScreen.storyboard */; };
+		7C516553201526BA004D1F4D /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7C516552201526BA004D1F4D /* index.html */; };
+		7C51655520153180004D1F4D /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 7C51655420153180004D1F4D /* main.js */; };
+		7C7DECC2203CBCC4000C1C51 /* roslib.js in Resources */ = {isa = PBXBuildFile; fileRef = 7C45DCE9203A75A2009C73F5 /* roslib.js */; };
+		7CA401E22033CE17009FAA3B /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E12033CE17009FAA3B /* main.css */; };
+		7CA401E42033FA34009FAA3B /* telemetry.js in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E32033FA34009FAA3B /* telemetry.js */; };
+		7CA401E6203471D9009FAA3B /* clever.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7CA401E5203471D8009FAA3B /* clever.svg */; };
+		C25141CAF1A7125F3CE29DDC /* Pods_cleverrc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C38C04523251039FF13DDCD /* Pods_cleverrc.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5C38C04523251039FF13DDCD /* Pods_cleverrc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cleverrc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C0AB7AA202A744400BAED27 /* BinUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinUtils.swift; sourceTree = "<group>"; };
+		7C45DCE9203A75A2009C73F5 /* roslib.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = roslib.js; sourceTree = "<group>"; };
+		7C51653D20139237004D1F4D /* cleverrc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleverrc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C51654020139237004D1F4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7C51654220139237004D1F4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7C51654520139237004D1F4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7C51654720139237004D1F4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7C51654A20139237004D1F4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7C51654C20139237004D1F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C516552201526BA004D1F4D /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		7C51655420153180004D1F4D /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		7CA401E12033CE17009FAA3B /* main.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
+		7CA401E32033FA34009FAA3B /* telemetry.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = telemetry.js; sourceTree = "<group>"; };
+		7CA401E5203471D8009FAA3B /* clever.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = clever.svg; sourceTree = "<group>"; };
+		AAC9195BF3A9BF6942EF4D0B /* Pods-cleverrc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleverrc.release.xcconfig"; path = "Pods/Target Support Files/Pods-cleverrc/Pods-cleverrc.release.xcconfig"; sourceTree = "<group>"; };
+		CB200F4B933204EA97E0E2E4 /* Pods-cleverrc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleverrc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-cleverrc/Pods-cleverrc.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7C51653A20139237004D1F4D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C25141CAF1A7125F3CE29DDC /* Pods_cleverrc.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4FA3968F2242239E15A656D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB200F4B933204EA97E0E2E4 /* Pods-cleverrc.debug.xcconfig */,
+				AAC9195BF3A9BF6942EF4D0B /* Pods-cleverrc.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		66C638F0021EBE07741B26F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C38C04523251039FF13DDCD /* Pods_cleverrc.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C51653420139237004D1F4D = {
+			isa = PBXGroup;
+			children = (
+				66C638F0021EBE07741B26F3 /* Frameworks */,
+				4FA3968F2242239E15A656D2 /* Pods */,
+				7C51653E20139237004D1F4D /* Products */,
+				7C51653F20139237004D1F4D /* cleverrc */,
+			);
+			sourceTree = "<group>";
+		};
+		7C51653E20139237004D1F4D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7C51653D20139237004D1F4D /* cleverrc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7C51653F20139237004D1F4D /* cleverrc */ = {
+			isa = PBXGroup;
+			children = (
+				7C45DCE9203A75A2009C73F5 /* roslib.js */,
+				7C51654020139237004D1F4D /* AppDelegate.swift */,
+				7C51654720139237004D1F4D /* Assets.xcassets */,
+				7C0AB7AA202A744400BAED27 /* BinUtils.swift */,
+				7C51654C20139237004D1F4D /* Info.plist */,
+				7C51654920139237004D1F4D /* LaunchScreen.storyboard */,
+				7C51654420139237004D1F4D /* Main.storyboard */,
+				7C51654220139237004D1F4D /* ViewController.swift */,
+				7CA401E5203471D8009FAA3B /* clever.svg */,
+				7C516552201526BA004D1F4D /* index.html */,
+				7CA401E12033CE17009FAA3B /* main.css */,
+				7C51655420153180004D1F4D /* main.js */,
+				7CA401E32033FA34009FAA3B /* telemetry.js */,
+			);
+			path = cleverrc;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7C51653C20139237004D1F4D /* cleverrc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C51654F20139237004D1F4D /* Build configuration list for PBXNativeTarget "cleverrc" */;
+			buildPhases = (
+				9F096121C4A02BCE9D4FD1B9 /* [CP] Check Pods Manifest.lock */,
+				7C51653920139237004D1F4D /* Sources */,
+				7C51653A20139237004D1F4D /* Frameworks */,
+				7C51653B20139237004D1F4D /* Resources */,
+				A37DBBAD5E44E632F8A8A204 /* [CP] Embed Pods Frameworks */,
+				9BAB41D26FC0095C7C86B9DE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cleverrc;
+			productName = cleverrc;
+			productReference = 7C51653D20139237004D1F4D /* cleverrc.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7C51653520139237004D1F4D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Copter Express";
+				TargetAttributes = {
+					7C51653C20139237004D1F4D = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7C51653820139237004D1F4D /* Build configuration list for PBXProject "cleverrc" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7C51653420139237004D1F4D;
+			productRefGroup = 7C51653E20139237004D1F4D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7C51653C20139237004D1F4D /* cleverrc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C51653B20139237004D1F4D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C51654B20139237004D1F4D /* LaunchScreen.storyboard in Resources */,
+				7CA401E6203471D9009FAA3B /* clever.svg in Resources */,
+				7CA401E42033FA34009FAA3B /* telemetry.js in Resources */,
+				7C7DECC2203CBCC4000C1C51 /* roslib.js in Resources */,
+				7C516553201526BA004D1F4D /* index.html in Resources */,
+				7C51654820139237004D1F4D /* Assets.xcassets in Resources */,
+				7CA401E22033CE17009FAA3B /* main.css in Resources */,
+				7C51654620139237004D1F4D /* Main.storyboard in Resources */,
+				7C51655520153180004D1F4D /* main.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9BAB41D26FC0095C7C86B9DE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cleverrc/Pods-cleverrc-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F096121C4A02BCE9D4FD1B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cleverrc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A37DBBAD5E44E632F8A8A204 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-cleverrc/Pods-cleverrc-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSocket/SwiftSocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-cleverrc/Pods-cleverrc-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7C51653920139237004D1F4D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C51654320139237004D1F4D /* ViewController.swift in Sources */,
+				7C51654120139237004D1F4D /* AppDelegate.swift in Sources */,
+				7C0AB7AB202A744400BAED27 /* BinUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7C51654420139237004D1F4D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C51654520139237004D1F4D /* Base */,
+			);
+			name = Main.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		7C51654920139237004D1F4D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C51654A20139237004D1F4D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7C51654D20139237004D1F4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7C51654E20139237004D1F4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7C51655020139237004D1F4D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB200F4B933204EA97E0E2E4 /* Pods-cleverrc.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QY6KJ2672;
+				INFOPLIST_FILE = cleverrc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = coex.cleverrc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7C51655120139237004D1F4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAC9195BF3A9BF6942EF4D0B /* Pods-cleverrc.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7QY6KJ2672;
+				INFOPLIST_FILE = cleverrc/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = coex.cleverrc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7C51653820139237004D1F4D /* Build configuration list for PBXProject "cleverrc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C51654D20139237004D1F4D /* Debug */,
+				7C51654E20139237004D1F4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7C51654F20139237004D1F4D /* Build configuration list for PBXNativeTarget "cleverrc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C51655020139237004D1F4D /* Debug */,
+				7C51655120139237004D1F4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7C51653520139237004D1F4D /* Project object */;
+}

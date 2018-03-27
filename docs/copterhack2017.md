@@ -1,6 +1,12 @@
 Copter Hack 2017
 ===
 
+28–30 июля 2017 "Коптер Экпресс" провел хакатон "Copter Hack 2017", на котором необходимо было запрограммировать "Клевер" на автономный танец-полет под случайную музыку.
+
+Победителем стала команда "Ящеры".
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xgXheg3TTs4?rel=0" frameborder="0" allowfullscreen></iframe>
+
 Модули
 ---
 

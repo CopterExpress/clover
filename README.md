@@ -1,51 +1,76 @@
-Клевер
-======
+# CLEVER
 
-<img src="img/clever.jpg" align="right" width="300px" alt="Клевер">
+<img src="docs/assets/clever3.png" align="right" width="300px" alt="CLEVER drone">
 
-«Клевер» — это учебный конструктор программируемого квадрокоптера, состоящего из популярных открытых компонентов, а также набор необходимой документации и библиотек для работы с ним.
+CLEVER is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. The kit includes Pixhawk/Pixracer autopilot running PX4 firmware, Raspberry Pi 3 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
-Набор включает в себя полетный контроллер PixHawk с полетным стеком PX4 (APM), Raspberry Pi в качестве управлящего бортового компьютера, модуль камеры для реализации полетов с использованием компьютерного зрения, а также набор различных датчиков и другой периферии.
+Copter Express has implemented a large number of different autonomous drone projects using exactly the same platform: [automated pizza delivery](https://www.youtube.com/watch?v=hmkAoZOtF58) in Samara and Kazan, coffee delivery in Skolkovo Innovation Center, [autonomous quadcopter with charging station](https://www.youtube.com/watch?v=RjX6nUqw1mI) for site monitoring and security, winning drones on [Robokross-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU) and [Robokross-2017](https://youtu.be/AQnd2CRczbQ) competitions and many others.
 
-На базе точно такой же платформы были созданы многие "большие" проекты компании Copter Express, например, дроны для [пиар-акций по автономной доставке пиццы](https://www.youtube.com/watch?v=hmkAoZOtF58) (Самара, Казань); дрон-доставщик кофе в Сколково, мониторинговый дрон с зарядной станцией, дроны-победители на полевых испытаниях "[Робокросс-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU)", "[Робокросс-2017](https://youtu.be/AQnd2CRczbQ)" и другие.
+**The main documentation in Russian is available on our Gitbook:**
+**https://copterexpress.gitbooks.io/clever/content/**
 
-Для того, чтобы научиться программировать автономный дрон "Клевер", воспользуйтесь нижеприведенной документацией.
+Use it to learn how to assemble, configure, pilot and program autonomous CLEVER drone.
 
-Работа с полетным контроллером
-------------------------------
+## Preconfigured RPi 3 image
 
-* [Полетные режимы](docs/modes.md)
+Preconfigured image for Raspberry Pi 3 with installed and configured software, ready to fly, is available [here](https://copterexpress.gitbooks.io/clever/content/docs/microsd_images.html).
 
-Настройка микрокомпьютера Raspberry Pi
---------------------------------------
+Image includes:
 
-Raspberry Pi — это один из самых известных одноплатных микрокомпьютеров, использующийся в сотнях проектов по разработке и прототипированию различных автоматизированных систем. Ввиду своей распространенности, простоте настройки и большого ряда доступной периферии этот компьютер отлично подходит для исследований и обучения в области программирования автономных дронов.
+* Raspbian Stretch
+* ROS Kinetic
+* Configured networking
+* OpenCV
+* mavros
+* CLEVER software bundle for autonomous drone control
 
-* [Общая информация о Raspberry Pi](docs/raspberry.md)
-* [Доступ по SSH к Raspberry Pi](docs/ssh.md)
-* [Настройка Wi-Fi](docs/wifi.md)
+API description in Russian for autonomous flights is available [here](https://copterexpress.gitbooks.io/clever/content/docs/simple_offboard.html).
 
-Сборка
-------
+## Manual installation
 
-* Подключение PixHawk к Raspberry Pi
-* Подключение камеры к Raspberry Pi
+Install ROS Kinetic according to the [documentation](http://wiki.ros.org/kinetic/Installation).
 
-Программирование квадрокоптера
-------------------------------
+Clone repo to directory `/home/pi/catkin_ws/src/clever`:
 
-Для управления автономным дроном на полетном стеке PX4 используется протокол MavLink.
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/CopterExpress/clever.git clever
+```
 
-* [Работа с симулятором (SITL)](docs/sitl.md)
-* [Настройка инструментов для программного управления PX4](docs/setup.md)
-* [Полное описание протокола MAVLink](https://pixhawk.ethz.ch/mavlink/)
-* [Информация о фреймворке ROS](https://github.com/CopterExpress/clever/blob/master/docs/ros.md)
-* [Пакет MAVROS](docs/mavros.md)
-* Использование модуля камеры
-* Использование ультразвукового дальномера (сонара)
-* Использование 4G-модема
+Build ROS packages:
 
-Хакатон Copter Hack 2017
-------------------------
+```bash
+cd ~/catkin_ws
+catkin_make -j1
+```
 
-* [Информация](docs/copterhack2017.md)
+Enable systemd service `roscore` (if not enabled):
+
+```bash
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl start roscore
+```
+
+Enable systemd service `clever`:
+
+```bash
+sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
+sudo systemctl start clever
+```
+
+### Dependencies
+
+[ROS Kinetic](http://wiki.ros.org/kinetic).
+
+Necessary ROS packages:
+
+* `opencv3`
+* `mavros`
+* `rosbridge_suite`
+* `web_video_server`
+* `cv_camera`
+* `nodelet`
+* `dynamic_reconfigure`
+* `bondcpp`, branch `master`
+* `roslint`
+* `rosserial`

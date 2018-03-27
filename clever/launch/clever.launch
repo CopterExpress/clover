@@ -1,0 +1,62 @@
+<launch>
+    <arg name="fcu_conn" default="usb"/>
+    <arg name="fcu_ip" default="127.0.0.1"/>
+    <arg name="gcs_bridge" default="tcp"/>
+    <arg name="viz" default="true"/>
+    <arg name="web_server" default="false"/>
+    <arg name="web_video_server" default="true"/>
+    <arg name="rosbridge" default="true"/>
+    <arg name="main_camera" default="true"/>
+    <arg name="aruco" default="false"/>
+    <arg name="rc" value="true"/>
+    <arg name="fpv_camera" default="false"/>
+    <arg name="fpv_camera_device" default="/dev/v4l/by-id/usb-HD_Camera_Manufacturer_USB_2.0_Camera-video-index0"/>
+    <arg name="arduino" default="false"/>
+
+    <!-- mavros -->
+    <include file="$(find clever)/launch/mavros.launch">
+        <arg name="fcu_conn" value="$(arg fcu_conn)"/>
+        <arg name="fcu_ip" value="$(arg fcu_ip)"/>
+        <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
+        <arg name="viz" value="$(arg viz)"/>
+    </include>
+
+    <!-- web server -->
+    <include file="$(find clever)/launch/web_server.launch" if="$(arg web_server)"/>
+
+    <!-- web video server -->
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>
+
+    <!-- aruco vpe -->
+    <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
+
+    <!-- main nodelet manager -->
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="local_origin_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 local_origin local_origin_upside_down"/>
+
+    <!-- fcu_horiz frame -->
+    <node pkg="nodelet" type="nodelet" name="fcu_horiz" args="standalone clever/fcu_horiz" output="screen" clear_params="true"/>
+
+    <!-- simplified offboard control -->
+    <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
+
+    <!-- main camera -->
+    <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
+
+    <!-- rosbridge -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(eval rosbridge or rc)"/>
+
+    <!-- rc backend -->
+    <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
+
+    <!-- FPV video streaming -->
+    <include file="$(find clever)/launch/fpv_camera.launch" if="$(arg fpv_camera)">
+        <arg name="device" value="$(arg fpv_camera_device)"/>
+    </include>
+
+    <!-- Arduino bridge -->
+    <include file="$(find clever)/launch/arduino.launch" if="$(arg arduino)"/>
+</launch>

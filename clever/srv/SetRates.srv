@@ -1,0 +1,8 @@
+float32 pitch_rate
+float32 roll_rate
+float32 yaw_rate
+float32 thrust
+bool auto_arm
+---
+bool success
+string message
