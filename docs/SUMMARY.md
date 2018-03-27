@@ -2,6 +2,8 @@
 
 * [Введение](README.md)
 * [Сборка](assemble.md)
+  * [Состав конструктора](kit.md)
+  * [Установка моторов] (mount_motors.md)
 * [Первоначальная настройка](setup.md)
 * [Полетные режимы](modes.md)
 * [Raspberry Pi](raspberry.md)
