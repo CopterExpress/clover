@@ -12,7 +12,11 @@
   * [Сопряжение приемника и пульта](binding.md)
   * [Проверка направления вращения моторов](test_motors.md)
   * [Монтаж радиоприемника](mount_receiver.md)
-  * 
+  * [Монтаж полетного контроллера](mount_pixhawk.md)
+  * [Сборка регуляторов](mount_esc.md)
+  * [Установка защиты](mount_frame.md)
+  * [Монтаж отсека АКБ](mount_battcase.md)
+  * []()
 * [Первоначальная настройка](setup.md)
 * [Полетные режимы](modes.md)
 * [Raspberry Pi](raspberry.md)
