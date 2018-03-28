@@ -11,6 +11,8 @@
   * [Пайка силовой цепи](soldering_power.md)
   * [Сопряжение приемника и пульта](binding.md)
   * [Проверка направления вращения моторов](test_motors.md)
+  * [Монтаж радиоприемника](mount_receiver.md)
+  * 
 * [Первоначальная настройка](setup.md)
 * [Полетные режимы](modes.md)
 * [Raspberry Pi](raspberry.md)
