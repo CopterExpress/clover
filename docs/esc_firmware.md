@@ -10,7 +10,7 @@
 
 Для прошивки самых разнообразных ESC регуляторов существует программа [BLHeliSuite](https://github.com/4712/BLHeliSuite) \(для Windows\).
 
-Для запуска программы \(BLHeliSuite.exe\) необходимо распаковать архивы BLHeliAtmelHEX.zip и BLHeliSilabsHEX.zip в корневой папке.
+Для запуска программы \(BLHeliSuite.exe\) необходимо распаковать архивы BLHeliAtmelHEX.zip и BLHeliSilabsHEX.zip в папку с программой.
 
 #### Программатор для прошивки регуляторов.
 
@@ -18,28 +18,37 @@
 
 Создание программатора на примере Arduino Mega.
 
-1. Запустить программу BLHeliSuite и выбрать вкладку Make interfaces.  
-   ![](assets/BLHeliSuiteSiLabs ESC Setup_171207_1.png)
+1. Запустите программу BLHeliSuite и выберите вкладку Make interfaces.  
 
-2. Нажать Arduino 4way-interface в разделе Make Arduino Interface Boards и выбрать файл прошивки  
-   ![](assets/BLHeliSuiteMake interfaces_171206_2.png)![](assets/BLHeliSuite interface options.png)![](assets/BLHeliSuite arduino select firmware.png)
+   ![](assets/BLHeliSuite_SiLabs_ESC_Setup_2.png)
 
-3. После прошивки Arduino вернуться на вкладку Silabs ESC Setup и подключиться к Arduino, предварительно выбрав интерфейс программатора 4way-if и COM порт Arduino.  
-   ![](assets/BLHeliSuite 4way-if select.png)![](assets/BLHeliSuite ESC setup Connect.png)
+2. Подключите Arduino к компьютеру, при необходимости посмотрите в диспетчере устройств номер COM порта, к которому подключена плата.
+
+3. Нажмите Arduino 4way-interface в разделе Make Arduino Interface Boards и выберите файл прошивки. После выбора файла начнётся прошивка контроллера.  
+
+   ![](assets/BLHeliSuite_Make_Interfaces.png)
+   ![](assets/BLHeliSuite_Interface_Options.png)
+   ![](assets/BLHeliSuite_Arduino_Select_Firmware.png)
+
+4. После прошивки Arduino вернитесь на вкладку Silabs ESC Setup и подключитесь к Arduino, предварительно выбрав интерфейс программатора 4way-if и COM порт Arduino.
+  
+   ![](assets/BLHeliSuite_4way-if_Select.png)
+   ![](assets/BLHeliSuite_ESC_Setup_Connect.png)
 
 #### Подключение ESC регуляторов к Arduino.
 
-Для прошивки или изменения настроек регуляторов необходимо подключить сигнальные порты ESC регуляторов к портам Arduino, предварительно посмотрев в мануале, какие порты используются для прошивки. Так же нужно не забыть соединить GND Arduino с землёй одного из регуляторов. Регуляторы должны быть подключены к питанию, в случае если к регуляторам подключены моторы, **на них не должно быть винтов**.
+Для прошивки или изменения настроек регуляторов необходимо подключить сигнальные порты (обычно белого цвета) ESC регуляторов к портам Arduino, предварительно посмотрев в мануале (см. рисунок ниже), какие порты используются для соединения с регуляторами. Так же нужно соединить GND Arduino с землёй одного из регуляторов (обычно черного цвета). Регуляторы должны быть подключены к питанию, а если к регуляторам подключены моторы, **на них не должно быть винтов**.
 
-![](assets/BLHeliSuite Arduino pinout for 4way-if.png)
+![](assets/BLHeliSuite_Arduino_Pinout_For_4way-if.png)
 
-В случае с Arduino Mega, регуляторы подключаются к портам D43-D49 и D51.
+В случае с Arduino Mega, сигнальные порты регуляторов подключаются к портам D43-D49 и D51.
 
 #### Изменение настроек ESC регуляторов.
 
 Для загрузки информации о версии прошивки и настроек регуляторов нужно нажать на кнопку Check.
 
-![](assets/BLHeliSuite ESC Setup Check.png)![](assets/BLHeliSuiteSiLabs ESC Setup_171206_1.png)
+![](assets/BLHeliSuite_ESC_Setup_Check.png)
+![](assets/BLHeliSuite_SiLabs_ESC_Setup_1.png)
 
 Основные параметры, которые нас интересуют, это:
 
@@ -51,13 +60,19 @@
 
 Самый левый мотор в списке моторов \(Multiple ESC\) считается главным \(мастер\). Нажимая на номера моторов, можно включать/выключать возможность записи в них настроек. После изменения необходимых параметров можно записать в нужные моторы настройки, нажав на кнопку Write Setup.
 
-![](assets/BLHeliSuite ESC Setup Write Setup.png)
+![](assets/BLHeliSuite_ESC_Setup_Write_Setup.png)
 
 Для отображения настроек со всех регуляторов одновременно можно воспользоваться вкладкой ESC Overview.
 
 #### Прошивка ESC регуляторов.
 
-Файлы с прошивками регуляторов находятся [здесь](https://github.com/cleanflight/blheli-multishot).
+Файлы с прошивками регуляторов находятся [здесь](https://github.com/cleanflight/blheli-multishot/tree/master/BLHeli_S%20SiLabs/Hex%20Files).
 
-Для перепрошивки регулятора отдельно, нужно сделать все остальные неактивными. Для перепрошивки нужно нажать на кнопку Flash BLHeli.
+Для перепрошивки регуляторов нужно нажать на кнопку Flash BLHeli и выбрать файл прошивки с типом контроллера, название которого указано в рамке названия прошивки и находится сверху во вкладке Silabs ESC Setup (в случае контроллера, который используется в конструкторе Клевер 2, это A-H-70).  
+
+Для перепрошивки отдельного регулятора нужно сделать все остальные неактивными.
+
+#### Видеоинструкция по перепрошивке ESC регуляторов
+
+Для лучшего понимания того, что описано в статье, рекомендуем посмотреть наглядное руководство по подключению электроники и прошивке регуляторов на английском языке на [youtube](https://www.youtube.com/watch?v=i6lhMcQLRSU&feature=youtu.be). 
 
