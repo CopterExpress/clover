@@ -30,6 +30,7 @@
             <param name="local_position/tf/frame_id" value="local_origin"/>
             <param name="local_position/tf/child_frame_id" value="fcu"/>
             <param name="global_position/tf/send" value="false"/>
+            <param name="imu/frame_id" value="fcu"/>
             <rosparam param="plugin_blacklist">
                 - safety_area
                 - image_pub
