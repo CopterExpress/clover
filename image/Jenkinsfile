@@ -1,22 +1,26 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'IMAGE_NAME', defaultValue: 'clever-auto.img', description: 'Output image file name')
+    string(name: 'IMAGE_VERSION', defaultValue: '0.4', description: 'Image version')
+    string(name: 'RPI_DONWLOAD_URL', defaultValue: 'https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip', description: '')
+    // TODO: Remove RPI_ZIP_NAME, RPI_IMAGE_NAME (calculate from RPI_DOWNLOAD_URL)
+    string(name: 'RPI_ZIP_NAME', defaultValue: '2017-11-29-raspbian-stretch-lite.zip', description: '')
+    string(name: 'RPI_IMAGE_NAME', defaultValue: '2017-11-29-raspbian-stretch-lite.img', description: '')
+    // TODO: Add mirrorparameters
+  }
   stages {
     stage('Get image') {
-      environment {
-        RPI_DONWLOAD_URL = 'https://downloads.raspberrypi.org/raspbian_lite_latest'
-        RPI_ZIP_NAME = 'raspbian_lite_latest.zip'
-        RPI_IMAGE_NAME = '2017-11-29-raspbian-stretch-lite.img'
-      }
       steps {
         sh "$WORKSPACE/image/image-config.sh get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME"
       }
     }
     stage('Resize FS') {
       environment {
-        SIZE = '7G'
+        SIZE = '8G'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS'
+        sh '$WORKSPACE/image/image-config.sh resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $ROOT_PARTITION'
       }
     }
     stage('Configure interfaces') {
@@ -24,7 +28,16 @@ pipeline {
         EXECUTE_FILE = 'iface.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $WORKSPACE/image/$EXECUTE_FILE'
+      }
+    }
+    stage('Initialize image') {
+      environment {
+        EXECUTE_FILE = 'init.sh'
+      }
+      // TODO: Transfer apps.sh initialisation code here
+      steps {
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $WORKSPACE/image/$EXECUTE_FILE $IMAGE_VERSION $RPI_ZIP_NAME'
       }
     }
     stage('Install Apps') {
@@ -32,7 +45,7 @@ pipeline {
         EXECUTE_FILE = 'apps.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
     stage('Install ROS') {
@@ -40,9 +53,10 @@ pipeline {
         EXECUTE_FILE = 'ros.sh'
       }
       steps {
-        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $WORKSPACE/image/$EXECUTE_FILE'
+        sh '$WORKSPACE/image/image-config.sh execute $BUILD_DIRECTORY/$IMAGE_NAME $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $WORKSPACE/image/$EXECUTE_FILE'
       }
     }
+    // TODO: Add finalising step, transfer mirror removal from ros.sh
     stage('Publish image') {
       environment {
         CONFIG_FILE = 'coex-ci.conf'
@@ -53,9 +67,10 @@ pipeline {
     }
   }
   environment {
-    BUILD_DIRECTORY = '/home/pi/clever_builder/temp'
-    PREFIX_PATH = '/mnt'
-    DEV_BOOT = '/dev/disk/by-uuid/CDD4-B453'
-    DEV_ROOTFS = '/dev/disk/by-uuid/72bfc10d-73ec-4d9e-a54a-1cc507ee7ed2'
+    BUILD_DIRECTORY = '/mnt/hdd_builder/workspace'
+    PREFIX_PATH = '/mnt/hdd_builder/image'
+    // Partitions numbers
+    BOOT_PARTITION=1
+    ROOT_PARTITION=2
   }
 }

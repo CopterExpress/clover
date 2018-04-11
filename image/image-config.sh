@@ -1,51 +1,40 @@
-#!/bin/sh
+#!/bin/bash
 
+# Exit immidiately on non-zero result
 set -e
 
 #
 # Script for image configure
 # @smirart Smirnov Artem
+# @Andrey Dvornikov
 #
-
-
-# PREFIX_PATH=/mnt
-# IMAGE=/home/pi/2017-11-29-raspbian-stretch-lite.img
-# 
-# # blkid
-# UUID_BOOT=CDD4-B453
-# UUID_ROOTFS=72bfc10d-73ec-4d9e-a54a-1cc507ee7ed2
-# 
-# # /dev/disk/by-label/boot
-# DEV_BOOT=/dev/disk/by-uuid/$UUID_BOOT
-# # /dev/disk/by-label$2
-# DEV_ROOTFS=/dev/disk/by-uuid/$UUID_ROOTFS
-
 
 get_image() {
 
 # STATIC
 # TEMPLATE: get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
 
-  echo 'Download RaspbianOS'
-  echo "$(date) | 1. Download raspbian lite"
+  echo 'Download original Linux distribution'
+  echo "$(date) | 1. Downloading Linux distribution"
   if [ ! -e "$1/$2" ];
   then wget -nv -O $1/$2 $3
   fi
   echo "$(date) | Downloading complete"
   echo 'Unzip image'
-  echo "$(date) | 2. Unzip raspbian lite"
-  if [ ! -e "$1/$4" ];
-  then unzip -uo $1/$2 -d $1
-  fi
-  echo "$(date) | Unziping complete"
-  echo 'Duplicate image'
-  cp -f $1/$4 $1/$5
+  echo "$(date) | 2. Unzipping Linux distribution image"
+  #if [ ! -e "$1/$4" ];
+  #then unzip -uo $1/$2 -d $1
+  unzip -p $1/$2 $4 > $1/$5
+  #fi
+  #echo "$(date) | Unziping complete"
+  #echo 'Duplicate image'
+  #cp -f $1/$4 $1/$5
 }
 
 resize_fs() {
 
   # STATIC
-  # TEMPLATE: resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
+  # TEMPLATE: resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $ROOT_PARTITION
 
   set +e
 
@@ -71,10 +60,16 @@ resize_fs() {
     && echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
     && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
     && sleep 0.5 \
+    # There is a risk that sfdisk will ask for a disk remount to update partition table
+    # TODO: Check sfdisk exit code
+    && losetup -d $DEV_IMAGE \
+    && sleep 0.5 \
+    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && sleep 0.5 \
     && echo "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
-    && e2fsck -fvy $4 \
+    && e2fsck -fvy "${DEV_IMAGE}p$ROOT_PARTITION" \
     && echo "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
-    && resize2fs $4 \
+    && resize2fs "${DEV_IMAGE}p$ROOT_PARTITION" \
     && echo "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
     && losetup -d $DEV_IMAGE
 
@@ -96,6 +91,7 @@ publish_image() {
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
     && echo "Make downloads in GH-release" \
     && $3/image/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
+#    echo "Fake publish"
 }
 
 publish_image2() {
@@ -138,7 +134,7 @@ burn_and_reboot() {
 mount_system() {
 
   # STATIC
-  # TEMPLATE: mount_system $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: mount_system $IMAGE $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION
 
   # https://www.stableit.ru/2011/05/losetup.html
   # -f     : losetup выбирает незанятое имя устройства, например /dev/loop2
@@ -151,8 +147,10 @@ mount_system() {
   sleep 0.5
 
   echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  #mount $3 $2
+  #mount $4 $2/boot
+  mount "{$DEV_IMAGE}p$ROOT_PARTITION" $2
+  mount "{$DEV_IMAGE}p$BOOT_PARTITION" $2/boot
 
   echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   # https://github.com/debian-pi/raspbian-ua-netinst/issues/314
@@ -205,15 +203,15 @@ mount_system() {
 mount_system2() {
 
   # STATIC
-  # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
+  # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $EXECUTE_FILE ...
 
   echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
   echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  mount "${DEV_IMAGE}p$ROOT_PARTITION" $2
+  mount "${DEV_IMAGE}p$BOOT_PARTITION" $2/boot
 
   echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   echo "Mounting /proc in chroot... "
@@ -242,7 +240,17 @@ mount_system2() {
   cp -L /etc/resolv.conf $2/etc/resolv.conf
 
   echo "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  chroot $2 /bin/sh -c "$5"
+  script_name=$(basename $5)
+  script_path_root="$2/root/$script_name"
+  # Copy script into chroot fs
+  # TODO: Find more suitable location for temporary script storage
+  cp "$5" "$script_path_root"
+  # It's important to save arguments (direct ${@:6} causes problems)
+  script_args="${@:6}"
+  # Run script in chroot with additional arguments
+  chroot $2 /bin/sh -c "/root/$script_name $script_args"
+  # Removing script from chroot fs
+  rm "$script_path_root"
 }
 
 umount_system() {
@@ -262,7 +270,32 @@ umount_system2() {
   # TEMPLATE: umount_system $PREFIX_PATH
   
   echo "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
-  umount -fR $1
+  # There is a risk that umount will fail
+  set +e
+  # Successfull unmount flag (false at thismoment)
+  umount_ok=false
+  # Repeat 5 times
+  for i in {1..5}
+  do
+    # Unmount chroot rootfs and boot partition
+    umount -fR $1
+    # If no problems detected
+    if [[ $? == 0 ]]
+    then
+	echo "\033[0;31m\033[1m$(date) | Successfull unmount\033[0m\033[0m"
+	# Set flag
+	umount_ok=true
+	# Exit loop
+	break
+    fi
+    # Unmount has failed
+    echo "\033[0;31m\033[1m$(date) | Unmount failed\033[0m\033[0m"
+    # Wait for some time
+    sleep 2
+  done
+  set -e
+  # Jenkins job will fail if this condition is not true
+  [[ "$umount_ok" == true ]]
   echo "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
   losetup -D
 }
@@ -292,7 +325,7 @@ EOF
 configure_system() {
 
   # STATIC
-  # TEMPLATE: configure_system $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: configure_system $IMAGE $PREFIX_PATH $ROOT_PARTITON $BOOT_PARTITION
 
   local BLACKLIST=/etc/modprobe.d/raspi-blacklist.conf
   local CONFIG=/boot/config.txt
@@ -317,8 +350,8 @@ configure_system() {
   sleep 0.5
 
   echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  mount ${DEV_IMAGE}p$ROOT_PARTITION $2
+  mount ${DEV_IMAGE}p$BOOT_PARTITION $2/boot
 
   # 2. Изменить необходимые настройки
 
@@ -426,9 +459,8 @@ enter() {
 execute() {
 
   # STATIC
-  # TEMPLATE: execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
-
-  mount_system2 $1 $2 $3 $4 "$(cat $5)"
+  # TEMPLATE: execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE ...
+  mount_system2 $1 $2 $3 $4 "$5" ${@:6}
   umount_system2 $2
 }
 
@@ -455,7 +487,6 @@ then echo "" \
   && exit 1
 fi
 
-
 echo "\$#: $#"
 echo "\$1: $1"
 echo "\$2: $2"
@@ -472,13 +503,13 @@ echo "\$7: $7"
 # configure_system
 
 case "$1" in
-  enter) # enter $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  enter) # enter $IMAGE $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION
     enter $2 $3 $4 $5;;
 
   get_image) # get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
     get_image $2 $3 $4 $5 $6;;
 
-  resize_fs) # resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
+  resize_fs) # resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $ROOT_PARTITION
     resize_fs $2 $3 $4 $5;;
 
   publish_image) # publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
@@ -487,8 +518,8 @@ case "$1" in
   publish_image2) # publish_image2 $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
     publish_image2 $2 $3 $4 $5 $6 $7;;
 
-  execute) # execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
-    execute $2 $3 $4 $5 $6;;
+  execute) # execute $IMAGE $PREFIX_PATH $ROOT_PARTITION $BOOT_PARTITION $EXECUTE_FILE ...
+    execute $2 $3 $4 $5 $6 ${@:7};;
 
   *)
     echo "Enter one of: enter, get_image, resize_fs, publish_image, execute";;
