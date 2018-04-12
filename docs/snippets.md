@@ -86,9 +86,9 @@ start_stamp = rospy.get_rostime()
 r = rospy.Rate(10)
 
 while not rospy.is_shutdown():
-    t = (rospy.get_rostime() - start_stamp).to_sec() * SPEED
-    x = start.x + math.sin(t) * RADIUS
-    y = start.y + math.cos(t) * RADIUS
+    angle = (rospy.get_rostime() - start_stamp).to_sec() * SPEED
+    x = start.x + math.sin(angle) * RADIUS
+    y = start.y + math.cos(angle) * RADIUS
     set_position(x=x, y=y, z=start.z)
 
     r.sleep()
