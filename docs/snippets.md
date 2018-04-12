@@ -67,6 +67,28 @@ angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.ro
 
 ---
 
+Полет по круговой траектории:
+
+```python
+RADIUS = 0.6  # m
+SPEED = 0.3  # rad / s
+
+start = get_telemetry()
+start_stamp = rospy.get_rostime()
+
+r = rospy.Rate(10)
+
+while not rospy.is_shutdown():
+    t = (rospy.get_rostime() - start_stamp).to_sec() * SPEED
+    x = start.x + math.sin(t) * RADIUS
+    y = start.y + math.cos(t) * RADIUS
+    set_position(x=x, y=y, z=start.z)
+
+    r.sleep()
+```
+
+---
+
 Запуск полётной программы с пульта:
 
 ```python
