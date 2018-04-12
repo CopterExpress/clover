@@ -57,6 +57,16 @@ while True:
 
 ---
 
+Рассчет общего угла коптера к горизонту:
+
+```python
+telem = get_telemetry()
+
+angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
+```
+
+---
+
 Запуск полётной программы с пульта:
 
 ```python
