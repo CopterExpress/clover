@@ -96,7 +96,7 @@ while not rospy.is_shutdown():
 
 ---
 
-Реакция на переключение режима на пульте радиоуправления (к примеру, может быть использовано для запуска автономного полета, см. [пример](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
+Реакция на переключение режима на пульте радиоуправления (может быть использовано для запуска автономного полета, см. [пример](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
 
 ```python
 from mavros_msgs.msg import RCIn
