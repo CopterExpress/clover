@@ -4,6 +4,13 @@
 Python
 ---
 
+> **Note** При использовании кириллических символов в кодировке UTF-8 необходимо добавить в начало программы указание кодировки:
+> ```python
+> # -*- coding: utf-8 -*-
+> ```
+
+---
+
 Функция определения расстяния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
 ```python
@@ -89,142 +96,30 @@ while not rospy.is_shutdown():
 
 ---
 
-Запуск полётной программы с пульта:
+Реакция на переключение режима на пульте радиоуправления (к примеру, может быть использовано для запуска автономного полета, см. [пример](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
 
 ```python
-
-#!/usr/bin/python
-import rospy
-import thread
-import sys
-import math
 from mavros_msgs.msg import RCIn
-from clever import srv
-from time import sleep
-from mavros_msgs.srv import SetMode
-from mavros_msgs.srv import CommandBool
 
-states = ('start','stop','unknown')
-state = states[2]
-
-rospy.init_node('Clever3_RC_Script')
-
-navigate = rospy.ServiceProxy('/navigate', srv.Navigate)
-set_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
-get_telemetry = rospy.ServiceProxy('/get_telemetry', srv.GetTelemetry)
-arming = rospy.ServiceProxy('/mavros/cmd/arming', CommandBool)
-
-def get_distance(x1, y1, z1, x2, y2, z2):
-	return math.sqrt((x1-x2)**2 + (y1-y2)**2 +(z1-z2)**2)
-
-def takeoff (zp, sp = 1, tolerance = 0.2):
-	start = get_telemetry()
-	print navigate(z=zp, speed=sp, frame_id='fcu_horiz', auto_arm=True)
-	while True:
-		telem = get_telemetry()
-		delta = abs(abs(telem.z - start.z)-zp)
-		if delta < tolerance:
-			break
-		rospy.sleep(0.2)
-
-def land(sp = 1, land_height = -1, tolerance = 0.25):
-	print 'land!'
-	z0 = get_telemetry(frame_id='local_origin').z
-	print z0	
-	h = get_telemetry(frame_id='aruco_map').z
-	print h
-	print navigate(z=-h+land_height, speed=sp, frame_id='fcu_horiz')
-	while True:
-		z = get_telemetry(frame_id='local_origin').z
-		delta = z0-z-h
-		print delta
-		if (abs(delta) < tolerance):
-			print get_telemetry(frame_id='local_origin')			
-			arming(False)
-			break
-		rospy.sleep(0.2)			
-
-def flight_to_point(xp, yp, zp, sp = 1, breakable = True, tolerance = 0.2, constant_yaw = True):
-	frame_id = 'aruco_map'
-	if constant_yaw:
-		current_yaw = get_telemetry(frame_id = 'aruco_map').yaw
-		print navigate(frame_id=frame_id, x=xp, y=yp, z=zp, speed=sp, yaw = current_yaw)
-	else:
-		print navigate(frame_id=frame_id, x=xp, y=yp, z=zp, speed=sp)
-	while True:
-		if breakable and state == 'stop':
-			return
-		telem = get_telemetry(frame_id=frame_id)
-		if get_distance(xp, yp, zp, telem.x, telem.y, telem.z) < tolerance:
-			break
-		rospy.sleep(0.2)
-
-# copter parameters
-
-speed = 1
-z = 1
-
-# rectangle parameters
-
-width = 1
-height = 1
-x0 = 0.1
-y0 = 0.6
-
-# flight program
-
-def flight_program (param):
-	while True:
-
-		global state
-		print 'waiting for stop!'
-		while state != 'stop':
-		    rospy.sleep(0.1)
-		print 'waiting for start...'
-		while state == 'stop':
-		    rospy.sleep(0.1)
-		print 'start!'
-
-		takeoff(z) #takeoff
-		flight_to_point(x0, y0, z, speed)
-		while True:
-			flight_to_point(x0, y0 + height, z, speed)
-			flight_to_point(x0 + width, y0 + height, z, speed)
-			flight_to_point(x0 + width, y0, z, speed)
-			flight_to_point(x0, y0, z, speed, breakable = False)
-			if state == 'stop':
-				break
-		land()
-
-# Вызывается при обновлении данных из топика
-def callback(data):
-	global state
-	# Обрабатываем данные с 6 канала пульта
+# Вызывается при получении новых данных с пульта
+def rc_callback(data):
+	# Произвольная реакция на переключение тумблера на пульте
 	if data.channels[5] < 1100:
-		state = states[1]
+		# ...
+		pass
 	elif data.channels[5] > 1900:
-		state = states[0]
+		# ...
+		pass
 	else:
-		state = states[2]	
+		# ...
+		pass
 
-def listener():
+# Создаем подписчик на топик с данными с пульта
+rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # name are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
-
-	rospy.Subscriber('mavros/rc/in', RCIn, callback)
-
-    # spin() simply keeps python from exiting until this node is stopped
-	
-	rospy.spin()
-
-param = []
-thread.start_new_thread(flight_program, (param,))
-listener()
+rospy.spin()
 ```
+
 ---
 
 Флип:
