@@ -2,7 +2,7 @@
 
 #
 # Simple github release body-editor
-# Smirnov Artem @urpylka
+# @urpylka Artem Smirnov
 #
 # Use:
 # python git_release.py CONFIG_FILE RELEASE_ID RELEASE_BODY
@@ -13,7 +13,8 @@ from ConfigParser import SafeConfigParser
 import requests, sys, urllib
 
 def json_wrapper(image_name, image_link, image_size, old_text):
-    old_text = urllib.unquote_plus(old_text)
+    # Don't need for Jenkins plugin
+    #old_text = urllib.unquote_plus(old_text)
     buffer = "### Download\n* [" + image_name + ".zip](" + image_link + ") (" + image_size + ")\n\n" + old_text
     js = {}
     js["body"] = buffer

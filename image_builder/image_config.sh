@@ -1,51 +1,42 @@
-#!/bin/sh
+#!/bin/bash
 
+# Exit immidiately on non-zero result
 set -e
 
 #
 # Script for image configure
-# @smirart Smirnov Artem
+# @urpylka Artem Smirnov
+# @dvornikov-aa Andrey Dvornikov
 #
-
-
-# PREFIX_PATH=/mnt
-# IMAGE=/home/pi/2017-11-29-raspbian-stretch-lite.img
-# 
-# # blkid
-# UUID_BOOT=CDD4-B453
-# UUID_ROOTFS=72bfc10d-73ec-4d9e-a54a-1cc507ee7ed2
-# 
-# # /dev/disk/by-label/boot
-# DEV_BOOT=/dev/disk/by-uuid/$UUID_BOOT
-# # /dev/disk/by-label$2
-# DEV_ROOTFS=/dev/disk/by-uuid/$UUID_ROOTFS
-
 
 get_image() {
 
-# STATIC
-# TEMPLATE: get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
+# STATIC FUNCTION
+# TEMPLATE: get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
 
-  echo 'Download RaspbianOS'
-  echo "$(date) | 1. Download raspbian lite"
-  if [ ! -e "$1/$2" ];
-  then wget -nv -O $1/$2 $3
+  local RPI_ZIP_NAME=$(basename $2)
+  if [ ! -e "$1/$RPI_ZIP_NAME" ];
+  then
+    echo "$(date) | 1. Downloading original Linux distribution"
+    wget -nv -O $1/$RPI_ZIP_NAME $2
+    echo "$(date) | Downloading complete"
+  else
+    echo "$(date) | 1. Linux distribution already donwloaded"
   fi
-  echo "$(date) | Downloading complete"
-  echo 'Unzip image'
-  echo "$(date) | 2. Unzip raspbian lite"
-  if [ ! -e "$1/$4" ];
-  then unzip -uo $1/$2 -d $1
-  fi
-  echo "$(date) | Unziping complete"
-  echo 'Duplicate image'
-  cp -f $1/$4 $1/$5
+  echo "$(date) | 2. Unzipping Linux distribution image"
+  local RPI_IMAGE_NAME=$(echo $RPI_ZIP_NAME | sed 's/zip/img/')
+  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$IMAGE_NAME
+  echo "$(date) | Unzipping complete"
 }
 
 resize_fs() {
 
-  # STATIC
-  # TEMPLATE: resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
+  # STATIC FUNCTION
+  # TEMPLATE: resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
+
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
 
   set +e
 
@@ -63,53 +54,65 @@ resize_fs() {
   # ", +" : расширяет раздел до размеров образа
   # -N 2  : выбирает раздел 2 для работы
 
-  echo "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
+  # There is a risk that sfdisk will ask for a disk remount to update partition table
+  # TODO: Check sfdisk exit code
+
+  echo -e "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
     && truncate -s$1 $2/$3 \
     && echo "Mount loop-image: $2/$3" \
     && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
     && sleep 0.5 \
-    && echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
+    && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
     && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
     && sleep 0.5 \
-    && echo "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
-    && e2fsck -fvy $4 \
-    && echo "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
-    && resize2fs $4 \
-    && echo "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
+    && losetup -d $DEV_IMAGE \
+    && sleep 0.5 \
+    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && sleep 0.5 \
+    && echo -e "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
+    && e2fsck -fvy "${DEV_IMAGE}p${ROOT_PARTITION}" \
+    && echo -e "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
+    && resize2fs "${DEV_IMAGE}p${ROOT_PARTITION}" \
+    && echo -e "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
     && losetup -d $DEV_IMAGE
 
   set -e
 }
 
-publish_image() {
+publish_image_python() {
 
-# STATIC
-# TEMPLATE: publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# STATIC FUNCTION
+# TEMPLATE: publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
 
   echo 'Zip image' \
-    && zip $1/$2.zip $1/$2 \
-    && echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
+    && if [ ! -e "$1/$2.zip" ];
+    then zip $1/$2.zip $1/$2
+    fi
+  echo 'Upload image' \
+    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
     && echo "Make downloads in GH-release" \
-    && $3/image/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
+    && $3/image_builder/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
+#    echo "Fake publish"
 }
 
-publish_image2() {
+publish_image_bash() {
 
-# STATIC
-# TEMPLATE: publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# STATIC FUNCTION
+# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
 
   echo 'Zip image' \
-    && zip $1/$2.zip $1/$2 \
-    && echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image/yadisk.py $1/$4 $1/$2.zip) \
+    && if [ ! -e "$1/$2.zip" ];
+    then zip $1/$2.zip $1/$2
+    fi
+  echo 'Upload image' \
+    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
     && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
     && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
@@ -118,17 +121,17 @@ publish_image2() {
 
 burn_image() {
 
-# STATIC
+# STATIC FUNCTION
 # TEMPLATE: burn_image $IMAGE_PATH $MICROSD_DEV
 
-  echo "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
+  echo -e "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
     && dd if=$1 of=$2 \
-    && echo "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
+    && echo -e "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
 }
 
 burn_and_reboot() {
 
-# STATIC
+# STATIC FUNCTION
 # TEMPLATE: burn_and_reboot $IMAGE_PATH $MICROSD_DEV
 
   burn_image $1 $2 \
@@ -137,8 +140,12 @@ burn_and_reboot() {
 
 mount_system() {
 
-  # STATIC
-  # TEMPLATE: mount_system $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # STATIC FUNCTION
+  # TEMPLATE: mount_system $IMAGE $MOUNT_POINT
+
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
 
   # https://www.stableit.ru/2011/05/losetup.html
   # -f     : losetup выбирает незанятое имя устройства, например /dev/loop2
@@ -146,40 +153,41 @@ mount_system() {
   #          например /dev/loop0p1 и /dev/loop0p2
   # --show : печатает имя устройства, например /dev/loop4
 
-  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
-  DEV_IMAGE=$(losetup -Pf $1 --show)
+  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  #mount $3 $2
+  #mount $4 $2/boot
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
 
-  echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   # https://github.com/debian-pi/raspbian-ua-netinst/issues/314
   echo "Mounting /proc in chroot... "
   if [ ! -d $2/proc ] ; then
-      mkdir -p $2/proc
-      echo "Created $2/proc"
+    mkdir -p $2/proc \
+      && echo "Created $2/proc"
   fi
-  mount -t proc -o nosuid,noexec,nodev proc $2/proc
-  echo "OK"
+  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+    && echo "OK"
   
   echo "Mounting /sys in chroot... "
   if [ ! -d $2/sys ] ; then
-      mkdir -p $2/sys
-      echo "Created $2/sys"
+    mkdir -p $2/sys \
+      && echo "Created $2/sys"
   fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys
-  echo "OK"
+  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+    && echo "OK"
   
-  echo "Mounting /dev/ and /dev/pts in chroot... "
-  mkdir -p -m 755 $2/dev/pts
-  mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev
-  mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts
+  echo "Mounting /dev/ and /dev/pts in chroot... " \
+    && mkdir -p -m 755 $2/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && echo "OK"
   # mount -t devpts none "$2/dev/pts" -o ptmxmode=0666,newinstance
   # ln -fs "pts/ptmx" "$2/dev/ptmx"
-  echo "OK"
-
 
   # mount -o bind /dev $2/dev
   # mount -t proc proc $2/proc
@@ -189,8 +197,8 @@ mount_system() {
   # mount -t sysfs sys $2/sys
   # mount --bind /dev $2/dev
 
-  echo "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
-  cp -L /etc/resolv.conf $2/etc/resolv.conf
+  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
+    && cp -L /etc/resolv.conf $2/etc/resolv.conf
 
   # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
   # http://www.unix-lab.org/posts/chroot/
@@ -198,73 +206,106 @@ mount_system() {
   # https://losst.ru/vosstanovlenie-grub2
   # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
   # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
-  echo "\033[0;31m\033[1mEnter chroot\033[0m\033[0m"
-  chroot $2 /bin/bash
+  echo -e "\033[0;31m\033[1mEnter chroot\033[0m\033[0m" \
+    && chroot $2 /bin/bash
+
+  umount_system $2 $DEV_IMAGE
 }
 
-mount_system2() {
+execute() {
 
-  # STATIC
-  # TEMPLATE: mount_system2 $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
+  # STATIC FUNCTION
+  # TEMPLATE: execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
 
-  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
-  DEV_IMAGE=$(losetup -Pf $1 --show)
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
+
+  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
 
-  echo "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   echo "Mounting /proc in chroot... "
   if [ ! -d $2/proc ] ; then
-      mkdir -p $2/proc
-      echo "Created $2/proc"
+    mkdir -p $2/proc
+    echo "Created $2/proc"
   fi
-  mount -t proc -o nosuid,noexec,nodev proc $2/proc
-  echo "OK"
-  
+  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+    && echo "OK"
+
   echo "Mounting /sys in chroot... "
   if [ ! -d $2/sys ] ; then
-      mkdir -p $2/sys
-      echo "Created $2/sys"
+    mkdir -p $2/sys
+    echo "Created $2/sys"
   fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys
-  echo "OK"
-  
-  echo "Mounting /dev/ and /dev/pts in chroot... "
-  mkdir -p -m 755 $2/dev/pts
-  mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev
-  mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts
-  echo "OK"
+  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+    && echo "OK"
 
-  echo "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m"
-  cp -L /etc/resolv.conf $2/etc/resolv.conf
+  echo "Mounting /dev/ and /dev/pts in chroot... " \
+    && mkdir -p -m 755 $2/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && echo "OK"
 
-  echo "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  chroot $2 /bin/sh -c "$5"
+  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
+    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+
+  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
+  script_name=$(basename $3)
+  script_path_root="$2/root/$script_name"
+  # Copy script into chroot fs
+  # TODO: Find more suitable location for temporary script storage
+  cp "$3" "$script_path_root"
+  # Its important to save arguments (direct ${@:4} causes problems)
+  script_args="${@:4}"
+  # Run script in chroot with additional arguments
+  chroot $2 /bin/sh -c "/root/$script_name $script_args"
+  # Removing script from chroot fs
+  rm "$script_path_root"
+
+  umount_system $2 $DEV_IMAGE
 }
 
 umount_system() {
 
-  # STATIC
-  # TEMPLATE: umount_system $PREFIX_PATH
+  # STATIC FUNCTION
+  # TEMPLATE: umount_system $MOUNT_POINT $DEV_IMAGE
 
-  echo "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
-  umount -fR $1
-  echo "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
-  losetup -d $DEV_IMAGE
-}
-
-umount_system2() {
-
-  # STATIC
-  # TEMPLATE: umount_system $PREFIX_PATH
-  
-  echo "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
-  umount -fR $1
-  echo "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
-  losetup -D
+  echo -e "\033[0;31m\033[1m$(date) | Umount recursive dirs: $1\033[0m\033[0m"
+  # There is a risk that umount will fail
+  set +e
+  # Successfull unmount flag (false at thismoment)
+  umount_ok=false
+  # Repeat 5 times
+  for i in {1..5}
+  do
+    # Unmount chroot rootfs and boot partition
+    umount -fR $1
+    # If no problems detected
+    if [[ $? == 0 ]]
+    then
+    echo -e "\033[0;31m\033[1m$(date) | Successfull unmount\033[0m\033[0m"
+    # Set flag
+    umount_ok=true
+    # Exit loop
+    break
+    fi
+    # Unmount has failed
+    echo -e "\033[0;31m\033[1m$(date) | Unmount failed\033[0m\033[0m"
+    # Wait for some time
+    sleep 2
+  done
+  set -e
+  # Jenkins job will fail if this condition is not true
+  [[ "$umount_ok" == true ]]
+  echo -e "\033[0;31m\033[1m$(date) | Umount loop-image\033[0m\033[0m"
+  #losetup -d $DEV_IMAGE
+  losetup -d $2
 }
 
 set_config_var() {
@@ -291,11 +332,14 @@ EOF
 
 configure_system() {
 
-  # STATIC
-  # TEMPLATE: configure_system $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: configure_system $IMAGE $MOUNT_POINT $ROOT_PARTITON $BOOT_PARTITION
 
   local BLACKLIST=/etc/modprobe.d/raspi-blacklist.conf
   local CONFIG=/boot/config.txt
+
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
 
   BLACKLIST=$2$BLACKLIST
   CONFIG=$2$CONFIG
@@ -303,8 +347,8 @@ configure_system() {
   # 1. Примонитровать образ
 
   # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
-  # mount -v -o offset=48234496 -t ext4 2017-11-29-raspbian-stretch-lite.img $PREFIX_PATH
-  # mount -v -o offset=4194304,sizelimit=29360128 -t vfat 2017-11-29-raspbian-stretch-lite.img $PREFIX_PATH/boot
+  # mount -v -o offset=48234496 -t ext4 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT
+  # mount -v -o offset=4194304,sizelimit=29360128 -t vfat 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT/boot
   #
   # fdisk -l 2017-11-29-raspbian-stretch-lite.img
   # https://www.stableit.ru/2011/05/losetup.html
@@ -312,25 +356,25 @@ configure_system() {
   # -P     : losetup монтирует разделы в образе как отдельные подразделы,
   #          например /dev/loop0p1 и /dev/loop0p2
   # --show : печатает имя устройства, например /dev/loop4
-  echo "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
   DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount $3 $2
-  mount $4 $2/boot
+  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  mount ${DEV_IMAGE}p${ROOT_PARTITION} $2
+  mount ${DEV_IMAGE}p${BOOT_PARTITION} $2/boot
 
   # 2. Изменить необходимые настройки
 
   #   2.1. Включить sshd
-  echo "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
   touch $2/boot/ssh
 
   #   2.2. Включить GPIO
   # Включено по умолчанию
 
   #   2.3. Включить I2C
-  echo "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
 
   set_config_var dtparam=i2c_arm on $CONFIG &&
     if ! [ -e $BLACKLIST ]; then
@@ -343,7 +387,7 @@ configure_system() {
     fi
 
   #   2.4. Включить SPI
-  echo "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
 
   set_config_var dtparam=spi on $CONFIG &&
     if ! [ -e $BLACKLIST ]; then
@@ -359,13 +403,13 @@ configure_system() {
   #   2.8. Настроить DHCPd на wlan
 
   # Отмонтировать образ
-  umount_system $2
+  umount_system $2 $DEV_IMAGE
 }
 
 
 prepare_fs() {
 
-  # STATIC
+  # STATIC FUNCTION
   # TEMPLATE: prepare_fs $IMAGE $SIZE
 
   date
@@ -381,11 +425,11 @@ prepare_fs() {
 
 install_docker() {
 
-  # STATIC
-  # TEMPLATE: install_docker $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # STATIC FUNCTION
+  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT $DEV_ROOTFS $DEV_BOOT
 
   # https://askubuntu.com/questions/485567/unexpected-end-of-file
-  mount_system $1 $2 $3 $4 << EOF
+  mount_system $1 $2 << EOF
 #!/bin/bash
 # https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 curl -sSL https://get.docker.com | sh
@@ -395,15 +439,14 @@ service docker start
 docker pull smirart/rpi-ros:sshd
 docker run -di --restart unless-stopped -p 192.168.0.121:2202:22 -t smirart/rpi-ros:sshd
 EOF
-  umount_system $2
 }
 
 test_docker() {
 
-  # STATIC
-  # TEMPLATE: test_docker $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
+  # STATIC FUNCTION
+  # TEMPLATE: test_docker $IMAGE $MOUNT_POINT
 
-  mount_system $1 $2 $3 $4 << EOF
+  mount_system $1 $2 << EOF
 #!/bin/bash
 # https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 service docker start
@@ -411,27 +454,7 @@ sleep 1
 docker images
 docker ps -a
 EOF
-  umount_system $2
 }
-
-enter() {
-
-  # STATIC
-  # TEMPLATE: enter $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
-
-  mount_system $1 $2 $3 $4
-  umount_system $2
-}
-
-execute() {
-
-  # STATIC
-  # TEMPLATE: execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
-
-  mount_system2 $1 $2 $3 $4 "$(cat $5)"
-  umount_system2 $2
-}
-
 
 # очистить history
 # https://askubuntu.com/questions/191999/how-to-clear-bash-history-completely
@@ -455,7 +478,6 @@ then echo "" \
   && exit 1
 fi
 
-
 echo "\$#: $#"
 echo "\$1: $1"
 echo "\$2: $2"
@@ -472,24 +494,24 @@ echo "\$7: $7"
 # configure_system
 
 case "$1" in
-  enter) # enter $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT
-    enter $2 $3 $4 $5;;
+  mount_system) # mount_system $IMAGE $MOUNT_POINT
+    mount_system $2 $3;;
 
-  get_image) # get_image $BUILD_DIRECTORY $RPI_ZIP_NAME $RPI_DONWLOAD_URL $RPI_IMAGE_NAME $IMAGE_NAME
-    get_image $2 $3 $4 $5 $6;;
+  get_image) # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
+    get_image $2 $3 $4;;
 
-  resize_fs) # resize_fs $SIZE $BUILD_DIRECTORY $IMAGE_NAME $DEV_ROOTFS
+  resize_fs) # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
     resize_fs $2 $3 $4 $5;;
 
-  publish_image) # publish_image $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image $2 $3 $4 $5 $6 $7;;
+  publish_image) # publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image_python $2 $3 $4 $5 $6 $7;;
 
-  publish_image2) # publish_image2 $BUILD_DIRECTORY $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image2 $2 $3 $4 $5 $6 $7;;
+  publish_image_bash) # publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image_bash $2 $3 $4 $5 $6 $7;;
 
-  execute) # execute $IMAGE $PREFIX_PATH $DEV_ROOTFS $DEV_BOOT $EXECUTE_FILE
-    execute $2 $3 $4 $5 $6;;
+  execute) # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
+    execute $2 $3 $4 ${@:5};;
 
   *)
-    echo "Enter one of: enter, get_image, resize_fs, publish_image, execute";;
+    echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;
 esac
