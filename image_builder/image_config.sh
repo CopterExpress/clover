@@ -377,24 +377,30 @@ echo "\$7: $7"
 # install_docker
 
 case "$1" in
-  mount_system) # mount_system $IMAGE $MOUNT_POINT
-    mount_system $2 $3;;
-
-  get_image) # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
-    get_image $2 $3 $4;;
-
-  resize_fs) # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
-    resize_fs $2 $3 $4 $5;;
-
-  publish_image) # publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_python $2 $3 $4 $5 $6 $7;;
-
-  publish_image_bash) # publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_bash $2 $3 $4 $5 $6 $7;;
-
-  execute) # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
-    execute $2 $3 $4 ${@:5};;
-
   *)
     echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;
+
+  mount_system)
+  # mount_system $IMAGE $MOUNT_POINT
+    mount_system $2 $3;;
+
+  get_image)
+  # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
+    get_image $2 $3 $4;;
+
+  resize_fs)
+  # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
+    resize_fs $2 $3 $4 $5;;
+
+  publish_image)
+  # publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image_python $2 $3 $4 $5 $6 $7;;
+
+  publish_image_bash)
+  # publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image_bash $2 $3 $4 $5 $6 $7;;
+
+  execute)
+  # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
+    execute $2 $3 $4 ${@:5};;
 esac
