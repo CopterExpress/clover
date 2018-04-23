@@ -51,8 +51,8 @@ resize_fs() {
   # --show : печатает имя устройства, например /dev/loop4
 
   # http://karelzak.blogspot.ru/2015/05/resize-by-sfdisk.html
-  # ", +" : расширяет раздел до размеров образа
-  # -N 2  : выбирает раздел 2 для работы
+  # ", +" : expand partition for volume size
+  # -N 2  : select second partition for work
 
   # There is a risk that sfdisk will ask for a disk remount to update partition table
   # TODO: Check sfdisk exit code
