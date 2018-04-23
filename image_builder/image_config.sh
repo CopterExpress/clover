@@ -87,14 +87,18 @@ publish_image_python() {
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
 
-  echo 'Zip image' \
-    && if [ ! -e "$1/$2.zip" ];
-    then zip $1/$2.zip $1/$2
-    fi
+  echo 'Zip image'
+  if [ ! -e "$1/$2.zip" ];
+  then cd $1 && zip $2.zip $2
+  fi
+
   echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
-    && echo "Make downloads in GH-release" \
+    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip)
+
+  echo 'Meashuring size of zip-image' \
+    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
+
+  echo 'Post message to GH' \
     && $3/image_builder/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
 #    echo "Fake publish"
 }
@@ -107,13 +111,18 @@ publish_image_bash() {
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
 
-  echo 'Zip image' \
-    && if [ ! -e "$1/$2.zip" ];
-    then zip $1/$2.zip $1/$2
-    fi
+  echo 'Zip image'
+  if [ ! -e "$1/$2.zip" ];
+  then cd $1 && zip $2.zip $2
+  fi
+
   echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
+    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip)
+
+  echo 'Meashuring size of zip-image' \
+    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
+
+  echo 'Post message to GH' \
     && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
     && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
     && curl -d "$(echo $DATA)" -u "LOGIN:PASS" --request PATCH https://api.github.com/repos/ONWER/REPO/releases/$5
