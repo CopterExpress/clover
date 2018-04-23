@@ -308,121 +308,6 @@ umount_system() {
   losetup -d $2
 }
 
-set_config_var() {
-  lua - "$1" "$2" "$3" <<EOF > "$3.bak"
-local key=assert(arg[1])
-local value=assert(arg[2])
-local fn=assert(arg[3])
-local file=assert(io.open(fn))
-local made_change=false
-for line in file:lines() do
-  if line:match("^#?%s*"..key.."=.*$") then
-    line=key.."="..value
-    made_change=true
-  end
-  print(line)
-end
-
-if not made_change then
-  print(key.."="..value)
-end
-EOF
-  mv "$3.bak" "$3"
-}
-
-configure_system() {
-
-  # TEMPLATE: configure_system $IMAGE $MOUNT_POINT $ROOT_PARTITON $BOOT_PARTITION
-
-  local BLACKLIST=/etc/modprobe.d/raspi-blacklist.conf
-  local CONFIG=/boot/config.txt
-
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
-  BLACKLIST=$2$BLACKLIST
-  CONFIG=$2$CONFIG
-
-  # 1. Примонитровать образ
-
-  # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
-  # mount -v -o offset=48234496 -t ext4 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT
-  # mount -v -o offset=4194304,sizelimit=29360128 -t vfat 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT/boot
-  #
-  # fdisk -l 2017-11-29-raspbian-stretch-lite.img
-  # https://www.stableit.ru/2011/05/losetup.html
-  # -f     : losetup сам выбрал loop (минуя занятые)
-  # -P     : losetup монтирует разделы в образе как отдельные подразделы,
-  #          например /dev/loop0p1 и /dev/loop0p2
-  # --show : печатает имя устройства, например /dev/loop4
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
-  DEV_IMAGE=$(losetup -Pf $1 --show)
-  sleep 0.5
-
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount ${DEV_IMAGE}p${ROOT_PARTITION} $2
-  mount ${DEV_IMAGE}p${BOOT_PARTITION} $2/boot
-
-  # 2. Изменить необходимые настройки
-
-  #   2.1. Включить sshd
-  echo -e "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
-  touch $2/boot/ssh
-
-  #   2.2. Включить GPIO
-  # Включено по умолчанию
-
-  #   2.3. Включить I2C
-  echo -e "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
-
-  set_config_var dtparam=i2c_arm on $CONFIG &&
-    if ! [ -e $BLACKLIST ]; then
-      touch $BLACKLIST
-    fi
-    sed $BLACKLIST -i -e "s/^\(blacklist[[:space:]]*i2c[-_]bcm2708\)/#\1/"
-    sed $2/etc/modules -i -e "s/^#[[:space:]]*\(i2c[-_]dev\)/\1/"
-    if ! grep -q "^i2c[-_]dev" $2/etc/modules; then
-      printf "i2c-dev\n" >> $2/etc/modules
-    fi
-
-  #   2.4. Включить SPI
-  echo -e "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
-
-  set_config_var dtparam=spi on $CONFIG &&
-    if ! [ -e $BLACKLIST ]; then
-      touch $BLACKLIST
-    fi
-    sed $BLACKLIST -i -e "s/^\(blacklist[[:space:]]*spi[-_]bcm2708\)/#\1/"
-
-  #   2.5. Включить raspicam
-  # Включена по умолчанию вроде как
-
-  #   2.6. Настроить AP wifi
-  #   2.7. Настроить сеть на wlan
-  #   2.8. Настроить DHCPd на wlan
-
-  # Отмонтировать образ
-  umount_system $2 $DEV_IMAGE
-}
-
-
-prepare_fs() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: prepare_fs $IMAGE $SIZE
-
-  date
-  #      Удаляем старый образ
-  # -f : не выводить ошибки, если файла нет
-  rm -f $1
-  #              Копируем origin образ
-  # --progress : Вывод прогресс-бара
-  rsync --progress -av $1.orig $1
-  expand_image $1 $2G
-  date
-}
-
 install_docker() {
 
   # STATIC FUNCTION
@@ -490,8 +375,6 @@ echo "\$7: $7"
 
 # test_docker
 # install_docker
-# prepare_fs
-# configure_system
 
 case "$1" in
   mount_system) # mount_system $IMAGE $MOUNT_POINT
