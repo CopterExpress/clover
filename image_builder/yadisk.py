@@ -36,7 +36,7 @@ def main():
         
         if os.path.isfile(sys.argv[1]) and os.path.isfile(sys.argv[2]):
 
-            with open('coex-ci.json') as json_data:
+            with open(sys.argv[1]) as json_data:
                 d = json.load(json_data)
                 upload(d['yadisk']['login'], d['yadisk']['password'], d['yadisk']['server_dir'], sys.argv[2])
 
