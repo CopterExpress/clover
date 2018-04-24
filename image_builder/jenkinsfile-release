@@ -21,7 +21,7 @@ pipeline {
     stage('Build image') {
       when { not { expression { return params.ONLY_PUBLISH } } }
       steps {
-        build job: 'CopterExpress-clever-build', parameters: [[$class: 'StringParameterValue', name: 'IMAGE_NAME', value: "${params.IMAGE_NAME}"], [$class: 'StringParameterValue', name: 'GWBT_RELEASE_TAG_NAME', value: "${params.GWBT_RELEASE_TAG_NAME}"]]
+        build job: 'CopterExpress-clever-build', parameters: [[$class: 'StringParameterValue', name: 'IMAGE_NAME', value: "${params.IMAGE_NAME}"], [$class: 'StringParameterValue', name: 'IMAGE_VERSION', value: "${params.GWBT_RELEASE_TAG_NAME}"], [$class: 'StringParameterValue', name: 'GWBT_RELEASE_TAG_NAME', value: "${params.GWBT_RELEASE_TAG_NAME}"]]
         sh "echo ${params.IMAGE_NAME}"
       }
     }
