@@ -79,31 +79,7 @@ resize_fs() {
   set -e
 }
 
-publish_image_python() {
-
-# STATIC FUNCTION
-# TEMPLATE: publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-
-# https://developer.github.com/v3/repos/releases/
-#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
-
-  echo 'Zip image'
-  if [ ! -e "$1/$2.zip" ];
-  then cd $1 && zip $2.zip $2
-  fi
-
-  echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip)
-
-  echo 'Meashuring size of zip-image' \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
-
-  echo 'Post message to GH' \
-    && $3/image_builder/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
-#    echo "Fake publish"
-}
-
-publish_image_bash() {
+publish_image() {
 
 # STATIC FUNCTION
 # TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
@@ -117,15 +93,18 @@ publish_image_bash() {
   fi
 
   echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip)
+    && local IMAGE_LINK=$($3/image_builder/yadisk.py $4 $1/$2.zip)
 
   echo 'Meashuring size of zip-image' \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
 
   echo 'Post message to GH' \
-    && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
-    && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
-    && curl -d "$(echo $DATA)" -u "LOGIN:PASS" --request PATCH https://api.github.com/repos/ONWER/REPO/releases/$5
+    local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6"
+    local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
+    local GH_LOGIN=$(cat $4 | jq 'github.login')
+    local GH_PASS=$(cat $4 | jq 'github.password')
+    local GH_URL=$(cat $4 | jq 'github.url')
+    curl -d "$(echo $DATA)" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
 }
 
 burn_image() {
@@ -399,12 +378,8 @@ case "$1" in
     resize_fs $2 $3 $4 $5;;
 
   publish_image)
-  # publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_python $2 $3 $4 $5 $6 $7;;
-
-  publish_image_bash)
-  # publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_bash $2 $3 $4 $5 $6 $7;;
+  # publish_image $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image $2 $3 $4 $5 $6 $7;;
 
   execute)
   # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...

@@ -31,7 +31,7 @@ pipeline {
         CONFIG_FILE = 'coex-ci.conf'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} $WORKSPACE $CONFIG_FILE ${params.GWBT_RELEASE_ID} \'${params.GWBT_RELEASE_BODY}\'"
+        sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} $WORKSPACE ${params.BUILD_DIR}/$CONFIG_FILE ${params.GWBT_RELEASE_ID} \'${params.GWBT_RELEASE_BODY}\'"
       }
     }
   }
