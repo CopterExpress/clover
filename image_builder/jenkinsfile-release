@@ -28,11 +28,11 @@ pipeline {
     stage('Publish image') {
       when { environment name: 'GWBT_TRIGGER', value: 'release' }
       environment {
-        CONFIG_FILE = 'coex-ci.conf'
-        YA_SCRIPT = 'image_builder/yadisk.py'
+        CONFIG_FILE = "${params.BUILD_DIR}/coex-ci.json"
+        YA_SCRIPT = "$WORKSPACE/image_builder/yadisk.py"
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} $WORKSPACE/$YA_SCRIPT ${params.BUILD_DIR}/$CONFIG_FILE ${params.GWBT_RELEASE_ID} \'${params.GWBT_RELEASE_BODY}\'"
+        sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} $YA_SCRIPT $CONFIG_FILE ${params.GWBT_RELEASE_ID} \'${params.GWBT_RELEASE_BODY}\'"
       }
     }
   }
