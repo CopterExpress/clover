@@ -299,7 +299,7 @@ umount_system() {
 install_docker() {
 
   # STATIC FUNCTION
-  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT
 
   # https://askubuntu.com/questions/485567/unexpected-end-of-file
   mount_system $1 $2 << EOF
