@@ -386,9 +386,6 @@ echo "\$7: $7"
 # install_docker
 
 case "$1" in
-  *)
-    echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;
-
   mount_system)
   # mount_system $IMAGE $MOUNT_POINT
     mount_system $2 $3;;
@@ -412,4 +409,7 @@ case "$1" in
   execute)
   # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
     execute $2 $3 $4 ${@:5};;
+
+  *)
+    echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;
 esac
