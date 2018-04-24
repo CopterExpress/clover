@@ -98,13 +98,13 @@ publish_image() {
   echo 'Meashuring size of zip-image' \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
 
-  echo 'Post message to GH' \
-    local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6"
-    local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
-    local GH_LOGIN=$(cat $4 | jq 'github.login')
-    local GH_PASS=$(cat $4 | jq 'github.password')
-    local GH_URL=$(cat $4 | jq 'github.url')
-    curl -d "$(echo $DATA)" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
+  echo 'Post message to GH'
+  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6"
+  local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
+  local GH_LOGIN=$(cat $4 | jq '.github.login')
+  local GH_PASS=$(cat $4 | jq '.github.password')
+  local GH_URL=$(cat $4 | jq '.github.url')
+  curl -d "$(echo $DATA)" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
 }
 
 burn_image() {
