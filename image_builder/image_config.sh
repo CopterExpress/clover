@@ -82,7 +82,7 @@ resize_fs() {
 publish_image() {
 
 # STATIC FUNCTION
-# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
 # https://developer.github.com/v3/repos/releases/
 #RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
@@ -93,7 +93,7 @@ publish_image() {
   fi
 
   echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $4 $1/$2.zip)
+    && local IMAGE_LINK=$($3 $4 $1/$2.zip)
 
   echo 'Meashuring size of zip-image' \
     && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
@@ -378,7 +378,7 @@ case "$1" in
     resize_fs $2 $3 $4 $5;;
 
   publish_image)
-  # publish_image $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+  # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
     publish_image $2 $3 $4 $5 $6 $7;;
 
   execute)
