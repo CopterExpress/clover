@@ -79,34 +79,6 @@ resize_fs() {
   set -e
 }
 
-publish_image() {
-
-# STATIC FUNCTION
-# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-
-# https://developer.github.com/v3/repos/releases/
-#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
-
-  echo 'Zip image'
-  if [ ! -e "$1/$2.zip" ];
-  then cd $1 && zip $2.zip $2
-  fi
-
-  echo 'Upload image' \
-    && local IMAGE_LINK=$($3 $4 $1/$2.zip)
-
-  echo 'Meashuring size of zip-image' \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
-
-  echo 'Post message to GH'
-  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6"
-  local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
-  local GH_LOGIN=$(cat $4 | jq '.github.login' -r)
-  local GH_PASS=$(cat $4 | jq '.github.password' -r)
-  local GH_URL=$(cat $4 | jq '.github.url' -r)
-  curl -d "$(echo $DATA)" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
-}
-
 burn_image() {
 
 # STATIC FUNCTION
@@ -341,6 +313,41 @@ EOF
 # service docker start
 # https://forums.docker.com/t/cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host/8925/17
 
+publish_image() {
+
+# STATIC FUNCTION
+# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+
+# https://developer.github.com/v3/repos/releases/
+#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
+
+  echo -e "\033[0;31m\033[1m$(date) | Zip image\033[0m\033[0m"
+  if [ ! -e "$1/$2.zip" ];
+  then
+    cd $1 && zip $2.zip $2
+    echo -e "\033[0;31m\033[1m$(date) | Zipping complete!\033[0m\033[0m"
+  else
+    echo -e "\033[0;31m\033[1m$(date) | Zip-archive already created\033[0m\033[0m"
+  fi
+
+  echo -e "\033[0;31m\033[1m$(date) | Upload image\033[0m\033[0m"
+  local IMAGE_LINK=$($3 $4 $1/$2.zip)
+  echo -e "\033[0;31m\033[1m$(date) | Upload copmlete!\033[0m\033[0m"
+
+
+  echo -e "\033[0;31m\033[1m$(date) | Meashure size of zip-image\033[0m\033[0m"
+  local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
+  echo -e "\033[0;31m\033[1m$(date) | Meashuring copmlete!\033[0m\033[0m"
+
+  echo -e "\033[0;31m\033[1m$(date) | Post message to GH\033[0m\033[0m"
+  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$(echo $6)"
+  local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
+  local GH_LOGIN=$(cat $4 | jq '.github.login' -r)
+  local GH_PASS=$(cat $4 | jq '.github.password' -r)
+  local GH_URL=$(cat $4 | jq '.github.url' -r)
+  curl -d "$DATA" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
+  echo -e "\033[0;31m\033[1m$(date) | Post message to GH copmlete!\033[0m\033[0m"
+}
 
 if [ $(whoami) != "root" ];
 then echo "" \
@@ -360,9 +367,9 @@ echo "\$5: $5"
 echo "\$6: $6"
 echo "\$7: $7"
 
-
 # test_docker
 # install_docker
+# burn_image
 
 case "$1" in
   mount_system)
@@ -379,7 +386,7 @@ case "$1" in
 
   publish_image)
   # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image $2 $3 $4 $5 $6 $7;;
+    publish_image $2 $3 $4 $5 $6 "$7";;
 
   execute)
   # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...

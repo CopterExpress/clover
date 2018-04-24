@@ -2,7 +2,7 @@ pipeline {
   agent any
   parameters {
     string(name: 'IMAGE_NAME', defaultValue: 'clever_noname.img', description: 'Output image file name')
-    string(name: 'GWBT_RELEASE_TAG_NAME', defaultValue: 'master', description: 'Release tag name')
+    string(name: 'GWBT_REF', defaultValue: 'master', description: 'Checkout ref-param')
     string(name: 'IMAGE_VERSION', defaultValue: 'no_version', description: 'Image version')
 
     string(name: 'BUILD_DIR', defaultValue: '/mnt/hdd_builder/workspace', description: 'Build workspace')

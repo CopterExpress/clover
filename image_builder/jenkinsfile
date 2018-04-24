@@ -1,0 +1,36 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'GWBT_REF', defaultValue: "master")
+    string(name: 'GWBT_URL', defaultValue: "https://github.com/CopterExpress/clever.git")
+    string(name: 'GWBT_FILE', defaultValue: "")
+    string(name: 'IMAGE_NAME', defaultValue: "\$(cat ${GWBT_FILE} | jq '.repository.name' -r)_${params.GWBT_REF}_\$(cat ${GWBT_FILE} | jq '.release.published_at' -r).img")
+    string(name: 'GWBT_EVENT', defaultValue: 'release')
+    booleanParam(name: 'ONLY_PUBLISH', defaultValue: false, description: 'ONLY PUBLISH')
+    string(name: 'BUILD_DIR', defaultValue: '/mnt/hdd_builder/workspace', description: 'Build workspace')
+  }
+  environment {
+    DEBIAN_FRONTEND = 'noninteractive'
+    LANG = 'C.UTF-8'
+    LC_ALL = 'C.UTF-8'
+  }
+  stages {
+    stage('Build image') {
+      when { not { expression { return params.ONLY_PUBLISH } } }
+      steps {
+        build job: 'CopterExpress-clever-build', parameters: [[$class: 'StringParameterValue', name: 'IMAGE_NAME', value: "${params.IMAGE_NAME}"], [$class: 'StringParameterValue', name: 'IMAGE_VERSION', value: "${params.GWBT_REF}"], [$class: 'StringParameterValue', name: 'GWBT_REF', value: "${params.GWBT_REF}"], [$class: 'StringParameterValue', name: 'GWBT_URL', value: "${params.GWBT_URL}"]]
+      }
+    }
+    stage('Publish image') {
+      when { environment name: 'GWBT_EVENT', value: 'release' }
+      environment {
+        CONFIG_FILE = "${params.BUILD_DIR}/coex-ci.json"
+        YA_SCRIPT = "$WORKSPACE/image_builder/yadisk.py"
+      }
+      steps {
+        //sh "$WORKSPACE/image_builder/image_config.sh publish_image_jenkins ${params.BUILD_DIR} ${params.IMAGE_NAME} ${YA_SCRIPT} ${CONFIG_FILE} ${params.GWBT_FILE}"
+        sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} ${YA_SCRIPT} ${CONFIG_FILE} \$(cat ${params.GWBT_FILE} | jq '.release.id' -r) \"\$(cat ${params.GWBT_FILE} | jq '.release.body' | sed 's/\"//' | rev | sed 's/\"//' | rev)\""
+      }
+    }
+  }
+}
