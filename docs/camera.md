@@ -97,7 +97,6 @@ def image_callback(data):
         # print detected QR code
         print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
 
-
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 ```
 
