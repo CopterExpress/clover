@@ -100,11 +100,11 @@ def image_callback(data):
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 ```
 
-Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта, можно запустить [throttling](http://wiki.ros.org/topic_tools/throttle) кадров с камеры, например, в 5 Гц (`main_camera.launch`):
+Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить [throttling](http://wiki.ros.org/topic_tools/throttle) кадров с камеры, например, в 5 Гц (`main_camera.launch`):
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
     args="messages main_camera/image_raw 5.0 main_camera/image_raw/throttled"/>
 ```
 
-Топик для подписчика, в этом случае, необходимо поменять на `main_camera/image_raw/throttled`.
+Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw/throttled`.
