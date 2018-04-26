@@ -28,7 +28,6 @@ pipeline {
         YA_SCRIPT = "$WORKSPACE/image_builder/yadisk.py"
       }
       steps {
-        //sh "$WORKSPACE/image_builder/image_config.sh publish_image_jenkins ${params.BUILD_DIR} ${params.IMAGE_NAME} ${YA_SCRIPT} ${CONFIG_FILE} ${params.GWBT_FILE}"
         sh "$WORKSPACE/image_builder/image_config.sh publish_image ${params.BUILD_DIR} ${params.IMAGE_NAME} ${YA_SCRIPT} ${CONFIG_FILE} \$(cat ${params.GWBT_FILE} | jq '.release.id' -r) \"\$(cat ${params.GWBT_FILE} | jq '.release.body' | sed 's/\"//' | rev | sed 's/\"//' | rev)\""
       }
     }
