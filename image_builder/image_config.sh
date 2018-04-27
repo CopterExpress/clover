@@ -343,8 +343,9 @@ publish_image() {
   echo "\$7: $7"
 
   echo -e "\033[0;31m\033[1m$(date) | Post message to GH\033[0m\033[0m"
-  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$(echo $6)"
+  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6"
   local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
+  echo "\$DATA: $DATA"
   local GH_LOGIN=$(cat $4 | jq '.github.login' -r)
   local GH_PASS=$(cat $4 | jq '.github.password' -r)
   local GH_URL=$(cat $4 | jq '.github.url' -r)
