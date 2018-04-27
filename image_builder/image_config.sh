@@ -339,6 +339,9 @@ publish_image() {
   local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
   echo -e "\033[0;31m\033[1m$(date) | Meashuring copmlete!\033[0m\033[0m"
 
+  echo "\$6: $6"
+  echo "\$7: $7"
+
   echo -e "\033[0;31m\033[1m$(date) | Post message to GH\033[0m\033[0m"
   local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$(echo $6)"
   local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
