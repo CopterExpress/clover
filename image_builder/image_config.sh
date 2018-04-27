@@ -25,7 +25,7 @@ get_image() {
   fi
   echo "$(date) | 2. Unzipping Linux distribution image"
   local RPI_IMAGE_NAME=$(echo $RPI_ZIP_NAME | sed 's/zip/img/')
-  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$IMAGE_NAME
+  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$3
   echo "$(date) | Unzipping complete"
 }
 
