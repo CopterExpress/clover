@@ -35,8 +35,8 @@ echo -e "\033[0;31m\033[1m$(date) | #5 Turn on raspicam\033[0m\033[0m"
 # 6. Enable V4L driver http://robocraft.ru/blog/electronics/3158.html
 #echo "bcm2835-v4l2" >> /etc/modules
 echo -e "\033[0;31m\033[1m$(date) | #6 Turn on v4l2 driver\033[0m\033[0m"
-if ! grep -q "^bcm2835-v4l2" /etc/modules; then
-  printf "bcm2835-v4l2\n" >> /etc/modules
+if ! grep -q "^bcm2835-v4l2" /etc/modules;
+then printf "bcm2835-v4l2\n" >> /etc/modules
 fi
 
 echo -e "\033[0;31m\033[1m$(date) | End of configure hardware interfaces\033[0m\033[0m"
