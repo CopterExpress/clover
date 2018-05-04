@@ -12,6 +12,10 @@ set -e
 # Configure hardware interfaces
 ##################################################
 
+# Disable dtparam in chroot (use in raspi-config)
+echo "echo 'dtparam is disabled in chroot'" >> /root/dtparam && chmod +x /root/dtparam
+export PATH=/root:$PATH
+
 # 1. Enable sshd
 echo -e "\033[0;31m\033[1m$(date) | #1 Turn on sshd\033[0m\033[0m"
 touch /boot/ssh
@@ -38,5 +42,7 @@ echo -e "\033[0;31m\033[1m$(date) | #6 Turn on v4l2 driver\033[0m\033[0m"
 if ! grep -q "^bcm2835-v4l2" /etc/modules;
 then printf "bcm2835-v4l2\n" >> /etc/modules
 fi
+
+rm /root/dtparam
 
 echo -e "\033[0;31m\033[1m$(date) | End of configure hardware interfaces\033[0m\033[0m"
