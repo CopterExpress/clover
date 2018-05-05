@@ -18,7 +18,7 @@ touch /boot/ssh
 # /usr/bin/raspi-config nonint do_ssh 0
 
 # 2. Enable GPIO
-echo -e "\033[0;31m\033[1m$(date) | #2 SSHd enabled by default\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #2 GPIO enabled by default\033[0m\033[0m"
 
 # 3. Enable I2C
 echo -e "\033[0;31m\033[1m$(date) | #3 Turn on I2C\033[0m\033[0m"
