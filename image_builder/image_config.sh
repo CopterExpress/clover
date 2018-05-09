@@ -25,7 +25,7 @@ get_image() {
   fi
   echo "$(date) | 2. Unzipping Linux distribution image"
   local RPI_IMAGE_NAME=$(echo $RPI_ZIP_NAME | sed 's/zip/img/')
-  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$IMAGE_NAME
+  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$3
   echo "$(date) | Unzipping complete"
 }
 
@@ -51,8 +51,8 @@ resize_fs() {
   # --show : печатает имя устройства, например /dev/loop4
 
   # http://karelzak.blogspot.ru/2015/05/resize-by-sfdisk.html
-  # ", +" : расширяет раздел до размеров образа
-  # -N 2  : выбирает раздел 2 для работы
+  # ", +" : expand partition for volume size
+  # -N 2  : select second partition for work
 
   # There is a risk that sfdisk will ask for a disk remount to update partition table
   # TODO: Check sfdisk exit code
@@ -77,46 +77,6 @@ resize_fs() {
     && losetup -d $DEV_IMAGE
 
   set -e
-}
-
-publish_image_python() {
-
-# STATIC FUNCTION
-# TEMPLATE: publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-
-# https://developer.github.com/v3/repos/releases/
-#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
-
-  echo 'Zip image' \
-    && if [ ! -e "$1/$2.zip" ];
-    then zip $1/$2.zip $1/$2
-    fi
-  echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
-    && echo "Make downloads in GH-release" \
-    && $3/image_builder/git_release.py $1/$4 $5 $6 $2 $IMAGE_LINK $IMAGE_SIZE
-#    echo "Fake publish"
-}
-
-publish_image_bash() {
-
-# STATIC FUNCTION
-# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-
-# https://developer.github.com/v3/repos/releases/
-#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
-
-  echo 'Zip image' \
-    && if [ ! -e "$1/$2.zip" ];
-    then zip $1/$2.zip $1/$2
-    fi
-  echo 'Upload image' \
-    && local IMAGE_LINK=$($3/image_builder/yadisk.py $1/$4 $1/$2.zip) \
-    && local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }') \
-    && local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\n\n$6" \
-    && local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }" \
-    && curl -d "$(echo $DATA)" -u "LOGIN:PASS" --request PATCH https://api.github.com/repos/ONWER/REPO/releases/$5
 }
 
 burn_image() {
@@ -308,125 +268,10 @@ umount_system() {
   losetup -d $2
 }
 
-set_config_var() {
-  lua - "$1" "$2" "$3" <<EOF > "$3.bak"
-local key=assert(arg[1])
-local value=assert(arg[2])
-local fn=assert(arg[3])
-local file=assert(io.open(fn))
-local made_change=false
-for line in file:lines() do
-  if line:match("^#?%s*"..key.."=.*$") then
-    line=key.."="..value
-    made_change=true
-  end
-  print(line)
-end
-
-if not made_change then
-  print(key.."="..value)
-end
-EOF
-  mv "$3.bak" "$3"
-}
-
-configure_system() {
-
-  # TEMPLATE: configure_system $IMAGE $MOUNT_POINT $ROOT_PARTITON $BOOT_PARTITION
-
-  local BLACKLIST=/etc/modprobe.d/raspi-blacklist.conf
-  local CONFIG=/boot/config.txt
-
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
-  BLACKLIST=$2$BLACKLIST
-  CONFIG=$2$CONFIG
-
-  # 1. Примонитровать образ
-
-  # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
-  # mount -v -o offset=48234496 -t ext4 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT
-  # mount -v -o offset=4194304,sizelimit=29360128 -t vfat 2017-11-29-raspbian-stretch-lite.img $MOUNT_POINT/boot
-  #
-  # fdisk -l 2017-11-29-raspbian-stretch-lite.img
-  # https://www.stableit.ru/2011/05/losetup.html
-  # -f     : losetup сам выбрал loop (минуя занятые)
-  # -P     : losetup монтирует разделы в образе как отдельные подразделы,
-  #          например /dev/loop0p1 и /dev/loop0p2
-  # --show : печатает имя устройства, например /dev/loop4
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
-  DEV_IMAGE=$(losetup -Pf $1 --show)
-  sleep 0.5
-
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount ${DEV_IMAGE}p${ROOT_PARTITION} $2
-  mount ${DEV_IMAGE}p${BOOT_PARTITION} $2/boot
-
-  # 2. Изменить необходимые настройки
-
-  #   2.1. Включить sshd
-  echo -e "\033[0;31m\033[1mTurn on sshd\033[0m\033[0m"
-  touch $2/boot/ssh
-
-  #   2.2. Включить GPIO
-  # Включено по умолчанию
-
-  #   2.3. Включить I2C
-  echo -e "\033[0;31m\033[1mTurn on I2C\033[0m\033[0m"
-
-  set_config_var dtparam=i2c_arm on $CONFIG &&
-    if ! [ -e $BLACKLIST ]; then
-      touch $BLACKLIST
-    fi
-    sed $BLACKLIST -i -e "s/^\(blacklist[[:space:]]*i2c[-_]bcm2708\)/#\1/"
-    sed $2/etc/modules -i -e "s/^#[[:space:]]*\(i2c[-_]dev\)/\1/"
-    if ! grep -q "^i2c[-_]dev" $2/etc/modules; then
-      printf "i2c-dev\n" >> $2/etc/modules
-    fi
-
-  #   2.4. Включить SPI
-  echo -e "\033[0;31m\033[1mTurn on SPI\033[0m\033[0m"
-
-  set_config_var dtparam=spi on $CONFIG &&
-    if ! [ -e $BLACKLIST ]; then
-      touch $BLACKLIST
-    fi
-    sed $BLACKLIST -i -e "s/^\(blacklist[[:space:]]*spi[-_]bcm2708\)/#\1/"
-
-  #   2.5. Включить raspicam
-  # Включена по умолчанию вроде как
-
-  #   2.6. Настроить AP wifi
-  #   2.7. Настроить сеть на wlan
-  #   2.8. Настроить DHCPd на wlan
-
-  # Отмонтировать образ
-  umount_system $2 $DEV_IMAGE
-}
-
-
-prepare_fs() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: prepare_fs $IMAGE $SIZE
-
-  date
-  #      Удаляем старый образ
-  # -f : не выводить ошибки, если файла нет
-  rm -f $1
-  #              Копируем origin образ
-  # --progress : Вывод прогресс-бара
-  rsync --progress -av $1.orig $1
-  expand_image $1 $2G
-  date
-}
-
 install_docker() {
 
   # STATIC FUNCTION
-  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT $DEV_ROOTFS $DEV_BOOT
+  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT
 
   # https://askubuntu.com/questions/485567/unexpected-end-of-file
   mount_system $1 $2 << EOF
@@ -468,6 +313,53 @@ EOF
 # service docker start
 # https://forums.docker.com/t/cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host/8925/17
 
+publish_image() {
+
+# STATIC FUNCTION
+# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+
+# https://developer.github.com/v3/repos/releases/
+#RELEASE_BODY="### Changelog\n* Add /boot/cmdline.txt net.ifnames=0 https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/\n* Updated cophelper\n* Installed copstat"
+
+  echo -e "\033[0;31m\033[1m$(date) | Zip image\033[0m\033[0m"
+  if [ ! -e "$1/$2.zip" ];
+  then
+    cd $1 && zip $2.zip $2
+    echo -e "\033[0;31m\033[1m$(date) | Zipping complete!\033[0m\033[0m"
+  else
+    echo -e "\033[0;31m\033[1m$(date) | Zip-archive already created\033[0m\033[0m"
+  fi
+
+  echo -e "\033[0;31m\033[1m$(date) | Upload image\033[0m\033[0m"
+  local IMAGE_LINK=$($3 $4 $1/$2.zip)
+  echo -e "\033[0;31m\033[1m$(date) | Upload copmlete!\033[0m\033[0m"
+
+  echo -e "\033[0;31m\033[1m$(date) | Meashure size of zip-image\033[0m\033[0m"
+  local IMAGE_SIZE=$(du -sh $1/$2.zip | awk '{ print $1 }')
+  echo -e "\033[0;31m\033[1m$(date) | Meashuring copmlete!\033[0m\033[0m"
+
+  echo -e "\033[0;31m\033[1m$(date) | Meashure hash-sum of zip-image\033[0m\033[0m"
+  local IMAGE_HASH=$(sha256sum $1/$2.zip | awk '{ print $1 }')
+  echo -e "\033[0;31m\033[1m$(date) | Meashuring copmlete!\033[0m\033[0m"
+
+  echo ""
+  echo "\$6: $6"
+  echo ""
+
+  echo -e "\033[0;31m\033[1m$(date) | Post message to GH\033[0m\033[0m"
+  local NEW_RELEASE_BODY="### Download\n* [$2.zip]($IMAGE_LINK) ($IMAGE_SIZE)\nsha256: $IMAGE_HASH\n\n$6"
+  local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
+
+  echo ""
+  echo "\$DATA: $DATA"
+  echo ""
+
+  local GH_LOGIN=$(cat $4 | jq '.github.login' -r)
+  local GH_PASS=$(cat $4 | jq '.github.password' -r)
+  local GH_URL=$(cat $4 | jq '.github.url' -r)
+  curl -d "$DATA" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$5
+  echo -e "\033[0;31m\033[1m$(date) | Post message to GH copmlete!\033[0m\033[0m"
+}
 
 if [ $(whoami) != "root" ];
 then echo "" \
@@ -487,29 +379,29 @@ echo "\$5: $5"
 echo "\$6: $6"
 echo "\$7: $7"
 
-
 # test_docker
 # install_docker
-# prepare_fs
-# configure_system
+# burn_image
 
 case "$1" in
-  mount_system) # mount_system $IMAGE $MOUNT_POINT
+  mount_system)
+  # mount_system $IMAGE $MOUNT_POINT
     mount_system $2 $3;;
 
-  get_image) # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
+  get_image)
+  # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
     get_image $2 $3 $4;;
 
-  resize_fs) # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
+  resize_fs)
+  # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
     resize_fs $2 $3 $4 $5;;
 
-  publish_image) # publish_image_python $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_python $2 $3 $4 $5 $6 $7;;
+  publish_image)
+  # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+    publish_image $2 $3 $4 $5 $6 "$7";;
 
-  publish_image_bash) # publish_image_bash $BUILD_DIR $IMAGE_NAME $WORKSPACE $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-    publish_image_bash $2 $3 $4 $5 $6 $7;;
-
-  execute) # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
+  execute)
+  # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
     execute $2 $3 $4 ${@:5};;
 
   *)

@@ -2,8 +2,8 @@ pipeline {
   agent any
   parameters {
     string(name: 'IMAGE_NAME', defaultValue: 'clever_noname.img', description: 'Output image file name')
-    string(name: 'GWBT_RELEASE_TAG_NAME', defaultValue: "master", description: 'Release tag name')
-    string(name: 'IMAGE_VERSION', defaultValue: "${params.GWBT_RELEASE_TAG_NAME}", description: 'Image version')
+    string(name: 'GWBT_REF', defaultValue: 'master', description: 'Checkout ref-param')
+    string(name: 'IMAGE_VERSION', defaultValue: 'no_version', description: 'Image version')
 
     string(name: 'BUILD_DIR', defaultValue: '/mnt/hdd_builder/workspace', description: 'Build workspace')
     string(name: 'MOUNT_POINT', defaultValue: '/mnt/hdd_builder/image', description: 'Mount point')
@@ -32,43 +32,43 @@ pipeline {
     }
     stage('Initialize image') {
       environment {
-        EXECUTE_FILE = 'scripts/init_image.sh'
+        EXECUTE_FILE = 'image_builder/scripts/init_image.sh'
       }
       // TODO: Transfer apps.sh initialisation code here
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/image_builder/$EXECUTE_FILE ${params.IMAGE_VERSION} \$(basename ${params.RPI_DONWLOAD_URL})"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.IMAGE_VERSION} \$(basename ${params.RPI_DONWLOAD_URL})"
       }
     }
     stage('Hardware setup') {
       environment {
-        EXECUTE_FILE = 'scripts/hardware_setup.sh'
+        EXECUTE_FILE = 'image_builder/scripts/hardware_setup.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/image_builder/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Software install') {
       environment {
-        EXECUTE_FILE = 'scripts/software_install.sh'
+        EXECUTE_FILE = 'image_builder/scripts/software_install.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/image_builder/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Network setup') {
       environment {
-        EXECUTE_FILE = 'scripts/network_setup.sh'
+        EXECUTE_FILE = 'image_builder/scripts/network_setup.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/image_builder/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Install ROS') {
       environment {
-        EXECUTE_FILE = 'scripts/ros_install.sh'
+        EXECUTE_FILE = 'image_builder/scripts/ros_install.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/image_builder/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
