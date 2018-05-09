@@ -383,7 +383,10 @@ def get_telemetry(req):
         res['vx'] = linear.vector.x
         res['vy'] = linear.vector.y
         res['vz'] = linear.vector.z
-        # TODO pitch_rate, roll_rate, yaw_rate
+
+        res['yaw_rate'] = velocity.twist.angular.z
+        res['pitch_rate'] = velocity.twist.angular.y
+        res['roll_rate'] = velocity.twist.angular.x
 
     if global_position and stamp - global_position.header.stamp < rospy.Duration(5):
         res['lat'] = global_position.latitude
