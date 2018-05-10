@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Resize FS') {
       environment {
-        SIZE = '8G'
+        SIZE = '7G'
       }
       steps {
         sh "$WORKSPACE/image_builder/image_config.sh resize_fs $SIZE ${params.BUILD_DIR} ${params.IMAGE_NAME}"
