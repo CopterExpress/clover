@@ -368,11 +368,9 @@ def get_telemetry(req):
         res['x'] = p.pose.position.x
         res['y'] = p.pose.position.y
         res['z'] = p.pose.position.z
-        # Get yaw in the request's frame_in
-        _, _, res['yaw'] = euler_from_orientation(p.pose.orientation)
-        # Calculate pitch and roll as angles between the pose and fcu_horiz
-        attitude_pose = tf_buffer.transform(pose, 'fcu_horiz', TRANSFORM_TIMEOUT)
-        res['roll'], res['pitch'], _ = euler_from_orientation(attitude_pose.pose.orientation)
+
+        # Calculate roll pitch and yaw as Tait-Bryan angles, order z-y-x
+        res['yaw'], res['pitch'], res['roll'] = euler_from_orientation(p.pose.orientation, axes='rzyx')
 
     if velocity:
         v = Vector3Stamped()
