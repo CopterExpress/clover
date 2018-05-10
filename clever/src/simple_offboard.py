@@ -188,7 +188,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=setpoint,
-                             yaw=euler_from_orientation(current_nav_finish.pose.orientation)[2] - math.pi / 2,
+                             yaw=euler_from_orientation(current_nav_finish.pose.orientation, 'szyx')[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -207,7 +207,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2,
+                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -225,7 +225,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              velocity=vector_local.vector,
-                             yaw=euler_from_orientation(pose_local.pose.orientation)[2] - math.pi / 2,
+                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
