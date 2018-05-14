@@ -63,7 +63,7 @@ resize_fs() {
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
-    && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
+    && echo ", +" | sfdisk -N ${ROOT_PARTITION} $DEV_IMAGE \
     && sleep 0.5 \
     && losetup -d $DEV_IMAGE \
     && sleep 0.5 \
