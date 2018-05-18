@@ -17,7 +17,7 @@
 
             <!-- gcs bridge -->
             <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
-            <param name="gcs_url" value="udp://@192.168.11.14:14550" if="$(eval gcs_bridge == 'udp')"/> <!-- TODO: fix -->
+            <param name="gcs_url" value="udp://0.0.0.0:14550@14550" if="$(eval gcs_bridge == 'udp')"/>
             <param name="gcs_url" value="udp-b://192.168.11.1:14550@" if="$(eval gcs_bridge == 'udp-b')"/>
             <param name="gcs_url" value="" if="$(eval not gcs_bridge)"/>
 
