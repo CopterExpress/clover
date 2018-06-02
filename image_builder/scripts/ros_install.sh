@@ -124,7 +124,7 @@ echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws\033[0m\033[0m"
 mkdir -p /home/pi/catkin_ws/src \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
-  && catkin init \
+  && catkin_init_workspace \
   && wstool init /home/pi/catkin_ws/src
 
 echo -e "\033[0;31m\033[1m$(date) | #13 Installing CLEVER-BUNDLE\033[0m\033[0m"
