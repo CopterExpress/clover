@@ -12,6 +12,9 @@ pipeline {
     // TODO: Add mirrorparameters
 
     string(name: 'GWBT_URL', defaultValue: 'https://github.com/CopterExpress/clever.git')
+
+    // Experimental function
+    booleanParam(name: 'SHRINK', defaultValue: false, description: 'SHRINK IMAGE')
   }
   environment {
     DEBIAN_FRONTEND = 'noninteractive'
@@ -76,5 +79,11 @@ pipeline {
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
+    stage('Shrink image') {
+      when { expression { return params.SHRINK } }
+      steps {
+        sh "$WORKSPACE/image_builder/autosizer.sh ${params.BUILD_DIR}/${params.IMAGE_NAME}"
+      }
+    }
   }
 }
