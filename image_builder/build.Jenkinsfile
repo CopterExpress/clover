@@ -29,7 +29,7 @@ pipeline {
         SIZE = '7G'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh resize_fs $SIZE ${params.BUILD_DIR} ${params.IMAGE_NAME}"
+        sh "$WORKSPACE/image_builder/image_config.sh resize_fs ${params.BUILD_DIR}/${params.IMAGE_NAME} $SIZE"
       }
     }
     stage('Initialize image') {

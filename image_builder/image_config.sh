@@ -32,7 +32,7 @@ get_image() {
 resize_fs() {
 
   # STATIC FUNCTION
-  # TEMPLATE: resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
+  # TEMPLATE: resize_fs $IMAGE_PATH $SIZE
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -58,16 +58,16 @@ resize_fs() {
   # TODO: Check sfdisk exit code
 
   echo -e "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
-    && truncate -s$1 $2/$3 \
-    && echo "Mount loop-image: $2/$3" \
-    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && truncate -s$2 $1 \
+    && echo "Mount loop-image: $1" \
+    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
     && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
     && sleep 0.5 \
     && losetup -d $DEV_IMAGE \
     && sleep 0.5 \
-    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
     && e2fsck -fvy "${DEV_IMAGE}p${ROOT_PARTITION}" \
@@ -393,8 +393,8 @@ case "$1" in
     get_image $2 $3 $4;;
 
   resize_fs)
-  # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
-    resize_fs $2 $3 $4 $5;;
+  # resize_fs $IMAGE_PATH $SIZE
+    resize_fs $2 $3;;
 
   publish_image)
   # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
