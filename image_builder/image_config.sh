@@ -79,25 +79,6 @@ resize_fs() {
   set -e
 }
 
-burn_image() {
-
-# STATIC FUNCTION
-# TEMPLATE: burn_image $IMAGE_PATH $MICROSD_DEV
-
-  echo -e "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
-    && dd if=$1 of=$2 \
-    && echo -e "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
-}
-
-burn_and_reboot() {
-
-# STATIC FUNCTION
-# TEMPLATE: burn_and_reboot $IMAGE_PATH $MICROSD_DEV
-
-  burn_image $1 $2 \
-    && reboot
-}
-
 mount_system() {
 
   # STATIC FUNCTION
@@ -268,51 +249,6 @@ umount_system() {
   losetup -d $2
 }
 
-install_docker() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT
-
-  # https://askubuntu.com/questions/485567/unexpected-end-of-file
-  mount_system $1 $2 << EOF
-#!/bin/bash
-# https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-curl -sSL https://get.docker.com | sh
-usermod -aG docker pi
-systemctl enable docker
-service docker start
-docker pull smirart/rpi-ros:sshd
-docker run -di --restart unless-stopped -p 192.168.0.121:2202:22 -t smirart/rpi-ros:sshd
-EOF
-}
-
-test_docker() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: test_docker $IMAGE $MOUNT_POINT
-
-  mount_system $1 $2 << EOF
-#!/bin/bash
-# https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-service docker start
-sleep 1
-docker images
-docker ps -a
-EOF
-}
-
-# очистить history
-# https://askubuntu.com/questions/191999/how-to-clear-bash-history-completely
-# cat /dev/null > ~/.bash_history && history -c && exit
-#
-# screen in chroot
-# getty tty
-# https://stackoverflow.com/questions/19104894/screen-must-be-connected-to-a-terminal/25646444
-#
-# docker in chroot
-# service docker start
-# https://forums.docker.com/t/cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host/8925/17
-
 publish_image() {
 
 # STATIC FUNCTION
@@ -378,10 +314,6 @@ echo "\$4: $4"
 echo "\$5: $5"
 echo "\$6: $6"
 echo "\$7: $7"
-
-# test_docker
-# install_docker
-# burn_image
 
 case "$1" in
   mount_system)
