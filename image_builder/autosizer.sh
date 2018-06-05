@@ -14,10 +14,11 @@ fi
 if [[ -z $1 ]]; then
   echo "================================================================================"
   echo -e "\033[0;31m\033[1mAutomatic Image file resizer\033[0m\033[0m"
-  echo -e "\033[0;31m\033[1mDescription:\033[0m\033[0m This script shrink your image to 100MB free space"
+  echo -e "\033[0;31m\033[1mDescription:\033[0m\033[0m This script shrink your image to 10MiB free space"
+  echo -e "if you didn't set FREE_SPACE in MiB (see usage below)."
   echo -e "\033[0;31m\033[1mAuthors:\033[0m\033[0m Artem Smirnov @urpylka, SirLagz"
   echo
-  echo -e "\033[0;31m\033[1mUsage:\033[0m\033[0m ./autosizer.sh PATH_TO_IMAGE"
+  echo -e "\033[0;31m\033[1mUsage:\033[0m\033[0m ./autosizer.sh PATH_TO_IMAGE FREE_SPACE"
   echo
   echo -e "\033[0;31m\033[1mRequirements:\033[0m\033[0m parted, losetup, e2fsck, resize2fs, bc, truncate"
   echo "================================================================================"
@@ -59,12 +60,16 @@ set -e
 echo "================================================================================"
 minsize=`resize2fs -P $loopback | awk -F': ' '{ print $2 }'`
 #minsize=`resize2fs -P $loopback 2> /dev/null | awk -F': ' '{ print $2 }'`
-echo -e "\033[0;31m\033[1mMinsize: $minsize (4k)\033[0m\033[0m"
+echo -e "\033[0;31m\033[1mMinsize: $minsize (4KiB)\033[0m\033[0m"
 echo "================================================================================"
 
-# Add 100MB free space to image 4096 (bytes) * 25000 = 102,400,000
-minsize=`echo "$minsize+25000" | bc`
-echo -e "\033[0;31m\033[1mMinsize + 25000 (4k): $minsize (4k)\033[0m\033[0m"
+# Default add 10MiB free space to image, if $2 doesn't set
+FREE_SPACE=${2:-10}
+
+FREE_SPACE=$(($FREE_SPACE*1024*1024/4096))
+
+minsize=`echo "$minsize+$FREE_SPACE" | bc`
+echo -e "\033[0;31m\033[1mMinsize + $FREE_SPACE (4KiB): $minsize (4KiB)\033[0m\033[0m"
 echo "================================================================================"
 
 resize2fs -p $loopback $minsize
@@ -73,7 +78,7 @@ losetup -d $loopback
 
 echo "================================================================================"
 partnewsize=`echo "$minsize * 4096" | bc`
-echo -e "\033[0;31m\033[1mNew size of part: $minsize (4k) = $partnewsize (bytes)\033[0m\033[0m"
+echo -e "\033[0;31m\033[1mNew size of part: $minsize (4KiB) = $partnewsize (bytes)\033[0m\033[0m"
 echo "================================================================================"
 
 newpartend=`echo "$partstart + $partnewsize" | bc`
