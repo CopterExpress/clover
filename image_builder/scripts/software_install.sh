@@ -19,7 +19,7 @@ apt-get install --no-install-recommends -y \
   lsof \
   python-pip \
   git \
-  isc-dhcp-server \
+  dnsmasq \
   tmux \
   vim \
   ipython3 \

@@ -10,6 +10,8 @@ pipeline {
 
     string(name: 'RPI_DONWLOAD_URL', defaultValue: 'https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip')
     // TODO: Add mirrorparameters
+
+    string(name: 'GWBT_URL', defaultValue: 'https://github.com/CopterExpress/clever.git')
   }
   environment {
     DEBIAN_FRONTEND = 'noninteractive'
