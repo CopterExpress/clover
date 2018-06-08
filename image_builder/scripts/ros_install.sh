@@ -119,18 +119,9 @@ echo -e "\033[0;31m\033[1m$(date) | #10 Building packages on 1 thread\033[0m\033
 # TODO: Can we increase threads number with HDD swap?
 cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j1 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
-echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #11 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
 
-mkdir -p /home/pi/catkin_ws/src \
-  && cd /home/pi/catkin_ws \
-  && . /opt/ros/kinetic/setup.sh \
-  && catkin_init_workspace \
-  && wstool init /home/pi/catkin_ws/src
-
-echo -e "\033[0;31m\033[1m$(date) | #13 Installing CLEVER-BUNDLE\033[0m\033[0m"
-
-cd /home/pi/catkin_ws/src \
-  && git clone https://github.com/CopterExpress/clever.git clever \
+git clone https://github.com/CopterExpress/clever.git /home/pi/catkin_ws/src/clever \
   && pip install wheel \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
@@ -139,7 +130,7 @@ cd /home/pi/catkin_ws/src \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 
-echo -e "\033[0;31m\033[1m$(date) | #14 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #12 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 
 # https://github.com/jacksonliam/mjpg-streamer
 
@@ -149,7 +140,7 @@ cd /home/pi \
   && make \
   && make install
 
-echo -e "\033[0;31m\033[1m$(date) | #15 Adding ENV vars\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #13 Adding ENV vars\033[0m\033[0m"
 
 # setup environment
 echo "LANG=C.UTF-8" >> /home/pi/.bashrc
@@ -157,12 +148,11 @@ echo "LC_ALL=C.UTF-8" >> /home/pi/.bashrc
 echo "ROS_DISTRO=kinetic" >> /home/pi/.bashrc
 echo "export ROS_IP=192.168.11.1" >> /home/pi/.bashrc
 
-echo "source /opt/ros/kinetic/setup.bash" >> /home/pi/.bashrc \
-  && echo "source /home/pi/catkin_ws/devel/setup.bash" >> /home/pi/.bashrc
+echo "source /opt/ros/kinetic/setup.bash" >> /home/pi/.bashrc
 
 chown -Rf pi:pi /home/pi
 
-#echo -e "\033[0;31m\033[1m$(date) | #16 Removing local apt mirror\033[0m\033[0m"
+#echo -e "\033[0;31m\033[1m$(date) | #14 Removing local apt mirror\033[0m\033[0m"
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
 # Clean apt cache
@@ -170,4 +160,4 @@ apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
-echo -e "\033[0;31m\033[1m$(date) | #16 END of ROS INSTALLATION\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #15 END of ROS INSTALLATION\033[0m\033[0m"
