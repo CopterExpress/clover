@@ -25,4 +25,9 @@ apt-get install --no-install-recommends -y \
   ipython3 \
   python3-pip
 
+# vim settings
+echo "set mouse-=a
+syntax on
+" > /home/pi/.vimrc
+
 echo -e "\033[0;31m\033[1m$(date) | End of network installation\033[0m\033[0m"
