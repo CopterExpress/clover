@@ -24,6 +24,7 @@ class ViewController: UIViewController, WKScriptMessageHandler {
         UIApplication.shared.isIdleTimerDisabled = true
 
         // Setup webview event handlers
+        webView.scrollView.bounces = false;
         webView.configuration.userContentController.add(self, name: "control")
         webView.configuration.userContentController.add(self, name: "controlStart")
         webView.configuration.userContentController.add(self, name: "lowBattery")
