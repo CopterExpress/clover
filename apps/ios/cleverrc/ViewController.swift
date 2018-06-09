@@ -10,12 +10,13 @@ import UIKit
 import WebKit
 import SwiftSocket
 import NotificationBannerSwift
+import AudioToolbox.AudioServices
 
 class ViewController: UIViewController, WKScriptMessageHandler {
     @IBOutlet weak var webView: WKWebView!
     let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
     let notificationGenerator = UINotificationFeedbackGenerator()
-    let udpSocket = UDPClient(address:"255.255.255.255", port: 35602)
+    let udpSocket = UDPClient(address: "255.255.255.255", port: 35602)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ class ViewController: UIViewController, WKScriptMessageHandler {
         } else if (message.name == "lowBattery") {
             // Got low battery notification
             print("Low battery notification")
-            notificationGenerator.notificationOccurred(.warning)
+            tapticNotify()
         } else if (message.name == "notification") {
             // Got notification message
             print(message)
@@ -69,6 +70,24 @@ class ViewController: UIViewController, WKScriptMessageHandler {
             } else {
                 let banner = NotificationBanner(title: m["msg"] as! String, style: .danger)
                 banner.show()
+            }
+        }
+    }
+
+    func tapticNotify() {
+        if let feedbackSupportLevel = UIDevice.current.value(forKey: "_feedbackSupportLevel") as? Int {
+            switch feedbackSupportLevel {
+            case 2:
+                // 2nd Generation Taptic Engine w/ Haptic Feedback (iPhone 7/7+)
+                notificationGenerator.notificationOccurred(.warning)
+            case 1:
+                // 1st Generation Taptic Engine (iPhone 6S/6S+)
+                let peek = SystemSoundID(1519)
+                AudioServicesPlaySystemSound(peek)
+            case 0:
+                // No Taptic Engine
+                break
+            default: break
             }
         }
     }
