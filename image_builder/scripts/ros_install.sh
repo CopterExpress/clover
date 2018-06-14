@@ -119,7 +119,11 @@ echo -e "\033[0;31m\033[1m$(date) | #10 Building packages on 1 thread\033[0m\033
 # TODO: Can we increase threads number with HDD swap?
 cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j1 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
-echo -e "\033[0;31m\033[1m$(date) | #11 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #11 Remove build_isolated & devel_isolated from ros_catkin_ws\033[0m\033[0m"
+
+rm -rf /home/pi/ros_catkin_ws/build_isolated /home/pi/ros_catkin_ws/devel_isolated
+
+echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
 
 git clone https://github.com/CopterExpress/clever.git /home/pi/catkin_ws/src/clever \
   && pip install wheel \
@@ -130,7 +134,11 @@ git clone https://github.com/CopterExpress/clever.git /home/pi/catkin_ws/src/cle
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 
-echo -e "\033[0;31m\033[1m$(date) | #12 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #13 Remove build & devel from catkin_ws\033[0m\033[0m"
+
+rm -rf /home/pi/catkin_ws/build /home/pi/catkin_ws/devel
+
+echo -e "\033[0;31m\033[1m$(date) | #14 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 
 # https://github.com/jacksonliam/mjpg-streamer
 
@@ -140,7 +148,7 @@ cd /home/pi \
   && make \
   && make install
 
-echo -e "\033[0;31m\033[1m$(date) | #13 Adding ENV vars\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #15 Adding ENV vars\033[0m\033[0m"
 
 # setup environment
 echo "LANG=C.UTF-8" >> /home/pi/.bashrc
@@ -160,4 +168,4 @@ apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
-echo -e "\033[0;31m\033[1m$(date) | #15 END of ROS INSTALLATION\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #16 END of ROS INSTALLATION\033[0m\033[0m"
