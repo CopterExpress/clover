@@ -15,7 +15,7 @@ echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\0
 
 # Install a tool that apt-key uses to add ROS repository key
 # http://wpblogger.su/tags/apt/
-apt-get install dirmngr
+apt-get install --no-install-recommends -y dirmngr
 # setup keys
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
