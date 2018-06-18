@@ -148,15 +148,15 @@ cd /home/pi \
   && make \
   && make install
 
-echo -e "\033[0;31m\033[1m$(date) | #15 Adding ENV vars\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #15 Setup environment\033[0m\033[0m"
 
-# setup environment
-echo "LANG=C.UTF-8" >> /home/pi/.bashrc
-echo "LC_ALL=C.UTF-8" >> /home/pi/.bashrc
-echo "ROS_DISTRO=kinetic" >> /home/pi/.bashrc
-echo "export ROS_IP=192.168.11.1" >> /home/pi/.bashrc
-
-echo "source /opt/ros/kinetic/setup.bash" >> /home/pi/.bashrc
+cat <<EOF | tee -a /home/pi/.bashrc > /dev/null
+LANG=C.UTF-8
+LC_ALL=C.UTF-8
+ROS_DISTRO=kinetic
+export ROS_IP=192.168.11.1
+source /opt/ros/kinetic/setup.bash
+EOF
 
 chown -Rf pi:pi /home/pi
 
