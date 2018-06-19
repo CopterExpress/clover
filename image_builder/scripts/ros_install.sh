@@ -31,15 +31,11 @@ apt-get update
 echo -e "\033[0;31m\033[1m$(date) | #3 Installing wget, unzip, python-rosdep, python-rosinstall-generator, python-wstool, python-rosinstall, build-essential, cmake\033[0m\033[0m"
 
 apt-get install --no-install-recommends -y \
-  wget \
-  unzip \
   python-rosdep \
   python-rosinstall-generator \
   python-wstool \
   python-rosinstall \
-  build-essential \
-  cmake \
-  libjpeg8-dev
+  build-essential
 
 echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0m"
 
@@ -122,6 +118,7 @@ cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j1
 echo -e "\033[0;31m\033[1m$(date) | #11 Remove build_isolated & devel_isolated from ros_catkin_ws\033[0m\033[0m"
 
 rm -rf /home/pi/ros_catkin_ws/build_isolated /home/pi/ros_catkin_ws/devel_isolated
+chown -Rf pi:pi /home/pi/ros_catkin_ws
 
 echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
 
@@ -137,18 +134,9 @@ git clone https://github.com/CopterExpress/clever.git /home/pi/catkin_ws/src/cle
 echo -e "\033[0;31m\033[1m$(date) | #13 Remove build & devel from catkin_ws\033[0m\033[0m"
 
 rm -rf /home/pi/catkin_ws/build /home/pi/catkin_ws/devel
+chown -Rf pi:pi /home/pi/catkin_ws
 
-echo -e "\033[0;31m\033[1m$(date) | #14 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
-
-# https://github.com/jacksonliam/mjpg-streamer
-
-cd /home/pi \
-  && git clone https://github.com/jacksonliam/mjpg-streamer.git \
-  && cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
-  && make \
-  && make install
-
-echo -e "\033[0;31m\033[1m$(date) | #15 Setup environment\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #14 Setup ROS environment\033[0m\033[0m"
 
 cat <<EOF | tee -a /home/pi/.bashrc > /dev/null
 LANG=C.UTF-8
@@ -158,8 +146,6 @@ export ROS_IP=192.168.11.1
 source /opt/ros/kinetic/setup.bash
 EOF
 
-chown -Rf pi:pi /home/pi
-
 #echo -e "\033[0;31m\033[1m$(date) | #14 Removing local apt mirror\033[0m\033[0m"
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
@@ -168,4 +154,4 @@ apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
-echo -e "\033[0;31m\033[1m$(date) | #16 END of ROS INSTALLATION\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #15 END of ROS INSTALLATION\033[0m\033[0m"
