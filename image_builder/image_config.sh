@@ -212,6 +212,59 @@ execute() {
   umount_system $2 $DEV_IMAGE
 }
 
+copy_to_chroot() {
+
+  # STATIC FUNCTION
+  # TEMPLATE: copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
+
+  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  local DEV_IMAGE=$(losetup -Pf $1 --show)
+  sleep 0.5
+
+  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
+
+  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo "Mounting /proc in chroot... "
+  if [ ! -d $2/proc ] ; then
+    mkdir -p $2/proc
+    echo "Created $2/proc"
+  fi
+  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+    && echo "OK"
+
+  echo "Mounting /sys in chroot... "
+  if [ ! -d $2/sys ] ; then
+    mkdir -p $2/sys
+    echo "Created $2/sys"
+  fi
+  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+    && echo "OK"
+
+  echo "Mounting /dev/ and /dev/pts in chroot... " \
+    && mkdir -p -m 755 $2/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && echo "OK"
+
+  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
+    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+
+  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
+  script_name=$(basename $3)
+  script_path_root="$2/root/$script_name"
+  # Copy script into chroot fs
+  # TODO: Find more suitable location for temporary script storage
+  cp "$3" "$script_path_root"
+
+  umount_system $2 $DEV_IMAGE
+}
+
 umount_system() {
 
   # STATIC FUNCTION
@@ -335,6 +388,10 @@ case "$1" in
   execute)
   # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
     execute $2 $3 $4 ${@:5};;
+
+  copy_to_chroot)
+  # copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+    copy_to_chroot $2 $3 $4;;
 
   *)
     echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;

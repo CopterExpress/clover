@@ -9,7 +9,7 @@ set -e
 # ros http://wiki.ros.org/action/fullsearch/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
 # maintainer @urpylka
 
-echo -e "\033[0;31m\033[1m$(date) | #0 Installing ROS\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | Installing ROS\033[0m\033[0m"
 
 echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\033[0m\033[0m"
 
@@ -42,21 +42,31 @@ echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0
 # bootstrap rosdep
 rosdep init && rosdep update
 
-echo -e "\033[0;31m\033[1m$(date) | #5 Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall\033[0m\033[0m"
+# If $2 not used, then discover packages
+if [[ -z $2 ]];
+then
+  echo -e "\033[0;31m\033[1m$(date) | #5 Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall\033[0m\033[0m"
 
-# create catkin workspace
-mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-    && rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall \
-    && wstool init src kinetic-ros_comm-wet.rosinstall
+  # create ros catkin workspace
+  mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
+      && rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall \
+      && wstool init src kinetic-ros_comm-wet.rosinstall
 
-echo -e "\033[0;31m\033[1m$(date) | #6 Preparing other ROS-packages to kinetic-custom_ros.rosinstall\033[0m\033[0m"
+  echo -e "\033[0;31m\033[1m$(date) | #6 Preparing other ROS-packages to kinetic-custom_ros.rosinstall\033[0m\033[0m"
 
-cd /home/pi/ros_catkin_ws \
-  && rosinstall_generator \
-  actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common cv_bridge cv_camera diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs web_video_server xmlrpcpp mavros opencv3 mavros_extras \
-  --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall \
-  && wstool merge -t src kinetic-custom_ros.rosinstall \
-  && wstool update -t src
+  cd /home/pi/ros_catkin_ws \
+    && rosinstall_generator \
+    actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common cv_bridge cv_camera diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs web_video_server xmlrpcpp mavros opencv3 mavros_extras \
+    --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall \
+    && wstool merge -t src kinetic-custom_ros.rosinstall \
+    && wstool update -t src
+else
+  echo -e "\033[0;31m\033[1m$(date) | #5 Creating manual ros_catkin_ws\033[0m\033[0m"
+
+  mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
+    && mv /root/kinetic-ros-coex.rosinstall kinetic-ros-coex.rosinstall \
+    && wstool init src kinetic-ros-coex.rosinstall
+fi
 
 echo -e "\033[0;31m\033[1m$(date) | #7 Installing dependencies apps with rosdep\033[0m\033[0m"
 cd /home/pi/ros_catkin_ws
@@ -87,7 +97,6 @@ set -e
 # Jenkins job will fail if this condition is not true
 [[ "$install_ok" == true ]]
 echo -e "\033[0;31m\033[1m$(date) | End of rosdep install\033[0m\033[0m"
-
 
 echo -e "\033[0;31m\033[1m$(date) | #8 Refactoring usb_cam in SRC\033[0m\033[0m"
 
@@ -122,7 +131,7 @@ chown -Rf pi:pi /home/pi/ros_catkin_ws
 
 echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
 
-git clone https://github.com/CopterExpress/clever.git /home/pi/catkin_ws/src/clever \
+git clone $1 /home/pi/catkin_ws/src/clever \
   && pip install wheel \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
@@ -154,4 +163,4 @@ apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
-echo -e "\033[0;31m\033[1m$(date) | #15 END of ROS INSTALLATION\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | END of ROS INSTALLATION\033[0m\033[0m"
