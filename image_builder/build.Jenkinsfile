@@ -12,6 +12,10 @@ pipeline {
     // TODO: Add mirrorparameters
 
     string(name: 'GWBT_URL', defaultValue: 'https://github.com/CopterExpress/clever.git')
+
+    // Experimental function
+    booleanParam(name: 'SHRINK', defaultValue: false, description: 'SHRINK IMAGE')
+    booleanParam(name: 'DISCOVER_ROS_PACKAGES', defaultValue: false, description: 'DISCOVER ROS PACKAGES')
   }
   environment {
     DEBIAN_FRONTEND = 'noninteractive'
@@ -29,7 +33,7 @@ pipeline {
         SIZE = '7G'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh resize_fs $SIZE ${params.BUILD_DIR} ${params.IMAGE_NAME}"
+        sh "$WORKSPACE/image_builder/image_config.sh resize_fs ${params.BUILD_DIR}/${params.IMAGE_NAME} $SIZE"
       }
     }
     stage('Initialize image') {
@@ -68,11 +72,19 @@ pipeline {
     stage('Install ROS') {
       environment {
         EXECUTE_FILE = 'image_builder/scripts/ros_install.sh'
+        MOVE_FILE = 'image_builder/kinetic-ros-coex.rosinstall'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
+        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$MOVE_FILE; fi"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.DISCOVER_ROS_PACKAGES}"
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
+    stage('Shrink image') {
+      when { expression { return params.SHRINK } }
+      steps {
+        sh "$WORKSPACE/image_builder/autosizer.sh ${params.BUILD_DIR}/${params.IMAGE_NAME}"
+      }
+    }
   }
 }
