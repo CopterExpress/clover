@@ -140,9 +140,9 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service \
   && systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
 
-echo -e "\033[0;31m\033[1m$(date) | #13 Remove build & devel from catkin_ws\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #13 Remove build dir from catkin_ws\033[0m\033[0m"
 
-rm -rf /home/pi/catkin_ws/build /home/pi/catkin_ws/devel
+rm -rf /home/pi/catkin_ws/build
 chown -Rf pi:pi /home/pi/catkin_ws
 
 echo -e "\033[0;31m\033[1m$(date) | #14 Setup ROS environment\033[0m\033[0m"
@@ -153,6 +153,7 @@ LC_ALL=C.UTF-8
 ROS_DISTRO=kinetic
 export ROS_IP=192.168.11.1
 source /opt/ros/kinetic/setup.bash
+source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
 #echo -e "\033[0;31m\033[1m$(date) | #14 Removing local apt mirror\033[0m\033[0m"
