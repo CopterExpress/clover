@@ -42,8 +42,8 @@ echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0
 # bootstrap rosdep
 rosdep init && rosdep update
 
-# If $2 not used, then discover packages
-if [[ -z $2 ]];
+# If $2 = false, then discover packages
+if [ "$2" = "false" ];
 then
   echo -e "\033[0;31m\033[1m$(date) | #5 Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall\033[0m\033[0m"
 

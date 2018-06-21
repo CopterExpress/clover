@@ -15,6 +15,7 @@ pipeline {
 
     // Experimental function
     booleanParam(name: 'SHRINK', defaultValue: false, description: 'SHRINK IMAGE')
+    booleanParam(name: 'DISCOVER_ROS_PACKAGES', defaultValue: false, description: 'DISCOVER ROS PACKAGES')
   }
   environment {
     DEBIAN_FRONTEND = 'noninteractive'
@@ -74,8 +75,8 @@ pipeline {
         MOVE_FILE = 'image_builder/kinetic-ros-coex.rosinstall'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$MOVE_FILE"
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} DONT_DISCOVER"
+        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$MOVE_FILE; fi"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.DISCOVER_ROS_PACKAGES}"
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
