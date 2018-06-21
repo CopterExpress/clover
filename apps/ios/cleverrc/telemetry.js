@@ -65,8 +65,8 @@ new ROSLIB.Topic({
 	name: '/rosout_agg',
 	messageType: 'rosgraph_msgs/Log'
 }).subscribe(function(message) {
-	var BLACKLIST = ['CMD: ', 'PR: ', 'DROPPED'];
-	if(message.level >= 4) {
+	var BLACKLIST = ['CMD: ', 'PR: ', 'DROPPED', 'Clock skew detected', 'MANUAL CONTROL LOST'];
+	if (message.level >= 4) {
 		if (BLACKLIST.some(function(e) {
 				return message.msg.indexOf(e) != -1;
 			})) {
