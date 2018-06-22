@@ -15,7 +15,7 @@ echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\0
 
 # Install a tool that apt-key uses to add ROS repository key
 # http://wpblogger.su/tags/apt/
-apt-get install --no-install-recommends -y dirmngr
+apt-get install --no-install-recommends -y dirmngr=2.1.18-8~deb9u2
 # setup keys
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
@@ -31,11 +31,11 @@ apt-get update
 echo -e "\033[0;31m\033[1m$(date) | #3 Installing wget, unzip, python-rosdep, python-rosinstall-generator, python-wstool, python-rosinstall, build-essential, cmake\033[0m\033[0m"
 
 apt-get install --no-install-recommends -y \
-  python-rosdep \
-  python-rosinstall-generator \
-  python-wstool \
-  python-rosinstall \
-  build-essential
+  python-rosdep=0.12.2-1 \
+  python-rosinstall-generator=0.1.14-1 \
+  python-wstool=0.1.17-1 \
+  python-rosinstall=0.7.8-1 \
+  build-essential=12.3
 
 echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0m"
 
