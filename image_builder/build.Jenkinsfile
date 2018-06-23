@@ -81,9 +81,13 @@ pipeline {
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
     stage('Shrink image') {
+      environment {
+        EXECUTE_FILE = 'image_builder/scripts/change_boot_part.sh'
+      }
       when { expression { return params.SHRINK } }
       steps {
         sh "$WORKSPACE/image_builder/autosizer.sh ${params.BUILD_DIR}/${params.IMAGE_NAME}"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
   }
