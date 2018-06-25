@@ -14,7 +14,7 @@ pipeline {
     string(name: 'GWBT_URL', defaultValue: 'https://github.com/CopterExpress/clever.git')
 
     // Experimental function
-    booleanParam(name: 'SHRINK', defaultValue: false, description: 'SHRINK IMAGE')
+    booleanParam(name: 'SHRINK', defaultValue: true, description: 'SHRINK IMAGE')
     booleanParam(name: 'DISCOVER_ROS_PACKAGES', defaultValue: false, description: 'DISCOVER ROS PACKAGES')
   }
   environment {
