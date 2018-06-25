@@ -14,7 +14,7 @@ pipeline {
     string(name: 'GWBT_URL', defaultValue: 'https://github.com/CopterExpress/clever.git')
 
     // Experimental function
-    booleanParam(name: 'SHRINK', defaultValue: false, description: 'SHRINK IMAGE')
+    booleanParam(name: 'SHRINK', defaultValue: true, description: 'SHRINK IMAGE')
     booleanParam(name: 'DISCOVER_ROS_PACKAGES', defaultValue: false, description: 'DISCOVER ROS PACKAGES')
   }
   environment {
@@ -81,9 +81,13 @@ pipeline {
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
     stage('Shrink image') {
+      environment {
+        EXECUTE_FILE = 'image_builder/scripts/change_boot_part.sh'
+      }
       when { expression { return params.SHRINK } }
       steps {
         sh "$WORKSPACE/image_builder/autosizer.sh ${params.BUILD_DIR}/${params.IMAGE_NAME}"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
       }
     }
   }
