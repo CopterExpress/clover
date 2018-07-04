@@ -348,6 +348,7 @@ def get_telemetry(req):
         'z': float('nan'),
         'lat': float('nan'),
         'lon': float('nan'),
+        'alt': float('nan'),
         'vx': float('nan'),
         'vy': float('nan'),
         'vz': float('nan'),
@@ -389,6 +390,7 @@ def get_telemetry(req):
     if global_position and stamp - global_position.header.stamp < rospy.Duration(5):
         res['lat'] = global_position.latitude
         res['lon'] = global_position.longitude
+        res['alt'] = global_position.altitude
 
     if state:
         res['connected'] = state.connected

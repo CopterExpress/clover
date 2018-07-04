@@ -68,9 +68,10 @@ release = rospy.ServiceProxy('release', Trigger)
 * `frame_id` – фрейм;
 * `connected` – есть ли подключение к <abbr title="Flight Control Unit, полетный контроллер">FCU</abbr>;
 * `armed` – состояние `armed` винтов (винты включены, если true);
-* `mode` - текущий [полетный режим](modes.md);
+* `mode` – текущий [полетный режим](modes.md);
 * `x, y, z` – локальная позиция коптера *(м)*;
-* `lat, lon` – широта, долгота *(градусы)*, необходимо наличие [gps](gps.md));
+* `lat, lon` – широта, долгота *(градусы)*, необходимо наличие [GPS](gps.md);
+* `alt` – высота в глобальной системе координат (стандарт [WGS-84](https://ru.wikipedia.org/wiki/WGS_84), не <abbr title="Above Mean Sea Level, выше среднего уровня моря">AMSL</abbr>!), необходимо наличие [GPS](gps.md);
 * `vx, vy, vz` – скорость коптера *(м/с)*;
 * `pitch` – угол по тангажу *(радианы)*;
 * `roll` – угол по крену *(радианы)*;
