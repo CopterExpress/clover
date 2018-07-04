@@ -32,7 +32,7 @@ get_image() {
 resize_fs() {
 
   # STATIC FUNCTION
-  # TEMPLATE: resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
+  # TEMPLATE: resize_fs $IMAGE_PATH $SIZE
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -58,16 +58,16 @@ resize_fs() {
   # TODO: Check sfdisk exit code
 
   echo -e "\033[0;31m\033[1mTruncate image\033[0m\033[0m" \
-    && truncate -s$1 $2/$3 \
-    && echo "Mount loop-image: $2/$3" \
-    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && truncate -s$2 $1 \
+    && echo "Mount loop-image: $1" \
+    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
-    && echo ", +" | sfdisk -N 2 $DEV_IMAGE \
+    && echo ", +" | sfdisk -N ${ROOT_PARTITION} $DEV_IMAGE \
     && sleep 0.5 \
     && losetup -d $DEV_IMAGE \
     && sleep 0.5 \
-    && local DEV_IMAGE=$(losetup -Pf $2/$3 --show) \
+    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mCheck & repair filesystem after expand partition\033[0m\033[0m" \
     && e2fsck -fvy "${DEV_IMAGE}p${ROOT_PARTITION}" \
@@ -77,25 +77,6 @@ resize_fs() {
     && losetup -d $DEV_IMAGE
 
   set -e
-}
-
-burn_image() {
-
-# STATIC FUNCTION
-# TEMPLATE: burn_image $IMAGE_PATH $MICROSD_DEV
-
-  echo -e "\033[0;31m\033[1mBurn image\033[0m\033[0m" \
-    && dd if=$1 of=$2 \
-    && echo -e "\033[0;31m\033[1mBurn image finished!\033[0m\033[0m"
-}
-
-burn_and_reboot() {
-
-# STATIC FUNCTION
-# TEMPLATE: burn_and_reboot $IMAGE_PATH $MICROSD_DEV
-
-  burn_image $1 $2 \
-    && reboot
 }
 
 mount_system() {
@@ -231,6 +212,59 @@ execute() {
   umount_system $2 $DEV_IMAGE
 }
 
+copy_to_chroot() {
+
+  # STATIC FUNCTION
+  # TEMPLATE: copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+
+  # Partitions numbers
+  local BOOT_PARTITION=1
+  local ROOT_PARTITION=2
+
+  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
+  local DEV_IMAGE=$(losetup -Pf $1 --show)
+  sleep 0.5
+
+  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
+
+  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
+  echo "Mounting /proc in chroot... "
+  if [ ! -d $2/proc ] ; then
+    mkdir -p $2/proc
+    echo "Created $2/proc"
+  fi
+  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+    && echo "OK"
+
+  echo "Mounting /sys in chroot... "
+  if [ ! -d $2/sys ] ; then
+    mkdir -p $2/sys
+    echo "Created $2/sys"
+  fi
+  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+    && echo "OK"
+
+  echo "Mounting /dev/ and /dev/pts in chroot... " \
+    && mkdir -p -m 755 $2/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && echo "OK"
+
+  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
+    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+
+  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
+  script_name=$(basename $3)
+  script_path_root="$2/root/$script_name"
+  # Copy script into chroot fs
+  # TODO: Find more suitable location for temporary script storage
+  cp "$3" "$script_path_root"
+
+  umount_system $2 $DEV_IMAGE
+}
+
 umount_system() {
 
   # STATIC FUNCTION
@@ -267,51 +301,6 @@ umount_system() {
   #losetup -d $DEV_IMAGE
   losetup -d $2
 }
-
-install_docker() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: install_docker $IMAGE $MOUNT_POINT
-
-  # https://askubuntu.com/questions/485567/unexpected-end-of-file
-  mount_system $1 $2 << EOF
-#!/bin/bash
-# https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-curl -sSL https://get.docker.com | sh
-usermod -aG docker pi
-systemctl enable docker
-service docker start
-docker pull smirart/rpi-ros:sshd
-docker run -di --restart unless-stopped -p 192.168.0.121:2202:22 -t smirart/rpi-ros:sshd
-EOF
-}
-
-test_docker() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: test_docker $IMAGE $MOUNT_POINT
-
-  mount_system $1 $2 << EOF
-#!/bin/bash
-# https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-service docker start
-sleep 1
-docker images
-docker ps -a
-EOF
-}
-
-# очистить history
-# https://askubuntu.com/questions/191999/how-to-clear-bash-history-completely
-# cat /dev/null > ~/.bash_history && history -c && exit
-#
-# screen in chroot
-# getty tty
-# https://stackoverflow.com/questions/19104894/screen-must-be-connected-to-a-terminal/25646444
-#
-# docker in chroot
-# service docker start
-# https://forums.docker.com/t/cannot-connect-to-the-docker-daemon-is-the-docker-daemon-running-on-this-host/8925/17
 
 publish_image() {
 
@@ -379,10 +368,6 @@ echo "\$5: $5"
 echo "\$6: $6"
 echo "\$7: $7"
 
-# test_docker
-# install_docker
-# burn_image
-
 case "$1" in
   mount_system)
   # mount_system $IMAGE $MOUNT_POINT
@@ -393,8 +378,8 @@ case "$1" in
     get_image $2 $3 $4;;
 
   resize_fs)
-  # resize_fs $SIZE $BUILD_DIR $IMAGE_NAME
-    resize_fs $2 $3 $4 $5;;
+  # resize_fs $IMAGE_PATH $SIZE
+    resize_fs $2 $3;;
 
   publish_image)
   # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
@@ -403,6 +388,10 @@ case "$1" in
   execute)
   # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
     execute $2 $3 $4 ${@:5};;
+
+  copy_to_chroot)
+  # copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+    copy_to_chroot $2 $3 $4;;
 
   *)
     echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;

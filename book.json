@@ -4,13 +4,16 @@
     "author": "Copter Express",
     "language": "ru",
     "root": "docs/",
-    "plugins": ["youtube", "richquotes", "versions"],
+    "plugins": ["youtube", "richquotes", "versions", "yametrika"],
     "pluginsConfig": {
         "disqus": {
             "shortName": "coex-clever"
         },
         "versions": {
             "type": "tags"
+        },
+        "yametrika": {
+            "id": 49359238
         }
     }
 }

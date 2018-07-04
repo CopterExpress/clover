@@ -6,7 +6,19 @@ sudo apt-get install unzip zip git python-pip jq curl
 sudo pip install YaDiskClient
 ```
 2. Mount HDD
-> TODO
+```bash
+nano /etc/fstab
+```
+```
+proc            /proc           proc    defaults          0       0
+PARTUUID=37665771-01  /boot           vfat    defaults          0       2
+PARTUUID=37665771-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+/dev/sdb1       none                    swap    sw              0       0
+/dev/sdb2       /mnt/hdd_system         ext4    defaults,acl    0       0
+/dev/sdb3       /mnt/hdd_builder        ext4    defaults,acl    0       0
+```
 
 3. Enable swap on HDD
 > TODO:

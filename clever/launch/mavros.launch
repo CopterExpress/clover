@@ -21,7 +21,7 @@
             <param name="gcs_url" value="udp-pb://192.168.11.1:14550@" if="$(eval gcs_bridge == 'udp-b')"/>
             <param name="gcs_url" value="" if="$(eval not gcs_bridge)"/>
             <param name="gcs_quiet_mode" value="true"/>
-            <param name="conn/timeout" value="20"/>
+            <param name="conn/timeout" value="10"/>
 
             <!-- default px4 params -->
             <rosparam command="load" file="$(find mavros)/launch/px4_config.yaml"/>
