@@ -4,17 +4,17 @@
 systemd
 ---
 
-Основная документация: https://wiki.archlinux.org/index.php/Systemd_(Русский).
+Основная документация: [https://wiki.archlinux.org/index.php/Systemd_(Русский)](https://wiki.archlinux.org/index.php/Systemd_(Русский)).
 
 Все автоматически стартуемое ПО Клевера запускается в виде systemd-сервиса `clever.service`.
 
-Сервис может быть перезапущен командой:
+Сервис может быть перезапущен командой `systemctl`:
 
 ```bash
 sudo systemctl restart clever
 ```
 
-Текстовый вывод ПО можно просмотреть с помощью команды journalctl:
+Текстовый вывод ПО можно просмотреть с помощью команды `journalctl`:
 
 ```bash
 journalctl -u clever
