@@ -26,6 +26,7 @@
 * [Визуализация с помощью rviz](rviz.md)
 * [Работа с SITL](sitl.md)
 * [Подключение GPS](gps.md)
+* [Автозапуск ПО](autolaunch.md)
 * [Использование 3G-модема](3g.md)
 * [Устройство сети RPi](network.md)
 * [Работа с логами PX4](flight_logs.md)
