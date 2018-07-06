@@ -25,7 +25,9 @@ apt-get install --no-install-recommends -y \
   cmake=3.7.2-1 \
   python-pip=9.0.1-2+rpt2 \
   python3-pip=9.0.1-2+rpt2 \
-  libjpeg8-dev=8d1-2
+  libjpeg8-dev=8d1-2 \
+  tcpdump \
+  libpoco-dev
   
 echo -e "\033[0;31m\033[1m$(date) | #2 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 # https://github.com/jacksonliam/mjpg-streamer
