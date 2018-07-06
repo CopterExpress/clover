@@ -7,93 +7,47 @@
 Учебно-методическое пособие
 ---------------------------
 
-[Урок 1. «Знакомство. Принципы проектирования и строение мультикоптеров»](metodmaterials.md)
+[Урок 1. «Знакомство. Принципы проектирования и строение мультикоптеров»](https://github.com/CopterExpress/clever/blob/master/docs/ https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 2. «Основы электричества»](metodmaterials.md)
+[Урок 2. «Основы электричества»](https://github.com/CopterExpress/clever/blob/master/docs/ https://github.com/CopterExpress/clever/blob/master/docs/ https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 3. «Теория пайки»](metodmaterials.md)
+[Урок 3. «Теория пайки»]( https://github.com/CopterExpress/clever/blob/master/docs/ https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 4. «Аэродинамика полета. Пропеллер»](metodmaterials.md)
+[Урок 4. «Аэродинамика полета. Пропеллер»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 5. «Основы электромагнетизма. Типы двигателей»](metodmaterials.md)
+[Урок 5. «Основы электромагнетизма. Типы двигателей»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 6. «Бесколлекторные двигатели и регуляторы их хода»](metodmaterials.md)
+[Урок 6. «Бесколлекторные двигатели и регуляторы их хода»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 7. «Принцип работы, типы и устройство аккумуляторов»](metodmaterials.md)
+[Урок 7. «Принцип работы, типы и устройство аккумуляторов»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 8. «Управление полётом мультикоптера. Принцип функционирования полетного контроллера. ПИД регуляторы»](metodmaterials.md)
+[Урок 8. «Управление полётом мультикоптера. Принцип функционирования полетного контроллера. ПИД регуляторы»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 9. «Основы радиосвязи. Принцип работы радиоаппаратуры управления»](metodmaterials.md)
+[Урок 9. «Основы радиосвязи. Принцип работы радиоаппаратуры управления»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 10. «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики и приёмники»](metodmaterials.md)
+[Урок 10. «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики и приёмники»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 11. «Техника безопасности при сборке и настройке коптеров, при подготовке к вылету. Техника безопасности при работе с аккумуляторами»](metodmaterials.md)
+[Урок 11. «Техника безопасности при сборке и настройке коптеров, при подготовке к вылету. Техника безопасности при работе с аккумуляторами»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 12. «Теория ручного визуального пилотирования»](metodmaterials.md)
+[Урок 12. «Теория ручного визуального пилотирования»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 13. «Техника безопасности при летной эксплуатации коптера»](metodmaterials.md)
+[Урок 13. «Техника безопасности при летной эксплуатации коптера»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 14. «Обучение лётному мастерству»](metodmaterials.md)
+[Урок 14. «Обучение лётному мастерству»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 15. «Основы радиоэлектроники, схемотехники и макетирования электрических схем»](metodmaterials.md)
+[Урок 15. «Основы радиоэлектроники, схемотехники и макетирования электрических схем»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 16. «Основы работы с аналоговым и цифровым сигналом»](metodmaterials.md)
+[Урок 16. «Основы работы с аналоговым и цифровым сигналом»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 17. «Основы работы с лабораторным оборудованием»](metodmaterials.md)
+[Урок 17. «Основы работы с лабораторным оборудованием»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 18. «Теория FPV полетов»](metodmaterials.md)
+[Урок 18. «Теория FPV полетов»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 19. «История автономных полетов. Развитие автопилотов в авиации»](metodmaterials.md)
+[Урок 19. «История автономных полетов. Развитие автопилотов в авиации»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 20. «Основы программирование на языке Python»](metodmaterials.md)
+[Урок 20. «Основы программирование на языке Python»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 21. «Знакомство с компьютером Raspberry Pi»](metodmaterials.md)
+[Урок 21. «Знакомство с компьютером Raspberry Pi»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-[Урок 22. «Управление автономным дроном: теория»](metodmaterials.md)
+[Урок 22. «Управление автономным дроном: теория»]( https://github.com/CopterExpress/clever/blob/master/docs/metodmaterials.md)
 
-Контрольные вопросы и тесты к разделам
-------------------
-
-[Урок 1. «Знакомство. Принципы проектирования и строение мультикоптеров»](tests.md)
-
-[Урок 2. «Основы электричества»](tests.md)
-
-[Урок 3. «Теория пайки»](tests.md)
-
-[Урок 4. «Аэродинамика полета. Пропеллер»](tests.md)
-
-[Урок 5. «Основы электромагнетизма. Типы двигателей»](tests.md)
-
-[Урок 6. «Бесколлекторные двигатели и регуляторы их хода»](tests.md)
-
-[Урок 7. «Принцип работы, типы и устройство аккумуляторов»](tests.md)
-
-[Урок 8. «Управление полётом мультикоптера. Принцип функционирования полетного контроллера. ПИД регуляторы»](tests.md)
-
-[Урок 9. «Основы радиосвязи. Принцип работы радиоаппаратуры управления»](tests.md)
-
-[Урок 10. «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики и приёмники»](tests.md)
-
-[Урок 11. «Техника безопасности при сборке и настройке коптеров, при подготовке к вылету. Техника безопасности при работе с аккумуляторами»](tests.md)
-
-[Урок 12. «Теория ручного визуального пилотирования»](tests.md)
-
-[Урок 13. «Техника безопасности при летной эксплуатации коптера»](tests.md)
-
-[Урок 14. «Обучение лётному мастерству»](tests.md)
-
-[Урок 15. «Основы радиоэлектроники, схемотехники и макетирования электрических схем»](tests.md)
-
-[Урок 16. «Основы работы с аналоговым и цифровым сигналом»](tests.md)
-
-[Урок 17. «Основы работы с лабораторным оборудованием»](tests.md)
-
-[Урок 18. «Теория FPV полетов»](tests.md)
-
-[Урок 19. «История автономных полетов. Развитие автопилотов в авиации»](tests.md)
-
-[Урок 20. «Основы программирование на языке Python»](tests.md)
-
-[Урок 21. «Знакомство с компьютером Raspberry Pi»](tests.md)
-
-[Урок 22. «Управление автономным дроном: теория»](tests.md)
