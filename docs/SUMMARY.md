@@ -9,6 +9,7 @@
 * [Подключение Raspberry Pi к PixHawk](connection.md)
 * [Подключение по Wi-Fi](wifi.md)
 * [Работа с QGroundControl через Wi-Fi](gcs_bridge.md)
+* [Прошивка PixHawk/PixRacer](firmware.md)
 * [SSH-доступ](ssh.md)
 * [Неисправности радиоаппаратуры](radioerrors.md)
 * [Безопасность](safety.md)
