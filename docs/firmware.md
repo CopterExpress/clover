@@ -10,7 +10,7 @@ PixHawk или PixRacer можно прошить, используя QGroundCon
 * `px4fmu-v2_default.px4` — прошивка для PixHawk с EKF2.
 * `px4fmu-v2_lpe.px4` — прошивка для PixHawk с LPE.
 * `px4fmu-v4_default.px4` — прошивка для PixRacer с EKF2 и LPE.
-* `px4fmu-v3_default.px4` — прошивка для более новых версий PixHawk (чип ревизии 3, см. илл.) с Bootloader v5 с EKF2 и LPE.
+* `px4fmu-v3_default.px4` — прошивка для более новых версий PixHawk (чип ревизии 3, см. илл. + Bootloader v5) с EKF2 и LPE.
 
 ![](assets/stmrev.jpg)
 
