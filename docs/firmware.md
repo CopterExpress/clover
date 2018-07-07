@@ -21,7 +21,7 @@ QGroundControl
 
 В QGroundControl откройте раздел Firmware. **После** этого подключите PixHawk / PixRacer по USB.
 
-Выберите PX4 Flight Stack. Для скачивания и загрузки стандартной прошивки (вариант с EKF2 для PixHawk) выберите пункт меню "Standard Version", для загрузки собственного файла прошивки выберите пункт "Custom firmware file...", зачем нажмите OK.
+Выберите PX4 Flight Stack. Для скачивания и загрузки стандартной прошивки (вариант с EKF2 для PixHawk) выберите пункт меню "Standard Version", для загрузки собственного файла прошивки выберите пункт "Custom firmware file...", затем нажмите OK.
 
 > **Warning** Не отключайте USB-кабель до окончания процесса прошивки.
 
