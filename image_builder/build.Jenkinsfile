@@ -6,7 +6,6 @@ pipeline {
     string(name: 'IMAGE_VERSION', defaultValue: 'no_version', description: 'Image version')
 
     string(name: 'BUILD_DIR', defaultValue: '/mnt/hdd_builder/workspace', description: 'Build workspace')
-    string(name: 'MOUNT_POINT', defaultValue: '/mnt/hdd_builder/image', description: 'Mount point')
 
     string(name: 'RPI_DONWLOAD_URL', defaultValue: 'https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip')
     // TODO: Add mirrorparameters
@@ -42,7 +41,7 @@ pipeline {
       }
       // TODO: Transfer apps.sh initialisation code here
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.IMAGE_VERSION} \$(basename ${params.RPI_DONWLOAD_URL})"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE ${params.IMAGE_VERSION} \$(basename ${params.RPI_DONWLOAD_URL})"
       }
     }
     stage('Hardware setup') {
@@ -50,7 +49,7 @@ pipeline {
         EXECUTE_FILE = 'image_builder/scripts/hardware_setup.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Software install') {
@@ -58,7 +57,7 @@ pipeline {
         EXECUTE_FILE = 'image_builder/scripts/software_install.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Network setup') {
@@ -66,7 +65,7 @@ pipeline {
         EXECUTE_FILE = 'image_builder/scripts/network_setup.sh'
       }
       steps {
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE"
       }
     }
     stage('Install ROS') {
@@ -75,8 +74,8 @@ pipeline {
         MOVE_FILE = 'image_builder/kinetic-ros-coex.rosinstall'
       }
       steps {
-        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$MOVE_FILE; fi"
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.DISCOVER_ROS_PACKAGES}"
+        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$MOVE_FILE '/root'; fi"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.DISCOVER_ROS_PACKAGES}"
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
@@ -87,7 +86,7 @@ pipeline {
       when { expression { return params.SHRINK } }
       steps {
         sh "$WORKSPACE/image_builder/autosizer.sh ${params.BUILD_DIR}/${params.IMAGE_NAME}"
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} ${params.MOUNT_POINT} $WORKSPACE/$EXECUTE_FILE"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE"
       }
     }
   }
