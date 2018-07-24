@@ -15,17 +15,17 @@ get_image() {
 # TEMPLATE: get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
 
   local RPI_ZIP_NAME=$(basename $2)
-  if [ ! -e "$1/$RPI_ZIP_NAME" ];
+  if [ ! -e "$1/${RPI_ZIP_NAME}" ];
   then
     echo "$(date) | 1. Downloading original Linux distribution"
-    wget -nv -O $1/$RPI_ZIP_NAME $2
+    wget -nv -O $1/${RPI_ZIP_NAME} $2
     echo "$(date) | Downloading complete"
   else
     echo "$(date) | 1. Linux distribution already donwloaded"
   fi
   echo "$(date) | 2. Unzipping Linux distribution image"
-  local RPI_IMAGE_NAME=$(echo $RPI_ZIP_NAME | sed 's/zip/img/')
-  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$3
+  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
+  unzip -p $1/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1/$3
   echo "$(date) | Unzipping complete"
 }
 
@@ -63,9 +63,9 @@ resize_fs() {
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
-    && echo ", +" | sfdisk -N ${ROOT_PARTITION} $DEV_IMAGE \
+    && echo ", +" | sfdisk -N ${ROOT_PARTITION} ${DEV_IMAGE} \
     && sleep 0.5 \
-    && losetup -d $DEV_IMAGE \
+    && losetup -d ${DEV_IMAGE} \
     && sleep 0.5 \
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
@@ -74,7 +74,7 @@ resize_fs() {
     && echo -e "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
     && resize2fs "${DEV_IMAGE}p${ROOT_PARTITION}" \
     && echo -e "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
-    && losetup -d $DEV_IMAGE
+    && losetup -d ${DEV_IMAGE}
 
   set -e
 }
