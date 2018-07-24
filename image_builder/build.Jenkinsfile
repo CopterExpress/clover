@@ -72,10 +72,11 @@ pipeline {
       environment {
         EXECUTE_FILE = 'image_builder/scripts/ros_install.sh'
         MOVE_FILE = 'image_builder/kinetic-ros-coex.rosinstall'
+        MOVE_TO = '/home/pi/ros_catkin_ws'
       }
       steps {
-        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$MOVE_FILE '/root'; fi"
-        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.DISCOVER_ROS_PACKAGES}"
+        sh "if ! ${params.DISCOVER_ROS_PACKAGES}; then $WORKSPACE/image_builder/image_config.sh copy_to_chroot ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$MOVE_FILE $MOVE_TO; fi"
+        sh "$WORKSPACE/image_builder/image_config.sh execute ${params.BUILD_DIR}/${params.IMAGE_NAME} $WORKSPACE/$EXECUTE_FILE ${params.GWBT_URL} ${params.GWBT_REF} ${params.DISCOVER_ROS_PACKAGES}"
       }
     }
     // TODO: Add finalising step, transfer mirror removal from ros.sh
