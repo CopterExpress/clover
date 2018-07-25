@@ -9,7 +9,7 @@
 
 > **Warning** Мобильный пульт предназначен в первую очередь для полетов в помещении на дальность не более 10-15 м. Большое количество Wi-Fi сетей также может ухудшить отзывчивость и дальность пульта.
 
-> **Info** Также управление со смартфона [доступно в мобильной версия приложения](https://docs.qgroundcontrol.com/en/SettingsView/VirtualJoystick.html) QGroundControl.
+Также управление со смартфона [доступно в мобильной версия приложения](https://docs.qgroundcontrol.com/en/SettingsView/VirtualJoystick.html) QGroundControl.
 
 Настройка
 ---
