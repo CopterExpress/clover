@@ -317,6 +317,8 @@ publish_image() {
     echo -e "\033[0;31m\033[1m$(date) | Zipping complete!\033[0m\033[0m"
   else
     echo -e "\033[0;31m\033[1m$(date) | Zip-archive already created\033[0m\033[0m"
+    cd $1 && rm $2.zip && zip $2.zip $2
+    echo -e "\033[0;31m\033[1m$(date) | Old archive was deleted & create new\033[0m\033[0m"
   fi
 
   echo -e "\033[0;31m\033[1m$(date) | Upload image\033[0m\033[0m"

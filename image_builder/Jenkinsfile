@@ -4,7 +4,7 @@ pipeline {
     string(name: 'GWBT_REF', defaultValue: "master")
     string(name: 'GWBT_URL', defaultValue: "https://github.com/CopterExpress/clever.git")
     string(name: 'GWBT_FILE', defaultValue: "")
-    string(name: 'IMAGE_NAME', defaultValue: "\$(cat ${GWBT_FILE} | jq '.repository.name' -r)_${params.GWBT_REF}_\$(cat ${GWBT_FILE} | jq '.release.published_at' -r).img")
+    string(name: 'IMAGE_NAME', defaultValue: "\$(cat ${GWBT_FILE} | jq '.repository.name' -r)-${params.GWBT_REF}.img")
     string(name: 'GWBT_EVENT', defaultValue: 'release')
     booleanParam(name: 'ONLY_PUBLISH', defaultValue: false, description: 'ONLY PUBLISH')
     string(name: 'BUILD_DIR', defaultValue: '/mnt/hdd_builder/workspace', description: 'Build workspace')

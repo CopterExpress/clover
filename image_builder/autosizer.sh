@@ -96,3 +96,8 @@ echo -e "\033[0;31m\033[1mSize of result image: $endresult (bytes)\033[0m\033[0m
 echo "================================================================================"
 
 truncate -s $endresult $strImgFile
+
+echo "================================================================================"
+partinfo=`parted -m $strImgFile unit B print`
+echo -e "\033[0;31m\033[1mPartition information:\033[0m\033[0m\n$partinfo"
+echo "================================================================================"
