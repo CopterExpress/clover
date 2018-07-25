@@ -7,7 +7,6 @@ set -e
 ##################################################################################################################################
 
 # ros http://wiki.ros.org/action/fullsearch/ROSberryPi/Installing%20ROS%20Kinetic%20on%20the%20Raspberry%20Pi
-# maintainer @urpylka
 
 echo -e "\033[0;31m\033[1m$(date) | Installing ROS\033[0m\033[0m"
 
@@ -42,8 +41,8 @@ echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0
 # bootstrap rosdep
 rosdep init && rosdep update
 
-# If $2 = false, then discover packages
-if [ "$2" = "false" ];
+# If $3 = false, then discover packages
+if [ "$3" = "false" ];
 then
   echo -e "\033[0;31m\033[1m$(date) | #5 Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall\033[0m\033[0m"
 
@@ -64,7 +63,6 @@ else
   echo -e "\033[0;31m\033[1m$(date) | #5 Creating manual ros_catkin_ws\033[0m\033[0m"
 
   mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-    && mv /root/kinetic-ros-coex.rosinstall kinetic-ros-coex.rosinstall \
     && wstool init src kinetic-ros-coex.rosinstall
 fi
 
@@ -132,6 +130,8 @@ chown -Rf pi:pi /home/pi/ros_catkin_ws
 echo -e "\033[0;31m\033[1m$(date) | #12 Creating catkin_ws & Installing CLEVER-BUNDLE\033[0m\033[0m"
 
 git clone $1 /home/pi/catkin_ws/src/clever \
+  && cd /home/pi/catkin_ws/src/clever \
+  && git checkout $2 \
   && pip install wheel \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \

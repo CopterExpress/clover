@@ -15,17 +15,17 @@ get_image() {
 # TEMPLATE: get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
 
   local RPI_ZIP_NAME=$(basename $2)
-  if [ ! -e "$1/$RPI_ZIP_NAME" ];
+  if [ ! -e "$1/${RPI_ZIP_NAME}" ];
   then
     echo "$(date) | 1. Downloading original Linux distribution"
-    wget -nv -O $1/$RPI_ZIP_NAME $2
+    wget -nv -O $1/${RPI_ZIP_NAME} $2
     echo "$(date) | Downloading complete"
   else
     echo "$(date) | 1. Linux distribution already donwloaded"
   fi
   echo "$(date) | 2. Unzipping Linux distribution image"
-  local RPI_IMAGE_NAME=$(echo $RPI_ZIP_NAME | sed 's/zip/img/')
-  unzip -p $1/$RPI_ZIP_NAME $RPI_IMAGE_NAME > $1/$3
+  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
+  unzip -p $1/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1/$3
   echo "$(date) | Unzipping complete"
 }
 
@@ -63,9 +63,9 @@ resize_fs() {
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m" \
-    && echo ", +" | sfdisk -N ${ROOT_PARTITION} $DEV_IMAGE \
+    && echo ", +" | sfdisk -N ${ROOT_PARTITION} ${DEV_IMAGE} \
     && sleep 0.5 \
-    && losetup -d $DEV_IMAGE \
+    && losetup -d ${DEV_IMAGE} \
     && sleep 0.5 \
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
@@ -74,7 +74,7 @@ resize_fs() {
     && echo -e "\033[0;31m\033[1mExpand filesystem\033[0m\033[0m" \
     && resize2fs "${DEV_IMAGE}p${ROOT_PARTITION}" \
     && echo -e "\033[0;31m\033[1mUmount loop-image\033[0m\033[0m" \
-    && losetup -d $DEV_IMAGE
+    && losetup -d ${DEV_IMAGE}
 
   set -e
 }
@@ -82,7 +82,7 @@ resize_fs() {
 mount_system() {
 
   # STATIC FUNCTION
-  # TEMPLATE: mount_system $IMAGE $MOUNT_POINT
+  # TEMPLATE: mount_system $IMAGE
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -98,48 +98,49 @@ mount_system() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  #mount $3 $2
-  #mount $4 $2/boot
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
+  # Get temp directory to mount image
+  local MOUNT_POINT=$(mktemp -d)
+
+  echo -e "\033[0;31m\033[1mMount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
 
   echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   # https://github.com/debian-pi/raspbian-ua-netinst/issues/314
   echo "Mounting /proc in chroot... "
-  if [ ! -d $2/proc ] ; then
-    mkdir -p $2/proc \
-      && echo "Created $2/proc"
+  if [ ! -d ${MOUNT_POINT}/proc ] ; then
+    mkdir -p ${MOUNT_POINT}/proc \
+      && echo "Created ${MOUNT_POINT}/proc"
   fi
-  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+  mount -t proc -o nosuid,noexec,nodev proc ${MOUNT_POINT}/proc \
     && echo "OK"
   
   echo "Mounting /sys in chroot... "
-  if [ ! -d $2/sys ] ; then
-    mkdir -p $2/sys \
-      && echo "Created $2/sys"
+  if [ ! -d ${MOUNT_POINT}/sys ] ; then
+    mkdir -p ${MOUNT_POINT}/sys \
+      && echo "Created ${MOUNT_POINT}/sys"
   fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+  mount -t sysfs -o nosuid,noexec,nodev sysfs ${MOUNT_POINT}/sys \
     && echo "OK"
   
   echo "Mounting /dev/ and /dev/pts in chroot... " \
-    && mkdir -p -m 755 $2/dev/pts \
-    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
-    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs ${MOUNT_POINT}/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts ${MOUNT_POINT}/dev/pts \
     && echo "OK"
-  # mount -t devpts none "$2/dev/pts" -o ptmxmode=0666,newinstance
-  # ln -fs "pts/ptmx" "$2/dev/ptmx"
+  # mount -t devpts none "${MOUNT_POINT}/dev/pts" -o ptmxmode=0666,newinstance
+  # ln -fs "pts/ptmx" "${MOUNT_POINT}/dev/ptmx"
 
-  # mount -o bind /dev $2/dev
-  # mount -t proc proc $2/proc
-  # mount -t devpts devpts $2/dev/pts
+  # mount -o bind /dev ${MOUNT_POINT}/dev
+  # mount -t proc proc ${MOUNT_POINT}/proc
+  # mount -t devpts devpts ${MOUNT_POINT}/dev/pts
 
-  # mount -t proc proc $2/proc
-  # mount -t sysfs sys $2/sys
-  # mount --bind /dev $2/dev
+  # mount -t proc proc ${MOUNT_POINT}/proc
+  # mount -t sysfs sys ${MOUNT_POINT}/sys
+  # mount --bind /dev ${MOUNT_POINT}/dev
 
   echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
-    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+    && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
 
   # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
   # http://www.unix-lab.org/posts/chroot/
@@ -148,15 +149,15 @@ mount_system() {
   # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
   # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
   echo -e "\033[0;31m\033[1mEnter chroot\033[0m\033[0m" \
-    && chroot $2 /bin/bash
+    && chroot ${MOUNT_POINT} /bin/bash
 
-  umount_system $2 $DEV_IMAGE
+  umount_system ${MOUNT_POINT} ${DEV_IMAGE}
 }
 
 execute() {
 
   # STATIC FUNCTION
-  # TEMPLATE: execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
+  # TEMPLATE: execute $IMAGE $EXECUTE_FILE ...
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -166,56 +167,59 @@ execute() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
+  # Get temp directory to mount image
+  local MOUNT_POINT=$(mktemp -d)
+
+  echo -e "\033[0;31m\033[1mMount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
 
   echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
   echo "Mounting /proc in chroot... "
-  if [ ! -d $2/proc ] ; then
-    mkdir -p $2/proc
-    echo "Created $2/proc"
+  if [ ! -d ${MOUNT_POINT}/proc ] ; then
+    mkdir -p ${MOUNT_POINT}/proc
+    echo "Created ${MOUNT_POINT}/proc"
   fi
-  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
+  mount -t proc -o nosuid,noexec,nodev proc ${MOUNT_POINT}/proc \
     && echo "OK"
 
   echo "Mounting /sys in chroot... "
-  if [ ! -d $2/sys ] ; then
-    mkdir -p $2/sys
-    echo "Created $2/sys"
+  if [ ! -d ${MOUNT_POINT}/sys ] ; then
+    mkdir -p ${MOUNT_POINT}/sys
+    echo "Created ${MOUNT_POINT}/sys"
   fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
+  mount -t sysfs -o nosuid,noexec,nodev sysfs ${MOUNT_POINT}/sys \
     && echo "OK"
 
   echo "Mounting /dev/ and /dev/pts in chroot... " \
-    && mkdir -p -m 755 $2/dev/pts \
-    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
-    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
+    && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
+    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs ${MOUNT_POINT}/dev \
+    && mount -t devpts -o gid=5,mode=620 devpts ${MOUNT_POINT}/dev/pts \
     && echo "OK"
 
   echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
-    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+    && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
 
   echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  script_name=$(basename $3)
-  script_path_root="$2/root/$script_name"
+  local script_name=$(basename $2)
+  local script_path_root="${MOUNT_POINT}/root/${script_name}"
   # Copy script into chroot fs
   # TODO: Find more suitable location for temporary script storage
-  cp "$3" "$script_path_root"
+  cp "$2" "${script_path_root}"
   # Its important to save arguments (direct ${@:4} causes problems)
-  script_args="${@:4}"
+  script_args="${@:3}"
   # Run script in chroot with additional arguments
-  chroot $2 /bin/sh -c "/root/$script_name $script_args"
+  chroot ${MOUNT_POINT} /bin/sh -c "/root/${script_name} ${script_args}"
   # Removing script from chroot fs
-  rm "$script_path_root"
+  rm "${script_path_root}"
 
-  umount_system $2 $DEV_IMAGE
+  umount_system ${MOUNT_POINT} ${DEV_IMAGE}
 }
 
 copy_to_chroot() {
 
   # STATIC FUNCTION
-  # TEMPLATE: copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+  # TEMPLATE: copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -225,44 +229,25 @@ copy_to_chroot() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  echo -e "\033[0;31m\033[1mMount dirs $2 & $2/boot\033[0m\033[0m"
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" $2
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" $2/boot
+  # Get temp directory to mount image
+  local MOUNT_POINT=$(mktemp -d)
 
-  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
-  echo "Mounting /proc in chroot... "
-  if [ ! -d $2/proc ] ; then
-    mkdir -p $2/proc
-    echo "Created $2/proc"
-  fi
-  mount -t proc -o nosuid,noexec,nodev proc $2/proc \
-    && echo "OK"
-
-  echo "Mounting /sys in chroot... "
-  if [ ! -d $2/sys ] ; then
-    mkdir -p $2/sys
-    echo "Created $2/sys"
-  fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs $2/sys \
-    && echo "OK"
-
-  echo "Mounting /dev/ and /dev/pts in chroot... " \
-    && mkdir -p -m 755 $2/dev/pts \
-    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs $2/dev \
-    && mount -t devpts -o gid=5,mode=620 devpts $2/dev/pts \
-    && echo "OK"
-
-  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
-    && cp -L /etc/resolv.conf $2/etc/resolv.conf
+  echo -e "\033[0;31m\033[1mMount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot\033[0m\033[0m"
+  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
+  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
 
   echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  script_name=$(basename $3)
-  script_path_root="$2/root/$script_name"
+  file_name=$(basename $2)
+  file_path_root="${MOUNT_POINT}$3/${file_name}"
   # Copy script into chroot fs
   # TODO: Find more suitable location for temporary script storage
-  cp "$3" "$script_path_root"
+  if [ ! -d ${file_path_root} ] ; then
+    mkdir -p ${file_path_root} \
+      && echo "Created ${file_path_root}"
+  fi
+  cp "$2" "${file_path_root}"
 
-  umount_system $2 $DEV_IMAGE
+  umount_system ${MOUNT_POINT} ${DEV_IMAGE}
 }
 
 umount_system() {
@@ -372,8 +357,8 @@ echo "\$7: $7"
 
 case "$1" in
   mount_system)
-  # mount_system $IMAGE $MOUNT_POINT
-    mount_system $2 $3;;
+  # mount_system $IMAGE
+    mount_system $2;;
 
   get_image)
   # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
@@ -388,11 +373,11 @@ case "$1" in
     publish_image $2 $3 $4 $5 $6 "$7";;
 
   execute)
-  # execute $IMAGE $MOUNT_POINT $EXECUTE_FILE ...
-    execute $2 $3 $4 ${@:5};;
+  # execute $IMAGE $EXECUTE_FILE ...
+    execute $2 $3 ${@:4};;
 
   copy_to_chroot)
-  # copy_to_chroot $IMAGE $MOUNT_POINT $MOVE_FILE
+  # copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
     copy_to_chroot $2 $3 $4;;
 
   *)
