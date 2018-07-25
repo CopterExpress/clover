@@ -18,8 +18,8 @@
             <!-- gcs bridge -->
             <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
             <param name="gcs_url" value="udp://0.0.0.0:14550@14550" if="$(eval gcs_bridge == 'udp')"/>
-            <param name="gcs_url" value="udp-b://0.0.0.0:14550@14550" if="$(eval gcs_bridge == 'udp-b')"/>
-            <param name="gcs_url" value="udp-pb://0.0.0.0:14550@14550" if="$(eval gcs_bridge == 'udp-pb')"/>
+            <param name="gcs_url" value="udp-b://$(env ROS_IP):14550@14550" if="$(eval gcs_bridge == 'udp-b')"/>
+            <param name="gcs_url" value="udp-pb://$(env ROS_IP):14550@14550" if="$(eval gcs_bridge == 'udp-pb')"/>
             <param name="gcs_url" value="" if="$(eval not gcs_bridge)"/>
             <param name="gcs_quiet_mode" value="true"/>
             <param name="conn/timeout" value="10"/>
