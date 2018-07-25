@@ -63,12 +63,12 @@ class ViewController: UIViewController, WKScriptMessageHandler {
             // Got notification message
             print(message)
             let m = message.body as! NSDictionary;
-            let level = m["level"] as! Int
+            let level = m["severity"] as! Int
             if level == 4 {
-                let banner = NotificationBanner(title: m["msg"] as! String, style: .warning)
+                let banner = NotificationBanner(title: m["text"] as! String, style: .warning)
                 banner.show()
             } else {
-                let banner = NotificationBanner(title: m["msg"] as! String, style: .danger)
+                let banner = NotificationBanner(title: m["text"] as! String, style: .danger)
                 banner.show()
             }
         }

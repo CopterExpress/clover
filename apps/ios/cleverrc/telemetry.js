@@ -62,15 +62,15 @@ new ROSLIB.Topic({
 
 new ROSLIB.Topic({
 	ros: ros,
-	name: '/rosout_agg',
-	messageType: 'rosgraph_msgs/Log'
+	name: '/mavros/statustext/recv',
+	messageType: 'mavros_msgs/StatusText'
 }).subscribe(function(message) {
 	var BLACKLIST = ['CMD: ', 'PR: ', 'DROPPED', 'Clock skew detected', 'MANUAL CONTROL LOST'];
-	if (message.level >= 4) {
+	if (message.severity <= 4) {
 		if (BLACKLIST.some(function(e) {
-				return message.msg.indexOf(e) != -1;
+				return message.text.indexOf(e) != -1;
 			})) {
-			console.log('Filtered out message ' + message.msg);
+			console.log('Filtered out message ' + message.text);
 			return;
 		}
 		callNativeApp('notification', message);
