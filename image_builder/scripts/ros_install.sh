@@ -137,8 +137,10 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
   && catkin_make -j1 \
-  && systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service \
-  && systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
+  && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
+  && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
+  && systemctl enable roscore \
+  && systemctl enable clever
 
 echo -e "\033[0;31m\033[1m$(date) | #13 Remove build dir from catkin_ws\033[0m\033[0m"
 
