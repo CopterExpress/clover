@@ -1,9 +1,9 @@
 Управление Клевером со смартфона
 ===
 
-**WORK-IN-PROGRESS**
+<a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="assets/appstore.svg"></a>
 
-Для управления Клевером со смартфона через Wi-Fi необходимо установить приложение – iOS (TODO), Android (TODO).
+Для управления Клевером со смартфона через Wi-Fi необходимо установить приложение – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), Android (*work-in-progress*).
 
 ![](assets/IMG_4397.PNG)
 
@@ -16,7 +16,7 @@
 
 > **Note** Мобильный пульт конфликтует с реальной аппаратурой радиоуправления. Во время использования мобильного пульта она должна быть выключена.
 
-Установите [образ Clever на RPi](microsd_images.md), а также включите `rosbridge` и `rc` в launch-файле (`~/catkin_ws/src/clever/clever/launch/clever.launch`):
+Установите [образ Clever на RPi](microsd_images.md). Для работы приложения параметры `rosbridge` и `rc` в launch-файле (`~/catkin_ws/src/clever/clever/launch/clever.launch`) должны быть включены:
 
 ```xml
 <arg name="rosbridge" default="true"/>
@@ -34,7 +34,7 @@ sudo systemctl restart clever
 
 Также необходимо убедиться, что PX4-параметр `COM_RC_IN_MODE` установлен в значение `0` (RC Transmitter).
 
-Дополнительные параметры:
+Дополнительные параметры PX4:
 
 * `COM_RC_LOSS_T` – таймаут для определения потери сигнала пульта (мобильного или физического). Рекомендуется увеличение таймаута до нескольких секунд.
 * `NAV_RCL_ACT` – действие при потере сигнала пульта.
