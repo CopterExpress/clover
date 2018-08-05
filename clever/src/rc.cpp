@@ -10,6 +10,7 @@
 #include "std_msgs/String.h"
 #include "mavros_msgs/State.h"
 #include "mavros_msgs/ManualControl.h"
+#include "mavros_msgs/Mavlink.h"
 
 struct ControlMessage
 {
@@ -27,6 +28,9 @@ public:
         std::thread t(&RC::socketThread, this);
         t.detach();
 
+        std::thread gcst(&RC::fakeGCSThread, this);
+        gcst.detach();
+
         initLatchedState();
     }
 
@@ -35,6 +39,7 @@ private:
     ros::Subscriber state_sub;
     ros::Publisher state_pub;
     ros::Timer state_timeout_timer;
+    ros::Time last_manual_control{0};
     mavros_msgs::StateConstPtr state_msg;
 
     void handleState(const mavros_msgs::StateConstPtr& state)
@@ -68,6 +73,36 @@ private:
         // Publish initial state
         mavros_msgs::State unknown_state;
         state_pub.publish(unknown_state);
+    }
+
+    void fakeGCSThread()
+    {
+        // Awful workaround for fixing PX4 not sending STATUSTEXTs
+        // if there is no GCS hearbeats.
+        // TODO: remove, when PX4 get this fixed.
+        ros::Publisher mavlink_pub = nh.advertise<mavros_msgs::Mavlink>("mavlink/to", 1);
+
+        // HEARTBEAT from GCS message
+        mavros_msgs::Mavlink hb;
+        hb.framing_status = mavros_msgs::Mavlink::FRAMING_OK;
+        hb.magic = mavros_msgs::Mavlink::MAVLINK_V20;
+        hb.len = 9;
+        hb.incompat_flags = 0;
+        hb.compat_flags = 0;
+        hb.seq = 0;
+        hb.sysid = 255;
+        hb.compid = 0;
+        hb.checksum = 26460;
+        hb.payload64.push_back(342282393542983680);
+        hb.payload64.push_back(3);
+
+        ros::Rate rate(1);
+        while (ros::ok()) {
+            if (ros::Time::now() - last_manual_control < ros::Duration(8)) {
+                mavlink_pub.publish(hb);
+            }
+            rate.sleep();
+        }
     }
 
     int createSocket(int port)
@@ -123,6 +158,8 @@ private:
             manual_control_msg.z = msg->z;
             manual_control_msg.r = msg->r;
             manual_control_pub.publish(manual_control_msg);
+
+            last_manual_control = ros::Time::now();
         }
     }
 };
