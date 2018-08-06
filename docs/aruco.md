@@ -122,7 +122,7 @@ _Примечание_: указанное выше определение пр�
   * `LNDMC_THR_RANGE` = 0.5
   * `LNDMC_Z_VEL_MAX` = 1 m/s
 
-Для простоты настройки можно воспользоваться готовым файлом настроек для [Clever 2](https://github.com/CopterExpress/clever/blob/masterassets/Clever2LPE_160118.params) или для [Clever 3](https://github.com/CopterExpress/clever/blob/masterassets/Clever3_LPE_020218.params) и вгрузить его в контроллер с помощью меню Tools - Load from file из раздела Parameters в QGroundControl.
+Для простоты настройки можно воспользоваться готовым файлом настроек для [Clever 2](https://github.com/CopterExpress/clever/blob/master/docs/assets/Clever2LPE_160118.params) или для [Clever 3](https://github.com/CopterExpress/clever/blob/master/docs/assets/Clever3_LPE_020218.params) и вгрузить его в контроллер с помощью меню Tools - Load from file из раздела Parameters в QGroundControl.
 
 ![](assets/Screenshot from 2018-02-27 22-30-50.png)
 
