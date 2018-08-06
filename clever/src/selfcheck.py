@@ -10,6 +10,8 @@ from geometry_msgs.msg import PoseStamped
 # TODO: roscore is running
 # TODO: local_origin, fcu, fcu_horiz
 # TODO: rc service
+# TODO: perform commander check in PX4
+
 
 rospy.init_node('selfcheck')
 
