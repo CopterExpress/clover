@@ -142,9 +142,8 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && systemctl enable roscore \
   && systemctl enable clever
 
-echo -e "\033[0;31m\033[1m$(date) | #13 Remove build dir from catkin_ws\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | #13 Change permissions for catkin_ws\033[0m\033[0m"
 
-rm -rf /home/pi/catkin_ws/build
 chown -Rf pi:pi /home/pi/catkin_ws
 
 echo -e "\033[0;31m\033[1m$(date) | #14 Setup ROS environment\033[0m\033[0m"
