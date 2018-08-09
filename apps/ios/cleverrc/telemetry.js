@@ -35,10 +35,14 @@ new ROSLIB.Topic({
 });
 
 function notifyLowBattery() {
+	console.log('low battery');
 	callNativeApp('lowBattery');
+	body.classList.remove('low-battery');
+	void body.offsetWidth; // trick for repeating animation
+	body.classList.add('low-battery');
 }
 
-notifyLowBatteryThrottled = throttle(notifyLowBattery, 10000);
+notifyLowBatteryThrottled = throttle(notifyLowBattery, 15000);
 
 new ROSLIB.Topic({
 	ros: ros,
@@ -50,11 +54,7 @@ new ROSLIB.Topic({
 	batteryEl.innerHTML = (message.cell_voltage[0].toFixed(2) + ' V') || '';
 
 	if (message.cell_voltage[0] < LOW_BATTERY) {
-		console.log('low battery');
-		callNativeApp('lowBattery');
-		body.classList.remove('low-battery');
-		void body.offsetWidth; // trick for repeating animation
-		body.classList.add('low-battery');
+		notifyLowBatteryThrottled();
 	} else {
 		body.classList.remove('low-battery');
 	}
