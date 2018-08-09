@@ -44,7 +44,7 @@ sudo systemctl disable dphys-swapfile
         "password":"PASS",
         "url":"https://api.github.com/repos/CopterExpress/clever/releases/"
     }
-
+}
 ```
 6. Add webhook to release on your github project
 > TODO
