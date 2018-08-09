@@ -75,6 +75,8 @@ while True:
 
 Рассчет общего угла коптера к горизонту:
 
+TODO: fix
+
 ```python
 telem = get_telemetry()
 
@@ -101,6 +103,58 @@ while not rospy.is_shutdown():
     set_position(x=x, y=y, z=start.z)
 
     r.sleep()
+```
+
+---
+
+Пример подписки на топики из MAVROS:
+
+
+```python
+from geometry_msgs.msg import PoseStamped, TwistStamped
+from sensor_msgs.msg import BatteryState
+from mavros_msgs.msg import RCIn
+
+# ...
+
+def state_update(pose):
+    # Обработка новых данных о позиции коптера
+    pass
+
+# Остальные функции-обработчики
+# ...
+
+rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
+rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
+```
+
+Информацию по топикам MAVROS см. по [ссылке](mavros.md).
+
+---
+
+Пример отправки произвольного [MAVLink-сообщения](mavlink.md) коптеру:
+
+```python
+# ...
+
+from mavros import mavlink
+from pymavlink import mavutil
+
+# ...
+
+mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+
+# Отправка сообщения HEARTBEAT:
+
+hb_mav_msg = mavutil.mavlink.MAVLink_heartbeat_message(
+             mavutil.mavlink.MAV_TYPE_GCS, 0, 0, 0, 0, 0)
+hb_mav_msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
+hb_ros_msg = mavlink.convert_to_rosmsg(hb_mav_msg)
+
+mavlink_pub.publish(hb_ros_msg)
+
 ```
 
 ---
