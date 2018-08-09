@@ -26,6 +26,6 @@
 
 * ОС [Raspbian Jessie](https://www.raspberrypi.org/downloads/raspbian/)
 * Фреймворк [ROS](ros.md)
-* Пакет [MAVROS](mavros.md) для связи с PixHawk по MAVLINK
+* Пакет [MAVROS](mavros.md) для связи с PixHawk по [MAVLink](mavlink.md)
 * Дополнительные пакеты ROS: web_video_server, usb_cam, rosbridge_suite и другие
 * Пакет программ clever_bundle
