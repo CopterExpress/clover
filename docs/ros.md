@@ -90,4 +90,10 @@ get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 telemetry = get_telemetry()
 ```
 
+С можно также работать при помощи утилиты `rosservice`. Например, так можно вызвать сервис `/get_telemetry` из командной строки:
+
+```bash
+rosservice call /get_telemetry "{frame_id: ''}"
+```
+
 Больше примеров использования сервисов для автономных полетов квадрокоптера Клевер можно посмотреть в [документации ноды simple_offboard](simple_offboard.md).
