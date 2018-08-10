@@ -13,3 +13,11 @@
 Для установки образа воспользуйтесь утилитой [Etcher](https://etcher.io).
 
 [![Etcher](https://etcher.io/static/screenshot.gif)](https://etcher.io)
+
+## Версия образа
+
+Версию установленного образа можно узнать в файле `/etc/clever_version`:
+
+```bash
+cat /etc/clever_version
+```
