@@ -1,5 +1,20 @@
 {
     "MD003": false,
     "MD013": false,
-    "MD033": false
+    "MD033": false,
+    "MD044": {
+        "names": [
+            "MAVLink",
+            "ROS",
+            "Python",
+            "C++",
+            "PX4",
+            "WireShark",
+            "Wi-Fi",
+            "Raspberry Pi",
+            "PixHawk",
+            "PixRacer",
+            "ArUco"
+        ]
+    }
 }
