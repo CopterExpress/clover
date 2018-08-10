@@ -1,6 +1,6 @@
-## Работа со светодиодной лентой на Raspberry 3
+# Работа со светодиодной лентой на Raspberry 3
 
-#### Подключение и определение типа ленты
+## Подключение и определение типа ленты
 
 Есть два основных типа адресуемых светодиодов: WS2812 и WS2812B. Принцип управления один и тот же, однако тайминги разные. Найдите на ленте чип светодиода и определите сколько у него ножек: 6 или 4. Если ножек 6, то это WS2812, если 4 - то WS2812B или его аналог SK6812.
 
@@ -16,7 +16,7 @@
 
 Типы лент для обозначения ленты в коде описаны в [файле](https://github.com/jgarff/rpi_ws281x/blob/master/ws2811.h). Основные типы лент - это WS2812\_STRIP \(для WS2812\) и SK6812\_STRIP \(для WS2812B или SK6812\).
 
-#### Установка библиотеки для работы со светодиодной лентой
+## Установка библиотеки для работы со светодиодной лентой
 
 Определите папку, в которой будут находиться файлы библиотеки, и открыть путь к этой папке в терминале. По-умолчанию можно использовать домашнюю папку, для перехода в неё нужно выполнить команду
 
@@ -51,7 +51,7 @@ sudo python ./setup.py build
 sudo python ./setup.py install
 ```
 
-#### Пример программы для светодиодной ленты на RPI3
+## Пример программы для светодиодной ленты на RPI3
 
 Откройте в текстовом редакторе файл strandtest.py из папки python/examples \(находится в папке с библиотекой\)
 
@@ -96,7 +96,7 @@ sudo python strandtest.py
 
 Права администратора необходимы для выполнения скрипта, т.к. без них нет доступа к функциям прерывания, которые использует библиотека для работы с лентой.
 
-#### Совместимость с ROS и python
+## Совместимость с ROS и python
 
 При запуске программы с помощью sudo пользовательское окружение изменяется и появляются ошибки импорта библиотек, т.к. в окружении отсутствуют необходимые пути. Чтобы добавить в окружение пути к библиотекам python и пакетам ROS, необходимо добавить в файл /etc/sudoers следующие строки:
 
@@ -107,7 +107,7 @@ Defaults env_keep += "ROS_ROOT"
 Defaults env_keep += "ROS_MASTER_URI"
 ```
 
-#### Функции для работы со светодиодной лентой
+## Функции для работы со светодиодной лентой
 
 Для подключения библиотеки и её корректной работы требуется подключить следующие модули: neopixels - для работы ленты, time - для управления задержками, sys и signal для прерываний и формирования управляющего сигнала.
 
@@ -144,23 +144,23 @@ pydoc neopixel
 
 ```(bash)
     Help on module neopixel:
-     
+
     NAME
         neopixel
-     
+
     DESCRIPTION
         # Adafruit NeoPixel library port to the rpi_ws281x library.
         # Author: Tony DiCola (tony@tonydicola.com)
-     
+
     CLASSES
         __builtin__.object
             Adafruit_NeoPixel
-        
+
         class Adafruit_NeoPixel(__builtin__.object)
          |  Methods defined here:
-         |  
+         |
          |  __del__(self)
-         |  
+         |
          |  __init__(self, num, pin, freq_hz=800000, dma=5, invert=False)
          |      Class to represent a NeoPixel/WS281x LED display.  Num should be the
          |      number of pixels in the display, and pin should be the GPIO pin connected
@@ -168,38 +168,38 @@ pydoc neopixel
          |      parameters are freq, the frequency of the display signal in hertz (default
          |      800khz), dma, the DMA channel to use (default 5), and invert, a boolean
          |      specifying if the signal line should be inverted (default False).
-         |  
+         |
          |  begin(self)
          |      Initialize library, must be called once before other functions are
          |      called.
-         |  
+         |
          |  getPixelColor(self, n)
          |      Get the 24-bit RGB color value for the LED at position n.
-         |  
+         |
          |  getPixels(self)
-         |      Return an object which allows access to the LED display data as if 
+         |      Return an object which allows access to the LED display data as if
          |      it were a sequence of 24-bit RGB values.
-         |  
+         |
          |  numPixels(self)
          |      Return the number of pixels in the display.
-         |  
+         |
          |  setBrightness(self, brightness)
          |      Scale each LED in the buffer by the provided brightness.  A brightness
          |      of 0 is the darkest and 255 is the brightest.  Note that scaling can have
          |      quantization issues (i.e. blowing out to white or black) if used repeatedly!
-         |  
+         |
          |  setPixelColor(self, n, color)
          |      Set LED at position n to the provided 24-bit color value (in RGB order).
-         |  
+         |
          |  setPixelColorRGB(self, n, red, green, blue)
          |      Set LED at position n to the provided red, green, and blue color.
          |      Each color component should be a value from 0 to 255 (where 0 is the
          |      lowest intensity and 255 is the highest intensity).
-         |  
+         |
          |  show(self)
          |      Update the display with the data from the LED buffer.
-         |  
-     
+         |
+
     FUNCTIONS
         Color(red, green, blue)
             Convert the provided red, green, blue color to a 24-bit color value.
@@ -207,7 +207,7 @@ pydoc neopixel
             and 255 is the highest intensity.
 ```
 
-#### Почему именно так и можно ли по-другому?
+## Почему именно так и можно ли по-другому?
 
 Основные типы лент, которые используются для Clever3, это WS2812, WS2812B и SK6812 \(аналог WS2812B\). Они управляются по одному и тому же принципу: для массива светодиодов в ленте отправляется пакет данных по 24 бита на светодиод; каждый светодиод считывает первые 24 бита из пришедших к нему данных и устанавливает соответствующий цвет, остальные данные он отправляет следующему светодиоду в ленте. Нули и единицы задаются разными сочетаниями длительностей высокого и низкого уровня в импульсе.
 
@@ -227,4 +227,3 @@ pydoc neopixel
 3. Если нам важна и работа аудио, и подключение к SPI устройств кроме лед ленты, то можно управлять лентой по каналу PCM \(GPIO 21 или 31\). При этом никаких дополнительных манипуляций с распберри не требуется.
 
 Исходя из вышеперечисленных способов управления лентой, наилучшим вариантом, позволяющим управлять лентой, сохранить работоспособность встроенной аудиосистемы и возможность подключения всяческих устройств и датчиков по SPI, является управление по каналу PCM \(GPIO 21\) с использованием 10 канала DMA.
-

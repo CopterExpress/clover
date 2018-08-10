@@ -18,6 +18,7 @@ TCP-бридж
 ---
 
 Изменить параметр `gcs_bridge` в launch-файле:
+
 ```xml
 <arg name="gcs_bridge" default="tcp"/>
 ```
@@ -32,6 +33,7 @@ UDP бридж (с автоматическим подключением)
 ---
 
 Изменить параметр gcs_bridge в launch-файле:
+
 ```xml
 <arg name="gcs_bridge" default="udp-b"/>
 ```
