@@ -148,13 +148,11 @@ mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
 
 # Отправка сообщения HEARTBEAT:
 
-hb_mav_msg = mavutil.mavlink.MAVLink_heartbeat_message(
-             mavutil.mavlink.MAV_TYPE_GCS, 0, 0, 0, 0, 0)
-hb_mav_msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
-hb_ros_msg = mavlink.convert_to_rosmsg(hb_mav_msg)
+msg = mavutil.mavlink.MAVLink_heartbeat_message(mavutil.mavlink.MAV_TYPE_GCS, 0, 0, 0, 0, 0)
+msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
+ros_msg = mavlink.convert_to_rosmsg(msg)
 
-mavlink_pub.publish(hb_ros_msg)
-
+mavlink_pub.publish(ros_msg)
 ```
 
 ---

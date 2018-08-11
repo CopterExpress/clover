@@ -15,6 +15,7 @@
             "PixHawk",
             "PixRacer",
             "ArUco"
-        ]
+        ],
+        "code_blocks": false
     }
 }
