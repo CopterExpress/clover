@@ -2,6 +2,7 @@
     "MD003": false,
     "MD013": false,
     "MD033": false,
+    "MD034": false,
     "MD044": {
         "names": [
             "MAVLink",
