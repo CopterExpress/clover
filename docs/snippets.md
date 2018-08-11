@@ -139,6 +139,7 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 ```python
 # ...
 
+from mavros_msgs.msg import Mavlink
 from mavros import mavlink
 from pymavlink import mavutil
 
