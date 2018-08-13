@@ -79,3 +79,11 @@ sudo systemctl start jenkins
 ## Requirements
 
 * Jenkins (BlueOcean plugin, optional)
+
+## Troubleshooting
+
+If JDK not installed:
+
+```bash
+sudo apt-get install default-jdk
+```
