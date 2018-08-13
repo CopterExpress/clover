@@ -34,6 +34,9 @@
 * [Устройство сети RPi](network.md)
 * [Работа с логами PX4](flight_logs.md)
 * [Протокол MAVLink](mavlink.md)
+* [Типы силовых разъемов](connectortypes.md)
+* [Ошибки радиоаппаратуры](radioerrors1.md)
+* [Настройка PID](calibratePID.md)
 * Учебник
   * [Теория и видеоуроки](lessons.md)
   * [Учебно-методическое пособие](metod.md)
