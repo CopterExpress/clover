@@ -136,7 +136,7 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
-  && catkin_make -j1 \
+  && catkin_make -j1 -DCMAKE_BUILD_TYPE=Release \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
