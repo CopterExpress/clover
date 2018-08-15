@@ -98,72 +98,66 @@ MAVLink-сообщение это отдельная "порция" данных
         <td>ID сообщения</td>
         <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td rowspan="11"><div style="transform: rotate(-90deg)">Данные (пример)</div></td>
         <td><code>target_system</code></td>
         <td>1 байт</td>
         <td>ID системы-получателя</td>
         <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>target_component</code></td>
         <td>1 байт</td>
         <td>ID компонента–получателя</td>
         <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>command</code></td>
         <td>2 байта</td>
         <td>ID команды</td>
         <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>confirmation</code></td>
         <td>1 байт</td>
         <td>Номер для подтверждения</td>
         <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param1</code></td>
         <td>4 байта</td>
         <td>Параметр 1</td>
         <td rowspan="7">Число с плавающей точкой одинарной точности</td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param2</code></td>
         <td>4 байта</td>
         <td>Параметр 2</td>
-        <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param3</code></td>
         <td>4 байта</td>
         <td>Параметр 3</td>
-        <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param4</code></td>
         <td>4 байта</td>
         <td>Параметр 4</td>
-        <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param5</code></td>
         <td>4 байта</td>
         <td>Параметр 5</td>
-        <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param6</code></td>
         <td>4 байта</td>
         <td>Параметр 6</td>
-        <td></td>
     </tr>
-    <tr bgcolor=#fffee6>
+    <tr style="background: #fffee6">
         <td><code>param7</code></td>
         <td>4 байта</td>
         <td>Параметр 7</td>
-        <td></td>
     </tr>
     <tr>
         <td></td>
