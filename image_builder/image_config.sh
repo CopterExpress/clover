@@ -173,16 +173,14 @@ copy_to_chroot() {
   mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
   mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
 
-  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  file_name=$(basename $2)
-  file_path_root="${MOUNT_POINT}$3/${file_name}"
-  # Copy script into chroot fs
-  # TODO: Find more suitable location for temporary script storage
-  if [ ! -d ${file_path_root} ] ; then
-    mkdir -p ${file_path_root} \
-      && echo "Created ${file_path_root}"
+  dir_name=$(dirname "${MOUNT_POINT}$3 /")
+  if [ ! -d ${dir_name} ] ; then
+    mkdir -p ${dir_name} \
+      && echo "Created ${dir_name}"
   fi
-  cp "$2" "${file_path_root}"
+
+  # Copy script into chroot fs
+  cp -r "$2" "${MOUNT_POINT}$3"
 
   umount_system ${MOUNT_POINT} ${DEV_IMAGE}
 }
