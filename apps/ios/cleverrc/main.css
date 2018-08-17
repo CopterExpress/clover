@@ -8,7 +8,7 @@ html, body {
 }
 
 * {
-    user-select: none;
+	user-select: none;
 }
 
 .stick {
@@ -76,7 +76,8 @@ body.armed .telemetry .mode {
 
 body.low-battery .battery {
 	color: #ff554b;
-	animation: scale 0.3s 1 ease-in-out}
+	animation: scale 0.3s 1 ease-in-out
+}
 
 .logo {
 	position: absolute;
@@ -92,4 +93,33 @@ body.low-battery .battery {
 	font-size: 20px;
 	user-select: none;
 	pointer-events: none;
+}
+
+.notifications {
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	color: white;
+}
+
+.notifications.hidden {
+	transform: translateY(-100%);
+}
+
+.notifications.anim {
+	transition: transform 0.2s ease;
+}
+
+.notifications .item {
+	font-size: 4mm;
+	-webkit-text-size-adjust: none;
+	background: #fca83a;
+	padding: 3mm;
+	padding-bottom: 1.5mm;
+}
+
+.notifications .item:last-child {
+	padding-bottom: 3mm;
 }

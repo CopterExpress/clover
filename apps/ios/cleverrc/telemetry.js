@@ -1,6 +1,7 @@
 var url = 'ws://192.168.11.1:9090';
 var modeEl = document.querySelector('.telemetry .mode');
 var batteryEl = document.querySelector('.battery');
+var notificationsEl = document.querySelector('.notifications');
 
 var ros = new ROSLIB.Ros({ url: url });
 
@@ -60,6 +61,30 @@ new ROSLIB.Topic({
 	}
 });
 
+var notificationHideTimer;
+
+function notify(text, severity) {
+	var item = document.createElement('div');
+	item.innerHTML = text;
+	item.classList.add('item');
+	notificationsEl.prepend(item);
+	var itemHeight = item.offsetHeight;
+	notificationsEl.classList.remove('anim');
+	notificationsEl.style.transform = 'translateY(' + -itemHeight + 'px)';
+	setTimeout(function() {
+		notificationsEl.classList.add('anim');
+		notificationsEl.style.transform = 'translateY(0)';
+	}, 0);
+	clearTimeout(notificationHideTimer);
+	notificationHideTimer = setTimeout(function() {
+		notificationsEl.style.transform = '';
+		notificationsEl.classList.add('hidden');
+		setTimeout(function() {
+			notificationsEl.innerHTML = '';
+		}, 210);
+	}, 4000);
+}
+
 new ROSLIB.Topic({
 	ros: ros,
 	name: '/mavros/statustext/recv',
@@ -73,6 +98,7 @@ new ROSLIB.Topic({
 			console.log('Filtered out message ' + message.text);
 			return;
 		}
+		notify(message.text, message.severity);
 		callNativeApp('notification', message);
 	}
 });

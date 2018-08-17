@@ -62,15 +62,7 @@ class ViewController: UIViewController, WKScriptMessageHandler {
         } else if (message.name == "notification") {
             // Got notification message
             print(message)
-            let m = message.body as! NSDictionary;
-            let level = m["severity"] as! Int
-            if level == 4 {
-                let banner = NotificationBanner(title: m["text"] as! String, style: .warning)
-                banner.show()
-            } else {
-                let banner = NotificationBanner(title: m["text"] as! String, style: .danger)
-                banner.show()
-            }
+            tapticNotify()
         }
     }
 

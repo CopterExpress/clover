@@ -9,6 +9,5 @@ target 'cleverrc' do
 
   # Pods for cleverrc
   pod 'SwiftSocket', '~> 2.0'
-  pod 'NotificationBannerSwift'
 
 end
