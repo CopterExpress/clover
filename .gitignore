@@ -1,2 +1,3 @@
 /deploy/ros_lib/
 *.pyc
+*.DS_Store
