@@ -79,85 +79,10 @@ resize_fs() {
   set -e
 }
 
-mount_system() {
-
-  # STATIC FUNCTION
-  # TEMPLATE: mount_system $IMAGE
-
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
-  # https://www.stableit.ru/2011/05/losetup.html
-  # -f     : losetup выбирает незанятое имя устройства, например /dev/loop2
-  # -P     : losetup монтирует разделы в образе как отдельные подразделы,
-  #          например /dev/loop0p1 и /dev/loop0p2
-  # --show : печатает имя устройства, например /dev/loop4
-
-  echo -e "\033[0;31m\033[1mMount loop-image: $1\033[0m\033[0m"
-  local DEV_IMAGE=$(losetup -Pf $1 --show)
-  sleep 0.5
-
-  # Get temp directory to mount image
-  local MOUNT_POINT=$(mktemp -d)
-
-  echo -e "\033[0;31m\033[1mMount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot\033[0m\033[0m"
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
-
-  echo -e "\033[0;31m\033[1mBind system dirs\033[0m\033[0m"
-  # https://github.com/debian-pi/raspbian-ua-netinst/issues/314
-  echo "Mounting /proc in chroot... "
-  if [ ! -d ${MOUNT_POINT}/proc ] ; then
-    mkdir -p ${MOUNT_POINT}/proc \
-      && echo "Created ${MOUNT_POINT}/proc"
-  fi
-  mount -t proc -o nosuid,noexec,nodev proc ${MOUNT_POINT}/proc \
-    && echo "OK"
-  
-  echo "Mounting /sys in chroot... "
-  if [ ! -d ${MOUNT_POINT}/sys ] ; then
-    mkdir -p ${MOUNT_POINT}/sys \
-      && echo "Created ${MOUNT_POINT}/sys"
-  fi
-  mount -t sysfs -o nosuid,noexec,nodev sysfs ${MOUNT_POINT}/sys \
-    && echo "OK"
-  
-  echo "Mounting /dev/ and /dev/pts in chroot... " \
-    && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
-    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs ${MOUNT_POINT}/dev \
-    && mount -t devpts -o gid=5,mode=620 devpts ${MOUNT_POINT}/dev/pts \
-    && echo "OK"
-  # mount -t devpts none "${MOUNT_POINT}/dev/pts" -o ptmxmode=0666,newinstance
-  # ln -fs "pts/ptmx" "${MOUNT_POINT}/dev/ptmx"
-
-  # mount -o bind /dev ${MOUNT_POINT}/dev
-  # mount -t proc proc ${MOUNT_POINT}/proc
-  # mount -t devpts devpts ${MOUNT_POINT}/dev/pts
-
-  # mount -t proc proc ${MOUNT_POINT}/proc
-  # mount -t sysfs sys ${MOUNT_POINT}/sys
-  # mount --bind /dev ${MOUNT_POINT}/dev
-
-  echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
-    && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
-
-  # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
-  # http://www.unix-lab.org/posts/chroot/
-  # https://habrahabr.ru/post/141012/
-  # https://losst.ru/vosstanovlenie-grub2
-  # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
-  # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
-  echo -e "\033[0;31m\033[1mEnter chroot\033[0m\033[0m" \
-    && chroot ${MOUNT_POINT} /bin/bash
-
-  umount_system ${MOUNT_POINT} ${DEV_IMAGE}
-}
-
 execute() {
 
   # STATIC FUNCTION
-  # TEMPLATE: execute $IMAGE $EXECUTE_FILE ...
+  # TEMPLATE: execute $IMAGE <$EXECUTE_FILE> <...>
 
   # Partitions numbers
   local BOOT_PARTITION=1
@@ -200,18 +125,30 @@ execute() {
   echo -e "\033[0;31m\033[1mCopy DNS records\033[0m\033[0m" \
     && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
 
-  echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
-  local script_name=$(basename $2)
-  local script_path_root="${MOUNT_POINT}/root/${script_name}"
-  # Copy script into chroot fs
-  # TODO: Find more suitable location for temporary script storage
-  cp "$2" "${script_path_root}"
-  # Its important to save arguments (direct ${@:4} causes problems)
-  script_args="${@:3}"
-  # Run script in chroot with additional arguments
-  chroot ${MOUNT_POINT} /bin/sh -c "/root/${script_name} ${script_args}"
-  # Removing script from chroot fs
-  rm "${script_path_root}"
+  if [[ $# > 1 ]]; then
+    echo -e "\033[0;31m\033[1m$(date) | Enter chroot\033[0m\033[0m"
+    local script_name=$(basename $2)
+    # TODO: maybe copy to tmp-dir
+    local script_path_root="${MOUNT_POINT}/root/${script_name}"
+    # Copy script into chroot fs
+    # TODO: Find more suitable location for temporary script storage
+    cp "$2" "${script_path_root}"
+    # Its important to save arguments (direct ${@:4} causes problems)
+    script_args="${@:3}"
+    # Run script in chroot with additional arguments
+    chroot ${MOUNT_POINT} /bin/sh -c "/root/${script_name} ${script_args}"
+    # Removing script from chroot fs
+    rm "${script_path_root}"
+  else
+    # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
+    # http://www.unix-lab.org/posts/chroot/
+    # https://habrahabr.ru/post/141012/
+    # https://losst.ru/vosstanovlenie-grub2
+    # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
+    # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
+    echo -e "\033[0;31m\033[1mEnter chroot\033[0m\033[0m" \
+      && chroot ${MOUNT_POINT} /bin/bash
+  fi
 
   umount_system ${MOUNT_POINT} ${DEV_IMAGE}
 }
@@ -356,10 +293,6 @@ echo "\$6: $6"
 echo "\$7: $7"
 
 case "$1" in
-  mount_system)
-  # mount_system $IMAGE
-    mount_system $2;;
-
   get_image)
   # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
     get_image $2 $3 $4;;
@@ -381,5 +314,5 @@ case "$1" in
     copy_to_chroot $2 $3 $4;;
 
   *)
-    echo "Enter one of: mount_system, get_image, resize_fs, publish_image, execute";;
+    echo "Enter one of: get_image, resize_fs, publish_image, execute";;
 esac
