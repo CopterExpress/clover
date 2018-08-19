@@ -1,6 +1,6 @@
 # MAVROS
 
-Основная статья: [http://wiki.ros.org/mavros](http://wiki.ros.org/mavros)
+Основная документация: [http://wiki.ros.org/mavros](http://wiki.ros.org/mavros)
 
 MAVROS \(MAVLink + ROS\) — это пакет для ROS, предоставляющий возможность управлять беспилотниками по протоколу [MAVLink](mavlink.md). MAVROS поддерживает полетные стеки PX4 и APM. Связь организовывается по UART, USB, TCP или UDP.
 
