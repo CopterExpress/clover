@@ -22,11 +22,11 @@ IMAGE_NAME="clever_qemu.img"
 ./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "qemu-arm-resin" "/usr/bin/qemu-arm-static"
 ./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "kinetic-ros-coex.rosinstall" "/home/pi/ros_catkin_ws/"
 
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/change_boot_part.sh
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/init_image.sh qemu_build_17082018 raspbian_nov_2017
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/software_install.sh
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/network_setup.sh
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/ros_install.sh https://github.com/CopterExpress/clever.git master True
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/change_boot_part.sh
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/init_image.sh qemu_build_17082018 raspbian_nov_2017
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/software_install.sh
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/network_setup.sh
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} scripts/ros_install.sh https://github.com/CopterExpress/clever.git master True
 
-./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "scripts" "/"
-./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME}
+#./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "scripts" "/"
+#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME}
