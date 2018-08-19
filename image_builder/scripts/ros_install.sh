@@ -12,7 +12,7 @@ echo -e "\033[0;31m\033[1m$(date) | Installing ROS\033[0m\033[0m"
 
 echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\033[0m\033[0m"
 
-apt-get install --no-install-recommends -y dirmngr=2.1.18-8~deb9u2
+apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u2 > /dev/null
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
