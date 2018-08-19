@@ -16,9 +16,9 @@ set -e
 echo -e "\033[0;31m\033[1m$(date) | #1 apt cache update\033[0m\033[0m"
 
 # Clean repostory cache
-apt-get clean
+apt-get clean -qq > /dev/null
 # Update repository cache
-apt-get update
+apt-get update -qq > /dev/null
 # && apt upgrade -y
 
 echo -e "\033[0;31m\033[1m$(date) | #2 Write clever information\033[0m\033[0m"

@@ -9,7 +9,7 @@ set -e
 echo -e "\033[0;31m\033[1m$(date) | #1 Software installing\033[0m\033[0m"
 
 # TODO: Use dnsmasq instead of isc-dhcp-server
-apt-get install --no-install-recommends -y \
+apt-get install --no-install-recommends -y  -qq \
   unzip=6.0-21 \
   zip=3.0-11 \
   ipython=5.1.0-3 \
@@ -27,7 +27,8 @@ apt-get install --no-install-recommends -y \
   python3-pip=9.0.1-2+rpt2 \
   libjpeg8-dev=8d1-2 \
   tcpdump \
-  libpoco-dev=1.7.6+dfsg1-5+deb9u1
+  libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  > /dev/null
   
 echo -e "\033[0;31m\033[1m$(date) | #2 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 # https://github.com/jacksonliam/mjpg-streamer

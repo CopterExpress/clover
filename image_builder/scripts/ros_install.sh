@@ -12,29 +12,25 @@ echo -e "\033[0;31m\033[1m$(date) | Installing ROS\033[0m\033[0m"
 
 echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\033[0m\033[0m"
 
-# Install a tool that apt-key uses to add ROS repository key
-# http://wpblogger.su/tags/apt/
-apt-get install --no-install-recommends -y dirmngr=2.1.18-8~deb9u2
-# setup keys
+apt-get install --no-install-recommends -y -dd dirmngr=2.1.18-8~deb9u2 > /dev/null
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
-# setup sources.list
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
 
 echo -e "\033[0;31m\033[1m$(date) | #2 apt update && apt upgrade\033[0m\033[0m"
 
-# install bootstrap tools
-apt-get update
+apt-get update -qq > /dev/null
 # && apt upgrade -y
 
 echo -e "\033[0;31m\033[1m$(date) | #3 Installing wget, unzip, python-rosdep, python-rosinstall-generator, python-wstool, python-rosinstall, build-essential, cmake\033[0m\033[0m"
 
-apt-get install --no-install-recommends -y \
+apt-get install --no-install-recommends -y -qq \
   python-rosdep=0.12.2-1 \
   python-rosinstall-generator=0.1.14-1 \
   python-wstool=0.1.17-1 \
   python-rosinstall=0.7.8-1 \
-  build-essential=12.3
+  build-essential=12.3 \
+  > /dev/null
 
 echo -e "\033[0;31m\033[1m$(date) | #4 rosdep init && rosdep update\033[0m\033[0m"
 
@@ -161,7 +157,7 @@ EOF
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
 # Clean apt cache
-apt-get clean
+apt-get clean -qq > /dev/null
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
