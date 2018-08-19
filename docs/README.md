@@ -24,7 +24,7 @@
 
 * Raspbian Stretch
 * ROS Kinetic
-* Настроенную работу с сетью
+* Настроенную [работу с сетью](network.md)
 * OpenCV
 * mavros
 * Набор ПО для работы с Клевером
