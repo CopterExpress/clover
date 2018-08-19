@@ -12,7 +12,7 @@ echo -e "\033[0;31m\033[1m$(date) | Installing ROS\033[0m\033[0m"
 
 echo -e "\033[0;31m\033[1m$(date) | #1 Installing dirmngr & add key to apt-key\033[0m\033[0m"
 
-apt-get install --no-install-recommends -y -dd dirmngr=2.1.18-8~deb9u2 > /dev/null
+apt-get install --no-install-recommends -y dirmngr=2.1.18-8~deb9u2
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
@@ -116,7 +116,7 @@ echo -e "\033[0;31m\033[1m$(date) | #10 Building packages on 1 thread\033[0m\033
 # Install builded packages
 # WARNING: A major bug was found when using --pkg option (catkin_make_isolated doesn't install environment files)
 # TODO: Can we increase threads number with HDD swap?
-cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j1 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
+cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j4 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
 echo -e "\033[0;31m\033[1m$(date) | #11 Remove build_isolated & devel_isolated from ros_catkin_ws\033[0m\033[0m"
 
@@ -132,7 +132,7 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
-  && catkin_make -j1 -DCMAKE_BUILD_TYPE=Release \
+  && catkin_make -j4 -DCMAKE_BUILD_TYPE=Release \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
