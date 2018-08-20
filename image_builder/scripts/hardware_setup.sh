@@ -73,4 +73,4 @@ if ! grep -q "^bcm2835-v4l2" /etc/modules;
 then printf "bcm2835-v4l2\n" >> /etc/modules
 fi
 
-echo_stamp "End of configure hardware interfaces"
+echo_stamp "#8 End of configure hardware interfaces"
