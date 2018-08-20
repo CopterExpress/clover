@@ -309,23 +309,23 @@ echo "\$7: $7"
 
 case "$1" in
   get_image)
-  # get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
+  # get_image <BUILD_DIR> <RPI_DONWLOAD_URL> <IMAGE_NAME>
     get_image $2 $3 $4;;
 
   resize_fs)
-  # resize_fs $IMAGE_PATH $SIZE
+  # resize_fs <IMAGE_PATH> <SIZE>
     resize_fs $2 $3;;
 
   publish_image)
-  # publish_image $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
+  # publish_image <BUILD_DIR> <IMAGE_NAME> <YA_SCRIPT> <CONFIG_FILE> <RELEASE_ID> <RELEASE_BODY>
     publish_image $2 $3 $4 $5 $6 "$7";;
 
   execute)
-  # execute $IMAGE $EXECUTE_FILE ...
+  # execute <IMAGE> [<EXECUTE_FILE>] [...]
     execute $2 $3 ${@:4};;
 
   copy_to_chroot)
-  # copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
+  # copy_to_chroot <IMAGE> <MOVE_FILE> <MOVE_TO>
     copy_to_chroot $2 $3 $4;;
 
   *)
