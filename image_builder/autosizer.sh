@@ -2,6 +2,28 @@
 
 set -e
 
+echo_bold() {
+
+  # STATIC FUNCTION
+  # TEMPLATE: echo_bold <TEXT> <TYPE>
+  # TYPE: SUCCESS, ERROR, INFO
+
+  # More info there https://www.shellhacks.com/ru/bash-colors/
+
+  TEXT="$1"
+  TEXT="\e[1m$TEXT\e[0m" # BOLD
+
+  case "$2" in
+    SUCCESS)
+    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
+    ERROR)
+    TEXT="\e[31m${TEXT}\e[0m";; # RED
+    *)
+    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
+  esac
+  echo -e ${TEXT}
+}
+
 if [ $(whoami) != "root" ]; then
   echo \
   && echo "********************************************************************" \
@@ -13,44 +35,44 @@ fi
 
 if [[ -z $1 ]]; then
   echo "================================================================================"
-  echo -e "\033[0;31m\033[1mAutomatic Image file resizer\033[0m\033[0m"
-  echo -e "\033[0;31m\033[1mDescription:\033[0m\033[0m This script shrink your image to 10MiB free space"
+  echo_bold "Automatic Image file resizer"
+  echo_bold "Description: This script shrink your image to 10MiB free space"
   echo -e "if you didn't set FREE_SPACE in MiB (see usage below)."
-  echo -e "\033[0;31m\033[1mAuthors:\033[0m\033[0m Artem Smirnov @urpylka, SirLagz"
+  echo_bold "Authors: Artem Smirnov @urpylka, SirLagz"
   echo
-  echo -e "\033[0;31m\033[1mUsage:\033[0m\033[0m ./autosizer.sh PATH_TO_IMAGE FREE_SPACE"
+  echo_bold "Usage: ./autosizer.sh PATH_TO_IMAGE FREE_SPACE"
   echo
-  echo -e "\033[0;31m\033[1mRequirements:\033[0m\033[0m parted, losetup, e2fsck, resize2fs, bc, truncate"
+  echo_bold "Requirements: parted, losetup, e2fsck, resize2fs, bc, truncate"
   echo "================================================================================"
   exit 0
 fi
 
 echo "================================================================================"
 strImgFile=$1
-echo -e "\033[0;31m\033[1mPath to image: $strImgFile\033[0m\033[0m"
+echo_bold "Path to image: $strImgFile"
 echo "================================================================================"
 
 if [[ ! -e $strImgFile ]]; then
-  echo -e "\033[0;31m\033[1mError: File doesn't exist\033[0m\033[0m"
+  echo_bold "Error: File doesn't exist"
   echo
   exit 1
 fi
 
 echo "================================================================================"
 partinfo=`parted -m $strImgFile unit B print`
-echo -e "\033[0;31m\033[1mPartition information:\033[0m\033[0m\n$partinfo"
+echo_bold "Partition information:\n$partinfo"
 echo "================================================================================"
 
 partnumber=`echo "$partinfo" | grep ext4 | awk -F: '{ print $1 }'`
-echo -e "\033[0;31m\033[1mPartition number: $partnumber\033[0m\033[0m"
+echo_bold "Partition number: $partnumber"
 echo "================================================================================"
 
 partstart=`echo "$partinfo" | grep ext4 | awk -F: '{ print substr($2,0,length($2)-1) }'`
-echo -e "\033[0;31m\033[1mPartition start: $partstart (bytes)\033[0m\033[0m"
+echo_bold "Partition start: $partstart (bytes)"
 echo "================================================================================"
 
 loopback=`losetup -f --show -o $partstart $strImgFile`
-echo -e "\033[0;31m\033[1mLoopback device: $loopback\033[0m\033[0m"
+echo_bold "Loopback device: $loopback"
 echo "================================================================================"
 
 set +e
@@ -60,7 +82,7 @@ set -e
 echo "================================================================================"
 minsize=`resize2fs -P $loopback | awk -F': ' '{ print $2 }'`
 #minsize=`resize2fs -P $loopback 2> /dev/null | awk -F': ' '{ print $2 }'`
-echo -e "\033[0;31m\033[1mMinsize: $minsize (4KiB)\033[0m\033[0m"
+echo_bold "Minsize: $minsize (4KiB)"
 echo "================================================================================"
 
 # Default add 10MiB free space to image, if $2 doesn't set
@@ -69,7 +91,7 @@ FREE_SPACE=${2:-10}
 FREE_SPACE=$(($FREE_SPACE*1024*1024/4096))
 
 minsize=`echo "$minsize+$FREE_SPACE" | bc`
-echo -e "\033[0;31m\033[1mMinsize + $FREE_SPACE (4KiB): $minsize (4KiB)\033[0m\033[0m"
+echo_bold "Minsize + $FREE_SPACE (4KiB): $minsize (4KiB)"
 echo "================================================================================"
 
 resize2fs -p $loopback $minsize
@@ -78,12 +100,12 @@ losetup -d $loopback
 
 echo "================================================================================"
 partnewsize=`echo "$minsize * 4096" | bc`
-echo -e "\033[0;31m\033[1mNew size of part: $minsize (4KiB) = $partnewsize (bytes)\033[0m\033[0m"
+echo_bold "New size of part: $minsize (4KiB) = $partnewsize (bytes)"
 echo "================================================================================"
 
 newpartend=`echo "$partstart + $partnewsize" | bc`
-echo -e "\033[0;31m\033[1mNew end of part (Part start + part new size):\033[0m\033[0m"
-echo -e "\033[0;31m\033[1m$partstart (bytes) + $partnewsize (bytes) = $newpartend (bytes)\033[0m\033[0m"
+echo_bold "New end of part (Part start + part new size):"
+echo_bold "$partstart (bytes) + $partnewsize (bytes) = $newpartend (bytes)"
 echo "================================================================================"
 
 part1=`parted $strImgFile rm 2`
@@ -92,12 +114,12 @@ part2=`parted $strImgFile unit B mkpart primary $partstart $newpartend`
 
 echo "================================================================================"
 endresult=`parted -m $strImgFile unit B print free | tail -1 | awk -F: '{ print substr($2,0,length($2)-1) }'`
-echo -e "\033[0;31m\033[1mSize of result image: $endresult (bytes)\033[0m\033[0m"
+echo_bold "Size of result image: $endresult (bytes)"
 echo "================================================================================"
 
 truncate -s $endresult $strImgFile
 
 echo "================================================================================"
 partinfo=`parted -m $strImgFile unit B print`
-echo -e "\033[0;31m\033[1mPartition information:\033[0m\033[0m\n$partinfo"
+echo_bold "Partition information:\n$partinfo"
 echo "================================================================================"
