@@ -31,5 +31,8 @@ RPI_DONWLOAD_URL="https://downloads.raspberrypi.org/raspbian_lite/images/raspbia
 ./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "scripts/init_rpi.sh" "/root/"
 ./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "scripts/hardware_setup.sh" "/root/"
 
+./autosizer.sh ${BUILD_DIR}/${IMAGE_NAME}
+./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} "scripts/change_boot_part.sh"
+
 #./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} "scripts" "/"
 #./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME}
