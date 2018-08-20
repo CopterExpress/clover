@@ -21,10 +21,13 @@ echo_stamp() {
   TEXT="\e[1m$TEXT\e[0m" # BOLD
 
   case "$2" in
-  SUCCESS) TEXT="\e[31m${TEXT}\e[0m" # GREEN
-  ERROR) TEXT="\e[31m${TEXT}\e[0m" # RED
-  *) TEXT="\e[31m${TEXT}\e[0m" # BLUE
-esac
+    SUCCESS)
+    TEXT="\e[31m${TEXT}\e[0m";; # GREEN
+    ERROR)
+    TEXT="\e[31m${TEXT}\e[0m";; # RED
+    *)
+    TEXT="\e[31m${TEXT}\e[0m";; # BLUE
+  esac
   echo -e ${TEXT}
 }
 
