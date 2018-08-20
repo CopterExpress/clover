@@ -28,4 +28,7 @@ sudo sed -i.OLD "s/CLEVER/CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | s
 echo_stamp "#2 Harware setup"
 /root/hardware_setup.sh
 
-echo -e "\033[0;31m\033[1m$(date) | #3 End of network installation\033[0m\033[0m"
+echo_stamp "#3 Remove init scripts"
+rm /root/init_rpi.sh /root/hardware_setup.sh
+
+echo_stamp "#4 End of network installation"
