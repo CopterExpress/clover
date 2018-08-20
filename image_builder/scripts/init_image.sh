@@ -51,7 +51,7 @@ echo "$1" >> /etc/clever_version
 echo "${2%.*}" >> /etc/clever_origin
 
 echo_stamp "#3 Write magic script to /etc/rc.local"
-MAGIC_SCRIPT="sudo /root/init_rpi.sh && sudo sed -i '/sudo \\\/root\\\/init_rpi.sh/d' /etc/rc.local && sudo reboot"
+MAGIC_SCRIPT="sudo /root/init_rpi.sh; sudo sed -i '/sudo \\\/root\\\/init_rpi.sh/d' /etc/rc.local && sudo reboot"
 sed -i "19a${MAGIC_SCRIPT}" /etc/rc.local
 
 echo_stamp "#4 End initialisation of image"
