@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Exit immidiately on non-zero result
-set -e
-
 #
 # Script for image configure
 # @urpylka Artem Smirnov
 # @dvornikov-aa Andrey Dvornikov
 #
+
+# Exit immidiately on non-zero result
+set -e
 
 echo_stamp() {
 
