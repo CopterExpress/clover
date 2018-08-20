@@ -22,11 +22,11 @@ echo_stamp() {
 
   case "$2" in
     SUCCESS)
-    TEXT="\e[31m${TEXT}\e[0m";; # GREEN
+    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
     ERROR)
     TEXT="\e[31m${TEXT}\e[0m";; # RED
     *)
-    TEXT="\e[31m${TEXT}\e[0m";; # BLUE
+    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
   esac
   echo -e ${TEXT}
 }
