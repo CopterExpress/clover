@@ -24,7 +24,8 @@ SHRINK=True
 
 set -e
 
-apt-get install unzip wget parted apt-utils git ca-certificates
+apt-get update -qq > /dev/null
+apt-get install -y --no-install-recommends -qq unzip wget parted apt-utils git ca-certificates > /dev/null
 
 git clone ${TARGET_REPO_URL} --single-branch --branch ${TARGET_REPO_REF} --depth 1 'repo_tmp'
 if [[ -d repo_tmp${TARGET_REPO_PATH} ]];
