@@ -4,7 +4,8 @@ DEBIAN_FRONTEND='noninteractive'
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 
-# решить проблему с тем что если уже подмонтированно все
+# 1. добавить проверку архитектуры
+# 2. решить проблему с тем что если уже подмонтированно все
 #
 # mount: binfmt_misc is already mounted or /proc/sys/fs/binfmt_misc busy
 # binfmt_misc is already mounted on /proc/sys/fs/binfmt_misc
