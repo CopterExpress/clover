@@ -1,13 +1,19 @@
 #! /bin/bash
 
-set -e
-
 DEBIAN_FRONTEND='noninteractive'
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 
+# решить проблему с тем что если уже подмонтированно все
+#
+# mount: binfmt_misc is already mounted or /proc/sys/fs/binfmt_misc busy
+# binfmt_misc is already mounted on /proc/sys/fs/binfmt_misc
+# ./manual.sh: line 9: echo: write error: File exists
+#
 mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
 echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register
+
+set -e
 
 apt install unzip wget
 
