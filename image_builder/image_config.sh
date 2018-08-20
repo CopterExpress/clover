@@ -53,10 +53,6 @@ resize_fs() {
   # STATIC FUNCTION
   # TEMPLATE: resize_fs $IMAGE_PATH $SIZE
 
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
   set +e
 
   # https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D0%B6%D1%91%D0%BD%D0%BD%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB
@@ -82,16 +78,16 @@ resize_fs() {
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo_stamp "Mount loop-image: $1" \
-    && echo ", +" | sfdisk -N ${ROOT_PARTITION} ${DEV_IMAGE} \
+    && echo ", +" | sfdisk -N 2 ${DEV_IMAGE} \
     && sleep 0.5 \
     && losetup -d ${DEV_IMAGE} \
     && sleep 0.5 \
     && local DEV_IMAGE=$(losetup -Pf $1 --show) \
     && sleep 0.5 \
     && echo_stamp "Check & repair filesystem after expand partition" \
-    && e2fsck -fvy "${DEV_IMAGE}p${ROOT_PARTITION}" \
+    && e2fsck -fvy "${DEV_IMAGE}p2" \
     && echo_stamp "Expand filesystem" \
-    && resize2fs "${DEV_IMAGE}p${ROOT_PARTITION}" \
+    && resize2fs "${DEV_IMAGE}p2" \
     && echo_stamp "Umount loop-image" \
     && losetup -d ${DEV_IMAGE}
 
@@ -103,10 +99,6 @@ execute() {
   # STATIC FUNCTION
   # TEMPLATE: execute $IMAGE <$EXECUTE_FILE> <...>
 
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
   echo_stamp "Mount loop-image: $1"
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
@@ -115,8 +107,8 @@ execute() {
   local MOUNT_POINT=$(mktemp -d)
 
   echo_stamp "Mount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot"
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
+  mount "${DEV_IMAGE}p2" ${MOUNT_POINT}
+  mount "${DEV_IMAGE}p1" ${MOUNT_POINT}/boot
 
   echo_stamp "Bind system dirs"
   echo_stamp "Mounting /proc in chroot... "
@@ -177,10 +169,6 @@ copy_to_chroot() {
   # STATIC FUNCTION
   # TEMPLATE: copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
 
-  # Partitions numbers
-  local BOOT_PARTITION=1
-  local ROOT_PARTITION=2
-
   echo_stamp "Mount loop-image: $1"
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
@@ -189,8 +177,8 @@ copy_to_chroot() {
   local MOUNT_POINT=$(mktemp -d)
 
   echo_stamp "Mount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot"
-  mount "${DEV_IMAGE}p${ROOT_PARTITION}" ${MOUNT_POINT}
-  mount "${DEV_IMAGE}p${BOOT_PARTITION}" ${MOUNT_POINT}/boot
+  mount "${DEV_IMAGE}p2" ${MOUNT_POINT}
+  mount "${DEV_IMAGE}p1" ${MOUNT_POINT}/boot
 
   dir_name=$(dirname "${MOUNT_POINT}$3 /")
   if [ ! -d ${dir_name} ] ; then
