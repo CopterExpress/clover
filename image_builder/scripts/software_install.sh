@@ -1,12 +1,34 @@
 #!/bin/bash
 
-set -e
-
 ##################################################################################################################################
 # Image software installation
 ##################################################################################################################################
 
-echo -e "\033[0;31m\033[1m$(date) | #1 Software installing\033[0m\033[0m"
+set -e
+
+echo_stamp() {
+
+  # STATIC FUNCTION
+  # TEMPLATE: echo_stamp <TEXT> <TYPE>
+  # TYPE: SUCCESS, ERROR, INFO
+
+  # More info there https://www.shellhacks.com/ru/bash-colors/
+
+  TEXT="$(date) | $1"
+  TEXT="\e[1m$TEXT\e[0m" # BOLD
+
+  case "$2" in
+    SUCCESS)
+    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
+    ERROR)
+    TEXT="\e[31m${TEXT}\e[0m";; # RED
+    *)
+    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
+  esac
+  echo -e ${TEXT}
+}
+
+echo_stamp "#1 Software installing"
 
 # TODO: Use dnsmasq instead of isc-dhcp-server
 apt-get install --no-install-recommends -y  -qq \
@@ -30,7 +52,7 @@ apt-get install --no-install-recommends -y  -qq \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
   > /dev/null
   
-echo -e "\033[0;31m\033[1m$(date) | #2 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
+echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
 
 git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streamer \
@@ -39,11 +61,11 @@ git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streame
   && make install \
   && chown -Rf pi:pi /home/pi/mjpg-streamer
 
-echo -e "\033[0;31m\033[1m$(date) | Add .vimrc\033[0m\033[0m"
+echo_stamp "Add .vimrc"
 
 # vim settings
 echo "set mouse-=a
 syntax on
 " > /home/pi/.vimrc
 
-echo -e "\033[0;31m\033[1m$(date) | End of network installation\033[0m\033[0m"
+echo_stamp "End of network installation"
