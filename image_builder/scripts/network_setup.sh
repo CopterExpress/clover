@@ -36,10 +36,8 @@ domain-needed
 quiet-dhcp6
 " >> /etc/dnsmasq.conf
 
-echo -e "\033[0;31m\033[1m$(date) | #4 Write magic script for rename SSID to /etc/rc.local\033[0m\033[0m"
-
-RENAME_SSID="sudo sed -i.OLD \"s/CLEVER/CLEVER-\$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)/g\" /etc/wpa_supplicant/wpa_supplicant.conf && sudo sed -i '/sudo sed/d' /etc/rc.local && sudo reboot"
-
-sed -i "19a$RENAME_SSID" /etc/rc.local
+#echo -e "\033[0;31m\033[1m$(date) | #4 Write magic script for rename SSID to /etc/rc.local\033[0m\033[0m"
+#RENAME_SSID="sudo sed -i.OLD \"s/CLEVER/CLEVER-\$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)/g\" /etc/wpa_supplicant/wpa_supplicant.conf && sudo sed -i '/sudo sed/d' /etc/rc.local && sudo reboot"
+#sed -i "19a$RENAME_SSID" /etc/rc.local
 
 echo -e "\033[0;31m\033[1m$(date) | #5 End of network installation\033[0m\033[0m"
