@@ -1,5 +1,5 @@
 {
     "main_script":"/image_builder/scripts/builder.sh",
-    "scripts_path":"/image_builder/scripts",
+    "scripts_dir":"/image_builder/scripts",
     "source_image": "https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip"
 }
