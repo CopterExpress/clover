@@ -3,8 +3,6 @@
 set -e
 
 echo_bold() {
-
-  # STATIC FUNCTION
   # TEMPLATE: echo_bold <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
 

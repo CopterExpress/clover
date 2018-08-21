@@ -7,8 +7,6 @@
 set -e
 
 echo_stamp() {
-
-  # STATIC FUNCTION
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
 
