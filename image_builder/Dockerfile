@@ -15,8 +15,5 @@ COPY ./autobuild.sh /builder/autobuild.sh
 COPY ./autosizer.sh /builder/autosizer.sh
 COPY ./qemu-arm-resin /builder/qemu-arm-resin
 
-VOLUME /dev /dev
-VOLUME ./image /builder/image
-
 WORKDIR /builder
 CMD ./autobuild.sh
