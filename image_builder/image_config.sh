@@ -98,7 +98,7 @@ execute() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  local MOUNT_POINT=$(mktemp -d)
+  local MOUNT_POINT=$(mktemp -d --suffix=.builder_image)
   echo_stamp "Mount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot"
   mount "${DEV_IMAGE}p2" ${MOUNT_POINT}
   mount "${DEV_IMAGE}p1" ${MOUNT_POINT}/boot
@@ -164,7 +164,7 @@ copy_to_chroot() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  local MOUNT_POINT=$(mktemp -d)
+  local MOUNT_POINT=$(mktemp -d --suffix=.builder_image)
   echo_stamp "Mount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot"
   mount "${DEV_IMAGE}p2" ${MOUNT_POINT}
   mount "${DEV_IMAGE}p1" ${MOUNT_POINT}/boot
