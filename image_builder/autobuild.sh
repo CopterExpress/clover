@@ -24,6 +24,7 @@ export IMAGE_PATH="$(pwd)/image/$(basename -s ".git" ${TARGET_REPO})_${IMAGE_VER
 
 if [[ $(arch) != 'armv7l' ]]; then
   [[ -d '/proc/sys/fs/binfmt_misc' ]] || mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
+  mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc
   echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register
   ./image_config.sh copy_to_chroot ${IMAGE_PATH} './qemu-arm-resin' '/usr/bin/qemu-arm-static'
 fi
