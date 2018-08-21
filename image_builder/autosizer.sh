@@ -121,3 +121,8 @@ echo "==========================================================================
 partinfo=`parted -m $strImgFile unit B print`
 echo_bold "Partition information:\n$partinfo"
 echo "================================================================================"
+
+# TODO check if image needs to change PARTUUID
+#sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/cmdline.txt
+#sed -i 's/.*  \/boot           vfat    defaults          0       2$/\/dev\/mmcblk0p1  \/boot           vfat    defaults          0       2/' /etc/fstab
+#sed -i 's/.*  \/               ext4    defaults,noatime  0       1$/\/dev\/mmcblk0p2  \/               ext4    defaults,noatime  0       1/' /etc/fstab
