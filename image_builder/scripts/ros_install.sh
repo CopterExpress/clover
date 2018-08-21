@@ -9,8 +9,6 @@
 set -e
 
 echo_stamp() {
-
-  # STATIC FUNCTION
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
 
@@ -33,16 +31,12 @@ echo_stamp() {
 echo_stamp "Installing ROS"
 
 echo_stamp "#1 Installing dirmngr & add key to apt-key"
-
 apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u2 > /dev/null
 apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
-
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
 
 echo_stamp "#2 apt update && apt upgrade"
-
 apt-get update -qq > /dev/null
-# && apt upgrade -y
 
 echo_stamp "#3 Installing wget, unzip, python-rosdep, python-rosinstall-generator, python-wstool, python-rosinstall, build-essential, cmake"
 
@@ -55,8 +49,6 @@ apt-get install --no-install-recommends -y -qq \
   > /dev/null
 
 echo_stamp "#4 rosdep init && rosdep update"
-
-# bootstrap rosdep
 rosdep init && rosdep update
 
 # If $3 = false, then discover packages
@@ -79,9 +71,8 @@ then
     && wstool update -t src
 else
   echo_stamp "#5 Creating manual ros_catkin_ws"
-
   mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-    && wstool init src kinetic-ros-coex.rosinstall
+  && wstool init src kinetic-ros-coex.rosinstall
 fi
 
 echo_stamp "#7 Installing dependencies apps with rosdep"
@@ -115,11 +106,9 @@ set -e
 echo_stamp "End of rosdep install"
 
 echo_stamp "#8 Refactoring usb_cam in SRC"
-
 sed -i '/#define __STDC_CONSTANT_MACROS/a\#define PIX_FMT_RGB24 AV_PIX_FMT_RGB24\n#define PIX_FMT_YUV422P AV_PIX_FMT_YUV422P' /home/pi/ros_catkin_ws/src/usb_cam/src/usb_cam.cpp
 
 echo_stamp "#9 Installing GeographicLib datasets"
-
 /home/pi/ros_catkin_ws/src/mavros/mavros/scripts/install_geographiclib_datasets.sh
 
 #echo_stamp "#11 Building light packages on 2 threads"
@@ -141,12 +130,10 @@ echo_stamp "#10 Building packages on 1 thread"
 cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j4 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
 echo_stamp "#11 Remove build_isolated & devel_isolated from ros_catkin_ws"
-
 rm -rf /home/pi/ros_catkin_ws/build_isolated /home/pi/ros_catkin_ws/devel_isolated
 chown -Rf pi:pi /home/pi/ros_catkin_ws
 
 echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE"
-
 git clone $1 /home/pi/catkin_ws/src/clever \
   && cd /home/pi/catkin_ws/src/clever \
   && git checkout $2 \
@@ -161,11 +148,9 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && systemctl enable clever
 
 echo_stamp "#13 Change permissions for catkin_ws"
-
 chown -Rf pi:pi /home/pi/catkin_ws
 
 echo_stamp "#14 Setup ROS environment"
-
 cat <<EOF | tee -a /home/pi/.bashrc > /dev/null
 LANG=C.UTF-8
 LC_ALL=C.UTF-8
