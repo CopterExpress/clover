@@ -21,11 +21,10 @@ set -e
 apt-get update -qq > /dev/null
 apt-get install -y --no-install-recommends -qq unzip wget parted apt-utils git ca-certificates > /dev/null
 
-git clone ${TARGET_REPO_URL} --single-branch --branch ${TARGET_REPO_REF} --depth 1 'repo_tmp'
-if [[ -d repo_tmp${TARGET_REPO_PATH} ]];
-then cd repo_tmp${TARGET_REPO_PATH}
-else echo "Error: TARGET_REPO_PATH incorrect!" && return 1
-fi
+REPO_DIR=$(mktemp -d)
+git clone ${TARGET_REPO_URL} --single-branch --branch ${TARGET_REPO_REF} --depth 1 ${REPO_DIR}
+[[ $? != 0 ]] && (echo 'Error: Could not clone repo!'; return 1)
+[[ -d ${REPO_DIR}${TARGET_REPO_PATH} ]] || (echo 'Error: TARGET_REPO_PATH was incorrect!'; return 1)
 
 BUILD_DIR=$(pwd)/image
 
