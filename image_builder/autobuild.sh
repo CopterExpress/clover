@@ -11,9 +11,9 @@ export TARGET_REF=${TARGET_REF:='qemu_test_2'}
 export TARGET_CONFIG=${TARGET_CONFIG:='/image_builder/scripts/builder.json'}
 
 echo "================================================================================"
-echo "\$TARGET_REPO: $TARGET_REPO"
-echo "\$TARGET_REF: $TARGET_REF"
-echo "\$TARGET_CONFIG: $TARGET_CONFIG"
+echo "TARGET_REPO: $TARGET_REPO"
+echo "TARGET_REF: $TARGET_REF"
+echo "TARGET_CONFIG: $TARGET_CONFIG"
 echo "================================================================================"
 
 # TODO: The repository can be already downloaded, use the TARGET_REPO also as unix path.
