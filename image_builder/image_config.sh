@@ -70,23 +70,23 @@ resize_fs() {
   # TODO: Check sfdisk exit code
 
   echo_stamp "Truncate image" \
-    && truncate -s$2 $1 \
-    && echo_stamp "Mount loop-image: $1" \
-    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
-    && sleep 0.5 \
-    && echo_stamp "Mount loop-image: $1" \
-    && echo ", +" | sfdisk -N 2 ${DEV_IMAGE} \
-    && sleep 0.5 \
-    && losetup -d ${DEV_IMAGE} \
-    && sleep 0.5 \
-    && local DEV_IMAGE=$(losetup -Pf $1 --show) \
-    && sleep 0.5 \
-    && echo_stamp "Check & repair filesystem after expand partition" \
-    && e2fsck -fvy "${DEV_IMAGE}p2" \
-    && echo_stamp "Expand filesystem" \
-    && resize2fs "${DEV_IMAGE}p2" \
-    && echo_stamp "Umount loop-image" \
-    && losetup -d ${DEV_IMAGE}
+  && truncate -s$2 $1 \
+  && echo_stamp "Mount loop-image: $1" \
+  && local DEV_IMAGE=$(losetup -Pf $1 --show) \
+  && sleep 0.5 \
+  && echo_stamp "Mount loop-image: $1" \
+  && echo ", +" | sfdisk -N 2 ${DEV_IMAGE} \
+  && sleep 0.5 \
+  && losetup -d ${DEV_IMAGE} \
+  && sleep 0.5 \
+  && local DEV_IMAGE=$(losetup -Pf $1 --show) \
+  && sleep 0.5 \
+  && echo_stamp "Check & repair filesystem after expand partition" \
+  && e2fsck -fvy "${DEV_IMAGE}p2" \
+  && echo_stamp "Expand filesystem" \
+  && resize2fs "${DEV_IMAGE}p2" \
+  && echo_stamp "Umount loop-image" \
+  && losetup -d ${DEV_IMAGE}
 
   set -e
 }
@@ -123,13 +123,13 @@ execute() {
   && echo_stamp "OK" "SUCCESS"
 
   echo_stamp "Mounting /dev/ and /dev/pts in chroot... " \
-    && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
-    && mount -t devtmpfs -o mode=0755,nosuid devtmpfs ${MOUNT_POINT}/dev \
-    && mount -t devpts -o gid=5,mode=620 devpts ${MOUNT_POINT}/dev/pts \
-    && echo_stamp "OK" "SUCCESS"
+  && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
+  && mount -t devtmpfs -o mode=0755,nosuid devtmpfs ${MOUNT_POINT}/dev \
+  && mount -t devpts -o gid=5,mode=620 devpts ${MOUNT_POINT}/dev/pts \
+  && echo_stamp "OK" "SUCCESS"
 
   echo_stamp "Copy DNS records" \
-    && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
+  && cp -L /etc/resolv.conf ${MOUNT_POINT}/etc/resolv.conf
 
   if [[ $# > 1 ]]; then
     echo_stamp "Entering to chroot"
@@ -153,7 +153,7 @@ execute() {
     # http://unixteam.ru/content/virtualizaciya-ili-zapuskaem-prilozhenie-v-chroot-okruzhenii-razmyshleniya
     # http://help.ubuntu.ru/wiki/%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5_grub
     echo_stamp "Entering to chroot" \
-      && chroot ${MOUNT_POINT} /bin/bash
+    && chroot ${MOUNT_POINT} /bin/bash
   fi
 
   umount_system ${MOUNT_POINT} ${DEV_IMAGE}
@@ -176,7 +176,7 @@ copy_to_chroot() {
   dir_name=$(dirname "${MOUNT_POINT}$3 /")
   if [ ! -d ${dir_name} ] ; then
     mkdir -p ${dir_name} \
-      && echo_stamp "Created ${dir_name}" "SUCCESS"
+    && echo_stamp "Created ${dir_name}" "SUCCESS"
   fi
 
   # Copy script into chroot fs
