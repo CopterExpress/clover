@@ -24,7 +24,7 @@ apt-get install -y --no-install-recommends -qq unzip wget parted apt-utils git c
 git clone ${TARGET_REPO_URL} --single-branch --branch ${TARGET_REPO_REF} --depth 1 'repo_tmp'
 if [[ -d repo_tmp${TARGET_REPO_PATH} ]];
 then cd repo_tmp${TARGET_REPO_PATH}
-else echo "Error TARGET_REPO_PATH incorrect!" && return 1
+else echo "Error: TARGET_REPO_PATH incorrect!" && return 1
 fi
 
 BUILD_DIR=$(pwd)/image
