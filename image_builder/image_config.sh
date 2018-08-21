@@ -10,8 +10,6 @@
 set -e
 
 echo_stamp() {
-
-  # STATIC FUNCTION
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
 
@@ -32,9 +30,7 @@ echo_stamp() {
 }
 
 get_image() {
-
-# STATIC FUNCTION
-# TEMPLATE: get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
+  # TEMPLATE: get_image $BUILD_DIR $RPI_DONWLOAD_URL $IMAGE_NAME
 
   local RPI_ZIP_NAME=$(basename $2)
   if [ ! -e "$1/${RPI_ZIP_NAME}" ];
@@ -52,8 +48,6 @@ get_image() {
 }
 
 resize_fs() {
-
-  # STATIC FUNCTION
   # TEMPLATE: resize_fs $IMAGE_PATH $SIZE
 
   set +e
@@ -98,8 +92,6 @@ resize_fs() {
 }
 
 execute() {
-
-  # STATIC FUNCTION
   # TEMPLATE: execute $IMAGE <$EXECUTE_FILE> <...>
 
   echo_stamp "Mount loop-image: $1"
@@ -168,8 +160,6 @@ execute() {
 }
 
 copy_to_chroot() {
-
-  # STATIC FUNCTION
   # TEMPLATE: copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
 
   echo_stamp "Mount loop-image: $1"
@@ -196,8 +186,6 @@ copy_to_chroot() {
 }
 
 umount_system() {
-
-  # STATIC FUNCTION
   # TEMPLATE: umount_system $MOUNT_POINT $DEV_IMAGE
 
   echo_stamp "Umount recursive dirs: $1"
@@ -232,11 +220,9 @@ umount_system() {
 }
 
 publish_image() {
+  # TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
 
-# STATIC FUNCTION
-# TEMPLATE: publish_image_bash $BUILD_DIR $IMAGE_NAME $YA_SCRIPT $CONFIG_FILE $RELEASE_ID $RELEASE_BODY
-
-# https://developer.github.com/v3/repos/releases/
+  # https://developer.github.com/v3/repos/releases/
 
   echo_stamp "Zip image"
   if [ ! -e "$1/$2.zip" ];
