@@ -36,6 +36,6 @@ if [[ $(arch) != 'armv7l' ]]; then
 fi
 
 export IMAGE_BUILDER="$(dirname $(readlink -e "$0"))"
-export SCRIPTS_DIR="$(jq '.scripts_dir' -r ${TARGET_CONFIG})"
+export SCRIPTS_DIR="${REPO_DIR}$(jq '.scripts_dir' -r ${TARGET_CONFIG})"
 
 ${REPO_DIR}$(jq '.main_script' -r ${TARGET_CONFIG})
