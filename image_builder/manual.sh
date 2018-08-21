@@ -26,10 +26,11 @@ git clone ${TARGET_REPO_URL} --single-branch --branch ${TARGET_REPO_REF} --depth
 [[ $? != 0 ]] && (echo 'Error: Could not clone repo!'; return 1)
 [[ -d ${REPO_DIR}${TARGET_REPO_PATH} ]] || (echo 'Error: TARGET_REPO_PATH was incorrect!'; return 1)
 
-BUILD_DIR=$(pwd)/image
+IMAGE_PATH=$(pwd)/image/${IMAGE_NAME}
+SCRIPTS_DIR=${REPO_DIR}${TARGET_REPO_PATH}'/scripts/'
 
-./image_config.sh get_image ${BUILD_DIR} ${SOURCE_IMAGE} ${IMAGE_NAME}
-./image_config.sh resize_fs ${BUILD_DIR}/${IMAGE_NAME} '7G'
+./image_config.sh get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
+./image_config.sh resize_fs ${IMAGE_PATH} '7G'
 
 if [[ $(arch) != 'armv7l' ]]; then
   if ! [[ -d '/proc/sys/fs/binfmt_misc' ]]; then
@@ -37,26 +38,26 @@ if [[ $(arch) != 'armv7l' ]]; then
     echo ':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:' > /proc/sys/fs/binfmt_misc/register
   fi
 fi
-./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} './qemu-arm-resin' '/usr/bin/qemu-arm-static'
+./image_config.sh copy_to_chroot ${IMAGE_PATH} './qemu-arm-resin' '/usr/bin/qemu-arm-static'
 
-./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} './scripts/init_rpi.sh' '/root/'
-./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} './scripts/hardware_setup.sh' '/root/'
+./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'init_rpi.sh' '/root/'
+./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'hardware_setup.sh' '/root/'
 
-./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} './scripts/init_image.sh' ${CLEVER_VERSION} ${SOURCE_IMAGE}
-./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} './scripts/software_install.sh'
-./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} './scripts/network_setup.sh'
+./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'init_image.sh' ${CLEVER_VERSION} ${SOURCE_IMAGE}
+./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'software_install.sh'
+./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'network_setup.sh'
 
-#./image_config.sh copy_to_chroot ${BUILD_DIR}/${IMAGE_NAME} 'kinetic-ros-coex.rosinstall' '/home/pi/ros_catkin_ws/'
+#./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'kinetic-ros-coex.rosinstall' '/home/pi/ros_catkin_ws/'
 
 #
 # Не совсем корректно тк такого параметра быть не должно,
 # вообще здесь не должно быть ветки как параметра, она должна задаваться непосредственно в файл ros_install
 #
-#./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} './scripts/ros_install.sh' https://github.com/CopterExpress/clever.git master True
+./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'ros_install.sh' ${TARGET_REPO_URL} ${TARGET_REPO_REF} ${DISCOVER_ROS_PACKAGES}
 
 if SHRINK; then
-  ./autosizer.sh ${BUILD_DIR}/${IMAGE_NAME}
+  ./autosizer.sh ${IMAGE_PATH}
   # Наверное вставить в autosizer, тк отдельно (внутри образа) это все равно никто не будет запускать
   # и не нужно его запускать через execute
-  ./image_config.sh execute ${BUILD_DIR}/${IMAGE_NAME} './scripts/change_boot_part.sh'
+  ./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'change_boot_part.sh'
 fi
