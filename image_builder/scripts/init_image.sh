@@ -52,4 +52,10 @@ echo_stamp "#3 Write magic script to /etc/rc.local"
 MAGIC_SCRIPT="sudo /root/init_rpi.sh; sudo sed -i '/sudo \\\/root\\\/init_rpi.sh/d' /etc/rc.local && sudo reboot"
 sed -i "19a${MAGIC_SCRIPT}" /etc/rc.local
 
-echo_stamp "#4 End initialisation of image"
+# It needs for autosizer.sh & maybe that is correct
+echo_stamp "#4 Change boot partition"
+sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/cmdline.txt
+sed -i 's/.*  \/boot           vfat    defaults          0       2$/\/dev\/mmcblk0p1  \/boot           vfat    defaults          0       2/' /etc/fstab
+sed -i 's/.*  \/               ext4    defaults,noatime  0       1$/\/dev\/mmcblk0p2  \/               ext4    defaults,noatime  0       1/' /etc/fstab
+
+echo_stamp "#5 End of init image"
