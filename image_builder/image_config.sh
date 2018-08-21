@@ -98,9 +98,7 @@ execute() {
   local DEV_IMAGE=$(losetup -Pf $1 --show)
   sleep 0.5
 
-  # Get temp directory to mount image
   local MOUNT_POINT=$(mktemp -d)
-
   echo_stamp "Mount dirs ${MOUNT_POINT} & ${MOUNT_POINT}/boot"
   mount "${DEV_IMAGE}p2" ${MOUNT_POINT}
   mount "${DEV_IMAGE}p1" ${MOUNT_POINT}/boot
