@@ -32,4 +32,4 @@ fi
 export IMAGE_BUILDER="$(dirname $(readlink -e "$0"))"
 export SCRIPTS_DIR="$(jq '.scripts_dir' -r ${TARGET_CONFIG})"
 
-$(jq '.main_script' -r ${TARGET_CONFIG})
+${REPO_DIR}$(jq '.main_script' -r ${TARGET_CONFIG})
