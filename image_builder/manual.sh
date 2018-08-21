@@ -1,20 +1,20 @@
 #! /bin/bash
 
-[ "${DEBIAN_FRONTEND:-}" ] || DEBIAN_FRONTEND='noninteractive'
-[ "${LANG:-}" ] || LANG='C.UTF-8'
-[ "${LC_ALL:-}" ] || LC_ALL='C.UTF-8'
+DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
+LANG=${LANG:='C.UTF-8'}
+LC_ALL=${LC_ALL:='C.UTF-8'}
 
-[ "${TARGET_REPO_URL:-}" ] || TARGET_REPO_URL='https://github.com/urpylka/clever.git'
-[ "${TARGET_REPO_REF:-}" ] || TARGET_REPO_REF='qemu_test_2'
-[ "${TARGET_REPO_PATH:-}" ] || TARGET_REPO_PATH='image_builder'
+TARGET_REPO_URL=${TARGET_REPO_URL:='https://github.com/urpylka/clever.git'}
+TARGET_REPO_REF=${TARGET_REPO_REF:='qemu_test_2'}
+TARGET_REPO_PATH=${TARGET_REPO_PATH:='/image_builder'}
 
-[ "${IMAGE_NAME:-}" ] || IMAGE_NAME='clever_docker.img'
-[ "${CLEVER_VERSION:-}" ] || CLEVER_VERSION='NO_VERSION'
+IMAGE_NAME=${IMAGE_NAME:='clever_docker.img'}
+CLEVER_VERSION=${CLEVER_VERSION:='NO_VERSION'}
 
-[ "${SOURCE_IMAGE:-}" ] || SOURCE_IMAGE='https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip'
-[ "${NUMBER_THREADS:-}" ] || NUMBER_THREADS=4
-[ "${DISCOVER_ROS_PACKAGES:-}" ] || DISCOVER_ROS_PACKAGES=False
-[ "${SHRINK:-}" ] || SHRINK=True
+SOURCE_IMAGE=${SOURCE_IMAGE:='https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-12-01/2017-11-29-raspbian-stretch-lite.zip'}
+NUMBER_THREADS=${NUMBER_THREADS:=4}
+DISCOVER_ROS_PACKAGES=${DISCOVER_ROS_PACKAGES:=False}
+SHRINK=${SHRINK:=True}
 
 set -e
 
