@@ -48,7 +48,7 @@ get_image() {
 }
 
 resize_fs() {
-  # TEMPLATE: resize_fs $IMAGE_PATH $SIZE
+  # TEMPLATE: resize_fs <IMAGE_PATH> <SIZE>
 
   set +e
 
@@ -92,7 +92,7 @@ resize_fs() {
 }
 
 execute() {
-  # TEMPLATE: execute $IMAGE <$EXECUTE_FILE> <...>
+  # TEMPLATE: execute <IMAGE_PATH> <$EXECUTE_FILE> <...>
 
   echo_stamp "Mount loop-image: $1"
   local DEV_IMAGE=$(losetup -Pf $1 --show)
@@ -160,7 +160,7 @@ execute() {
 }
 
 copy_to_chroot() {
-  # TEMPLATE: copy_to_chroot $IMAGE $MOVE_FILE $MOVE_TO
+  # TEMPLATE: copy_to_chroot <IMAGE_PATH> <MOVE_FILE> <MOVE_TO>
 
   echo_stamp "Mount loop-image: $1"
   local DEV_IMAGE=$(losetup -Pf $1 --show)
@@ -182,7 +182,7 @@ copy_to_chroot() {
 }
 
 umount_system() {
-  # TEMPLATE: umount_system $MOUNT_POINT $DEV_IMAGE
+  # TEMPLATE: umount_system <MOUNT_POINT> <DEV_IMAGE>
 
   echo_stamp "Umount recursive dirs: $1"
   # There is a risk that umount will fail
@@ -299,11 +299,11 @@ case "$1" in
     publish_image $2 $3 $4 $5 "$6";;
 
   execute)
-  # execute <IMAGE> [<EXECUTE_FILE>] [...]
+  # execute <IMAGE_PATH> [<EXECUTE_FILE>] [...]
     execute $2 $3 ${@:4};;
 
   copy_to_chroot)
-  # copy_to_chroot <IMAGE> <MOVE_FILE> <MOVE_TO>
+  # copy_to_chroot <IMAGE_PATH> <MOVE_FILE> <MOVE_TO>
     copy_to_chroot $2 $3 $4;;
 
   *)
