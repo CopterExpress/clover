@@ -88,23 +88,8 @@ If JDK not installed:
 sudo apt-get install default-jdk
 ```
 
-Running the Docker
-```
-docker run \
-    --privileged -it \
-    -v /dev:/dev \
-    --volume /media/secondary/docker/image:/clever/image_builder/image \
-    -e CLEVER_VERSION='NO_VERSION' \
-    -e CLEVER_ORIG='NOV_2017' \
-    -e IMAGE_NAME='clever_docker.img' \
-    -e SOURCE_IMAGE='https://' \
-    -e INSTRUCTION_REPO_URL='https://github.com/urpylka/clever.git' \
-    -e INSTRUCTION_REPO_REF='qemu_test_2' \
-    -e INSTRUCTION_REPO_PATH='/image_builder'
-    -e NUMBER_THREADS='qemu_test_2' \
-    -e SHRINK='qemu_test_2' \
-    -e DISCOVER_ROS_PACKS='qemu_test_2' \
-    9307e33d68f0
+## Running the Docker
 
---env-file ./env.list
+```bash
+docker run --privileged -it -v /dev:/dev -v ./image:/builder/image f4cc7487c922
 ```
