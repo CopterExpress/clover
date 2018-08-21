@@ -127,7 +127,7 @@ echo_stamp "#10 Building packages on 1 thread"
 # Install builded packages
 # WARNING: A major bug was found when using --pkg option (catkin_make_isolated doesn't install environment files)
 # TODO: Can we increase threads number with HDD swap?
-cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j4 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
+cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j$4 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
 echo_stamp "#11 Remove build_isolated & devel_isolated from ros_catkin_ws"
 rm -rf /home/pi/ros_catkin_ws/build_isolated /home/pi/ros_catkin_ws/devel_isolated
@@ -141,7 +141,7 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
-  && catkin_make -j4 -DCMAKE_BUILD_TYPE=Release \
+  && catkin_make -j$4 -DCMAKE_BUILD_TYPE=Release \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
