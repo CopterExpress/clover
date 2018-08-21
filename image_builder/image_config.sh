@@ -92,7 +92,7 @@ resize_fs() {
 }
 
 execute() {
-  # TEMPLATE: execute <IMAGE_PATH> <$EXECUTE_FILE> <...>
+  # TEMPLATE: execute <IMAGE_PATH> <EXECUTE_FILE> <...>
 
   echo_stamp "Mount loop-image: $1"
   local DEV_IMAGE=$(losetup -Pf $1 --show)

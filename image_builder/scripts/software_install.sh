@@ -54,16 +54,14 @@ echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
 
 git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streamer \
-  && cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
-  && make \
-  && make install \
-  && chown -Rf pi:pi /home/pi/mjpg-streamer
+&& cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
+&& make \
+&& make install \
+&& chown -Rf pi:pi /home/pi/mjpg-streamer
 
 echo_stamp "Add .vimrc"
-
-# vim settings
 echo "set mouse-=a
 syntax on
 " > /home/pi/.vimrc
 
-echo_stamp "End of network installation"
+echo_stamp "#3 End of network installation"

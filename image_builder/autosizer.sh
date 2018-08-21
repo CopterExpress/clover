@@ -35,10 +35,10 @@ if [[ -z $1 ]]; then
   echo "================================================================================"
   echo_bold "Automatic Image file resizer"
   echo_bold "Description: This script shrink your image to 10MiB free space"
-  echo -e "if you didn't set FREE_SPACE in MiB (see usage below)."
+  echo_bold "if you didn't set FREE_SPACE in MiB (see usage below)."
   echo_bold "Authors: Artem Smirnov @urpylka, SirLagz"
   echo
-  echo_bold "Usage: ./autosizer.sh PATH_TO_IMAGE FREE_SPACE"
+  echo_bold "Usage: ./autosizer.sh IMAGE_PATH FREE_SPACE"
   echo
   echo_bold "Requirements: parted, losetup, e2fsck, resize2fs, bc, truncate"
   echo "================================================================================"
