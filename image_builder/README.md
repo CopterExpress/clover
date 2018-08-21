@@ -91,5 +91,5 @@ sudo apt-get install default-jdk
 ## Running the Docker
 
 ```bash
-docker run --privileged -it -v /dev:/dev -v ./image:/builder/image f4cc7487c922
+docker run --privileged -it -v /dev:/dev -v $(pwd)/image:/builder/image smirart/builder
 ```
