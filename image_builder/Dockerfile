@@ -11,9 +11,9 @@ RUN apt-get install -y --no-install-recommends -qq bc jq unzip wget parted apt-u
 RUN apt-get clean
 
 COPY ./image_config.sh /builder/image_config.sh
-COPY ./autobuild.sh /builder/autobuild.sh
+COPY ./build.sh /builder/build.sh
 COPY ./autosizer.sh /builder/autosizer.sh
 COPY ./qemu-arm-resin /builder/qemu-arm-resin
 
 WORKDIR /builder
-CMD ./autobuild.sh
+CMD ./build.sh
