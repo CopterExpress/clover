@@ -1,3 +1,4 @@
 /deploy/ros_lib/
 *.pyc
 *.DS_Store
+/image_builder/image/*
