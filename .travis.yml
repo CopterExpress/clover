@@ -1,0 +1,37 @@
+sudo: required	
+language: generic
+services:
+  - docker
+env:
+  global:
+    - DOCKER=smirart/builder
+    #- TARGET_REPO=$(dhdhdhjdjdjdhrhd)
+    # https://docs.travis-ci.com/user/environment-variables
+    # REGISTRY_PASS=...
+    #- secret: "<something long>"
+git:
+  depth: 1
+before_script:
+  - docker pull ${DOCKER}
+script:
+  - docker run --privileged --rm -v /dev:/dev -v $(pwd)/image:/builder/image -e "TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git" -e "TARGET_REF=${TRAVIS_BRANCH}" ${DOCKER}
+after_failure:
+  - skip_deploy
+
+before_deploy:
+  provider: script
+  script: echo 'before deploy'
+  #- zip
+  #- size
+  #- Sha256
+  #- Upload
+
+deploy:
+  provider: script
+  script: echo 'github release measage'
+  # https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
+  #provider: releases
+  #  api_key: $GITHUB_OAUTH_TOKEN
+  #  skip_cleanup: true
+  #  on:
+  #    tags: true
