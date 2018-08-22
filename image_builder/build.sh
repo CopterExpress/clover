@@ -7,7 +7,7 @@ export LANG=${LANG:='C.UTF-8'}
 export LC_ALL=${LC_ALL:='C.UTF-8'}
 
 export TARGET_REPO=${TARGET_REPO:='https://github.com/urpylka/clever.git'}
-export TARGET_REF=${TARGET_REF:='qemu_test_2'}
+export TARGET_REF=${TARGET_REF:='master'}
 export TARGET_CONFIG=${TARGET_CONFIG:='/image_builder/scripts/builder.json'}
 
 echo "================================================================================"
