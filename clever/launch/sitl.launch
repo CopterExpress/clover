@@ -11,7 +11,6 @@
         <arg name="main_camera" default="false"/>
         <arg name="fpv_camera" default="false"/>
         <arg name="rosbridge" value="$(arg rosbridge)"/>
-        <arg name="web_server" default="false"/>
         <arg name="aruco" default="false"/>
     </include>
 </launch>
