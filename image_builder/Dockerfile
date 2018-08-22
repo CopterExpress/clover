@@ -7,7 +7,7 @@ ENV LANG 'C.UTF-8'
 ENV LC_ALL 'C.UTF-8'
 
 RUN apt-get update -qq > /dev/null
-RUN apt-get install -y --no-install-recommends -qq bc jq unzip wget parted apt-utils git ca-certificates > /dev/null
+RUN apt-get install -y --no-install-recommends -qq bc jq unzip wget parted apt-utils git ca-certificates gawk > /dev/null
 RUN apt-get clean
 
 COPY ./image_config.sh /builder/image_config.sh
