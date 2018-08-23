@@ -9,7 +9,6 @@
 import UIKit
 import WebKit
 import SwiftSocket
-import NotificationBannerSwift
 import AudioToolbox.AudioServices
 
 class ViewController: UIViewController, WKScriptMessageHandler {
