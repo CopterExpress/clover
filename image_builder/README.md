@@ -58,7 +58,7 @@ sudo sed -i 's/JENKINS_USER=$NAME/JENKINS_USER=root/' /etc/default/jenkins
 sudo sed -i 's/JENKINS_GROUP=$NAME/JENKINS_GROUP=root/' /etc/default/jenkins
 ```
 11. Install Jenikins plugins
-> Pipeline, Git SCM
+> Pipeline, Git SCM, Matrix Authorization, github-webhook-build-trigger-plugin
 
 12. Create Jenkins pipeline job
 > TODO
@@ -88,8 +88,32 @@ If JDK not installed:
 sudo apt-get install default-jdk
 ```
 
+## Для использования execute в качестве mount_image
+
+./image_config.sh execute $IMAGE_PATH << EOF
+uname -a
+EOF
+}
+
 ## Running the Docker
 
 ```bash
 docker run --privileged -it --rm -v /dev:/dev -v $(pwd)/image:/builder/image smirart/builder
 ```
+
+## TODO
+
+* Change http на https в jenkins plugins
+* Add finally block for disconnect image
+* In Jenkins build call by name - change
+
+## Варнинги Jenkins
+
+```log
+[WARNING] The POM for org.jenkins-ci.tools:maven-hpi-plugin:jar:2.0 is missing, no dependency information available
+[WARNING] Failed to build parent project for io.codeclou.jenkins.github.webhook.build.trigger.plugin:github-webhook-build-trigger-plugin:hpi:1.2.0
+```
+
+* https://yandex.ru/search/?text=The%20POM%20for%20org.jenkins-ci.tools%3Amaven-hpi-plugin%3Ajar%3A2.0%20is%20missing%2C%20no%20dependency%20information%20available&&lr=213
+* http://jenkins-ci.361315.n4.nabble.com/Plugin-org-jenkins-ci-tools-maven-hpi-plugin-td4751140.html
+* http://qaru.site/questions/1460710/maven-jenkins-plugin-poms-missing-for-dependency-information-on-jars
