@@ -6,6 +6,14 @@
 # @dvornikov-aa Andrey Dvornikov
 #
 
+# This script doesn't work on Ubuntu because OS`s losetup does not consist --partscan (-P).
+
+# Idea: use `mount -o loop,offset`
+# https://stefanoprenna.com/blog/2014/09/22/tutorial-how-to-mount-raw-images-img-images-on-linux/
+# REPO_DIR=$(mktemp -d --suffix=.builder_repo)
+# mount -t ext4 -o loop,offset=$((94208 * 512)) image/clever_qemu_test_2_20180822_163141.img "$REPO_DIR"
+# mount -t vfat -o loop,offset=$((8192 * 512)) image/clever_qemu_test_2_20180822_163141.img "$REPO_DIR/boot"
+
 # Exit immidiately on non-zero result
 set -e
 
