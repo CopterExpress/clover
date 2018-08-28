@@ -55,7 +55,7 @@ echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 
 git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streamer \
 && cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
-&& make 2> /dev/null \
+&& make > /dev/null \
 && make install \
 && chown -Rf pi:pi /home/pi/mjpg-streamer
 
