@@ -38,11 +38,17 @@ git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streame
   && make install \
   && chown -Rf pi:pi /home/pi/mjpg-streamer
 
-echo -e "\033[0;31m\033[1m$(date) | Add .vimrc\033[0m\033[0m"
+echo -e "\033[0;31m\033[1m$(date) | Miscellaneous\033[0m\033[0m"
 
 # vim settings
 echo "set mouse-=a
 syntax on
 " > /home/pi/.vimrc
+
+# disable some auto-updating
+sudo systemctl disable apt-daily.service
+sudo systemctl disable apt-daily.timer
+sudo systemctl disable apt-daily-upgrade.timer
+sudo systemctl disable apt-daily-upgrade.service
 
 echo -e "\033[0;31m\033[1m$(date) | End of network installation\033[0m\033[0m"
