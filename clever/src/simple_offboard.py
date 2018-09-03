@@ -89,6 +89,7 @@ SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
 LOCAL_FRAME = rospy.get_param('~local_frame', 'local_origin')
 LAND_MODE = rospy.get_param('~land_mode', 'AUTO.LAND')
 LAND_TIMEOUT = rospy.Duration(rospy.get_param('~land_timeout', 2))
+DEFAULT_SPEED = rospy.get_param('~default_speed', 0.5)
 
 
 def offboard_and_arm():
@@ -261,9 +262,12 @@ def handle(req):
         rospy.logwarn('No connection to the FCU')
         return {'message': 'No connection to the FCU'}
 
-    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and req.speed <= 0:
-        rospy.logwarn('Navigate speed must be greater than zero, %s passed')
-        return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
+    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
+        if req.speed < 0:
+            rospy.logwarn('Navigate speed must be positive, %s passed')
+            return {'message': 'Navigate speed must be positive, %s passed' % req.speed}
+        elif req.speed == 0:
+            req.speed = DEFAULT_SPEED
 
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and \
             (pose is None or rospy.get_rostime() - pose.header.stamp > LOCAL_POSITION_TIMEOUT):
