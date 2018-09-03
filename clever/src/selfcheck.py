@@ -27,7 +27,7 @@ def check_fcu():
 
 def check_camera(name):
     try:
-        rospy.wait_for_message(name + '/image_raw', Image, timeout=3)
+        rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
     except rospy.ROSException:
         raise Exception('No %s camera images' % name)
     try:
@@ -37,7 +37,7 @@ def check_camera(name):
 
 def check_aruco():
     try:
-        rospy.wait_for_message('aruco_pose/debug', Image, timeout=3)
+        rospy.wait_for_message('aruco_pose/debug', Image, timeout=1)
     except rospy.ROSException:
         raise Exception('No aruco_pose/debug topic')
 
@@ -53,21 +53,21 @@ def check_simpleoffboard():
 
 def check_imu():
     try:
-        rospy.wait_for_message('mavros/imu/data', Imu, timeout=3)
+        rospy.wait_for_message('mavros/imu/data', Imu, timeout=1)
     except rospy.ROSException:
         raise Exception('No IMU data')
 
 
 def check_local_position():
     try:
-        rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=3)
+        rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=1)
     except rospy.ROSException:
         raise Exception('No local position')
 
 
 def check_velocity():
     try:
-        velocity = rospy.wait_for_message('mavros/local_position/velocity', TwistStamped, timeout=3)
+        velocity = rospy.wait_for_message('mavros/local_position/velocity', TwistStamped, timeout=1)
         horiz = math.hypot(velocity.twist.linear.x, velocity.twist.linear.y)
         vert = velocity.twist.linear.z
         if abs(horiz) > 0.1:
@@ -89,7 +89,7 @@ def check(name, fn):
     try:
         fn()
         rospy.loginfo('%s: OK', name)
-    except BaseException as e:
+    except Exception as e:
         rospy.logwarn('%s: %s', name, str(e))
 
 
