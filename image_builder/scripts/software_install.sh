@@ -28,7 +28,19 @@ apt-get install --no-install-recommends -y \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1
-  
+
+# install Monkey web-server
+cd /home/pi
+git clone git@github.com:monkey/monkey.git
+cd monkey
+git checkout v1.6.9
+./configure --malloc-libc --local
+make
+sudo setcap 'cap_net_bind_service=+ep' ./build/monkey  # allow using 80 port
+rm build/conf/sites/default
+ln -s /home/pi/catkin_ws/src/clever/deploy/monkey ./build/conf/sites/default
+cd /home/pi
+
 echo -e "\033[0;31m\033[1m$(date) | #2 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 # https://github.com/jacksonliam/mjpg-streamer
 
