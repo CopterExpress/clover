@@ -160,7 +160,7 @@ navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map', update_frame=True)
 Вращение на месте со скоростью 0.5 рад/c (против часовой):
 
 ```python
-navigate(x=0, y=0, z=0, speed=1, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
+navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
 ```
 
 Полет вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:
