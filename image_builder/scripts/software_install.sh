@@ -31,7 +31,7 @@ apt-get install --no-install-recommends -y \
 
 # install Monkey web-server
 cd /home/pi
-git clone git@github.com:monkey/monkey.git
+git clone https://github.com/monkey/monkey.git
 cd monkey
 git checkout v1.6.9
 ./configure --malloc-libc --local
