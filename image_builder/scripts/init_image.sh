@@ -27,11 +27,13 @@ echo_stamp() {
 }
 
 # Add apt key to allow local mirror usage during image build
-#wget -O - ftp://192.168.0.10/coex-mirror.gpg | apt-key add -
+wget -O - ftp://mirror.coex.space/coex-mirror.gpg | apt-key add -
 # Generate a backup of the original source.list
-#cp /etc/apt/sources.list /var/sources.list.bak
-# Add the local mirror as the first priority repository
-#wget -O - ftp://192.168.0.10/coex-mirror.list 2>/dev/null | cat - /etc/apt/sources.list > /var/sources.list && mv /var/sources.list /etc/apt/sources.list
+cp /etc/apt/sources.list /var/sources.list.bak
+# Add the coex-mirror as the first priority repository
+curl ftp://mirror.coex.space/coex-mirror.list | cat - /etc/apt/sources.list > /var/sources.list && mv /var/sources.list /etc/apt/sources.list
+# Add the urpylka-rpi repo
+curl ftp://mirror.coex.space/urpylka-rpi.list >> /etc/apt/sources.list
 
 echo_stamp "#1 apt cache update"
 
