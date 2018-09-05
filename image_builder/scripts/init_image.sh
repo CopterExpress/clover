@@ -28,4 +28,11 @@ echo "$1" >> /etc/clever_version
 # Origin image file name
 echo "${2%.*}" >> /etc/clever_origin
 
-echo -e "\033[0;31m\033[1m$(date) | #3 End initialisation of image\033[0m\033[0m"
+
+echo -e "\033[0;31m\033[1m$(date) | #3 Set max space for syslogs\033[0m\033[0m"
+
+# https://unix.stackexchange.com/questions/139513/how-to-clear-journalctl
+sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
+
+
+echo -e "\033[0;31m\033[1m$(date) | #4 End initialisation of image\033[0m\033[0m"
