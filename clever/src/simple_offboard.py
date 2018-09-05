@@ -165,7 +165,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         if update_frame:
             ps.header.frame_id = req.frame_id or LOCAL_FRAME
             ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
-            ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
+            ps.pose.orientation = orientation_from_euler(0, 0, req.yaw, axes='sxyz')
             current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
 
             if isinstance(req, srv.NavigateGlobalRequest):
@@ -189,7 +189,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=setpoint,
-                             yaw=euler_from_orientation(current_nav_finish.pose.orientation, 'szyx')[2] - math.pi / 2,
+                             yaw=euler_from_orientation(current_nav_finish.pose.orientation, 'sxyz')[2],
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -208,7 +208,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
+                             yaw=euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2],
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
@@ -226,7 +226,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
                                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
                              velocity=vector_local.vector,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
+                             yaw=euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2],
                              yaw_rate=req.yaw_rate)
         return position_pub, msg
 
