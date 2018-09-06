@@ -29,7 +29,7 @@ echo_stamp() {
 echo_stamp "#1 Software installing"
 
 # TODO: Use dnsmasq instead of isc-dhcp-server
-apt-get install --no-install-recommends -y  -qq \
+apt-get install --no-install-recommends -y -qq \
   unzip=6.0-21 \
   zip=3.0-11 \
   ipython=5.1.0-3 \
@@ -48,8 +48,7 @@ apt-get install --no-install-recommends -y  -qq \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
-  ros-kinetic-opencv3 \
-  > /dev/null
+  ros-kinetic-opencv3
   
 echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
