@@ -82,7 +82,6 @@ resize_fs() {
   && echo_stamp "Mount loop-image: $1" \
   && local DEV_IMAGE=$(losetup -Pf $1 --show) \
   && sleep 0.5 \
-  && echo_stamp "Mount loop-image: $1" \
   && echo ", +" | sfdisk -N 2 ${DEV_IMAGE} \
   && sleep 0.5 \
   && losetup -d ${DEV_IMAGE} \
