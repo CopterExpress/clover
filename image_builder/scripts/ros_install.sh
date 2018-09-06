@@ -80,33 +80,21 @@ fi
 
 echo_stamp "#7 Installing dependencies apps with rosdep"
 cd /home/pi/ros_catkin_ws
-# There is a risk that umount will fail
 set +e
 # Successfull unmount flag (false at thismoment)
 install_ok=false
 # Repeat 5 times
-for i in {1..5}
-do
+for i in {1..5}; do
   # Resolving Dependencies with rosdep
-  rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:stretch
-  # If no problems detected
-  if [[ $? == 0 ]]
-  then
-    echo_stamp "Successfull rosdep install" "SUCCESS"
-    # Set flag
-    install_ok=true
-    # Exit loop
-    break
-  fi
-  # Unmount has failed
-  echo_stamp "Rosdep installation failed" "ERROR"
-  # Wait for some time
-  sleep 2
+  rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:stretch \
+  > /dev/null \
+  && (install_ok=true; break) || (echo_stamp "rosdep iteration #$i failed!" "ERROR"; sleep 2)
 done
 set -e
-# Jenkins job will fail if this condition is not true
-[[ "$install_ok" == true ]]
-echo_stamp "End of rosdep install"
+# Stage fail if this condition is not true
+[[ $install_ok ]] \
+&& echo_stamp "All rosdep dependencies was installed!" "SUCCESS" \
+|| (echo_stamp "Rosdep installation failed!" "ERROR"; exit 1)
 
 echo_stamp "#8 Refactoring usb_cam in SRC"
 sed -i '/#define __STDC_CONSTANT_MACROS/a\#define PIX_FMT_RGB24 AV_PIX_FMT_RGB24\n#define PIX_FMT_YUV422P AV_PIX_FMT_YUV422P' /home/pi/ros_catkin_ws/src/usb_cam/src/usb_cam.cpp
