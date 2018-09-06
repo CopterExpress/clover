@@ -28,7 +28,6 @@ echo_stamp() {
 
 echo_stamp "#1 Software installing"
 
-# TODO: Use dnsmasq instead of isc-dhcp-server
 apt-get install --no-install-recommends -y -qq \
   unzip=6.0-21 \
   zip=3.0-11 \
