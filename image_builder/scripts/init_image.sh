@@ -27,7 +27,8 @@ echo_stamp() {
 }
 
 # Add apt key to allow local mirror usage during image build
-wget -O - ftp://mirror.coex.space/coex-mirror.gpg 2> /dev/null | apt-key add - 2> /dev/null
+# this STDOUT consist 'OK'
+wget -O - ftp://mirror.coex.space/coex-mirror.gpg 2> /dev/null | apt-key add -
 # Generate a backup of the original source.list
 cp /etc/apt/sources.list /var/sources.list.bak
 # Add the coex-mirror as the first priority repository
