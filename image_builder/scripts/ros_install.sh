@@ -122,21 +122,18 @@ echo_stamp "#9 Installing GeographicLib datasets"
 # Build the catkin Workspace
 #cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -j1 --install-space /opt/ros/kinetic --pkg mavros opencv3 cv_bridge cv_camera mavros_extras web_video_server
 
-echo_stamp "#10 Building packages on 1 thread"
+echo_stamp "#10 Building packages"
 
 # Install builded packages
 # WARNING: A major bug was found when using --pkg option (catkin_make_isolated doesn't install environment files)
 # TODO: Can we increase threads number with HDD swap?
 cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j$4 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
-echo_stamp "#11 Building packages on 1 thread"
-apt-get install --no-install-recommends -y -qq ros-kinetic-opencv3
-
-echo_stamp "#12 Remove build_isolated & devel_isolated from ros_catkin_ws"
+echo_stamp "#11 Remove build_isolated & devel_isolated from ros_catkin_ws"
 rm -rf /home/pi/ros_catkin_ws/build_isolated /home/pi/ros_catkin_ws/devel_isolated
 chown -Rf pi:pi /home/pi/ros_catkin_ws
 
-echo_stamp "#13 Creating catkin_ws & Installing CLEVER-BUNDLE"
+echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE"
 git clone $1 /home/pi/catkin_ws/src/clever \
   && cd /home/pi/catkin_ws/src/clever \
   && git checkout $2 \
@@ -150,10 +147,10 @@ git clone $1 /home/pi/catkin_ws/src/clever \
   && systemctl enable roscore \
   && systemctl enable clever
 
-echo_stamp "#14 Change permissions for catkin_ws"
+echo_stamp "#13 Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "#15 Setup ROS environment"
+echo_stamp "#14 Setup ROS environment"
 cat <<EOF | tee -a /home/pi/.bashrc > /dev/null
 LANG=C.UTF-8
 LC_ALL=C.UTF-8

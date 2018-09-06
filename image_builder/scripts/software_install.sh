@@ -48,6 +48,7 @@ apt-get install --no-install-recommends -y  -qq \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  ros-kinetic-opencv3 \
   > /dev/null
   
 echo_stamp "#2 Adding mjpg-streamer at /home/pi"
