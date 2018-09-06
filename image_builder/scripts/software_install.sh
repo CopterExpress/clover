@@ -28,7 +28,7 @@ echo_stamp() {
 
 echo_stamp "#1 Software installing"
 
-apt-get install --no-install-recommends -y -qq -v \
+apt-get install --no-install-recommends -y -qq -V \
   ros-kinetic-opencv3=3.3.1-0stretch \
   unzip=6.0-21 \
   zip=3.0-11 \
@@ -48,7 +48,6 @@ apt-get install --no-install-recommends -y -qq -v \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
-  > /dev/null \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
