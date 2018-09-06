@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -e
+
 cd ${IMAGE_BUILDER}
 
 # Make free space
