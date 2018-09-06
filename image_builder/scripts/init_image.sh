@@ -31,9 +31,9 @@ wget -O - ftp://mirror.coex.space/coex-mirror.gpg | apt-key add -
 # Generate a backup of the original source.list
 cp /etc/apt/sources.list /var/sources.list.bak
 # Add the coex-mirror as the first priority repository
-curl ftp://mirror.coex.space/coex-mirror.list | cat - /etc/apt/sources.list > /var/sources.list && mv /var/sources.list /etc/apt/sources.list
+curl ftp://mirror.coex.space/coex-mirror.list ?> /dev/null | cat - /etc/apt/sources.list > /var/sources.list && mv /var/sources.list /etc/apt/sources.list
 # Add the urpylka-rpi repo
-curl ftp://mirror.coex.space/urpylka-rpi.list >> /etc/apt/sources.list
+curl ftp://mirror.coex.space/urpylka-rpi.list ?> /dev/null  >> /etc/apt/sources.list
 
 echo_stamp "#1 apt cache update"
 
