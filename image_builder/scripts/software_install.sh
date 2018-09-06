@@ -28,8 +28,7 @@ echo_stamp() {
 
 echo_stamp "#1 Software installing"
 
-apt-get install --no-install-recommends -y -qq -V \
-  ros-kinetic-opencv3=3.3.1-0stretch \
+apt-get install --no-install-recommends -y \
   unzip=6.0-21 \
   zip=3.0-11 \
   ipython=5.1.0-3 \
@@ -51,17 +50,15 @@ apt-get install --no-install-recommends -y -qq -V \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
-exit 2
+echo_stamp "#2 Installation OpenCV"
 
-echo_stamp "Installation OpenCV"
-
-apt-get install --no-install-recommends -y -qq \
+apt-get install --no-install-recommends -y \
   ros-kinetic-opencv3=3.3.1-0stretch \
   > /dev/null \
   && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
   || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
 
-echo_stamp "#2 Adding mjpg-streamer at /home/pi"
+echo_stamp "#3 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
 
 git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streamer \
@@ -70,11 +67,11 @@ git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streame
 && make install \
 && chown -Rf pi:pi /home/pi/mjpg-streamer
 
-echo_stamp "Add .vimrc"
+echo_stamp "#4 Add .vimrc"
 
 cat << EOF > /home/pi/.vimrc
 set mouse-=a
 syntax on
 EOF
 
-echo_stamp "#3 End of network installation"
+echo_stamp "#5 End of software installation"
