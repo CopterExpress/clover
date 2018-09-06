@@ -70,9 +70,12 @@ then
     && wstool merge -t src kinetic-custom_ros.rosinstall \
     && wstool update -t src
 else
-  echo_stamp "#5 Creating manual ros_catkin_ws"
+  echo_stamp "#5 Creating ros_catkin_ws & getting all sources using wstool"
   mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-  && wstool init src kinetic-ros-coex.rosinstall
+  && wstool init src kinetic-ros-coex.rosinstall \
+  > /dev/null \
+  && echo_stamp "ros_catkin_ws was created!" "SUCCESS" \
+  || (echo_stamp "ros_catkin_ws wasn't created!" "ERROR"; exit 1)
 fi
 
 echo_stamp "#7 Installing dependencies apps with rosdep"
