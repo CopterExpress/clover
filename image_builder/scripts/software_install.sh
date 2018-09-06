@@ -47,6 +47,7 @@ apt-get install --no-install-recommends -y -qq \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  ros-kinetic-opencv3=3.3.1-0stretch \
   > /dev/null \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
@@ -55,13 +56,6 @@ apt-get install --no-install-recommends -y -qq \
 
   echo "dasfasfdsagfasdgagasgas" >/dev/null 2>&1 || true
 
-echo_stamp "Installation opencv"
-
-apt-get install --no-install-recommends -y -qq \
-  ros-kinetic-opencv3=3.3.1-0stretch \
-  > /dev/null \
-  && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
-  || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
 
 echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
