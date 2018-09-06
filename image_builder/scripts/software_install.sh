@@ -26,17 +26,10 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "Installation OpenCV"
-
-apt-get install --no-install-recommends -y -qq \
-  ros-kinetic-opencv3=3.3.1-0stretch \
-  > /dev/null \
-  && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
-  || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
-
 echo_stamp "#1 Software installing"
 
-apt-get install --no-install-recommends -y -qq \
+apt-get install --no-install-recommends -y -v \
+  ros-kinetic-opencv3=3.3.1-0stretch \
   unzip=6.0-21 \
   zip=3.0-11 \
   ipython=5.1.0-3 \
@@ -60,6 +53,14 @@ apt-get install --no-install-recommends -y -qq \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
 exit 2
+
+echo_stamp "Installation OpenCV"
+
+apt-get install --no-install-recommends -y -qq \
+  ros-kinetic-opencv3=3.3.1-0stretch \
+  > /dev/null \
+  && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
+  || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
 
 echo_stamp "#2 Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
