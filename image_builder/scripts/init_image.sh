@@ -27,7 +27,7 @@ echo_stamp() {
 }
 
 # Add apt key to allow local mirror usage during image build
-# this STDOUT consist 'OK'
+# TODO: This STDOUT consist 'OK'
 wget -O - ftp://mirror.coex.space/coex-mirror.gpg 2> /dev/null | apt-key add -
 # Generate a backup of the original source.list
 cp /etc/apt/sources.list /var/sources.list.bak
@@ -41,6 +41,7 @@ echo_stamp "#1 apt cache update"
 # Clean repostory cache
 apt-get clean -qq > /dev/null
 # Update repository cache
+# TODO: FIX ERROR: /usr/bin/apt-key: 596: /usr/bin/apt-key: cannot create /dev/null: Permission denied
 apt-get update -qq > /dev/null
 # && apt upgrade -y
 
@@ -61,4 +62,4 @@ sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/cmdline.txt
 sed -i 's/.*  \/boot           vfat    defaults          0       2$/\/dev\/mmcblk0p1  \/boot           vfat    defaults          0       2/' /etc/fstab
 sed -i 's/.*  \/               ext4    defaults,noatime  0       1$/\/dev\/mmcblk0p2  \/               ext4    defaults,noatime  0       1/' /etc/fstab
 
-echo_stamp "#5 End of init image"
+echo_stamp "#4 End of init image"
