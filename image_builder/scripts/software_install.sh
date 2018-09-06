@@ -71,8 +71,10 @@ git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streame
 && chown -Rf pi:pi /home/pi/mjpg-streamer
 
 echo_stamp "Add .vimrc"
-echo "set mouse-=a
+
+cat << EOF > /home/pi/.vimrc
+set mouse-=a
 syntax on
-" > /home/pi/.vimrc
+EOF
 
 echo_stamp "#3 End of network installation"
