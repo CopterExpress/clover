@@ -55,7 +55,9 @@ apt-get install --no-install-recommends -y -qq \
 
   echo "dasfasfdsagfasdgagasgas" >/dev/null 2>&1 || true
 
-  apt-get install --no-install-recommends \
+echo_stamp "Instalation opencv"
+
+apt-get install --no-install-recommends -y -qq \
   ros-kinetic-opencv3=3.3.1-0stretch \
   > /dev/null \
   && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
