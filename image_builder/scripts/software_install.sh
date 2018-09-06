@@ -47,6 +47,7 @@ apt-get install --no-install-recommends -y \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  > /dev/null \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
