@@ -9,8 +9,6 @@
     <arg name="main_camera" default="true"/>
     <arg name="aruco" default="false"/>
     <arg name="rc" value="true"/>
-    <arg name="fpv_camera" default="false"/>
-    <arg name="fpv_camera_device" default="/dev/v4l/by-id/usb-HD_Camera_Manufacturer_USB_2.0_Camera-video-index0"/>
     <arg name="arduino" default="false"/>
 
     <!-- mavros -->
@@ -52,11 +50,6 @@
 
     <!-- rc backend -->
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
-
-    <!-- FPV video streaming -->
-    <include file="$(find clever)/launch/fpv_camera.launch" if="$(arg fpv_camera)">
-        <arg name="device" value="$(arg fpv_camera_device)"/>
-    </include>
 
     <!-- Arduino bridge -->
     <include file="$(find clever)/launch/arduino.launch" if="$(arg arduino)"/>
