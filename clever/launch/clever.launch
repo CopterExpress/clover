@@ -2,7 +2,6 @@
     <arg name="fcu_conn" default="usb"/>
     <arg name="fcu_ip" default="127.0.0.1"/>
     <arg name="gcs_bridge" default="tcp"/>
-    <arg name="viz" default="true"/>
     <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
@@ -16,7 +15,7 @@
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
-        <arg name="viz" value="$(arg viz)"/>
+        <arg name="viz" value="true"/>
     </include>
 
 
