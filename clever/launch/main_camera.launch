@@ -1,4 +1,7 @@
 <launch>
+    <!-- Camera position and orientation are represented by fcu -> main_camera_optical transform -->
+    <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
+
     <!-- clever 2 -->
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>-->
 
@@ -19,5 +22,11 @@
 
         <param name="image_width" value="320"/>
         <param name="image_height" value="240"/>
+    </node>
+
+    <!-- camera visualization markers -->
+    <node pkg="clever" type="camera_markers" ns="main_camera" name="main_camera_markers">
+        <param name="frame_id" value="main_camera_optical"/>
+        <param name="scale" value="3.0"/>
     </node>
 </launch>
