@@ -50,6 +50,9 @@
                 - cam_imu_sync
                 - hil
                 - adsb
+                - obstacle_distance
+                - setpoint_accel
+                - trajectory
             </rosparam>
     </node>
 
