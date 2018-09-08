@@ -67,6 +67,7 @@ echo -e "\033[0;31m\033[1m$(date) | Miscellaneous\033[0m\033[0m"
 # vim settings
 echo "set mouse-=a
 syntax on
+autocmd BufNewFile,BufRead *.launch set syntax=xml
 " > /home/pi/.vimrc
 
 echo -e "\033[0;31m\033[1m$(date) | End of network installation\033[0m\033[0m"
