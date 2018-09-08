@@ -12,7 +12,7 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 
 
 # TODO: roscore is running
-# TODO: CPU usage
+# TODO: disk free space
 # TODO: local_origin, fcu, fcu_horiz
 # TODO: rc service
 # TODO: perform commander check in PX4
@@ -132,10 +132,27 @@ def check_boot_duration():
     proc.wait()
     output = proc.communicate()[0]
     r = re.compile(r'([\d\.]+)s$')
-    print 'output', r.search(output).groups()
     duration = float(r.search(output).groups()[0])
     if duration > 15:
         failure('long Raspbian boot duration: %ss', duration)
+
+
+@check('CPU usage')
+def check_cpu_usage():
+    WHITELIST = 'nodelet',
+    CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
+    proc = Popen(CMD, stdout=PIPE, shell=True)
+    proc.wait()
+    output = proc.communicate()[0]
+    processes = output.split('\n')
+    for process in processes:
+        if not process:
+            continue
+        pid, cpu, cmd = process.split('\t')
+
+        if cmd.strip() not in WHITELIST and float(cpu) > 30:
+            failure('High CPU usage (%s%%) detected: %s (PID %s)',
+                    cpu.strip(), cmd.strip(), pid.strip())
 
 
 def selfcheck():
@@ -148,6 +165,7 @@ def selfcheck():
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
+    check_cpu_usage()
     check_boot_duration()
 
 
