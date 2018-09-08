@@ -676,5 +676,5 @@
     version: vision_opencv-release-release-kinetic-cv_bridge-1.12.8-0
 - tar:
     local-name: web_video_server
-    uri: https://github.com/RobotWebTools-release/web_video_server-release/archive/release/kinetic/web_video_server/0.0.7-0.tar.gz
-    version: web_video_server-release-release-kinetic-web_video_server-0.0.7-0
+    uri: https://github.com/RobotWebTools-release/web_video_server-release/archive/release/kinetic/web_video_server/0.1.0-0.tar.gz
+    version: web_video_server-release-release-kinetic-web_video_server-0.1.0-0
