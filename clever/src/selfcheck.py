@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import math
+from subprocess import Popen, PIPE
+import re
+import traceback
 import rospy
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu
@@ -13,7 +16,8 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 # TODO: local_origin, fcu, fcu_horiz
 # TODO: rc service
 # TODO: perform commander check in PX4
-# TODO: selfcheck ROS service
+# TODO: check if FCU params setter succeed
+# TODO: selfcheck ROS service (with blacklists for checks)
 
 
 rospy.init_node('selfcheck')
@@ -30,12 +34,16 @@ def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
             failures[:] = []
-            fn(*args, **kwargs)
-            if not failures:
-                rospy.loginfo('%s: OK', name)
-            else:
+            try:
+                fn(*args, **kwargs)
                 for f in failures:
                     rospy.logwarn('%s: %s', name, f)
+            except Exception as e:
+                traceback.print_exc()
+                rospy.logwarn('%s: exception occured', name)
+                return
+            if not failures:
+                rospy.loginfo('%s: OK', name)
         return wrapper
     return inner
 
@@ -118,6 +126,18 @@ def check_global_position():
         failure('No global position')
 
 
+@check('Boot duration')
+def check_boot_duration():
+    proc = Popen('systemd-analyze', stdout=PIPE)
+    proc.wait()
+    output = proc.communicate()[0]
+    r = re.compile(r'([\d\.]+)s$')
+    print 'output', r.search(output).groups()
+    duration = float(r.search(output).groups()[0])
+    if duration > 15:
+        failure('long Raspbian boot duration: %ss', duration)
+
+
 def selfcheck():
     # check('roscore', check_roscore)
     check_fcu()
@@ -128,6 +148,7 @@ def selfcheck():
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
+    check_boot_duration()
 
 
 if __name__ == '__main__':
