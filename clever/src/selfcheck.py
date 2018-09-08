@@ -156,7 +156,6 @@ def check_cpu_usage():
 
 
 def selfcheck():
-    # check('roscore', check_roscore)
     check_fcu()
     check_imu()
     check_local_position()
