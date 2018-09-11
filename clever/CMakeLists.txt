@@ -21,6 +21,9 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   tf2
   tf2_geometry_msgs
+  tf2_ros
+  image_transport
+  cv_bridge
 )
 
 
@@ -121,7 +124,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES clever
+  LIBRARIES clever
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -137,7 +140,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
+# Declare a C++ library
+add_library(clever
+  src/optical_flow.cpp
+)
+
 add_library(fcu_horiz
   src/fcu_horiz.cpp
 )
@@ -173,6 +180,10 @@ target_link_libraries(camera_markers ${catkin_LIBRARIES})
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(clever
+  ${catkin_LIBRARIES}
+)
+
 target_link_libraries(fcu_horiz
   ${catkin_LIBRARIES}
   "/opt/ros/kinetic/lib/libtf2_ros.so"

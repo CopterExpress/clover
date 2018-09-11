@@ -1,3 +1,8 @@
+<library path="lib/libclever">
+   <class name="clever/optical_flow" type="OpticalFlow" base_class_type="nodelet::Nodelet">
+      <description/>
+   </class>
+</library>
 <library path="lib/libfcu_horiz">
    <class name="clever/fcu_horiz" type="FcuHoriz" base_class_type="nodelet::Nodelet">
       <description/>

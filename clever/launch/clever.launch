@@ -6,6 +6,7 @@
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="main_camera" default="true"/>
+    <arg name="optical_flow" default="false"/>
     <arg name="aruco" default="false"/>
     <arg name="rc" value="true"/>
     <arg name="arduino" default="false"/>
@@ -27,6 +28,12 @@
 
     <!-- aruco vpe -->
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
+
+    <!-- optical flow -->
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true">
+        <remap from="image" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+    </node>
 
     <!-- main nodelet manager -->
     <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
