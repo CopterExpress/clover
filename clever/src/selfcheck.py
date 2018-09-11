@@ -121,7 +121,7 @@ def check_velocity():
 @check('Global position (GPS)')
 def check_global_position():
     try:
-        rospy.wait_for_message('mavros/global_position/global', PoseStamped, timeout=3)
+        rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=2)
     except rospy.ROSException:
         failure('No global position')
 
