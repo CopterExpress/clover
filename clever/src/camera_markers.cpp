@@ -9,6 +9,7 @@
 
 #include <string>
 #include <ros/ros.h>
+#include <sensor_msgs/CameraInfo.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 
@@ -81,11 +82,14 @@ MarkerArray createMarkers() {
 
 int main(int argc, char **argv)
 {
-	ros::init(argc, argv, "camera_markers");
+	ros::init(argc, argv, "camera_markers", ros::init_options::AnonymousName);
 	ros::NodeHandle nh, nh_priv("~");
 
-	nh_priv.param<std::string>("frame_id", camera_frame, "main_camera_optical");
 	nh_priv.param("scale", markers_scale, 1.0);
+
+	// wait for camera info
+	auto camera_info = ros::topic::waitForMessage<sensor_msgs::CameraInfo>("camera_info", nh);
+	camera_frame = camera_info->header.frame_id;
 
 	ros::Publisher markers_pub = nh.advertise<visualization_msgs::MarkerArray>("camera_markers", 1, true);
 	markers_pub.publish(createMarkers());

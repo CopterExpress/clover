@@ -26,7 +26,6 @@
 
     <!-- camera visualization markers -->
     <node pkg="clever" type="camera_markers" ns="main_camera" name="main_camera_markers">
-        <param name="frame_id" value="main_camera_optical"/>
         <param name="scale" value="3.0"/>
     </node>
 </launch>
