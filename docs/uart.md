@@ -67,8 +67,19 @@ dtoverlay=pi3-miniuart-bt
 sudo systemctl disable hciuart.service
 ```
 
-### Bugs
+## Дефолтная настройка образа
+
+На образе CLEVER мы изначально выключили `Mini UART` и Bluetooth модуль.
+
+## Bugs
 
 Если использовать подключение `Mini UART` к Bluetooth, `hciuart` падает с ошибкой:
 
 ![hciuart error](assets/hciuart_error.jpg)
+
+В случае отключения Bluetooth
+
+```
+/dev/serial0 -> ttyAMA0
+/dev/serial1 -> ttyS0
+```
