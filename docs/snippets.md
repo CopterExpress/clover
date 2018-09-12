@@ -76,10 +76,10 @@ while True:
 Определение, перевернут ли коптер:
 
 ```python
-pi_2 = math.pi / 2
+PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -pi_2 <= telem.pitch <= pi_2 or not -pi_2 <= telem.roll <= pi_2
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 ```
 
 ---
@@ -87,10 +87,10 @@ flipped = not -pi_2 <= telem.pitch <= pi_2 or not -pi_2 <= telem.roll <= pi_2
 Рассчет общего угла коптера к горизонту:
 
 ```python
-pi_2 = math.pi / 2
+PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -pi_2 <= telem.pitch <= pi_2 or not -pi_2 <= telem.roll <= pi_2
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
 if flipped:
     angle_to_horizon = math.pi - angle_to_horizon
