@@ -30,3 +30,9 @@ export ROS_IP=192.168.11.1
 В качестве reference frame рекомендуется установить фрейм `local_origin`. Для визуализации коптера можно добавить визуализационные маркеры из топика `/vehicle_markers`. Можно просмотреть картинку с дополненной реальностью из топика основной камеры `/main_camera/image_raw`.
 
 Axis или Grid настроенный на фрейм `aruco_map` будут визуализировать расположение [карты ArUco-меток](aruco.md).
+
+Рекомендуется также установка набора дополнительных полезных плагинов [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). Это набор позволяет визуализировать топики типа `TwistStamped` (скорость), `CameraInfo`, `PolygonArray` и многое другое. Для установки используйте команду:
+
+```bash
+sudo apt-get install ros-kinetic-jsk-visualization
+```
