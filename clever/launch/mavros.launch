@@ -40,11 +40,11 @@
                         frame_id: "rangefinder"
                         orientation: PITCH_270
                         field_of_view: 0.5
-                    rangefinder_0_sub:
+                    rangefinder_2_sub:
                         subscriber: true
                         id: 2
                         orientation: PITCH_270
-                    rangefinder_0_sub:
+                    rangefinder_3_sub:
                         subscriber: true
                         id: 3
                         orientation: PITCH_270
