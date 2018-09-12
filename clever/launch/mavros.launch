@@ -27,6 +27,29 @@
             <!-- default px4 params -->
             <rosparam command="load" file="$(find mavros)/launch/px4_config.yaml"/>
 
+            <!-- rangefinders -->
+            <rosparam>
+                distance_sensor:
+                    rangefinder_0:
+                        id: 0
+                        frame_id: "rangefinder"
+                        orientation: PITCH_270
+                        field_of_view: 0.5
+                    rangefinder_1:
+                        id: 1
+                        frame_id: "rangefinder"
+                        orientation: PITCH_270
+                        field_of_view: 0.5
+                    rangefinder_0_sub:
+                        subscriber: true
+                        id: 2
+                        orientation: PITCH_270
+                    rangefinder_0_sub:
+                        subscriber: true
+                        id: 3
+                        orientation: PITCH_270
+            </rosparam>
+
             <!-- additional params -->
             <param name="local_position/frame_id" value="local_origin"/>
             <param name="local_position/tf/send" value="true"/>
@@ -53,6 +76,9 @@
                 - trajectory
             </rosparam>
     </node>
+
+    <!-- Rangefinders frame -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 fcu rangefinder"/>
 
     <!-- Copter visualization -->
     <include file="$(find clever)/launch/copter_visualization.launch" if="$(arg viz)"/>
