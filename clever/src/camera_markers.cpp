@@ -4,7 +4,9 @@
  *
  * Author: Oleg Kalachev <okalachev@gmail.com>
  *
- * Licensed under the MIT License. See LICENSE.md in the project root for license information.
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  */
 
 #include <string>
