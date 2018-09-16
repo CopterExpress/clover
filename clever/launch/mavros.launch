@@ -71,6 +71,7 @@
                 - cam_imu_sync
                 - hil
                 - adsb
+                - waypoint
                 - obstacle_distance
                 - setpoint_accel
                 - trajectory
