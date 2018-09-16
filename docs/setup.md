@@ -282,4 +282,4 @@
 
 Далее: [Настройка-полетного-контролера](aruco.md#Настройка-полетного-контролера)
 
-Далее: [Подключение Raspberry Pi к PixHawk](connection.md).
+Далее: [Подключение Raspberry Pi к Pixhawk](connection.md).
