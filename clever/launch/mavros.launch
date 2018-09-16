@@ -82,5 +82,13 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 fcu rangefinder"/>
 
     <!-- Copter visualization -->
-    <include file="$(find clever)/launch/copter_visualization.launch" if="$(arg viz)"/>
+    <node name="copter_visualization" pkg="mavros_extras" type="copter_visualization" if="$(arg viz)">
+        <remap to="mavros/local_position/pose" from="local_position"/>
+        <remap to="mavros/setpoint_position/local" from="local_setpoint"/>
+        <param name="copter_visualization/fixed_frame_id" value="local_origin"/>
+        <param name="copter_visualization/child_frame_id" value="fcu"/>
+        <param name="copter_visualization/marker_scale" value="1"/>
+        <param name="copter_visualization/max_track_size" value="20"/>
+        <param name="copter_visualization/num_rotors" value="4"/>
+    </node>
 </launch>
