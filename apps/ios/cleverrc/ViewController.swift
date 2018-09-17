@@ -3,7 +3,7 @@
 //  cleverrc
 //
 //  Created by Oleg Kalachev on 20.01.2018.
-//  Copyright © 2018 Copter Express. All rights reserved.
+//  Copyright © 2018 Copter Express Technologies. All rights reserved.
 //
 
 import UIKit
