@@ -119,7 +119,6 @@ echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
   && cd /home/pi/catkin_ws/src/clever \
   && git checkout $2 \
   && pip install wheel \
-  && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
   && resolve_rosdep $(pwd) \
