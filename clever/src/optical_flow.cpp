@@ -59,7 +59,7 @@ private:
 		image_transport::ImageTransport it(nh);
 		image_transport::ImageTransport it_priv(nh_priv);
 
-		nh_priv.param<std::string>("frame_id", fcu_frame_id_, "fcu");
+		nh_priv.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "fcu");
 		nh_priv.param("roi", roi_, 128);
 		roi_2_ = roi_ / 2;
 
