@@ -41,7 +41,7 @@ def make_quadcopter_marker():
     marker.pose.orientation.w = 1
 
     marker.name = 'quadcopter'
-    marker.description = 'Quadrocopter'
+    marker.description = 'Quadcopter'
 
     make_box_control(marker)
 
