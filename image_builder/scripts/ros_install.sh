@@ -45,7 +45,6 @@ resolve_rosdep() {
   for i in {1..5}; do
     # Resolving Dependencies with rosdep
     rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -r --os=${OS_DISTRO}:${OS_VERSION} \
-    > /dev/null \
     && (install_ok=true; break) || (echo_stamp "rosdep iteration #$i failed!" "ERROR"; sleep 2)
   done
   set -e
