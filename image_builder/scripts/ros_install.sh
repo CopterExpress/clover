@@ -31,10 +31,10 @@ echo_stamp "Init rosdep" \
 
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
-  CATKIN_PATH=${1:='/home/pi/ros_catkin_ws'}
-  ROS_DISTRO=${2:='kinetic'}
-  OS_DISTRO=${3:='debian'}
-  OS_VERSION=${4:='stretch'}
+  CATKIN_PATH=$1
+  ROS_DISTRO='kinetic'
+  OS_DISTRO='debian'
+  OS_VERSION='stretch'
 
   echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
   cd ${CATKIN_PATH}
