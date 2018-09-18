@@ -83,7 +83,7 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
       || (echo_stamp "Some CLEVER sources installation was failed!" "ERROR"; exit 1)
   fi
 
-  resolve_rosdep
+  resolve_rosdep '/home/pi/ros_catkin_ws'
 
   # TODO: Add refactor to origin repo
   #echo_stamp "Refactoring usb_cam in SRC"
@@ -119,7 +119,8 @@ echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
   && pip install wheel \
   && cd /home/pi/catkin_ws \
   && resolve_rosdep $(pwd) \
-  && . /opt/ros/kinetic/setup.sh \
+  && ls -l /opt/ros/kinetic \
+  && source /opt/ros/kinetic/setup.bash \
   && catkin_make -j$5 -DCMAKE_BUILD_TYPE=Release \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \

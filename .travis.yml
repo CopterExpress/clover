@@ -1,10 +1,13 @@
 sudo: required	
 language: generic
+cache:
+  directories:
+    - $(pwd)/image/
 services:
   - docker
 env:
   global:
-    - DOCKER=smirart/builder
+    - DOCKER=smirart/builder:latest
     #- TARGET_REPO=$(dhdhdhjdjdjdhrhd)
     # https://docs.travis-ci.com/user/environment-variables
     # REGISTRY_PASS=...
@@ -19,16 +22,14 @@ after_failure:
   - skip_deploy
 
 before_deploy:
-  provider: script
-  script: echo 'before deploy'
+  - echo 'before deploy'
   #- zip
   #- size
   #- Sha256
   #- Upload
 
 deploy:
-  provider: script
-  script: echo 'github release measage'
+  - echo 'github release measage'
   # https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
   #provider: releases
   #  api_key: $GITHUB_OAUTH_TOKEN
