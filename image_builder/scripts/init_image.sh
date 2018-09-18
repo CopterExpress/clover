@@ -30,7 +30,8 @@ echo_stamp "#0 Install apt keys & repos"
 
 # TODO: This STDOUT consist 'OK'
 curl http://repo.coex.space/aptly_repo_signing.key 2> /dev/null | apt-key add -
-apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u2 > /dev/null \
+apt-get update \
+  && apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u2 > /dev/null \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
