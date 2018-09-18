@@ -19,7 +19,7 @@ before_script:
 script:
   - docker run --privileged --rm -v /dev:/dev -v $(pwd)/image:/builder/image -e "TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git" -e "TARGET_REF=${TRAVIS_BRANCH}" ${DOCKER}
 after_failure:
-  - skip_deploy
+  - skip_deploy: true
 
 before_deploy:
   - echo 'before deploy'
@@ -29,7 +29,8 @@ before_deploy:
   #- Upload
 
 deploy:
-  - echo 'github release measage'
+  provider: script
+  script: echo 'github release measage'
   # https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
   #provider: releases
   #  api_key: $GITHUB_OAUTH_TOKEN
