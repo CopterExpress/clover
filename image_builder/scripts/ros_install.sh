@@ -25,7 +25,6 @@ echo_stamp() {
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep" \
   && rosdep init \
-  && wget -O /etc/ros/rosdep/kinetic-rosdep-clever.yaml http://repo.coex.space/kinetic-rosdep-clever.yaml 2> /dev/null \
   && echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
   && rosdep update
 
