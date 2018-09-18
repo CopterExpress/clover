@@ -122,7 +122,7 @@ echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
   && pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
   && cd /home/pi/catkin_ws \
   && . /opt/ros/kinetic/setup.sh \
-  && resolve_rosdep $(pwd)
+  && resolve_rosdep $(pwd) \
   && catkin_make -j$5 -DCMAKE_BUILD_TYPE=Release \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
