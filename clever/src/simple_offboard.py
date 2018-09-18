@@ -121,6 +121,8 @@ def offboard_and_arm():
 
 ps = PoseStamped()
 vs = Vector3Stamped()
+pt = PositionTarget()
+at = AttitudeTarget()
 
 
 BRAKE_TIME = rospy.Duration(0)
@@ -184,13 +186,14 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                          current_nav_start_stamp, req.speed)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             position=setpoint,
-                             yaw=euler_from_orientation(current_nav_finish.pose.orientation, 'sxyz')[2],
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ + \
+                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.position = setpoint
+        msg.yaw = euler_from_orientation(current_nav_finish.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, (srv.SetPositionRequest, srv.SetPositionGlobalRequest)):
@@ -203,13 +206,14 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
             pose_local.pose.position.x, pose_local.pose.position.y = global_to_local(req.lat, req.lon)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2],
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ + \
+                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.position = pose_local.pose.position
+        msg.yaw = euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, srv.SetVelocityRequest):
@@ -221,28 +225,33 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_PX + PT.IGNORE_PY + PT.IGNORE_PZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             velocity=vector_local.vector,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2],
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_PX + PT.IGNORE_PY + PT.IGNORE_PZ + \
+                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.velocity = vector_local.vector
+        msg.yaw = euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, srv.SetAttitudeRequest):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(req.roll, req.pitch, req.yaw)
         pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = AttitudeTarget(orientation=pose_local.pose.orientation,
-                             thrust=req.thrust,
-                             type_mask=AT.IGNORE_YAW_RATE + AT.IGNORE_PITCH_RATE + AT.IGNORE_ROLL_RATE)
+        msg = at
+        msg.orientation = pose_local.pose.orientation
+        msg.thrust = req.thrust
+        msg.type_mask = AT.IGNORE_YAW_RATE + AT.IGNORE_PITCH_RATE + AT.IGNORE_ROLL_RATE
         return attitude_pub, msg
 
     elif isinstance(req, srv.SetRatesRequest):
-        msg = AttitudeTarget(thrust=req.thrust,
-                             type_mask=AttitudeTarget.IGNORE_ATTITUDE,
-                             body_rate=Vector3(req.roll_rate, req.pitch_rate, req.yaw_rate))
+        msg = at
+        msg.thrust = req.thrust
+        msg.type_mask = AT.IGNORE_ATTITUDE
+        msg.body_rate.x = req.roll_rate
+        msg.body_rate.y = req.pitch_rate
+        msg.body_rate.z = req.yaw_rate
         return attitude_pub, msg
 
 
