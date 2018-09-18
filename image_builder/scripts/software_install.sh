@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
 
 ##################################################################################################################################
 # Image software installation
 ##################################################################################################################################
-
-set -e
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
@@ -26,8 +26,7 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "#1 Software installing"
-
+echo_stamp "Software installing"
 apt-get install --no-install-recommends -y \
   unzip=6.0-21 \
   zip=3.0-11 \
@@ -47,32 +46,34 @@ apt-get install --no-install-recommends -y \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  python-rosdep=0.12.2-1 \
+  python-rosinstall-generator=0.1.14-1 \
+  python-wstool=0.1.17-1 \
+  python-rosinstall=0.7.8-1 \
+  build-essential=12.3 \
   > /dev/null \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
-echo_stamp "#2 Installation OpenCV"
+# echo_stamp "Installation OpenCV"
+# apt-get install --no-install-recommends -y \
+#   ros-kinetic-opencv3=3.3.1-0stretch \
+#   > /dev/null \
+#   && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
+#   || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
 
-apt-get install --no-install-recommends -y \
-  ros-kinetic-opencv3=3.3.1-0stretch \
-  > /dev/null \
-  && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
-  || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
-
-echo_stamp "#3 Adding mjpg-streamer at /home/pi"
+echo_stamp "Adding mjpg-streamer at /home/pi"
 # https://github.com/jacksonliam/mjpg-streamer
-
-git clone https://github.com/jacksonliam/mjpg-streamer.git /home/pi/mjpg-streamer \
+git clone https://github.com/urpylka/mjpg-streamer.git /home/pi/mjpg-streamer \
 && cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
 && make > /dev/null \
 && make install \
 && chown -Rf pi:pi /home/pi/mjpg-streamer
 
-echo_stamp "#4 Add .vimrc"
-
+echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
 set mouse-=a
 syntax on
 EOF
 
-echo_stamp "#5 End of software installation"
+echo_stamp "End of software installation"

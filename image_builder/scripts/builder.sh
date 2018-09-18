@@ -18,6 +18,6 @@ cd ${IMAGE_BUILDER}
 [[ $(arch) == 'armv7l' ]] && NUMBER_THREADS=1 || NUMBER_THREADS=$(nproc --all)
 
 ./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'/kinetic-ros-coex.rosinstall' '/home/pi/ros_catkin_ws/'
-./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'/ros_install.sh' ${TARGET_REPO} ${TARGET_REF} False ${NUMBER_THREADS}
+./image_config.sh execute ${IMAGE_PATH} ${SCRIPTS_DIR}'/ros_install.sh' ${TARGET_REPO} ${TARGET_REF} False False ${NUMBER_THREADS} 
 
 ./autosizer.sh ${IMAGE_PATH}

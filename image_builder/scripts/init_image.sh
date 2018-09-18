@@ -26,26 +26,23 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-# Add apt key to allow local mirror usage during image build
+echo_stamp "#0 Install apt keys & repos"
+
 # TODO: This STDOUT consist 'OK'
-wget -O - ftp://mirror.coex.space/coex-mirror.gpg 2> /dev/null | apt-key add -
-# Generate a backup of the original source.list
-cp /etc/apt/sources.list /var/sources.list.bak
-# Add the coex-mirror as the first priority repository
-curl ftp://mirror.coex.space/coex-mirror.list 2> /dev/null | cat - /etc/apt/sources.list > /var/sources.list && mv /var/sources.list /etc/apt/sources.list
-# Add the urpylka-rpi repo
-curl ftp://mirror.coex.space/urpylka-rpi.list 2> /dev/null  >> /etc/apt/sources.list
+curl http://repo.coex.space/aptly_repo_signing.key 2> /dev/null | apt-key add -
+apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u2 > /dev/null \
+  && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
-echo_stamp "#1 apt cache update"
+echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
+echo "deb http://repo.coex.space/rpi-ros-kinetic/ stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
 
-# Clean repostory cache
-apt-get clean -qq > /dev/null
-# Update repository cache
+echo_stamp "#1 Update apt cache"
+
 # TODO: FIX ERROR: /usr/bin/apt-key: 596: /usr/bin/apt-key: cannot create /dev/null: Permission denied
 apt-get update -qq > /dev/null
 # && apt upgrade -y
 
-echo_stamp "#2 Write clever information"
+echo_stamp "#2 Write CLEVER information"
 
 # Clever image version
 echo "$1" >> /etc/clever_version
