@@ -31,7 +31,7 @@ apt-get install --no-install-recommends -y \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1
 
 # Deny byobu to check available updates
-sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
+# sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
 sudo sed -i "s/updates_available//" /home/pi/.byobu/status
 
 # install Monkey web-server
