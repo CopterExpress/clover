@@ -75,6 +75,7 @@
             - obstacle_distance
             - setpoint_accel
             - trajectory
+            - wind_estimation
         </rosparam>
     </node>
 
