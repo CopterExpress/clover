@@ -165,4 +165,14 @@ apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
+echo -e "\033[0;31m\033[1m$(date) | #14 Install Butterfly\033[0m\033[0m"
+# install and enable Butterfly (web terminal)
+# TODO: move it back to software_install
+# Had to move it here, as we don't have `clever` directory in software_install
+pip3 install butterfly
+pip3 install butterfly[systemd]
+ln -s /home/pi/catkin_ws/src/clever/deploy/butterfly.service /lib/systemd/system/
+ln -s /home/pi/catkin_ws/src/clever/deploy/butterfly.socket /lib/systemd/system/
+systemctl enable butterfly.socket
+
 echo -e "\033[0;31m\033[1m$(date) | END of ROS INSTALLATION\033[0m\033[0m"

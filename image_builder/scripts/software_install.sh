@@ -28,7 +28,8 @@ apt-get install --no-install-recommends -y \
   libjpeg8-dev=8d1-2 \
   tcpdump \
   ltrace \
-  libpoco-dev=1.7.6+dfsg1-5+deb9u1
+  libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+  libffi-dev # for butterfly
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
@@ -45,14 +46,6 @@ setcap 'cap_net_bind_service=+ep' ./build/monkey  # allow using 80 port
 rm build/conf/sites/default
 ln -s /home/pi/catkin_ws/src/clever/deploy/monkey ./build/conf/sites/default
 cd /home/pi
-
-# install and enable Butterfly (web terminal)
-apt-get install libffi-dev
-pip3 install butterfly
-pip3 install butterfly[systemd]
-ln -s /home/pi/catkin_ws/src/clever/deploy/butterfly.service /lib/systemd/system/
-ln -s /home/pi/catkin_ws/src/clever/deploy/butterfly.socket /lib/systemd/system/
-systemctl enable butterfly.socket
 
 echo -e "\033[0;31m\033[1m$(date) | #2 Adding mjpg-streamer at /home/pi\033[0m\033[0m"
 # https://github.com/jacksonliam/mjpg-streamer
