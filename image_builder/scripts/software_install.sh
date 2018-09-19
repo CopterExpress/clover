@@ -27,6 +27,7 @@ apt-get install --no-install-recommends -y \
   python3-pip=9.0.1-2+rpt2 \
   libjpeg8-dev=8d1-2 \
   tcpdump \
+  ltrace \
   libpoco-dev=1.7.6+dfsg1-5+deb9u1
 
 # Deny byobu to check available updates
