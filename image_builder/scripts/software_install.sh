@@ -51,6 +51,7 @@ apt-get install --no-install-recommends -y \
   python-wstool=0.1.17-1 \
   python-rosinstall=0.7.8-1 \
   build-essential=12.3 \
+  mjpg-streamer=2.0
   > /dev/null \
   && echo_stamp "Everything was installed!" "SUCCESS" \
   || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
@@ -62,13 +63,13 @@ apt-get install --no-install-recommends -y \
 #   && echo_stamp "OpenCV3 was installed!" "SUCCESS" \
 #   || (echo_stamp "OpenCV3 wasn't installed!" "ERROR"; exit 1)
 
-echo_stamp "Adding mjpg-streamer at /home/pi"
-# https://github.com/jacksonliam/mjpg-streamer
-git clone https://github.com/urpylka/mjpg-streamer.git /home/pi/mjpg-streamer \
-&& cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
-&& make > /dev/null \
-&& make install \
-&& chown -Rf pi:pi /home/pi/mjpg-streamer
+# echo_stamp "Adding mjpg-streamer at /home/pi"
+# # https://github.com/jacksonliam/mjpg-streamer
+# git clone https://github.com/urpylka/mjpg-streamer.git /home/pi/mjpg-streamer \
+# && cd /home/pi/mjpg-streamer/mjpg-streamer-experimental \
+# && make > /dev/null \
+# && make install \
+# && chown -Rf pi:pi /home/pi/mjpg-streamer
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc

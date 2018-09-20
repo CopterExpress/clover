@@ -35,7 +35,8 @@ apt-get update \
   && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://repo.coex.space/rpi-ros-kinetic/ stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
+echo "deb http://repo.coex.space/rpi-ros-kinetic stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
+echo "deb http://repo.coex.space/clever stretch main" > /etc/apt/sources.list.d/clever.list
 
 echo_stamp "Update apt cache"
 
