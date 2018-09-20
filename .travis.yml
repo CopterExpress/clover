@@ -31,6 +31,7 @@ before_deploy:
 deploy:
   provider: script
   script: echo 'github release measage'
+  # https://docs.travis-ci.com/user/deployment#examples-of-conditional-deployment
   # https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
   #provider: releases
   #  api_key: $GITHUB_OAUTH_TOKEN
