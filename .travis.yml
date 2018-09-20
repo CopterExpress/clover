@@ -1,8 +1,5 @@
 sudo: required	
 language: generic
-cache:
-  directories:
-    - $(pwd)/image/
 services:
   - docker
 env:
