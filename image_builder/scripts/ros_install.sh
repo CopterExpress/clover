@@ -125,7 +125,9 @@ echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
-  && systemctl enable clever
+  && systemctl enable clever \
+  && echo_stamp "All CLEVER-BUNDLE was installed!" "SUCCESS" \
+  || (echo_stamp "CLEVER-BUNDLE installation was failed!" "ERROR"; exit 1)
 
 echo_stamp "#13 Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
