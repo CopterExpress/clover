@@ -131,7 +131,7 @@ echo_stamp "#13 Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
 echo_stamp "#14 Setup ROS environment"
-cat <<EOF | tee -a /home/pi/.bashrc > /dev/null
+cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 ROS_DISTRO='kinetic'
