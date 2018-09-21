@@ -18,7 +18,7 @@ get_image() {
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ];
   then
     echo_stamp "1. Downloading original Linux distribution"
-    wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 > /dev/null \
+    wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 \
     && echo_stamp "Downloading complete" "SUCCESS"
   else
     echo_stamp "1. Linux distribution already donwloaded"
