@@ -18,7 +18,7 @@ before_deploy:
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-  - cd image && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} \
+  - cd image && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
 
 deploy:
   provider: releases
