@@ -8,6 +8,7 @@ env:
     - TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git
     - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
     - IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
+    - IMAGE_NAME="$(basename ${IMAGE_PATH})"
 git:
   depth: 1
 before_script:
@@ -21,8 +22,7 @@ before_deploy:
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-  - echo ${IMAGE_PATH}
-  - cd image && zip ${IMAGE_PATH}.zip ${IMAGE_PATH}
+  - cd $(pwd)/image && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
