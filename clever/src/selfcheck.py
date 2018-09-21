@@ -63,15 +63,20 @@ def check_fcu():
 @check('Camera')
 def check_camera(name):
     try:
-        rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
+        img = rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
     except rospy.ROSException:
-        failure('%s: No images', name)
+        failure('%s: No images (is the camera connected properly?)', name)
         return
     try:
-        rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=3)
+        info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
     except rospy.ROSException:
         failure('%s: No calibration info', name)
         return
+
+    if img.width != info.width:
+        failure('%s: Calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
+    if img.height != info.height:
+        failure('%s: Calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
 
 
 @check('Aruco detector')
