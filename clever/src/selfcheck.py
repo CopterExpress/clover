@@ -12,10 +12,12 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 
 
 # TODO: roscore is running
+# TODO: clever.service is running
+# TODO: check attitude is present
 # TODO: disk free space
 # TODO: local_origin, fcu, fcu_horiz
 # TODO: rc service
-# TODO: perform commander check in PX4
+# TODO: perform commander check, ekf2 status on PX4
 # TODO: check if FCU params setter succeed
 # TODO: selfcheck ROS service (with blacklists for checks)
 
@@ -53,9 +55,9 @@ def check_fcu():
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
-            failure('No connection to the FCU')
+            failure('No connection to the FCU (check wiring)')
     except rospy.ROSException:
-        failure('No MAVROS state')
+        failure('No MAVROS state (check wiring)')
 
 
 @check('Camera')
@@ -63,11 +65,13 @@ def check_camera(name):
     try:
         rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
     except rospy.ROSException:
-        failure('No %s camera images' % name)
+        failure('%s: No images', name)
+        return
     try:
         rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=3)
     except rospy.ROSException:
-        failure('No %s camera camera info' % name)
+        failure('%s: No calibration info', name)
+        return
 
 
 @check('Aruco detector')
@@ -93,7 +97,7 @@ def check_imu():
     try:
         rospy.wait_for_message('mavros/imu/data', Imu, timeout=1)
     except rospy.ROSException:
-        failure('No IMU data')
+        failure('No IMU data (check flight controller calibration)')
 
 
 @check('Local position')
@@ -134,7 +138,7 @@ def check_boot_duration():
     r = re.compile(r'([\d\.]+)s$')
     duration = float(r.search(output).groups()[0])
     if duration > 15:
-        failure('long Raspbian boot duration: %ss', duration)
+        failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
 
 
 @check('CPU usage')
