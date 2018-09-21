@@ -30,7 +30,7 @@ git clone ${TARGET_REPO} --single-branch --branch ${TARGET_REF} --depth 1 ${REPO
 || (echo "Error: TARGET_CONFIG doesn't exist!"; return 1)
 
 export IMAGE_VERSION="${TARGET_REF}_$(git show-ref --hash origin/master | cut -c1-7)"
-export IMAGE_PATH="$(pwd)/image/$(basename -s ".git" ${TARGET_REPO})_${IMAGE_VERSION}.img"
+export IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 
 ./get_image.sh ${IMAGE_PATH} $(jq '.source_image' -r ${TARGET_CONFIG})
 
