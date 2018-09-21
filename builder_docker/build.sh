@@ -14,7 +14,7 @@ export LC_ALL=${LC_ALL:='C.UTF-8'}
 
 export TARGET_REPO=${TARGET_REPO:='https://github.com/urpylka/clever.git'}
 export TARGET_REF=${TARGET_REF:='master'}
-export TARGET_CONFIG=${TARGET_CONFIG:='/image_builder/scripts/builder.json'}
+export TARGET_CONFIG=${TARGET_CONFIG:='/.builder.json'}
 
 echo "================================================================================"
 echo "TARGET_REPO: $TARGET_REPO"
