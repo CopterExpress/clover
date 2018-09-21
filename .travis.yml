@@ -5,12 +5,15 @@ services:
 env:
   global:
     - DOCKER=smirart/builder:latest
+    - TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git
+    - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
+    - IMAGE_PATH="$(pwd)/image/${TRAVIS_REPO_SLUG}_${IMAGE_VERSION}.img"
 git:
   depth: 1
 before_script:
   - docker pull ${DOCKER}
 script:
-  - docker run --privileged --rm -v /dev:/dev -v $(pwd)/image:/builder/image -e "TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git" -e "TARGET_REF=${TRAVIS_BRANCH}" ${DOCKER}
+  - docker run --privileged --rm -v /dev:/dev -v $(pwd)/image:/builder/image -e "TARGET_REPO=${TARGET_REPO}" -e "TARGET_REF=${TRAVIS_BRANCH}" ${DOCKER}
 #after_failure:
 #  - skip_deploy: true
 before_deploy:
@@ -18,7 +21,8 @@ before_deploy:
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-  - cd image && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
+  - echo ${IMAGE_PATH}
+  - cd image && zip ${IMAGE_PATH}.zip ${IMAGE_PATH}
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
