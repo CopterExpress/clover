@@ -7,7 +7,7 @@ env:
     - DOCKER=smirart/builder:latest
     - TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git
     - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
-    - IMAGE_PATH="$(pwd)/image/${TRAVIS_REPO_SLUG}_${IMAGE_VERSION}.img"
+    - IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 1
 before_script:
