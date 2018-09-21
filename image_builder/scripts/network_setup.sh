@@ -1,5 +1,11 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
+#
+# Script for image configure
+# @urpylka Artem Smirnov
+#
+
+# Exit immidiately on non-zero result
 set -e
 
 echo_stamp() {

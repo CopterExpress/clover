@@ -1,11 +1,17 @@
 #! /usr/bin/env bash
 
+#
+# Script for image configure
+# @urpylka Artem Smirnov
+#
+
+# Exit immidiately on non-zero result
 set -e
 
 cd ${IMAGE_BUILDER}
 
 # Make free space
-./image_config.sh resize_fs ${IMAGE_PATH} '7G'
+./resize_fs.sh ${IMAGE_PATH} '7G'
 
 ./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'/init_rpi.sh' '/root/'
 ./image_config.sh copy_to_chroot ${IMAGE_PATH} ${SCRIPTS_DIR}'/hardware_setup.sh' '/root/'

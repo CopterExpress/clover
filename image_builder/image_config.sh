@@ -1,10 +1,15 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 #
 # Script for image configure
 # @urpylka Artem Smirnov
 # @dvornikov-aa Andrey Dvornikov
 #
+
+# Exit immidiately on non-zero result
+set -e
+
+source echo_stamp.sh
 
 # This script doesn't work on Ubuntu because OS`s losetup does not consist --partscan (-P).
 
@@ -13,90 +18,6 @@
 # REPO_DIR=$(mktemp -d --suffix=.builder_repo)
 # mount -t ext4 -o loop,offset=$((94208 * 512)) image/clever_qemu_test_2_20180822_163141.img "$REPO_DIR"
 # mount -t vfat -o loop,offset=$((8192 * 512)) image/clever_qemu_test_2_20180822_163141.img "$REPO_DIR/boot"
-
-# Exit immidiately on non-zero result
-set -e
-
-echo_stamp() {
-  # TEMPLATE: echo_stamp <TEXT> <TYPE>
-  # TYPE: SUCCESS, ERROR, INFO
-
-  # More info there https://www.shellhacks.com/ru/bash-colors/
-
-  TEXT="$(date) | $1"
-  TEXT="\e[1m$TEXT\e[0m" # BOLD
-
-  case "$2" in
-    SUCCESS)
-    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
-    ERROR)
-    TEXT="\e[31m${TEXT}\e[0m";; # RED
-    *)
-    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
-  esac
-  echo -e ${TEXT}
-}
-
-get_image() {
-  # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL> 
-  local BUILD_DIR=$(dirname $1)
-  local RPI_ZIP_NAME=$(basename $2)
-  if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ];
-  then
-    echo_stamp "1. Downloading original Linux distribution"
-    wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 > /dev/null \
-    && echo_stamp "Downloading complete" "SUCCESS"
-  else
-    echo_stamp "1. Linux distribution already donwloaded"
-  fi
-  echo_stamp "2. Unzipping Linux distribution image"
-  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
-  unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1
-  echo_stamp "Unzipping complete" "SUCCESS"
-}
-
-resize_fs() {
-  # TEMPLATE: resize_fs <IMAGE_PATH> <SIZE>
-
-  set +e
-
-  # https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B5%D0%B6%D1%91%D0%BD%D0%BD%D1%8B%D0%B9_%D1%84%D0%B0%D0%B9%D0%BB
-
-  # https://raspberrypi.stackexchange.com/questions/13137/how-can-i-mount-a-raspberry-pi-linux-distro-image
-  # fdisk -l 2017-11-29-raspbian-stretch-lite.img
-  # https://www.stableit.ru/2011/05/losetup.html
-  # -f     : losetup сам выбрал loop (минуя занятые)
-  # -P     : losetup монтирует разделы в образе как отдельные подразделы,
-  #          например /dev/loop0p1 и /dev/loop0p2
-  # --show : печатает имя устройства, например /dev/loop4
-
-  # http://karelzak.blogspot.ru/2015/05/resize-by-sfdisk.html
-  # ", +" : expand partition for volume size
-  # -N 2  : select second partition for work
-
-  # There is a risk that sfdisk will ask for a disk remount to update partition table
-  # TODO: Check sfdisk exit code
-
-  echo_stamp "Truncate image" \
-  && truncate -s$2 $1 \
-  && echo_stamp "Mount loop-image: $1" \
-  && local DEV_IMAGE=$(losetup -Pf $1 --show) \
-  && sleep 0.5 \
-  && echo ", +" | sfdisk -N 2 ${DEV_IMAGE} \
-  && sleep 0.5 \
-  && losetup -d ${DEV_IMAGE} \
-  && sleep 0.5 \
-  && local DEV_IMAGE=$(losetup -Pf $1 --show) \
-  && sleep 0.5 \
-  && echo_stamp "Check & repair filesystem after expand partition" \
-  && e2fsck -fvy "${DEV_IMAGE}p2" \
-  && echo_stamp "Expand filesystem" \
-  && resize2fs "${DEV_IMAGE}p2" \
-  && echo_stamp "Umount loop-image" \
-  && losetup -d ${DEV_IMAGE}
-
-  set -e
-}
 
 execute() {
   # TEMPLATE: execute <IMAGE_PATH> <EXECUTE_FILE> <...>
@@ -220,56 +141,6 @@ umount_system() {
   losetup -d $2
 }
 
-publish_image() {
-  # TEMPLATE: publish_image_bash <IMAGE_PATH> <YA_SCRIPT> <CONFIG_FILE> <RELEASE_ID> <RELEASE_BODY>
-
-  # https://developer.github.com/v3/repos/releases/
-
-  IMAGE_NAME=$(basename $1)
-  BUILD_DIR=$(dirname $1)
-
-  echo_stamp "Zip image"
-  if [ ! -e "${BUILD_DIR}/${IMAGE_NAME}.zip" ];
-  then
-    cd ${BUILD_DIR} && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
-    echo_stamp "Zipping complete!" "SUCCESS"
-  else
-    echo_stamp "Zip-archive already created"
-    cd ${BUILD_DIR} && rm ${IMAGE_NAME}.zip && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} \
-    && echo_stamp "Old archive was deleted & create new" "SUCCESS"
-  fi
-
-  echo_stamp "Upload image"
-  local IMAGE_LINK=$($2 $3 ${BUILD_DIR}/${IMAGE_NAME}.zip) \
-  && echo_stamp "Upload copmlete!" "SUCCESS"
-
-  echo_stamp "Meashure size of zip-image"
-  local IMAGE_SIZE=$(du -sh ${BUILD_DIR}/${IMAGE_NAME}.zip | awk '{ print $1 }') \
-  && echo_stamp "Meashuring copmlete!" "SUCCESS"
-
-  echo_stamp "Meashure hash-sum of zip-image"
-  local IMAGE_HASH=$(sha256sum ${BUILD_DIR}/${IMAGE_NAME}.zip | awk '{ print $1 }') \
-  && echo_stamp "Meashuring copmlete!" "SUCCESS"
-
-  echo ""
-  echo "\$5: $5"
-  echo ""
-
-  echo_stamp "Post message to GH"
-  local NEW_RELEASE_BODY="### Download\n* [${IMAGE_NAME}.zip]($IMAGE_LINK) ($IMAGE_SIZE)\nsha256: $IMAGE_HASH\n\n$5"
-  local DATA="{ \"body\":\"$NEW_RELEASE_BODY\" }"
-
-  echo ""
-  echo "\$DATA: $DATA"
-  echo ""
-
-  local GH_LOGIN=$(cat $3 | jq '.github.login' -r)
-  local GH_PASS=$(cat $3 | jq '.github.password' -r)
-  local GH_URL=$(cat $3 | jq '.github.url' -r)
-  curl -d "$DATA" -u "$GH_LOGIN:$GH_PASS" --request PATCH $GH_URL$4 \
-  && echo_stamp "Post message to GH copmlete!" "SUCCESS"
-}
-
 if [ $(whoami) != "root" ];
 then echo "" \
   && echo "********************************************************************" \
@@ -284,18 +155,6 @@ for ((i=1; i<=$#; i++)); do echo "\$$i: ${!i}"; done
 echo "================================================================================"
 
 case "$1" in
-  get_image)
-  # get_image <IMAGE_PATH> <RPI_DONWLOAD_URL>
-    get_image $2 $3;;
-
-  resize_fs)
-  # resize_fs <IMAGE_PATH> <SIZE>
-    resize_fs $2 $3;;
-
-  publish_image)
-  # publish_image <IMAGE_PATH> <YA_SCRIPT> <CONFIG_FILE> <RELEASE_ID> <RELEASE_BODY>
-    publish_image $2 $3 $4 $5 "$6";;
-
   execute)
   # execute <IMAGE_PATH> [<EXECUTE_FILE>] [...]
     execute $2 $3 ${@:4};;
