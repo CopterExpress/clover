@@ -12,8 +12,6 @@ set -e
 # Image initialisation
 ##################################################################################################################################
 
-set -e
-
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
