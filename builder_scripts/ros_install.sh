@@ -59,7 +59,6 @@ resolve_rosdep() {
   || (echo_stamp "Rosdep installation was failed!" "ERROR"; exit 1)
 }
 
-
 INSTALL_ROS_PACK_SOURCES=${3:='False'}
 if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
   DISCOVER_ROS_PACK=${4:='True'}
@@ -128,8 +127,8 @@ echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
   && ls -l /opt/ros/kinetic \
   && source /opt/ros/kinetic/setup.bash \
   && catkin_make -j$5 -DCMAKE_BUILD_TYPE=Release \
-  && ln -s /home/pi/catkin_ws/src/clever/deploy/roscore.service /lib/systemd/system/roscore.service \
-  && ln -s /home/pi/catkin_ws/src/clever/deploy/clever.service /lib/systemd/system/clever.service \
+  && ln -s /root/roscore.service /lib/systemd/system/roscore.service \
+  && ln -s /root/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
   && systemctl enable clever \
   && echo_stamp "All CLEVER-BUNDLE was installed!" "SUCCESS" \
