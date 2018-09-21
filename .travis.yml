@@ -18,8 +18,10 @@ before_deploy:
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
   - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  - cd image && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} \
+
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
-  file: ${IMAGE_PATH}
+  file: ${IMAGE_PATH}.zip
   skip_cleanup: true
