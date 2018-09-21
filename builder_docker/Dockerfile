@@ -10,9 +10,7 @@ RUN apt-get update -qq > /dev/null
 RUN apt-get install -y --no-install-recommends -qq bc jq unzip wget parted apt-utils git ca-certificates gawk > /dev/null
 RUN apt-get clean
 
-COPY ./image_config.sh /builder/image_config.sh
-COPY ./build.sh /builder/build.sh
-COPY ./autosizer.sh /builder/autosizer.sh
+COPY ./*.sh /builder/
 COPY ./qemu-arm-resin /builder/qemu-arm-resin
 
 WORKDIR /builder
