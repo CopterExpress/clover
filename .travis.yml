@@ -5,10 +5,6 @@ services:
 env:
   global:
     - DOCKER=smirart/builder:latest
-    #- TARGET_REPO=$(dhdhdhjdjdjdhrhd)
-    # https://docs.travis-ci.com/user/environment-variables
-    # REGISTRY_PASS=...
-    #- secret: "<something long>"
 git:
   depth: 1
 before_script:
@@ -17,21 +13,13 @@ script:
   - docker run --privileged --rm -v /dev:/dev -v $(pwd)/image:/builder/image -e "TARGET_REPO=https://github.com/${TRAVIS_REPO_SLUG}.git" -e "TARGET_REF=${TRAVIS_BRANCH}" ${DOCKER}
 #after_failure:
 #  - skip_deploy: true
-
 before_deploy:
-  - echo 'before deploy'
-  #- zip
-  #- size
-  #- Sha256
-  #- Upload
-
+  # Set up git user name and tag this commit
+  - git config --local user.name "urpylka"
+  - git config --local user.email "urpylka@gmail.com"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
-  provider: script
-  script: echo 'github release measage'
-  # https://docs.travis-ci.com/user/deployment#examples-of-conditional-deployment
-  # https://docs.travis-ci.com/user/build-stages/deploy-github-releases/
-  #provider: releases
-  #  api_key: $GITHUB_OAUTH_TOKEN
-  #  skip_cleanup: true
-  #  on:
-  #    tags: true
+  provider: releases
+  api_key: ${GITHUB_OAUTH_TOKEN}
+  file: ${IMAGE_PATH}
+  skip_cleanup: true
