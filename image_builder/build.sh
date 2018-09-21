@@ -32,7 +32,7 @@ git clone ${TARGET_REPO} --single-branch --branch ${TARGET_REF} --depth 1 ${REPO
 export IMAGE_VERSION="${TARGET_REF}_$(date '+%Y%m%d_%H%M%S')"
 export IMAGE_PATH="$(pwd)/image/$(basename -s ".git" ${TARGET_REPO})_${IMAGE_VERSION}.img"
 
-./get_new_image.sh ${IMAGE_PATH} $(jq '.source_image' -r ${TARGET_CONFIG})
+./get_image.sh ${IMAGE_PATH} $(jq '.source_image' -r ${TARGET_CONFIG})
 
 REGISTER=':arm:M::\x7fELF\x01\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x28\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-arm-static:'
 if [[ $(arch) != 'armv7l' ]]; then
