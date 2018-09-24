@@ -8,6 +8,12 @@
 # Exit immidiately on non-zero result
 set -e
 
+REPO=$1
+REF=$2
+INSTALL_ROS_PACK_SOURCES=$3
+DISCOVER_ROS_PACK=$4
+NUMBER_THREADS=$5
+
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
@@ -59,14 +65,14 @@ resolve_rosdep() {
   || (echo_stamp "Rosdep installation was failed!" "ERROR"; exit 1)
 }
 
-INSTALL_ROS_PACK_SOURCES=${3:='False'}
+INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='False'}
 if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
-  DISCOVER_ROS_PACK=${4:='True'}
+  DISCOVER_ROS_PACK=${DISCOVER_ROS_PACK:='True'}
   if [ "${DISCOVER_ROS_PACK}" = "False" ]; then
     echo_stamp "Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall" \
       && mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
       && rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall \
-      && wstool init -j$5 src kinetic-ros_comm-wet.rosinstall \
+      && wstool init -j${NUMBER_THREADS} src kinetic-ros_comm-wet.rosinstall \
       && echo_stamp "All roscomm sources was installed!" "SUCCESS" \
       || (echo_stamp "Some roscomm sources installation was failed!" "ERROR"; exit 1)
 
@@ -75,14 +81,14 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
       && rosinstall_generator \
       actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common cv_bridge cv_camera diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs web_video_server xmlrpcpp mavros opencv3 mavros_extras \
       --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall \
-      && wstool merge -j$5 -t src kinetic-custom_ros.rosinstall \
-      && wstool update -j$5 -t src \
+      && wstool merge -j${NUMBER_THREADS} -t src kinetic-custom_ros.rosinstall \
+      && wstool update -j${NUMBER_THREADS} -t src \
       && echo_stamp "All custom sources was installed!" "SUCCESS" \
       || (echo_stamp "Some custom sources installation was failed!" "ERROR"; exit 1)
   else
     echo_stamp "Creating ros_catkin_ws & getting all sources using wstool" \
       && mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-      && wstool init -j$5 src kinetic-ros-clever.rosinstall \
+      && wstool init -j${NUMBER_THREADS} src kinetic-ros-clever.rosinstall \
       > /dev/null \
       && echo_stamp "All CLEVER sources was installed!" "SUCCESS" \
       || (echo_stamp "Some CLEVER sources installation was failed!" "ERROR"; exit 1)
@@ -118,15 +124,15 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
 fi
 
 echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
-  && git clone $1 /home/pi/catkin_ws/src/clever \
+  && git clone ${REPO} /home/pi/catkin_ws/src/clever \
   && cd /home/pi/catkin_ws/src/clever \
-  && git checkout $2 \
+  && git checkout ${REF} \
   && pip install wheel \
   && cd /home/pi/catkin_ws \
   && resolve_rosdep $(pwd) \
   && ls -l /opt/ros/kinetic \
   && source /opt/ros/kinetic/setup.bash \
-  && catkin_make -j$5 -DCMAKE_BUILD_TYPE=Release \
+  && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
   && ln -s /root/roscore.service /lib/systemd/system/roscore.service \
   && ln -s /root/clever.service /lib/systemd/system/clever.service \
   && systemctl enable roscore \
