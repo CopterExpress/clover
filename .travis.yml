@@ -30,3 +30,5 @@ deploy:
   api_key: ${GITHUB_OAUTH_TOKEN}
   file: ${IMAGE_PATH}.zip
   skip_cleanup: true
+  on:
+    tags: true
