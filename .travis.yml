@@ -8,15 +8,15 @@ services:
 #     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 env:
   global:
-    - DOCKER = smirart/builder:latest
-    - TARGET_REPO = https://github.com/${TRAVIS_REPO_SLUG}.git
-    # - TARGET_REF = ${TRAVIS_BRANCH}
-    - TARGET_REF = ${TRAVIS_TAG}
-    # - IMAGE_VERSION = "${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
-    - IMAGE_VERSION = ${TRAVIS_TAG}
-    - IMAGE_PATH = "$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
-    - IMAGE_NAME = "$(basename ${IMAGE_PATH})"
-    - BUILD_DIR = "$(dirname ${IMAGE_PATH})"
+    - DOCKER="smirart/builder:latest"
+    - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
+    # - TARGET_REF="${TRAVIS_BRANCH}"
+    - TARGET_REF="${TRAVIS_TAG}"
+    # - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
+    - IMAGE_VERSION="${TRAVIS_TAG}"
+    - IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
+    - IMAGE_NAME="$(basename ${IMAGE_PATH})"
+    - BUILD_DIR="$(dirname ${IMAGE_PATH})"
 git:
   depth: 1
 before_script:
