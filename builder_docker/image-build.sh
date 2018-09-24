@@ -54,10 +54,11 @@ git clone ${TARGET_REPO} --single-branch --branch ${TARGET_REF} --depth 1 ${REPO
 || (echo "Error: TARGET_CONFIG doesn't exist!"; return 1)
 
 CUR_DIR="$(pwd)" && cd ${REPO_DIR}
-TARGET_COMMIT=$(git show-ref --hash origin/master | cut -c1-7)
+#TARGET_COMMIT=$(git show-ref --hash origin/master | cut -c1-7)
 cd ${CUR_DIR} && unset CUR_DIR
 
-export IMAGE_VERSION="${TARGET_REF}_${TARGET_COMMIT}"
+#export IMAGE_VERSION="${TARGET_REF}_${TARGET_COMMIT}"
+export IMAGE_VERSION="${TARGET_REF}"
 export IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 
 get_image ${IMAGE_PATH} $(jq '.source_image' -r ${TARGET_CONFIG})
