@@ -87,7 +87,7 @@ execute() {
   if [[ $# > 1 ]]; then
     echo_stamp "Copy script to chroot fs"
 
-    local SCRIPT_NAME="$(tr -dc 'A-F0-9' < /dev/urandom | dd bs=1 count=16 2>/dev/null)"
+    local SCRIPT_NAME="$(basename $2).$(tr -dc 'A-F0-9' < /dev/urandom | dd bs=1 count=7 2>/dev/null)"
     local SCRIPT_DIR="${MOUNT_POINT}/root"
 
     cp "$2" "${SCRIPT_DIR}/${SCRIPT_NAME}"
