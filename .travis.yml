@@ -2,6 +2,9 @@ sudo: required
 language: generic
 services:
   - docker
+branches:
+  only:
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 env:
   global:
     - DOCKER=smirart/builder:latest
