@@ -34,16 +34,16 @@ get_image() {
   local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
-    echo_stamp "Downloading original Linux distribution" \
+    echo -e "Downloading original Linux distribution" \
     && wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 \
-    && echo_stamp "Downloading complete" "SUCCESS" \
-    || (echo_stamp "Downloading was failed!" "ERROR"; exit 1)
-  else; echo_stamp "Linux distribution already donwloaded"; fi
+    && echo -e "Downloading complete" "SUCCESS" \
+    || (echo -e "Downloading was failed!" "ERROR"; exit 1)
+  else echo -e "Linux distribution already donwloaded"; fi
 
-  echo_stamp "Unzipping Linux distribution image" \
+  echo -e "Unzipping Linux distribution image" \
   && unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1 \
-  && echo_stamp "Unzipping complete" "SUCCESS" \
-  || (echo_stamp "Unzipping was failed!" "ERROR"; exit 1)
+  && echo -e "Unzipping complete" "SUCCESS" \
+  || (echo -e "Unzipping was failed!" "ERROR"; exit 1)
 }
 
 # TODO: The repository can be already downloaded, use the TARGET_REPO also as unix path.
