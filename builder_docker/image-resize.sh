@@ -190,7 +190,7 @@ if [[ $# > 0 ]]; then
 
   [[ -f $1 ]] || (echo_bold "$1 does not exist" "ERROR"; exit 1)
 
-  if [[ -z $2 ]]; then
+  if [[ ! -z $2 ]]; then
     case "$2" in
       min)
         shrink_free_space $1 $3;;

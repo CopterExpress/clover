@@ -85,23 +85,16 @@ execute() {
   || (echo_stamp "Failed" "ERROR"; exit 1)
 
   if [[ $# > 1 ]]; then
-    echo_stamp "Copy script into chroot fs"
+    echo_stamp "Copy script to chroot fs"
 
-    local SCRIPT_NAME=$(basename $2)
-    local SCRIPT_PATH="$(mktemp -d -p ${MOUNT_POINT}/tmp --suffix=.tmp_builder_script)"
+    local SCRIPT_NAME="$(tr -dc 'A-F0-9' < /dev/urandom | dd bs=1 count=16 2>/dev/null)"
+    local SCRIPT_DIR="${MOUNT_POINT}/root"
 
-    local script_name=$(basename $2)
-    local script_path_root="${MOUNT_POINT}/root/${script_name}"
-
-    # TODO: maybe copy to tmp-dir
-    # TODO: Find more suitable location for temporary script storage
-    # $(mktemp -p ${MOUNT_POINT}/tmp --suffix=.tmp_builder_script)
-
-    cp "$2" "${script_path_root}"
+    cp "$2" "${SCRIPT_DIR}/${SCRIPT_NAME}"
     # Run script in chroot with additional arguments
-    chroot ${MOUNT_POINT} /bin/sh -c "/root/${script_name} ${@:3}"
+    chroot ${MOUNT_POINT} /bin/sh -c "/root/${SCRIPT_NAME} ${@:3}"
     # Removing script from chroot fs
-    rm "${script_path_root}"
+    rm "${SCRIPT_DIR}/${SCRIPT_NAME}"
   else
     # https://wiki.archlinux.org/index.php/Change_root_(%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9)
     # http://www.unix-lab.org/posts/chroot/
@@ -162,14 +155,14 @@ if [ $(whoami) != "root" ]; then
   exit 1
 fi
 
+echo "================================================================================"
+for ((i=0; i<=$#; i++)); do echo "\$$i: ${!i}"; done
+echo "================================================================================"
+
 if [[ $# > 0 ]]; then
-  echo "================================================================================"
-  for ((i=1; i<=$#; i++)); do echo "\$$i: ${!i}"; done
-  echo "================================================================================"
+  [[ -f $1 ]] || (echo_stamp "$1 does not exist" "ERROR"; echo "Template: image-chroot.sh <IMAGE> [ exec <SCRIPT> [...] | copy <MOVE_FILE> <MOVE_TO> ]"; exit 1)
 
-  [[ -f $1 ]] || (echo_stamp "$1 does not exist" "ERROR"; exit 1)
-
-  if [[ -z $2 ]] && [[ -f $3 ]]; then
+  if [[ ! -z $2 && -f $3 ]]; then
     case "$2" in
       exec)
         execute $1 $3 ${@:4};;
