@@ -117,10 +117,10 @@ umount_system() {
   # Repeat 5 times
   for i in {1..5}; do
     umount -fR $1 \
-    && (echo_stamp "OK" "SUCCESS"; umount_ok=true; break) \
+    && umount_ok=true && break \
     || (echo_stamp "Failed #$i (try 5 times)" "ERROR"; sleep 2)
   done
-  [[ "$umount_ok" == true ]] \
+  [[ "$umount_ok" == true ]] && echo_stamp "OK" "SUCCESS" \
   || (echo_stamp "Umount loop-image was failed" "ERROR"; exit 1)
   losetup -d $2
 }
