@@ -48,7 +48,7 @@ get_image() {
 
 # TODO: The repository can be already downloaded, use the TARGET_REPO also as unix path.
 REPO_DIR=$(mktemp -d --suffix=.builder_repo)
-git clone ${TARGET_REPO} --single-branch --branch ${TARGET_REF} --depth 1 ${REPO_DIR} \
+git clone ${TARGET_REPO} --single-branch --branch ${TARGET_REF} --depth 1 ${REPO_DIR} &> /dev/null \
 || (echo 'Error: Could not clone repo!'; return 1)
 [[ -f ${REPO_DIR}${TARGET_CONFIG} ]] && export TARGET_CONFIG=${REPO_DIR}${TARGET_CONFIG} \
 || (echo "Error: TARGET_CONFIG doesn't exist!"; return 1)
