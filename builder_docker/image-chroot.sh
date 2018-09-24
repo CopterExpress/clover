@@ -59,11 +59,10 @@ execute() {
   echo_stamp "Mounting /proc in chroot... "
   if [ ! -d ${MOUNT_POINT}/proc ]; then
     mkdir -p ${MOUNT_POINT}/proc \
-    && mount -t proc -o nosuid,noexec,nodev proc ${MOUNT_POINT}/proc
+    && mount -t proc -o nosuid,noexec,nodev proc ${MOUNT_POINT}/proc \
     && echo_stamp "OK" "SUCCESS" \
     || (echo_stamp "Failed" "ERROR"; exit 1)
-  else echo_stamp "/sys already exist" "SUCCESS"
-  fi
+  else echo_stamp "/proc already exist" "SUCCESS"; fi
 
   echo_stamp "Mounting /sys in chroot... "
   if [ ! -d ${MOUNT_POINT}/sys ]; then
@@ -71,8 +70,7 @@ execute() {
     &&   mount -t sysfs -o nosuid,noexec,nodev sysfs ${MOUNT_POINT}/sys \
     && echo_stamp "OK" "SUCCESS" \
     || (echo_stamp "Failed" "ERROR"; exit 1)
-  else echo_stamp "/sys already exist" "SUCCESS"
-  fi
+  else echo_stamp "/sys already exist" "SUCCESS"; fi
 
   echo_stamp "Mounting /dev/ and /dev/pts in chroot... " \
   && mkdir -p -m 755 ${MOUNT_POINT}/dev/pts \
@@ -126,7 +124,7 @@ umount_system() {
   # Repeat 5 times
   for i in {1..5}; do
     umount -fR $1 \
-    && (echo_stamp "OK" "SUCCESS"; umount_ok=true; break)
+    && (echo_stamp "OK" "SUCCESS"; umount_ok=true; break) \
     || (echo_stamp "Failed #$i (try 5 times)" "ERROR"; sleep 2)
   done
   [[ "$umount_ok" == true ]] \
