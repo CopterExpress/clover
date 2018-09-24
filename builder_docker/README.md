@@ -100,6 +100,24 @@ docker run --privileged -it --rm -v /dev:/dev -v $(pwd)/image:/builder/image smi
 * Add finally block for disconnect image
 * In Jenkins build call by name - change
 
+**image-chroot**
+
+* Добавить отмонтирование образа при возникновении ошибке
+* проверка на существование образа и скрипта если тот задан (кстати скрипт копируется перед исполнением, модет подумать как сопрягать с copytochroot)
+
+**image-build**
+
+* должна смотреть в текущую папку
+* проверка на существование файла инструкций
+* Тоесть по сути должен быть отдельный скрипт для скачивания репы, если таковой не имеется
+* Идея для билдера: добавить в Volume репу с инструкциями. И делать лишь git fetch, git pull, git checkout
+* Сделать так, чтобы в текущей папке все собиралось и работало:
+    1. Если это репозиторий (как передавать доступ в папку?)
+    2. Брать имя репы, ветку или бренчу и коммит из файлов репы
+    3. Обеспечить возможность работы с удаленным репозиторием в качестве источника инструкций (может сделать переход по коммиту или еще что-то подобное)
+
+**image-resize <IMAGE> free-space**
+
 ## Варнинги Jenkins
 
 ```log
@@ -110,3 +128,4 @@ docker run --privileged -it --rm -v /dev:/dev -v $(pwd)/image:/builder/image smi
 * https://yandex.ru/search/?text=The%20POM%20for%20org.jenkins-ci.tools%3Amaven-hpi-plugin%3Ajar%3A2.0%20is%20missing%2C%20no%20dependency%20information%20available&&lr=213
 * http://jenkins-ci.361315.n4.nabble.com/Plugin-org-jenkins-ci-tools-maven-hpi-plugin-td4751140.html
 * http://qaru.site/questions/1460710/maven-jenkins-plugin-poms-missing-for-dependency-information-on-jars
+
