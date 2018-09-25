@@ -19,6 +19,7 @@
         <!-- setting camera FPS -->
         <param name="rate" value="100"/>
         <param name="cv_cap_prop_fps" value="40"/>
+        <param name="capture_delay" value="0.02"/>
 
         <param name="image_width" value="320"/>
         <param name="image_height" value="240"/>
