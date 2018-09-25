@@ -76,6 +76,7 @@
             - setpoint_accel
             - trajectory
             - wind_estimation
+            - home_position
         </rosparam>
     </node>
 
