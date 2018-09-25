@@ -130,7 +130,7 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
   chown -Rf pi:pi /home/pi/ros_catkin_ws
 fi
 
-echo_stamp "#12 Creating catkin_ws & Installing CLEVER-BUNDLE" \
+echo_stamp "#12 Installing CLEVER" \
   && git clone ${REPO} /home/pi/catkin_ws/src/clever \
   && cd /home/pi/catkin_ws/src/clever \
   && git checkout ${REF} \
