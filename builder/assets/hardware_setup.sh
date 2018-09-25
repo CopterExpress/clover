@@ -14,7 +14,7 @@ echo_stamp() {
 
   # More info there https://www.shellhacks.com/ru/bash-colors/
 
-  TEXT="$(date) | $1"
+  TEXT="$(date '+[%Y-%m-%d %H:%M:%S]') $1"
   TEXT="\e[1m$TEXT\e[0m" # BOLD
 
   case "$2" in

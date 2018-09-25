@@ -29,13 +29,33 @@ REPO_DIR="$(pwd)/repo"
 SCRIPTS_DIR="${REPO_DIR}/builder"
 IMAGES_DIR="${REPO_DIR}/images"
 
-[[ ! -d "${SCRIPTS_DIR}" ]] && (echo -e "Directory ${SCRIPTS_DIR} doesn't exist"; exit 1)
-[[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo -e "Directory ${IMAGES_DIR} was created successful"
+[[ ! -d ${SCRIPTS_DIR} ]] && (echo_stamp "Directory ${SCRIPTS_DIR} doesn't exist"; exit 1)
+[[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo_stamp "Directory ${IMAGES_DIR} was created successful"
 
 IMAGE_VERSION="${TRAVIS_TAG:=$(cd ${REPO_DIR}; git log --format=%h -1)}"
 REPO_NAME=$(basename -s '.git' $(git remote --verbose | grep origin | grep fetch | cut -f2 | cut -d' ' -f1))
 IMAGE_NAME="${REPO_NAME}_${IMAGE_VERSION}.img"
 IMAGE_PATH="${IMAGES_DIR}/${IMAGE_NAME}"
+
+echo_stamp() {
+  # TEMPLATE: echo_stamp <TEXT> <TYPE>
+  # TYPE: SUCCESS, ERROR, INFO
+
+  # More info there https://www.shellhacks.com/ru/bash-colors/
+
+  TEXT="$(date '+[%Y-%m-%d %H:%M:%S]') $1"
+  TEXT="\e[1m$TEXT\e[0m" # BOLD
+
+  case "$2" in
+    SUCCESS)
+    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
+    ERROR)
+    TEXT="\e[31m${TEXT}\e[0m";; # RED
+    *)
+    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
+  esac
+  echo -e ${TEXT}
+}
 
 get_image() {
   # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL> 
@@ -44,16 +64,16 @@ get_image() {
   local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
-    echo -e "Downloading original Linux distribution" \
+    echo_stamp "Downloading original Linux distribution" \
     && wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 \
-    && echo -e "Downloading complete" "SUCCESS" \
-    || (echo -e "Downloading was failed!" "ERROR"; exit 1)
-  else echo -e "Linux distribution already donwloaded"; fi
+    && echo_stamp "Downloading complete" "SUCCESS" \
+    || (echo_stamp "Downloading was failed!" "ERROR"; exit 1)
+  else echo_stamp "Linux distribution already donwloaded"; fi
 
-  echo -e "Unzipping Linux distribution image" \
+  echo_stamp "Unzipping Linux distribution image" \
   && unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1 \
-  && echo -e "Unzipping complete" "SUCCESS" \
-  || (echo -e "Unzipping was failed!" "ERROR"; exit 1)
+  && echo_stamp "Unzipping complete" "SUCCESS" \
+  || (echo_stamp "Unzipping was failed!" "ERROR"; exit 1)
 }
 
 get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
