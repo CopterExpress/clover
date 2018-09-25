@@ -1,12 +1,19 @@
 #! /usr/bin/env bash
 
 #
-# Script for image configure
-# @urpylka Artem Smirnov
+# Script for build the image. Used builder script of the target repo
+# For build: docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/builder/repo smirart/builder
+#
+# Copyright (C) 2018 Copter Express Technologies
+#
+# Author: Artem Smirnov <urpylka@gmail.com>
+#
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
 
-# Exit immidiately on non-zero result
-set -e
+set -e # Exit immidiately on non-zero result
 
 REPO=$1
 REF=$2
@@ -105,7 +112,7 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
   #/home/pi/ros_catkin_ws/src/mavros/mavros/scripts/install_geographiclib_datasets.sh
 
   echo_stamp "Building ros_catkin_ws packages"
-  cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j$5 -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
+  cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
   #echo_stamp "#11 Building light packages on 2 threads"
   #cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -j2 --install-space /opt/ros/kinetic --pkg actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs xmlrpcpp

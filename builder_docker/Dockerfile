@@ -14,4 +14,4 @@ COPY ./*.sh /builder/
 COPY ./qemu-arm-resin /builder/qemu-arm-resin
 
 WORKDIR /builder
-CMD ./image-build.sh
+CMD ./repo/builder/image-build.sh

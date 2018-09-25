@@ -21,8 +21,6 @@ export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
 export LC_ALL=${LC_ALL:='C.UTF-8'}
 
-echo "BUILDER_DIR (pwd): $(pwd)"
-
 BUILDER_DIR="$(pwd)"
 REPO_DIR="$(pwd)/repo"
 SCRIPTS_DIR="${REPO_DIR}/builder"
@@ -32,7 +30,8 @@ IMAGES_DIR="${REPO_DIR}/images"
 [[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo_stamp "Directory ${IMAGES_DIR} was created successful"
 
 IMAGE_VERSION="${TRAVIS_TAG:=$(cd ${REPO_DIR}; git log --format=%h -1)}"
-REPO_NAME=$(basename -s '.git' $(git remote --verbose | grep origin | grep fetch | cut -f2 | cut -d' ' -f1))
+REPO_URL="$(cd ${REPO_DIR}; git remote --verbose | grep origin | grep fetch | cut -f2 | cut -d' ' -f1)"
+REPO_NAME="$(basename -s '.git' ${REPO_URL})"
 IMAGE_NAME="${REPO_NAME}_${IMAGE_VERSION}.img"
 IMAGE_PATH="${IMAGES_DIR}/${IMAGE_NAME}"
 
@@ -83,7 +82,7 @@ get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
 ./image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/init_rpi.sh' '/root/'
 ./image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/hardware_setup.sh' '/root/'
 
-./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh' ${CLEVER_VERSION} $(jq '.source_image' -r ${TARGET_CONFIG})
+./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh' ${IMAGE_VERSION} ${SOURCE_IMAGE}
 ./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-software.sh'
 ./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-network.sh'
 
@@ -96,6 +95,6 @@ get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
 
 ./image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/kinetic-rosdep-clever.yaml' '/etc/ros/rosdep/'
 # ./image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/kinetic-ros-clever.rosinstall' '/home/pi/ros_catkin_ws/'
-./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ros.sh' ${TARGET_REPO} ${TARGET_REF} False False ${NUMBER_THREADS} 
+./image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ros.sh' ${REPO_URL} ${IMAGE_VERSION} False False ${NUMBER_THREADS} 
 
 ./image-resize.sh ${IMAGE_PATH}
