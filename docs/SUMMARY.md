@@ -48,4 +48,6 @@
   * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
   * [Работа со светодиодной лентой](leds.md)
   * [Проекты на базе коптера "Клевер"](projects.md)
+  * [Тестовое описание Клевера по шаблону robots.ros.org/gapter/](testovoe-opisanie-klevera-po-shablonu-robotsrosorggapter.md)
 * [Полезные ссылки](links.md)
+
