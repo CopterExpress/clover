@@ -1,4 +1,4 @@
-flask==0.12.2
+flask==0.12.3
 geopy==1.11.0
 pymavlink==2.2.10
 smbus2==0.2.1
