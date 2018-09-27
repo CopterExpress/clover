@@ -120,9 +120,21 @@ def check_velocity():
         horiz = math.hypot(velocity.twist.linear.x, velocity.twist.linear.y)
         vert = velocity.twist.linear.z
         if abs(horiz) > 0.1:
-            failure('Horizontal velocity estimation is %s m/s; is the copter staying still?' % horiz)
+            failure('Horizontal velocity estimation is %.2f m/s; is copter staying still?' % horiz)
         if abs(vert) > 0.1:
-            failure('Vertical velocity estimation is %s m/s; is the copter staying still?' % vert)
+            failure('Vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
+
+        angular = velocity.twist.angular
+        ANGULAR_VELOCITY_LIMIT = 0.01
+        if abs(angular.x) > ANGULAR_VELOCITY_LIMIT:
+            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+                    angular.x, math.degrees(angular.x))
+        if abs(angular.y) > ANGULAR_VELOCITY_LIMIT:
+            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+                    angular.y, math.degrees(angular.y))
+        if abs(angular.z) > ANGULAR_VELOCITY_LIMIT:
+            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+                    angular.z, math.degrees(angular.z))
     except rospy.ROSException:
         failure('No velocity estimation')
 
