@@ -10,6 +10,7 @@
     <arg name="aruco" default="false"/>
     <arg name="rc" value="true"/>
     <arg name="arduino" default="false"/>
+    <arg name="vl53l1x" default="false"/>
 
     <!-- mavros -->
     <include file="$(find clever)/launch/mavros.launch">
@@ -53,6 +54,11 @@
 
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(eval rosbridge or rc)"/>
+
+    <!-- vl53l1x ToF rangefinder -->
+    <node name="vl53l1x" pkg="clever" type="vl53l1x.py" output="screen" if="$(arg vl53l1x)">
+        <!-- <remap from="~range" to="mavros/distance_sensor/rangefinder_3_sub"/> -->
+    </node>
 
     <!-- rc backend -->
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
