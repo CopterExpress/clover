@@ -10,19 +10,16 @@ env:
   global:
     - DOCKER="smirart/builder:latest"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
-    # - TARGET_REF="${TRAVIS_BRANCH}"
-    - TARGET_REF="${TRAVIS_TAG}"
     # - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
     - IMAGE_VERSION="${TRAVIS_TAG}"
-    - IMAGE_PATH="$(pwd)/image/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
+    - IMAGE_PATH="$(pwd)/images/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
     - IMAGE_NAME="$(basename ${IMAGE_PATH})"
-    - BUILD_DIR="$(dirname ${IMAGE_PATH})"
 git:
   depth: 1
 before_script:
   - docker pull ${DOCKER}
 script:
-  - if [[ ! -z $TRAVIS_TAG ]]; then docker run --privileged --rm -v /dev:/dev -v ${BUILD_DIR}:/builder/image -e "TARGET_REPO=${TARGET_REPO}" -e "TARGET_REF=${TARGET_REF}" ${DOCKER}; fi
+  - if [[ ! -z $TRAVIS_TAG ]]; then docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo ${DOCKER}; fi
 # after_failure:
 #   - skip_deploy: true
 before_deploy:
@@ -30,8 +27,8 @@ before_deploy:
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
   # - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-  - sudo chmod -R 777 ${BUILD_DIR}
-  - cd ${BUILD_DIR} && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
+  - sudo chmod -R 777 *
+  - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
