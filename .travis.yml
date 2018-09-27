@@ -2,26 +2,18 @@ sudo: required
 language: generic
 services:
   - docker
-# branches:
-#   only:
-#     - master
-#     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 env:
   global:
     - DOCKER="smirart/builder:latest"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
-    # - IMAGE_VERSION="${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)"
-    - IMAGE_VERSION="${TRAVIS_TAG}"
-    - IMAGE_PATH="$(pwd)/images/$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
-    - IMAGE_NAME="$(basename ${IMAGE_PATH})"
+    - IMAGE_VERSION="${TRAVIS_TAG:=${TRAVIS_BRANCH}_$(echo ${TRAVIS_COMMIT} | cut -c1-7)}"
+    - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 1
 before_script:
   - docker pull ${DOCKER}
 script:
-  - if [[ ! -z $TRAVIS_TAG ]]; then docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo ${DOCKER}; fi
-# after_failure:
-#   - skip_deploy: true
+  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo ${DOCKER}
 before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "urpylka"
