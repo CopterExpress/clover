@@ -1,5 +1,4 @@
-Управление коптером с Arduino
-===
+# Управление коптером с Arduino
 
 Для взаимодействия с ROS-топиками и сервисами на Raspberry Pi можно использовать библиотеку [rosserial_arduino](http://wiki.ros.org/rosserial_arduino).
 
@@ -7,17 +6,23 @@
 
 Arudino необходимо установить на Клевер и подключить по USB-порту.
 
-Настройка Arduino IDE
----
+## Настройка Arduino IDE
 
-Необходимо скачать и скопировать [библиотеку ROS-сообщений Клевера](https://github.com/CopterExpress/clever_bundle/blob/master/deploy/clever_arudino.tar.gz?raw=true) (`ros_lib`) в `<папку скетчей>/libraries`.
+Для работы с ROS, Arduino необходимо понимать формат сообщений. Для этого на Clever необходимо собрать библиотеку ROS-сообщений (`ros_lib`) и скопировать в папку `<папку скетчей>/libraries`.
 
-Настройка Raspberry Pi
----
+Для сборки библиотеки на коптере необходимо выполнить следующий скрипт:
+
+```bash
+rosrun rosserial_arduino make_libraries.py .
+tar czf clever_arudino.tar.gz ros_lib
+rm -rf ros_lib
+```
+
+## Настройка Raspberry Pi
 
 Чтобы единоразово запустить программу на Arduino, можно воспользоваться командой:
 
-```
+```bash
 roslaunch clever arduino.launch
 ```
 
@@ -33,8 +38,7 @@ roslaunch clever arduino.launch
 sudo systemctl restart clever
 ```
 
-Задержки
----
+## Задержки
 
 При использовании `rosserial_arduino` микроконтроллер Arduino не должен быть заблокирован больше чем на несколько секунд (например, с использованием функции `delay`); иначе связь между Raspberry Pi и Arduino будет разорвана. 
 
@@ -52,13 +56,12 @@ while(/* условие */) {
 ```cpp
 // Задержка на 8 секунд
 for(int i=0; i<8; i++) {
-	delay(1000);
-	nh.spinOnce();
+  delay(1000);
+  nh.spinOnce();
 }
 ```
 
-Работа с Клевером
----
+## Работа с Клевером
 
 Набор сервисов и топиков аналогичен обычному набору в [simple_offboard](simple_offboard.md) и [mavros](mavros.md).
 
@@ -165,8 +168,7 @@ void loop()
 }
 ```
 
-Получение телеметрии
----
+## Получение телеметрии
 
 С Arduino можно использовать [сервис](simple_offboard.md) `get_telemetry`. Для этого надо объявить его по аналогии с сервисами `navigate` и `set_mode`:
 
@@ -201,8 +203,7 @@ getTelemetry.call(gt_req, gt_res);
 // gt_res.z - положение коптера по z
 ```
 
-Проблемы
----
+## Проблемы
 
 При использовании Arudino Nano может не хватать оперативной памяти (RAM). В таком случае в Aruino IDE будут появляться сообщения, типа:
 
