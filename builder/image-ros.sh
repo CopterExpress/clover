@@ -130,7 +130,7 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
   chown -Rf pi:pi /home/pi/ros_catkin_ws
 fi
 
-echo_stamp "#12 Installing CLEVER" \
+echo_stamp "Installing CLEVER" \
 && git clone ${REPO} /home/pi/catkin_ws/src/clever \
 && cd /home/pi/catkin_ws/src/clever \
 && git checkout ${REF} \
@@ -151,10 +151,10 @@ echo_stamp "#12 Installing CLEVER" \
 echo_stamp "Install GeographicLib datasets" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sh
 
-echo_stamp "#13 Change permissions for catkin_ws"
+echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "#14 Setup ROS environment"
+echo_stamp "Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
@@ -164,7 +164,7 @@ source /opt/ros/kinetic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
-#echo_stamp "#16 Removing local apt mirror"
+#echo_stamp "Removing local apt mirror"
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
 # Clean apt cache
