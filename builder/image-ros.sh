@@ -145,10 +145,10 @@ echo_stamp "Installing CLEVER" \
 && ln -s /root/clever.service /lib/systemd/system/clever.service \
 && systemctl enable roscore \
 && systemctl enable clever \
-&& echo_stamp "All CLEVER-BUNDLE was installed!" "SUCCESS" \
-|| (echo_stamp "CLEVER-BUNDLE installation was failed!" "ERROR"; exit 1)
+&& echo_stamp "All CLEVER was installed!" "SUCCESS" \
+|| (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
 
-echo_stamp "Install GeographicLib datasets" \
+echo_stamp "Install GeographicLib datasets (needs for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sh
 
 echo_stamp "Change permissions for catkin_ws"
