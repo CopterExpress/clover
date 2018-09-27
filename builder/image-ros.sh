@@ -131,21 +131,22 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
 fi
 
 echo_stamp "#12 Installing CLEVER" \
-  && git clone ${REPO} /home/pi/catkin_ws/src/clever \
-  && cd /home/pi/catkin_ws/src/clever \
-  && git checkout ${REF} \
-  && pip install wheel \
-  && cd /home/pi/catkin_ws \
-  && resolve_rosdep $(pwd) \
-  && ls -l /opt/ros/kinetic \
-  && source /opt/ros/kinetic/setup.bash \
-  && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
-  && ln -s /root/roscore.service /lib/systemd/system/roscore.service \
-  && ln -s /root/clever.service /lib/systemd/system/clever.service \
-  && systemctl enable roscore \
-  && systemctl enable clever \
-  && echo_stamp "All CLEVER-BUNDLE was installed!" "SUCCESS" \
-  || (echo_stamp "CLEVER-BUNDLE installation was failed!" "ERROR"; exit 1)
+&& git clone ${REPO} /home/pi/catkin_ws/src/clever \
+&& cd /home/pi/catkin_ws/src/clever \
+&& git checkout ${REF} \
+&& pip install wheel \
+&& pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
+&& cd /home/pi/catkin_ws \
+&& resolve_rosdep $(pwd) \
+&& ls -l /opt/ros/kinetic \
+&& source /opt/ros/kinetic/setup.bash \
+&& catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
+&& ln -s /root/roscore.service /lib/systemd/system/roscore.service \
+&& ln -s /root/clever.service /lib/systemd/system/clever.service \
+&& systemctl enable roscore \
+&& systemctl enable clever \
+&& echo_stamp "All CLEVER-BUNDLE was installed!" "SUCCESS" \
+|| (echo_stamp "CLEVER-BUNDLE installation was failed!" "ERROR"; exit 1)
 
 echo_stamp "#13 Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
