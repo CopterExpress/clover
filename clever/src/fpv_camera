@@ -4,5 +4,4 @@
 # fpv_camera <video_device> <http port>
 
 echo "Starting FPV camera $1 on :$2"
-cd /home/pi/mjpg-streamer/mjpg-streamer-experimental
-./mjpg_streamer -i "./input_uvc.so -d $1 -r 320x240 -f 30" -o "./output_http.so -w ./www -p $2"
+mjpg_streamer -i "/usr/lib/input_uvc.so -d $1 -r 320x240 -f 30" -o "/usr/lib/output_http.so -w /usr/share/mjpg_streamer/www -p $2"
