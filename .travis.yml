@@ -18,7 +18,6 @@ before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "urpylka"
   - git config --local user.email "urpylka@gmail.com"
-  # - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
   - sudo chmod -R 777 *
   - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
 deploy:
