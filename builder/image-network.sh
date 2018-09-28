@@ -1,12 +1,18 @@
 #! /usr/bin/env bash
 
 #
-# Script for image configure
-# @urpylka Artem Smirnov
+# Script for network configure
+#
+# Copyright (C) 2018 Copter Express Technologies
+#
+# Author: Artem Smirnov <urpylka@gmail.com>
+#
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
 
-# Exit immidiately on non-zero result
-set -e
+set -e # Exit immidiately on non-zero result
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
@@ -31,7 +37,7 @@ echo_stamp() {
 echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant.conf"
 
 # TODO: Use wpa_cli insted direct file edit
-echo "
+cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
 network={
     ssid=\"CLEVER\"
     psk=\"cleverwifi\"
@@ -41,17 +47,19 @@ network={
     pairwise=CCMP
     group=CCMP
     auth_alg=OPEN
-}" >> /etc/wpa_supplicant/wpa_supplicant.conf
+}
+EOF
 
 echo_stamp "#2 Write STATIC to /etc/dhcpcd.conf"
 
-echo "
+cat << EOF >> /etc/dhcpcd.conf
 interface wlan0
-static ip_address=192.168.11.1/24" >> /etc/dhcpcd.conf
+static ip_address=192.168.11.1/24
+EOF
 
 echo_stamp "#3 Write dhcp-config to /etc/dnsmasq.conf"
 
-echo "
+cat << EOF >> /etc/dnsmasq.conf
 interface=wlan0
 address=/clever/coex/192.168.11.1
 dhcp-range=192.168.11.100,192.168.11.200,12h
@@ -60,7 +68,7 @@ filterwin2k
 bogus-priv
 domain-needed
 quiet-dhcp6
-" >> /etc/dnsmasq.conf
+EOF
 
 #echo_stamp "#4 Write magic script for rename SSID to /etc/rc.local"
 #RENAME_SSID="sudo sed -i.OLD \"s/CLEVER/CLEVER-\$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)/g\" /etc/wpa_supplicant/wpa_supplicant.conf && sudo sed -i '/sudo sed/d' /etc/rc.local && sudo reboot"
