@@ -79,6 +79,9 @@ image_transport:
 libmavconn:
   debian:
     stretch: [ros-kinetic-libmavconn]
+lxml:
+  debian:
+    stretch: [python-lxml=3.7.1-1]
 mavlink:
   debian:
     stretch: [ros-kinetic-mavlink]

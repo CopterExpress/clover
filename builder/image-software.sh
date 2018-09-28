@@ -78,9 +78,6 @@ python-wstool=0.1.17-1 \
 python-rosinstall=0.7.8-1 \
 build-essential=12.3 \
 mjpg-streamer=2.0 \
-python-dev \
-libxml2-dev=2.9.4+dfsg1-2.2+deb9u2 \
-libxslt1-dev=1.1.29-2.1 \
 > /dev/null \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)

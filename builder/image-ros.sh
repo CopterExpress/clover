@@ -134,11 +134,10 @@ echo_stamp "Installing CLEVER" \
 && git clone ${REPO} /home/pi/catkin_ws/src/clever \
 && cd /home/pi/catkin_ws/src/clever \
 && git checkout ${REF} \
-&& pip install wheel \
-&& pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
-&& ls -l /opt/ros/kinetic \
+&& pip install wheel \
+&& pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
 && ln -s /root/roscore.service /lib/systemd/system/roscore.service \
