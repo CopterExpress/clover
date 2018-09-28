@@ -6,7 +6,7 @@ env:
   global:
     - DOCKER="smirart/builder:latest"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
-    - IMAGE_VERSION="${TRAVIS_TAG:=$(echo ${TRAVIS_COMMIT} | cut -c1-7)}"
+    - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="$(cd ${REPO_DIR}; git log --format=%h -1)"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 1
