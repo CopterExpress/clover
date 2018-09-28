@@ -43,11 +43,12 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="local_origin_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 local_origin local_origin_upside_down"/>
 
-    <!-- fcu_horiz frame -->
-    <node pkg="nodelet" type="nodelet" name="fcu_horiz" args="standalone clever/fcu_horiz" output="screen" clear_params="true"/>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
+    <!-- Auxiliary frames -->
+    <node name="frames" pkg="clever" type="frames" output="screen"/>
+
 
     <!-- main camera -->
     <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
