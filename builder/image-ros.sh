@@ -148,7 +148,7 @@ echo_stamp "Installing CLEVER" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
 
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \
-&& wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sh
+&& wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
