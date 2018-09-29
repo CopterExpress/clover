@@ -23,7 +23,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key: ${GITHUB_OAUTH_TOKEN}
-  file: ${IMAGE_PATH}.zip
+  file: ${IMAGE_NAME}.zip
   skip_cleanup: true
   on:
     tags: true
