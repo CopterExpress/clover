@@ -13,7 +13,7 @@ git:
 before_script:
   - docker pull ${DOCKER}
 script:
-  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo ${DOCKER}
+  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
 before_deploy:
   # Set up git user name and tag this commit
   - git config --local user.name "urpylka"
