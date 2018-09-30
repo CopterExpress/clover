@@ -71,6 +71,7 @@ python-pip=9.0.1-2+rpt2 \
 python3-pip=9.0.1-2+rpt2 \
 libjpeg8-dev=8d1-2 \
 tcpdump \
+ltrace \
 libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
 python-rosdep=0.12.2-1 \
 python-rosinstall-generator=0.1.14-1 \
