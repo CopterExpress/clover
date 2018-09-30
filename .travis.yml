@@ -4,7 +4,7 @@ services:
   - docker
 env:
   global:
-    - DOCKER="smirart/builder:latest"
+    - DOCKER="smirart/img-tool:v0.1"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
     - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="$(cd ${REPO_DIR}; git log --format=%h -1)"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
