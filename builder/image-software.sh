@@ -82,6 +82,10 @@ build-essential=12.3 \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
+# Deny byobu to check available updates
+sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
+# sudo sed -i "s/updates_available//" /home/pi/.byobu/status
+
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
 set mouse-=a
