@@ -51,4 +51,9 @@ sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/cmdline.txt
 sed -i 's/.*  \/boot           vfat    defaults          0       2$/\/dev\/mmcblk0p1  \/boot           vfat    defaults          0       2/' /etc/fstab
 sed -i 's/.*  \/               ext4    defaults,noatime  0       1$/\/dev\/mmcblk0p2  \/               ext4    defaults,noatime  0       1/' /etc/fstab
 
+echo -e "\033[0;31m\033[1m$(date) | Set max space for syslogs\033[0m\033[0m"
+
+# https://unix.stackexchange.com/questions/139513/how-to-clear-journalctl
+sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
+
 echo_stamp "End of init image"
