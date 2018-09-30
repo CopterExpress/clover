@@ -1,6 +1,0 @@
-[Unit]
-Description=Butterfly Terminal Server
-
-[Service]
-ExecStart=/usr/local/bin/butterfly.server.py --host="0.0.0.0" --unsecure
-User=pi
