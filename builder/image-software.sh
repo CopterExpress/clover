@@ -79,6 +79,7 @@ python-wstool=0.1.17-1 \
 python-rosinstall=0.7.8-1 \
 build-essential=12.3 \
 libffi-dev \
+monkey=1.6.9-1 \
 > /dev/null \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
@@ -93,6 +94,9 @@ pip3 install butterfly[systemd]
 ln -s /root/butterfly.service /lib/systemd/system/
 ln -s /root/butterfly.socket /lib/systemd/system/
 systemctl enable butterfly.socket
+
+echo_stamp "Setup Monkey"
+ln -s /root/monkey-clever /etc/monkey/sites/clever
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
