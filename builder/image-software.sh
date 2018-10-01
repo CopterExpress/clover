@@ -90,6 +90,7 @@ echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
 set mouse-=a
 syntax on
+autocmd BufNewFile,BufRead *.launch set syntax=xml
 EOF
 
 echo_stamp "End of software installation"
