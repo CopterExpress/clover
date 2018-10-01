@@ -39,8 +39,8 @@ echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant.conf"
 # TODO: Use wpa_cli insted direct file edit
 cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
 network={
-    ssid=\"CLEVER\"
-    psk=\"cleverwifi\"
+    ssid="CLEVER"
+    psk="cleverwifi"
     mode=2
     proto=RSN
     key_mgmt=WPA-PSK
