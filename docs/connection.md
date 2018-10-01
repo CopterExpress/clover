@@ -1,7 +1,7 @@
-Подключение PixHawk/PixRacer к Raspberry Pi
+Подключение Pixhawk/Pixracer к Raspberry Pi
 ===
 
-Для программирования [автономных полетов](simple_offboard.md), [работы с PixHawk по Wi-Fi](gcs_bridge.md), использования [веб-пульта](web_rc.md) и других функций необходимо подсоединить Raspberry Pi к PixHawk.
+Для программирования [автономных полетов](simple_offboard.md), [работы с Pixhawk по Wi-Fi](gcs_bridge.md), использования [веб-пульта](web_rc.md) и других функций необходимо подсоединить Raspberry Pi к Pixhawk.
 
 Убедиться в работоспособности подключения, выполнив на Raspberry Pi:
 
@@ -14,7 +14,7 @@ rostopic echo /mavros/state
 Подключение по USB
 ---
 
-Соедините PixHawk/PixRacer и Raspberry Pi micro-USB to USB кабелем.
+Соедините Pixhawk/Pixracer и Raspberry Pi micro-USB to USB кабелем.
 
 Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения установлен на USB:
 
@@ -28,7 +28,7 @@ rostopic echo /mavros/state
 sudo systemctl restart clever
 ```
 
-> **Hint** Для корректной работы подключения Raspberry Pi и PixHawk по USB необходимо установить значение параметра `CBRK_USB_CHK` на 197848.
+> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение параметра `CBRK_USB_CHK` на 197848.
 
 Подключение по UART
 ---
@@ -47,7 +47,7 @@ TODO схема подключения
 sudo systemctl restart clever
 ```
 
-> **Hint** Для корректной работы подключения Raspberry Pi и PixHawk по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.
+> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.
 
 Подключение к SITL
 ---

@@ -71,16 +71,29 @@ while True:
     rospy.sleep(0.2)
 ```
 
+--
+
+Определение, перевернут ли коптер:
+
+```python
+PI_2 = math.pi / 2
+telem = get_telemetry()
+
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
+```
+
 ---
 
 Рассчет общего угла коптера к горизонту:
 
-TODO: fix
-
 ```python
+PI_2 = math.pi / 2
 telem = get_telemetry()
 
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
+if flipped:
+    angle_to_horizon = math.pi - angle_to_horizon
 ```
 
 ---
@@ -102,6 +115,17 @@ while not rospy.is_shutdown():
     y = start.y + math.cos(angle) * RADIUS
     set_position(x=x, y=y, z=start.z)
 
+    r.sleep()
+```
+
+---
+
+Повторять действие с частотой 10 Гц:
+
+```python
+r = rospy.Rate(10)
+while not rospy.is_shutdown():
+    # Do anything
     r.sleep()
 ```
 

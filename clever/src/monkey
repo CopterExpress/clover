@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec /home/pi/monkey/build/monkey --port 80 --workers 1

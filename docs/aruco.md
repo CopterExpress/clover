@@ -110,7 +110,7 @@ _Примечание_: указанное выше определение пр�
 
 Для правильной работы Vision Position Estimation необходимо \(через [QGroundControl](gcs_bridge.md)\) убедиться, что:
 
-* Для PixHawk: Установлена прошивка с LPE \(local position estimator\). Для PixHawk необходимо [скачать прошивку `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases). Для PixRacer параметр `SYS_MC_EST_GROUP` должен быть установлен в `local_position_estimator, attitude_estimator_q`.
+* Для Pixhawk: Установлена прошивка с LPE \(local position estimator\). Для Pixhawk необходимо [скачать прошивку `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases). Для Pixracer параметр `SYS_MC_EST_GROUP` должен быть установлен в `local_position_estimator, attitude_estimator_q`.
 * В параметре `LPE_FUSION` включены **только** флажки `vision position`, `vision yaw`, `land detector`. Итоговое значение _28_.
 * Выключен компас: `ATT_W_MAG` = 0
 * Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
