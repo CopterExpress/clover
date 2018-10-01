@@ -107,10 +107,6 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
   #echo_stamp "Refactoring usb_cam in SRC"
   #sed -i '/#define __STDC_CONSTANT_MACROS/a\#define PIX_FMT_RGB24 AV_PIX_FMT_RGB24\n#define PIX_FMT_YUV422P AV_PIX_FMT_YUV422P' /home/pi/ros_catkin_ws/src/usb_cam/src/usb_cam.cpp
 
-  # TODO: test without that
-  #echo_stamp "#9 Installing GeographicLib datasets"
-  #/home/pi/ros_catkin_ws/src/mavros/mavros/scripts/install_geographiclib_datasets.sh
-
   echo_stamp "Building ros_catkin_ws packages"
   cd /home/pi/ros_catkin_ws && ./src/catkin/bin/catkin_make_isolated --install -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic
 
@@ -147,6 +143,7 @@ echo_stamp "Installing CLEVER" \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
 
+# TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
