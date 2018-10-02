@@ -88,6 +88,10 @@ monkey=1.6.9-1 \
 sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sudo sed -i "s/updates_available//" /home/pi/.byobu/status
 
+echo_stamp "Upgrade pip"
+pip install --upgrade pip
+pip3 install --upgrade pip3
+
 echo_stamp "Install and enable Butterfly (web terminal)"
 pip3 install butterfly
 pip3 install butterfly[systemd]
