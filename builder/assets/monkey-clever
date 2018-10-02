@@ -20,7 +20,7 @@
     # Example:
     #      DocumentRoot /home/krypton/htdocs
 
-    DocumentRoot /root/monkey-static
+    DocumentRoot /usr/share/monkey-static
 
     # Redirect:
     # ---------

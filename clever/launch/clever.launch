@@ -21,7 +21,7 @@
     </include>
 
 
-    <!-- web server, serving /home/pi/catkin_ws/src/clever/clever/static -->
+    <!-- web server, serving /usr/share/clever-static -->
     <node name="web_server" pkg="clever" type="monkey" output="screen" if="$(arg web_server)" respawn="true" respawn_delay="5"/>
 
     <!-- web video server -->
