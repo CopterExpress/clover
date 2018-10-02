@@ -1,12 +1,15 @@
 #! /usr/bin/env bash
 
 #
-# Script for image configure
-# @urpylka Artem Smirnov
+# Script for build the image. Used builder script of the target repo
+# For build: docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/builder/repo smirart/builder
+#
+# Copyright (C) 2018 Copter Express Technologies
+#
+# Author: Artem Smirnov <urpylka@gmail.com>
 #
 
-# Exit immidiately on non-zero result
-set -e
+set -e # Exit immidiately on non-zero result
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
