@@ -496,6 +496,9 @@ tinyxml:
 uuid:
   debian:
     stretch: [uuid-dev]
+web_video_server:
+  debian:
+    stretch: [ros-kinetic-web-video-server]
 v4l-utils:
   debian:
     stretch: [v4l-utils]
