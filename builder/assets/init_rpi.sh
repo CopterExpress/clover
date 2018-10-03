@@ -31,13 +31,13 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "#1 Rename SSID"
+echo_stamp "Rename SSID"
 sudo sed -i.OLD "s/CLEVER/CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)/g" /etc/wpa_supplicant/wpa_supplicant.conf
 
-echo_stamp "#2 Harware setup"
+echo_stamp "Harware setup"
 /root/hardware_setup.sh
 
-echo_stamp "#3 Remove init scripts"
+echo_stamp "Remove init scripts"
 rm /root/init_rpi.sh /root/hardware_setup.sh
 
-echo_stamp "#4 End of network installation"
+echo_stamp "End of initialization of the image"
