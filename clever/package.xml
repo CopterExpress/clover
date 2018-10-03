@@ -23,6 +23,7 @@
   <run_depend>ros_cpp</run_depend>
   <run_depend>nodelet</run_depend>
   <run_depend>mavros</run_depend>
+  <run_depend>mavros_extras</run_depend>
   <run_depend>lxml</run_depend>
   <run_depend>cv_camera</run_depend>
   <run_depend>mjpg-streamer</run_depend>

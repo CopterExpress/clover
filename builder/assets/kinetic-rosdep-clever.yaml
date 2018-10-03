@@ -94,6 +94,9 @@ mavros:
 mavros_msgs:
   debian:
     stretch: [ros-kinetic-mavros-msgs]
+mavros_extras:
+  debian:
+    stretch: [ros-kinetic-mavros-extras]
 message_filters:
   debian:
     stretch: [ros-kinetic-message-filters]
