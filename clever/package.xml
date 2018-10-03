@@ -24,6 +24,7 @@
   <run_depend>nodelet</run_depend>
   <run_depend>mavros</run_depend>
   <run_depend>lxml</run_depend>
+  <run_depend>cv_camera</run_depend>
   <run_depend>mjpg-streamer</run_depend>
   <run_depend>rosbridge_server</run_depend>
   <!-- Use test_depend for packages you need only for testing: -->
