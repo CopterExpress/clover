@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# TODO: rewrite, as Python version eats 20% CPU
+
 from __future__ import division
 
 import rospy
@@ -11,6 +13,7 @@ rospy.init_node('vl53l1x')
 # range_pub = rospy.Publisher('~range', Range, queue_size=5)
 # TODO: why remmaping is not working?
 range_pub = rospy.Publisher('mavros/distance_sensor/rangefinder_3_sub', Range, queue_size=10)
+z_shift = rospy.get_param("z_shift", 0)  # TODO: move to mavros (use frame)
 
 msg = Range()
 msg.radiation_type = Range.INFRARED
@@ -28,7 +31,7 @@ rospy.loginfo('vl53l1x: start ranging')
 r = rospy.Rate(14)
 while not rospy.is_shutdown():
     msg.header.stamp = rospy.get_rostime()
-    msg.range = tof.get_distance() / 1000
+    msg.range = tof.get_distance() / 1000 + z_shift
     range_pub.publish(msg)
     r.sleep()
 

@@ -58,6 +58,7 @@
 
     <!-- vl53l1x ToF rangefinder -->
     <node name="vl53l1x" pkg="clever" type="vl53l1x.py" output="screen" if="$(arg vl53l1x)">
+        <param name="z_shift" value="-0.05"/>
         <!-- <remap from="~range" to="mavros/distance_sensor/rangefinder_3_sub"/> -->
     </node>
 
