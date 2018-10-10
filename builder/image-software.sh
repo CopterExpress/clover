@@ -45,7 +45,7 @@ echo "deb http://repo.coex.space/clever stretch main" > /etc/apt/sources.list.d/
 echo_stamp "Update apt cache"
 
 # TODO: FIX ERROR: /usr/bin/apt-key: 596: /usr/bin/apt-key: cannot create /dev/null: Permission denied
-apt-get update -qq > /dev/null
+apt-get update -qq
 # && apt upgrade -y
 
 echo_stamp "Software installing"
