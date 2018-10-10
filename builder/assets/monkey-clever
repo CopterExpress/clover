@@ -20,7 +20,7 @@
     # Example:
     #      DocumentRoot /home/krypton/htdocs
 
-    DocumentRoot /home/pi/catkin_ws/src/clever/clever/static
+    DocumentRoot /usr/share/monkey-static
 
     # Redirect:
     # ---------
@@ -36,13 +36,13 @@
     # ----------
     # Registration file of correct request.
 
-    AccessLog /home/pi/monkey/build/log/access.log
+    AccessLog /var/log/monkey-clever/access.log
 
     # ErrorLog:
     # ---------
     # Registration file of incorrect request.
 
-    ErrorLog /home/pi/monkey/build/log/error.log
+    ErrorLog /var/log/monkey-clever/error.log
 
 [ERROR_PAGES]
     404  404.html

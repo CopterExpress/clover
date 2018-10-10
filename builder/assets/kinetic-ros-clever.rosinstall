@@ -419,10 +419,6 @@
     uri: https://github.com/ros-gbp/nodelet_core-release/archive/release/kinetic/nodelet/1.9.14-0.tar.gz
     version: nodelet_core-release-release-kinetic-nodelet-1.9.14-0
 - tar:
-    local-name: opencv3
-    uri: https://github.com/ros-gbp/opencv3-release/archive/release/kinetic/opencv3/3.3.1-5.tar.gz
-    version: opencv3-release-release-kinetic-opencv3-3.3.1-5
-- tar:
     local-name: orocos_kinematics_dynamics/orocos_kdl
     uri: https://github.com/smits/orocos-kdl-release/archive/release/kinetic/orocos_kdl/1.3.1-0.tar.gz
     version: orocos-kdl-release-release-kinetic-orocos_kdl-1.3.1-0

@@ -1,0 +1,35 @@
+sudo: required
+language: generic
+services:
+  - docker
+env:
+  global:
+    - DOCKER="smirart/img-tool:v0.1"
+    - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
+    - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
+    - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
+git:
+  depth: 1
+before_script:
+  - docker pull ${DOCKER}
+script:
+  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "urpylka"
+  - git config --local user.email "urpylka@gmail.com"
+  - sudo chmod -R 777 *
+  - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
+deploy:
+  provider: releases
+  api_key: ${GITHUB_OAUTH_TOKEN}
+  file: ${IMAGE_NAME}.zip
+  skip_cleanup: true
+  on:
+    tags: true
+
+# More info there
+# https://github.com/travis-ci/travis-ci/issues/6893
+# https://docs.travis-ci.com/user/customizing-the-build/
+# https://docs.travis-ci.com/user/deployment/releases
+# https://docs.travis-ci.com/user/environment-variables/

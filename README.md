@@ -14,7 +14,7 @@ Use it to learn how to assemble, configure, pilot and program autonomous CLEVER 
 
 **Preconfigured image for Raspberry Pi 3 with installed and configured software, ready to fly, is available [in the Releases section](https://github.com/CopterExpress/clever/releases).**
 
-[![Build Status](http://builder.coex.space/job/CopterExpress---clever/badge/icon)](http://builder.coex.space/job/CopterExpress---clever/)
+[![Build Status](https://travis-ci.org/urpylka/clever.svg?branch=master)](https://travis-ci.org/urpylka/clever)
 
 Image includes:
 
