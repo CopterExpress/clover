@@ -76,7 +76,6 @@ python-rosinstall=0.7.8-1 \
 build-essential=12.3 \
 libffi-dev \
 monkey=1.6.9-1 \
-> /dev/null \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
