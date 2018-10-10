@@ -37,6 +37,29 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
+# https://gist.github.com/letmaik/caa0f6cc4375cbfcc1ff26bd4530c2a3
+# https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/templates/header.sh
+my_travis_retry() {
+  local result=0
+  local count=1
+  while [ $count -le 3 ]; do
+    [ $result -ne 0 ] && {
+      echo -e "\n${ANSI_RED}The command \"$@\" failed. Retrying, $count of 3.${ANSI_RESET}\n" >&2
+    }
+    # ! { } ignores set -e, see https://stackoverflow.com/a/4073372
+    ! { "$@"; result=$?; }
+    [ $result -eq 0 ] && break
+    count=$(($count + 1))
+    sleep 1
+  done
+
+  [ $count -gt 3 ] && {
+    echo -e "\n${ANSI_RED}The command \"$@\" failed 3 times.${ANSI_RESET}\n" >&2
+  }
+
+  return $result
+}
+
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep" \
 && rosdep init \
@@ -128,8 +151,8 @@ echo_stamp "Installing CLEVER" \
 && git checkout ${REF} \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
-&& pip install wheel \
-&& pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
+&& my_travis_retry pip install wheel \
+&& my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
 && ln -s /root/roscore.service /lib/systemd/system/roscore.service \

@@ -30,6 +30,29 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
+# https://gist.github.com/letmaik/caa0f6cc4375cbfcc1ff26bd4530c2a3
+# https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/templates/header.sh
+my_travis_retry() {
+  local result=0
+  local count=1
+  while [ $count -le 3 ]; do
+    [ $result -ne 0 ] && {
+      echo -e "\n${ANSI_RED}The command \"$@\" failed. Retrying, $count of 3.${ANSI_RESET}\n" >&2
+    }
+    # ! { } ignores set -e, see https://stackoverflow.com/a/4073372
+    ! { "$@"; result=$?; }
+    [ $result -eq 0 ] && break
+    count=$(($count + 1))
+    sleep 1
+  done
+
+  [ $count -gt 3 ] && {
+    echo -e "\n${ANSI_RED}The command \"$@\" failed 3 times.${ANSI_RESET}\n" >&2
+  }
+
+  return $result
+}
+
 echo_stamp "Install apt keys & repos"
 
 # TODO: This STDOUT consist 'OK'
@@ -84,12 +107,12 @@ sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sudo sed -i "s/updates_available//" /home/pi/.byobu/status
 
 echo_stamp "Upgrade pip"
-pip install --upgrade pip
-pip3 install --upgrade pip3
+my_travis_retry pip install --upgrade pip
+my_travis_retry pip3 install --upgrade pip3
 
 echo_stamp "Install and enable Butterfly (web terminal)"
-pip3 install butterfly
-pip3 install butterfly[systemd]
+my_travis_retry pip3 install butterfly
+my_travis_retry pip3 install butterfly[systemd]
 ln -s /root/butterfly.service /lib/systemd/system/
 ln -s /root/butterfly.socket /lib/systemd/system/
 systemctl enable butterfly.socket
