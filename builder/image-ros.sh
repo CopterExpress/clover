@@ -68,10 +68,10 @@ resolve_rosdep() {
   || (echo_stamp "Rosdep installation was failed!" "ERROR"; exit 1)
 }
 
-INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='False'}
-if [ "${INSTALL_ROS_PACK_SOURCES}" = "True" ]; then
-  DISCOVER_ROS_PACK=${DISCOVER_ROS_PACK:='True'}
-  if [ "${DISCOVER_ROS_PACK}" = "False" ]; then
+INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='false'}
+if [ "${INSTALL_ROS_PACK_SOURCES}" = "true" ]; then
+  DISCOVER_ROS_PACK=${DISCOVER_ROS_PACK:='true'}
+  if [ "${DISCOVER_ROS_PACK}" = "false" ]; then
     echo_stamp "Preparing ros_comm packages to kinetic-ros_comm-wet.rosinstall" \
     && mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
     && rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall \
