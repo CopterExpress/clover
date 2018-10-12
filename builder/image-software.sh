@@ -103,8 +103,8 @@ monkey=1.6.9-1 \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
 # Deny byobu to check available updates
-sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
-# sudo sed -i "s/updates_available//" /home/pi/.byobu/status
+sed -i "s/updates_available//" /usr/share/byobu/status/status
+# sed -i "s/updates_available//" /home/pi/.byobu/status
 
 echo_stamp "Upgrade pip"
 my_travis_retry pip install --upgrade pip
