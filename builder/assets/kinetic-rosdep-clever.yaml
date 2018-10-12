@@ -511,3 +511,18 @@ yaml-cpp:
 zlib:
   debian:
     stretch: [zlib1g-dev]
+compressed_depth_image_transport:
+  debian:
+    stretch: [ros-kinetic-compressed-depth-image-transport]
+compressed_image_transport:
+  debian:
+    stretch: [ros-kinetic-compressed-image-transport]
+dynamic_reconfigure:
+  debian:
+    stretch: [ros-kinetic-dynamic-reconfigure]
+theora_image_transport:
+  debian:
+    stretch: [ros-kinetic-theora-image-transport]
+libogg:
+  debian:
+    stretch: [libtheora0:1.1.1+dfsg.1-14]
