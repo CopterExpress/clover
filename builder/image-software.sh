@@ -113,14 +113,11 @@ my_travis_retry pip3 install --upgrade pip3
 echo_stamp "Install and enable Butterfly (web terminal)"
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
-ln -s /root/butterfly.service /lib/systemd/system/
-ln -s /root/butterfly.socket /lib/systemd/system/
 systemctl enable butterfly.socket
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey-clever /etc/monkey/sites/default
-ln -s /root/monkey.socket /lib/systemd/system/
 systemctl enable monkey.socket
 
 echo_stamp "Add .vimrc"
