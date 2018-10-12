@@ -42,7 +42,7 @@ cv_bridge:
     stretch: [ros-kinetic-cv-bridge]
 cv_camera:
   debian:
-    stretch: [ros-kinetic-cv-camera=0.3.1-0]
+    stretch: [ros-kinetic-cv-camera:0.3.1-0]
 diagnostic_msgs:
   debian:
     stretch: [ros-kinetic-diagnostic-msgs]
@@ -84,7 +84,7 @@ libmavconn:
     stretch: [ros-kinetic-libmavconn]
 lxml:
   debian:
-    stretch: [python-lxml=3.7.1-1]
+    stretch: [python-lxml:3.7.1-1]
 mavlink:
   debian:
     stretch: [ros-kinetic-mavlink]
@@ -108,7 +108,7 @@ message_runtime:
     stretch: [ros-kinetic-message-runtime]
 mjpg-streamer:
   debian:
-    stretch: [mjpg-streamer=2.0]
+    stretch: [mjpg-streamer:2.0]
 mk:
   debian:
     stretch: [ros-kinetic-mk]
