@@ -119,7 +119,9 @@ systemctl enable butterfly.socket
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
-ln -s /root/monkey-clever /etc/monkey/sites/default
+mv /root/monkey-clever /etc/monkey/sites/default
+ln -s /root/monkey.socket /lib/systemd/system/
+systemctl enable monkey.socket
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc

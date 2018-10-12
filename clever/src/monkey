@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec /usr/sbin/monkey --port 80 --workers 1
