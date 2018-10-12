@@ -42,7 +42,7 @@ cv_bridge:
     stretch: [ros-kinetic-cv-bridge]
 cv_camera:
   debian:
-    stretch: [ros-kinetic-cv-camera=0.3.1-0]
+    stretch: [ros-kinetic-cv-camera=0.3.1-0stretch]
 diagnostic_msgs:
   debian:
     stretch: [ros-kinetic-diagnostic-msgs]
