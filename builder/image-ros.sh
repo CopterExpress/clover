@@ -155,8 +155,6 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
-&& ln -s /root/roscore.service /lib/systemd/system/roscore.service \
-&& ln -s /root/clever.service /lib/systemd/system/clever.service \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
