@@ -20,7 +20,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <!-- Use run_depend for packages you need at runtime: -->
   <run_depend>catkin</run_depend>
-  <run_depend>ros_cpp</run_depend>
+  <run_depend>roscpp</run_depend>
   <run_depend>nodelet</run_depend>
   <run_depend>mavros</run_depend>
   <run_depend>mavros_extras</run_depend>
