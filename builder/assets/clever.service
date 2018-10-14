@@ -4,7 +4,7 @@ Requires=roscore.service
 After=roscore.service
 
 [Service]
-EnvironmentFile=/root/roscore.env
+EnvironmentFile=/lib/systemd/system/roscore.env
 ExecStart=/opt/ros/kinetic/bin/roslaunch clever clever.launch --wait
 Restart=on-abort
 
