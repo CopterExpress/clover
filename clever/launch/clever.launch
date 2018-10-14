@@ -2,7 +2,6 @@
     <arg name="fcu_conn" default="usb"/>
     <arg name="fcu_ip" default="127.0.0.1"/>
     <arg name="gcs_bridge" default="tcp"/>
-    <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="main_camera" default="true"/>
