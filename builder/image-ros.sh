@@ -135,6 +135,7 @@ fi
 echo_stamp "Installing CLEVER" \
 && git clone ${REPO} /home/pi/catkin_ws/src/clever \
 && cd /home/pi/catkin_ws/src/clever \
+&& echo "REF: ${REF}" \
 && git checkout ${REF} \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
