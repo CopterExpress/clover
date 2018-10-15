@@ -12,6 +12,7 @@
 * [Подключение по Wi-Fi](wifi.md)
 * [Работа с QGroundControl через Wi-Fi](gcs_bridge.md)
 * [Прошивка Pixhawk/Pixracer](firmware.md)
+* [Параметры PX4](px4_parameters.md)
 * [Пилотирование со смартфона](rc.md)
 * [SSH-доступ](ssh.md)
 * [Устройство UART](uart.md)
