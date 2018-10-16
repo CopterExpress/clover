@@ -47,7 +47,9 @@
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
     <!-- Auxiliary frames -->
-    <node name="frames" pkg="clever" type="frames" output="screen"/>
+    <node name="frames" pkg="clever" type="frames" output="screen">
+        <param name="body/frame_id" value="fcu_horiz"/>
+    </node>
 
 
     <!-- main camera -->
