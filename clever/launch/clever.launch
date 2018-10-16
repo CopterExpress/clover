@@ -7,7 +7,7 @@
     <arg name="main_camera" default="true"/>
     <arg name="optical_flow" default="false"/>
     <arg name="aruco" default="false"/>
-    <arg name="rc" value="true"/>
+    <arg name="rc" default="true"/>
     <arg name="arduino" default="false"/>
     <arg name="vl53l1x" default="false"/>
 
