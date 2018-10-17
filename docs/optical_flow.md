@@ -27,7 +27,7 @@
 * `SYS_MC_EST_GROUP` – 2 (EKF2).
 * `EKF2_AID_MASK` – use optical flow.
 * `EKF2_OF_DELAY` – 0.
-* `EKF2_OF_QMIN` – 30.
+* `EKF2_OF_QMIN` – 20.
 * `EKF2_HGT_MODE` – range sensor (ремменд.).
 
 ## Полет в POSCTL
