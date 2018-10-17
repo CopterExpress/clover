@@ -161,6 +161,9 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     ps.header.stamp = stamp
     vs.header.stamp = stamp
 
+    # don't block on setpoints publishing
+    transform_timeout = rospy.Duration(0.1) if continued else TRANSFORM_TIMEOUT
+
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
         global current_nav_start, current_nav_start_stamp, current_nav_finish
 
@@ -168,7 +171,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
             ps.header.frame_id = req.frame_id or LOCAL_FRAME
             ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
             ps.pose.orientation = orientation_from_euler(0, 0, req.yaw, axes='sxyz')
-            current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+            current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
 
             if isinstance(req, srv.NavigateGlobalRequest):
                 # Recalculate x and y from lat and lon
@@ -200,7 +203,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
 
         if isinstance(req, srv.SetPositionGlobalRequest):
             pose_local.pose.position.x, pose_local.pose.position.y = global_to_local(req.lat, req.lon)
@@ -221,8 +224,8 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         vs.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
+        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, transform_timeout)
 
         yaw_rate_flag = math.isnan(req.yaw)
         msg = pt
@@ -238,7 +241,7 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     elif isinstance(req, srv.SetAttitudeRequest):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(req.roll, req.pitch, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
         msg = at
         msg.orientation = pose_local.pose.orientation
         msg.thrust = req.thrust
@@ -292,8 +295,13 @@ def handle(req):
         return {'message': 'Both yaw and yaw_rate cannot be NaN'}
 
     try:
+        # check frame_id existance
+        # (for non-blocking setpoint's publishing in get_publisher_and_message)
+        stamp = rospy.get_rostime()
+        if hasattr(req, 'frame_id'):
+            tf_buffer.lookup_transform(req.frame_id or LOCAL_FRAME, LOCAL_FRAME, stamp, TRANSFORM_TIMEOUT)
+
         with handle_lock:
-            stamp = rospy.get_rostime()
             current_req = req
             current_pub, current_msg = get_publisher_and_message(req, stamp, False)
             rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
@@ -441,20 +449,20 @@ def start_loop():
                         current_pub, current_msg = get_publisher_and_message(current_req, stamp, True,
                                                                              getattr(current_req, 'update_frame', False))
 
-                    current_msg.header.stamp = stamp
-                    current_pub.publish(current_msg)
-
-                    # For monitoring
-                    if isinstance(current_msg, PositionTarget):
-                        p = PoseStamped()
-                        p.header.frame_id = LOCAL_FRAME
-                        p.header.stamp = stamp
-                        p.pose.position = current_msg.position
-                        p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw + math.pi / 2)
-                        target_pub.publish(p)
-
                 except Exception as e:
                     rospy.logwarn_throttle(10, str(e))
+
+                current_msg.header.stamp = stamp
+                current_pub.publish(current_msg)
+
+                # For monitoring
+                if isinstance(current_msg, PositionTarget):
+                    p = PoseStamped()
+                    p.header.frame_id = LOCAL_FRAME
+                    p.header.stamp = stamp
+                    p.pose.position = current_msg.position
+                    p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw)
+                    target_pub.publish(p)
 
         r.sleep()
 
