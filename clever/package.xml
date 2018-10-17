@@ -20,7 +20,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <!-- Use run_depend for packages you need at runtime: -->
   <run_depend>catkin</run_depend>
-  <run_depend>ros_cpp</run_depend>
+  <run_depend>roscpp</run_depend>
   <run_depend>nodelet</run_depend>
   <run_depend>mavros</run_depend>
   <run_depend>mavros_extras</run_depend>
@@ -29,6 +29,7 @@
   <run_depend>mjpg-streamer</run_depend>
   <run_depend>rosbridge_server</run_depend>
   <run_depend>web_video_server</run_depend>
+  <run_depend>ros_comm</run_depend>r
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
 

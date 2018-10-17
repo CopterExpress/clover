@@ -1,0 +1,9 @@
+[Unit]
+Description=Monkey web-server
+
+[Service]
+ExecStart=/usr/sbin/monkey
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

@@ -2,7 +2,6 @@
     <arg name="fcu_conn" default="usb"/>
     <arg name="fcu_ip" default="127.0.0.1"/>
     <arg name="gcs_bridge" default="tcp"/>
-    <arg name="web_server" default="true"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="main_camera" default="true"/>
@@ -19,10 +18,6 @@
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
         <arg name="viz" value="true"/>
     </include>
-
-
-    <!-- web server, serving /usr/share/clever-static -->
-    <node name="web_server" pkg="clever" type="monkey" output="screen" if="$(arg web_server)" respawn="true" respawn_delay="5"/>
 
     <!-- web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>

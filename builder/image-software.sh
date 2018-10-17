@@ -103,8 +103,8 @@ monkey=1.6.9-1 \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
 # Deny byobu to check available updates
-sudo sed -i "s/updates_available//" /usr/share/byobu/status/status
-# sudo sed -i "s/updates_available//" /home/pi/.byobu/status
+sed -i "s/updates_available//" /usr/share/byobu/status/status
+# sed -i "s/updates_available//" /home/pi/.byobu/status
 
 echo_stamp "Upgrade pip"
 my_travis_retry pip install --upgrade pip
@@ -113,13 +113,12 @@ my_travis_retry pip3 install --upgrade pip3
 echo_stamp "Install and enable Butterfly (web terminal)"
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
-ln -s /root/butterfly.service /lib/systemd/system/
-ln -s /root/butterfly.socket /lib/systemd/system/
 systemctl enable butterfly.socket
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
-ln -s /root/monkey-clever /etc/monkey/sites/default
+mv /root/monkey-clever /etc/monkey/sites/default
+systemctl enable monkey.service
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc

@@ -75,20 +75,7 @@ resolve_rosdep() {
 
   echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
   cd ${CATKIN_PATH}
-  set +e
-  # Successfull unmount flag (false at thismoment)
-  install_ok=false
-  # Repeat 5 times
-  for i in {1..5}; do
-    # Resolving Dependencies with rosdep
-    rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -r --os=${OS_DISTRO}:${OS_VERSION} \
-    && install_ok=true && break || (echo_stamp "rosdep iteration #$i failed!" "ERROR"; sleep 2)
-  done
-  set -e
-  # Stage fail if this condition is not true
-  [[ $install_ok ]] \
-  && echo_stamp "All rosdep dependencies was installed!" "SUCCESS" \
-  || (echo_stamp "Rosdep installation was failed!" "ERROR"; exit 1)
+  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -r --os=${OS_DISTRO}:${OS_VERSION}
 }
 
 INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='false'}
@@ -148,6 +135,7 @@ fi
 echo_stamp "Installing CLEVER" \
 && git clone ${REPO} /home/pi/catkin_ws/src/clever \
 && cd /home/pi/catkin_ws/src/clever \
+&& echo "REF: ${REF}" \
 && git checkout ${REF} \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
@@ -155,8 +143,6 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
-&& ln -s /root/roscore.service /lib/systemd/system/roscore.service \
-&& ln -s /root/clever.service /lib/systemd/system/clever.service \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
