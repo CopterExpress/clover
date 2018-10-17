@@ -41,8 +41,8 @@ PX4
 
 Основные используемые пакеты MAVLink:
 
-* MAV_CMD_COMPONENT_ARM_DISARM
-* [SET_POSITION_TARGET_LOCAL_NED](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED)
-* [SET_ATTITUDE_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET)
+* [MAV_CMD_COMPONENT_ARM_DISARM](https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM)
+* [SET_POSITION_TARGET_LOCAL_NED](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED)
+* [SET_ATTITUDE_TARGET](https://mavlink.io/en/messages/common.html#SET_ATTITUDE_TARGET)
 
 См.: [автономные полеты коптера в режиме OFFBOARD](simple_offboard.md).
