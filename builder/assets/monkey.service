@@ -2,7 +2,7 @@
 Description=Monkey web-server
 
 [Service]
-ExecStart=/usr/sbin/monkey
+ExecStart=/usr/sbin/monkey --port 80 --workers 1
 Restart=on-abort
 
 [Install]
