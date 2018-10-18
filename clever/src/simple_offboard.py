@@ -131,7 +131,10 @@ BRAKE_TIME = rospy.Duration(0)
 def get_navigate_setpoint(stamp, start, finish, start_stamp, speed):
     distance = math.sqrt((finish.z - start.z)**2 + (finish.x - start.x)**2 + (finish.y - start.y)**2)
     time = rospy.Duration(distance / speed)
-    k = (stamp - start_stamp) / time
+    if time == rospy.Duration(0):
+        k = 0
+    else:
+        k = (stamp - start_stamp) / time
     time_left = start_stamp + time - stamp
 
     if BRAKE_TIME and time_left < BRAKE_TIME:
