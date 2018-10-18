@@ -388,24 +388,31 @@ def get_telemetry(req):
     frame_id = req.frame_id or LOCAL_FRAME
     stamp = rospy.get_rostime()
 
-    if pose:
-        p = tf_buffer.transform(pose, frame_id, TRANSFORM_TIMEOUT)
-        res['x'] = p.pose.position.x
-        res['y'] = p.pose.position.y
-        res['z'] = p.pose.position.z
+    transform_timeout = rospy.Duration(0.4)
+    try:
+        if pose:
+            p = tf_buffer.transform(pose, frame_id, transform_timeout)
+            res['x'] = p.pose.position.x
+            res['y'] = p.pose.position.y
+            res['z'] = p.pose.position.z
 
-        # Calculate roll pitch and yaw as Tait-Bryan angles, order z-y-x
-        res['yaw'], res['pitch'], res['roll'] = euler_from_orientation(p.pose.orientation, axes='rzyx')
+            # Calculate roll pitch and yaw as Tait-Bryan angles, order z-y-x
+            res['yaw'], res['pitch'], res['roll'] = euler_from_orientation(p.pose.orientation, axes='rzyx')
+    except:
+        pass
 
     if velocity:
-        v = Vector3Stamped()
-        v.header.stamp = velocity.header.stamp
-        v.header.frame_id = velocity.header.frame_id
-        v.vector = velocity.twist.linear
-        linear = tf_buffer.transform(v, frame_id, TRANSFORM_TIMEOUT)
-        res['vx'] = linear.vector.x
-        res['vy'] = linear.vector.y
-        res['vz'] = linear.vector.z
+        try:
+            v = Vector3Stamped()
+            v.header.stamp = velocity.header.stamp
+            v.header.frame_id = velocity.header.frame_id
+            v.vector = velocity.twist.linear
+            linear = tf_buffer.transform(v, frame_id, transform_timeout)
+            res['vx'] = linear.vector.x
+            res['vy'] = linear.vector.y
+            res['vz'] = linear.vector.z
+        except:
+            pass
 
         res['yaw_rate'] = velocity.twist.angular.z
         res['pitch_rate'] = velocity.twist.angular.y
