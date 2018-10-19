@@ -9,6 +9,7 @@ from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad
 from geometry_msgs.msg import PoseStamped, TwistStamped
+from aruco_pose.msg import MarkerArray
 
 
 # TODO: roscore is running
@@ -82,9 +83,9 @@ def check_camera(name):
 @check('Aruco detector')
 def check_aruco():
     try:
-        rospy.wait_for_message('aruco_pose/debug', Image, timeout=1)
+        rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=0.5)
     except rospy.ROSException:
-        failure('No aruco_pose/debug messages')
+        failure('No aruco markers detection')
 
 
 @check('Visual position estimate')

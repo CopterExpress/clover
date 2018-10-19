@@ -22,7 +22,7 @@
     <!-- web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>
 
-    <!-- aruco vpe -->
+    <!-- aruco -->
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
@@ -33,7 +33,7 @@
 
     <!-- main nodelet manager -->
     <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
-        <param name="num_worker_threads" value="2"/>
+        <param name="num_worker_threads" value="4"/>
     </node>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="local_origin_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 local_origin local_origin_upside_down"/>

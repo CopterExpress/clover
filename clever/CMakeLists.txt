@@ -167,11 +167,15 @@ add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(frames src/frames.cpp)
 
+add_executable(vpe_publisher src/vpe_publisher.cpp)
+
 target_link_libraries(rc ${catkin_LIBRARIES})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(frames ${catkin_LIBRARIES})
+
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
