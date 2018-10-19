@@ -87,6 +87,17 @@ def check_aruco():
         failure('No aruco_pose/debug messages')
 
 
+@check('Visual position estimate')
+def check_vpe():
+    try:
+        rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
+    except rospy.ROSException:
+        try:
+            rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
+        except rospy.ROSException:
+            failure('No VPE or MoCap messages')
+
+
 @check('Simple offboard node')
 def check_simpleoffboard():
     try:
@@ -142,7 +153,7 @@ def check_velocity():
 @check('Global position (GPS)')
 def check_global_position():
     try:
-        rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=2)
+        rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
         failure('No global position')
 
@@ -208,6 +219,7 @@ def selfcheck():
     check_aruco()
     check_simpleoffboard()
     check_optical_flow()
+    check_vpe()
     check_rangefinder()
     check_cpu_usage()
     check_boot_duration()
