@@ -6,8 +6,8 @@ import re
 import traceback
 import rospy
 from std_srvs.srv import Trigger
-from mavros_msgs.msg import State
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
+from mavros_msgs.msg import State, OpticalFlowRad
 from geometry_msgs.msg import PoseStamped, TwistStamped
 
 
@@ -147,6 +147,15 @@ def check_global_position():
         failure('No global position')
 
 
+@check('Optical flow')
+def check_optical_flow():
+    # TODO:check FPS!
+    try:
+        rospy.wait_for_message('mavros/px4flow/raw/send', OpticalFlowRad, timeout=0.5)
+    except rospy.ROSException:
+        failure('No optical flow data (from Raspberry)')
+
+
 @check('Rangefinder')
 def check_rangefinder():
     # TODO: check FPS!
@@ -198,6 +207,7 @@ def selfcheck():
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
+    check_optical_flow()
     check_rangefinder()
     check_cpu_usage()
     check_boot_duration()
