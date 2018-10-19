@@ -6,8 +6,8 @@ import re
 import traceback
 import rospy
 from std_srvs.srv import Trigger
-from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu
 from mavros_msgs.msg import State
+from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from geometry_msgs.msg import PoseStamped, TwistStamped
 
 
@@ -147,6 +147,19 @@ def check_global_position():
         failure('No global position')
 
 
+@check('Rangefinder')
+def check_rangefinder():
+    # TODO: check FPS!
+    try:
+        rospy.wait_for_message('mavros/distance_sensor/rangefinder_3_sub', Range, timeout=0.5)
+    except rospy.ROSException:
+        failure('No randefinder data from Raspberry')
+    try:
+        rospy.wait_for_message('mavros/distance_sensor/rangefinder_0', Range, timeout=0.5)
+    except rospy.ROSException:
+        failure('No rangefinder data from PX4')
+
+
 @check('Boot duration')
 def check_boot_duration():
     proc = Popen('systemd-analyze', stdout=PIPE)
@@ -185,6 +198,7 @@ def selfcheck():
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
+    check_rangefinder()
     check_cpu_usage()
     check_boot_duration()
 
