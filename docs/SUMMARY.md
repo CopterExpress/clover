@@ -45,6 +45,7 @@
   * [Учебно-методическое пособие](metod.md)
   * [Контрольные и проверочные материалы](tests.md)
 * [Другое](drugoe.md)
+  * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
   * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
   * [Работа со светодиодной лентой](leds.md)
