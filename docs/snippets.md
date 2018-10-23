@@ -71,7 +71,21 @@ while True:
     rospy.sleep(0.2)
 ```
 
---
+---
+
+Дизарм коптера (выключение винтов, **коптер упадет**):
+
+```python
+# Объявление прокси:
+from mavros_msgs.srv import CommandBool
+arming = rospy.ServiceProxy('mavros/cmd/arming', CommandBool)
+
+# ...
+
+arming(False)  # дизарм
+```
+
+---
 
 Определение, перевернут ли коптер:
 
