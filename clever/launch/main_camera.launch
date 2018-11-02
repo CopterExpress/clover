@@ -2,14 +2,19 @@
     <!-- Camera position and orientation are represented by fcu -> main_camera_optical transform -->
     <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
 
-    <!-- clever 2 -->
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>-->
+    <!-- article about camera setup: https://clever.copterexpress.com/camera_frame.html -->
 
-    <!-- clever 3 -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>
+    <!-- camera is oriented downward, camera cable goes backward [option 1] -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
 
-    <!-- clever 3, upwards -->
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>-->
+    <!-- camera is oriented downward, camera cable goes forward  [option 2] -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.00 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>-->
+
+    <!-- camera is oriented upward, camera cable goes backward   [option 3] -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 1.5707963 0 0 fcu main_camera_optical"/>-->
+
+    <!-- camera is oriented upward, camera cable goes forward    [option 4] -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.00 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>-->
 
     <!-- camera node -->
     <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" clear_params="true">
