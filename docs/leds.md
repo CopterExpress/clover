@@ -101,10 +101,14 @@ sudo python strandtest.py
 При запуске программы с помощью sudo пользовательское окружение изменяется и появляются ошибки импорта библиотек, т.к. в окружении отсутствуют необходимые пути. Чтобы добавить в окружение пути к библиотекам python и пакетам ROS, необходимо добавить в файл /etc/sudoers следующие строки:
 
 ```(bash)
-Defaults env_keep += "PYTHONPATH"
-Defaults env_keep += "PATH"
-Defaults env_keep += "ROS_ROOT"
-Defaults env_keep += "ROS_MASTER_URI"
+Defaults        env_keep += "PYTHONPATH"
+Defaults        env_keep += "PATH"
+Defaults        env_keep += "ROS_ROOT"
+Defaults        env_keep += "ROS_MASTER_URI"
+Defaults        env_keep += "ROS_PACKAGE_PATH"
+Defaults        env_keep += "ROS_LOCATIONS"
+Defaults        env_keep += "ROS_HOME"
+Defaults        env_keep += "ROS_LOG_DIR"
 ```
 
 ## Функции для работы со светодиодной лентой

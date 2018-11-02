@@ -14,6 +14,12 @@
 <arg name="vl53l1x" default="true"/>
 ```
 
+Проверить работу лазерного дальномера можно с помощью команды:
+
+```bash
+rostopic echo mavros/distance_sensor/rangefinder_3_sub
+```
+
 Необходимо включить Optical Flow:
 
 ```xml
