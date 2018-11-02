@@ -106,11 +106,13 @@ monkey=1.6.9-1 \
 sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sed -i "s/updates_available//" /home/pi/.byobu/status
 
-echo_stamp "Upgrade pip"
-my_travis_retry pip install --upgrade pip
-my_travis_retry python3 -m pip install --upgrade pip
+#echo_stamp "Upgrade pip"
+#my_travis_retry pip install --upgrade pip
+#my_travis_retry pip3 install --upgrade pip
 
-echo_stamp "Make sure both pip and pip3 are installed and upgraded"
+echo_stamp "Not upgrading system pip due to https://github.com/pypa/pip/issues/5599"
+
+echo_stamp "Make sure both pip and pip3 are installed"
 pip --version
 pip3 --version
 
