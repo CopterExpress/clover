@@ -108,7 +108,11 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 
 echo_stamp "Upgrade pip"
 my_travis_retry pip install --upgrade pip
-my_travis_retry pip3 install --upgrade pip3
+my_travis_retry python3 -m pip install --upgrade pip
+
+echo_stamp "Make sure both pip and pip3 are installed and upgraded"
+pip --version
+pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 my_travis_retry pip3 install butterfly
