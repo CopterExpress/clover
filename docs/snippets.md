@@ -87,6 +87,35 @@ arming(False)  # дизарм
 
 ---
 
+Трансформировать позицию (`PoseStamped`) из одной системы координат ([фрейма](frames.md)) в другую, используя [tf2](http://wiki.ros.org/tf2):
+
+```python
+import tf2_ros
+import tf2_geometry_msgs
+
+tf_buffer = tf2_ros.Buffer()
+tf_listener = tf2_ros.TransformListener(tf_buffer)
+
+# ...
+
+# Создаем объект PoseStamped (либо получаем из топика):
+pose = PoseStamped()
+pose.header.frame_id = 'local_origin'  # фрейм, в котором задана позиция
+pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
+pose.pose.position.x = 1
+pose.pose.position.y = 2
+pose.pose.position.z = 3
+pose.pose.orientation.w = 1
+
+frame_id = 'fcu'  # целевой фрейм
+transform_timeout = rospy.Duration(0.2)  # таймаут ожидания транформации
+
+# Преобразовываем позицию из старого фрейма в новый:
+new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
+```
+
+---
+
 Определение, перевернут ли коптер:
 
 ```python
