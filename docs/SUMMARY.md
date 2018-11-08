@@ -4,6 +4,7 @@
 * [Глоссарий](glossary.md)
 * [Сборка Клевер 2](assemble.md)
 * [Сборка Клевер 3](assemble_clever3_4in1.md)
+* [Установка FPV](fpv.md)
 * [Первоначальная настройка](setup.md)
 * [Полетные режимы](modes.md)
 * [Raspberry Pi](raspberry.md)
