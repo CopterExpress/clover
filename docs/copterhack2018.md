@@ -28,4 +28,4 @@
 4. International Post (Новосибирск) — автоматический разброс листовок с дрона.
 5. ЛАМАР (Екатеринбург) — станция автоматической смены аккумулятора квадрокоптера.
 
-<img src="assets/alcopter.jpg" title="Команда Alcopter">
+<img src="assets/alcopter.jpg" title="Команда Alcopter" height=400px>
