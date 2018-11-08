@@ -1,6 +1,6 @@
 # Copter Hack 2018
 
-<img src="assets/copterhack18.jpg" height=400px>
+<img src="assets/copterhack18.jpg" height=400px title="Copter Hack 2018">
 
 Чат хакатона: https://t.me/CopterHack.
 
@@ -28,4 +28,4 @@
 4. International Post (Новосибирск) — автоматический разброс листовок с дрона.
 5. ЛАМАР (Екатеринбург) — станция автоматической смены аккумулятора квадрокоптера.
 
-<img src="assets/alcopter.jpg" title="Команда Alcopter" height=400px>
+<img src="assets/alcopter.jpg" title="Команда Alcopter" height=300px>
