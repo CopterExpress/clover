@@ -4,7 +4,7 @@
     "author": "Copter Express",
     "language": "ru",
     "root": "docs/",
-    "plugins": ["youtube", "richquotes", "versions", "yametrika", "image-captions"],
+    "plugins": ["youtube", "richquotes", "versions", "yametrika"],
     "pluginsConfig": {
         "disqus": {
             "shortName": "coex-clever"
