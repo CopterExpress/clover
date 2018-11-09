@@ -38,19 +38,21 @@
 * [Устройство сети RPi](network.md)
 * [Работа с логами PX4](flight_logs.md)
 * [Протокол MAVLink](mavlink.md)
-* [Типы силовых разъемов](connectortypes.md)
-* [Ошибки радиоаппаратуры](radioerrors1.md)
-* [Настройка PID](calibratePID.md)
 * Учебник
   * [Теория и видеоуроки](lessons.md)
   * [Учебно-методическое пособие](metod.md)
   * [Контрольные и проверочные материалы](tests.md)
-* [Другое](drugoe.md)
-  * [CopterHack-2018](copterhack2018.md)
-  * [CopterHack-2017](copterhack2017.md)
+* Дополнительные материалы
+  * [Лужение](zap.md)
+  * [Типы силовых разъемов](connectortypes.md)
+  * [Подключение регулятора 4 в 1](cl3_connectESC4in1.md)
+  * [Ошибки радиоаппаратуры](radioerrors1.md)
+  * [Настройка PID](calibratePID.md)
   * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
   * [Работа со светодиодной лентой](leds.md)
+* Другое
+  * [CopterHack-2018](copterhack2018.md)
+  * [CopterHack-2017](copterhack2017.md)
   * [Проекты на базе коптера "Клевер"](projects.md)
   * [Тестовое описание Клевера по шаблону robots.ros.org/gapter/](testovoe-opisanie-klevera-po-shablonu-robotsrosorggapter.md)
-* [Полезные ссылки](links.md)
 
