@@ -22,20 +22,34 @@
 
 ## Настройки для Клевера
 
-### Клевер 3, камера вниз
+### 1. Камера направлена вниз, шлейф назад
+
+```xml
+<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
+```
+
+![](assets/camera_option_1.png)
+
+### 2. Камера направлена вниз, шлейф вперёд
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>
 ```
 
-### Клевер 3, камера вверх
+![](assets/camera_option_2.png)
+
+### 3. Камера направлена вверх, шлейф назад
+
+```xml
+<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 1.5707963 0 0 fcu main_camera_optical"/>
+```
+
+![](assets/camera_option_3.png)
+
+### 4. Камера направлена вверх, шлейф вперёд
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>
 ```
 
-### Клевер 2, камера вниз
-
-```xml
-<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
-```
+![](assets/camera_option_4.png)

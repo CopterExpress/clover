@@ -49,3 +49,8 @@
 Часть 6
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/v00oNVzwICg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+Автономные полеты
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WvIlRG7ShWA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+

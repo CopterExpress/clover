@@ -1,5 +1,0 @@
-<launch>
-    <node name="web_server" pkg="clever" type="web_server.py" output="screen">
-        <param name="path" value="$(find clever)/static"/>
-    </node>
-</launch>

@@ -83,12 +83,13 @@ AUTO_ARM = AUTO_OFFBOARD and rospy.get_param('~auto_arm', True)
 OFFBOARD_TIMEOUT = rospy.Duration(rospy.get_param('~offboard_timeout', 3))
 ARM_TIMEOUT = rospy.Duration(rospy.get_param('~arm_timeout', 5))
 LOCAL_POSITION_TIMEOUT = rospy.Duration(rospy.get_param('~local_position_timeout', 0.5))
-NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', False))
+NAVIGATE_AFTER_ARMED = rospy.Duration(rospy.get_param('~navigate_after_armed', True))
 TRANSFORM_TIMEOUT = rospy.Duration(rospy.get_param('~transform_timeout', 3))
 SETPOINT_RATE = rospy.get_param('~setpoint_rate', 30)
-LOCAL_FRAME = rospy.get_param('~local_frame', 'local_origin')
+LOCAL_FRAME = rospy.get_param('mavros/local_position/frame_id', 'local_origin')
 LAND_MODE = rospy.get_param('~land_mode', 'AUTO.LAND')
 LAND_TIMEOUT = rospy.Duration(rospy.get_param('~land_timeout', 2))
+DEFAULT_SPEED = rospy.get_param('~default_speed', 0.5)
 
 
 def offboard_and_arm():
@@ -120,6 +121,8 @@ def offboard_and_arm():
 
 ps = PoseStamped()
 vs = Vector3Stamped()
+pt = PositionTarget()
+at = AttitudeTarget()
 
 
 BRAKE_TIME = rospy.Duration(0)
@@ -128,7 +131,10 @@ BRAKE_TIME = rospy.Duration(0)
 def get_navigate_setpoint(stamp, start, finish, start_stamp, speed):
     distance = math.sqrt((finish.z - start.z)**2 + (finish.x - start.x)**2 + (finish.y - start.y)**2)
     time = rospy.Duration(distance / speed)
-    k = (stamp - start_stamp) / time
+    if time == rospy.Duration(0):
+        k = 0
+    else:
+        k = (stamp - start_stamp) / time
     time_left = start_stamp + time - stamp
 
     if BRAKE_TIME and time_left < BRAKE_TIME:
@@ -158,14 +164,17 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
     ps.header.stamp = stamp
     vs.header.stamp = stamp
 
+    # don't block on setpoints publishing
+    transform_timeout = rospy.Duration(0.1) if continued else TRANSFORM_TIMEOUT
+
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
         global current_nav_start, current_nav_start_stamp, current_nav_finish
 
         if update_frame:
             ps.header.frame_id = req.frame_id or LOCAL_FRAME
             ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
-            ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-            current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+            ps.pose.orientation = orientation_from_euler(0, 0, req.yaw, axes='sxyz')
+            current_nav_finish = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
 
             if isinstance(req, srv.NavigateGlobalRequest):
                 # Recalculate x and y from lat and lon
@@ -183,32 +192,34 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
                                          current_nav_start_stamp, req.speed)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             position=setpoint,
-                             yaw=euler_from_orientation(current_nav_finish.pose.orientation, 'szyx')[2] - math.pi / 2,
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ + \
+                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.position = setpoint
+        msg.yaw = euler_from_orientation(current_nav_finish.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, (srv.SetPositionRequest, srv.SetPositionGlobalRequest)):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.position = Point(getattr(req, 'x', 0), getattr(req, 'y', 0), req.z)
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
 
         if isinstance(req, srv.SetPositionGlobalRequest):
             pose_local.pose.position.x, pose_local.pose.position.y = global_to_local(req.lat, req.lon)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             position=pose_local.pose.position,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_VX + PT.IGNORE_VY + PT.IGNORE_VZ + \
+                        PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                        (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.position = pose_local.pose.position
+        msg.yaw = euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, srv.SetVelocityRequest):
@@ -216,32 +227,37 @@ def get_publisher_and_message(req, stamp, continued=True, update_frame=True):
         vs.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(0, 0, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, TRANSFORM_TIMEOUT)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
+        vector_local = tf_buffer.transform(vs, LOCAL_FRAME, transform_timeout)
 
         yaw_rate_flag = math.isnan(req.yaw)
-        msg = PositionTarget(coordinate_frame=PT.FRAME_LOCAL_NED,
-                             type_mask=PT.IGNORE_PX + PT.IGNORE_PY + PT.IGNORE_PZ +
-                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ +
-                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE),
-                             velocity=vector_local.vector,
-                             yaw=euler_from_orientation(pose_local.pose.orientation, 'szyx')[2] - math.pi / 2,
-                             yaw_rate=req.yaw_rate)
+        msg = pt
+        msg.coordinate_frame = PT.FRAME_LOCAL_NED
+        msg.type_mask = PT.IGNORE_PX + PT.IGNORE_PY + PT.IGNORE_PZ + \
+                                       PT.IGNORE_AFX + PT.IGNORE_AFY + PT.IGNORE_AFZ + \
+                                       (PT.IGNORE_YAW if yaw_rate_flag else PT.IGNORE_YAW_RATE)
+        msg.velocity = vector_local.vector
+        msg.yaw = euler_from_orientation(pose_local.pose.orientation, 'sxyz')[2]
+        msg.yaw_rate = req.yaw_rate
         return position_pub, msg
 
     elif isinstance(req, srv.SetAttitudeRequest):
         ps.header.frame_id = req.frame_id or LOCAL_FRAME
         ps.pose.orientation = orientation_from_euler(req.roll, req.pitch, req.yaw)
-        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, TRANSFORM_TIMEOUT)
-        msg = AttitudeTarget(orientation=pose_local.pose.orientation,
-                             thrust=req.thrust,
-                             type_mask=AT.IGNORE_YAW_RATE + AT.IGNORE_PITCH_RATE + AT.IGNORE_ROLL_RATE)
+        pose_local = tf_buffer.transform(ps, LOCAL_FRAME, transform_timeout)
+        msg = at
+        msg.orientation = pose_local.pose.orientation
+        msg.thrust = req.thrust
+        msg.type_mask = AT.IGNORE_YAW_RATE + AT.IGNORE_PITCH_RATE + AT.IGNORE_ROLL_RATE
         return attitude_pub, msg
 
     elif isinstance(req, srv.SetRatesRequest):
-        msg = AttitudeTarget(thrust=req.thrust,
-                             type_mask=AttitudeTarget.IGNORE_ATTITUDE,
-                             body_rate=Vector3(req.roll_rate, req.pitch_rate, req.yaw_rate))
+        msg = at
+        msg.thrust = req.thrust
+        msg.type_mask = AT.IGNORE_ATTITUDE
+        msg.body_rate.x = req.roll_rate
+        msg.body_rate.y = req.pitch_rate
+        msg.body_rate.z = req.yaw_rate
         return attitude_pub, msg
 
 
@@ -261,9 +277,12 @@ def handle(req):
         rospy.logwarn('No connection to the FCU')
         return {'message': 'No connection to the FCU'}
 
-    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and req.speed <= 0:
-        rospy.logwarn('Navigate speed must be greater than zero, %s passed')
-        return {'message': 'Navigate speed must be greater than zero, %s passed' % req.speed}
+    if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)):
+        if req.speed < 0:
+            rospy.logwarn('Navigate speed must be positive, %s passed')
+            return {'message': 'Navigate speed must be positive, %s passed' % req.speed}
+        elif req.speed == 0:
+            req.speed = DEFAULT_SPEED
 
     if isinstance(req, (srv.NavigateRequest, srv.NavigateGlobalRequest)) and \
             (pose is None or rospy.get_rostime() - pose.header.stamp > LOCAL_POSITION_TIMEOUT):
@@ -279,14 +298,19 @@ def handle(req):
         return {'message': 'Both yaw and yaw_rate cannot be NaN'}
 
     try:
-        with handle_lock:
-                stamp = rospy.get_rostime()
-                current_req = req
-                current_pub, current_msg = get_publisher_and_message(req, stamp, False)
-                rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
+        # check frame_id existance
+        # (for non-blocking setpoint's publishing in get_publisher_and_message)
+        stamp = rospy.get_rostime()
+        if hasattr(req, 'frame_id'):
+            tf_buffer.lookup_transform(req.frame_id or LOCAL_FRAME, LOCAL_FRAME, stamp, TRANSFORM_TIMEOUT)
 
-                current_msg.header.stamp = stamp
-                current_pub.publish(current_msg)
+        with handle_lock:
+            current_req = req
+            current_pub, current_msg = get_publisher_and_message(req, stamp, False)
+            rospy.loginfo('Topic: %s, message: %s', current_pub.name, current_msg)
+
+            current_msg.header.stamp = stamp
+            current_pub.publish(current_msg)
 
         if req.auto_arm:
             offboard_and_arm()
@@ -364,24 +388,31 @@ def get_telemetry(req):
     frame_id = req.frame_id or LOCAL_FRAME
     stamp = rospy.get_rostime()
 
-    if pose:
-        p = tf_buffer.transform(pose, frame_id, TRANSFORM_TIMEOUT)
-        res['x'] = p.pose.position.x
-        res['y'] = p.pose.position.y
-        res['z'] = p.pose.position.z
+    transform_timeout = rospy.Duration(0.4)
+    try:
+        if pose:
+            p = tf_buffer.transform(pose, frame_id, transform_timeout)
+            res['x'] = p.pose.position.x
+            res['y'] = p.pose.position.y
+            res['z'] = p.pose.position.z
 
-        # Calculate roll pitch and yaw as Tait-Bryan angles, order z-y-x
-        res['yaw'], res['pitch'], res['roll'] = euler_from_orientation(p.pose.orientation, axes='rzyx')
+            # Calculate roll pitch and yaw as Tait-Bryan angles, order z-y-x
+            res['yaw'], res['pitch'], res['roll'] = euler_from_orientation(p.pose.orientation, axes='rzyx')
+    except:
+        pass
 
     if velocity:
-        v = Vector3Stamped()
-        v.header.stamp = velocity.header.stamp
-        v.header.frame_id = velocity.header.frame_id
-        v.vector = velocity.twist.linear
-        linear = tf_buffer.transform(v, frame_id, TRANSFORM_TIMEOUT)
-        res['vx'] = linear.vector.x
-        res['vy'] = linear.vector.y
-        res['vz'] = linear.vector.z
+        try:
+            v = Vector3Stamped()
+            v.header.stamp = velocity.header.stamp
+            v.header.frame_id = velocity.header.frame_id
+            v.vector = velocity.twist.linear
+            linear = tf_buffer.transform(v, frame_id, transform_timeout)
+            res['vx'] = linear.vector.x
+            res['vy'] = linear.vector.y
+            res['vz'] = linear.vector.z
+        except:
+            pass
 
         res['yaw_rate'] = velocity.twist.angular.z
         res['pitch_rate'] = velocity.twist.angular.y
@@ -428,20 +459,20 @@ def start_loop():
                         current_pub, current_msg = get_publisher_and_message(current_req, stamp, True,
                                                                              getattr(current_req, 'update_frame', False))
 
-                    current_msg.header.stamp = stamp
-                    current_pub.publish(current_msg)
-
-                    # For monitoring
-                    if isinstance(current_msg, PositionTarget):
-                        p = PoseStamped()
-                        p.header.frame_id = LOCAL_FRAME
-                        p.header.stamp = stamp
-                        p.pose.position = current_msg.position
-                        p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw + math.pi / 2)
-                        target_pub.publish(p)
-
                 except Exception as e:
                     rospy.logwarn_throttle(10, str(e))
+
+                current_msg.header.stamp = stamp
+                current_pub.publish(current_msg)
+
+                # For monitoring
+                if isinstance(current_msg, PositionTarget):
+                    p = PoseStamped()
+                    p.header.frame_id = LOCAL_FRAME
+                    p.header.stamp = stamp
+                    p.pose.position = current_msg.position
+                    p.pose.orientation = orientation_from_euler(0, 0, current_msg.yaw)
+                    target_pub.publish(p)
 
         r.sleep()
 

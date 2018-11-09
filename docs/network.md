@@ -5,7 +5,7 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 1. **Режим клиента** – RPi подключается к существующей Wi-Fi сети.
 2. **Режим точки доступа** – RPi создает Wi-Fi сеть, к которой вы можете подключиться.
 
-При использовании [образа для RPi](microsd_images.md) по умолчанию Wi-Fi адаптер работает в режиме точки доступа.
+При использовании [образа для RPi](microsd_images.md) по умолчанию Wi-Fi адаптер работает в [режиме точки доступа](wifi.md).
 
 ## Инструкция для переключения адаптера в режим клиента
 
@@ -272,7 +272,7 @@ EOF
 ## Ссылки
 
 1. [habr.com: Linux WiFi из командной строки с wpa_supplicant](https://habr.com/post/315960/)
-2. [wiki.archlinux.org: WPA supplicant (Русский)](https://wiki.archlinux.org/index.php/WPA_supplicant_(Русский))
+2. [wiki.archlinux.org: WPA supplicant (Русский)](https://wiki.archlinux.org/index.php/WPA_supplicant_\(Русский\))
 3. [blog.hoxnox.com: WiFi access point with wpa_supplicant](http://blog.hoxnox.com/gentoo/wifi-hotspot.html)
 4. [dmitrysnotes.ru: Raspberry Pi 3. Присвоение статического IP-адреса](http://dmitrysnotes.ru/raspberry-pi-3-prisvoenie-staticheskogo-ip-adresa)
 5. [thegeekdiary.com: Linux OS Service ‘network’](https://www.thegeekdiary.com/linux-os-service-network/)

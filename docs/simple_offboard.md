@@ -1,9 +1,7 @@
 Simple offboard
 ===
 
-> **Warning** Это описание API версии 0.5. См. [описание API предыдущих версий](https://github.com/CopterExpress/clever/blob/67051b21a05b12e2e9e519cb640565bccb80fbe3/docs/simple_offboard.md).
-
-Модуль `simple_offboard` пакета `clever` предназначен для упрощенного программирования автономного дрона (режим `OFFBOARD`). Он позволяет устанавливать желаемые полетные  задачи и автоматически трансформирует [систему координат](frames.md).
+Модуль `simple_offboard` пакета `clever` предназначен для упрощенного программирования автономного дрона ([режим](modes.md) `OFFBOARD`). Он позволяет устанавливать желаемые полетные  задачи и автоматически трансформирует [систему координат](frames.md).
 
 `simple_offboard` является высокоуровневым способом взаимодействия с полетным контроллером. Для более низкоуровневой работы см. [mavros](mavros.md).
 
@@ -162,7 +160,7 @@ navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map', update_frame=True)
 Вращение на месте со скоростью 0.5 рад/c (против часовой):
 
 ```python
-navigate(x=0, y=0, z=0, speed=1, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
+navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
 ```
 
 Полет вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:

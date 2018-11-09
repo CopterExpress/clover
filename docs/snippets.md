@@ -9,7 +9,7 @@ Python
 > # -*- coding: utf-8 -*-
 > ```
 
----
+<h3 id="distance"><a href="#distance">#</a></h3>
 
 Функция определения расстяния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
@@ -18,7 +18,7 @@ def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
 
----
+<h3 id="distance-global"><a href="#distance-global">#</a></h3>
 
 Функция для приблизительного определения расстояния (в метрах) между двумя глобальными координатами (широта/долгота):
 
@@ -27,7 +27,7 @@ def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
 
----
+<h3 id="block-takeoff"><a href="#block-takeoff">#</a></h3>
 
 Взлет и ожидание окончания взлета:
 
@@ -50,7 +50,7 @@ while True:
     rospy.sleep(0.2)
 ```
 
----
+<h3 id="block-nav"><a href="#block-nav">#</a></h3>
 
 Лететь в точку и ждать пока коптер долетит в нее:
 
@@ -71,19 +71,75 @@ while True:
     rospy.sleep(0.2)
 ```
 
----
+<h3 id="disarm"><a href="#disarm">#</a></h3>
+
+Дизарм коптера (выключение винтов, **коптер упадет**):
+
+```python
+# Объявление прокси:
+from mavros_msgs.srv import CommandBool
+arming = rospy.ServiceProxy('mavros/cmd/arming', CommandBool)
+
+# ...
+
+arming(False)  # дизарм
+```
+
+<h3 id="transform"><a href="#transform">#</a></h3>
+
+Трансформировать позицию (`PoseStamped`) из одной системы координат ([фрейма](frames.md)) в другую, используя [tf2](http://wiki.ros.org/tf2):
+
+```python
+import tf2_ros
+import tf2_geometry_msgs
+
+tf_buffer = tf2_ros.Buffer()
+tf_listener = tf2_ros.TransformListener(tf_buffer)
+
+# ...
+
+# Создаем объект PoseStamped (либо получаем из топика):
+pose = PoseStamped()
+pose.header.frame_id = 'local_origin'  # фрейм, в котором задана позиция
+pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
+pose.pose.position.x = 1
+pose.pose.position.y = 2
+pose.pose.position.z = 3
+pose.pose.orientation.w = 1
+
+frame_id = 'fcu'  # целевой фрейм
+transform_timeout = rospy.Duration(0.2)  # таймаут ожидания транформации
+
+# Преобразовываем позицию из старого фрейма в новый:
+new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
+```
+
+<h3 id="upside-down"><a href="#upside-down">#</a></h3>
+
+Определение, перевернут ли коптер:
+
+```python
+PI_2 = math.pi / 2
+telem = get_telemetry()
+
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
+```
+
+<h3 id="angle-hor"><a href="#angle-hor">#</a></h3>
 
 Рассчет общего угла коптера к горизонту:
 
-TODO: fix
-
 ```python
+PI_2 = math.pi / 2
 telem = get_telemetry()
 
+flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
+if flipped:
+    angle_to_horizon = math.pi - angle_to_horizon
 ```
 
----
+<h3 id="circle"><a href="#circle">#</a></h3>
 
 Полет по круговой траектории:
 
@@ -105,7 +161,18 @@ while not rospy.is_shutdown():
     r.sleep()
 ```
 
----
+<h3 id="rate"><a href="#rate">#</a></h3>
+
+Повторять действие с частотой 10 Гц:
+
+```python
+r = rospy.Rate(10)
+while not rospy.is_shutdown():
+    # Do anything
+    r.sleep()
+```
+
+<h3 id="mavros-sub"><a href="#mavros-sub">#</a></h3>
 
 Пример подписки на топики из MAVROS:
 
@@ -132,7 +199,7 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 Информацию по топикам MAVROS см. по [ссылке](mavros.md).
 
----
+<h3 id="mavlink"><a href="#mavlink">#</a></h3>
 
 Пример отправки произвольного [MAVLink-сообщения](mavlink.md) коптеру:
 
@@ -156,7 +223,7 @@ ros_msg = mavlink.convert_to_rosmsg(msg)
 mavlink_pub.publish(ros_msg)
 ```
 
----
+<h3 id="rc-sub"><a href="#rc-sub">#</a></h3>
 
 Реакция на переключение режима на пульте радиоуправления (может быть использовано для запуска автономного полета, см. [пример](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
 
@@ -165,16 +232,16 @@ from mavros_msgs.msg import RCIn
 
 # Вызывается при получении новых данных с пульта
 def rc_callback(data):
-	# Произвольная реакция на переключение тумблера на пульте
-	if data.channels[5] < 1100:
-		# ...
-		pass
-	elif data.channels[5] > 1900:
-		# ...
-		pass
-	else:
-		# ...
-		pass
+    # Произвольная реакция на переключение тумблера на пульте
+        if data.channels[5] < 1100:
+        # ...
+        pass
+    elif data.channels[5] > 1900:
+        # ...
+        pass
+    else:
+        # ...
+        pass
 
 # Создаем подписчик на топик с данными с пульта
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
@@ -182,7 +249,7 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 rospy.spin()
 ```
 
----
+<h3 id="flip"><a href="#flip">#</a></h3>
 
 Флип:
 

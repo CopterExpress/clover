@@ -13,4 +13,6 @@ ssh pi@192.168.11.1
 
 Для доступа по SSH из Windows можно использовать [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
 
+Также можно получить доступ по SSH со смартфона с помощью приложения [Termius](https://www.termius.com).
+
 Подробнее: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md

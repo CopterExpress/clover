@@ -1,0 +1,9 @@
+[Unit]
+Description=Monkey web-server
+
+[Service]
+ExecStart=/usr/sbin/monkey --port 80 --workers 1
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

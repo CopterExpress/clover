@@ -1,0 +1,528 @@
+actionlib:
+  debian:
+    stretch: [ros-kinetic-actionlib]
+actionlib_msgs:
+  debian:
+    stretch: [ros-kinetic-actionlib-msgs]
+angles:
+  debian:
+    stretch: [ros-kinetic-angles]
+async_web_server_cpp:
+  debian:
+    stretch: [ros-kinetic-async-web-server-cpp]
+bond:
+  debian:
+    stretch: [ros-kinetic-bond]
+bondcpp:
+  debian:
+    stretch: [ros-kinetic-bondcpp]
+bondpy:
+  debian:
+    stretch: [ros-kinetic-bondpy]
+camera_calibration_parsers:
+  debian:
+    stretch: [ros-kinetic-camera-calibration-parsers]
+camera_info_manager:
+  debian:
+    stretch: [ros-kinetic-camera-info-manager]
+catkin:
+  debian:
+    stretch: [ros-kinetic-catkin]
+class_loader:
+  debian:
+    stretch: [ros-kinetic-class-loader]
+cmake_modules:
+  debian:
+    stretch: [ros-kinetic-cmake-modules]
+cpp_common:
+  debian:
+    stretch: [ros-kinetic-cpp-common]
+cv_bridge:
+  debian:
+    stretch: [ros-kinetic-cv-bridge]
+cv_camera:
+  debian:
+    stretch: [ros-kinetic-cv-camera=0.3.1-0stretch]
+diagnostic_msgs:
+  debian:
+    stretch: [ros-kinetic-diagnostic-msgs]
+diagnostic_updater:
+  debian:
+    stretch: [ros-kinetic-diagnostic-updater]
+eigen_conversions:
+  debian:
+    stretch: [ros-kinetic-eigen-conversions]
+gencpp:
+  debian:
+    stretch: [ros-kinetic-gencpp]
+geneus:
+  debian:
+    stretch: [ros-kinetic-geneus]
+genlisp:
+  debian:
+    stretch: [ros-kinetic-genlisp]
+genmsg:
+  debian:
+    stretch: [ros-kinetic-genmsg]
+gennodejs:
+  debian:
+    stretch: [ros-kinetic-gennodejs]
+genpy:
+  debian:
+    stretch: [ros-kinetic-genpy]
+geographic_msgs:
+  debian:
+    stretch: [ros-kinetic-geographic-msgs]
+geometry_msgs:
+  debian:
+    stretch: [ros-kinetic-geometry-msgs]
+image_transport:
+  debian:
+    stretch: [ros-kinetic-image-transport]
+libmavconn:
+  debian:
+    stretch: [ros-kinetic-libmavconn]
+lxml:
+  debian:
+    stretch: [python-lxml=3.7.1-1]
+mavlink:
+  debian:
+    stretch: [ros-kinetic-mavlink]
+mavros:
+  debian:
+    stretch: [ros-kinetic-mavros]
+mavros_msgs:
+  debian:
+    stretch: [ros-kinetic-mavros-msgs]
+mavros_extras:
+  debian:
+    stretch: [ros-kinetic-mavros-extras]
+message_filters:
+  debian:
+    stretch: [ros-kinetic-message-filters]
+message_generation:
+  debian:
+    stretch: [ros-kinetic-message-generation]
+message_runtime:
+  debian:
+    stretch: [ros-kinetic-message-runtime]
+mjpg-streamer:
+  debian:
+    stretch: [mjpg-streamer=2.0]
+mk:
+  debian:
+    stretch: [ros-kinetic-mk]
+nav_msgs:
+  debian:
+    stretch: [ros-kinetic-nav-msgs]
+nodelet:
+  debian:
+    stretch: [ros-kinetic-nodelet]
+opencv3:
+  debian:
+    stretch: [ros-kinetic-opencv3]
+orocos_kdl:
+  debian:
+    stretch: [ros-kinetic-orocos-kdl]
+pluginlib:
+  debian:
+    stretch: [ros-kinetic-pluginlib]
+python_orocos_kdl:
+  debian:
+    stretch: [ros-kinetic-python-orocos-kdl]
+ros:
+  debian:
+    stretch: [ros-kinetic-ros]
+ros_comm:
+  debian:
+    stretch: [ros-kinetic-ros-comm]
+ros_environment:
+  debian:
+    stretch: [ros-kinetic-ros-environment]
+rosapi:
+  debian:
+    stretch: [ros-kinetic-rosapi]
+rosauth:
+  debian:
+    stretch: [ros-kinetic-rosauth]
+rosbag:
+  debian:
+    stretch: [ros-kinetic-rosbag]
+rosbag_migration_rule:
+  debian:
+    stretch: [ros-kinetic-rosbag-migration-rule]
+rosbag_storage:
+  debian:
+    stretch: [ros-kinetic-rosbag-storage]
+rosbash:
+  debian:
+    stretch: [ros-kinetic-rosbash]
+rosboost_cfg:
+  debian:
+    stretch: [ros-kinetic-rosboost-cfg]
+rosbridge_library:
+  debian:
+    stretch: [ros-kinetic-rosbridge-library]
+rosbridge_server:
+  debian:
+    stretch: [ros-kinetic-rosbridge-server]
+rosbuild:
+  debian:
+    stretch: [ros-kinetic-rosbuild]
+rosclean:
+  debian:
+    stretch: [ros-kinetic-rosclean]
+rosconsole:
+  debian:
+    stretch: [ros-kinetic-rosconsole]
+rosconsole_bridge:
+  debian:
+    stretch: [ros-kinetic-rosconsole-bridge]
+roscpp:
+  debian:
+    stretch: [ros-kinetic-roscpp]
+roscpp_serialization:
+  debian:
+    stretch: [ros-kinetic-roscpp-serialization]
+roscpp_traits:
+  debian:
+    stretch: [ros-kinetic-roscpp-traits]
+roscreate:
+  debian:
+    stretch: [ros-kinetic-roscreate]
+rosgraph:
+  debian:
+    stretch: [ros-kinetic-rosgraph]
+rosgraph_msgs:
+  debian:
+    stretch: [ros-kinetic-rosgraph-msgs]
+roslang:
+  debian:
+    stretch: [ros-kinetic-roslang]
+roslaunch:
+  debian:
+    stretch: [ros-kinetic-roslaunch]
+roslib:
+  debian:
+    stretch: [ros-kinetic-roslib]
+roslint:
+  debian:
+    stretch: [ros-kinetic-roslint]
+roslisp:
+  debian:
+    stretch: [ros-kinetic-roslisp]
+roslz4:
+  debian:
+    stretch: [ros-kinetic-roslz4]
+rosmake:
+  debian:
+    stretch: [ros-kinetic-rosmake]
+rosmaster:
+  debian:
+    stretch: [ros-kinetic-rosmaster]
+rosmsg:
+  debian:
+    stretch: [ros-kinetic-rosmsg]
+rosnode:
+  debian:
+    stretch: [ros-kinetic-rosnode]
+rosout:
+  debian:
+    stretch: [ros-kinetic-rosout]
+rospack:
+  debian:
+    stretch: [ros-kinetic-rospack]
+rosparam:
+  debian:
+    stretch: [ros-kinetic-rosparam]
+rospy:
+  debian:
+    stretch: [ros-kinetic-rospy]
+rospy_tutorials:
+  debian:
+    stretch: [ros-kinetic-rospy-tutorials]
+rosserial_client:
+  debian:
+    stretch: [ros-kinetic-rosserial-client]
+rosserial_msgs:
+  debian:
+    stretch: [ros-kinetic-rosserial-msgs]
+rosserial_python:
+  debian:
+    stretch: [ros-kinetic-rosserial-python]
+rosservice:
+  debian:
+    stretch: [ros-kinetic-rosservice]
+rostest:
+  debian:
+    stretch: [ros-kinetic-rostest]
+rostime:
+  debian:
+    stretch: [ros-kinetic-rostime]
+rostopic:
+  debian:
+    stretch: [ros-kinetic-rostopic]
+rosunit:
+  debian:
+    stretch: [ros-kinetic-rosunit]
+roswtf:
+  debian:
+    stretch: [ros-kinetic-roswtf]
+sensor_msgs:
+  debian:
+    stretch: [ros-kinetic-sensor-msgs]
+smclib:
+  debian:
+    stretch: [ros-kinetic-smclib]
+std_msgs:
+  debian:
+    stretch: [ros-kinetic-std-msgs]
+std_srvs:
+  debian:
+    stretch: [ros-kinetic-std-srvs]
+stereo_msgs:
+  debian:
+    stretch: [ros-kinetic-stereo-msgs]
+tf2:
+  debian:
+    stretch: [ros-kinetic-tf2]
+tf2_bullet:
+  debian:
+    stretch: [ros-kinetic-tf2-bullet]
+tf2_eigen:
+  debian:
+    stretch: [ros-kinetic-tf2-eigen]
+tf2_geometry_msgs:
+  debian:
+    stretch: [ros-kinetic-tf2-geometry-msgs]
+tf2_kdl:
+  debian:
+    stretch: [ros-kinetic-tf2-kdl]
+tf2_msgs:
+  debian:
+    stretch: [ros-kinetic-tf2-msgs]
+tf2_py:
+  debian:
+    stretch: [ros-kinetic-tf2-py]
+tf2_ros:
+  debian:
+    stretch: [ros-kinetic-tf2-ros]
+tf2_sensor_msgs:
+  debian:
+    stretch: [ros-kinetic-tf2-sensor-msgs]
+tf2_tools:
+  debian:
+    stretch: [ros-kinetic-tf2-tools]
+tf:
+  debian:
+    stretch: [ros-kinetic-tf]
+topic_tools:
+  debian:
+    stretch: [ros-kinetic-topic-tools]
+trajectory_msgs:
+  debian:
+    stretch: [ros-kinetic-trajectory-msgs]
+urdf:
+  debian:
+    stretch: [ros-kinetic-urdf]
+urdf_parser_plugin:
+  debian:
+    stretch: [ros-kinetic-urdf-parser-plugin]
+uuid_msgs:
+  debian:
+    stretch: [ros-kinetic-uuid-msgs]
+visualization_msgs:
+  debian:
+    stretch: [ros-kinetic-visualization-msgs]
+xmlrpcpp:
+  debian:
+    stretch: [ros-kinetic-xmlrpcpp]
+boost:
+  debian:
+    stretch: [libboost-all-dev]
+bullet:
+  debian:
+    stretch: [libbullet-dev]
+bzip2:
+  debian:
+    stretch: [libbz2-dev]
+cmake:
+  debian:
+    stretch: [cmake]
+cppunit:
+  debian:
+    stretch: [libcppunit-dev]
+eigen:
+  debian:
+    stretch: [libeigen3-dev]
+geographiclib-tools:
+  debian:
+    stretch: [geographiclib-tools]
+geographiclib:
+  debian:
+    stretch: [libgeographic-dev]
+google-mock:
+  debian:
+    stretch: [google-mock]
+graphviz:
+  debian:
+    stretch: [graphviz]
+gtest:
+  debian:
+    stretch: [libgtest-dev]
+libconsole-bridge-dev:
+  debian:
+    stretch: [libconsole-bridge-dev]
+libjpeg:
+  debian:
+    stretch: [libjpeg-dev]
+libpng-dev:
+  debian:
+    stretch: [libpng-dev]
+libpoco-dev:
+  debian:
+    stretch: [libpoco-dev]
+libssl-dev:
+  debian:
+    stretch: [libssl-dev]
+libtiff-dev:
+  debian:
+    stretch: [libtiff5-dev]
+liburdfdom-dev:
+  debian:
+    stretch: [liburdfdom-dev]
+liburdfdom-headers-dev:
+  debian:
+    stretch: [liburdfdom-headers-dev]
+libv4l-dev:
+  debian:
+    stretch: [libv4l-dev]
+libvtk-qt:
+  debian:
+    stretch: [libvtk6-qt-dev]
+libwebp-dev:
+  debian:
+    stretch: [libwebp-dev]
+log4cxx:
+  debian:
+    stretch: [liblog4cxx-dev]
+lz4:
+  debian:
+    stretch: [liblz4-dev]
+pkg-config:
+  debian:
+    stretch: [pkg-config]
+protobuf:
+  debian:
+    stretch: [libprotobuf10]
+python-bson:
+  debian:
+    stretch: [python-bson]
+python-catkin-pkg:
+  debian:
+    stretch: [python-catkin-pkg]
+python-coverage:
+  debian:
+    stretch: [python-coverage]
+python-defusedxml:
+  debian:
+    stretch: [python-defusedxml]
+python-empy:
+  debian:
+    stretch: [python-empy]
+python-future:
+  debian:
+    stretch: [python-future]
+python-imaging:
+  debian:
+    stretch: [python-imaging]
+python-lxml:
+  debian:
+    stretch: [python-lxml]
+python-mock:
+  debian:
+    stretch: [python-mock]
+python-netifaces:
+  debian:
+    stretch: [python-netifaces]
+python-nose:
+  debian:
+    stretch: [python-nose]
+python-numpy:
+  debian:
+    stretch: [python-numpy]
+python-paramiko:
+  debian:
+    stretch: [python-paramiko]
+python-rosdep:
+  debian:
+    stretch: [python-rosdep]
+python-rospkg:
+  debian:
+    stretch: [python-rospkg]
+python-serial:
+  debian:
+    stretch: [python-serial]
+python-setuptools:
+  debian:
+    stretch: [python-setuptools]
+python-sip:
+  debian:
+    stretch: [python-sip-dev]
+python-tornado:
+  debian:
+    stretch: [python-tornado]
+python-twisted-core:
+  debian:
+    stretch: [python-twisted-core]
+python-websocket:
+  debian:
+    stretch: [python-websocket]
+python-wxtools:
+  debian:
+    stretch: [python-wxtools]
+python-yaml:
+  debian:
+    stretch: [python-yaml]
+python:
+  debian:
+    stretch: [python-dev]
+sbcl:
+  debian:
+    stretch: [sbcl]
+tinyxml2:
+  debian:
+    stretch: [libtinyxml2-dev]
+tinyxml:
+  debian:
+    stretch: [libtinyxml-dev]
+uuid:
+  debian:
+    stretch: [uuid-dev]
+web_video_server:
+  debian:
+    stretch: [ros-kinetic-web-video-server]
+v4l-utils:
+  debian:
+    stretch: [v4l-utils]
+yaml-cpp:
+  debian:
+    stretch: [libyaml-cpp-dev]
+zlib:
+  debian:
+    stretch: [zlib1g-dev]
+compressed_depth_image_transport:
+  debian:
+    stretch: [ros-kinetic-compressed-depth-image-transport]
+compressed_image_transport:
+  debian:
+    stretch: [ros-kinetic-compressed-image-transport]
+dynamic_reconfigure:
+  debian:
+    stretch: [ros-kinetic-dynamic-reconfigure]
+theora_image_transport:
+  debian:
+    stretch: [ros-kinetic-theora-image-transport]
+libogg:
+  debian:
+    stretch: [libtheora0=1.1.1+dfsg.1-14]

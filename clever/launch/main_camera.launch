@@ -1,11 +1,19 @@
 <launch>
-    <!-- clever 2 -->
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>-->
+    <!-- Camera position and orientation are represented by fcu -> main_camera_optical transform -->
+    <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
 
-    <!-- clever 3 -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>
+    <!-- article about camera setup: https://clever.copterexpress.com/camera_frame.html -->
 
-    <!-- clever 3, upwards -->
+    <!-- camera is oriented downward, camera cable goes backward [option 1] -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
+
+    <!-- camera is oriented downward, camera cable goes forward  [option 2] -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>-->
+
+    <!-- camera is oriented upward, camera cable goes backward   [option 3] -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 1.5707963 0 0 fcu main_camera_optical"/>-->
+
+    <!-- camera is oriented upward, camera cable goes forward    [option 4] -->
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>-->
 
     <!-- camera node -->
@@ -16,8 +24,14 @@
         <!-- setting camera FPS -->
         <param name="rate" value="100"/>
         <param name="cv_cap_prop_fps" value="40"/>
+        <param name="capture_delay" value="0.02"/>
 
         <param name="image_width" value="320"/>
         <param name="image_height" value="240"/>
+    </node>
+
+    <!-- camera visualization markers -->
+    <node pkg="clever" type="camera_markers" ns="main_camera" name="main_camera_markers">
+        <param name="scale" value="3.0"/>
     </node>
 </launch>

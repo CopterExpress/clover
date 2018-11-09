@@ -3,13 +3,12 @@
 //  cleverrc
 //
 //  Created by Oleg Kalachev on 20.01.2018.
-//  Copyright © 2018 Copter Express. All rights reserved.
+//  Copyright © 2018 Copter Express Technologies. All rights reserved.
 //
 
 import UIKit
 import WebKit
 import SwiftSocket
-import NotificationBannerSwift
 import AudioToolbox.AudioServices
 
 class ViewController: UIViewController, WKScriptMessageHandler {
@@ -62,15 +61,7 @@ class ViewController: UIViewController, WKScriptMessageHandler {
         } else if (message.name == "notification") {
             // Got notification message
             print(message)
-            let m = message.body as! NSDictionary;
-            let level = m["severity"] as! Int
-            if level == 4 {
-                let banner = NotificationBanner(title: m["text"] as! String, style: .warning)
-                banner.show()
-            } else {
-                let banner = NotificationBanner(title: m["text"] as! String, style: .danger)
-                banner.show()
-            }
+            tapticNotify()
         }
     }
 
