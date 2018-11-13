@@ -24,6 +24,7 @@
 * [Работа с ROS](ros.md)
 * [MAVROS](mavros.md)
 * [Автономный полет в OFFBOARD](simple_offboard.md)
+* [Самопроверка](selfcheck.md)
 * [Примеры программ](snippets.md)
 * [Навигация по ArUco-маркерам](aruco.md)
 * [Взаимодействие с Arduino](arduino.md)
