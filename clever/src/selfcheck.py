@@ -9,6 +9,7 @@ from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad
 from geometry_msgs.msg import PoseStamped, TwistStamped
+import tf.transformations as t
 
 
 # TODO: roscore is running
@@ -119,7 +120,17 @@ def check_imu():
 @check('Local position')
 def check_local_position():
     try:
-        rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=1)
+        pose = rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=1)
+        o = pose.pose.orientation
+        _, pitch, roll = t.euler_from_quaternion((o.x, o.y, o.z, o.w), axes='rzyx')
+        MAX_ANGLE = math.radians(2)
+        if abs(pitch) > MAX_ANGLE:
+            failure('Pitch is %.2f deg; place copter horizontally or redo level horizon calib',
+                    math.degrees(pitch))
+        if abs(roll) > MAX_ANGLE:
+            failure('Roll is %.2f deg; place copter horizontally or redo level horizon calib',
+                    math.degrees(roll))
+
     except rospy.ROSException:
         failure('No local position')
 
