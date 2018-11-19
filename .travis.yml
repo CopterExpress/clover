@@ -4,7 +4,7 @@ services:
   - docker
 env:
   global:
-    - DOCKER="smirart/img-tool:v0.1"
+    - DOCKER="goldarte/img-tool:builder-mod"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
     - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
@@ -16,8 +16,8 @@ script:
   - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
 before_deploy:
   # Set up git user name and tag this commit
-  - git config --local user.name "urpylka"
-  - git config --local user.email "urpylka@gmail.com"
+  - git config --local user.name "goldarte"
+  - git config --local user.email "goldartt@gmail.com"
   - sudo chmod -R 777 *
   - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
 deploy:
