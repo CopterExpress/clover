@@ -84,6 +84,15 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/monkey-clever' '/root/'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/index.html' '/usr/share/monkey-static/'
 
+# Gitbook
+apt-get install -y curl gnupg
+curl -sL https://deb.nodesource.com/setup_11.x | bash -
+apt-get install -y nodejs
+npm install gitbook-cli -g
+gitbook build ${REPO_DIR}'/docs'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${REPO_DIR}'/docs/_book/' '/usr/share/monkey-static/docs/'
+
+
 # Butterfly
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/butterfly.service' '/lib/systemd/system/'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/butterfly.socket' '/lib/systemd/system/'
