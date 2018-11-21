@@ -52,6 +52,7 @@
   * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
   * [Работа со светодиодной лентой](leds.md)
 * Другое
+  * [Вклад в Клевер](contribution.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
   * [Проекты на базе коптера "Клевер"](projects.md)
