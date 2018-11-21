@@ -19,7 +19,7 @@
 Если вы нашли ошибку в документации или хотите ее улучшить, используйте механизм Pull Request'ов.
 
 1. Найдите файл с интересующей вас статьей в репозитории – https://github.com/CopterExpress/clever/tree/master/docs.
-2. Нажмите кнопку "редактировать".
+2. Нажмите кнопку "Редактировать".
 
     <img src="assets/github-edit.png" alt="GitHub Edit">
 
