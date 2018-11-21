@@ -55,5 +55,3 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
   * [Проекты на базе коптера "Клевер"](projects.md)
-  * [Тестовое описание Клевера по шаблону robots.ros.org/gapter/](testovoe-opisanie-klevera-po-shablonu-robotsrosorggapter.md)
-
