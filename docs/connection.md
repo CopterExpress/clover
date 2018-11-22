@@ -1,9 +1,9 @@
 Подключение Pixhawk/Pixracer к Raspberry Pi
 ===
 
-Для программирования [автономных полетов](simple_offboard.md), [работы с Pixhawk по Wi-Fi](gcs_bridge.md), использования [веб-пульта](web_rc.md) и других функций необходимо подсоединить Raspberry Pi к Pixhawk.
+Для программирования [автономных полетов](simple_offboard.md), [работы с Pixhawk (Pixracer) по Wi-Fi](gcs_bridge.md), использования [веб-пульта](web_rc.md) и других функций необходимо подсоединить Raspberry Pi к Pixhawk (Pixracer).
 
-Убедиться в работоспособности подключения, выполнив на Raspberry Pi:
+Убедиться в работоспособности подключения, [выполнив на Raspberry Pi](ssh.md):
 
 ```bash
 rostopic echo /mavros/state
@@ -28,7 +28,7 @@ rostopic echo /mavros/state
 sudo systemctl restart clever
 ```
 
-> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение параметра `CBRK_USB_CHK` на 197848.
+> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](px4_parameters) `CBRK_USB_CHK` на 197848.
 
 Подключение по UART
 ---
