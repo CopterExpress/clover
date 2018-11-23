@@ -9,114 +9,114 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
 ## Инструкция для переключения адаптера в режим клиента
 
-1\. Выключите службу `dnsmasq`.
+1. Выключите службу `dnsmasq`.
 
-```bash
-sudo systemctl stop dnsmasq
-sudo systemctl disable dnsmasq
-```
+    ```bash
+    sudo systemctl stop dnsmasq
+    sudo systemctl disable dnsmasq
+    ```
 
-2\. Включите получение IP адреса на беспроводном интерфейсе DHCP клиентом.
+2. Включите получение IP адреса на беспроводном интерфейсе DHCP клиентом.
 
-Для этого удалите следующие строки
+    Для этого удалите следующие строки
 
-```
-interface wlan0
-static ip_address=192.168.11.1/24
-```
+    ```conf
+    interface wlan0
+    static ip_address=192.168.11.1/24
+    ```
 
-из файла `/etc/dhcpcd.conf` вручную или введите следующие команды.
+    из файла `/etc/dhcpcd.conf` вручную или введите следующие команды.
 
-```bash
-sudo sed -i 's/interface wlan0//' /etc/dhcpcd.conf
-sudo sed -i 's/static ip_address=192.168.11.1\/24//' /etc/dhcpcd.conf
-```
+    ```bash
+    sudo sed -i 's/interface wlan0//' /etc/dhcpcd.conf
+    sudo sed -i 's/static ip_address=192.168.11.1\/24//' /etc/dhcpcd.conf
+    ```
 
-3\. Настройте `wpa_supplicant` для подключения к существующей точке доступа.
+3. Настройте `wpa_supplicant` для подключения к существующей точке доступа.
 
-```bash
-cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=GB
+    ```bash
+    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    update_config=1
+    country=GB
 
-network={
-    ssid="CLEVER"
-    psk="cleverwifi"
-}
+    network={
+        ssid="CLEVER"
+        psk="cleverwifi"
+    }
 
-EOF
-```
+    EOF
+    ```
 
-где `CLEVER` – название сети, а `cleverwifi` – пароль.
+    где `CLEVER` – название сети, а `cleverwifi` – пароль.
 
-4\. Перезапустите службу `dhcpcd`.
+4. Перезапустите службу `dhcpcd`.
 
-```bash
-sudo systemctl restart dhcpcd
-```
+    ```bash
+    sudo systemctl restart dhcpcd
+    ```
 
 ## Инструкция для переключения адаптера в режим точки доступа
 
-1\. Включите статический IP адрес на беспроводном интерфейсе.
+1. Включите статический IP адрес на беспроводном интерфейсе.
 
-Для этого добавьте следующие строки
+    Для этого добавьте следующие строки
 
-```
-interface wlan0
-static ip_address=192.168.11.1/24
-```
+    ```conf
+    interface wlan0
+    static ip_address=192.168.11.1/24
+    ```
 
-в файл `/etc/dhcpcd.conf` вручную или введите следующую команду
+    в файл `/etc/dhcpcd.conf` вручную или введите следующую команду
 
-```bash
-cat << EOF | sudo tee -a /etc/dhcpcd.conf
-interface wlan0
-static ip_address=192.168.11.1/24
+    ```bash
+    cat << EOF | sudo tee -a /etc/dhcpcd.conf
+    interface wlan0
+    static ip_address=192.168.11.1/24
 
-EOF
-```
+    EOF
+    ```
 
-2\. Настроите wpa_supplicant на работу в режиме точки доступа.
+2. Настроите wpa_supplicant на работу в режиме точки доступа.
 
-```bash
-cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=GB
+    ```bash
+    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    update_config=1
+    country=GB
 
-network={
-    ssid="CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)"
-    psk="cleverwifi"
-    mode=2
-    proto=RSN
-    key_mgmt=WPA-PSK
-    pairwise=CCMP
-    group=CCMP
-    auth_alg=OPEN
-}
+    network={
+        ssid="CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)"
+        psk="cleverwifi"
+        mode=2
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP
+        group=CCMP
+        auth_alg=OPEN
+    }
 
-EOF
-```
+    EOF
+    ```
 
-3\. Перезагрузите службу `dhcpcd`.
+3. Перезагрузите службу `dhcpcd`.
 
-```bash
-sudo systemctl restart dhcpcd
-```
+    ```bash
+    sudo systemctl restart dhcpcd
+    ```
 
-4\. Включите службу `dnsmasq`.
+4. Включите службу `dnsmasq`.
 
-```bash
-sudo systemctl enable dnsmasq
-sudo systemctl start dnsmasq
-```
+    ```bash
+    sudo systemctl enable dnsmasq
+    sudo systemctl start dnsmasq
+    ```
 
 ___
 
 Ниже вы можете узнать больше о том, как устроена работа с сетью на RPi.
 
-# Устройство сети RPi
+## Устройство сети RPi
 
 Работа сети на образе **2017-11-29-raspbian-stretch-lite** поддерживается двумя предустановленными службами:
 
@@ -125,7 +125,7 @@ ___
 
 Для работы в режиме роутера (точки доступа) RPi необходим DHCP сервер. Он служит для автоматической выдачи настроек текущей сети подключившимся клиентам. В роли такого сервера может выступать `isc-dhcp-server` или `dnsmasq`.
 
-## dhcpcd
+### dhcpcd
 
 Начиная с Raspbian Jesse настройки сети больше не задаются в файле `/etc/network/interfaces`. Теперь за выдачу адресации и настройку маршрутизации отвечает `dhcpcd` [4].
 
@@ -138,14 +138,14 @@ static ip_address=192.168.11.1/24
 
 > **Note** Если интерфейс является беспроводным (wlan), то служба `dhcpcd` триггерит `wpa_supplicant` [13], который в свою очередь работает непосредственно с wifi-адаптером и переводит его в заданное состояние.
 
-## wpa_supplicant
+### wpa_supplicant
 
 **wpa_supplicant** – служба конфигурирует Wi-Fi адаптер. Служба `wpa_supplicant` работает не как самостоятельная (хотя как таковая существует), а запускается как дочерний процесс от `dhcpcd`.
 
 Конфигурационный файл по умолчанию должен иметь путь `/etc/wpa_supplicant/wpa_supplicant.conf`.
 Пример конфигурационного файла:
 
-```
+```conf
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=GB
@@ -164,14 +164,16 @@ network={
 
 Внутри конфига указываются общие настройки `wpa_supplicant` и параметры для настройки адаптера. Также конфигурационный файл содержит секции `network` – основные настройки Wi-Fi сети такие как SSID сети, пароль, режим работы адаптера. Таких блоков может быть несколько, но используется первый рабочий. Например, если вы указали в первом блоке подключение к некоторой недоступной сети, то адаптер будет настроен следующей удачной секцией, если такая есть. Подробнее о синтаксисе `wpa_supplicant.conf` [TODO WIKI].
 
-### wpa_passphrase
+#### wpa_passphrase
 
 `wpa_passphrase` – утилита для создания секции `network`.
 
  ```bash
 wpa_passphrase SSID PASSWORD
 ```
+
 После выполнения команды скопируйте полученную секцию в ваш конфигурационный файл. Можно удалить закоментированное поле `psk` и оставить только поле с хешем пароля, либо наоборот.
+
 ```bash
 network={
 	ssid="SSID"
@@ -181,20 +183,22 @@ network={
 ```
 
 ### Несколько Wi-Fi адаптеров
-В системе может быть несколько Wi-Fi адаптеров. Если для них корректно подключены драйвера, то их можно увидеть вызвав `ifconfig` (например wlan0 и wlan1).
+
+В системе может быть несколько Wi-Fi адаптеров. Если для них корректно подключены драйвера, то их можно увидеть вызвав `ifconfig` (например `wlan0` и `wlan1`).
 
 Если у вас несколько адаптеров, для всех будет использоваться одна и таже самая рабочая секция `network`. Это связано с тем, что для каждого интерфейса, `dhcpcd` отдельно создает по дочернему процессу `wpa_supplicant`, в котором выполняется один тот же код (т. к. конфиг один и тот же).
 
 Для работы нескольких адаптеров с отдельными настройками для каждого, в стандартном вызываемом скрипте `dhcpcd` реализован механизм запуска разных конфигурационных скриптов. Для его использования необходимо переименовать стандартный файл конфига по следующему образцу: `wpa_supplicant-<имя интерфейса>.conf`, например `wpa_supplicant-wlan0.conf`.
 
-Для применения настроек необходимо перезапустить родительский процесс - службу `dhcpcd`. Сделать это можно следующей командой:
+Для применения настроек необходимо перезапустить родительский процесс – службу `dhcpcd`. Сделать это можно следующей командой:
+
 ```bash
 sudo systemctl restart dhcpcd
 ```
 
-## DHCP сервер
+### DHCP сервер
 
-### dnsmasq-base
+#### dnsmasq-base
 
 `dnsmasq-base` – консольная утилита, не являющаяся службой, для использования dnsmasq как службы надо установить пакет `dnsmasq`.
 
@@ -213,7 +217,7 @@ dnsmasq --help
 man dnsmasq
 ```
 
-### dnsmasq
+#### dnsmasq
 
 ```bash
 sudo apt install dnsmasq
@@ -233,7 +237,7 @@ quiet-dhcp6
 EOF
 ```
 
-### isc-dhcp-server
+#### isc-dhcp-server
 
 ```bash
 sudo apt install isc-dhcp-server
