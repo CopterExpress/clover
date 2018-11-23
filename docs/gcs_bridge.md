@@ -1,10 +1,10 @@
 Использование QGroundControl через Wi-Fi
 ===
 
-![](assets/qground.png)
+![QGroundControl](assets/qground.png)
 
 Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi.
-Для этого необходимо подключиться к Wi-Fi сети `CLEVER-xxxx`.
+Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `CLEVER-xxxx`.
 
 После чего в launch-файле Клевера `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch` выбрать один из преднастроенных режимов бриджа.
 
@@ -25,7 +25,7 @@ TCP-бридж
 
 Затем в программе QGroundControl нужно выбрать Application Settings > Comm Links > Add. Создать подключение со следующими настройками:
 
-![](assets/bridge_tcp.png)
+![QGroundControl TCP connection](assets/bridge_tcp.png)
 
 Затем необходимо выбрать в списке подключений "Clever" и нажать "Connect".
 
@@ -52,11 +52,9 @@ UDP-бридж (без автоматического подключения)
 
 Затем в программе QGroundControl нужно выбрать Application Settings > Comm Links > Add. Создать подключение со следующими настройками:
 
-![](assets/bridge_udp.png)
+![QGroundControl UDP connection](assets/bridge_udp.png)
 
 Затем необходимо выбрать в списке подключений "CLEVER" и нажать "Connect".
-
-
 
 UDP broadcast-бридж
 ---
