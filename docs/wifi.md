@@ -5,4 +5,6 @@
 
 Пароль: `cleverwifi`.
 
+<img src="assets/ssid.png" width="300px" alt="Wi-Fi SSID">
+
 Для изменения настроек Wi-Fi или получения более детальной информации о устройстве сети на Raspberri Pi прочитайте эту [статью](network.md).
