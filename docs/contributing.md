@@ -12,6 +12,10 @@
 
 На английском: https://www.markdownguide.org/getting-started, https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet.
 
+Для удобного редактирования текста, вы можете использовать текстовые редакторы с поддержкой Markdown: [Typora](https://typora.io), [Dillinger](https://dillinger.io/) (веб), [VSCode](https://code.visualstudio.com) с плагином [Markdown Editor](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor).
+
+Для локальной сборки статического сайта документации необходимо использовать утилиту [`gitbook-cli`](https://github.com/GitbookIO/gitbook-cli).
+
 ## Исправление ошибок в документации
 
 Если вы нашли ошибку в документации или хотите ее улучшить, используйте механизм Pull Request'ов.
