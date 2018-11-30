@@ -12,14 +12,8 @@
         "validate-links"
     ],
     "pluginsConfig": {
-        "disqus": {
-            "shortName": "coex-clever"
-        },
         "yametrika": {
             "id": 49359238
-        },
-        "image-captions": {
-            "caption": "_CAPTION_"
         }
     },
     "structure": {
