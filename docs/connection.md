@@ -28,7 +28,7 @@ rostopic echo /mavros/state
 sudo systemctl restart clever
 ```
 
-> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](px4_parameters) `CBRK_USB_CHK` на 197848.
+> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](px4_parameters.md) `CBRK_USB_CHK` на 197848.
 
 Подключение по UART
 ---

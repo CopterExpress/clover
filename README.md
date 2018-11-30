@@ -25,7 +25,7 @@ Image includes:
 * mavros
 * CLEVER software bundle for autonomous drone control
 
-API description (in Russian) for autonomous flights is available [on GitBook](https://copterexpress.gitbooks.io/clever/simple_offboard.html).
+API description (in Russian) for autonomous flights is available [on GitBook](https://clever.copterexpress.com/simple_offboard.html).
 
 ## Manual installation
 
