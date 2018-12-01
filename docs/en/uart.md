@@ -76,7 +76,7 @@ Bugs
 
 If you use the Mini UART connection to Bluetooth, `hciuart` crashes with the following error:
 
-![hciuart error](assets/hciuart_error.jpg)
+![hciuart error](../assets/hciuart_error.jpg)
 
 In case of Bluetooth disconnection
 
