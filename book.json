@@ -6,17 +6,19 @@
     "root": "docs/",
     "plugins": [
         "youtube",
-        "richquotes",
+        "richquotes@https://github.com/okalachev/gitbook-plugin-richquotes.git",
         "yametrika",
         "anchors",
-        "validate-links"
+        "validate-links",
+        "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git"
     ],
     "pluginsConfig": {
         "yametrika": {
             "id": 49359238
+        },
+        "bulk-redirect": {
+            "basepath": "/",
+            "redirectsFile": "redirects.json"
         }
-    },
-    "structure": {
-        "glossary": "_GLOSSARY.md"
     }
 }
