@@ -88,15 +88,36 @@ def check_aruco():
         failure('No aruco_pose/debug messages')
 
 
-@check('Visual position estimate')
+@check('Vision position estimate')
 def check_vpe():
     try:
-        rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
+        vis = rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
     except rospy.ROSException:
         try:
-            rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
+            vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
         except rospy.ROSException:
             failure('No VPE or MoCap messages')
+            return
+
+    # check vision pose and estimated pose inconsistency
+    try:
+        pose = rospy.wait_for_message('mavros/local_position/pose', PoseStamped, timeout=1)
+    except:
+        return
+    horiz = math.hypot(vis.pose.position.x - pose.pose.position.x, vis.pose.position.y - pose.pose.position.y)
+    if horiz > 0.5:
+        failure('Horizontal position inconsistency: %.2f m', horiz)
+    vert = vis.pose.position.z - pose.pose.position.z
+    if abs(vert) > 0.5:
+        failure('Vertical position inconsistency: %.2f m', vert)
+    op = pose.pose.orientation
+    ov = vis.pose.orientation
+    yawp, _, _ = t.euler_from_quaternion((op.x, op.y, op.z, op.w), axes='rzyx')
+    yawv, _, _ = t.euler_from_quaternion((ov.x, ov.y, ov.z, ov.w), axes='rzyx')
+    yawdiff = yawp - yawv
+    yawdiff = math.degrees((yawdiff + 180) % 360 - 180)
+    if abs(yawdiff) > 8:
+        failure('Yaw inconsistency: %.2f deg', yawdiff)
 
 
 @check('Simple offboard node')
