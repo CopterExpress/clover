@@ -56,9 +56,9 @@ def check_fcu():
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
-            failure('No connection to the FCU (check wiring)')
+            failure('no connection to the FCU (check wiring)')
     except rospy.ROSException:
-        failure('No MAVROS state (check wiring)')
+        failure('no MAVROS state (check wiring)')
 
 
 @check('Camera')
@@ -66,18 +66,18 @@ def check_camera(name):
     try:
         img = rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
     except rospy.ROSException:
-        failure('%s: No images (is the camera connected properly?)', name)
+        failure('%s: no images (is the camera connected properly?)', name)
         return
     try:
         info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
     except rospy.ROSException:
-        failure('%s: No calibration info', name)
+        failure('%s: no calibration info', name)
         return
 
     if img.width != info.width:
-        failure('%s: Calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
+        failure('%s: calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
     if img.height != info.height:
-        failure('%s: Calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
+        failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
 
 
 @check('Aruco detector')
@@ -85,7 +85,7 @@ def check_aruco():
     try:
         rospy.wait_for_message('aruco_pose/debug', Image, timeout=1)
     except rospy.ROSException:
-        failure('No aruco_pose/debug messages')
+        failure('no aruco_pose/debug messages')
 
 
 @check('Vision position estimate')
@@ -96,7 +96,7 @@ def check_vpe():
         try:
             vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
         except rospy.ROSException:
-            failure('No VPE or MoCap messages')
+            failure('no VPE or MoCap messages')
             return
 
     # check vision pose and estimated pose inconsistency
@@ -106,10 +106,10 @@ def check_vpe():
         return
     horiz = math.hypot(vis.pose.position.x - pose.pose.position.x, vis.pose.position.y - pose.pose.position.y)
     if horiz > 0.5:
-        failure('Horizontal position inconsistency: %.2f m', horiz)
+        failure('horizontal position inconsistency: %.2f m', horiz)
     vert = vis.pose.position.z - pose.pose.position.z
     if abs(vert) > 0.5:
-        failure('Vertical position inconsistency: %.2f m', vert)
+        failure('vertical position inconsistency: %.2f m', vert)
     op = pose.pose.orientation
     ov = vis.pose.orientation
     yawp, _, _ = t.euler_from_quaternion((op.x, op.y, op.z, op.w), axes='rzyx')
@@ -117,7 +117,7 @@ def check_vpe():
     yawdiff = yawp - yawv
     yawdiff = math.degrees((yawdiff + 180) % 360 - 180)
     if abs(yawdiff) > 8:
-        failure('Yaw inconsistency: %.2f deg', yawdiff)
+        failure('yaw inconsistency: %.2f deg', yawdiff)
 
 
 @check('Simple offboard node')
@@ -127,7 +127,7 @@ def check_simpleoffboard():
         rospy.wait_for_service('get_telemetry', timeout=3)
         rospy.wait_for_service('land', timeout=3)
     except rospy.ROSException:
-        failure('No simple_offboard services')
+        failure('no simple_offboard services')
 
 
 @check('IMU')
@@ -135,7 +135,7 @@ def check_imu():
     try:
         rospy.wait_for_message('mavros/imu/data', Imu, timeout=1)
     except rospy.ROSException:
-        failure('No IMU data (check flight controller calibration)')
+        failure('no IMU data (check flight controller calibration)')
 
 
 @check('Local position')
@@ -146,14 +146,14 @@ def check_local_position():
         _, pitch, roll = t.euler_from_quaternion((o.x, o.y, o.z, o.w), axes='rzyx')
         MAX_ANGLE = math.radians(2)
         if abs(pitch) > MAX_ANGLE:
-            failure('Pitch is %.2f deg; place copter horizontally or redo level horizon calib',
+            failure('pitch is %.2f deg; place copter horizontally or redo level horizon calib',
                     math.degrees(pitch))
         if abs(roll) > MAX_ANGLE:
-            failure('Roll is %.2f deg; place copter horizontally or redo level horizon calib',
+            failure('roll is %.2f deg; place copter horizontally or redo level horizon calib',
                     math.degrees(roll))
 
     except rospy.ROSException:
-        failure('No local position')
+        failure('no local position')
 
 
 @check('Velocity estimation')
@@ -163,23 +163,23 @@ def check_velocity():
         horiz = math.hypot(velocity.twist.linear.x, velocity.twist.linear.y)
         vert = velocity.twist.linear.z
         if abs(horiz) > 0.1:
-            failure('Horizontal velocity estimation is %.2f m/s; is copter staying still?' % horiz)
+            failure('horizontal velocity estimation is %.2f m/s; is copter staying still?' % horiz)
         if abs(vert) > 0.1:
-            failure('Vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
+            failure('vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
 
         angular = velocity.twist.angular
         ANGULAR_VELOCITY_LIMIT = 0.01
         if abs(angular.x) > ANGULAR_VELOCITY_LIMIT:
-            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+            failure('pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
                     angular.x, math.degrees(angular.x))
         if abs(angular.y) > ANGULAR_VELOCITY_LIMIT:
-            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+            failure('pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
                     angular.y, math.degrees(angular.y))
         if abs(angular.z) > ANGULAR_VELOCITY_LIMIT:
-            failure('Pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
+            failure('pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
                     angular.z, math.degrees(angular.z))
     except rospy.ROSException:
-        failure('No velocity estimation')
+        failure('no velocity estimation')
 
 
 @check('Global position (GPS)')
@@ -187,7 +187,7 @@ def check_global_position():
     try:
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
-        failure('No global position')
+        failure('no global position')
 
 
 @check('Optical flow')
@@ -196,7 +196,7 @@ def check_optical_flow():
     try:
         rospy.wait_for_message('mavros/px4flow/raw/send', OpticalFlowRad, timeout=0.5)
     except rospy.ROSException:
-        failure('No optical flow data (from Raspberry)')
+        failure('no optical flow data (from Raspberry)')
 
 
 @check('Rangefinder')
@@ -205,11 +205,11 @@ def check_rangefinder():
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder_3_sub', Range, timeout=0.5)
     except rospy.ROSException:
-        failure('No randefinder data from Raspberry')
+        failure('no randefinder data from Raspberry')
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder_0', Range, timeout=0.5)
     except rospy.ROSException:
-        failure('No rangefinder data from PX4')
+        failure('no rangefinder data from PX4')
 
 
 @check('Boot duration')
@@ -237,7 +237,7 @@ def check_cpu_usage():
         pid, cpu, cmd = process.split('\t')
 
         if cmd.strip() not in WHITELIST and float(cpu) > 30:
-            failure('High CPU usage (%s%%) detected: %s (PID %s)',
+            failure('high CPU usage (%s%%) detected: %s (PID %s)',
                     cpu.strip(), cmd.strip(), pid.strip())
 
 
