@@ -7,7 +7,7 @@
 Учебно-методическое пособие
 ---------------------------
 
-[Урок 1. «Знакомство. Принципы проектирования и строение мультикоптеров»](https://github.com/CopterExpress/clever/blob/master/docs/ru/ru/metodmaterials.md)
+[Урок 1. «Знакомство. Принципы проектирования и строение мультикоптеров»](https://github.com/CopterExpress/clever/blob/master/docs/ru/metodmaterials.md)
 
 [Урок 2. «Основы электричества»](https://github.com/CopterExpress/clever/blob/master/docs/ru/metodmaterials.md)
 
