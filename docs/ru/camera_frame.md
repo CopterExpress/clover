@@ -22,13 +22,16 @@
 
 ## Настройки для Клевера
 
+> Первое изображение - как выглядит модель коптера в Rviz при указанных настройках, второе - как выглядит Клевер при тех же настройках.
+
 ### 1. Камера направлена вниз, шлейф назад
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 fcu main_camera_optical"/>
 ```
 
-![](../assets/camera_option_1.png)
+![](../assets/camera_option_1_rviz.png)
+![](../assets/camera_option_1_clever.jpg)
 
 ### 2. Камера направлена вниз, шлейф вперёд
 
@@ -36,7 +39,8 @@
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 fcu main_camera_optical"/>
 ```
 
-![](../assets/camera_option_2.png)
+![](../assets/camera_option_2_rviz.png)
+![](../assets/camera_option_2_clever.jpg)
 
 ### 3. Камера направлена вверх, шлейф назад
 
@@ -44,7 +48,8 @@
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 1.5707963 0 0 fcu main_camera_optical"/>
 ```
 
-![](../assets/camera_option_3.png)
+![](../assets/camera_option_3_rviz.png)
+![](../assets/camera_option_3_clever.jpg)
 
 ### 4. Камера направлена вверх, шлейф вперёд
 
@@ -52,4 +57,5 @@
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 -1.5707963 0 0 fcu main_camera_optical"/>
 ```
 
-![](../assets/camera_option_4.png)
+![](../assets/camera_option_4_rviz.png)
+![](../assets/camera_option_4_clever.jpg)
