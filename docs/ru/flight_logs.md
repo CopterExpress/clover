@@ -34,6 +34,7 @@
 * **att_pos_mocap** – полученная MOCAP-позиция коптера, аналог MAVLink пакета `ATT_POS_MOCAP` или MAVROS-топика `/mavros/mocap/pose`;
 * **actuator_controls** – сигналы на моторы;
 * **vehicle_land_detected** – статус Land-detector'а;
+* **optical_flow** – данные с модуля optical flow.
 
 Мониторинг топиков в режиме реального времени
 ---
