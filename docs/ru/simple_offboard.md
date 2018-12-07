@@ -31,7 +31,7 @@ import rospy
 from clever import srv
 from std_srvs.srv import Trigger
 
-rospy.init_node('foo')   # название вашей ROS-ноды
+rospy.init_node('flight')  # flight - название вашей ROS-ноды
 
 # Создаем прокси ко всем сервисам:
 
