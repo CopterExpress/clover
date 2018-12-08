@@ -110,7 +110,11 @@ _Примечание_: указанное выше определение пр�
 
 Для правильной работы Vision Position Estimation необходимо \(через [QGroundControl](gcs_bridge.md)\) убедиться, что:
 
-* Для Pixhawk: Установлена прошивка с LPE \(local position estimator\). Для Pixhawk необходимо [скачать прошивку `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases). Для Pixracer параметр `SYS_MC_EST_GROUP` должен быть установлен в `local_position_estimator, attitude_estimator_q`.
+* **Для Pixhawk**: Установлена прошивка с LPE \(local position estimator\). Для Pixhawk необходимо [скачать прошивку `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases).
+
+  **Для Pixracer**: параметр `SYS_MC_EST_GROUP` должен быть установлен в `local_position_estimator, attitude_estimator_q`.
+
+  > **Note** После изменения значения параметра `SYS_MC_EST_GROUP` необходимо перезагрузить полетный контроллер.
 * В параметре `LPE_FUSION` включены **только** флажки `vision position`, `land detector`. Итоговое значение _20_.
 * Выключен компас: `ATT_W_MAG` = 0
 * Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
@@ -122,9 +126,11 @@ _Примечание_: указанное выше определение пр�
   * `LNDMC_THR_RANGE` = 0.5
   * `LNDMC_Z_VEL_MAX` = 1 m/s
 
+<!--
 Для простоты настройки можно воспользоваться готовым файлом настроек для [Clever 2](https://github.com/CopterExpress/clever/blob/master/docs/assets/Clever2LPE_160118.params) или для [Clever 3](https://github.com/CopterExpress/clever/blob/master/docs/assets/Clever3_LPE_020218.params) и вгрузить его в контроллер с помощью меню Tools - Load from file из раздела Parameters в QGroundControl.
 
 ![](../assets/Screenshot from 2018-02-27 22-30-50.png)
+-->
 
 ### Полет
 
@@ -143,11 +149,9 @@ time.sleep(5)
 navigate(2, 2, 2, speed=1, frame_id='aruco_map', update_frame=True)  #  полет в координату 2:2, высота 3 метра
 ```
 
-См. [другие функции](simple_offboard.md) simple offboard.
+См. [другие функции](simple_offboard.md) simple_offboard.
 
 ### Расположение маркеров на потолке
-
-> **Info** Образ версии &gt;0.2.
 
 ![Маркеры на потолке](../assets/IMG_4175.JPG)
 
