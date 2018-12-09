@@ -151,6 +151,12 @@ navigate(x=5, y=0, z=3, speed=0.8, yaw=float('nan'))
 navigate(x=0, y=-3, z=0, speed=1, frame_id='fcu_horiz')
 ```
 
+Повернуться на 90 градусов против часовой:
+
+```python
+navigate(yaw=math.radians(-90), frame_id='fcu_horiz')
+```
+
 Полет в точку 3:2 (высота 2) в системе координат [маркерного поля](aruco.md) со скоростью 1 м/с:
 
 ```python
