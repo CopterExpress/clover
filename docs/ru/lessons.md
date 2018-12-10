@@ -34,7 +34,7 @@
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jWMGSgiLD_E" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Часть 3 
+Часть 3
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WhxxXD4b1MY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -53,4 +53,3 @@
 Автономные полеты
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WvIlRG7ShWA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-

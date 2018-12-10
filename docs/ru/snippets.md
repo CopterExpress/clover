@@ -176,7 +176,6 @@ while not rospy.is_shutdown():
 
 Пример подписки на топики из MAVROS:
 
-
 ```python
 from geometry_msgs.msg import PoseStamped, TwistStamped
 from sensor_msgs.msg import BatteryState
@@ -199,7 +198,11 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 Информацию по топикам MAVROS см. по [ссылке](mavros.md).
 
+<!-- markdownlint-disable MD044 -->
+
 ### # {#mavlink}
+
+<!-- markdownlint-enable MD044 -->
 
 Пример отправки произвольного [MAVLink-сообщения](mavlink.md) коптеру:
 

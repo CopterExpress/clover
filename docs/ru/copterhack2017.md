@@ -7,6 +7,8 @@ Copter Hack 2017
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xgXheg3TTs4?rel=0" frameborder="0" allowfullscreen></iframe>
 
+Запись видеолекций – https://copterexpress.timepad.ru/event/510375/.
+
 Модули
 ---
 
@@ -50,18 +52,14 @@ rostopic echo /marker_data
 
 * [Пакет MAVRos](mavros.md)
 
-* Неплохая вводная статья
-https://habrahabr.ru/post/227425/ 
+* Неплохая вводная статья: https://habrahabr.ru/post/227425/
 
-* Сигналы, применяющиеся в дронах
-https://geektimes.ru/post/258186/ 
+* Сигналы, применяющиеся в дронах: https://geektimes.ru/post/258186/
 
-* Хорошая статья про ПИДы
-https://habrahabr.ru/company/technoworks/blog/216437/
+* Хорошая статья про ПИДы: https://habrahabr.ru/company/technoworks/blog/216437/
 
-* Запись видеолекций
-https://copterexpress.timepad.ru/event/510375/
+* Запись видеолекций: https://copterexpress.timepad.ru/event/510375/
 
 * [Aubio](https://aubio.org), библиотека для анализа звука (музыки)
 
-* Пакеты для работы с музыкой для Python https://wiki.python.org/moin/PythonInMusic
+* Пакеты для работы с музыкой для Python: https://wiki.python.org/moin/PythonInMusic

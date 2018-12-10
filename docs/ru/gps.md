@@ -8,6 +8,7 @@
 * Полеты на глобальные точки в автономном режиме при помощи модуля [simple offboard](simple_offboard.md).
 
 Полезные ссылки:
+
 * https://docs.px4.io/en/assembly/quick_start_pixhawk.html
 * http://ardupilot.org/copter/docs/common-pixhawk-wiring-and-quick-start.html
 * http://ardupilot.org/copter/docs/common-installing-3dr-ublox-gps-compass-module.html

@@ -4,11 +4,13 @@
         "code_blocks": false
     },
     "MD013": false,
+    "MD024": false,
     "MD026" :{
         "punctuation": ".,;:!"
     },
     "MD033": false,
     "MD034": false,
+    "MD040": false,
     "MD044": {
         "names": [
             "MAVLink",
@@ -24,5 +26,6 @@
             "ArUco"
         ],
         "code_blocks": false
-    }
+    },
+    "MD045": false
 }

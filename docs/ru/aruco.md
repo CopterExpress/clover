@@ -39,7 +39,7 @@ sudo systemctl restart clever
 
 В качестве карты меток можно использовать автоматически сгенерированный [ArUco-board](https://docs.opencv.org/trunk/db/da9/tutorial_aruco_board_detection.html).
 
-Настройка карты меток производится с помощью файла `~/catkin_ws/src/clever/clever/launch/aruco.launch`. Для использования AruCo-board введите его параметры:
+Настройка карты меток производится с помощью файла `~/catkin_ws/src/clever/clever/launch/aruco.launch`. Для использования ArUco-board введите его параметры:
 
 ```xml
 <node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager">

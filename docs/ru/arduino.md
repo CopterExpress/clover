@@ -40,7 +40,7 @@ sudo systemctl restart clever
 
 ## Задержки
 
-При использовании `rosserial_arduino` микроконтроллер Arduino не должен быть заблокирован больше чем на несколько секунд (например, с использованием функции `delay`); иначе связь между Raspberry Pi и Arduino будет разорвана. 
+При использовании `rosserial_arduino` микроконтроллер Arduino не должен быть заблокирован больше чем на несколько секунд (например, с использованием функции `delay`); иначе связь между Raspberry Pi и Arduino будет разорвана.
 
 При реализации долгих циклов `while` обеспечьте периодический вызов функции `hn.spinOnce`:
 
@@ -121,7 +121,7 @@ void setup()
   	delay(1000);
   	nh.spinOnce();
   }
-    
+
   nav_req.auto_arm = false;
 
   // Пролет вперед на 3 метра:
@@ -133,13 +133,13 @@ void setup()
   nav_req.frame_id = "fcu_horiz";
   nav_req.speed = 0.8;
   navigate.call(nav_req, nav_res);
-  
+
   // Ждем 5 секунд
   for(int i=0; i<5; i++) {
     delay(1000);
     nh.spinOnce();
-  }  
-  
+  }
+
   // Полет в точку 1:0:2 по маркерному полю
   nh.loginfo("Fly on point");
   nav_req.auto_arm = false;

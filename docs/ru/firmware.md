@@ -12,7 +12,7 @@ Pixhawk или Pixracer можно прошить, используя QGroundCon
 * `px4fmu-v4_default.px4` — прошивка для Pixracer с EKF2 и LPE (*Клевер 3*).
 * `px4fmu-v3_default.px4` — прошивка для более новых версий Pixhawk (чип ревизии 3, см. илл. + Bootloader v5) с EKF2 и LPE.
 
-![](../assets/stmrev.jpg)
+![STM revision](../assets/stmrev.jpg)
 
 > **Note** Для загрузки `px4fmu-v3_default.px4` может понадобиться использование команды `force_upload` из командной строки.
 
