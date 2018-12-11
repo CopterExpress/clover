@@ -64,9 +64,19 @@ new ROSLIB.Topic({
 var notificationHideTimer;
 
 function notify(text, severity) {
+	var repeated = notificationsEl.querySelector('.item:first-of-type[data-text=' + text + ']');
+	if (repeated) {
+		// don't repeat notifications
+		var count = repeated.getAttribute('data-count') || 1;
+		repeated.setAttribute('data-count', ++count);
+		repeated.innerHTML = text + ' (' + count + ')';
+		return;
+	}
+
 	var item = document.createElement('div');
 	item.innerHTML = text;
 	item.classList.add('item');
+	item.setAttribute('data-text', text);
 	notificationsEl.prepend(item);
 	var itemHeight = item.offsetHeight;
 	notificationsEl.classList.remove('anim');
