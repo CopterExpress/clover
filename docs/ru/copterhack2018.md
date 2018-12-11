@@ -1,5 +1,7 @@
 # Copter Hack 2018
 
+Хакатон [Copter Hack 2018](https://copterexpress.timepad.ru/event/768108/) прошел 19–21 октября в Технополисе "Москва".
+
 <img src="../assets/copterhack18.jpg" height=400px title="Copter Hack 2018">
 
 Чат хакатона: https://t.me/CopterHack.
@@ -7,6 +9,10 @@
 Стрим хакатона: https://www.youtube.com/watch?v=nIo5HSqlt6I.
 
 Фотографии с хакатона: https://drive.google.com/open?id=1ozdXol4rhKwhHbsrnfxrp3CqazBRm-3W.
+
+## Видео
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iv9I-JwaAhE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Лекции
 
