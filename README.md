@@ -23,6 +23,7 @@ Image includes:
 * Configured networking
 * OpenCV
 * mavros
+* Periphery drivers (`pigpiod`, `rpi_ws281x`, etc)
 * CLEVER software bundle for autonomous drone control
 
 API description (in Russian) for autonomous flights is available [on GitBook](https://clever.copterexpress.com/simple_offboard.html).
