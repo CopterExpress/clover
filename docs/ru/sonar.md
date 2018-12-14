@@ -20,7 +20,7 @@
 
 ### Чтение данных
 
-Чтобы считать данных с дальномера HC-SR04 используется библиотека для работы с <abbr title="General-Purpose Input/Output – пины ввода/вывода общего назначения">GPIO</abbr> – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). Эта библиотека предустановлена на [образе Клевера](microsd_images.md), начиная с версии **v0.14**. Для более старых версий образа используйте [инструкцию по установке](http://abyz.me.uk/rpi/pigpio/download.html).
+Чтобы считать данные с дальномера HC-SR04, используется библиотека для работы с <abbr title="General-Purpose Input/Output – пины ввода/вывода общего назначения">GPIO</abbr> – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). Эта библиотека предустановлена на [образе Клевера](microsd_images.md), начиная с версии **v0.14**. Для более старых версий образа используйте [инструкцию по установке](http://abyz.me.uk/rpi/pigpio/download.html).
 
 Для работы с `pigpio` необходимо запустить соответствующий демон:
 
