@@ -26,7 +26,7 @@ Clever 2 construction kit assembly instruction
 * EFEST Luc V4 Li-lon Charger ×1.
 * Regulators protective case ×4.
 * Legs attachment ×8.
-* PixHawk flight controller ×1.
+* Pixhawk flight controller ×1.
 * FlySky i6 radio receiver×1.
 * FlySky i6 radio transmitter ×1.
 * EFEST LUC V4 Charger ×1.
@@ -292,7 +292,7 @@ IMPORTANT NOTE about polarity
 
 ![Connecting the radio receiver power](../assets/connectingRadio.jpg)
 
-[Radio equipment troubleshooting manual ](radioerrors.md)
+[Radio equipment troubleshooting manual](radioerrors.md)
 
 ### Checking the motors rotation direction
 
@@ -322,7 +322,7 @@ IMPORTANT NOTE about polarity
 
 ![Turn the assembly upside down](../assets/topPreview.png)
 
-#### Installation of the PixHawk flight controller
+#### Installation of the Pixhawk flight controller
 
 1. Stick the two-sided adhesive tape in the corners of the flight controller. ![Flight controller](../assets/pixhawk.png)
     > **IMPORTANT** When the motors rotate, vibrations occur, which affect sensors of the PixHawk flight controller. To avoid this effect, the number of double-sided tape layers
