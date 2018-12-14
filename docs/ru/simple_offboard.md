@@ -10,7 +10,7 @@ Simple offboard
 Общие для сервисов параметры:
 
 * `auto_arm` = `true`/`false` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id` — система координат в TF2, в которой заданы координаты и рысканье (yaw), [описание систем координат](frames.md);
+* `frame_id` — система координат в TF2, в которой заданы координаты и рысканье (yaw), [описание систем координат](frames.md), значение по умолчанию: `local_origin`;
 * `update_frame` — считать ли систему координат изменяющейся (например, `false` для `local_origin`, `fcu`, `fcu_horiz`, `true` для `marker_map`);
 * `x`, `y` – горизонтальные координаты в системе координат `frame_id` *(м)*;
 * `z` — высота в системе координат `frame_id` *(м)*;
@@ -59,7 +59,7 @@ release = rospy.ServiceProxy('release', Trigger)
 
 Параметры:
 
-* `frame_id` – [фрейм](frames.md) для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`.
+* `frame_id` – [фрейм](frames.md) для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`. Значение по умолчанию: `local_origin`.
 
 Формат ответа:
 
