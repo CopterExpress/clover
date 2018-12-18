@@ -43,6 +43,14 @@ export ROS_IP=192.168.11.1
 
 Axis или Grid настроенный на фрейм `aruco_map` будут визуализировать расположение [карты ArUco-меток](aruco.md).
 
+### jsk_rviz_plugins
+
+Рекомендуется также установка набора дополнительных полезных плагинов для rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). Это набор позволяет визуализировать топики типа `TwistStamped` (скорость), `CameraInfo`, `PolygonArray` и многое другое. Для установки используйте команду:
+
+```bash
+sudo apt-get install ros-kinetic-jsk-visualization
+```
+
 Запуск инструментов rqt
 ---
 
@@ -60,11 +68,8 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rqt
 ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view
 ```
 
-jsk_rviz_plugins
----
+Краткое описание полезных rqt-плагинов:
 
-Рекомендуется также установка набора дополнительных полезных плагинов для rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). Это набор позволяет визуализировать топики типа `TwistStamped` (скорость), `CameraInfo`, `PolygonArray` и многое другое. Для установки используйте команду:
-
-```bash
-sudo apt-get install ros-kinetic-jsk-visualization
-```
+* `rqt_image_view` – просмотр изображений из топиков типа `sensor_msgs/Image`;
+* `rqt_multiplot` – построение графиков по данным из произвольным топиков;
+* Bag – работа с [Bag-файлами](http://wiki.ros.org/rosbag).
