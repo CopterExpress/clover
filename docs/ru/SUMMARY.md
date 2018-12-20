@@ -54,7 +54,7 @@
   * [CopterHack-2017](copterhack2017.md)
 * Дополнительные материалы
   * [Вклад в Клевер](contributing.md)
-  * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
+  * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Протокол MAVLink](mavlink.md)
   * [Работа с логами PX4](flight_logs.md)
 * Учебник
