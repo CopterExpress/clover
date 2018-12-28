@@ -100,6 +100,7 @@ build-essential=12.3 \
 libffi-dev \
 monkey=1.6.9-1 \
 pigpio python-pigpio python3-pigpio \
+i2c-tools \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
