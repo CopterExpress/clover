@@ -30,7 +30,7 @@ In manual mode, the pilot controls the drone directly. GPS, computer vision data
 
 In the automatic flight mode, the quadcopter ignores the control signals from the transmitter.
 
-* **AUTO.MISSION** – PX4 completes the mission pre-loaded into the drone (the mission is downloaded using the QGroundControl, or from [MAVLink] (mavlink.md) using [MAVROS](mavros.md).
+* **AUTO.MISSION** – PX4 completes the mission pre-loaded into the drone (the mission is downloaded using the QGroundControl, or from [MAVLink](mavlink.md) using [MAVROS](mavros.md).
 * **AUTO.RTL** – the copter automatically returns to the takeoff point.
 * **AUTO.LAND** – the copter lands automatically.
 
