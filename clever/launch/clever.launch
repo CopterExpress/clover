@@ -45,7 +45,6 @@
         <param name="body/frame_id" value="fcu_horiz"/>
     </node>
 
-
     <!-- main camera -->
     <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
 
