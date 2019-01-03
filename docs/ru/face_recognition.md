@@ -103,8 +103,9 @@ python recog.py
 
 И на выходе:
 
-<img src="https://github.com/mmkuznecov/face_recognition_from_clever/blob/master/files/Mikhail_output.jpg" width="50%">
-<img src="https://github.com/mmkuznecov/face_recognition_from_clever/blob/master/files/Timofey_output.jpg" width="50%">
+<img src="../assets/Mikhail_output.jpg" width="50%">
+
+<img src="../assets/Timofey_output.jpg" width="50%">
 
 ## Возможные трудности
 
