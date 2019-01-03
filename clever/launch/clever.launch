@@ -38,7 +38,6 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="local_origin_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 local_origin local_origin_upside_down"/>
 
-
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
     <!-- Auxiliary frames -->
