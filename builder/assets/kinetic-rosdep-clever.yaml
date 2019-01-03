@@ -528,4 +528,4 @@ libogg:
     stretch: [libtheora0=1.1.1+dfsg.1-14]
 vl53l1x:
   debian:
-    stretch: [ros-kineic-vl53l1x]
+    stretch: [ros-kinetic-vl53l1x]
