@@ -50,6 +50,7 @@
   * [3G-модем](3g.md)
 * Проекты на базе Клевера
   * [Шаровая защита коптера](shield.md)
+  * [Распознавание лиц](face_recognition.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Дополнительные материалы
