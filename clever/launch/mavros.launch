@@ -13,7 +13,7 @@
         <param name="fcu_url" value="/dev/ttyACM0" if="$(eval fcu_conn == 'usb')"/>
 
         <!-- sitl -->
-        <param name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
+        <param name="fcu_url" value="udp://:14540@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
 
         <!-- gcs bridge -->
         <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
