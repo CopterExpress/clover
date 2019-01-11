@@ -71,5 +71,5 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view
 Краткое описание полезных rqt-плагинов:
 
 * `rqt_image_view` – просмотр изображений из топиков типа `sensor_msgs/Image`;
-* `rqt_multiplot` – построение графиков по данным из произвольным топиков;
+* `rqt_multiplot` – построение графиков по данным из произвольным топиков (установка: `sudo apt-get install ros-kinetic-rqt-multiplot`);
 * Bag – работа с [Bag-файлами](http://wiki.ros.org/rosbag).
