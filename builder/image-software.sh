@@ -138,4 +138,7 @@ syntax on
 autocmd BufNewFile,BufRead *.launch set syntax=xml
 EOF
 
+echo_stamp "Attempting to kill dirmngr"
+gpgconf --kill dirmngr
+
 echo_stamp "End of software installation"
