@@ -27,6 +27,9 @@
         <!-- default px4 params -->
         <rosparam command="load" file="$(find mavros)/launch/px4_config.yaml"/>
 
+        <!-- enable setpoint_attitude/attitude -->
+        <param name="setpoint_attitude/use_quaternion" value="true"/>
+
         <!-- rangefinders -->
         <rosparam>
             distance_sensor:

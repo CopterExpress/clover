@@ -4,7 +4,6 @@ float32 vz
 float32 yaw
 float32 yaw_rate
 string frame_id
-bool update_frame
 bool auto_arm
 ---
 bool success

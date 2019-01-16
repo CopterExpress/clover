@@ -39,7 +39,13 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="local_origin_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 local_origin local_origin_upside_down"/>
 
     <!-- simplified offboard control -->
-    <node name="simple_offboard" pkg="clever" type="simple_offboard.py" output="screen"/>
+    <node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
+        <rosparam param="reference_frames">
+            body: local_origin
+            base_link: local_origin
+        </rosparam>
+    </node>
+
     <!-- Auxiliary frames -->
     <node name="frames" pkg="clever" type="frames" output="screen">
         <param name="body/frame_id" value="fcu_horiz"/>

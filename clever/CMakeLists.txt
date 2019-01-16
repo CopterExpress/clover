@@ -26,6 +26,9 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
 )
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+find_package(GeographicLib REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -138,6 +141,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${GeographicLib_INCLUDE_DIRS}
 )
 
 # Declare a C++ library
@@ -161,11 +165,18 @@ add_library(aruco_vpe
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+add_executable(simple_offboard src/simple_offboard.cpp)
+
 add_executable(rc src/rc.cpp)
 
 add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(frames src/frames.cpp)
+
+target_link_libraries(simple_offboard
+  ${catkin_LIBRARIES}
+  ${GeographicLib_LIBRARIES}
+)
 
 target_link_libraries(rc ${catkin_LIBRARIES})
 

@@ -16,6 +16,7 @@
   <build_depend>roscpp</build_depend>
   <build_depend>visualization_msgs</build_depend>
   <build_depend>tf2_geometry_msgs</build_depend>
+  <build_depend>geographiclib</build_depend>
   <!-- Use buildtool_depend for build tool packages: -->
   <buildtool_depend>catkin</buildtool_depend>
   <!-- Use run_depend for packages you need at runtime: -->
@@ -30,6 +31,7 @@
   <run_depend>rosbridge_server</run_depend>
   <run_depend>web_video_server</run_depend>
   <run_depend>ros_comm</run_depend>
+  <run_depend>geographiclib</run_depend>
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
 
