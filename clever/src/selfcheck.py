@@ -16,7 +16,7 @@ import tf.transformations as t
 # TODO: clever.service is running
 # TODO: check attitude is present
 # TODO: disk free space
-# TODO: local_origin, fcu, fcu_horiz
+# TODO: map, base_link, body
 # TODO: rc service
 # TODO: perform commander check, ekf2 status on PX4
 # TODO: check if FCU params setter succeed

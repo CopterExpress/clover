@@ -54,12 +54,12 @@
         </rosparam>
 
         <!-- additional params -->
-        <param name="local_position/frame_id" value="local_origin"/>
+        <param name="local_position/frame_id" value="map"/>
         <param name="local_position/tf/send" value="true"/>
-        <param name="local_position/tf/frame_id" value="local_origin"/>
-        <param name="local_position/tf/child_frame_id" value="fcu"/>
+        <param name="local_position/tf/frame_id" value="map"/>
+        <param name="local_position/tf/child_frame_id" value="base_link"/>
         <param name="global_position/tf/send" value="false"/>
-        <param name="imu/frame_id" value="fcu"/>
+        <param name="imu/frame_id" value="base_link"/>
         <rosparam param="plugin_blacklist">
             - safety_area
             - image_pub
@@ -84,14 +84,14 @@
     </node>
 
     <!-- Rangefinders frame -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 fcu rangefinder"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 base_link rangefinder"/>
 
     <!-- Copter visualization -->
     <node name="copter_visualization" pkg="mavros_extras" type="copter_visualization" if="$(arg viz)">
         <remap to="mavros/local_position/pose" from="local_position"/>
         <remap to="mavros/setpoint_position/local" from="local_setpoint"/>
-        <param name="fixed_frame_id" value="local_origin"/>
-        <param name="child_frame_id" value="fcu"/>
+        <param name="fixed_frame_id" value="map"/>
+        <param name="child_frame_id" value="base_link"/>
         <param name="marker_scale" value="1"/>
         <param name="max_track_size" value="20"/>
         <param name="num_rotors" value="4"/>

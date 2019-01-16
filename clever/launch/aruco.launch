@@ -16,8 +16,8 @@
     </node>
 
     <node pkg="nodelet" type="nodelet" name="aruco_vpe" args="load clever/aruco_vpe nodelet_manager" clear_params="true">
-        <param name="aruco_orientation" value="local_origin"/>
-        <!--<param name="aruco_orientation" value="local_origin_upside_down"/>-->
+        <param name="aruco_orientation" value="map"/>
+        <!--<param name="aruco_orientation" value="map_upside_down"/>-->
 
         <param name="use_mocap" value="true"/>
     </node>

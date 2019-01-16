@@ -39,7 +39,7 @@ private:
         ros::NodeHandle& nh = getNodeHandle();
         ros::NodeHandle& nh_priv = getPrivateNodeHandle();
 
-        nh_priv.param<string>("aruco_orientation", aruco_orientation_, "local_origin");
+        nh_priv.param<string>("aruco_orientation", aruco_orientation_, "map");
         bool use_mocap;
         nh_priv.param<bool>("use_mocap", use_mocap, false);
         nh_priv.param<bool>("reset_vpe", reset_vpe_, !use_mocap);
@@ -107,20 +107,20 @@ private:
                (reset_vpe_ && (ros::Time::now() - last_published_ > reset_timeout_))) // vpe origin outdated
             {
                 ROS_INFO("Reset VPE");
-                t = tf_buffer.lookupTransform("local_origin", "aruco_map_vision", stamp, lookup_timeout_);
+                t = tf_buffer.lookupTransform("map", "aruco_map_vision", stamp, lookup_timeout_);
                 t.child_frame_id = "aruco_map";
                 static_br.sendTransform(t);
             }
 
             // Calculate VPE
-            ps.header.frame_id = "fcu_horiz";
+            ps.header.frame_id = "body";
             ps.header.stamp = stamp;
             ps.pose.orientation.w = 1;
 
             tf_buffer.transform(ps, vpe_raw, "aruco_map_vision", lookup_timeout_);
 
             vpe_raw.header.frame_id = "aruco_map";
-            tf_buffer.transform(vpe_raw, vpe, "local_origin", lookup_timeout_);
+            tf_buffer.transform(vpe_raw, vpe, "map", lookup_timeout_);
 
             vision_position_pub_.publish(vpe);
 

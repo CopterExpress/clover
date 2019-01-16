@@ -35,7 +35,7 @@ def make_box_control(msg):
 
 def make_quadcopter_marker():
     marker = InteractiveMarker()
-    marker.header.frame_id = 'fcu'
+    marker.header.frame_id = 'base_link'
     marker.header.stamp = rospy.get_rostime()
     marker.scale = 1
     marker.pose.orientation.w = 1
