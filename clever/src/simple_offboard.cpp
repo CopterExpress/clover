@@ -127,7 +127,7 @@ void handleMessage(const T& msg)
 
 // wait for transform without interrupting publishing setpoints
 inline bool waitTransform(const string& target, const string& source,
-                                  const ros::Time& stamp, const ros::Duration& timeout)
+                          const ros::Time& stamp, const ros::Duration& timeout)
 {
 	ros::Rate r(10);
 	auto start = ros::Time::now();
