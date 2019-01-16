@@ -148,10 +148,6 @@ add_library(clever
   src/optical_flow.cpp
 )
 
-add_library(fcu_horiz
-  src/fcu_horiz.cpp
-)
-
 add_library(aruco_vpe
   src/aruco_vpe.cpp
 )
