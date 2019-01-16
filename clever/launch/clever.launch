@@ -41,8 +41,8 @@
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
         <rosparam param="reference_frames">
-            body: local_origin
-            base_link: local_origin
+            fcu_horiz: local_origin
+            fcu: local_origin
         </rosparam>
     </node>
 
