@@ -77,7 +77,6 @@ add_service_files(
   Navigate.srv
   NavigateGlobal.srv
   SetPosition.srv
-  SetPositionGlobal.srv
   SetVelocity.srv
   SetAttitude.srv
   SetRates.srv
