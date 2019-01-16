@@ -188,11 +188,6 @@ target_link_libraries(clever
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(fcu_horiz
-  ${catkin_LIBRARIES}
-  "/opt/ros/kinetic/lib/libtf2_ros.so"
-)
-
 target_link_libraries(aruco_vpe
   ${catkin_LIBRARIES}
 )
