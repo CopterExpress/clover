@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<package>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
   <name>clever</name>
   <version>0.0.1</version>
   <description>The CLEVER package</description>
@@ -11,27 +12,23 @@
   <author email="okalachev@gmail.com">Oleg Kalachev</author>
   <author email="urpylka@gmail.com">Artem Smirnov</author>
 
-  <!-- Use build_depend for packages you need at compile time: -->
-  <build_depend>nodelet</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>visualization_msgs</build_depend>
-  <build_depend>tf2_geometry_msgs</build_depend>
-  <build_depend>geographiclib</build_depend>
-  <!-- Use buildtool_depend for build tool packages: -->
   <buildtool_depend>catkin</buildtool_depend>
-  <!-- Use run_depend for packages you need at runtime: -->
-  <run_depend>catkin</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>nodelet</run_depend>
-  <run_depend>mavros</run_depend>
-  <run_depend>mavros_extras</run_depend>
-  <run_depend>lxml</run_depend>
-  <run_depend>cv_camera</run_depend>
-  <run_depend>mjpg-streamer</run_depend>
-  <run_depend>rosbridge_server</run_depend>
-  <run_depend>web_video_server</run_depend>
-  <run_depend>ros_comm</run_depend>
-  <run_depend>geographiclib</run_depend>
+
+  <!-- Package format specifier version 2.0 allows specifying dependencies for both
+   build- and runtime in a single <depend> element -->
+  <depend>visualization_msgs</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>geographiclib</depend>
+  <depend>roscpp</depend>
+  <depend>nodelet</depend>
+  <depend>mavros</depend>
+  <depend>mavros_extras</depend>
+  <depend>lxml</depend>
+  <depend>cv_camera</depend>
+  <depend>mjpg-streamer</depend>
+  <depend>rosbridge_server</depend>
+  <depend>web_video_server</depend>
+  <depend>ros_comm</depend>
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
 
