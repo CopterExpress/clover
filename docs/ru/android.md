@@ -46,7 +46,7 @@ private fun fullScreenCall() {
 
 Вот так выглядит пульт на этом этапе:
 
-<img src="./screenshots/android.png" width="50%">
+<img src="../assets/android.png" width="50%">
 
 Если вы запустите приложение, то заметите что стики не работают. Это происходит по тому, что на нашей странице отключен *JavaScript*. чтобы его включить надо прописать следующее:
 ```Kotlin
