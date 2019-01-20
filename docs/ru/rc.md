@@ -1,7 +1,7 @@
 Управление Клевером со смартфона
 ===
 
-<a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="../assets/appstore.svg"></a><a href="https://play.google.com/store/apps/details?id=express.copter.cleverrc"><img src="../assets/google_play.png" width="30%"></a>
+<a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="../assets/appstore.svg"></a><a href="https://play.google.com/store/apps/details?id=express.copter.cleverrc"><img src="../assets/google_play.png" width="10%"></a>
 
 Для управления Клевером со смартфона через Wi-Fi необходимо установить приложение – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), [Android](https://play.google.com/store/apps/details?id=express.copter.cleverrc).
 
