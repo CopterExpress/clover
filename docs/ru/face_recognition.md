@@ -154,5 +154,5 @@ frame=cv2.resize(frame,(0,0), fx=(width_or/width_unz),fy=(height_or/height_unz))
 
 Благодаря этому можно значительно повысить точность распознавания, т.к. обрабатываемое изображение будет уже не так сильно искажено.
 
-<img src="./assets/misha_calib.jpg" width="50%">
-<img src="./assets/tim_calib.jpg" width="50%">
+<img src="../assets/misha_calib.jpg" width="50%">
+<img src="../assets/tim_calib.jpg" width="50%">
