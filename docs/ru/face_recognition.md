@@ -140,7 +140,12 @@ height_or, width_or, depth_or = frame.shape
 Затем исправляем искажения оригинального изображения и получаем уже его параметры:
 
 ```python
-frame=ccc.get_undistorted_image(frame,ccc.CLEVER_FISHEYE_CAM_640)
+if height_or==240 and width_or==320:
+    frame=ccc.get_undistorted_image(frame,ccc.CLEVER_FISHEYE_CAM_320)
+elif height_or==480 and width_or==640:
+    frame=ccc.get_undistorted_image(frame,ccc.CLEVER_FISHEYE_CAM_640)
+else:
+    frame=ccc.get_undistorted_image(frame,input("Input your path to the .yaml file: "))
 height_unz, width_unz, depth_unz = frame.shape
 ```
 
