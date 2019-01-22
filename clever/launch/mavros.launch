@@ -5,7 +5,7 @@
     <arg name="viz" default="true"/>
     <arg name="respawn" default="true"/>
 
-    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" respawn_delay="5" output="screen">
+    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" respawn_delay="2" output="screen">
         <!-- UART connection -->
         <param name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
 
