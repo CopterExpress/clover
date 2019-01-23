@@ -21,6 +21,8 @@ find_package(catkin REQUIRED COMPONENTS
   #aruco_msgs
 )
 
+find_package(OpenCV 3 REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -158,7 +160,7 @@ link_directories(/opt/ros/kinetic/lib)
 
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
-  "/opt/ros/kinetic/lib/libopencv_aruco3.so" # TODO: fix launch fails with .so loading
+  ${OpenCV_LIBRARIES}
 )
 
 #############
