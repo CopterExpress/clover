@@ -149,7 +149,13 @@ echo_stamp "Installing CLEVER" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
 
 echo_stamp "Installing additional ROS packages"
-apt-get install -y --no-install-recommends ros-kinetic-dynamic-reconfigure ros-kinetic-compressed-image-transport
+apt-get install -y --no-install-recommends \
+    ros-kinetic-dynamic-reconfigure \
+    ros-kinetic-compressed-image-transport \
+    ros-kinetic-rosbridge-suite \
+    ros-kinetic-rosserial \
+    ros-kinetic-usb-cam \
+    ros-kinetic-vl53l1x
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \
