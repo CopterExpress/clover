@@ -27,6 +27,7 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+  draft: true
 
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
