@@ -58,6 +58,7 @@
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Протокол MAVLink](mavlink.md)
   * [Работа с логами PX4](flight_logs.md)
+  * [Калибровка камеры](calibration.md)
 * Учебник
   * [Теория и видеоуроки](lessons.md)
   * [Учебно-методическое пособие](metod.md)
