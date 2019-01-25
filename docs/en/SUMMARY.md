@@ -14,7 +14,6 @@
 * [Soldering safety](tb.md)
 * [Connecting GPS](gps.md)
 * [Flight modes](modes.md)
-* [UART settings](uart.md)
 * [Pixhawk / Pixracer Firmware](firmware.md)
 * [PX4 Parameters](px4_parameters.md)
 * [PID Setup](calibratePID.md)
@@ -22,4 +21,19 @@
 * [RPi Image](microsd_images.md)
 * [RPi Connection to the Pixhawk](connection.md)
 * [Wi-Fi connection](wifi.md)
-* [SSH access](ssh.md)
+* [Configuring Wi-Fi](network.md)
+* [Using QGroundControl via Wi-Fi](gcs_bridge.md)
+* [Controlling Clever from a smartphone](rc.md)
+* [UART settings](uart.md)
+* [Viewing images from cameras](web_video_server.md)
+* [Coordinate systems (frames)](frames.md)
+* [ROS](ros.md)
+* [MAVROS](mavros.md)
+* [Simple offboard](simple_offboard.md)
+
+
+
+
+
+
+
