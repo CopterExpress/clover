@@ -16,7 +16,6 @@
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
-        <arg name="viz" value="true"/>
     </include>
 
     <!-- web video server -->
