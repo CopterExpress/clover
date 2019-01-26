@@ -92,7 +92,7 @@ libjpeg8-dev=8d1-2 \
 tcpdump \
 ltrace \
 libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
-python-rosdep=0.14.0-1 \
+python-rosdep=0.15.0-1 \
 python-rosinstall-generator=0.1.14-1 \
 python-wstool=0.1.17-1 \
 python-rosinstall=0.7.8-1 \
