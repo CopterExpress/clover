@@ -151,6 +151,7 @@ echo_stamp "Installing CLEVER" \
 echo_stamp "Build CLEVER documentation"
 cd /home/pi/catkin_ws/src/clever
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
+NPM_CONFIG_UNSAFE_PERM=true gitbook install
 gitbook build
 
 echo_stamp "Installing additional ROS packages"
