@@ -17,7 +17,7 @@
             "id": 49359238
         },
         "bulk-redirect": {
-            "basepath": "/",
+            "basepath": "",
             "redirectsFile": "redirects.json"
         }
     }
