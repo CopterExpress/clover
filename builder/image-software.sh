@@ -131,6 +131,13 @@ mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey /etc/monkey/sites/default
 systemctl enable monkey.service
 
+echo_stamp "Install Node.js"
+cd /home/pi
+wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
+tar -xzf node-v10.15.0-linux-armv6l.tar.gz
+cp -R node-v10.15.0-linux-armv6l/* /usr/local/
+rm -rf node-v10.15.0-linux-armv6l/
+
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
 set mouse-=a
