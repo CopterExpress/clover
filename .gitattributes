@@ -1,3 +1,5 @@
-apps/ios/cleverrc/roslib.js linguist-vendored
 apps/ios/cleverrc/BinUtils.swift linguist-vendored
-apps/android/app/src/main/assets/roslib.js linguist-vendored
+roslib.js linguist-vendored
+eventemitter2.js linguist-vendored
+ros3d.js linguist-vendored
+three.min.js linguist-vendored
