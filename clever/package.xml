@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="2">
   <name>clever</name>
   <version>0.0.1</version>
@@ -8,7 +7,7 @@
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
   <license>MIT</license>
 
-  <!--url type="website">http://wiki.ros.org/clever</url-->
+  <url type="website">https://clever.copterexpress.com/</url>
   <author email="okalachev@gmail.com">Oleg Kalachev</author>
   <author email="urpylka@gmail.com">Artem Smirnov</author>
 
@@ -16,19 +15,28 @@
 
   <!-- Package format specifier version 2.0 allows specifying dependencies for both
    build- and runtime in a single <depend> element -->
-  <depend>visualization_msgs</depend>
-  <depend>tf2_geometry_msgs</depend>
-  <depend>geographiclib</depend>
   <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_srvs</depend>
+  <depend>tf</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>geographiclib</depend>
   <depend>nodelet</depend>
   <depend>mavros</depend>
   <depend>mavros_extras</depend>
   <depend>lxml</depend>
   <depend>cv_camera</depend>
+  <depend>cv_bridge</depend>
+  <depend>opencv3</depend>
   <depend>mjpg-streamer</depend>
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
-  <depend>ros_comm</depend>
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
 
