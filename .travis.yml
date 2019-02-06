@@ -42,7 +42,7 @@ matrix:
         - gitbook -V
         - markdownlint -V
       script:
-        - markdownlint docs --ignore docs/ru/lesson*.md --ignore docs/ru/metodmaterials.md
+        - markdownlint docs --ignore **/lesson*.md --ignore **/metodmaterials.md
         - gitbook install
         - gitbook build
       deploy:
