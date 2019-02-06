@@ -66,6 +66,9 @@ echo_stamp "Init rosdep" \
 && echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
 && rosdep update
 
+echo_stamp "Populate rosdep for ROS user"
+sudo -u pi rosdep update
+
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
   CATKIN_PATH=$1
