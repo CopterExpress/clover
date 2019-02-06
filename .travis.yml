@@ -5,7 +5,6 @@ services:
 env:
   global:
     - DOCKER="sfalexrog/img-tool:builder-mod"
-    - DOCS_DOCKER="sfalexrog/gitbook-builder:latest"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
     - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
@@ -34,10 +33,18 @@ matrix:
           tags: true
         draft: true
     - name: "Documentation"
+      language: node_js
+      node_js:
+        - "10"
       before_script:
-        - docker pull ${DOCS_DOCKER}
+        - npm install gitbook-cli -g
+        - npm install markdownlint-cli -g
+        - gitbook -V
+        - markdownlint -V
       script:
-        - docker run --rm -v $(pwd):/gitbook ${DOCS_DOCKER}
+        - markdownlint docs
+        - gitbook install
+        - gitbook build
       deploy:
         provider: pages
         local-dir: _book
