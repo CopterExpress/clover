@@ -176,6 +176,8 @@ private:
 					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
 					flow_.integrated_zgyro = flow_gyro_fcu.vector.z;
 				} catch (const tf2::TransformException& e) {
+					// Invalidate previous frame
+					prev_.release();
 					return;
 				}
 			}
