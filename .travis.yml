@@ -48,7 +48,7 @@ matrix:
       deploy:
         provider: pages
         local-dir: _book
-        skip-cleanum: true
+        skip-cleanup: true
         github-token: ${GITHUB_OAUTH_TOKEN}
         keep-history: true
         target-branch: gh-pages
