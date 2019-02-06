@@ -45,15 +45,19 @@ matrix:
         - markdownlint docs --ignore **/lesson*.md --ignore **/metodmaterials.md
         - gitbook install
         - gitbook build
-      deploy:
-        provider: pages
-        local-dir: _book
-        skip-cleanup: true
-        github-token: ${GITHUB_OAUTH_TOKEN}
-        keep-history: true
-        target-branch: gh-pages
-        on:
-          branch: WIP/gitbook-autobuild
+# ***
+# Disable deployments for now, revisit this later
+#   --sfalexrog, 06.02.2019
+# ***
+#      deploy:
+#        provider: pages
+#        local-dir: _book
+#        skip-cleanup: true
+#        github-token: ${GITHUB_OAUTH_TOKEN}
+#        keep-history: true
+#        target-branch: gh-pages
+#        on:
+#          branch: WIP/gitbook-autobuild
 
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
