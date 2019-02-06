@@ -146,7 +146,6 @@ Start the calibration procedure
 
 ![Gyroscope calibration](../assets/calibrategyro.jpg)
 
-
 > *Warning* During calibration, the drone should remain in position, be stable, etc.
 
 ## Flight modes

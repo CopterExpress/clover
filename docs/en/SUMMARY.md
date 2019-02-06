@@ -30,10 +30,3 @@
 * [ROS](ros.md)
 * [MAVROS](mavros.md)
 * [Simple offboard](simple_offboard.md)
-
-
-
-
-
-
-
