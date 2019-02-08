@@ -19,13 +19,13 @@ Pixhawk, Ardupilot, Naze32, CC3D.
 
 An electric motor that rotates propellers of the multicopter. Usually, brushless motors are used. These motors are connected to ESC.
 
-## ESC / motor controller / "regul"
+## ESC / motor controller
 
 An Electronic Speed Controller. A specialized circuit-board that controls the speed of the brushless motor. It is controlled by a flight controller using pulse width modulation (PWM).
 
 ESC has the firmware that determines the characteristics of its operation.
 
-## Remote control / radio control equipment/ "appa"
+## Remote control / radio control equipment
 
 A radio-operated quadcopter remote control. Operation of the remote control requires connecting a receiver to the flight controller.
 

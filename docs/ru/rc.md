@@ -1,9 +1,9 @@
 Управление Клевером со смартфона
 ===
 
-<a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="../assets/appstore.svg"></a>
+<a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="../assets/appstore.svg"></a><a href="https://play.google.com/store/apps/details?id=express.copter.cleverrc"><img src="../assets/google_play.png" width="15%"></a>
 
-Для управления Клевером со смартфона через Wi-Fi необходимо установить приложение – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), Android (*work-in-progress*).
+Для управления Клевером со смартфона через Wi-Fi необходимо установить приложение – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), [Android](https://play.google.com/store/apps/details?id=express.copter.cleverrc).
 
 ![CLEVER RC](../assets/IMG_4397.PNG)
 
@@ -46,7 +46,7 @@ sudo systemctl restart clever
 
 Подключите смартфон к [Wi-Fi](wifi.md) сети Клевера (`CLEVER-xxxx`). Приложение должно подключиться с коптеру автоматически. При успешном подключении должны отобразиться текущий [режим](modes.md) и заряд батареи.
 
-Стики на экране приложения работают так же, как и реальные стики. Для арма коптера подержите левый стик в правом нижнем углу на протяжении нескольких секунд. Для дизарма – в левом нижнем углу.
+Стики на экране приложения работают так же, как и реальные стики. Для арма коптера подержите левый стик в правом нижнем углу на протяжении нескольких секунд. Для дизарма – в левом нижнем углу.
 
 Неисправности
 ---

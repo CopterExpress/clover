@@ -66,6 +66,9 @@ echo_stamp "Init rosdep" \
 && echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
 && rosdep update
 
+echo_stamp "Populate rosdep for ROS user"
+sudo -u pi rosdep update
+
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
   CATKIN_PATH=$1
@@ -92,7 +95,7 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "true" ]; then
     echo_stamp "Preparing other ROS-packages to kinetic-custom_ros.rosinstall" \
     && cd /home/pi/ros_catkin_ws \
     && rosinstall_generator \
-    actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common cv_bridge cv_camera diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport compressed_image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs web_video_server xmlrpcpp mavros opencv3 mavros_extras interactive_markers tf2_web_republisher interactive_marker_proxy \
+    actionlib actionlib_msgs angles async_web_server_cpp bond bond_core bondcpp bondpy camera_calibration_parsers camera_info_manager catkin class_loader cmake_modules cpp_common cv_bridge cv_camera diagnostic_msgs diagnostic_updater dynamic_reconfigure eigen_conversions gencpp geneus genlisp genmsg gennodejs genpy geographic_msgs geometry_msgs geometry2 image_transport compressed_image_transport libmavconn mavlink mavros_msgs message_filters message_generation message_runtime mk nav_msgs nodelet orocos_kdl pluginlib python_orocos_kdl ros ros_comm rosapi rosauth rosbag rosbag_migration_rule rosbag_storage rosbash rosboost_cfg rosbridge_library rosbridge_server rosbridge_suite rosbuild rosclean rosconsole rosconsole_bridge roscpp roscpp_serialization roscpp_traits roscreate rosgraph rosgraph_msgs roslang roslaunch roslib roslint roslisp roslz4 rosmake rosmaster rosmsg rosnode rosout rospack rosparam rospy rospy_tutorials rosserial rosserial_client rosserial_msgs rosserial_python rosservice rostest rostime rostopic rosunit roswtf sensor_msgs smclib std_msgs std_srvs stereo_msgs tf tf2 tf2_bullet tf2_eigen tf2_geometry_msgs tf2_kdl tf2_msgs tf2_py tf2_ros tf2_sensor_msgs tf2_tools topic_tools trajectory_msgs urdf urdf_parser_plugin usb_cam uuid_msgs visualization_msgs web_video_server xmlrpcpp mavros opencv3 mavros_extras interactive_markers tf2_web_republisher interactive_marker_proxy vl53l1x \
     --rosdistro kinetic --deps --wet-only --tar > kinetic-custom_ros.rosinstall \
     && wstool merge -j${NUMBER_THREADS} -t src kinetic-custom_ros.rosinstall \
     && wstool update -j${NUMBER_THREADS} -t src \
@@ -147,6 +150,23 @@ echo_stamp "Installing CLEVER" \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
+
+echo_stamp "Build CLEVER documentation"
+cd /home/pi/catkin_ws/src/clever
+NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
+NPM_CONFIG_UNSAFE_PERM=true gitbook install
+gitbook build
+
+echo_stamp "Installing additional ROS packages"
+apt-get install -y --no-install-recommends \
+    ros-kinetic-dynamic-reconfigure \
+    ros-kinetic-tf2-web-republisher \
+    ros-kinetic-compressed-image-transport \
+    ros-kinetic-rosbridge-suite \
+    ros-kinetic-rosserial \
+    ros-kinetic-usb-cam \
+    ros-kinetic-vl53l1x \
+    ros-kinetic-opencv3=3.3.1neon-0stretch
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \

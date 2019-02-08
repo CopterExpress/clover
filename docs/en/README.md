@@ -24,7 +24,7 @@ The image includes:
 
 * Raspbian Stretch
 * ROS Kinetic
-* Configured [networking] (network.md)
+* Configured [networking](network.md)
 * OpenCV
 * mavros
 * A software set for working with Clever

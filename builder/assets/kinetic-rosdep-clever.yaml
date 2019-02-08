@@ -526,3 +526,15 @@ theora_image_transport:
 libogg:
   debian:
     stretch: [libtheora0=1.1.1+dfsg.1-14]
+vl53l1x:
+  debian:
+    stretch: [ros-kinetic-vl53l1x]
+interactive_markers:
+  debian:
+    stretch: [ros-kinetic-interactive-markers]
+interactive_marker_proxy:
+  debian:
+    stretch: [ros-kinetic-interactive-marker-proxy]
+tf2_web_republisher:
+  debian:
+    stretch: [ros-kinetic-tf2-web-republisher]

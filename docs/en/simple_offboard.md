@@ -269,7 +269,6 @@ set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='bod
 
 Setting pitch, roll, yaw and throttle level (approximate analogue to control in [the `STABILIZED` mode](modes.md)). This service may be used for lower level monitoring of the copter behavior or controlling the copter, if no reliable data about its position are available.
 
-
 Parameters:
 
 * `pitch`, `roll`, `yaw` – required pitch, roll, and yaw angle *(radians)*;

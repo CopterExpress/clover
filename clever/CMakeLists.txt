@@ -26,6 +26,9 @@ find_package(catkin REQUIRED COMPONENTS
   cv_bridge
 )
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
+find_package(GeographicLib REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -74,7 +77,6 @@ add_service_files(
   Navigate.srv
   NavigateGlobal.srv
   SetPosition.srv
-  SetPositionGlobal.srv
   SetVelocity.srv
   SetAttitude.srv
   SetRates.srv
@@ -138,15 +140,12 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${GeographicLib_INCLUDE_DIRS}
 )
 
 # Declare a C++ library
 add_library(clever
   src/optical_flow.cpp
-)
-
-add_library(fcu_horiz
-  src/fcu_horiz.cpp
 )
 
 add_library(aruco_vpe
@@ -161,17 +160,26 @@ add_library(aruco_vpe
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+add_executable(simple_offboard src/simple_offboard.cpp)
+
 add_executable(rc src/rc.cpp)
 
 add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(frames src/frames.cpp)
 
+target_link_libraries(simple_offboard
+  ${catkin_LIBRARIES}
+  ${GeographicLib_LIBRARIES}
+)
+
 target_link_libraries(rc ${catkin_LIBRARIES})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(frames ${catkin_LIBRARIES})
+
+add_dependencies(simple_offboard clever_generate_messages_cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -186,11 +194,6 @@ target_link_libraries(frames ${catkin_LIBRARIES})
 ## Specify libraries to link a library or executable target against
 target_link_libraries(clever
   ${catkin_LIBRARIES}
-)
-
-target_link_libraries(fcu_horiz
-  ${catkin_LIBRARIES}
-  "/opt/ros/kinetic/lib/libtf2_ros.so"
 )
 
 target_link_libraries(aruco_vpe

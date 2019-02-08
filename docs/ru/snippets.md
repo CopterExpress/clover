@@ -39,7 +39,7 @@ tolerance = 0.2  # точность проверки высоты (м)
 start = get_telemetry()
 
 # Взлетаем на 2 м
-print navigate(z=z, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 
 # Ожидаем взлета
 while True:
@@ -100,14 +100,14 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 # Создаем объект PoseStamped (либо получаем из топика):
 pose = PoseStamped()
-pose.header.frame_id = 'local_origin'  # фрейм, в котором задана позиция
+pose.header.frame_id = 'map'  # фрейм, в котором задана позиция
 pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
 pose.pose.position.x = 1
 pose.pose.position.y = 2
 pose.pose.position.z = 3
 pose.pose.orientation.w = 1
 
-frame_id = 'fcu'  # целевой фрейм
+frame_id = 'base_link'  # целевой фрейм
 transform_timeout = rospy.Duration(0.2)  # таймаут ожидания транформации
 
 # Преобразовываем позицию из старого фрейма в новый:
@@ -250,6 +250,22 @@ def rc_callback(data):
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 rospy.spin()
+```
+
+### # {#set_mode}
+
+Сменить [режим полета](modes.md) на произвольный:
+
+```python
+from mavros_msgs.srv import SetMode
+
+# ...
+
+set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
+
+# ...
+
+set_mode(custom_mode='STABILIZED')
 ```
 
 ### # {#flip}

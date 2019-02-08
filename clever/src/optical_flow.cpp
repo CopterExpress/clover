@@ -19,6 +19,7 @@
 #include <tf/transform_datatypes.h>
 #include <tf2/exceptions.h>
 #include <tf2/convert.h>
+#include <tf2/utils.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <mavros_msgs/OpticalFlowRad.h>
@@ -41,7 +42,7 @@ public:
 private:
 	ros::Publisher flow_pub_, velo_pub_, shift_pub_;
 	ros::Time prev_stamp_;
-	std::string fcu_frame_id_;
+	std::string fcu_frame_id_, local_frame_id_;
 	image_transport::CameraSubscriber img_sub_;
 	image_transport::Publisher img_pub_;
 	mavros_msgs::OpticalFlowRad flow_;
@@ -51,6 +52,7 @@ private:
 	Mat camera_matrix_, dist_coeffs_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_;
+	bool calc_flow_gyro_;
 
 	void onInit()
 	{
@@ -59,9 +61,11 @@ private:
 		image_transport::ImageTransport it(nh);
 		image_transport::ImageTransport it_priv(nh_priv);
 
-		nh_priv.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "fcu");
+		nh.param<std::string>("mavros/local_position/tf/frame_id", local_frame_id_, "map");
+		nh.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "base_link");
 		nh_priv.param("roi", roi_, 128);
 		roi_2_ = roi_ / 2;
+		nh_priv.param("calc_flow_gyro", calc_flow_gyro_, false);
 
 		img_sub_ = it.subscribeCamera("image", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
@@ -163,6 +167,21 @@ private:
 			ros::Duration integration_time = msg->header.stamp - prev_stamp_;
 			uint32_t integration_time_us = integration_time.toSec() * 1.0e6;
 
+			if (calc_flow_gyro_) {
+				try {
+					auto flow_gyro_camera = calcFlowGyro(msg->header.frame_id, prev_stamp_, msg->header.stamp);
+					static geometry_msgs::Vector3Stamped flow_gyro_fcu;
+					tf_buffer_.transform(flow_gyro_camera, flow_gyro_fcu, fcu_frame_id_);
+					flow_.integrated_xgyro = flow_gyro_fcu.vector.x;
+					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
+					flow_.integrated_zgyro = flow_gyro_fcu.vector.z;
+				} catch (const tf2::TransformException& e) {
+					// Invalidate previous frame
+					prev_.release();
+					return;
+				}
+			}
+
 			// Publish flow in fcu frame
 			flow_.header.stamp = /*prev_stamp_*/ msg->header.stamp;
 			flow_.integration_time_us = integration_time_us;
@@ -194,6 +213,23 @@ private:
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 		}
+	}
+
+	geometry_msgs::Vector3Stamped calcFlowGyro(const std::string& frame_id, const ros::Time& prev, const ros::Time& curr)
+	{
+		tf2::Quaternion prev_rot, curr_rot;
+		tf2::fromMsg(tf_buffer_.lookupTransform(frame_id, local_frame_id_, prev).transform.rotation, prev_rot);
+		tf2::fromMsg(tf_buffer_.lookupTransform(frame_id, local_frame_id_, curr).transform.rotation, curr_rot);
+
+		geometry_msgs::Vector3Stamped flow;
+		flow.header.frame_id = frame_id;
+		flow.header.stamp = curr;
+		auto diff = ((curr_rot - prev_rot) * prev_rot.inverse()) * 2.0f;
+		flow.vector.x = diff.x();
+		flow.vector.y = diff.y();
+		flow.vector.z = diff.z();
+
+		return flow;
 	}
 };
 

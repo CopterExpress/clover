@@ -8,12 +8,11 @@
         <arg name="fcu_ip" value="$(arg ip)"/>
         <arg name="gcs_bridge" value="false"/>
         <arg name="optical_flow" value="false"/>
-        <arg name="web_server" default="false"/>
         <arg name="web_video_server" default="false"/>
         <arg name="main_camera" default="false"/>
         <arg name="rosbridge" value="$(arg rosbridge)"/>
         <arg name="aruco" default="false"/>
-        <arg name="vl53l1x" default="false"/>
+        <arg name="rangefinder_vl53l1x" default="false"/>
         <arg name="rc" default="false"/>
     </include>
 </launch>

@@ -50,13 +50,16 @@
   * [3G-модем](3g.md)
 * Проекты на базе Клевера
   * [Шаровая защита коптера](shield.md)
+  * [Распознавание лиц](face_recognition.md)
+  * [Пульт на Андроид](android.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Дополнительные материалы
   * [Вклад в Клевер](contributing.md)
-  * [Прошивка ESC контроллеров с помощью Arduino](esc_firmware.md)
+  * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Протокол MAVLink](mavlink.md)
   * [Работа с логами PX4](flight_logs.md)
+  * [Калибровка камеры](calibration.md)
 * Учебник
   * [Теория и видеоуроки](lessons.md)
   * [Учебно-методическое пособие](metod.md)

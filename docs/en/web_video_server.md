@@ -1,6 +1,6 @@
 # Viewing images from cameras
 
-To view images from cameras (or other Ros topics), you can use [rviz](rviz.md), rqt, or watch them in a browser using web\_video\_server.
+To view images from cameras (or other ROS topics), you can use [rviz](rviz.md), rqt, or watch them in a browser using web\_video\_server.
 
 See read more about [using rqt](rviz.md).
 

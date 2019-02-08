@@ -1,24 +1,24 @@
 # Теория
 
-[**Урок №1** «Знакомство. Принципы проектирования и строение мультикоптеров»](https://github.com/CopterExpress/clever/blob/master/docs/lesson1.md)
+[**Урок №1** «Знакомство. Принципы проектирования и строение мультикоптеров»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson1.md)
 
-[**Урок №2** «Основы электричества»](https://github.com/CopterExpress/clever/blob/master/docs/lesson2.md)
+[**Урок №2** «Основы электричества»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson2.md)
 
-[**Урок №3** «Теория пайки»](https://github.com/CopterExpress/clever/blob/master/docs/lesson3.md)
+[**Урок №3** «Теория пайки»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson3.md)
 
-[**Урок №4** «Аэродинамика полета. Пропеллер»](https://github.com/CopterExpress/clever/blob/master/docs/lesson4.md)
+[**Урок №4** «Аэродинамика полета. Пропеллер»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson4.md)
 
-[**Урок №5** «Бесколлекторные двигатели и регуляторы их хода»](https://github.com/CopterExpress/clever/blob/master/docs/lesson5.md)
+[**Урок №5** «Бесколлекторные двигатели и регуляторы их хода»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson5.md)
 
-[**Урок №6** «Основы электромагнетизма. Типы двигателей»](https://github.com/CopterExpress/clever/blob/master/docs/lesson6.md)
+[**Урок №6** «Основы электромагнетизма. Типы двигателей»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson6.md)
 
-[**Урок №7** «Принцип работы, типы и устройство аккумуляторов»](https://github.com/CopterExpress/clever/blob/master/docs/lesson7.md)
+[**Урок №7** «Принцип работы, типы и устройство аккумуляторов»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson7.md)
 
-[**Урок №8** «Управление полётом мультикоптера. Принцип функционирования полётного контроллера. ПИД регуляторы»](https://github.com/CopterExpress/clever/blob/master/docs/lesson8.md)
+[**Урок №8** «Управление полётом мультикоптера. Принцип функционирования полётного контроллера. ПИД регуляторы»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson8.md)
 
-[**Урок №9** «Основы радиосвязи. Принцип работы радиоаппаратуры управления»](https://github.com/CopterExpress/clever/blob/master/docs/lesson9.md)
+[**Урок №9** «Основы радиосвязи. Принцип работы радиоаппаратуры управления»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson9.md)
 
-[**Урок №10** «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики иприёмники»](https://github.com/CopterExpress/clever/blob/master/docs/lesson10.md)
+[**Урок №10** «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики иприёмники»](https://github.com/CopterExpress/clever/blob/master/docs/ru/lesson10.md)
 
 ## Видеоуроки
 

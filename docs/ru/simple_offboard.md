@@ -1,25 +1,13 @@
 Simple offboard
 ===
 
+> **Note** Документация для версий [образа](microsd_images.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+
 Модуль `simple_offboard` пакета `clever` предназначен для упрощенного программирования автономного дрона ([режим](modes.md) `OFFBOARD`). Он позволяет устанавливать желаемые полетные  задачи и автоматически трансформирует [систему координат](frames.md).
 
 `simple_offboard` является высокоуровневым способом взаимодействия с полетным контроллером. Для более низкоуровневой работы см. [mavros](mavros.md).
 
 Основные сервисы – `get_telemetry` (получение всей телеметрии), `navigate` (полет в заданную точку по прямой), `navigate_global` (полет в глобальную точку по прямой), `land` (переход в режим посадки).
-
-Общие для сервисов параметры:
-
-* `auto_arm` = `true`/`false` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id` — система координат в TF2, в которой заданы координаты и рысканье (yaw), [описание систем координат](frames.md);
-* `update_frame` — считать ли систему координат изменяющейся (например, `false` для `local_origin`, `fcu`, `fcu_horiz`, `true` для `marker_map`);
-* `x`, `y` – горизонтальные координаты в системе координат `frame_id` *(м)*;
-* `z` — высота в системе координат `frame_id` *(м)*;
-* `lat`, `lon` – широта и долгота *(градусы)*;
-* `yaw` — рысканье в радианах в системе координат `frame_id` (0 – коптер смотрит по оси X);
-* `yaw_rate` — угловая скорость по рысканью в радианах в секунду (против часовой), `yaw` должен быть установлен в NaN;
-* `thrust` — уровень газа от 0 (нет газа) до 1 (полный газ).
-
-> **Warning** API модуля `simple_offboard` на данный момент нестабилен и может измениться.
 
 Использование из языка Python
 ---
@@ -59,11 +47,11 @@ release = rospy.ServiceProxy('release', Trigger)
 
 Параметры:
 
-* `frame_id` – [фрейм](frames.md) для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `local_origin`, `fcu_horiz`, `aruco_map`.
+* `frame_id` – [система координат](frames.md) для значений `x`, `y`, `z`, `vx`, `vy`, `vz`. Пример: `map`, `body`, `aruco_map`. Значение по умолчанию: `map`.
 
 Формат ответа:
 
-* `frame_id` – фрейм;
+* `frame_id` – система координат;
 * `connected` – есть ли подключение к <abbr title="Flight Control Unit, полетный контроллер">FCU</abbr>;
 * `armed` – состояние `armed` винтов (винты включены, если true);
 * `mode` – текущий [полетный режим](modes.md);
@@ -73,7 +61,7 @@ release = rospy.ServiceProxy('release', Trigger)
 * `vx, vy, vz` – скорость коптера *(м/с)*;
 * `pitch` – угол по тангажу *(радианы)*;
 * `roll` – угол по крену *(радианы)*;
-* `yaw` – угол по рысканью в фрейме `frame_id`;
+* `yaw` – угол по рысканью *(радианы)*;
 * `pitch_rate` – угловая скорость по тангажу *(рад/с)*;
 * `roll_rate` – угловая скорость по крену *(рад/с)*;
 * `yaw_rate` – угловая скорость по рысканью *(рад/с)*;
@@ -118,19 +106,19 @@ rosservice call /get_telemetry "{frame_id: ''}"
 
 Параметры:
 
-* `x`, `y`, `z` – координаты в системе `frame_id` *(м)*;
+* `x`, `y`, `z` – координаты *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
 * `yaw_rate` – угловая скорость по рысканью (применяется при установке yaw в `NaN`) *(рад/с)*;
 * `speed` – скорость полета (скорость движения setpoint) *(м/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id`, `update_frame`.
+* `frame_id` – [система координат](frames.md), в которой заданы `x`, `y`, `z` и `yaw` (по умолчанию: `map`).
 
 > **Note** Для полета без изменения угла по рыскаью достаточно установить `yaw` в `NaN` (значение угловой скорости по-умолчанию – 0).
 
 Взлет на высоту 1.5 м со скоростью взлета 0.5 м/с:
 
 ```python
-navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='body', auto_arm=True)
 ```
 
 Полет по прямой в точку 5:0 (высота 2) в локальной системе координат со скоростью 0.8 м/с (рысканье установится в 0):
@@ -148,37 +136,37 @@ navigate(x=5, y=0, z=3, speed=0.8, yaw=float('nan'))
 Полет вправо относительно коптера на 3 м:
 
 ```python
-navigate(x=0, y=-3, z=0, speed=1, frame_id='fcu_horiz')
+navigate(x=0, y=-3, z=0, speed=1, frame_id='body')
 ```
 
 Повернуться на 90 градусов против часовой:
 
 ```python
-navigate(yaw=math.radians(-90), frame_id='fcu_horiz')
+navigate(yaw=math.radians(-90), frame_id='body')
 ```
 
 Полет в точку 3:2 (высота 2) в системе координат [маркерного поля](aruco.md) со скоростью 1 м/с:
 
 ```python
-navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map', update_frame=True)
+navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map')
 ```
 
 Вращение на месте со скоростью 0.5 рад/c (против часовой):
 
 ```python
-navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='fcu_horiz')
+navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='body')
 ```
 
 Полет вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:
 
 ```python
-navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='fcu_horiz')
+navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='body')
 ```
 
 Взлет на высоту 2 м (командная строка):
 
 ```bash
-rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'fcu_horiz', update_frame: false, auto_arm: true}"
+rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
 ```
 
 ### navigate_global
@@ -188,31 +176,31 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed
 Параметры:
 
 * `lat`, `lon` – широта и долгота *(градусы)*;
-* `z` – высота в системе координат `frame_id` *(м)*;
+* `z` – высота *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
 * `yaw_rate` – угловая скорость по рысканью (при установке yaw в `NaN`) *(рад/с)*;
 * `speed` – скорость полета (скорость движения setpoint) *(м/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id`, `update_frame`.
+* `frame_id` – [система координат](frames.md), в которой заданы `z` и `yaw` (по умолчанию: `map`).
 
 > **Note** Для полета без изменения угла по рыскаью достаточно установить `yaw` в `NaN` (значение угловой скорости по-умолчанию – 0).
 
 Полет в глобальную точку со скоростью 5 м/с, оставаясь на текущей высоте (`yaw` установится в 0, коптер сориентируется передом на восток):
 
 ```python
-navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='fcu_horiz')
+navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='body')
 ```
 
 Полет в глобальную точку без изменения угла по рысканью (`yaw` = `NaN`, `yaw_rate` = 0):
 
 ```python
-navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), frame_id='fcu_horiz')
+navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), frame_id='body')
 ```
 
 Полет в глобальную точку (командная строка):
 
 ```bash
-rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'fcu_horiz', update_frame: false, auto_arm: false}"
+rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
 ```
 
 ### set_position
@@ -223,34 +211,34 @@ rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 
 
 Параметры:
 
-* `x`, `y`, `z` – координаты точки в системе координат `frame_id` *(м)*;
+* `x`, `y`, `z` – координаты точки *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
 * `yaw_rate` – угловая скорость по рысканью (при установке yaw в NaN) *(рад/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id`, `update_frame`.
+* `frame_id` – [система координат](frames.md), в которой заданы `x`, `y`, `z` и `yaw` (по умолчанию: `map`).
 
 Зависнуть на месте:
 
 ```python
-set_position(frame_id='fcu_horiz')
+set_position(frame_id='body')
 ```
 
 Назначить целевую точку на 3 м выше текущей позиции:
 
 ```python
-set_position(x=0, y=0, z=3, frame_id='fcu_horiz')
+set_position(x=0, y=0, z=3, frame_id='body')
 ```
 
 Назначить целевую точку на 1 м впереди текущей позиции:
 
 ```python
-set_position(x=1, y=0, z=0, frame_id='fcu_horiz')
+set_position(x=1, y=0, z=0, frame_id='body')
 ```
 
 Вращение на месте со скоростью 0.5 рад/c:
 
 ```python
-set_position(x=0, y=0, z=0, frame_id='fcu_horiz', yaw=float('nan'), yaw_rate=0.5)
+set_position(x=0, y=0, z=0, frame_id='body', yaw=float('nan'), yaw_rate=0.5)
 ```
 
 ### set_velocity
@@ -261,34 +249,32 @@ set_position(x=0, y=0, z=0, frame_id='fcu_horiz', yaw=float('nan'), yaw_rate=0.5
 * `yaw` – угол по рысканью *(радианы)*;
 * `yaw_rate` – угловая скорость по рысканью (при установке yaw в NaN) *(рад/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id`, `update_frame`.
+* `frame_id` – [система координат](frames.md), в которой заданы `vx`, `vy`, `vz` и `yaw` (по умолчанию: `map`).
 
 > **Note** Параметр `frame_id` определяет только ориентацию результирующего вектора скорости, но не его длину.
 
 Полет вперед (относительно коптера) со скоростью 1 м/с:
 
 ```python
-set_velocity(vx=1, vy=0.0, vz=0, frame_id='fcu_horiz')
+set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 ```
 
 Один из вариантов полета по кругу:
 
 ```python
-set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='fcu_horiz', update_frame=True)
+set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='body')
 ```
 
 ### set_attitude
 
 Установить тангаж, крен, рысканье и уровень газа (примерный аналог управления в [режиме `STABILIZED`](modes.md)). Данный сервис может быть использован для более низкоуровнего контроля поведения коптера либо для управления коптером при отсутствии источника достоверных данных о его позиции.
 
-> **Note** Параметр `frame_id` определяет только систему координат, в которой задается рысканье (`yaw`).
-
 Параметры:
 
 * `pitch`, `roll`, `yaw` – необходимый угол по тангажу, крену и рысканью *(радианы)*;
-* `thrust` – уровень газа от 0 (нет газа) до 1 (полный газ);
+* `thrust` – уровень газа от 0 (нет газа, пропеллеры остановлены) до 1 (полный газ);
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
-* `frame_id`, `update_frame`.
+* `frame_id` – [система координат](frames.md), в которой задан `yaw` (по умолчанию: `map`).
 
 ### set_rates
 
@@ -297,14 +283,14 @@ set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='fcu
 Параметры:
 
 * `pitch_rate`, `roll_rate`, `yaw_rate` – угловая скорость по танажу, крену и рыканью *(рад/с)*;
-* `thrust` – уровень газа от 0 (нет газа) до 1 (полный газ).
+* `thrust` – уровень газа от 0 (нет газа, пропеллеры остановлены) до 1 (полный газ).
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 
 ### land
 
 Перевести коптер в [режим](modes.md) посадки (`AUTO.LAND` или аналогичный).
 
-> **Note** Для автоматического отключения винтов после посадки PX4-параметр `COM_DISARM_LAND` должен быть установлен в значение > 0.
+> **Note** Для автоматического отключения винтов после посадки [параметр PX4](px4_parameters.md) `COM_DISARM_LAND` должен быть установлен в значение > 0.
 
 Посадка коптера:
 
@@ -321,9 +307,11 @@ if res.success:
 rosservice call /land "{}"
 ```
 
+<!--
 ### release
 
 Перестать публиковать setpoint'ы коптеру (отпустить управление). Необходим для продолжения контроля средствами [MAVROS](mavros.md).
+-->
 
 Дополнительные материалы
 ------------------------

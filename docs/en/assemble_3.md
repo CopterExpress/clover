@@ -95,7 +95,7 @@ TODO
 
 ![Installation of the BEC voltage Converter](../assets/cl3_mountBEC.JPG)
 
-## Installation of the 4 in 1 ESC board and the PDB power-board 
+## Installation of the 4 in 1 ESC board and the PDB power-board
 
 1. Install the 4 in 1 ESC circuit-board as shown in the picture.
 
@@ -188,7 +188,7 @@ article [remote faults](radioerrors.md).
 
 ![Installation of Raspberry Pi Model B](../assets/cl3_mountRaspberryPi.JPG)
 
-## Installation of Arduino and the FlySky radio receiver 
+## Installation of Arduino and the FlySky radio receiver
 
 1. Mount the pins of the Arduino Nano micro-controller using soldering.
 2. Install the micro-controller into a special mount, and attach to the lower deck using М3х16 screws (4 pcs).
