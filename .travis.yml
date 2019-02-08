@@ -14,10 +14,16 @@ matrix:
   fast_finish: true
   include:
     - name: "Raspberry Pi Image Build"
+      cache:
+        directories:
+        - imgcache
       before_script:
         - docker pull ${DOCKER}
+        - if [ -d imgcache ]; then mkdir -p images && cp imgcache/*.zip images; fi
       script:
         - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+      before_cache:
+        - cp images/*.zip imgcache
       before_deploy:
         # Set up git user name and tag this commit
         - git config --local user.name "goldarte"
