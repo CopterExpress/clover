@@ -11,7 +11,7 @@
 
 set -e # Exit immidiately on non-zero result
 
-SOURCE_IMAGE="http://repo.coex.space/2018-06-27-raspbian-stretch-lite.zip"
+SOURCE_IMAGE="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29/2018-06-27-raspbian-stretch-lite.zip"
 
 export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
