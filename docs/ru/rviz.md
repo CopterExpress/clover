@@ -23,7 +23,7 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rviz
 Если соединение не устанавливается, необходимо убедиться, что в `.bashrc` Клевера присутствует строка:
 
 ```bash
-export ROS_IP=192.168.11.1
+export ROS_HOSTNAME=raspberrypi.local
 ```
 
 Использование rviz
