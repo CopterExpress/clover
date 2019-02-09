@@ -9,5 +9,5 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.{js,html}]
+[*.{cpp,h,js,html}]
 indent_style = tab
