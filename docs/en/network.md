@@ -2,7 +2,6 @@
 
 The Raspberry Pi Wi-Fi adapter of has two main operating modes:
 
-
 1. **Client mode** – RPi connects to an existing Wi-Fi network.
 
 2. **Access point mode** – RPi creates a Wi-Fi network that you can connect to.

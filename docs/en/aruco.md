@@ -37,7 +37,7 @@ After the launch-file is edited, restart package `clever`:
 sudo systemctl restart clever
 ```
 
-### Calibrating the ArUco marker map.
+### Calibrating the ArUco marker map
 
 An automatically generated [ArUco-board] may be used as a map of marks (https://docs.opencv.org/trunk/db/da9/tutorial_aruco_board_detection.html).
 

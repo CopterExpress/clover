@@ -62,9 +62,9 @@ The obtained images can be viewed using [web_video_server](web_video_server.md).
 
 #### Working with QR codes
 
-> **Hint** For high-speed recognition and positioning, it is better to use [ArUco markers] (aruco.md).
+> **Hint** For high-speed recognition and positioning, it is better to use [ArUco markers](aruco.md).
 
-To program actions of the copter upon detection of [QR codes] (https://ru.wikipedia.org/wiki/QR-код) you can use the [ZBar] library (http://zbar.sourceforge.net). It should be installed using pip:
+To program actions of the copter upon detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [ZBar] library (http://zbar.sourceforge.net). It should be installed using pip:
 
 ```(bash)
 sudo pip install zbar
