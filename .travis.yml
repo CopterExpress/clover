@@ -49,7 +49,7 @@ matrix:
         - gitbook -V
         - markdownlint -V
       script:
-        - markdownlint docs --ignore **/lesson*.md --ignore **/metodmaterials.md
+        - markdownlint docs
         - gitbook install
         - gitbook build
 # ***
