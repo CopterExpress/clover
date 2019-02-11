@@ -11,3 +11,6 @@ indent_size = 4
 
 [*.{cpp,h,js,html}]
 indent_style = tab
+
+[*.txt]
+tab_width = 8
