@@ -153,7 +153,7 @@ private:
 
 					// snap orientation (if enabled and snap frame avaiable)
 					if (!snap_orientation_.empty() && !snap_to.header.frame_id.empty()) {
-						snapOrientation(marker.pose.pose, snap_to.transform.rotation);
+						snapOrientation(marker.pose.pose.orientation, snap_to.transform.rotation);
 					}
 
 					// TODO: check IDs are unique
@@ -273,16 +273,6 @@ private:
 		marker.text = std::to_string(id);
 		marker.pose = pose;
 		vis_array_.markers.push_back(marker);
-	}
-
-	void snapOrientation(geometry_msgs::Pose& pose, const geometry_msgs::Quaternion orientation)
-	{
-		tf::Quaternion q;
-		q.setRPY(0, 0, -tf::getYaw(pose.orientation) + tf::getYaw(orientation) + M_PI / 2);
-		tf::Quaternion pq;
-		tf::quaternionMsgToTF(orientation, pq);
-		pq = pq * q;
-		tf::quaternionTFToMsg(pq, pose.orientation);
 	}
 
 	inline std::string getChildFrameId(int id) const
