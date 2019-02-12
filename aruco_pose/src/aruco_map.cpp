@@ -49,7 +49,7 @@ using cv::Mat;
 class ArucoMap : public nodelet::Nodelet {
 private:
 	ros::NodeHandle nh_, nh_priv_;
-	ros::Publisher img_pub_, pose_pub_;
+	ros::Publisher img_pub_, pose_pub_, vis_markers_pub_;
 	ros::Subscriber markers_sub_, cinfo_sub;
 	cv::Ptr<cv::aruco::Board> board_;
 	Mat camera_matrix_, dist_coeffs_;
