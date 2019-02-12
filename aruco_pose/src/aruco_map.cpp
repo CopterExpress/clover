@@ -23,6 +23,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
+#include <tf/transform_datatypes.h>
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/transform_broadcaster.h>
@@ -57,7 +58,7 @@ private:
 	tf2_ros::TransformBroadcaster br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
-	visualization_msgs::MarkerArray vis_markers;
+	visualization_msgs::MarkerArray vis_array_;
 	std::string snap_orientation_;
 	bool has_camera_info_ = false;
 
@@ -80,6 +81,11 @@ public:
 
 		std::string type, map, map_name;
 		nh_priv_.param<std::string>("type", type, "map");
+		nh_priv_.param<std::string>("name", map_name, "map");
+		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
+		nh_priv_.param<std::string>("snap_orientation", snap_orientation_, "");
+
+		createStripLine();
 
 		if (type == "map") {
 			param(nh_priv_, "map", map);
@@ -91,17 +97,16 @@ public:
 			ros::shutdown();
 		}
 
-		nh_priv_.param<std::string>("name", map_name, "map");
-		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
-		nh_priv_.param<std::string>("snap_orientation", snap_orientation_, "");
-
 		pose_pub_ = nh_priv_.advertise<geometry_msgs::PoseWithCovarianceStamped>("pose", 1);
+		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1, true);
 
 		// TODO: use synchronised subscriber
 		markers_sub_ = nh_.subscribe("markers", 1, &ArucoMap::markersCallback, this);
 		cinfo_sub = nh_.subscribe("camera_info", 1, &ArucoMap::cinfoCallback, this);
 
 		publishMapImage();
+		vis_markers_pub_.publish(vis_array_);
+
 		ROS_INFO("aruco_map: ready");
 	}
 
@@ -265,23 +270,69 @@ public:
 		createCustomGridBoard(board_, markers_x, markers_y, markers_side, markers_sep_x, markers_sep_y, marker_ids);
 	}
 
+	void createStripLine()
+	{
+		visualization_msgs::Marker marker;
+		marker.header.frame_id = transform_.child_frame_id;
+		marker.action = visualization_msgs::Marker::ADD;
+		marker.ns = "aruco_map_link";
+		marker.type = visualization_msgs::Marker::LINE_STRIP;
+		marker.scale.x = 0.02;
+		marker.color.g = 1;
+		marker.color.a = 0.8;
+		marker.frame_locked = true;
+		marker.pose.orientation.w = 1;
+		vis_array_.markers.push_back(marker);
+	}
+
 	void addMarker(int id, double length, double x, double y, double z,
 				   double yaw, double pitch, double roll)
 	{
 		// Create transform
-		geometry_msgs::TransformStamped t;
-		t.transform.translation.x = x;
-		t.transform.translation.y = y;
-		t.transform.translation.z = z;
-		tf::Quaternion q;
-		q.setRPY(roll, pitch, yaw);
-		tf::quaternionTFToMsg(q, t.transform.rotation);
+		// geometry_msgs::TransformStamped t;
+		// t.transform.translation.x = x;
+		// t.transform.translation.y = y;
+		// t.transform.translation.z = z;
+		// tf::Quaternion q;
+		// q.setRPY(roll, pitch, yaw);
+		// tf::quaternionTFToMsg(q, t.transform.rotation);
 
 		// TODO: process roll pitch yaw
 		vector<cv::Point3f> obj_points(4);
 		setMarkerObjectPoints(x, y, z, yaw, length, obj_points);
 		board_->ids.push_back(id);
 		board_->objPoints.push_back(obj_points);
+
+		// Add visualization marker
+		visualization_msgs::Marker marker;
+		marker.header.frame_id = transform_.child_frame_id;
+		// marker.header.stamp = stamp;
+		marker.action = visualization_msgs::Marker::ADD;
+		marker.id = vis_array_.markers.size();
+		marker.ns = "aruco_map_marker";
+		marker.type = visualization_msgs::Marker::CUBE;
+		marker.scale.x = length;
+		marker.scale.y = length;
+		marker.scale.z = 0.001;
+		marker.color.r = 1;
+		marker.color.g = 0.5;
+		marker.color.b = 0.5;
+		marker.color.a = 0.8;
+		marker.pose.position.x = x;
+		marker.pose.position.y = y;
+		marker.pose.position.z = z;
+		tf::Quaternion q;
+		q.setRPY(roll, pitch, yaw);
+		tf::quaternionTFToMsg(q, marker.pose.orientation);
+		marker.frame_locked = true;
+		vis_array_.markers.push_back(marker);
+
+		// Add linking line
+		geometry_msgs::Point p;
+		p.x = x;
+		p.y = y;
+		p.z = z;
+		vis_array_.markers.at(0).points.push_back(p);
 	}
 
 	void setMarkerObjectPoints(float x, float y, float z, float yaw, float length,
