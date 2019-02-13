@@ -4,11 +4,6 @@ Code examples
 Python
 ---
 
-> **Note** If Cyrillic characters in the UTF-8 charset are used, specify the charset at the beginning of the program:
-> ```python
-> # -*- coding: utf-8 -*-
-> ```
-
 ### # {#distance}
 
 The function of determining the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
@@ -183,7 +178,7 @@ from mavros_msgs.msg import RCIn
 
 # ...
 
-def state_update(pose):
+def pose_update(pose):
     # Processing new data about the copter position
     pass
 

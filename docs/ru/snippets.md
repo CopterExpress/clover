@@ -183,7 +183,7 @@ from mavros_msgs.msg import RCIn
 
 # ...
 
-def state_update(pose):
+def pose_update(pose):
     # Обработка новых данных о позиции коптера
     pass
 
