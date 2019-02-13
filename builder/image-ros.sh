@@ -136,10 +136,8 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "true" ]; then
 fi
 
 echo_stamp "Installing CLEVER" \
-&& git clone ${REPO} /home/pi/catkin_ws/src/clever \
 && cd /home/pi/catkin_ws/src/clever \
-&& echo "REF: ${REF}" \
-&& git checkout ${REF} \
+&& git status \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
 && my_travis_retry pip install wheel \
