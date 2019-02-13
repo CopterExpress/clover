@@ -14,6 +14,8 @@ ROS уже установлен на [образе для RPi](microsd_images.md
 
 Для использования ROS на компьютере рекомендуется ОС Ubuntu Linux (либо виртуальная машина, например [Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) или [VirtualBox](https://www.virtualbox.org)).
 
+> **Note** Для дистрибутива ROS Kinetic рекомендуется Ubuntu версии 16.04.
+
 Концепции
 ---
 
@@ -51,6 +53,9 @@ from std_msgs.msg import String
 # ...
 
 foo_pub = rospy.Publisher('/foo', String, queue_size=1)  # создаем Publisher'а
+
+# ...
+
 foo_pub.publish(data='Hello, world!')  # публикуем сообщение
 ```
 

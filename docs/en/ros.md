@@ -51,6 +51,9 @@ from std_msgs.msg import String
 # ...
 
 foo_pub = rospy.Publisher('/foo', String, queue_size=1)  # creating a Publisher
+
+# ...
+
 foo_pub.publish(data='Hello, world!')  # posting the message
 ```
 
