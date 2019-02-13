@@ -16,7 +16,6 @@
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
-        <arg name="viz" value="true"/>
     </include>
 
     <!-- web video server -->
@@ -57,6 +56,9 @@
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(eval rosbridge or rc)"/>
 
+    <!-- tf2 republisher for web visualization -->
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" output="screen" if="$(arg rosbridge)"/>
+
     <!-- vl53l1x ToF rangefinder -->
     <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
@@ -68,5 +70,7 @@
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
 
     <!-- Arduino bridge -->
-    <include file="$(find clever)/launch/arduino.launch" if="$(arg arduino)"/>
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" if="$(arg arduino)">
+        <param name="port" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
+    </node>
 </launch>

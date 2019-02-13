@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>aruco_pose</name>
-  <version>0.0.0</version>
-  <description>ArUco maps precise pose estimation nodelet</description>
+  <version>0.0.1</version>
+  <description>Positioning with ArUco markers</description>
 
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
   <license>MIT</license>
 
   <!--url type="website">http://wiki.ros.org/aruco_pose</url-->
   <author email="okalachev@gmail.com">Oleg Kalachev</author>
-  <author email="urpylka@gmail.com">Artem Smirnov</author>
 
-  <!-- Use build_depend for packages you need at compile time: -->
-  <build_depend>nodelet</build_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>image_transport</build_depend>
-  <build_depend>cv_bridge</build_depend>
-  <build_depend>tf</build_depend>
-  <!-- Use buildtool_depend for build tool packages: -->
   <buildtool_depend>catkin</buildtool_depend>
-  <!-- Use run_depend for packages you need at runtime: -->
-  <run_depend>nodelet</run_depend>
-  <run_depend>roscpp</run_depend>
-  <run_depend>image_transport</run_depend>
-  <run_depend>cv_bridge</run_depend>
-  <!-- Use test_depend for packages you need only for testing: -->
-  <!--   <test_depend>gtest</test_depend> -->
+
+  <depend>roscpp</depend>
+  <depend>nodelet</depend>
+  <depend>tf</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>opencv3</depend>
+  <depend>cv_bridge</depend>
+  <depend>image_transport</depend>
+  <depend>message_generation</depend>
+  <depend>message_runtime</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>sensor_msgs</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

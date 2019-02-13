@@ -1,9 +1,0 @@
-<launch>
-    <!-- Bridge to connected Arduino using rosserial -->
-    <arg name="device" default="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
-    <!-- TODO: UART connection -->
-
-    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen">
-        <param name="port" value="$(arg device)"/>
-    </node>
-</launch>

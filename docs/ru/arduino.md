@@ -110,7 +110,7 @@ void setup()
   nav_req.x = 0;
   nav_req.y = 0;
   nav_req.z = 2;
-  nav_req.frame_id = "fcu_horiz";
+  nav_req.frame_id = "body";
   nav_req.speed = 0.5;
   navigate.call(nav_req, nav_res);
 
@@ -128,7 +128,7 @@ void setup()
   nav_req.x = 3;
   nav_req.y = 0;
   nav_req.z = 0;
-  nav_req.frame_id = "fcu_horiz";
+  nav_req.frame_id = "body";
   nav_req.speed = 0.8;
   navigate.call(nav_req, nav_res);
 
@@ -145,7 +145,6 @@ void setup()
   nav_req.y = 0;
   nav_req.z = 2;
   nav_req.frame_id = "aruco_map";
-  nav_req.update_frame = true;
   nav_req.speed = 0.8;
   navigate.call(nav_req, nav_res);
 

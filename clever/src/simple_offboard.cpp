@@ -338,7 +338,7 @@ void publish(const ros::Time stamp)
 
 	try {
 		// transform position and/or yaw
-		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION || setpoint_type == ATTITUDE) {
+		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION || setpoint_type == VELOCITY || setpoint_type == ATTITUDE) {
 			setpoint_position.header.stamp = stamp;
 			tf_buffer.transform(setpoint_position, setpoint_position_transformed, local_frame, ros::Duration(0.05));
 		}
@@ -473,7 +473,7 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 				speed = default_speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
 			if (yaw_rate != 0 && !std::isnan(yaw))
 				throw std::runtime_error("Yaw value should be NaN for setting yaw rate");
 
@@ -520,7 +520,7 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 			nav_speed = speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
 			if (std::isnan(yaw) && yaw_rate == 0) {
 				// keep yaw unchanged
 				yaw = tf2::getYaw(local_position.pose.orientation);

@@ -11,7 +11,7 @@
 
 set -e # Exit immidiately on non-zero result
 
-SOURCE_IMAGE="http://repo.coex.space/2018-06-27-raspbian-stretch-lite.zip"
+SOURCE_IMAGE="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-06-29/2018-06-27-raspbian-stretch-lite.zip"
 
 export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
@@ -53,16 +53,15 @@ IMAGE_NAME="${REPO_NAME}_${IMAGE_VERSION}.img"
 IMAGE_PATH="${IMAGES_DIR}/${IMAGE_NAME}"
 
 get_image() {
-  # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL> 
+  # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL>
   local BUILD_DIR=$(dirname $1)
   local RPI_ZIP_NAME=$(basename $2)
   local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
-    echo_stamp "Downloading original Linux distribution" \
-    && wget -nv -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2 \
-    && echo_stamp "Downloading complete" "SUCCESS" \
-    || (echo_stamp "Downloading was failed!" "ERROR"; exit 1)
+    echo_stamp "Downloading original Linux distribution"
+    wget --progress=dot:giga -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2
+    echo_stamp "Downloading complete" "SUCCESS" \
   else echo_stamp "Linux distribution already donwloaded"; fi
 
   echo_stamp "Unzipping Linux distribution image" \
@@ -81,17 +80,7 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/hardwar
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh' ${IMAGE_VERSION} ${SOURCE_IMAGE}
 
 # Monkey
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/monkey-clever' '/root/'
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/index.html' '/usr/share/monkey-static/'
-
-# Gitbook
-apt-get install -y curl gnupg
-curl -sL https://deb.nodesource.com/setup_11.x | bash -
-apt-get install -y nodejs
-npm install gitbook-cli -g
-gitbook build ${REPO_DIR}'/docs'
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${REPO_DIR}'/docs/_book/' '/usr/share/monkey-static/docs/'
-
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/monkey' '/root/'
 
 # Butterfly
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/butterfly.service' '/lib/systemd/system/'
@@ -110,6 +99,6 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/roscore
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/roscore.service' '/lib/systemd/system/'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/kinetic-rosdep-clever.yaml' '/etc/ros/rosdep/'
 # ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/kinetic-ros-clever.rosinstall' '/home/pi/ros_catkin_ws/'
-${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ros.sh' ${REPO_URL} ${IMAGE_VERSION} false false ${NUMBER_THREADS} 
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ros.sh' ${REPO_URL} ${IMAGE_VERSION} false false ${NUMBER_THREADS}
 
 ${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH}

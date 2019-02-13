@@ -66,6 +66,9 @@ echo_stamp "Init rosdep" \
 && echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
 && rosdep update
 
+echo_stamp "Populate rosdep for ROS user"
+sudo -u pi rosdep update
+
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
   CATKIN_PATH=$1
@@ -147,6 +150,23 @@ echo_stamp "Installing CLEVER" \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
+
+echo_stamp "Build CLEVER documentation"
+cd /home/pi/catkin_ws/src/clever
+NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
+NPM_CONFIG_UNSAFE_PERM=true gitbook install
+gitbook build
+
+echo_stamp "Installing additional ROS packages"
+apt-get install -y --no-install-recommends \
+    ros-kinetic-dynamic-reconfigure \
+    ros-kinetic-tf2-web-republisher \
+    ros-kinetic-compressed-image-transport \
+    ros-kinetic-rosbridge-suite \
+    ros-kinetic-rosserial \
+    ros-kinetic-usb-cam \
+    ros-kinetic-vl53l1x \
+    ros-kinetic-opencv3=3.3.1neon-0stretch
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \

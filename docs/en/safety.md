@@ -35,7 +35,7 @@ If anyone says the opposite – don't believe him, he is trying to misguide you:
 Flying
 ------
 
-### Safety during preparation to flying
+### Safety during pre-flight preparations
 
 * Make sure that the Li-ion batteries are charged.
 * Make sure the batteries in the control equipment are charged.
