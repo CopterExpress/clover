@@ -117,12 +117,12 @@ private:
 			img = img(cv::Rect((msg->width / 2 - roi_2_), (msg->height / 2 - roi_2_), roi_, roi_));
 		}
 
-		img.convertTo(curr_, CV_64F);
+		img.convertTo(curr_, CV_32F);
 
 		if (prev_.empty()) {
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
-			cv::createHanningWindow(hann_, curr_.size(), CV_64F);
+			cv::createHanningWindow(hann_, curr_.size(), CV_32F);
 
 		} else {
 			double response;
