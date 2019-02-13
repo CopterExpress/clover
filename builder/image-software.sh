@@ -86,8 +86,6 @@ dnsmasq=2.76-5+rpt1+deb9u1  \
 tmux=2.3-4 \
 vim=2:8.0.0197-4+deb9u1 \
 cmake=3.7.2-1 \
-python-pip=9.0.1-2+rpt2 \
-python3-pip=9.0.1-2+rpt2 \
 libjpeg8-dev=8d1-2 \
 tcpdump \
 ltrace \
@@ -102,6 +100,8 @@ monkey=1.6.9-1 \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
 ntpdate \
+python-dev \
+python3-dev \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
@@ -109,11 +109,12 @@ ntpdate \
 sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sed -i "s/updates_available//" /home/pi/.byobu/status
 
-#echo_stamp "Upgrade pip"
+echo_stamp "Installing pip"
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+python get-pip.py
 #my_travis_retry pip install --upgrade pip
 #my_travis_retry pip3 install --upgrade pip
-
-echo_stamp "Not upgrading system pip due to https://github.com/pypa/pip/issues/5599"
 
 echo_stamp "Make sure both pip and pip3 are installed"
 pip --version
