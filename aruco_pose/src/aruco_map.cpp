@@ -40,6 +40,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
 
+#include "draw.h"
 #include "utils.h"
 #include "gridboard.h"
 
@@ -289,17 +290,31 @@ public:
 				   double yaw, double pitch, double roll)
 	{
 		// Create transform
-		// geometry_msgs::TransformStamped t;
-		// t.transform.translation.x = x;
-		// t.transform.translation.y = y;
-		// t.transform.translation.z = z;
-		// tf::Quaternion q;
-		// q.setRPY(roll, pitch, yaw);
-		// tf::quaternionTFToMsg(q, t.transform.rotation);
+		tf::Quaternion q;
+		q.setRPY(roll, pitch, yaw);
+		tf::Transform transform(q, tf::Vector3(x, y, z));
 
-		// TODO: process roll pitch yaw
-		vector<cv::Point3f> obj_points(4);
-		setMarkerObjectPoints(x, y, z, yaw, length, obj_points);
+		/* marker's corners:
+			0    1
+			3    2
+		*/
+		double halflen = length / 2;
+		tf::Point p0(-halflen, halflen, 0);
+		tf::Point p1(halflen, halflen, 0);
+		tf::Point p2(halflen, -halflen, 0);
+		tf::Point p3(-halflen, -halflen, 0);
+		p0 = transform * p0;
+		p1 = transform * p1;
+		p2 = transform * p2;
+		p3 = transform * p3;
+
+		vector<cv::Point3f> obj_points = {
+			cv::Point3f(p0.x(), p0.y(), p0.z()),
+			cv::Point3f(p1.x(), p1.y(), p1.z()),
+			cv::Point3f(p2.x(), p2.y(), p2.z()),
+			cv::Point3f(p3.x(), p3.y(), p3.z())
+		};
+
 		board_->ids.push_back(id);
 		board_->objPoints.push_back(obj_points);
 
@@ -321,8 +336,6 @@ public:
 		marker.pose.position.x = x;
 		marker.pose.position.y = y;
 		marker.pose.position.z = z;
-		tf::Quaternion q;
-		q.setRPY(roll, pitch, yaw);
 		tf::quaternionTFToMsg(q, marker.pose.orientation);
 		marker.frame_locked = true;
 		vis_array_.markers.push_back(marker);
@@ -335,20 +348,12 @@ public:
 		vis_array_.markers.at(0).points.push_back(p);
 	}
 
-	void setMarkerObjectPoints(float x, float y, float z, float yaw, float length,
-	                           vector<cv::Point3f>& obj_points)
-	{
-		obj_points[0] = cv::Point3f(x - length / 2, y + length / 2, 0);
-		obj_points[1] = obj_points[0] + cv::Point3f(length, 0, 0);
-		obj_points[2] = obj_points[0] + cv::Point3f(length, -length, 0);
-		obj_points[3] = obj_points[0] + cv::Point3f(0, -length, 0);
-	}
-
 	void publishMapImage()
 	{
 		cv::Mat image;
 		cv_bridge::CvImage msg;
-		cv::aruco::drawPlanarBoard(board_, cv::Size(2000, 2000), image, 50, 1);
+		drawPlanarBoard(board_, cv::Size(2000, 2000), image, 200, 1);
+
 		cv::cvtColor(image, image, CV_GRAY2BGR);
 		msg.encoding = sensor_msgs::image_encodings::BGR8;
 		msg.image = image;
