@@ -9,7 +9,7 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.{cpp,h,js,html}]
+[*.{cpp,h,js,html,txt}]
 indent_style = tab
 
 [*.txt]
