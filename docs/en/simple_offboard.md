@@ -1,4 +1,4 @@
-Simple offboard
+Simple OFFBOARD
 ===
 
 > **Note** Documentation for the [image](microsd_images.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
@@ -56,8 +56,8 @@ Response format:
 * `armed` `armed` state of propellers (the propellers are armed, if true);
 * `mode` – current [flight mode](modes.md);
 * `x, y, z` — local position of the copter *(m)*;
-* `lat, lon` – latitude, longitude *(degrees)*, [GPS] is to be available (gps.md);
-* `alt` – altitude in the global system of coordinates (standard [WGS-84](https://ru.wikipedia.org/wiki/WGS_84), not <abbr title="Above Mean Sea Level">AMSL</abbr>!), [GPS] is to be available (gps.md);
+* `lat, lon` – latitude, longitude *(degrees)*, [GPS](gps.md) is to be available;
+* `alt` – altitude in the global system of coordinates (standard [WGS-84](https://ru.wikipedia.org/wiki/WGS_84), not <abbr title="Above Mean Sea Level">AMSL</abbr>!), [GPS](gps.md) is to be available ;
 * `vx, vy, vz` – copter velocity *(m/s)*;
 * `pitch` – pitch angle *(radians)*;
 * `roll` – roll angle *(radians)*;

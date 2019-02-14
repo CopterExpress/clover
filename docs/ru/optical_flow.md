@@ -50,7 +50,7 @@ rostopic echo mavros/distance_sensor/rangefinder_3_sub
 
 ## Troubleshooting
 
-При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить ekf2. Для этого наберите в MAVLink-консоли:
+При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить EKF2. Для этого наберите в MAVLink-консоли:
 
 ```nsh
 ekf2 stop

@@ -29,7 +29,7 @@
 * [Coordinate systems (frames)](frames.md)
 * [ROS](ros.md)
 * [MAVROS](mavros.md)
-* [Simple offboard](simple_offboard.md)
+* [Simple OFFBOARD](simple_offboard.md)
 * [Navigation using ArUco markers](aruco.md)
 * [Automatic check](selfcheck.md)
 * [Code examples](snippets.md)

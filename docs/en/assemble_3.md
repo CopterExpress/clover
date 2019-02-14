@@ -134,7 +134,7 @@ article [remote faults](radioerrors.md).
 
 1. Turn the transmitter ON
 
-    Make sure ppm in the RX Setup menu is disabled ([section "No communications with the flight controller"](radioerrors.md))
+    Make sure PPM in the RX Setup menu is disabled ([section "No communications with the flight controller"](radioerrors.md))
 
     In point 3, select “RX setup” > “PPM OUTPUT” > “Off”.
 

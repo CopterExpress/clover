@@ -213,7 +213,7 @@ The result of the command:
 
 ## Why exactly so, and is there a different way?
 
-The main types of strips used for Clever 3 are WS2812, WS2812B and SK6812 \(analog to WS2812B\). They are controlled according to the same principle: for a massif of LEDs in the strip, a data packet at the rate of 24 bits per LED; each led reads the first 24 bits of received data, and sets the corresponding color, the rest of the data are sent to the next LED in the strip. Zeros and ones are determined by different combinations of the durations of high and low level in the pulse.
+The main types of strips used for Clever 3 are WS2812, WS2812B and SK6812 \(analog to WS2812B\). They are controlled according to the same principle: for a massif of LEDs in the strip, a data packet at the rate of 24 bits per LED; each LED reads the first 24 bits of received data, and sets the corresponding color, the rest of the data are sent to the next LED in the strip. Zeros and ones are determined by different combinations of the durations of high and low level in the pulse.
 
 All these strips are supported for library management [rpi_ws281x](https://github.com/jgarff/rpi_ws281x), with that, the DMA module\(direct memory access \) of the Raspberri processor, and one of the data channels re used for control: PWM, PCM, or SPI, which guarantees absence of delays in control \(and everything is controlled from a multitasking OS, it's important\).
 
