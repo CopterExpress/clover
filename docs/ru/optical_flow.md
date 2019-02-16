@@ -2,11 +2,11 @@
 
 > **Warning** Данная функция является **экспериментальной** и включена в образ с версии v0.11.4.
 
-При использовании технологии Optical Flow возможен полет в режиме POSCTL и автономные полеты по камере, направленной вниз, засчет измерения сдвигов текстуры поверхности пола.
+При использовании технологии Optical Flow возможен полет в режиме POSCTL и автономные полеты по камере, направленной вниз, за счет измерения сдвигов текстуры поверхности пола.
 
 ## Включение
 
-А данный момент для использования Optical Flow необходима [кастомная прошивка PX4](https://yadi.sk/d/KaxaIhohu4V8XA).
+На данный момент для использования Optical Flow необходима [кастомная прошивка PX4](https://yadi.sk/d/KaxaIhohu4V8XA).
 
 Необходимо использования дальномера. При использовании дальномера STM vl53l1x, необходимо подключить его к Raspberry Pi по I2C и включить его в `~/catkin_ws/src/clever/clever/launch/clever.launch`:
 
@@ -34,7 +34,11 @@ rostopic echo mavros/distance_sensor/rangefinder_3_sub
 * `EKF2_AID_MASK` – use optical flow.
 * `EKF2_OF_DELAY` – 0.
 * `EKF2_OF_QMIN` – 20.
-* `EKF2_HGT_MODE` – range sensor (ремменд.).
+* `EKF2_HGT_MODE` – range sensor (рекомменд.).
+
+**Важно** По умолчанию в прошивке PX4 указан поворот камеры, высчитывающей flow, на 270 градусов. При использовании optical flow с Клевера следует установить нулевой поворот:
+
+* `SENS_FLOW_ROT` – No rotation (отсутствие поворота)
 
 ## Полет в POSCTL
 
@@ -46,7 +50,7 @@ rostopic echo mavros/distance_sensor/rangefinder_3_sub
 
 ## Troubleshooting
 
-При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить ekf2. Для этого наберите в MAVLink-консоли:
+При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить EKF2. Для этого наберите в MAVLink-консоли:
 
 ```nsh
 ekf2 stop

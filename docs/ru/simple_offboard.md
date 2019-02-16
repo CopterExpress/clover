@@ -1,4 +1,4 @@
-Simple offboard
+Simple OFFBOARD
 ===
 
 > **Note** Документация для версий [образа](microsd_images.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).

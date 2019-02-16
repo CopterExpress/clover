@@ -2,7 +2,7 @@
 
 Main documentation: [http://wiki.ros.org/mavros](http://wiki.ros.org/mavros)
 
-MAVROS \(MAVLink + ROS\) is a package for ROS that provides the possibility of controlling drones via the [MAVLink] protocol (mavlink.md). MAVROS supports flight stacks PX4 and APM. Communication is established via UART, USB, TCP or UDP.
+MAVROS \(MAVLink + ROS\) is a package for ROS that provides the possibility of controlling drones via the [MAVLink](mavlink.md) protocol. MAVROS supports flight stacks PX4 and APM. Communication is established via UART, USB, TCP or UDP.
 
 MAVROS subscribes to certain ROS topics while waiting for commands, publishes telemetry to other topics, and provides services.
 

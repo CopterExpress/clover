@@ -10,24 +10,61 @@ env:
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 1
-before_script:
-  - docker pull ${DOCKER}
-script:
-  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "goldarte"
-  - git config --local user.email "goldartt@gmail.com"
-  - sudo chmod -R 777 *
-  - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
-deploy:
-  provider: releases
-  api_key: ${GITHUB_OAUTH_TOKEN}
-  file: ${IMAGE_NAME}.zip
-  skip_cleanup: true
-  on:
-    tags: true
-  draft: true
+matrix:
+  fast_finish: true
+  include:
+    - name: "Raspberry Pi Image Build"
+      cache:
+        directories:
+        - imgcache
+      before_script:
+        - docker pull ${DOCKER}
+# Check if there are any cached images, copy them to our "images" directory
+        - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
+      script:
+        - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+      before_cache:
+        - cp images/*.zip imgcache
+      before_deploy:
+        # Set up git user name and tag this commit
+        - git config --local user.name "goldarte"
+        - git config --local user.email "goldartt@gmail.com"
+        - sudo chmod -R 777 *
+        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
+      deploy:
+        provider: releases
+        api_key: ${GITHUB_OAUTH_TOKEN}
+        file: ${IMAGE_NAME}.zip
+        skip_cleanup: true
+        on:
+          tags: true
+        draft: true
+    - name: "Documentation"
+      language: node_js
+      node_js:
+        - "10"
+      before_script:
+        - npm install gitbook-cli -g
+        - npm install markdownlint-cli -g
+        - gitbook -V
+        - markdownlint -V
+      script:
+        - markdownlint docs
+        - gitbook install
+        - gitbook build
+# ***
+# Disable deployments for now, revisit this later
+#   --sfalexrog, 06.02.2019
+# ***
+#      deploy:
+#        provider: pages
+#        local-dir: _book
+#        skip-cleanup: true
+#        github-token: ${GITHUB_OAUTH_TOKEN}
+#        keep-history: true
+#        target-branch: gh-pages
+#        on:
+#          branch: WIP/gitbook-autobuild
 
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893

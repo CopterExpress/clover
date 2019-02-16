@@ -9,5 +9,12 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[*.{js,html}]
+[*.{cpp,h,js,html,txt}]
 indent_style = tab
+
+[*.txt]
+tab_width = 8
+
+[CMakeLists.txt]
+indent_style = space
+indent_size = 2

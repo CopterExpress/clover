@@ -5,7 +5,7 @@ Upon connecting GPS, the following possibilities appear:
 
 * The copter can remain at the same point when flying outside
 * Autonomous missions may be programmed in the QGroundControl application
-* Flying may be performed by global points in standalone mode using the [simple offboard] module (simple_offboard.md).
+* Flying may be performed by global points in standalone mode using the [simple_offboard](simple_offboard.md) module.
 
 Useful links:
 

@@ -325,10 +325,10 @@ IMPORTANT NOTE about polarity
 #### Installation of the Pixhawk flight controller
 
 1. Stick the two-sided adhesive tape in the corners of the flight controller. ![Flight controller](../assets/pixhawk.png)
-    > **IMPORTANT** When the motors rotate, vibrations occur, which affect sensors of the PixHawk flight controller. To avoid this effect, the number of double-sided tape layers
+    > **IMPORTANT** When the motors rotate, vibrations occur, which affect sensors of the Pixhawk flight controller. To avoid this effect, the number of double-sided tape layers
 should be increased up to 4 – 5.
 2. Install the flight controller in the center of the frame. ![Flight controller](../assets/topviewpixhawk.jpg)
-    > **IMPORTANT** The arrows on the frame and PixHawk should point in the same direction
+    > **IMPORTANT** The arrows on the frame and Pixhawk should point in the same direction
 
 #### Connecting the flight controller according to the circuit diagram
 

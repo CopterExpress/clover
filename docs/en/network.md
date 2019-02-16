@@ -2,7 +2,8 @@
 
 The Raspberry Pi Wi-Fi adapter of has two main operating modes:
 
-1. **Client mode** – RPi connects to an existing Wi-Fi network. 
+1. **Client mode** – RPi connects to an existing Wi-Fi network.
+
 2. **Access point mode** – RPi creates a Wi-Fi network that you can connect to.
 
 When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [access point mode] by default (Wi-Fi.md).
@@ -147,7 +148,7 @@ Below you can read more about how RPi networking is organized.
 
 ## RPi network organization
 
-Network operation in image **2017-11-29-raspbian-stretch-lite** is supported by two pre-installed services:
+Network operation in the [image](microsd_images.md) is supported by two pre-installed services:
 
 * **networking** — the service enables all network interfaces at the moment of start [5].
 * **dhcpcd** — the service ensures configuration of addressing and routing on the interfaces obtained dynamically, or specified statically in the config file.

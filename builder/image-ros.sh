@@ -66,6 +66,9 @@ echo_stamp "Init rosdep" \
 && echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
 && rosdep update
 
+echo_stamp "Populate rosdep for ROS user"
+sudo -u pi rosdep update
+
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
   CATKIN_PATH=$1
@@ -142,7 +145,7 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install wheel \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
-&& catkin_make -j${NUMBER_THREADS} -DCMAKE_BUILD_TYPE=Release \
+&& catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \

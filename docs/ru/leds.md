@@ -24,7 +24,7 @@
 cd ~
 ```
 
-Склонируйте репозиторий библиотеки для работы с led лентами на Raspberry Pi:
+Склонируйте репозиторий библиотеки для работы с LED-лентами на Raspberry Pi:
 
 ```bash
 git clone https://github.com/jgarff/rpi_ws281x.git
