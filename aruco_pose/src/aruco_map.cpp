@@ -61,6 +61,7 @@ private:
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
 	visualization_msgs::MarkerArray vis_array_;
 	std::string snap_orientation_;
+	int image_width_, image_height_, image_margin_;
 	bool has_camera_info_ = false;
 
 public:
@@ -85,6 +86,9 @@ public:
 		nh_priv_.param<std::string>("name", map_name, "map");
 		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
 		nh_priv_.param<std::string>("snap_orientation", snap_orientation_, "");
+		nh_priv_.param("image_width", image_width_, 2000);
+		nh_priv_.param("image_height", image_height_, 2000);
+		nh_priv_.param("image_margin", image_margin_, 200);
 
 		createStripLine();
 
@@ -352,7 +356,7 @@ public:
 	{
 		cv::Mat image;
 		cv_bridge::CvImage msg;
-		drawPlanarBoard(board_, cv::Size(2000, 2000), image, 200, 1);
+		drawPlanarBoard(board_, cv::Size(image_width_, image_height_), image, image_margin_, 1);
 
 		cv::cvtColor(image, image, CV_GRAY2BGR);
 		msg.encoding = sensor_msgs::image_encodings::BGR8;
