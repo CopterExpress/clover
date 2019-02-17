@@ -2,7 +2,6 @@
 
 ## Подключение ИК-приемника
 
-
 Большинство ИК-приемников работают и подключаются одинаково. У таких приемников есть 3 пина для подключения: G/GND – земля, V/VCC – питание 5В, S/OUT – сигнал.
 
 <img src="../assets/IR_reciver_connection.png" height="400px" alt="ir reciver connection to raspberry">
