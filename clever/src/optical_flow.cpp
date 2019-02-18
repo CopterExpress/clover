@@ -224,6 +224,7 @@ private:
 		geometry_msgs::Vector3Stamped flow;
 		flow.header.frame_id = frame_id;
 		flow.header.stamp = curr;
+		// https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Quaternion_↔_angular_velocities
 		auto diff = ((curr_rot - prev_rot) * prev_rot.inverse()) * 2.0f;
 		flow.vector.x = diff.x();
 		flow.vector.y = diff.y();
