@@ -50,7 +50,7 @@ Helpful articles
 
 * [Flight modes](modes.md)
 
-* [MAVRos package] (mavros.md)
+* [MAVRos package](mavros.md)
 
 * A good introductory article: https://habrahabr.ru/post/227425/
 

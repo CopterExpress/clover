@@ -8,7 +8,7 @@ Sometimes, it is necessary to change one of ESC parameters, such as the directio
 
 ## An application for flashing ESCs
 
-For flashing various ESC, the[BLHeliSuite] application is used (https://github.com/4712/BLHeliSuite) \(for Windows\).
+For flashing various ESC, the [BLHeliSuite](https://github.com/4712/BLHeliSuite) application is used  \(for Windows\).
 
 To start the \(BLHeliSuite.exe\) application, unpack archives BLHeliAtmelHEX.zip and BLHeliSilabsHEX.zip into the folder with the application.
 
@@ -66,7 +66,7 @@ To display the settings of all ESCs simultaneously, you can use the ESC Overview
 
 ## Flashing ESCs
 
-ESC firmware files are located [here] (https://github.com/cleanflight/blheli-multishot/tree/master/BLHeli_S%20SiLabs/Hex%20Files).
+ESC firmware files are located [here](https://github.com/cleanflight/blheli-multishot/tree/master/BLHeli_S%20SiLabs/Hex%20Files).
 
 To flesh ESCs, click on button Flash BLHeli and choose the firmware file with the type of the controller, the name of which is indicated in the firmware name frame on top of the screen in tab Silabs ESC Setup (for the controller that is used in Clever 2, it is A-H-70).
 
