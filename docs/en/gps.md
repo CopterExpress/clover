@@ -18,6 +18,6 @@ Connection
 
 The GPS module is connected to "GPS" and "I2C" (compass) connectors of the flight controller.
 
-If GPS is connected, magnetometers are to be re-calibrated in the QGroundControl application via a [Wi-Fi](Wi-Fi.md) or USB connection.
+If GPS is connected, magnetometers are to be re-calibrated in the QGroundControl application via a [Wi-Fi](wifi.md) or USB connection.
 
 Next, GPS is to be enabled in parameter `EKF2_AID_MASK` (when EKF2is used) or `LPE_FUSION` (when LPE is used).

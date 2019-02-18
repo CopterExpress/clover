@@ -21,6 +21,7 @@
 * [RPi Image](microsd_images.md)
 * [RPi Connection to the Pixhawk](connection.md)
 * [Wi-Fi connection](wifi.md)
+* [SSH access](ssh.md)
 * [Configuring Wi-Fi](network.md)
 * [Using QGroundControl via Wi-Fi](gcs_bridge.md)
 * [Controlling Clever from a smartphone](rc.md)
