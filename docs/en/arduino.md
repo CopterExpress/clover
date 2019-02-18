@@ -1,6 +1,6 @@
 # Controlling the copter from Arduino
 
-For interaction with ROS topics and services on a Raspberry Pi, you can use the [rosserial_arduino] library (http://wiki.ros.org/rosserial_arduino). This library is pre-installed on [a Raspberry Pi image] (microsd_images.md).
+For interaction with ROS topics and services on a Raspberry Pi, you can use the [rosserial_arduino](http://wiki.ros.org/rosserial_arduino) library. This library is pre-installed on [a Raspberry Pi image](microsd_images.md).
 
 The main tutorial for rosserial: http://wiki.ros.org/rosserial_arduino/Tutorials
 
@@ -61,7 +61,7 @@ for(int i=0; i<8; i++) {
 
 ## Working with Clever
 
-The set of services and topics is similar to the regular set in [simple_offboard](simple_offboard.md) and [mavros] (mavros.md).
+The set of services and topics is similar to the regular set in [simple_offboard](simple_offboard.md) and [mavros](mavros.md).
 
 An example of a program that controls the copter by position using the `navigate` and `set_mode` services:
 
@@ -167,7 +167,7 @@ void loop()
 
 ## Getting telemetry
 
-With Arduino, you can use the (simple_offboard.md) `get_telemetry` [service]. To do so, declare it similar to the `navigate` and `set_mode` services:
+With Arduino, you can use the [`get_telemetry` service](simple_offboard.md). To do so, declare it similar to the `navigate` and `set_mode` services:
 
 ```cpp
 #include <ros.h>
@@ -192,7 +192,7 @@ GetTelemetry::Response gt_res;
 
 // ...
 
-gt_req.frame_id = "aruco_map"; // фрейм для значений x, y, z
+gt_req.frame_id = "aruco_map"; // frame id for x, y, z
 getTelemetry.call(gt_req, gt_res);
 
 // gt_res.x is copter position on the x axis
