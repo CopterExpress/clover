@@ -200,7 +200,7 @@ lirc.deinit()
 
 <img src="../assets/IR_transmitter_connection.png" height="500px" alt="IR transmitter connection to raspberry">
 
-<img src="../assets/IR_transmitter.png" height="500px" alt="IR transmitter scheme">
+<img src="../assets/IR_transmitter.png" height="200px" alt="IR transmitter scheme">
 
 > **Hint** В случае, если вы используете готовую плату ИК передатчика, точно так же как и с приемником, в соответсвии с маркировкой пинов подключите ее к нужным пинам Raspberry.
 
@@ -215,3 +215,23 @@ irsend SEND_ONCE deviceName keyName
 + SEND_ONCE - параметр отвечающий за то, посылаете вы один сигнал или он передается как от зажатой кнопки
 + deviceName - имя пульта, которое вы давали во время его [настройки](#remote_control)
 + keyName - имя одной из кнопок, которые были вами заданы во время настройки пульта
+
+Для того, что бы работать с `irsend` внутри вашего скрипта, требуется установить модуль `python-irsend`, для этого используйте команду:
+
+```
+pip install py-irsend
+```
+
+Что бы использовать `irsend` импортируйте библиотеку и вызовите соответствующую команду.
+
+```python
+from py_irsend import irsend
+
+
+irsend.send_once('YourRemote', ['YourKey'])
+```
+
+Где:
+
++ YourRemote - название вашего пульта указанное при настройке
++ YourKey - имя одной из заданных при настройке кнопок
