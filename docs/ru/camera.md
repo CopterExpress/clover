@@ -1,5 +1,7 @@
 # Работа с камерой
 
+<!-- TODO: физическое подключение -->
+
 Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
 
 ```xml
@@ -14,7 +16,25 @@
 sudo systemctl restart clever
 ```
 
-Для мониторинга изображения с камеры можно использовать rqt или [web_video_server](web_video_server.md).
+Для мониторинга изображения с камеры можно использовать [rqt](rviz.md) или [web_video_server](web_video_server.md).
+
+## Неисправности
+
+Если изображение с камеры отсутствует, попробуйте проверить ее с помощью утилиты [`raspistill`](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md).
+
+Остановите сервисы Клевера:
+
+```bash
+sudo systemctl stop clever
+```
+
+Получите картинку с камеры утилитой `raspistill`:
+
+```bash
+raspistill -o test-image.jpg
+```
+
+Если команда завершается с ошибкой, проверьте качество подключения шлейфа камеры к Raspberry Pi или замените его.
 
 ## Компьютерное зрение
 
