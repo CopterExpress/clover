@@ -225,7 +225,6 @@ pip install py-irsend
 from py_irsend import irsend
 
 
-
 irsend.send_once('YourRemote', ['YourKey'])
 ```
 
