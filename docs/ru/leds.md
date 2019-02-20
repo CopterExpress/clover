@@ -18,6 +18,8 @@
 
 ## Установка библиотеки для работы со светодиодной лентой
 
+> **Note** Начиная с версии v0.14 библиотека для управления светодиодной лентой встроена в образ. И вы можете сразу переходить к [совмещению модуля с `ROS` и программированию](#tuning).
+
 Определите папку, в которой будут находиться файлы библиотеки, и открыть путь к этой папке в терминале. По-умолчанию можно использовать домашнюю папку, для перехода в неё нужно выполнить команду:
 
 ```bash
@@ -51,7 +53,26 @@ sudo python ./setup.py build
 sudo python ./setup.py install
 ```
 
+<a name="install"></a>
+
+## Совместимость с ROS и Python
+
+При запуске программы с помощью sudo пользовательское окружение изменяется и появляются ошибки импорта библиотек, т.к. в окружении отсутствуют необходимые пути. Чтобы добавить в окружение пути к библиотекам Python и пакетам ROS, необходимо добавить в файл `/etc/sudoers` следующие строки:
+
+```
+Defaults        env_keep += "PYTHONPATH"
+Defaults        env_keep += "PATH"
+Defaults        env_keep += "ROS_ROOT"
+Defaults        env_keep += "ROS_MASTER_URI"
+Defaults        env_keep += "ROS_PACKAGE_PATH"
+Defaults        env_keep += "ROS_LOCATIONS"
+Defaults        env_keep += "ROS_HOME"
+Defaults        env_keep += "ROS_LOG_DIR"
+```
+
 ## Пример программы для светодиодной ленты на RPI3
+
+> **Note** В случае, если вы используете версию образа выше v0.14, вы не найдете файл `strandtest.py`. Вы можете его [скачать](https://github.com/jgarff/rpi_ws281x/blob/master/python/examples/strandtest.py "Github разработчика") с сайта разработчика.
 
 Откройте в текстовом редакторе файл `strandtest.py` из папки `python/examples` \(находится в папке с библиотекой\):
 
@@ -61,7 +82,7 @@ nano strandtest.py
 
 Найдите участок кода с настройками ленты:
 
-```(bash)
+```python
 # LED strip configuration:
 LED_COUNT      = 16      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -74,18 +95,12 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP = ws.WS2811_STRIP_GRB # Strip type and colour ordering
 ```
 
-Поправьте настройки для работы с лентой и сохраните файл. Чтобы использование ленты не мешало работе других устройств на Raspberry Pi, рекомендуется использовать следующие настройки \(настройки подходят для ленты в комплекте с Клевер 3\):
+Поправьте настройки для работы с лентой и сохраните файл. Чтобы использование ленты не мешало работе других устройств на Raspberry Pi, рекомендуется изменить следующие настройки \(настройки подходят для ленты в комплекте с Клевер 3\):
 
-```bash
+```python
 # LED strip configuration:
 LED_COUNT      = 30      # Number of LED pixels.
 LED_PIN        = 21      # GPIO pin connected to the pixels.
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-LED_STRIP = ws.SK6812_STRIP # Strip type and colour ordering
 ```
 
 Запустите тестовую программу, используя права администратора:
@@ -94,33 +109,18 @@ LED_STRIP = ws.SK6812_STRIP # Strip type and colour ordering
 sudo python strandtest.py
 ```
 
-Права администратора необходимы для выполнения скрипта, т.к. без них нет доступа к функциям прерывания, которые использует библиотека для работы с лентой.
-
-## Совместимость с ROS и Python
-
-При запуске программы с помощью sudo пользовательское окружение изменяется и появляются ошибки импорта библиотек, т.к. в окружении отсутствуют необходимые пути. Чтобы добавить в окружение пути к библиотекам Python и пакетам ROS, необходимо добавить в файл `/etc/sudoers` следующие строки:
-
-```bash
-Defaults        env_keep += "PYTHONPATH"
-Defaults        env_keep += "PATH"
-Defaults        env_keep += "ROS_ROOT"
-Defaults        env_keep += "ROS_MASTER_URI"
-Defaults        env_keep += "ROS_PACKAGE_PATH"
-Defaults        env_keep += "ROS_LOCATIONS"
-Defaults        env_keep += "ROS_HOME"
-Defaults        env_keep += "ROS_LOG_DIR"
-```
+Права администратора `sudo` необходимы для выполнения скрипта, т.к. без них нет доступа к функциям прерывания, которые использует библиотека для работы с лентой.
 
 ## Функции для работы со светодиодной лентой
 
-Для подключения библиотеки и её корректной работы требуется подключить следующие модули: neopixel - для работы ленты, time – для управления задержками, sys и signal для прерываний и формирования управляющего сигнала.
+Для подключения библиотеки и её корректной работы требуется подключить следующие модули: neopixel - для работы ленты и time – для управления задержками.
 
 ```python
 from neopixel import *
 import time
-import signal
-import sys
 ```
+
+> **Note** В случае использования версии образа с предустановленной библиотекой, вам потребуется изменить название модуля `neopixel` на `rpi_ws281x`, в результате у вас должно получиться сточка `from rpi_ws281x import *`
 
 Для работы с лентой необходимо создать объект типа **Adafruit_NeoPixel** и инициализировать библиотеку:
 
@@ -138,7 +138,7 @@ strip.begin()
 * `setPixelColorRGB(pos, red, green, blue)` – устанавливает цвет пикселя в позиции pos в цвет, состоящий из компонент `red`, `green`, `blue`. Каждый компонент должен находиться в диапазоне 0–255, где 0 – отсутствие цвета, а 255 – наибольшая доступная яркость компонента в светодиодном модуле.
 * `show()` – обновляет состояние ленты. Только после её использования все программные изменения перемещаются на светодиодную ленту.
 
-Остальные функции можно обнаружить, вызвав команду
+Остальные функции можно обнаружить, вызвав команду:
 
 ```bash
 pydoc neopixel
