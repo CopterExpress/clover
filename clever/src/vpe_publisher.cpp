@@ -30,20 +30,30 @@ ros::Publisher vpe_pub;
 ros::Subscriber local_position_sub;
 ros::Timer zero_timer;
 PoseStamped vpe, pose;
-ros::Time local_pose_stamp(0);
-ros::Duration publish_zero_timout, offset_timeout;
+ros::Time got_local_pos(0);
+ros::Duration publish_zero_timout, publish_zero_duration, offset_timeout;
 TransformStamped offset;
 
-void publishZero(const ros::TimerEvent&)
+void publishZero(const ros::TimerEvent& e)
 {
-	if ((ros::Time::now() - pose.header.stamp < publish_zero_timout) ||
-	    (ros::Time::now() - vpe.header.stamp < publish_zero_timout))
-		return;
+	if (e.current_real - vpe.header.stamp < publish_zero_timout) return; // have vpe
+
+	if (e.current_real - pose.header.stamp < publish_zero_timout) { // have local position
+		if (got_local_pos.isZero()) {
+			ROS_INFO("vpe_publisher: got local position");
+			got_local_pos = e.current_real;
+		}
+
+		if (e.current_real - got_local_pos > publish_zero_duration) return; // stop publishing zero
+	} else {
+		// lost local position
+		got_local_pos = ros::Time(0);
+	}
 
 	ROS_INFO_THROTTLE(10, "vpe_publisher: publish zero");
 	static geometry_msgs::PoseStamped zero;
 	zero.header.frame_id = vpe.header.frame_id;
-	zero.header.stamp = ros::Time::now();
+	zero.header.stamp = e.current_real;
 	zero.pose.orientation.w = 1;
 	vpe_pub.publish(zero);
 }
@@ -127,6 +137,7 @@ int main(int argc, char **argv) {
 		// publish zero to initialize the local position
 		zero_timer = nh.createTimer(ros::Duration(0.1), &publishZero);
 		publish_zero_timout = ros::Duration(nh_priv.param("publish_zero_timout", 5.0));
+		publish_zero_duration = ros::Duration(nh_priv.param("publish_zero_duration", 5.0));
 		local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &localPositionCallback);
 	}
 
