@@ -32,7 +32,7 @@ ros::Timer zero_timer;
 PoseStamped vpe, pose;
 ros::Time local_pose_stamp(0);
 ros::Duration publish_zero_timout, offset_timeout;
-TransformStamped offset, offset_inversed;
+TransformStamped offset;
 
 void publishZero(const ros::TimerEvent&)
 {
@@ -82,7 +82,6 @@ void callback(const T& msg)
 				// offset.header.frame_id = vpe.header.frame_id;
 				offset.child_frame_id = offset_frame_id;
 				br.sendTransform(offset);
-				//offset_inversed = inverseTransform(offset);
 			}
 			// apply the offset
 			tf2::doTransform(vpe, vpe, offset);
