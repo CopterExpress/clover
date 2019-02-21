@@ -64,7 +64,7 @@
     <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
         <param name="offset" value="-0.05"/>
-        <remap from="~range" to="mavros/distance_sensor/rangefinder_3_sub"/> <!-- redirect data to FCU -->
+        <remap from="~range" to="mavros/distance_sensor/rangefinder_sub"/> <!-- redirect data to FCU -->
     </node>
 
     <!-- rc backend -->

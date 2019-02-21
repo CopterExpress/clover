@@ -24,10 +24,10 @@
 <arg name="rangefinder_vl53l1x" default="true"/>
 ```
 
-По умолчания драйер дальномера передает данные в Pixhawk (через топик `/mavros/distance_sensor/rangefinder_3_sub`). Для просмотра данных из топика используйте команду:
+По умолчания драйер дальномера передает данные в Pixhawk (через топик `/mavros/distance_sensor/rangefinder_sub`). Для просмотра данных из топика используйте команду:
 
 ```bash
-rostopic echo mavros/distance_sensor/rangefinder_3_sub
+rostopic echo mavros/distance_sensor/rangefinder_sub
 ```
 
 ### Настройки PX4
@@ -47,7 +47,7 @@ def range_callback(msg):
     # Обработка новых данных с дальномера
     print 'Rangefinder distance:', msg.range
 
-rospy.Subscriber('mavros/distance_sensor/rangefinder_3_sub', Range, range_callback)
+rospy.Subscriber('mavros/distance_sensor/rangefinder_sub', Range, range_callback)
 ```
 
 ### Визуализация данных
