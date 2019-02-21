@@ -115,8 +115,8 @@ int main(int argc, char **argv) {
 	nh_priv.param<string>("frame_id", frame_id, "");
 	nh_priv.param<string>("child_frame_id", child_frame_id, "");
 	nh_priv.param<string>("mavros/local_position/frame_id", local_frame_id, "map");
-	nh_priv.param<string>("offset/frame_id", offset_frame_id, "");
-	offset_timeout = ros::Duration(nh_priv.param("offset/timeout", 5.0));
+	nh_priv.param<string>("offset_frame_id", offset_frame_id, "");
+	offset_timeout = ros::Duration(nh_priv.param("offset_timeout", 5.0));
 
 	if (!frame_id.empty()) {
 		ROS_INFO("vpe_publisher: using data from TF");
@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
 	auto pose_cov_sub = nh_priv.subscribe<PoseWithCovarianceStamped>("pose_cov", 1, &callback);
 	//auto markers_sub = nh_priv.subscribe<aruco_pose::MarkerArray>("markers", 1, &callback);
 
-	vpe_pub = nh_priv.advertise<PoseStamped>("pose_pub", 1);
+	vpe_pub = nh_priv.advertise<PoseStamped>("vpe", 1);
 	//vpe_cov_pub = nh_priv_.advertise<PoseStamped>("pose_cov_pub", 1);
 
 	vpe.header.stamp = ros::Time(0);
