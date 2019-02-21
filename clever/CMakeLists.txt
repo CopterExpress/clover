@@ -164,6 +164,8 @@ add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(frames src/frames.cpp)
 
+add_executable(vpe_publisher src/vpe_publisher.cpp)
+
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
@@ -174,6 +176,8 @@ target_link_libraries(rc ${catkin_LIBRARIES})
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(frames ${catkin_LIBRARIES})
+
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 add_dependencies(simple_offboard clever_generate_messages_cpp)
 

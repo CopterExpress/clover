@@ -89,7 +89,7 @@ arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
 frame = cv2.imdecode(arr, -1)
 ```
 
-Объяснение дальнейшего кода можно найти на github’е используемого API в комментариях к [следующему скрипту](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
+Объяснение дальнейшего кода можно найти на GitHub’е используемого API в комментариях к [следующему скрипту](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
 
 ## Использование
 

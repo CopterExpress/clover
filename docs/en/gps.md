@@ -5,7 +5,7 @@ Upon connecting GPS, the following possibilities appear:
 
 * The copter can remain at the same point when flying outside
 * Autonomous missions may be programmed in the QGroundControl application
-* Flying may be performed by global points in standalone mode using the [simple offboard] module (simple_offboard.md).
+* Flying may be performed by global points in standalone mode using the [simple_offboard](simple_offboard.md) module.
 
 Useful links:
 
@@ -18,6 +18,6 @@ Connection
 
 The GPS module is connected to "GPS" and "I2C" (compass) connectors of the flight controller.
 
-If GPS is connected, magnetometers are to be re-calibrated in the QGroundControl application via a [Wi-Fi](Wi-Fi.md) or USB connection.
+If GPS is connected, magnetometers are to be re-calibrated in the QGroundControl application via a [Wi-Fi](wifi.md) or USB connection.
 
 Next, GPS is to be enabled in parameter `EKF2_AID_MASK` (when EKF2is used) or `LPE_FUSION` (when LPE is used).

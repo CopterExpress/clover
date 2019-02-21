@@ -34,6 +34,7 @@
 #include <mavros_msgs/AttitudeTarget.h>
 #include <mavros_msgs/Thrust.h>
 #include <mavros_msgs/State.h>
+#include <mavros_msgs/StatusText.h>
 
 #include <clever/GetTelemetry.h>
 #include <clever/Navigate.h>
@@ -113,6 +114,7 @@ enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
 
 // Last received telemetry messages
 mavros_msgs::State state;
+mavros_msgs::StatusText statustext;
 PoseStamped local_position;
 TwistStamped velocity;
 NavSatFix global_position;
@@ -248,7 +250,10 @@ void offboardAndArm()
 			if (state.mode == "OFFBOARD") {
 				break;
 			} else if (ros::Time::now() - start > offboard_timeout) {
-				throw std::runtime_error("OFFBOARD request timed out");
+				string report = "OFFBOARD timed out";
+				if (statustext.header.stamp > start)
+					report += ": " + statustext.text;
+				throw std::runtime_error(report);
 			}
 			ros::spinOnce();
 			r.sleep();
@@ -270,7 +275,10 @@ void offboardAndArm()
 			if (state.armed) {
 				break;
 			} else if (ros::Time::now() - start > arming_timeout) {
-				throw std::runtime_error("Arming timed out");
+				string report = "Arming timed out";
+				if (statustext.header.stamp > start)
+					report += ": " + statustext.text;
+				throw std::runtime_error(report);
 			}
 			ros::spinOnce();
 			r.sleep();
@@ -710,6 +718,7 @@ int main(int argc, char **argv)
 	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
+	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);

@@ -148,7 +148,7 @@ Below you can read more about how RPi networking is organized.
 
 ## RPi network organization
 
-Network operation in image **2017-11-29-raspbian-stretch-lite** is supported by two pre-installed services:
+Network operation in the [image](microsd_images.md) is supported by two pre-installed services:
 
 * **networking** — the service enables all network interfaces at the moment of start [5].
 * **dhcpcd** — the service ensures configuration of addressing and routing on the interfaces obtained dynamically, or specified statically in the config file.

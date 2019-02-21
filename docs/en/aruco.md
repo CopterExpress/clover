@@ -2,7 +2,7 @@
 
 > **Note** Documentation for the versions [of image](microsd_images.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/aruco.md).
 
-[ArUco-Markers] (https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html) is a popular technology for positioning
+[ArUco-Markers](https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html) is a popular technology for positioning
 robotic systems using computer vision.
 
 Examples of ArUco markers:
@@ -15,13 +15,13 @@ For rapid generation of markers for printing, you may use an online tool: http:/
 
 ## aruco\_pose
 
-The `aruco_pose` module allows restoring the position of the copter relative to the map of ArUco markers and communicating it to the flight controller using the [Vision Position Estimation] mechanism (https://dev.px4.io/en/ros/external_position_estimation.html).
+The `aruco_pose` module allows restoring the position of the copter relative to the map of ArUco markers and communicating it to the flight controller using the [Vision Position Estimation](https://dev.px4.io/en/ros/external_position_estimation.html) mechanism.
 
-If the source of the copter position by the markers is available, the option appears for precise autonomous indoor navigation by the positions using the [simple\_offboard] module (simple_offboard.md).
+If the source of the copter position by the markers is available, the option appears for precise autonomous indoor navigation by the positions using the [simple_offboard](simple_offboard.md) module.
 
 ### Turning on
 
-Make sure that in the clever launch file \(`~/catkin_ws/src/clever/clever/launch/clever.launch`\), the start of aruco\_pose and [computer vision cameras] is turned on(camera.md):
+Make sure that in the clever launch file \(`~/catkin_ws/src/clever/clever/launch/clever.launch`\), the start of aruco\_pose and [computer vision cameras](camera.md) is turned on:
 
 ```xml
 <arg name="main_camera" default="true"/>
@@ -39,7 +39,7 @@ sudo systemctl restart clever
 
 ### Calibrating the ArUco marker map
 
-An automatically generated [ArUco-board] may be used as a map of marks (https://docs.opencv.org/trunk/db/da9/tutorial_aruco_board_detection.html).
+An automatically generated [ArUco-board](https://docs.opencv.org/trunk/db/da9/tutorial_aruco_board_detection.html) may be used as a map of marks.
 
 The map of marks is adjusted using file `~/catkin_ws/src/clever/clever/launch/aruco.launch`. To use ArUco-board, enter its parameters:
 

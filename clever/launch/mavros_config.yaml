@@ -1,0 +1,142 @@
+# Config file for mavros
+# Based on https://raw.githubusercontent.com/mavlink/mavros/master/mavros/launch/px4_config.yaml
+
+startup_px4_usb_quirk: true
+
+conn:
+  heartbeat_rate: 1.0    # send hertbeat rate in Hertz
+  timeout: 10.0          # hertbeat timeout in seconds
+  timesync_rate: 10.0    # TIMESYNC rate in Hertz (feature disabled if 0.0)
+  system_time_rate: 1.0  # send system time to FCU rate in Hertz (disabled if 0.0)
+
+time:
+  time_ref_source: "fcu"  # time_reference source
+  timesync_mode: MAVLINK
+  timesync_avg_alpha: 0.6 # timesync averaging factor
+
+global_position:
+  frame_id: "map"             # origin frame
+  child_frame_id: "base_link" # body-fixed frame
+  rot_covariance: 99999.0   # covariance for attitude?
+  gps_uere: 1.0             # User Equivalent Range Error (UERE) of GPS sensor (m)
+  use_relative_alt: true    # use relative altitude for local coordinates
+  tf:
+    send: false               # send TF?
+    frame_id: "map"  # TF frame_id
+    global_frame_id: "earth"  # TF earth frame_id
+    child_frame_id: "base_link" # TF child_frame_id
+
+imu:
+  frame_id: "base_link"
+  # need find actual values
+  linear_acceleration_stdev: 0.0003
+  angular_velocity_stdev: !degrees 0.02
+  orientation_stdev: 1.0
+  magnetic_stdev: 0.0
+
+local_position:
+  frame_id: "map"
+  tf:
+    send: true
+    send_fcu: false
+
+# setpoint_attitude
+setpoint_attitude:
+  reverse_thrust: false     # allow reversed thrust
+  use_quaternion: true     # enable PoseStamped topic subscriber
+  tf:
+    listen: false           # enable tf listener (disable topic subscribers)
+    frame_id: "map"
+    child_frame_id: "target_attitude"
+    rate_limit: 50.0
+
+setpoint_raw:
+  thrust_scaling: 1.0       # used in setpoint_raw attitude callback.
+  # Note: PX4 expects normalized thrust values between 0 and 1, which means that
+  # the scaling needs to be unitary and the inputs should be 0..1 as well.
+
+setpoint_position:
+  tf:
+    listen: false           # enable tf listener (disable topic subscribers)
+    frame_id: "map"
+    child_frame_id: "target_position"
+    rate_limit: 50.0
+  mav_frame: LOCAL_NED
+
+setpoint_velocity:
+  mav_frame: LOCAL_NED
+
+mission:
+  pull_after_gcs: true  # update mission if gcs updates
+
+distance_sensor:
+  rangefinder:
+      id: 0
+      frame_id: "rangefinder"
+      orientation: PITCH_270
+      field_of_view: 0.5
+  rangefinder_sub:
+      subscriber: true
+      id: 1
+      orientation: PITCH_270
+      covariance: 1  # cm
+
+# fake_gps
+fake_gps:
+  # select data source
+  use_mocap: true         # ~mocap/pose
+  mocap_transform: true   # ~mocap/tf instead of pose
+  use_vision: false       # ~vision (pose)
+  # origin (default: Zürich)
+  geo_origin:
+    lat: 47.3667          # latitude [degrees]
+    lon: 8.5500           # longitude [degrees]
+    alt: 408.0            # altitude (height over the WGS-84 ellipsoid) [meters]
+  eph: 2.0
+  epv: 2.0
+  satellites_visible: 5   # virtual number of visible satellites
+  fix_type: 3             # type of GPS fix (default: 3D)
+  tf:
+    listen: false
+    send: false           # send TF?
+    frame_id: "map"       # TF frame_id
+    child_frame_id: "fix" # TF child_frame_id
+    rate_limit: 10.0      # TF rate
+  gps_rate: 5.0           # GPS data publishing rate
+
+mocap:
+  # select mocap source
+  use_tf: false   # ~mocap/tf
+  use_pose: true  # ~mocap/pose
+
+odometry:
+  in:
+    frame_id: "odom"
+    child_frame_id: "base_link"
+    frame_tf:
+      local_frame: "local_origin_ned"
+      body_frame_orientation: "flu"
+  out:
+    frame_tf:
+      # available: check MAV_FRAME odometry local frames in
+      # https://mavlink.io/en/messages/common.html
+      local_frame: "vision_ned"
+      # available: ned, frd or flu (though only the tf to frd is supported)
+      body_frame_orientation: "frd"
+
+px4flow:
+  frame_id: "px4flow"
+  ranger_fov: !degrees 6.8  # 6.8 degreens at 5 meters, 31 degrees at 1 meter
+  ranger_min_range: 0.3     # meters
+  ranger_max_range: 5.0     # meters
+
+vision_pose:
+  tf:
+    listen: false           # enable tf listener (disable topic subscribers)
+
+vision_speed:
+  listen_twist: true    # enable listen to twist topic, else listen to vec3d topic
+  twist_cov: true       # enable listen to twist with covariance topic
+
+vibration:
+  frame_id: "base_link"
