@@ -25,8 +25,8 @@
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true">
-        <remap from="image" to="main_camera/image_raw"/>
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+        <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
     </node>
 
