@@ -15,12 +15,12 @@
         <param name="estimate_poses" value="true"/>
     </node>
 
-    <!-- <node name="aruco_map" pkg="nodelet" type="nodelet" if="$(arg aruco_map)" args="load aruco_pose/aruco_map nodelet_manager" output="screen" clear_params="true">
+    <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true">
         <remap from="markers" to="aruco_detect/markers"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="type" value="map"/>
         <param name="map" value="$(find aruco_pose)/map/map.txt"/>
-    </node> -->
+    </node>
 
     <test test-name="test_aruco_pose" pkg="aruco_pose" type="basic.py"/>
 </launch>

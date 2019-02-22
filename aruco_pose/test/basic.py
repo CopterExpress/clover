@@ -6,21 +6,18 @@ from pytest import approx
 import rospy
 import rostest
 
+from geometry_msgs.msg import PoseWithCovarianceStamped
 from sensor_msgs.msg import Image
 from aruco_pose.msg import MarkerArray
 from visualization_msgs.msg import MarkerArray as VisMarkerArray
 
 
-def to_dict(msg):
-    return {s: getattr(msg, s) for s in msg.__slots__}
-
-
-class TestArucoDetect(unittest.TestCase):
+class TestArucoPose(unittest.TestCase):
     def setUp(self):
         rospy.init_node('test_aruco_detect', anonymous=True)
 
     def test_markers(self):
-        markers = rospy.wait_for_message('/aruco_detect/markers', MarkerArray, timeout=5)
+        markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=5)
         assert len(markers.markers) == 4
         assert markers.header.frame_id == 'main_camera_optical'
 
@@ -64,7 +61,19 @@ class TestArucoDetect(unittest.TestCase):
     def test_visualization(self):
         vis = rospy.wait_for_message('aruco_detect/visualization', VisMarkerArray, timeout=5)
 
+    def test_map(self):
+        pose = rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=5)
+        assert pose.header.frame_id == 'main_camera_optical'
+        assert pose.pose.pose.position.x == approx(-0.629167753342)
+        assert pose.pose.pose.position.y == approx(0.293822650809)
+        assert pose.pose.pose.position.z == approx(2.12641343155)
+        assert pose.pose.pose.orientation.x == approx(-0.998383794799)
+        assert pose.pose.pose.orientation.y == approx(-5.20919098575e-06)
+        assert pose.pose.pose.orientation.z == approx(-0.0300861070302)
+        assert pose.pose.pose.orientation.w == approx(0.0482143590507)
+
     # def test_transforms(self):
     #     pass
 
-rostest.rosrun('aruco_pose', 'test_aruco_detect', TestArucoDetect, sys.argv)
+
+rostest.rosrun('aruco_pose', 'test_aruco_detect', TestArucoPose, sys.argv)
