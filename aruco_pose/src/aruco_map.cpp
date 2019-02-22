@@ -60,7 +60,7 @@ private:
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
 	visualization_msgs::MarkerArray vis_array_;
-	std::string snap_orientation_;
+	std::string known_orientation_;
 	int image_width_, image_height_, image_margin_;
 	bool has_camera_info_ = false;
 
@@ -85,7 +85,7 @@ public:
 		nh_priv_.param<std::string>("type", type, "map");
 		nh_priv_.param<std::string>("name", map_name, "map");
 		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
-		nh_priv_.param<std::string>("snap_orientation", snap_orientation_, "");
+		nh_priv_.param<std::string>("known_orientation", known_orientation_, "");
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
@@ -140,7 +140,7 @@ public:
 		Mat obj_points, img_points;
 		cv::Vec3d rvec, tvec;
 
-		if (snap_orientation_.empty()) {
+		if (known_orientation_.empty()) {
 			// simple estimation
 			int valid = cv::aruco::estimatePoseBoard(corners, ids, board_, camera_matrix_, dist_coeffs_,
 		                                             rvec, tvec, false);
@@ -166,7 +166,7 @@ public:
 			fillTransform(transform_.transform, rvec, tvec);
 			try {
 				geometry_msgs::TransformStamped snap_to = tf_buffer_.lookupTransform(markers.header.frame_id,
-				                                          snap_orientation_, markers.header.stamp, ros::Duration(0.02));
+				                                          known_orientation_, markers.header.stamp, ros::Duration(0.02));
 				snapOrientation(transform_.transform.rotation, snap_to.transform.rotation);
 			} catch (const tf2::TransformException& e) {
 				ROS_WARN_THROTTLE(1, "aruco_map: can't snap: %s", e.what());
