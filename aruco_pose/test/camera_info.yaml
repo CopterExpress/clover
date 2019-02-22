@@ -1,0 +1,21 @@
+# some random camera calibration for testing
+image_width: 640
+image_height: 480
+camera_name: test_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [643.229809, 0.000000, 356.811289, 0.000000, 644.318982, 299.150067, 0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.422907, 0.202567, 0.000781, 0.000447, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [567.010193, 0.000000, 366.677428, 0.000000, 0.000000, 594.591980, 307.043423, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
