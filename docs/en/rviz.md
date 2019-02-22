@@ -54,7 +54,7 @@ sudo apt-get install ros-kinetic-jsk-visualization
 Starting the rqt toolkit
 ---
 
-![rqt](../assets/rqt.png)
+![rqt](../assets/rqt.jpg)
 
 To start rqt for monitoring Clever status, use command:
 

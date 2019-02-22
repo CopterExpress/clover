@@ -54,7 +54,7 @@ sudo apt-get install ros-kinetic-jsk-visualization
 Запуск инструментов rqt
 ---
 
-![rqt](../assets/rqt.png)
+![rqt](../assets/rqt.jpg)
 
 Для запуска rqt для мониторинга состояния Клевера используйте команду:
 

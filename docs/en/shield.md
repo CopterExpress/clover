@@ -52,7 +52,7 @@ The sticks were cut to the calculated length and prepared for subsequent work.
 
 After everything has been printed and cut, it is time to assemble the guard.
 
-![detal](../assets/detal.png)
+![detal](../assets/detal.jpg)
 
 Assembly is the most crucial moment, as it requires a special algorithm.
 
@@ -68,9 +68,9 @@ Assembly:
 
 After assembly, divide the ball into 2 hemispheres and install the mounts on the copter making sure that everything fits.
 
-![detal1](../assets/detal1.png)
+![detal1](../assets/detal1.jpg)
 
-![detal2](../assets/detal2.png)
+![detal2](../assets/detal2.jpg)
 
 (An example of fasteners installation)
 
@@ -78,7 +78,7 @@ Now, the hemispheres may be glued. The hemispheres are not to be glued to each o
 
 After drying, the guard is ready for installation and for the first test flight!
 
-![finalball](../assets/finalball.png)
+![finalball](../assets/finalball.jpg)
 
 (without fasteners yet)
 

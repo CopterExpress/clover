@@ -32,14 +32,14 @@ The same procedure applies here:
 
 Prepared connectors are to be inserted into appropriate sockets, and power wires are to be soldered to the power distribution board according to the circuit diagram:
 
-![FPV3](../assets/fpv_3.png)
+![FPV3](../assets/fpv_3.jpg)
 
 > **Warning** In this circuit diagram, the camera is powered from 12 V (however, it is possible to use 5 V).
 > The transmitter is powered from the ESC power (however, it is possible to use 12 V).
 
 ## Installing FPV components
 
-![FPV4](../assets/fpv_4.png)
+![FPV4](../assets/fpv_4.jpg)
 
 The following may be used as fastening materials:
 
