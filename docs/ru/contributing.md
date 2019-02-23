@@ -14,6 +14,8 @@
 
 Для удобного редактирования текста, вы можете использовать текстовые редакторы с поддержкой Markdown: [Typora](https://typora.io), [Dillinger](https://dillinger.io/) (веб), [VSCode](https://code.visualstudio.com) с плагином [Markdown Editor](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor).
 
+Для VSCode также рекомендуется использование плагина [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) ([словарь для русского языка](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian)).
+
 Для локальной сборки статического сайта документации необходимо использовать утилиту [`gitbook-cli`](https://github.com/GitbookIO/gitbook-cli).
 
 ## Исправление ошибок в документации

@@ -1,6 +1,6 @@
 # Калибровка камеры
 
-Компьютерное зрение получает все более широкое распространение. Зачастую, алгоритмы компьютерного зрения работают неточно, получая искаженное изображение с камеры, что особенно характерно для fisheye-камер.  
+Компьютерное зрение получает все более широкое распространение. Зачастую, алгоритмы компьютерного зрения работают неточно, получая искаженное изображение с камеры, что особенно характерно для fisheye-камер.
 
 ![img](../assets/img1.jpg)
 
@@ -13,10 +13,10 @@
 Для начала, необходимо установить необходимые библиотеки:
 
 ```
-pip install numpy  
-pip install opencv-python  
-pip install glob  
-pip install pyyaml  
+pip install numpy
+pip install opencv-python
+pip install glob
+pip install pyyaml
 pip install urllib.request
 ```
 
@@ -46,12 +46,12 @@ python setup.py install
 
 ## Подготовка к калибровке
 
-Вам необходимо подготовить калибровочную мишень. Она представляет собой «шахматную доску». Файл можно взять [отсюда](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_ac01.png).  
+Вам необходимо подготовить калибровочную мишень. Она представляет собой «шахматную доску». Файл можно взять [отсюда](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_ac01.png).
 Наклейте распечатанную мишень на любую твердую поверхность. Посчитайте количество пересечений в длину и в ширину доски, измерьте размер клетки (в мм).
 
 ![img](../assets/chessboard.jpg)
 
-Включите Клевер и подключитесь к его Wifi.
+Включите Клевер и подключитесь к его Wi-Fi.
 
 > Перейдите на 192.168.11.1:8080 и проверьте, получает ли компьютер изображения из топика image_raw.
 
@@ -178,17 +178,17 @@ Path:  # Путь до папки с изображениями
 Данная программа получает изображения с камеры Клевера и выводит их на экран в исправленном виде, используя существующий калибровочный файл.
 
 ```python
-import clevercamcalib.clevercamcalib as ccc  
-import cv2  
-import urllib.request  
-import numpy as np  
-while True:  
-	req = urllib.request.urlopen('http://192.168.11.1:8080/snapshot?topic=/main_camera/image_raw')  
-    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)  
-    image = cv2.imdecode(arr, -1)  
-    undistorted_img = ccc.get_undistorted_image(image, ccc.CLEVER_FISHEYE_CAM_640)  
-    cv2.imshow("undistort", undistorted_img)  
-    cv2.waitKey(33)  
+import clevercamcalib.clevercamcalib as ccc
+import cv2
+import urllib.request
+import numpy as np
+while True:
+	req = urllib.request.urlopen('http://192.168.11.1:8080/snapshot?topic=/main_camera/image_raw')
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    image = cv2.imdecode(arr, -1)
+    undistorted_img = ccc.get_undistorted_image(image, ccc.CLEVER_FISHEYE_CAM_640)
+    cv2.imshow("undistort", undistorted_img)
+    cv2.waitKey(33)
 cv2.destroyAllWindows()
 ```
 

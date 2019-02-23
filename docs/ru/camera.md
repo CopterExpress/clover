@@ -44,7 +44,7 @@ raspistill -o test-image.jpg
 
 Основная статья: http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython.
 
-Пример создания подписчика на топик с изображением с основной камеры для обрабоки с использованием OpenCV:
+Пример создания подписчика на топик с изображением с основной камеры для обработки с использованием OpenCV:
 
 ```python
 import rospy
@@ -84,7 +84,7 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 > **Hint** Для высокоскоростного распознавания и позиционирования лучше использовать [ArUco-маркеры](aruco.md).
 
-Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать бибилиотеку [ZBar](http://zbar.sourceforge.net). Ее нужно установить в помощью pip:
+Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать библиотеку [ZBar](http://zbar.sourceforge.net). Ее нужно установить в помощью pip:
 
 ```bash
 sudo pip install zbar

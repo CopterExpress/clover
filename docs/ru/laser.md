@@ -4,7 +4,7 @@
 
 Рекомендуемая для Клевера модель дальномера – STM VL53L1X. Это дальномер может измерять расстояния от 0 до 4 м, при этом обеспечивая высокую точность измерений.
 
-На [образе для Raspberry Pi](microsd_images.md) предустановен соответствующий ROS-драйвер.
+На [образе для Raspberry Pi](microsd_images.md) предустановлен соответствующий ROS-драйвер.
 
 ### Подключение к Raspberry Pi
 
@@ -24,7 +24,7 @@
 <arg name="rangefinder_vl53l1x" default="true"/>
 ```
 
-По умолчания драйер дальномера передает данные в Pixhawk (через топик `/mavros/distance_sensor/rangefinder_sub`). Для просмотра данных из топика используйте команду:
+По умолчания драйвер дальномера передает данные в Pixhawk (через топик `/mavros/distance_sensor/rangefinder_sub`). Для просмотра данных из топика используйте команду:
 
 ```bash
 rostopic echo mavros/distance_sensor/rangefinder_sub
@@ -52,7 +52,7 @@ rospy.Subscriber('mavros/distance_sensor/rangefinder_sub', Range, range_callback
 
 ### Визуализация данных
 
-Для посмотроения графика по данным с дальномера может быть использован rqt_multiplot.
+Для построения графика по данным с дальномера может быть использован rqt_multiplot.
 
 Для визуализации данных может быть использован rviz. Для этого необходимо добавить топик типа `sensor_msgs/Range` в визуализацию:
 
