@@ -5,8 +5,8 @@
 import rospy
 from geometry_msgs.msg import PoseStamped
 
-#import cv2  # TODO - fix "NEON - NOT AVAILABLE" error
-#import cv2.aruco
+import cv2  # TODO - fix "NEON - NOT AVAILABLE" error
+import cv2.aruco
 
 import numpy
 import mavros
@@ -25,3 +25,6 @@ import pymavlink
 from pymavlink import mavutil
 import rpi_ws281x
 import pigpio
+
+print cv2.getBuildInformation()
+

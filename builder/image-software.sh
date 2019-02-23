@@ -150,7 +150,7 @@ EOF
 echo_stamp "Attempting to kill dirmngr"
 gpgconf --kill dirmngr
 # dirmngr is only used by apt-key, so we can safely kill it.
-# We ignore killall's exit value as well.
-killall -w -9 dirmngr || true
+# We ignore pkill's exit value as well.
+pkill -9 -f dirmngr || true
 
 echo_stamp "End of software installation"
