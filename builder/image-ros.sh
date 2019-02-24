@@ -166,7 +166,7 @@ apt-get install -y --no-install-recommends \
     ros-kinetic-rosserial \
     ros-kinetic-usb-cam \
     ros-kinetic-vl53l1x \
-    ros-kinetic-opencv3=3.3.1neon-0stretch
+    ros-kinetic-opencv3=3.3.19-0stretch
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \
