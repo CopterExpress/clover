@@ -22,7 +22,7 @@ sudo systemctl restart clever
 
 ### Viewing
 
-To view a video-stream, you have to [connect to Wi-Fi](Wi-Fi.md) of Clever \(`CLEVER-xxxx`\), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
+To view a video-stream, you have to [connect to Wi-Fi](wifi.md) of Clever \(`CLEVER-xxxx`\), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
 
 ![Viewing web_video_server](../assets/web_video_server.png)
 

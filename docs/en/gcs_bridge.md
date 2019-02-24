@@ -4,7 +4,7 @@ Using QGroundControl via Wi-Fi
 ![QGroundControl](../assets/qground.png)
 
 You can monitor, control, calibrate and configure the flight controller of the quadcopter using QGroundControl via Wi-Fi.
-This requires [connecting to Wi-Fi](Wi-Fi.md) of the `CLEVER-xxxx` network.
+This requires [connecting to Wi-Fi](wifi.md) of the `CLEVER-xxxx` network.
 
 After that, in the Clever launch-file `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch`, choose one of the preconfigured bridge modes.
 

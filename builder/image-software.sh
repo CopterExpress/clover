@@ -58,7 +58,7 @@ echo_stamp "Install apt keys & repos"
 # TODO: This STDOUT consist 'OK'
 curl http://repo.coex.space/aptly_repo_signing.key 2> /dev/null | apt-key add -
 apt-get update \
-&& apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u3 > /dev/null \
+&& apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u4 > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
@@ -90,7 +90,7 @@ libjpeg8-dev=8d1-2 \
 tcpdump \
 ltrace \
 libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
-python-rosdep=0.15.0-1 \
+python-rosdep \
 python-rosinstall-generator=0.1.14-1 \
 python-wstool=0.1.17-1 \
 python-rosinstall=0.7.8-1 \
@@ -121,12 +121,12 @@ pip --version
 pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
-my_travis_retry pip3 install butterfly
-my_travis_retry pip3 install butterfly[systemd]
+my_travis_retry pip3 install --prefer-binary butterfly
+my_travis_retry pip3 install --prefer-binary butterfly[systemd]
 systemctl enable butterfly.socket
 
 echo_stamp "Install ws281x library"
-my_travis_retry pip install rpi_ws281x
+my_travis_retry pip install --prefer-binary rpi_ws281x
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
@@ -150,7 +150,7 @@ EOF
 echo_stamp "Attempting to kill dirmngr"
 gpgconf --kill dirmngr
 # dirmngr is only used by apt-key, so we can safely kill it.
-# We ignore killall's exit value as well.
-killall -w -9 dirmngr || true
+# We ignore pkill's exit value as well.
+pkill -9 -f dirmngr || true
 
 echo_stamp "End of software installation"

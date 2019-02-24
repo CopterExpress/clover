@@ -17,6 +17,8 @@
 #include <math.h>
 #include <vector>
 #include <string>
+#include <map>
+#include <unordered_map>
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
@@ -62,7 +64,8 @@ private:
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	bool estimate_poses_, send_tf_;
 	double length_;
-	std::string frame_id_prefix_, snap_orientation_;
+	std::unordered_map<int, double> length_override_;
+	std::string frame_id_prefix_, known_orientation_;
 	Mat camera_matrix_, dist_coeffs_;
 	aruco_pose::MarkerArray array_;
 	visualization_msgs::MarkerArray vis_array_;
@@ -81,7 +84,9 @@ public:
 			ROS_FATAL("aruco_detect: can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
 		}
-		nh_priv_.param<std::string>("snap_orientation", snap_orientation_, "");
+		readLengthOverride();
+
+		nh_priv_.param<std::string>("known_orientation", known_orientation_, "");
 		nh_priv_.param<std::string>("frame_id_prefix", frame_id_prefix_, "aruco_");
 
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
@@ -128,9 +133,27 @@ private:
 				cv::aruco::estimatePoseSingleMarkers(corners, length_, camera_matrix_, dist_coeffs_,
 				                                     rvecs, tvecs);
 
-				if (!snap_orientation_.empty()) {
+				// process length override, TODO: efficiency
+				if (!length_override_.empty()) {
+					for (unsigned int i = 0; i < ids.size(); i++) {
+						int id = ids[i];
+						auto item = length_override_.find(id);
+						if (item != length_override_.end()) { // found override
+							vector<cv::Vec3d> rvecs_current, tvecs_current;
+							vector<vector<cv::Point2f>> corners_current;
+							corners_current.push_back(corners[i]);
+							cv::aruco::estimatePoseSingleMarkers(corners_current, item->second,
+							                                     camera_matrix_, dist_coeffs_,
+										                         rvecs_current, tvecs_current);
+							rvecs[i] = rvecs_current[0];
+							tvecs[i] = tvecs_current[0];
+						}
+					}
+				}
+
+				if (!known_orientation_.empty()) {
 					try {
-						snap_to = tf_buffer_.lookupTransform(msg->header.frame_id, snap_orientation_,
+						snap_to = tf_buffer_.lookupTransform(msg->header.frame_id, known_orientation_,
 						                                     msg->header.stamp, ros::Duration(0.02));
 					} catch (const tf2::TransformException& e) {
 						ROS_WARN_THROTTLE(5, "aruco_detect: can't snap: %s", e.what());
@@ -152,7 +175,7 @@ private:
 					fillPose(marker.pose.pose, rvecs[i], tvecs[i]);
 
 					// snap orientation (if enabled and snap frame avaiable)
-					if (!snap_orientation_.empty() && !snap_to.header.frame_id.empty()) {
+					if (!known_orientation_.empty() && !snap_to.header.frame_id.empty()) {
 						snapOrientation(marker.pose.pose.orientation, snap_to.transform.rotation);
 					}
 
@@ -181,7 +204,7 @@ private:
 
 			for (unsigned int i = 0; i < ids.size(); i++)
 				pushVisMarkers(msg->header.frame_id, msg->header.stamp, array_.markers[i].pose.pose,
-				               length_, ids[i], i);
+				               getMarkerLength(ids[i]), ids[i], i);
 
 			vis_markers_pub_.publish(vis_array_);
 		}
@@ -192,7 +215,8 @@ private:
 			cv::aruco::drawDetectedMarkers(debug, corners, ids); // draw markers
 			if (estimate_poses_)
 				for (unsigned int i = 0; i < ids.size(); i++)
-					cv::aruco::drawAxis(debug, camera_matrix_, dist_coeffs_, rvecs[i], tvecs[i], length_);
+					cv::aruco::drawAxis(debug, camera_matrix_, dist_coeffs_,
+					                    rvecs[i], tvecs[i], getMarkerLength(ids[i]));
 
 			cv_bridge::CvImage out_msg;
 			out_msg.header.frame_id = msg->header.frame_id;
@@ -278,6 +302,25 @@ private:
 	inline std::string getChildFrameId(int id) const
 	{
 		return frame_id_prefix_ + std::to_string(id);
+	}
+
+	void readLengthOverride()
+	{
+		std::map<std::string, double> length_override;
+		nh_priv_.getParam("length_override", length_override);
+		for (auto const& item : length_override) {
+			length_override_[std::stoi(item.first)] = item.second;
+		}
+	}
+
+	inline double getMarkerLength(int id)
+	{
+		auto item = length_override_.find(id);
+		if (item != length_override_.end()) {
+			return item->second;
+		} else {
+			return length_;
+		}
 	}
 };
 

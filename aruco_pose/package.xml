@@ -27,6 +27,7 @@
   <depend>geometry_msgs</depend>
   <depend>visualization_msgs</depend>
   <depend>sensor_msgs</depend>
+  <depend>rostest</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

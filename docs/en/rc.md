@@ -44,7 +44,7 @@ Additional PX4 parameters:
 Connection
 ---
 
-Connect the smartphone to Clever [Wi-Fi](Wi-Fi.md) network (`CLEVER-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
+Connect the smartphone to Clever [Wi-Fi](wifi.md) network (`CLEVER-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
 
 The sticks on the screen of the application work just like real sticks. To arm the copter, hold the left stick in the bottom right corner for several seconds. To disarm — in the bottom left corner.
 

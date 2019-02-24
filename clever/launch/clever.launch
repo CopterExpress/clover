@@ -25,9 +25,10 @@
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true">
-        <remap from="image" to="main_camera/image_raw"/>
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+        <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
+        <param name="calc_flow_gyro" value="true"/>
     </node>
 
     <!-- main nodelet manager -->
@@ -63,7 +64,7 @@
     <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
         <param name="offset" value="-0.05"/>
-        <remap from="~range" to="mavros/distance_sensor/rangefinder_3_sub"/> <!-- redirect data to FCU -->
+        <remap from="~range" to="mavros/distance_sensor/rangefinder_sub"/> <!-- redirect data to FCU -->
     </node>
 
     <!-- rc backend -->

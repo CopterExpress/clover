@@ -3,7 +3,7 @@ SSH access to Raspberry Pi
 
 [RPi image](microsd_images.md) is configured to be accessed via SSH for editing files, loading data and running programs.
 
-For the SSH access, it is necessary [to connect to Raspberry Pi over Wi-Fi](Wi-Fi.md) (connection via an Ethernet cable is also possible).
+For the SSH access, it is necessary [to connect to Raspberry Pi over Wi-Fi](wifi.md) (connection via an Ethernet cable is also possible).
 
 In Linux or macOS, run the command prompt, and execute command:
 

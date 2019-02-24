@@ -11,7 +11,7 @@ Python
 
 ### # {#distance}
 
-Функция определения расстяния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
+Функция определения расстояния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
 ```python
 def get_distance(x1, y1, z1, x2, y2, z2):
@@ -108,7 +108,7 @@ pose.pose.position.z = 3
 pose.pose.orientation.w = 1
 
 frame_id = 'base_link'  # целевой фрейм
-transform_timeout = rospy.Duration(0.2)  # таймаут ожидания транформации
+transform_timeout = rospy.Duration(0.2)  # таймаут ожидания трансформации
 
 # Преобразовываем позицию из старого фрейма в новый:
 new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
@@ -127,7 +127,7 @@ flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 
 ### # {#angle-hor}
 
-Рассчет общего угла коптера к горизонту:
+Расчет общего угла коптера к горизонту:
 
 ```python
 PI_2 = math.pi / 2

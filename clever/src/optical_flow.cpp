@@ -67,7 +67,7 @@ private:
 		roi_2_ = roi_ / 2;
 		nh_priv.param("calc_flow_gyro", calc_flow_gyro_, false);
 
-		img_sub_ = it.subscribeCamera("image", 1, &OpticalFlow::flow, this);
+		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
 		flow_pub_ = nh.advertise<mavros_msgs::OpticalFlowRad>("mavros/px4flow/raw/send", 1);
 		velo_pub_ = nh_priv.advertise<geometry_msgs::TwistStamped>("angular_velocity", 1);
@@ -224,6 +224,7 @@ private:
 		geometry_msgs::Vector3Stamped flow;
 		flow.header.frame_id = frame_id;
 		flow.header.stamp = curr;
+		// https://en.wikipedia.org/wiki/Rotation_formalisms_in_three_dimensions#Quaternion_↔_angular_velocities
 		auto diff = ((curr_rot - prev_rot) * prev_rot.inverse()) * 2.0f;
 		flow.vector.x = diff.x();
 		flow.vector.y = diff.y();
