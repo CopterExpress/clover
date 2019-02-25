@@ -34,7 +34,7 @@
 * Coding
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
-  * [Simple offboard](simple_offboard.md)
+  * [Simple OFFBOARD](simple_offboard.md)
   * [Navigation using ArUco markers](aruco.md)
   * [Automatic check](selfcheck.md)
   * [Code examples](snippets.md)
@@ -55,6 +55,6 @@
   * [Contribution to Clever](contributing.md)
   * [Flashing ESCs using BLHeliSuite](esc_firmware.md)
   * [MAVLink](mavlink.md)
-  * [PX4 Logs and Topics ](flight_logs.md)
+  * [PX4 Logs and Topics](flight_logs.md)
 * Textbook
   * [Theory and Videos](lessons.md)

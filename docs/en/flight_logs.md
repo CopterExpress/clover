@@ -1,4 +1,4 @@
-PX4 Logs and Topics 
+PX4 Logs and Topics
 ===
 
 For detailed analysis of the PX4 firmware behavior, you can view flight logs. Flight logs are messages in [uORB topics](https://dev.px4.io/en/middleware/uorb.html) written to a file with extension `.ulg`. The log file can be downloaded using QGroundControl via Wi-Fi or USB in the *Download Log* tab:

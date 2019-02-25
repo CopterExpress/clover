@@ -1,8 +1,8 @@
 Lesson 1: "Introduction. Principles of designing and building multicopters"
-======================================================================== 
+========================================================================
 
 The first drones
-------------------- 
+-------------------
 
 The impetus for the emergence of remotely operated machines was discovery of electricity and invention of radio. On August 22, 1849, the Austrian army used balloons controlled by wires for bombing Venice. In 1892, the Sims-Edison Electric Torpedo Company presented an anti-ship torpedo controlled by wires. In 1897, a British Ernest Wilson patented a system for wireless control of a zeppelin; however, there is no information about building such a mechanism.
 
@@ -27,7 +27,7 @@ UAV types
 
 An Unmanned Aerial Vehicle (UAV) is an aircraft flying without a pilot (crew) on board, and controlled during flight automatically, by an operator in a control room, or by a combination of these methods. The main classes of such aircraft are UAVs of the airplane and copter types.
 
-Airplane-type UAVs 
+Airplane-type UAVs
 ---------------------
 
 This type of aircraft is also known as fixed-wing UAV. The lifting force of such aircraft is created aerodynamically by the air pressure moving against a fixed wing. Aircraft of this type are usually characterized by longer flight duration, high maximum altitude, and high speed.
@@ -45,7 +45,7 @@ The areas of use:
 * Security and area monitoring.
 
 Application of copters
-------------------- 
+-------------------
 
 An Unmanned Aerial Vehicle (UAV) is an aircraft flying without a pilot (crew) on board, and controlled during flight automatically, by an operator in the control room, or by a combination of these methods. It is widely used in various fields:
 
@@ -58,7 +58,7 @@ An Unmanned Aerial Vehicle (UAV) is an aircraft flying without a pilot (crew) on
 * Food industry (delivery of food products).
 
 Types and configuration
-------------------- 
+-------------------
 
 There are many engines configurations: a tricopter, a hexacopter, or an octocopter, but the simplest one in terms of assembly and operation is a quadcopter, i. e., a multi-rotor platform with four engines. In turn, a quadcopter may have + and х configuration. In copters with a "+" configuration, one of the beams faces forward, while in platforms with the "x" configuration, the main direction of movement is between two adjacent beams.
 

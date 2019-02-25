@@ -1,8 +1,8 @@
 Lesson 2 "Fundamentals of electricity"
-============================== 
+======================================
 
 Introduction. Electromotive force. Ohm's Law
------------------------------------------ 
+--------------------------------------------
 
 As we know, all bodies are composed of tiny particles - molecules, molecules are composed of atoms, atoms — of still smaller protons, neutrons, and electrons. Each particle, molecule, or body has its energy charge. Bodies with a positive (+) charge are attracted to bodies with a negative (-) charge, and the same charges repel from each other ( + ) from ( + ) and ( - ) from ( - ).  Motion is observed.
 
@@ -51,7 +51,7 @@ I = U\R
 I=2 A
 
 The first Kirchhoff's law
---------------------- 
+-------------------------
 
 In circuits that consist of series-connected source and receiver of energy, the relationship between the current, electromotive force and resistance of the entire circuit, or between the voltage and the resistance in any section of the circuit is determined by the Ohm's law.
 
@@ -109,7 +109,7 @@ The obtained expression is of wide practical use.
 Electric circuits are calculated by this law.
 
 The second Kirchhoff's law
---------------------- 
+---------------------
 
 In a closed electric circuit, the sum of all the EMF is equal to the sum of the voltage drops in the resistances of the same circuit.
 
