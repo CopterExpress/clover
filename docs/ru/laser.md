@@ -32,7 +32,16 @@ rostopic echo mavros/distance_sensor/rangefinder_sub
 
 ### Настройки PX4
 
-TODO
+Для использования данных с дальномера в [PX4 должен быть сконфигурирован](px4_parameters.md).
+
+При использовании EKF2 (`SYS_MC_EST_GROUP` = `ekf2`):
+
+* `EKF2_HGT_MODE` = `2` (Range sensor) – при полете над горизонтальным полом;
+* `EKF2_RNG_AID` = `1` (Range aid enabled) – в остальных случаях.
+
+При использовании LPE (`SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
+
+* В параметре `LPE_FUSION` включен флажок "pub agl as lpos down" – при полете над горизонтальным полом.
 
 ### Получение данных из Python
 
