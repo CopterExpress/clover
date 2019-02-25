@@ -150,6 +150,7 @@ Solder the prepared wires of the motors to the pads of ESC.
 
 1. Take a bundle of red and black wires marked 14AWG
 2. Cut 4 pieces of wire of the following lengths
+
 * Length 7 cm (XT60 pin power connector) - 1 red, 1 black
 * Length 9 cm (XT60 socket power connector) - 1 red, 1 black
 

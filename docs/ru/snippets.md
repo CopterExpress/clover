@@ -4,10 +4,14 @@
 Python
 ---
 
+<!-- markdownlint-disable MD031 -->
+
 > **Note** При использовании кириллических символов в кодировке UTF-8 необходимо добавить в начало программы указание кодировки:
 > ```python
 > # -*- coding: utf-8 -*-
 > ```
+
+<!-- markdownlint-disable MD031 -->
 
 ### # {#distance}
 
