@@ -29,7 +29,7 @@
 Основные топики в PX4
 ---
 
-[uORB](https://dev.px4.io/en/middleware/uorb.html) представляет собой pubsub механизм, аналогичный ROS-топикам, однако сильно упрощенный и подходящий для embedded-среды.
+[uORB](https://dev.px4.io/en/middleware/uorb.html) представляет собой pub/sub механизм, аналогичный ROS-топикам, однако сильно упрощенный и подходящий для embedded-среды.
 
 Полный список топиков можно узнать в исходном коде проекта [в каталоге `msg`](https://github.com/PX4/Firmware/tree/master/msg).
 
