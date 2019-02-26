@@ -42,7 +42,6 @@
 
 #include "draw.h"
 #include "utils.h"
-#include "gridboard.h"
 
 using std::vector;
 using cv::Mat;
@@ -90,7 +89,7 @@ public:
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
 
-		createStripLine();
+		// createStripLine();
 
 		if (type == "map") {
 			param(nh_priv_, "map", map);
@@ -272,23 +271,31 @@ public:
 			}
 		}
 
-		createCustomGridBoard(board_, markers_x, markers_y, markers_side, markers_sep_x, markers_sep_y, marker_ids);
+		double max_y = markers_y * markers_side + (markers_y - 1) * markers_sep_y;
+		for(int y = 0; y < markers_y; y++) {
+			for(int x = 0; x < markers_x; x++) {
+				double x_pos = x * (markers_side + markers_sep_x);
+				double y_pos = max_y - y * (markers_side + markers_sep_y) - markers_side;
+				ROS_INFO("add marker %d %g %g", marker_ids[y * markers_y + x], x_pos, y_pos);
+				addMarker(marker_ids[y * markers_y + x], markers_side, x_pos, y_pos, 0, 0, 0, 0);
+			}
+		}
 	}
 
-	void createStripLine()
-	{
-		visualization_msgs::Marker marker;
-		marker.header.frame_id = transform_.child_frame_id;
-		marker.action = visualization_msgs::Marker::ADD;
-		marker.ns = "aruco_map_link";
-		marker.type = visualization_msgs::Marker::LINE_STRIP;
-		marker.scale.x = 0.02;
-		marker.color.g = 1;
-		marker.color.a = 0.8;
-		marker.frame_locked = true;
-		marker.pose.orientation.w = 1;
-		vis_array_.markers.push_back(marker);
-	}
+	// void createStripLine()
+	// {
+	// 	visualization_msgs::Marker marker;
+	// 	marker.header.frame_id = transform_.child_frame_id;
+	// 	marker.action = visualization_msgs::Marker::ADD;
+	// 	marker.ns = "aruco_map_link";
+	// 	marker.type = visualization_msgs::Marker::LINE_STRIP;
+	// 	marker.scale.x = 0.02;
+	// 	marker.color.g = 1;
+	// 	marker.color.a = 0.8;
+	// 	marker.frame_locked = true;
+	// 	marker.pose.orientation.w = 1;
+	// 	vis_array_.markers.push_back(marker);
+	// }
 
 	void addMarker(int id, double length, double x, double y, double z,
 				   double yaw, double pitch, double roll)
@@ -345,11 +352,11 @@ public:
 		vis_array_.markers.push_back(marker);
 
 		// Add linking line
-		geometry_msgs::Point p;
-		p.x = x;
-		p.y = y;
-		p.z = z;
-		vis_array_.markers.at(0).points.push_back(p);
+		// geometry_msgs::Point p;
+		// p.x = x;
+		// p.y = y;
+		// p.z = z;
+		// vis_array_.markers.at(0).points.push_back(p);
 	}
 
 	void publishMapImage()
