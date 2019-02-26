@@ -54,6 +54,7 @@
   * [Автозапуск ПО](autolaunch.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [3G-модем](3g.md)
+  * [Установка ROS Kinetic](ros-install.md)
 * Проекты на базе Клевера
   * [Шаровая защита коптера](shield.md)
   * [Распознавание лиц](face_recognition.md)
