@@ -35,6 +35,7 @@ var tfClient = new ROSLIB.TFClient({
 	fixedFrame : 'map'
 });
 
+// vehicle markers
 var vehicleMarkers = new ROS3D.MarkerArrayClient({
 	ros: ros,
 	tfClient: tfClient,
@@ -42,10 +43,19 @@ var vehicleMarkers = new ROS3D.MarkerArrayClient({
 	rootObject: viewer.scene
 });
 
+// camera markers
 var cameraMarkers = new ROS3D.MarkerArrayClient({
 	ros: ros,
 	tfClient: tfClient,
 	topic: '/main_camera/camera_markers',
+	rootObject: viewer.scene
+});
+
+// detected aruco markers
+var cameraMarkers = new ROS3D.MarkerArrayClient({
+	ros: ros,
+	tfClient: tfClient,
+	topic: '/aruco_detect/visualization',
 	rootObject: viewer.scene
 });
 
