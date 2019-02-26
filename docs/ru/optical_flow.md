@@ -8,25 +8,17 @@
 
 На данный момент для использования Optical Flow необходима [кастомная прошивка PX4](https://yadi.sk/d/KaxaIhohu4V8XA).
 
-Необходимо использования дальномера. При использовании дальномера STM vl53l1x, необходимо подключить его к Raspberry Pi по I2C и включить его в `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
-```xml
-<arg name="vl53l1x" default="true"/>
-```
-
-Проверить работу лазерного дальномера можно с помощью команды:
-
-```bash
-rostopic echo mavros/distance_sensor/rangefinder_3_sub
-```
-
-Необходимо включить Optical Flow:
+Включите Optical Flow в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
 
 ```xml
 <arg name="optical_flow" default="true"/>
 ```
 
-В `main_camera.launch` должен быть выставлен корректный фрейм камеры.
+> **Info** Для правильной работы модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
+
+## Настройка полетного контроллера
 
 Рекомендуемые параметры PX4:
 
@@ -34,11 +26,8 @@ rostopic echo mavros/distance_sensor/rangefinder_3_sub
 * `EKF2_AID_MASK` – use optical flow.
 * `EKF2_OF_DELAY` – 0.
 * `EKF2_OF_QMIN` – 20.
-* `EKF2_HGT_MODE` – range sensor (рекомменд.).
-
-**Важно** По умолчанию в прошивке PX4 указан поворот камеры, высчитывающей flow, на 270 градусов. При использовании optical flow с Клевера следует установить нулевой поворот:
-
-* `SENS_FLOW_ROT` – No rotation (отсутствие поворота)
+* `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 ## Полет в POSCTL
 
@@ -48,7 +37,19 @@ rostopic echo mavros/distance_sensor/rangefinder_3_sub
 
 Автономный полет возможен с использованием модуля [simple_offboard](simple_offboard.md).
 
-## Troubleshooting
+Пример взлета на высоту 1.5 м и удержание позиции:
+
+```python
+navigate(z=1.5, frame_id='body', auto_arm=True)
+```
+
+Полет вперед на 1 м:
+
+```python
+navigate(x=1.5, frame_id='body')
+```
+
+## Неисправности
 
 При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить EKF2. Для этого наберите в MAVLink-консоли:
 
@@ -57,11 +58,14 @@ ekf2 stop
 ekf2 start
 ```
 
-Если коптер будет сильно уплывать по рысканью, попробуйте следующее:
+Если коптер сильно уплывает по рысканью, попробуйте:
 
-* Перекалибровать гироскопы
-* Перекалибровать магнитометр
-* Попробовать разные значения параметра `EKF2_MAG_TYPE`, который определяет, каким образом данные с магнитометра используются в EKF2.
-* Изменять значения параметров `EKF2_MAG_NOISE`, `EKF2_GYR_NOISE`, `EKF2_GYR_B_NOISE`.
+* перекалибровать гироскопы;
+* перекалибровать магнитометр;
+* попробовать разные значения параметра `EKF2_MAG_TYPE`, который определяет, каким образом данные с магнитометра используются в EKF2;
+* изменять значения параметров `EKF2_MAG_NOISE`, `EKF2_GYR_NOISE`, `EKF2_GYR_B_NOISE`.
 
-Если коптер уплывает по высоте, попробуйте также выставить `MPC_ALT_MODE` = 2 (Terrain following).
+Если коптер уплывает по высоте, попробуйте:
+
+* Изменить значение параметра `MPC_THR_HOVER`;
+* выставить `MPC_ALT_MODE` = 2 (Terrain following).

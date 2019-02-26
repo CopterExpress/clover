@@ -37,6 +37,7 @@
   * [MAVROS](mavros.md)
   * [Автономный полет в OFFBOARD](simple_offboard.md)
   * [Навигация по ArUco-маркерам](aruco.md)
+  * [Навигация по Optical Flow](optical_flow.md)
   * [Автоматическая проверка](selfcheck.md)
   * [Примеры кода](snippets.md)
   * [Ориентация камеры](camera_frame.md)
