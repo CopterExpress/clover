@@ -31,7 +31,6 @@ set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
-release = rospy.ServiceProxy('release', Trigger)
 ```
 
 Unused proxy functions may be removed from the code.
