@@ -52,7 +52,7 @@ void publishZero(const ros::TimerEvent& e)
 
 	ROS_INFO_THROTTLE(10, "vpe_publisher: publish zero");
 	static geometry_msgs::PoseStamped zero;
-	zero.header.frame_id = vpe.header.frame_id;
+	zero.header.frame_id = local_frame_id;
 	zero.header.stamp = e.current_real;
 	zero.pose.orientation.w = 1;
 	vpe_pub.publish(zero);
@@ -84,14 +84,14 @@ void callback(const T& msg)
 
 		// offset
 		if (!offset_frame_id.empty()) {
-			if (ros::Time::now() - vpe.header.stamp > offset_timeout) {
+			if (msg->header.stamp - vpe.header.stamp > offset_timeout) {
 				// calculate the offset
-				ROS_INFO("vpe_publisher: reset offset");
 				offset = tf_buffer.lookupTransform(local_frame_id, frame_id,
-												msg->header.stamp, ros::Duration(0.02));
+				                                   msg->header.stamp, ros::Duration(0.02));
 				// offset.header.frame_id = vpe.header.frame_id;
 				offset.child_frame_id = offset_frame_id;
 				br.sendTransform(offset);
+				ROS_INFO("vpe_publisher: offset reset");
 			}
 			// apply the offset
 			tf2::doTransform(vpe, vpe, offset);
@@ -102,7 +102,7 @@ void callback(const T& msg)
 		vpe_pub.publish(vpe);
 
 	} catch (const tf2::TransformException& e) {
-		ROS_WARN_THROTTLE(10, "vpe_publisher: %s", e.what());
+		ROS_WARN_THROTTLE(5, "vpe_publisher: %s", e.what());
 	}
 }
 
@@ -130,8 +130,6 @@ int main(int argc, char **argv) {
 
 	vpe_pub = nh_priv.advertise<PoseStamped>("vpe", 1);
 	//vpe_cov_pub = nh_priv_.advertise<PoseStamped>("pose_cov_pub", 1);
-
-	vpe.header.stamp = ros::Time(0);
 
 	if (nh_priv.param("publish_zero", false)) {
 		// publish zero to initialize the local position
