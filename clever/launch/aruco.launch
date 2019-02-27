@@ -1,24 +1,34 @@
 <launch>
-    <remap from="image" to="main_camera/image_raw"/>
-    <remap from="camera_info" to="main_camera/camera_info"/>
+    <arg name="aruco_detect" default="true"/>
+    <arg name="aruco_map" default="false"/>
+    <arg name="aruco_vpe" default="false"/>
 
-    <node pkg="nodelet" type="nodelet" name="aruco_pose" args="load aruco_pose/aruco_pose nodelet_manager" clear_params="true">
-        <param name="frame_id" value="aruco_map_raw"/>
-        <param name="type" value="gridboard"/>
-        <param name="markers_x" value="1"/>
-        <param name="markers_y" value="6"/>
-        <param name="first_marker" value="240"/>
-        <param name="markers_side" value="0.3362"/>
-        <param name="markers_sep" value="0.46"/>
-
-        <!-- Custom gridboard: -->
-        <!--<rosparam param="marker_ids">[6, 5, 4, 3, 2, 1]</rosparam>-->
+    <!-- aruco_detect: detect aruco markers, estimate poses -->
+    <node name="aruco_detect" pkg="nodelet" if="$(arg aruco_detect)" type="nodelet" args="load aruco_pose/aruco_detect nodelet_manager" output="screen" clear_params="true">
+        <remap from="image_raw" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <param name="estimate_poses" value="true"/>
+        <param name="send_tf" value="true"/>
+        <param name="known_tilt" value="map"/>
+        <param name="length" value="0.33"/>
     </node>
 
-    <node pkg="nodelet" type="nodelet" name="aruco_vpe" args="load clever/aruco_vpe nodelet_manager" clear_params="true">
-        <param name="aruco_orientation" value="map"/>
-        <!--<param name="aruco_orientation" value="map_upside_down"/>-->
+    <!-- aruco_map: estimate aruco map pose -->
+    <node name="aruco_map" pkg="nodelet" type="nodelet" if="$(arg aruco_map)" args="load aruco_pose/aruco_map nodelet_manager" output="screen" clear_params="true">
+        <remap from="markers" to="aruco_detect/markers"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <param name="map" value="$(find aruco_pose)/map/map.txt"/>
+        <param name="known_tilt" value="map"/>
+        <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
+        <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
+    </node>
 
-        <param name="use_mocap" value="true"/>
+    <!-- vpe publisher from aruco markers -->
+    <node name="vpe_publisher" pkg="clever" type="vpe_publisher" if="$(arg aruco_vpe)" output="screen" clear_params="true">
+        <remap from="~pose_cov" to="aruco_map/pose"/>
+        <remap from="~vpe" to="mavros/vision_pose/pose"/>
+        <param name="frame_id" value="aruco_map_detected"/>
+        <param name="publish_zero" value="true"/>
+        <param name="offset_frame_id" value="aruco_map"/>
     </node>
 </launch>
