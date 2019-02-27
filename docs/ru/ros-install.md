@@ -30,11 +30,15 @@ sudo apt-get update
 
 + Если вы планируете использовать `ROS` вместе с симуляцией(так же содержит инструменты: `rqt`, `rviz` и т.д).
 
-```bash sudo apt-get install ros-kinetic-desktop-full```
+```bash
+sudo apt-get install ros-kinetic-desktop-full
+```
 
 + Если вы планируете использовать `ROS` исключительно работать с инструментами: `rqt`, `rviz` и т.д.
 
-```bash sudo apt-get install ros-kinetic-desktop```
+```bash
+sudo apt-get install ros-kinetic-desktop
+```
 
 После установки пакета, вам нужно инициализировать `rosdep`.
 `rosdep` позволит вам легко устанавливать системные зависимости для источника, который вы хотите скомпилировать и необходим для запуска некоторых основных компонентов в ROS.
@@ -42,6 +46,13 @@ sudo apt-get update
 ```bash
 sudo rosdep init
 rosdep update
+```
+
+Что бы каждый раз в ручном режиме на запускать ваш `ROS`, вы можете настроить среду так, что бы он загружался автоматически на каждой сессии.
+
+```bash
+echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 Если вы хотите установить какие-либо дополнительные пакеты для вашего `ROS Kinetic` просто используйте.
