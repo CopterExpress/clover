@@ -174,8 +174,8 @@ public:
 			cv::aruco::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
 			if (obj_points.empty()) goto publish_debug;
 
-			double center_x = 0, center_y = 0;
-			alignObjPointsToCenter(obj_points, center_x, center_y);
+			double center_x = 0, center_y = 0, center_z = 0;
+			alignObjPointsToCenter(obj_points, center_x, center_y, center_z);
 
 			valid = solvePnP(obj_points, img_points, camera_matrix_, dist_coeffs_, rvec, tvec, false);
 			if (!valid) goto publish_debug;
@@ -192,6 +192,7 @@ public:
 			geometry_msgs::TransformStamped shift;
 			shift.transform.translation.x = -center_x;
 			shift.transform.translation.y = -center_y;
+			shift.transform.translation.z = -center_z;
 			shift.transform.rotation.w = 1;
 			tf2::doTransform(shift, transform_, transform_);
 
@@ -228,23 +229,27 @@ publish_debug:
 	}
 
 	// TODO consider z
-	void alignObjPointsToCenter(Mat &obj_points, double &center_x, double &center_y) const
+	void alignObjPointsToCenter(Mat &obj_points, double &center_x, double &center_y, double &center_z) const
 	{
 		// Align object points to the center of mass
 		double sum_x = 0;
 		double sum_y = 0;
+		double sum_z = 0;
 
 		for (int i = 0; i < obj_points.rows; i++) {
 			sum_x += obj_points.at<float>(i, 0);
 			sum_y += obj_points.at<float>(i, 1);
+			sum_z += obj_points.at<float>(i, 2);
 		}
 
 		center_x = sum_x / obj_points.rows;
 		center_y = sum_y / obj_points.rows;
+		center_z = sum_z / obj_points.rows;
 
 		for (int i = 0; i < obj_points.rows; i++) {
 			obj_points.at<float>(i, 0) -= center_x;
 			obj_points.at<float>(i, 1) -= center_y;
+			obj_points.at<float>(i, 2) -= center_z;
 		}
 	}
 
