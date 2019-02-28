@@ -201,7 +201,7 @@ public:
 		double sum_x = 0;
 		double sum_y = 0;
 
-		for (int i = 0; i < obj_points.rows; i++) 		{
+		for (int i = 0; i < obj_points.rows; i++) {
 			sum_x += obj_points.at<float>(i, 0);
 			sum_y += obj_points.at<float>(i, 1);
 		}
@@ -209,7 +209,7 @@ public:
 		center_x = sum_x / obj_points.rows;
 		center_y = sum_y / obj_points.rows;
 
-		for (int i = 0; i < obj_points.rows; i++) 		{
+		for (int i = 0; i < obj_points.rows; i++) {
 			obj_points.at<float>(i, 0) -= center_x;
 			obj_points.at<float>(i, 1) -= center_y;
 		}
