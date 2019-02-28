@@ -6,13 +6,40 @@
 * [ROS Kinetic](http://wiki.ros.org/kinetic)
 * [Пакет ПО для Клевера](https://github.com/CopterExpress/clever)
 
-**Свежую версию образа можно [скачать на GitHub в разделе Releases](https://github.com/CopterExpress/clever/releases).**
+## Скачать
+
+Последний стабильный релиз:
+
+**<a id="download-latest-release"></a>**
+
+<script type="text/javascript">
+    // get latest release from GitHub
+    fetch('https://api.github.com/repos/CopterExpress/clever/releases').then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // look for stable release
+        let stable;
+        for (let release of data) {
+            if (!release.prerelease && !release.draft) {
+                stable = release;
+                break;
+            }
+        }
+        let el = document.querySelector('#download-latest-release');
+        let name = stable.name;
+        let link = stable.assets[0].browser_download_url;
+        el.innerHTML = name + ' – скачать'
+        el.href = link;
+    });
+</script>
+
+Свежую версию образа можно [скачать на GitHub в разделе Releases](https://github.com/CopterExpress/clever/releases).
 
 > **Hint** Стабильной и поддерживаемой версией образа является релиз, помеченный плашкой **Latest release**.
 
 <img src="../assets/image.png" width=400 alt="Скачивание образа">
 
-## Установка образа ОС на MicroSD карту
+## Запись образа ОС на MicroSD карту
 
 Для установки образа вы можете воспользоваться утилитой [Etcher](https://etcher.io).
 
