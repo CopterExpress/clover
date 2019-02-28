@@ -178,7 +178,7 @@ cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 ROS_DISTRO='kinetic'
-export ROS_IP='192.168.11.1'
+export ROS_HOSTNAME='raspberrypi.local'
 source /opt/ros/kinetic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
