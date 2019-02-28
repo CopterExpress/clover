@@ -5,7 +5,7 @@
 import rospy
 from geometry_msgs.msg import PoseStamped
 
-import cv2  # TODO - fix "NEON - NOT AVAILABLE" error
+import cv2
 import cv2.aruco
 
 import numpy

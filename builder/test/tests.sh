@@ -35,7 +35,7 @@ roscore -h
 rosversion clever
 rosversion aruco_pose
 rosversion vl53l1x
-rosversion opencv3  # TODO
+rosversion opencv3
 rosversion mavros
 rosversion mavros_extras
 rosversion dynamic_reconfigure
