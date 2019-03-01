@@ -42,7 +42,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 * `~send_tf` (*bool*) – send TF transforms (default: true)
 * `~frame_id_prefix` (*string*) – prefix for TF transforms names, marker's ID is appended (default: `aruco_`)
 * `~length` (*double*) – markers' sides length
-* `~length_override` (*map*) length of markers with specified ids
+* `~length_override` (*map*) – lengths of markers with specified ids
 * `~known_tilt` (*string*) – known tilt (pitch and roll) of all the markers as a frame
 
 ### Topics
