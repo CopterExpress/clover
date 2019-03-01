@@ -691,7 +691,7 @@ int main(int argc, char **argv)
 	// Params
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
 	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
-	nh_priv.param("target_frame", target.child_frame_id, string("target"));
+	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.getParam("reference_frames", reference_frames);
