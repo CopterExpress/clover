@@ -216,6 +216,7 @@ publish_debug:
 		// publish debug image (even if no map detected)
 		if (debug_pub_.getNumSubscribers() > 0) {
 			Mat mat = cv_bridge::toCvCopy(image, "bgr8")->image; // copy image as we're planning to modify it
+			cv::aruco::drawDetectedMarkers(mat, corners, ids); // draw detected markers
 			if (valid) {
 				cv::aruco::drawAxis(mat, camera_matrix_, dist_coeffs_, rvec, tvec, 1.0); // draw board axis
 			}
