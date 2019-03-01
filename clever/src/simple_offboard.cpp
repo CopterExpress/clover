@@ -454,10 +454,10 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
 }
 
-inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-                  float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-                  float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-                  uint8_t& success, string& message)
+bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
+           uint8_t& success, string& message)
 {
 	auto stamp = ros::Time::now();
 
@@ -601,42 +601,36 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 		message = e.what();
 		ROS_INFO("simple_offboard: %s", message.c_str());
 		busy = false;
-		return;
+		return true;
 	}
 
 	success = true;
 	busy = false;
-	return;
+	return true;
 }
 
 bool navigate(Navigate::Request& req, Navigate::Response& res) {
-	serve(NAVIGATE, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(NAVIGATE, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res) {
-	serve(NAVIGATE_GLOBAL, 0, 0, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, req.lat, req.lon, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(NAVIGATE_GLOBAL, 0, 0, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, req.lat, req.lon, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
-	serve(POSITION, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(POSITION, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setVelocity(SetVelocity::Request& req, SetVelocity::Response& res) {
-	serve(VELOCITY, 0, 0, 0, req.vx, req.vy, req.vz, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(VELOCITY, 0, 0, 0, req.vx, req.vy, req.vz, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setAttitude(SetAttitude::Request& req, SetAttitude::Response& res) {
-	serve(ATTITUDE, 0, 0, 0, 0, 0, 0, req.pitch, req.roll, req.yaw, 0, 0, 0, 0, 0, req.thrust, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(ATTITUDE, 0, 0, 0, 0, 0, 0, req.pitch, req.roll, req.yaw, 0, 0, 0, 0, 0, req.thrust, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setRates(SetRates::Request& req, SetRates::Response& res) {
-	serve(RATES, 0, 0, 0, 0, 0, 0, 0, 0, 0, req.pitch_rate, req.roll_rate, req.yaw_rate, 0, 0, req.thrust, 0, "", req.auto_arm, res.success, res.message);
-	return true;
+	return serve(RATES, 0, 0, 0, 0, 0, 0, 0, 0, 0, req.pitch_rate, req.roll_rate, req.yaw_rate, 0, 0, req.thrust, 0, "", req.auto_arm, res.success, res.message);
 }
 
 bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
