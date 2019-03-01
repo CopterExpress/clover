@@ -19,3 +19,5 @@
 
 * [распознавание и навигация по отдельным маркерам](aruco_marker.md);
 * [распознавание и навигация по картам маркеров](aruco_map.md).
+
+> **Info** Исчерпывающую документацию по пакету `aruco_pose` на английском языке можно посмотреть [на GitHub](https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md).
