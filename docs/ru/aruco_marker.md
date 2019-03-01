@@ -46,7 +46,7 @@
 * ось **<font color=green>y</font>** указывает на правую сторону маркера;
 * ось **<font color=blue>z</font>** указывает от плоскости маркера.
 
-<img src="../assets/marker-axis.png" width="300">
+<img src="../assets/aruco-axis.png" width="300">
 
 ## Работа с распознанными маркерами
 

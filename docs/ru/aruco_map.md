@@ -40,13 +40,13 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 
 Для контроля карты, по которой в данный момент коптер осуществляет навигацию, можно просмотреть содержимое топика `/aruco_map/image`. Через браузер его можно просмотреть при помощи [web_video_server](web_video_server.md) по ссылке http://192.168.11.1:8080/snapshot?topic=/aruco_map/image:
 
-<img src="../assets/aruco_map.png" width=600>
+<img src="../assets/aruco-map.png" width=600>
 
 Клевер публикует текущую позицию распознанной карты в топик `aruco_map/pose`. Также публикуется [TF-фрейм](frames.md) `aruco_map` (VPE выключен) или `aruco_map_detected` (VPE включен). Используя топик `aruco_map/visualization` можно визуализировать текущую карту маркеров в [rviz](rviz.md).
 
 Наглядно позиция распознанной карты отображается в топике `aruco_map/debug` (просмотр доступен по ссылке http://192.168.11.1:8080/stream_viewer?topic=/aruco_map/debug):
 
-<img src="../assets/aruco_map_debug.png" width=600>
+<img src="../assets/aruco-map-debug.png" width=600>
 
 ## Система координат
 
