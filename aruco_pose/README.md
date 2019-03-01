@@ -70,10 +70,10 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 
 * `~map` – path to text file with markers list
 * `~frame_id` – published frame id (default: `aruco_map`)
-* `known_tilt` – debug image width
-* `image_width` – debug image width (default: 2000)
-* `image_height` – debug image height (default: 2000)
-* `image_margin` – debug image margin (default: 200)
+* `~known_tilt` – debug image width
+* `~image_width` – debug image width (default: 2000)
+* `~image_height` – debug image height (default: 2000)
+* `~image_margin` – debug image margin (default: 200)
 
 Map file has one marker per line with the following line format:
 
@@ -97,6 +97,7 @@ See examples in [`map`](map/) directory.
 
 * `~pose` (*geometry_msgs/PoseWithCovarianceStamped*) – estimated map pose
 * `~image` (*sensor_msgs/Image*) – planarized map image
+* `~visualization` (*visualization_msgs/MarkerArray*) – markers map visualization for rviz
 * `~debug` (*sensor_msgs/Image*) – debug image with detected markers and map axis
 
 ### Published transforms
