@@ -91,9 +91,8 @@ public:
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
 		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
-		std::string type, map, map_name;
+		std::string type, map;
 		nh_priv_.param<std::string>("type", type, "map");
-		nh_priv_.param<std::string>("name", map_name, "map");
 		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
 		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
 		nh_priv_.param("image_width", image_width_, 2000);
