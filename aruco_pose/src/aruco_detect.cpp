@@ -172,17 +172,17 @@ private:
 				fillCorners(marker, corners[i]);
 
 				if (estimate_poses_) {
-					fillPose(marker.pose.pose, rvecs[i], tvecs[i]);
+					fillPose(marker.pose, rvecs[i], tvecs[i]);
 
 					// snap orientation (if enabled and snap frame available)
 					if (!known_tilt_.empty() && !snap_to.header.frame_id.empty()) {
-						snapOrientation(marker.pose.pose.orientation, snap_to.transform.rotation);
+						snapOrientation(marker.pose.orientation, snap_to.transform.rotation);
 					}
 
 					// TODO: check IDs are unique
 					if (send_tf_) {
 						transform.child_frame_id = getChildFrameId(ids[i]);
-						transform.transform.rotation = marker.pose.pose.orientation;
+						transform.transform.rotation = marker.pose.orientation;
 						fillTranslation(transform.transform.translation, tvecs[i]);
 						br_.sendTransform(transform);
 					}
@@ -203,7 +203,7 @@ private:
 			vis_array_.markers.push_back(vis_marker);
 
 			for (unsigned int i = 0; i < ids.size(); i++)
-				pushVisMarkers(msg->header.frame_id, msg->header.stamp, array_.markers[i].pose.pose,
+				pushVisMarkers(msg->header.frame_id, msg->header.stamp, array_.markers[i].pose,
 				               getMarkerLength(ids[i]), ids[i], i);
 
 			vis_markers_pub_.publish(vis_array_);
