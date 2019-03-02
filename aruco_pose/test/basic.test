@@ -20,7 +20,7 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
         <param name="type" value="map"/>
-        <param name="map" value="$(find aruco_pose)/map/map.txt"/>
+        <param name="map" value="$(find aruco_pose)/test/basic.txt"/>
     </node>
 
     <test test-name="test_aruco_pose" pkg="aruco_pose" type="basic.py"/>

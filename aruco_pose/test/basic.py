@@ -65,6 +65,9 @@ class TestArucoPose(unittest.TestCase):
     def test_visualization(self):
         vis = rospy.wait_for_message('aruco_detect/visualization', VisMarkerArray, timeout=5)
 
+    def test_debug(self):
+        img = rospy.wait_for_message('aruco_detect/debug', Image, timeout=5)
+
     def test_map(self):
         pose = rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=5)
         assert pose.header.frame_id == 'main_camera_optical'
@@ -75,6 +78,15 @@ class TestArucoPose(unittest.TestCase):
         assert pose.pose.pose.orientation.y == approx(-5.20919098575e-06)
         assert pose.pose.pose.orientation.z == approx(-0.0300861070302)
         assert pose.pose.pose.orientation.w == approx(0.0482143590507)
+
+    def test_map_image(self):
+        img = rospy.wait_for_message('aruco_map/image', Image, timeout=5)
+
+    def test_map_visualization(self):
+        vis = rospy.wait_for_message('aruco_map/visualization', VisMarkerArray, timeout=5)
+
+    def test_map_debug(self):
+        img = rospy.wait_for_message('aruco_map/debug', Image, timeout=5)
 
     # def test_transforms(self):
     #     pass
