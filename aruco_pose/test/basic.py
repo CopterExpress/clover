@@ -22,6 +22,7 @@ class TestArucoPose(unittest.TestCase):
         assert markers.header.frame_id == 'main_camera_optical'
 
         assert markers.markers[0].id == 2
+        assert markers.markers[0].length == approx(0.33)
         assert markers.markers[0].pose.position.x == approx(0.36706567854)
         assert markers.markers[0].pose.position.y == approx(0.290484516644)
         assert markers.markers[0].pose.position.z == approx(2.18787602301)
@@ -39,6 +40,7 @@ class TestArucoPose(unittest.TestCase):
         assert markers.markers[0].c4.y == approx(429.442260742)
 
         assert markers.markers[3].id == 3
+        assert markers.markers[3].length == approx(0.1)
         assert markers.markers[3].pose.position.x == approx(-0.1805169666)
         assert markers.markers[3].pose.position.y == approx(-0.200697302327)
         assert markers.markers[3].pose.position.z == approx(0.585767514823)
@@ -56,7 +58,9 @@ class TestArucoPose(unittest.TestCase):
         assert markers.markers[3].c4.y == approx(143.442276001)
 
         assert markers.markers[1].id == 1
+        assert markers.markers[1].length == approx(0.33)
         assert markers.markers[2].id == 4
+        assert markers.markers[2].length == approx(0.33)
 
     def test_visualization(self):
         vis = rospy.wait_for_message('aruco_detect/visualization', VisMarkerArray, timeout=5)

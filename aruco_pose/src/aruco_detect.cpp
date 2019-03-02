@@ -169,6 +169,7 @@ private:
 
 			for (unsigned int i = 0; i < ids.size(); i++) {
 				marker.id = ids[i];
+				marker.length = getMarkerLength(marker.id);
 				fillCorners(marker, corners[i]);
 
 				if (estimate_poses_) {
