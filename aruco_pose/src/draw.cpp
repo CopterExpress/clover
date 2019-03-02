@@ -6,7 +6,7 @@
 using namespace cv;
 using namespace cv::aruco;
 
-void drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginSize,
+void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginSize,
                      int borderBits) {
 
     CV_Assert(outSize.area() > 0);

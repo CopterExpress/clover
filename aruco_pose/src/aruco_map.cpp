@@ -399,12 +399,19 @@ publish_debug:
 
 	void publishMapImage()
 	{
+		cv::Size size(image_width_, image_height_);
 		cv::Mat image;
 		cv_bridge::CvImage msg;
-		drawPlanarBoard(board_, cv::Size(image_width_, image_height_), image, image_margin_, 1);
 
-		cv::cvtColor(image, image, CV_GRAY2BGR);
-		msg.encoding = sensor_msgs::image_encodings::BGR8;
+		if (!board_->ids.empty()) {
+			_drawPlanarBoard(board_, size, image, image_margin_, 1);
+		} else {
+			// empty map
+			image.create(size, CV_8UC1);
+			image.setTo(cv::Scalar::all(255));
+		}
+
+		msg.encoding = sensor_msgs::image_encodings::MONO8;
 		msg.image = image;
 		img_pub_.publish(msg.toImageMsg());
 	}
