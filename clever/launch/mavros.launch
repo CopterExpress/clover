@@ -27,26 +27,28 @@
         <!-- basic params -->
         <rosparam command="load" file="$(find clever)/launch/mavros_config.yaml"/>
 
-        <rosparam param="plugin_blacklist">
-            - safety_area
-            - image_pub
-            - vibration
-            - rangefinder
-            - 3dr_radio
-            - actuator_control
-            - hil_controls
-            - vfr_hud
-            - vision_speed_estimate
-            - fake_gps
-            - cam_imu_sync
-            - hil
-            - adsb
-            - waypoint
-            - obstacle_distance
-            - setpoint_accel
-            - trajectory
-            - wind_estimation
-            - home_position
+        <rosparam param="plugin_whitelist">
+            - altitude
+            - command
+            - distance_sensor
+            - ftp
+            - global_position
+            - imu
+            - local_position
+            - manual_control
+            # - mocap_pose_estimate
+            - param
+            - px4flow
+            - rc_io
+            - setpoint_attitude
+            - setpoint_position
+            - setpoint_raw
+            - setpoint_velocity
+            - sys_status
+            - sys_time
+            - vision_pose_estimate
+            # - vision_speed_estimate
+            # - waypoint
         </rosparam>
     </node>
 
