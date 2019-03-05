@@ -121,8 +121,10 @@ pip --version
 pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
-my_travis_retry pip3 install --prefer-binary butterfly
-my_travis_retry pip3 install --prefer-binary butterfly[systemd]
+echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
+my_travis_retry pip3 install tornado==5.1.1
+my_travis_retry pip3 install butterfly
+my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
 
 echo_stamp "Install ws281x library"
