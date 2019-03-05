@@ -145,6 +145,7 @@ echo_stamp "Installing CLEVER" \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && catkin_make run_tests \
+&& catkin_test_results \ # this command returns non-zero on tests failure
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
