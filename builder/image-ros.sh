@@ -135,6 +135,8 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "true" ]; then
   chown -Rf pi:pi /home/pi/ros_catkin_ws
 fi
 
+export ROS_IP='127.0.0.1' # needed for running tests
+
 echo_stamp "Installing CLEVER" \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
