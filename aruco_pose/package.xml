@@ -29,6 +29,8 @@
   <depend>sensor_msgs</depend>
   <depend>rostest</depend>
 
+  <test_depend>image_publisher</test_depend>
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <nodelet plugin="${prefix}/nodelet_plugins.xml" />
