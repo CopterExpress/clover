@@ -141,6 +141,7 @@ wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
 tar -xzf node-v10.15.0-linux-armv6l.tar.gz
 cp -R node-v10.15.0-linux-armv6l/* /usr/local/
 rm -rf node-v10.15.0-linux-armv6l/
+rm node-v10.15.0-linux-armv6l.tar.gz
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc
