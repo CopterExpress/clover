@@ -39,6 +39,7 @@ matrix:
         on:
           tags: true
         draft: true
+        name: ${TRAVIS_TAG}
     - name: "Documentation"
       language: node_js
       node_js:
