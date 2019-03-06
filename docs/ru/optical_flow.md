@@ -20,14 +20,22 @@
 
 ## Настройка полетного контроллера
 
-Рекомендуемые параметры PX4:
+При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
 
-* `SYS_MC_EST_GROUP` – 2 (EKF2).
-* `EKF2_AID_MASK` – use optical flow.
+* `EKF2_AID_MASK` – включен флажок use optical flow.
 * `EKF2_OF_DELAY` – 0.
-* `EKF2_OF_QMIN` – 20.
+* `EKF2_OF_QMIN` – 15.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
-* `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
+* Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
+
+При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
+
+* `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
+* `EKF2_OF_DELAY` – 0.
+* `LPE_FLW_QMIN` – 15.
+* `LPE_FLW_SCALE` – 1.0.
+* `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
 
 ## Полет в POSCTL
 
@@ -49,14 +57,15 @@ navigate(z=1.5, frame_id='body', auto_arm=True)
 navigate(x=1.5, frame_id='body')
 ```
 
-## Неисправности
+При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md).
 
-При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить EKF2. Для этого наберите в MAVLink-консоли:
+## Дополнительные настройки
 
-```nsh
-ekf2 stop
-ekf2 start
-```
+<!-- TODO: статья по пидам -->
+
+Если коптер нестабильно удерживает позицию по VPE, попробуйте увеличить коэффициенты *P* PID-регулятора по скорости – параметры `MPC_XY_VEL_P` и `MPC_Z_VEL_P`.
+
+Если коптер нестабильно удерживает высоту, попробуйте увеличить коэффициент `MPC_Z_VEL_P` или лучше подобрать газ висения – `MPC_THR_HOVER`.
 
 Если коптер сильно уплывает по рысканью, попробуйте:
 
@@ -67,5 +76,15 @@ ekf2 start
 
 Если коптер уплывает по высоте, попробуйте:
 
-* Изменить значение параметра `MPC_THR_HOVER`;
+* повысить значение коэффициента `MPC_Z_VEL_P`;
+* изменить значение параметра `MPC_THR_HOVER`;
 * выставить `MPC_ALT_MODE` = 2 (Terrain following).
+
+## Неисправности
+
+При появлении в QGC ошибок типа `EKF INTERNAL CHECKS` попробуйте перезагрузить EKF2. Для этого наберите в MAVLink-консоли:
+
+```nsh
+ekf2 stop
+ekf2 start
+```
