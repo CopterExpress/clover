@@ -30,6 +30,7 @@
   <depend>rostest</depend>
 
   <test_depend>image_publisher</test_depend>
+  <test_depend>python-pytest</test_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
