@@ -74,24 +74,14 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 
 		dictionary.drawMarker(_board->ids[m], side, marker, borderBits);
 
-		try {
-			if((outCorners[0].y == outCorners[1].y) && (outCorners[1].x == outCorners[2].x)) {
-				// marker is aligned to image axes
-				marker.copyTo(out(Rect(outCorners[0], dst_sz)));
-				continue;
-			}
+		// interpolate tiny marker to marker position in markerZone
+		inCorners[0] = Point2f(-0.5f, -0.5f);
+		inCorners[1] = Point2f(marker.cols - 0.5f, -0.5f);
+		inCorners[2] = Point2f(marker.cols - 0.5f, marker.rows - 0.5f);
 
-			// interpolate tiny marker to marker position in markerZone
-			inCorners[0] = Point2f(-0.5f, -0.5f);
-			inCorners[1] = Point2f(marker.cols - 0.5f, -0.5f);
-			inCorners[2] = Point2f(marker.cols - 0.5f, marker.rows - 0.5f);
-
-			// remove perspective
-			Mat transformation = getAffineTransform(inCorners, outCorners);
-			warpAffine(marker, out, transformation, out.size(), INTER_LINEAR,
-							BORDER_TRANSPARENT);
-		} catch(cv::Exception& e) {
-			ROS_INFO("Skip drawing marker %d", m);
-		}
+		// remove perspective
+		Mat transformation = getAffineTransform(inCorners, outCorners);
+		warpAffine(marker, out, transformation, out.size(), INTER_LINEAR,
+						BORDER_TRANSPARENT);
 	}
 }
