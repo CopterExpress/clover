@@ -228,7 +228,6 @@ publish_debug:
 		}
 	}
 
-	// TODO consider z
 	void alignObjPointsToCenter(Mat &obj_points, double &center_x, double &center_y, double &center_z) const
 	{
 		// Align object points to the center of mass
