@@ -43,7 +43,7 @@ def check(name):
                     rospy.logwarn('%s: %s', name, f)
             except Exception as e:
                 traceback.print_exc()
-                rospy.logwarn('%s: exception occured', name)
+                rospy.logwarn('%s: exception occurred', name)
                 return
             if not failures:
                 rospy.loginfo('%s: OK', name)
