@@ -80,12 +80,17 @@ def check_camera(name):
         failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
 
 
-@check('Aruco detector')
+@check('ArUco detector')
 def check_aruco():
     try:
-        rospy.wait_for_message('aruco_pose/debug', Image, timeout=1)
+        rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
     except rospy.ROSException:
-        failure('no aruco_pose/debug messages')
+        failure('no markers detection')
+        return
+    try:
+        rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
+    except rospy.ROSException:
+        failure('no map detection')
 
 
 @check('Vision position estimate')
