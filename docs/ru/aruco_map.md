@@ -37,6 +37,20 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 
 Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clever/tree/master/aruco_pose/map).
 
+Файл карты может быть сгенерирован с помощью инструмента `genmap.py`:
+
+```bash
+rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+```
+
+Где `length` – размер маркера, `x` – количество маркеров по оси *x*, `y` - количество маркеров по оси *y*, `dist_x` – расстояние между центрами маркеров по оси *x*, `y` – расстояние между центрами маркеров по оси *y*, `first` – ID первого (левого нижнего) маркера, `test_map.txt` – название файла с картой. Дополнительный ключ `--top-left` позволяет нумеровать маркеры с левого верхнего угла.
+
+Пример:
+
+```bash
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+```
+
 ### Проверка
 
 Для контроля карты, по которой в данный момент коптер осуществляет навигацию, можно просмотреть содержимое топика `/aruco_map/image`. Через браузер его можно просмотреть при помощи [web_video_server](web_video_server.md) по ссылке http://192.168.11.1:8080/snapshot?topic=/aruco_map/image:
