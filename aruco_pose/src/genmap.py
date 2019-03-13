@@ -10,8 +10,8 @@ Usage:
 
 Options:
   <length>    Marker side length
-  <x>         Marker count along Y axis
-  <y>         Marker count along X axis
+  <x>         Marker count along X axis
+  <y>         Marker count along Y axis
   <dist_x>    Distance between markers along X axis
   <dist_y>    Distance between markers along Y axis
   <sep_x>     Space beetween markers along X axis
