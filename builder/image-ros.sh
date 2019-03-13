@@ -78,7 +78,7 @@ resolve_rosdep() {
 
   echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
   cd ${CATKIN_PATH}
-  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -r --os=${OS_DISTRO}:${OS_VERSION}
+  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=${OS_DISTRO}:${OS_VERSION}
 }
 
 INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='false'}
