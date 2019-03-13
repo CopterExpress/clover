@@ -47,6 +47,7 @@
   * [Ультразвуковой дальномер](sonar.md)
   * [Лазерный дальномер](laser.md)
   * [Работа с SITL](sitl.md)
+  * [SITL в Docker-контейнере](sitl_docker.md)
   * [Автозапуск ПО](autolaunch.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [3G-модем](3g.md)
