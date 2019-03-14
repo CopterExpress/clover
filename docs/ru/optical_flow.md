@@ -35,16 +35,24 @@
 
 * `EKF2_AID_MASK` – включен флажок use optical flow.
 * `EKF2_OF_DELAY` – 0.
-* `EKF2_OF_QMIN` – 15.
+* `EKF2_OF_QMIN` – 10.
+* `EKF2_OF_N_MIN` – 0.05.
+* `EKF2_OF_N_MIN` - 0.2.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
 * `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
-* `LPE_FLW_QMIN` – 15.
+* `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
+* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
 
 ## Полет в POSCTL
