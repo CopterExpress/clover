@@ -10,10 +10,11 @@ env:
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 50
-matrix:
+jobs:
   fast_finish: true
   include:
-    - name: "Raspberry Pi Image Build"
+    - stage: Build
+      name: "Raspberry Pi Image Build"
       cache:
         directories:
         - imgcache
@@ -40,7 +41,8 @@ matrix:
           tags: true
         draft: true
         name: ${TRAVIS_TAG}
-    - name: "Documentation"
+    - stage: Build
+      name: "Documentation"
       language: node_js
       node_js:
         - "10"
@@ -66,7 +68,17 @@ matrix:
 #        target-branch: gh-pages
 #        on:
 #          branch: WIP/gitbook-autobuild
-
+    - stage: Annotate
+      name: Auto-generate changelog
+      language: python
+      python: 3.6
+      install:
+        - pip install GitPython PyGithub
+      script:
+        - PYTHONUNBUFFERED=1 python ./gen_changelog.py
+stages:
+  - Build
+  - Annotate
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
 # https://docs.travis-ci.com/user/customizing-the-build/
