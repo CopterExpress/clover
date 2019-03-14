@@ -25,6 +25,8 @@
 <arg name="optical_flow" default="true"/>
 ```
 
+Optical Flow публикует данные в топик `mavros/px4flow/raw/send`. Кроме того, в топик `optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
+
 > **Info** Для правильной работы модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
 
 ## Настройка полетного контроллера
