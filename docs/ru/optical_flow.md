@@ -6,7 +6,18 @@
 
 ## Включение
 
-На данный момент для использования Optical Flow необходима [кастомная прошивка PX4](https://github.com/CopterExpress/Firmware/releases/tag/v1.8.2-clever.1).
+> **Note** Для использования Optical Flow необходима <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">кастомная прошивка PX4</a>. Подробнее про прошивку см. [соответствующую статью](firmware.md).
+
+<script type="text/javascript">
+    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
+        for (let release of data) {
+            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
+                document.querySelector('#download-firmware').href = release.html_url;
+                return;
+            }
+        }
+    });
+</script>
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
@@ -31,7 +42,6 @@
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
 * `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
-* `EKF2_OF_DELAY` – 0.
 * `LPE_FLW_QMIN` – 15.
 * `LPE_FLW_SCALE` – 1.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
@@ -57,7 +67,7 @@ navigate(z=1.5, frame_id='body', auto_arm=True)
 navigate(x=1.5, frame_id='body')
 ```
 
-При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md).
+При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md), в том числе [используя VPE](aruco_map.md).
 
 ## Дополнительные настройки
 
