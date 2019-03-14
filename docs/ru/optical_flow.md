@@ -37,7 +37,7 @@
 * `EKF2_OF_DELAY` – 0.
 * `EKF2_OF_QMIN` – 10.
 * `EKF2_OF_N_MIN` – 0.05.
-* `EKF2_OF_N_MIN` - 0.2.
+* `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
 * `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
