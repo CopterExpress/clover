@@ -35,7 +35,7 @@ dist_x = float(arguments['<dist_x>'])
 dist_y = float(arguments['<dist_y>'])
 top_left = arguments['--top-left']
 
-max_y = markers_y * length
+max_y = (markers_y - 1) * dist_y
 
 for y in range(markers_y):
     for x in range(markers_x):
