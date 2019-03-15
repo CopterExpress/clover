@@ -14,8 +14,6 @@ Options:
   <y>         Marker count along Y axis
   <dist_x>    Distance between markers along X axis
   <dist_y>    Distance between markers along Y axis
-  <sep_x>     Space beetween markers along X axis
-  <sep_y>     Space beetween markers along Y axis
   <first>     First marker ID
   --top-left  First marker is on top-left (not bottom-left)
 """
