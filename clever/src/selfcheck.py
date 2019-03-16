@@ -157,8 +157,17 @@ def check_vpe():
             failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
         rospy.loginfo('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
     elif est == 2:
-        # TODO
-        pass
+        fuse = get_param('EKF2_AID_MASK')
+        if not fuse & (1 << 3):
+            failure('vision position fusing is disabled, change EKF2_AID_MASK parameter')
+        if not fuse & (1 << 4):
+            failure('vision yaw fusing is disabled, change EKF2_AID_MASK parameter')
+        delay = get_param('EKF2_EV_DELAY')
+        if delay != 0:
+            failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
+        rospy.loginfo('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
+            get_param('EKF2_EVA_NOISE'),
+            get_param('EKF2_EVP_NOISE'))
 
     # check vision pose and estimated pose inconsistency
     try:
