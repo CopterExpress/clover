@@ -55,6 +55,8 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
 
+Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
+
 ## Полет в POSCTL
 
 Настройте POSCTL как один из полетных режимов PX4. Переведите в режим POSCTL.

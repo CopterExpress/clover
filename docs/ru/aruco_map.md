@@ -94,6 +94,8 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/m
 
 <!-- * Выключен компас: `ATT_W_MAG` = 0 -->
 
+Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
+
 > **Info** Для использования LPE в Pixhawk необходимо [скачать прошивку с названием `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases).
 
 ## Полет
