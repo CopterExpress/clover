@@ -258,6 +258,9 @@ def check_optical_flow():
         rospy.wait_for_message('mavros/px4flow/raw/send', OpticalFlowRad, timeout=0.5)
 
         # check PX4 settings
+        rot = get_param('SENS_FLOW_ROT')
+        if rot != 0:
+            failure('SENS_FLOW_ROT parameter is %s, but it should be zero', rot)
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             fuse = get_param('LPE_FUSION')
@@ -265,9 +268,6 @@ def check_optical_flow():
                 failure('optical flow fusing is disabled, change LPE_FUSION parameter')
             if not fuse & (1 << 1):
                 failure('flow gyro compensation is disabled, change LPE_FUSION parameter')
-            rot = get_param('SENS_FLOW_ROT')
-            if rot != 0:
-                failure('SENS_FLOW_ROT parameter is %s, but it should be zero', rot)
             scale = get_param('LPE_FLW_SCALE')
             if scale != 0:
                 failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
@@ -279,8 +279,18 @@ def check_optical_flow():
                 get_param('SENS_FLOW_MINHGT'),
                 get_param('SENS_FLOW_MAXHGT'))
         elif est == 2:
-            # TODO
-            pass
+            fuse = get_param('EKF2_AID_MASK')
+            if not fuse & (1 << 1):
+                failure('optical flow fusing is disabled, change EKF2_AID_MASK parameter')
+            delay = get_param('EKF2_OF_DELAY')
+            if delay != 0:
+                failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
+            rospy.loginfo('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+                get_param('EKF2_OF_QMIN'),
+                get_param('EKF2_OF_N_MIN'),
+                get_param('EKF2_OF_N_MAX'),
+                get_param('SENS_FLOW_MINHGT'),
+                get_param('SENS_FLOW_MAXHGT'))
 
     except rospy.ROSException:
         failure('no optical flow data (from Raspberry)')
