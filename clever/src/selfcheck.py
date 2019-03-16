@@ -210,7 +210,7 @@ def check_rangefinder():
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder_sub', Range, timeout=0.5)
     except rospy.ROSException:
-        failure('no randefinder data from Raspberry')
+        failure('no rangefinder data from Raspberry')
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder', Range, timeout=0.5)
     except rospy.ROSException:
