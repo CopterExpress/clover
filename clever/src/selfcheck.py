@@ -308,23 +308,41 @@ def check_optical_flow():
 @check('Rangefinder')
 def check_rangefinder():
     # TODO: check FPS!
+    rng = False
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder_sub', Range, timeout=0.5)
+        rng = True
     except rospy.ROSException:
         failure('no rangefinder data from Raspberry')
+
     try:
         rospy.wait_for_message('mavros/distance_sensor/rangefinder', Range, timeout=0.5)
+        rng = True
     except rospy.ROSException:
         failure('no rangefinder data from PX4')
+
+    if not rng:
+        return
 
     est = get_param('SYS_MC_EST_GROUP')
     if est == 1:
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 5):
-            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is disabled, not operating over flat surface')
+            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
+        else:
+            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
+
     elif est == 2:
-        # TODO
-        pass
+        hgt = get_param('EKF2_HGT_MODE')
+        if hgt != 2:
+            rospy.loginfo('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
+        else:
+            rospy.loginfo('EKF2_HGT_MODE = Range sensor, operating over flat surface')
+        aid = get_param('EKF2_RNG_AID')
+        if aid != 1:
+            rospy.loginfo('EKF2_RNG_AID != 1, range sensor aiding disabled')
+        else:
+            rospy.loginfo('EKF2_RNG_AID = 1, range sensor aiding enabled')
 
 
 @check('Boot duration')
