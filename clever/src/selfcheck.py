@@ -8,8 +8,10 @@ import rospy
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad
-from geometry_msgs.msg import PoseStamped, TwistStamped
+from mavros_msgs.srv import ParamGet
+from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
 import tf.transformations as t
+from aruco_pose.msg import MarkerArray
 
 
 # TODO: roscore is running
@@ -51,12 +53,44 @@ def check(name):
     return inner
 
 
+param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
+
+
+def get_param(name):
+    res = param_get(param_id=name)
+    if not res.success:
+        failure('Unable to retrieve PX4 parameter%s', name)
+    else:
+        if res.value.integer != 0:
+            return res.value.integer
+        return res.value.real
+
+
 @check('FCU')
 def check_fcu():
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+
+        est = get_param('SYS_MC_EST_GROUP')
+        if est == 1:
+            rospy.loginfo('Selected estimator: LPE')
+            fuse = get_param('LPE_FUSION')
+            if fuse & (1 << 4):
+                rospy.loginfo('LPE_FUSION: land detector fusion is enabled')
+            else:
+                rospy.loginfo('LPE_FUSION: land detector fusion is disabled')
+            if fuse & (1 << 7):
+                rospy.loginfo('LPE_FUSION: barometer fusion is enabled')
+            else:
+                rospy.loginfo('LPE_FUSION: barometer fusion is disabled')
+
+        elif est == 2:
+            rospy.loginfo('Selected estimator: EKF2')
+        else:
+            failure('Unknown selected estimator: %s', est)
+
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
 
@@ -103,6 +137,28 @@ def check_vpe():
         except rospy.ROSException:
             failure('no VPE or MoCap messages')
             return
+
+    # check PX4 settings
+    est = get_param('SYS_MC_EST_GROUP')
+    if est == 1:
+        ext_yaw = get_param('ATT_EXT_HDG_M')
+        if ext_yaw != 1:
+            failure('vision yaw is disabled, change ATT_EXT_HDG_M parameter')
+        vision_yaw_w = get_param('ATT_W_EXT_HDG')
+        if vision_yaw_w == 0:
+            failure('vision yaw weight is zero, change ATT_W_EXT_HDG parameter')
+        else:
+            rospy.loginfo('Vision yaw weight: %.2f', vision_yaw_w)
+        fuse = get_param('LPE_FUSION')
+        if not fuse & (1 << 2):
+            failure('vision position fusing is disabled, change LPE_FUSION parameter')
+        delay = get_param('LPE_VIS_DELAY')
+        if delay != 0:
+            failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
+        rospy.loginfo('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
+    elif est == 2:
+        # TODO
+        pass
 
     # check vision pose and estimated pose inconsistency
     try:
@@ -200,6 +256,32 @@ def check_optical_flow():
     # TODO:check FPS!
     try:
         rospy.wait_for_message('mavros/px4flow/raw/send', OpticalFlowRad, timeout=0.5)
+
+        # check PX4 settings
+        est = get_param('SYS_MC_EST_GROUP')
+        if est == 1:
+            fuse = get_param('LPE_FUSION')
+            if not fuse & (1 << 1):
+                failure('optical flow fusing is disabled, change LPE_FUSION parameter')
+            if not fuse & (1 << 1):
+                failure('flow gyro compensation is disabled, change LPE_FUSION parameter')
+            rot = get_param('SENS_FLOW_ROT')
+            if rot != 0:
+                failure('SENS_FLOW_ROT parameter is %s, but it should be zero', rot)
+            scale = get_param('LPE_FLW_SCALE')
+            if scale != 0:
+                failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
+
+            rospy.loginfo('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+                get_param('LPE_FLW_QMIN'),
+                get_param('LPE_FLW_R'),
+                get_param('LPE_FLW_RR'),
+                get_param('SENS_FLOW_MINHGT'),
+                get_param('SENS_FLOW_MAXHGT'))
+        elif est == 2:
+            # TODO
+            pass
+
     except rospy.ROSException:
         failure('no optical flow data (from Raspberry)')
 
@@ -215,6 +297,15 @@ def check_rangefinder():
         rospy.wait_for_message('mavros/distance_sensor/rangefinder', Range, timeout=0.5)
     except rospy.ROSException:
         failure('no rangefinder data from PX4')
+
+    est = get_param('SYS_MC_EST_GROUP')
+    if est == 1:
+        fuse = get_param('LPE_FUSION')
+        if not fuse & (1 << 5):
+            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is disabled, not operating over flat surface')
+    elif est == 2:
+        # TODO
+        pass
 
 
 @check('Boot duration')
