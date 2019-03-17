@@ -6,21 +6,20 @@
 
 ## Скачивание
 
-> **Hint** На этом этапе RPi должна быть подключена к интернету
+Есть два варианта скачивания кода проекта на RPi:
 
-В командной строке RPi переходим в домашнюю директорию и скачиваем проект с GitHub:
+### Вариант 1
+
+Подключить плату к интернету (вставив в нее ethernet-кабель или [перенастроив Wi-Fi](network.md)) и в командной строке RPi выполнить:
 
 ```
 cd
 git clone https://github.com/garinegor/clever-blocks
 ```
 
-И скачиваем все нужные пакеты:
+### Вариант 2
 
-```
-cd clever-blocks
-pip install -r requirements.txt  
-```
+Исходный код проекта можно скачать на компьютер с [GitHub](https://github.com/garinegor/clever-blocks), а затем скопировать его на RPi посредством SFTP или SCP.
 
 ## Установка
 
@@ -29,22 +28,8 @@ pip install -r requirements.txt
 ```
 cd
 cd clever-blocks
-sudo mv service/clever-blocks.service /lib/systemd/system/
-chown pi main.py 
-chmod +x main.py
-```
-
-Теперь нужно перезагрузить RPi. Сделаем это:
-
-```
-sudo reboot
-```
-
-После перезагрузки следует заново подключиться к RPi и ввести:
-
-```
-sudo systemctl enable clever-blocks
-sudo service clever-blocks start
+sudo systemctl enable /home/pi/clever-blocks/service/
+sudo systemctl start clever-blocks.service
 ```
 
 Все готово! Теперь можно переходить к использованию.
@@ -56,6 +41,5 @@ sudo service clever-blocks start
 ```
 python main.py
 ```
-
 
 После запуска Вы можете открыть веб-интерфейс для блочного программирования по адресу [192.168.11.1:5000](192.168.11.1:5000).
