@@ -26,8 +26,6 @@ git clone https://github.com/garinegor/clever-blocks
 Если Вы хотите, чтобы блочный конструктор запускался автоматически, необходимо создать соответствующий сервис. Для этого следует ввести в командную строку RPi следующие команды:
 
 ```
-cd
-cd clever-blocks
 sudo systemctl enable /home/pi/clever-blocks/service/
 sudo systemctl start clever-blocks.service
 ```
