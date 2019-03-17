@@ -19,7 +19,7 @@ git clone https://github.com/garinegor/clever-blocks
 
 ### Вариант 2
 
-Исходный код проекта можно скачать на компьютер с [GitHub](https://github.com/garinegor/clever-blocks), а затем скопировать его на RPi посредством SFTP или SCP.
+Исходный код проекта можно скачать на компьютер с [GitHub](https://github.com/garinegor/clever-blocks), а затем скопировать его в домашнюю директорию RPi посредством SFTP или SCP.
 
 ## Установка
 
