@@ -240,7 +240,7 @@ from mavros_msgs.msg import RCIn
 # Вызывается при получении новых данных с пульта
 def rc_callback(data):
     # Произвольная реакция на переключение тумблера на пульте
-        if data.channels[5] < 1100:
+    if data.channels[5] < 1100:
         # ...
         pass
     elif data.channels[5] > 1900:
