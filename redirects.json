@@ -27,6 +27,7 @@
         { "from": "ros.html", "to": "ru/ros.html" },
         { "from": "mavros.html", "to": "ru/mavros.html" },
         { "from": "simple_offboard.html", "to": "ru/simple_offboard.html" },
+        { "from": "aruco/", "to": "ru/aruco.html" },
         { "from": "aruco.html", "to": "ru/aruco.html" },
         { "from": "selfcheck.html", "to": "ru/selfcheck.html" },
         { "from": "snippets.html", "to": "ru/snippets.html" },
