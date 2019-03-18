@@ -161,7 +161,12 @@ private:
 			flow_camera.header.stamp = msg->header.stamp;
 			flow_camera.vector.x = flow_y; // +y means counter-clockwise rotation around Y axis
 			flow_camera.vector.y = -flow_x; // +x means clockwise rotation around X axis
-			tf_buffer_.transform(flow_camera, flow_fcu, fcu_frame_id_);
+			try {
+				tf_buffer_.transform(flow_camera, flow_fcu, fcu_frame_id_);
+			} catch (const tf2::TransformException& e) {
+				// transform is not available yet
+				return;
+			}
 
 			// Calculate integration time
 			ros::Duration integration_time = msg->header.stamp - prev_stamp_;
