@@ -217,7 +217,7 @@ publish_debug:
 			Mat mat = cv_bridge::toCvCopy(image, "bgr8")->image; // copy image as we're planning to modify it
 			cv::aruco::drawDetectedMarkers(mat, corners, ids); // draw detected markers
 			if (valid) {
-				cv::aruco::drawAxis(mat, camera_matrix_, dist_coeffs_, rvec, tvec, 1.0); // draw board axis
+				_drawAxis(mat, camera_matrix_, dist_coeffs_, rvec, tvec, 1.0); // draw board axis
 			}
 			cv_bridge::CvImage out_msg;
 			out_msg.header.frame_id = image->header.frame_id;
