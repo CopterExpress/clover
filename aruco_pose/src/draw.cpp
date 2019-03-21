@@ -118,9 +118,12 @@ void _drawAxis(InputOutputArray _image, InputArray _cameraMatrix, InputArray _di
     std::vector< Point3f > imagePointsZ;
     _projectPoints(axisPoints, _rvec, _tvec, _cameraMatrix, _distCoeffs, imagePointsZ);
 
-    if (imagePointsZ[0].z < 0)
+    if (imagePointsZ[0].z < 0 ||
+        imagePointsZ[1].z < 0 ||
+        imagePointsZ[2].z < 0 ||
+        imagePointsZ[3].z < 0)
     {
-        // Axis center is behind camera -> don't draw anything
+        // Any axis point is behind screen plane -> don't draw anything
         return;
     }
 
