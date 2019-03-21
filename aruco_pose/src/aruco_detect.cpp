@@ -62,7 +62,7 @@ private:
 	image_transport::Publisher debug_pub_;
 	image_transport::CameraSubscriber img_sub_;
 	ros::Publisher markers_pub_, vis_markers_pub_;
-	bool estimate_poses_, send_tf_;
+	bool estimate_poses_, send_tf_, auto_flip_;
 	double length_;
 	std::unordered_map<int, double> length_override_;
 	std::string frame_id_prefix_, known_tilt_;
@@ -87,6 +87,8 @@ public:
 		readLengthOverride();
 
 		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
+		nh_priv_.param("auto_flip", auto_flip_, false);
+
 		nh_priv_.param<std::string>("frame_id_prefix", frame_id_prefix_, "aruco_");
 
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
@@ -177,7 +179,7 @@ private:
 
 					// snap orientation (if enabled and snap frame available)
 					if (!known_tilt_.empty() && !snap_to.header.frame_id.empty()) {
-						snapOrientation(marker.pose.orientation, snap_to.transform.rotation);
+						snapOrientation(marker.pose.orientation, snap_to.transform.rotation, auto_flip_);
 					}
 
 					// TODO: check IDs are unique

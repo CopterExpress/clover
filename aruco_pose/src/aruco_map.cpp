@@ -73,6 +73,7 @@ private:
 	visualization_msgs::MarkerArray vis_array_;
 	std::string known_tilt_;
 	int image_width_, image_height_, image_margin_;
+	bool auto_flip_;
 
 public:
 	virtual void onInit()
@@ -95,6 +96,7 @@ public:
 		nh_priv_.param<std::string>("type", type, "map");
 		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
 		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
+		nh_priv_.param("auto_flip", auto_flip_, false);
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
@@ -183,7 +185,7 @@ public:
 			try {
 				geometry_msgs::TransformStamped snap_to = tf_buffer_.lookupTransform(markers->header.frame_id,
 				                                          known_tilt_, markers->header.stamp, ros::Duration(0.02));
-				snapOrientation(transform_.transform.rotation, snap_to.transform.rotation);
+				snapOrientation(transform_.transform.rotation, snap_to.transform.rotation, auto_flip_);
 			} catch (const tf2::TransformException& e) {
 				ROS_WARN_THROTTLE(1, "aruco_map: can't snap: %s", e.what());
 			}
