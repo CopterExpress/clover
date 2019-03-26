@@ -11,3 +11,7 @@ pod install
 ## Политика конфиденциальности
 
 App Store приложение CLEVER RC не собирает и не хранит каких-либо личных данных пользователя.
+
+## Privacy policy
+
+The App Store app CLEVER RC does not collect and store any personal user data.
