@@ -91,7 +91,7 @@ tcpdump \
 ltrace \
 libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
 python-rosdep \
-python-rosinstall-generator=0.1.14-1 \
+python-rosinstall-generator \
 python-wstool=0.1.17-1 \
 python-rosinstall=0.7.8-1 \
 build-essential=12.3 \
