@@ -44,6 +44,8 @@ def check(name):
                 for f in failures:
                     rospy.logwarn('%s: %s', name, f)
             except Exception as e:
+                for f in failures:
+                    rospy.logwarn('%s: %s', name, f)
                 traceback.print_exc()
                 rospy.logwarn('%s: exception occurred', name)
                 return
