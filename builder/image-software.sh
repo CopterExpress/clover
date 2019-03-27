@@ -113,6 +113,7 @@ echo_stamp "Installing pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 python get-pip.py
+rm get-pip.py
 #my_travis_retry pip install --upgrade pip
 #my_travis_retry pip3 install --upgrade pip
 
