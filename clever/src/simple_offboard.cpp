@@ -528,12 +528,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			nav_speed = speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
-			if (std::isnan(yaw) && yaw_rate == 0) {
-				// keep yaw unchanged
-				yaw = tf2::getYaw(local_position.pose.orientation);
-			}
-		}
+		// if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
+		// 	if (std::isnan(yaw) && yaw_rate == 0) {
+		// 		// keep yaw unchanged
+		//		// TODO: this is incorrect, because we need yaw in desired frame
+		// 		yaw = tf2::getYaw(local_position.pose.orientation);
+		// 	}
+		// }
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
 			// destination point and/or yaw
