@@ -10,7 +10,6 @@ jMavSim является легковесной средой, предназна
 
 ## Запуск PX4 SITL
 
-
 1. Склонировать репозиторий с PX4.
 
 ```bash
@@ -19,7 +18,6 @@ cd Firmware
 ```
 
 ## jMavSim
-
 
 Основная статья: https://dev.px4.io/en/simulation/jmavsim.html
 
@@ -36,7 +34,6 @@ make posix_sitl_lpe jmavsim
 ```
 
 ## Gazebo
-
 
 Основная статья: https://dev.px4.io/en/simulation/gazebo.html
 
