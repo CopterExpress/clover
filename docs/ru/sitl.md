@@ -102,60 +102,7 @@ wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 Вам нужно установить пакеты которые потребуются во время запуска симуляции:
 
 ```bash
-sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install \
-		bzip2 \
-		ca-certificates \
-		ccache \
-		cmake \
-		cppcheck \
-		curl \
-		dirmngr \
-		doxygen \
-		file \
-		g++ \
-		gcc \
-		gdb \
-		git \
-		gnupg \
-		gosu \
-		lcov \
-		libfreetype6-dev \
-		libgtest-dev \
-		libpng-dev \
-		lsb-release \
-		make \
-		ninja-build \
-		openjdk-8-jdk \
-		openjdk-8-jre \
-		openssh-client \
-		pkg-config \
-		python-pip \
-		python-pygments \
-		python-setuptools \
-		rsync \
-		shellcheck \
-		tzdata \
-		unzip \
-		wget \
-		xsltproc \
-		zip \
-		ant \
-		gazebo7 \
-		gstreamer1.0-plugins-bad \
-		gstreamer1.0-plugins-base \
-		gstreamer1.0-plugins-good \
-		gstreamer1.0-plugins-ugly \
-		libeigen3-dev \
-		libgazebo7-dev \
-		libgstreamer-plugins-base1.0-dev \
-		libimage-exiftool-perl \
-		libopencv-dev \
-		libxml2-utils \
-		pkg-config \
-		protobuf-compiler \
-		libgeographic-dev \
-		geographiclib-tools \
-		libignition-math2-dev
+sudo apt-get update && sudo apt-get -y --quiet --no-install-recommends install bzip2 ca-certificates ccache cmake cppcheck curl dirmngr doxygen file g++ gcc gdb git gnupg gosu lcov libfreetype6-dev libgtest-dev libpng-dev lsb-release make ninja-build openjdk-8-jdk openjdk-8-jre openssh-client pkg-config python-pip python-pygments python-setuptools rsync shellcheck tzdata unzip wget xsltproc zip ant gazebo7 gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly libeigen3-dev libgazebo7-dev libgstreamer-plugins-base1.0-dev libimage-exiftool-perl libopencv-dev libxml2-utils pkg-config protobuf-compiler libgeographic-dev geographiclib-tools libignition-math2-dev
 
 ```
 
@@ -168,12 +115,10 @@ wget -qO- http://bootstrap.pypa.io/get-pip.py | sudo python
 Теперь установите необходимые модули:
 
 ```bash
-
-pip install --user setuptools pkgconfig wheel \
-	&& pip install --user argparse argcomplete coverage jinja2 empy numpy requests serial toml pyyaml cerberus
+pip install --user setuptools pkgconfig wheel && pip install --user argparse argcomplete coverage jinja2 empy numpy requests serial toml pyyaml cerberus
 ```
 
-Вам необходимо установить спецификацию для библиотеки `geographiclib`.
+Вам необходимо установить спецификацию для библиотеки `geographiclib`:
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sudo bash
@@ -187,13 +132,13 @@ cd Firmware/
 git checkout v1.8.2
 ```
 
-Если вы все настройки были произведены правильно, вы можете произвести сборку пакета Gazebo, чтобы в дальнейшем быстрее его запустить. Для этого вы должны находиться в директории `Firmware`.
+Если вы все настройки были произведены правильно, вы можете произвести сборку пакета Gazebo, чтобы в дальнейшем быстрее его запустить. Для этого вы должны находиться в директории `Firmware`:
 
 ```bash
 make posix_sitl_default sitl_gazebo
 ```
 
-Теперь все готово к запуску самого симулятора, для этого пропишите в переменных окружения, где искать собранные библиотеки и запустите симулятор. Обратите внимание, что если вы хотите вызвать симулятор в другом окне терминала, вам повторно потребуется прописать переменные окружения (первая строка последующей команды).
+Теперь все готово к запуску самого симулятора, для этого пропишите в переменных окружения, где искать собранные библиотеки и запустите симулятор. Обратите внимание, что если вы хотите вызвать симулятор в другом окне терминала, вам повторно потребуется прописать переменные окружения (первая строка последующей команды):
 
 ```bash
 . Tools/setup_gazebo.bash $(pwd) $(pwd)/build/posix_sitl_default
@@ -202,9 +147,9 @@ roslaunch gazebo_ros empty_world.launch world_name:=$(pwd)/Tools/sitl_gazebo/wor
 
 #### Запуск PX4 для Gazebo
 
-Чтобы запустить PX4 и подключить его к Gazebo, в директории `Firmware` соберите сам пакет симулятора.
-
 > **Hint** Для того, чтобы открыть окно PX4 параллельно с симулятором, откройте дополнительное окно терминала.
+
+Чтобы запустить PX4 и подключить его к Gazebo, в директории `Firmware` соберите сам пакет симулятора:
 
 ```bash
 make posix_sitl_default
@@ -228,10 +173,10 @@ cd ~/catkin_ws
 catkin_make
 ```
 
-Подтяните зависимости, прописанные в файле `setup` и склонируйте образ `Clever` в директорию `src`.
+Подтяните зависимости, прописанные в файле `setup` и склонируйте образ `Clever` в директорию `src`:
 
 ```bash
-. devel/setup.bash
+./devel/setup.bash
 cd src
 git clone https://github.com/copterexpress/clever
 ```
@@ -249,14 +194,14 @@ rosdep install -y --from-paths src --ignore-src -r
 catkin_make
 ```
 
-Если сборка прошла успешно то вы можете запустить ноду клевера и пользоваться пакетом `Clever` точно так же, как и на реальном коптере.
+Если сборка прошла успешно то вы можете запустить ноду клевера и пользоваться пакетом `Clever` точно так же, как и на реальном коптере:
 
 ```bash
 . devel/setup.bash
 roslaunch clever sitl.launch
 ```
 
-Для того, чтобы воспользоваться функциями предоставляемыми нашим пакетом, в новом окне терминала подтяните зависимости из файла `setup`.
+Для того, чтобы воспользоваться функциями предоставляемыми нашим пакетом, в новом окне терминала подтяните зависимости из файла `setup`:
 
 ```bash
 source ~/catkin_ws/devel/setup.bash
