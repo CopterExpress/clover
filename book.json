@@ -10,7 +10,6 @@
         "yametrika",
         "anchors",
         "validate-links",
-        "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git"
     ],
     "pluginsConfig": {
