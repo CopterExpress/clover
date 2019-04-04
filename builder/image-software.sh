@@ -106,7 +106,7 @@ python3-dev \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
 echo_stamp "Updating kernel to fix camera bug"
-apt-get install --no-install-recommends -y raspberrypi-kernel
+apt-get install --no-install-recommends -y raspberrypi-kernel=1.20190215-1
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
