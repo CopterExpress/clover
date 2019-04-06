@@ -139,6 +139,9 @@ mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey /etc/monkey/sites/default
 systemctl enable monkey.service
 
+echo_stamp "Install paho-mqtt"
+my_travis_retry pip install paho-mqtt
+
 echo_stamp "Install Node.js"
 cd /home/pi
 wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
