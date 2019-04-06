@@ -62,6 +62,7 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Дополнительные материалы
+  * [Олимпиада НТИ 2019](nti2019.md)
   * [Вклад в Клевер](contributing.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Протокол MAVLink](mavlink.md)
