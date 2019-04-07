@@ -102,6 +102,42 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 	}
 }
 
+/* Draw a (potentially partially visible) line. */
+static void linePartial(InputOutputArray image, Point3f p1, Point3f p2, const Scalar& color,
+        int thickness = 1, int lineType = LINE_8, int shift = 0)
+{
+    // If both points are behind the screen, don't draw anything
+    if (p1.z <= 0 && p2.z <= 0)
+    {
+        return;
+    }
+    Point2f p1p{p1.x, p1.y};
+    Point2f p2p{p2.x, p2.y};
+    // If points are on the different sides of the plane, compute intersection point
+    if (p1.z * p2.z < 0)
+    {
+        // Compute intersection point with the screen
+        // We denote alpha as such:
+        // xi = (1 - alpha) * x1 + alpha * x2
+        // yi = (1 - alpha) * y1 + alpha * y2
+        // zi = (1 - alpha) * z1 + alpha * z2 = 0
+        // Thus, alpha can be expressed as
+        // alpha = z1 / (z1 - z2)
+        float alpha = p1.z / (p1.z - p2.z);
+        Point2f pi{(1 - alpha) * p1.x + alpha * p2.x, (1 - alpha) * p1.y + alpha * p2.y};
+        // Now, if z1 is negative, we draw the line from (xi, yi) to (x2, y2), else we draw from (x1, y1) to (xi, yi)
+        if (p1.z < 0)
+        {
+            p1p = pi;
+        }
+        else
+        {
+            p2p = pi;
+        }
+    }
+    line(image, p1p, p2p, color, thickness, lineType, shift);
+}
+
 void _drawAxis(InputOutputArray _image, InputArray _cameraMatrix, InputArray _distCoeffs,
               InputArray _rvec, InputArray _tvec, float length) {
 
@@ -118,26 +154,10 @@ void _drawAxis(InputOutputArray _image, InputArray _cameraMatrix, InputArray _di
     std::vector< Point3f > imagePointsZ;
     _projectPoints(axisPoints, _rvec, _tvec, _cameraMatrix, _distCoeffs, imagePointsZ);
 
-    if (imagePointsZ[0].z < 0 ||
-        imagePointsZ[1].z < 0 ||
-        imagePointsZ[2].z < 0 ||
-        imagePointsZ[3].z < 0)
-    {
-        // Any axis point is behind screen plane -> don't draw anything
-        return;
-    }
-
-    // Intersect axis lines with screen plane (they may be outside)
-    std::vector<Point2f> imagePoints(4);
-    imagePoints[0] = Point2f{imagePointsZ[0].x, imagePointsZ[0].y};
-    imagePoints[1] = Point2f{imagePointsZ[1].x, imagePointsZ[1].y};
-    imagePoints[2] = Point2f{imagePointsZ[2].x, imagePointsZ[2].y};
-    imagePoints[3] = Point2f{imagePointsZ[3].x, imagePointsZ[3].y};
-
     // draw axis lines
-    line(_image, imagePoints[0], imagePoints[1], Scalar(0, 0, 255), 3);
-    line(_image, imagePoints[0], imagePoints[2], Scalar(0, 255, 0), 3);
-    line(_image, imagePoints[0], imagePoints[3], Scalar(255, 0, 0), 3);
+    linePartial(_image, imagePointsZ[0], imagePointsZ[1], Scalar(0, 0, 255), 3);
+    linePartial(_image, imagePointsZ[0], imagePointsZ[2], Scalar(0, 255, 0), 3);
+    linePartial(_image, imagePointsZ[0], imagePointsZ[3], Scalar(255, 0, 0), 3);
 }
 
 static CvMat _cvMat(const cv::Mat& m)
