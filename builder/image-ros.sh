@@ -137,6 +137,10 @@ fi
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
+echo_stamp "Adding ros_ws281x ROS package"
+cd /home/pi/catkin_ws/src
+git clone https://github.com/sfalexrog/ros_ws281x
+
 echo_stamp "Installing CLEVER" \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
@@ -145,13 +149,16 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install wheel \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
-&& catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
+&& catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DROS_WS2811_REAL_LIB=ON \
 && catkin_make run_tests \
 && catkin_test_results \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
 || (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
+
+echo_stamp "Enabling ROS LED service"
+systemctl enable rosled
 
 echo_stamp "Build CLEVER documentation"
 cd /home/pi/catkin_ws/src/clever

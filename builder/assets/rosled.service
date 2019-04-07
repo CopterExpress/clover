@@ -1,0 +1,14 @@
+[Unit]
+Description=ROS ws281x support
+Requires=roscore.service
+After=roscore.service
+
+[Service]
+EnvironmentFile=/lib/systemd/system/roscore.env
+ExecStart=/opt/ros/kinetic/bin/roslaunch ros_ws281x clever4.launch --wait --screen
+Restart=on-failure
+RestartSec=3
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target
