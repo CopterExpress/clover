@@ -1,7 +1,7 @@
 <launch>
     <arg name="aruco_detect" default="true"/>
-    <arg name="aruco_map" default="false"/>
-    <arg name="aruco_vpe" default="false"/>
+    <arg name="aruco_map" default="true"/>
+    <arg name="aruco_vpe" default="true"/>
 
     <!-- For additional help go to https://clever.copterexpress.com/aruco.html -->
 
