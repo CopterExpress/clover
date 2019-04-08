@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Set Clever hostname to the specified value
+
+set -e
+
+NEW_NAME_OPT=$1
+
+if [[ -z ${NEW_NAME_OPT} ]]; then
+  echo "Please specify new name for this Clever"
+  exit 1
+fi
+
+NEW_NAME=$(echo ${NEW_NAME_OPT} | tr '[:upper:]' '[:lower:]')
+
+echo "Setting name to ${NEW_NAME}"
+
+echo "Backing up /etc/hostname"
+cp /etc/hostname /etc/hostname.bak
+echo "Writing new /etc/hostname"
+echo ${NEW_NAME} > /etc/hostname
+
+echo "Backing up /etc/hosts"
+cp /etc/hosts /etc/hosts.bak
+echo "Rewriting /etc/hosts with new values"
+sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_NAME}'/g' /etc/hosts
+
+echo "Changing hostname in /lib/systemd/system/roscore.env"
+sed -i 's/ROS_HOSTNAME=.*/ROS_HOSTNAME='${NEW_NAME}'.local/g' /lib/systemd/system/roscore.env
+
+echo "Changing hostname in .bashrc"
+sed -i 's/export ROS_HOSTNAME=.*/export ROS_HOSTNAME='${NEW_NAME}'.local/g' /home/pi/.bashrc
+
+echo "Done, reboot your Clever to see the results"
+
