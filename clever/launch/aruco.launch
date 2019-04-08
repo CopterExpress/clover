@@ -20,7 +20,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
-        <param name="map" value="$(find aruco_pose)/map/map.txt"/>
+        <param name="map" value="$(find aruco_pose)/map/nti_novgorod.txt"/>
         <param name="known_tilt" value="map"/>
         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
         <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
