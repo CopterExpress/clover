@@ -5,10 +5,10 @@
     <!-- article about camera setup: https://clever.copterexpress.com/camera_frame.html -->
 
     <!-- camera is oriented downward, camera cable goes backward [option 1] -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/> -->
 
     <!-- camera is oriented downward, camera cable goes forward  [option 2] -->
-    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 1.5707963 0 3.1415926 base_link main_camera_optical"/>-->
+        <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="-0.04 0 -0.08 1.5707963 0 3.1415926 base_link main_camera_optical"/>
 
     <!-- camera is oriented upward, camera cable goes backward   [option 3] -->
     <!--<node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.07 1.5707963 0 0 base_link main_camera_optical"/>-->
