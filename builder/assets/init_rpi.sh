@@ -33,7 +33,7 @@ echo_stamp() {
 
 echo_stamp "Rename SSID"
 NEW_SSID='CLEVER-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
-sudo sed -i.OLD "s/CLEVER/${NEW_SSID}" /etc/wpa_supplicant/wpa_supplicant.conf
+sudo sed -i.OLD "s/CLEVER/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant.conf
 clever_rename ${NEW_SSID}
 
 echo_stamp "Harware setup"
