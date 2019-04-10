@@ -312,13 +312,13 @@ def check_rangefinder():
     # TODO: check FPS!
     rng = False
     try:
-        rospy.wait_for_message('mavros/distance_sensor/rangefinder_sub', Range, timeout=0.5)
+        rospy.wait_for_message('mavros/distance_sensor/rangefinder_sub', Range, timeout=4)
         rng = True
     except rospy.ROSException:
         failure('no rangefinder data from Raspberry')
 
     try:
-        rospy.wait_for_message('mavros/distance_sensor/rangefinder', Range, timeout=0.5)
+        rospy.wait_for_message('mavros/distance_sensor/rangefinder', Range, timeout=4)
         rng = True
     except rospy.ROSException:
         failure('no rangefinder data from PX4')
