@@ -46,3 +46,4 @@ rosversion rosserial
 rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
+rosversion rosshow
