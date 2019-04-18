@@ -9,6 +9,7 @@
 #
 
 set -e # Exit immidiately on non-zero result
+set -v # Echo commands
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>

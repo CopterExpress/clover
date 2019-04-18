@@ -10,6 +10,7 @@
 #
 
 set -e # Exit immidiately on non-zero result
+set -v # Echo commands
 
 SOURCE_IMAGE="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2018-11-15/2018-11-13-raspbian-stretch-lite.zip"
 

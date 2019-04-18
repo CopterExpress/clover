@@ -10,6 +10,7 @@
 #
 
 set -e # Exit immidiately on non-zero result
+set -v # Echo commands
 
 REPO=$1
 REF=$2
