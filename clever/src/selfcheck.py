@@ -4,6 +4,7 @@ import math
 from subprocess import Popen, PIPE
 import re
 import traceback
+import numpy
 import rospy
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
@@ -280,7 +281,7 @@ def check_optical_flow():
             if not fuse & (1 << 1):
                 failure('flow gyro compensation is disabled, change LPE_FUSION parameter')
             scale = get_param('LPE_FLW_SCALE')
-            if scale != 0:
+            if not numpy.isclose(scale, 1.0):
                 failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
 
             rospy.loginfo('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
