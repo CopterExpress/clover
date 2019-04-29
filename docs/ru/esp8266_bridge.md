@@ -33,6 +33,22 @@ esptool.py --baud 921600 --port /dev/ttyUSB0 write_flash 0x00000 firmware-1.2.2.
 
 ## Работа с ESP8266
 
-![ESP8266 connection scheme](../assets/pixracer_connection.jpg)
+![ESP8266 connection scheme](../assets/esp8266_pixracer_connection.jpg)
 
-Подключите ESP8266 к Pixracer так, как показано на схеме, и включите
+<!-- markdownlint-disable MD044 -->
+Подключите ESP8266 к Pixracer так, как показано на схеме, и включите полётный контроллер. В списке доступных Wi-Fi сетей появится сеть **PixRacer** с паролем по умолчанию **pixracer**. Подключитесь к этой сети и запустите QGroundControl. Программа должна автоматически установить соединение с полётным контроллером.
+<!-- markdownlint-enable MD044 -->
+
+> **Info** Если автоматическое подключение не происходит, проверьте, что в настройках QGroundControl включено автоматическое подключение по UDP
+
+![QGroundControl connection via ESP8266](../assets/esp8266_qgroundcontrol.png)
+
+В меню настроек полётного контроллера появится вкладка **WiFi Bridge**. В ней можно изменить некоторые параметры модуля, например, режим работы (точка доступа/клиент), название и пароль Wi-Fi сети.
+
+![QGroundControl ESP8266 settings pane](../assets/esp8266_qgroundcontrol_settings.png)
+
+> **Warning** Настоятельно рекомендуется поменять стандартные параметры сети!
+
+Также эти параметры можно поменять в веб-интерфейсе модуля, доступном по умолчанию по адресу [http://192.168.4.1/setup](http://192.168.4.1/setup)
+
+![ESP8266 native Web interface](../assets/esp8266_web_interface.png)
