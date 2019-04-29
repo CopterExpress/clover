@@ -270,9 +270,48 @@ publish_debug:
 
 			std::istringstream s(line);
 
-			if (!(s >> id >> length >> x >> y >> z >> yaw >> pitch >> roll)) {
-				ROS_ERROR("aruco_map: cannot parse line: %s", line.c_str());
+			// Read first character to see whether it's a comment
+			char first = 0;
+			if (!(s >> first)) {
+				// No non-whitespace characters, must be a blank line
 				continue;
+			}
+
+			if (first == '#') {
+				ROS_DEBUG("aruco_map: Skipping line as a comment: %s", line.c_str());
+				continue;
+			} else if (isdigit(first)) {
+				// Put the digit back into the stream
+				// Note that this is a non-modifying putback, so this should work with istreams
+				// (see https://en.cppreference.com/w/cpp/io/basic_istream/putback)
+				s.putback(first);
+			} else {
+				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
+				ROS_ERROR("aruco_map: Malformed input: %s", line.c_str());
+				throw std::runtime_error("Malformed input");
+			}
+
+			if (!(s >> id >> length >> x >> y)) {
+				ROS_ERROR("aruco_map: Not enough data: %s", line.c_str());
+				ROS_ERROR("aruco_map: Each marker must have at least id, length, x, y fields");
+				throw std::runtime_error("Not enough data");
+			}
+			// Be less strict about z, yaw, pitch roll
+			if (!(s >> z)) {
+				ROS_DEBUG("aruco_map: No z coordinate provided for marker %d, assuming 0", id);
+				z = 0;
+			}
+			if (!(s >> yaw)) {
+				ROS_DEBUG("aruco_map: No yaw provided for marker %d, assuming 0", id);
+				yaw = 0;
+			}
+			if (!(s >> pitch)) {
+				ROS_DEBUG("aruco_map: No pitch provided for marker %d, assuming 0", id);
+				pitch = 0;
+			}
+			if (!(s >> roll)) {
+				ROS_DEBUG("aruco_map: No roll provided for marker %d, assuming 0", id);
+				roll = 0;
 			}
 			addMarker(id, length, x, y, z, yaw, pitch, roll);
 		}
@@ -339,6 +378,14 @@ publish_debug:
 	void addMarker(int id, double length, double x, double y, double z,
 				   double yaw, double pitch, double roll)
 	{
+		// Check whether the id is in range for current dictionary
+		int numMarkers = board_->dictionary->bytesList.rows;
+		if (numMarkers <= id) {
+			ROS_ERROR("aruco_map: Marker id %d is not in dictionary", id);
+			ROS_ERROR("aruco_map: Current dictionary contains %d markers", numMarkers);
+			ROS_ERROR("aruco_map: Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details");
+			throw std::runtime_error("Marker id outside of dictionary range");
+		}
 		// Create transform
 		tf::Quaternion q;
 		q.setRPY(roll, pitch, yaw);
