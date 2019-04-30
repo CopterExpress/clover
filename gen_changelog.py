@@ -32,7 +32,8 @@ try:
 except KeyError:
     print('TRAVIS_REPO_SLUG not set - cannot determine remote repository')
     repo_slug = ''
-    exit(1)
+    if upload_changelog:
+        exit(1)
 
 if len(sys.argv) > 1:
     repo_path = sys.argv[1]
@@ -48,10 +49,17 @@ try:
 except exc.GitCommandError:
     print('Repository already unshallowed')
 print('Attempting to get previous tag')
-base_tag = git.describe('--tags', '--abbrev=0', '{}^'.format(current_tag))
+try:
+    base_tag = git.describe('--tags', '--abbrev=0', '{}^'.format(current_tag))
+except exc.GitCommandError:
+    print('No tags found')
+    base_tag = 'empty'
 print('Base tag set to {}'.format(base_tag))
 
-changelog = git.log('{}...{}'.format(base_tag, current_tag), '--pretty=format:* %H %s *(%an)*')
+if base_tag == 'empty':
+    changelog = git.log('--pretty=format:* %H %s *(%an)*')
+else:
+    changelog = git.log('{}...{}'.format(base_tag, current_tag), '--pretty=format:* %H %s *(%an)*')
 print('Current changelog: \n{}'.format(changelog))
 
 # Only interact with Github if uploading is enabled
