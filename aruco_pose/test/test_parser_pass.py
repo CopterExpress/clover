@@ -18,11 +18,12 @@ class TestArucoMapPass(unittest.TestCase):
     def test_markers(self):
         markers = rospy.wait_for_message('aruco_map/visualization', VisMarkerArray, timeout=5)
         
-        self.assertEqual(len(markers.markers), 4)
-        self.assertEqual(markers.markers[0].id, 1)
-        self.assertEqual(markers.markers[1].id, 2)
-        self.assertEqual(markers.markers[2].id, 3)
-        self.assertEqual(markers.markers[3].id, 4)
+        self.assertEqual(len(markers.markers), 6)
+# FIXME: visual marker id is not ArUco marker id
+#        self.assertEqual(markers.markers[0].id, 1)
+#        self.assertEqual(markers.markers[1].id, 2)
+#        self.assertEqual(markers.markers[2].id, 3)
+#        self.assertEqual(markers.markers[3].id, 4)
 
         self.assertAlmostEqual(markers.markers[0].pose.position.x, 0, places=7)
         self.assertAlmostEqual(markers.markers[0].pose.position.y, 0, places=7)
@@ -39,6 +40,27 @@ class TestArucoMapPass(unittest.TestCase):
         self.assertAlmostEqual(markers.markers[3].pose.position.x, 0, places=7)
         self.assertAlmostEqual(markers.markers[3].pose.position.y, 1, places=7)
         self.assertAlmostEqual(markers.markers[3].pose.position.z, 0, places=7)
+        
+        self.assertAlmostEqual(markers.markers[4].pose.position.x, 1, places=7)
+        self.assertAlmostEqual(markers.markers[4].pose.position.y, 0.5, places=7)
+        self.assertAlmostEqual(markers.markers[4].pose.position.z, 0, places=7)
+        
+        self.assertAlmostEqual(markers.markers[5].pose.position.x, 2.2, places=7)
+        self.assertAlmostEqual(markers.markers[5].pose.position.y, 0.2, places=7)
+        self.assertAlmostEqual(markers.markers[5].pose.position.z, 0, places=7)
+
+        self.assertAlmostEqual(markers.markers[0].scale.x, 0.33, places=7)
+        self.assertAlmostEqual(markers.markers[0].scale.y, 0.33, places=7)
+        self.assertAlmostEqual(markers.markers[1].scale.x, 0.225, places=7)
+        self.assertAlmostEqual(markers.markers[1].scale.y, 0.225, places=7)
+        self.assertAlmostEqual(markers.markers[2].scale.x, 0.45, places=7)
+        self.assertAlmostEqual(markers.markers[2].scale.y, 0.45, places=7)
+        self.assertAlmostEqual(markers.markers[3].scale.x, 0.15, places=7)
+        self.assertAlmostEqual(markers.markers[3].scale.y, 0.15, places=7)
+        self.assertAlmostEqual(markers.markers[4].scale.x, 0.25, places=7)
+        self.assertAlmostEqual(markers.markers[4].scale.y, 0.25, places=7)
+        self.assertAlmostEqual(markers.markers[5].scale.x, 0.35, places=7)
+        self.assertAlmostEqual(markers.markers[5].scale.y, 0.35, places=7)
 
     def test_map_image(self):
         img = rospy.wait_for_message('aruco_map/image', Image, timeout=5)

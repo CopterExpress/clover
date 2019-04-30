@@ -18,4 +18,6 @@
 3 0.45 1 0 0.5
 # Default roll, pitch, yaw, z
 4 0.15 0 1
-
+# Inline commentary
+5 0.25 1 0.5# Comment straight after digit
+6 0.35 2.2 0.2 # Comment with a space after digit
