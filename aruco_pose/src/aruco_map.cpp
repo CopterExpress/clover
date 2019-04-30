@@ -379,10 +379,10 @@ publish_debug:
 				   double yaw, double pitch, double roll)
 	{
 		// Check whether the id is in range for current dictionary
-		int numMarkers = board_->dictionary->bytesList.rows;
-		if (numMarkers <= id) {
+		int num_markers = board_->dictionary->bytesList.rows;
+		if (num_markers <= id) {
 			ROS_ERROR("aruco_map: Marker id %d is not in dictionary", id);
-			ROS_ERROR("aruco_map: Current dictionary contains %d markers", numMarkers);
+			ROS_ERROR("aruco_map: Current dictionary contains %d markers", num_markers);
 			ROS_ERROR("aruco_map: Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details");
 			throw std::runtime_error("Marker id outside of dictionary range");
 		}
