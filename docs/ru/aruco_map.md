@@ -128,7 +128,7 @@ navigate(2, 2, 2, speed=1, frame_id='aruco_map')  # полет в координ
 
 Для навигации по маркерам, расположенным на потолке, необходимо поставить основную камеру так, чтобы она смотрела вверх и [установить соответствующий фрейм камеры](camera_frame.md).
 
-Также в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` необходимо установить параметр `known_tilt` в секции `aruco_map` в значение `map_flipped`:
+Также в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` необходимо установить параметр `known_tilt` в секциях `aruco_detect` и `aruco_map` в значение `map_flipped`:
 
 ```xml
 <param name="known_tilt" value="map_flipped"/>
