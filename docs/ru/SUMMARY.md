@@ -58,6 +58,7 @@
 * Проекты на базе Клевера
   * [Шаровая защита коптера](shield.md)
   * [Распознавание лиц](face_recognition.md)
+  * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
   * [CopterHack-2018](copterhack2018.md)
