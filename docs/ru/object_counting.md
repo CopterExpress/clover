@@ -22,13 +22,7 @@ git clone https://github.com/mmkuznecov/objects_counting_from_clever.git
 
 ## Примеры работы
 
-Система может быть адаптирована для разных условий, съёмка может производиться как из статичного положения,
-
-<img src="../assets/people_static.gif" width="70%">
-
-так и в динамическом полёте.
-
-<img src="../assets/giff.gif" width="50%">
+Система может быть адаптирована для разных условий, съёмка может производиться как из [статичного положения](https://youtu.be/RUVNRlA_dwY), так и в [динамическом полёте](https://youtu.be/jNcQ9aJZUh8).
 
 ## Использование
 
