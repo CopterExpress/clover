@@ -61,7 +61,7 @@ jobs:
         skip-cleanup: true
         github-token: ${GITHUB_OAUTH_TOKEN}
         keep-history: true
-        target-branch: gh-pages
+        target-branch: master
         repo: CopterExpress/clever-gitbook
         fqdn: clever.copterexpress.com
         verbose: true
