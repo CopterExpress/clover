@@ -55,4 +55,4 @@ sofa, train, tvmonitor
 
 <img src="../assets/op.png" width="50%">
 
-По вопросам пишите в telegram @mmkuznecov
+По вопросам пишите в Telegram @mmkuznecov.
