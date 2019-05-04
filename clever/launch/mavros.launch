@@ -5,12 +5,12 @@
     <arg name="viz" default="true"/>
     <arg name="respawn" default="true"/>
 
-    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" respawn_delay="5" output="screen">
+    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" unless="$(eval fcu_conn == 'none')" respawn_delay="1" output="screen">
         <!-- UART connection -->
         <param name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
 
         <!-- USB connection -->
-        <param name="fcu_url" value="/dev/ttyACM0" if="$(eval fcu_conn == 'usb')"/>
+        <param name="fcu_url" value="/dev/px4fmu" if="$(eval fcu_conn == 'usb')"/>
 
         <!-- sitl -->
         <param name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
@@ -18,68 +18,37 @@
         <!-- gcs bridge -->
         <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>
         <param name="gcs_url" value="udp://0.0.0.0:14550@14550" if="$(eval gcs_bridge == 'udp')"/>
-        <param name="gcs_url" value="udp-b://$(env ROS_IP):14550@14550" if="$(eval gcs_bridge == 'udp-b')"/>
-        <param name="gcs_url" value="udp-pb://$(env ROS_IP):14550@14550" if="$(eval gcs_bridge == 'udp-pb')"/>
+        <param name="gcs_url" value="udp-b://$(env ROS_HOSTNAME):14550@14550" if="$(eval gcs_bridge == 'udp-b')"/>
+        <param name="gcs_url" value="udp-pb://$(env ROS_HOSTNAME):14550@14550" if="$(eval gcs_bridge == 'udp-pb')"/>
         <param name="gcs_url" value="" if="$(eval not gcs_bridge)"/>
         <param name="gcs_quiet_mode" value="true"/>
         <param name="conn/timeout" value="8"/>
 
-        <!-- default px4 params -->
-        <rosparam command="load" file="$(find mavros)/launch/px4_config.yaml"/>
+        <!-- basic params -->
+        <rosparam command="load" file="$(find clever)/launch/mavros_config.yaml"/>
 
-        <!-- enable setpoint_attitude/attitude -->
-        <param name="setpoint_attitude/use_quaternion" value="true"/>
-
-        <!-- rangefinders -->
-        <rosparam>
-            distance_sensor:
-                rangefinder_0:
-                    id: 0
-                    frame_id: "rangefinder"
-                    orientation: PITCH_270
-                    field_of_view: 0.5
-                rangefinder_1:
-                    id: 1
-                    frame_id: "rangefinder"
-                    orientation: PITCH_270
-                    field_of_view: 0.5
-                rangefinder_2_sub:
-                    subscriber: true
-                    id: 2
-                    orientation: PITCH_270
-                rangefinder_3_sub:
-                    subscriber: true
-                    id: 3
-                    orientation: PITCH_270
-        </rosparam>
-
-        <!-- additional params -->
-        <param name="local_position/frame_id" value="map"/>
-        <param name="local_position/tf/send" value="true"/>
-        <param name="local_position/tf/frame_id" value="map"/>
-        <param name="local_position/tf/child_frame_id" value="base_link"/>
-        <param name="global_position/tf/send" value="false"/>
-        <param name="imu/frame_id" value="base_link"/>
-        <rosparam param="plugin_blacklist">
-            - safety_area
-            - image_pub
-            - vibration
-            - rangefinder
-            - 3dr_radio
-            - actuator_control
-            - hil_controls
-            - vfr_hud
-            - vision_speed_estimate
-            - fake_gps
-            - cam_imu_sync
-            - hil
-            - adsb
-            - waypoint
-            - obstacle_distance
-            - setpoint_accel
-            - trajectory
-            - wind_estimation
-            - home_position
+        <rosparam param="plugin_whitelist">
+            - altitude
+            - command
+            - distance_sensor
+            - ftp
+            - global_position
+            - imu
+            - local_position
+            - manual_control
+            # - mocap_pose_estimate
+            - param
+            - px4flow
+            - rc_io
+            - setpoint_attitude
+            - setpoint_position
+            - setpoint_raw
+            - setpoint_velocity
+            - sys_status
+            - sys_time
+            - vision_pose_estimate
+            # - vision_speed_estimate
+            # - waypoint
         </rosparam>
     </node>
 

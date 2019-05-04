@@ -16,19 +16,21 @@
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
-        <arg name="viz" value="true"/>
     </include>
 
     <!-- web video server -->
-    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5"/>
+    <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5">
+        <param name="default_stream_type" value="ros_compressed"/>
+    </node>
 
-    <!-- aruco vpe -->
+    <!-- aruco markers -->
     <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true">
-        <remap from="image" to="main_camera/image_raw"/>
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+        <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
+        <param name="calc_flow_gyro" value="true"/>
     </node>
 
     <!-- main nodelet manager -->
@@ -36,14 +38,12 @@
         <param name="num_worker_threads" value="2"/>
     </node>
 
-    <node pkg="tf2_ros" type="static_transform_publisher" name="map_upside_down_frame" args="0 0 0 3.1415926 3.1415926 0 map map_upside_down"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
-        <rosparam param="reference_frames">
-            body: map
-            base_link: map
-        </rosparam>
+        <param name="reference_frames/body" value="map"/>
+        <param name="reference_frames/base_link" value="map"/>
     </node>
 
     <!-- Auxiliary frames -->
@@ -57,16 +57,20 @@
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(eval rosbridge or rc)"/>
 
+    <!-- tf2 republisher for web visualization -->
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" output="screen" if="$(arg rosbridge)"/>
+
     <!-- vl53l1x ToF rangefinder -->
     <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
-        <param name="offset" value="-0.05"/>
-        <remap from="~range" to="mavros/distance_sensor/rangefinder_3_sub"/> <!-- redirect data to FCU -->
+        <remap from="~range" to="mavros/distance_sensor/rangefinder_sub"/> <!-- redirect data to FCU -->
     </node>
 
     <!-- rc backend -->
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
 
     <!-- Arduino bridge -->
-    <include file="$(find clever)/launch/arduino.launch" if="$(arg arduino)"/>
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" if="$(arg arduino)">
+        <param name="port" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
+    </node>
 </launch>

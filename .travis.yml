@@ -4,30 +4,80 @@ services:
   - docker
 env:
   global:
-    - DOCKER="goldarte/img-tool:builder-mod"
+    - DOCKER="sfalexrog/img-tool:qemu-update"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
     - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
-  depth: 1
-before_script:
-  - docker pull ${DOCKER}
-script:
-  - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "goldarte"
-  - git config --local user.email "goldartt@gmail.com"
-  - sudo chmod -R 777 *
-  - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
-deploy:
-  provider: releases
-  api_key: ${GITHUB_OAUTH_TOKEN}
-  file: ${IMAGE_NAME}.zip
-  skip_cleanup: true
-  on:
-    tags: true
-
+  depth: 50
+jobs:
+  fast_finish: true
+  include:
+    - stage: Build
+      name: "Raspberry Pi Image Build"
+      cache:
+        directories:
+        - imgcache
+      before_script:
+        - docker pull ${DOCKER}
+# Check if there are any cached images, copy them to our "images" directory
+        - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
+      script:
+        - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+      before_cache:
+        - cp images/*.zip imgcache
+      before_deploy:
+        # Set up git user name and tag this commit
+        - git config --local user.name "goldarte"
+        - git config --local user.email "goldartt@gmail.com"
+        - sudo chmod -R 777 *
+        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
+      deploy:
+        provider: releases
+        api_key: ${GITHUB_OAUTH_TOKEN}
+        file: ${IMAGE_NAME}.zip
+        skip_cleanup: true
+        on:
+          tags: true
+        draft: true
+        name: ${TRAVIS_TAG}
+    - stage: Build
+      name: "Documentation"
+      language: node_js
+      node_js:
+        - "10"
+      before_script:
+        - npm install gitbook-cli -g
+        - npm install markdownlint-cli -g
+        - gitbook -V
+        - markdownlint -V
+      script:
+        - markdownlint docs
+        - gitbook install
+        - gitbook build
+      deploy:
+        provider: pages
+        local-dir: _book
+        skip-cleanup: true
+        github-token: ${GITHUB_OAUTH_TOKEN}
+        keep-history: true
+        target-branch: master
+        repo: CopterExpress/clever-gitbook
+        fqdn: clever.copterexpress.com
+        verbose: true
+        on:
+          branch: master
+    - stage: Annotate
+      name: Auto-generate changelog
+      language: python
+      python: 3.6
+      install:
+        - pip install GitPython PyGithub
+      script:
+        - PYTHONUNBUFFERED=1 python ./gen_changelog.py
+stages:
+  - Build
+  - Annotate
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
 # https://docs.travis-ci.com/user/customizing-the-build/

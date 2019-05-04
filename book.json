@@ -10,15 +10,19 @@
         "yametrika",
         "anchors",
         "validate-links",
-        "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git"
+        "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
+        "sitemap@https://github.com/okalachev/plugin-sitemap.git"
     ],
     "pluginsConfig": {
         "yametrika": {
             "id": 49359238
         },
         "bulk-redirect": {
-            "basepath": "/",
+            "basepath": "",
             "redirectsFile": "redirects.json"
+        },
+        "sitemap": {
+            "hostname": "https://clever.copterexpress.com"
         }
     }
 }

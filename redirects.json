@@ -27,6 +27,7 @@
         { "from": "ros.html", "to": "ru/ros.html" },
         { "from": "mavros.html", "to": "ru/mavros.html" },
         { "from": "simple_offboard.html", "to": "ru/simple_offboard.html" },
+        { "from": "aruco/", "to": "ru/aruco.html" },
         { "from": "aruco.html", "to": "ru/aruco.html" },
         { "from": "selfcheck.html", "to": "ru/selfcheck.html" },
         { "from": "snippets.html", "to": "ru/snippets.html" },
@@ -40,6 +41,14 @@
         { "from": "copterhack2018.html", "to": "ru/copterhack2018.html" },
         { "from": "copterhack2018.html", "to": "ru/copterhack2017.html" },
         { "from": "mavlink.html", "to": "ru/mavlink.html" },
-        { "from": "flight_logs.html", "to": "ru/flight_logs.html" }
+        { "from": "flight_logs.html", "to": "ru/flight_logs.html" },
+
+        { "from": "modes/", "to": "ru/modes.html" },
+        { "from": "firmware/", "to": "ru/firmware.html" },
+        { "from": "simple_offboard/", "to": "ru/simple_offboard.html" },
+        { "from": "camera/", "to": "ru/camera.html" },
+        { "from": "snippets/", "to": "ru/snippets.html" },
+        { "from": "optical_flow/", "to": "ru/optical_flow.html" },
+        { "from": "laser/", "to": "ru/laser.html" }
     ]
 }

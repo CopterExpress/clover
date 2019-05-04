@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/eventemitter2.js"></script>
+		<script type="text/javascript" src="js/roslib.js"></script>
+		<script type="text/javascript" src="js/ros3d.js"></script>
+		<title>3D visualization</title>
+	</head>
+	<body>
+		<div id="viz"></div>
+		<script type="text/javascript" src="js/viz.js"></script>
+		<script>
+			setScene('map');
+			addVehicle();
+			addCamera();
+			addAruco();
+		</script>
+	</body>
+</html>

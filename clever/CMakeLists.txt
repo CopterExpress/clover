@@ -148,10 +148,6 @@ add_library(clever
   src/optical_flow.cpp
 )
 
-add_library(aruco_vpe
-  src/aruco_vpe.cpp
-)
-
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -168,6 +164,8 @@ add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(frames src/frames.cpp)
 
+add_executable(vpe_publisher src/vpe_publisher.cpp)
+
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
@@ -178,6 +176,8 @@ target_link_libraries(rc ${catkin_LIBRARIES})
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(frames ${catkin_LIBRARIES})
+
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 add_dependencies(simple_offboard clever_generate_messages_cpp)
 
@@ -193,10 +193,6 @@ add_dependencies(simple_offboard clever_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(clever
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(aruco_vpe
   ${catkin_LIBRARIES}
 )
 

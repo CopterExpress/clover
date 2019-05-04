@@ -4,9 +4,11 @@ Requires=roscore.service
 After=roscore.service
 
 [Service]
+User=pi
 EnvironmentFile=/lib/systemd/system/roscore.env
-ExecStart=/opt/ros/kinetic/bin/roslaunch clever clever.launch --wait
-Restart=on-abort
+ExecStart=/opt/ros/kinetic/bin/roslaunch clever clever.launch --wait --screen
+Restart=on-failure
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

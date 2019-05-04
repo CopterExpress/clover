@@ -4,14 +4,18 @@
 Python
 ---
 
+<!-- markdownlint-disable MD031 -->
+
 > **Note** При использовании кириллических символов в кодировке UTF-8 необходимо добавить в начало программы указание кодировки:
 > ```python
 > # -*- coding: utf-8 -*-
 > ```
 
+<!-- markdownlint-disable MD031 -->
+
 ### # {#distance}
 
-Функция определения расстяния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
+Функция определения расстояния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
 ```python
 def get_distance(x1, y1, z1, x2, y2, z2):
@@ -39,7 +43,7 @@ tolerance = 0.2  # точность проверки высоты (м)
 start = get_telemetry()
 
 # Взлетаем на 2 м
-print navigate(z=z, speed=0.5, frame_id='fcu_horiz', auto_arm=True)
+print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 
 # Ожидаем взлета
 while True:
@@ -100,15 +104,15 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 # Создаем объект PoseStamped (либо получаем из топика):
 pose = PoseStamped()
-pose.header.frame_id = 'local_origin'  # фрейм, в котором задана позиция
+pose.header.frame_id = 'map'  # фрейм, в котором задана позиция
 pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
 pose.pose.position.x = 1
 pose.pose.position.y = 2
 pose.pose.position.z = 3
 pose.pose.orientation.w = 1
 
-frame_id = 'fcu'  # целевой фрейм
-transform_timeout = rospy.Duration(0.2)  # таймаут ожидания транформации
+frame_id = 'base_link'  # целевой фрейм
+transform_timeout = rospy.Duration(0.2)  # таймаут ожидания трансформации
 
 # Преобразовываем позицию из старого фрейма в новый:
 new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
@@ -127,7 +131,7 @@ flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
 
 ### # {#angle-hor}
 
-Рассчет общего угла коптера к горизонту:
+Расчет общего угла коптера к горизонту:
 
 ```python
 PI_2 = math.pi / 2
@@ -183,7 +187,7 @@ from mavros_msgs.msg import RCIn
 
 # ...
 
-def state_update(pose):
+def pose_update(pose):
     # Обработка новых данных о позиции коптера
     pass
 
@@ -236,7 +240,7 @@ from mavros_msgs.msg import RCIn
 # Вызывается при получении новых данных с пульта
 def rc_callback(data):
     # Произвольная реакция на переключение тумблера на пульте
-        if data.channels[5] < 1100:
+    if data.channels[5] < 1100:
         # ...
         pass
     elif data.channels[5] > 1900:
@@ -250,6 +254,22 @@ def rc_callback(data):
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 rospy.spin()
+```
+
+### # {#set_mode}
+
+Сменить [режим полета](modes.md) на произвольный:
+
+```python
+from mavros_msgs.srv import SetMode
+
+# ...
+
+set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
+
+# ...
+
+set_mode(custom_mode='STABILIZED')
 ```
 
 ### # {#flip}

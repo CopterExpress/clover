@@ -1,9 +1,9 @@
 Connecting Pixhawk/Pixracer to Raspberry Pi
 ===
 
-To program [autonomous flights] (simple_offboard.md) [work with Pixhawk (Pixracer) over Wi-Fi] (gcs_bridge.md), use [of a phone transmitter] (rc.md), and other functions, it is necessary to connect Raspberry Pi to Pixhawk (Pixracer).
+To program [autonomous flights](simple_offboard.md) [work with Pixhawk (Pixracer) over Wi-Fi](gcs_bridge.md), use [of a phone transmitter] (rc.md), and other functions, it is necessary to connect Raspberry Pi to Pixhawk (Pixracer).
 
-Check operability of the connection [by running on Raspberry Pi] (ssh.md):
+Check operability of the connection [by running on Raspberry Pi](ssh.md):
 
 ```bash
 rostopic echo /mavros/state

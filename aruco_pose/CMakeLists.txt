@@ -16,10 +16,14 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   cv_bridge
   tf
-  #tf2
-  #tf2_ros
-  #aruco_msgs
+  tf2
+  tf2_ros
+  tf2_geometry_msgs
+  sensor_msgs
+  message_generation
 )
+
+find_package(OpenCV 3 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -55,11 +59,12 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-#add_message_files(
-#  FILES
-#  Marker.msg
-#  MarkerArray.msg
-#)
+add_message_files(
+  FILES
+  Point2D.msg
+  Marker.msg
+  MarkerArray.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -76,10 +81,11 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-#generate_messages(
-#  DEPENDENCIES
-#  std_msgs  # Or other packages containing msgs
-#)
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  geometry_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -111,9 +117,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS DEPENDS OpenCV
   LIBRARIES aruco_pose
-#  CATKIN_DEPENDS other_catkin_pkg
+  CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -126,17 +132,17 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-add_library(${PROJECT_NAME}
-  src/aruco_pose.cpp
+add_library(aruco_pose
+  src/aruco_detect.cpp
+  src/aruco_map.cpp
+  src/draw.cpp
 )
 
-## Add cmake target dependencies of the library
-## as an example, code may need to be generated before libraries
-## either from message generation or dynamic reconfigure
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME} aruco_pose_generate_messages_cpp)
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
@@ -154,11 +160,9 @@ add_library(${PROJECT_NAME}
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-link_directories(/opt/ros/kinetic/lib)
-
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(aruco_pose
   ${catkin_LIBRARIES}
-  "/opt/ros/kinetic/lib/libopencv_aruco3.so" # TODO: fix launch fails with .so loading
+  ${OpenCV_LIBRARIES}
 )
 
 #############
@@ -208,3 +212,8 @@ target_link_libraries(${PROJECT_NAME}
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+if (CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest(test/basic.test)
+endif()

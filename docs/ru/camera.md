@@ -1,5 +1,7 @@
 # Работа с камерой
 
+<!-- TODO: физическое подключение -->
+
 Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
 
 ```xml
@@ -14,7 +16,25 @@
 sudo systemctl restart clever
 ```
 
-Для мониторинга изображения с камеры можно использовать rqt или [web_video_server](web_video_server.md).
+Для мониторинга изображения с камеры можно использовать [rqt](rviz.md) или [web_video_server](web_video_server.md).
+
+## Неисправности
+
+Если изображение с камеры отсутствует, попробуйте проверить ее с помощью утилиты [`raspistill`](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md).
+
+Остановите сервисы Клевера:
+
+```bash
+sudo systemctl stop clever
+```
+
+Получите картинку с камеры утилитой `raspistill`:
+
+```bash
+raspistill -o test-image.jpg
+```
+
+Если команда завершается с ошибкой, проверьте качество подключения шлейфа камеры к Raspberry Pi или замените его.
 
 ## Компьютерное зрение
 
@@ -24,7 +44,7 @@ sudo systemctl restart clever
 
 Основная статья: http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython.
 
-Пример создания подписчика на топик с изображением с основной камеры для обрабоки с использованием OpenCV:
+Пример создания подписчика на топик с изображением с основной камеры для обработки с использованием OpenCV:
 
 ```python
 import rospy
@@ -58,13 +78,15 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md).
 
+> **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clever.launch`.
+
 ### Примеры
 
 #### Работа с QR-кодами
 
 > **Hint** Для высокоскоростного распознавания и позиционирования лучше использовать [ArUco-маркеры](aruco.md).
 
-Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать бибилиотеку [ZBar](http://zbar.sourceforge.net). Ее нужно установить в помощью pip:
+Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать библиотеку [ZBar](http://zbar.sourceforge.net). Ее нужно установить в помощью pip:
 
 ```bash
 sudo pip install zbar

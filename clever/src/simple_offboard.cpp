@@ -34,6 +34,7 @@
 #include <mavros_msgs/AttitudeTarget.h>
 #include <mavros_msgs/Thrust.h>
 #include <mavros_msgs/State.h>
+#include <mavros_msgs/StatusText.h>
 
 #include <clever/GetTelemetry.h>
 #include <clever/Navigate.h>
@@ -69,6 +70,7 @@ ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
 float default_speed;
 bool auto_release;
+bool land_only_in_offboard;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -113,6 +115,7 @@ enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
 
 // Last received telemetry messages
 mavros_msgs::State state;
+mavros_msgs::StatusText statustext;
 PoseStamped local_position;
 TwistStamped velocity;
 NavSatFix global_position;
@@ -248,7 +251,10 @@ void offboardAndArm()
 			if (state.mode == "OFFBOARD") {
 				break;
 			} else if (ros::Time::now() - start > offboard_timeout) {
-				throw std::runtime_error("OFFBOARD request timed out");
+				string report = "OFFBOARD timed out";
+				if (statustext.header.stamp > start)
+					report += ": " + statustext.text;
+				throw std::runtime_error(report);
 			}
 			ros::spinOnce();
 			r.sleep();
@@ -270,7 +276,10 @@ void offboardAndArm()
 			if (state.armed) {
 				break;
 			} else if (ros::Time::now() - start > arming_timeout) {
-				throw std::runtime_error("Arming timed out");
+				string report = "Arming timed out";
+				if (statustext.header.stamp > start)
+					report += ": " + statustext.text;
+				throw std::runtime_error(report);
 			}
 			ros::spinOnce();
 			r.sleep();
@@ -338,7 +347,7 @@ void publish(const ros::Time stamp)
 
 	try {
 		// transform position and/or yaw
-		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION || setpoint_type == ATTITUDE) {
+		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION || setpoint_type == VELOCITY || setpoint_type == ATTITUDE) {
 			setpoint_position.header.stamp = stamp;
 			tf_buffer.transform(setpoint_position, setpoint_position_transformed, local_frame, ros::Duration(0.05));
 		}
@@ -446,10 +455,10 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
 }
 
-inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-                  float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-                  float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-                  uint8_t& success, string& message)
+bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
+           uint8_t& success, string& message)
 {
 	auto stamp = ros::Time::now();
 
@@ -473,7 +482,7 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 				speed = default_speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
 			if (yaw_rate != 0 && !std::isnan(yaw))
 				throw std::runtime_error("Yaw value should be NaN for setting yaw rate");
 
@@ -520,12 +529,13 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 			nav_speed = speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
-			if (std::isnan(yaw) && yaw_rate == 0) {
-				// keep yaw unchanged
-				yaw = tf2::getYaw(local_position.pose.orientation);
-			}
-		}
+		// if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
+		// 	if (std::isnan(yaw) && yaw_rate == 0) {
+		// 		// keep yaw unchanged
+		//		// TODO: this is incorrect, because we need yaw in desired frame
+		// 		yaw = tf2::getYaw(local_position.pose.orientation);
+		// 	}
+		// }
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
 			// destination point and/or yaw
@@ -593,42 +603,36 @@ inline void serve(enum setpoint_type_t sp_type, float x, float y, float z, float
 		message = e.what();
 		ROS_INFO("simple_offboard: %s", message.c_str());
 		busy = false;
-		return;
+		return true;
 	}
 
 	success = true;
 	busy = false;
-	return;
+	return true;
 }
 
 bool navigate(Navigate::Request& req, Navigate::Response& res) {
-	serve(NAVIGATE, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(NAVIGATE, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res) {
-	serve(NAVIGATE_GLOBAL, 0, 0, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, req.lat, req.lon, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(NAVIGATE_GLOBAL, 0, 0, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, req.lat, req.lon, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
-	serve(POSITION, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(POSITION, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setVelocity(SetVelocity::Request& req, SetVelocity::Response& res) {
-	serve(VELOCITY, 0, 0, 0, req.vx, req.vy, req.vz, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(VELOCITY, 0, 0, 0, req.vx, req.vy, req.vz, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setAttitude(SetAttitude::Request& req, SetAttitude::Response& res) {
-	serve(ATTITUDE, 0, 0, 0, 0, 0, 0, req.pitch, req.roll, req.yaw, 0, 0, 0, 0, 0, req.thrust, 0, req.frame_id, req.auto_arm, res.success, res.message);
-	return true;
+	return serve(ATTITUDE, 0, 0, 0, 0, 0, 0, req.pitch, req.roll, req.yaw, 0, 0, 0, 0, 0, req.thrust, 0, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setRates(SetRates::Request& req, SetRates::Response& res) {
-	serve(RATES, 0, 0, 0, 0, 0, 0, 0, 0, 0, req.pitch_rate, req.roll_rate, req.yaw_rate, 0, 0, req.thrust, 0, "", req.auto_arm, res.success, res.message);
-	return true;
+	return serve(RATES, 0, 0, 0, 0, 0, 0, 0, 0, 0, req.pitch_rate, req.roll_rate, req.yaw_rate, 0, 0, req.thrust, 0, "", req.auto_arm, res.success, res.message);
 }
 
 bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
@@ -640,6 +644,12 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		busy = true;
 
 		checkState();
+
+		if (land_only_in_offboard) {
+			if (state.mode != "OFFBOARD") {
+				throw std::runtime_error("Copter is not in OFFBOARD mode");
+			}
+		}
 
 		static mavros_msgs::SetMode sm;
 		sm.request.custom_mode = "AUTO.LAND";
@@ -683,8 +693,9 @@ int main(int argc, char **argv)
 	// Params
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
 	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
-	nh_priv.param("target_frame", target.child_frame_id, string("target"));
+	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("auto_release", auto_release, true);
+	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.getParam("reference_frames", reference_frames);
 
@@ -710,6 +721,7 @@ int main(int argc, char **argv)
 	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
+	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);

@@ -1,0 +1,125 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	user-select: none;
+	font-family: sans-serif;
+	background: #212121;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+* {
+	user-select: none;
+}
+
+.stick {
+	border-radius: 50%;
+	width: 5cm;
+	height: 5cm;
+	position: relative;
+	transform: translateZ(0);
+	border: 4px solid rgba(255,255,255,.4);
+	box-shadow: 0 0 0 1px rgba(0,0,0,.2), inset 0 0 0 1px rgba(0,0,0,.2);
+}
+
+.stick-pointer {
+	position: absolute;
+	border-radius: 50%;
+	background-color: rgba(255,255,255,.25);
+	box-shadow: 0 0 10px rgba(0,0,0,.3);
+	width: 3cm;
+	height: 3cm;
+	margin-left: -1.5cm;
+	margin-top: -1.5cm;
+	top: 2.5cm;
+	left: 2.5cm;
+	pointer-events: none;
+	transform: translateZ(0);
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
+.telemetry {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 30px;
+	font-size: 20px;
+	user-select: none;
+	pointer-events: none;
+}
+
+body.armed .telemetry .mode {
+	font-weight: bold;
+}
+
+@keyframes scale {
+	0% { transform: scale(1.0); }
+	50% { transform: scale(1.2); }
+	100% { transform: scale(1.0); }
+}
+
+.battery {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	bottom: 30px;
+	font-size: 20px;
+	user-select: none;
+	pointer-events: none;
+}
+
+body.low-battery .battery {
+	color: #ff554b;
+	animation: scale 0.3s 1 ease-in-out
+}
+
+.logo {
+	position: absolute;
+	background: url(clever.svg);
+	-webkit-background-size: 50px;
+	background-size: 50px;
+	width: 50px;
+	height: 50px;
+	top: 50%;
+	left: 50%;
+	margin-top: -25px;
+	margin-left: -25px;
+	font-size: 20px;
+	user-select: none;
+	pointer-events: none;
+}
+
+.notifications {
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	color: white;
+}
+
+.notifications.hidden {
+	transform: translateY(-100%);
+}
+
+.notifications.anim {
+	transition: transform 0.2s ease;
+}
+
+.notifications .item {
+	font-size: 4mm;
+	-webkit-text-size-adjust: none;
+	background: #fca83a;
+	padding: 3mm;
+	padding-bottom: 1.5mm;
+}
+
+.notifications .item:last-child {
+	padding-bottom: 3mm;
+}

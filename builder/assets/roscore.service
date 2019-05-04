@@ -3,9 +3,11 @@ Description=Launcher for the ROS master, parameter server and rosout logging nod
 After=network.target
 
 [Service]
+User=pi
 EnvironmentFile=/lib/systemd/system/roscore.env
 ExecStart=/opt/ros/kinetic/bin/roscore
-Restart=on-abort
+Restart=on-failure
+RestartSec=3
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+# PixHawk (px4fmu-v2), px4fmu-v3
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0011", ATTRS{product}=="PX4 FMU v2.x", SYMLINK+="px4fmu"
+# PixRacer (px4fmu-v4)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0012", ATTRS{product}=="PX4 FMU v4.x", SYMLINK+="px4fmu"
+# px4fmu-v5
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0032", ATTRS{product}=="PX4 FMU v5.x", SYMLINK+="px4fmu"
+# auav
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0021", ATTRS{product}=="PX4 AUAV x2.1", SYMLINK+="px4fmu"
+# crazyflie
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0016", ATTRS{product}=="PX4 Crazyflie v2.0", SYMLINK+="px4fmu"
+# px4fmu-v4pro
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0013", ATTRS{product}=="PX4 FMU v4.x PRO", SYMLINK+="px4fmu"
+# Omnibus
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="PX4 OmnibusF4SD", SYMLINK+="px4fmu"
+
