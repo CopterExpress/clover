@@ -287,14 +287,14 @@ publish_debug:
 				s.putback(first);
 			} else {
 				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
-				ROS_ERROR("aruco_map: Malformed input: %s", line.c_str());
-				throw std::runtime_error("Malformed input");
+				ROS_FATAL("aruco_map: Malformed input: %s", line.c_str());
+				ros::shutdown();
 			}
 
 			if (!(s >> id >> length >> x >> y)) {
-				ROS_ERROR("aruco_map: Not enough data: %s", line.c_str());
-				ROS_ERROR("aruco_map: Each marker must have at least id, length, x, y fields");
-				throw std::runtime_error("Not enough data");
+				ROS_FATAL("aruco_map: Not enough data: %s; "
+				          "Each marker must have at least id, length, x, y fields", line.c_str());
+				ros::shutdown();
 			}
 			// Be less strict about z, yaw, pitch roll
 			if (!(s >> z)) {
@@ -381,10 +381,10 @@ publish_debug:
 		// Check whether the id is in range for current dictionary
 		int num_markers = board_->dictionary->bytesList.rows;
 		if (num_markers <= id) {
-			ROS_ERROR("aruco_map: Marker id %d is not in dictionary", id);
-			ROS_ERROR("aruco_map: Current dictionary contains %d markers", num_markers);
-			ROS_ERROR("aruco_map: Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details");
-			throw std::runtime_error("Marker id outside of dictionary range");
+			ROS_FATAL("aruco_map: Marker id %d is not in dictionary; current dictionary contains %d markers. "
+			          "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
+					  id, num_markers);
+			ros::shutdown();
 		}
 		// Create transform
 		tf::Quaternion q;
