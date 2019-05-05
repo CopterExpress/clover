@@ -61,13 +61,13 @@ my_travis_retry() {
 }
 
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
-echo_stamp "Init rosdep" \
-&& rosdep init \
-&& echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
-&& rosdep update
+echo_stamp "Init rosdep"
+my_travis_retry rosdep init
+echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
-sudo -u pi rosdep update
+my_travis_retry sudo -u pi rosdep update
 
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
