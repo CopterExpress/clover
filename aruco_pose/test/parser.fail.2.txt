@@ -1,0 +1,2 @@
+# Fail case 2: Marker outside of dictionary range
+1001 0.33 0 0
