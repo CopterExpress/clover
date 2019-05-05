@@ -292,7 +292,7 @@ publish_debug:
 			}
 
 			if (!(s >> id >> length >> x >> y)) {
-				ROS_FATAL("aruco_map: Not enough data: %s; "
+				ROS_FATAL("aruco_map: Not enough data in line: %s; "
 				          "Each marker must have at least id, length, x, y fields", line.c_str());
 				ros::shutdown();
 			}
