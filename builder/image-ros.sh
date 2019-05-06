@@ -42,9 +42,10 @@ echo_stamp() {
 my_travis_retry() {
   local result=0
   local count=1
-  while [ $count -le 30 ]; do
+  local max_count=50
+  while [ $count -le $max_count ]; do
     [ $result -ne 0 ] && {
-      echo -e "\n${ANSI_RED}The command \"$@\" failed. Retrying, $count of 3.${ANSI_RESET}\n" >&2
+      echo -e "\nThe command \"$@\" failed. Retrying, $count of $max_count.\n" >&2
     }
     # ! { } ignores set -e, see https://stackoverflow.com/a/4073372
     ! { "$@"; result=$?; }
@@ -53,8 +54,8 @@ my_travis_retry() {
     sleep 1
   done
 
-  [ $count -gt 3 ] && {
-    echo -e "\n${ANSI_RED}The command \"$@\" failed 3 times.${ANSI_RESET}\n" >&2
+  [ $count -gt $max_count ] && {
+    echo -e "\nThe command \"$@\" failed $max_count times.\n" >&2
   }
 
   return $result
