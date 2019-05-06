@@ -10,8 +10,8 @@
         "yametrika",
         "anchors",
         "validate-links",
-        "sitemap@https://github.com/okalachev/plugin-sitemap.git",
-        "meta"
+        "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
+        "sitemap@https://github.com/okalachev/plugin-sitemap.git"
     ],
     "pluginsConfig": {
         "yametrika": {
@@ -23,10 +23,6 @@
         },
         "sitemap": {
             "hostname": "https://clever.copterexpress.com"
-        },
-        "meta": {
-            "name": "google-site-verification",
-            "content": "ISIZ943qrAQYpCWcxdudJj0hVeA4KgbmcKeTeAvV1NI"
         }
     }
 }
