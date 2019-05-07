@@ -102,6 +102,7 @@ i2c-tools \
 ntpdate \
 python-dev \
 python3-dev \
+python-systemd \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
