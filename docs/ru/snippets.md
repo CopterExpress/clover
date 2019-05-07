@@ -11,7 +11,7 @@ Python
 > # -*- coding: utf-8 -*-
 > ```
 
-<!-- markdownlint-disable MD031 -->
+<!-- markdownlint-enable MD031 -->
 
 ### # {#distance}
 

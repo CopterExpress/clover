@@ -24,6 +24,8 @@
             "Python",
             "C++",
             "PX4",
+            "px4.io",
+            "logs.px4.io",
             "QGroundControl",
             "QGC",
             "WireShark",

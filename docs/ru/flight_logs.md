@@ -10,11 +10,7 @@
 Анализ
 ---
 
-<!-- markdownlint-disable MD044 -->
-
 ### logs.px4.io
-
-<!-- markdownlint-enable MD044 -->
 
 Записанные лог-файлы можно загрузить на сайт https://logs.px4.io и анализировать их через веб-интерфейс.
 
