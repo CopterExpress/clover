@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import math
-from subprocess import Popen, PIPE
+import subprocess
 import re
 import traceback
 import numpy
@@ -349,9 +349,7 @@ def check_rangefinder():
 
 @check('Boot duration')
 def check_boot_duration():
-    proc = Popen('systemd-analyze', stdout=PIPE)
-    proc.wait()
-    output = proc.communicate()[0]
+    output = subprocess.check_output('systemd-analyze')
     r = re.compile(r'([\d\.]+)s$')
     duration = float(r.search(output).groups()[0])
     if duration > 15:
@@ -362,9 +360,7 @@ def check_boot_duration():
 def check_cpu_usage():
     WHITELIST = 'nodelet',
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
-    proc = Popen(CMD, stdout=PIPE, shell=True)
-    proc.wait()
-    output = proc.communicate()[0]
+    output = subprocess.check_output(CMD, shell=True)
     processes = output.split('\n')
     for process in processes:
         if not process:
@@ -376,46 +372,33 @@ def check_cpu_usage():
                     cpu.strip(), cmd.strip(), pid.strip())
 
 
-def _check_systemd_service(service_name):
-    CMD = 'systemctl show -p ActiveState --value %s' % service_name
-    proc = Popen(CMD.split(), stdout=PIPE)
-    proc.wait()
-    output = proc.communicate()[0]
-    if 'inactive' in output:
-        failure('%s.service is not running' % service_name)
-
-
-@check('Clever service')
+@check('clever.service')
 def check_clever_service():
-    _check_systemd_service('clever')
-
-
-# FIXME: Do we really need to check for roscore presence?
-@check('roscore service')
-def check_roscore_service():
-    _check_systemd_service('roscore')
-
-
-@check('Clever logs')
-def check_clever_logs():
+    output = subprocess.check_output('systemctl show -p ActiveState --value clever.service'.split())
+    if 'inactive' in output:
+        failure('clever.service is not running, try sudo systemctl restart clever')
+        return
     j = journal.Reader()
     j.this_boot()
     j.add_match(_SYSTEMD_UNIT='clever.service')
     j.add_disjunction()
     j.add_match(UNIT='clever.service')
     node_errors = []
+    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
     for event in j:
         msg = event['MESSAGE']
         if ('Stopped Clever ROS package' in msg) or ('Started Clever ROS package' in msg):
             node_errors = []
-        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
+        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):      
+            msg = r.search(msg).groups()[2]
+            if msg in node_errors:
+                continue
             node_errors.append(msg)
-    if len(node_errors) > 0:
-        failure('Log contains node errors:\n%s\nRun `journalctl -u clever` for more info', '\n'.join(node_errors))
+    for error in node_errors:
+        failure(error)
 
 
 def selfcheck():
-    check_roscore_service()
     check_clever_service()
     check_fcu()
     check_imu()
@@ -430,7 +413,6 @@ def selfcheck():
     check_rangefinder()
     check_cpu_usage()
     check_boot_duration()
-    check_clever_logs()
 
 
 if __name__ == '__main__':
