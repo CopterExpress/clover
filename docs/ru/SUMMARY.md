@@ -66,6 +66,7 @@
 * Дополнительные материалы
   * [Олимпиада НТИ 2019](nti2019.md)
   * [Вклад в Клевер](contributing.md)
+  * [Сборка и модификация образа Клевера](image_building.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Протокол MAVLink](mavlink.md)
   * [Работа с логами PX4](flight_logs.md)
