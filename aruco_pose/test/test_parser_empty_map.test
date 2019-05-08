@@ -6,8 +6,8 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
         <param name="type" value="map"/>
-        <param name="map" value="$(find aruco_pose)/test/parser.fail.2.txt"/>
+        <param name="map" value="$(find aruco_pose)/test/test_parser_empty_map.txt"/>
     </node>
 
-    <test test-name="test_aruco_map_fail_dict" pkg="aruco_pose" type="test_parser_fail.py"/>
+    <test test-name="test_aruco_map_incomplete" pkg="aruco_pose" type="test_parser_empty_map.py"/>
 </launch>

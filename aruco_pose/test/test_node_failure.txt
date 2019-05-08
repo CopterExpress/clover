@@ -1,0 +1,4 @@
+# Any garbage data (pretty much anything apart from a comment starting with a hash starting
+# with a hash sign or a number) will be interpreted as garbage data; the node should fail
+# after reading it.
+// Don't try to put your comments this way, it will kill your node!
