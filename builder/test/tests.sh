@@ -28,6 +28,7 @@ monkey --version
 pigpiod -v
 i2cdetect -V
 butterfly -h
+espeak --version
 
 # ros stuff
 
