@@ -99,7 +99,7 @@ libffi-dev \
 monkey=1.6.9-1 \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-epseak speak-data python-espeak \
+espeak espeak-data python-espeak \
 ntpdate \
 python-dev \
 python3-dev \
