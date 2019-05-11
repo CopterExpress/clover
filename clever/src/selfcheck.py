@@ -397,7 +397,7 @@ def check_clever_service():
         msg = event['MESSAGE']
         if ('Stopped Clever ROS package' in msg) or ('Started Clever ROS package' in msg):
             node_errors = []
-        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):      
+        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
             msg = r.search(msg).groups()[2]
             if msg in node_errors:
                 continue
