@@ -131,6 +131,7 @@ def check_aruco():
 
 @check('Vision position estimate')
 def check_vpe():
+    vis = None
     try:
         vis = rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
     except rospy.ROSException:
@@ -138,7 +139,11 @@ def check_vpe():
             vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
         except rospy.ROSException:
             failure('no VPE or MoCap messages')
-            return
+            # check if vpe_publisher is running
+            try:
+                subprocess.check_output(['pgrep', '-x', 'vpe_publisher'])
+            except subprocess.CalledProcessError:
+                return  # it's not running, skip following checks
 
     # check PX4 settings
     est = get_param('SYS_MC_EST_GROUP')
@@ -170,6 +175,9 @@ def check_vpe():
         rospy.loginfo('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
             get_param('EKF2_EVA_NOISE'),
             get_param('EKF2_EVP_NOISE'))
+
+    if not vis:
+        return
 
     # check vision pose and estimated pose inconsistency
     try:
