@@ -163,7 +163,7 @@ def check_vpe():
             rospy.loginfo('Vision yaw weight: %.2f', vision_yaw_w)
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 2):
-            failure('vision position fusing is disabled, change LPE_FUSION parameter')
+            failure('vision position fusion is disabled, change LPE_FUSION parameter')
         delay = get_param('LPE_VIS_DELAY')
         if delay != 0:
             failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
@@ -171,9 +171,9 @@ def check_vpe():
     elif est == 2:
         fuse = get_param('EKF2_AID_MASK')
         if not fuse & (1 << 3):
-            failure('vision position fusing is disabled, change EKF2_AID_MASK parameter')
+            failure('vision position fusion is disabled, change EKF2_AID_MASK parameter')
         if not fuse & (1 << 4):
-            failure('vision yaw fusing is disabled, change EKF2_AID_MASK parameter')
+            failure('vision yaw fusion is disabled, change EKF2_AID_MASK parameter')
         delay = get_param('EKF2_EV_DELAY')
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
@@ -289,7 +289,7 @@ def check_optical_flow():
         if est == 1:
             fuse = get_param('LPE_FUSION')
             if not fuse & (1 << 1):
-                failure('optical flow fusing is disabled, change LPE_FUSION parameter')
+                failure('optical flow fusion is disabled, change LPE_FUSION parameter')
             if not fuse & (1 << 1):
                 failure('flow gyro compensation is disabled, change LPE_FUSION parameter')
             scale = get_param('LPE_FLW_SCALE')
@@ -305,7 +305,7 @@ def check_optical_flow():
         elif est == 2:
             fuse = get_param('EKF2_AID_MASK')
             if not fuse & (1 << 1):
-                failure('optical flow fusing is disabled, change EKF2_AID_MASK parameter')
+                failure('optical flow fusion is disabled, change EKF2_AID_MASK parameter')
             delay = get_param('EKF2_OF_DELAY')
             if delay != 0:
                 failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
