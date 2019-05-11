@@ -253,7 +253,7 @@ def check_velocity():
             failure('vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
 
         angular = velocity.twist.angular
-        ANGULAR_VELOCITY_LIMIT = 0.01
+        ANGULAR_VELOCITY_LIMIT = 0.1
         if abs(angular.x) > ANGULAR_VELOCITY_LIMIT:
             failure('pitch rate estimation is %.2f rad/s (%.2f deg/s); is copter staying still?',
                     angular.x, math.degrees(angular.x))
