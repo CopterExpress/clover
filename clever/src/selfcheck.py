@@ -63,7 +63,7 @@ def get_param(name):
         res = param_get(param_id=name)
     except rospy.ServiceException as e:
         failure('%s: %s', name, str(e))
-        return
+        return None
 
     if not res.success:
         failure('Unable to retrieve PX4 parameter %s', name)
@@ -178,8 +178,8 @@ def check_vpe():
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
         rospy.loginfo('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
-            get_param('EKF2_EVA_NOISE'),
-            get_param('EKF2_EVP_NOISE'))
+                      get_param('EKF2_EVA_NOISE'),
+                      get_param('EKF2_EVP_NOISE'))
 
     if not vis:
         return
@@ -297,11 +297,11 @@ def check_optical_flow():
                 failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
 
             rospy.loginfo('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
-                get_param('LPE_FLW_QMIN'),
-                get_param('LPE_FLW_R'),
-                get_param('LPE_FLW_RR'),
-                get_param('SENS_FLOW_MINHGT'),
-                get_param('SENS_FLOW_MAXHGT'))
+                          get_param('LPE_FLW_QMIN'),
+                          get_param('LPE_FLW_R'),
+                          get_param('LPE_FLW_RR'),
+                          get_param('SENS_FLOW_MINHGT'),
+                          get_param('SENS_FLOW_MAXHGT'))
         elif est == 2:
             fuse = get_param('EKF2_AID_MASK')
             if not fuse & (1 << 1):
@@ -310,11 +310,11 @@ def check_optical_flow():
             if delay != 0:
                 failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
             rospy.loginfo('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
-                get_param('EKF2_OF_QMIN'),
-                get_param('EKF2_OF_N_MIN'),
-                get_param('EKF2_OF_N_MAX'),
-                get_param('SENS_FLOW_MINHGT'),
-                get_param('SENS_FLOW_MAXHGT'))
+                          get_param('EKF2_OF_QMIN'),
+                          get_param('EKF2_OF_N_MIN'),
+                          get_param('EKF2_OF_N_MAX'),
+                          get_param('SENS_FLOW_MINHGT'),
+                          get_param('SENS_FLOW_MAXHGT'))
 
     except rospy.ROSException:
         failure('no optical flow data (from Raspberry)')
