@@ -59,7 +59,12 @@ param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
 
 
 def get_param(name):
-    res = param_get(param_id=name)
+    try:
+        res = param_get(param_id=name)
+    except rospy.ServiceException as e:
+        failure('%s: %s', name, str(e))
+        return
+
     if not res.success:
         failure('Unable to retrieve PX4 parameter %s', name)
     else:
