@@ -421,7 +421,7 @@ publish_debug:
 		marker.header.frame_id = transform_.child_frame_id;
 		// marker.header.stamp = stamp;
 		marker.action = visualization_msgs::Marker::ADD;
-		marker.id = id;
+		marker.id = vis_array_.markers.size();
 		marker.ns = "aruco_map_marker";
 		marker.type = visualization_msgs::Marker::CUBE;
 		marker.scale.x = length;
