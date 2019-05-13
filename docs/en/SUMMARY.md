@@ -43,12 +43,15 @@
   * [Working with a LED strip on Raspberry 3](leds.md)
   * [Using rviz and rqt](rviz.md)
   * [Working with the ultrasonic distance gage](sonar.md)
+  * [Working with a laser rangefinder](laser.md)
   * [PX4 Simulation](sitl.md)
   * [Software autorun](autolaunch.md)
   * [Controlling the copter from Arduino](arduino.md)
   * [Using an external 3G modem](3g.md)
 * Clever-based projects
   * [Copter spheric guard](shield.md)
+  * [Face recognition system](face_recognition.md)
+  * [An Android transmitter](android.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
 * Supplementary materials
@@ -56,5 +59,7 @@
   * [Flashing ESCs using BLHeliSuite](esc_firmware.md)
   * [MAVLink](mavlink.md)
   * [PX4 Logs and Topics](flight_logs.md)
+  * [Camera calibration](calibration.md)
+  * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
 * Textbook
   * [Theory and Videos](lessons.md)
