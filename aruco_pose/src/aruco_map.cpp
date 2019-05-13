@@ -36,6 +36,7 @@
 #include <sensor_msgs/Image.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <algorithm>
 
 #include <aruco_pose/MarkerArray.h>
 #include <aruco_pose/Marker.h>
@@ -270,9 +271,49 @@ publish_debug:
 
 			std::istringstream s(line);
 
-			if (!(s >> id >> length >> x >> y >> z >> yaw >> pitch >> roll)) {
-				ROS_ERROR("aruco_map: cannot parse line: %s", line.c_str());
+			// Read first character to see whether it's a comment
+			char first = 0;
+			if (!(s >> first)) {
+				// No non-whitespace characters, must be a blank line
 				continue;
+			}
+
+			if (first == '#') {
+				ROS_DEBUG("aruco_map: Skipping line as a comment: %s", line.c_str());
+				continue;
+			} else if (isdigit(first)) {
+				// Put the digit back into the stream
+				// Note that this is a non-modifying putback, so this should work with istreams
+				// (see https://en.cppreference.com/w/cpp/io/basic_istream/putback)
+				s.putback(first);
+			} else {
+				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
+				ROS_FATAL("aruco_map: Malformed input: %s", line.c_str());
+				ros::shutdown();
+				throw std::runtime_error("Malformed input");
+			}
+
+			if (!(s >> id >> length >> x >> y)) {
+				ROS_ERROR("aruco_map: Not enough data in line: %s; "
+				          "Each marker must have at least id, length, x, y fields", line.c_str());
+				continue;
+			}
+			// Be less strict about z, yaw, pitch roll
+			if (!(s >> z)) {
+				ROS_DEBUG("aruco_map: No z coordinate provided for marker %d, assuming 0", id);
+				z = 0;
+			}
+			if (!(s >> yaw)) {
+				ROS_DEBUG("aruco_map: No yaw provided for marker %d, assuming 0", id);
+				yaw = 0;
+			}
+			if (!(s >> pitch)) {
+				ROS_DEBUG("aruco_map: No pitch provided for marker %d, assuming 0", id);
+				pitch = 0;
+			}
+			if (!(s >> roll)) {
+				ROS_DEBUG("aruco_map: No roll provided for marker %d, assuming 0", id);
+				roll = 0;
 			}
 			addMarker(id, length, x, y, z, yaw, pitch, roll);
 		}
@@ -339,6 +380,19 @@ publish_debug:
 	void addMarker(int id, double length, double x, double y, double z,
 				   double yaw, double pitch, double roll)
 	{
+		// Check whether the id is in range for current dictionary
+		int num_markers = board_->dictionary->bytesList.rows;
+		if (num_markers <= id) {
+			ROS_ERROR("aruco_map: Marker id %d is not in dictionary; current dictionary contains %d markers. "
+			          "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
+					  id, num_markers);
+			return;
+		}
+		// Check if marker is already in the board
+		if (std::count(board_->ids.begin(), board_->ids.end(), id) > 0) {
+			ROS_ERROR("aruco_map: Marker id %d is already in the map", id);
+			return;
+		}
 		// Create transform
 		tf::Quaternion q;
 		q.setRPY(roll, pitch, yaw);
