@@ -1,3 +1,9 @@
+---
+description: Режимы полетного контроллера PX4
+meta:
+    author: Oleg Kalachev
+---
+
 Полетные режимы
 ===
 
