@@ -3,8 +3,14 @@
 * [Введение](README.md)
 * [Глоссарий](gloss.md)
 * Сборка
-  * [Сборка Клевера 2](assemble_2.md)
-  * [Сборка Клевера 3](assemble_3.md)
+  * Клевер 4
+    * [Комплект](clever4/equipment.md)
+    * [Рама](clever4/frame.md)
+    * [Пульт](clever4/rc.md)
+    * [Настройка](setup.md)
+  * [Клевер 3](assemble_2.md)
+  * [Клевер 2](assemble_3.md)
+  * [Захват](grab.md)
   * [Установка FPV](fpv.md)
   * [Безопасность](safety.md)
   * [Подключение регулятора 4 в 1](4in1.md)

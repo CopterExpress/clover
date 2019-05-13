@@ -67,6 +67,17 @@ jobs:
         verbose: true
         on:
           branch: master
+      deploy:
+        provider: pages
+        local-dir: _book
+        skip-cleanup: true
+        github-token: ${GITHUB_OAUTH_TOKEN}
+        keep-history: false
+        target-branch: master
+        repo: okalachev/cl4wip
+        verbose: true
+        on:
+          branch: clever4
     - stage: Annotate
       name: Auto-generate changelog
       language: python
