@@ -10,9 +10,9 @@
 # All-whitespace line test:
 		    
 # 2. Default coordinates test
-# Fully filled marker description, tab-delimeted:
+# Fully filled marker description, tab-delimited:
 1	0.33	0	0	0	0	0	0
-# Fully filled marker description, space-delimeted:
+# Fully filled marker description, space-delimited:
 2 0.225 1 1 1 0 0 0
 # Default roll, pitch, yaw angles
 3 0.45 1 0 0.5
