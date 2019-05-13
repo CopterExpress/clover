@@ -36,6 +36,7 @@
 #include <sensor_msgs/Image.h>
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <unordered_set>
 
 #include <aruco_pose/MarkerArray.h>
 #include <aruco_pose/Marker.h>
@@ -74,6 +75,7 @@ private:
 	std::string known_tilt_;
 	int image_width_, image_height_, image_margin_;
 	bool auto_flip_;
+	std::unordered_set<int> added_markers_;
 
 public:
 	virtual void onInit()
@@ -385,6 +387,12 @@ publish_debug:
 			ROS_ERROR("aruco_map: Marker id %d is not in dictionary; current dictionary contains %d markers. "
 			          "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
 					  id, num_markers);
+			return;
+		}
+		// Add marker id to a set of currently added markers
+		auto insertion_result = added_markers_.insert(id);
+		if (!insertion_result.second) {
+			ROS_ERROR("aruco_map: Marker id %d is already in the map", id);
 			return;
 		}
 		// Create transform
