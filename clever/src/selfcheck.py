@@ -8,12 +8,14 @@ import numpy
 import rospy
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
-from mavros_msgs.msg import State, OpticalFlowRad
+from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from systemd import journal
+from mavros import mavlink
+from pymavlink import mavutil
 
 
 # TODO: check attitude is present
@@ -411,13 +413,67 @@ def check_clever_service():
         failure(error)
 
 
+def mavlink_exec(cmd, timeout=1.0):
+    link = mavutil.mavlink.MAVLink('', 255, 1)
+    mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+    mavlink_recv = []
+    def mavlink_message_handler(msg):
+        if msg.msgid == 126:
+            mav_bytes_msg = mavlink.convert_to_bytes(msg)
+            mav_msg = link.decode(mav_bytes_msg)
+            mavlink_recv.append(''.join(chr(x) for x in mav_msg.data[:mav_msg.count]))
+    mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
+    # FIXME: not waiting here breaks communications
+    rospy.sleep(0.5)
+    if not cmd.endswith('\n'):
+        cmd += '\n'
+    msg = mavutil.mavlink.MAVLink_serial_control_message(
+        device=mavutil.mavlink.SERIAL_CONTROL_DEV_SHELL,
+        flags=mavutil.mavlink.SERIAL_CONTROL_FLAG_RESPOND | mavutil.mavlink.SERIAL_CONTROL_FLAG_EXCLUSIVE |
+              mavutil.mavlink.SERIAL_CONTROL_FLAG_MULTI,
+        timeout=3,
+        baudrate=0,
+        count=len(cmd),
+        data=map(ord, cmd.ljust(70, '\0')))
+    msg.pack(link)
+    ros_msg = mavlink.convert_to_rosmsg(msg)
+    mavlink_pub.publish(ros_msg)
+    rospy.sleep(timeout)
+    mavlink_sub.unregister()
+    mavlink_pub.unregister()
+    return ''.join(mavlink_recv)
+
+
+@check('Firmware version')
+def check_firmware_version():
+    version_str = mavlink_exec('ver all')
+    if version_str == '':
+        failure('No data from FCU (running SITL?)')
+    elif 'clever' not in version_str:
+        failure('Not running Clever firmware')
+
+
+@check('Commander check')
+def check_commander():
+    cmdr_lines = mavlink_exec('commander check').split('\n')
+    r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
+    for line in cmdr_lines:
+        match = r.search(line)
+        if match is not None:
+            check_status = match.groups()[2]
+            if check_status != 'OK':
+                failure(' '.join([match.groups()[2], 'check:', check_status]))
+
+
 def selfcheck():
     check_clever_service()
     check_fcu()
+    check_firmware_version()
     check_imu()
     check_local_position()
     check_velocity()
     check_global_position()
+    check_commander()
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
