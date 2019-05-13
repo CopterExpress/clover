@@ -455,7 +455,11 @@ def check_firmware_version():
 
 @check('Commander check')
 def check_commander():
-    cmdr_lines = mavlink_exec('commander check').split('\n')
+    cmdr_output = mavlink_exec('commander check')
+    if cmdr_output == '':
+        failure('No data from FCU (running SITL?)')
+        return
+    cmdr_lines = cmdr_output.split('\n')
     r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
     for line in cmdr_lines:
         match = r.search(line)
