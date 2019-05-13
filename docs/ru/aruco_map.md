@@ -86,7 +86,7 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/m
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
-* В параметре `LPE_FUSION` включены флажки `vision position`, `land detector`.
+* В параметре `LPE_FUSION` включены флажки `vision position`, `land detector`. Флажок `baro` рекомендуется отключить.
 * Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
 * Включена ориентация по Yaw по зрению: `ATT_EXT_HDG_M` = 1 `Vision`.
 * Шумы позиции по зрению: `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.1 m.
