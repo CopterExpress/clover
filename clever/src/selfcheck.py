@@ -76,18 +76,78 @@ def get_param(name):
         return res.value.real
 
 
-fcu_connected = False
+recv_event = Event()
+link = mavutil.mavlink.MAVLink('', 255, 1)
+mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+mavlink_recv = ''
+
+
+def mavlink_message_handler(msg):
+    global mavlink_recv
+    if msg.msgid == 126:
+        mav_bytes_msg = mavlink.convert_to_bytes(msg)
+        mav_msg = link.decode(mav_bytes_msg)
+        mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
+        if 'nsh>' in mavlink_recv:
+            recv_event.set()
+
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
+# FIXME: not sleeping here still breaks things
+rospy.sleep(0.5)
+
+
+def mavlink_exec(cmd, timeout=10.0):
+    global mavlink_recv
+    mavlink_recv = ''
+    recv_event.clear()
+    if not cmd.endswith('\n'):
+        cmd += '\n'
+    msg = mavutil.mavlink.MAVLink_serial_control_message(
+        device=mavutil.mavlink.SERIAL_CONTROL_DEV_SHELL,
+        flags=mavutil.mavlink.SERIAL_CONTROL_FLAG_RESPOND | mavutil.mavlink.SERIAL_CONTROL_FLAG_EXCLUSIVE |
+              mavutil.mavlink.SERIAL_CONTROL_FLAG_MULTI,
+        timeout=3,
+        baudrate=0,
+        count=len(cmd),
+        data=map(ord, cmd.ljust(70, '\0')))
+    msg.pack(link)
+    ros_msg = mavlink.convert_to_rosmsg(msg)
+    mavlink_pub.publish(ros_msg)
+    recv_event.wait(timeout)
+    return mavlink_recv
 
 
 @check('FCU')
 def check_fcu():
-    global fcu_connected
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
 
-        fcu_connected = True
+        # Make sure the console is available to us
+        mavlink_exec('\n')
+        version_str = mavlink_exec('ver all')
+        if version_str == '':
+            if fcu_connected:
+                rospy.info('No version data available from SITL')
+            else:
+                failure('FCU did not respond')
+            return
+
+        r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
+        is_clever_firmware = False
+        for ver_line in version_str.split('\n'):
+            match = r.search(ver_line)
+            if match is not None:
+                field, version = match.groups()
+                rospy.loginfo('FCU firmware %s: %s' % (field, version))
+                if 'clever' in version:
+                    is_clever_firmware = True
+
+        if not is_clever_firmware:
+            failure('Not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
+
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             rospy.loginfo('Selected estimator: LPE')
@@ -419,80 +479,13 @@ def check_clever_service():
         failure(error)
 
 
-recv_event = Event()
-link = mavutil.mavlink.MAVLink('', 255, 1)
-mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
-mavlink_recv = ''
-
-
-def mavlink_message_handler(msg):
-    global mavlink_recv
-    if msg.msgid == 126:
-        mav_bytes_msg = mavlink.convert_to_bytes(msg)
-        mav_msg = link.decode(mav_bytes_msg)
-        mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
-        if 'nsh>' in mavlink_recv:
-            recv_event.set()
-
-
-mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
-# FIXME: not sleeping here still breaks things
-rospy.sleep(0.5)
-
-
-def mavlink_exec(cmd, timeout=10.0):
-    global mavlink_recv
-    mavlink_recv = ''
-    recv_event.clear()
-    if not cmd.endswith('\n'):
-        cmd += '\n'
-    msg = mavutil.mavlink.MAVLink_serial_control_message(
-        device=mavutil.mavlink.SERIAL_CONTROL_DEV_SHELL,
-        flags=mavutil.mavlink.SERIAL_CONTROL_FLAG_RESPOND | mavutil.mavlink.SERIAL_CONTROL_FLAG_EXCLUSIVE |
-              mavutil.mavlink.SERIAL_CONTROL_FLAG_MULTI,
-        timeout=3,
-        baudrate=0,
-        count=len(cmd),
-        data=map(ord, cmd.ljust(70, '\0')))
-    msg.pack(link)
-    ros_msg = mavlink.convert_to_rosmsg(msg)
-    mavlink_pub.publish(ros_msg)
-    recv_event.wait(timeout)
-    return mavlink_recv
-
-
-@check('Firmware version')
-def check_firmware_version():
-    # Make sure the console is available to us
-    mavlink_exec('\n')
-    version_str = mavlink_exec('ver all')
-    if version_str == '':
-        if fcu_connected:
-            rospy.info('No version data available from SITL')
-        else:
-            failure('FCU did not respond')
-        return
-    r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
-    is_clever_firmware = False
-    for ver_line in version_str.split('\n'):
-        #rospy.loginfo(ver_line)
-        match = r.search(ver_line)
-        if match is not None:
-            field, version = match.groups()
-            rospy.loginfo('FCU firmware %s: %s' % (field, version))
-            if 'clever' in version:
-                is_clever_firmware = True
-    if not is_clever_firmware:
-        failure('Not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
-
-
 @check('Preflight status')
 def check_preflight_status():
     # Make sure the console is available to us
     mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
     if cmdr_output == '':
-        failure('No data from FCU (running SITL?)')
+        failure('No data from FCU')
         return
     cmdr_lines = cmdr_output.split('\n')
     r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
@@ -507,7 +500,6 @@ def check_preflight_status():
 def selfcheck():
     check_clever_service()
     check_fcu()
-    check_firmware_version()
     check_imu()
     check_local_position()
     check_velocity()
