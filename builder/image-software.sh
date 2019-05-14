@@ -156,6 +156,9 @@ syntax on
 autocmd BufNewFile,BufRead *.launch set syntax=xml
 EOF
 
+echo_stamp "Change default keyboard layout to US"
+sed -i 's/XKBLAYOUT="gb"/XKBLAYOUT="us"/g' /etc/default/keyboard
+
 echo_stamp "Attempting to kill dirmngr"
 gpgconf --kill dirmngr
 # dirmngr is only used by apt-key, so we can safely kill it.
