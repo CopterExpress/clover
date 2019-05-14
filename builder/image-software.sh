@@ -86,7 +86,7 @@ dnsmasq=2.76-5+rpt1+deb9u1  \
 tmux=2.3-4 \
 vim=2:8.0.0197-4+deb9u1 \
 cmake=3.7.2-1 \
-libjpeg8-dev=8d1-2 \
+libjpeg8=8d1-2 \
 tcpdump \
 ltrace \
 libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
