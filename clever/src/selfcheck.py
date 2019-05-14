@@ -449,8 +449,19 @@ def check_firmware_version():
     version_str = mavlink_exec('ver all')
     if version_str == '':
         failure('No data from FCU (running SITL?)')
-    elif 'clever' not in version_str:
-        failure('Not running Clever firmware')
+        return
+    r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
+    is_clever_firmware = False
+    for ver_line in version_str.split('\n'):
+        #rospy.loginfo(ver_line)
+        match = r.search(ver_line)
+        if match is not None:
+            field, version = match.groups()
+            rospy.loginfo('FCU firmware %s: %s' % (field, version))
+            if 'clever' in version:
+                is_clever_firmware = True
+    if not is_clever_firmware:
+        failure('Not running Clever PX4 firmware')
 
 
 @check('Commander check')
