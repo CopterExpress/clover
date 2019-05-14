@@ -16,6 +16,7 @@ from aruco_pose.msg import MarkerArray
 from systemd import journal
 from mavros import mavlink
 from pymavlink import mavutil
+from threading import Event
 
 
 # TODO: check attitude is present
@@ -75,13 +76,18 @@ def get_param(name):
         return res.value.real
 
 
+fcu_connected = False
+
+
 @check('FCU')
 def check_fcu():
+    global fcu_connected
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
 
+        fcu_connected = True
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             rospy.loginfo('Selected estimator: LPE')
@@ -413,18 +419,31 @@ def check_clever_service():
         failure(error)
 
 
-def mavlink_exec(cmd, timeout=1.0):
-    link = mavutil.mavlink.MAVLink('', 255, 1)
-    mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
-    mavlink_recv = []
-    def mavlink_message_handler(msg):
-        if msg.msgid == 126:
-            mav_bytes_msg = mavlink.convert_to_bytes(msg)
-            mav_msg = link.decode(mav_bytes_msg)
-            mavlink_recv.append(''.join(chr(x) for x in mav_msg.data[:mav_msg.count]))
-    mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
-    # FIXME: not waiting here breaks communications
-    rospy.sleep(0.5)
+recv_event = Event()
+link = mavutil.mavlink.MAVLink('', 255, 1)
+mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+mavlink_recv = ''
+
+
+def mavlink_message_handler(msg):
+    global mavlink_recv
+    if msg.msgid == 126:
+        mav_bytes_msg = mavlink.convert_to_bytes(msg)
+        mav_msg = link.decode(mav_bytes_msg)
+        mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
+        if 'nsh>' in mavlink_recv:
+            recv_event.set()
+
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
+# FIXME: not sleeping here still breaks things
+rospy.sleep(0.5)
+
+
+def mavlink_exec(cmd, timeout=10.0):
+    global mavlink_recv
+    mavlink_recv = ''
+    recv_event.clear()
     if not cmd.endswith('\n'):
         cmd += '\n'
     msg = mavutil.mavlink.MAVLink_serial_control_message(
@@ -438,17 +457,20 @@ def mavlink_exec(cmd, timeout=1.0):
     msg.pack(link)
     ros_msg = mavlink.convert_to_rosmsg(msg)
     mavlink_pub.publish(ros_msg)
-    rospy.sleep(timeout)
-    mavlink_sub.unregister()
-    mavlink_pub.unregister()
-    return ''.join(mavlink_recv)
+    recv_event.wait(timeout)
+    return mavlink_recv
 
 
 @check('Firmware version')
 def check_firmware_version():
+    # Make sure the console is available to us
+    mavlink_exec('\n')
     version_str = mavlink_exec('ver all')
     if version_str == '':
-        failure('No data from FCU (running SITL?)')
+        if fcu_connected:
+            rospy.info('No version data available from SITL')
+        else:
+            failure('FCU did not respond')
         return
     r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
     is_clever_firmware = False
@@ -464,8 +486,10 @@ def check_firmware_version():
         failure('Not running Clever PX4 firmware')
 
 
-@check('Commander check')
-def check_commander():
+@check('Preflight status')
+def check_preflight_status():
+    # Make sure the console is available to us
+    mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
     if cmdr_output == '':
         failure('No data from FCU (running SITL?)')
@@ -488,7 +512,7 @@ def selfcheck():
     check_local_position()
     check_velocity()
     check_global_position()
-    check_commander()
+    check_preflight_status()
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
