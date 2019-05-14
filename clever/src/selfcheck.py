@@ -97,7 +97,7 @@ mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
 rospy.sleep(0.5)
 
 
-def mavlink_exec(cmd, timeout=10.0):
+def mavlink_exec(cmd, timeout=3.0):
     global mavlink_recv
     mavlink_recv = ''
     recv_event.clear()
@@ -124,16 +124,13 @@ def check_fcu():
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+            return
 
         # Make sure the console is available to us
         mavlink_exec('\n')
         version_str = mavlink_exec('ver all')
         if version_str == '':
-            if fcu_connected:
-                rospy.info('No version data available from SITL')
-            else:
-                failure('FCU did not respond')
-            return
+            rospy.info('No version data available from SITL')
 
         r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
         is_clever_firmware = False
@@ -490,11 +487,14 @@ def check_preflight_status():
     cmdr_lines = cmdr_output.split('\n')
     r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
     for line in cmdr_lines:
+        if 'WARN' in line:
+            failure(line[line.find(']') + 2:])
+            continue
         match = r.search(line)
         if match is not None:
             check_status = match.groups()[2]
             if check_status != 'OK':
-                failure(' '.join([match.groups()[2], 'check:', check_status]))
+                failure(' '.join([match.groups()[1], 'check:', check_status]))
 
 
 def selfcheck():
