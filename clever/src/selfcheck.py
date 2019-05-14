@@ -483,7 +483,7 @@ def check_firmware_version():
             if 'clever' in version:
                 is_clever_firmware = True
     if not is_clever_firmware:
-        failure('Not running Clever PX4 firmware')
+        failure('Not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
 
 
 @check('Preflight status')
