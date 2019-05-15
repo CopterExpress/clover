@@ -541,8 +541,3 @@ tf2_web_republisher:
 image_publisher:
   debian:
     stretch: [ros-kinetic-image-publisher]
-python-pymavlink:
-  debian:
-    stretch:
-      pip:
-        packages: [pymavlink]
