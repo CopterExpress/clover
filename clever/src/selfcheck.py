@@ -8,12 +8,15 @@ import numpy
 import rospy
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
-from mavros_msgs.msg import State, OpticalFlowRad
+from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from systemd import journal
+from mavros import mavlink
+from pymavlink import mavutil
+from threading import Event
 
 
 # TODO: check attitude is present
@@ -73,12 +76,76 @@ def get_param(name):
         return res.value.real
 
 
+recv_event = Event()
+link = mavutil.mavlink.MAVLink('', 255, 1)
+mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+mavlink_recv = ''
+
+
+def mavlink_message_handler(msg):
+    global mavlink_recv
+    if msg.msgid == 126:
+        mav_bytes_msg = mavlink.convert_to_bytes(msg)
+        mav_msg = link.decode(mav_bytes_msg)
+        mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
+        if 'nsh>' in mavlink_recv:
+            # Remove the last line, including newline before prompt
+            mavlink_recv = mavlink_recv[:mavlink_recv.find('nsh>') - 1]
+            recv_event.set()
+
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
+# FIXME: not sleeping here still breaks things
+rospy.sleep(0.5)
+
+
+def mavlink_exec(cmd, timeout=3.0):
+    global mavlink_recv
+    mavlink_recv = ''
+    recv_event.clear()
+    if not cmd.endswith('\n'):
+        cmd += '\n'
+    msg = mavutil.mavlink.MAVLink_serial_control_message(
+        device=mavutil.mavlink.SERIAL_CONTROL_DEV_SHELL,
+        flags=mavutil.mavlink.SERIAL_CONTROL_FLAG_RESPOND | mavutil.mavlink.SERIAL_CONTROL_FLAG_EXCLUSIVE |
+              mavutil.mavlink.SERIAL_CONTROL_FLAG_MULTI,
+        timeout=3,
+        baudrate=0,
+        count=len(cmd),
+        data=map(ord, cmd.ljust(70, '\0')))
+    msg.pack(link)
+    ros_msg = mavlink.convert_to_rosmsg(msg)
+    mavlink_pub.publish(ros_msg)
+    recv_event.wait(timeout)
+    return mavlink_recv
+
+
 @check('FCU')
 def check_fcu():
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+            return
+
+        # Make sure the console is available to us
+        mavlink_exec('\n')
+        version_str = mavlink_exec('ver all')
+        if version_str == '':
+            rospy.info('No version data available from SITL')
+
+        r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
+        is_clever_firmware = False
+        for ver_line in version_str.split('\n'):
+            match = r.search(ver_line)
+            if match is not None:
+                field, version = match.groups()
+                rospy.loginfo('FCU firmware %s: %s' % (field, version))
+                if 'clever' in version:
+                    is_clever_firmware = True
+
+        if not is_clever_firmware:
+            failure('Not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
@@ -411,6 +478,27 @@ def check_clever_service():
         failure(error)
 
 
+@check('Preflight status')
+def check_preflight_status():
+    # Make sure the console is available to us
+    mavlink_exec('\n')
+    cmdr_output = mavlink_exec('commander check')
+    if cmdr_output == '':
+        failure('No data from FCU')
+        return
+    cmdr_lines = cmdr_output.split('\n')
+    r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
+    for line in cmdr_lines:
+        if 'WARN' in line:
+            failure(line[line.find(']') + 2:])
+            continue
+        match = r.search(line)
+        if match is not None:
+            check_status = match.groups()[2]
+            if check_status != 'OK':
+                failure(' '.join([match.groups()[1], 'check:', check_status]))
+
+
 def selfcheck():
     check_clever_service()
     check_fcu()
@@ -418,6 +506,7 @@ def selfcheck():
     check_local_position()
     check_velocity()
     check_global_position()
+    check_preflight_status()
     check_camera('main_camera')
     check_aruco()
     check_simpleoffboard()
