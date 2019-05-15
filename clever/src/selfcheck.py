@@ -89,6 +89,8 @@ def mavlink_message_handler(msg):
         mav_msg = link.decode(mav_bytes_msg)
         mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
         if 'nsh>' in mavlink_recv:
+            # Remove the last line, including newline before prompt
+            mavlink_recv = mavlink_recv[:mavlink_recv.find('nsh>') - 1]
             recv_event.set()
 
 
