@@ -138,6 +138,10 @@ fi
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
+echo_stamp "Reconfiguring Clever repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clever
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
 echo_stamp "Installing CLEVER" \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
