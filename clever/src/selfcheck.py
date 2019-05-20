@@ -4,8 +4,11 @@ import math
 import subprocess
 import re
 import traceback
+from threading import Event
 import numpy
 import rospy
+from systemd import journal
+from pymavlink import mavutil
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
@@ -13,10 +16,7 @@ from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
-from systemd import journal
 from mavros import mavlink
-from pymavlink import mavutil
-from threading import Event
 
 
 # TODO: check attitude is present
