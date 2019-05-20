@@ -45,39 +45,27 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     sudo systemctl disable dnsmasq
     ```
 
-2. Включите получение IP адреса на беспроводном интерфейсе DHCP клиентом.
-
-    Для этого удалите следующие строки
+2. Включите получение IP адреса на беспроводном интерфейсе DHCP клиентом. Для этого удалите из файла `/etc/dhcpcd.conf` строки:
 
     ```conf
     interface wlan0
     static ip_address=192.168.11.1/24
     ```
 
-    из файла `/etc/dhcpcd.conf` вручную или введите следующие команды.
+3. Настройте `wpa_supplicant` для подключения к существующей точке доступа. Для этого замените содержимое файла `/etc/wpa_supplicant/wpa_supplicant.conf` на:
 
-    ```bash
-    sudo sed -i 's/interface wlan0//' /etc/dhcpcd.conf
-    sudo sed -i 's/static ip_address=192.168.11.1\/24//' /etc/dhcpcd.conf
     ```
-
-3. Настройте `wpa_supplicant` для подключения к существующей точке доступа.
-
-    ```bash
-    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
     country=GB
 
     network={
-        ssid="CLEVER"
-        psk="cleverwifi"
+        ssid="SSID"
+        psk="password"
     }
-
-    EOF
     ```
 
-    где `CLEVER` – название сети, а `cleverwifi` – пароль.
+    где `SSID` – название сети, а `password` – пароль.
 
 4. Перезапустите службу `dhcpcd`.
 
@@ -87,35 +75,22 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
 ## Переключение адаптера в режим точки доступа
 
-1. Включите статический IP адрес на беспроводном интерфейсе.
-
-    Для этого добавьте следующие строки
+1. Включите статический IP адрес на беспроводном интерфейсе. Для этого добавьте в файл `/etc/dhcpcd.conf` строки:
 
     ```conf
     interface wlan0
     static ip_address=192.168.11.1/24
     ```
 
-    в файл `/etc/dhcpcd.conf` вручную или введите следующую команду
+2. Настроите `wpa_supplicant` на работу в режиме точки доступа. Для этого замените содержимое файла `/etc/wpa_supplicant/wpa_supplicant.conf` на:
 
-    ```bash
-    cat << EOF | sudo tee -a /etc/dhcpcd.conf
-    interface wlan0
-    static ip_address=192.168.11.1/24
-
-    EOF
     ```
-
-2. Настроите wpa_supplicant на работу в режиме точки доступа.
-
-    ```bash
-    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
     country=GB
 
     network={
-        ssid="CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)"
+        ssid="CLEVER-1234"
         psk="cleverwifi"
         mode=2
         proto=RSN
@@ -124,9 +99,9 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
         group=CCMP
         auth_alg=OPEN
     }
-
-    EOF
     ```
+
+    где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
 
 3. Перезагрузите службу `dhcpcd`.
 
