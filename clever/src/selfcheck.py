@@ -8,12 +8,14 @@ from threading import Event
 import numpy
 import rospy
 from systemd import journal
+import tf2_ros
+import tf2_geometry_msgs
 from pymavlink import mavutil
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
-from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
+from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped, Vector3Stamped
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from mavros import mavlink
@@ -29,6 +31,10 @@ from mavros import mavlink
 
 
 rospy.init_node('selfcheck')
+
+
+tf_buffer = tf2_ros.Buffer()
+tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 
 failures = []
@@ -169,6 +175,23 @@ def check_fcu():
         failure('no MAVROS state (check wiring)')
 
 
+def describe_direction(v):
+    if v.x > 0.9:
+        return 'forward'
+    elif v.x < - 0.9:
+        return 'backward'
+    elif v.y > 0.9:
+        return 'left'
+    elif v.y < -0.9:
+        return 'right'
+    elif v.z > 0.9:
+        return 'upward'
+    elif v.z < -0.9:
+        return 'downward'
+    else:
+        return None
+
+
 def check_camera(name):
     try:
         img = rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
@@ -185,6 +208,24 @@ def check_camera(name):
         failure('%s: calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
     if img.height != info.height:
         failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
+
+    try:
+        optical = Vector3Stamped()
+        optical.header.frame_id = img.header.frame_id
+        optical.vector.z = 1
+        cable = Vector3Stamped()
+        cable.header.frame_id = img.header.frame_id
+        cable.vector.y = 1
+
+        optical = describe_direction(tf_buffer.transform(optical, 'base_link').vector)
+        cable = describe_direction(tf_buffer.transform(cable, 'base_link').vector)
+        if not optical or not cable:
+            rospy.loginfo('%s: custom camera orientation detected', name)
+        else:
+           rospy.loginfo('%s is oriented %s, camera cable goes %s', name, optical, cable)
+
+    except tf2_ros.TransformException:
+        failure('cannot transform from base_link to camera frame')
 
 
 @check('Main camera')
