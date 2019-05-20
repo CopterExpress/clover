@@ -38,23 +38,28 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 
 failures = []
+current_check = None
 
 
 def failure(text, *args):
-    failures.append(text % args)
+    msg = text % args
+    rospy.logwarn('%s: %s', current_check, msg)
+    failures.append(msg)
+
+
+def info(text, *args):
+    rospy.loginfo('%s: %s', current_check, text % args)
 
 
 def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
             failures[:] = []
+            global current_check
+            current_check = name
             try:
                 fn(*args, **kwargs)
-                for f in failures:
-                    rospy.logwarn('%s: %s', name, f)
             except Exception as e:
-                for f in failures:
-                    rospy.logwarn('%s: %s', name, f)
                 traceback.print_exc()
                 rospy.logerr('%s: exception occurred', name)
                 return
@@ -138,7 +143,7 @@ def check_fcu():
         mavlink_exec('\n')
         version_str = mavlink_exec('ver all')
         if version_str == '':
-            rospy.info('No version data available from SITL')
+            info('no version data available from SITL')
 
         r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
         is_clever_firmware = False
@@ -146,30 +151,30 @@ def check_fcu():
             match = r.search(ver_line)
             if match is not None:
                 field, version = match.groups()
-                rospy.loginfo('FCU firmware %s: %s' % (field, version))
+                info('firmware %s: %s' % (field, version))
                 if 'clever' in version:
                     is_clever_firmware = True
 
         if not is_clever_firmware:
-            failure('Not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
+            failure('not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
-            rospy.loginfo('Selected estimator: LPE')
+            info('selected estimator: LPE')
             fuse = get_param('LPE_FUSION')
             if fuse & (1 << 4):
-                rospy.loginfo('LPE_FUSION: land detector fusion is enabled')
+                info('LPE_FUSION: land detector fusion is enabled')
             else:
-                rospy.loginfo('LPE_FUSION: land detector fusion is disabled')
+                info('LPE_FUSION: land detector fusion is disabled')
             if fuse & (1 << 7):
-                rospy.loginfo('LPE_FUSION: barometer fusion is enabled')
+                info('LPE_FUSION: barometer fusion is enabled')
             else:
-                rospy.loginfo('LPE_FUSION: barometer fusion is disabled')
+                info('LPE_FUSION: barometer fusion is disabled')
 
         elif est == 2:
-            rospy.loginfo('Selected estimator: EKF2')
+            info('selected estimator: EKF2')
         else:
-            failure('Unknown selected estimator: %s', est)
+            failure('unknown selected estimator: %s', est)
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
@@ -199,15 +204,15 @@ def check_camera(name):
         failure('%s: no images (is the camera connected properly?)', name)
         return
     try:
-        info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
+        camera_info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
     except rospy.ROSException:
         failure('%s: no calibration info', name)
         return
 
-    if img.width != info.width:
-        failure('%s: calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
-    if img.height != info.height:
-        failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
+    if img.width != camera_info.width:
+        failure('%s: calibration width doesn\'t match image width (%d != %d)', name, camera_info.width, img.width)
+    if img.height != camera_info.height:
+        failure('%s: calibration height doesn\'t match image height (%d != %d))', name, camera_info.height, img.height)
 
     try:
         optical = Vector3Stamped()
@@ -220,9 +225,9 @@ def check_camera(name):
         optical = describe_direction(tf_buffer.transform(optical, 'base_link').vector)
         cable = describe_direction(tf_buffer.transform(cable, 'base_link').vector)
         if not optical or not cable:
-            rospy.loginfo('%s: custom camera orientation detected', name)
+            info('%s: custom camera orientation detected', name)
         else:
-           rospy.loginfo('%s is oriented %s, camera cable goes %s', name, optical, cable)
+           info('camera is oriented %s, camera cable goes %s', optical, cable)
 
     except tf2_ros.TransformException:
         failure('cannot transform from base_link to camera frame')
@@ -272,14 +277,14 @@ def check_vpe():
         if vision_yaw_w == 0:
             failure('vision yaw weight is zero, change ATT_W_EXT_HDG parameter')
         else:
-            rospy.loginfo('Vision yaw weight: %.2f', vision_yaw_w)
+            info('Vision yaw weight: %.2f', vision_yaw_w)
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 2):
             failure('vision position fusion is disabled, change LPE_FUSION parameter')
         delay = get_param('LPE_VIS_DELAY')
         if delay != 0:
             failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
-        rospy.loginfo('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
+        info('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
     elif est == 2:
         fuse = get_param('EKF2_AID_MASK')
         if not fuse & (1 << 3):
@@ -289,7 +294,7 @@ def check_vpe():
         delay = get_param('EKF2_EV_DELAY')
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
-        rospy.loginfo('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
+        info('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
                       get_param('EKF2_EVA_NOISE'),
                       get_param('EKF2_EVP_NOISE'))
 
@@ -408,7 +413,7 @@ def check_optical_flow():
             if not numpy.isclose(scale, 1.0):
                 failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
 
-            rospy.loginfo('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+            info('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
                           get_param('LPE_FLW_QMIN'),
                           get_param('LPE_FLW_R'),
                           get_param('LPE_FLW_RR'),
@@ -421,7 +426,7 @@ def check_optical_flow():
             delay = get_param('EKF2_OF_DELAY')
             if delay != 0:
                 failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
-            rospy.loginfo('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+            info('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
                           get_param('EKF2_OF_QMIN'),
                           get_param('EKF2_OF_N_MIN'),
                           get_param('EKF2_OF_N_MAX'),
@@ -455,21 +460,21 @@ def check_rangefinder():
     if est == 1:
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 5):
-            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
+            info('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
         else:
-            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
+            info('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
 
     elif est == 2:
         hgt = get_param('EKF2_HGT_MODE')
         if hgt != 2:
-            rospy.loginfo('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
+            info('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
         else:
-            rospy.loginfo('EKF2_HGT_MODE = Range sensor, operating over flat surface')
+            info('EKF2_HGT_MODE = Range sensor, operating over flat surface')
         aid = get_param('EKF2_RNG_AID')
         if aid != 1:
-            rospy.loginfo('EKF2_RNG_AID != 1, range sensor aiding disabled')
+            info('EKF2_RNG_AID != 1, range sensor aiding disabled')
         else:
-            rospy.loginfo('EKF2_RNG_AID = 1, range sensor aiding enabled')
+            info('EKF2_RNG_AID = 1, range sensor aiding enabled')
 
 
 @check('Boot duration')
