@@ -169,7 +169,6 @@ def check_fcu():
         failure('no MAVROS state (check wiring)')
 
 
-@check('Camera')
 def check_camera(name):
     try:
         img = rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
@@ -186,6 +185,11 @@ def check_camera(name):
         failure('%s: calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
     if img.height != info.height:
         failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
+
+
+@check('Main camera')
+def check_main_camera():
+    check_camera('main_camera')
 
 
 @check('ArUco detector')
@@ -507,7 +511,7 @@ def selfcheck():
     check_velocity()
     check_global_position()
     check_preflight_status()
-    check_camera('main_camera')
+    check_main_camera()
     check_aruco()
     check_simpleoffboard()
     check_optical_flow()
