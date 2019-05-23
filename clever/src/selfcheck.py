@@ -563,6 +563,11 @@ def check_clever_service():
         failure(error)
 
 
+@check('Image')
+def check_image():
+    info('version: %s', open('/etc/clever_version').read().strip())
+
+
 @check('Preflight status')
 def check_preflight_status():
     # Make sure the console is available to us
@@ -585,6 +590,7 @@ def check_preflight_status():
 
 
 def selfcheck():
+    check_image()
     check_clever_service()
     check_fcu()
     check_imu()
