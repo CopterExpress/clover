@@ -238,17 +238,52 @@ def check_main_camera():
     check_camera('main_camera')
 
 
-@check('ArUco detector')
+def is_process_running(binary, exact=False, full=False):
+    try:
+        args = ['pgrep']
+        if exact:
+            args.append('-x')  # match exactly with the command name
+        if full:
+            args.append('-f')  # use full process name to match
+        args.append(binary)
+        subprocess.check_output(args)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+@check('ArUco markers')
 def check_aruco():
-    try:
-        rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
-    except rospy.ROSException:
-        failure('no markers detection')
+    if is_process_running('aruco_detect', full=True):
+        info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
+        known_tilt = rospy.get_param('aruco_detect/known_tilt')
+        if known_tilt == 'map':
+            known_tilt += ' (ALL markers are on the floor)'
+        elif known_tilt == 'map_flipped':
+            known_tilt += ' (ALL markers are on the ceiling)'
+        info('aruco_detector/known_tilt = %s', known_tilt)
+        try:
+            rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
+        except rospy.ROSException:
+            failure('no markers detection')
+            return
+    else:
+        info('aruco_detect is not running')
         return
-    try:
-        rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
-    except rospy.ROSException:
-        failure('no map detection')
+
+    if is_process_running('aruco_map', full=True):
+        known_tilt = rospy.get_param('aruco_map/known_tilt')
+        if known_tilt == 'map':
+            known_tilt += ' (marker\'s map is on the floor)'
+        elif known_tilt == 'map_flipped':
+            known_tilt += ' (marker\'s map is on the ceiling)'
+        info('aruco_map/known_tilt = %s', known_tilt)
+        try:
+            rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
+        except rospy.ROSException:
+            failure('no map detection')
+    else:
+        info('aruco_map is not running')
 
 
 @check('Vision position estimate')
