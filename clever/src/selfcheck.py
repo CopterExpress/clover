@@ -38,6 +38,7 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 
 failures = []
+infos = []
 current_check = None
 
 
@@ -48,13 +49,16 @@ def failure(text, *args):
 
 
 def info(text, *args):
-    rospy.loginfo('%s: %s', current_check, text % args)
+    msg = text % args
+    rospy.loginfo('%s: %s', current_check, msg)
+    infos.append(msg)
 
 
 def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
             failures[:] = []
+            infos[:] = []
             global current_check
             current_check = name
             try:
@@ -63,7 +67,7 @@ def check(name):
                 traceback.print_exc()
                 rospy.logerr('%s: exception occurred', name)
                 return
-            if not failures:
+            if not failures and not infos:
                 rospy.loginfo('%s: OK', name)
         return wrapper
     return inner
