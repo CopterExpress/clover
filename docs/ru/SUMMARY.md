@@ -17,7 +17,7 @@
 * Настройка
   * [Первоначальная настройка](setup.md)
   * [Полетные режимы](modes.md)
-  * [Прошивка Pixhawk/Pixracer](firmware.md)
+  * [Прошивка полетного контролера](firmware.md)
   * [Параметры PX4](px4_parameters.md)
   * [Настройка PID](calibratePID.md)
 * Работа с Raspberry Pi
@@ -29,13 +29,13 @@
   * [Настройка сети RPi](network.md)
   * [Работа с QGroundControl через Wi-Fi](gcs_bridge.md)
   * [Пилотирование со смартфона](rc.md)
-  * [Интерфейс UART](uart.md)
   * [Просмотр видеострима с камер](web_video_server.md)
   * [Системы координат](frames.md)
+  * [Интерфейс UART](uart.md)
 * Программирование
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
-  * [Автономный полет в OFFBOARD](simple_offboard.md)
+  * [Автономный полет (OFFBOARD)](simple_offboard.md)
   * Визуальные маркеры (ArUco)
     * [Общая информация](aruco.md)
     * [Распознавание маркеров](aruco_marker.md)

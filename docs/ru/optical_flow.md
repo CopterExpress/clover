@@ -4,18 +4,7 @@
 
 ## Включение
 
-> **Note** Для использования Optical Flow необходима <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">кастомная прошивка PX4</a>. Подробнее про прошивку см. [соответствующую статью](firmware.md).
-
-<script type="text/javascript">
-    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
-        for (let release of data) {
-            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
-                document.querySelector('#download-firmware').href = release.html_url;
-                return;
-            }
-        }
-    });
-</script>
+> **Hint** Рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
