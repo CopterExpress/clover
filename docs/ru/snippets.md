@@ -280,12 +280,18 @@ set_mode(custom_mode='STABILIZED')
 def flip():
     start = get_telemetry()  # memorize starting position
 
-    set_rates(roll_rate=5, thrust=0.2)  # maximum roll rate
+    set_rates(thrust=1)  # bump up
+    rospy.sleep(0.2)
+
+    set_rates(roll_rate=20, thrust=0.2)  # maximum roll rate
+
     while True:
         telem = get_telemetry()
-        if abs(telem.roll) > math.pi / 2:
+
+        if -math.pi + 0.1 < telem.roll < -0.2:
             break
 
+    rospy.loginfo('finish flip')
     set_position(x=start.x, y=start.y, z=start.z, yaw=start.yaw)  # finish flip
 
 print navigate(z=4, speed=1, auto_arm=True)  # take off
@@ -294,3 +300,5 @@ rospy.sleep(10)
 rospy.loginfo('flip')
 flip()
 ```
+
+Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера). Перед выполнением флипа необходимо принять все меры безопасности.
