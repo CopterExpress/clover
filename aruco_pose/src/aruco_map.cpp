@@ -179,13 +179,7 @@ public:
 			double center_x = 0, center_y = 0, center_z = 0;
 			alignObjPointsToCenter(obj_points, center_x, center_y, center_z);
 
-			// Step 1: Solve using EPnP
-			valid = solvePnP(obj_points, img_points, camera_matrix_, dist_coeffs_, rvec, tvec, false, cv::SOLVEPNP_EPNP);
-			// Step 2: Use iterative method to refine results
-			valid &= solvePnP(obj_points, img_points, camera_matrix_, dist_coeffs_, rvec, tvec, true);
-			// Step 3: Check tvec magnitude. Iterative method tends to diverge sometimes, and this divergence is not picked up
-			// by OpenCV code
-			valid &= norm(tvec) < 1e6;
+			valid = solvePnP(obj_points, img_points, camera_matrix_, dist_coeffs_, rvec, tvec, false);
 			if (!valid) goto publish_debug;
 
 			fillTransform(transform_.transform, rvec, tvec);
