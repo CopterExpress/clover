@@ -154,7 +154,7 @@ Solder the prepared wires of the motors to the pads of ESC.
 * Length 7 cm (XT60 pin power connector) - 1 red, 1 black
 * Length 9 cm (XT60 socket power connector) - 1 red, 1 black
 
-![Preparing wires for the power connector](../assets/cutwire14AWG.jpg)
+![Preparing wires for the power connector](../assets/en/cutwire14AWG.jpg)
 
 #### Preparing XT60 pin and XT60 socket high-power connectors
 
@@ -178,7 +178,7 @@ Solder the prepared wires of the motors to the pads of ESC.
 3. Remove the 3rd (orange) wire from the connector, since it is not needed.
 4. The length of the remaining black and red wires should be 10 – 12 cm.
 
-![Installation of the 5V connector](../assets/mount5vconnector.jpg)
+![Installation of the 5V connector](../assets/en/mount5vconnector.jpg)
 
 ### Installation of the power distribution board
 
@@ -204,7 +204,7 @@ Check CLOSED CONDITION of the following circuits (presence of the multimeter sou
 1. [Blanch*] (zap.md) the contact pads of the power board
 2. Using a multimeter, check absence of contact closure on the PCB (check continuity)
 
-![ After-soldering check](../assets/zapPDBtest.jpg)
+![ After-soldering check](../assets/en/zapPDBtest.jpg)
 
 To make solder neatly fill the entire pad, it should be warmed up. For this purpose, hold the tip of the soldering gun to the contact pad for 2 seconds (or more if needed)
 
@@ -279,7 +279,7 @@ IMPORTANT NOTE about polarity
 
 #### SAFETY when working with the battery
 
-![SAFETY when working with the battery](../assets/safetyPower.png)
+![SAFETY when working with the battery](../assets/en/safetyPower.png)
 
 #### Enabling the transmitter
 
@@ -337,7 +337,7 @@ should be increased up to 4 – 5.
 2. Motors to MAIN OUT ports 1,2,3,4, according to the circuit diagram
 3. Power by PDB (5V/VCC) to any port except for SB (SBUS)
 
- ![Connecting the flight controller](../assets/connectionPixhawk.png)
+ ![Connecting the flight controller](../assets/en/connectionPixhawk.png)
 
 ### ESC assembly
 

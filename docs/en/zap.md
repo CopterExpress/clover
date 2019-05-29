@@ -10,7 +10,7 @@ Blanching a contact pad means doing the following:
 1. Apply flux on the contact pad
 2. Cover the contact pad with solder
 
-![Blanching pads](../assets/zapPDBtest.jpg)
+![Blanching pads](../assets/en/zapPDBtest.jpg)
 
 ## Blanching wires
 

@@ -14,11 +14,11 @@ TODO
 
 ## Additional equipment
 
-![Additional equipment](../assets/additonal_eqipment.jpg)
+![Additional equipment](../assets/en/additonal_eqipment.jpg)
 
 ## Conventional symbols
 
-![Conventional symbols](../assets/conditional_refer.jpg)
+![Conventional symbols](../assets/en/conditional_refer.jpg)
 
 ## Installation of motors
 
@@ -36,7 +36,7 @@ TODO
 
     Cut the remaining part of the clamp (tie wrap) with scissors.
 
-    ![Preparation of motors](../assets/cl3_prepareMotors.JPG)
+    ![Preparation of motors](../assets/en/cl3_prepareMotors.JPG)
 
 ## Installation of frame elements
 
@@ -45,7 +45,7 @@ TODO
 3. Attach the assembled unit to the frame with М3х16 screws, complying with the layout.
 4. Install the frame for the LED strip, using the slots in the leg holders.
 
-![Legs installation on the frame](../assets/cl3_mountElements.JPG)
+![Legs installation on the frame](../assets/en/cl3_mountElements.JPG)
 
 ## Installation of the BEC voltage converter (to be soldered and tested)
 
@@ -93,7 +93,7 @@ TODO
             Black -> GND
             Blue -> Din
 
-![Installation of the BEC voltage Converter](../assets/cl3_mountBEC.JPG)
+![Installation of the BEC voltage Converter](../assets/en/cl3_mountBEC.JPG)
 
 ## Installation of the 4 in 1 ESC board and the PDB power-board
 
@@ -213,7 +213,7 @@ article [remote faults](radioerrors.md).
 
 5. Install the legs into the mounts (4 pcs).
 
-![Mounting the RPi camera](../assets/cl3_mountRpiCamera.JPG)
+![Mounting the RPi camera](../assets/en/cl3_mountRpiCamera.JPG)
 
 ## Installation of the remaining structural elements
 

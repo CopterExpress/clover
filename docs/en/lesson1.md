@@ -69,7 +69,7 @@ Control
 
 The copter is controlled from a transmitter that sends commands to the radio receiver. The transmitter is powered by batteries, and the radio receiver is powered from the flight controller. The communication is often one-way, from the transmitter to the receiver. The receiver is connected to the flight controller with at least five wires which are used for transmitting the turn signals around 3 axes, the throttle command, and the flight mode command.
 
-![Control](../assets/1_5.png)
+![Control](../assets/en/1_5.png)
 
 **Throttle** — translated as "throttle", "thrust", or "gas" in everyday life. A multicopter throttle is the mean arithmetical between the rotation speeds of all motors is it more the throttle, the higher the total thrust of the engines, and the stronger they pull the copter upwards (in other words, "Step on it" means the fastest ascent possible). It is usually measured as percentage: 0 % — the motors are stopped, 100 % — the motors are rotating at maximum speed. Hovering throttle is the minimum throttle required for the copter to stay at certain altitude.
 
@@ -77,15 +77,15 @@ The axes of the copter (pitch, roll, and yaw) are the angles used to determine a
 
 **Yaw** The multicopter nose turn. conditionally — turning right or left
 
-![Yaw](../assets/1_6.png)
+![Yaw](../assets/en/1_6.png)
 
 **Pitch**. In copters, manipulation with this moment of force allows the copter to move forward or backward due to tilting the nose in the appropriate direction
 
-![Pitch](../assets/1_7.png)
+![Pitch](../assets/en/1_7.png)
 
 **Roll** Multicopter tilting to the left or to the right. Due to the roll, the copter can move sideways in the appropriate direction.
 
-![Roll](../assets/1_8.png)
+![Roll](../assets/en/1_8.png)
 
 If you can control throttle, pitch, roll and yaw, you can control the quadcopter. They are also sometimes called control channels. There are many flight modes. GPS, barometer, and distance gage are also used, as well as stabilization mode (stab, stabilize, flying and stab), in which the copter keeps the angles set from the transmitter regardless of external factors. Without wind, the copter can hang almost in place in this mode. And the wind will have to be compensated for by the pilot.
 The propellers rotation directions are not chosen randomly. If all motors rotated in the same direction, the quadcopter would rotate in the opposite direction due to the generated moments. Therefore, two opposite motors always rotate in the same direction, and other two motors rotate the opposite direction. The effect of rotation moments is used to change the yaw: one pair of motors starts rotating a bit faster than the other, and the quadcopter slowly turns towards us:
@@ -105,7 +105,7 @@ Elements of the copter
 
 Usually, when it comes to controlling a model of boat or an aircraft, the operator has absolute, precise control over the engine. Pressing the joystick on the transmitter results in proportional increasing the speed of the screws (rpm). A distinctive feature of multi-propeller aircraft (regardless of whether it is an advantage or a disadvantage) is in the fact that no one can simultaneously control the rotation speed of 3 and more motors precisely enough to keep the aircraft in the air. That is where the flight controllers come into play.
 
-![Flightctr](../assets/1_10.png)
+![Flightctr](../assets/en/1_10.png)
 
 **Flight controller** is the most important part. Ninety percent of flight stability and controllability depends on the characteristics of the flight controller.
 A flight controller is intended for translating commands from the transmitter into the signals that set the rotation speed of the motor. It also has inertial measuring sensors that allow keeping an eye on the current position of the platform and performing automatic adjustment
@@ -114,11 +114,11 @@ A flight controller is intended for translating commands from the transmitter in
 
 **ESC** are regulators for adjusting the motors rotation. The fact is that multi copters use special brushless motors that can rotate at very high speeds. To control such motors, it is sometimes necessary to form three phase voltage and relatively high currents, which is performed by ESCs. Each motor requires its own ESC. All ESCs are connected to the flight controller. The ESCs are powered directly from the battery. Each motor is connected to its own ESC with three wires. The order of connecting the wires determines the direction of motor rotation.
 
-![Esc](../assets/1_12.png)
+![Esc](../assets/en/1_12.png)
 
 **Motor**. Copters use brushless motors. They feature outstanding characteristics and survivability due to the absence of friction units (brushes) for transmitting the current. Unlike a conventional motor, which has a moving part — the rotor, and a stationary part — the stator, in a brushless motor, the moving part is the stator with permanent magnets, and the stationary part is the rotor with windings of three phases. In order to rotate such a system, the direction of the magnetic field in the windings of the rotor is changed in specific order, whereby permanent magnets in the rotor interact with magnetic fields of the stator and start rotating. This rotation is caused by the ability of magnets with the same poles to repel from each other, and magnets with opposite poles to attract to each other.
 
-![Engine](../assets/1_13.png)
+![Engine](../assets/en/1_13.png)
 
 **Radio control equipment**. It includes a transmitter with a control unit, and a receiver. They may have various numbers of channels and frequencies. Most transmitters operate at the frequency of 2.40 GHz, there are also several other frequency bands available in the market.
 
