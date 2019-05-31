@@ -15,7 +15,13 @@
 
 Также у нас есть чат для программистов, которые разрабатывают под PX4, автономную навигацию в помещениях и рои дронов https://t.me/DroneCode.
 
-The English version of this documentation [is available](../en/).
+The English version of this documentation <a id='english-link' href="https://clever.copterexpress.com/en/">is available</a>.
+
+<script>
+    let el = document.querySelector('#english-link');
+    el.href = '/en/';
+    el.target = '_self';
+</script>
 
 Образ для Raspberry Pi
 ----------------------
