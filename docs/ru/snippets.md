@@ -18,6 +18,10 @@ Python
 Функция определения расстояния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
 ```python
+import math
+
+# ...
+
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -27,6 +31,10 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 Функция для приблизительного определения расстояния (в метрах) между двумя глобальными координатами (широта/долгота):
 
 ```python
+import math
+
+# ...
+
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
