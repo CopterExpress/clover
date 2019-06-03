@@ -1,12 +1,16 @@
 #! /usr/bin/env bash
 
 #
-# Script for build the image. Used builder script of the target repo
+# Script for build the image. Used builder script of the target repo.
 # For build: docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/builder/repo smirart/builder
 #
 # Copyright (C) 2018 Copter Express Technologies
 #
 # Author: Artem Smirnov <urpylka@gmail.com>
+#
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
 
 set -e # Exit immidiately on non-zero result

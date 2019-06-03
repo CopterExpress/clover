@@ -1,3 +1,14 @@
+/*
+ * Utility functions
+ * Copyright (C) 2018 Copter Express Technologies
+ *
+ * Author: Oleg Kalachev <okalachev@gmail.com>
+ *
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 #pragma once
 
 #include <cmath>
