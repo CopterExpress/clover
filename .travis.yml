@@ -23,7 +23,16 @@ jobs:
 # Check if there are any cached images, copy them to our "images" directory
         - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
       script:
-        - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+        - if [[ -z ${TRAVIS_TAG} && ${TRAVIS_PULL_REQUEST} ]]; then
+            echo "Commit range is ${TRAVIS_COMMIT_RANGE}" &&
+            if [ $(git diff --name-only ${TRAVIS_COMMIT_RANGE} | grep -v ^"docs/" | wc -l) -eq 0 ]; then
+              echo " === Docs-only change; skipping build ===" &&
+              export SKIP_BUILD=true;
+            fi;
+          fi
+        - if [ -z ${SKIP_BUILD} ]; then
+            docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER};
+          fi
       before_cache:
         - cp images/*.zip imgcache
       before_deploy:
