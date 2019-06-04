@@ -57,6 +57,8 @@ level = pi.read(12)
 import time
 import pigpio
 
+pi = pigpio.pi()
+
 # устанавливаем режим 13 пина на вывод
 pi.set_mode(13, pigpio.OUTPUT)
 
