@@ -285,13 +285,17 @@ set_mode(custom_mode='STABILIZED')
 Флип по крену:
 
 ```python
+import math
+
+# ...
+
 def flip():
     start = get_telemetry()  # memorize starting position
 
     set_rates(thrust=1)  # bump up
     rospy.sleep(0.2)
 
-    set_rates(roll_rate=20, thrust=0.2)  # maximum roll rate
+    set_rates(roll_rate=30, thrust=0.2)  # maximum roll rate
 
     while True:
         telem = get_telemetry()
@@ -302,7 +306,7 @@ def flip():
     rospy.loginfo('finish flip')
     set_position(x=start.x, y=start.y, z=start.z, yaw=start.yaw)  # finish flip
 
-print navigate(z=4, speed=1, auto_arm=True)  # take off
+print navigate(z=2, speed=1, frame_id='body', auto_arm=True)  # take off
 rospy.sleep(10)
 
 rospy.loginfo('flip')
