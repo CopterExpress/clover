@@ -108,7 +108,7 @@ def markers_callback(msg):
     for marker in msg.markers:
         print 'Marker: %s' % marker
 
-# Подписываемся. При получении сообщения в топик /foo будет вызвана функция foo_callback.
+# Подписываемся. При получении сообщения в топик aruco_detect/markers будет вызвана функция markers_callback.
 rospy.Subscriber('aruco_detect/markers', MarkerArray, markers_callback)
 
 # ...
