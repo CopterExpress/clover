@@ -71,8 +71,8 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/m
 
 По [соглашению](http://www.ros.org/reps/rep-0103.html) в маркерном поле используется стандартная система координат <abbr title="East-North-Up">ENU</abbr>:
 
-* ось **<font color=red>x</font>** указывает кверху карты маркеров;
-* ось **<font color=green>y</font>** указывает на правую сторону карты маркеров;
+* ось **<font color=red>x</font>** указывает на правую сторону карты маркеров;
+* ось **<font color=green>y</font>** указывает кверху карты маркеров;
 * ось **<font color=blue>z</font>** указывает от плоскости карты маркеров.
 
 <img src="../assets/aruco-map-axis.png" width="600">
