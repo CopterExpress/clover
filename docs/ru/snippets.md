@@ -83,6 +83,33 @@ while True:
     rospy.sleep(0.2)
 ```
 
+Вышеприведенный код может быть обернут в функцию:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while True:
+        telem = get_telemetry(frame_id=frame_id)
+        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+Более универсальная функция с использованием фрейма `navigate_target`, который совпадает с целевой точкой навигации дрона:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while True:
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+```
+
+Такой код может быть использован для полета в том числе с использованием фрейма `body`.
+
 ### # {#disarm}
 
 Дизарм коптера (выключение винтов, **коптер упадет**):
