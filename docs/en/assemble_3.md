@@ -52,7 +52,7 @@ TODO
 1. Unpack the power board and install the power ribbon cable.
 2. Switch the multimeter in the DC voltage measurement mode (20V or 200V range).
 3. Check the correct functionning of the power board by connecting the battery.
-	* Voltage measurements are to be made between black and red wires.
+    * Voltage measurements are to be made between black and red wires.
     * Output voltage at the XT30 connector should be equal to the battery voltage (10 V to 12.6 V).
     * The output voltage at the power ribbon cable should be between 4.9 V to 5.3 V.
 4. Unpack the voltage converter and remove the transparent insulation.
