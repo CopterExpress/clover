@@ -81,4 +81,59 @@ The marker map adheres to the [ROS coordinate system convention](http://www.ros.
 
 In order to enable vision position estimation you should use the following [PX4 parameters](px4_parameters.md).
 
-<!-- TODO: Complete translation -->
+If you're using **EKF2** estimator (`SYS_MC_EST_GROUP` parameter is set to `ekf2`), make sure the following is set:
+
+* `EKF2_AID_MASK` should have `vision position fusion` and `vision yaw fusion` flags set.
+* Vision angle observations noise: `EKF2_EVA_NOISE` = 0.1 rad.
+* Vision position observations noise: `EKF2_EVP_NOISE` = 0.1 m.
+* `EKF2_EV_DELAY` = 0.
+
+If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_estimator,attitude_estimator_q`):
+
+* `LPE_FUSION` should have `vision position` and `land detector` flags set. We suggest unsetting the `baro` flag for indoor flights.
+* External heading (yaw) weight: `ATT_W_EXT_HDG` = 0.5.
+* External heading (yaw) mode: `ATT_EXT_HDG_M` = 1 (`Vision`).
+* Vision position standard deviations: `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.1 m.
+* `LPE_VIS_DELAY` = 0 sec.
+
+> **Hint** In order to use LPE with the Pixhawk v1 hardware you should download the [`px4fmu-v2_lpe.px4` firmware](firmware.md)
+
+## Flight
+
+If the setup is done correctly, the drone will hold its position in `POSCTL` and `OFFBOARD` [flight modes](modes.md) automatically.
+
+You will also be able to use `navigate`, `set_position` and `set_velocity` ROS services for [autonomous flights](simple_offboard.md). In order to fly to a specific coordinate within the ArUco map you should use the `aruco_map` frame:
+
+```python
+# Takeoff should be performed in the "body" frame; "aruco_map" frame will appear as soon as the drone detects the marker field
+navigate(0, 0, 2, frame_id='body', speed=0.5, auto_arm=True) # Takeoff and hover 2 metres above the ground
+
+time.sleep(5)
+
+# Fly to the (2, 2) point on the marker field while being 2 metres above it
+navigate(2, 2, 2, speed=1, frame_id='aruco_map')
+```
+
+## Additional settings
+
+If the drone's position is not stable when VPE is used, try increasing the *P* term in the velocity PID regulator: increase the `MPC_XY_VEL_P` and `MPC_Z_VEL_P` parameters.
+
+If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` parameter and adjusting hover thrust via `MPC_THR_HOVER`.
+
+## Placing markers on the ceiling
+
+![Ceiling markers](../assets/IMG_4175.JPG)
+
+In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_frame.md).
+
+You should also set the `known_tilt` parameter to `map_flipped` in both `aruco_detect` and `aruco_map` sections of `~/catkin_ws/src/clever/clever/launch/aruco.launch`:
+
+```xml
+<param name="known_tilt" value="map_flipped"/>
+```
+
+This will flip the `aruco_map` frame (making its **<font color=blue>z</font>** axis point downward). Thus, in order to fly 2 metres below ceiling, the `z` argument for the `navigate` service should be set to 2:
+
+```python
+navigate(x=1, y=1.1, z=2, speed=0.5, frame_id='aruco_map')
+```
