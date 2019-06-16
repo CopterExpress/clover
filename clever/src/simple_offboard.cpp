@@ -54,6 +54,7 @@ using mavros_msgs::Thrust;
 
 // tf2
 tf2_ros::Buffer tf_buffer;
+std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
 
 // Parameters
 string local_frame;
@@ -88,6 +89,7 @@ AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
 TwistStamped rates_msg;
 TransformStamped target;
+geometry_msgs::TransformStamped body;
 
 // State
 PoseStamped nav_start;
@@ -126,6 +128,29 @@ template<typename T, T& STORAGE>
 void handleMessage(const T& msg)
 {
 	STORAGE = msg;
+}
+
+inline void publishBodyFrame()
+{
+	if (body.child_frame_id.empty()) return;
+
+	tf::Quaternion q;
+	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
+	tf::quaternionTFToMsg(q, body.transform.rotation);
+
+	body.transform.translation.x = local_position.pose.position.x;
+	body.transform.translation.y = local_position.pose.position.y;
+	body.transform.translation.z = local_position.pose.position.z;
+	body.header.frame_id = local_position.header.frame_id;
+	body.header.stamp = local_position.header.stamp;
+	transform_broadcaster->sendTransform(body);
+}
+
+void handleLocalPosition(const PoseStamped& pose)
+{
+	local_position = pose;
+	publishBodyFrame();
+	// TODO: terrain?, home?
 }
 
 // wait for transform without interrupting publishing setpoints
@@ -364,13 +389,12 @@ void publish(const ros::Time stamp)
 
 	if (!target.child_frame_id.empty()) {
 		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
-			static tf2_ros::TransformBroadcaster tf_broadcaster;
 			target.header = setpoint_position_transformed.header;
 			target.transform.translation.x = setpoint_position_transformed.pose.position.x;
 			target.transform.translation.y = setpoint_position_transformed.pose.position.y;
 			target.transform.translation.z = setpoint_position_transformed.pose.position.z;
 			target.transform.rotation = setpoint_position_transformed.pose.orientation;
-			tf_broadcaster.sendTransform(target);
+			transform_broadcaster->sendTransform(target);
 		}
 	}
 
@@ -689,6 +713,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh, nh_priv("~");
 
 	tf2_ros::TransformListener tf_listener(tf_buffer);
+	transform_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>();
 
 	// Params
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
@@ -697,6 +722,7 @@ int main(int argc, char **argv)
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
+	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
 
 	state_timeout = ros::Duration(nh_priv.param("state_timeout", 3.0));
@@ -717,11 +743,11 @@ int main(int argc, char **argv)
 
 	// Telemetry subscribers
 	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
-	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleMessage<PoseStamped, local_position>);
 	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);

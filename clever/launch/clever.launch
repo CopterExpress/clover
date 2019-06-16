@@ -46,11 +46,6 @@
         <param name="reference_frames/base_link" value="map"/>
     </node>
 
-    <!-- Auxiliary frames -->
-    <node name="frames" pkg="clever" type="frames" output="screen">
-        <param name="body/frame_id" value="body"/>
-    </node>
-
     <!-- main camera -->
     <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
 
