@@ -89,7 +89,7 @@ If the copter's height is deviating, try:
 * change the value of `MPC_THR_HOVER` parameter;
 * add `MPC_ALT_MODE` = 2 (Terrain following).
 
-When using Optical Flow, the maximal horizontal speed is farther limited. This is an indirect influence of the parameter `SENS_FLOW_MAXR` (maximal reliable "angular speed" of the optical flow). In normal flight mode, the speed will be controlled such as Optical Flow values do not exceed 50% of the given parameter.
+When using Optical Flow, the maximal horizontal speed is further limited. This is an indirect influence of the parameter `SENS_FLOW_MAXR` (maximal reliable "angular speed" of the optical flow). In normal flight mode, control loops will be adjusted so that Optical Flow values do not exceed 50% of this parameter.
 
 ## Errors
 
