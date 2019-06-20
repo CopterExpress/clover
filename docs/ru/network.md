@@ -108,7 +108,7 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     ```bash
     sudo systemctl daemon-reload
     ```
-    
+
 4. Включите службу `dnsmasq`.
 
     ```bash
@@ -121,7 +121,7 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     ```bash
     sudo systemctl restart dhcpcd
     ```
-    
+
 ___
 
 Ниже вы можете узнать больше о том, как устроена работа с сетью на RPi.
