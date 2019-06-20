@@ -103,12 +103,12 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
     где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
 
-3. Перезагрузите службу `dhcpcd`.
+3. Перезагрузите `systemd`.
 
     ```bash
-    sudo systemctl restart dhcpcd
+    sudo systemctl daemon-reload
     ```
-
+    
 4. Включите службу `dnsmasq`.
 
     ```bash
@@ -116,6 +116,12 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     sudo systemctl start dnsmasq
     ```
 
+5. Перезагрузите службу `dhcpcd`.
+
+    ```bash
+    sudo systemctl restart dhcpcd
+    ```
+    
 ___
 
 Ниже вы можете узнать больше о том, как устроена работа с сетью на RPi.
