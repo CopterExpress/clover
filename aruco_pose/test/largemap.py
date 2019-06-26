@@ -5,9 +5,7 @@ import json
 import rospy
 import rostest
 
-from geometry_msgs.msg import PoseWithCovarianceStamped
 from sensor_msgs.msg import Image
-from aruco_pose.msg import MarkerArray
 from visualization_msgs.msg import MarkerArray as VisMarkerArray
 
 
