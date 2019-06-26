@@ -75,6 +75,9 @@ private:
 	std::string known_tilt_;
 	int image_width_, image_height_, image_margin_;
 	bool auto_flip_;
+	bool mapping_;
+	vector<int> mapping_exclude_;
+	std::fstream map_file_;
 
 public:
 	virtual void onInit()
@@ -98,6 +101,8 @@ public:
 		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
 		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
 		nh_priv_.param("auto_flip", auto_flip_, false);
+		nh_priv_.param("mapping", mapping_, false);
+		nh_priv_.getParam("mapping_exclude", mapping_exclude_);
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
@@ -156,6 +161,13 @@ public:
 				cv::Point2f(marker.c4.x, marker.c4.y)
 			};
 			corners.push_back(marker_corners);
+
+			if (mapping_) {
+				if(std::find(board_->ids.begin(), board_->ids.end(), marker.id) == board_->ids.end()) {
+					// no such marker in map
+					mappingAddMarker(marker);
+				}
+			}
 		}
 
 		if (known_tilt_.empty()) {
@@ -257,15 +269,15 @@ publish_debug:
 
 	void loadMap(std::string filename)
 	{
-		std::ifstream f(filename);
+		map_file_.open(filename, std::fstream::in | std::fstream::out | std::fstream::app);
 		std::string line;
 
-		if (!f.good()) {
+		if (!map_file_.good()) {
 			ROS_FATAL("aruco_map: %s - %s", strerror(errno), filename.c_str());
 			ros::shutdown();
 		}
 
-		while (std::getline(f, line)) {
+		while (std::getline(map_file_, line)) {
 			int id;
 			double length, x, y, z, yaw, pitch, roll;
 
@@ -318,7 +330,36 @@ publish_debug:
 			addMarker(id, length, x, y, z, yaw, pitch, roll);
 		}
 
+		map_file_.clear(); // clear EOF state
 		ROS_INFO("aruco_map: loading %s complete (%d markers)", filename.c_str(), static_cast<int>(board_->ids.size()));
+	}
+
+	void mappingAddMarker(const aruco_pose::Marker& marker)
+	{
+		ROS_INFO("aruco_map: add marker %d to map", marker.id);
+
+		double roll, pitch, yaw;
+		tf::Quaternion q;
+		tf::quaternionMsgToTF(marker.pose.orientation, q);
+		tf::Matrix3x3(q).getRPY(roll, pitch, yaw);
+		const geometry_msgs::Point& p = marker.pose.position;
+		addMarker(marker.id, marker.length, p.x, p.y, p.z, yaw, pitch, roll);
+		writeToMap(marker.id, marker.length, p.x, p.y, p.z, yaw, pitch, roll);
+		publishMapImage();
+		vis_markers_pub_.publish(vis_array_);
+	}
+
+	inline void writeToMap(int id, double length, double x, double y, double z, double yaw, double pitch, double roll)
+	{
+		map_file_ << std::setprecision(3) // round numbers
+		          << id << '\t'
+		          << length << '\t'
+		          << x << '\t'
+		          << y << '\t'
+		          << z << '\t'
+		          << yaw << '\t'
+		          << pitch << '\t'
+		          << roll << std::endl;
 	}
 
 	void createGridBoard()
