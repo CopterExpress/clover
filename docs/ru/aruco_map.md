@@ -55,7 +55,7 @@ rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/cle
 rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
 ```
 
-Также, можно создать карту в специальном [конструкторе](arucogenmap.md)
+Также, можно создать карту в специальном [конструкторе](arucogenmap.md).
 
 ### Проверка
 
