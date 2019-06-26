@@ -87,6 +87,7 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		// dst_sz.width = dst_sz.height = std::min(dst_sz.width, dst_sz.height); //marker should be square
 		double diag = std::round(std::hypot(dst_sz.width, dst_sz.height));
 		int side = std::round(diag / std::sqrt(2));
+		side = std::max(side, 10);
 
 		dictionary.drawMarker(_board->ids[m], side, marker, borderBits);
 
