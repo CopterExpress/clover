@@ -1,6 +1,5 @@
 import rospy
 import pytest
-from pytest import approx
 
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from sensor_msgs.msg import Image
@@ -11,6 +10,9 @@ from visualization_msgs.msg import MarkerArray as VisMarkerArray
 @pytest.fixture
 def node():
     return rospy.init_node('aruco_pose_test', anonymous=True)
+
+def approx(expected):
+    return pytest.approx(expected, abs=1e-7) # compare floats more roughly
 
 def test_markers(node):
     markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=5)
