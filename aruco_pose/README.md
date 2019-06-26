@@ -110,7 +110,7 @@ See examples in [`map`](map/) directory.
 Command for running tests:
 
 ```bash
-rostest aruco_pose basic.test
+catkin_make run_tests && catkin_test_results
 ```
 
 ## Copyright
