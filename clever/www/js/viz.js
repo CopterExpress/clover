@@ -20,50 +20,75 @@ ros.on('close', function() {
 	titleEl.innerText = 'Disconnected';
 });
 
-var viewer = new ROS3D.Viewer({
-	divID: 'viz',
-	width: 1000,
-	height: 600,
-	antialias: true
-});
+var viewer, tfClient;
 
-var tfClient = new ROSLIB.TFClient({
-	ros: ros,
-	angularThres: 0.01,
-	transThres: 0.01,
-	rate: 10.0,
-	fixedFrame : 'map'
-});
+function setScene(fixedFrame) {
+	viewer = new ROS3D.Viewer({
+		divID: 'viz',
+		width: 1000,
+		height: 600,
+		antialias: true
+	});
 
-// vehicle markers
-var vehicleMarkers = new ROS3D.MarkerArrayClient({
-	ros: ros,
-	tfClient: tfClient,
-	topic: '/vehicle_marker',
-	rootObject: viewer.scene
-});
+	tfClient = new ROSLIB.TFClient({
+		ros: ros,
+		angularThres: 0.01,
+		transThres: 0.01,
+		rate: 10.0,
+		fixedFrame : fixedFrame
+	});
 
-// camera markers
-var cameraMarkers = new ROS3D.MarkerArrayClient({
-	ros: ros,
-	tfClient: tfClient,
-	topic: '/main_camera/camera_markers',
-	rootObject: viewer.scene
-});
+	var map = new ROS3D.Grid({
+		ros: ros,
+		tfClient: tfClient,
+		rootObject: viewer.scene
+	});
 
-// detected aruco markers
-var cameraMarkers = new ROS3D.MarkerArrayClient({
-	ros: ros,
-	tfClient: tfClient,
-	topic: '/aruco_detect/visualization',
-	rootObject: viewer.scene
-});
+	viewer.scene.add(map);
+}
 
-var map = new ROS3D.Grid({
-	ros: ros,
-	tfClient: tfClient,
-	// frameID: 'map',
-	rootObject: viewer.scene
-});
+function addAxes() {
+	var axes = new ROS3D.Axes({
+		ros: ros,
+		tfClient: tfClient,
+		rootObject: viewer.scene
+	});
+	viewer.scene.add(axes);
+}
 
-viewer.scene.add(map);
+function addVehicle() {
+	new ROS3D.MarkerArrayClient({
+		ros: ros,
+		tfClient: tfClient,
+		topic: '/vehicle_marker',
+		rootObject: viewer.scene
+	});
+}
+
+
+function addCamera() {
+	new ROS3D.MarkerArrayClient({
+		ros: ros,
+		tfClient: tfClient,
+		topic: '/main_camera/camera_markers',
+		rootObject: viewer.scene
+	});
+}
+
+function addAruco() {
+	new ROS3D.MarkerArrayClient({
+		ros: ros,
+		tfClient: tfClient,
+		topic: '/aruco_detect/visualization',
+		rootObject: viewer.scene
+	});
+}
+
+function addArucoMap() {
+	new ROS3D.MarkerArrayClient({
+		ros: ros,
+		tfClient: tfClient,
+		topic: '/aruco_map/visualization',
+		rootObject: viewer.scene
+	});
+}

@@ -1,0 +1,6 @@
+# Failing markers: Not enough parameters to add a marker
+1
+2 1
+3 0.5 1
+# Failing markers: Marker IDs outside of dictionary range
+1001 1 1 0

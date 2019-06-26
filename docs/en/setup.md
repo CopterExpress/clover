@@ -2,7 +2,7 @@
 
 ## Composition of the FLYSKY i6 transmitter
 
-![Composition of the transmitter](../assets/consistofTransmitter.jpg)
+![Composition of the transmitter](../assets/en/consistofTransmitter.jpg)
 
 ## Installation of QGroundControl
 

@@ -2,6 +2,10 @@
 
 > **Info** Для распознавания маркеров модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
 
+<!-- -->
+
+> **Hint** Рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
+
 Модуль `aruco_map` распознает карты ArUco-маркеров, как единое целое. Также возможна навигация по картам ArUco-маркеров с использованием механизма Vision Position Estimate (VPE).
 
 ## Конфигурирование
@@ -37,6 +41,22 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 
 Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clever/tree/master/aruco_pose/map).
 
+Файл карты может быть сгенерирован с помощью инструмента `genmap.py`:
+
+```bash
+rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+```
+
+Где `length` – размер маркера, `x` – количество маркеров по оси *x*, `y` - количество маркеров по оси *y*, `dist_x` – расстояние между центрами маркеров по оси *x*, `y` – расстояние между центрами маркеров по оси *y*, `first` – ID первого (левого нижнего) маркера, `test_map.txt` – название файла с картой. Дополнительный ключ `--top-left` позволяет нумеровать маркеры с левого верхнего угла.
+
+Пример:
+
+```bash
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+```
+
+Также, можно создать карту в специальном [конструкторе](arucogenmap.md).
+
 ### Проверка
 
 Для контроля карты, по которой в данный момент коптер осуществляет навигацию, можно просмотреть содержимое топика `/aruco_map/image`. Через браузер его можно просмотреть при помощи [web_video_server](web_video_server.md) по ссылке http://192.168.11.1:8080/snapshot?topic=/aruco_map/image:
@@ -53,8 +73,8 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 
 По [соглашению](http://www.ros.org/reps/rep-0103.html) в маркерном поле используется стандартная система координат <abbr title="East-North-Up">ENU</abbr>:
 
-* ось **<font color=red>x</font>** указывает кверху карты маркеров;
-* ось **<font color=green>y</font>** указывает на правую сторону карты маркеров;
+* ось **<font color=red>x</font>** указывает на правую сторону карты маркеров;
+* ось **<font color=green>y</font>** указывает кверху карты маркеров;
 * ось **<font color=blue>z</font>** указывает от плоскости карты маркеров.
 
 <img src="../assets/aruco-map-axis.png" width="600">
@@ -67,18 +87,22 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 
 * В параметре `EKF2_AID_MASK` включены флажки `vision position fusion`, `vision yaw fusion`.
 * Шум угла по зрению: `EKF2_EVA_NOISE` = 0.1 rad
-* Шум позиции по зрению: `EKF2_EVP_NOISE` = 0.05 m
+* Шум позиции по зрению: `EKF2_EVP_NOISE` = 0.1 m
 * `EKF2_EV_DELAY` = 0
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
-* В параметре `LPE_FUSION` включены флажки `vision position`, `land detector`.
+* В параметре `LPE_FUSION` включены флажки `vision position`, `land detector`. Флажок `baro` рекомендуется отключить.
 * Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
 * Включена ориентация по Yaw по зрению: `ATT_EXT_HDG_M` = 1 `Vision`.
-* Шумы позиции по зрению: `LPE_VIS_XY` = 0.05 m, `LPE_VIS_Z` = 0.05 m.
+* Шумы позиции по зрению: `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.1 m.
 * `LPE_VIS_DELAY` = 0 sec
 
 <!-- * Выключен компас: `ATT_W_MAG` = 0 -->
+
+> **Hint** На данный момент для полета по маркерам рекомендуется использование **LPE**.
+
+Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
 
 > **Info** Для использования LPE в Pixhawk необходимо [скачать прошивку с названием `px4fmu-v2_lpe.px4`](https://github.com/PX4/Firmware/releases).
 
@@ -112,7 +136,7 @@ navigate(2, 2, 2, speed=1, frame_id='aruco_map')  # полет в координ
 
 Для навигации по маркерам, расположенным на потолке, необходимо поставить основную камеру так, чтобы она смотрела вверх и [установить соответствующий фрейм камеры](camera_frame.md).
 
-Также в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` необходимо установить параметр `known_tilt` в секции `aruco_map` в значение `map_flipped`:
+Также в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` необходимо установить параметр `known_tilt` в секциях `aruco_detect` и `aruco_map` в значение `map_flipped`:
 
 ```xml
 <param name="known_tilt" value="map_flipped"/>

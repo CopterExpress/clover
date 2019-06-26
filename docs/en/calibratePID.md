@@ -13,4 +13,4 @@ The Rate Pitch and Rate Roll parameters should be the same.
 
 YAW parameters should be changed individually, according to the above instruction (usually the yaw doesn't require serious adjustment, you may leave it default).
 
-![ROLL oscillations](../assets/oscillRoll.jpg)
+![ROLL oscillations](../assets/en/oscillRoll.jpg)

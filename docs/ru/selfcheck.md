@@ -22,6 +22,9 @@ rosrun clever selfcheck.py
 * Velocity estimation – оценка скоростей дрона (**запрещено выполнять автономный взлет при ошибках в этой проверке!**);
 * Global position (GPS) – наличие глобальной позиции (требуется GPS);
 * Camera – корректная работа камеры Raspberry.
+* ArUco – проверка работы [распознавания ArUco-маркеров](aruco.md).
+* VPE – проверка правильности работы VPE.
+* Rangefinder – проверка работы [дальномера](laser.md).
 
 ## commander check
 

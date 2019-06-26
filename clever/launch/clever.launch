@@ -9,7 +9,6 @@
     <arg name="aruco" default="false"/>
     <arg name="rc" default="true"/>
     <arg name="rangefinder_vl53l1x" default="false"/>
-    <arg name="arduino" default="false"/>
 
     <!-- mavros -->
     <include file="$(find clever)/launch/mavros.launch">
@@ -21,6 +20,7 @@
     <!-- web video server -->
     <node name="web_video_server" pkg="web_video_server" type="web_video_server" if="$(arg web_video_server)" required="false" respawn="true" respawn_delay="5">
         <param name="default_stream_type" value="ros_compressed"/>
+        <param name="publish_rate" value="1.0"/>
     </node>
 
     <!-- aruco markers -->
@@ -46,11 +46,6 @@
         <param name="reference_frames/base_link" value="map"/>
     </node>
 
-    <!-- Auxiliary frames -->
-    <node name="frames" pkg="clever" type="frames" output="screen">
-        <param name="body/frame_id" value="body"/>
-    </node>
-
     <!-- main camera -->
     <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
 
@@ -63,15 +58,9 @@
     <!-- vl53l1x ToF rangefinder -->
     <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
-        <param name="offset" value="-0.05"/>
         <remap from="~range" to="mavros/distance_sensor/rangefinder_sub"/> <!-- redirect data to FCU -->
     </node>
 
     <!-- rc backend -->
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
-
-    <!-- Arduino bridge -->
-    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" if="$(arg arduino)">
-        <param name="port" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
-    </node>
 </launch>

@@ -28,6 +28,7 @@ monkey --version
 pigpiod -v
 i2cdetect -V
 butterfly -h
+espeak --version
 
 # ros stuff
 
@@ -44,3 +45,6 @@ rosversion compressed_image_transport
 rosversion rosbridge_suite
 rosversion rosserial
 rosversion usb_cam
+rosversion cv_camera
+rosversion web_video_server
+rosversion rosshow

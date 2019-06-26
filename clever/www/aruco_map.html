@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/three.min.js"></script>
+		<script type="text/javascript" src="js/eventemitter2.js"></script>
+		<script type="text/javascript" src="js/roslib.js"></script>
+		<script type="text/javascript" src="js/ros3d.js"></script>
+		<title>Aruco Map visualization</title>
+	</head>
+	<body>
+		<div id="viz"></div>
+		<script type="text/javascript" src="js/viz.js"></script>
+		<script>
+			setScene('aruco_map');
+			addArucoMap();
+			addAxes();
+		</script>
+	</body>
+</html>

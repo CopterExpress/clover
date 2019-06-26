@@ -1,5 +1,17 @@
+/*
+ * Utility functions
+ * Copyright (C) 2018 Copter Express Technologies
+ *
+ * Author: Oleg Kalachev <okalachev@gmail.com>
+ *
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 #pragma once
 
+#include <cmath>
 #include <ros/ros.h>
 #include <tf/transform_datatypes.h>
 #include <geometry_msgs/Quaternion.h>
@@ -90,14 +102,33 @@ inline void fillTranslation(geometry_msgs::Vector3& translation, const cv::Vec3d
 	translation.z = tvec[2];
 }
 
-inline void snapOrientation(geometry_msgs::Quaternion& to, const geometry_msgs::Quaternion& from)
+inline bool isFlipped(tf::Quaternion& q)
 {
-	tf::Quaternion q;
-	q.setRPY(0, 0, -tf::getYaw(to) + tf::getYaw(from));
-	tf::Quaternion pq;
-	tf::quaternionMsgToTF(from, pq);
-	pq = pq * q;
-	tf::quaternionTFToMsg(pq, to);
+	double yaw, pitch, roll;
+	tf::Matrix3x3(q).getEulerYPR(yaw, pitch, roll);
+	return (abs(pitch) > M_PI / 2) || (abs(roll) > M_PI / 2);
+}
+
+/* Set roll and pitch from "from" to "to", keeping yaw */
+inline void snapOrientation(geometry_msgs::Quaternion& to, const geometry_msgs::Quaternion& from, bool auto_flip = false)
+{
+	tf::Quaternion _from, _to;
+	tf::quaternionMsgToTF(from, _from);
+	tf::quaternionMsgToTF(to, _to);
+
+	if (auto_flip) {
+		if (!isFlipped(_from)) {
+			static const tf::Quaternion flip = tf::createQuaternionFromRPY(M_PI, 0, 0);
+			_from *= flip; // flip "from"
+		}
+	}
+
+	auto diff = tf::Matrix3x3(_to).transposeTimes(tf::Matrix3x3(_from));
+	double _, yaw;
+	diff.getRPY(_, _, yaw);
+	auto q = tf::createQuaternionFromRPY(0, 0, -yaw);
+	_from = _from * q; // set yaw from "to" to "from"
+	tf::quaternionTFToMsg(_from, to); // set "from" to "to"
 }
 
 inline void transformToPose(const geometry_msgs::Transform& transform, geometry_msgs::Pose& pose)

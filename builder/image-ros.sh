@@ -8,6 +8,10 @@
 #
 # Author: Artem Smirnov <urpylka@gmail.com>
 #
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
 
 set -e # Exit immidiately on non-zero result
 
@@ -42,9 +46,10 @@ echo_stamp() {
 my_travis_retry() {
   local result=0
   local count=1
-  while [ $count -le 3 ]; do
+  local max_count=50
+  while [ $count -le $max_count ]; do
     [ $result -ne 0 ] && {
-      echo -e "\n${ANSI_RED}The command \"$@\" failed. Retrying, $count of 3.${ANSI_RESET}\n" >&2
+      echo -e "\nThe command \"$@\" failed. Retrying, $count of $max_count.\n" >&2
     }
     # ! { } ignores set -e, see https://stackoverflow.com/a/4073372
     ! { "$@"; result=$?; }
@@ -53,21 +58,21 @@ my_travis_retry() {
     sleep 1
   done
 
-  [ $count -gt 3 ] && {
-    echo -e "\n${ANSI_RED}The command \"$@\" failed 3 times.${ANSI_RESET}\n" >&2
+  [ $count -gt $max_count ] && {
+    echo -e "\nThe command \"$@\" failed $max_count times.\n" >&2
   }
 
   return $result
 }
 
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
-echo_stamp "Init rosdep" \
-&& rosdep init \
-&& echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list \
-&& rosdep update
+echo_stamp "Init rosdep"
+my_travis_retry rosdep init
+echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
-sudo -u pi rosdep update
+my_travis_retry sudo -u pi rosdep update
 
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
@@ -78,7 +83,7 @@ resolve_rosdep() {
 
   echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
   cd ${CATKIN_PATH}
-  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} -r --os=${OS_DISTRO}:${OS_VERSION}
+  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=${OS_DISTRO}:${OS_VERSION}
 }
 
 INSTALL_ROS_PACK_SOURCES=${INSTALL_ROS_PACK_SOURCES:='false'}
@@ -137,6 +142,10 @@ fi
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
+echo_stamp "Reconfiguring Clever repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clever
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
 echo_stamp "Installing CLEVER" \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
@@ -168,7 +177,8 @@ apt-get install -y --no-install-recommends \
     ros-kinetic-rosserial \
     ros-kinetic-usb-cam \
     ros-kinetic-vl53l1x \
-    ros-kinetic-opencv3=3.3.19-0stretch
+    ros-kinetic-opencv3=3.3.19-0stretch \
+    ros-kinetic-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needs for mavros)" \

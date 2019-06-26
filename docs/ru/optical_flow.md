@@ -1,12 +1,10 @@
 # Использование Optical Flow
 
-> **Warning** Данная функция является **экспериментальной** и включена в образ с версии v0.11.4.
-
 При использовании технологии Optical Flow возможен полет в режиме POSCTL и автономные полеты по камере, направленной вниз, за счет измерения сдвигов текстуры поверхности пола.
 
 ## Включение
 
-На данный момент для использования Optical Flow необходима [кастомная прошивка PX4](https://github.com/CopterExpress/Firmware/releases/tag/v1.8.2-clever.1).
+> **Hint** Рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
@@ -16,6 +14,8 @@
 <arg name="optical_flow" default="true"/>
 ```
 
+Optical Flow публикует данные в топик `mavros/px4flow/raw/send`. Кроме того, в топик `optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
+
 > **Info** Для правильной работы модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
 
 ## Настройка полетного контроллера
@@ -24,18 +24,27 @@
 
 * `EKF2_AID_MASK` – включен флажок use optical flow.
 * `EKF2_OF_DELAY` – 0.
-* `EKF2_OF_QMIN` – 15.
+* `EKF2_OF_QMIN` – 10.
+* `EKF2_OF_N_MIN` – 0.05.
+* `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
 * `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
-* `EKF2_OF_DELAY` – 0.
-* `LPE_FLW_QMIN` – 15.
+* `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
+* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
+
+Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
 
 ## Полет в POSCTL
 
@@ -57,7 +66,7 @@ navigate(z=1.5, frame_id='body', auto_arm=True)
 navigate(x=1.5, frame_id='body')
 ```
 
-При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md).
+При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md), в том числе [используя VPE](aruco_map.md).
 
 ## Дополнительные настройки
 
@@ -79,6 +88,8 @@ navigate(x=1.5, frame_id='body')
 * повысить значение коэффициента `MPC_Z_VEL_P`;
 * изменить значение параметра `MPC_THR_HOVER`;
 * выставить `MPC_ALT_MODE` = 2 (Terrain following).
+
+При использовании Optical Flow максимальная горизонтальная скорость дополнительно ограничивается. За это косвенно отвечает параметр `SENS_FLOW_MAXR` (максимальная достоверная "угловая скорость" оптического потока). При нормальном полёте горизонтальная скорость будет регулироваться так, чтобы показания Optical Flow не превышали 50% значения данного параметра.
 
 ## Неисправности
 

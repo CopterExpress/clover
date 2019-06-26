@@ -87,10 +87,11 @@ Saving mode (YES - on):  # Режим сохранения
 
 Скрипт начнет свою работу:
 
-    ...
-    Calibration started!
-    Commands:
-    help, catch (key: Enter), delete, restart, stop, finish
+```
+Calibration started!
+Commands:
+help, catch (key: Enter), delete, restart, stop, finish
+```
 
 Чтобы откалибровать камеру, вам требуется сделать как минимум 25 фото шахматной доски с различных ракурсов.
 

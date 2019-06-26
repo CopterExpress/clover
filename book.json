@@ -4,6 +4,7 @@
     "author": "Copter Express",
     "language": "ru",
     "root": "docs/",
+    "gitbook": "^3.2.2",
     "plugins": [
         "youtube",
         "richquotes@https://github.com/okalachev/gitbook-plugin-richquotes.git",

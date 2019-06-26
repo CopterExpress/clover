@@ -24,6 +24,7 @@
         <param name="rate" value="100"/> <!-- poll rate -->
         <param name="cv_cap_prop_fps" value="40"/> <!-- camera FPS -->
         <param name="capture_delay" value="0.02"/> <!-- approximate delay on frame retrieving -->
+        <param name="rescale_camera_info" value="true"/> <!-- automatically rescale camera calibration info -->
 
         <!-- camera resolution, NOTE: camera_info file should match it -->
         <param name="image_width" value="320"/>

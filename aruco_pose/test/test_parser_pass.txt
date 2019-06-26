@@ -1,0 +1,23 @@
+# Parser test #1 - correct file
+# 1. Commentary test
+#Commentary text without space after pound sign
+# Commentary text with space after pound sign
+    # Commentary text with spaces before pound sign
+	# Commentary text with tab before pound sign
+			# Text with tabs before pound sign
+# Empty line test:
+
+# All-whitespace line test:
+		    
+# 2. Default coordinates test
+# Fully filled marker description, tab-delimited:
+1	0.33	0	0	0	0	0	0
+# Fully filled marker description, space-delimited:
+2 0.225 1 1 1 0 0 0
+# Default roll, pitch, yaw angles
+3 0.45 1 0 0.5
+# Default roll, pitch, yaw, z
+4 0.15 0 1
+# Inline commentary
+5 0.25 1 0.5# Comment straight after digit
+6 0.35 2.2 0.2 # Comment with a space after digit

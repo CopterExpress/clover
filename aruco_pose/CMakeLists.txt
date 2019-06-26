@@ -216,4 +216,8 @@ target_link_libraries(aruco_pose
 if (CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   add_rostest(test/basic.test)
+  add_rostest(test/test_parser_pass.test)
+  add_rostest(test/test_parser_empty_map.test)
+  add_rostest(test/test_node_failure.test)
+  add_rostest(test/largemap.test)
 endif()

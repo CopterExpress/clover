@@ -42,8 +42,8 @@
 
 С маркером связана следующая система координат:
 
-* ось **<font color=red>x</font>** указывает кверху маркера;
-* ось **<font color=green>y</font>** указывает на правую сторону маркера;
+* ось **<font color=red>x</font>** указывает на правую сторону маркера;
+* ось **<font color=green>y</font>** указывает кверху маркера;
 * ось **<font color=blue>z</font>** указывает от плоскости маркера.
 
 <img src="../assets/aruco-axis.png" width="300">
@@ -108,7 +108,7 @@ def markers_callback(msg):
     for marker in msg.markers:
         print 'Marker: %s' % marker
 
-# Подписываемся. При получении сообщения в топик /foo будет вызвана функция foo_callback.
+# Подписываемся. При получении сообщения в топик aruco_detect/markers будет вызвана функция markers_callback.
 rospy.Subscriber('aruco_detect/markers', MarkerArray, markers_callback)
 
 # ...

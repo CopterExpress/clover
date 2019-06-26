@@ -10,10 +10,11 @@ env:
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 50
-matrix:
+jobs:
   fast_finish: true
   include:
-    - name: "Raspberry Pi Image Build"
+    - stage: Build
+      name: "Raspberry Pi Image Build"
       cache:
         directories:
         - imgcache
@@ -22,7 +23,16 @@ matrix:
 # Check if there are any cached images, copy them to our "images" directory
         - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
       script:
-        - docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER}
+        - if [[ -z ${TRAVIS_TAG} && "${TRAVIS_PULL_REQUEST}" != "false" ]]; then
+            echo "Commit range is ${TRAVIS_COMMIT_RANGE}" &&
+            if [ $(git diff --name-only ${TRAVIS_COMMIT_RANGE} | grep -v ^"docs/" | wc -l) -eq 0 ]; then
+              echo " === Docs-only change; skipping build ===" &&
+              export SKIP_BUILD=true;
+            fi;
+          fi
+        - if [ -z ${SKIP_BUILD} ]; then
+            docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER};
+          fi
       before_cache:
         - cp images/*.zip imgcache
       before_deploy:
@@ -40,7 +50,8 @@ matrix:
           tags: true
         draft: true
         name: ${TRAVIS_TAG}
-    - name: "Documentation"
+    - stage: Build
+      name: "Documentation"
       language: node_js
       node_js:
         - "10"
@@ -53,20 +64,29 @@ matrix:
         - markdownlint docs
         - gitbook install
         - gitbook build
-# ***
-# Disable deployments for now, revisit this later
-#   --sfalexrog, 06.02.2019
-# ***
-#      deploy:
-#        provider: pages
-#        local-dir: _book
-#        skip-cleanup: true
-#        github-token: ${GITHUB_OAUTH_TOKEN}
-#        keep-history: true
-#        target-branch: gh-pages
-#        on:
-#          branch: WIP/gitbook-autobuild
-
+      deploy:
+        provider: pages
+        local-dir: _book
+        skip-cleanup: true
+        github-token: ${GITHUB_OAUTH_TOKEN}
+        keep-history: true
+        target-branch: master
+        repo: CopterExpress/clever-gitbook
+        fqdn: clever.copterexpress.com
+        verbose: true
+        on:
+          branch: master
+    - stage: Annotate
+      name: Auto-generate changelog
+      language: python
+      python: 3.6
+      install:
+        - pip install GitPython PyGithub
+      script:
+        - PYTHONUNBUFFERED=1 python ./gen_changelog.py
+stages:
+  - Build
+  - Annotate
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
 # https://docs.travis-ci.com/user/customizing-the-build/

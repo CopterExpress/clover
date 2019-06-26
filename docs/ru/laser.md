@@ -8,6 +8,19 @@
 
 ### Подключение к Raspberry Pi
 
+> **Note** Для корректной работы лазерного дальномера с полетным контроллером необходима <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">кастомная прошивка PX4</a>. Подробнее про прошивку см. [соответствующую статью](firmware.md).
+
+<script type="text/javascript">
+    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
+        for (let release of data) {
+            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
+                document.querySelector('#download-firmware').href = release.html_url;
+                return;
+            }
+        }
+    });
+</script>
+
 Подключите дальномер по интерфейсу I²C к пинам 3V, GND, SCL и SDA:
 
 <img src="../assets/raspberry-vl53l1x.png" alt="Подключение VL53L1X" height=600>
