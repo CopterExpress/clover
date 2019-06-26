@@ -24,6 +24,7 @@ from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped, Vector3Stamped
+from visualization_msgs.msg import MarkerArray as VisualizationMarkerArray
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from mavros import mavlink
@@ -290,6 +291,13 @@ def check_aruco():
         elif known_tilt == 'map_flipped':
             known_tilt += ' (marker\'s map is on the ceiling)'
         info('aruco_map/known_tilt = %s', known_tilt)
+
+        try:
+            visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=1)
+            info('map has %s markers', len(visualization.markers))
+        except:
+            failure('cannot read aruco_map/visualization topic')
+
         try:
             rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
         except rospy.ROSException:
