@@ -550,3 +550,6 @@ ddynamic_reconfigure:
 realsense2_camera:
   debian:
     stretch: [ros-kinetic-realsense2-camera]
+ros_pytest:
+  debian:
+    stretch: [ros-kinetic-ros-pytest]

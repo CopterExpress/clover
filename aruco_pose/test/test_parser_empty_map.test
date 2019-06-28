@@ -9,5 +9,6 @@
         <param name="map" value="$(find aruco_pose)/test/test_parser_empty_map.txt"/>
     </node>
 
-    <test test-name="test_aruco_map_incomplete" pkg="aruco_pose" type="test_parser_empty_map.py"/>
+    <param name="test_module" value="$(find aruco_pose)/test/test_parser_empty_map.py"/>
+    <test test-name="test_node_empty_map" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>
