@@ -56,7 +56,7 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 base_link rangefinder"/>
 
     <!-- Copter visualization -->
-    <node name="copter_visualization" pkg="mavros_extras" type="visualization" if="$(arg viz)">
+    <node name="visualization" pkg="mavros_extras" type="visualization" if="$(arg viz)">
         <remap to="mavros/local_position/pose" from="local_position"/>
         <remap to="mavros/setpoint_position/local" from="local_setpoint"/>
         <param name="fixed_frame_id" value="map"/>
