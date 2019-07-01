@@ -171,7 +171,6 @@ gitbook build
 echo_stamp "Installing additional ROS packages"
 apt-get install -y --no-install-recommends \
     ros-kinetic-dynamic-reconfigure \
-    ros-kinetic-tf2-web-republisher \
     ros-kinetic-compressed-image-transport \
     ros-kinetic-rosbridge-suite \
     ros-kinetic-rosserial \

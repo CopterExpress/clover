@@ -35,6 +35,7 @@
   <depend>opencv3</depend>
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
+  <depend>tf2_web_republisher</depend>
   <exec_depend>python-pymavlink</exec_depend>
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
