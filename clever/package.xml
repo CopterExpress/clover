@@ -30,11 +30,9 @@
   <depend>nodelet</depend>
   <depend>mavros</depend>
   <depend>mavros_extras</depend>
-  <depend>lxml</depend>
   <depend>cv_camera</depend>
   <depend>cv_bridge</depend>
   <depend>opencv3</depend>
-  <depend>mjpg-streamer</depend>
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
   <exec_depend>python-pymavlink</exec_depend>
