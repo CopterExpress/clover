@@ -155,8 +155,6 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
-&& catkin_make run_tests \
-&& catkin_test_results \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
@@ -180,8 +178,11 @@ apt-get install -y --no-install-recommends \
     ros-kinetic-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
-echo_stamp "Install GeographicLib datasets (needs for mavros)" \
+echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
+
+echo_stamp "Running tests"
+catkin_make run_tests && catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
