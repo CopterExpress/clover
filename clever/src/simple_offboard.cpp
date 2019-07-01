@@ -123,7 +123,7 @@ TwistStamped velocity;
 NavSatFix global_position;
 BatteryState battery;
 
-// Common subcriber callback template that stores message to the variable
+// Common subscriber callback template that stores message to the variable
 template<typename T, T& STORAGE>
 void handleMessage(const T& msg)
 {
