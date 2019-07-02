@@ -13,6 +13,7 @@
         <param name="length" value="0.33"/>
         <param name="length_override/3" value="0.1"/>
         <param name="estimate_poses" value="true"/>
+        <param name="send_tf" value="true"/>
     </node>
 
     <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true" required="true">

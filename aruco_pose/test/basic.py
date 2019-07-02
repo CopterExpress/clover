@@ -1,6 +1,8 @@
 import rospy
 import pytest
 
+import tf2_ros
+import tf2_geometry_msgs
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from sensor_msgs.msg import Image
 from aruco_pose.msg import MarkerArray
@@ -10,6 +12,12 @@ from visualization_msgs.msg import MarkerArray as VisMarkerArray
 @pytest.fixture
 def node():
     return rospy.init_node('aruco_pose_test', anonymous=True)
+
+@pytest.fixture
+def tf_buffer():
+    buf = tf2_ros.Buffer()
+    tf2_ros.TransformListener(buf)
+    return buf
 
 def approx(expected):
     return pytest.approx(expected, abs=1e-4) # compare floats more roughly
@@ -59,6 +67,16 @@ def test_markers(node):
     assert markers.markers[1].length == approx(0.33)
     assert markers.markers[2].id == 4
     assert markers.markers[2].length == approx(0.33)
+
+def test_markers_frames(node, tf_buffer):
+    marker_2 = tf_buffer.lookup_transform('main_camera_optical', 'aruco_2', rospy.Time(), rospy.Duration(5))
+    assert marker_2.transform.translation.x == approx(0.36706567854)
+    assert marker_2.transform.translation.y == approx(0.290484516644)
+    assert marker_2.transform.translation.z == approx(2.18787602301)
+    assert marker_2.transform.rotation.x == approx(0.993997406299)
+    assert marker_2.transform.rotation.y == approx(-0.00532003481626)
+    assert marker_2.transform.rotation.z == approx(-0.107390951553)
+    assert marker_2.transform.rotation.w == approx(0.0201999263402)
 
 def test_visualization(node):
     vis = rospy.wait_for_message('aruco_detect/visualization', VisMarkerArray, timeout=5)
