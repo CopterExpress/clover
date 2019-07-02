@@ -24,7 +24,7 @@ namespace compat
 void getBoardObjectAndImagePoints(const cv::Ptr<cv::aruco::Board> &board, cv::InputArrayOfArrays detectedCorners,
                                   cv::InputArray detectedIds, cv::OutputArray objPoints, cv::OutputArray imgPoints)
 {
-#if (CV_VERSION_MAJOR >= 3) && (CV_VERSION_MINOR >=3)
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 3)) || (CV_VERSION_MAJOR > 3)
 	cv::aruco::getBoardObjectAndImagePoints(board, detectedCorners, detectedIds, objPoints, imgPoints);
 #else
 	using std::vector;

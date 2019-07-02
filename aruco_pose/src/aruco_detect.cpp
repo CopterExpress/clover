@@ -96,7 +96,7 @@ public:
 
 		dictionary_ = cv::aruco::getPredefinedDictionary(static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(dictionary));
 		parameters_ = cv::aruco::DetectorParameters::create();
-#if (CV_VERSION_MAJOR >= 3) && (CV_VERSION_MINOR >= 3)
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 3)) || (CV_VERSION_MAJOR > 3)
 		parameters_->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
 #else
 		parameters_->doCornerRefinement = true;
