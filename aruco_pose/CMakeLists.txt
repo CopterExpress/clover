@@ -140,6 +140,7 @@ add_library(aruco_pose
   src/aruco_detect.cpp
   src/aruco_map.cpp
   src/draw.cpp
+  src/compat.cpp
 )
 
 add_dependencies(${PROJECT_NAME} aruco_pose_generate_messages_cpp)

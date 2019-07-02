@@ -46,6 +46,7 @@
 
 #include "draw.h"
 #include "utils.h"
+#include "compat.h"
 
 using std::vector;
 using cv::Mat;
@@ -161,7 +162,7 @@ public:
 		if (known_tilt_.empty()) {
 			// simple estimation
 			valid = cv::aruco::estimatePoseBoard(corners, ids, board_, camera_matrix_, dist_coeffs_,
-			                                     rvec, tvec, false);
+			                                     rvec, tvec);
 			if (!valid) goto publish_debug;
 
 			transform_.header.stamp = markers->header.stamp;
@@ -173,7 +174,7 @@ public:
 		} else {
 			Mat obj_points, img_points;
 			// estimation with "snapping"
-			cv::aruco::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
+			compat::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
 			if (obj_points.empty()) goto publish_debug;
 
 			double center_x = 0, center_y = 0, center_z = 0;
