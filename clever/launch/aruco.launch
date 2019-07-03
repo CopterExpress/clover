@@ -24,6 +24,8 @@
         <param name="known_tilt" value="map"/>
         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
         <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
+        <param name="markers/frame_id" value="aruco_map"/>
+        <param name="markers/child_frame_id_prefix" value="aruco_map_"/>
     </node>
 
     <!-- vpe publisher from aruco markers -->

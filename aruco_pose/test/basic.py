@@ -78,6 +78,25 @@ def test_markers_frames(node, tf_buffer):
     assert marker_2.transform.rotation.z == approx(-0.107390951553)
     assert marker_2.transform.rotation.w == approx(0.0201999263402)
 
+def test_map_markers_frames(node, tf_buffer):
+    stamp = rospy.get_rostime()
+    timeout = rospy.Duration(5)
+
+    marker_1 = tf_buffer.lookup_transform('aruco_map', 'aruco_map_1', stamp, timeout)
+    assert marker_1.transform.translation.x == approx(0)
+    assert marker_1.transform.translation.y == approx(0)
+    assert marker_1.transform.translation.z == approx(0)
+
+    marker_4 = tf_buffer.lookup_transform('aruco_map', 'aruco_map_4', stamp, timeout)
+    assert marker_4.transform.translation.x == approx(1)
+    assert marker_4.transform.translation.y == approx(1)
+    assert marker_4.transform.translation.z == approx(0)
+
+    marker_12 = tf_buffer.lookup_transform('aruco_map', 'aruco_map_12', stamp, timeout)
+    assert marker_12.transform.translation.x == approx(0.2)
+    assert marker_12.transform.translation.y == approx(0.5)
+    assert marker_12.transform.translation.z == approx(0)
+
 def test_visualization(node):
     vis = rospy.wait_for_message('aruco_detect/visualization', VisMarkerArray, timeout=5)
     assert len(vis.markers) == 9
