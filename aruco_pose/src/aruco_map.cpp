@@ -104,6 +104,8 @@ public:
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
+		nh_priv_.param<std::string>("markers/frame_id", markers_parent_frame_, transform_.child_frame_id);
+		nh_priv_.param<std::string>("markers/child_frame_id_prefix", markers_frame_, "");
 
 		// createStripLine();
 
