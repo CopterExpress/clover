@@ -24,5 +24,4 @@ catkin_make
 pip install --upgrade pytest
 cd /root/catkin_ws
 source devel/setup.bash
-catkin_make run_tests
-
+catkin_make run_tests && catkin_test_results
