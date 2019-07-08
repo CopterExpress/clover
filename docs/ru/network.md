@@ -7,28 +7,30 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
 При использовании [образа для RPi](microsd_images.md) по умолчанию Wi-Fi адаптер работает в [режиме точки доступа](wifi.md).
 
+<!-- markdownlint-disable MD029 -->
+
 ## Изменение пароля или SSID (имени сети)
 
 1. Отредактируйте файл `/etc/wpa_supplicant/wpa_supplicant.conf` (используя [SSH-соединение](ssh.md)):
 
-    ```bash
-    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-    ```
+  ```bash
+  sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+  ```
 
-    Измените значение параметра `ssid`, чтобы изменить название Wi-Fi сети, и параметра `psk`, чтобы изменить пароль. Например:
+  Измените значение параметра `ssid`, чтобы изменить название Wi-Fi сети, и параметра `psk`, чтобы изменить пароль. Например:
 
-    ```txt
-    network={
-        ssid="my-super-ssid"
-        psk="cleverwifi123"
-        mode=2
-        proto=RSN
-        key_mgmt=WPA-PSK
-        pairwise=CCMP
-        group=CCMP
-        auth_alg=OPEN
-    }
-    ```
+  ```txt
+  network={
+      ssid="my-super-ssid"
+      psk="cleverwifi123"
+      mode=2
+      proto=RSN
+      key_mgmt=WPA-PSK
+      pairwise=CCMP
+      group=CCMP
+      auth_alg=OPEN
+  }
+  ```
 
 2. Перезагрузите Raspberry Pi.
 
@@ -40,87 +42,89 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
 1. Выключите службу `dnsmasq`.
 
-    ```bash
-    sudo systemctl stop dnsmasq
-    sudo systemctl disable dnsmasq
-    ```
+  ```bash
+  sudo systemctl stop dnsmasq
+  sudo systemctl disable dnsmasq
+  ```
 
 2. Включите получение IP адреса на беспроводном интерфейсе DHCP клиентом. Для этого удалите из файла `/etc/dhcpcd.conf` строки:
 
-    ```conf
-    interface wlan0
-    static ip_address=192.168.11.1/24
-    ```
+  ```conf
+  interface wlan0
+  static ip_address=192.168.11.1/24
+  ```
 
 3. Настройте `wpa_supplicant` для подключения к существующей точке доступа. Для этого замените содержимое файла `/etc/wpa_supplicant/wpa_supplicant.conf` на:
 
-    ```
-    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
-    country=GB
+  ```
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  update_config=1
+  country=GB
 
-    network={
-        ssid="SSID"
-        psk="password"
-    }
-    ```
+  network={
+      ssid="SSID"
+      psk="password"
+  }
+  ```
 
-    где `SSID` – название сети, а `password` – пароль.
+  где `SSID` – название сети, а `password` – пароль.
 
 4. Перезапустите службу `dhcpcd`.
 
-    ```bash
-    sudo systemctl restart dhcpcd
-    ```
+  ```bash
+  sudo systemctl restart dhcpcd
+  ```
 
 ## Переключение адаптера в режим точки доступа
 
 1. Включите статический IP адрес на беспроводном интерфейсе. Для этого добавьте в файл `/etc/dhcpcd.conf` строки:
 
-    ```conf
-    interface wlan0
-    static ip_address=192.168.11.1/24
-    ```
+  ```conf
+  interface wlan0
+  static ip_address=192.168.11.1/24
+  ```
 
 2. Настроите `wpa_supplicant` на работу в режиме точки доступа. Для этого замените содержимое файла `/etc/wpa_supplicant/wpa_supplicant.conf` на:
 
-    ```
-    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
-    country=GB
+  ```
+  ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+  update_config=1
+  country=GB
 
-    network={
-        ssid="CLEVER-1234"
-        psk="cleverwifi"
-        mode=2
-        proto=RSN
-        key_mgmt=WPA-PSK
-        pairwise=CCMP
-        group=CCMP
-        auth_alg=OPEN
-    }
-    ```
+  network={
+      ssid="CLEVER-1234"
+      psk="cleverwifi"
+      mode=2
+      proto=RSN
+      key_mgmt=WPA-PSK
+      pairwise=CCMP
+      group=CCMP
+      auth_alg=OPEN
+  }
+  ```
 
-    где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
+  где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
 
 3. Перезагрузите `systemd`.
 
-    ```bash
-    sudo systemctl daemon-reload
-    ```
+  ```bash
+  sudo systemctl daemon-reload
+  ```
 
 4. Включите службу `dnsmasq`.
 
-    ```bash
-    sudo systemctl enable dnsmasq
-    sudo systemctl start dnsmasq
-    ```
+  ```bash
+  sudo systemctl enable dnsmasq
+  sudo systemctl start dnsmasq
+  ```
 
 5. Перезагрузите службу `dhcpcd`.
 
-    ```bash
-    sudo systemctl restart dhcpcd
-    ```
+  ```bash
+  sudo systemctl restart dhcpcd
+  ```
+
+<!-- markdownlint-enable MD029 -->
 
 ___
 
