@@ -5,4 +5,4 @@
 
 void _drawPlanarBoard(cv::aruco::Board *_board, cv::Size outSize, cv::OutputArray _img, int marginSize, int borderBits);
 void _drawAxis(cv::InputOutputArray image, cv::InputArray cameraMatrix, cv::InputArray distCoeffs,
-              cv::InputArray rvec, cv::InputArray tvec, float length);
+               cv::InputArray rvec, cv::InputArray tvec, float length); // editorconfig-checker-disable-line

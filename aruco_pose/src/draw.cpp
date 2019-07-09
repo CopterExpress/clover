@@ -105,70 +105,65 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 
 /* Draw a (potentially partially visible) line. */
 static void linePartial(InputOutputArray image, Point3f p1, Point3f p2, const Scalar& color,
-        int thickness = 1, int lineType = LINE_8, int shift = 0)
+                        int thickness = 1, int lineType = LINE_8, int shift = 0)
 {
-    // If both points are behind the screen, don't draw anything
-    if (p1.z <= 0 && p2.z <= 0)
-    {
-        return;
-    }
-    Point2f p1p{p1.x, p1.y};
-    Point2f p2p{p2.x, p2.y};
-    // If points are on the different sides of the plane, compute intersection point
-    if (p1.z * p2.z < 0)
-    {
-        // Compute intersection point with the screen
-        // We denote alpha as such:
-        // xi = (1 - alpha) * x1 + alpha * x2
-        // yi = (1 - alpha) * y1 + alpha * y2
-        // zi = (1 - alpha) * z1 + alpha * z2 = 0
-        // Thus, alpha can be expressed as
-        // alpha = z1 / (z1 - z2)
-        float alpha = p1.z / (p1.z - p2.z);
-        Point2f pi{(1 - alpha) * p1.x + alpha * p2.x, (1 - alpha) * p1.y + alpha * p2.y};
-        // Now, if z1 is negative, we draw the line from (xi, yi) to (x2, y2), else we draw from (x1, y1) to (xi, yi)
-        if (p1.z < 0)
-        {
-            p1p = pi;
-        }
-        else
-        {
-            p2p = pi;
-        }
-    }
-    line(image, p1p, p2p, color, thickness, lineType, shift);
+	// If both points are behind the screen, don't draw anything
+	if (p1.z <= 0 && p2.z <= 0) {
+		return;
+	}
+	Point2f p1p{p1.x, p1.y};
+	Point2f p2p{p2.x, p2.y};
+	// If points are on the different sides of the plane, compute intersection point
+	if (p1.z * p2.z < 0) {
+		// Compute intersection point with the screen
+		// We denote alpha as such:
+		// xi = (1 - alpha) * x1 + alpha * x2
+		// yi = (1 - alpha) * y1 + alpha * y2
+		// zi = (1 - alpha) * z1 + alpha * z2 = 0
+		// Thus, alpha can be expressed as
+		// alpha = z1 / (z1 - z2)
+		float alpha = p1.z / (p1.z - p2.z);
+		Point2f pi{(1 - alpha) * p1.x + alpha * p2.x, (1 - alpha) * p1.y + alpha * p2.y};
+		// Now, if z1 is negative, we draw the line from (xi, yi) to (x2, y2), else we draw from (x1, y1) to (xi, yi)
+		if (p1.z < 0) {
+			p1p = pi;
+		} else {
+			p2p = pi;
+		}
+	}
+	line(image, p1p, p2p, color, thickness, lineType, shift);
 }
 
 void _drawAxis(InputOutputArray _image, InputArray _cameraMatrix, InputArray _distCoeffs,
               InputArray _rvec, InputArray _tvec, float length) {
 
-    CV_Assert(_image.getMat().total() != 0 &&
-              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3));
-    CV_Assert(length > 0);
+	CV_Assert(_image.getMat().total() != 0 &&
+			  (_image.getMat().channels() == 1 || _image.getMat().channels() == 3));
+	CV_Assert(length > 0);
 
-    // project axis points
-    std::vector< Point3f > axisPoints;
-    axisPoints.push_back(Point3f(0, 0, 0));
-    axisPoints.push_back(Point3f(length, 0, 0));
-    axisPoints.push_back(Point3f(0, length, 0));
-    axisPoints.push_back(Point3f(0, 0, length));
-    std::vector< Point3f > imagePointsZ;
-    _projectPoints(axisPoints, _rvec, _tvec, _cameraMatrix, _distCoeffs, imagePointsZ);
+	// project axis points
+	std::vector<Point3f> axisPoints;
+	axisPoints.push_back(Point3f(0, 0, 0));
+	axisPoints.push_back(Point3f(length, 0, 0));
+	axisPoints.push_back(Point3f(0, length, 0));
+	axisPoints.push_back(Point3f(0, 0, length));
+	std::vector<Point3f> imagePointsZ;
+	_projectPoints(axisPoints, _rvec, _tvec, _cameraMatrix, _distCoeffs, imagePointsZ);
 
-    // draw axis lines
-    linePartial(_image, imagePointsZ[0], imagePointsZ[1], Scalar(0, 0, 255), 3);
-    linePartial(_image, imagePointsZ[0], imagePointsZ[2], Scalar(0, 255, 0), 3);
-    linePartial(_image, imagePointsZ[0], imagePointsZ[3], Scalar(255, 0, 0), 3);
+	// draw axis lines
+	linePartial(_image, imagePointsZ[0], imagePointsZ[1], Scalar(0, 0, 255), 3);
+	linePartial(_image, imagePointsZ[0], imagePointsZ[2], Scalar(0, 255, 0), 3);
+	linePartial(_image, imagePointsZ[0], imagePointsZ[3], Scalar(255, 0, 0), 3);
 }
 
 static CvMat _cvMat(const cv::Mat& m)
 {
-    CvMat self;
-    CV_DbgAssert(m.dims <= 2);
-    self = cvMat(m.rows, m.dims == 1 ? 1 : m.cols, m.type(), m.data);
-    self.step = (int)m.step[0];
-    self.type = (self.type & ~cv::Mat::CONTINUOUS_FLAG) | (m.flags & cv::Mat::CONTINUOUS_FLAG);
-    return self;
+	CvMat self;
+	CV_DbgAssert(m.dims <= 2);
+	self = cvMat(m.rows, m.dims == 1 ? 1 : m.cols, m.type(), m.data);
+	self.step = (int)m.step[0];
+	self.type = (self.type & ~cv::Mat::CONTINUOUS_FLAG) | (m.flags & cv::Mat::CONTINUOUS_FLAG);
+	return self;
 }
 
 static void _projectPoints( InputArray _opoints,
@@ -180,47 +175,47 @@ static void _projectPoints( InputArray _opoints,
                         OutputArray _jacobian,
                         double aspectRatio )
 {
-    Mat opoints = _opoints.getMat();
-    int npoints = opoints.checkVector(3), depth = opoints.depth();
-    CV_Assert(npoints >= 0 && (depth == CV_32F || depth == CV_64F));
+	Mat opoints = _opoints.getMat();
+	int npoints = opoints.checkVector(3), depth = opoints.depth();
+	CV_Assert(npoints >= 0 && (depth == CV_32F || depth == CV_64F));
 
-    CvMat dpdrot, dpdt, dpdf, dpdc, dpddist;
-    CvMat *pdpdrot=0, *pdpdt=0, *pdpdf=0, *pdpdc=0, *pdpddist=0;
+	CvMat dpdrot, dpdt, dpdf, dpdc, dpddist;
+	CvMat *pdpdrot = 0, *pdpdt = 0, *pdpdf = 0, *pdpdc = 0, *pdpddist = 0;
 
-    CV_Assert( _ipoints.needed() );
+	CV_Assert(_ipoints.needed());
 
-    _ipoints.create(npoints, 1, CV_MAKETYPE(depth, 3), -1, true);
-    Mat imagePoints = _ipoints.getMat();
-    CvMat c_imagePoints = _cvMat(imagePoints);
-    CvMat c_objectPoints = _cvMat(opoints);
-    Mat cameraMatrix = _cameraMatrix.getMat();
+	_ipoints.create(npoints, 1, CV_MAKETYPE(depth, 3), -1, true);
+	Mat imagePoints = _ipoints.getMat();
+	CvMat c_imagePoints = _cvMat(imagePoints);
+	CvMat c_objectPoints = _cvMat(opoints);
+	Mat cameraMatrix = _cameraMatrix.getMat();
 
-    Mat rvec = _rvec.getMat(), tvec = _tvec.getMat();
-    CvMat c_cameraMatrix = _cvMat(cameraMatrix);
-    CvMat c_rvec = _cvMat(rvec), c_tvec = _cvMat(tvec);
+	Mat rvec = _rvec.getMat(), tvec = _tvec.getMat();
+	CvMat c_cameraMatrix = _cvMat(cameraMatrix);
+	CvMat c_rvec = _cvMat(rvec), c_tvec = _cvMat(tvec);
 
-    double dc0buf[5]={0};
-    Mat dc0(5,1,CV_64F,dc0buf);
-    Mat distCoeffs = _distCoeffs.getMat();
-    if( distCoeffs.empty() )
-        distCoeffs = dc0;
-    CvMat c_distCoeffs = _cvMat(distCoeffs);
-    int ndistCoeffs = distCoeffs.rows + distCoeffs.cols - 1;
+	double dc0buf[5] = {0};
+	Mat dc0(5, 1, CV_64F, dc0buf);
+	Mat distCoeffs = _distCoeffs.getMat();
+	if (distCoeffs.empty())
+		distCoeffs = dc0;
+	CvMat c_distCoeffs = _cvMat(distCoeffs);
+	int ndistCoeffs = distCoeffs.rows + distCoeffs.cols - 1;
 
-    Mat jacobian;
-    if( _jacobian.needed() )
-    {
-        _jacobian.create(npoints*2, 3+3+2+2+ndistCoeffs, CV_64F);
-        jacobian = _jacobian.getMat();
-        pdpdrot = &(dpdrot = _cvMat(jacobian.colRange(0, 3)));
-        pdpdt = &(dpdt = _cvMat(jacobian.colRange(3, 6)));
-        pdpdf = &(dpdf = _cvMat(jacobian.colRange(6, 8)));
-        pdpdc = &(dpdc = _cvMat(jacobian.colRange(8, 10)));
-        pdpddist = &(dpddist = _cvMat(jacobian.colRange(10, 10+ndistCoeffs)));
-    }
+	Mat jacobian;
+	if (_jacobian.needed())
+	{
+		_jacobian.create(npoints * 2, 3 + 3 + 2 + 2 + ndistCoeffs, CV_64F);
+		jacobian = _jacobian.getMat();
+		pdpdrot = &(dpdrot = _cvMat(jacobian.colRange(0, 3)));
+		pdpdt = &(dpdt = _cvMat(jacobian.colRange(3, 6)));
+		pdpdf = &(dpdf = _cvMat(jacobian.colRange(6, 8)));
+		pdpdc = &(dpdc = _cvMat(jacobian.colRange(8, 10)));
+		pdpddist = &(dpddist = _cvMat(jacobian.colRange(10, 10 + ndistCoeffs)));
+	}
 
-    _cvProjectPoints2( &c_objectPoints, &c_rvec, &c_tvec, &c_cameraMatrix, &c_distCoeffs,
-                      &c_imagePoints, pdpdrot, pdpdt, pdpdf, pdpdc, pdpddist, aspectRatio );
+	_cvProjectPoints2(&c_objectPoints, &c_rvec, &c_tvec, &c_cameraMatrix, &c_distCoeffs,
+					  &c_imagePoints, pdpdrot, pdpdt, pdpdf, pdpdc, pdpddist, aspectRatio);
 }
 
 namespace _detail
