@@ -40,7 +40,7 @@
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui.hpp>
-#include <opencv2/aruco.hpp>
+#include <aruco.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 
@@ -58,8 +58,8 @@ private:
 	tf2_ros::TransformBroadcaster br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
-	cv::Ptr<cv::aruco::Dictionary> dictionary_;
-	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
+	cv::Ptr<aruco_lib::Dictionary> dictionary_;
+	cv::Ptr<aruco_lib::DetectorParameters> parameters_;
 	image_transport::Publisher debug_pub_;
 	image_transport::CameraSubscriber img_sub_;
 	ros::Publisher markers_pub_, vis_markers_pub_;
@@ -97,9 +97,9 @@ public:
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
 		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
-		dictionary_ = cv::aruco::getPredefinedDictionary(static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(dictionary));
-		parameters_ = cv::aruco::DetectorParameters::create();
-		parameters_->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
+		dictionary_ = aruco_lib::getPredefinedDictionary(static_cast<aruco_lib::PREDEFINED_DICTIONARY_NAME>(dictionary));
+		parameters_ = aruco_lib::DetectorParameters::create();
+		parameters_->cornerRefinementMethod = aruco_lib::CORNER_REFINE_SUBPIX;
 
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
@@ -125,7 +125,7 @@ private:
 		geometry_msgs::TransformStamped snap_to;
 
 		// Detect markers
-		cv::aruco::detectMarkers(image, dictionary_, corners, ids, parameters_, rejected);
+		aruco_lib::detectMarkers(image, dictionary_, corners, ids, parameters_, rejected);
 
 		array_.header.stamp = msg->header.stamp;
 		array_.header.frame_id = msg->header.frame_id;
@@ -136,7 +136,7 @@ private:
 
 			// Estimate individual markers' poses
 			if (estimate_poses_) {
-				cv::aruco::estimatePoseSingleMarkers(corners, length_, camera_matrix_, dist_coeffs_,
+				aruco_lib::estimatePoseSingleMarkers(corners, length_, camera_matrix_, dist_coeffs_,
 				                                     rvecs, tvecs);
 
 				// process length override, TODO: efficiency
@@ -148,7 +148,7 @@ private:
 							vector<cv::Vec3d> rvecs_current, tvecs_current;
 							vector<vector<cv::Point2f>> corners_current;
 							corners_current.push_back(corners[i]);
-							cv::aruco::estimatePoseSingleMarkers(corners_current, item->second,
+							aruco_lib::estimatePoseSingleMarkers(corners_current, item->second,
 							                                     camera_matrix_, dist_coeffs_,
 										                         rvecs_current, tvecs_current);
 							rvecs[i] = rvecs_current[0];
@@ -223,10 +223,10 @@ private:
 		// Publish debug image
 		if (debug_pub_.getNumSubscribers() != 0) {
 			Mat debug = image.clone();
-			cv::aruco::drawDetectedMarkers(debug, corners, ids); // draw markers
+			aruco_lib::drawDetectedMarkers(debug, corners, ids); // draw markers
 			if (estimate_poses_)
 				for (unsigned int i = 0; i < ids.size(); i++)
-					cv::aruco::drawAxis(debug, camera_matrix_, dist_coeffs_,
+					aruco_lib::drawAxis(debug, camera_matrix_, dist_coeffs_,
 					                    rvecs[i], tvecs[i], getMarkerLength(ids[i]));
 
 			cv_bridge::CvImage out_msg;

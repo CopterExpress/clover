@@ -29,7 +29,8 @@ pigpiod -v
 i2cdetect -V
 butterfly -h
 espeak --version
-mjpg_streamer --version
+# FIXME: no mjpg_streamer for buster yet
+# mjpg_streamer --version
 
 # ros stuff
 

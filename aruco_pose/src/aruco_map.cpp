@@ -43,7 +43,7 @@
 #include <aruco_pose/Marker.h>
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/aruco.hpp>
+#include <aruco.hpp>
 
 #include "draw.h"
 #include "utils.h"
@@ -65,7 +65,7 @@ private:
 	message_filters::Subscriber<CameraInfo> info_sub_;
 	message_filters::Subscriber<MarkerArray> markers_sub_;
 	boost::shared_ptr<message_filters::Synchronizer<SyncPolicy> > sync_;
-	cv::Ptr<cv::aruco::Board> board_;
+	cv::Ptr<aruco_lib::Board> board_;
 	Mat camera_matrix_, dist_coeffs_;
 	geometry_msgs::TransformStamped transform_;
 	geometry_msgs::PoseWithCovarianceStamped pose_;
@@ -92,9 +92,9 @@ public:
 		img_pub_ = nh_priv_.advertise<sensor_msgs::Image>("image", 1, true);
 		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1, true);
 
-		board_ = cv::makePtr<cv::aruco::Board>();
-		board_->dictionary = cv::aruco::getPredefinedDictionary(
-			                 static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(nh_priv_.param("dictionary", 2)));
+		board_ = cv::makePtr<aruco_lib::Board>();
+		board_->dictionary = aruco_lib::getPredefinedDictionary(
+			                 static_cast<aruco_lib::PREDEFINED_DICTIONARY_NAME>(nh_priv_.param("dictionary", 2)));
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
 		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
@@ -170,7 +170,7 @@ public:
 
 		if (known_tilt_.empty()) {
 			// simple estimation
-			valid = cv::aruco::estimatePoseBoard(corners, ids, board_, camera_matrix_, dist_coeffs_,
+			valid = aruco_lib::estimatePoseBoard(corners, ids, board_, camera_matrix_, dist_coeffs_,
 			                                     rvec, tvec, false);
 			if (!valid) goto publish_debug;
 
@@ -183,7 +183,7 @@ public:
 		} else {
 			Mat obj_points, img_points;
 			// estimation with "snapping"
-			cv::aruco::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
+			aruco_lib::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
 			if (obj_points.empty()) goto publish_debug;
 
 			double center_x = 0, center_y = 0, center_z = 0;
@@ -228,7 +228,7 @@ publish_debug:
 		// publish debug image (even if no map detected)
 		if (debug_pub_.getNumSubscribers() > 0) {
 			Mat mat = cv_bridge::toCvCopy(image, "bgr8")->image; // copy image as we're planning to modify it
-			cv::aruco::drawDetectedMarkers(mat, corners, ids); // draw detected markers
+			aruco_lib::drawDetectedMarkers(mat, corners, ids); // draw detected markers
 			if (valid) {
 				_drawAxis(mat, camera_matrix_, dist_coeffs_, rvec, tvec, 1.0); // draw board axis
 			}
