@@ -129,17 +129,17 @@ When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [a
     EOF
     ```
 
-3. Restart the `dhcpcd` service.
-
-    ```bash
-    sudo systemctl restart dhcpcd
-    ```
-
-4. Enable the `dnsmasq` service.
+3. Enable the `dnsmasq` service.
 
     ```bash
     sudo systemctl enable dnsmasq
     sudo systemctl start dnsmasq
+    ```
+
+4. Restart the `dhcpcd` service.
+
+    ```bash
+    sudo systemctl restart dhcpcd
     ```
 
 ___
