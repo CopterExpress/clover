@@ -4,15 +4,6 @@ Code examples
 Python
 ---
 
-<!-- markdownlint-disable MD031 -->
-
-> **Note** When using cyrillic simbols with UTF-8 encoding, specify the encoding in the beginning of the program:
-> ```python
-> # -*- coding: utf-8 -*-
-> ```
-
-<!-- markdownlint-enable MD031 -->
-
 ### # {#distance}
 
 Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
