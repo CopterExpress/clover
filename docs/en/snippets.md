@@ -66,6 +66,25 @@ while True:
     rospy.sleep(0.2)
 ```
 
+### # {#block-land}
+
+Landing and waiting until the copter lands:
+
+```python
+land()
+while get_telemetry().armed:
+    rospy.sleep(0.2)
+```
+
+This code can be wrapped in a function:
+
+```python
+def land_wait():
+    land()
+    while get_telemetry().armed:
+        rospy.sleep(0.2)
+```
+
 ### # {#disarm}
 
 Quadcopter disarm (disabling propellers **the copter will fall down**):

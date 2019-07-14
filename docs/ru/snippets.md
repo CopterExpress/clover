@@ -110,6 +110,25 @@ def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
 
 Такой код может быть использован для полета в том числе с использованием фрейма `body`.
 
+### # {#block-land}
+
+Посадка и ожидание окончания посадки:
+
+```python
+land()
+while get_telemetry().armed:
+    rospy.sleep(0.2)
+```
+
+Вышеприведенный код может быть обернут в функцию:
+
+```python
+def land_wait():
+    land()
+    while get_telemetry().armed:
+        rospy.sleep(0.2)
+```
+
 ### # {#disarm}
 
 Дизарм коптера (выключение винтов, **коптер упадет**):
