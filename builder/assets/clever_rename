@@ -11,8 +11,11 @@ if [[ -z ${NEW_NAME_OPT} ]]; then
   exit 1
 fi
 
+# Get old hostname from /etc/hostname - we might have a different hostname for this session
+OLD_NAME=$(cat /etc/hostname | tr -d '[:space:]')
 NEW_NAME=$(echo ${NEW_NAME_OPT} | tr '[:upper:]' '[:lower:]')
 
+echo "Old name is ${OLD_NAME}"
 echo "Setting name to ${NEW_NAME}"
 
 echo "Backing up /etc/hostname"
@@ -23,7 +26,7 @@ echo ${NEW_NAME} > /etc/hostname
 echo "Backing up /etc/hosts"
 cp /etc/hosts /etc/hosts.bak
 echo "Rewriting /etc/hosts with new values"
-sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_NAME}'/g' /etc/hosts
+sed -i 's/127\.0\.1\.1.+'${OLD_NAME}'/127.0.1.1\t'${NEW_NAME}'/g' /etc/hosts
 
 echo "Changing hostname in /lib/systemd/system/roscore.env"
 sed -i 's/ROS_HOSTNAME=.*/ROS_HOSTNAME='${NEW_NAME}'.local/g' /lib/systemd/system/roscore.env

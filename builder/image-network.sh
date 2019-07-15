@@ -74,4 +74,7 @@ EOF
 #RENAME_SSID="sudo sed -i.OLD \"s/CLEVER/CLEVER-\$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)/g\" /etc/wpa_supplicant/wpa_supplicant.conf && sudo sed -i '/sudo sed/d' /etc/rc.local && sudo reboot"
 #sed -i "19a$RENAME_SSID" /etc/rc.local
 
+echo_stamp "Add raspberrypi.local to /etc/hosts"
+printf '127.0.1.1\traspberrypi.local\n' >> /etc/hosts
+
 echo_stamp "#5 End of network installation"
