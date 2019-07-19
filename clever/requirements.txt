@@ -1,4 +1,4 @@
-flask==0.12.3
+flask==1.1.1
 docopt==0.6.2
 geopy==1.11.0
 smbus2==0.2.1
