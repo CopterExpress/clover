@@ -650,7 +650,7 @@ def check_preflight_status():
     mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
     if cmdr_output == '':
-        failure('No data from FCU')
+        failure('no data from FCU')
         return
     cmdr_lines = cmdr_output.split('\n')
     r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
