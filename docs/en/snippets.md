@@ -45,6 +45,20 @@ while True:
     rospy.sleep(0.2)
 ```
 
+This code can be wrapped in a function:
+
+```python
+def takeoff_wait(alt, speed=0.5, tolerance=0.2):
+    start = get_telemetry()
+    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
+
+    while True:
+        if get_telemetry().z - start.z + z < tolerance:
+            break
+
+        rospy.sleep(0.2)
+```
+
 ### # {#block-nav}
 
 Flying towards a point and waiting for copter's arrival:
