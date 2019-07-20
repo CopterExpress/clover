@@ -3,7 +3,7 @@ var titleEl = document.querySelector('title');
 var modeEl = document.querySelector('.mode');
 var batteryEl = document.querySelector('.battery');
 
-var url = 'ws://' + location.host + ':9090';
+var url = 'ws://' + location.hostname + ':9090';
 var ros = new ROSLIB.Ros({ url: url });
 
 function speak(txt) {
