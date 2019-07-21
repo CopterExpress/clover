@@ -157,7 +157,7 @@ void handleLocalPosition(const PoseStamped& pose)
 inline bool waitTransform(const string& target, const string& source,
                           const ros::Time& stamp, const ros::Duration& timeout)
 {
-	ros::Rate r(10);
+	ros::Rate r(100);
 	auto start = ros::Time::now();
 	while (ros::ok()) {
 		if (ros::Time::now() - start > timeout) return false;
