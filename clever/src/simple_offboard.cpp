@@ -351,7 +351,7 @@ PoseStamped globalToLocal(double lat, double lon)
 	x_offset = distance * sin(azimuth_radians);
 	y_offset = distance * cos(azimuth_radians);
 
-	if (!waitTransform(local_frame, fcu_frame, global_position.header.stamp, ros::Duration(1))) {
+	if (!waitTransform(local_frame, fcu_frame, global_position.header.stamp, ros::Duration(0.2))) {
 		throw std::runtime_error("No local position");
 	}
 
