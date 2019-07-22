@@ -543,7 +543,9 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type == NAVIGATE_GLOBAL) {
 			// Calculate x and from lat and lot in request's frame
-			auto xy_in_req_frame = tf_buffer.transform(globalToLocal(lat, lon), frame_id);
+			auto pose_local = globalToLocal(lat, lon);
+			pose_local.header.stamp = stamp; // TODO: fix
+			auto xy_in_req_frame = tf_buffer.transform(pose_local, frame_id);
 			x = xy_in_req_frame.pose.position.x;
 			y = xy_in_req_frame.pose.position.y;
 		}
