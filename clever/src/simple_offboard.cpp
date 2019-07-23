@@ -483,6 +483,8 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
 }
 
+#define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
+
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
            float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
            float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
@@ -493,6 +495,20 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 	try {
 		if (busy)
 			throw std::runtime_error("Busy");
+
+		ENSURE_FINITE(x);
+		ENSURE_FINITE(y);
+		ENSURE_FINITE(z);
+		ENSURE_FINITE(vx);
+		ENSURE_FINITE(vy);
+		ENSURE_FINITE(vz);
+		ENSURE_FINITE(pitch);
+		ENSURE_FINITE(roll);
+		ENSURE_FINITE(pitch_rate);
+		ENSURE_FINITE(roll_rate);
+		ENSURE_FINITE(lat);
+		ENSURE_FINITE(lon);
+		ENSURE_FINITE(thrust);
 
 		busy = true;
 
