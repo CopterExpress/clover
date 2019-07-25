@@ -64,6 +64,7 @@
   * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
+  * [Дрон для 3D-сканирования человека](3dscan.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Дополнительные материалы

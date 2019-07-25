@@ -55,6 +55,7 @@
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)
+  * [3D-scanning drone](3dscan.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
 * Supplementary materials
