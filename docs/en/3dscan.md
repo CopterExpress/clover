@@ -17,6 +17,7 @@ To make it all work we conducted many tests, made changes in the drone's design 
 ## Team
 
 The project was made by:
+
 * Timofei Kondratiev [Copter Express] - drone assembly, writing and debugging the program, conducting tests;
 * Anton Maltsev [Copter Express] - modeling of the protection of the propellers;
 * Andrei Poskonin [Texel] - modifying the Texel's software to work on Raspberry Pi.
