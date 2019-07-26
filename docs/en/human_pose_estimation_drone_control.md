@@ -49,9 +49,9 @@ git clone https://github.com/hany606/tfjs-posenet.git
 
 - Do the steps of running and setup as it is described in the README [here](https://github.com/hany606/tfjs-posenet/tree/master/posenet)
 
-### In the raspberry pi of the drone (Main controller)
+### In the Raspberry Pi of the drone (Main controller)
 
-- Access the raspberry pi
+- Access the Raspberry Pi
 - [Switch to Client mode](https://clever.copterexpress.com/en/network.html) and ensure that the network has internet connection.
 
 Notice: I have already made a bash script based on that tutorial, it is in COEX-Internship19/helpers/ called .to_client.bash
@@ -68,7 +68,7 @@ chmod +x .to_client.bash
 sudo pip install tornado
 ```
 
-- Clone the main repo on the raspberry pi of the drone
+- Clone the main repo on the Raspberry Pi of the drone
 
 ```sh
 git clone https://github.com/hany606/COEX-Internship19.git
@@ -80,13 +80,13 @@ git clone https://github.com/hany606/COEX-Internship19.git
 cd COEX-Internship19/projects/Human_pose_estimation_drone_control/
 ```
 
-- Run the server to test that everything is correct and run the posenet, you should see a lot of data is printed in the terminal (if you are running the human pose estimation code on your main computer, just refresh the page in the browser after running the below command in Raspberry pi)
+- Run the server to test that everything is correct and run the posenet, you should see a lot of data is printed in the terminal (if you are running the human pose estimation code on your main computer, just refresh the page in the browser after running the below command in Raspberry Pi)
 
 ```sh
 python websocket_server_test.py
 ```
 
-- Close the server using Ctrl+C 
+- Close the server using Ctrl+C
 - To run the main file
 
 ```sh
@@ -95,7 +95,7 @@ python main_drone.py
 
 ## How to use it
 
-- Run the server first from the raspberry pi from the correct directory
+- Run the server first from the Raspberry Pi from the correct directory
 
 ```sh
 python main_drone.py
@@ -109,7 +109,7 @@ yarn websocket
 
 Or refresh the page if you already run it.
 
-- You should see the instructions on the screen of the terminal of the raspberry pi right now.
+- You should see the instructions on the screen of the terminal of the Raspberry Pi right now.
 - Firstly, you should be visible for the camera and it is better to have a clear background without many details.
 - Secondly, you should do initial pose as it is described in the images below.
 - You can perform any pose and try to keep it until your drone finish doing this move that is corresponding to the pose.
@@ -139,15 +139,14 @@ Animation is created by [this](https://justsketchme.web.app/)
 
 ## Acknowledgments
 
-- This project was part of an internship in COEX in July 2019. if you found any bugs or problems, you can contact me through telegram: @hany606 or email: h.hamed.elanwar@gmail.com .
-- The above applications were thoughted by me and my internship supervisor Timofey.
+- This project was part of an internship in COEX in July 2019. if you found any bugs or problems, you can contact me through telegram: @hany606 or email: h.hamed.elanwar@gmail.com.
+- The above applications were thought by me and my internship supervisor Timofey.
 
-
-## References:
+## References
 
 - [Human pose estimation guide](https://blog.nanonets.com/human-pose-estimation-2d-guide/)
 - [Clever drones tutorials](https://clever.copterexpress.com/en/)
-- [Posenet Github repo](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
+- [Posenet GitHub repo](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
 - [Posenet meduim article](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5)
 - [Tensorflow.js demos](https://www.tensorflow.org/js/demos)
 - [Posenet overview](https://www.tensorflow.org/lite/models/pose_estimation/overview)
