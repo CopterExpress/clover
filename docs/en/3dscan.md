@@ -1,6 +1,6 @@
 # 3D-scanning drone
 
-<img src="../assets/3d_drone_1.jpg" title="3D-scanning drone" height=500px>
+<img src="../assets/3d_drone_1.jpg" title="3D-scanning drone">
 
 The project was created in collaboration with Texel inc. that develops 3D-scanners for scanning people.
 
@@ -12,7 +12,7 @@ To make it all work we conducted many tests, made changes in the drone's design 
 
 ## Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=aqBION3TVhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="966" height="543" src="https://www.youtube.com/embed/aqBION3TVhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Team
 
