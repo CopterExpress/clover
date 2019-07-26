@@ -1,6 +1,6 @@
 # Дрон для 3D-сканирования человека
 
-<img src="../assets/3d_drone_1.jpg" title="Сканирующий дрон" height=500px>
+<img src="../assets/3d_drone_1.jpg" title="Сканирующий дрон">
 
 Проект был создан совместно с компанией Texel, которая разрабатывает стационарные 3D-сканеры для создания модели человека.
 
@@ -12,7 +12,7 @@
 
 ## Видео
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=aqBION3TVhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="966" height="543" src="https://www.youtube.com/embed/aqBION3TVhg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Команда
 
