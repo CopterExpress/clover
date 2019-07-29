@@ -37,7 +37,7 @@ start = get_telemetry()
 print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 
 # Waiting for takeoff
-while True:
+while not rospy.is_shutdown():
     # Checking current altitude
     if get_telemetry().z - start.z + z < tolerance:
         # Takeoff complete
@@ -52,7 +52,7 @@ def takeoff_wait(alt, speed=0.5, tolerance=0.2):
     start = get_telemetry()
     print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
 
-    while True:
+    while not rospy.is_shutdown():
         if get_telemetry().z - start.z + z < tolerance:
             break
 
@@ -71,7 +71,7 @@ frame_id='aruco_map'
 print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
 
 # Wait for the copter to arrive at the requested point
-while True:
+while not rospy.is_shutdown():
     telem = get_telemetry(frame_id=frame_id)
     # Calculating the distance to the requested point
     if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
