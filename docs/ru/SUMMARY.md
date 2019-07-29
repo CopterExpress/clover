@@ -20,7 +20,7 @@
   * [Настройка режима тренера](trainer_mode.md)
   * [Прошивка полетного контролера](firmware.md)
   * [Параметры PX4](px4_parameters.md)
-  * [Настройка PID](calibratePID.md)
+  * [Настройка PID](pid_tuning.md)
 * Работа с Raspberry Pi
   * [Raspberry Pi](raspberry.md)
   * [Образ для RPi](microsd_images.md)
