@@ -201,24 +201,20 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.mode = state.mode;
 	}
 
-	waitTransform(local_frame, req.frame_id, stamp, telemetry_transform_timeout);
+	try {
+		waitTransform(req.frame_id, fcu_frame, stamp, telemetry_transform_timeout);
+		auto transform = tf_buffer.lookupTransform(req.frame_id, fcu_frame, stamp);
+		res.x = transform.transform.translation.x;
+		res.y = transform.transform.translation.y;
+		res.z = transform.transform.translation.z;
 
-	if (!TIMEOUT(local_position, local_position_timeout)) {
-		try {
-			// transform pose
-			PoseStamped pose;
-			tf_buffer.transform(local_position, pose, req.frame_id);
-			res.x = pose.pose.position.x;
-			res.y = pose.pose.position.y;
-			res.z = pose.pose.position.z;
-
-			// Tait-Bryan angles, order z-y-x
-			double yaw, pitch, roll;
-			tf2::getEulerYPR(pose.pose.orientation, yaw, pitch, roll);
-			res.yaw = yaw;
-			res.pitch = pitch;
-			res.roll = roll;
-		} catch (const tf2::TransformException& e) {}
+		double yaw, pitch, roll;
+		tf2::getEulerYPR(transform.transform.rotation, yaw, pitch, roll);
+		res.yaw = yaw;
+		res.pitch = pitch;
+		res.roll = roll;
+	} catch (const tf2::TransformException& e) {
+		ROS_DEBUG(e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
