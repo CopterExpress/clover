@@ -360,7 +360,7 @@ def flip():
     while True:
         telem = get_telemetry()
 
-        if -math.pi + 0.1 < telem.roll < -0.2:
+        if abs(telem.roll) > math.pi/2:
             break
 
     rospy.loginfo('finish flip')
