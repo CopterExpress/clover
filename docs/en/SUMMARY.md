@@ -45,6 +45,7 @@
   * [Computer vision basics](camera.md)
   * [LED strip](leds.md)
   * [Using rviz and rqt](rviz.md)
+  * [Working with GPIO](gpio.md)
   * [Interfacing with a sonar](sonar.md)
   * [Interfacing with a laser rangefinder](laser.md)
   * [PX4 Simulation](sitl.md)
