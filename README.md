@@ -59,6 +59,15 @@ To complete `mavros` install you'll need to install `geographiclib` datasets:
 curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sudo bash
 ```
 
+You may optionally install udev rules to provide `/dev/px4fmu` symlink to your PX4-based flight controller connected over USB. Copy `99-px4fmu.rules` to your `/lib/udev/rules.d` folder:
+
+```bash
+cd ~/catkin_ws/src/clever/clever/config
+sudo cp 99-px4fmu.rules /lib/udev/rules.d
+```
+
+Alternatively you may change the `fcu_url` property in `mavros.launch` file to point to your flight controller device.
+
 ## Running
 
 Enable systemd service `roscore` (if not running):
@@ -79,6 +88,8 @@ To start connection to the flight controller, use:
 ```bash
 roslaunch clever clever.launch
 ```
+
+> Note that the package is configured to connect to `/dev/px4fmu` by default (see [previous section](#manual-installation)). Install udev rules or specify path to your FCU device in `mavros.launch`.
 
 Also, you can enable and start the systemd service:
 
