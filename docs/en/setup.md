@@ -180,7 +180,7 @@ To unlock the copter, disable the safety button
 
 1. Go to the Power menu.
 2. Set the Number of cells — 4S.
-3. Set parameter Full Voltage (per cell) - 4.20 V.
+3. Set parameter Full Voltage (per cell) - 4.20 V; Empty Voltage (per cell) - 3.50V.
 
     To save the changes, restart Pihxawk:
 

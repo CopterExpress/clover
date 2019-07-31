@@ -182,7 +182,7 @@
 
 1. Заходим в меню Power.
 2. Устанавливаем количество банок Number of cells - 4S.
-3. Устанавливаем параметр Full Voltage (per cell) - 4.20V.
+3. Устанавливаем параметры: Full Voltage (per cell) - 4.20V; Empty Voltage (per cell) - 3.50V.
 
     Чтобы изменения сохранились, необходимо перезагрузить Pixhawk:
 
