@@ -10,7 +10,13 @@ Using this module along with [map-based navigation](aruco_map.md) is also possib
 
 ## Setup
 
-Set the `aruco_detect` argument in `~/catkin_ws/src/clever/clever/launch/aruco.launch` to `true` to automatically launch the module:
+Set the `aruco` argument in `~/catkin_ws/src/clever/clever/launch/aruco.launch` to `true`:
+
+```xml
+<arg name="aruco" default="true"/>
+```
+
+For enabling detection set the `aruco_detect` argument in `~/catkin_ws/src/clever/clever/launch/aruco.launch` to `true`:
 
 ```xml
 <arg name="aruco_detect" default="true"/>
