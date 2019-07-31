@@ -214,7 +214,7 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.pitch = pitch;
 		res.roll = roll;
 	} catch (const tf2::TransformException& e) {
-		ROS_DEBUG(e.what());
+		ROS_DEBUG("simple_offboard: %s", e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
