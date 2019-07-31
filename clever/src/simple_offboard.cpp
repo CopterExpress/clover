@@ -220,8 +220,10 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 	if (!TIMEOUT(velocity, velocity_timeout)) {
 		try {
 			// transform velocity
+			waitTransform(req.frame_id, fcu_frame, velocity.header.stamp, telemetry_transform_timeout);
 			Vector3Stamped vec, vec_out;
-			vec.header = velocity.header;
+			vec.header.stamp = velocity.header.stamp;
+			vec.header.frame_id = velocity.header.frame_id;
 			vec.vector = velocity.twist.linear;
 			tf_buffer.transform(vec, vec_out, req.frame_id);
 
@@ -761,7 +763,7 @@ int main(int argc, char **argv)
 
 	// Telemetry subscribers
 	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
+	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
