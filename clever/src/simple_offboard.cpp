@@ -155,7 +155,7 @@ void handleLocalPosition(const PoseStamped& pose)
 
 // wait for transform without interrupting publishing setpoints
 inline bool waitTransform(const string& target, const string& source,
-                          const ros::Time& stamp, const ros::Duration& timeout)
+                          const ros::Time& stamp, const ros::Duration& timeout) // editorconfig-checker-disable-line
 {
 	ros::Rate r(100);
 	auto start = ros::Time::now();
@@ -484,9 +484,9 @@ inline void checkState()
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
 
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-           uint8_t& success, string& message)
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
+           uint8_t& success, string& message) // editorconfig-checker-disable-line
 {
 	auto stamp = ros::Time::now();
 

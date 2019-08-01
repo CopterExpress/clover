@@ -287,7 +287,7 @@ def check_camera(name):
         if not optical or not cable:
             info('%s: custom camera orientation detected', name)
         else:
-           info('camera is oriented %s, camera cable goes %s', optical, cable)
+            info('camera is oriented %s, camera cable goes %s', optical, cable)
 
     except tf2_ros.TransformException:
         failure('cannot transform from base_link to camera frame')
@@ -397,8 +397,8 @@ def check_vpe():
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
         info('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
-                      get_param('EKF2_EVA_NOISE'),
-                      get_param('EKF2_EVP_NOISE'))
+            get_param('EKF2_EVA_NOISE'),
+            get_param('EKF2_EVP_NOISE'))
 
     if not vis:
         return
