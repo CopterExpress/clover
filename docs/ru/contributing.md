@@ -40,4 +40,50 @@
 
 Подготовьте вашу статью и пришлите Pull Request с ней в [репозиторий Клевера](https://github.com/CopterExpress/clever).
 
+1. Сделайте форк репозитория Клевера:
+   
+    <img src="../assets/github-fork.png" alt="GitHub Fork">
+
+2. Склонируйте форк на компьютер:
+
+```bash
+git clone https://github.com/<USERNAME>/clever.git 
+```
+
+3. Перейдите в директорию с форком и создайте новую ветку с названием вашей статьи (например `new-article`):
+
+```bash
+git checkout -b new-article 
+```
+
+4. Напишите новую статью в разделе `docs/ru` или `docs/en` в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown) (например `docs/ru/new_article.md`).
+5. Поместите дополнительные визуальные материалы в папку `docs/assets` и оформите на них ссылки в вашей статье.
+6. Добавьте статью в файл оглавления `SUMMARY.md` в том разделе, где вы её написали (например в `docs/ru/SUMMARY.md`):
+
+```bash
+...
+* Дополнительные материалы
+  * [Олимпиада НТИ 2019](nti2019.md)
+  * [Вклад в Клевер](contributing.md)
+  * [Новая статья](new_article.md)
+  * [Сборка и модификация образа Клевера](image_building.md)
+  * [Прошивка ESC контроллеров](esc_firmware.md) 
+...
+```
+
+6. Сохраните состояние ваших изменений локально:
+   
+```bash
+git add docs/ru/new_article.md
+git add docs/ru/SUMMARY.md
+git commit -m "Add new article for Clever"
+```
+
+7. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
+
+```bash
+git push -u origin new-article
+```
+
+8. Сделайте Pull-request вашей ветки в master Клевера:
 <!-- TODO -->
