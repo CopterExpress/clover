@@ -85,5 +85,11 @@ git commit -m "Add new article for Clever"
 git push -u origin new-article
 ```
 
-8. Сделайте Pull-request вашей ветки в master Клевера:
-<!-- TODO -->
+8. Перейдите на web страницу вашего форка и сделайте `pull request` вашей ветки в master Клевера:
+
+    <img src="../assets/github-pull-request.png" alt="GitHub Pull Request">
+
+    <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
+
+9. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
+10. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com !
