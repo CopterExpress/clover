@@ -41,19 +41,19 @@
 Подготовьте вашу статью и пришлите Pull Request с ней в [репозиторий Клевера](https://github.com/CopterExpress/clever).
 
 1. Сделайте форк репозитория Клевера:
-   
+
     <img src="../assets/github-fork.png" alt="GitHub Fork">
 
 2. Склонируйте форк на компьютер:
 
 ```bash
-git clone https://github.com/<USERNAME>/clever.git 
+git clone https://github.com/<USERNAME>/clever.git
 ```
 
 3. Перейдите в директорию с форком и создайте новую ветку с названием вашей статьи (например `new-article`):
 
 ```bash
-git checkout -b new-article 
+git checkout -b new-article
 ```
 
 4. Напишите новую статью в разделе `docs/ru` или `docs/en` в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown) (например `docs/ru/new_article.md`).
@@ -67,7 +67,7 @@ git checkout -b new-article
   * [Вклад в Клевер](contributing.md)
   * [Новая статья](new_article.md)
   * [Сборка и модификация образа Клевера](image_building.md)
-  * [Прошивка ESC контроллеров](esc_firmware.md) 
+  * [Прошивка ESC контроллеров](esc_firmware.md)
 ...
 ```
 
