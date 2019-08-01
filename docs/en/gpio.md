@@ -94,3 +94,5 @@ time.sleep(2)
 # disable the magnet
 pi.write(15, 0)
 ```
+
+> **Note** A more [comprehensive description](https://elinux.org/RPi_Low-level_peripherals) of the Raspberry Pi GPIO pins and [additional examples](https://elinux.org/RPi_GPIO_Interface_Circuits) of circuits are available at the [Embedded Linux wiki](https://elinux.org/RPi_Hub).
