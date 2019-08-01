@@ -175,11 +175,15 @@ python main.py
 Где
 
 - **ip** - ip адрес коптера
+<!-- markdownlint-disable MD044 -->
 - **led** - цвет светодиодной ленты
+<!-- markdownlint-restore MD044 -->
 - **status** - *fly* или *land* - текущий статус коптера
 - **pose** - позиция коптера (*x*, *y*, *z*,  и *yaw*)
 - **voltage** - напряжение на одной банке
+<!-- markdownlint-disable MD044 -->
 - **nextp** - отдаваемая коптеру команда на полёт (*led*, *status*, *pose* как выше)
+<!-- markdownlint-restore MD044 -->
 
 ### /static/roads.json
 
@@ -236,4 +240,4 @@ python main.py
 Где
 
 - **dist** - Дистанция в метрах
-- **cost** - Цена в рублях (150₽ + 30₽ * *n* метров) 
+- **cost** - Цена в рублях (150₽ + 30₽ * *n* метров)
