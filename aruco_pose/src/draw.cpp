@@ -23,12 +23,12 @@ static void _projectPoints( InputArray objectPoints,
 
 
 void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginSize,
-                      int borderBits) {
+                      int borderBits, bool drawAxis) {
 
 	CV_Assert(outSize.area() > 0);
 	CV_Assert(marginSize >= 0);
 
-	_img.create(outSize, CV_8UC1);
+	_img.create(outSize, drawAxis ? CV_8UC3 : CV_8UC1);
 	Mat out = _img.getMat();
 	out.setTo(Scalar::all(255));
 	out.adjustROI(-marginSize, -marginSize, -marginSize, -marginSize);
@@ -90,6 +90,9 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		side = std::max(side, 10);
 
 		dictionary.drawMarker(_board->ids[m], side, marker, borderBits);
+		if (drawAxis) {
+			cvtColor(marker, marker, COLOR_GRAY2RGB);
+		}
 
 		// interpolate tiny marker to marker position in markerZone
 		inCorners[0] = Point2f(-0.5f, -0.5f);
@@ -100,6 +103,18 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		Mat transformation = getAffineTransform(inCorners, outCorners);
 		warpAffine(marker, out, transformation, out.size(), INTER_LINEAR,
 						BORDER_TRANSPARENT);
+	}
+
+	// draw axis
+	if (drawAxis) {
+		Size wholeSize; Point ofs;
+		out.locateROI(wholeSize, ofs);
+		auto out_copy = _img.getMat();
+
+		cv::Point center(ofs.x - minX / sizeX * float(out.cols), ofs.y + out.rows + minY / sizeY * float(out.rows));
+		line(out_copy, center, center + Point(300, 0), Scalar(255, 0, 0), 10); // x axis
+		line(out_copy, center, center + Point(0, -300), Scalar(0, 255, 0), 10); // y axis
+		line(out_copy, center, center + Point(-200, 200), Scalar(0, 0, 255), 10); // z axis
 	}
 }
 

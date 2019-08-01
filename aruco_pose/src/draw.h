@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
 
-void _drawPlanarBoard(cv::aruco::Board *_board, cv::Size outSize, cv::OutputArray _img, int marginSize, int borderBits);
+void _drawPlanarBoard(cv::aruco::Board *_board, cv::Size outSize, cv::OutputArray _img,
+                      int marginSize, int borderBits, bool drawAxis);
 void _drawAxis(cv::InputOutputArray image, cv::InputArray cameraMatrix, cv::InputArray distCoeffs,
               cv::InputArray rvec, cv::InputArray tvec, float length);
