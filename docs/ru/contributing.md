@@ -74,9 +74,7 @@
 7. Сохраните состояние ваших изменений локально:
 
     ```bash
-    git add docs/ru/new_article.md
-    git add docs/ru/SUMMARY.md
-    git add docs/assets/*
+    git add docs/
     git commit -m "Add new article for Clever"
     ```
 
