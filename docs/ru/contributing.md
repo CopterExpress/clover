@@ -46,50 +46,50 @@
 
 2. Склонируйте форк на компьютер:
 
-```bash
-git clone https://github.com/<USERNAME>/clever.git
-```
+    ```bash
+    git clone https://github.com/<USERNAME>/clever.git
+    ```
 
 3. Перейдите в директорию с форком и создайте новую ветку с названием вашей статьи (например `new-article`):
 
-```bash
-git checkout -b new-article
-```
+    ```bash
+    git checkout -b new-article
+    ```
 
 4. Напишите новую статью в разделе `docs/ru` или `docs/en` в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown) (например `docs/ru/new_article.md`).
 5. Поместите дополнительные визуальные материалы в папку `docs/assets` и оформите на них ссылки в вашей статье.
 6. Добавьте статью в файл оглавления `SUMMARY.md` в том разделе, где вы её написали (например в `docs/ru/SUMMARY.md`):
 
-```bash
-...
-* Дополнительные материалы
-  * [Олимпиада НТИ 2019](nti2019.md)
-  * [Вклад в Клевер](contributing.md)
-  * [Новая статья](new_article.md)
-  * [Сборка и модификация образа Клевера](image_building.md)
-  * [Прошивка ESC контроллеров](esc_firmware.md)
-...
-```
+    ```bash
+    ...
+    * Дополнительные материалы
+      * [Олимпиада НТИ 2019](nti2019.md)
+      * [Вклад в Клевер](contributing.md)
+      * [Новая статья](new_article.md)
+      * [Сборка и модификация образа Клевера](image_building.md)
+      * [Прошивка ESC контроллеров](esc_firmware.md)
+    ...
+    ```
 
-6. Сохраните состояние ваших изменений локально:
+7. Сохраните состояние ваших изменений локально:
 
-```bash
-git add docs/ru/new_article.md
-git add docs/ru/SUMMARY.md
-git commit -m "Add new article for Clever"
-```
+    ```bash
+    git add docs/ru/new_article.md
+    git add docs/ru/SUMMARY.md
+    git commit -m "Add new article for Clever"
+    ```
 
-1. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
+8. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
 
-```bash
-git push -u origin new-article
-```
+    ```bash
+    git push -u origin new-article
+    ```
 
-8. Перейдите на web страницу вашего форка и сделайте `pull request` вашей ветки в master Клевера:
+9. Перейдите на web страницу вашего форка и сделайте `pull request` вашей ветки в master Клевера:
 
     <img src="../assets/github-pull-request.png" alt="GitHub Pull Request">
 
     <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
 
-9. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
-10. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com !
+10. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
+11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com !
