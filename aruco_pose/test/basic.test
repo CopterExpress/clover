@@ -23,7 +23,7 @@
         <param name="type" value="map"/>
         <param name="map" value="$(find aruco_pose)/test/basic.txt"/>
         <param name="markers/frame_id" value="aruco_map"/>
-        <param name="markers/child_frame_id_prefix" value="aruco_map_"/>
+        <param name="markers/child_frame_id_prefix" value="aruco_in_map_"/>
     </node>
 
     <param name="test_module" value="$(find aruco_pose)/test/basic.py"/>

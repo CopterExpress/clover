@@ -103,23 +103,17 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 
     где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
 
-3. Перезагрузите `systemd`.
-
-    ```bash
-    sudo systemctl daemon-reload
-    ```
-
-4. Включите службу `dnsmasq`.
+3. Включите службу `dnsmasq`.
 
     ```bash
     sudo systemctl enable dnsmasq
     sudo systemctl start dnsmasq
     ```
 
-5. Перезагрузите службу `dhcpcd`.
+4. Перезапустите службу `dhcpcd`.
 
     ```bash
-    sudo systemctl restart dhcpcd
+    sudo systemctl start dhcpcd
     ```
 
 ___
@@ -137,7 +131,7 @@ ___
 
 ### dhcpcd
 
-Начиная с Raspbian Jesse настройки сети больше не задаются в файле `/etc/network/interfaces`. Теперь за выдачу адресации и настройку маршрутизации отвечает `dhcpcd` [4].
+Начиная с Raspbian Jessie настройки сети больше не задаются в файле `/etc/network/interfaces`. Теперь за выдачу адресации и настройку маршрутизации отвечает `dhcpcd` [4].
 
 По умолчанию на всех интерфейсах включен dhcp-клиент. Настройки интерфейсов меняются в файле `/etc/dhcpcd.conf`. Для того, чтобы поднять точку доступа необходимо прописать статический ip-адрес. Для этого в конец файла необходимо добавить следующие строки:
 

@@ -157,7 +157,7 @@ void handleLocalPosition(const PoseStamped& pose)
 inline bool waitTransform(const string& target, const string& source,
                           const ros::Time& stamp, const ros::Duration& timeout) // editorconfig-checker-disable-line
 {
-	ros::Rate r(10);
+	ros::Rate r(100);
 	auto start = ros::Time::now();
 	while (ros::ok()) {
 		if (ros::Time::now() - start > timeout) return false;
@@ -201,24 +201,20 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.mode = state.mode;
 	}
 
-	waitTransform(local_frame, req.frame_id, stamp, telemetry_transform_timeout);
+	try {
+		waitTransform(req.frame_id, fcu_frame, stamp, telemetry_transform_timeout);
+		auto transform = tf_buffer.lookupTransform(req.frame_id, fcu_frame, stamp);
+		res.x = transform.transform.translation.x;
+		res.y = transform.transform.translation.y;
+		res.z = transform.transform.translation.z;
 
-	if (!TIMEOUT(local_position, local_position_timeout)) {
-		try {
-			// transform pose
-			PoseStamped pose;
-			tf_buffer.transform(local_position, pose, req.frame_id);
-			res.x = pose.pose.position.x;
-			res.y = pose.pose.position.y;
-			res.z = pose.pose.position.z;
-
-			// Tait-Bryan angles, order z-y-x
-			double yaw, pitch, roll;
-			tf2::getEulerYPR(pose.pose.orientation, yaw, pitch, roll);
-			res.yaw = yaw;
-			res.pitch = pitch;
-			res.roll = roll;
-		} catch (const tf2::TransformException& e) {}
+		double yaw, pitch, roll;
+		tf2::getEulerYPR(transform.transform.rotation, yaw, pitch, roll);
+		res.yaw = yaw;
+		res.pitch = pitch;
+		res.roll = roll;
+	} catch (const tf2::TransformException& e) {
+		ROS_DEBUG(e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
@@ -351,6 +347,10 @@ PoseStamped globalToLocal(double lat, double lon)
 	x_offset = distance * sin(azimuth_radians);
 	y_offset = distance * cos(azimuth_radians);
 
+	if (!waitTransform(local_frame, fcu_frame, global_position.header.stamp, ros::Duration(0.2))) {
+		throw std::runtime_error("No local position");
+	}
+
 	auto local = tf_buffer.lookupTransform(local_frame, fcu_frame, global_position.header.stamp);
 
 	PoseStamped pose;
@@ -479,6 +479,8 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
 }
 
+#define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
+
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
            float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
            float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
@@ -489,6 +491,20 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 	try {
 		if (busy)
 			throw std::runtime_error("Busy");
+
+		ENSURE_FINITE(x);
+		ENSURE_FINITE(y);
+		ENSURE_FINITE(z);
+		ENSURE_FINITE(vx);
+		ENSURE_FINITE(vy);
+		ENSURE_FINITE(vz);
+		ENSURE_FINITE(pitch);
+		ENSURE_FINITE(roll);
+		ENSURE_FINITE(pitch_rate);
+		ENSURE_FINITE(roll_rate);
+		ENSURE_FINITE(lat);
+		ENSURE_FINITE(lon);
+		ENSURE_FINITE(thrust);
 
 		busy = true;
 
@@ -539,7 +555,9 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type == NAVIGATE_GLOBAL) {
 			// Calculate x and from lat and lot in request's frame
-			auto xy_in_req_frame = tf_buffer.transform(globalToLocal(lat, lon), frame_id);
+			auto pose_local = globalToLocal(lat, lon);
+			pose_local.header.stamp = stamp; // TODO: fix
+			auto xy_in_req_frame = tf_buffer.transform(pose_local, frame_id);
 			x = xy_in_req_frame.pose.position.x;
 			y = xy_in_req_frame.pose.position.y;
 		}

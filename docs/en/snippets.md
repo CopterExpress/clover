@@ -4,15 +4,6 @@ Code examples
 Python
 ---
 
-<!-- markdownlint-disable MD031 -->
-
-> **Note** When using cyrillic simbols with UTF-8 encoding, specify the encoding in the beginning of the program:
-> ```python
-> # -*- coding: utf-8 -*-
-> ```
-
-<!-- markdownlint-enable MD031 -->
-
 ### # {#distance}
 
 Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
@@ -46,12 +37,26 @@ start = get_telemetry()
 print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 
 # Waiting for takeoff
-while True:
+while not rospy.is_shutdown():
     # Checking current altitude
     if get_telemetry().z - start.z + z < tolerance:
         # Takeoff complete
         break
     rospy.sleep(0.2)
+```
+
+This code can be wrapped in a function:
+
+```python
+def takeoff_wait(alt, speed=0.5, tolerance=0.2):
+    start = get_telemetry()
+    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
+
+    while not rospy.is_shutdown():
+        if get_telemetry().z - start.z + z < tolerance:
+            break
+
+        rospy.sleep(0.2)
 ```
 
 ### # {#block-nav}
@@ -66,13 +71,32 @@ frame_id='aruco_map'
 print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
 
 # Wait for the copter to arrive at the requested point
-while True:
+while not rospy.is_shutdown():
     telem = get_telemetry(frame_id=frame_id)
     # Calculating the distance to the requested point
     if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
         # Arrived at the requested point
         break
     rospy.sleep(0.2)
+```
+
+### # {#block-land}
+
+Landing and waiting until the copter lands:
+
+```python
+land()
+while get_telemetry().armed:
+    rospy.sleep(0.2)
+```
+
+This code can be wrapped in a function:
+
+```python
+def land_wait():
+    land()
+    while get_telemetry().armed:
+        rospy.sleep(0.2)
 ```
 
 ### # {#disarm}

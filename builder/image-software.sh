@@ -114,11 +114,11 @@ mjpg-streamer=2.0 \
 
 echo_stamp "Updating kernel to fix camera bug"
 apt-get install --no-install-recommends -y \
-	raspberrypi-kernel=1.20190517-1 \
-	raspberrypi-bootloader=1.20190517-1 \
-	libraspberrypi-bin=1.20190517-1 \
-	libraspberrypi-dev=1.20190517-1 \
-	libraspberrypi0=1.20190517-1 \
+	raspberrypi-kernel=1.20190709~stretch-1 \
+	raspberrypi-bootloader=1.20190709~stretch-1 \
+	libraspberrypi-bin=1.20190709~stretch-1 \
+	libraspberrypi-dev=1.20190709~stretch-1 \
+	libraspberrypi0=1.20190709~stretch-1 \
 	wireless-regdb=2018.05.09-0~rpt1 \
 	wpasupplicant=2:2.6-21~bpo9~rpt1
 

@@ -1,5 +1,5 @@
 var ros = new ROSLIB.Ros({
-	url : 'ws://' + location.host + ':9090'
+	url : 'ws://' + location.hostname + ':9090'
 });
 
 var titleEl = document.querySelector('title');

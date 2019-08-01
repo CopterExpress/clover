@@ -3,9 +3,9 @@ PX4 Simulation
 
 Main article: https://dev.px4.io/en/simulation/
 
-PX4 simulation is possible in Linux and macOS with the use of physical environment simulation systems [jMavSim](https://pixhawk.org/dev/hil/jmavsim) and [the Gazebo](http://gazebosim.org).
+PX4 simulation is possible in Linux and macOS with the use of physical environment simulation systems [jMAVSim](https://pixhawk.org/dev/hil/jmavsim) and [the Gazebo](http://gazebosim.org).
 
-jMavSim is a lightweight environment intended only for testing multi-rotor aircraft systems; Gazebo is a versatile environment for all types of robots.
+jMAVSim is a lightweight environment intended only for testing multi-rotor aircraft systems; Gazebo is a versatile environment for all types of robots.
 
 Launching PX4 SITL
 --
@@ -17,12 +17,12 @@ git clone https://github.com/PX4/Firmware.git
 cd Firmware
 ```
 
-jMavSim
+jMAVSim
 --
 
 Main article: https://dev.px4.io/en/simulation/jmavsim.html
 
-For simulation using the jMavSim lightweight environment, use the following command:
+For simulation using the jMAVSim lightweight environment, use the following command:
 
 ```(bash)
 make posix_sitl_default jmavsim

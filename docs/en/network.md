@@ -1,22 +1,21 @@
 # Configuring Wi-Fi
 
-The Raspberry Pi Wi-Fi adapter of has two main operating modes:
+The Raspberry Pi Wi-Fi adapter has two main operating modes:
 
 1. **Client mode** – RPi connects to an existing Wi-Fi network.
-
 2. **Access point mode** – RPi creates a Wi-Fi network that you can connect to.
 
-When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [access point mode] by default (Wi-Fi.md).
+On our [RPi image](microsd_images.md) the Wi-Fi adapter is confuigured to use the [access point mode](Wi-Fi.md) by default.
 
 ## Changing the password or SSID (of the network name)
 
-1. Edit file `/etc/wpa_supplicant/wpa_supplicant.conf` (using [SSH connection](ssh.md)):
+1. Edit the `/etc/wpa_supplicant/wpa_supplicant.conf` file (using [SSH connection](ssh.md)):
 
     ```bash
     sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
     ```
 
-    To change the name of the Wi-Fi network, change the value of parameter `ssid`, to change the password, change parameter `psk`. For example:
+    In order to change the name of the Wi-Fi network, change the value of the `ssid` parameter; to change the password, change the `psk` parameter. For example:
 
     ```txt
     network={
@@ -33,9 +32,9 @@ When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [a
 
 2. Restart Raspberry Pi.
 
-> **Caution** The length of the password for the Wi-Fi network should be **at least** 8 characters.
+> **Caution** The Wi-Fi network password should be **at least** 8 characters.
 >
-> In case of incorrect settings `wpa_supplicant.conf`, Raspberry Pi will stop distributing Wi-Fi!
+> If your `wpa_supplicant.conf` is not valid, Raspberry Pi will not allow Wi-Fi connections!
 
 ## Switching adapter to the client mode
 
@@ -46,39 +45,27 @@ When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [a
     sudo systemctl disable dnsmasq
     ```
 
-2. Enable obtaining IP address on the wireless interface by the DHCP client.
-
-    For this purpose, remove the following lines
+2. Enable DHCP client on the wireless interface to obtain IP address. In order to do this, remove the following lines from the `etc/dhcpcd.conf` file:
 
     ```conf
     interface wlan0
     static ip_address=192.168.11.1/24
     ```
 
-    from file `/etc/dhcpcd.conf` manually, or run the following commands.
+3. Configure `wpa_supplicant` to connect to an existing access point. Change your `/etc/wpa_supplicant/wpa_supplicant.conf` to contain the following:
 
-    ```bash
-    sudo sed -i 's/interface wlan0//' /etc/dhcpcd.conf
-    sudo sed -i 's/static ip_address=192.168.11.1\/24//' /etc/dhcpcd.conf
     ```
-
-3. Configure `wpa_supplicant` to connect to an existing access point.
-
-    ```bash
-    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
     country=GB
 
     network={
-        ssid="CLEVER"
-        psk="cleverwifi"
+        ssid="SSID"
+        psk="password"
     }
-
-    EOF
     ```
 
-    where `CLEVER` is the name of the network, and `cleverwifi` is the password.
+    where `SSID` is the name of the network, and `password` is its password.
 
 4. Restart the `dhcpcd` service.
 
@@ -88,35 +75,22 @@ When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [a
 
 ## Switching the adapter to the access point mode
 
-1. Enable the static IP address in the wireless interface.
-
-    For this purpose, add the following lines
+1. Enable the static IP address in the wireless interface. Add the following lines to your `/etc/dhcpcd.conf` file:
 
     ```conf
     interface wlan0
     static ip_address=192.168.11.1/24
     ```
 
-    to file `/etc/dhcpcd.conf` manually, or run the following command.
+2. Configure wpa_supplicant to work in the access point mode. Change your `/etc/wpa_supplicant/wpa_supplicant.conf` file to contain the following:
 
-    ```bash
-    cat << EOF | sudo tee -a /etc/dhcpcd.conf
-    interface wlan0
-    static ip_address=192.168.11.1/24
-
-    EOF
     ```
-
-2. Configure wpa_supplicant to work in the access point mode.
-
-    ```bash
-    cat << EOF | sudo tee /etc/wpa_supplicant/wpa_supplicant.conf
     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
     update_config=1
     country=GB
 
     network={
-        ssid="CLEVER-$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e 's/[^0-9]//g' | cut -c 1-4)"
+        ssid="CLEVER-1234"
         psk="cleverwifi"
         mode=2
         proto=RSN
@@ -125,21 +99,21 @@ When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [a
         group=CCMP
         auth_alg=OPEN
     }
-
-    EOF
     ```
 
-3. Restart the `dhcpcd` service.
+    where `CLEVER-1234` is the network name and `cleverwifi` is the password.
 
-    ```bash
-    sudo systemctl restart dhcpcd
-    ```
-
-4. Enable the `dnsmasq` service.
+3. Enable the `dnsmasq` service.
 
     ```bash
     sudo systemctl enable dnsmasq
     sudo systemctl start dnsmasq
+    ```
+
+4. Restart the `dhcpcd` service.
+
+    ```bash
+    sudo systemctl restart dhcpcd
     ```
 
 ___
@@ -150,16 +124,16 @@ Below you can read more about how RPi networking is organized.
 
 Network operation in the [image](microsd_images.md) is supported by two pre-installed services:
 
-* **networking** — the service enables all network interfaces at the moment of start [5].
-* **dhcpcd** — the service ensures configuration of addressing and routing on the interfaces obtained dynamically, or specified statically in the config file.
+* **networking** — the service enables all network interfaces at startup [5].
+* **dhcpcd** — the service ensures that configuration of addressing and routing on the interfaces is obtained dynamically or specified statically in the config file.
 
-To work in the router (access point) mode, RPi requires a DHCP server. It is used to automatically send the settings of the current network to connected clients. `isc-dhcp-server` or `dnsmasq` may be used as such server.
+To work in the router (access point) mode, RPi requires a DHCP server. It is used to automatically send the settings of the current network to connected clients. `isc-dhcp-server` or `dnsmasq` may be used for this.
 
 ### dhcpcd
 
-Starting with Raspbian Jessy, network settings are no longer defined in the `/etc/network/interfaces` file. Now `dhcpcd` is used for sending addressing and routing settings[4].
+Starting with Raspbian Jessie, network settings are no longer defined in the `/etc/network/interfaces` file. Now `dhcpcd` is used for sending addressing and routing settings[4].
 
-By default, a dhcp client is enabled in all interfaces. Settings of the interfaces are changed in the `/etc/dhcpcd.conf` file. To start an access point, specify a static IP address. To do this, add the following lines to the end of the file:
+By default, a dhcp client is enabled in all interfaces. Settings for network interfaces are changed in the `/etc/dhcpcd.conf` file. An access point should have a static IP address. To specify one, add the following lines to the end of the file:
 
 ```
 interface wlan0
@@ -170,9 +144,9 @@ static ip_address=192.168.11.1/24
 
 ### wpa_supplicant
 
-**wpa_supplicant** — the service configures the Wi-Fi adapter. The `wpa_supplicant` service runs not as standalone (although it exists as such), and runs as a `dhcpcd` child process.
+**wpa_supplicant** — the service configures the Wi-Fi adapter. The `wpa_supplicant` service does not run as a standalone service (although it exists as such), but is instead launched as a `dhcpcd` child process.
 
-By default, the config file should contain path `/etc/wpa_supplicant/wpa_supplicant.conf`.
+By default the config file is `/etc/wpa_supplicant/wpa_supplicant.conf`.
 An example of the configuration file:
 
 ```conf
@@ -192,7 +166,7 @@ network={
 }
 ```
 
-Inside the config file, general `wpa_supplicant` settings, and the settings for the adapter configuration are specified. The configuration file also contains `network` section with the basic settings of the Wi-Fi network, such as network SSID, password, adapter operating mode. There may be several such sections, but only the first one is the working one. For example, if the first section contains connection to an unavailable network, the adapter will be configured according to a next valid section, if there is one. Read more about the syntax of `wpa_supplicant.conf` [TODO WIKI].
+Inside the config file, general `wpa_supplicant` settings, and the settings for the adapter configuration are specified. The configuration file also contains `network` section with the basic settings of the Wi-Fi network, such as network SSID, password, adapter operating mode. There may be several `network` sections, but only the first valid one is used. For example, if the first section contains a connection to an unavailable network, the adapter will be configured according to a next valid section, if there is one. Read more about the syntax of `wpa_supplicant.conf` [TODO WIKI].
 
 #### wpa_passphrase
 
