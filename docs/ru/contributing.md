@@ -72,14 +72,14 @@ git checkout -b new-article
 ```
 
 6. Сохраните состояние ваших изменений локально:
-   
+
 ```bash
 git add docs/ru/new_article.md
 git add docs/ru/SUMMARY.md
 git commit -m "Add new article for Clever"
 ```
 
-7. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
+1. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
 
 ```bash
 git push -u origin new-article
