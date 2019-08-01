@@ -1,16 +1,16 @@
 # Working with GPIO
 
-GPIO (General-Purpose Input/Output) – is a type of Raspberry Pi's pins, with programmatically adjustable and measurable voltage. On some of the pins there also is hardware implemented <abbr title="Pulse-width modulation">PWM</abbr>.
+A GPIO (General-Purpose Input/Output) pin is a programmable digital signal pin on a circuit board or a microcontroller that may act as an input or an output. Raspberry Pi has a set of easily accessible GPIO pins, some of which have hardware <abbr title="Pulse-width modulation">PWM</abbr>.
 
 > **Info** Use the [pinout](https://pinout.xyz) for figuring out, which Raspberry Pi's pins support GPIO and PWM.
 
-[The RPi image](microsd_images.md) includes [`pigpio`](http://abyz.me.uk/rpi/pigpio/) library for work with GPIO. To interact with this library, run the appropriate daemon:
+The [`pigpio`](http://abyz.me.uk/rpi/pigpio) library for interfacing with the GPIO pins is already preinstalled on [the RPi image](microsd_images.md). To interact with this library, run the appropriate daemon:
 
 ```bash
 sudo systemctl start pigpiod.service
 ```
 
-For enabling automatic launch of the daemon, use command:
+To enable automatic launch of the daemon, run:
 
 ```bash
 sudo systemctl enable pigpiod.service
@@ -25,15 +25,15 @@ import pigpio
 # initializing connection to pigpiod
 pi = pigpio.pi()
 
-# setting pin 11 mode for output
+# set pin 11 mode for output
 pi.set_mode(11, pigpio.OUTPUT)
 
-# enabling signal of pin 11
+# set signal of pin 11 to high
 pi.write(11, 1)
 
 time.sleep(2)
 
-# disabling signal on pin 11
+# set signal on pin 11 to low
 pi.write(11, 0)
 
 # ...
@@ -45,13 +45,13 @@ pi.set_mode(12, pigpio.INPUT)
 level = pi.read(12)
 ```
 
-For finding out pins' numbers, use the [Raspberry Pi pinout](https://pinout.xyz).
+To find out the pins' numbers, consult the [Raspberry Pi pinout](https://pinout.xyz).
 
 ## Connecting servos
 
-Most of servos are controlled with PWM signal. Extreme positions of servos are reached with signal widths approximately equal to 1000 and 2000 µs. Values for a specific servo can be determined experimentally.
+Servo motors are typically controlled with PWM signal. Extreme positions of servos are reached with signal widths approximately equal to 1000 and 2000 µs. Values for a specific servo can be determined experimentally.
 
-Connect the signal wire of the servo to one of GPIO-pins of the Raspberry. For controlling a servo, connected to the pin 13, use a code like this:
+Connect the signal wire of the servo to one of GPIO-pins of the Raspberry. To control a servo connected to the pin 13 use a code like this:
 
 ```python
 import time
@@ -59,23 +59,23 @@ import pigpio
 
 pi = pigpio.pi()
 
-# setting mode of pin 13 to output
+# set mode of pin 13 to output
 pi.set_mode(13, pigpio.OUTPUT)
 
-# setting pin 13 to output PWM signal 1000 us
+# set pin 13 to output PWM signal 1000 us
 pi.set_servo_pulsewidth(13, 1000)
 
 time.sleep(2)
 
-# setting pin 13 to output PWM signal 2000 us
+# set pin 13 to output PWM signal 2000 us
 pi.set_servo_pulsewidth(13, 2000)
 ```
 
-## Connecting electromagnet
+## Connecting an electromagnet
 
 ![GPIO Mosfet Magnet Connection](../assets/gpio_mosfet_magnet.png)
 
-For connecting an electromagnet, use a field-effect transistor (MOSFET). Connect the MOSFET to one of GPIO-pins of the Raspberry Pi. For controlling the magnet, connected to the pin 15, use a code like this:
+To connect an electromagnet use a field-effect transistor (MOSFET). Connect the MOSFET to one of GPIO-pins of the Raspberry Pi. To control the magnet connected to the pin 15 use a code like this:
 
 ```python
 import time
@@ -83,14 +83,14 @@ import pigpio
 
 pi = pigpio.pi()
 
-# setting mode of pin 15 for output
+# set mode of pin 15 for output
 pi.set_mode(15, pigpio.OUTPUT)
 
-# enabling the magnet
+# enable the magnet
 pi.write(15, 1)
 
 time.sleep(2)
 
-# disabling the magnet
+# disable the magnet
 pi.write(15, 0)
 ```
