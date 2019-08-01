@@ -34,9 +34,9 @@
 
 Более подробную информацию о Pull Request'ах смотрите [на GitHub](https://help.github.com/articles/about-pull-requests/) (англ.) или в [документации по git](https://git-scm.com/book/ru/v2/GitHub-Внесение-собственного-вклада-в-проекты) (русск.).
 
-## Ваш проект с Клевером
+## Добавление статьи в GitBook
 
-Если вы реализовали собственный интересный проект на Клевере, вы можете добавить статью о нем в раздел "Проекты на базе Клевера".
+> **Note** Если вы реализовали собственный интересный проект на Клевере, вы можете добавить статью о нем в раздел "Проекты на базе Клевера".
 
 Подготовьте вашу статью и пришлите Pull Request с ней в [репозиторий Клевера](https://github.com/CopterExpress/clever).
 
@@ -76,6 +76,7 @@
     ```bash
     git add docs/ru/new_article.md
     git add docs/ru/SUMMARY.md
+    git add docs/assets/*
     git commit -m "Add new article for Clever"
     ```
 
@@ -92,4 +93,4 @@
     <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
 
 10. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
-11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com !
+11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com!
