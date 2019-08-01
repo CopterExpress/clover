@@ -59,6 +59,7 @@
   * [Установка ROS Kinetic](ros-install.md)
 * Проекты на базе Клевера
   * [Генератор ArUco карт](arucogenmap.md)
+  * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
   * [Распознавание лиц](face_recognition.md)
   * [Подсчет количества объектов c камеры](object_counting.md)

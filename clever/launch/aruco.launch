@@ -22,6 +22,7 @@
         <remap from="markers" to="aruco_detect/markers"/>
         <param name="map" value="$(find aruco_pose)/map/map.txt"/>
         <param name="known_tilt" value="map"/>
+        <param name="image_axis" value="true"/>
         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
         <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
         <param name="markers/frame_id" value="aruco_map"/>

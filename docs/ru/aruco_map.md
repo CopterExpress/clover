@@ -10,6 +10,12 @@
 
 ## Конфигурирование
 
+Аргумент `aruco` в файле `~/catkin_ws/src/clever/clever/launch/clever.launch` должен быть в значении `true`:
+
+```xml
+<arg name="aruco" default="true"/>
+```
+
 Для включения распознавания карт маркеров аргументы `aruco_map` и `aruco_detect` в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` должны быть в значении `true`:
 
 ```xml
