@@ -50,6 +50,7 @@
   * [Interfacing with a laser rangefinder](laser.md)
   * [PX4 Simulation](sitl.md)
   * [Software autorun](autolaunch.md)
+  * [Hostname](hostname.md)
   * [Controlling the copter from Arduino](arduino.md)
   * [Using an external 3G modem](3g.md)
 * Clever-based projects
