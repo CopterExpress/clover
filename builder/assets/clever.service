@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=pi
-ExecStart=/bin/bash -c ". /home/parallels/catkin_ws/devel/setup.bash; \
+ExecStart=/bin/bash -c ". /home/pi/catkin_ws/devel/setup.bash; \
                         ROS_HOSTNAME=`hostname`.local exec roslaunch clever clever.launch --wait --screen --skip-log-check"
 Restart=on-failure
 RestartSec=3
