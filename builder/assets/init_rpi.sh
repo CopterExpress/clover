@@ -38,7 +38,12 @@ echo_stamp() {
 echo_stamp "Rename SSID"
 NEW_SSID='CLEVER-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
 sudo sed -i.OLD "s/CLEVER/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant.conf
-clever_rename ${NEW_SSID}
+
+echo_stamp "Rename hostname to $NEW_SSID"
+hostnamectl set-hostname $NEW_SSID
+sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_NAME}'/g' /etc/hosts
+# make .local hostname accesable when wlan and ethernet interfaces down
+echo -e "127.0.0.1\t${NEW_NAME}.local" >> /etc/hosts
 
 echo_stamp "Harware setup"
 /root/hardware_setup.sh

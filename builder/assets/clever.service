@@ -1,12 +1,11 @@
 [Unit]
 Description=Clever ROS package
-Requires=roscore.service
-After=roscore.service
+After=network.target
 
 [Service]
 User=pi
-EnvironmentFile=/lib/systemd/system/roscore.env
-ExecStart=/opt/ros/kinetic/bin/roslaunch clever clever.launch --wait --screen
+ExecStart=/bin/bash -c ". /home/parallels/catkin_ws/devel/setup.bash; \
+                        ROS_HOSTNAME=`hostname`.local exec roslaunch clever clever.launch --wait --screen --skip-log-check"
 Restart=on-failure
 RestartSec=3
 
