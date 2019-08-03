@@ -41,9 +41,8 @@ sudo sed -i.OLD "s/CLEVER/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant.conf
 
 echo_stamp "Rename hostname to $NEW_SSID"
 hostnamectl set-hostname $NEW_SSID
-sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_NAME}'/g' /etc/hosts
-# make .local hostname accesable when wlan and ethernet interfaces down
-echo -e "127.0.0.1\t${NEW_NAME}.local" >> /etc/hosts
+sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_SSID}' '${NEW_SSID}'.local/g' /etc/hosts
+# .local (mdns) hostname added to make it accesable when wlan and ethernet interfaces down
 
 echo_stamp "Harware setup"
 /root/hardware_setup.sh
