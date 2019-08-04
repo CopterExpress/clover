@@ -24,3 +24,4 @@ source /home/pi/catkin_ws/devel/setup.bash
 cd /home/pi/catkin_ws/src/clever/builder/test/
 ./tests.sh
 ./tests.py
+./tests3.py
