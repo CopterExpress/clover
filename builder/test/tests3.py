@@ -13,7 +13,7 @@ from std_srvs.srv import Trigger
 from clever.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
     SetAttitude, SetRates
 
-get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
+get_telemetry = rospy.ServiceProxy('get_telemetry', GetTelemetry)
 
 import tf2_ros
 import tf2_geometry_msgs
