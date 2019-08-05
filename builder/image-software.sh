@@ -109,6 +109,7 @@ python-dev \
 python3-dev \
 python-systemd \
 mjpg-streamer=2.0 \
+python3-yaml \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 

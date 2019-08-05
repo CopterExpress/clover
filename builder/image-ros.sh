@@ -181,6 +181,9 @@ apt-get install -y --no-install-recommends \
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
+echo_stamp "Installing rospkg and catkin_pkg for Python3"
+pip3 install rospkg catkin_pkg
+
 echo_stamp "Running tests"
 catkin_make run_tests && catkin_test_results
 
