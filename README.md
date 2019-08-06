@@ -73,7 +73,7 @@ Alternatively you may change the `fcu_url` property in `mavros.launch` file to p
 Enable systemd service `roscore` (if not running):
 
 ```bash
-sudo systemctl enable /home/<username>/catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl enable /home/<username>/catkin_ws/src/clever/builder/assets/roscore.service
 sudo systemctl start roscore
 ```
 
