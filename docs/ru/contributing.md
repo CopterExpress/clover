@@ -91,4 +91,4 @@
     <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
 
 10. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
-11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com!
+11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.copterexpress.com !
