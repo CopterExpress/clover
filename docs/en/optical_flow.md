@@ -37,7 +37,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `LPE_FUSION` – flags 'fuse optical flow' and 'flow gyro compensation' are on.
 * `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
-* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_R` – 0.2.
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
