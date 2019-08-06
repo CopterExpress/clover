@@ -16,6 +16,8 @@ To enable automatic launch of the daemon, run:
 sudo systemctl enable pigpiod.service
 ```
 
+> **Note** `pigpiod` may interfere with [LED strip](leds.md) if configured improperly. Make sure that the strip is connected to GPIO21 and that `pigpiod` is launched with the `-t 0` flag.
+
 Example of working with the library:
 
 ```python

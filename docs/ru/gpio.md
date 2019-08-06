@@ -16,6 +16,8 @@ sudo systemctl start pigpiod.service
 sudo systemctl enable pigpiod.service
 ```
 
+> **Note** При одновременном использовании `pigpiod` и [LED-ленты](leds.md) возможны конфликты. Для подключения ленты используйте пин GPIO21 и убедитесь в наличии флага `-t 0` в строке запуска `pigpiod`.
+
 Пример работы с библиотекой:
 
 ```python
