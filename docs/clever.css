@@ -1,0 +1,9 @@
+/* Dashed list items */
+section li {
+	list-style-type: none;
+}
+section li:before {
+	content: "—";
+	margin-left: -20px;
+	position: absolute;
+}
