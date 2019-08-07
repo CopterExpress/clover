@@ -65,14 +65,15 @@ apt-get update \
 && apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://repo.coex.space/rpi-ros-kinetic-buster stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
-echo "deb http://repo.coex.space/clever stretch main" > /etc/apt/sources.list.d/clever.list
+echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
+echo "deb http://repo.coex.space/rpi-ros-kinetic-buster buster main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
+# FIXME: We still don't have these packages built for Buster
+# echo "deb http://repo.coex.space/clever buster main" > /etc/apt/sources.list.d/clever.list
 
 echo_stamp "Update apt cache"
 
 # TODO: FIX ERROR: /usr/bin/apt-key: 596: /usr/bin/apt-key: cannot create /dev/null: Permission denied
-apt-get update -qq
+apt-get update
 # && apt upgrade -y
 
 echo_stamp "Software installing"
@@ -107,11 +108,7 @@ espeak espeak-data python-espeak \
 ntpdate \
 python-dev \
 python3-dev \
-<<<<<<< HEAD
-mjpg-streamer=2.0 \
-=======
 python-systemd \
->>>>>>> builder: Build against Buster
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
