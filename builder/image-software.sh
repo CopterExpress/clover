@@ -62,12 +62,12 @@ echo_stamp "Install apt keys & repos"
 # TODO: This STDOUT consist 'OK'
 curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -
 apt-get update \
-&& apt-get install --no-install-recommends -y -qq dirmngr=2.1.18-8~deb9u4 > /dev/null \
+&& apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://deb.coex.tech/rpi-ros-kinetic stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
-echo "deb http://deb.coex.tech/clever stretch main" > /etc/apt/sources.list.d/clever.list
+echo "deb http://repo.coex.space/rpi-ros-kinetic-buster stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
+echo "deb http://repo.coex.space/clever stretch main" > /etc/apt/sources.list.d/clever.list
 
 echo_stamp "Update apt cache"
 
@@ -77,49 +77,51 @@ apt-get update -qq
 
 echo_stamp "Software installing"
 apt-get install --no-install-recommends -y \
-unzip=6.0-21 \
-zip=3.0-11 \
-ipython=5.1.0-3 \
-ipython3=5.1.0-3 \
-screen=4.5.0-6 \
-byobu=5.112-1  \
-nmap=7.40-1 \
-lsof=4.89+dfsg-0.1 \
+unzip \
+zip \
+ipython \
+ipython3 \
+screen \
+byobu  \
+nmap \
+lsof \
 git \
-dnsmasq=2.76-5+rpt1+deb9u1  \
-tmux=2.3-4 \
+dnsmasq  \
+tmux \
 vim \
-cmake=3.7.2-1 \
-libjpeg8=8d1-2 \
+cmake \
+libjpeg8 \
 tcpdump \
 ltrace \
-libpoco-dev=1.7.6+dfsg1-5+deb9u1 \
+libpoco-dev \
 python-rosdep \
 python-rosinstall-generator \
-python-wstool=0.1.17-1 \
-python-rosinstall=0.7.8-1 \
-build-essential=12.3 \
+python-wstool \
+python-rosinstall \
+build-essential \
 libffi-dev \
-monkey=1.6.9-1 \
+monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
 espeak espeak-data python-espeak \
 ntpdate \
 python-dev \
 python3-dev \
+<<<<<<< HEAD
 mjpg-streamer=2.0 \
+=======
+python-systemd \
+>>>>>>> builder: Build against Buster
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
 
 echo_stamp "Updating kernel to fix camera bug"
 apt-get install --no-install-recommends -y \
-	raspberrypi-kernel=1.20190819~stretch-1 \
-	raspberrypi-bootloader=1.20190819~stretch-1 \
-	libraspberrypi-bin=1.20190819~stretch-1 \
-	libraspberrypi-dev=1.20190819~stretch-1 \
-	libraspberrypi0=1.20190819~stretch-1 \
-	wireless-regdb=2018.05.09-0~rpt1 \
-	wpasupplicant=2:2.6-21~bpo9~rpt1
+	raspberrypi-kernel=1.20190718-1 \
+	raspberrypi-bootloader=1.20190718-1 \
+	libraspberrypi-bin=1.20190718-1 \
+	libraspberrypi-dev=1.20190718-1 \
+	libraspberrypi0=1.20190718-1
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
