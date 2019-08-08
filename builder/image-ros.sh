@@ -79,7 +79,7 @@ resolve_rosdep() {
   CATKIN_PATH=$1
   ROS_DISTRO='kinetic'
   OS_DISTRO='debian'
-  OS_VERSION='stretch'
+  OS_VERSION='buster'
 
   echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
   cd ${CATKIN_PATH}
