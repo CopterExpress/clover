@@ -1,8 +1,8 @@
 /* Dashed list items */
-section li {
+section ul li {
 	list-style-type: none;
 }
-section li:before {
+section ul li:before {
 	content: "—";
 	margin-left: -20px;
 	position: absolute;
