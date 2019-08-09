@@ -25,8 +25,7 @@
 ## Использование
 
 Программное обеспечение Cortex: классифицирует сигнал мозга в эмоцию.
- <img src="../assets/Cortex1.jpg" width=450>
- <img src="../assets/Cortex 2.jpg" width=450>
+ <img src="../assets/Cortex1.jpg" width=450>                   <img src="../assets/Cortex 2.jpg" width=450>
  
 
 
