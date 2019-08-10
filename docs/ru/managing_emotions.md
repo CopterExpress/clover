@@ -13,7 +13,7 @@
 
 Видео-демонстрация:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen><iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen>< / iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen><iframe width="560" height="315" 
 
 ## Установка
 
@@ -25,13 +25,12 @@
 ## Использование
 
 Программное обеспечение Cortex: классифицирует сигнал мозга в эмоцию.
+<img src="../assets/Cortex1.jpg" width="450">
 
-./ активы / Cortex1.jpg " ширина=450>
-
-./ активы / Cortex 2.jpg " ширина=450>
+<img src="../assets/Cortex 2.jpg" width="450">
 
 Программное обеспечение BioEcho: эмуляция физической клавиатуры.
-./ активы / Биоэхо.jpg " ширина>
+<img src="../assets/BioEcho.jpg">
 
 «Далее Teleop code: работает на одном из терминалов Raspberry Pi (основной контроллер дрона) с того же устройства, которое запускает 1-е и 2-е программное обеспечение. Далее данные поступают на клавиатуру с помощью BioEcho и предаются в key_value ros.
 
