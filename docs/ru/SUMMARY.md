@@ -59,7 +59,7 @@
   * [3G-модем](3g.md)
   * [Установка ROS Kinetic](ros-install.md)
 * Проекты на базе Клевера
-  * [Управление дроном силой мысли](Control_of_the_drone_by_the_power_of_thought.md)
+  * [Управление дроном силой мысли](Managing_emotions.md)
   * [Генератор ArUco карт](arucogenmap.md)
   * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
