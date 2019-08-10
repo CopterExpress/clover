@@ -13,7 +13,7 @@
 
 Видео-демонстрация:
 
-**<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Установка
 
@@ -25,15 +25,15 @@
 ## Использование
 
 Программное обеспечение Cortex: классифицирует сигнал мозга в эмоцию.
- <img src="../assets/Cortex1.jpg" width=450>                   <img src="../assets/Cortex 2.jpg" width=450>
- 
 
+<img src="../assets/Cortex1.jpg" width=450>
+ 
+<img src="../assets/Cortex 2.jpg" width=450>
 
 Программное обеспечение BioEcho: эмуляция физической клавиатуры.
 <img src="../assets/BioEcho.jpg" width>
 
-«Далее Teleop code: работает на одном из терминалов Raspberry Pi (основной контроллер дрона) с того же устройства, которое запускает 1-е и 2-е программное обеспечение.
- Далее данные поступают  на клавиатуру с помощью BioEcho и предаются в key_value ros.
+«Далее Teleop code: работает на одном из терминалов Raspberry Pi (основной контроллер дрона) с того же устройства, которое запускает 1-е и 2-е программное обеспечение. Далее данные поступают  на клавиатуру с помощью BioEcho и предаются в key_value ros.
 
 Основной код: работает на Raspberry Pi и передает команды на key_value ros,  после  дрон летит вперед, если была использована эмоция напряжения клавиша «w», далее вращение происходит по направлению yaw на 90° против часовой стрелки, если будет использоваться эмоция радости клавиша  «s», и  последнюю эмоцию расслабления, мы  будем использовать  за движение дрона  в более стабильном и рациональном состоянии  для изменения эмоций пользователя,так как  эмоция является непрерывным сигналом, мы сделали сигнал перехода со значением клавиши «o», с данном состоянии дрон не сможет сделать никакого движения,если не будет отправлен сигнал перехода на клавишу «o».
 
