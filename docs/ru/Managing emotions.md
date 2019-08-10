@@ -26,13 +26,13 @@
 
 Программное обеспечение Cortex: классифицирует сигнал мозга в эмоцию.
 
-<img src="..docs/assets/Cortex1.jpg width="450"
+<img src="..docs/assets/Cortex1.jpg width="450">
 
-<img src="..docs/assets/Cortex 2.jpg width="450"
+<img src="..docs/assets/Cortex 2.jpg width="450">
 
 Программное обеспечение BioEcho: эмуляция физической клавиатуры.
 
-<img src="..docs/assets/BioEcho.jpg width="450"
+<img src="..docs/assets/BioEcho.jpg>
 
 «Далее Teleop code: работает на одном из терминалов Raspberry Pi (основной контроллер дрона) с того же устройства, которое запускает 1-е и 2-е программное обеспечение. Далее данные поступают на клавиатуру с помощью BioEcho и предаются в key_value ros.
 
