@@ -13,7 +13,7 @@
 
 Видео-демонстрация:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen><iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen>< / iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uLR5NNcekfA" frameborder= " 0 "allow=" акселерометр; автозапуск; зашифрованный носитель; гироскоп; картинка в картинке " allowfullscreen><iframe width="560" height="315" 
 
 ## Установка
 
@@ -26,9 +26,9 @@
 
 Программное обеспечение Cortex: классифицирует сигнал мозга в эмоцию.
 
-<img src="../assets/Cortex1.jpg width="450">
+<img src="../assets/Cortex1.jpg" width="450">
 
-<img src="../assets/Cortex 2.jpg width="450">
+<img src="../assets/Cortex 2.jpg" width="450">
 
 Программное обеспечение BioEcho: эмуляция физической клавиатуры.
 
