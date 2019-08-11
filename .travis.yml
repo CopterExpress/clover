@@ -62,7 +62,8 @@ jobs:
         - markdownlint -V
       script:
         - markdownlint docs
-        - ./check_files_size.py
+        - ./check_assets_size.py
+        - ./check_unused_assets.py
         - gitbook install
         - gitbook build
       deploy:
