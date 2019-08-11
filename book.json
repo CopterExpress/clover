@@ -13,7 +13,8 @@
         "validate-links",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
-        "addcssjs"
+        "addcssjs",
+        "language-picker@https://github.com/okalachev/gitbook-plugin-language-picker.git"
     ],
     "pluginsConfig": {
         "yametrika": {
@@ -28,6 +29,9 @@
         },
         "addcssjs": {
             "css": ["../clever.css"]
+        },
+        "language-picker": {
+            "languages": [["ru", "Russian"], ["en", "English"]]
         }
     }
 }
