@@ -188,17 +188,17 @@ main_camera.launch.
 - В файле `aruco.launch` нужно активировать несколько параметров. Подробнее в статье:
 https://clever.copterexpress.com/ru/aruco_map.html
 
-Должно получиться:
-```
-<arg name="aruco_detect" default="true"/>
-<arg name="aruco_map" default="true"/>
-<arg name="aruco_vpe" default="true"/>`
-```
+  Должно получиться:
+  ```
+  <arg name="aruco_detect" default="true"/>
+  <arg name="aruco_map" default="true"/>
+  <arg name="aruco_vpe" default="true"/>`
+  ```
 
 - Сгенерировать поле с метками. Подробности в статье в разделе «Настройка карты маркеров»:
 https://clever.copterexpress.com/ru/aruco_map.html
 
-Пример команды для генерации поля, где:
+  Пример команды для генерации поля, где:
   - длина маркера = 0.335 м (length)
   - 10 столбцов (x)
   - 10 строк (y)
@@ -208,11 +208,11 @@ https://clever.copterexpress.com/ru/aruco_map.html
   - название карты остается стандартным: map.txt
   - нумерация идет с верхнего левого угла (ключ --top-left)
 
-```
-rosrun aruco_pose genmap.py 0.335 10 10 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/map.txt --top-left
-```
+  ```
+  rosrun aruco_pose genmap.py 0.335 10 10 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/map.txt --top-left
+  ```
 
-В большинстве полей нумерация начинается с нулевой метки. Также в большинстве случаев нумерация начинается с верхнего левого угла, поэтому при генерации очень важно указывать ключ --top-left
+  В большинстве полей нумерация начинается с нулевой метки. Также в большинстве случаев нумерация начинается с верхнего левого угла, поэтому при генерации очень важно указывать ключ --top-left
 
 > **Hint** Если вы зададите другое имя для файла с картой, его нужно прописать в файле `aruco.launch`. Найдите строку
 `<param name="map" value="$(find aruco_pose)/map/map.txt"/>`
@@ -261,7 +261,7 @@ https://clever.copterexpress.com/ru/firmware.html
 
 > **Warn** Обязательно выберете скачанную прошивку во время нажатия firmware.
 
-https://clever.copterexpress.com/ru/setup.html
+  https://clever.copterexpress.com/ru/setup.html
 
 ## Соединение полетного контроллера и Raspberry Pi
 
@@ -271,7 +271,7 @@ https://clever.copterexpress.com/ru/setup.html
 На образе настраивать ничего не надо, нужно лишь создать новое подключение в QGroundControl, выбрать его и подключиться. Настраивается оно, как на картинке в статье в разделе "TCP-бридж":
 https://clever.copterexpress.com/ru/gcs_bridge.html
 
-Можно пока не подключать аккумулятор, а подать питание только на Raspberry Pi.
+  Можно пока не подключать аккумулятор, а подать питание только на Raspberry Pi.
 
 ## Настройка пульта
 
@@ -279,6 +279,15 @@ https://clever.copterexpress.com/ru/gcs_bridge.html
 https://clever.copterexpress.com/ru/setup.html
 
   Канал 5 должен располагаться на переключателе SwC; Канал 6 - на SwA. Однако вы можете настроить эти каналы любым удобным для вас образом.
+  
+## Выполнение автоматической
+
+Проверку следует выполнить, когда вы полностью настроили дрон. Подробно процедура описана в статье: https://clever.copterexpress.com/ru/selfcheck.html
+
+- Выполнить команду:
+  ```
+  rosrun clever selfcheck.py
+  ```
 
 ## Написание программы
 
@@ -338,3 +347,31 @@ https://clever.copterexpress.com/ru/simple_offboard.html
   ```
   land()
   ```
+
+## Запись программы на дрон.
+
+Самый простой способ - это скопировать текст программы, создать новый файл в командной строке Клевера и вставить текст программы в файл.
+
+- Для создания файла myprogram.py введите команду:
+  ```
+  nano myprogram.py
+  ```
+  
+  Название можно выбрать любое, однако не рекомендуется использовать пробелы и специальные символы. Также расширение у программы всегда должно быть `.py`.
+  
+- Вставить текст в поле ввода. Если вы пользуетесь Веб-доступом Butterfly на Windows или Linux:
+  ```
+  Ctrl+Shift+V
+  ```
+  
+  На Mac нажмите `Cmd+V`.
+  
+- Сохранить файл:
+  ```
+  Ctrl+x; Y; Enter
+  ```
+  
+## Запуск программы
+
+Необходимо тщательно подготовить дрон, пульт и программу.
+  
