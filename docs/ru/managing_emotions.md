@@ -33,7 +33,7 @@
 
 Программное обеспечение BioEcho: эмуляция физической клавиатуры.
 
-<img src="../assets/bioecho.jpg">
+![image description](/assests/bioecho.md)
 
 Далее данные поступают на клавиатуру с помощью BioEcho и предаются в ROS.
 
@@ -41,4 +41,4 @@
 
 ## Код
 
-[Код]( https://github.com/hany606/COEX-Internship19/tree/master/projects/NeuroHelmet) для управления квадрокоптером, написанный на языке Python, был взят с сайта GitHub.
+[Код](https://github.com/hany606/COEX-Internship19/tree/master/projects/NeuroHelmet) для управления квадрокоптером, написанный на языке Python, был взят с сайта GitHub.
