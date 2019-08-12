@@ -622,18 +622,30 @@ def check_clever_service():
     j.add_disjunction()
     j.add_match(UNIT='clever.service')
     node_errors = []
+    xml_errors = []
     r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
+    xml_error_header = 'Invalid roslaunch XML syntax:'
     for event in j:
         msg = event['MESSAGE']
-        if ('Stopped Clever ROS package' in msg) or ('Started Clever ROS package' in msg):
+        if 'Started Clever ROS package' in msg:
+            # Clear xml errors (we might get some later)
+            xml_errors = []
+        elif 'Stopped Clever ROS service' in msg:
+            # Clear node errors (we don't care about them anymore)
             node_errors = []
         elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
             msg = r.search(msg).groups()[2]
             if msg in node_errors:
                 continue
             node_errors.append(msg)
+        elif xml_error_header in msg:
+            msg = msg.replace(xml_error_header, 'clever.launch syntax error:')
+            xml_errors.append(msg)
+
     for error in node_errors:
         failure(error)
+    for syntax_error in xml_errors:
+        failure(syntax_error)
 
 
 @check('Image')
