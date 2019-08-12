@@ -57,10 +57,10 @@ except exc.GitCommandError:
 print('Base tag set to {}'.format(base_tag))
 
 if base_tag == 'empty':
-    changelog = git.log('--pretty=format:* %H %s *(%an)*')
+    changelog_link = 'https://github.com/{}/commits'.format(repo_slug)
 else:
-    changelog = git.log('{}...{}'.format(base_tag, current_tag), '--pretty=format:* %H %s *(%an)*')
-print('Current changelog: \n{}'.format(changelog))
+    changelog_link = 'https://github.com/{}/compare/{}...{}'.format(repo_slug, base_tag, current_tag)
+print('Current changelog: \n{}'.format(changelog_link))
 
 # Only interact with Github if uploading is enabled
 if upload_changelog:
@@ -77,7 +77,7 @@ if upload_changelog:
     gh_body = gh_release.body
     if gh_body is None:
         gh_body = ''
-    gh_body = '{}\nChanges between `{}` and `{}`:\n\n{}'.format(gh_body, base_tag, current_tag, changelog)
+    gh_body = '{}\nChanges between `{}` and `{}`:\n\n{}'.format(gh_body, base_tag, current_tag, changelog_link)
     print('New release body: {}'.format(gh_body))
     gh_release.update_release(gh_release.tag_name, gh_body, draft=True, prerelease=True,
                               tag_name=gh_release.tag_name, target_commitish=gh_release.target_commitish)
