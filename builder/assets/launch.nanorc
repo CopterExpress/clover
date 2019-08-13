@@ -1,4 +1,4 @@
-## Here is an example for XML files.
+## ROS .launch files (which are actually xml files)
 
 syntax "launch" "\.(launch)$"
 header "<\?xml.*version=.*\?>"
