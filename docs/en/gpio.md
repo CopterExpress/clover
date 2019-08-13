@@ -16,7 +16,7 @@ To enable automatic launch of the daemon, run:
 sudo systemctl enable pigpiod.service
 ```
 
-> **Note** `pigpiod` may interfere with [LED strip](leds.md) if configured improperly. Make sure that the strip is connected to GPIO21 and that `pigpiod` is launched with the `-t 0` flag.
+> **Warning** `pigpiod` may interfere with [LED strip](leds.md) if configured improperly. Make sure that the strip is connected to GPIO21. On [image versions](microsd_images.md) lower than 0.17 change the service start string in `/lib/systemd/system/pigpiod.service` to `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
 
 Example of working with the library:
 
