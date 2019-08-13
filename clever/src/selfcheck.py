@@ -236,6 +236,10 @@ def check_fcu():
             except KeyError:
                 failure('unknown board rotation %s', rot)
 
+        cbrk_usb_chk = get_param('CBRK_USB_CHK')
+        if cbrk_usb_chk != 197848:
+            failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
 
