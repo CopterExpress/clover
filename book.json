@@ -12,6 +12,7 @@
         "validate-links",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
+        "toolbar@git+https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
         "addcssjs"
     ],
     "pluginsConfig": {
@@ -24,6 +25,23 @@
         },
         "sitemap": {
             "hostname": "https://clever.copterexpress.com"
+        },
+        "toolbar": {
+            "buttons":
+            [
+                {
+                    "label": "Edit page on github",
+                    "icon": "fa fa-pencil-square-o",
+                    "position" : "left",
+                    "url": "https://github.com/CopterExpress/clever/edit/master/docs/{{filepath_lang}}"
+                },
+                {
+                    "label": "GitHub",
+                    "icon": "fa fa-github",
+                    "position" : "left",
+                    "url": "https://github.com/CopterExpress/clever"
+                }
+            ]
         },
         "addcssjs": {
             "css": ["../clever.css"]
