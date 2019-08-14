@@ -623,9 +623,11 @@ def check_clever_service():
     j.add_match(UNIT='clever.service')
     node_errors = []
     xml_errors = []
+    xml_error_file = 'clever.launch'
     current_xml_error_count = 0
     r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
     xml_error_header = 'Invalid roslaunch XML syntax:'
+    xml_error_file_header = 'while processing '
     for event in j:
         msg = event['MESSAGE']
         if 'Started Clever ROS package' in msg:
@@ -637,13 +639,16 @@ def check_clever_service():
                 # We didn't get any XML errors on last launch,
                 # assume last configuration was good enough
                 xml_errors = []
+                xml_error_file = 'clever.launch'
         elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
             msg = r.search(msg).groups()[2]
             if msg in node_errors:
                 continue
             node_errors.append(msg)
+        elif xml_error_file_header in msg:
+            xml_error_file = msg.replace(xml_error_file_header, '').replace(':', '')
         elif xml_error_header in msg:
-            msg = msg.replace(xml_error_header, 'clever.launch syntax error:')
+            msg = msg.replace(xml_error_header, '%s syntax error:' % xml_error_file)
             current_xml_error_count += 1
             xml_errors.append(msg)
 
