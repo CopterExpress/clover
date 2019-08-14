@@ -1,6 +1,6 @@
 # Navigation using ArUco markers
 
-> **Note** Documentation for the versions [of image](microsd_images.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/aruco.md).
+> **Note** Documentation for the versions [of image](image.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/aruco.md).
 
 [ArUco-Markers](https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html) is a popular technology for positioning
 robotic systems using computer vision.

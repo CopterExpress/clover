@@ -18,7 +18,7 @@ We also have a chat for programmers coding for PX4, autonomous navigation indoor
 Raspberry Pi image
 ----------------------
 
-**Preconfigured OS** image for Raspberry Pi 3 with installed and configured software is available [here](microsd_images.md).
+**Preconfigured OS** image for Raspberry Pi 3 with installed and configured software is available [here](image.md).
 
 The image includes:
 

@@ -1,7 +1,7 @@
 Simple OFFBOARD
 ===
 
-> **Note** Documentation for the [image](microsd_images.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+> **Note** Documentation for the [image](image.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
 
 The `simple_offboard` module of the `clever` package is intended for simplified programming of an autonomous drone ([mode](modes.md) `OFFBOARD`). It allows setting the desired flight tasks, and automatically transforms [the system of coordinates](frames.md).
 

@@ -21,7 +21,7 @@
   * [PID Setup](calibratePID.md)
 * Work with Raspberry Pi
   * [Raspberry Pi](raspberry.md)
-  * [RPi Image](microsd_images.md)
+  * [RPi Image](image.md)
   * [RPi Connection to the Pixhawk](connection.md)
   * [Wi-Fi connection](wifi.md)
   * [SSH access to Raspberry Pi](ssh.md)

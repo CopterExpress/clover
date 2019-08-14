@@ -25,6 +25,6 @@ In fact, we will use it as the last in the list, due to its ability to connect t
 
 See more:
 
-* [RPi image](microsd_images.md)
+* [RPi image](image.md)
 * [SSH access](ssh.md)
 * [Network setup](network.md)

@@ -1,6 +1,6 @@
 # Adjusting the position of the main camera
 
-> **Note** Documentation for the versions [of image](microsd_images.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/camera_frame.md).
+> **Note** Documentation for the versions [of image](image.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/camera_frame.md).
 
 Position and orientation of the main camera is determined in file `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 

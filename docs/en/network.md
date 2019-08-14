@@ -6,7 +6,7 @@ The Raspberry Pi Wi-Fi adapter of has two main operating modes:
 
 2. **Access point mode** – RPi creates a Wi-Fi network that you can connect to.
 
-When using [the RPi image](microsd_images.md), the Wi-Fi adapter works in the [access point mode] by default (Wi-Fi.md).
+When using [the RPi image](image.md), the Wi-Fi adapter works in the [access point mode] by default (Wi-Fi.md).
 
 ## Changing the password or SSID (of the network name)
 
@@ -148,7 +148,7 @@ Below you can read more about how RPi networking is organized.
 
 ## RPi network organization
 
-Network operation in the [image](microsd_images.md) is supported by two pre-installed services:
+Network operation in the [image](image.md) is supported by two pre-installed services:
 
 * **networking** — the service enables all network interfaces at the moment of start [5].
 * **dhcpcd** — the service ensures configuration of addressing and routing on the interfaces obtained dynamically, or specified statically in the config file.

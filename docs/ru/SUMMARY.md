@@ -22,7 +22,7 @@
   * [Настройка PID](calibratePID.md)
 * Работа с Raspberry Pi
   * [Raspberry Pi](raspberry.md)
-  * [Образ для RPi](microsd_images.md)
+  * [Образ для RPi](image.md)
   * [Подключение RPi к Pixhawk](connection.md)
   * [Подключение по Wi-Fi](wifi.md)
   * [SSH-доступ](ssh.md)

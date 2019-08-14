@@ -4,7 +4,7 @@ GPIO (General-Purpose Input/Output) – это тип пинов на Raspberry 
 
 > **Info** Используйте [распиновку](https://pinout.xyz), чтобы понять, какие из пинов на Raspberry Pi поддерживают GPIO и ШИМ.
 
-Для работы с GPIO на [образе для RPi](microsd_images.md) предустановлена библиотека [`pigpio`](http://abyz.me.uk/rpi/pigpio/). Чтобы взаимодействовать с этой библиотекой, запустите соответствующий демон:
+Для работы с GPIO на [образе для RPi](image.md) предустановлена библиотека [`pigpio`](http://abyz.me.uk/rpi/pigpio/). Чтобы взаимодействовать с этой библиотекой, запустите соответствующий демон:
 
 ```bash
 sudo systemctl start pigpiod.service
