@@ -647,10 +647,8 @@ def check_clever_service():
             current_xml_error_count += 1
             xml_errors.append(msg)
 
-    for error in node_errors:
+    for error in node_errors + xml_errors:
         failure(error)
-    for syntax_error in xml_errors:
-        failure(syntax_error)
 
 
 @check('Image')
