@@ -44,7 +44,7 @@ http://192.168.11.1:8080/stream_viewer?topic=/main_camera/image_raw&quality=1
 ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view
 ```
 
-Выберите топик для просмотра, например `/main_camera/image_raw`:
+Выберите топик для просмотра, например, `/main_camera/image_raw`:
 
 ![rqt_image_view](../assets/rqt_image_view.jpg)
 
