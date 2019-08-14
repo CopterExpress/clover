@@ -18,10 +18,9 @@ ssh pi@192.168.11.1
 Также можно получить доступ по SSH со смартфона с помощью приложения [Termius](https://www.termius.com).
 
 Подробнее: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
+## Веб-доступ
 
-Веб-доступ
-----------
+Начиная с версии 0.11.4 [образа](image.md) доступ к шеллу также доступен через веб-браузер (с использованием [Butterfly](https://github.com/paradoxxxzero/butterfly)). Для доступа откройте страницу http://192.168.11.1 и выберите на ней ссылку *Open web terminal*:
 
-Начиная с версии 0.11.4 [образа](microsd_images.md) доступ к шеллу также доступен через веб-браузер (с использованием [Butterfly](https://github.com/paradoxxxzero/butterfly)). Для доступа откройте страницу http://192.168.11.1 и выберите на ней ссылку *Open web terminal*:
 
 <img src="../assets/butterfly.png">
