@@ -7,3 +7,10 @@ section li:before {
 	margin-left: -20px;
 	position: absolute;
 }
+
+/* Centered images */
+.book img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
