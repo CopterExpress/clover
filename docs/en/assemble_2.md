@@ -31,7 +31,7 @@ Clever 2 construction kit assembly instruction
 * FlySky i6 radio transmitter ×1.
 * EFEST LUC V4 Charger ×1.
 * Micro USB to USB Cable ×1
-* Battery compartment 18650 li-Ion ×1
+* Battery compartment 18650 Li-ion ×1
 * Wire copper multicore silicone insulated cable 18AWG (red, black), 100 cm long
 * AA battery ×4
 * Jumper, Bind-plug
