@@ -12,7 +12,7 @@
         "validate-links",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
-        "toolbar@git+https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
+        "toolbar@https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
         "addcssjs",
         "image-zoom@https://github.com/okalachev/gitbook-plugin-image-zoom.git",
         "language-picker@https://github.com/okalachev/gitbook-plugin-language-picker.git"
