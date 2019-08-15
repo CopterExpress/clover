@@ -19,4 +19,4 @@ for root, dirs, files in os.walk('assets'):
                 print('\x1b[1;31mAssets file {} is not used\x1b[0m'.format(path))
                 code = 1
 
-sys.exit(code)
+# sys.exit(code) # TODO!!!
