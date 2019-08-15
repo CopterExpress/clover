@@ -12,7 +12,7 @@
   * [Калибровка](calibration.md)
   * [Настройка пульта](radio.md)
   * [Полетные режимы](modes.md)
-  * [Калибровка регуляторов](esc.md)
+  * [Настройка питания](power.md)
 * [Работа с Raspberry Pi](raspberry.md)
   * [Образ для RPi](image.md)
   * [Подключение RPi к Pixhawk](connection.md)
