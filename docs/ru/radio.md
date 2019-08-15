@@ -31,9 +31,9 @@
 
 4. Переведите левый стик (газа) в минимум и нажмите *Next*.
 5. Повторяйте движения стиками вслед за анимацией и читайте подсказки.
-6. При появлении надписи *Move all transmitter switches and/or dials back and forth to their extreme positions* переключите SwA. SwD, VrA, VrB в их конечные положения.
+6. При появлении надписи *"Move all transmitter switches and/or dials back and forth to their extreme positions"* переключите SwA. SwD, VrA, VrB в их конечные положения.
 7. Нажмите *Next*.
-8. При появлении надписи *All settings have been captured. Click Next to write the new parameters to your board* нажмите *Next*.
+8. При появлении надписи *"All settings have been captured. Click Next to write the new parameters to your board"* нажмите *Next*.
 
 Дополнительная информация: https://docs.qgroundcontrol.com/en/SetupView/Radio.html.
 
