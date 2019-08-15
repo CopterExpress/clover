@@ -8,7 +8,7 @@
   * [Safety instruction](safety.md)
   * [Connecting 4 in 1 ESCs](4in1.md)
   * [Types of power connectors](connectortypes.md)
-  * [Blanching](zap.md)
+  * [Blanching](tinning)
   * [Soldering safety](tb.md)
   * [Using multimeter](test_connection.md)
   * [Possible radio failures](radioerrors.md)

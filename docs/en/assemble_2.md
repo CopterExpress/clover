@@ -201,7 +201,7 @@ Check CLOSED CONDITION of the following circuits (presence of the multimeter sou
 
 ### Blanch the contact pads of the power board
 
-1. [Blanch*] (zap.md) the contact pads of the power board
+1. [Blanch*](tinning.md) the contact pads of the power board
 2. Using a multimeter, check absence of contact closure on the PCB (check continuity)
 
 ![ After-soldering check](../assets/zapPDBtest.jpg)
