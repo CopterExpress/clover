@@ -106,7 +106,7 @@
 5. Зажмите кнопку На пульте зажать кнопку *BIND KEY*.
 6. Включите пульт (перещелкните *POWER*, не отпуская *BIND KEY*).
 
-    <img src="../assets/4/radio/binding.png" class="zoom center">
+    <img src="../assets/4/radio/binding.png" class="zoom center" width=500>
 
 7. Ждите синхронизации.
 8. Отсоедините джампер.
@@ -118,7 +118,7 @@
 2. Правый стик в **центре**.
 3. Переключатели A, B, C, D в положение **"от себя"**.
 
-    <img src="../assets/4/radio/base.png" alt="Нейтральное положение стиков пульта" class="zoom center">
+    <img src="../assets/4/radio/base.png" alt="Нейтральное положение стиков пульта" class="zoom center" width=500>
 
 Убедитесь, что PPM в меню RX Setup отключен:
 
