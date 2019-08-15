@@ -201,13 +201,8 @@ Check CLOSED CONDITION of the following circuits (the multimeter beeps):
 
 ### Tin the contact pads of the power board
 
-<<<<<<< HEAD
-1. [Blanch*](tinning.md) the contact pads of the power board
-2. Using a multimeter, check absence of contact closure on the PCB (check continuity)
-=======
-1. [Tin*] (zap.md) the contact pads of the power board.
+1. [Tin*](tinning.md) the contact pads of the power board.
 2. Using a multimeter, check absence of short-circuits on the PCB (check continuity).
->>>>>>> master
 
 ![ After-soldering check](../assets/en/zapPDBtest.jpg)
 
