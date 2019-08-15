@@ -13,7 +13,8 @@
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
         "toolbar@git+https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
-        "addcssjs"
+        "addcssjs",
+        "image-zoom@https://github.com/okalachev/gitbook-plugin-image-zoom.git"
     ],
     "pluginsConfig": {
         "yametrika": {
