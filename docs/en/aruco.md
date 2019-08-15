@@ -12,7 +12,7 @@ Examples of ArUco markers:
 
 For rapid generation of markers for printing, you may use an online tool: http://chev.me/arucogen/.
 
-[Clever Raspberry Pi image](microsd_images.md) contains a pre-installed `aruco_pose` ROS package, which can be used for marker detection.
+[Clever Raspberry Pi image](image.md) contains a pre-installed `aruco_pose` ROS package, which can be used for marker detection.
 
 ## Modes of operation
 

@@ -16,7 +16,7 @@ sudo systemctl start pigpiod.service
 sudo systemctl enable pigpiod.service
 ```
 
-> **Warning** При одновременном использовании `pigpiod` и [LED-ленты](leds.md) возможны конфликты. Для подключения ленты используйте пин GPIO21. На версиях [образа](microsd_images.md) ниже 0.17 измените в файле `/lib/systemd/system/pigpiod.service` строку запуска сервиса на `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
+> **Warning** При одновременном использовании `pigpiod` и [LED-ленты](leds.md) возможны конфликты. Для подключения ленты используйте пин GPIO21. На версиях [образа](image.md) ниже 0.17 измените в файле `/lib/systemd/system/pigpiod.service` строку запуска сервиса на `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
 
 Пример работы с библиотекой:
 

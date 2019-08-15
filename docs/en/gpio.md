@@ -4,7 +4,7 @@ A GPIO (General-Purpose Input/Output) pin is a programmable digital signal pin o
 
 > **Info** Use the [pinout](https://pinout.xyz) for figuring out, which Raspberry Pi's pins support GPIO and PWM.
 
-The [`pigpio`](http://abyz.me.uk/rpi/pigpio) library for interfacing with the GPIO pins is already preinstalled on [the RPi image](microsd_images.md). To interact with this library, run the appropriate daemon:
+The [`pigpio`](http://abyz.me.uk/rpi/pigpio) library for interfacing with the GPIO pins is already preinstalled on [the RPi image](image.md). To interact with this library, run the appropriate daemon:
 
 ```bash
 sudo systemctl start pigpiod.service
@@ -16,7 +16,7 @@ To enable automatic launch of the daemon, run:
 sudo systemctl enable pigpiod.service
 ```
 
-> **Warning** `pigpiod` may interfere with [LED strip](leds.md) if configured improperly. Make sure that the strip is connected to GPIO21. On [image versions](microsd_images.md) lower than 0.17 change the service start string in `/lib/systemd/system/pigpiod.service` to `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
+> **Warning** `pigpiod` may interfere with [LED strip](leds.md) if configured improperly. Make sure that the strip is connected to GPIO21. On [image versions](image.md) lower than 0.17 change the service start string in `/lib/systemd/system/pigpiod.service` to `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
 
 Example of working with the library:
 
