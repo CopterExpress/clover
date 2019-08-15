@@ -18,11 +18,11 @@
   * [Подключение RPi к Pixhawk](connection.md)
   * [Подключение по Wi-Fi](wifi.md)
   * [SSH-доступ](ssh.md)
+  * [Редактирование файлов](editing.md)
   * [Работа с QGroundControl через Wi-Fi](gcs_bridge.md)
   * [Автоматическая проверка](selfcheck.md)
   * [Просмотр видеострима с камер](web_video_server.md)
   * [Системы координат](frames.md)
-  * [Интерфейс UART](uart.md)
 * Программирование
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
@@ -42,7 +42,6 @@
   * [Лазерный дальномер](laser.md)
   * [Автозапуск ПО](autolaunch.md)
 * Дополнительные материалы
-  * [Редактирование файлов](editing.md)
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)

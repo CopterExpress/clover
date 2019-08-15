@@ -50,4 +50,4 @@
 
 Дополнительная информация: https://docs.px4.io/v1.9.0/en/config/level_horizon_calibration.html.
 
-**Далее**: [Подключение пульта](radio.md).
+**Далее**: [Настройка пульта](radio.md).
