@@ -4,7 +4,7 @@ It is generally a good idea to perform some checks before flight, especially bef
 
 ## <span>selfcheck</span>.py
 
-Utility `selfcheck.py` is part of `clever` package, and automatically tests the main aspects of the ROS platform and the PX4. The utility is pre-installed on [the Raspberry Pi image](image.md).
+The `selfcheck.py` utility script is part of the `clever` package; it performs automated tests of the main aspects of the ROS platform and PX4. The utility is pre-installed on [the Raspberry Pi image](image.md).
 
 In order to run it, enter the following command in [the Raspberry Pi console](ssh.md):
 
