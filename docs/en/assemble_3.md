@@ -58,7 +58,7 @@ TODO
 4. Unpack the voltage converter and remove the transparent insulation.
 5. Solder two additional wires to the BEC
     * Take 3 male-female wires from the kit (red, black, and any color)
-    * The red and black wires [are to be blanched](tinning.md) on both ends using tweezers. The blue wire is to be blanched from the side of the MALE connector.
+    * The red and black wires [are to be tinned](tinning.md) on both ends using tweezers. The blue wire is to be tinned from the side of the MALE connector.
 
         To tin means:
         * Apply flux to the exposed part of the wire.
