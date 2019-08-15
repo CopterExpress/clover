@@ -41,7 +41,7 @@
 
 ## Запись образа ОС на MicroSD карту
 
-Для установки образа вы можете воспользоваться утилитой [Etcher](https://etcher.io).
+Для установки образа используйте утилиту [Etcher](https://etcher.io).
 
 [![Etcher](../assets/etcher.gif)](https://etcher.io)
 
