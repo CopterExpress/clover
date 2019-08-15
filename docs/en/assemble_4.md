@@ -186,3 +186,154 @@ Make sure the transmitter operates in the PPM mode:
         <img src="../assets/4/22.png" width=300 class="zoom border">
         <img src="../assets/4/23.png" width=300 class="zoom border">
     </center>
+
+## Installing the Raspberry Pi
+
+1. Attach the Raspberry Pi using four standoffs.
+2. Route the BEC wires through the channel in the top carbon deck.
+
+    <center>
+        <img src="../assets/4/24.png" width=300 class="zoom border">
+        <img src="../assets/4/26.png" width=300 class="zoom border">
+    </center>
+
+3. Connect the BEC outputs according to the following image:
+
+<img src="../assets/4/26_1.png" width=300 class="zoom center border">
+
+## Installing the LED strip on the LED strip ring
+
+1. Check wires on the strip (and solder them on if they're missing)
+2. Attach the LED strip to the ring using the adhesive layer on the strip. Use zip ties to fix it in place.
+
+    <center>
+        <img src="../assets/4/27.png" width=300 class="zoom border">
+        <img src="../assets/4/27_1.png" width=300 class="zoom border">
+        <img src="../assets/4/28.png" width=300 class="zoom border">
+    </center>
+
+## Connecting the LED strip to Raspberry Pi
+
+1. Power the LED strip from a separate BEC. Connect the **«+»** and **«-»** leads to **5v** and **Ground** respectively.
+2. Connect the **D** lead to GPIO21 (consult the [relevant article](leds.md) for more information).
+
+<img src="../assets/4/31_1.png" width=300 class="zoom center border">
+
+## Installing the camera cable
+
+1. Open the slot connector by lifting the T-clip.
+2. Insert the ribbon cable.
+3. Press the T-clip down to secure the cable.
+
+<img src="../assets/4/32.png" width=300 class="zoom center border">
+
+## Mounting the lower deck periphery
+
+1. Prepare the laser rangefinder by soldering leads to it.
+2. Use four 2x5 self-tapping screws to secure the camera.
+3. Mount the laser rangefinder on the lower deck using two M3x8 screws and steel nuts.
+
+    <center>
+        <img src="../assets/4/33.png" width=300 class="zoom border">
+        <img src="../assets/4/33_1.png" width=300 class="zoom border">
+    </center>
+
+4. Attach RC receiver to the lower deck using 3M double-sided adhesive pads.
+
+    <img src="../assets/4/34.png" width=300 class="zoom center border">
+
+5. Mount the lower deck assembly using four M3x10 screws.
+6. Connect the camera ribbon cable to the camera.
+
+    <center>
+        <img src="../assets/4/35.png" width=300 class="zoom border">
+        <img src="../assets/4/36.png" width=300 class="zoom border">
+    </center>
+
+7. Connect the laser rangefineder to the Raspberry Pi using the following pinout:
+    * Connect **VCC** to pin 1 (**3v3**)
+    * Connect **GND** to pin 9 (**Ground**)
+    * Connect **SDA** to pin 3 (**GPIO2**)
+    * Connect **SCL** to pin 5 (**GPIO3**)
+
+    <img src="../assets/4/36.png" width=300 class="zoom center border">
+
+## Mounting the landing gear
+
+1. Attach 8 landing gear pieces using M3x10 screws and steel nuts.
+2. Attach dampening pads to the landing gear pieces using M3x10 screws and steel nuts.
+
+    <center>
+        <img src="../assets/4/37.png" width=300 class="zoom border">
+        <img src="../assets/4/38.png" width=300 class="zoom border">
+    </center>
+
+## Connecting the cables
+
+1. Connect RC cable to the **RCIN** port on the flight controller.
+2. Connect RC cable to RC receiver.
+
+    <img src="../assets/4/39.png" width=300 class="zoom center border">
+
+## Mounting the propeller guards
+
+1. Assemble the lower part of the guards using twelve M3x10 screws and twelve 40 mm plastic spacers.
+2. Assemble the top part using twelve M3x10 screws.
+
+    <center>
+        <img src="../assets/4/40.png" width=300 class="zoom border">
+        <img src="../assets/4/41.png" width=300 class="zoom border">
+    </center>
+
+3. Attach the assembly to the drone using four M3x10 screws and steel nuts.
+
+    <center>
+        <img src="../assets/4/42.png" width=300 class="zoom border">
+        <img src="../assets/4/42_1.png" width=300 class="zoom border">
+    </center>
+
+## Mounting the top deck
+
+1. Attach the battery holder to the top deck with four M3x8 screws and steel nuts.
+2. Thread the battery strap through the slots in the deck.
+3. Attach the top deck using four M3x10 screws.
+
+    <center>
+        <img src="../assets/4/42.png" width=300 class="zoom border">
+        <img src="../assets/4/42_1.png" width=300 class="zoom border">
+    </center>
+
+4. Connect the flight controller to the Raspberry Pi using retractable USB cable.
+5. Attach the USB cable reel where convenient using 3M double-sided adhesive pads while making sure the cable does not interfere with the propellers.
+
+    <center>
+        <img src="../assets/4/47_1.png" width=300 class="zoom border">
+        <img src="../assets/4/47_2.png" width=300 class="zoom border">
+    </center>
+
+## Installing the battery
+
+> **Warning** Make sure all cables are secured and nothing interferes with the propellers!
+
+Check the quadrotor assembly:
+
+* The balance connector should be fixed under the battery strap.
+* The ESCs should be zip tied to the frame.
+* All wires from the PDB and flight controller should be tucked under a velcro strap wound around aluminum spacers.
+
+<img src="../assets/4/48.png" width=300 class="zoom center border">
+
+## Mounting the propellers and preparing for flight
+
+Perform the quadrotor components setup according to [the "Initial setup" article](setup.md)
+
+> **Warning** Be sure to **not** mount the propellers **until the setup is complete**. Do it only when you are ready to fly.
+
+Attach the propellers according to their rotation direction. The battery should be disconnected duting propeller installation.
+
+<center>
+    <img src="../assets/4/49.png" width=300 class="zoom border">
+    <img src="../assets/4/50.png" width=300 class="zoom border">
+</center>
+
+> **Success** The drone is ready to fly!
