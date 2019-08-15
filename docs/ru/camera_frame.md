@@ -2,7 +2,9 @@
 
 > **Note** Документация для версий [образа](image.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/camera_frame.md).
 
-Расположение и ориентация основной камеры задается в файле `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
+Для корректной работы всех модулей, связанных с компьютерным зрением (в том числе [полет по ArUco-маркерам](aruco.md) и [Optical Flow](optical_flow.md)) необходимо корректно выставленная ориентация основной камеры Клевера.
+
+Расположение и ориентация камеры [задается в файле](editing.md) `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>
@@ -61,3 +63,5 @@
 
 <img src="../assets/camera_option_4_rviz.png" width=400>
 <img src="../assets/camera_option_4_clever.jpg" width=400>
+
+> **Hint** [Утилита `selfcheck.py`](selfcheck.md) выдает словесное описание установленной в данной момент ориентации основной камеры.
