@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" required="true"/>
+
+    <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true" required="true">
+        <remap from="image_raw" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <remap from="markers" to="aruco_detect/markers"/>
+        <param name="type" value="map"/>
+        <param name="map" value="$(find aruco_pose)/test/largemap.txt"/>
+    </node>
+
+    <test test-name="test_aruco_pose_largemap" pkg="aruco_pose" type="largemap.py"/>
+</launch>

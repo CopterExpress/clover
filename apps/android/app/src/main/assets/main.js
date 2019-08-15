@@ -23,19 +23,18 @@ function throttle(func, ms) {
 }
 
 function postAppMessage(msg) {
-    if (window.webkit != undefined) {
-        if (window.webkit.messageHandlers.appInterface != undefined) {
-            window.webkit.messageHandlers.appInterface.postMessage(JSON.stringify(msg));
-        }
-    }
-    else if (window.appInterface != undefined) {
-        window.appInterface.postMessage(JSON.stringify(msg));
-    }
+	if (window.webkit != undefined) {
+		if (window.webkit.messageHandlers.appInterface != undefined) {
+			window.webkit.messageHandlers.appInterface.postMessage(JSON.stringify(msg));
+		}
+	} else if (window.appInterface != undefined) {
+		window.appInterface.postMessage(JSON.stringify(msg));
+	}
 }
 
 function callNativeApp(name, msg) {
 	try {
-        postAppMessage(msg);
+		postAppMessage(msg);
 		return true;
 	} catch(err) {
 		console.warn('The native context does not exist yet');
@@ -109,12 +108,12 @@ function stickTouchStart(e) {
 
 function stickTouchMove(e) {
 	for (touch of e.changedTouches) {
-            onStickTouchMove(touch);
-        }
-    	//onStickTouchMove(e.changedTouches[0]);
-    	rcPublishThrottled();
-    	e.stopPropagation();
-    	e.preventDefault();
+		onStickTouchMove(touch);
+	}
+	//onStickTouchMove(e.changedTouches[0]);
+	rcPublishThrottled();
+	e.stopPropagation();
+	e.preventDefault();
 }
 
 function stickTouchEnd(e) {

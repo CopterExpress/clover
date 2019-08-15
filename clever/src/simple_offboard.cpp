@@ -54,6 +54,7 @@ using mavros_msgs::Thrust;
 
 // tf2
 tf2_ros::Buffer tf_buffer;
+std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
 
 // Parameters
 string local_frame;
@@ -88,6 +89,7 @@ AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
 TwistStamped rates_msg;
 TransformStamped target;
+geometry_msgs::TransformStamped body;
 
 // State
 PoseStamped nav_start;
@@ -121,18 +123,41 @@ TwistStamped velocity;
 NavSatFix global_position;
 BatteryState battery;
 
-// Common subcriber callback template that stores message to the variable
+// Common subscriber callback template that stores message to the variable
 template<typename T, T& STORAGE>
 void handleMessage(const T& msg)
 {
 	STORAGE = msg;
 }
 
+inline void publishBodyFrame()
+{
+	if (body.child_frame_id.empty()) return;
+
+	tf::Quaternion q;
+	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
+	tf::quaternionTFToMsg(q, body.transform.rotation);
+
+	body.transform.translation.x = local_position.pose.position.x;
+	body.transform.translation.y = local_position.pose.position.y;
+	body.transform.translation.z = local_position.pose.position.z;
+	body.header.frame_id = local_position.header.frame_id;
+	body.header.stamp = local_position.header.stamp;
+	transform_broadcaster->sendTransform(body);
+}
+
+void handleLocalPosition(const PoseStamped& pose)
+{
+	local_position = pose;
+	publishBodyFrame();
+	// TODO: terrain?, home?
+}
+
 // wait for transform without interrupting publishing setpoints
 inline bool waitTransform(const string& target, const string& source,
-                          const ros::Time& stamp, const ros::Duration& timeout)
+                          const ros::Time& stamp, const ros::Duration& timeout) // editorconfig-checker-disable-line
 {
-	ros::Rate r(10);
+	ros::Rate r(100);
 	auto start = ros::Time::now();
 	while (ros::ok()) {
 		if (ros::Time::now() - start > timeout) return false;
@@ -176,31 +201,29 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.mode = state.mode;
 	}
 
-	waitTransform(local_frame, req.frame_id, stamp, telemetry_transform_timeout);
+	try {
+		waitTransform(req.frame_id, fcu_frame, stamp, telemetry_transform_timeout);
+		auto transform = tf_buffer.lookupTransform(req.frame_id, fcu_frame, stamp);
+		res.x = transform.transform.translation.x;
+		res.y = transform.transform.translation.y;
+		res.z = transform.transform.translation.z;
 
-	if (!TIMEOUT(local_position, local_position_timeout)) {
-		try {
-			// transform pose
-			PoseStamped pose;
-			tf_buffer.transform(local_position, pose, req.frame_id);
-			res.x = pose.pose.position.x;
-			res.y = pose.pose.position.y;
-			res.z = pose.pose.position.z;
-
-			// Tait-Bryan angles, order z-y-x
-			double yaw, pitch, roll;
-			tf2::getEulerYPR(pose.pose.orientation, yaw, pitch, roll);
-			res.yaw = yaw;
-			res.pitch = pitch;
-			res.roll = roll;
-		} catch (const tf2::TransformException& e) {}
+		double yaw, pitch, roll;
+		tf2::getEulerYPR(transform.transform.rotation, yaw, pitch, roll);
+		res.yaw = yaw;
+		res.pitch = pitch;
+		res.roll = roll;
+	} catch (const tf2::TransformException& e) {
+		ROS_DEBUG("simple_offboard: %s", e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
 		try {
 			// transform velocity
+			waitTransform(req.frame_id, fcu_frame, velocity.header.stamp, telemetry_transform_timeout);
 			Vector3Stamped vec, vec_out;
-			vec.header = velocity.header;
+			vec.header.stamp = velocity.header.stamp;
+			vec.header.frame_id = velocity.header.frame_id;
 			vec.vector = velocity.twist.linear;
 			tf_buffer.transform(vec, vec_out, req.frame_id);
 
@@ -326,6 +349,10 @@ PoseStamped globalToLocal(double lat, double lon)
 	x_offset = distance * sin(azimuth_radians);
 	y_offset = distance * cos(azimuth_radians);
 
+	if (!waitTransform(local_frame, fcu_frame, global_position.header.stamp, ros::Duration(0.2))) {
+		throw std::runtime_error("No local position");
+	}
+
 	auto local = tf_buffer.lookupTransform(local_frame, fcu_frame, global_position.header.stamp);
 
 	PoseStamped pose;
@@ -364,13 +391,12 @@ void publish(const ros::Time stamp)
 
 	if (!target.child_frame_id.empty()) {
 		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
-			static tf2_ros::TransformBroadcaster tf_broadcaster;
 			target.header = setpoint_position_transformed.header;
 			target.transform.translation.x = setpoint_position_transformed.pose.position.x;
 			target.transform.translation.y = setpoint_position_transformed.pose.position.y;
 			target.transform.translation.z = setpoint_position_transformed.pose.position.z;
 			target.transform.rotation = setpoint_position_transformed.pose.orientation;
-			tf_broadcaster.sendTransform(target);
+			transform_broadcaster->sendTransform(target);
 		}
 	}
 
@@ -455,16 +481,32 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
 }
 
+#define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
+
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-           uint8_t& success, string& message)
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
+           uint8_t& success, string& message) // editorconfig-checker-disable-line
 {
 	auto stamp = ros::Time::now();
 
 	try {
 		if (busy)
 			throw std::runtime_error("Busy");
+
+		ENSURE_FINITE(x);
+		ENSURE_FINITE(y);
+		ENSURE_FINITE(z);
+		ENSURE_FINITE(vx);
+		ENSURE_FINITE(vy);
+		ENSURE_FINITE(vz);
+		ENSURE_FINITE(pitch);
+		ENSURE_FINITE(roll);
+		ENSURE_FINITE(pitch_rate);
+		ENSURE_FINITE(roll_rate);
+		ENSURE_FINITE(lat);
+		ENSURE_FINITE(lon);
+		ENSURE_FINITE(thrust);
 
 		busy = true;
 
@@ -515,7 +557,9 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type == NAVIGATE_GLOBAL) {
 			// Calculate x and from lat and lot in request's frame
-			auto xy_in_req_frame = tf_buffer.transform(globalToLocal(lat, lon), frame_id);
+			auto pose_local = globalToLocal(lat, lon);
+			pose_local.header.stamp = stamp; // TODO: fix
+			auto xy_in_req_frame = tf_buffer.transform(pose_local, frame_id);
 			x = xy_in_req_frame.pose.position.x;
 			y = xy_in_req_frame.pose.position.y;
 		}
@@ -689,6 +733,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle nh, nh_priv("~");
 
 	tf2_ros::TransformListener tf_listener(tf_buffer);
+	transform_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>();
 
 	// Params
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
@@ -697,6 +742,7 @@ int main(int argc, char **argv)
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
+	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
 
 	state_timeout = ros::Duration(nh_priv.param("state_timeout", 3.0));
@@ -717,11 +763,11 @@ int main(int argc, char **argv)
 
 	// Telemetry subscribers
 	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
-	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleMessage<PoseStamped, local_position>);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
+	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);

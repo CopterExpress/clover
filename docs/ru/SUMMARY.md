@@ -22,6 +22,7 @@
   * [Автоматическая проверка](selfcheck.md)
   * [Просмотр видеострима с камер](web_video_server.md)
   * [Системы координат](frames.md)
+  * [Интерфейс UART](uart.md)
 * Программирование
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
@@ -42,6 +43,7 @@
   * [Автозапуск ПО](autolaunch.md)
 * Дополнительные материалы
   * [Редактирование файлов](editing.md)
+  * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Kinetic](ros-install.md)
@@ -53,6 +55,7 @@
   * [Прошивка PX4](firmware.md)
   * [Протокол MAVLink](mavlink.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
+  * [Настройка режима тренера](trainer_mode.md)
   * [Калибровка камеры](camera_calibration.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [Подключение GPS](gps.md)
@@ -70,6 +73,8 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Проекты на базе Клевера
+  * [Генератор ArUco карт](arucogenmap.md)
+  * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
   * [Распознавание лиц](face_recognition.md)
   * [Подсчет количества объектов c камеры](object_counting.md)

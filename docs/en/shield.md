@@ -16,7 +16,7 @@ As a result of searching for a solution that would fit all our requirements, we 
 
 In creating such a shape, two types of edges (beams) are used: short and long ones, their length is calculated based on the desired diameter of a polyhedron inscribed into a sphere. For better understanding, I will insert all necessary formulas from Wikipedia below.
 
-![calculation](../assets/calculation.png)
+![calculation](../assets/en/calculation.png)
 
 The corner joints (fittings) were not very easy either. They are of two types as well: with five faces on the vertex (five beams protrude from the vertex) and with six faces (six rays protrude from the vertex).
 
@@ -28,7 +28,7 @@ Making simple calculations for the required size, we built a model in Inventor C
 
 In the progress of designing, we faced problems in modeling corner joints, but they were solved by simplifying the design, and the differences of the angles were compensated for by flexible materials. Thus, all joints fit slightly tightly.
 
-![table](../assets/table.png)
+![table](../assets/en/table.png)
 
 ![elements](../assets/elements.png)
 

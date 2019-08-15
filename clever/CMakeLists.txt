@@ -162,8 +162,6 @@ add_executable(rc src/rc.cpp)
 
 add_executable(camera_markers src/camera_markers.cpp)
 
-add_executable(frames src/frames.cpp)
-
 add_executable(vpe_publisher src/vpe_publisher.cpp)
 
 target_link_libraries(simple_offboard
@@ -174,8 +172,6 @@ target_link_libraries(simple_offboard
 target_link_libraries(rc ${catkin_LIBRARIES})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
-
-target_link_libraries(frames ${catkin_LIBRARIES})
 
 target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
@@ -231,6 +227,19 @@ target_link_libraries(clever
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
+# Only install udev rules when building a Debian package
+# FIXME: Other operating systems may have other prefixes
+string(FIND ${CMAKE_INSTALL_PREFIX} "/opt/ros" _PREFIX_INDEX)
+if (${_PREFIX_INDEX} EQUAL 0)
+  message(STATUS "Building as a Debian package - adding udev rules as installable files")
+  install(FILES
+    config/99-px4fmu.rules
+    DESTINATION /lib/udev/rules.d
+  )
+else()
+  message(STATUS "Building in a user workspace - not adding udev rules")
+endif()
+
 #############
 ## Testing ##
 #############
@@ -243,3 +252,8 @@ target_link_libraries(clever
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+if (CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest(test/basic.test)
+endif()

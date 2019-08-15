@@ -4,18 +4,7 @@
 
 ## Включение
 
-> **Note** Для использования Optical Flow необходима <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">кастомная прошивка PX4</a>. Подробнее про прошивку см. [соответствующую статью](firmware.md).
-
-<script type="text/javascript">
-    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
-        for (let release of data) {
-            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
-                document.querySelector('#download-firmware').href = release.html_url;
-                return;
-            }
-        }
-    });
-</script>
+> **Hint** Рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
@@ -48,7 +37,7 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
 * `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
-* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_R` – 0.2.
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)

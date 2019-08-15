@@ -1,6 +1,6 @@
 # CLEVER
 
-<img src="docs/assets/clever3.png" align="right" width="300px" alt="CLEVER drone">
+<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="CLEVER drone">
 
 CLEVER (Russian: *"Клевер"*, meaning *"Clover"*) is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. The kit includes Pixhawk/Pixracer autopilot running PX4 firmware, Raspberry Pi 3 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
@@ -10,7 +10,7 @@ Copter Express has implemented a large number of different autonomous drone proj
 
 Use it to learn how to assemble, configure, pilot and program autonomous CLEVER drone.
 
-## Preconfigured RPi 3 image
+## Raspberry Pi image
 
 **Preconfigured image for Raspberry Pi 3 with installed and configured software, ready to fly, is available [in the Releases section](https://github.com/CopterExpress/clever/releases).**
 
@@ -30,49 +30,70 @@ API description (in Russian) for autonomous flights is available [on GitBook](ht
 
 ## Manual installation
 
-Install ROS Kinetic according to the [documentation](http://wiki.ros.org/kinetic/Installation).
+Install ROS Kinetic according to the [documentation](http://wiki.ros.org/kinetic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
 
-Clone repo to directory `/home/pi/catkin_ws/src/clever`:
+Clone this repo to directory `~/catkin_ws/src/clever`:
 
 ```bash
 cd ~/catkin_ws/src
 git clone https://github.com/CopterExpress/clever.git clever
 ```
 
-Build ROS packages:
+All the required ROS packages (including `mavros` and `opencv`) can be installed using `rosdep`:
+
+```bash
+cd ~/catkin_ws/
+rosdep install -y --from-paths src --ignore-src
+```
+
+Build ROS packages (on memory constrained platforms you might be going to need to use `-j1` key):
 
 ```bash
 cd ~/catkin_ws
 catkin_make -j1
 ```
 
-Enable systemd service `roscore` (if not enabled):
+To complete `mavros` install you'll need to install `geographiclib` datasets:
 
 ```bash
-sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/roscore.service
+curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sudo bash
+```
+
+You may optionally install udev rules to provide `/dev/px4fmu` symlink to your PX4-based flight controller connected over USB. Copy `99-px4fmu.rules` to your `/lib/udev/rules.d` folder:
+
+```bash
+cd ~/catkin_ws/src/clever/clever/config
+sudo cp 99-px4fmu.rules /lib/udev/rules.d
+```
+
+Alternatively you may change the `fcu_url` property in `mavros.launch` file to point to your flight controller device.
+
+## Running
+
+Enable systemd service `roscore` (if not running):
+
+```bash
+sudo systemctl enable /home/<username>/catkin_ws/src/clever/builder/assets/roscore.service
 sudo systemctl start roscore
 ```
 
-Enable systemd service `clever`:
+To start connection to SITL, use:
 
 ```bash
-sudo systemctl enable /home/pi/catkin_ws/src/clever/deploy/clever.service
-sudo systemctl start clever
+roslaunch clever sitl.launch
 ```
 
-### Dependencies
+To start connection to the flight controller, use:
 
-[ROS Kinetic](http://wiki.ros.org/kinetic).
+```bash
+roslaunch clever clever.launch
+```
 
-Necessary ROS packages:
+> Note that the package is configured to connect to `/dev/px4fmu` by default (see [previous section](#manual-installation)). Install udev rules or specify path to your FCU device in `mavros.launch`.
 
-* `opencv3`
-* `mavros`
-* `rosbridge_suite`
-* `web_video_server`
-* `cv_camera`
-* `nodelet`
-* `dynamic_reconfigure`
-* `bondcpp`, branch `master`
-* `roslint`
-* `rosserial`
+Also, you can enable and start the systemd service:
+
+```bash
+sudo systemctl enable /home/<username>/catkin_ws/src/clever/deploy/clever.service
+sudo systemctl start clever
+```

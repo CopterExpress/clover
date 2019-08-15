@@ -5,23 +5,27 @@
         <param name="camera_info_url" value="file://$(find aruco_pose)/test/camera_info.yaml" />
     </node>
 
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" required="true"/>
 
-    <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect" args="load aruco_pose/aruco_detect nodelet_manager">
+    <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect" args="load aruco_pose/aruco_detect nodelet_manager" required="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="length" value="0.33"/>
         <param name="length_override/3" value="0.1"/>
         <param name="estimate_poses" value="true"/>
+        <param name="send_tf" value="true"/>
     </node>
 
-    <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true">
+    <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true" required="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
         <param name="type" value="map"/>
         <param name="map" value="$(find aruco_pose)/test/basic.txt"/>
+        <param name="markers/frame_id" value="aruco_map"/>
+        <param name="markers/child_frame_id_prefix" value="aruco_in_map_"/>
     </node>
 
-    <test test-name="test_aruco_pose" pkg="aruco_pose" type="basic.py"/>
+    <param name="test_module" value="$(find aruco_pose)/test/basic.py"/>
+    <test test-name="aruco_pose_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>

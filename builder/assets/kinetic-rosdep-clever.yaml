@@ -541,3 +541,15 @@ tf2_web_republisher:
 image_publisher:
   debian:
     stretch: [ros-kinetic-image-publisher]
+raspberry-kernel-headers:
+  debian:
+    stretch: [raspberry-kernel-headers]
+ddynamic_reconfigure:
+  debian:
+    stretch: [ros-kinetic-ddynamic-reconfigure]
+realsense2_camera:
+  debian:
+    stretch: [ros-kinetic-realsense2-camera]
+ros_pytest:
+  debian:
+    stretch: [ros-kinetic-ros-pytest]

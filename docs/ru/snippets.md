@@ -18,6 +18,10 @@ Python
 Функция определения расстояния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
 ```python
+import math
+
+# ...
+
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -27,6 +31,10 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 Функция для приблизительного определения расстояния (в метрах) между двумя глобальными координатами (широта/долгота):
 
 ```python
+import math
+
+# ...
+
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
@@ -46,12 +54,26 @@ start = get_telemetry()
 print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 
 # Ожидаем взлета
-while True:
+while not rospy.is_shutdown():
     # Проверяем текущую высоту
     if get_telemetry().z - start.z + z < tolerance:
         # Взлет завершен
         break
     rospy.sleep(0.2)
+```
+
+Вышеприведенный код может быть обернут в функцию:
+
+```python
+def takeoff_wait(alt, speed=0.5, tolerance=0.2):
+    start = get_telemetry()
+    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
+
+    while not rospy.is_shutdown():
+        if get_telemetry().z - start.z + z < tolerance:
+            break
+
+        rospy.sleep(0.2)
 ```
 
 ### # {#block-nav}
@@ -66,13 +88,59 @@ frame_id='aruco_map'
 print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
 
 # Ждем, пока коптер долетит до запрошенной точки
-while True:
+while not rospy.is_shutdown():
     telem = get_telemetry(frame_id=frame_id)
     # Вычисляем расстояние до заданной точки
     if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
         # Долетели до необходимой точки
         break
     rospy.sleep(0.2)
+```
+
+Вышеприведенный код может быть обернут в функцию:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id=frame_id)
+        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+Более универсальная функция с использованием фрейма `navigate_target`, который совпадает с целевой точкой навигации дрона:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+```
+
+Такой код может быть использован для полета в том числе с использованием фрейма `body`.
+
+### # {#block-land}
+
+Посадка и ожидание окончания посадки:
+
+```python
+land()
+while get_telemetry().armed:
+    rospy.sleep(0.2)
+```
+
+Вышеприведенный код может быть обернут в функцию:
+
+```python
+def land_wait():
+    land()
+    while get_telemetry().armed:
+        rospy.sleep(0.2)
 ```
 
 ### # {#disarm}
@@ -277,20 +345,32 @@ set_mode(custom_mode='STABILIZED')
 Флип по крену:
 
 ```python
+import math
+
+# ...
+
 def flip():
     start = get_telemetry()  # memorize starting position
 
-    set_rates(roll_rate=5, thrust=0.2)  # maximum roll rate
+    set_rates(thrust=1)  # bump up
+    rospy.sleep(0.2)
+
+    set_rates(roll_rate=30, thrust=0.2)  # maximum roll rate
+
     while True:
         telem = get_telemetry()
-        if abs(telem.roll) > math.pi / 2:
+
+        if abs(telem.roll) > math.pi/2:
             break
 
+    rospy.loginfo('finish flip')
     set_position(x=start.x, y=start.y, z=start.z, yaw=start.yaw)  # finish flip
 
-print navigate(z=4, speed=1, auto_arm=True)  # take off
+print navigate(z=2, speed=1, frame_id='body', auto_arm=True)  # take off
 rospy.sleep(10)
 
 rospy.loginfo('flip')
 flip()
 ```
+
+Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера). Перед выполнением флипа необходимо принять все меры безопасности.

@@ -1,3 +1,14 @@
+/*
+ * Utility functions
+ * Copyright (C) 2018 Copter Express Technologies
+ *
+ * Author: Oleg Kalachev <okalachev@gmail.com>
+ *
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 #pragma once
 
 #include <cmath>
@@ -19,8 +30,7 @@ static void param(ros::NodeHandle nh, const std::string& param_name, T& param_va
 	}
 }
 
-static void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr& cinfo,
-                     cv::Mat& matrix, cv::Mat& dist)
+static void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr& cinfo, cv::Mat& matrix, cv::Mat& dist)
 {
 	for (unsigned int i = 0; i < 3; ++i)
 		for (unsigned int j = 0; j < 3; ++j)

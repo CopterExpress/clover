@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager"/>
+
+    <node name="aruco_map" pkg="nodelet" type="nodelet" args="load aruco_pose/aruco_map nodelet_manager" clear_params="true">
+        <remap from="image_raw" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <remap from="markers" to="aruco_detect/markers"/>
+        <param name="type" value="map"/>
+        <param name="map" value="$(find aruco_pose)/test/test_parser_empty_map.txt"/>
+    </node>
+
+    <param name="test_module" value="$(find aruco_pose)/test/test_parser_empty_map.py"/>
+    <test test-name="test_node_empty_map" pkg="ros_pytest" type="ros_pytest_runner"/>
+</launch>

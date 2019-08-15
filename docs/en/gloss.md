@@ -11,7 +11,7 @@ An unmanned aerial vehicle with an electronic stabilization system and the numbe
 ## Flight controller / autopilot
 
 **1\.** A specialized circuit-board designed for controlling a multicopter, an aircraft or another apparatus. Examples:
-Pixhawk, Ardupilot, Naze32, CC3D.
+Pixhawk, ArduPilot, Naze32, CC3D.
 
 **2\.** Software for the multicopter control circuit-board. Examples: PX4, APM, CleanFlight.
 
@@ -41,7 +41,7 @@ Clever may also be [controlled from a smartphone](rc.md).
 
 ## Arming
 
-Armed is the state of copter readiness for the fligh. When the gas stick is lifted, or when an external command with the target point is sent, the copter will fly. Usually, a copter starts rotating its propellers when it is switched to the "armed" state, even if the gas stick is down.
+Armed is the state of copter readiness for the flight. When the gas stick is lifted, or when an external command with the target point is sent, the copter will fly. Usually, a copter starts rotating its propellers when it is switched to the "armed" state, even if the gas stick is down.
 
 The opposite state is Disarmed.
 

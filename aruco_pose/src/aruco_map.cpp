@@ -18,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <algorithm>
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
@@ -27,6 +28,7 @@
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/transform_broadcaster.h>
+#include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <message_filters/subscriber.h>
 #include <message_filters/synchronizer.h>
@@ -67,13 +69,15 @@ private:
 	Mat camera_matrix_, dist_coeffs_;
 	geometry_msgs::TransformStamped transform_;
 	geometry_msgs::PoseWithCovarianceStamped pose_;
+	vector<geometry_msgs::TransformStamped> markers_transforms_;
 	tf2_ros::TransformBroadcaster br_;
+	tf2_ros::StaticTransformBroadcaster static_br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
 	visualization_msgs::MarkerArray vis_array_;
-	std::string known_tilt_;
+	std::string known_tilt_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
-	bool auto_flip_;
+	bool auto_flip_, image_axis_;
 
 public:
 	virtual void onInit()
@@ -100,6 +104,9 @@ public:
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
+		nh_priv_.param("image_axis", image_axis_, true);
+		nh_priv_.param<std::string>("markers/frame_id", markers_parent_frame_, transform_.child_frame_id);
+		nh_priv_.param<std::string>("markers/child_frame_id_prefix", markers_frame_, "");
 
 		// createStripLine();
 
@@ -124,6 +131,7 @@ public:
 		sync_.reset(new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), image_sub_, info_sub_, markers_sub_));
 		sync_->registerCallback(boost::bind(&ArucoMap::callback, this, _1, _2, _3));
 
+		publishMarkersFrames();
 		publishMapImage();
 		vis_markers_pub_.publish(vis_array_);
 
@@ -270,9 +278,49 @@ publish_debug:
 
 			std::istringstream s(line);
 
-			if (!(s >> id >> length >> x >> y >> z >> yaw >> pitch >> roll)) {
-				ROS_ERROR("aruco_map: cannot parse line: %s", line.c_str());
+			// Read first character to see whether it's a comment
+			char first = 0;
+			if (!(s >> first)) {
+				// No non-whitespace characters, must be a blank line
 				continue;
+			}
+
+			if (first == '#') {
+				ROS_DEBUG("aruco_map: Skipping line as a comment: %s", line.c_str());
+				continue;
+			} else if (isdigit(first)) {
+				// Put the digit back into the stream
+				// Note that this is a non-modifying putback, so this should work with istreams
+				// (see https://en.cppreference.com/w/cpp/io/basic_istream/putback)
+				s.putback(first);
+			} else {
+				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
+				ROS_FATAL("aruco_map: Malformed input: %s", line.c_str());
+				ros::shutdown();
+				throw std::runtime_error("Malformed input");
+			}
+
+			if (!(s >> id >> length >> x >> y)) {
+				ROS_ERROR("aruco_map: Not enough data in line: %s; "
+				          "Each marker must have at least id, length, x, y fields", line.c_str());
+				continue;
+			}
+			// Be less strict about z, yaw, pitch roll
+			if (!(s >> z)) {
+				ROS_DEBUG("aruco_map: No z coordinate provided for marker %d, assuming 0", id);
+				z = 0;
+			}
+			if (!(s >> yaw)) {
+				ROS_DEBUG("aruco_map: No yaw provided for marker %d, assuming 0", id);
+				yaw = 0;
+			}
+			if (!(s >> pitch)) {
+				ROS_DEBUG("aruco_map: No pitch provided for marker %d, assuming 0", id);
+				pitch = 0;
+			}
+			if (!(s >> roll)) {
+				ROS_DEBUG("aruco_map: No roll provided for marker %d, assuming 0", id);
+				roll = 0;
 			}
 			addMarker(id, length, x, y, z, yaw, pitch, roll);
 		}
@@ -339,6 +387,19 @@ publish_debug:
 	void addMarker(int id, double length, double x, double y, double z,
 				   double yaw, double pitch, double roll)
 	{
+		// Check whether the id is in range for current dictionary
+		int num_markers = board_->dictionary->bytesList.rows;
+		if (num_markers <= id) {
+			ROS_ERROR("aruco_map: Marker id %d is not in dictionary; current dictionary contains %d markers. "
+			          "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
+					  id, num_markers);
+			return;
+		}
+		// Check if marker is already in the board
+		if (std::count(board_->ids.begin(), board_->ids.end(), id) > 0) {
+			ROS_ERROR("aruco_map: Marker id %d is already in the map", id);
+			return;
+		}
 		// Create transform
 		tf::Quaternion q;
 		q.setRPY(roll, pitch, yaw);
@@ -367,6 +428,15 @@ publish_debug:
 
 		board_->ids.push_back(id);
 		board_->objPoints.push_back(obj_points);
+
+		// Add marker's static transform
+		if (!markers_frame_.empty()) {
+			geometry_msgs::TransformStamped marker_transform;
+			marker_transform.header.frame_id = markers_parent_frame_;
+			marker_transform.child_frame_id = markers_frame_ + std::to_string(id);
+			tf::transformTFToMsg(transform, marker_transform.transform);
+			markers_transforms_.push_back(marker_transform);
+		}
 
 		// Add visualization marker
 		visualization_msgs::Marker marker;
@@ -398,6 +468,13 @@ publish_debug:
 		// vis_array_.markers.at(0).points.push_back(p);
 	}
 
+	void publishMarkersFrames()
+	{
+		if (!markers_transforms_.empty()) {
+			static_br_.sendTransform(markers_transforms_);
+		}
+	}
+
 	void publishMapImage()
 	{
 		cv::Size size(image_width_, image_height_);
@@ -405,14 +482,15 @@ publish_debug:
 		cv_bridge::CvImage msg;
 
 		if (!board_->ids.empty()) {
-			_drawPlanarBoard(board_, size, image, image_margin_, 1);
+			_drawPlanarBoard(board_, size, image, image_margin_, 1, image_axis_);
+			msg.encoding = image_axis_ ? sensor_msgs::image_encodings::RGB8 : sensor_msgs::image_encodings::MONO8;
 		} else {
 			// empty map
 			image.create(size, CV_8UC1);
 			image.setTo(cv::Scalar::all(255));
+			msg.encoding = sensor_msgs::image_encodings::MONO8;
 		}
 
-		msg.encoding = sensor_msgs::image_encodings::MONO8;
 		msg.image = image;
 		img_pub_.publish(msg.toImageMsg());
 	}

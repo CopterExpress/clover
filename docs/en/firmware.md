@@ -3,34 +3,76 @@ Pixhawk / Pixracer firmware flashing
 
 Pixhawk or Pixracer firmware may be flashed using QGroundControl or command line utilities.
 
-Various releases of stable PX4 firmwares are available from [Releases at GitHub] (https://github.com/PX4/Firmware/releases).
+Modified firmware for Clever
+---
 
-The name of the firmware file contains encoded information about the target circuit-board and the release. Examples:
+It is advisable to use a specialized build of PX4 with the necessary fixes and better defaults for the Clever drone. Use the latest stable release in our [GitHub repository](https://github.com/CopterExpress/Firmware/releases) with the word `clever`, for example, `v1.8.2-clever.5`.
 
-* `px4fmu-v2_default.px4` — firmware for Pixhawk with EKF2.
-* `px4fmu-v2_lpe.px4` — firmware for Pixhawk with LPE.
-* `px4fmu-v4_default.px4` — firmware for Pixhawk with EKF2 and LPE (*Clever 3*).
-* `px4fmu-v3_default.px4` — firmware for newer Pixhawk versions (rev. 3 chip, see Fig. + Bootloader v5) with EKF2 and LPE.
+<div id="release" style="display:none">
+<p>Latest stable release: <strong><a id="download-latest-release"></a></strong>.</p>
 
-![STM revision](../assets/stmrev.jpg)
+<ul>
+<li>Firmware for Pixracer (<strong>Clever 4 / Clever 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
+<li>Firmware for Pixhawk (<strong>Clever 2</strong>) – <a id="firmware-pixhawk" href=""><code>px4fmu-v2_lpe.px4</code></a>.</li>
+</ul>
+</div>
 
-> **Note** To download the `px4fmu-v3_default.px4` file, you may need to use the `force_upload` command in the command prompt.
+<script type="text/javascript">
+    // get latest release from GitHub
+    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(function(res) {
+        return res.json();
+    }).then(function(data) {
+        // look for stable release
+        let stable;
+        for (let release of data) {
+            let clever = release.name.indexOf('clever') != -1;
+            if (clever && !release.prerelease && !release.draft) {
+                stable = release;
+                break;
+            }
+        }
+        let el = document.querySelector('#download-latest-release');
+        el.innerHTML = stable.name;
+        el.href = stable.html_url;
+        document.querySelector('#release').style.display = 'block';
+        for (let asset of stable.assets) {
+            console.log(asset.name);
+            if (asset.name == 'px4fmu-v4_default.px4') {
+                document.querySelector('#firmware-pixracer').href = asset.browser_download_url;
+            } else if (asset.name == 'px4fmu-v2_lpe.px4') {
+                document.querySelector('#firmware-pixhawk').href = asset.browser_download_url;
+            }
+        }
+    });
+</script>
 
 QGroundControl
 ---
 
-In QGroundControl, go to Firmware. **After** that, connect Pixhawk / Pixracer via USB.
+Open the Firmware section in QGroundControl. Then, connect your Pixhawk or Pixracer via USB.
 
-Select PX4 Flight Stack. To download and upload the standard firmware (the version with EKF2 for Pixhawk), select the "Standard Version" menu item, to load your own firmware file, select "Custom firmware file...", then click OK.
+Choose PX4 Flight Stack. If you wish to install the official firmware (with EKF2 for Pixhawk), choose "Standard version". In order to flash custom firmware, choose "Custom firmware file..." and click OK.
 
-> **Warning** Do not disconnect the USB cable until the flashing process is complete.
+> **Warning** Do not unplug your flight controller from USB during flashing!
 
-TODO: Figure.
+Firmware variants
+---
+
+The name of the firmware file contains information about the target flight controller and build variant. For example:
+
+* `px4fmu-v4_default.px4` — firmware for Pixhawk with EKF2 and LPE (**Clever 3** / **Clever 4**).
+* `px4fmu-v2_lpe.px4` — firmware for Pixhawk with LPE (**Clever 2**).
+* `px4fmu-v2_default.px4` — firmware for Pixhawk with EKF2.
+* `px4fmu-v3_default.px4` — firmware for newer Pixhawk versions (rev. 3 chip, see Fig. + Bootloader v5) with EKF2 and LPE.
+
+![STM revision](../assets/stmrev.jpg)
+
+> **Note** In order to flash the `px4fmu-v3_default.px4` file, you may need to use the `force_upload` command in the command prompt.
 
 Command prompt
 ---
 
-PX4 may be compiled from the source and automatically loaded to the circuit-board from the command prompt.
+PX4 may be compiled from the source and automatically flashed to the flight controller from the command prompt.
 
 To do this, clone the PX4 repository:
 
@@ -44,9 +86,9 @@ Select the appropriate version (tag) using `git checkout`. Then compile and uplo
 make px4fmu-v4_default upload
 ```
 
-Where `px4fmu-v4_default` is the required firmware version.
+Where `px4fmu-v4_default` is the required firmware variant.
 
-To upload the `v3` firmware to Pixhawk, you may need the `force_upload` command:
+In order to upload the `v3` firmware to Pixhawk, you may need to use the `force_upload` option:
 
 ```
 make px4fmu-v3_default force-upload

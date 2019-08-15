@@ -1,19 +1,34 @@
 #!/usr/bin/env python
+# coding=utf-8
+
+# Copyright (C) 2018 Copter Express Technologies
+#
+# Author: Oleg Kalachev <okalachev@gmail.com>
+#
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 
 import math
 import subprocess
 import re
 import traceback
+from threading import Event
 import numpy
 import rospy
+from systemd import journal
+import tf2_ros
+import tf2_geometry_msgs
+from pymavlink import mavutil
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
-from mavros_msgs.msg import State, OpticalFlowRad
+from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
-from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped
+from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped, Vector3Stamped
+from visualization_msgs.msg import MarkerArray as VisualizationMarkerArray
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
-from systemd import journal
+from mavros import mavlink
 
 
 # TODO: check attitude is present
@@ -28,28 +43,41 @@ from systemd import journal
 rospy.init_node('selfcheck')
 
 
+tf_buffer = tf2_ros.Buffer()
+tf_listener = tf2_ros.TransformListener(tf_buffer)
+
+
 failures = []
+infos = []
+current_check = None
 
 
 def failure(text, *args):
-    failures.append(text % args)
+    msg = text % args
+    rospy.logwarn('%s: %s', current_check, msg)
+    failures.append(msg)
+
+
+def info(text, *args):
+    msg = text % args
+    rospy.loginfo('%s: %s', current_check, msg)
+    infos.append(msg)
 
 
 def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
             failures[:] = []
+            infos[:] = []
+            global current_check
+            current_check = name
             try:
                 fn(*args, **kwargs)
-                for f in failures:
-                    rospy.logwarn('%s: %s', name, f)
             except Exception as e:
-                for f in failures:
-                    rospy.logwarn('%s: %s', name, f)
                 traceback.print_exc()
                 rospy.logerr('%s: exception occurred', name)
                 return
-            if not failures:
+            if not failures and not infos:
                 rospy.loginfo('%s: OK', name)
         return wrapper
     return inner
@@ -73,36 +101,162 @@ def get_param(name):
         return res.value.real
 
 
+recv_event = Event()
+link = mavutil.mavlink.MAVLink('', 255, 1)
+mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
+mavlink_recv = ''
+
+
+def mavlink_message_handler(msg):
+    global mavlink_recv
+    if msg.msgid == 126:
+        mav_bytes_msg = mavlink.convert_to_bytes(msg)
+        mav_msg = link.decode(mav_bytes_msg)
+        mavlink_recv += ''.join(chr(x) for x in mav_msg.data[:mav_msg.count])
+        if 'nsh>' in mavlink_recv:
+            # Remove the last line, including newline before prompt
+            mavlink_recv = mavlink_recv[:mavlink_recv.find('nsh>') - 1]
+            recv_event.set()
+
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_message_handler)
+# FIXME: not sleeping here still breaks things
+rospy.sleep(0.5)
+
+
+def mavlink_exec(cmd, timeout=3.0):
+    global mavlink_recv
+    mavlink_recv = ''
+    recv_event.clear()
+    if not cmd.endswith('\n'):
+        cmd += '\n'
+    msg = mavutil.mavlink.MAVLink_serial_control_message(
+        device=mavutil.mavlink.SERIAL_CONTROL_DEV_SHELL,
+        flags=mavutil.mavlink.SERIAL_CONTROL_FLAG_RESPOND | mavutil.mavlink.SERIAL_CONTROL_FLAG_EXCLUSIVE |
+              mavutil.mavlink.SERIAL_CONTROL_FLAG_MULTI,
+        timeout=3,
+        baudrate=0,
+        count=len(cmd),
+        data=map(ord, cmd.ljust(70, '\0')))
+    msg.pack(link)
+    ros_msg = mavlink.convert_to_rosmsg(msg)
+    mavlink_pub.publish(ros_msg)
+    recv_event.wait(timeout)
+    return mavlink_recv
+
+
+BOARD_ROTATIONS = {
+    0: 'no rotation',
+    1: 'yaw 45°',
+    2: 'yaw 90°',
+    3: 'yaw 135°',
+    4: 'yaw 180°',
+    5: 'yaw 225°',
+    6: 'yaw 270°',
+    7: 'yaw 315°',
+    8: 'roll 180°',
+    9: 'roll 180°, yaw 45°',
+    10: 'roll 180°, yaw 90°',
+    11: 'roll 180°, yaw 135°',
+    12: 'pitch 180°',
+    13: 'roll 180°, yaw 225°',
+    14: 'roll 180°, yaw 270°',
+    15: 'roll 180°, yaw 315°',
+    16: 'roll 90°',
+    17: 'roll 90°, yaw 45°',
+    18: 'roll 90°, yaw 90°',
+    19: 'roll 90°, yaw 135°',
+    20: 'roll 270°',
+    21: 'roll 270°, yaw 45°',
+    22: 'roll 270°, yaw 90°',
+    23: 'roll 270°, yaw 135°',
+    24: 'pitch 90°',
+    25: 'pitch 270°',
+    26: 'roll 270°, yaw 270°',
+    27: 'roll 180°, pitch 270°',
+    28: 'pitch 90°, yaw 180',
+    29: 'pitch 90°, roll 90°',
+    30: 'yaw 293°, pitch 68°, roll 90°',
+    31: 'pitch 90°, roll 270°',
+    32: 'pitch 9°, yaw 180°',
+    33: 'pitch 45°',
+    34: 'pitch 315°',
+}
+
+
 @check('FCU')
 def check_fcu():
     try:
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+            return
+
+        # Make sure the console is available to us
+        mavlink_exec('\n')
+        version_str = mavlink_exec('ver all')
+        if version_str == '':
+            info('no version data available from SITL')
+
+        r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
+        is_clever_firmware = False
+        for ver_line in version_str.split('\n'):
+            match = r.search(ver_line)
+            if match is not None:
+                field, version = match.groups()
+                info('firmware %s: %s' % (field, version))
+                if 'clever' in version:
+                    is_clever_firmware = True
+
+        if not is_clever_firmware:
+            failure('not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
-            rospy.loginfo('Selected estimator: LPE')
+            info('selected estimator: LPE')
             fuse = get_param('LPE_FUSION')
             if fuse & (1 << 4):
-                rospy.loginfo('LPE_FUSION: land detector fusion is enabled')
+                info('LPE_FUSION: land detector fusion is enabled')
             else:
-                rospy.loginfo('LPE_FUSION: land detector fusion is disabled')
+                info('LPE_FUSION: land detector fusion is disabled')
             if fuse & (1 << 7):
-                rospy.loginfo('LPE_FUSION: barometer fusion is enabled')
+                info('LPE_FUSION: barometer fusion is enabled')
             else:
-                rospy.loginfo('LPE_FUSION: barometer fusion is disabled')
+                info('LPE_FUSION: barometer fusion is disabled')
 
         elif est == 2:
-            rospy.loginfo('Selected estimator: EKF2')
+            info('selected estimator: EKF2')
         else:
-            failure('Unknown selected estimator: %s', est)
+            failure('unknown selected estimator: %s', est)
+
+        rot = get_param('SENS_BOARD_ROT')
+        if rot is not None:
+            try:
+                info('board rotation: %s', BOARD_ROTATIONS[rot])
+            except KeyError:
+                failure('unknown board rotation %s', rot)
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
 
 
-@check('Camera')
+def describe_direction(v):
+    if v.x > 0.9:
+        return 'forward'
+    elif v.x < - 0.9:
+        return 'backward'
+    elif v.y > 0.9:
+        return 'left'
+    elif v.y < -0.9:
+        return 'right'
+    elif v.z > 0.9:
+        return 'upward'
+    elif v.z < -0.9:
+        return 'downward'
+    else:
+        return None
+
+
 def check_camera(name):
     try:
         img = rospy.wait_for_message(name + '/image_raw', Image, timeout=1)
@@ -110,28 +264,93 @@ def check_camera(name):
         failure('%s: no images (is the camera connected properly?)', name)
         return
     try:
-        info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
+        camera_info = rospy.wait_for_message(name + '/camera_info', CameraInfo, timeout=1)
     except rospy.ROSException:
         failure('%s: no calibration info', name)
         return
 
-    if img.width != info.width:
-        failure('%s: calibration width doesn\'t match image width (%d != %d)', name, info.width, img.width)
-    if img.height != info.height:
-        failure('%s: calibration height doesn\'t match image height (%d != %d))', name, info.height, img.height)
+    if img.width != camera_info.width:
+        failure('%s: calibration width doesn\'t match image width (%d != %d)', name, camera_info.width, img.width)
+    if img.height != camera_info.height:
+        failure('%s: calibration height doesn\'t match image height (%d != %d))', name, camera_info.height, img.height)
+
+    try:
+        optical = Vector3Stamped()
+        optical.header.frame_id = img.header.frame_id
+        optical.vector.z = 1
+        cable = Vector3Stamped()
+        cable.header.frame_id = img.header.frame_id
+        cable.vector.y = 1
+
+        optical = describe_direction(tf_buffer.transform(optical, 'base_link').vector)
+        cable = describe_direction(tf_buffer.transform(cable, 'base_link').vector)
+        if not optical or not cable:
+            info('%s: custom camera orientation detected', name)
+        else:
+            info('camera is oriented %s, camera cable goes %s', optical, cable)
+
+    except tf2_ros.TransformException:
+        failure('cannot transform from base_link to camera frame')
 
 
-@check('ArUco detector')
+@check('Main camera')
+def check_main_camera():
+    check_camera('main_camera')
+
+
+def is_process_running(binary, exact=False, full=False):
+    try:
+        args = ['pgrep']
+        if exact:
+            args.append('-x')  # match exactly with the command name
+        if full:
+            args.append('-f')  # use full process name to match
+        args.append(binary)
+        subprocess.check_output(args)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+@check('ArUco markers')
 def check_aruco():
-    try:
-        rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
-    except rospy.ROSException:
-        failure('no markers detection')
+    if is_process_running('aruco_detect', full=True):
+        info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
+        known_tilt = rospy.get_param('aruco_detect/known_tilt')
+        if known_tilt == 'map':
+            known_tilt += ' (ALL markers are on the floor)'
+        elif known_tilt == 'map_flipped':
+            known_tilt += ' (ALL markers are on the ceiling)'
+        info('aruco_detector/known_tilt = %s', known_tilt)
+        try:
+            rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
+        except rospy.ROSException:
+            failure('no markers detection')
+            return
+    else:
+        info('aruco_detect is not running')
         return
-    try:
-        rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
-    except rospy.ROSException:
-        failure('no map detection')
+
+    if is_process_running('aruco_map', full=True):
+        known_tilt = rospy.get_param('aruco_map/known_tilt')
+        if known_tilt == 'map':
+            known_tilt += ' (marker\'s map is on the floor)'
+        elif known_tilt == 'map_flipped':
+            known_tilt += ' (marker\'s map is on the ceiling)'
+        info('aruco_map/known_tilt = %s', known_tilt)
+
+        try:
+            visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=1)
+            info('map has %s markers', len(visualization.markers))
+        except:
+            failure('cannot read aruco_map/visualization topic')
+
+        try:
+            rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
+        except rospy.ROSException:
+            failure('no map detection')
+    else:
+        info('aruco_map is not running')
 
 
 @check('Vision position estimate')
@@ -160,14 +379,14 @@ def check_vpe():
         if vision_yaw_w == 0:
             failure('vision yaw weight is zero, change ATT_W_EXT_HDG parameter')
         else:
-            rospy.loginfo('Vision yaw weight: %.2f', vision_yaw_w)
+            info('Vision yaw weight: %.2f', vision_yaw_w)
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 2):
             failure('vision position fusion is disabled, change LPE_FUSION parameter')
         delay = get_param('LPE_VIS_DELAY')
         if delay != 0:
             failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
-        rospy.loginfo('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
+        info('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
     elif est == 2:
         fuse = get_param('EKF2_AID_MASK')
         if not fuse & (1 << 3):
@@ -177,9 +396,9 @@ def check_vpe():
         delay = get_param('EKF2_EV_DELAY')
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
-        rospy.loginfo('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
-                      get_param('EKF2_EVA_NOISE'),
-                      get_param('EKF2_EVP_NOISE'))
+        info('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
+            get_param('EKF2_EVA_NOISE'),
+            get_param('EKF2_EVP_NOISE'))
 
     if not vis:
         return
@@ -296,7 +515,7 @@ def check_optical_flow():
             if not numpy.isclose(scale, 1.0):
                 failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
 
-            rospy.loginfo('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+            info('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
                           get_param('LPE_FLW_QMIN'),
                           get_param('LPE_FLW_R'),
                           get_param('LPE_FLW_RR'),
@@ -309,7 +528,7 @@ def check_optical_flow():
             delay = get_param('EKF2_OF_DELAY')
             if delay != 0:
                 failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
-            rospy.loginfo('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+            info('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
                           get_param('EKF2_OF_QMIN'),
                           get_param('EKF2_OF_N_MIN'),
                           get_param('EKF2_OF_N_MAX'),
@@ -343,21 +562,21 @@ def check_rangefinder():
     if est == 1:
         fuse = get_param('LPE_FUSION')
         if not fuse & (1 << 5):
-            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
+            info('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
         else:
-            rospy.loginfo('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
+            info('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
 
     elif est == 2:
         hgt = get_param('EKF2_HGT_MODE')
         if hgt != 2:
-            rospy.loginfo('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
+            info('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
         else:
-            rospy.loginfo('EKF2_HGT_MODE = Range sensor, operating over flat surface')
+            info('EKF2_HGT_MODE = Range sensor, operating over flat surface')
         aid = get_param('EKF2_RNG_AID')
         if aid != 1:
-            rospy.loginfo('EKF2_RNG_AID != 1, range sensor aiding disabled')
+            info('EKF2_RNG_AID != 1, range sensor aiding disabled')
         else:
-            rospy.loginfo('EKF2_RNG_AID = 1, range sensor aiding enabled')
+            info('EKF2_RNG_AID = 1, range sensor aiding enabled')
 
 
 @check('Boot duration')
@@ -387,10 +606,16 @@ def check_cpu_usage():
 
 @check('clever.service')
 def check_clever_service():
-    output = subprocess.check_output('systemctl show -p ActiveState --value clever.service'.split())
+    try:
+        output = subprocess.check_output('systemctl show -p ActiveState --value clever.service'.split(),
+                                         stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        failure('systemctl returned %s: %s', e.returncode, e.output)
+        return
     if 'inactive' in output:
         failure('clever.service is not running, try sudo systemctl restart clever')
         return
+
     j = journal.Reader()
     j.this_boot()
     j.add_match(_SYSTEMD_UNIT='clever.service')
@@ -411,14 +636,45 @@ def check_clever_service():
         failure(error)
 
 
+@check('Image')
+def check_image():
+    try:
+        info('version: %s', open('/etc/clever_version').read().strip())
+    except IOError:
+        info('no /etc/clever_version file, not the Clever image?')
+
+
+@check('Preflight status')
+def check_preflight_status():
+    # Make sure the console is available to us
+    mavlink_exec('\n')
+    cmdr_output = mavlink_exec('commander check')
+    if cmdr_output == '':
+        failure('no data from FCU')
+        return
+    cmdr_lines = cmdr_output.split('\n')
+    r = re.compile(r'^(.*)(Preflight|Prearm) check: (.*)')
+    for line in cmdr_lines:
+        if 'WARN' in line:
+            failure(line[line.find(']') + 2:])
+            continue
+        match = r.search(line)
+        if match is not None:
+            check_status = match.groups()[2]
+            if check_status != 'OK':
+                failure(' '.join([match.groups()[1], 'check:', check_status]))
+
+
 def selfcheck():
+    check_image()
     check_clever_service()
     check_fcu()
     check_imu()
     check_local_position()
     check_velocity()
     check_global_position()
-    check_camera('main_camera')
+    check_preflight_status()
+    check_main_camera()
     check_aruco()
     check_simpleoffboard()
     check_optical_flow()

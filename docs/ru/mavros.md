@@ -48,8 +48,8 @@ MAVROS подписывается на определенные ROS-топики
 
 ### Топики для посылки raw-пакетов
 
-`/mavros/setpoint_raw/local` — отправка пакета [SET\_POSITION\_TARGET\_LOCAL\_NED](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_LOCAL_NED). Позволяет установить целевую позицию/целевую скорость и целевое рысканье/угловую скорость по рысканью. Выбор устанавливаемых величин осуществляется с помощью поля `type_mask`.
+`/mavros/setpoint_raw/local` — отправка пакета [SET\_POSITION\_TARGET\_LOCAL\_NED](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED). Позволяет установить целевую позицию/целевую скорость и целевое рысканье/угловую скорость по рысканью. Выбор устанавливаемых величин осуществляется с помощью поля `type_mask`.
 
-`/mavros/setpoint_raw/attitude` — отправка пакета [SET\_ATTITUDE\_TARGET](https://pixhawk.ethz.ch/mavlink/#SET_ATTITUDE_TARGET). Позвлояет установить целевую ориенатацию /угловые скорости и уровень газа. Выбор устанавливаемых величин осуществляется с помощью поля `type_mask`
+`/mavros/setpoint_raw/attitude` — отправка пакета [SET\_ATTITUDE\_TARGET](https://mavlink.io/en/messages/common.html#SET_ATTITUDE_TARGET). Позвлояет установить целевую ориенатацию /угловые скорости и уровень газа. Выбор устанавливаемых величин осуществляется с помощью поля `type_mask`
 
-`/mavros/setpoint_raw/global` — отправка пакета [SET\_POSITION\_TARGET\_GLOBAL\_INT](https://pixhawk.ethz.ch/mavlink/#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах \(ширина, долгота, высота\), а также скорости полета. **Не поддерживается в PX4** \([issue](https://github.com/PX4/Firmware/issues/7552)\).
+`/mavros/setpoint_raw/global` — отправка пакета [SET\_POSITION\_TARGET\_GLOBAL\_INT](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах \(ширина, долгота, высота\), а также скорости полета. **Не поддерживается в PX4** \([issue](https://github.com/PX4/Firmware/issues/7552)\).

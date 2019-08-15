@@ -16,6 +16,8 @@ sudo systemctl start pigpiod.service
 sudo systemctl enable pigpiod.service
 ```
 
+> **Warning** При одновременном использовании `pigpiod` и [LED-ленты](leds.md) возможны конфликты. Для подключения ленты используйте пин GPIO21. На версиях [образа](microsd_images.md) ниже 0.17 измените в файле `/lib/systemd/system/pigpiod.service` строку запуска сервиса на `ExecStart=/usr/bin/pigpiod -l -t 0 -x 0x0FFF3FF0`.
+
 Пример работы с библиотекой:
 
 ```python
@@ -57,6 +59,8 @@ level = pi.read(12)
 import time
 import pigpio
 
+pi = pigpio.pi()
+
 # устанавливаем режим 13 пина на вывод
 pi.set_mode(13, pigpio.OUTPUT)
 
@@ -71,7 +75,7 @@ pi.set_servo_pulsewidth(13, 2000)
 
 ## Подключение электромагнита
 
-<!-- TODO схема -->
+![GPIO Mosfet Magnet Connection](../assets/gpio_mosfet_magnet.png)
 
 Для подключения электромагнита используйте полевой транзистор (MOSFET). Подключите транзистор к одному из GPIO-пинов Raspberry Pi. Для управления магнитом, подключенным к 15 пину, используйте такой код:
 

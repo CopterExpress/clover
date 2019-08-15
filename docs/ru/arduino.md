@@ -18,16 +18,26 @@ rosrun rosserial_arduino make_libraries.py .
 
 ## Настройка Raspberry Pi
 
-Чтобы единоразово запустить программу на Arduino, можно воспользоваться командой:
+Для запуска `rosserial` создайте файл `arduino.launch` в каталоге `~/catkin_ws/src/clever/clever/launch/` со следующим содержимым:
+
+```xml
+<launch>
+    <node pkg="rosserial_python" type="serial_node.py" name="serial_node" output="screen" if="$(arg arduino)">
+        <param name="port" value="/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0"/>
+    </node>
+</launch>
+```
+
+Чтобы единоразово запустить программу на Arduino, можно будет воспользоваться командой:
 
 ```bash
 roslaunch clever arduino.launch
 ```
 
-Чтобы запускать связку с Arduino при старте системы автоматически, необходимо установить аргумент `arudino` в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`):
+Чтобы запускать связку с Arduino при старте системы автоматически, необходимо добавить запуск созданного launch-файла в основной launch-файл Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`). Добавьте в конец этого файла строку:
 
 ```xml
-<arg name="arduino" default="true"/>
+<include file="$(find clever)/launch/arduino.launch"/>
 ```
 
 При изменении launch-файла необходимо перезапустить пакет `clever`:

@@ -14,6 +14,8 @@ ROS is already installed on [the RPi image](image.md).
 
 To use ROS on a PC, we recommend using Ubuntu Linux (or a virtual machine such as Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) or [VirtualBox](https://www.virtualbox.org)).
 
+> **Note** For ROS Kinetic distribution, we recommend using Ubuntu 16.04.
+
 Concepts
 ---
 
@@ -23,9 +25,9 @@ Main article: http://wiki.ros.org/Nodes
 
 ROS node is a special program (usually written in Python or C++) that communicates with other nodes via ROS topics and ROS services. Dividing complex robotic systems into isolated nodes provides certain advantages: reduced coupling of the code, increases re-usability and reliability.
 
-Many robotic libraries, and the driver are executed in the form of ROS-nodes.
+Many robotic libraries and the drivers are executed in the form of ROS-nodes.
 
-In order to turn an ordinary program into a ROS node, connect to it a `rospy` or `roscpp` library, and add the initialization code.
+In order to turn an ordinary program into a ROS node, include a `rospy` or `roscpp` library, and insert the initialization code.
 
 An example of a ROS node in Python:
 
@@ -43,7 +45,7 @@ Main article: http://wiki.ros.org/Topics
 
 A topic is a named data bus used by the nodes for exchanging messages. Any node can *post* a message in a random topic, and *subscribe* to an arbitrary topic.
 
-An example of posting a message of type [`std_msgs/String`](http://docs.ros.org/api/std_msgs/html/msg/String.html) (line) in topic `/foo` in Python:
+An example of [`std_msgs/String`](http://docs.ros.org/api/std_msgs/html/msg/String.html) (line) message type posting in topic `/foo` in Python:
 
 ```python
 from std_msgs.msg import String
@@ -77,9 +79,9 @@ rostopic echo /mavros/state
 
 Main article: http://wiki.ros.org/Services
 
-A service is an analogue to the function that can be called from one node, and processed in another one. The service has a name that is similar to the name of the topic, and 2 message types: request type and response type.
+A service can be assimilated to the a function that can be called from one node, and processed in another one. The service has a name that is similar to the name of the topic, and 2 message types: request type and response type.
 
-An example of invoking a ROS service from Python:
+An example ROS service invoking from Python:
 
 ```python
 from clever.srv import GetTelemetry

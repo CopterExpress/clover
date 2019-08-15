@@ -8,6 +8,10 @@
 #
 # Author: Artem Smirnov <urpylka@gmail.com>
 #
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
 
 set -e # Exit immidiately on non-zero result
 
@@ -138,6 +142,10 @@ fi
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
+echo_stamp "Reconfiguring Clever repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clever
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
 echo_stamp "Installing CLEVER" \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
@@ -147,8 +155,6 @@ echo_stamp "Installing CLEVER" \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
-&& catkin_make run_tests \
-&& catkin_test_results \
 && systemctl enable roscore \
 && systemctl enable clever \
 && echo_stamp "All CLEVER was installed!" "SUCCESS" \
@@ -163,7 +169,6 @@ gitbook build
 echo_stamp "Installing additional ROS packages"
 apt-get install -y --no-install-recommends \
     ros-kinetic-dynamic-reconfigure \
-    ros-kinetic-tf2-web-republisher \
     ros-kinetic-compressed-image-transport \
     ros-kinetic-rosbridge-suite \
     ros-kinetic-rosserial \
@@ -173,8 +178,11 @@ apt-get install -y --no-install-recommends \
     ros-kinetic-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
-echo_stamp "Install GeographicLib datasets (needs for mavros)" \
+echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
+
+echo_stamp "Running tests"
+catkin_make run_tests && catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
@@ -184,7 +192,7 @@ cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 ROS_DISTRO='kinetic'
-export ROS_HOSTNAME='raspberrypi.local'
+export ROS_HOSTNAME=\`hostname\`.local
 source /opt/ros/kinetic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF

@@ -3,7 +3,7 @@ Clever
 
 <img src="../assets/clever3.png" align="right" width="300px" alt="Klever">
 
-"Clever" is an educational constructor set of a programmable quadcopter that consists of popular open source components, and a set of necessary documentation and libraries for working with it.
+CLEVER (Russian: *"Клевер"*, meaning *"Clover"*) is an educational kit of a programmable quadcopter that consists of popular open source components, and a set of necessary documentation and libraries for working with it.
 
 The kit includes a Pixhawk/Pixracer flight controller with the PX4 flight stack, a Raspberry Pi 3 as a controlling onboard computer, and a camera module for performing flights with the use of computer vision, and a set of various sensors and other peripherals.
 

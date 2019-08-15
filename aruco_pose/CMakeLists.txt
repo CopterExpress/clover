@@ -173,7 +173,7 @@ target_link_libraries(aruco_pose
 # See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
 
 ## Mark executable scripts (Python etc.) for installation
- ## in contrast to setup.py, you can choose the destination
+## in contrast to setup.py, you can choose the destination
 # install(PROGRAMS
 #   scripts/my_python_script
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -216,4 +216,8 @@ target_link_libraries(aruco_pose
 if (CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   add_rostest(test/basic.test)
+  add_rostest(test/test_parser_pass.test)
+  add_rostest(test/test_parser_empty_map.test)
+  add_rostest(test/test_node_failure.test)
+  add_rostest(test/largemap.test)
 endif()
