@@ -87,7 +87,7 @@ TODO
 
     * Solder the wires from BEC (from step 5) to the LED strip.
     * Remove the silicone layer on the strip (make an incision with a knife and tear).
-    * [Tin](zap.md) the contacts of the LED strip.
+    * [Tin](tinning.md) the contacts of the LED strip.
 
             Red -> +5V
             Black -> GND
