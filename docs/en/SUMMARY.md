@@ -16,6 +16,7 @@
   * [Connecting GPS](gps.md)
 * Configuration
   * [Initial setup](setup.md)
+  * [Sensor calibration](calibration.md)
   * [Flight modes](modes.md)
   * [Pixhawk / Pixracer Firmware](firmware.md)
   * [PX4 Parameters](px4_parameters.md)
@@ -67,7 +68,7 @@
   * [Flashing ESCs using BLHeliSuite](esc_firmware.md)
   * [MAVLink](mavlink.md)
   * [PX4 Logs and Topics](flight_logs.md)
-  * [Camera calibration](calibration.md)
+  * [Camera calibration](camera_calibration.md)
   * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
 * Textbook
   * [Theory and Videos](lessons.md)
