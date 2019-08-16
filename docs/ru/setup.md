@@ -61,7 +61,7 @@
 
 <img src="../assets/qgc-requires-setup.png" alt="QGroundControl overview" class="zoom">
 
-1. Параметр, нуждающиеся в настройке: *Airframe*, *Radio*, *Sensors*, *Flight Modes*.
+1. Параметры, нуждающиеся в настройке: *Airframe*, *Radio*, *Sensors*, *Flight Modes*.
 2. Текущая прошивка контроллера.
 3. Текущий полетный режим.
 4. Сообщения об ошибках.
