@@ -21,6 +21,11 @@ section ul li:before {
 	border-radius: 5px;
 }
 
+.book.color-theme-2 img.border {
+	border: none;
+	background: #fffffa;
+}
+
 /* Main Clever image */
 .book img.bigclever {
 	margin-bottom: -80px;
