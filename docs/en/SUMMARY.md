@@ -17,7 +17,9 @@
 * Configuration
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
+  * [RC setup](radio.md)
   * [Flight modes](modes.md)
+  * [Power setup](power.md)
   * [Pixhawk / Pixracer Firmware](firmware.md)
   * [PX4 Parameters](px4_parameters.md)
   * [PID Setup](calibratePID.md)
