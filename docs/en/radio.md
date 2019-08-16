@@ -37,4 +37,4 @@ Before connecting and calibrating the RC, make sure that:
 
 Further reading: https://docs.qgroundcontrol.com/en/SetupView/Radio.html
 
-**Next**: [Flight modes](modes.md)
+**Next**: [Flight modes](modes.md).

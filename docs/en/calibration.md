@@ -50,4 +50,4 @@ Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/accelerometer.ht
 
 Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/level_horizon_calibration.html.
 
-**Next**: [RC setup](radio.md)
+**Next**: [RC setup](radio.md).
