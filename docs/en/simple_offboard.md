@@ -16,7 +16,7 @@ Main services are `get_telemetry` (receiving all telemetry), `navigate` (flying 
 The use of Python language
 ---
 
-To use the services, create proxies to them. Following is an example of the program that declares proxies to all `simple_offboard` services:
+To use the services, create proxies to them. Use the following template for you programs:
 
 ```python
 import rospy
