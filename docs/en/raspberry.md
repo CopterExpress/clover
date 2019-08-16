@@ -1,7 +1,7 @@
 Raspberry Pi
 ============
 
-**Raspberry Pi** is a single-board computer that fits in the palm, created on the basis of mobile microprocessor ARM11. It features low energy consumption, and it can even run on solar panels. Raspberry Pi 3 is included in the kits for programmable quadcopters "Clever 2" and "Clever 3".
+**Raspberry Pi** is a single-board computer that fits in the palm, created on the basis of ARM mobile microprocessor. It features low energy consumption, and it can even run on solar panels. Raspberry Pi 3 is included in the kits for programmable quadcopters "Clever".
 
 <img src="../assets/raspberry3.jpg" width="500">
 
