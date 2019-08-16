@@ -1,5 +1,4 @@
-Клевер
-======
+# Клевер
 
 <img class="center bigclever zoom" src="../assets/clever4-front-white-large.png" width="80%" alt="Клевер 4">
 
