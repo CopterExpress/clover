@@ -93,28 +93,17 @@ Perform these actions for each motor.
         <img src="../assets/4/12_1.png" width=300 class="zoom border">
     </center>
 
-## Binding the RC transmitter and receiver
+4. Check the board for shorts using a multimeter.
 
-1. Connect the RC receiver to the 5 V BEC output.
-2. Place the binding jumper on the B/VCC output.
-3. Connect the battery pack.
-4. The LED on the RC receiver should start to blink.
+## Checking motor rotation direction
 
-    <center>
-        <img src="../assets/4/13.png" width=300 class="zoom border">
-        <img src="../assets/4/13_1.png" width=300 class="zoom border">
-    </center>
+Motors with **<font color=red>red</font>** nuts should rotate **counterclockwise**, the ones with **black** nuts should rotate **clockwise**. Correct rotation direction should also be printed on the motors. You can use a servo tester or your RC transmitter and receiver to check rotation direction.
 
-5. Hold down the **BIND KEY** on the RC transmitter.
-6. Turn on the RC transmitter while holding the **BIND KEY**
+The following describes how to use your RC gear to check the motor direction.
 
-    <img src="../assets/4/radio/binding.png" class="zoom center">
+### Setting up PWM mode on RC
 
-7. Wait for the **RXBind ok** message on the RC transmitter
-8. Disconnect the binding jumper.
-9. The LED on the RC receiver should be lit continuously.
-
-If the RC transmitter is locked, place all controls in their neutral position:
+Turn on your transmitter using the **POWER** slider. If the RC transmitter is locked, place all controls in their neutral position:
 
 1. Left stick should be in the **lower center position**.
 2. Right stick should be **centered**.
@@ -122,9 +111,57 @@ If the RC transmitter is locked, place all controls in their neutral position:
 
     <img src="../assets/4/radio/base.png" alt="Neutral control state" class="zoom center">
 
-Make sure the transmitter operates in the PPM mode:
+Make sure the transmitter operates in the PWM mode:
 
-1. Power down the receiver
+1. Power down the receiver.
+2. Hold down the "OK" button to enter the menu.
+3. Select the "System setup" option, press "OK" to enter the submenu.
+4. Select "RX Setup" option.
+5. Select "Output mode".
+6. Make sure the "PWM" option is selected.
+7. Save settings by holding the "Cancel" button.
+
+### Binding the RC transmitter and receiver
+
+1. Turn off the RC transmitter with the **POWER** slider.
+2. Connect the RC receiver to the 5 V BEC output. Connect the black wire into one of the bottom pins and the red wire to one of the central pins.
+3. Place the binding jumper on the B/VCC output.
+4. Connect the battery pack.
+5. The LED on the RC receiver should start to blink.
+
+    <center>
+        <img src="../assets/4/13.png" width=300 class="zoom border">
+        <img src="../assets/4/13_1.png" width=300 class="zoom border">
+    </center>
+
+6. Hold down the **BIND KEY** on the RC transmitter.
+7. Turn on the RC transmitter while holding the **BIND KEY**
+
+    <img src="../assets/4/radio/binding.png" class="zoom center">
+
+8. Wait for the **RXBind ok** message on the RC transmitter
+9. Disconnect the binding jumper.
+10. The LED on the RC receiver should be lit continuously.
+
+### Checking the motor rotation direction
+
+1. Disconnect the battery pack and power down the transmitter.
+2. Connect the signal wires from the ESC to CH3 pins on the output. The white wire should go to the top pin, the black one should go to the bottom one.
+3. Power on the transmitter. Make sure the left stick is in the bottom position.
+4. Connect the battery pack.
+5. Slowly move the left stick up until the motor starts to spin.
+
+If the motor rotation direction is wrong, switch any two motor wires.
+
+> **Info** You can also change motor direction by reprogramming the speed controllers. The process is described [in the ESC firmware flashing article](esc_firmware.md).
+
+Do this for each motor.
+
+### Switching the transmitter back to PPM mode
+
+The flight controller expects PPM signal from your RC gear. Switch your transmitter back to PPM before flight.
+
+1. Make sure the receiver is not powered.
 2. Hold down the "OK" button to enter the menu.
 3. Select the "System setup" option, press "OK" to enter the submenu.
 4. Select "RX Setup" option.
