@@ -53,6 +53,8 @@
   * [Работа с логами PX4](flight_logs.md)
   * [Прошивка PX4](firmware.md)
   * [Протокол MAVLink](mavlink.md)
+  * [Использование мультиметра](test_connection.md)
+  * [Неисправности радиоаппаратуры](radioerrors.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Настройка режима тренера](trainer_mode.md)
   * [Калибровка камеры](camera_calibration.md)
