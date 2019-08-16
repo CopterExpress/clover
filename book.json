@@ -46,7 +46,8 @@
             ]
         },
         "addcssjs": {
-            "css": ["../clever.css"]
+            "css": ["../clever.css"],
+            "js": ["../clever.js"]
         },
         "language-picker": {
             "languages": [["ru", "Russian"], ["en", "English"]]
