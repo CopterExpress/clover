@@ -26,6 +26,20 @@ section ul li:before {
 	background: #fffffa;
 }
 
+/* Images groups in instructions */
+.book .image-group {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.book .image-group img {
+	align-self: center;
+	margin: 0 10px;
+	width: 300px;
+	margin-bottom: 0.85em;
+}
+
 /* Main Clever image */
 .book img.bigclever {
 	margin-bottom: -80px;

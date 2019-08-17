@@ -5,17 +5,17 @@
 1. Совместите 2 карбоновые пластины жесткости, используя центральные пазы.
 2. Используя пазы, установите сверху карбоновую центральную деку.
 
-    <center>
-        <img src="../assets/4/01.png" width=300 class="zoom border">
-        <img src="../assets/4/02.png" width=300 class="zoom border">
-    </center>
+    <div class="image-group">
+        <img src="../assets/4/01.png" class="zoom border">
+        <img src="../assets/4/02.png" class="zoom border">
+    </div>
 
 3. Стяните конструкцию с помощью винтов М3х8 и стальных гаек, установленных в пазах пластин.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/03.png" width=300 class="zoom border">
         <img src="../assets/4/03_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка моторов
 
@@ -47,10 +47,10 @@
 
 2. Зафиксируйте лучи на раме, используя 8 винтов М3х8 и 6 стальных гаек, а также 2 стойки "мама-мама" 15 мм.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/07.png" width=300 class="zoom border">
         <img src="../assets/4/07_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Подготовка платы распределения питания
 
@@ -64,10 +64,10 @@
 
 1. Установите 4 стойки "папа-мама" 6 мм на центральную деку винтами М3х6.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/08.png" width=300 class="zoom border">
         <img src="../assets/4/08_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 2. Установите PDB на стойки.
 3. Стрелки на PDB и центральной деке должны быть направлены в одну сторону.
@@ -79,17 +79,17 @@
 1. Припаяйте фазные провода моторов к регуляторам.
 2. Припаяйте силовые провода регуляторов к контактным площадкам платы (**<font color=red>красный</font>** к **«+»**, **черный** к **«-»**).
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/09.png" width=300 class="zoom border">
         <img src="../assets/4/10_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Припаяйте силовые провода каждого BEC к контактным площадкам одного из регуляторов (**<font color=red>красный</font>** к **«+»**, **черный** к **«-»**).
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/10.png" width=300 class="zoom border">
         <img src="../assets/4/12_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. С помощью мультиметра проверьте, что в цепи нет короткого замыкания.
 
@@ -127,10 +127,10 @@
 4. Подключите АКБ.
 5. Светодиод на радиоприемнике должен мигать.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/13.png" width=300 class="zoom border">
         <img src="../assets/4/13_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 6. Зажмите кнопку **BIND KEY** на пульте.
 7. Включите пульт (перещелкните **POWER**, не отпуская **BIND KEY**).
@@ -173,11 +173,11 @@
 2. Подключите шлейф питания к PDB.
 3. Установите поликарбонатную пластину на стойки и зафиксировать нейлоновыми гайками.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/14.png" width=300 class="zoom border">
         <img src="../assets/4/15.png" width=300 class="zoom border">
         <img src="../assets/4/16.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка полётного контроллера
 
@@ -185,52 +185,52 @@
 2. Стрелки на полетном контроллере и центральной деке должны быть направлены в одну сторону.
 3. Подключите шлейф питания PDB к разъему *"POWER"* полетного контроллера, закрутив его в "косичку" для взаимной фиксации проводов.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/18.png" width=300 class="zoom border">
         <img src="../assets/4/18_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Установите 4 алюминиевые стойки 40 мм с помощью винтов М3х10.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/19.png" width=300 class="zoom border">
         <img src="../assets/4/19_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 5. Подключите сигнальные провода регуляторов к полетному контроллеру следующим образом:
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/20.png" width=300 class="zoom border">
         <img src="../assets/4/20_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 6. Установите 2 стойки "мама-мама" 15 мм на центральную деку с помощью винтов М3х8.
 7. Другие 2 стойки крепятся винтами М3х10 при том, что фиксируют 2 карбоновые детали, помимо стойки.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/21.png" width=300 class="zoom border">
         <img src="../assets/4/21_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка обруча для светодиодной ленты
 
 1. Согните поликарбонатную заготовку в обруч и зафиксируйте ее концы в замке.
 2. Установите обруч на раму, используя пазы.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/22.png" width=300 class="zoom border">
         <img src="../assets/4/23.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка Raspberry Pi
 
 1. Установите плату Raspberry Pi на стойки, используя 4 стойки "папа-мама".
 2. Протяните провода от BEC через паз в центральной раме.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/24.png" width=300 class="zoom border">
         <img src="../assets/4/26.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Подключите провод питания от BEC к Raspberry, согласно схеме:
 
@@ -241,11 +241,11 @@
 1. Проверьте наличие напаянных пинов на контактах ленты (при отсутствии - напаять).
 2. Установите светодиодную ленту на обруч (используя клеевой слой на ленте) так, чтобы контакты были в задней части коптера. Для фиксации использовать **стяжки**.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/27.png" width=300 class="zoom border">
         <img src="../assets/4/27_1.png" width=300 class="zoom border">
         <img src="../assets/4/28.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Подключение светодиодной ленты к Raspberry Pi
 
@@ -268,10 +268,10 @@
 2. Установите камеру на 4 самореза 2х5.
 3. Установить на деку лазерный дальномер с помощью 2 винтов М3х8 и стальных гаек.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/33.png" width=300 class="zoom border">
         <img src="../assets/4/33_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Установите приемник на нижнюю деку с помощью двухстороннего скотча.
 
@@ -280,10 +280,10 @@
 5. Установите нижнюю деку с помощью 4 винтов М3х10.
 6. Подключите шлейф к камере.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/35.png" width=300 class="zoom border">
         <img src="../assets/4/36.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 7. Подключите лазерный дальномер к Raspberry Pi с помощью проводов типа "мама-мама":
     * Разъем *VCC* к пину 1 (*3.3v*).
@@ -298,10 +298,10 @@
 1. Установите 8 ножек с помощью винтов М3х10 и стальных гаек.
 2. Установите демпфирующие прокладки на ножки с помощью винтов М3х10 и стальных гаек.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/37.png" width=300 class="zoom border">
         <img src="../assets/4/38.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Подключение шлейфов
 
@@ -315,17 +315,17 @@
 1. Соберите нижнюю часть защиты, используя 12 винтов М3х10 и 12 нейлоновых стоек 40 мм.
 2. Установите верхнюю часть, используя 12 винтов М3х10.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/40.png" width=300 class="zoom border">
         <img src="../assets/4/41.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Установите защиту на коптер, с помощью 4 винтов М3х10 и стальных гаек.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/42.png" width=300 class="zoom border">
         <img src="../assets/4/42_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка верхней деки на коптер
 
@@ -333,18 +333,18 @@
 2. Проденьте в пазы ремешок для фиксации АКБ.
 3. Установите верхнюю деку на коптер с помощью 4 винтов М3х10.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/42.png" width=300 class="zoom border">
         <img src="../assets/4/42_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Подключите USB кабель к разъему на полетном контроллере и USB разъему Raspberry Pi.
 5. Зафиксируйте "улитку" кабеля в удобном месте с помощью двухстороннего скотча так, чтобы провод не мешал вращению винтов.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/47_1.png" width=300 class="zoom border">
         <img src="../assets/4/47_2.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Установка АКБ
 
@@ -366,9 +366,9 @@
 
 Установите 4 пропеллера, согласно схеме вращения. При установке пропеллеров АКБ должна быть отключена.
 
-<center>
+<div class="image-group">
     <img src="../assets/4/49.png" width=300 class="zoom border">
     <img src="../assets/4/50.png" width=300 class="zoom border">
-</center>
+</div>
 
 > **Success** Дрон готов к полету!.

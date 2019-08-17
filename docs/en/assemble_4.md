@@ -5,17 +5,17 @@
 1. Align two reinforcement carbon plates using the center notch.
 2. Install the top carbon deck using notches as guides.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/01.png" width=300 class="zoom border">
         <img src="../assets/4/02.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Place steel nuts into the slots in reinforcement plates and tighten the assembly with M3x8 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/03.png" width=300 class="zoom border">
         <img src="../assets/4/03_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Installing motors
 
@@ -47,10 +47,10 @@ Perform these actions for each motor.
 
 2. Attach the arms to the frame base using 8 M3x8 screws, 6 steel nuts, and 2 15 mm spacers.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/07.png" width=300 class="zoom border">
         <img src="../assets/4/07_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Preparing the power distribution board
 
@@ -64,10 +64,10 @@ Perform these actions for each motor.
 
 1. Attach four 6 mm standoffs on the top carbon deck using M3x6 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/08.png" width=300 class="zoom border">
         <img src="../assets/4/08_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 2. Place the PDB on the standoffs.
 3. Make sure the arrow on the PDB is pointing in the same direction as the arrow on the top carbon deck.
@@ -79,17 +79,17 @@ Perform these actions for each motor.
 1. Solder the motor wires to the electronic speed controllers (ESCs).
 2. Solder the ESC power wires to the power distribution board (**<font color=red>red</font>** to **«+»**, **black** to **«-»**).
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/09.png" width=300 class="zoom border">
         <img src="../assets/4/10_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Solder power wires of the battery elimination circuit in parallel to one of the ESC power wires (**<font color=red>red</font>** to **«+»**, **black** to **«-»**).
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/10.png" width=300 class="zoom border">
         <img src="../assets/4/12_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Check the board for shorts using a multimeter.
 
@@ -107,7 +107,7 @@ Turn on your transmitter using the **POWER** slider. If the RC transmitter is lo
 2. Right stick should be **centered**.
 3. The switches (A, B, C, D) should be in the **top position**.
 
-    <img src="../assets/4/radio/base.png" alt="Neutral control state" class="zoom center">
+    <img src="../assets/4/radio/base.png" alt="Neutral control state" width=500 class="zoom center">
 
 Make sure the transmitter operates in the PWM mode:
 
@@ -127,15 +127,15 @@ Make sure the transmitter operates in the PWM mode:
 4. Connect the battery pack.
 5. The LED on the RC receiver should start to blink.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/13.png" width=300 class="zoom border">
         <img src="../assets/4/13_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 6. Hold down the **BIND KEY** on the RC transmitter.
 7. Turn on the RC transmitter while holding the **BIND KEY**
 
-    <img src="../assets/4/radio/binding.png" class="zoom center">
+    <img src="../assets/4/radio/binding.png" width=500 class="zoom center">
 
 8. Wait for the **RXBind ok** message on the RC transmitter
 9. Disconnect the binding jumper.
@@ -173,11 +173,11 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 2. Connect the flight controller power cable to the PDB.
 3. Place the polycarbonate plate on the standoffs and fix them with plastic nuts.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/14.png" width=300 class="zoom border">
         <img src="../assets/4/15.png" width=300 class="zoom border">
         <img src="../assets/4/16.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Mounting the flight controller
 
@@ -185,52 +185,52 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 2. Attach the flight controller to the flight controller plate using 3M double-sided adhesive pads.
 3. Connect the power cable to the **"POWER"** input of the flight controller.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/18.png" width=300 class="zoom border">
         <img src="../assets/4/18_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Attach four 40 mm aluminum spacers to the top carbon deck using M3x10 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/19.png" width=300 class="zoom border">
         <img src="../assets/4/19_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 5. Connect signal wires to the flight controller as shown in these pictures:
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/20.png" width=300 class="zoom border">
         <img src="../assets/4/20_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 6. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
 7. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/21.png" width=300 class="zoom border">
         <img src="../assets/4/21_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Mounting the LED strip ring
 
 1. Bend the polycarbonate strip into a ring and use the locks to fix it in this shape.
 2. Fix the ring on the frame using appropriate notches.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/22.png" width=300 class="zoom border">
         <img src="../assets/4/23.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Installing the Raspberry Pi
 
 1. Attach the Raspberry Pi using four standoffs.
 2. Route the BEC wires through the channel in the top carbon deck.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/24.png" width=300 class="zoom border">
         <img src="../assets/4/26.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Connect the BEC outputs according to the following image:
 
@@ -241,11 +241,11 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 1. Check wires on the strip (and solder them on if they're missing)
 2. Attach the LED strip to the ring using the adhesive layer on the strip. Use zip ties to fix it in place.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/27.png" width=300 class="zoom border">
         <img src="../assets/4/27_1.png" width=300 class="zoom border">
         <img src="../assets/4/28.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Connecting the LED strip to Raspberry Pi
 
@@ -268,10 +268,10 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 2. Use four 2x5 self-tapping screws to secure the camera.
 3. Mount the laser rangefinder on the lower deck using two M3x8 screws and steel nuts.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/33.png" width=300 class="zoom border">
         <img src="../assets/4/33_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Attach RC receiver to the lower deck using 3M double-sided adhesive pads.
 
@@ -280,10 +280,10 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 5. Mount the lower deck assembly using four M3x10 screws.
 6. Connect the camera ribbon cable to the camera.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/35.png" width=300 class="zoom border">
         <img src="../assets/4/36.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 7. Connect the laser rangefineder to the Raspberry Pi using the following pinout:
     * Connect **VCC** to pin 1 (**3v3**)
@@ -298,10 +298,10 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 1. Attach 8 landing gear pieces using M3x10 screws and steel nuts.
 2. Attach dampening pads to the landing gear pieces using M3x10 screws and steel nuts.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/37.png" width=300 class="zoom border">
         <img src="../assets/4/38.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Connecting the cables
 
@@ -315,17 +315,17 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 1. Assemble the lower part of the guards using twelve M3x10 screws and twelve 40 mm plastic spacers.
 2. Assemble the top part using twelve M3x10 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/40.png" width=300 class="zoom border">
         <img src="../assets/4/41.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 3. Attach the assembly to the drone using four M3x10 screws and steel nuts.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/42.png" width=300 class="zoom border">
         <img src="../assets/4/42_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Mounting the top deck
 
@@ -333,18 +333,18 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 2. Thread the battery strap through the slots in the deck.
 3. Attach the top deck using four M3x10 screws.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/42.png" width=300 class="zoom border">
         <img src="../assets/4/42_1.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 4. Connect the flight controller to the Raspberry Pi using retractable USB cable.
 5. Attach the USB cable reel where convenient using 3M double-sided adhesive pads while making sure the cable does not interfere with the propellers.
 
-    <center>
+    <div class="image-group">
         <img src="../assets/4/47_1.png" width=300 class="zoom border">
         <img src="../assets/4/47_2.png" width=300 class="zoom border">
-    </center>
+    </div>
 
 ## Installing the battery
 
@@ -360,15 +360,15 @@ Check the quadrotor assembly:
 
 ## Mounting the propellers and preparing for flight
 
-Perform the quadrotor components setup according to [the "Initial setup" article](setup.md)
+Perform the quadrotor components setup according to [the "Configuration" section](setup.md).
 
 > **Warning** Be sure to **not** mount the propellers **until the setup is complete**. Do it only when you are ready to fly.
 
 Attach the propellers according to their rotation direction. The battery should be disconnected duting propeller installation.
 
-<center>
+<div class="image-group">
     <img src="../assets/4/49.png" width=300 class="zoom border">
     <img src="../assets/4/50.png" width=300 class="zoom border">
-</center>
+</div>
 
 > **Success** The drone is ready to fly!
