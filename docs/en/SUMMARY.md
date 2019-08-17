@@ -4,9 +4,9 @@
 * [Glossary](gloss.md)
 * [Safety tips](safety.md)
 * Assembly
-  * [Clever 2 assembly](assemble_2.md)
-  * [Clever 3 assembly](assemble_3.md)
   * [Clever 4 assembly](assemble_4.md)
+  * [Clever 3 assembly](assemble_3.md)
+  * [Clever 2 assembly](assemble_2.md)
 * Configuration
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
