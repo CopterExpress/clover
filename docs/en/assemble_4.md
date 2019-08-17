@@ -1,7 +1,5 @@
 # Clever 4 assembly
 
-<img src="../assets/clever-4-blow.png" class="zoom center" width=400>
-
 ## Frame base assembly
 
 1. Align two reinforcement carbon plates using the center notch.
