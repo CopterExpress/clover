@@ -45,7 +45,7 @@
 * Дополнительные материалы
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
-  * [Настройка PID](calibratePID.md)
+  * [Настройка PID](pid_tuning.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Kinetic](ros-install.md)
   * [Пилотирование со смартфона](rc.md)
