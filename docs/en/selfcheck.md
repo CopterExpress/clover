@@ -1,10 +1,8 @@
 # Automatic check
 
-It is generally a good idea to perform some checks before flight, especially before an autonomous one. There are several methods of automated self-checks of the drone subsystems.
+The [RPi image](image.md) contains a tool for automatic checking the correctness of all the settings and subsystems of the drone – **selfcheck.py**.
 
-## <span>selfcheck</span>.py
-
-The `selfcheck.py` utility script is part of the `clever` package; it performs automated tests of the main aspects of the ROS platform and PX4. The utility is pre-installed on [the Raspberry Pi image](microsd_images.md).
+It is generally a good idea to perform this check before flight, especially before an autonomous one.
 
 In order to run it, enter the following command in [the Raspberry Pi console](ssh.md):
 
@@ -26,10 +24,4 @@ Description of some checks:
 * VPE — checks whether VPE data is published
 * Rangefinder — checks whether [rangefinder](laser.md) data is published
 
-## commander check
-
-In order check the main subsystems of PX4 and the possibility of arming at the moment you can run the `commander check` command in the MAVLink console.
-
-<img src="../assets/commander-check.png">
-
-If you're running SITL, you should use the terminal where PX4 simulation is running instead of the MAVLink console.
+> *Caution* Pay attention on the checks marked with *WARN* sign. If necessary, contact [Copter Express echnical support](tg://resolve?domain=COEXHelpdesk).

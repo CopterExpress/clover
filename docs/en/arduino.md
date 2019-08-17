@@ -1,6 +1,6 @@
 # Controlling the copter from Arduino
 
-For interaction with ROS topics and services on a Raspberry Pi, you can use the [rosserial_arduino](http://wiki.ros.org/rosserial_arduino) library. This library is pre-installed on [a Raspberry Pi image](microsd_images.md).
+For interaction with ROS topics and services on a Raspberry Pi, you can use the [rosserial_arduino](http://wiki.ros.org/rosserial_arduino) library. This library is pre-installed on [a Raspberry Pi image](image.md).
 
 The main tutorial for rosserial: http://wiki.ros.org/rosserial_arduino/Tutorials
 

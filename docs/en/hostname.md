@@ -1,6 +1,6 @@
 # Hostname
 
-[By default](microsd_images.md) the hostname of the Clever drone is set to `clever-xxxx`, where `xxxx` are random numbers. These numbers are the same as in the [Wi-Fi SSID](wifi.md).
+[By default](image.md) the hostname of the Clever drone is set to `clever-xxxx`, where `xxxx` are random numbers. These numbers are the same as in the [Wi-Fi SSID](wifi.md).
 
 Thus, Clever is accessible on machines that support mDNS as `clever-xxxx.local`. You can use this name to access Clever over SSH:
 

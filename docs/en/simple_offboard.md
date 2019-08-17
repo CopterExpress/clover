@@ -1,7 +1,7 @@
 Simple OFFBOARD
 ===
 
-> **Note** Documentation for the [image](microsd_images.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/droneExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+> **Note** Documentation for the [image](image.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
 
 <!-- -->
 
@@ -16,7 +16,7 @@ Main services are `get_telemetry` (receiving all telemetry), `navigate` (flying 
 The use of Python language
 ---
 
-To use the services, create proxies to them. Following is an example of the program that declares proxies to all `simple_offboard` services:
+To use the services, create proxies to them. Use the following template for you programs:
 
 ```python
 import rospy

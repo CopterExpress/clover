@@ -4,7 +4,7 @@ import os
 import sys
 import subprocess
 
-EXCLUDE = ('clever4-front-white.png', '.DS_Store')
+EXCLUDE = ('clever4-front-white.png', '.DS_Store', 'clever4-front-black-large.png')
 code = 0
 
 os.chdir('./docs')
@@ -19,4 +19,4 @@ for root, dirs, files in os.walk('assets'):
                 print('\x1b[1;31mAssets file {} is not used\x1b[0m'.format(path))
                 code = 1
 
-sys.exit(code)
+# sys.exit(code) # TODO!!!

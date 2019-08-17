@@ -1,12 +1,26 @@
-Использование QGroundControl через Wi-Fi
-===
+# Подключение QGroundControl по Wi-Fi
 
-![QGroundControl](../assets/qground.png)
+Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi. Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `CLEVER-xxxx`.
 
-Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi.
-Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `CLEVER-xxxx`.
+## Подключение
 
-После чего в launch-файле Клевера `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch` выбрать один из преднастроенных режимов бриджа.
+По умолчанию на Клевере настроена возможность подключения QGroundControl по протоколу TCP.
+
+1. На первой вкладке QGroundControl выберите меню *Comm Links*.
+2. Нажмите кнопку *Add*, чтобы добавить новое подключение.
+3. Введите параметры подключения:
+    * Name: *Clever*.
+    * Type: *TCP*.
+    * Host Address: *192.168.11.1*.
+    * TCP Port: *5760*.
+4. Нажмите *OK* для сохранения параметров.
+5. Выберите созданное подключение и нажмите *Connect*.
+
+<img src="../assets/qgc-bridge-tcp.png" alt="Подключение QGroundControl к Клеверу через TCP">
+
+## UDP
+
+Также возможна настройка подключения по протоколу UDP. Для выбора различных вариантов подключения по UDP необходимо отредактировать параметр `gcs_bridge` в launch-файле `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch`.
 
 После изменения launch-файла необходимо перезагрузить сервис clever:
 
@@ -14,56 +28,23 @@
 sudo systemctl restart clever
 ```
 
-TCP-бридж
----
+## UDP-бридж с автоматическим подключением
 
-Изменить параметр `gcs_bridge` в launch-файле:
+1. Измените параметр `gcs_bridge` на `udp-b`.
+2. При открытии программы QGroundControl соединение должно установиться автоматически.
 
-```xml
-<arg name="gcs_bridge" default="tcp"/>
-```
+## UDP-бридж без автоматического подключения
 
-Затем в программе QGroundControl нужно выбрать Application Settings > Comm Links > Add. Создать подключение со следующими настройками:
+1. Измените параметр `gcs_bridge` на `udp`.
+2. В QQroundControl создайте подключение со следующими настройками:
 
-![QGroundControl TCP connection](../assets/bridge_tcp.png)
+    ![QGroundControl UDP connection](../assets/bridge_udp.png)
 
-Затем необходимо выбрать в списке подключений "Clever" и нажать "Connect".
+3. Выберите в списке подключений *CLEVER* и нажмите *Connect*.
 
-UDP бридж (с автоматическим подключением)
----
-
-Изменить параметр gcs_bridge в launch-файле:
-
-```xml
-<arg name="gcs_bridge" default="udp-b"/>
-```
-
-При открытии программы QGroundControl соединение должно установиться автоматически.
-
-UDP-бридж (без автоматического подключения)
----
-
-Изменить параметр `gcs_bridge` в launch-файле:
-
-```xml
-<arg name="gcs_bridge" default="udp"/>
-```
-
-Затем в программе QGroundControl нужно выбрать Application Settings > Comm Links > Add. Создать подключение со следующими настройками:
-
-![QGroundControl UDP connection](../assets/bridge_udp.png)
-
-Затем необходимо выбрать в списке подключений "CLEVER" и нажать "Connect".
-
-UDP broadcast-бридж
----
+## UDP broadcast-бридж
 
 > **Hint** Особенностью UDP broadcast-бриджа является возможность просмотра телеметрии дрона одновременно с нескольких устройств (например с телефона и компьютера). Также он хорошо подходит для организации сети из устройств при помощи роутера.
 
-Изменить параметр `gcs_bridge` в launch-файле:
-
-```xml
-<arg name="gcs_bridge" default="udp-pb"/>
-```
-
-При открытии программы QGroundControl соединение должно установиться автоматически.
+1. Измените параметр `gcs_bridge` на `udp-pb`.
+2. При открытии программы QGroundControl соединение должно установиться автоматически.

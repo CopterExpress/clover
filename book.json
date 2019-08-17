@@ -6,14 +6,15 @@
     "root": "docs/",
     "gitbook": "^3.2.2",
     "plugins": [
-        "youtube",
         "richquotes@https://github.com/okalachev/gitbook-plugin-richquotes.git",
         "yametrika",
         "anchors",
         "validate-links",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
+        "toolbar@https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
         "addcssjs",
+        "image-zoom@https://github.com/okalachev/gitbook-plugin-image-zoom.git",
         "language-picker@https://github.com/okalachev/gitbook-plugin-language-picker.git"
     ],
     "pluginsConfig": {
@@ -27,8 +28,26 @@
         "sitemap": {
             "hostname": "https://clever.copterexpress.com"
         },
+        "toolbar": {
+            "buttons":
+            [
+                {
+                    "label": "Edit page on github",
+                    "icon": "fa fa-pencil-square-o",
+                    "position" : "left",
+                    "url": "https://github.com/CopterExpress/clever/edit/master/docs/{{filepath_lang}}"
+                },
+                {
+                    "label": "GitHub",
+                    "icon": "fa fa-github",
+                    "position" : "left",
+                    "url": "https://github.com/CopterExpress/clever"
+                }
+            ]
+        },
         "addcssjs": {
-            "css": ["../clever.css"]
+            "css": ["../clever.css"],
+            "js": ["../clever.js"]
         },
         "language-picker": {
             "languages": [["ru", "Russian"], ["en", "English"]]
