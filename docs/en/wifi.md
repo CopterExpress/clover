@@ -15,4 +15,4 @@ After connecting to Clever Wi-Fi, point http://192.168.11.1 in you web browser. 
 
 <img src="../assets/web.png" alt="Веб-интерфейс Клевера" class="zoom">
 
-**Next**: [Using QGroundControl via Wi-Fi](gcs_bridge).
+**Next**: [Using QGroundControl via Wi-Fi](gcs_bridge.md).

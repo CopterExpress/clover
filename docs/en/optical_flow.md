@@ -52,7 +52,7 @@ Setup POSCTL to be one of PX4 flight modes and then select POSCTL.
 
 ## Autonomous flight
 
-The module [simple_offboard](simple_offboard.mb) enables autonomous flight.
+The module [simple_offboard](simple_offboard.md) enables autonomous flight.
 
 Example of take off and leveling at 1.5m above the ground:
 
@@ -66,7 +66,7 @@ Flying forward for 1m:
 navigate(x=1.5, frame_id='body')
 ```
 
-[Navigation using ArUco-markers](aruco_marker) and [using VPE] are available when using Optical Flow.
+[Navigation using ArUco-markers](aruco_marker.md) and [using VPE] are available when using Optical Flow.
 
 ## Additional settings
 
