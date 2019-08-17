@@ -1,6 +1,6 @@
 # RC setup
 
-<img src="../assets/consistofTransmitter.jpg" alt="Состав пульта" class="zoom">
+<img src="../assets/en/consistofTransmitter.jpg" class="zoom">
 
 Before connecting and calibrating the RC, make sure that:
 
