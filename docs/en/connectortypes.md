@@ -25,4 +25,4 @@ This connector may be used together with a buzzer (beeper) for monitoring batter
 There is a great variety of Gold bullet pin connectors. Connectors of this type may have different diameters and size. The most widespread connectors are those with the diameter of 2 mm, 3 mm, and 4 mm.
 They are often used for solderless connections on PDB and motors.
 
-<img src="../assets/Banana.jpg" alt="Banana" width=200>
+<img src="../assets/banana.jpg" alt="Banana" width=200>

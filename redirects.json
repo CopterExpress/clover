@@ -15,7 +15,7 @@
         { "from": "firmware.html", "to": "ru/firmware.html" },
         { "from": "px4_parameters.html", "to": "ru/px4_parameters.html" },
         { "from": "raspberry.html", "to": "ru/raspberry.html" },
-        { "from": "microsd_images.html", "to": "ru/microsd_images.html" },
+        { "from": "microsd_images.html", "to": "ru/image.html" },
         { "from": "connection.html", "to": "ru/connection.html" },
         { "from": "wifi.html", "to": "ru/wifi.html" },
         { "from": "ssh.html", "to": "ru/ssh.html" },
@@ -49,6 +49,9 @@
         { "from": "camera/", "to": "ru/camera.html" },
         { "from": "snippets/", "to": "ru/snippets.html" },
         { "from": "optical_flow/", "to": "ru/optical_flow.html" },
-        { "from": "laser/", "to": "ru/laser.html" }
+        { "from": "laser/", "to": "ru/laser.html" },
+
+        { "from": "ru/microsd_images.html", "to": "ru/image.html" },
+        { "from": "en/microsd_images.html", "to": "en/image.html" }
     ]
 }

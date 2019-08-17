@@ -31,8 +31,8 @@ Clever 2 construction kit assembly instruction
 * FlySky i6 radio transmitter ×1.
 * EFEST LUC V4 Charger ×1.
 * Micro USB to USB Cable ×1
-* Battery compartment 18650 li-Ion ×1
-* Multicore silicone insulated copper wire 18AWG (red, black), 100 cm long
+* Battery compartment 18650 Li-ion ×1
+* Wire copper multicore silicone insulated cable 18AWG (red, black), 100 cm long
 * AA battery ×4
 * Jumper, Bind-plug
 
@@ -201,7 +201,7 @@ Check CLOSED CONDITION of the following circuits (the multimeter beeps):
 
 ### Tin the contact pads of the power board
 
-1. [Tin*] (zap.md) the contact pads of the power board.
+1. [Tin*](tinning.md) the contact pads of the power board.
 2. Using a multimeter, check absence of short-circuits on the PCB (check continuity).
 
 ![ After-soldering check](../assets/en/zapPDBtest.jpg)

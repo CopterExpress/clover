@@ -1,0 +1,50 @@
+/* Dashed list items */
+section ul li {
+	list-style-type: none;
+}
+section ul li:before {
+	content: "—";
+	margin-left: -20px;
+	position: absolute;
+}
+
+/* Centered images */
+.book img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Images with border */
+.book img.border {
+	border: 1px #e9e9e9 solid;
+	border-radius: 5px;
+}
+
+.book.color-theme-2 img.border {
+	border: none;
+	background: #fffffa;
+}
+
+/* Images groups in instructions */
+.book .image-group {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.book .image-group img {
+	align-self: center;
+	margin: 0 10px;
+	width: 300px;
+	margin-bottom: 0.85em;
+}
+
+/* Main Clever image */
+.book img.bigclever {
+	margin-bottom: -80px;
+}
+.book.color-theme-2 img.bigclever {
+	/* change image for black background */
+	content:url(assets/clever4-front-black-large.png);
+}

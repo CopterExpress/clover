@@ -227,6 +227,19 @@ target_link_libraries(clever
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
+# Only install udev rules when building a Debian package
+# FIXME: Other operating systems may have other prefixes
+string(FIND ${CMAKE_INSTALL_PREFIX} "/opt/ros" _PREFIX_INDEX)
+if (${_PREFIX_INDEX} EQUAL 0)
+  message(STATUS "Building as a Debian package - adding udev rules as installable files")
+  install(FILES
+    config/99-px4fmu.rules
+    DESTINATION /lib/udev/rules.d
+  )
+else()
+  message(STATUS "Building in a user workspace - not adding udev rules")
+endif()
+
 #############
 ## Testing ##
 #############

@@ -62,7 +62,7 @@ chmod +x .to_client.bash
 ./.to_client <NAME_OF_NETWORK> <PASSWORD>
 ```
 
-- Install the tornado library to make a websocket server
+- Install the tornado library to make a WebSocket server
 
 ```sh
 sudo pip install tornado
@@ -101,7 +101,7 @@ python main_drone.py
 python main_drone.py
 ```
 
-- Run Human pose estimation module on your laptop with websocket by
+- Run Human pose estimation module on your laptop with WebSocket by
 
 ```sh
 yarn websocket

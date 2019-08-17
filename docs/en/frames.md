@@ -1,7 +1,7 @@
 Coordinate systems (frames)
 ===
 
-> **Note** Documentation for the [image](microsd_images.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/frames.md).
+> **Note** Documentation for the [image](image.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/frames.md).
 
 ![Clever coordinates systems (TF2)](../assets/frames.png)
 

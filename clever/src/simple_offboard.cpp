@@ -155,7 +155,7 @@ void handleLocalPosition(const PoseStamped& pose)
 
 // wait for transform without interrupting publishing setpoints
 inline bool waitTransform(const string& target, const string& source,
-                          const ros::Time& stamp, const ros::Duration& timeout)
+                          const ros::Time& stamp, const ros::Duration& timeout) // editorconfig-checker-disable-line
 {
 	ros::Rate r(100);
 	auto start = ros::Time::now();
@@ -201,31 +201,29 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.mode = state.mode;
 	}
 
-	waitTransform(local_frame, req.frame_id, stamp, telemetry_transform_timeout);
+	try {
+		waitTransform(req.frame_id, fcu_frame, stamp, telemetry_transform_timeout);
+		auto transform = tf_buffer.lookupTransform(req.frame_id, fcu_frame, stamp);
+		res.x = transform.transform.translation.x;
+		res.y = transform.transform.translation.y;
+		res.z = transform.transform.translation.z;
 
-	if (!TIMEOUT(local_position, local_position_timeout)) {
-		try {
-			// transform pose
-			PoseStamped pose;
-			tf_buffer.transform(local_position, pose, req.frame_id);
-			res.x = pose.pose.position.x;
-			res.y = pose.pose.position.y;
-			res.z = pose.pose.position.z;
-
-			// Tait-Bryan angles, order z-y-x
-			double yaw, pitch, roll;
-			tf2::getEulerYPR(pose.pose.orientation, yaw, pitch, roll);
-			res.yaw = yaw;
-			res.pitch = pitch;
-			res.roll = roll;
-		} catch (const tf2::TransformException& e) {}
+		double yaw, pitch, roll;
+		tf2::getEulerYPR(transform.transform.rotation, yaw, pitch, roll);
+		res.yaw = yaw;
+		res.pitch = pitch;
+		res.roll = roll;
+	} catch (const tf2::TransformException& e) {
+		ROS_DEBUG("simple_offboard: %s", e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
 		try {
 			// transform velocity
+			waitTransform(req.frame_id, fcu_frame, velocity.header.stamp, telemetry_transform_timeout);
 			Vector3Stamped vec, vec_out;
-			vec.header = velocity.header;
+			vec.header.stamp = velocity.header.stamp;
+			vec.header.frame_id = velocity.header.frame_id;
 			vec.vector = velocity.twist.linear;
 			tf_buffer.transform(vec, vec_out, req.frame_id);
 
@@ -486,9 +484,9 @@ inline void checkState()
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
 
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-           uint8_t& success, string& message)
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
+           uint8_t& success, string& message) // editorconfig-checker-disable-line
 {
 	auto stamp = ros::Time::now();
 
@@ -765,7 +763,7 @@ int main(int argc, char **argv)
 
 	// Telemetry subscribers
 	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
+	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);

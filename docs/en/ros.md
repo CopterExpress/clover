@@ -10,7 +10,7 @@ Installation
 
 Main article: http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-ROS is already installed on [the RPi image](microsd_images.md).
+ROS is already installed on [the RPi image](image.md).
 
 To use ROS on a PC, we recommend using Ubuntu Linux (or a virtual machine such as Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) or [VirtualBox](https://www.virtualbox.org)).
 

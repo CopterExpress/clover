@@ -58,7 +58,7 @@ TODO
 4. Unpack the voltage converter and remove the transparent insulation.
 5. Solder two additional wires to the BEC
     * Take 3 male-female wires from the kit (red, black, and any color)
-    * The red and black wires [are to be tinned](zap.md) on both ends using tweezers. The blue wire is to be tinned from the side of the MALE connector.
+    * The red and black wires [are to be tinned](tinning.md) on both ends using tweezers. The blue wire is to be tinned from the side of the MALE connector.
 
         To tin means:
         * Apply flux to the exposed part of the wire.
@@ -87,7 +87,7 @@ TODO
 
     * Solder the wires from BEC (from step 5) to the LED strip.
     * Remove the silicone layer on the strip (make an incision with a knife and tear).
-    * [Tin](zap.md) the contacts of the LED strip.
+    * [Tin](tinning.md) the contacts of the LED strip.
 
             Red -> +5V
             Black -> GND

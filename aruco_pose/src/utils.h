@@ -30,8 +30,7 @@ static void param(ros::NodeHandle nh, const std::string& param_name, T& param_va
 	}
 }
 
-static void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr& cinfo,
-                     cv::Mat& matrix, cv::Mat& dist)
+static void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr& cinfo, cv::Mat& matrix, cv::Mat& dist)
 {
 	for (unsigned int i = 0; i < 3; ++i)
 		for (unsigned int j = 0; j < 3; ++j)
