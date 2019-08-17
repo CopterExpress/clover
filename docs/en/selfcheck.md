@@ -24,4 +24,4 @@ Description of some checks:
 * VPE — checks whether VPE data is published
 * Rangefinder — checks whether [rangefinder](laser.md) data is published
 
-> *Caution* Pay attention on the checks marked with *WARN* sign. If necessary, contact [Copter Express echnical support](tg://resolve?domain=COEXHelpdesk).
+> **Caution** Pay attention on the checks marked with *WARN* sign. If necessary, contact [Copter Express technical support](tg://resolve?domain=COEXHelpdesk).

@@ -8,6 +8,7 @@
 2. Скачайте и установите [программу для записи образов Etcher](https://www.balena.io/etcher/) (доступна для Windows/Linux/macOS).
 3. Установите MicroSD-карту в компьютер (используйте адаптер при необходимости).
 4. Запишите скачанный образ на карту, используя Etcher.
+5. Установите карту в Raspberry Pi.
 
 <img src="../assets/etcher.png" class="zoom">
 
