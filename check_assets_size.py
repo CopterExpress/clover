@@ -10,11 +10,14 @@ def human_size(num, suffix='B'):
         num /= 1024.0
     return "%.1f %s%s" % (num, 'Yi', suffix)
 
-SIZE_LIMIT = 600 * 1024
+SIZE_LIMIT = 800 * 1024
 EXCLUDE = 'rviz.png', 'ssid.png', 'sitl_docker_demo.png', 'qgc-params.png', 'butterfly.png', \
     'Clever main.png', 'fpv_3.png', '1_4.png', 'fpv_4.png', 'detal1.png', 'lockradio.png', \
     'qground.png', 'allElements.png', 'download-log.png', 'explosion.png', 'rqt.png', \
-    'cl3_mountBEC.JPG', 'cl3_mountRpiCamera.JPG'
+    'cl3_mountBEC.JPG', 'cl3_mountRpiCamera.JPG', 'clever4-front-black-large.png', \
+    'qgc-battery.png', 'qgc-radio.png', 'qgc-cal-acc.png', 'qgc-esc.png', 'qgc-cal-compass.png', \
+    'qgc.png', 'qgc-parameters.png', 'clever4-front-white-large.png', 'qgc-modes.png', \
+    'qgc-requires-setup.png', 'clever4-front-white.png', 'clever4-kit-white.png', '26_1.png'
 
 code = 0
 
