@@ -10,7 +10,7 @@
         <img src="../assets/4/02.png" width=300 class="zoom border">
     </div>
 
-3. Place steel nuts into the slots in reinforcement plates and tighten the assembly with M3x8 screws.
+3. Place self-locking steel nuts into the slots in reinforcement plates and tighten the assembly with M3x8 screws.
 
     <div class="image-group">
         <img src="../assets/4/03.png" width=300 class="zoom border">
@@ -20,7 +20,7 @@
 ## Installing motors
 
 1. Unbox the motors.
-2. Shorten the motor wires using wire strippers or scissors:
+2. Shorten the motor wires using wire strippers or sidecutters:
 
     * Cut wires to 30 mm.
     * Strip 5 mm of insulation while taking care to not damage the cores
@@ -43,7 +43,7 @@ Perform these actions for each motor.
 
     <img src="../assets/4/05.png" width=300 class="zoom center border">
 
-    > **Hint** Note the motor nut colors when installing the arms.
+    > **Hint** Note the motor nut colors when installing the arms. Motors with red nuts should be placed on the front right and back left arms, with black ones - on the front left and back right arms.
 
 2. Attach the arms to the frame base using 8 M3x8 screws, 6 steel nuts, and 2 15 mm spacers.
 
@@ -205,7 +205,7 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
     </div>
 
 6. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
-7. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws.
+7. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws (this was already described in the "Frame Assembly" section, p. 2).
 
     <div class="image-group">
         <img src="../assets/4/21.png" width=300 class="zoom border">
