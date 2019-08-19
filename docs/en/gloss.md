@@ -14,7 +14,7 @@ An unmanned aerial vehicle with an electronic stabilization system and the numbe
 
 ## Flight controller / autopilot
 
-**1\.** A specialized circuit-board designed for controlling a multicopter, an aircraft or another apparatus. Examples:
+**1\.** A specialized circuit-board designed for controlling a multicopter, a plane or another vehicle. Examples:
 Pixhawk, ArduPilot, Naze32, CC3D.
 
 **2\.** Software for the multicopter control circuit-board. Examples: PX4, APM, CleanFlight.
