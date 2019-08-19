@@ -16,7 +16,6 @@ import traceback
 from threading import Event
 import numpy
 import rospy
-from systemd import journal
 import tf2_ros
 import tf2_geometry_msgs
 from pymavlink import mavutil
@@ -618,6 +617,12 @@ def check_clever_service():
         return
     if 'inactive' in output:
         failure('clever.service is not running, try sudo systemctl restart clever')
+        return
+
+    try:
+        from systemd import journal
+    except ImportError:
+        failure('no python-systemd package, not the Clever image?')
         return
 
     j = journal.Reader()
