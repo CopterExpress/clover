@@ -42,7 +42,7 @@ section ul li:before {
 
 /* Main Clever image */
 .book img.bigclever {
-	margin-bottom: -80px;
+	margin-bottom: -12%;
 }
 .book.color-theme-2 img.bigclever {
 	/* change image for black background */
