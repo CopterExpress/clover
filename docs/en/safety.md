@@ -1,45 +1,49 @@
-Safety instruction
+Safety tips
 ===
 
 Soldering
 -----
 
-### Preliminary examination
+<img src="../assets/stand.jpg" align=right width=200>
 
-Before you start, check the integrity of the wiring and the plug.
-Damage may cause electric shock.
+Soldering and tinning should be performed in specially prepared rooms. A ventilation system and a fume extractor are mandatory.
 
-### The soldering tip
+Before you start:
 
-The soldering tip heats up to very high temperatures, so if it touches an electrical wire during soldering, the insulation will be damaged in a matter of moments, followed by a short circuit.
+1. Prepare your workplace. Nothing should interrupt the process. Your workbench should be well lit.
+2. Check the integrity of wiring and plugs of all electrical appliances.
+3. Place your soldering iron near the fume extractor. Use a soldering iron stand when the soldering iron is not in use.
+4. Wear safety goggles and gloves.
 
-### Soldering iron prop
+During soldering:
 
-When working with a hot soldering iron it is important to use a prop. If you don't have a factory-made prop, you can use the one made of a wooden block and metal holders. The prop allows placing the tool without the risk of it falling down on combustible materials.
+1. Use the soldering iron grip to hold the soldering iron. The tip is very hot!
 
-### Ventilation
+    <img src="../assets/keep.png" width=300>
 
-When melted, colophony and solder can emit significant amounts of hazardous substances.
-It is strongly advised to ventilate the room after each soldering.
-Make short breaks with through ventilation every 30 minutes, do not forget to turn off the soldering iron.
+2. The soldering iron tip can easily damage insulation which may lead to short circuits.
+3. Use pliers, tweezers and other tools to safely handle wires and boards during soldering.
+4. Do not pull wires too hard during desoldering operations to avoid burns by molten solder.
+5. Use a special holder (a "helping hand") for soldering small components.
 
-### How to hold a soldering iron?
+    <img src="../assets/helphand.jpg" width=300>
 
-A soldering iron may only be held by the handle.
-If anyone says the opposite – don't believe him, he is trying to misguide you:)
+6. Don't hold the soldering iron by its wire or tip. Unplug the iron during breaks and after work.
 
-![Composition of a soldering iron](../assets/solderConsist.gif)
+> **Caution** Unplug the soldering iron in case of malfunctions and/or fire.
 
-[More about soldering safety](tb.md)
+Rosin and solder emit a considerable amount of harmful substances when heated. Vent the room after each soldering session. Take breaks every 30 minutes for full room ventilation; don't forget to unplug the soldering iron during these breaks.
 
-Flying
-------
+<!-- FIXME: add translated soldering iron picture -->
+
+Flights
+-------
 
 ### Safety during pre-flight preparations
 
 * Make sure that the Li-ion batteries are charged.
 * Make sure the batteries in the control equipment are charged.
-* Attach the propellers immediately before flying.
+* Attach the propellers just before flying.
 
 Check the following:
 
@@ -47,7 +51,7 @@ Check the following:
 * Attachment and integrity of propellers guards.
 * Reliability of wires attachment, absence of loose wires.
 
-### Safety before flying
+### Safety before flight
 
 * Place the spectators behind the pilot, or behind the line passing through both shoulders of the pilot behind the pilot.
 * Do not allow spectators into the hemisphere in front of the pilot.
@@ -64,9 +68,6 @@ Check the following:
 * When learning to fly, fly below the level of your height.
 * Fly in proximity to yourself at a distance at which you can see the copter orientation in space. Do no fly far away from yourself. If you doubt copter orientation, immediately land on the spot. Do not try to take off. Approach the copter and take off.
 * During the flight, move the control sticks carefully and smoothly. Avoid abrupt movements. If you have to change the flight direction, move the sticks vigorously, but not abruptly.
-
-> **Caution** Never move the sticks abruptly. Do not move the stick to the extreme position.
-
 * Fly carefully, and perform only those flight elements that you are sure you can perform. Never perform the flight maneuvers that you doubt you can perform, and the maneuvers involving risks.
 * Observe the speed limit. The copter speed should be maintained within the speed of a walking man.
 * Return the copter to the landing location by the estimated time, prevent complete discharge of the battery during the flight.
