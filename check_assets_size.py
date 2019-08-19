@@ -31,4 +31,4 @@ for root, dirs, files in os.walk('docs/'):
                     file=sys.stderr)
                 code = 1
 
-# sys.exit(code) # TODO!!!
+sys.exit(code)
