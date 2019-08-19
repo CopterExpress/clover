@@ -26,9 +26,8 @@ In order to configure flight modes:
 
 In manual mode the pilot controls the drone directly. GPS, computer vision data, and barometer are not used. Flying in these modes requires good drone piloting skills.
 
-* **MANUAL** — signals from the transmitter are sent directly to the mixer and to the motors. Throttle and the front/back, right/left pairs of motors rotation speed ratio is controlled. This mode is almost never used for flying, since keeping the copter stable is too difficult.
-* **ACRO** — control of throttle and the copter's pitch, roll, and yaw angular velocity. Used by drone racers and in 3D piloting stunt shows.
-* **STABILIZED** — the mode with stabilized horizontal position. Allows control of the throttle, the copter pitch and roll, and the yaw angular velocity.
+* **STABILIZED**/**MANUAL** — the mode with stabilized horizontal orientation. Allows control of the throttle, the copter pitch and roll, and the yaw rate.
+* **ACRO** — control of throttle and the copter's pitch rate, roll rate, and yaw rate. Used by drone racers and in 3D piloting stunt shows.
 * **RATTITUDE** — in the center, the right stick is similar to STABILIZED, at the edges, it passes to the ACRO mode.
 
 ### Assisted flight modes
