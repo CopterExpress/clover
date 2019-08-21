@@ -68,7 +68,7 @@ my_travis_retry() {
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -77,7 +77,7 @@ my_travis_retry sudo -u pi rosdep update
 resolve_rosdep() {
   # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
   CATKIN_PATH=$1
-  ROS_DISTRO='kinetic'
+  ROS_DISTRO='melodic'
   OS_DISTRO='debian'
   OS_VERSION='buster'
 
@@ -153,7 +153,7 @@ echo_stamp "Installing CLEVER" \
 && resolve_rosdep $(pwd) \
 && my_travis_retry pip install wheel \
 && my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
-&& source /opt/ros/kinetic/setup.bash \
+&& source /opt/ros/melodic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && systemctl enable roscore \
 && systemctl enable clever \
@@ -168,14 +168,14 @@ gitbook build
 
 echo_stamp "Installing additional ROS packages"
 apt-get install -y --no-install-recommends \
-    ros-kinetic-dynamic-reconfigure \
-    ros-kinetic-compressed-image-transport \
-    ros-kinetic-rosbridge-suite \
-    ros-kinetic-rosserial \
-    ros-kinetic-usb-cam \
-    ros-kinetic-vl53l1x \
-    ros-kinetic-ws281x \
-    ros-kinetic-rosshow
+    ros-melodic-dynamic-reconfigure \
+    ros-melodic-compressed-image-transport \
+    ros-melodic-rosbridge-suite \
+    ros-melodic-rosserial \
+    ros-melodic-usb-cam \
+    ros-melodic-vl53l1x \
+    ros-melodic-ws281x \
+    ros-melodic-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
@@ -191,9 +191,9 @@ echo_stamp "Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
-ROS_DISTRO='kinetic'
+ROS_DISTRO='melodic'
 export ROS_HOSTNAME=\`hostname\`.local
-source /opt/ros/kinetic/setup.bash
+source /opt/ros/melodic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
