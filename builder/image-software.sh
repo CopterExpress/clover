@@ -115,11 +115,11 @@ python-systemd \
 
 echo_stamp "Updating kernel to fix camera bug"
 apt-get install --no-install-recommends -y \
-	raspberrypi-kernel=1.20190718-1 \
-	raspberrypi-bootloader=1.20190718-1 \
-	libraspberrypi-bin=1.20190718-1 \
-	libraspberrypi-dev=1.20190718-1 \
-	libraspberrypi0=1.20190718-1
+	raspberrypi-kernel=1.20190819-1 \
+	raspberrypi-bootloader=1.20190819-1 \
+	libraspberrypi-bin=1.20190819-1 \
+	libraspberrypi-dev=1.20190819-1 \
+	libraspberrypi0=1.20190819-1
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
