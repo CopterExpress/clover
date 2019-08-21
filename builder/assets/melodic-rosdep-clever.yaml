@@ -484,6 +484,9 @@ joint_state_publisher:
 message_filters:
   debian:
     buster: ros-melodic-message-filters
+ros_pytest:
+  debian:
+    buster: ros-melodic-ros-pytest
 rosauth:
   debian:
     buster: ros-melodic-rosauth
@@ -565,6 +568,9 @@ compressed_depth_image_transport:
 compressed_image_transport:
   debian:
     buster: ros-melodic-compressed-image-transport
+cv_camera:
+  debian:
+    buster: ros-melodic-cv-camera
 image_proc:
   debian:
     buster: ros-melodic-image-proc
@@ -670,6 +676,9 @@ kdl_parser:
 kdl_parser_py:
   debian:
     buster: ros-melodic-kdl-parser-py
+mavros_extras:
+  debian:
+    buster: ros-melodic-mavros-extras
 robot_state_publisher:
   debian:
     buster: ros-melodic-robot-state-publisher
