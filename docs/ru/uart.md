@@ -69,7 +69,7 @@ sudo systemctl disable hciuart.service
 
 ## Настройка образа по умолчанию
 
-На [образе для RPi](microsd_images.md) изначально выключен `Mini UART` и Bluetooth модуль.
+На [образе для RPi](image.md) изначально выключен `Mini UART` и Bluetooth модуль.
 
 ## Bugs
 

@@ -103,7 +103,8 @@
             "SDA",
             "TCP",
             "UDP",
-            "QR"
+            "QR",
+            "Li-ion"
         ],
         "code_blocks": false
     },

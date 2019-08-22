@@ -37,7 +37,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `LPE_FUSION` – flags 'fuse optical flow' and 'flow gyro compensation' are on.
 * `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
-* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_R` – 0.2.
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
@@ -52,7 +52,7 @@ Setup POSCTL to be one of PX4 flight modes and then select POSCTL.
 
 ## Autonomous flight
 
-The module [simple_offboard](simple_offboard.mb) enables autonomous flight.
+The module [simple_offboard](simple_offboard.md) enables autonomous flight.
 
 Example of take off and leveling at 1.5m above the ground:
 
@@ -66,7 +66,7 @@ Flying forward for 1m:
 navigate(x=1.5, frame_id='body')
 ```
 
-[Navigation using ArUco-markers](aruco_marker) and [using VPE] are available when using Optical Flow.
+[Navigation using ArUco-markers](aruco_marker.md) and [using VPE] are available when using Optical Flow.
 
 ## Additional settings
 

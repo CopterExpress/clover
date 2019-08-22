@@ -16,7 +16,6 @@ import traceback
 from threading import Event
 import numpy
 import rospy
-from systemd import journal
 import tf2_ros
 import tf2_geometry_msgs
 from pymavlink import mavutil
@@ -236,6 +235,10 @@ def check_fcu():
             except KeyError:
                 failure('unknown board rotation %s', rot)
 
+        cbrk_usb_chk = get_param('CBRK_USB_CHK')
+        if cbrk_usb_chk != 197848:
+            failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
 
@@ -287,7 +290,7 @@ def check_camera(name):
         if not optical or not cable:
             info('%s: custom camera orientation detected', name)
         else:
-           info('camera is oriented %s, camera cable goes %s', optical, cable)
+            info('camera is oriented %s, camera cable goes %s', optical, cable)
 
     except tf2_ros.TransformException:
         failure('cannot transform from base_link to camera frame')
@@ -397,8 +400,8 @@ def check_vpe():
         if delay != 0:
             failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
         info('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
-                      get_param('EKF2_EVA_NOISE'),
-                      get_param('EKF2_EVP_NOISE'))
+            get_param('EKF2_EVA_NOISE'),
+            get_param('EKF2_EVP_NOISE'))
 
     if not vis:
         return
@@ -614,6 +617,12 @@ def check_clever_service():
         return
     if 'inactive' in output:
         failure('clever.service is not running, try sudo systemctl restart clever')
+        return
+
+    try:
+        from systemd import journal
+    except ImportError:
+        failure('no python-systemd package, not the Clever image?')
         return
 
     j = journal.Reader()

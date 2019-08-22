@@ -37,7 +37,7 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `LPE_FUSION` – включены флажки fuse optical flow и flow gyro compensation.
 * `LPE_FLW_QMIN` – 10.
 * `LPE_FLW_SCALE` – 1.0.
-* `LPE_FLW_R` – 0.1.
+* `LPE_FLW_R` – 0.2.
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)

@@ -23,7 +23,7 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rviz
 If connection is not established, make sure the `.bashrc` of Clever contains line:
 
 ```(bash)
-export ROS_IP=192.168.11.1
+export ROS_HOSTNAME=`hostname`.local
 ```
 
 Using rviz

@@ -10,6 +10,10 @@
 
 > **Caution** Обратите внимание, что светодиодную ленту нужно питать от стабильного источника энергии. Если вы подключите питание напрямую к Raspberry, то это создаст слишком большую нагрузку на ваш микрокомпьютер. Для снятия нагрузки с Raspberry можно подключить питание к преобразователю `BEC`.
 
+<!-- -->
+
+> **Note** При работе с [GPIO](gpio.md) следует подключать ленту к пину GPIO21. В противном случае управление LED-лентой будет работать некорректно.
+
 ## Совместимость с ROS и Python
 
 Чтобы корректно работать со светодиодной лентой вам нужно добавить в окружение необходимые пути к библиотекам Python и пакетам ROS, для этого необходимо добавить в файл `/etc/sudoers` следующие строки:
@@ -37,12 +41,12 @@ from rpi_ws281x import Color
 
 
 LED_COUNT      = 10      # Количество светодиодов в ленте
-LED_PIN        = 18      # GPIO пин, к которому вы подсоединяете светодиодную ленту
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL    = 0       # Set to '1' for GPIOs 13, 19, 41, 45 or 53
+LED_PIN        = 21      # GPIO пин, к которому вы подсоединяете светодиодную ленту
+LED_FREQ_HZ    = 800000  # Частота несущего сигнала (обычно 800 кГц)
+LED_DMA        = 10      # DMA-канал для генерации сигнала (обычно 10)
+LED_BRIGHTNESS = 255     # Яркость: 0 - наименьшая, 255 - наибольшая
+LED_INVERT     = False   # True для инвертирования сигнала (для подключения через NPN транзистор)
+LED_CHANNEL    = 0       # '1' для GPIO 13, 19, 41, 45 или 53
 
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT)
 
@@ -50,7 +54,7 @@ strip.begin()
 
 
 def colorWipe(strip, color, wait_ms=50):
-    """Wipe color across display a pixel at a time."""
+    """Заполнение ленты цветом по одному светодиоду."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
         strip.show()
@@ -58,13 +62,13 @@ def colorWipe(strip, color, wait_ms=50):
 
 
 print('Color wipe animations.')
-colorWipe(strip, Color(255, 0, 0), wait_ms=100)  # Red wipe
-colorWipe(strip, Color(0, 255, 0), wait_ms=100)  # Blue wipe
-colorWipe(strip, Color(0, 0, 255), wait_ms=100)  # Green wipe
-colorWipe(strip, Color(0, 0, 0), wait_ms=100)  # Green wipe
+colorWipe(strip, Color(255, 0, 0), wait_ms=100)  # Заполнение красным
+colorWipe(strip, Color(0, 255, 0), wait_ms=100)  # Заполнение зелёным
+colorWipe(strip, Color(0, 0, 255), wait_ms=100)  # Заполнение синим
+colorWipe(strip, Color(0, 0, 0), wait_ms=100)    # Выключение ленты
 ```
 
-> **Note** Вы так же можете использовать тестовый код разработчиков данного модуля. Вы можете его [скачать](https://github.com/jgarff/rpi_ws281x/blob/master/python/examples/strandtest.py "Github разработчика") из репозитория разработчика. Обратите внимание, что для корректной работы вам нужно будет изменить импорт модуля `numpixel` на `rpi_ws281x`.
+> **Note** Вы так же можете использовать тестовый код разработчиков данного модуля. Вы можете его [скачать](https://github.com/rpi-ws281x/rpi-ws281x-python/tree/master/examples "Github разработчика") из репозитория разработчика.
 
 Сохраните программу в ваш скрипт и запустите его используя права администратора:
 

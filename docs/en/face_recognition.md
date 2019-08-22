@@ -120,7 +120,7 @@ In this case, try to edit the images in folder faces, perhaps the program cannot
 
 ## Using the calibration
 
-To improve recognition accuracy, you can use camera calibration. The calibration module may be installed using [a special package](https://github.com/tinderad/clever_cam_calibration). Instructions for installation and use are available in file calibration.md. The program that uses the calibration package is named recog_undist.py
+To improve recognition accuracy, you can use camera calibration. The calibration module may be installed using [a special package](https://github.com/tinderad/clever_cam_calibration). Instructions for installation and use are available in the [camera calibration article](camera_calibration.md). The program that uses the calibration package is named recog_undist.py
 
 **Code brief explanation:**
 

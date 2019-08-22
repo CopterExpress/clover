@@ -155,7 +155,7 @@ void handleLocalPosition(const PoseStamped& pose)
 
 // wait for transform without interrupting publishing setpoints
 inline bool waitTransform(const string& target, const string& source,
-                          const ros::Time& stamp, const ros::Duration& timeout)
+                          const ros::Time& stamp, const ros::Duration& timeout) // editorconfig-checker-disable-line
 {
 	ros::Rate r(100);
 	auto start = ros::Time::now();
@@ -220,8 +220,10 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 	if (!TIMEOUT(velocity, velocity_timeout)) {
 		try {
 			// transform velocity
+			waitTransform(req.frame_id, fcu_frame, velocity.header.stamp, telemetry_transform_timeout);
 			Vector3Stamped vec, vec_out;
-			vec.header = velocity.header;
+			vec.header.stamp = velocity.header.stamp;
+			vec.header.frame_id = velocity.header.frame_id;
 			vec.vector = velocity.twist.linear;
 			tf_buffer.transform(vec, vec_out, req.frame_id);
 
@@ -482,9 +484,9 @@ inline void checkState()
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
 
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate,
-           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm,
-           uint8_t& success, string& message)
+           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
+           float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
+           uint8_t& success, string& message) // editorconfig-checker-disable-line
 {
 	auto stamp = ros::Time::now();
 
@@ -761,7 +763,7 @@ int main(int argc, char **argv)
 
 	// Telemetry subscribers
 	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity", 1, &handleMessage<TwistStamped, velocity>);
+	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);

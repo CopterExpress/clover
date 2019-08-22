@@ -4,7 +4,7 @@
 
 The rangefinder model recommended for Clever is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
 
-The [image for Raspberry Pi](microsd_images.md) contains pre-installed corresponding ROS driver.
+The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS driver.
 
 ### Connecting to Raspberry Pi
 

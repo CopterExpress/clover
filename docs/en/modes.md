@@ -1,47 +1,49 @@
-Flight modes
-===
+# Flight modes
 
-The flight controller mode determines the exact behavior of the copter (or another craft): how incoming commands and signals from the transmitter are to be interpreted.
+PX4 **mode** determines how the vehicle should react to commands and RC signals. Mode changing is usually mapped to one of the RC transmitter sticks.
 
-PX4
----
+In order to configure flight modes:
 
-Main article: https://dev.px4.io/en/concept/flight_modes.html
+1. Open the *Vehicle Setup* tab in QGroundControl.
+2. Select the *Flight Modes* menu.
+3. Choose SwC (Channel 5) as mode selection switch.
+4. Set desired flight modes.
 
-### Manual control (MANUAL)
+    The following flight modes are recommended:
 
-In manual mode, the pilot controls the drone directly. GPS, computer vision data, and barometer are not used. Flying in these modes requires good drone piloting skills.
+    * Flight Mode 1: *Stabilized*.
+    * Flight Mode 4: *Altitude*.
+    * Flight Mode 6: *Position*.
 
-* **MANUAL** — signals from the transmitter are sent directly to the mixer and to the motors. Control of the throttle and of the front/back, right/left pairs of motors rotation speed ratio. This mode is almost never used for flying, since keeping the copter stable is too difficult.
+5. Check mode switching by changing the switch position.
+6. Choose SwA (Channel 6) as emergency motor stop (*Kill switch*).
 
-* **STABILIZED** — the mode with stabilized horizontal position. Control of the throttle, the copter pitch and roll, and the yaw angular velocity.
+<img src="../assets/qgc-modes.png" class="zoom" alt="QGroundControl modes">
 
-* **ACRO** — control of throttle and the copter's pitch, roll, and yaw angular velocity. Used by drone racers and in 3D piloting shows for performing stunts.
+## Flight modes description
 
+### Manual control
+
+In manual mode the pilot controls the drone directly. GPS, computer vision data, and barometer are not used. Flying in these modes requires good drone piloting skills.
+
+* **STABILIZED**/**MANUAL** — the mode with stabilized horizontal orientation. Allows control of the throttle, the copter pitch and roll, and the yaw rate.
+* **ACRO** — control of throttle and the copter's pitch rate, roll rate, and yaw rate. Used by drone racers and in 3D piloting stunt shows.
 * **RATTITUDE** — in the center, the right stick is similar to STABILIZED, at the edges, it passes to the ACRO mode.
 
-### With the use of additional sensors (ASSISTED)
+### Assisted flight modes
 
-* **ALTCTL** (ALTITUDE) — control of the altitude rate, pitch, roll and yaw angular velocity. The barometer is used (or another height gauge).
-
+* **ALTCTL** (ALTITUDE) — control of the altitude rate, pitch, roll and yaw angular velocity. Requires a barometer or another altitude source.
 * **POSCTL** (POSITION) — control of the altitude rate, forward/backward and right/left speed, and yaw angular velocity. It is the easiest flying mode. The barometer, GPS, computer vision, and other sensors are used.
 
-### Automatic flight (AUTO)
+### Auto flight modes
 
-In the automatic flight mode, the quadcopter ignores the control signals from the transmitter.
+In autonomous flight modes the quadcopter ignores the control signals from the transmitter and uses a program to fly.
 
-* **AUTO.MISSION** – PX4 completes the mission pre-loaded into the drone (the mission is downloaded using the QGroundControl, or from [MAVLink](mavlink.md) using [MAVROS](mavros.md).
-* **AUTO.RTL** – the copter automatically returns to the takeoff point.
-* **AUTO.LAND** – the copter lands automatically.
+* **OFFBOARD** mode uses an external computer (like a [Raspberry Pi](raspberry.md)). This mode is used in Clever for [autonomous flights](simple_offboard.md).
+* **AUTO.MISSION** – PX4 uses the mission pre-loaded into the drone (the mission is uploaded using ground control station over [MAVLink](mavlink.md)). This mode is commonly used to move in a pre-planned path using GPS as a position source, for example, in photogrammetry.
+* **AUTO.RTL** – the copter automatically returns to the takeoff (launch) point.
+* **AUTO.LAND** – the copter lands at the current position.
 
-### Control from an external computer
+Additional information: https://dev.px4.io/en/concept/flight_modes.html.
 
-* **OFFBOARD** in the mode for flying at the MAVLink commands. Control from an external computer (e.g., Raspberry Pi).
-
-The main used MAVLink packages are:
-
-* [MAV_CMD_COMPONENT_ARM_DISARM](https://mavlink.io/en/messages/common.html#MAV_CMD_COMPONENT_ARM_DISARM)
-* [SET_POSITION_TARGET_LOCAL_NED](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_LOCAL_NED)
-* [SET_ATTITUDE_TARGET](https://mavlink.io/en/messages/common.html#SET_ATTITUDE_TARGET)
-
-See: [autonomous flying the quadcopter in the OFFBOARD mode](simple_offboard.md).
+**Next**: [Power setup](power.md).

@@ -10,6 +10,12 @@
 
 ## Configuration
 
+Set the `aruco` argument in `~/catkin_ws/src/clever/clever/launch/aruco.launch` to `true`:
+
+```xml
+<arg name="aruco" default="true"/>
+```
+
 In order to enable map detection set `aruco_map` and `aruco_detect` arguments to `true` in `~/catkin_ws/src/clever/clever/launch/aruco.launch`:
 
 ```xml

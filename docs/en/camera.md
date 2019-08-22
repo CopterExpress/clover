@@ -18,7 +18,7 @@ For monitoring images from the camera, you may use rqt or [web_video_server](web
 
 ## Computer vision
 
-For implementation of the computer vision algorithms, it is recommended to use the [OpenCV] library that is pre-installed in [the SD card image] (microsd_images.md) (https://opencv.org).
+For implementation of the computer vision algorithms, it is recommended to use the [OpenCV] library that is pre-installed in [the SD card image] (image.md) (https://opencv.org).
 
 ### Python
 

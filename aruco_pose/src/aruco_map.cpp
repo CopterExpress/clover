@@ -77,7 +77,7 @@ private:
 	visualization_msgs::MarkerArray vis_array_;
 	std::string known_tilt_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
-	bool auto_flip_;
+	bool auto_flip_, image_axis_;
 
 public:
 	virtual void onInit()
@@ -104,6 +104,7 @@ public:
 		nh_priv_.param("image_width", image_width_, 2000);
 		nh_priv_.param("image_height", image_height_, 2000);
 		nh_priv_.param("image_margin", image_margin_, 200);
+		nh_priv_.param("image_axis", image_axis_, true);
 		nh_priv_.param<std::string>("markers/frame_id", markers_parent_frame_, transform_.child_frame_id);
 		nh_priv_.param<std::string>("markers/child_frame_id_prefix", markers_frame_, "");
 
@@ -481,14 +482,15 @@ publish_debug:
 		cv_bridge::CvImage msg;
 
 		if (!board_->ids.empty()) {
-			_drawPlanarBoard(board_, size, image, image_margin_, 1);
+			_drawPlanarBoard(board_, size, image, image_margin_, 1, image_axis_);
+			msg.encoding = image_axis_ ? sensor_msgs::image_encodings::RGB8 : sensor_msgs::image_encodings::MONO8;
 		} else {
 			// empty map
 			image.create(size, CV_8UC1);
 			image.setTo(cv::Scalar::all(255));
+			msg.encoding = sensor_msgs::image_encodings::MONO8;
 		}
 
-		msg.encoding = sensor_msgs::image_encodings::MONO8;
 		msg.image = image;
 		img_pub_.publish(msg.toImageMsg());
 	}

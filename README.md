@@ -1,12 +1,12 @@
 # CLEVER
 
-<img src="docs/assets/clever3.png" align="right" width="300px" alt="CLEVER drone">
+<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="CLEVER drone">
 
 CLEVER (Russian: *"Клевер"*, meaning *"Clover"*) is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. The kit includes Pixhawk/Pixracer autopilot running PX4 firmware, Raspberry Pi 3 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
 Copter Express has implemented a large number of different autonomous drone projects using exactly the same platform: [automated pizza delivery](https://www.youtube.com/watch?v=hmkAoZOtF58) in Samara and Kazan, coffee delivery in Skolkovo Innovation Center, [autonomous quadcopter with charging station](https://www.youtube.com/watch?v=RjX6nUqw1mI) for site monitoring and security, winning drones on [Robocross-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU) and [Robocross-2017](https://youtu.be/AQnd2CRczbQ) competitions and many others.
 
-**The main documentation in Russian is available [on our Gitbook](https://clever.copterexpress.com/).**
+**The main documentation is available [on Gitbook](https://clever.copterexpress.com/).**
 
 Use it to learn how to assemble, configure, pilot and program autonomous CLEVER drone.
 
@@ -59,12 +59,21 @@ To complete `mavros` install you'll need to install `geographiclib` datasets:
 curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | sudo bash
 ```
 
+You may optionally install udev rules to provide `/dev/px4fmu` symlink to your PX4-based flight controller connected over USB. Copy `99-px4fmu.rules` to your `/lib/udev/rules.d` folder:
+
+```bash
+cd ~/catkin_ws/src/clever/clever/config
+sudo cp 99-px4fmu.rules /lib/udev/rules.d
+```
+
+Alternatively you may change the `fcu_url` property in `mavros.launch` file to point to your flight controller device.
+
 ## Running
 
 Enable systemd service `roscore` (if not running):
 
 ```bash
-sudo systemctl enable /home/<username>/catkin_ws/src/clever/deploy/roscore.service
+sudo systemctl enable /home/<username>/catkin_ws/src/clever/builder/assets/roscore.service
 sudo systemctl start roscore
 ```
 
@@ -79,6 +88,8 @@ To start connection to the flight controller, use:
 ```bash
 roslaunch clever clever.launch
 ```
+
+> Note that the package is configured to connect to `/dev/px4fmu` by default (see [previous section](#manual-installation)). Install udev rules or specify path to your FCU device in `mavros.launch`.
 
 Also, you can enable and start the systemd service:
 

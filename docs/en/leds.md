@@ -2,105 +2,23 @@
 
 ## Connecting and determining the type of the strip
 
-There are two main types of addressed LEDs: WS2812B and WS2812. The control principle is the same, but the timings are different. Locate a LED chip on the strip, and determine how many pins it has: 6 or 4. If it has 6 pins, it is WS2812; if 4, it is WS2812B or its analog SK6812.
+> **Note** The following is applicable to image versions 0.14 and up. For versions 0.13 and older see [an older revision of this article](https://github.com/CopterExpress/clever/blob/v0.16/docs/en/leds.md)
 
-<img src="../assets/timing_with_thumbs.png" height="400px" alt="leds">
+Connect the +5v and GND leads of your LED to a power source and the DIN (data in) lead to GPIO18 or GPIO21.
 
-Since the control principle is the same, the strips are connected the same way:
+<img src="../assets/led_connection.png" height="400px" alt="leds">
 
-| strip | Raspberry Pi |
-| :---: | :---: |
-| GND | GND |
-| 5V | 5V |
-| DIN | GPIO21 or GPIO31 |
+> **Caution** LED strip can consume a lot of power! Powering it from a Raspyerry Pi may overload the computer's power circuitry. Consider using a separate BEC as a power source.
 
-strip types for denoting the strip in the code are described in [file](https://github.com/jgarff/rpi_ws281x/blob/master/ws2811.h). The main strip types are WS2812\_STRIP \(for WS2812\) and SK6812\_STRIP \(for WS2812B or SK6812\).
+<!-- -->
 
-## Installing a library for working with the LED strip
+> **Note** If you are using [GPIO](gpio.md) along with the LED strip, connect the strip to GPIO21. Otherwise you may experience unintended strip behavior.
 
-Define the folder that will contain files of the library, and open the path to this folder in the terminal. By default, you can use the home folder, to move to it, run command:
+## ROS and Python compatibility
 
-```(bash)
-cd ~
+LED strip library requires you to run your Python scripts with `sudo`. In order to make it work with ROS nodes you have to add the following lines to your `/etc/sudoers` file on the Raspberry Pi:
+
 ```
-
-Clone the repository of library for working with LED strips on Raspberry Pi:
-
-```(bash)
-git clone https://github.com/jgarff/rpi_ws281x.git
-```
-
-Install [Scons](https://ru.wikipedia.org/wiki/SCons) and [Swig](https://ru.wikipedia.org/wiki/SWIG):
-
-```(bash)
-sudo apt-get install scons python-dev swig
-```
-
-Compile the library using Scons \(the command is to be run inside the folder with the source code of the library\):
-
-```(bash)
-cd rpi_ws281x
-scons
-```
-
-Compile the Python wrapper for the library using Swig, and set it for using in your Python scripts.
-
-```(bash)
-cd python
-sudo python ./setup.py build
-sudo python ./setup.py install
-```
-
-## Sample program for a LED bang on RPI3
-
-In a text editor, open file `strandtest.py` from folder `python/examples` \(located in the folder with the library\):
-
-```(bash)
-nano strandtest.py
-```
-
-Locate the part of the code with strip settings:
-
-```(bash)
-# LED strip configuration:
-LED_COUNT      = 16      # Number of LED pixels.
-LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
-#LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-LED_STRIP = ws.WS2811_STRIP_GRB # Strip type and color ordering
-```
-
-Adjust the settings for working with the strip, and save the file. To avoid interference of the use of the strip with the operation of other devices on Raspberry Pi, it is recommended to use the following settings \(the settings are for a strip together with Clever 3\):
-
-```(bash)
-# LED strip configuration:
-LED_COUNT      = 30      # Number of LED pixels.
-LED_PIN        = 21      # GPIO pin connected to the pixels.
-LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-LED_STRIP = ws.SK6812_STRIP # Strip type and color ordering
-```
-
-Run the test program from root:
-
-```(bash)
-sudo python strandtest.py
-```
-
-The root privileges are required for executing the script, since without them there is no access to the interrupt functions used by the library to work with the strip.
-
-## Compatibility with ROS and Python
-
-When the program is run using sudo, the user environment changes, and errors of library import appear, since required paths are missing in the environment. To add paths to Python libraries and ROS packages to the environment, add the following lines to file `/etc/sudoers` :
-
-```(bash)
 Defaults        env_keep += "PYTHONPATH"
 Defaults        env_keep += "PATH"
 Defaults        env_keep += "ROS_ROOT"
@@ -111,123 +29,96 @@ Defaults        env_keep += "ROS_HOME"
 Defaults        env_keep += "ROS_LOG_DIR"
 ```
 
-## Functions for working with the LED strip
+## Sample program for the LED strip
 
-To connect the library and its correct operation, engage the following modules: neopixel - for strip operation, time – for delay management, and sys and signal for interruptions and forming the control signal.
+The following code lights up the first 10 LEDs on the LED strip. You may use it to check whether your LED strip works correctly:
 
 ```python
-from neopixel import *
 import time
-import signal
-import sys
+
+from rpi_ws281x import Adafruit_NeoPixel
+from rpi_ws281x import Color
+
+
+LED_COUNT      = 10      # Number of LED pixels
+LED_PIN        = 21      # GPIO pin for the strip
+LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
+LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
+LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
+LED_CHANNEL    = 0       # Set to '1' for GPIOs 13, 19, 41, 45 or 53
+
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT)
+
+strip.begin()
+
+
+def colorWipe(strip, color, wait_ms=50):
+    """Wipe color across strip a pixel at a time."""
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
+
+
+print('Color wipe animations.')
+colorWipe(strip, Color(255, 0, 0), wait_ms=100)  # Red wipe
+colorWipe(strip, Color(0, 255, 0), wait_ms=100)  # Blue wipe
+colorWipe(strip, Color(0, 0, 255), wait_ms=100)  # Green wipe
+colorWipe(strip, Color(0, 0, 0), wait_ms=100)    # Turn LEDs off
 ```
 
-To work with the strip, create an object of type **Adafruit_NeoPixel**, and initialize the library:
+> **Note** You may also want to use additional test scripts from the [LED library repository](https://github.com/rpi-ws281x/rpi-ws281x-python/blob/master/examples).
+
+Save the script and run it as root:
+
+```
+sudo python led_test.py
+```
+
+## Basic LED library functions
+
+You'll need to import `Adafruit_NeoPixel` class and `Color` function into your program to interact with the LED strip. Additionally, you'll want the `time` module to add delays to your animations:
 
 ```python
-# Creating a NeoPixel object with specifies configuration
+from rpi_ws281x import Adafruit_NeoPixel
+from rpi_ws281x import Color
+import time
+```
+
+Instantiate the `Adafruit_NeoPixel` object and call its `begin()` method to start working with the strip:
+
+```
+# Strip object instantiation (parameter description is provided in a code snippet above)
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT)
-# Initialization of the library, to be run before other functions
 strip.begin()
 ```
 
-The main functions that are used to control the strip:
+Main strip control methods:
 
-* `numPixels()` - returns the number of pixels in the strip. It is convenient for cyclical control of the entire strip.
-* `setPixelColor(pos, color)` – sets pixel color to position `pos`, to color `color`. The color should be a 24 bit value, where the first 8 bits are red color \(red\), the next 8 bits — green \(green\), and the last 8 bits — blue \(blue\). To get the `color` value, you can use function `Color(red, green, blue)`, which composes this value of 3 components. Each component should be in the range 0 – 255, where 0 is no color, and 255 — the highest brightness of the component available in the LED module.
-* `setPixelColorRGB(pos, red, green, blue)` – sets the pixel color at position pos to the color that consists of components `red`, `green`, `blue`. Each component should be in the range 0 – 255, where 0 is no color, and 255 — the highest brightness of the component available in the LED module.
-* `show()` – updates the state of the strip. It is only after using it that all software changes are moved to the LED strip.
++ `numPixels()` returns the number of pixels in the strip. Convenient for whole strip operations.
++ `setPixelColor(pos, color)` sets the pixel color at `pos` to `color`. Color should be a 24-bit value, where the first 8 bits are for the red channel, the next 8 bits are for the green channel, and the last 8 bits are for the blue channel. You may use the `Color(red, green, blue)` convenience function to convert colors to this format. Each color value should be an integer in the \[0..255\] range, where 0 means zero brightness and 255 means full brightness.
++ `SetPixelColorRGB(pos, red, green, blue)` sets the pixel at `pos` to the color value with components `red`, `green` and `blue`. Each component value shoule be an integer in the \[0..255\] range, where 0 means zero brighness and 255 means full brightness.
++ `show()` updates the strip state. Any changes to the strip state are only pushed to the actual strip after calling this method.
 
-Other functions may be detected by running command
+## Does it have to be this way?
 
-```(bash)
-pydoc neopixel
-```
+The LED strip type used in the Clever kits use the following protocol: a data source (a Raspberry Pi, for example) sends a bit stream, 24 bits per LED. Each LED reads the first 24 bits from the stream and sets its color accordingly while passing the rest of the stream to the next LED. Zeroes and ones are encoded by different pulse lengths.
 
-The result of the command:
+This LED strip is supported by the [rpi_ws281x](https://github.com/jgarff/rpi_ws281x) library. The library uses the DMA (direct memory access) module of the Raspberry CPU and can utilize one of the three periphery channels: PWM, PCM or SPI. This allows the library to drive the strip consistently in a multitasking environment.
 
-```(bash)
-    Help on module neopixel:
+Each channel has its caveats. Using the PWM prevents you from using the builtin Raspberry audio subsystem; using the PCM channel will prevent you from adding I2S (digital audio) devices, although the analog audio will work. SPI requires you to change your GPU and buffer size and prevents you from using any SPI devices.
 
-    NAME
-        neopixel
+Some DMA channels are reserved for system use. DMA channel 5 is used for SD card reads and writes, and setting LED_DMA to 5 will corrupt your filesystem. DMA channel 10 is considered to be safe.
 
-    DESCRIPTION
-        # Adafruit NeoPixel library port to the rpi_ws281x library.
-        # Author: Tony DiCola (tony@tonydicola.com)
+You have the following options for the LED strip:
 
-    CLASSES
-        __builtin__.object
-            Adafruit_NeoPixel
+1. If you don't need onboard audio, you may use the PWM channel and connect the LED strip to one of the following GPIO pins: 12, 18, 40 or 52 for PWM0 and 13, 19, 41, 45 or 53 for PWM1.
+2. If you don't care about SPI devices, you may use the SPI channel for the LED with GPIO pins 10 or 38. You'll have to perform the following adjustments:
 
-        class Adafruit_NeoPixel(__builtin__.object)
-         |  Methods defined here:
-         |
-         |  __del__(self)
-         |
-         |  __init__(self, num, pin, freq_hz=800000, dma=5, invert=False)
-         |      Class to represent a NeoPixel/WS281x LED display.  Num should be the
-         |      number of pixels in the display, and pin should be the GPIO pin connected
-         |      to the display signal line (must be a PWM pin like 18!).  Optional
-         |      parameters are freq, the frequency of the display signal in hertz (default
-         |      800khz), dma, the DMA channel to use (default 5), and invert, a boolean
-         |      specifying if the signal line should be inverted (default False).
-         |
-         |  begin(self)
-         |      Initialize library, must be called once before other functions are
-         |      called.
-         |
-         |  getPixelColor(self, n)
-         |      Get the 24-bit RGB color value for the LED at position n.
-         |
-         |  getPixels(self)
-         |      Return an object which allows access to the LED display data as if
-         |      it were a sequence of 24-bit RGB values.
-         |
-         |  numPixels(self)
-         |      Return the number of pixels in the display.
-         |
-         |  setBrightness(self, brightness)
-         |      Scale each LED in the buffer by the provided brightness.  The brightness
-         |      of 0 is the darkest and 255 is the brightest.  Note that scaling can have
-         |      quantization issues (i.e. blowing out to white or black) if used repeatedly!
-         |
-         |  setPixelColor(self, n, color)
-         |      Set LED at position n to the provided 24-bit color value (in RGB order).
-         |
-         |  setPixelColorRGB(self, n, red, green, blue)
-         |      Set LED at position n to the provided red, green, and blue color.
-         |      Each color component should be a value from 0 to 255 (where 0 is the
-         |      lowest intensity and 255 is the highest intensity).
-         |
-         |  show(self)
-         |      Update the display with the data from the LED buffer.
-         |
+    + increase the SPI device buffer by adding `spidev.bufsiz=32768` option to `/boot/cmdline.txt`;
+    + set the GPU frequency to 250 MHz by adding `core_freq=250` to `/boot/cmdline.txt`;
+    + reboot your Raspberry Pi: `sudo reboot`.
+3. If you care about audio and SPI devices, you may want to use the PCM channel (GPIO 21 or 31). You don't have to reconfigure your Raspberry.
 
-    FUNCTIONS
-        Color(red, green, blue)
-            Convert the provided red, green, blue color to a 24-bit color value.
-            Each color component should be a value 0-255 where 0 is the lowest intensity
-            and 255 is the highest intensity.
-```
-
-## Why exactly so, and is there a different way?
-
-The main types of strips used for Clever 3 are WS2812, WS2812B and SK6812 \(analog to WS2812B\). They are controlled according to the same principle: for a massif of LEDs in the strip, a data packet at the rate of 24 bits per LED; each LED reads the first 24 bits of received data, and sets the corresponding color, the rest of the data are sent to the next LED in the strip. Zeros and ones are determined by different combinations of the durations of high and low level in the pulse.
-
-All these strips are supported for library management [rpi_ws281x](https://github.com/jgarff/rpi_ws281x), with that, the DMA module\(direct memory access \) of the Raspberri processor, and one of the data channels re used for control: PWM, PCM, or SPI, which guarantees absence of delays in control \(and everything is controlled from a multitasking OS, it's important\).
-
-There are some peculiarities of working with channels, for example, when transmitting data using PWM \\ (PWM \\), the built-in audio system stops working, when transmitting data via PCM, the use of connected digital audio devices  is blocked\\ (with that, the built-in system keeps working \\), and when using SPI \(by the way, special adjustment of buffer size and Raspberry GPU frequency is required for proper operation\) the LED strip blocks all other devices connected to that channel.
-
-There are some peculiarities of DMA channel selection to control the strip: some channels are used by the system, so using them may lead to unpleasant consequences; for example, using channel 5 destroys the Raspberry file system, since this channel is used for reading / writing to the SD card. Secure channel is No. 10, it is set by default in the library above.
-
-Therefore, the scenarios of using the LED strip are the following:
-
-1. If performance of embedded audio on Raspberry is not important \(and we don't use it, since the audio and the strip will produce nonsense in this case\), it is possible to use the PWM channel \(for this purpose, you have to connect strip inputs to one of the following Raspberry GPIO ports: 12, 18, 40, or 52 for PWM0 channel and 13, 19, 41, 45, or 53 for PWM1 channel\).
-2. If presence of other devices on the SPI bus is not important, you can control the strip via the SPI \(GPIO on Raspberry 10 or 38\) channel.
-   Here the following settings are required \(only for Raspberry Pi 3\):
-   * increase the size of the data transfer buffer to support long strips, by adding line `spidev.bufsiz=32768` to file `/boot/cmdline.txt`;
-   * set the GPU frequency for proper the frequency of SPI, by adding line `core_freq=250` to file `/boot/config.txt`.
-3. If both audio operation and connection of SPI devices in addition to the LED strip is important, the strip may be controlled via the PCM channel \(GPIO 21 or 31\). With that, no further manipulations with Raspberry is required.
-
-Based on the above methods of controlling the strip, the best variant that allows controlling the strip, preserve operability of the built-in audio system, and the possibility of connecting all sorts of devices and sensors via the SPI is the controlling via the PCM \(GPIO 21\) channel using the 10 DMA channel.
+The default option is 3, because it allows the builtin audio system to work and does not require any modifications to the boot sequence.

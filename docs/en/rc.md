@@ -16,7 +16,7 @@ Configuring
 
 > **Warning** An open QGroundControl or rviz connection sends large amounts of data over Wi-Fi, which can adversely affect responsiveness of the mobile transmitter. It is recommended not to use these applications together with it.
 
-Install [Clever image on RPi](microsd_images.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`) should be enabled:
+Install [Clever image on RPi](image.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`) should be enabled:
 
 ```xml
 <arg name="rosbridge" default="true"/>

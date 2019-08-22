@@ -62,7 +62,8 @@ jobs:
         - markdownlint -V
       script:
         - markdownlint docs
-        - ./check_files_size.py
+        - ./check_assets_size.py
+        - ./check_unused_assets.py
         - gitbook install
         - gitbook build
       deploy:
@@ -85,6 +86,14 @@ jobs:
         - pip install GitPython PyGithub
       script:
         - PYTHONUNBUFFERED=1 python ./gen_changelog.py
+    - stage: Build
+      name: Editorconfig-lint
+      language: generic
+      before_script:
+        - wget https://github.com/okalachev/editorconfig-checker/releases/download/1.2.1-disable-spaces-amount/ec-linux-amd64
+        - chmod +x ec-linux-amd64
+      script:
+        - ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt"
 stages:
   - Build
   - Annotate

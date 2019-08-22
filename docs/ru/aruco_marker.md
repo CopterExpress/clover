@@ -10,7 +10,13 @@
 
 ## Настройка
 
-Для включения модуля аргумент `aruco_detect` в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` должен быть в значении `true`:
+Аргумент `aruco` в файле `~/catkin_ws/src/clever/clever/launch/clever.launch` должен быть в значении `true`:
+
+```xml
+<arg name="aruco" default="true"/>
+```
+
+Для включения распознавания маркеров аргумент `aruco_detect` в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` должен быть в значении `true`:
 
 ```xml
 <arg name="aruco_detect" default="true"/>

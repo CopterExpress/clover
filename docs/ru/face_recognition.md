@@ -58,7 +58,7 @@ for i in os.listdir('faces/'):
 
 ***Дополнение: все изображения хранятся в папке faces в формате name.jpg***
 
-<img src="../assets/screen.jpg" width="50%">
+<img src="../assets/screenshot.jpeg" width="50%">
 
 <img src="../assets/Mikhail.jpg" width="30%">
 
