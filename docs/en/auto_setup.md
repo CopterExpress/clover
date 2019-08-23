@@ -23,7 +23,7 @@ This manual contains links to other articles in which each of the topics address
 
 - Connect to Raspberry Pi via SSH.
 
-   Web access is the easiest way. Follow the instructions in the article [SSH Access] (ssh.md # web access).
+   Web access is the easiest way. Follow the instructions in the article [SSH Access](ssh.md # web access).
 
 - You can change the name and password of the network if you want to. See the article "[Network Settings] (network.md # change-password-or-ssid-network-name)". The remaining operations with the network are unnecessary.
 
@@ -190,7 +190,7 @@ Most of the parameters for autonomous flight are located in the following direct
   <arg name="aruco" default="true"/>.
   ```
 
-  This will acticate the ArUco marker detection module. 
+  This will acticate the ArUco marker detection module.
 - Open the file `aruco.launch`:
 
   ```bash
@@ -209,7 +209,7 @@ Most of the parameters for autonomous flight are located in the following direct
 
 - Generate the ArUco markers field. See the article [Map-based navigation with ArUco markers] (aruco_map.md # marker map settings) for details. To generate markers, you need to enter a command with specific values.
 
-  Here is the example generating command where: 
+  Here is the example generating command where:
 
   - marker length = 0.335 m (`length`)
   - 10 columns (x)
@@ -343,7 +343,6 @@ and replace map.txt with your map name.
   navigate(x=1, y=1, z=1.5, speed=1, frame_id='aruco_map')
   ```
 
-
 - As the result you will get:
 
   ```python
@@ -380,8 +379,8 @@ The easiest way to send the program is to copy the content of the program, creat
   ```bash
   nano myprogram.py
   ```
-You can select any name you want, but it is not recommended to use spaces and special characters. In addition, the program extension should always end with `.py`
 
+You can select any name you want, but it is not recommended to use spaces and special characters. In addition, the program extension should always end with `.py`
 
 - Paste text in the input field. If you use Butterfly web access on Windows or Linux:
 
@@ -398,7 +397,6 @@ You can select any name you want, but it is not recommended to use spaces and sp
   ```
 
 ## Starting the program
-
 
 - It is necessary to carefully prepare the drone, remote control and program. Run `selfcheck.py`. Make sure the drone flies in manual mode.
 - Turn on the drone and wait until the system boots. A red light on the camera means that the system has booted.
@@ -418,4 +416,4 @@ You can select any name you want, but it is not recommended to use spaces and sp
   python my_program.py
   ```
 
-  > ** Warning ** After completion of the program , the drone can land incorrectly and continue to fly over the floor. In this case, you need to intercept control.
+  > **Warning** After completion of the program , the drone can land incorrectly and continue to fly over the floor. In this case, you need to intercept control.
