@@ -230,7 +230,7 @@ Most of the parameters for autonomous flight are located in the following direct
 `<param name="map" value="$(find aruco_pose)/map/map.txt"/>`
 and replace map.txt with your map name.
 
-- Edit the `main_camera.launch` for setting the camera:
+- Edit the `main_camera.launch` for setting up the camera:
 
   Read more in the article. "[Camera orientation](camera_frame.md)".
 
@@ -287,82 +287,77 @@ and replace map.txt with your map name.
 - Connect the Raspberry Pi and the Pixracer via the microUSB cable. The cable should be tightly fastened and passed through the bottom of the drone to not get into the propellers.
 
 - Connect remotely to the flight controller through QGroundControl.
-   All the necessary settings are already set in the Clever settings. Now you need to create a new connection in QGroundControl
 
-остается лишь создать новое подключение в QGroundControl, выбрать его и подключиться. Настраивается оно, как на картинке в статье "[Подключение QGroundControl по Wi-Fi](gcs_bridge.md)".
+  All the necessary settings for that are already set in Clever. Now you need to create a new connection in QGroundControl. Use the settings from [this article](gcs_bridge.md).
 
-## Настройка пульта
+## Remote controller setup
 
-- Настройка полетных режимов описана в статье "[Полетные режимы](modes.md)".
+- Flight modes setup is described in the article "[Flight modes](modes.md)".
 
-  Канал 5 должен располагаться на переключателе SwC; Канал 6 - на SwA. Однако вы можете настроить эти каналы любым удобным для вас образом.
+  Set channel 5 to SwC switch; channel 5 to SwA switch. Or you can use any other switches you like.
 
-## Выполнение автоматической проверки
+## Clever selfcheck
 
-Проверку следует выполнить, когда вы полностью настроили дрон, а также при возникновении неполадок. Подробно процедура описана в статье "[Автоматическая проверка](selfcheck.md)".
+Perform selfcheck when you have set up your drone or when you have faced problems. The selfcheck process is described in the article "[Automated self checks](selfcheck.md)"
 
-- Выполнить команду:
+- Run the command:
 
   ```bash
   rosrun clever selfcheck.py
   ```
 
-## Написание программы
+## Writing a program
 
-В статье "[Автономный полет](simple_offboard.md)" описана работа с модулем `simple_offboard`, который создан для простого программирования дрона. В ней даны описания основных функций, а также примеры кода.
+The article "[Simple OFFBOARD](simple_offboard.md)" describes working with `simple_offboard` module that helps to easily program a drone. All the basic flight functions are described in this article, as well as code snippets.
 
-- Скопируйте из раздела "Использование из языка Python" пример кода и вставьте в редактор (например, в Visual Studio Code, PyCharm, Sublime Text, Notepad++).
+- Copy the Python code example from "The use of Python language" section and paste in code editor (e.g. Visual Studio Code, PyCharm, Sublime Text, Notepad++)
+- Save the document with .py extension for highlighting the code.
+- Add flight logic. The examples of such functions are given in the article. You need to call functions for taking off, flying to point and landing.
+- Taking off.
 
-- Сохраните документ с расширением .py для включения подсветки текста.
-
-- Далее необходимо добавить полётные команды в программу. Примеры таких команд представлены в статье. Нужно написать функции для взлета и полета в точку, а также для посадки.
-
-- Взлет.
-
-  Для взлета можно использовать функцию `navigate`:
+  Use `navigate` function to take off. Add this line at the bottom of the program.
 
   ```python
   navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='body', auto_arm=True)
   ```
 
-  Добавьте эту строку внизу программы.
-
-  Также добавьте команду ожидания:
+  Add this line to add delay to the program. It gives you time for doing previously called operation.
 
   ```python
   rospy.sleep(3)
   ```
 
-> **Hint** Важно выделить время на выполнение команды `navigate`, иначе коптер, не дожидаясь выполнения предыдущей команды, сразу перейдет к выполнению следующей. Для этого используется команда `rospy.sleep()`. В скобках указывается время в секундах. Функция `rospy.sleep()` относится к предыдущей команде `navigate`, а не к последующей, то есть это время, которое мы даем на то, чтобы долететь до точки, обозначенной в предыдущем `navigate`.
+> **Hint** It is important to allocate time to execute the `navigate` function, otherwise the drone, without waiting for the previous command to execute, will immediately proceed to the next. For allocating time, use the `rospy.sleep ()` command. The time in seconds is indicated in parentheses. The function `rospy.sleep ()` refers to the previous `navigate` command, and not to the next. This is the time we give to fly to the point indicated in previous ` navigate` (the one that is just above the `rospy.sleep ()` ).
 
-- Зафиксировать положение дрона в системе координат маркерного поля.
+- Set the drone's position in the marker field coordinate system.
 
-  Для этого нужно выполнить `navigate` и указать в нем необходимые координаты (например, x=1, y=1, z=1.5) и выбрать систему координат (`frame_id`):
+  For doing that you need to call a `navigate`, set the coordinates and coordinate system (`frame_id`):
 
   ```python
   navigate(x=1, y=1, z=1.5, speed=1, frame_id='aruco_map')
   ```
 
-- As the result you will get:
+- As the result you get:
 
   ```python
   navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='body', auto_arm=True)
   rospy.sleep(3)
   navigate(x=1, y=1, z=1.5, speed=1, frame_id='aruco_map')
+  rospy.sleep(5)
   ```
 
-  > **Warning** Note that the parameter `auto_arm = True` is only  set once on the first take-off. In other cases it should not be set True because it will prevent overtaking the control.
+  > **Warning** Note that the parameter `auto_arm = True` is only set once on the first takeoff. In other cases it should not be set True because it prevents overtaking the control.
 
-- If you want to add other points for the drone's flight, you need to add another `navigate` and`rospy.sleep ()`. Time must be calculated separately for each point, depending on the speed of flight and the distance between the points.
+- If you want to add other points for the drone's mission, add another `navigate` and `rospy.sleep()`. Calculate time individually for each point, depending on the speed of flight and the distance between two points.
 
-  For example, if we want to reach the point (3, 3, 1.5):
+  If you want to add the points with coordinates (3, 3, 1.5):
 
   ```python
   navigate(x=3, y=3, z=1.5, speed=1, frame_id=‘aruco_map’)
   rospy.sleep(3)
   ```
 
-  > **Warning** Coordinates should not exceed the size of your field. If the field is 4x4 meters in size, the maximum coordinate value should be 4.
+  > **Warning** Coordinates should not exceed the size of your field. If the field is 4x4 meters in size, the maximum coordinate value is 4.
 
 - After reaching all of the points you need to land. The following line is placed at the end of the program:
 
@@ -370,17 +365,17 @@ and replace map.txt with your map name.
   land()
   ```
 
-## Sending the program on the drone
+## Writing the program to the drone
 
 The easiest way to send the program is to copy the content of the program, create a new file on the Clever command line and paste the program text into the file.
 
-- To create the file `myprogram.py`, enter the command:
+- To create the file `myprogram.py`, run the command:
 
   ```bash
   nano myprogram.py
   ```
 
-You can select any name you want, but it is not recommended to use spaces and special characters. In addition, the program extension should always end with `.py`
+  You can select any name you want, but it is not recommended to use spaces and special characters. In addition, the program extension should always end with `.py`
 
 - Paste text in the input field. If you use Butterfly web access on Windows or Linux:
 
@@ -388,9 +383,9 @@ You can select any name you want, but it is not recommended to use spaces and sp
   Ctrl+Shift+V
   ```
 
-  On Mac you can click `cmd+v`.
+  On Mac you can click `Cmd+v`.
 
-- Save file:
+- Save the file:
 
   ```
   Ctrl+x; Y; Enter
@@ -398,17 +393,17 @@ You can select any name you want, but it is not recommended to use spaces and sp
 
 ## Starting the program
 
-- It is necessary to carefully prepare the drone, remote control and program. Run `selfcheck.py`. Make sure the drone flies in manual mode.
-- Turn on the drone and wait until the system boots. A red light on the camera means that the system has booted.
-- Check drone's flight in POSCTL mode
-- To do this, take off above the marks in the STABILIZED mode and turn the SwC switch to the lower position - POSCTL mode.
+- It is necessary to carefully prepare the drone, remote control and program before you fly autonomously. Run `selfcheck.py`. Make sure the drone flies well in manual mode.
+- Turn on the drone and wait for the system to boot. A red light on the camera means that the system has booted.
+- Check drone's flight in POSCTL mode.
+- To do this, take off above the markers in STABILIZED mode and turn the SwC switch (or the one you have set) to the lower position - POSCTL mode.
 
-  > **Warning** You need to be prepared to immediately switch back to STABILIZED mode if the drone gets out of control!
+  > **Warning** You need to be ready to immediately switch back to STABILIZED mode if the drone gets out of control!
 
-  Set the left stick (throttle) to the center position. The drone has to hover in place. In this case, you can land the drone and go to the next step. If not, you need to sort out the problem.
+  Set the left stick (throttle) to the middle position. The drone has to hover in place. If so, you can land the drone and proceed to the next step. If not, you need to find the reason for the problem.
 
-- Set the SwC switch to the middle position. It can help you to intercept the drone. You only need to switch it to the upper position.
-- Set the left stick (throttle) to the middle position so that in case of interception the drone won't fall on the floor.
+- Before you start your program, set the SwC switch to the middle position. It will help you to take control of the drone. For taking control, switch your mode switch (SwC by default) to any other flight mode.
+- Set the left stick (throttle) to the middle position so that in case of taking control the drone won't fall down.
 
 - Run the program:
 
@@ -417,3 +412,5 @@ You can select any name you want, but it is not recommended to use spaces and sp
   ```
 
   > **Warning** After completion of the program , the drone can land incorrectly and continue to fly over the floor. In this case, you need to intercept control.
+
+- If you want to stop the program before it ends, press `Ctrl+C`. If didn't work, press `Ctrl+Z`, but it is not recommended.
