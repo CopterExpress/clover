@@ -23,7 +23,7 @@ This manual contains links to other articles in which each of the topics address
 
 - Connect to Raspberry Pi via SSH.
 
-   Web access is the easiest way. Follow the instructions in the article [SSH Access](ssh.md # web access).
+   Web access is the easiest way. Follow the instructions in the article [SSH Access](ssh.md).
 
 - You can change the name and password of the network if you want to. See the article "[Network Settings] (network.md # change-password-or-ssid-network-name)". The remaining operations with the network are unnecessary.
 
@@ -327,7 +327,7 @@ The article "[Simple OFFBOARD](simple_offboard.md)" describes working with `simp
   rospy.sleep(3)
   ```
 
-> **Hint** It is important to allocate time to execute the `navigate` function, otherwise the drone, without waiting for the previous command to execute, will immediately proceed to the next. For allocating time, use the `rospy.sleep ()` command. The time in seconds is indicated in parentheses. The function `rospy.sleep ()` refers to the previous `navigate` command, and not to the next. This is the time we give to fly to the point indicated in previous ` navigate` (the one that is just above the `rospy.sleep ()` ).
+> **Hint** It is important to allocate time to execute the `navigate` function, otherwise the drone, without waiting for the previous command to execute, will immediately proceed to the next. For allocating time, use the `rospy.sleep ()` command. The time in seconds is indicated in parentheses. The function `rospy.sleep ()` refers to the previous `navigate` command, and not to the next. This is the time we give to fly to the point indicated in previous `navigate` (the one that is just above the `rospy.sleep ()` ).
 
 - Set the drone's position in the marker field coordinate system.
 
