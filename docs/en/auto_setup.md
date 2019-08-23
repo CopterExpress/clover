@@ -1,12 +1,10 @@
 # Step-by-step guide on autonomous flight with Clever 4
 
-The guid refers to many other articles
-
 This manual contains links to other articles in which each of the topics addressed is discussed in more detail. If you encounter difficulties while reading one of these articles, it is recommended that you return to this manual, since many operations here are described step by step and some unnecessary steps are skipped.
 
 ## Raspberry Pi initial setup
 
-- Install Raspberry Pi and a camera on the drone according to the [manual](assemble_3.md # montage-raspberry).
+- Install Raspberry Pi and a camera on the drone according to the [manual](assemble_4.md#installing-the-raspberry-pi).
 - Download the system image [here](image.md).
 - Burn the image to the microSD card.
 - Insert the card into Raspberry Pi.
@@ -15,7 +13,7 @@ This manual contains links to other articles in which each of the topics address
 
   > **Warning** Before connecting the Raspberry Pi to the computer via USB, you need to remove the 5V power cable from Raspberry Pi. Otherwise, there may be problems with power.
 
-- Connect to Wi-Fi and open the web interface ([this article] (wifi.md)).
+- Connect to Wi-Fi and open the web interface ([this article](wifi.md)).
 
    After the first power-up, the network appears with a delay. You need to wait until the system is fully loaded. If the Clever network does not appear in the list of networks for a long time, reopen the window with the network selection. Then the list of networks will be updated.
 
@@ -152,7 +150,10 @@ Most of the parameters for autonomous flight are located in the following direct
   ```
 
   The `~` symbol stands for home directory of your user. If you are already in the directory, you can go with just the command:
-`cd catkin_ws/src/clever/clever/launch/`
+
+  ```bash
+  cd catkin_ws/src/clever/clever/launch/
+  ```
 
   > **Hint** Tab can automatically complete the names of files, folders or commands. You need to start entering the desired name and press Tab. If there are no conflicts, the name will be auto completed. For example, to quickly enter the path to the `catkin_ws/src/clever/clever/launch/` directory, after entering `cd`, you can start typing the following key combination:`c-Tab-s-Tab-c-Tab-c-Tab-l-Tab`. This way you can save a lot of time when writing a long command, and also avoid possible mistakes in writing the path.
 
@@ -201,7 +202,7 @@ Most of the parameters for autonomous flight are located in the following direct
 
   Here is what you should get:
 
-  ```
+  ```xml
   <arg name="aruco_detect" default="true"/>
   <arg name="aruco_map" default="true"/>
   <arg name="aruco_vpe" default="true"/>`
@@ -346,7 +347,7 @@ The article "[Simple OFFBOARD](simple_offboard.md)" describes working with `simp
   rospy.sleep(5)
   ```
 
-  > **Warning** Note that the parameter `auto_arm = True` is only set once on the first takeoff. In other cases it should not be set True because it prevents overtaking the control.
+  > **Warning** Note that the parameter `auto_arm=True` is only set once on the first takeoff. In other cases it should not be set True because it prevents overtaking the control.
 
 - If you want to add other points for the drone's mission, add another `navigate` and `rospy.sleep()`. Calculate time individually for each point, depending on the speed of flight and the distance between two points.
 
