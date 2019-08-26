@@ -6,6 +6,8 @@ Open the *Vehicle Setup* tab and select the *Power* menu.
 
 > **Note** Power sensor calibration should be done with the battery pack connected to the drone.
 
+If there is no voltage indicator or manual calibration is not possible, set the average value of the voltage divider for the Clever 4 kit (*Voltage divider* = 11).
+
 1. Set the *Number of cells* parameter according to the number of cells in your battery (*3* for the Clever 4 drone).
 2. Calculate the voltage divider:
     * Measure voltage across the battery (you may use a battery voltage tester for that).
