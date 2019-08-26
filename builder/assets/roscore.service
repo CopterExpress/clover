@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 User=pi
-ExecStart=/bin/sh -c ". /opt/ros/kinetic/setup.sh; ROS_HOSTNAME=`hostname`.local exec roscore"
+ExecStart=/bin/sh -c ". /opt/ros/melodic/setup.sh; ROS_HOSTNAME=`hostname`.local exec roscore"
 Restart=on-failure
 RestartSec=3
 
