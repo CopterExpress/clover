@@ -1,0 +1,38 @@
+<launch>
+    <arg name="ws281x" default="true"/>
+    <arg name="led_effect" default="true"/>
+    <arg name="led_notify" default="true"/>
+
+    <!-- For additional help go to https://clever.copterexpress.com/led.html -->
+
+    <!-- ws281x led strip driver -->
+    <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">
+        <param name="led_count" value="30"/>
+        <param name="gpio_pin" value="21"/>
+        <param name="brightness" value="255"/>
+        <param name="strip_type" value="WS2811_STRIP_GRB"/>
+        <param name="target_frequency" value="800000"/>
+        <param name="dma" value="10"/>
+        <param name="invert" value="false"/>
+    </node>
+
+    <!-- high level led effects control, events notification with leds -->
+    <node pkg="clever" name="led_effect" type="led" ns="led" clear_params="true" output="screen" if="$(arg led_effect)">
+        <param name="blink_rate" value="2"/>
+        <param name="fade_period" value="0.5"/>
+        <param name="rainbow_period" value="5"/>
+        <!-- events effects table -->
+        <rosparam param="notify" if="$(arg led_notify)">
+            startup: { r: 255, g: 255, b: 255 }
+            connected: { effect: rainbow }
+            disconnected: { effect: blink, r: 255, g: 50, b: 50 }
+            acro: { r: 245, g: 155, b: 0 }
+            stabilized: { r: 30, g: 180, b: 50 }
+            altctl: { r: 255, g: 255, b: 40 }
+            posctl: { r: 50, g: 100, b: 220 }
+            offboard: { r: 220, g: 20, b: 250 }
+            low_battery: { threshold: 3.7, effect: blink_fast, r: 255, g: 0, b: 0 }
+            error: { effect: flash, r: 255, g: 0, b: 0 }
+        </rosparam>
+    </node>
+</launch>

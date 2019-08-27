@@ -26,6 +26,7 @@
   <depend>geometry_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>visualization_msgs</depend>
+  <depend>led_msgs</depend>
   <depend>geographiclib</depend>
   <depend>nodelet</depend>
   <depend>mavros</depend>
@@ -36,6 +37,7 @@
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
   <depend>tf2_web_republisher</depend>
+  <depend>ws281x</depend>
   <depend>python-lxml</depend>
   <exec_depend>python-pymavlink</exec_depend>
   <!-- Use test_depend for packages you need only for testing: -->

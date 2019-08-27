@@ -80,6 +80,7 @@ add_service_files(
   SetVelocity.srv
   SetAttitude.srv
   SetRates.srv
+  SetLEDEffect.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -164,6 +165,8 @@ add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(vpe_publisher src/vpe_publisher.cpp)
 
+add_executable(led src/led.cpp)
+
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
@@ -175,7 +178,11 @@ target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
+target_link_libraries(led ${catkin_LIBRARIES})
+
 add_dependencies(simple_offboard clever_generate_messages_cpp)
+
+add_dependencies(led clever_generate_messages_cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
