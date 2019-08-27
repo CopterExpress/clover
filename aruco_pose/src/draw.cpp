@@ -114,7 +114,29 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		cv::Point center(ofs.x - minX / sizeX * float(out.cols), ofs.y + out.rows + minY / sizeY * float(out.rows));
 		line(out_copy, center, center + Point(300, 0), Scalar(255, 0, 0), 10); // x axis
 		line(out_copy, center, center + Point(0, -300), Scalar(0, 255, 0), 10); // y axis
-		line(out_copy, center, center + Point(-200, 200), Scalar(0, 0, 255), 10); // z axis
+		line(out_copy, center, center + Point(-150, 150), Scalar(0, 0, 255), 10); // z axis
+		
+		Point poly_points[3][3];
+		poly_points[0][0] = center + Point(330, 0);
+		poly_points[0][1] = center + Point(275, -14);
+		poly_points[0][2] = center + Point(275, 14);
+		poly_points[1][0] = center + Point(0, -330);
+		poly_points[1][1] = center + Point(-14, -275);
+		poly_points[1][2] = center + Point(14, -275);
+		poly_points[2][0] = center + Point(-180, 180);
+		poly_points[2][1] = center + Point(-130, 151);
+		poly_points[2][2] = center + Point(-151, 130);
+
+		const Point* ppt[3] = {poly_points[0], poly_points[1], poly_points[2]};
+		int npt[] = {3};
+
+		fillPoly(out_copy, ppt, npt, 1, Scalar(255, 0, 0));
+		fillPoly(out_copy, ppt + 1, npt, 1, Scalar(0, 255, 0));
+		fillPoly(out_copy, ppt + 2, npt, 1, Scalar(0, 0, 255));
+
+		putText(out_copy, "X", center + Point(270, 50), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(255, 0, 0), 8);
+		putText(out_copy, "Y", center + Point(25, -270), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(0, 255, 0), 8);
+		putText(out_copy, "Z", center + Point(-160, 115), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(0, 0, 255), 8);
 	}
 }
 
