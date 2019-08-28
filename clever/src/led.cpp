@@ -135,7 +135,6 @@ void proceed(const ros::TimerEvent& event)
 bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Response& res)
 {
 	res.success = true;
-	counter = 0;
 
 	if (req.effect != "flash" && current_effect.effect == req.effect &&
 	    current_effect.r == req.r && current_effect.g == req.g && current_effect.b == req.b) {
@@ -196,6 +195,7 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 
 	// set current effect
 	current_effect = req;
+	counter = 0;
 	start_state = state;
 	start_time = ros::Time::now();
 
