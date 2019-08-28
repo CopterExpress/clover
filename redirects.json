@@ -33,6 +33,7 @@
         { "from": "snippets.html", "to": "ru/snippets.html" },
         { "from": "camera_frame.html", "to": "ru/camera_frame.html" },
         { "from": "camera.html", "to": "ru/camera.html" },
+        { "from": "led.html", "to": "ru/leds.html" },
         { "from": "leds.html", "to": "ru/leds.html" },
         { "from": "rviz.html", "to": "ru/rviz.html" },
         { "from": "sitl.html", "to": "ru/sitl.html" },
@@ -50,6 +51,8 @@
         { "from": "snippets/", "to": "ru/snippets.html" },
         { "from": "optical_flow/", "to": "ru/optical_flow.html" },
         { "from": "laser/", "to": "ru/laser.html" },
+        { "from": "led/", "to": "ru/leds.html" },
+        { "from": "leds/", "to": "ru/leds.html" },
 
         { "from": "ru/microsd_images.html", "to": "ru/image.html" },
         { "from": "en/microsd_images.html", "to": "en/image.html" }
