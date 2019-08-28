@@ -218,9 +218,9 @@ bool notify(const std::string& event)
 		clever::SetLEDEffect effect;
 		ros::param::get("~notify/" + event + "/effect", effect.request.effect);
 		int r, g, b;
-		ros::param::get("~notify/" + event + "/r", r);
-		ros::param::get("~notify/" + event + "/g", g);
-		ros::param::get("~notify/" + event + "/b", b);
+		ros::param::param("~notify/" + event + "/r", r, 0);
+		ros::param::param("~notify/" + event + "/g", g, 0);
+		ros::param::param("~notify/" + event + "/b", b, 0);
 		effect.request.r = r;
 		effect.request.g = g;
 		effect.request.b = b;
