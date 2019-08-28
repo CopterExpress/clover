@@ -2,6 +2,7 @@
 // with some improvements and fixes
 
 #include "draw.h"
+#include <math.h>
 
 using namespace cv;
 using namespace cv::aruco;
@@ -112,31 +113,33 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		auto out_copy = _img.getMat();
 
 		cv::Point center(ofs.x - minX / sizeX * float(out.cols), ofs.y + out.rows + minY / sizeY * float(out.rows));
-		line(out_copy, center, center + Point(300, 0), Scalar(255, 0, 0), 10); // x axis
-		line(out_copy, center, center + Point(0, -300), Scalar(0, 255, 0), 10); // y axis
-		line(out_copy, center, center + Point(-150, 150), Scalar(0, 0, 255), 10); // z axis
 		
-		Point poly_points[3][3];
-		poly_points[0][0] = center + Point(330, 0);
-		poly_points[0][1] = center + Point(275, -14);
-		poly_points[0][2] = center + Point(275, 14);
-		poly_points[1][0] = center + Point(0, -330);
-		poly_points[1][1] = center + Point(-14, -275);
-		poly_points[1][2] = center + Point(14, -275);
-		poly_points[2][0] = center + Point(-180, 180);
-		poly_points[2][1] = center + Point(-130, 151);
-		poly_points[2][2] = center + Point(-151, 130);
+		int axis_points[3][2] = {{300, 0}, {0, -300}, {-150, 150}};
+        Point axis_names[3] = {Point(270, 50), Point(25, -270), Point(-160, 115)};
+        Scalar colors[] = {Scalar(255, 0, 0), Scalar(0, 255, 0), Scalar(0, 0, 255)};
+        String names[] = {"X", "Y", "Z"};
 
-		const Point* ppt[3] = {poly_points[0], poly_points[1], poly_points[2]};
-		int npt[] = {3};
+        int r_half = 14;
+        int height = 55;
 
-		fillPoly(out_copy, ppt, npt, 1, Scalar(255, 0, 0));
-		fillPoly(out_copy, ppt + 1, npt, 1, Scalar(0, 255, 0));
-		fillPoly(out_copy, ppt + 2, npt, 1, Scalar(0, 0, 255));
+        for(int poly = 2; poly >= 0; poly--){
+                double alpha = atan2(0 - axis_points[poly][0], 0 - axis_points[poly][1]);
+        
+                float x_delta = r_half * cos(alpha);
+                float y_delta = r_half * sin(alpha);
 
-		putText(out_copy, "X", center + Point(270, 50), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(255, 0, 0), 8);
-		putText(out_copy, "Y", center + Point(25, -270), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(0, 255, 0), 8);
-		putText(out_copy, "Z", center + Point(-160, 115), FONT_HERSHEY_SIMPLEX, 1.0, Scalar(0, 0, 255), 8);
+                Point polygon_vertices[1][3];
+                polygon_vertices[0][0] = center + Point(axis_points[poly][0] + x_delta, axis_points[poly][1] - y_delta);
+                polygon_vertices[0][1] = center + Point(axis_points[poly][0] - x_delta, axis_points[poly][1] + y_delta);
+                polygon_vertices[0][2] = center + Point(axis_points[poly][0] - sin(alpha) * height, axis_points[poly][1] - cos(alpha) * height);
+
+                const Point* ppt[1] = {polygon_vertices[0]};
+                int npt[] = {3};
+
+                fillPoly(out_copy, ppt, npt, 1, colors[poly]);
+                putText(out_copy, names[poly], center + axis_names[poly], FONT_HERSHEY_SIMPLEX, 1.2, colors[poly], 7);
+                line(out_copy, center, center + Point(axis_points[poly][0], axis_points[poly][1]), colors[poly], 10);
+        }
 	}
 }
 
