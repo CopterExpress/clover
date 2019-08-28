@@ -7,7 +7,7 @@
 
     <!-- ws281x led strip driver -->
     <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">
-        <param name="led_count" value="30"/>
+        <param name="led_count" value="58"/>
         <param name="gpio_pin" value="21"/>
         <param name="brightness" value="255"/>
         <param name="strip_type" value="WS2811_STRIP_GRB"/>
