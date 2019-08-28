@@ -27,7 +27,7 @@ clever::SetLEDEffect::Request current_effect;
 int led_count;
 ros::Timer timer;
 ros::Time start_time;
-double blink_rate, blink_fast_rate, flash_delay, fade_period, rainbow_period;
+double blink_rate, blink_fast_rate, flash_delay, fade_period, wipe_period, rainbow_period;
 double low_battery_threshold;
 bool blink_state;
 led_msgs::SetLEDs set_leds;
@@ -109,6 +109,18 @@ void proceed(const ros::TimerEvent& event)
 			timer.stop();
 		}
 
+	} else if (current_effect.effect == "wipe") {
+		set_leds.request.leds.resize(1);
+		set_leds.request.leds[0].index = counter - 1;
+		set_leds.request.leds[0].r = current_effect.r;
+		set_leds.request.leds[0].g = current_effect.g;
+		set_leds.request.leds[0].b = current_effect.b;
+		callSetLeds();
+		if (counter == led_count) {
+			// wipe finished
+			timer.stop();
+		}
+
 	} else if (current_effect.effect == "rainbow_fill") {
 		rainbow(counter % 255, r, g, b);
 		for (int i = 0; i < led_count; i++) {
@@ -157,6 +169,10 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 		timer.setPeriod(ros::Duration(0.05), true);
 		timer.start();
 
+	} else if (req.effect == "wipe") {
+		timer.setPeriod(ros::Duration(wipe_period / led_count), true);
+		timer.start();
+
 	} else if (req.effect == "flash") {
 		ros::Duration delay(flash_delay);
 		fill(0, 0, 0);
@@ -187,7 +203,7 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 		timer.start();
 
 	} else {
-		res.message = "Unknown effect: " + req.effect + ". Available effects are fill, fade, blink, blink_fast, flash, rainbow, rainbow_fill.";
+		res.message = "Unknown effect: " + req.effect + ". Available effects are fill, fade, wipe, blink, blink_fast, flash, rainbow, rainbow_fill.";
 		ROS_ERROR("%s", res.message.c_str());
 		res.success = false;
 		return true;
@@ -271,6 +287,7 @@ int main(int argc, char **argv)
 	nh_priv.param("blink_rate", blink_rate, 2.0);
 	nh_priv.param("blink_fast_rate", blink_fast_rate, blink_rate * 2);
 	nh_priv.param("fade_period", fade_period, 0.5);
+	nh_priv.param("wipe_period", wipe_period, 0.5);
 	nh_priv.param("flash_delay", flash_delay, 0.1);
 	nh_priv.param("rainbow_period", rainbow_period, 5.0);
 
