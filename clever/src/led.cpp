@@ -216,14 +216,10 @@ bool notify(const std::string& event)
 	    ros::param::has("~notify/" + event + "/b")) {
 		ROS_INFO_THROTTLE(5, "led: notify %s", event.c_str());
 		clever::SetLEDEffect effect;
-		ros::param::get("~notify/" + event + "/effect", effect.request.effect);
-		int r, g, b;
-		ros::param::param("~notify/" + event + "/r", r, 0);
-		ros::param::param("~notify/" + event + "/g", g, 0);
-		ros::param::param("~notify/" + event + "/b", b, 0);
-		effect.request.r = r;
-		effect.request.g = g;
-		effect.request.b = b;
+		effect.request.effect = ros::param::param("~notify/" + event + "/effect", std::string(""));
+		effect.request.r = ros::param::param("~notify/" + event + "/r", 0);
+		effect.request.g = ros::param::param("~notify/" + event + "/g", 0);
+		effect.request.b = ros::param::param("~notify/" + event + "/b", 0);
 		setEffect(effect.request, effect.response);
 	}
 }
