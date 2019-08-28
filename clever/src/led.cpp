@@ -36,7 +36,7 @@ ros::ServiceClient set_leds_srv;
 mavros_msgs::State mavros_state;
 int counter;
 
-inline void call_set_leds()
+void callSetLeds()
 {
 	bool res = set_leds_srv.call(set_leds);
 	if (!res) {
@@ -74,7 +74,7 @@ void fill(uint8_t r, uint8_t g, uint8_t b)
 		set_leds.request.leds[i].g = g;
 		set_leds.request.leds[i].b = b;
 	}
-	call_set_leds();
+	callSetLeds();
 }
 
 void proceed(const ros::TimerEvent& event)
@@ -103,7 +103,7 @@ void proceed(const ros::TimerEvent& event)
 			set_leds.request.leds[i].g = one_minus_passed * start_state.leds[i].g + passed * current_effect.g;
 			set_leds.request.leds[i].b = one_minus_passed * start_state.leds[i].b + passed * current_effect.b;
 		}
-		call_set_leds();
+		callSetLeds();
 		if (passed >= 1.0) {
 			// fade finished
 			timer.stop();
@@ -117,7 +117,7 @@ void proceed(const ros::TimerEvent& event)
 			set_leds.request.leds[i].g = g;
 			set_leds.request.leds[i].b = b;
 		}
-		call_set_leds();
+		callSetLeds();
 
 	} else if (current_effect.effect == "rainbow") {
 		for (int i = 0; i < led_count; i++) {
@@ -128,7 +128,7 @@ void proceed(const ros::TimerEvent& event)
 			set_leds.request.leds[i].g = g;
 			set_leds.request.leds[i].b = b;
 		}
-		call_set_leds();
+		callSetLeds();
 	}
 }
 
@@ -175,7 +175,7 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 			for (int i = 0; i < led_count; i++) {
 				fill(current_effect.r, current_effect.g, current_effect.b);
 			}
-			call_set_leds();
+			callSetLeds();
 		}
 		return true; // this effect happens only once
 
