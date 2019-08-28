@@ -241,6 +241,7 @@ void handleMavrosState(const mavros_msgs::State& msg)
 		// mode changed
 		std::string mode = boost::algorithm::to_lower_copy(msg.mode);
 		if (mode.find(".") != std::string::npos) {
+			// remove the part before "."
 			mode = mode.substr(mode.find(".") + 1);
 		}
 		notify(mode);
