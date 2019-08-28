@@ -205,6 +205,7 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 void handleState(const led_msgs::LEDStateArray& msg)
 {
 	state = msg;
+	led_count = state.leds.size();
 }
 
 bool notify(const std::string& event)
@@ -271,7 +272,6 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "led");
 	ros::NodeHandle nh, nh_priv("~");
 
-	nh.param("led_count", led_count, 30);
 	nh_priv.param("blink_rate", blink_rate, 2.0);
 	nh_priv.param("blink_fast_rate", blink_fast_rate, blink_rate * 2);
 	nh_priv.param("fade_period", fade_period, 0.5);
@@ -283,7 +283,9 @@ int main(int argc, char **argv)
 	ros::service::waitForService("set_leds"); // cannot work without set_leds service
 	set_leds_srv = nh.serviceClient<led_msgs::SetLEDs>("set_leds", true);
 
-	ros::topic::waitForMessage<led_msgs::LEDStateArray>("state", nh); // cannot work without leds count info
+	// wait for leds count info
+	handleState(*ros::topic::waitForMessage<led_msgs::LEDStateArray>("state", nh));
+
 	auto state_sub = nh.subscribe("state", 1, &handleState);
 
 	auto set_effect = nh.advertiseService("set_effect", &setEffect);
