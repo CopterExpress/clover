@@ -12,7 +12,6 @@
 
 #include <ros/ros.h>
 #include <string>
-#include <map>
 #include <boost/algorithm/string.hpp>
 
 #include <clever/SetLEDEffect.h>
