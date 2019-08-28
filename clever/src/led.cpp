@@ -104,7 +104,7 @@ void proceed(const ros::TimerEvent& event)
 			set_leds.request.leds[i].b = one_minus_passed * start_state.leds[i].b + passed * current_effect.b;
 		}
 		call_set_leds();
-		if (passed > 1.0) {
+		if (passed >= 1.0) {
 			// fade finished
 			timer.stop();
 		}
