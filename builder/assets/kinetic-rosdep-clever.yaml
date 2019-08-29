@@ -529,6 +529,12 @@ libogg:
 vl53l1x:
   debian:
     stretch: [ros-kinetic-vl53l1x]
+ws281x:
+  debian:
+    stretch: [ros-kinetic-ws281x]
+led_msgs:
+  debian:
+    stretch: [ros-kinetic-led-msgs]
 interactive_markers:
   debian:
     stretch: [ros-kinetic-interactive-markers]

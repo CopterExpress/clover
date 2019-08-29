@@ -7,8 +7,9 @@
     <arg name="main_camera" default="true"/>
     <arg name="optical_flow" default="false"/>
     <arg name="aruco" default="false"/>
-    <arg name="rc" default="true"/>
     <arg name="rangefinder_vl53l1x" default="false"/>
+    <arg name="led" default="false"/>
+    <arg name="rc" default="true"/>
 
     <!-- mavros -->
     <include file="$(find clever)/launch/mavros.launch">
@@ -59,6 +60,9 @@
     <node name="rangefinder" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
     </node>
+
+    <!-- led strip -->
+    <include file="$(find clever)/launch/led.launch" if="$(arg led)"/>
 
     <!-- rc backend -->
     <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>

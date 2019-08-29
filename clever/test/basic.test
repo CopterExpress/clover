@@ -32,6 +32,10 @@
 
     <node name="rc" pkg="clever" type="rc" required="true" output="screen"/>
 
+    <node pkg="clever" name="led_effect" type="led" ns="led" clear_params="true" output="screen" required="true">
+        <rosparam param="notify">startup: { r: 255, g: 255, b: 255 }</rosparam>
+    </node>
+
     <param name="test_module" value="$(find clever)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>
