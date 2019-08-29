@@ -67,6 +67,7 @@
   * [Types of power connectors](connectortypes.md)
   * [Connecting 4 in 1 ESCs](4in1.md)
   * [Soldering safety](tb.md)
+  * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
 * Clever-based projects
   * [Copter spheric guard](shield.md)
