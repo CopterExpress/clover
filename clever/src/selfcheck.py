@@ -20,7 +20,7 @@ import tf2_ros
 import tf2_geometry_msgs
 from pymavlink import mavutil
 from std_srvs.srv import Trigger
-from sensor_msgs.msg import Image, CameraInfo, NavSatFix, Imu, Range
+from sensor_msgs.msg import BatteryState, Image, CameraInfo, NavSatFix, Imu, Range
 from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped, Vector3Stamped
@@ -238,6 +238,16 @@ def check_fcu():
         cbrk_usb_chk = get_param('CBRK_USB_CHK')
         if cbrk_usb_chk != 197848:
             failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+
+        try:
+            battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
+            cell = battery.cell_voltage[0]
+            if cell > 4.3 or cell < 3.0:
+                failure('Incorrect cell voltage: %.2f V, see https://clever.copterexpress.com/power.html', cell)
+            elif cell < 3.7:
+                failure('Critically low cell voltage: %.2f V, recharge battery', cell)
+        except rospy.ROSException:
+            failure('no battery state')
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
