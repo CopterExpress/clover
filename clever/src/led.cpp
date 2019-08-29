@@ -154,7 +154,11 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 		return true;
 	}
 
-	if (req.effect == "" || req.effect == "fill") {
+	if (req.effect == "") {
+		req.effect = "fill";
+	}
+
+	if (req.effect == "fill") {
 		fill(req.r, req.g, req.b);
 
 	} else if (req.effect == "blink") {
@@ -185,7 +189,9 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 		delay.sleep();
 		fill(0, 0, 0);
 		delay.sleep();
-		if (current_effect.effect == "fill" || current_effect.effect == "fade") {
+		if (current_effect.effect == "fill"||
+		    current_effect.effect == "fade" ||
+		    current_effect.effect == "wipe") {
 			// restore previous filling
 			for (int i = 0; i < led_count; i++) {
 				fill(current_effect.r, current_effect.g, current_effect.b);
