@@ -77,9 +77,6 @@ distance_sensor:
       field_of_view: 0.5
   rangefinder_sub:
       subscriber: true
-      id: 1
-      orientation: PITCH_270
-      covariance: 1  # cm
 
 # fake_gps
 fake_gps:

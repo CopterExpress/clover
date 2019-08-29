@@ -1,5 +1,7 @@
 # Working with a laser rangefinder
 
+> **Note** Documentation for the [image](image.md), versions, starting with **0.18**. For older versions refer to [documentation for version **0.17**](https://github.com/CopterExpress/clever/blob/v0.17/docs/en/laser.md).
+
 ## VL53L1X Rangefinder
 
 The rangefinder model recommended for Clever is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
@@ -37,10 +39,10 @@ If the pin marked GND is occupied, you can use any other ground pin (look at the
 <arg name="rangefinder_vl53l1x" default="true"/>
 ```
 
-By default, the rangefinder driver sends the data to Pixhawk via the `/mavros/distance_sensor/rangefinder_sub` topic. To view data from the topic, use the following command:
+By default, the rangefinder driver sends the data to Pixhawk via the `/rangefinder/range` topic. To view data from the topic, use the following command:
 
 ```bash
-rostopic echo mavros/distance_sensor/rangefinder_sub
+rostopic echo /rangefinder/range
 ```
 
 ### PX4 settings
@@ -69,7 +71,7 @@ def range_callback(msg):
     # Process data from the rangefinder
     print 'Rangefinder distance:', msg.range
 
-rospy.Subscriber('mavros/distance_sensor/rangefinder_sub', Range, range_callback)
+rospy.Subscriber('rangefinder/range', Range, range_callback)
 ```
 
 ### Data visualization

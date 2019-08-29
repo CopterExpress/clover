@@ -56,9 +56,8 @@
     <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" output="screen" if="$(arg rosbridge)"/>
 
     <!-- vl53l1x ToF rangefinder -->
-    <node name="vl53l1x" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
+    <node name="rangefinder" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
-        <remap from="~range" to="mavros/distance_sensor/rangefinder_sub"/> <!-- redirect data to FCU -->
     </node>
 
     <!-- rc backend -->

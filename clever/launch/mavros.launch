@@ -4,6 +4,7 @@
     <arg name="gcs_bridge" default="tcp"/>
     <arg name="viz" default="true"/>
     <arg name="respawn" default="true"/>
+    <arg name="distance_sensor_remap" default="rangefinder/range"/>
 
     <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" unless="$(eval fcu_conn == 'none')" respawn_delay="1" output="screen">
         <!-- UART connection -->
@@ -26,6 +27,9 @@
 
         <!-- basic params -->
         <rosparam command="load" file="$(find clever)/launch/mavros_config.yaml"/>
+
+        <!-- remap rangefinder -->
+        <remap from="mavros/distance_sensor/rangefinder_sub" to="rangefinder/range"/>
 
         <rosparam param="plugin_whitelist">
             - altitude
@@ -51,6 +55,14 @@
             # - waypoint
         </rosparam>
     </node>
+
+    <!-- remapped distance_sensor config -->
+    <rosparam param="$(arg distance_sensor_remap)" if="$(eval bool(distance_sensor_remap))">
+        subscriber: true
+        id: 1
+        orientation: PITCH_270
+        covariance: 1  # cm
+    </rosparam>
 
     <!-- Rangefinders frame -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 base_link rangefinder"/>
