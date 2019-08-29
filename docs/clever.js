@@ -15,12 +15,12 @@ gitbook.events.bind('page.change', function() {
 			}
 		}
 
-		let el;
 		// let el = document.querySelector('#download-latest-release');
 		// el.innerHTML = stable.name;
 		// el.href = stable.html_url;
 		// document.querySelector('#release').style.display = 'block';
 		for (let asset of stable.assets) {
+			let el;
 			if (asset.name == 'px4fmu-v4_default.px4') {
 				el = document.querySelector('a.latest-firmware.v4');
 			} else if (asset.name == 'px4fmu-v2_lpe.px4') {
