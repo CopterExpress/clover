@@ -97,7 +97,7 @@ disconnected: { effect: blink, r: 255, g: 50, b: 50 }
 <!-- ... -->
 ```
 
-The left part is one of the possible events that the strip reacts to. The right part contains the effect description that you want to execute for this event. Here is the list of supported messages:
+The left part is one of the possible events that the strip reacts to. The right part contains the effect description that you want to execute for this event. Here is the list of supported events:
 
 * `startup` – Clever system startup;
 * `connected` – successful connection to the flight controller;
