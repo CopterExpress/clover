@@ -110,6 +110,12 @@ The left part is one of the possible events that the strip reacts to. The right 
 
 > **Note** You need to [calibrate the power sensor](power.md#calibrating-the-power-sensor) for the `low_battery` event to work properly.
 
+In order to disable LED strip notifications set `led_notify` argument in `~/catkin_ws/src/clever/clever/launch/led.launch` to `false`:
+
+```xml
+<arg name="led_notify" default="false"/>
+```
+
 ## Low-level control
 
 You can use the `/led/set_leds` ROS service to control individual LEDs. It accepts an array of LED indices and desired colors.
