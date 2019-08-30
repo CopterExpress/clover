@@ -85,6 +85,7 @@
   * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
+  * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
 
 ## Учебник
 
