@@ -87,7 +87,6 @@
   * [Блочный конструктор полета](clever_blocks.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
 
-
 ## Учебник
 
 * [Теория и видеоуроки](lessons.md)
