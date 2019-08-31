@@ -11,6 +11,7 @@
         { "from": "connectortypes.html", "to": "ru/connectortypes.html" },
         { "from": "gps.html", "to": "ru/gps.html" },
         { "from": "setup.html", "to": "ru/setup.html" },
+        { "from": "power.html", "to": "ru/power.html" },
         { "from": "modes.html", "to": "ru/modes.html" },
         { "from": "firmware.html", "to": "ru/firmware.html" },
         { "from": "px4_parameters.html", "to": "ru/px4_parameters.html" },
