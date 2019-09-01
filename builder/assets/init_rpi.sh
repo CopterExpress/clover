@@ -35,14 +35,15 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "Rename SSID"
 NEW_SSID='CLEVER-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
+echo_stamp "Setting SSID to ${NEW_SSID}"
 sudo sed -i.OLD "s/CLEVER/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant.conf
 
-echo_stamp "Rename hostname to $NEW_SSID"
-hostnamectl set-hostname $NEW_SSID
-sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_SSID}' '${NEW_SSID}'.local/g' /etc/hosts
-# .local (mdns) hostname added to make it accesable when wlan and ethernet interfaces down
+NEW_HOSTNAME=$(echo ${NEW_SSID} | tr '[:upper:]' '[:lower:]')
+echo_stamp "Setting hostname to $NEW_HOSTNAME"
+hostnamectl set-hostname $NEW_HOSTNAME
+sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_HOSTNAME}' '${NEW_HOSTNAME}'.local/g' /etc/hosts
+# .local (mdns) hostname added to make it accesable when wlan and ethernet interfaces are down
 
 echo_stamp "Harware setup"
 /root/hardware_setup.sh
