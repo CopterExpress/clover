@@ -166,7 +166,7 @@ Most of the parameters for autonomous flight are located in the following direct
 - Open the file `clever.launch`:
 
   ```bash
-  nano clever.launch`
+  nano clever.launch
   ```
 
   You must be in the directory in which the file is located. If you are in other directory, you can open the file by writing the full path to it:
