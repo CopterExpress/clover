@@ -82,6 +82,7 @@
   * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
   * [Распознавание лиц](face_recognition.md)
+  * [Управление дроном силой мысли](control_emotions.md)
   * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
