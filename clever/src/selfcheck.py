@@ -642,16 +642,18 @@ def check_clever_service():
     j.add_match(UNIT='clever.service')
     node_errors = []
     r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
-    for event in j:
+    for event in reversed(list(j)):
         msg = event['MESSAGE']
-        if ('Stopped Clever ROS package' in msg) or ('Started Clever ROS package' in msg):
-            node_errors = []
+        if 'Started Clever ROS package' in msg:
+            break  # we're done
         elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
             msg = r.search(msg).groups()[2]
             if msg in node_errors:
                 continue
             node_errors.append(msg)
-    for error in node_errors:
+        elif ('ERROR: ' in msg) or ('while processing' in msg) or ('Invalid roslaunch XML syntax' in msg):
+            node_errors.append(msg)
+    for error in reversed(node_errors):
         failure(error)
 
 
