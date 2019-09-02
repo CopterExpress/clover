@@ -97,3 +97,7 @@ Also, you can enable and start the systemd service:
 sudo systemctl enable /home/<username>/catkin_ws/src/clever/deploy/clever.service
 sudo systemctl start clever
 ```
+
+## License
+
+While the Clever platform source code is available under the MIT License, note, that the [documentation](docs/) is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
