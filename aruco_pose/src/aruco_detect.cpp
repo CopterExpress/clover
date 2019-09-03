@@ -84,7 +84,7 @@ public:
 		nh_priv_.param("estimate_poses", estimate_poses_, true);
 		nh_priv_.param("send_tf", send_tf_, true);
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
-			ROS_FATAL("aruco_detect: can't estimate marker's poses as ~length parameter is not defined");
+			ROS_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
 		}
 		readLengthOverride();
@@ -110,7 +110,7 @@ public:
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
 		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
 
-		ROS_INFO("aruco_detect: ready");
+		ROS_INFO("ready");
 	}
 
 private:
@@ -162,7 +162,7 @@ private:
 						snap_to = tf_buffer_.lookupTransform(msg->header.frame_id, known_tilt_,
 						                                     msg->header.stamp, ros::Duration(0.02));
 					} catch (const tf2::TransformException& e) {
-						ROS_WARN_THROTTLE(5, "aruco_detect: can't snap: %s", e.what());
+						ROS_WARN_THROTTLE(5, "can't snap: %s", e.what());
 					}
 				}
 			}

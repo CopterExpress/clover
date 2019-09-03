@@ -40,7 +40,7 @@ void publishZero(const ros::TimerEvent& e)
 
 	if (e.current_real - pose.header.stamp < publish_zero_timout) { // have local position
 		if (got_local_pos.isZero()) {
-			ROS_INFO("vpe_publisher: got local position");
+			ROS_INFO("got local position");
 			got_local_pos = e.current_real;
 		}
 
@@ -50,7 +50,7 @@ void publishZero(const ros::TimerEvent& e)
 		got_local_pos = ros::Time(0);
 	}
 
-	ROS_INFO_THROTTLE(10, "vpe_publisher: publish zero");
+	ROS_INFO_THROTTLE(10, "publish zero");
 	static geometry_msgs::PoseStamped zero;
 	zero.header.frame_id = local_frame_id;
 	zero.header.stamp = e.current_real;
@@ -91,7 +91,7 @@ void callback(const T& msg)
 				// offset.header.frame_id = vpe.header.frame_id;
 				offset.child_frame_id = offset_frame_id;
 				br.sendTransform(offset);
-				ROS_INFO("vpe_publisher: offset reset");
+				ROS_INFO("offset reset");
 			}
 			// apply the offset
 			tf2::doTransform(vpe, vpe, offset);
@@ -102,7 +102,7 @@ void callback(const T& msg)
 		vpe_pub.publish(vpe);
 
 	} catch (const tf2::TransformException& e) {
-		ROS_WARN_THROTTLE(5, "vpe_publisher: %s", e.what());
+		ROS_WARN_THROTTLE(5, "%s", e.what());
 	}
 }
 
@@ -119,9 +119,9 @@ int main(int argc, char **argv) {
 	offset_timeout = ros::Duration(nh_priv.param("offset_timeout", 3.0));
 
 	if (!frame_id.empty()) {
-		ROS_INFO("vpe_publisher: using data from TF");
+		ROS_INFO("using data from TF");
 	} else {
-		ROS_INFO("vpe_publisher: using data topic");
+		ROS_INFO("using data topic");
 	}
 
 	auto pose_sub = nh_priv.subscribe<PoseStamped>("pose", 1, &callback);
@@ -139,6 +139,6 @@ int main(int argc, char **argv) {
 		local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &localPositionCallback);
 	}
 
-	ROS_INFO("vpe_publisher: ready");
+	ROS_INFO("ready");
 	ros::spin();
 }

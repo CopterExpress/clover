@@ -315,7 +315,7 @@ int main(int argc, char **argv)
 
 	timer = nh.createTimer(ros::Duration(0), &proceed, false, false);
 
-	ROS_INFO("led: ready");
+	ROS_INFO("ready");
 	notify("startup");
 	ros::spin();
 }
