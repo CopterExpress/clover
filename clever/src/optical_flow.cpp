@@ -80,7 +80,7 @@ private:
 		flow_.distance = -1; // no distance sensor available
 		flow_.temperature = 0;
 
-		ROS_INFO("Optical Flow initialized");
+		NODELET_INFO("Optical Flow initialized");
 	}
 
 	void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr &cinfo) {
