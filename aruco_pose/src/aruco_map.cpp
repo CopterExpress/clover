@@ -59,7 +59,7 @@ typedef message_filters::sync_policies::ExactTime<Image, CameraInfo, MarkerArray
 class ArucoMap : public nodelet::Nodelet {
 private:
 	ros::NodeHandle nh_, nh_priv_;
-	ros::Publisher img_pub_, pose_pub_, vis_markers_pub_;
+	ros::Publisher img_pub_, pose_pub_, markers_pub_, vis_markers_pub_;
 	image_transport::Publisher debug_pub_;
 	message_filters::Subscriber<Image> image_sub_;
 	message_filters::Subscriber<CameraInfo> info_sub_;
@@ -70,6 +70,7 @@ private:
 	geometry_msgs::TransformStamped transform_;
 	geometry_msgs::PoseWithCovarianceStamped pose_;
 	vector<geometry_msgs::TransformStamped> markers_transforms_;
+	aruco_pose::MarkerArray markers_;
 	tf2_ros::TransformBroadcaster br_;
 	tf2_ros::StaticTransformBroadcaster static_br_;
 	tf2_ros::Buffer tf_buffer_;
@@ -89,6 +90,7 @@ public:
 
 		// TODO: why image_transport doesn't work here?
 		img_pub_ = nh_priv_.advertise<sensor_msgs::Image>("image", 1, true);
+		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1, true);
 
 		board_ = cv::makePtr<cv::aruco::Board>();
 		board_->dictionary = cv::aruco::getPredefinedDictionary(
@@ -132,6 +134,7 @@ public:
 		sync_->registerCallback(boost::bind(&ArucoMap::callback, this, _1, _2, _3));
 
 		publishMarkersFrames();
+		publishMarkers();
 		publishMapImage();
 		vis_markers_pub_.publish(vis_array_);
 
@@ -438,27 +441,36 @@ publish_debug:
 			markers_transforms_.push_back(marker_transform);
 		}
 
-		// Add visualization marker
-		visualization_msgs::Marker marker;
-		marker.header.frame_id = transform_.child_frame_id;
-		// marker.header.stamp = stamp;
-		marker.action = visualization_msgs::Marker::ADD;
-		marker.id = vis_array_.markers.size();
-		marker.ns = "aruco_map_marker";
-		marker.type = visualization_msgs::Marker::CUBE;
-		marker.scale.x = length;
-		marker.scale.y = length;
-		marker.scale.z = 0.001;
-		marker.color.r = 1;
-		marker.color.g = 0.5;
-		marker.color.b = 0.5;
-		marker.color.a = 0.8;
+		// Add marker to array
+		aruco_pose::Marker marker;
+		marker.id = id;
+		marker.length = length;
 		marker.pose.position.x = x;
 		marker.pose.position.y = y;
 		marker.pose.position.z = z;
 		tf::quaternionTFToMsg(q, marker.pose.orientation);
-		marker.frame_locked = true;
-		vis_array_.markers.push_back(marker);
+		markers_.markers.push_back(marker);
+
+		// Add visualization marker
+		visualization_msgs::Marker vis_marker;
+		vis_marker.header.frame_id = transform_.child_frame_id;
+		vis_marker.action = visualization_msgs::Marker::ADD;
+		vis_marker.id = vis_array_.markers.size();
+		vis_marker.ns = "aruco_map_marker";
+		vis_marker.type = visualization_msgs::Marker::CUBE;
+		vis_marker.scale.x = length;
+		vis_marker.scale.y = length;
+		vis_marker.scale.z = 0.001;
+		vis_marker.color.r = 1;
+		vis_marker.color.g = 0.5;
+		vis_marker.color.b = 0.5;
+		vis_marker.color.a = 0.8;
+		vis_marker.pose.position.x = x;
+		vis_marker.pose.position.y = y;
+		vis_marker.pose.position.z = z;
+		tf::quaternionTFToMsg(q, marker.pose.orientation);
+		vis_marker.frame_locked = true;
+		vis_array_.markers.push_back(vis_marker);
 
 		// Add linking line
 		// geometry_msgs::Point p;
@@ -473,6 +485,11 @@ publish_debug:
 		if (!markers_transforms_.empty()) {
 			static_br_.sendTransform(markers_transforms_);
 		}
+	}
+
+	void publishMarkers()
+	{
+		markers_pub_.publish(markers_);
 	}
 
 	void publishMapImage()

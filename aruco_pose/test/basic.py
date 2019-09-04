@@ -142,6 +142,61 @@ def test_map_image(node):
     assert img.height == 2000
     assert img.encoding == 'mono8'
 
+def test_map_markers(node):
+    markers = rospy.wait_for_message('aruco_map/markers', MarkerArray, timeout=5)
+    assert markers.markers[0].id == 1
+    assert markers.markers[1].id == 2
+    assert markers.markers[2].id == 3
+    assert markers.markers[3].id == 4
+    assert markers.markers[4].id == 10
+    assert markers.markers[5].id == 11
+    assert markers.markers[6].id == 12
+
+    assert markers.markers[0].pose.position.x == 0
+    assert markers.markers[0].pose.position.y == 0
+    assert markers.markers[0].pose.position.z == 0
+    assert markers.markers[0].pose.orientation.x == 0
+    assert markers.markers[0].pose.orientation.y == 0
+    assert markers.markers[0].pose.orientation.z == 0
+    assert markers.markers[0].pose.orientation.w == 1
+    assert markers.markers[0].length == approx(0.33)
+
+    assert markers.markers[1].pose.position.x == 1
+    assert markers.markers[1].pose.position.y == 0
+    assert markers.markers[1].pose.position.z == 0
+    assert markers.markers[1].pose.orientation.x == 0
+    assert markers.markers[1].pose.orientation.y == 0
+    assert markers.markers[1].pose.orientation.z == 0
+    assert markers.markers[1].pose.orientation.w == 1
+    assert markers.markers[1].length == approx(0.33)
+
+    assert markers.markers[2].pose.position.x == 0
+    assert markers.markers[2].pose.position.y == 1
+    assert markers.markers[2].pose.position.z == 0
+    assert markers.markers[2].pose.orientation.x == 0
+    assert markers.markers[2].pose.orientation.y == 0
+    assert markers.markers[2].pose.orientation.z == 0
+    assert markers.markers[2].pose.orientation.w == 1
+    assert markers.markers[2].length == approx(0.33)
+
+    assert markers.markers[3].pose.position.x == 1
+    assert markers.markers[3].pose.position.y == 1
+    assert markers.markers[3].pose.position.z == 0
+    assert markers.markers[3].pose.orientation.x == 0
+    assert markers.markers[3].pose.orientation.y == 0
+    assert markers.markers[3].pose.orientation.z == 0
+    assert markers.markers[3].pose.orientation.w == 1
+    assert markers.markers[3].length == approx(0.33)
+
+    assert markers.markers[4].pose.position.x == approx(0.5)
+    assert markers.markers[4].pose.position.y == 2
+    assert markers.markers[4].pose.position.z == 0
+    assert markers.markers[4].pose.orientation.x == 0
+    assert markers.markers[4].pose.orientation.y == 0
+    assert markers.markers[4].pose.orientation.z == approx(0.5646424733950354)
+    assert markers.markers[4].pose.orientation.w == approx(0.8253356149096783)
+    assert markers.markers[4].length == approx(0.5)
+
 def test_map_visualization(node):
     vis = rospy.wait_for_message('aruco_map/visualization', VisMarkerArray, timeout=5)
 
