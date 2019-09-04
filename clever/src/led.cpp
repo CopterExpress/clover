@@ -148,14 +148,14 @@ bool setEffect(clever::SetLEDEffect::Request& req, clever::SetLEDEffect::Respons
 {
 	res.success = true;
 
-	if (req.effect != "flash" && current_effect.effect == req.effect &&
+	if (req.effect == "") {
+		req.effect = "fill";
+	}
+
+	if (req.effect != "flash" && req.effect != "fill" && current_effect.effect == req.effect &&
 	    current_effect.r == req.r && current_effect.g == req.g && current_effect.b == req.b) {
 		res.message = "Effect already set, skip";
 		return true;
-	}
-
-	if (req.effect == "") {
-		req.effect = "fill";
 	}
 
 	if (req.effect == "fill") {
