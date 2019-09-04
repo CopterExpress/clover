@@ -19,6 +19,7 @@
 #include <string>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
@@ -62,12 +63,14 @@ private:
 	image_transport::Publisher debug_pub_;
 	image_transport::CameraSubscriber img_sub_;
 	ros::Publisher markers_pub_, vis_markers_pub_;
+	ros::Subscriber map_markers_sub_;
 	bool estimate_poses_, send_tf_, auto_flip_;
 	double length_;
 	std::unordered_map<int, double> length_override_;
 	std::string frame_id_prefix_, known_tilt_;
 	Mat camera_matrix_, dist_coeffs_;
 	aruco_pose::MarkerArray array_;
+	std::unordered_set<int> map_markers_ids_;
 	visualization_msgs::MarkerArray vis_array_;
 
 public:
@@ -101,6 +104,7 @@ public:
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
 
+		map_markers_sub_ = nh_.subscribe("map_markers", 1, &ArucoDetect::mapMarkersCallback, this);
 		debug_pub_ = it_priv.advertise("debug", 1);
 		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
@@ -186,8 +190,8 @@ private:
 					if (send_tf_) {
 						transform.child_frame_id = getChildFrameId(ids[i]);
 
-						// check if such static transform exists
-						if (!tf_buffer_.canTransform(transform.header.frame_id, transform.child_frame_id, transform.header.stamp)) {
+						// check if such static transform is in the map
+						if (map_markers_ids_.find(ids[i]) == map_markers_ids_.end()) {
 							transform.transform.rotation = marker.pose.orientation;
 							fillTranslation(transform.transform.translation, tvecs[i]);
 							br_.sendTransform(transform);
@@ -327,6 +331,14 @@ private:
 			return item->second;
 		} else {
 			return length_;
+		}
+	}
+
+	void mapMarkersCallback(const aruco_pose::MarkerArray& msg)
+	{
+		map_markers_ids_.clear();
+		for (auto const& marker : msg.markers) {
+			map_markers_ids_.insert(marker.id);
 		}
 	}
 };
