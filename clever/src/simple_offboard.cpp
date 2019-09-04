@@ -71,7 +71,7 @@ ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
 float default_speed;
 bool auto_release;
-bool land_only_in_offboard;
+bool land_only_in_offboard, nav_from_sp;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -100,6 +100,7 @@ float setpoint_yaw_rate;
 float nav_speed;
 bool busy = false;
 bool wait_armed = false;
+bool nav_from_sp_flag = false;
 
 enum setpoint_type_t {
 	NONE,
@@ -128,6 +129,15 @@ template<typename T, T& STORAGE>
 void handleMessage(const T& msg)
 {
 	STORAGE = msg;
+}
+
+void handleState(const mavros_msgs::State& s)
+{
+	state = s;
+	if (s.mode != "OFFBOARD") {
+		// flight intercepted
+		nav_from_sp_flag = false;
+	}
 }
 
 inline void publishBodyFrame()
@@ -513,6 +523,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// Checks
 		checkState();
 
+		if (sp_type != NAVIGATE && sp_type != NAVIGATE_GLOBAL) {
+			nav_from_sp_flag = false;
+		}
+
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			if (TIMEOUT(local_position, local_position_timeout))
 				throw std::runtime_error("No local position, check settings");
@@ -569,8 +583,14 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			// starting point
-			nav_start = local_position;
+			if (nav_from_sp && nav_from_sp_flag) {
+				message = "Navigating from current setpoint";
+				nav_start = position_msg;
+			} else {
+				nav_start = local_position;
+			}
 			nav_speed = speed;
+			nav_from_sp_flag = true;
 		}
 
 		// if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
@@ -741,6 +761,7 @@ int main(int argc, char **argv)
 	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
+	nh_priv.param("nav_from_sp", nav_from_sp, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
@@ -762,7 +783,7 @@ int main(int argc, char **argv)
 	set_mode = nh.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
 
 	// Telemetry subscribers
-	auto state_sub = nh.subscribe("mavros/state", 1, &handleMessage<mavros_msgs::State, state>);
+	auto state_sub = nh.subscribe("mavros/state", 1, &handleState);
 	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
