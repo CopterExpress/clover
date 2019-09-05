@@ -12,6 +12,7 @@
 import math
 import subprocess
 import re
+from collections import OrderedDict
 import traceback
 from threading import Event
 import numpy
@@ -631,32 +632,28 @@ def check_clever_service():
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
 
+    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
+    error_count = OrderedDict()
     try:
-        from systemd import journal
-    except ImportError:
-        failure('no python-systemd package, not the Clever image?')
-        return
+        for line in open('/tmp/clever.err', 'r'):
+            node_error = r.search(line)
+            if node_error:
+                msg = node_error.groups()[1] + ': ' + node_error.groups()[2]
+                if msg in error_count:
+                    error_count[msg] += 1
+                else:
+                    error_count.update({msg: 1})
+            else:
+                error_count.update({line.strip(): 1})
 
-    j = journal.Reader()
-    j.this_boot()
-    j.add_match(_SYSTEMD_UNIT='clever.service')
-    j.add_disjunction()
-    j.add_match(UNIT='clever.service')
-    node_errors = []
-    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
-    for event in reversed(list(j)):
-        msg = event['MESSAGE']
-        if 'Started Clever ROS package' in msg:
-            break  # we're done
-        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
-            msg = r.search(msg).groups()[2]
-            if msg in node_errors:
-                continue
-            node_errors.append(msg)
-        elif ('ERROR: ' in msg) or ('while processing' in msg) or ('Invalid roslaunch XML syntax' in msg):
-            node_errors.append(msg)
-    for error in reversed(node_errors):
-        failure(error)
+        for error in error_count:
+            if error_count[error] == 1:
+                failure(error)
+            else:
+                failure('%s (%d)', error, error_count[error])
+
+    except IOError as e:
+        failure('%s', e)
 
 
 @check('Image')

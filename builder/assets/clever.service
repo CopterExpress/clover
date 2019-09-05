@@ -5,8 +5,9 @@ After=network.target
 
 [Service]
 User=pi
-ExecStart=/bin/sh -c ". /home/pi/catkin_ws/devel/setup.sh; \
-                      ROS_HOSTNAME=`hostname`.local exec roslaunch clever clever.launch --wait --screen --skip-log-check"
+ExecStart=/bin/bash -c ". /home/pi/catkin_ws/devel/setup.sh; \
+                      ROS_HOSTNAME=`hostname`.local exec roslaunch clever clever.launch --wait --screen --skip-log-check \
+                      2> >(tee /tmp/clever.err)"
 
 [Install]
 WantedBy=multi-user.target
