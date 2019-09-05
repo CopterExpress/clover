@@ -9,7 +9,7 @@
     <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">
         <param name="led_count" value="58"/>
         <param name="gpio_pin" value="21"/>
-        <param name="brightness" value="255"/>
+        <param name="brightness" value="100"/>
         <param name="strip_type" value="WS2811_STRIP_GRB"/>
         <param name="target_frequency" value="800000"/>
         <param name="dma" value="10"/>
