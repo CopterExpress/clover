@@ -630,31 +630,10 @@ def check_clever_service():
         return
 
     try:
-        from systemd import journal
-    except ImportError:
-        failure('no python-systemd package, not the Clever image?')
-        return
-
-    j = journal.Reader()
-    j.this_boot()
-    j.add_match(_SYSTEMD_UNIT='clever.service')
-    j.add_disjunction()
-    j.add_match(UNIT='clever.service')
-    node_errors = []
-    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*)$')
-    for event in reversed(list(j)):
-        msg = event['MESSAGE']
-        if 'Started Clever ROS package' in msg:
-            break  # we're done
-        elif ('[ERROR]' in msg) or ('[FATAL]' in msg):
-            msg = r.search(msg).groups()[2]
-            if msg in node_errors:
-                continue
-            node_errors.append(msg)
-        elif ('ERROR: ' in msg) or ('while processing' in msg) or ('Invalid roslaunch XML syntax' in msg):
-            node_errors.append(msg)
-    for error in reversed(node_errors):
-        failure(error)
+        for line in open('/tmp/clever.err', 'r'):
+            failure(line.strip())
+    except IOError as e:
+        failure('%s', e)
 
 
 @check('Image')
