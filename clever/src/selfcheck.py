@@ -626,8 +626,10 @@ def check_clever_service():
         failure('systemctl returned %s: %s', e.returncode, e.output)
         return
     if 'inactive' in output:
-        failure('clever.service is not running, try sudo systemctl restart clever')
+        failure('service is not running, try sudo systemctl restart clever')
         return
+    elif 'failed' in output:
+        failure('service failed to run')
 
     try:
         for line in open('/tmp/clever.err', 'r'):
