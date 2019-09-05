@@ -20,6 +20,7 @@
 #include <tf2/utils.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_ros/transform_broadcaster.h>
+#include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <std_srvs/Trigger.h>
 #include <geometry_msgs/PoseStamped.h>
@@ -55,6 +56,7 @@ using mavros_msgs::Thrust;
 // tf2
 tf2_ros::Buffer tf_buffer;
 std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
+std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_transform_broadcaster;
 
 // Parameters
 string local_frame;
@@ -399,17 +401,6 @@ void publish(const ros::Time stamp)
 		ROS_WARN_THROTTLE(10, "simple_offboard: can't transform");
 	}
 
-	if (!target.child_frame_id.empty()) {
-		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
-			target.header = setpoint_position_transformed.header;
-			target.transform.translation.x = setpoint_position_transformed.pose.position.x;
-			target.transform.translation.y = setpoint_position_transformed.pose.position.y;
-			target.transform.translation.z = setpoint_position_transformed.pose.position.z;
-			target.transform.rotation = setpoint_position_transformed.pose.orientation;
-			transform_broadcaster->sendTransform(target);
-		}
-	}
-
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
 		position_msg.pose.orientation = setpoint_position_transformed.pose.orientation; // copy yaw
 		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
@@ -652,6 +643,19 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		publish(stamp); // calculate initial transformed messages first
 		setpoint_timer.start();
 
+		// publish target frame
+		if (!target.child_frame_id.empty()) {
+			if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
+				target.header.frame_id = setpoint_position.header.frame_id;
+				target.header.stamp = stamp;
+				target.transform.translation.x = setpoint_position.pose.position.x;
+				target.transform.translation.y = setpoint_position.pose.position.y;
+				target.transform.translation.z = setpoint_position.pose.position.z;
+				target.transform.rotation = setpoint_position.pose.orientation;
+				static_transform_broadcaster->sendTransform(target);
+			}
+		}
+
 		if (auto_arm) {
 			offboardAndArm();
 			wait_armed = false;
@@ -754,6 +758,7 @@ int main(int argc, char **argv)
 
 	tf2_ros::TransformListener tf_listener(tf_buffer);
 	transform_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>();
+	static_transform_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>();
 
 	// Params
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
