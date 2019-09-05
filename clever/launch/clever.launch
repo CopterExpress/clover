@@ -45,6 +45,7 @@
     <node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
         <param name="reference_frames/body" value="map"/>
         <param name="reference_frames/base_link" value="map"/>
+        <param name="reference_frames/navigate_target" value="map"/>
     </node>
 
     <!-- main camera -->
