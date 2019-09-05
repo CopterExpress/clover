@@ -523,10 +523,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// Checks
 		checkState();
 
-		if (sp_type != NAVIGATE && sp_type != NAVIGATE_GLOBAL) {
-			nav_from_sp_flag = false;
-		}
-
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			if (TIMEOUT(local_position, local_position_timeout))
 				throw std::runtime_error("No local position, check settings");
@@ -580,6 +576,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		// Everything fine - switch setpoint type
 		setpoint_type = sp_type;
+
+		if (sp_type != NAVIGATE && sp_type != NAVIGATE_GLOBAL) {
+			nav_from_sp_flag = false;
+		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			// starting point
