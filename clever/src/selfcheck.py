@@ -650,7 +650,7 @@ def check_clever_service():
             if error_count[error] == 1:
                 failure(error)
             else:
-                failure('%s (%s)', error, error_count[error])
+                failure('%s (%d)', error, error_count[error])
 
     except IOError as e:
         failure('%s', e)
