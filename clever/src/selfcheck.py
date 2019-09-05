@@ -12,6 +12,7 @@
 import math
 import subprocess
 import re
+from collections import OrderedDict
 import traceback
 from threading import Event
 import numpy
@@ -631,9 +632,26 @@ def check_clever_service():
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
 
+    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
+    error_count = OrderedDict()
     try:
         for line in open('/tmp/clever.err', 'r'):
-            failure(line.strip())
+            node_error = r.search(line)
+            if node_error:
+                msg = node_error.groups()[1] + ': ' + node_error.groups()[2]
+                if msg in error_count:
+                    error_count[msg] += 1
+                else:
+                    error_count.update({msg: 1})
+            else:
+                error_count.update({line.strip(): 1})
+
+        for error in error_count:
+            if error_count[error] == 1:
+                failure(error)
+            else:
+                failure('%s (%s)', error, error_count[error])
+
     except IOError as e:
         failure('%s', e)
 
