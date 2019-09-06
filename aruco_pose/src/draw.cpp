@@ -113,7 +113,7 @@ void _drawPlanarBoard(Board *_board, Size outSize, OutputArray _img, int marginS
 		auto out_copy = _img.getMat();
 
 		cv::Point center(ofs.x - minX / sizeX * float(out.cols), ofs.y + out.rows + minY / sizeY * float(out.rows));
-		
+
 		int axis_points[3][2] = {{300, 0}, {0, -300}, {-150, 150}};
 		Point axis_names[3] = {Point(270, 50), Point(25, -270), Point(-160, 115)};
 		Scalar colors[] = {Scalar(255, 0, 0), Scalar(0, 255, 0), Scalar(0, 0, 255)};
