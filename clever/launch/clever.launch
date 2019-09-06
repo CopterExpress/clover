@@ -12,7 +12,7 @@
     <arg name="rc" default="true"/>
 
     <!-- log formatting -->
-    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger} - ${message}"/>
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger}: ${message}"/>
 
     <!-- mavros -->
     <include file="$(find clever)/launch/mavros.launch">
