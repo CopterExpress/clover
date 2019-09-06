@@ -118,7 +118,7 @@ public:
 		} else if (type == "gridboard") {
 			createGridBoard();
 		} else {
-			ROS_FATAL("aruco_map: unknown type: %s", type.c_str());
+			NODELET_FATAL("unknown type: %s", type.c_str());
 			ros::shutdown();
 		}
 
@@ -138,7 +138,7 @@ public:
 		publishMapImage();
 		vis_markers_pub_.publish(vis_array_);
 
-		ROS_INFO("aruco_map: ready");
+		NODELET_INFO("ready");
 	}
 
 	void callback(const sensor_msgs::ImageConstPtr& image,
@@ -198,7 +198,7 @@ public:
 				                                          known_tilt_, markers->header.stamp, ros::Duration(0.02));
 				snapOrientation(transform_.transform.rotation, snap_to.transform.rotation, auto_flip_);
 			} catch (const tf2::TransformException& e) {
-				ROS_WARN_THROTTLE(1, "aruco_map: can't snap: %s", e.what());
+				NODELET_WARN_THROTTLE(1, "can't snap: %s", e.what());
 			}
 
 			geometry_msgs::TransformStamped shift;
@@ -271,7 +271,7 @@ publish_debug:
 		std::string line;
 
 		if (!f.good()) {
-			ROS_FATAL("aruco_map: %s - %s", strerror(errno), filename.c_str());
+			NODELET_FATAL("%s - %s", strerror(errno), filename.c_str());
 			ros::shutdown();
 		}
 
@@ -289,7 +289,7 @@ publish_debug:
 			}
 
 			if (first == '#') {
-				ROS_DEBUG("aruco_map: Skipping line as a comment: %s", line.c_str());
+				NODELET_DEBUG("Skipping line as a comment: %s", line.c_str());
 				continue;
 			} else if (isdigit(first)) {
 				// Put the digit back into the stream
@@ -298,43 +298,43 @@ publish_debug:
 				s.putback(first);
 			} else {
 				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
-				ROS_FATAL("aruco_map: Malformed input: %s", line.c_str());
+				NODELET_FATAL("Malformed input: %s", line.c_str());
 				ros::shutdown();
 				throw std::runtime_error("Malformed input");
 			}
 
 			if (!(s >> id >> length >> x >> y)) {
-				ROS_ERROR("aruco_map: Not enough data in line: %s; "
+				NODELET_ERROR("Not enough data in line: %s; "
 				          "Each marker must have at least id, length, x, y fields", line.c_str());
 				continue;
 			}
 			// Be less strict about z, yaw, pitch roll
 			if (!(s >> z)) {
-				ROS_DEBUG("aruco_map: No z coordinate provided for marker %d, assuming 0", id);
+				NODELET_DEBUG("No z coordinate provided for marker %d, assuming 0", id);
 				z = 0;
 			}
 			if (!(s >> yaw)) {
-				ROS_DEBUG("aruco_map: No yaw provided for marker %d, assuming 0", id);
+				NODELET_DEBUG("No yaw provided for marker %d, assuming 0", id);
 				yaw = 0;
 			}
 			if (!(s >> pitch)) {
-				ROS_DEBUG("aruco_map: No pitch provided for marker %d, assuming 0", id);
+				NODELET_DEBUG("No pitch provided for marker %d, assuming 0", id);
 				pitch = 0;
 			}
 			if (!(s >> roll)) {
-				ROS_DEBUG("aruco_map: No roll provided for marker %d, assuming 0", id);
+				NODELET_DEBUG("No roll provided for marker %d, assuming 0", id);
 				roll = 0;
 			}
 			addMarker(id, length, x, y, z, yaw, pitch, roll);
 		}
 
-		ROS_INFO("aruco_map: loading %s complete (%d markers)", filename.c_str(), static_cast<int>(board_->ids.size()));
+		NODELET_INFO("loading %s complete (%d markers)", filename.c_str(), static_cast<int>(board_->ids.size()));
 	}
 
 	void createGridBoard()
 	{
-		ROS_INFO("aruco_map: generate gridboard");
-		ROS_WARN("aruco_map: gridboard maps are deprecated");
+		NODELET_INFO("generate gridboard");
+		NODELET_WARN("gridboard maps are deprecated");
 
 		int markers_x, markers_y, first_marker;
 		double markers_side, markers_sep_x, markers_sep_y;
@@ -349,7 +349,7 @@ publish_debug:
 
 		if (nh_priv_.getParam("marker_ids", marker_ids)) {
 			if ((unsigned int)(markers_x * markers_y) != marker_ids.size()) {
-				ROS_FATAL("~marker_ids length should be equal to ~markers_x * ~markers_y");
+				NODELET_FATAL("~marker_ids length should be equal to ~markers_x * ~markers_y");
 				ros::shutdown();
 			}
 		} else {
@@ -366,7 +366,7 @@ publish_debug:
 			for(int x = 0; x < markers_x; x++) {
 				double x_pos = x * (markers_side + markers_sep_x);
 				double y_pos = max_y - y * (markers_side + markers_sep_y) - markers_side;
-				ROS_INFO("add marker %d %g %g", marker_ids[y * markers_y + x], x_pos, y_pos);
+				NODELET_INFO("add marker %d %g %g", marker_ids[y * markers_y + x], x_pos, y_pos);
 				addMarker(marker_ids[y * markers_y + x], markers_side, x_pos, y_pos, 0, 0, 0, 0);
 			}
 		}
@@ -393,14 +393,14 @@ publish_debug:
 		// Check whether the id is in range for current dictionary
 		int num_markers = board_->dictionary->bytesList.rows;
 		if (num_markers <= id) {
-			ROS_ERROR("aruco_map: Marker id %d is not in dictionary; current dictionary contains %d markers. "
-			          "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
+			NODELET_ERROR("Marker id %d is not in dictionary; current dictionary contains %d markers. "
+			              "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
 					  id, num_markers);
 			return;
 		}
 		// Check if marker is already in the board
 		if (std::count(board_->ids.begin(), board_->ids.end(), id) > 0) {
-			ROS_ERROR("aruco_map: Marker id %d is already in the map", id);
+			NODELET_ERROR("Marker id %d is already in the map", id);
 			return;
 		}
 		// Create transform

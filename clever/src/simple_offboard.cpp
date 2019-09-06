@@ -226,7 +226,7 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 		res.pitch = pitch;
 		res.roll = roll;
 	} catch (const tf2::TransformException& e) {
-		ROS_DEBUG("simple_offboard: %s", e.what());
+		ROS_DEBUG("%s", e.what());
 	}
 
 	if (!TIMEOUT(velocity, velocity_timeout)) {
@@ -273,7 +273,7 @@ void offboardAndArm()
 
 	if (state.mode != "OFFBOARD") {
 		auto start = ros::Time::now();
-		ROS_INFO("simple_offboard: switch to OFFBOARD");
+		ROS_INFO("switch to OFFBOARD");
 		static mavros_msgs::SetMode sm;
 		sm.request.custom_mode = "OFFBOARD";
 
@@ -298,7 +298,7 @@ void offboardAndArm()
 
 	if (!state.armed) {
 		ros::Time start = ros::Time::now();
-		ROS_INFO("simple_offboard: arming");
+		ROS_INFO("arming");
 		mavros_msgs::CommandBool srv;
 		srv.request.value = true;
 		if (!arming.call(srv)) {
@@ -398,7 +398,7 @@ void publish(const ros::Time stamp)
 		}
 
 	} catch (const tf2::TransformException& e) {
-		ROS_WARN_THROTTLE(10, "simple_offboard: can't transform");
+		ROS_WARN_THROTTLE(10, "can't transform");
 	}
 
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
@@ -669,7 +669,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 	} catch (const std::exception& e) {
 		message = e.what();
-		ROS_INFO("simple_offboard: %s", message.c_str());
+		ROS_INFO("%s", message.c_str());
 		busy = false;
 		return true;
 	}
@@ -745,7 +745,7 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 
 	} catch (const std::exception& e) {
 		res.message = e.what();
-		ROS_INFO("simple_offboard: %s", e.what());
+		ROS_INFO("%s", e.what());
 		busy = false;
 		return true;
 	}
@@ -821,6 +821,6 @@ int main(int argc, char **argv)
 	position_raw_msg.coordinate_frame = PositionTarget::FRAME_LOCAL_NED;
 	rates_msg.header.frame_id = fcu_frame;
 
-	ROS_INFO("simple_offboard: ready");
+	ROS_INFO("ready");
 	ros::spin();
 }
