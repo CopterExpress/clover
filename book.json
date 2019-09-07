@@ -24,7 +24,8 @@
         },
         "bulk-redirect": {
             "basepath": "",
-            "redirectsFile": "redirects.json"
+            "redirectsFile": "redirects.json",
+            "blank": true
         },
         "sitemap": {
             "hostname": "https://clever.copterexpress.com"
