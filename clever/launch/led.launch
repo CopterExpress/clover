@@ -3,7 +3,7 @@
     <arg name="led_effect" default="true"/>
     <arg name="led_notify" default="true"/>
 
-    <!-- For additional help go to https://clever.copterexpress.com/led.html -->
+    <!-- For additional help go to https://clever.coex.tech/led -->
 
     <!-- ws281x led strip driver -->
     <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">

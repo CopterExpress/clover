@@ -209,7 +209,7 @@ def check_fcu():
                     is_clever_firmware = True
 
         if not is_clever_firmware:
-            failure('not running Clever PX4 firmware, check http://clever.copterexpress.com/firmware.html')
+            failure('not running Clever PX4 firmware, https://clever.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
@@ -244,7 +244,7 @@ def check_fcu():
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
             cell = battery.cell_voltage[0]
             if cell > 4.3 or cell < 3.0:
-                failure('Incorrect cell voltage: %.2f V, see https://clever.copterexpress.com/power.html', cell)
+                failure('Incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
             elif cell < 3.7:
                 failure('Critically low cell voltage: %.2f V, recharge battery', cell)
         except rospy.ROSException:

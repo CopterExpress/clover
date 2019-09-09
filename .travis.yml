@@ -73,8 +73,8 @@ jobs:
         github-token: ${GITHUB_OAUTH_TOKEN}
         keep-history: true
         target-branch: master
-        repo: CopterExpress/clever-gitbook
-        fqdn: clever.copterexpress.com
+        repo: CopterExpress/clever.coex.tech
+        fqdn: clever.coex.tech
         verbose: true
         on:
           branch: master

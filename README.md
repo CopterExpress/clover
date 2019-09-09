@@ -6,7 +6,7 @@ CLEVER (Russian: *"Клевер"*, meaning *"Clover"*) is an educational program
 
 Copter Express has implemented a large number of different autonomous drone projects using exactly the same platform: [automated pizza delivery](https://www.youtube.com/watch?v=hmkAoZOtF58) in Samara and Kazan, coffee delivery in Skolkovo Innovation Center, [autonomous quadcopter with charging station](https://www.youtube.com/watch?v=RjX6nUqw1mI) for site monitoring and security, winning drones on [Robocross-2016](https://www.youtube.com/watch?v=dGbDaz_VmYU) and [Robocross-2017](https://youtu.be/AQnd2CRczbQ) competitions and many others.
 
-**The main documentation is available [on Gitbook](https://clever.copterexpress.com/).**
+**The main documentation is available [on Gitbook](https://clever.coex.tech/).**
 
 Use it to learn how to assemble, configure, pilot and program autonomous CLEVER drone.
 
@@ -26,7 +26,7 @@ Image includes:
 * Periphery drivers (`pigpiod`, `rpi_ws281x`, etc)
 * CLEVER software bundle for autonomous drone control
 
-API description (in Russian) for autonomous flights is available [on GitBook](https://clever.copterexpress.com/simple_offboard.html).
+API description (in Russian) for autonomous flights is available [on GitBook](https://clever.coex.tech/simple_offboard.html).
 
 ## Manual installation
 

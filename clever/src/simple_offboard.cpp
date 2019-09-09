@@ -479,7 +479,7 @@ inline void checkState()
 		throw std::runtime_error("State timeout, check mavros settings");
 
 	if (!state.connected)
-		throw std::runtime_error("No connection to FCU, https://clever.copterexpress.com/connection.html");
+		throw std::runtime_error("No connection to FCU, https://clever.coex.tech/connection");
 }
 
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }

@@ -2,7 +2,7 @@
     <!-- Camera position and orientation are represented by base_link -> main_camera_optical transform -->
     <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
 
-    <!-- article about camera setup: https://clever.copterexpress.com/camera_frame.html -->
+    <!-- article about camera setup: https://clever.coex.tech/camera_frame -->
 
     <!-- camera is oriented downward, camera cable goes backward [option 1] -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>
