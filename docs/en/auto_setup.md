@@ -269,7 +269,7 @@ and replace map.txt with your map name.
   Ctrl+x; y; Enter
   ```
 
-- Перезагрузите модуль Клевер:
+- Restart the `clever` service:
 
   ```bash
   sudo systemctl restart clever
