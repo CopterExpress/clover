@@ -90,7 +90,7 @@ print telemetry.z
 ```python
 import math
 if not math.isnan(get_telemetry().lat):
-    print 'Global position presents'
+    print 'Global position is available'
 else:
     print 'No global position'
 ```

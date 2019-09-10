@@ -5,27 +5,25 @@ Simple OFFBOARD
 
 <!-- -->
 
-> **Hint** For autonomous flights it is recommanded to use [special firmware PX4 for Clever](firmware.md#прошивка-для-клевера).
+> **Hint** For autonomous flights it is recommanded to use [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever).
 
-The `simple_offboard` module of the `clever` package is intended for simplified programming of the autonomous drone ([mode](modes.md) `OFFBOARD`). It allows setting the desired flight tasks, and automatically transforms [the system of coordinates](frames.md).
+The `simple_offboard` module of the `clever` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
-`simple_offboard` is a high level way of interacting with the flight controller. For a more low level work, see [mavros](mavros.md).
+`simple_offboard` is a high level system for interacting with the flight controller. For a more low level system, see [mavros](mavros.md).
 
-Main services are `get_telemetry` (receiving all telemetry), `navigate` (flying to a given point along a straight line), `navigate_global` (flying to a global point along a straight line), `land` (switching to the landing mode).
+Main services are [`get_telemetry`](#gettelemetry) (receive telemetry data), [`navigate`](#navigate) (fly to a given point along a straight line), [`navigate_global`](#navigateglobal) (fly to a point specified as latitude and longitude along a straight line), [`land`](#land) (switch to landing mode).
 
-The use of Python language
+Python samples
 ---
 
-To use the services, create proxies to them. Use the following template for you programs:
+You need to create proxies for services before calling them. Use the following template for your programs:
 
 ```python
 import rospy
 from clever import srv
 from std_srvs.srv import Trigger
 
-rospy.init_node('flight') # flight – name of your ROS node
-
-# Creating proxies to all services:
+rospy.init_node('flight') # 'flight' is name of your ROS node
 
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
@@ -42,11 +40,11 @@ Unused proxy functions may be removed from the code.
 API description
 ---
 
-> **Note** Blank numeric parameters are set to 0.
+> **Note** Omitted numeric parameters are set to 0.
 
 ### get_telemetry
 
-Obtaining complete telemetry of the drone.
+Obtains complete telemetry of the drone.
 
 Parameters:
 
@@ -56,11 +54,11 @@ Response format:
 
 * `frame_id` — frame;
 * `connected` – whether there is a connection to <abbr title="Flight Control Unit flight controller">FCU</abbr>;
-* `armed` - state of propellers (the propellers are armed, if true);
+* `armed` - drone arming state (armed if true);
 * `mode` – current [flight mode](modes.md);
 * `x, y, z` — local position of the drone *(m)*;
-* `lat, lon` – latitude, longitude *(degrees)*, [GPS](gps.md) is to be available;
-* `alt` – altitude in the global system of coordinates (standard [WGS-84](https://ru.wikipedia.org/wiki/WGS_84), not <abbr title="Above Mean Sea Level">AMSL</abbr>!), [GPS](gps.md) is to be available ;
+* `lat, lon` – drone latitude and longitude *(degrees)*, requires [GPS](gps.md) module;
+* `alt` – altitude in the global coordinate system (according to [WGS-84](https://ru.wikipedia.org/wiki/WGS_84) standard, not <abbr title="Above Mean Sea Level">AMSL</abbr>!), requires [GPS](gps.md) module;
 * `vx, vy, vz` – drone velocity *(m/s)*;
 * `pitch` – pitch angle *(radians)*;
 * `roll` – roll angle *(radians)*;
@@ -71,7 +69,7 @@ Response format:
 * `voltage` – total battery voltage *(V)*;
 * `cell_voltage` – battery cell voltage *(V)*.
 
-> **Note** Fields that are unavailabe for any reason will contain the `NaN` value.
+> **Note** Fields that are unavailable for any reason will contain the `NaN` value.
 
 Displaying drone coordinates `x`, `y` and `z` in the local system of coordinates:
 
@@ -80,7 +78,7 @@ telemetry = get_telemetry()
 print telemetry.x, telemetry.y, telemetry.z
 ```
 
-Displaying drone altitude relative to [the card of ArUco tags](aruco.md):
+Displaying drone altitude relative to [the ArUco map](aruco.md):
 
 ```python
 telemetry = get_telemetry(frame_id='aruco_map')
@@ -92,14 +90,14 @@ Checking global position availability:
 ```python
 import math
 if not math.isnan(get_telemetry().lat):
-    print 'Global position presents'
+    print 'Global position is available'
 else:
     print 'No global position'
 ```
 
 Output of current telemetry (command line):
 
-```(bash)
+```bash
 rosservice call /get_telemetry "{frame_id: ''}"
 ```
 
@@ -111,12 +109,12 @@ Parameters:
 
 * `x`, `y` — coordinates *(m)*;
 * `yaw` — yaw angle *(radians)*;
-* `yaw_rate` – angular yaw velocity (used for setting the yaw to `NaN`) *(rad/s)*;
+* `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
-* `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
-* `frame_id` – [system of coordinates](frames.md) for values `x`, `y`, `z`, `vx`, `vy`, `vz`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
+* `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
+* `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z`, `vx`, `vy`, `vz`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
 
-> **Note** To fly without changing the yaw angle, it is sufficient to set the `yaw` to `NaN` (angular velocity by default is 0).
+> **Note** If you don't want to change your current yaw set the `yaw` parameter to `NaN` (angular velocity by default is 0).
 
 Ascending to the altitude of 1.5 m with the climb rate of 0.5 m/s:
 
@@ -148,7 +146,7 @@ Turn 90 degrees counterclockwise:
 navigate(yaw=math.radians(-90), frame_id='body')
 ```
 
-Flying to point 3:2 (altitude 2) in the system of coordinates [of the marker field](aruco.md) at the speed of 1 m/s:
+Flying to point 3:2 (with the altitude of 2 m) in the [ArUco map](aruco.md) coordinate system with the speed of 1 m/s:
 
 ```python
 navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map')
@@ -174,7 +172,7 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed
 
 ### navigate_global
 
-Flying in a straight line to a point in the global system of coordinates (latitude/longitude).
+Flying in a straight line to a point in the global coordinate system (latitude/longitude).
 
 Parameters:
 
@@ -184,11 +182,11 @@ Parameters:
 * `yaw_rate` – angular yaw velocity (used for setting the yaw to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
-* `frame_id` – [system of coordinates](frames.md), given `z` и `yaw` (Default value: `map`).
+* `frame_id` – [coordinate system](frames.md) for `z` and `yaw` (Default value: `map`).
 
-> **Note** To fly without changing the yaw angle, it is sufficient to set the `yaw` to `NaN` (angular velocity by default is 0).
+> **Note** If you don't want to change your current yaw set the `yaw` parameter to `NaN` (angular velocity by default is 0).
 
-Flying to a global point at the speed of 5 m/s, while remaining at current altitude (`yaw` will be set to 0, the drone will face East):
+Flying to a global point at the speed of 5 m/s, while maintaining current altitude (`yaw` will be set to 0, the drone will face East):
 
 ```python
 navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='body')
@@ -202,15 +200,15 @@ navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), fr
 
 Flying to a global point (command line):
 
-```(bash)
+```bash
 rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
 ```
 
 ### set_position
 
-Set the target for position and yaw. This service may be used to specify the continuous flow of target points, for example, for flying along complex trajectories (circular, arcuate, etc.).
+Set the setpoint for position and yaw. This service may be used to specify the continuous flow of target points, for example, for flying along complex trajectories (circular, arcuate, etc.).
 
-> **Hint** For flying to a point in a straight line or takeoff, use the [`navigate`] higher-level service (#navigate).
+> **Hint** Use the [`navigate`](#navigate) higher-level service to fly to a point in a straight line or to perform takeoff.
 
 Parameters:
 
@@ -218,7 +216,7 @@ Parameters:
 * `yaw` — yaw angle *(radians)*;
 * `yaw_rate` – angular yaw velocity (used for setting the yaw to NaN) *(rad/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
-* `frame_id` – [system of coordinates](frames.md), given `x`, `y`, `z` и `yaw` (Default value: `map`).
+* `frame_id` – [coordinate system](frames.md) for `x`, `y`, `z` and `yaw` parameters (Default value: `map`).
 
 Hovering on the spot:
 
@@ -246,13 +244,13 @@ set_position(x=0, y=0, z=0, frame_id='body', yaw=float('nan'), yaw_rate=0.5)
 
 ### set_velocity
 
-Setting speed and yaw.
+Set speed and yaw setpoints.
 
-* `vx`, `vy`, `vz` – required flight speed *(m/s)*;
+* `vx`, `vy`, `vz` – flight speed *(m/s)*;
 * `yaw` — yaw angle *(radians)*;
 * `yaw_rate` – angular yaw velocity (used for setting the yaw to NaN) *(rad/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
-* `frame_id` – [system of coordinates](frames.md), given `vx`, `vy`, `vz` и `yaw` (Default value: `map`).
+* `frame_id` – [coordinate system](frames.md) for `vx`, `vy`, `vz` and `yaw` (Default value: `map`).
 
 > **Note** Parameter `frame_id` specifies only the orientation of the resulting velocity vector, but not its length.
 
@@ -262,7 +260,7 @@ Flying forward (relative to the drone) at the speed of 1 m/s:
 set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 ```
 
-One of variants of flying in a circle:
+One possible way of flying in a circle:
 
 ```python
 set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='body')
@@ -270,30 +268,30 @@ set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='bod
 
 ### set_attitude
 
-Setting pitch, roll, yaw and throttle level (approximate analogue to control in [the `STABILIZED` mode](modes.md)). This service may be used for lower level monitoring of the drone behavior or controlling the drone, if no reliable data on its position are available.
+Set pitch, roll, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
 
 Parameters:
 
-* `pitch`, `roll`, `yaw` – required pitch, roll, and yaw angle *(radians)*;
-* `thrust` — throttle level from 0 (no throttle, propellers are stopped) to 1 (full throttle).
-* `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
-* `frame_id` – [system of coordinates](frames.md), given `yaw` (Default value: `map`).
+* `pitch`, `roll`, `yaw` – requested pitch, roll, and yaw angle *(radians)*;
+* `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
+* `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
+* `frame_id` – [coordinate system](frames.md) for `yaw` (Default value: `map`).
 
 ### set_rates
 
-Setting pitch, roll, and yaw angular velocity and the throttle level (approximate analogue to control in [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform acrobatic tricks (e.g., flips).
+Set pitch, roll, and yaw rates and the throttle level (similar to [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform aerobatic tricks (e.g., flips).
 
 Parameters:
 
-* `pitch_rate`, `roll_rate`, `yaw_rate` – angular pitch, roll, and yaw velocity *(rad/s)*;
-* `thrust` — throttle level from 0 (no throttle, propellers are stopped) to 1 (full throttle).
+* `pitch_rate`, `roll_rate`, `yaw_rate` – pitch, roll, and yaw rates *(rad/s)*;
+* `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 
 ### land
 
-Transfer the drone to the landing [mode](modes.md) (`AUTO.LAND` or similar).
+Switch the drone to landing [mode](modes.md) (`AUTO.LAND` or similar).
 
-> **Note** For automatic propeller disabling after landing, [parameter PX4](px4_parameters.md) `COM_DISARM_LAND` is to be set to a value > 0.
+> **Note** Set the `COM_DISARM_LAND` [PX4 parameter](px4_parameters.md) to a value greater than 0 to enable automatic disarm after landing.
 
 Landing the drone:
 
@@ -306,7 +304,7 @@ if res.success:
 
 Landing the drone (command line):
 
-```(bash)
+```bash
 rosservice call /land "{}"
 ```
 
@@ -319,5 +317,5 @@ Stop publishing setpoints to the drone (release control). Required to continue m
 Additional materials
 ------------------------
 
-* [Flying in the field of ArUco markers](aruco.md).
-* [Samples of programs and snippets](snippets.md).
+* [ArUco-based position estimation and navigation](aruco.md).
+* [Program samples and snippets](snippets.md).
