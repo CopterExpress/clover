@@ -27,7 +27,7 @@ Main article: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
 
 > **Note** Do not connect your flight controller prior to flashing.
 
-We recommend using the modified version of PX4 by CopterExpress for the Clever drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/clever/releases">from our GitHub</a>**.
+We recommend using the modified version of PX4 by CopterExpress for the Clever drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
 
 Flash the flight controller with this firmware:
 
