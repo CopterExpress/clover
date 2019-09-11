@@ -11,7 +11,7 @@ python ./get-pip.py
 # Step 1.5: Add deb.coex.tech to apt
 curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -
 echo "deb http://deb.coex.tech/ros xenial main" > /etc/apt/sources.list.d/coex.tech.list
-echo "yaml file:///etc/ros/rosdep/coex.yaml" > /etc/ros/rosdep/sources.list.d/99-coex.yaml
+echo "yaml file:///etc/ros/rosdep/coex.yaml" > /etc/ros/rosdep/sources.list.d/99-coex.list
 cat <<EOF > /etc/ros/rosdep/coex.yaml
 led_msgs:
   ubuntu:
