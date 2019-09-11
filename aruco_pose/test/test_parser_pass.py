@@ -58,4 +58,4 @@ def test_map_image(node):
     img = rospy.wait_for_message('aruco_map/image', Image, timeout=5)
     assert img.width == 2000
     assert img.height == 2000
-    assert img.encoding == 'mono8'
+    assert img.encoding in ('mono8', 'rgb8')
