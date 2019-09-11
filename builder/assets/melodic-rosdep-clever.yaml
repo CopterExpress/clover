@@ -715,3 +715,9 @@ web_video_server:
 xacro:
   debian:
     buster: ros-melodic-xacro
+led_msgs:
+  debian:
+    buster: ros-melodic-led-msgs
+ws281x:
+  debian:
+    stretch: ros-melodic-ws281x
