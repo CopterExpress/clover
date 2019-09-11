@@ -17,7 +17,7 @@ class TestArucoPose(unittest.TestCase):
         img = rospy.wait_for_message('aruco_map/image', Image, timeout=5)
         self.assertEqual(img.width, 2000)
         self.assertEqual(img.height, 2000)
-        self.assertEqual(img.encoding, 'mono8')
+        self.assertIn(img.encoding, ('mono8', 'rgb8'))
 
     def test_map_visualization(self):
         vis = rospy.wait_for_message('aruco_map/visualization', VisMarkerArray, timeout=5)
