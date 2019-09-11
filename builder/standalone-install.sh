@@ -4,7 +4,7 @@
 
 # Step 1: Install pip
 apt update
-apt install curl
+apt install -y curl
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python ./get-pip.py
 
