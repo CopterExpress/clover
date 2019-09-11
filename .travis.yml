@@ -51,6 +51,22 @@ jobs:
         draft: true
         name: ${TRAVIS_TAG}
     - stage: Build
+      name: "Native Kinetic build"
+      env:
+        - NATIVE_DOCKER=ros:kinetic-ros-base
+      before_script:
+        - docker pull ${NATIVE_DOCKER}
+      script:
+        - docker run --rm -v $(pwd):/root/catkin_ws/src/clever ${NATIVE_DOCKER} /root/catkin_ws/src/clever/builder/standalone-install.sh
+    - stage: Build
+      name: "Native Melodic build"
+      env:
+        - NATIVE_DOCKER=ros:melodic-ros-base
+      before_script:
+        - docker pull ${NATIVE_DOCKER}
+      script:
+        - docker run --rm -v $(pwd):/root/catkin_ws/src/clever ${NATIVE_DOCKER} /root/catkin_ws/src/clever/builder/standalone-install.sh
+    - stage: Build
       name: "Documentation"
       language: node_js
       node_js:
