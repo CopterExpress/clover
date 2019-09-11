@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0)
 project(aruco_pose)
 
 add_definitions(-std=c++11 -Wall -g)
@@ -23,7 +23,16 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
-find_package(OpenCV 3 REQUIRED)
+find_package(OpenCV 3 REQUIRED COMPONENTS core imgproc calib3d)
+if ("${OpenCV_VERSION_MINOR}" LESS "3")
+  message(STATUS "OpenCV version too low, using vendored ArUco package")
+  include(vendor/VendorOpenCV.cmake)
+else()
+  message(STATUS "Using system OpenCV ArUco package")
+  find_package(OpenCV 3 REQUIRED COMPONENTS aruco)
+endif()
+message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV libraries: ${OpenCV_LIBRARIES}")
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
