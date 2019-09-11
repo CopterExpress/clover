@@ -183,6 +183,7 @@ echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
 echo_stamp "Running tests"
+cd /home/pi/catkin_ws
 catkin_make run_tests && catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
