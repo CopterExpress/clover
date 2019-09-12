@@ -37,7 +37,7 @@ gitbook.events.bind('page.change', function() {
 // show link to latest raspberry image
 gitbook.events.bind('page.change', function() {
 	var el = document.querySelector('a.latest-image');
-	if (el) return;
+	if (!el) return;
 
 	// get latest release from GitHub
 	fetch('https://api.github.com/repos/CopterExpress/clever/releases').then(function(res) {
