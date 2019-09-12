@@ -29,8 +29,7 @@ pigpiod -v
 i2cdetect -V
 butterfly -h
 espeak --version
-# FIXME: add after building mjpg_streamer
-# mjpg_streamer --version
+mjpg_streamer --version
 
 # ros stuff
 
