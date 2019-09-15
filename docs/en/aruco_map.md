@@ -120,6 +120,13 @@ time.sleep(5)
 navigate(2, 2, 2, speed=1, frame_id='aruco_map')
 ```
 
+Starting from the [image](image.md) version 0.18, the drone also can fly relative to a marker in the map, even if it doesn't see it:
+
+```python
+# Fly to 1 meter above the marker 5
+navigate(frame_id='aruco_5', x=0, y=0, z=1)
+```
+
 ## Additional settings
 
 If the drone's position is not stable when VPE is used, try increasing the *P* term in the velocity PID regulator: increase the `MPC_XY_VEL_P` and `MPC_Z_VEL_P` parameters.
