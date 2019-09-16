@@ -26,7 +26,7 @@
         <param name="conn/timeout" value="8"/>
 
         <!-- basic params -->
-        <rosparam command="load" file="$(find clever)/launch/mavros_config.yaml"/>
+        <rosparam command="load" file="$(find clover)/launch/mavros_config.yaml"/>
 
         <!-- remap rangefinder -->
         <remap from="mavros/distance_sensor/rangefinder_sub" to="rangefinder/range"/>

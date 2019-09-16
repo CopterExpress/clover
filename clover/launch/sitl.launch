@@ -1,9 +1,9 @@
 <launch>
-    <!-- Clever configuration for testing in sitl -->
+    <!-- clover configuration for testing in sitl -->
     <arg name="ip" default="127.0.0.1"/>
     <arg name="rosbridge" default="false"/>
 
-    <include file="$(find clever)/launch/clever.launch">
+    <include file="$(find clover)/launch/clover.launch">
         <arg name="fcu_conn" value="udp"/>
         <arg name="fcu_ip" value="$(arg ip)"/>
         <arg name="gcs_bridge" value="false"/>

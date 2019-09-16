@@ -1,6 +1,0 @@
-<launch>
-    <arg name="device" default="/dev/video1"/>
-    <arg name="port" default="9999"/>
-
-    <node name="fpv_camera" pkg="clever" type="fpv_camera" args="$(arg device) $(arg port)" output="screen"/>
-</launch>

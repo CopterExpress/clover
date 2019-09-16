@@ -67,7 +67,7 @@ apt-get update \
 
 echo "deb http://packages.ros.org/ros/ubuntu stretch main" > /etc/apt/sources.list.d/ros-latest.list
 echo "deb http://deb.coex.tech/rpi-ros-kinetic stretch main" > /etc/apt/sources.list.d/rpi-ros-kinetic.list
-echo "deb http://deb.coex.tech/clever stretch main" > /etc/apt/sources.list.d/clever.list
+echo "deb http://deb.coex.tech/clever stretch main" > /etc/apt/sources.list.d/clover.list
 
 echo_stamp "Update apt cache"
 

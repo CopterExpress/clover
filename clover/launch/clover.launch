@@ -15,7 +15,7 @@
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger}: ${message}"/>
 
     <!-- mavros -->
-    <include file="$(find clever)/launch/mavros.launch">
+    <include file="$(find clover)/launch/mavros.launch">
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
@@ -28,10 +28,10 @@
     </node>
 
     <!-- aruco markers -->
-    <include file="$(find clever)/launch/aruco.launch" if="$(arg aruco)"/>
+    <include file="$(find clover)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clever/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
@@ -45,14 +45,14 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
 
     <!-- simplified offboard control -->
-    <node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
+    <node name="simple_offboard" pkg="clover" type="simple_offboard" output="screen" clear_params="true">
         <param name="reference_frames/body" value="map"/>
         <param name="reference_frames/base_link" value="map"/>
         <param name="reference_frames/navigate_target" value="map"/>
     </node>
 
     <!-- main camera -->
-    <include file="$(find clever)/launch/main_camera.launch" if="$(arg main_camera)"/>
+    <include file="$(find clover)/launch/main_camera.launch" if="$(arg main_camera)"/>
 
     <!-- rosbridge -->
     <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" if="$(eval rosbridge or rc)"/>
@@ -66,8 +66,8 @@
     </node>
 
     <!-- led strip -->
-    <include file="$(find clever)/launch/led.launch" if="$(arg led)"/>
+    <include file="$(find clover)/launch/led.launch" if="$(arg led)"/>
 
     <!-- rc backend -->
-    <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
+    <node name="rc" pkg="clover" type="rc" output="screen" if="$(arg rc)"/>
 </launch>

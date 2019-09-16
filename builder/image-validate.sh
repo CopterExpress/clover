@@ -21,6 +21,6 @@ export ROS_IP='127.0.0.1'
 source /opt/ros/kinetic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 
-cd /home/pi/catkin_ws/src/clever/builder/test/
+cd /home/pi/catkin_ws/src/clover/builder/test/
 ./tests.sh
 ./tests.py

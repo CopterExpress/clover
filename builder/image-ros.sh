@@ -65,10 +65,10 @@ my_travis_retry() {
   return $result
 }
 
-# TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
+# TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+echo "yaml file:///etc/ros/rosdep/kinetic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -109,10 +109,10 @@ if [ "${INSTALL_ROS_PACK_SOURCES}" = "true" ]; then
   else
     echo_stamp "Creating ros_catkin_ws & getting all sources using wstool" \
     && mkdir -p /home/pi/ros_catkin_ws && cd /home/pi/ros_catkin_ws \
-    && wstool init -j${NUMBER_THREADS} src kinetic-ros-clever.rosinstall \
+    && wstool init -j${NUMBER_THREADS} src kinetic-ros-clover.rosinstall \
     > /dev/null \
-    && echo_stamp "All CLEVER sources was installed!" "SUCCESS" \
-    || (echo_stamp "Some CLEVER sources installation was failed!" "ERROR"; exit 1)
+    && echo_stamp "All Clover sources was installed!" "SUCCESS" \
+    || (echo_stamp "Some Clover sources installation was failed!" "ERROR"; exit 1)
   fi
 
   resolve_rosdep '/home/pi/ros_catkin_ws'
@@ -142,26 +142,35 @@ fi
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
-echo_stamp "Reconfiguring Clever repository for simplier unshallowing"
-cd /home/pi/catkin_ws/src/clever
+echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clover
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
-echo_stamp "Installing CLEVER" \
-&& cd /home/pi/catkin_ws/src/clever \
+echo_stamp "Installing Clover" \
+&& cd /home/pi/catkin_ws/src/clover \
 && git status \
 && cd /home/pi/catkin_ws \
+&& mkdir -p src/clever/clever/srv src/clever/clever/launch \
+&& cd src/clever/clever/srv && ln -s ../../../clover/clover/srv/* ./ \
+&& cd ../launch && ln -s ../../../clover/clover/launch/* ./ \
+&& ln -s clover.launch clever.launch \
+&& cd /home/pi/catkin_ws \
+&& cp src/clover/clover/package.xml src/clever/clever/package.xml \
+&& cp src/clover/builder/assets/clever/CMakeLists.txt src/clever/clever/CMakeLists.txt \
+&& ls -la /home/pi/catkin_ws/src/clever/clever/srv/GetTelemetry.srv \
+&& sed -i 's/<name>clover<\/name>/<name>clever<\/name>/' src/clever/clever/package.xml \
 && resolve_rosdep $(pwd) \
 && my_travis_retry pip install wheel \
-&& my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
+&& my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt \
 && source /opt/ros/kinetic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && systemctl enable roscore \
-&& systemctl enable clever \
-&& echo_stamp "All CLEVER was installed!" "SUCCESS" \
-|| (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
+&& systemctl enable clover \
+&& echo_stamp "All Clover was installed!" "SUCCESS" \
+|| (echo_stamp "Clover installation was failed!" "ERROR"; exit 1)
 
-echo_stamp "Build CLEVER documentation"
-cd /home/pi/catkin_ws/src/clever
+echo_stamp "Build Clover documentation"
+cd /home/pi/catkin_ws/src/clover
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
 NPM_CONFIG_UNSAFE_PERM=true gitbook install
 gitbook build
@@ -183,7 +192,6 @@ echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
 echo_stamp "Running tests"
-cd /home/pi/catkin_ws
 catkin_make run_tests && catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"

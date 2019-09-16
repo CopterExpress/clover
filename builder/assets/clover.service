@@ -1,0 +1,13 @@
+[Unit]
+Description=Clover ROS package
+Requires=roscore.service
+After=network.target
+
+[Service]
+User=pi
+ExecStart=/bin/bash -c ". /home/pi/catkin_ws/devel/setup.sh; \
+                      ROS_HOSTNAME=`hostname`.local exec stdbuf -o L roslaunch clover clover.launch --wait --screen --skip-log-check \
+                      2> >(tee /tmp/clover.err)"
+
+[Install]
+WantedBy=multi-user.target
