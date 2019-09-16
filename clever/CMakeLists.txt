@@ -127,7 +127,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-  LIBRARIES clever
+  LIBRARIES ${PROJECT_NAME}
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -145,7 +145,7 @@ include_directories(
 )
 
 # Declare a C++ library
-add_library(clever
+add_library(${PROJECT_NAME}
   src/optical_flow.cpp
 )
 
@@ -180,9 +180,9 @@ target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 target_link_libraries(led ${catkin_LIBRARIES})
 
-add_dependencies(simple_offboard clever_generate_messages_cpp)
+add_dependencies(simple_offboard ${PROJECT_NAME}_generate_messages_cpp)
 
-add_dependencies(led clever_generate_messages_cpp)
+add_dependencies(led ${PROJECT_NAME}_generate_messages_cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -195,7 +195,7 @@ add_dependencies(led clever_generate_messages_cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(clever
+target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 
@@ -252,7 +252,7 @@ endif()
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_clever.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_${PROJECT_NAME}.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
