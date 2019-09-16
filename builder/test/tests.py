@@ -15,7 +15,7 @@ from mavros_msgs.srv import CommandBool, CommandLong, SetMode
 
 from std_srvs.srv import Trigger
 from clever.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
-    SetAttitude, SetRates
+    SetAttitude, SetRates, SetLEDEffect
 
 import tf2_ros
 import tf2_geometry_msgs
