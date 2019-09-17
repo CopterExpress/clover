@@ -1,6 +1,5 @@
 {
     "redirects": [
-        { "from": "index.html", "to": "ru/index.html" },
         { "from": "assemble.html", "to": "ru/assemble_2.html" },
         { "from": "assemble_clever3_4in1.html", "to": "ru/assemble_3.html" },
         { "from": "glossary.html", "to": "ru/gloss.html" },
