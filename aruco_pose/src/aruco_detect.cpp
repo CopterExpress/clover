@@ -50,6 +50,8 @@
 #include <aruco_pose/DetectorConfig.h>
 
 #include "utils.h"
+#include <memory>
+#include <functional>
 
 using std::vector;
 using cv::Mat;
@@ -60,7 +62,7 @@ private:
 	tf2_ros::TransformBroadcaster br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
-	boost::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
+	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
 	cv::Ptr<cv::aruco::Dictionary> dictionary_;
 	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
 	image_transport::Publisher debug_pub_;
@@ -113,10 +115,10 @@ public:
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
 		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
 
-		dyn_srv_ = boost::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
 		dynamic_reconfigure::Server<aruco_pose::DetectorConfig>::CallbackType cb;
 
-		cb = boost::bind(&ArucoDetect::paramCallback, this, _1, _2);
+		cb = std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
 		dyn_srv_->setCallback(cb);
 
 		NODELET_INFO("ready");
