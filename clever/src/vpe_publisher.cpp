@@ -19,6 +19,7 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <std_srvs/Trigger.h>
 // #include <aruco_pose/MarkerArray.h>
 
 using std::string;
