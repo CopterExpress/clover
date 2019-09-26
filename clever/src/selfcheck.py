@@ -477,7 +477,7 @@ def check_local_position():
 @check('Velocity estimation')
 def check_velocity():
     try:
-        velocity = rospy.wait_for_message('mavros/local_position/velocity', TwistStamped, timeout=1)
+        velocity = rospy.wait_for_message('mavros/local_position/velocity_local', TwistStamped, timeout=1)
         horiz = math.hypot(velocity.twist.linear.x, velocity.twist.linear.y)
         vert = velocity.twist.linear.z
         if abs(horiz) > 0.1:
@@ -485,6 +485,7 @@ def check_velocity():
         if abs(vert) > 0.1:
             failure('vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
 
+        velocity = rospy.wait_for_message('mavros/local_position/velocity_body', TwistStamped, timeout=1)
         angular = velocity.twist.angular
         ANGULAR_VELOCITY_LIMIT = 0.1
         if abs(angular.x) > ANGULAR_VELOCITY_LIMIT:
