@@ -14,17 +14,20 @@
 #include <tf2/transform_datatypes.h>
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
+#include <tf2_ros/transform_broadcaster.h>
 #include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <nav_msgs/Odometry.h>
 #include <std_srvs/Trigger.h>
 // #include <aruco_pose/MarkerArray.h>
 
 using std::string;
 using namespace geometry_msgs;
 
+bool use_tf;
 bool reset_flag = false;
 string local_frame_id, frame_id, child_frame_id, offset_frame_id;
 tf2_ros::Buffer tf_buffer;
@@ -35,6 +38,28 @@ PoseStamped vpe, pose;
 ros::Time got_local_pos(0);
 ros::Duration publish_zero_timout, publish_zero_duration, offset_timeout;
 TransformStamped offset;
+
+inline geometry_msgs::TransformStamped poseToTransform(const geometry_msgs::PoseStamped& pose)
+{
+	geometry_msgs::TransformStamped result;
+	result.header.frame_id = pose.header.frame_id;
+	result.header.stamp = pose.header.stamp;
+	result.transform.translation.x = pose.pose.position.x;
+	result.transform.translation.y = pose.pose.position.y;
+	result.transform.translation.z = pose.pose.position.z;
+	result.transform.rotation = pose.pose.orientation;
+	return result;
+}
+
+inline geometry_msgs::Transform poseToTransform(const geometry_msgs::Pose& pose)
+{
+	geometry_msgs::Transform result;
+	result.translation.x = pose.position.x;
+	result.translation.y = pose.position.y;
+	result.translation.z = pose.position.z;
+	result.rotation = pose.orientation;
+	return result;
+}
 
 void publishZero(const ros::TimerEvent& e)
 {
@@ -66,23 +91,35 @@ inline Pose getPose(const PoseStampedConstPtr& pose) { return pose->pose; }
 
 inline Pose getPose(const PoseWithCovarianceStampedConstPtr& pose) { return pose->pose.pose; }
 
+inline Pose getPose(const nav_msgs::OdometryConstPtr& pose) { return pose->pose.pose; }
+
 template <typename T>
 void callback(const T& msg)
 {
 	static tf2_ros::StaticTransformBroadcaster br;
 
 	try {
-		if (!frame_id.empty()) {
-			// get VPE transform from TF
-			auto transform = tf_buffer.lookupTransform(frame_id, child_frame_id,
-													msg->header.stamp, ros::Duration(0.02));
-			vpe.pose.position.x = transform.transform.translation.x;
-			vpe.pose.position.y = transform.transform.translation.y;
-			vpe.pose.position.z = transform.transform.translation.z;
-			vpe.pose.orientation = transform.transform.rotation;
-		} else {
-			vpe.pose = getPose(msg);
+		if (!use_tf) {
+			// republish transform from pose for convenience
+			static tf2_ros::TransformBroadcaster tr_br;
+			tf2::Transform pose;
+			tf2::fromMsg(poseToTransform(getPose(msg)), pose);
+			pose = pose.inverse();
+			TransformStamped transform;
+			transform.transform = tf2::toMsg(pose);
+			transform.header.stamp = msg->header.stamp;
+			transform.header.frame_id = child_frame_id;
+			transform.child_frame_id = frame_id;
+			tr_br.sendTransform(transform);
 		}
+
+		// get VPE transform from TF
+		auto transform = tf_buffer.lookupTransform(frame_id, child_frame_id,
+												msg->header.stamp, ros::Duration(0.02));
+		vpe.pose.position.x = transform.transform.translation.x;
+		vpe.pose.position.y = transform.transform.translation.y;
+		vpe.pose.position.z = transform.transform.translation.z;
+		vpe.pose.orientation = transform.transform.rotation;
 
 		// offset
 		if (!offset_frame_id.empty()) {
@@ -101,7 +138,7 @@ void callback(const T& msg)
 		}
 
 		vpe.header.frame_id = local_frame_id;
-		vpe.header.stamp = msg->header.stamp;
+		vpe.header.stamp = ros::Time::now();//msg->header.stamp;
 		vpe_pub.publish(vpe);
 
 	} catch (const tf2::TransformException& e) {
@@ -122,13 +159,15 @@ int main(int argc, char **argv) {
 
 	tf2_ros::TransformListener tf_listener(tf_buffer);
 
+	string base_link;
 	nh_priv.param<string>("frame_id", frame_id, "");
 	nh_priv.param<string>("offset_frame_id", offset_frame_id, "");
 	nh_priv.param<string>("mavros/local_position/frame_id", local_frame_id, "map");
-	nh_priv.param<string>("mavros/local_position/tf/child_frame_id", child_frame_id, "base_link");
+	nh_priv.param<string>("mavros/local_position/tf/child_frame_id", base_link, "base_link");
+	nh_priv.param<string>("child_frame_id", child_frame_id, base_link);
 	offset_timeout = ros::Duration(nh_priv.param("offset_timeout", 3.0));
 
-	if (!frame_id.empty()) {
+	if (use_tf) {
 		ROS_INFO("using data from TF");
 	} else {
 		ROS_INFO("using data topic");
@@ -136,6 +175,7 @@ int main(int argc, char **argv) {
 
 	auto pose_sub = nh_priv.subscribe<PoseStamped>("pose", 1, &callback);
 	auto pose_cov_sub = nh_priv.subscribe<PoseWithCovarianceStamped>("pose_cov", 1, &callback);
+	auto odom_sub = nh_priv.subscribe<nav_msgs::Odometry>("odom", 1, &callback, ros::TransportHints().tcpNoDelay());
 	//auto markers_sub = nh_priv.subscribe<aruco_pose::MarkerArray>("markers", 1, &callback);
 
 	vpe_pub = nh_priv.advertise<PoseStamped>("vpe", 1);
