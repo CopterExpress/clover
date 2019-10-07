@@ -1,12 +1,12 @@
 # Working with the camera
 
-To work with the main camera, make sure it is enabled in file `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+Make sure the camera is enabled in the `~/catkin_ws/src/clever/clever/launch/clever.launch` file:
 
 ```xml
 <arg name="main_camera" default="true"/>
 ```
 
-Also make sure that [correct position and orientation are indicated] for the camera (camera_frame.md).
+Also make sure that [position and orientation of the camera](camera_frame.md) is correct.
 
 The `clever` package must be restarted after the launch-file has been edited:
 
@@ -14,11 +14,29 @@ The `clever` package must be restarted after the launch-file has been edited:
 sudo systemctl restart clever
 ```
 
-For monitoring images from the camera, you may use rqt or [web_video_server](web_video_server.md).
+You may use rqt or [web_video_server](web_video_server.md) to view the camera stream.
+
+## Troubleshooting
+
+If the camera stream is missing, try using the [`raspistill`](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md) utility to check whether the camera works.
+
+First, stop the Clever service:
+
+```bash
+sudo systemctl stop clever
+```
+
+Then use `raspistill` to capture an image from the camera:
+
+```bash
+raspistill -o test-image.jpeg
+```
+
+If it doesn't work, check the camera cable connections and the cable itself. Replace the cable if it is damaged. Also, make sure the camera screws don't touch any components on the camera board.
 
 ## Computer vision
 
-For implementation of the computer vision algorithms, it is recommended to use the [OpenCV] library that is pre-installed in [the SD card image] (image.md) (https://opencv.org).
+The [SD card image](image.md) comes with a preinstalled [OpenCV](https://opencv.org) library, which is commonly used for various comupter vision-related tasks. Additional libraries for converting from ROS messages to OpenCV images and back are preinstalled as well.
 
 ### Python
 
@@ -66,11 +84,11 @@ The obtained images can be viewed using [web_video_server](web_video_server.md).
 
 To program actions of the copter upon detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [ZBar] library (http://zbar.sourceforge.net). It should be installed using pip:
 
-```(bash)
+```bash
 sudo pip install zbar
 ```
 
-Recognizing QR codes in Python:
+QR codes recognition in Python:
 
 ```python
 import cv2
@@ -100,7 +118,7 @@ def image_callback(data):
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 ```
 
-The script will take up to 100% CPU capacity. To slow down the script artificially, you can run [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
+The script will take up to 100% CPU capacity. To slow down the script artificially, you can use [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
