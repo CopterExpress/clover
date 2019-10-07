@@ -230,7 +230,7 @@ void handleState(const led_msgs::LEDStateArray& msg)
 	led_count = state.leds.size();
 }
 
-bool notify(const std::string& event)
+void notify(const std::string& event)
 {
 	if (ros::param::has("~notify/" + event + "/effect") ||
 	    ros::param::has("~notify/" + event + "/r") ||

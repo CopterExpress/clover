@@ -70,6 +70,7 @@ def fall(gpio, level, tick):
     done.set()
 
 def read_distance():
+    global low
     done.clear()
     pi.gpio_trigger(TRIG, 50, 1)
     done.wait(timeout=5)
