@@ -34,6 +34,18 @@ raspistill -o test-image.jpeg
 
 If it doesn't work, check the camera cable connections and the cable itself. Replace the cable if it is damaged. Also, make sure the camera screws don't touch any components on the camera board.
 
+## Camera parameters
+
+Some camera parameters, such as image size, FPS cap, and exposure, may be configured in the `main_camera.launch` file. The list of supported parameters can be found [in the cv_camera repository](https://github.com/OTL/cv_camera#parameters).
+
+Additionally you can specify an arbitrary capture parameter using its [OpenCV code](https://docs.opencv.org/3.3.1/d4/d15/group__videoio__flags__base.html). For example, add the following parameters to the camera node to set exposition manually:
+
+```xml
+<param name="property_0_code" value="21"/> <!-- property code 21 is CAP_PROP_AUTO_EXPOSURE -->
+<param name="property_0_value" value="0.25"/> <!-- property values are normalized as per OpenCV specs, even for "menu" controls; 0.25 means "use manual exposure" -->
+<param name="cv_cap_prop_exposure" value="0.3"> <!-- set exposure to 30% of maximum value -->
+```
+
 ## Computer vision
 
 The [SD card image](image.md) comes with a preinstalled [OpenCV](https://opencv.org) library, which is commonly used for various comupter vision-related tasks. Additional libraries for converting from ROS messages to OpenCV images and back are preinstalled as well.
