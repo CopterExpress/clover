@@ -32,3 +32,6 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 Лекция 3: архитектура полетного контроллера PX4 – https://www.youtube.com/watch?v=_jl7FImq3jk.
 
+Лекция 4: автономные полеты: https://www.youtube.com/watch?v=ThXiNG1IzvI.
+
+См. также другие видео на канале COEX на YouTube: https://www.youtube.com/channel/UCeCu93sLBkcgbIkIC7Jaauw/featured.
