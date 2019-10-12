@@ -18,6 +18,12 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 Этот параметр устанавливается для того, чтобы на программном уровне настроить ориентацию вашего *IMU* датчика находящегося на полетном контроллере.
 
+### Рекомендуемая версия образа
+
+Для Raspberry Pi версий до 3B+: [v0.18](https://github.com/CopterExpress/clever/releases/tag/v0.18)
+
+Для Raspberry Pi версии 4: [v0.19-alpha.1](https://github.com/CopterExpress/clever/releases/tag/v0.19-alpha.1)
+
 ### Полет с использованием Optical Flow
 
 При полете только с использованием Optical Flow необходимо в QGroundControl в параметре `LPE_FUSION` включить галочку `pub agl as lpos down`.
