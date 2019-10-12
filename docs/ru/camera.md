@@ -45,7 +45,7 @@ raspistill -o test-image.jpg
 ```xml
 <param name="property_0_code" value="21"/> <!-- property code 21 is CAP_PROP_AUTO_EXPOSURE -->
 <param name="property_0_value" value="0.25"/> <!-- property values are normalized as per OpenCV specs, even for "menu" controls; 0.25 means "use manual exposure" -->
-<param name="cv_cap_prop_exposure" value="0.3"> <!-- set exposure to 30% of maximum value -->
+<param name="cv_cap_prop_exposure" value="0.3"/> <!-- set exposure to 30% of maximum value -->
 ```
 
 ## Компьютерное зрение
