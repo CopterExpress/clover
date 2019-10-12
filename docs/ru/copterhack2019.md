@@ -24,17 +24,25 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 Для Raspberry Pi версии 4: [v0.19-alpha.1](https://github.com/CopterExpress/clever/releases/tag/v0.19-alpha.1)
 
-### Полет с использованием Optical Flow
-
-При полете только с использованием Optical Flow необходимо в QGroundControl в параметре `LPE_FUSION` включить галочку `pub agl as lpos down`.
-
-Необходимо также убедиться, что лазерный дальномер корректно установлен и работает (см. [конфигурирование дальномера](laser.md)).
-
 ### Ориентация камеры
 
 На многих дронах камера ориентирована шлейфом вперёд. Это следует отразить в файле `main_camera.launch` в пакете `clever`.
 
 Подробнее см. статью [Ориентация камеры](camera_frame.md).
+
+### Полет с использованием Optical Flow
+
+Для включения optical flow установите параметры `optical_flow` и `rangefinder_vl53l1x` в файле `clever.launch` в `true`.
+
+Также необходимо в QGroundControl в параметре `LPE_FUSION` включить галочку `pub agl as lpos down`.
+
+Необходимо также убедиться, что лазерный дальномер корректно установлен и работает (см. [конфигурирование дальномера](laser.md)).
+
+Подробнее: [Использование Optical Flow](optical_flow.md).
+
+### Использование карты маркеров
+
+Для настройки большой карты маркеров используйте карту с названием `cmit.txt`. Далее используйте [инструкцию](aruco_map.md).
 
 ## Лекции
 
