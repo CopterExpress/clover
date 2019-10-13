@@ -52,6 +52,25 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 Снимайте **ВСЕ** ваши полеты на видео! В случае поломки дрона на защите сможете показать видео, что будет учтено при оценке.
 
+### Проблема с yaw
+
+При полете по маркерам (VPE) в прошивке v1.8.2-clever.7 возможно есть ошибка, которая проявляется в том, что дрон не держит yaw по маркерам. Если у вас есть такая проблема, попробуйте залить более старую прошивку v1.8.2-clever.6, доступную по ссылке https://github.com/CopterExpress/Firmware/releases/tag/v1.8.2-clever.6. Для COEX Pix необходимо скачивать файл `px4fmu-v4_default.px4`.
+
+### Проблема с navigate
+
+В образе 0.18 обнаружился баг из-за которого дрон может летать по точкам слишком быстро. Если у вас это происходит, поставьте в файле `~/catkin_ws/src/clever/clever/launch/clever.launch` параметр `nav_from_sp` в значение `false` таким образом:
+
+```xml
+<!-- simplified offboard control -->
+<node name="simple_offboard" pkg="clever" type="simple_offboard" output="screen" clear_params="true">
+    <param name="reference_frames/body" value="map"/>
+    <param name="reference_frames/base_link" value="map"/>
+    <param name="reference_frames/navigate_target" value="map"/>
+    <param name="reference_frames/navigate_target" value="map"/>
+    <param name="nav_from_sp" value="false"/>
+</node>
+```
+
 ## Лекции
 
 Лекция 1: введение – https://www.youtube.com/watch?v=cjtmZNuq7z0.
