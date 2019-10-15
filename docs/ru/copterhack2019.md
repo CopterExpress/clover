@@ -82,3 +82,13 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 Лекция 4: автономные полеты: https://www.youtube.com/watch?v=ThXiNG1IzvI.
 
 См. также другие видео на канале COEX на YouTube: https://www.youtube.com/channel/UCeCu93sLBkcgbIkIC7Jaauw/featured.
+
+## Результаты
+
+Команды-победители:
+
+1. Бульболет – доставка картошки с помощью умной лебедки.
+2. Copter don't hurt me – управление дроном с помощью нейроинтерфейса.
+3. import torch – active track на нейронках.
+4. Автобот – freeze light через бота ВКонтакте.
+5. Stardust Crusaders – AR среда симуляции для дронов.
