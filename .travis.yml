@@ -57,7 +57,7 @@ jobs:
         - "10"
       before_script:
         - npm install gitbook-cli -g
-        - npm install markdownlint-cli -g
+        - npm install markdownlint-cli@0.18.0 -g 
         - gitbook -V
         - markdownlint -V
       script:
