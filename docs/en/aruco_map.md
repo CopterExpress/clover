@@ -112,12 +112,12 @@ You will also be able to use `navigate`, `set_position` and `set_velocity` ROS s
 
 ```python
 # Takeoff should be performed in the "body" frame; "aruco_map" frame will appear as soon as the drone detects the marker field
-navigate(0, 0, 2, frame_id='body', speed=0.5, auto_arm=True) # Takeoff and hover 2 metres above the ground
+navigate(x=0, y=0, z=2, frame_id='body', speed=0.5, auto_arm=True) # Takeoff and hover 2 metres above the ground
 
 time.sleep(5)
 
 # Fly to the (2, 2) point on the marker field while being 2 metres above it
-navigate(2, 2, 2, speed=1, frame_id='aruco_map')
+navigate(x=2, y=2, z=2, speed=1, frame_id='aruco_map')
 ```
 
 Starting from the [image](image.md) version 0.18, the drone also can fly relative to a marker in the map, even if it doesn't see it:

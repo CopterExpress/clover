@@ -120,12 +120,12 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/m
 
 ```python
 # Вначале необходимо взлететь, чтобы коптер увидел карту меток и появился фрейм aruco_map:
-navigate(0, 0, 2, frame_id='body', speed=0.5, auto_arm=True)  # взлет на 2 метра
+navigate(x=0, y=0, z=2, frame_id='body', speed=0.5, auto_arm=True)  # взлет на 2 метра
 
 time.sleep(5)
 
 # Полет в координату 2:2 маркерного поля, высота 2 метра
-navigate(2, 2, 2, speed=1, frame_id='aruco_map')  # полет в координату 2:2, высота 3 метра
+navigate(x=2, y=2, z=2, speed=1, frame_id='aruco_map')  # полет в координату 2:2, высота 3 метра
 ```
 
 Начиная с версии [образа](image.md) 0.18, доступны также полеты относительно отдельного маркера в карте, даже если дрон его не видит:
