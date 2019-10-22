@@ -43,6 +43,7 @@
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
 * Дополнительные материалы
+  * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
