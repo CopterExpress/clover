@@ -20,6 +20,8 @@ Optical Flow publishes data in `mavros/px4flow/raw/send` topic. In the topic `op
 
 ## Setup of the flight controler
 
+> **Hint** Suggested parameters are applied automatically in [our custom PX4 firmware](firmware.md#modified-firmware-for-clever).
+
 When using **EKF2** (parameter `SYS_MC_EST_GROUP` = `ekf2`):
 
 * `EKF2_AID_MASK` – flag 'use optical flow' is on.
