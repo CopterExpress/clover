@@ -97,6 +97,8 @@ Perform these actions for each motor.
 
 Motors with **<font color=red>red</font>** nuts should rotate **counterclockwise**, the ones with **black** nuts should rotate **clockwise**. Correct rotation direction should also be printed on the motors. You can use a servo tester or your RC transmitter and receiver to check rotation direction.
 
+<img src="../assets/4/props/props_rotation.png" width=300 class="zoom center">
+
 The following describes how to use your RC gear to check the motor direction.
 
 ### Setting up PWM mode on RC
@@ -342,6 +344,9 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
     </div>
 
 4. Connect the flight controller to the Raspberry Pi using retractable USB cable.
+
+    <img src="../assets/4/43_1.png" width=300 class="zoom center border">
+
 5. Attach the USB cable reel where convenient using 3M double-sided adhesive pads while making sure the cable does not interfere with the propellers.
 
     <div class="image-group">
