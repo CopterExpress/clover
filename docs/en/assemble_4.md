@@ -252,7 +252,10 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 1. Power the LED strip from a separate BEC. Connect the **«+»** and **«-»** leads to **5v** and **Ground** respectively.
 2. Connect the **D** lead to GPIO21 (consult the [relevant article](leds.md) for more information).
 
-<img src="../assets/4/31_1.png" width=300 class="zoom center border">
+    <div class="image-group">
+        <img src="../assets/4/31_1.png" width=300 class="zoom border">
+        <img src="../assets/4/31_2.png" width=300 class="zoom border">
+    </div>
 
 ## Installing the camera cable
 

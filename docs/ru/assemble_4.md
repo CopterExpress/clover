@@ -252,7 +252,10 @@
 1. Питание для ленты берется от второго BEC. Подключите контакты *«-»* и *«+»* к *Ground* и *5v* на ленте соответственно.
 2. Подключите контакт *D* к GPIO-пину на Raspberry. Рекомендуется использовать пин GPIO21.
 
-<img src="../assets/4/31_1.png" width=300 class="zoom center border">
+    <div class="image-group">
+        <img src="../assets/4/31_1.png" width=300 class="zoom border">
+        <img src="../assets/4/31_2.png" width=300 class="zoom border">
+    </div>
 
 ## Установка шлейфа для камеры
 
