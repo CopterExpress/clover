@@ -61,7 +61,7 @@ Usage example:
 rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
 ```
 
-You can also use the [online map editor](arucogenmap.md) to create ArUco maps.
+<!-- You can also use the [online map editor](arucogenmap.md) to create ArUco maps. -->
 
 ### Checking the map
 
