@@ -8,7 +8,7 @@
     <arg name="optical_flow" default="false"/>
     <arg name="aruco" default="false"/>
     <arg name="rangefinder_vl53l1x" default="false"/>
-    <arg name="led" default="false"/>
+    <arg name="led" default="true"/>
     <arg name="rc" default="true"/>
 
     <!-- log formatting -->
