@@ -183,31 +183,35 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 
 ## Mounting the flight controller
 
-1. Align the flight controller so that the arrows on the controller and on the top carbon deck point in the same direction.
-2. Attach the flight controller to the flight controller plate using 3M double-sided adhesive pads.
-3. Connect the power cable to the **"POWER"** input of the flight controller.
+1. Insert the microSD card into your flight controller.
+
+    <img src="../assets/4/pix/pixracer_sdcard.png" width=300 class="zoom center border">
+
+2. Align the flight controller so that the arrows on the controller and on the top carbon deck point in the same direction.
+3. Attach the flight controller to the flight controller plate using 3M double-sided adhesive pads.
+4. Connect the power cable to the **"POWER"** input of the flight controller.
 
     <div class="image-group">
         <img src="../assets/4/18.png" width=300 class="zoom border">
         <img src="../assets/4/18_1.png" width=300 class="zoom border">
     </div>
 
-4. Attach four 40 mm aluminum spacers to the top carbon deck using M3x10 screws.
+5. Attach four 40 mm aluminum spacers to the top carbon deck using M3x10 screws.
 
     <div class="image-group">
         <img src="../assets/4/19.png" width=300 class="zoom border">
         <img src="../assets/4/19_1.png" width=300 class="zoom border">
     </div>
 
-5. Connect signal wires to the flight controller as shown in these pictures:
+6. Connect signal wires to the flight controller as shown in these pictures:
 
     <div class="image-group">
         <img src="../assets/4/20.png" width=300 class="zoom border">
         <img src="../assets/4/20_1.png" width=300 class="zoom border">
     </div>
 
-6. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
-7. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws (this was already described in the "Frame Assembly" section, p. 2).
+7. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
+8. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws (this was already described in the "Frame Assembly" section, p. 2).
 
     <div class="image-group">
         <img src="../assets/4/21.png" width=300 class="zoom border">
