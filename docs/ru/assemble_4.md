@@ -226,15 +226,19 @@
 
 ## Установка Raspberry Pi
 
-1. Установите плату Raspberry Pi на стойки, используя 4 стойки "папа-мама".
-2. Протяните провода от BEC через паз в центральной раме.
+1. Вставьте карту microSD с [записанным образом](image.md) в Raspberry Pi
+
+    <img src="../assets/4/rpi/rpi_sdcard.png" width=300 class="zoom center border">
+
+2. Установите плату Raspberry Pi на стойки, используя 4 стойки "папа-мама".
+3. Протяните провода от BEC через паз в центральной раме.
 
     <div class="image-group">
         <img src="../assets/4/24.png" width=300 class="zoom border">
         <img src="../assets/4/26.png" width=300 class="zoom border">
     </div>
 
-3. Подключите провод питания от BEC к Raspberry, согласно схеме:
+4. Подключите провод питания от BEC к Raspberry, согласно схеме:
 
 <img src="../assets/4/26_1.png" width=300 class="zoom center border">
 

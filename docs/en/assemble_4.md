@@ -226,15 +226,19 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 
 ## Installing the Raspberry Pi
 
-1. Attach the Raspberry Pi using four standoffs.
-2. Route the BEC wires through the channel in the top carbon deck.
+1. Insert your microSD card [with our image](image.md) into the Raspberry Pi
+
+    <img src="../assets/4/rpi/rpi_sdcard.png" width=300 class="zoom center border">
+
+2. Attach the Raspberry Pi using four standoffs.
+3. Route the BEC wires through the channel in the top carbon deck.
 
     <div class="image-group">
         <img src="../assets/4/24.png" width=300 class="zoom border">
         <img src="../assets/4/26.png" width=300 class="zoom border">
     </div>
 
-3. Connect the BEC outputs according to the following image:
+4. Connect the BEC outputs according to the following image:
 
 <img src="../assets/4/26_1.png" width=300 class="zoom center border">
 
