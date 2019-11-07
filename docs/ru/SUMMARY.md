@@ -84,6 +84,7 @@
   * [Генератор ArUco карт](arucogenmap.md)
   * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
+  * [Дрон для 3D-сканирования человека](3dscan.md)
   * [Распознавание лиц](face_recognition.md)
   * [Управление дроном силой мысли](control_emotions.md)
   * [Подсчет количества объектов c камеры](object_counting.md)
