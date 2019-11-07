@@ -4,4 +4,4 @@
 
 ## Клевер 4
 
-* Холдер для АКБ – [battery_holder.stl](../assets/battery_holder.stl).
+* Холдер для АКБ – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/battery_holder.stl).
