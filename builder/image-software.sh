@@ -97,21 +97,21 @@ libjpeg8 \
 tcpdump \
 ltrace \
 libpoco-dev \
-python-rosdep \
-python-rosinstall-generator \
-python-wstool \
-python-rosinstall \
+python3-rosdep \
+python3-rosinstall-generator \
+python3-wstool \
+python3-rosinstall \
 build-essential \
 libffi-dev \
 monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-espeak espeak-data python-espeak \
+espeak espeak-data python-espeak python3-espeak \
 ntpdate \
 python-dev \
 python3-dev \
 python3-venv \
-python-systemd \
+python3-systemd \
 mjpg-streamer \
 && echo_stamp "Everything was installed!" "SUCCESS" \
 || (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
@@ -123,10 +123,9 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 echo_stamp "Installing pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-python get-pip.py
+# Don't even bother installing pip for python2.7
+# python get-pip.py
 rm get-pip.py
-#my_travis_retry pip install --upgrade pip
-#my_travis_retry pip3 install --upgrade pip
 
 echo_stamp "Make sure both pip and pip3 are installed"
 pip --version

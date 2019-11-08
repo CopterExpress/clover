@@ -177,6 +177,8 @@ inline bool waitTransform(const string& target, const string& source,
 		ros::spinOnce();
 		r.sleep();
 	}
+	// At this point our node has been shut down
+	return false;
 }
 
 #define TIMEOUT(msg, timeout) (ros::Time::now() - msg.header.stamp > timeout)
@@ -749,6 +751,8 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		busy = false;
 		return true;
 	}
+	// We should not end up here, but if we did, our node has been shut down
+	return false;
 }
 
 int main(int argc, char **argv)
