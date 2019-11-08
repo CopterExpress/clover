@@ -20,8 +20,6 @@ nmap --version
 lsof -v
 git --version
 vim --version
-pip --version
-pip2 --version
 pip3 --version
 tcpdump --version
 monkey --version
