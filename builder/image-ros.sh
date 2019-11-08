@@ -68,7 +68,8 @@ my_travis_retry() {
 # TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clever.yaml" > /etc/ros/rosdep/sources.list.d/30-clever.list
+echo "yaml file:///etc/ros/rosdep/python3.yaml" > /etc/ros/rosdep/sources.list.d/40-python3.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -97,8 +98,9 @@ echo_stamp "Installing CLEVER" \
 && git status \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
-&& my_travis_retry pip install wheel \
-&& my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
+&& my_travis_retry pip3 install wheel \
+&& my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
+&& export ROS_PYTHON_VERSION=3 \
 && source /opt/ros/melodic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && systemctl enable roscore \
@@ -128,8 +130,7 @@ echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
 # FIXME: Buster comes with tornado==5.1.1 but we need tornado==4.2.1 for rosbridge_suite
-# (note that Python 3 will still have a more recent version)
-pip install tornado==4.2.1
+pip3 install tornado==4.2.1
 
 echo_stamp "Running tests"
 cd /home/pi/catkin_ws

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # validate all required modules installed
 
@@ -27,4 +27,4 @@ import rpi_ws281x
 import pigpio
 from espeak import espeak
 
-print cv2.getBuildInformation()
+print(cv2.getBuildInformation())

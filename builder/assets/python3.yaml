@@ -1,0 +1,22 @@
+python3-crypto:
+  debian:
+    buster: [python3-crypto]
+python3-imaging:
+  debian:
+    buster: [python3-pil]
+python3-wxtools:
+  debian:
+    pip:
+      packages: [wxPython]
+python3-future:
+  debian:
+    buster: [python3-future]
+python3-twisted:
+  debian:
+    buster: [python3-twisted]
+python3-serial:
+  debian:
+    buster: [python3-serial]
+python3-requests:
+  debian:
+    buster: [python3-requests]

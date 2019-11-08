@@ -66,7 +66,8 @@ apt-get update \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
+echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
+echo "deb http://deb.coex.tech/melodic-py3 buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
 # FIXME: We still don't have these packages built for Buster
 # FIXME: Check these packages after their installation
 echo "deb http://deb.coex.tech/clever stretch main" > /etc/apt/sources.list.d/clever.list
@@ -109,6 +110,7 @@ espeak espeak-data python-espeak \
 ntpdate \
 python-dev \
 python3-dev \
+python3-venv \
 python-systemd \
 mjpg-streamer \
 && echo_stamp "Everything was installed!" "SUCCESS" \
@@ -132,10 +134,14 @@ pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
-my_travis_retry pip3 install tornado==5.1.1
-my_travis_retry pip3 install butterfly
-my_travis_retry pip3 install butterfly[systemd]
+cd /root
+python3 -m venv butterfly_env
+source butterfly_env/bin/activate
+my_travis_retry pip install tornado==5.1.1
+my_travis_retry pip install butterfly
+my_travis_retry pip install butterfly[systemd]
 systemctl enable butterfly.socket
+deactivate
 
 echo_stamp "Install ws281x library"
 my_travis_retry pip install --prefer-binary rpi_ws281x
