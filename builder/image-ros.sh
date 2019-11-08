@@ -94,13 +94,13 @@ cd /home/pi/catkin_ws/src/clever
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 echo_stamp "Installing CLEVER" \
+&& export ROS_PYTHON_VERSION=3 \
 && cd /home/pi/catkin_ws/src/clever \
 && git status \
 && cd /home/pi/catkin_ws \
 && resolve_rosdep $(pwd) \
 && my_travis_retry pip3 install wheel \
 && my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
-&& export ROS_PYTHON_VERSION=3 \
 && source /opt/ros/melodic/setup.bash \
 && catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
 && systemctl enable roscore \
