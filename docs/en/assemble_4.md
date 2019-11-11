@@ -97,6 +97,8 @@ Perform these actions for each motor.
 
 Motors with **<font color=red>red</font>** nuts should rotate **counterclockwise**, the ones with **black** nuts should rotate **clockwise**. Correct rotation direction should also be printed on the motors. You can use a servo tester or your RC transmitter and receiver to check rotation direction.
 
+<img src="../assets/4/props/props_rotation.png" width=300 class="zoom center">
+
 The following describes how to use your RC gear to check the motor direction.
 
 ### Setting up PWM mode on RC
@@ -181,31 +183,35 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 
 ## Mounting the flight controller
 
-1. Align the flight controller so that the arrows on the controller and on the top carbon deck point in the same direction.
-2. Attach the flight controller to the flight controller plate using 3M double-sided adhesive pads.
-3. Connect the power cable to the **"POWER"** input of the flight controller.
+1. Insert the microSD card into your flight controller.
+
+    <img src="../assets/4/pix/pixracer_sdcard.png" width=300 class="zoom center border">
+
+2. Align the flight controller so that the arrows on the controller and on the top carbon deck point in the same direction.
+3. Attach the flight controller to the flight controller plate using 3M double-sided adhesive pads.
+4. Connect the power cable to the **"POWER"** input of the flight controller.
 
     <div class="image-group">
         <img src="../assets/4/18.png" width=300 class="zoom border">
         <img src="../assets/4/18_1.png" width=300 class="zoom border">
     </div>
 
-4. Attach four 40 mm aluminum spacers to the top carbon deck using M3x10 screws.
+5. Attach four 40 mm aluminum spacers to the top carbon deck using M3x10 screws.
 
     <div class="image-group">
         <img src="../assets/4/19.png" width=300 class="zoom border">
         <img src="../assets/4/19_1.png" width=300 class="zoom border">
     </div>
 
-5. Connect signal wires to the flight controller as shown in these pictures:
+6. Connect signal wires to the flight controller as shown in these pictures:
 
     <div class="image-group">
         <img src="../assets/4/20.png" width=300 class="zoom border">
         <img src="../assets/4/20_1.png" width=300 class="zoom border">
     </div>
 
-6. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
-7. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws (this was already described in the "Frame Assembly" section, p. 2).
+7. Attach two 15 mm spacers to the top carbon deck using M3x8 screws.
+8. Attach two 15 mm spacers to the top carbon deck and the front arms using M3x10 screws (this was already described in the "Frame Assembly" section, p. 2).
 
     <div class="image-group">
         <img src="../assets/4/21.png" width=300 class="zoom border">
@@ -224,15 +230,19 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 
 ## Installing the Raspberry Pi
 
-1. Attach the Raspberry Pi using four standoffs.
-2. Route the BEC wires through the channel in the top carbon deck.
+1. Insert your microSD card [with our image](image.md) into the Raspberry Pi
+
+    <img src="../assets/4/rpi/rpi_sdcard.png" width=300 class="zoom center border">
+
+2. Attach the Raspberry Pi using four standoffs.
+3. Route the BEC wires through the channel in the top carbon deck.
 
     <div class="image-group">
         <img src="../assets/4/24.png" width=300 class="zoom border">
         <img src="../assets/4/26.png" width=300 class="zoom border">
     </div>
 
-3. Connect the BEC outputs according to the following image:
+4. Connect the BEC outputs according to the following image:
 
 <img src="../assets/4/26_1.png" width=300 class="zoom center border">
 
@@ -252,7 +262,10 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 1. Power the LED strip from a separate BEC. Connect the **«+»** and **«-»** leads to **5v** and **Ground** respectively.
 2. Connect the **D** lead to GPIO21 (consult the [relevant article](leds.md) for more information).
 
-<img src="../assets/4/31_1.png" width=300 class="zoom center border">
+    <div class="image-group">
+        <img src="../assets/4/31_1.png" width=300 class="zoom border">
+        <img src="../assets/4/31_2.png" width=300 class="zoom border">
+    </div>
 
 ## Installing the camera cable
 
@@ -339,6 +352,9 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
     </div>
 
 4. Connect the flight controller to the Raspberry Pi using retractable USB cable.
+
+    <img src="../assets/4/43_1.png" width=300 class="zoom center border">
+
 5. Attach the USB cable reel where convenient using 3M double-sided adhesive pads while making sure the cable does not interfere with the propellers.
 
     <div class="image-group">
