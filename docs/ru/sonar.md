@@ -124,7 +124,7 @@ while True:
 Пример полетной программы с использованием [simple_offboard](simple_offboard.md), которая заставляет коптер лететь вперед, пока подключенный ультразвуковой дальномер не задетектирует препятствие:
 
 ```python
-set_velocity(x=0.5, frame_id='body', auto_arm=True)  # полет вперед со скоростью 0.5 мс
+set_velocity(vx=0.5, frame_id='body', auto_arm=True)  # полет вперед со скоростью 0.5 мс
 
 while True:
     if read_distance_filtered() < 1:
