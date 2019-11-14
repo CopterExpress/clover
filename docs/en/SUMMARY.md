@@ -20,7 +20,7 @@
   * [Connection to the Pixracer](connection.md)
   * [Using QGroundControl over Wi-Fi](gcs_bridge.md)
   * [Remote shell](ssh.md)
-  * [Editing files](editing.md)
+  * [Command line interface](cli.md)
   * [Automated self-checks](selfcheck.md)
   * [Viewing images from cameras](web_video_server.md)
 * Programming
