@@ -47,6 +47,7 @@
   * [Hostname](hostname.md)
   * [PX4 Simulation](sitl.md)
   * [PID Setup](calibratePID.md)
+  * [Model files for parts](models.md)
   * [ROS Kinetic installation](ros-install.md)
   * [Remote control app](rc.md)
   * [Wi-Fi Configuration](network.md)
