@@ -140,6 +140,12 @@ navigate(x=5, y=0, z=3, speed=0.8, yaw=float('nan'))
 navigate(x=0, y=-3, z=0, speed=1, frame_id='body')
 ```
 
+Полет влево на 2 м относительно последней целевой точки полета дрона:
+
+```python
+navigate(x=0, y=2, z=0, speed=1, frame_id='navigate_target')
+```
+
 Повернуться на 90 градусов против часовой:
 
 ```python
@@ -169,6 +175,8 @@ navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='bod
 ```bash
 rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
 ```
+
+> **Note** При программировании миссии дрона в терминах "вперед-назад-влево-вправо" рекомендуется использовать систему координат `navigate_target` вместо `body`, чтобы не учитывать неточность прилета дрона в предыдущую целевую точку при вычислении следующей.
 
 ### navigate_global
 

@@ -224,6 +224,12 @@ def check_fcu():
             else:
                 info('LPE_FUSION: barometer fusion is disabled')
 
+            mag_yaw_w = get_param('ATT_W_MAG')
+            if mag_yaw_w == 0:
+                info('magnetometer weight (ATT_W_MAG) is zero, better for indoor flights')
+            else:
+                info('magnetometer weight (ATT_W_MAG) is non-zero (%.2f), better for outdoor flights', mag_yaw_w)
+
         elif est == 2:
             info('selected estimator: EKF2')
         else:

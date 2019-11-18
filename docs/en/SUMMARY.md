@@ -77,5 +77,3 @@
   * [Human pose estimation drone control](human_pose_estimation_drone_control.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
-* Textbook
-  * [Theory and Videos](lessons.md)

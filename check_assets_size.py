@@ -17,7 +17,7 @@ EXCLUDE = 'rviz.png', 'ssid.png', 'sitl_docker_demo.png', 'qgc-params.png', 'but
     'cl3_mountBEC.JPG', 'cl3_mountRpiCamera.JPG', 'clever4-front-black-large.png', \
     'qgc-battery.png', 'qgc-radio.png', 'qgc-cal-acc.png', 'qgc-esc.png', 'qgc-cal-compass.png', \
     'qgc.png', 'qgc-parameters.png', 'clever4-front-white-large.png', 'qgc-modes.png', \
-    'qgc-requires-setup.png', 'clever4-front-white.png', 'clever4-kit-white.png', '26_1.png'
+    'qgc-requires-setup.png', 'clever4-front-white.png', 'clever4-kit-white.png', '26_1.png', 'battery_holder.stl'
 
 code = 0
 
