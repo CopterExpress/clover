@@ -1,6 +1,5 @@
 [Unit]
 Description=Launcher for the ROS master, parameter server and rosout logging node
-After=network.target
 
 [Service]
 User=pi
