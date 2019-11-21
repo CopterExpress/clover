@@ -43,6 +43,7 @@
   * [Interfacing with a laser rangefinder](laser.md)
   * [Software autorun](autolaunch.md)
 * Supplementary materials
+  * [COEX Pix](coex_pix.md)
   * [Guide on autonomous flight](auto_setup.md)
   * [Hostname](hostname.md)
   * [PX4 Simulation](sitl.md)
