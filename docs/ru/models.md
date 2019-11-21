@@ -18,15 +18,15 @@
 
 ### Лазерная резка
 
-* Ножка (вариант с захватом) (4 шт) – [`big_leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/big_leg.dxf).
-* Дека монтажная (3 шт) – [`deck.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/deck.dxf).
-* Дуга (16 шт) – [`prop_guard.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/prop_guard.dxf).
-* Рогатка+ушко (4 шт) – [`prop_guard_mount.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/prop_guard_mount.dxf).
-* Дека центральная (1 шт) – [`central_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/central_plate.dxf).
-* Луч (4 шт) – [`arm.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/arm.dxf).
-* Проставка (4 шт) – [`grab_spacer.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/grab_spacer.dxf).
-* Ножка (4 шт) – [`leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/leg.dxf).
-* Обруч (LED) (4 шт) – [`led_mount_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/led_mount_plate.dxf).
+* Ножка (вариант с захватом) – [`big_leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/big_leg.dxf).
+* Дека монтажная – [`deck.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/deck.dxf).
+* Дуга – [`prop_guard.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/prop_guard.dxf).
+* Рогатка+ушко – [`prop_guard_mount.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/prop_guard_mount.dxf).
+* Дека центральная – [`central_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/central_plate.dxf).
+* Луч – [`arm.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/arm.dxf).
+* Проставка – [`grab_spacer.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/grab_spacer.dxf).
+* Ножка – [`leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/leg.dxf).
+* Обруч (LED) – [`led_mount_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/led_mount_plate.dxf).
 
 ### Фрезеровка
 
