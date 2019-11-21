@@ -49,7 +49,7 @@
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
   * [Настройка PID](pid_tuning.md)
-  * [STL-модели Клевера](models.md)
+  * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Kinetic](ros-install.md)
   * [Пилотирование со смартфона](rc.md)
