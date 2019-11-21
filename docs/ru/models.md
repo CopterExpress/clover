@@ -26,7 +26,7 @@
 * Луч (4 шт) – [`arm.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/arm.dxf).
 * Проставка (4 шт) – [`grab_spacer.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/grab_spacer.dxf).
 * Ножка (4 шт) – [`leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/leg.dxf).
-* Обруч (LED) (4 шт) – [`led_mount_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/deck.dxf).
+* Обруч (LED) (4 шт) – [`led_mount_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/laser/led_mount_plate.dxf).
 
 ### Фрезеровка
 
