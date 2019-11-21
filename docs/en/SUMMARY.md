@@ -77,5 +77,6 @@
   * [Android RC app](android.md)
   * [3D-scanning drone](3dscan.md)
   * [Human pose estimation drone control](human_pose_estimation_drone_control.md)
+  * [Copter Hack 2019](copterhack2019.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
