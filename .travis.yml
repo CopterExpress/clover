@@ -93,7 +93,7 @@ jobs:
         - wget https://github.com/okalachev/editorconfig-checker/releases/download/1.2.1-disable-spaces-amount/ec-linux-amd64
         - chmod +x ec-linux-amd64
       script:
-        - ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt|\.stl"
+        - ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt|\.stl|\.dxf"
 stages:
   - Build
   - Annotate
