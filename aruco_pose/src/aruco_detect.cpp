@@ -360,9 +360,12 @@ private:
 		parameters_->adaptiveThreshWinSizeMax = config.adaptiveThreshWinSizeMax;
 		parameters_->adaptiveThreshWinSizeStep = config.adaptiveThreshWinSizeStep;
 		parameters_->cornerRefinementMaxIterations = config.cornerRefinementMaxIterations;
+		parameters_->cornerRefinementMethod = config.cornerRefinementMethod;
 		parameters_->cornerRefinementMinAccuracy = config.cornerRefinementMinAccuracy;
 		parameters_->cornerRefinementWinSize = config.cornerRefinementWinSize;
-		parameters_->cornerRefinementMethod = config.cornerRefinementMethod;
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 4) && (CV_VERSION_REVISION >= 7)) || (CV_VERSION_MAJOR > 3)
+		parameters_->detectInvertedMarker = config.detectInvertedMarker;
+#endif
 		parameters_->errorCorrectionRate = config.errorCorrectionRate;
 		parameters_->minCornerDistanceRate = config.minCornerDistanceRate;
 		parameters_->markerBorderBits = config.markerBorderBits;
