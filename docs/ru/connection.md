@@ -26,7 +26,7 @@
 
 1. Подключите Raspberry Pi к полетному контроллеру по UART.
 2. [Подключитесь в Raspberry Pi по SSH](ssh.md).
-3. Поменяйте в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) тип подключения на UART:
+3. Поменяйте в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения на UART:
 
     ```xml
     <arg name="fcu_conn" default="uart"/>

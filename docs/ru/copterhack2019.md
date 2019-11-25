@@ -1,6 +1,6 @@
 # Copter Hack 2019
 
-Хакатон [Copter Hack 2019](https://copterexpress.timepad.ru/event/768108/) проходит 11–13 октября в Технополисе "Москва".
+Хакатон [Copter Hack 2019](https://copterexpress.timepad.ru/event/1017592/) проходит 11–13 октября в Технополисе "Москва".
 
 Официальный сайт: https://ru.coex.tech/copterhack.
 
