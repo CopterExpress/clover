@@ -24,6 +24,7 @@
   * [Automated self-checks](selfcheck.md)
   * [Viewing images from cameras](web_video_server.md)
 * Programming
+  * [Overview](programming.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
   * [Camera orientation](camera_frame.md)
