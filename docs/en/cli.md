@@ -52,7 +52,7 @@ You can terminate currently running (foreground) program by pressing `Ctrl`+`C`.
 
 Read more about the Linux command line in the Raspberry Pi documentation: https://www.raspberrypi.org/documentation/linux/usage/commands.md.
 
-## Editing files
+## Editing files {#editing}
 
 You can use **nano** to edit files on the Raspberry Pi. It is one of the more user-friendly console-based text editor.
 

@@ -25,7 +25,7 @@ This manual contains links to other articles in which each of the topics address
 
 - You can change the name and password of the network if you want to. See the article "[Network Settings] (network.md # change-password-or-ssid-network-name)". The remaining operations with the network are unnecessary.
 
-- Use the nano editor to edit files. [Instructions for working with nano] (editing.md).
+- Use the nano editor to edit files. [Instructions for working with nano](cli.md#editing).
 
   > **Hint** In nano, you can only move the cursor with the arrow keys on the keyboard.
 
