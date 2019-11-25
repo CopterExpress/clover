@@ -12,6 +12,11 @@ Main frames in the `clever` package:
 * `body` is bound to the drone, but its Z axis points up regardless of the drone's pitch and roll. It is shown by the red, blue and green lines in the illustration;
 * `navigate_target` is bound to the current navigation target (as set by the [navigate](simple_offboard.md#navigate) service).
 
+Additional frames become available when [ArUco positioning system](aruco.md) is active:
+
+* `aruco_map` is bound to the currently active [ArUco map](aruco_map.md);
+* `aruco_N` is bound to the [marker](aruco_marker.md) with ID=N.
+
 > **Hint** Frames that are bound to the drone are oriented according to [the ROS convention](http://www.ros.org/reps/rep-0103.html): the X axis points forward, Y to the left, and Z up.
 
 3D visualization of the coordinate systems can be viewed using [rviz](rviz.md).

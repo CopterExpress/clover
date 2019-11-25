@@ -35,7 +35,7 @@ In manual mode the pilot controls the drone directly. GPS, computer vision data,
 * **ALTCTL** (ALTITUDE) — control of the altitude rate, pitch, roll and yaw angular velocity. Requires a barometer or another altitude source.
 * **POSCTL** (POSITION) — control of the altitude rate, forward/backward and right/left speed, and yaw angular velocity. It is the easiest flying mode. The barometer, GPS, computer vision, and other sensors are used.
 
-### Auto flight modes
+### Auto flight modes {#auto}
 
 In autonomous flight modes the quadcopter ignores the control signals from the transmitter and uses a program to fly.
 

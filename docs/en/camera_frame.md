@@ -2,7 +2,7 @@
 
 > **Note** Documentation for the versions [of image](image.md), starting with **0.15**. For earlier versions, see [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/camera_frame.md).
 
-Position and orientation of the main camera is determined in file `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
+Position and orientation of the main camera is [set in file](cli.md#editing) `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>

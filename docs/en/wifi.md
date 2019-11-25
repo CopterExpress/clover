@@ -15,4 +15,4 @@ After connecting to Clever Wi-Fi, open http://192.168.11.1 in you web browser. I
 
 <img src="../assets/web.png" alt="Веб-интерфейс Клевера" class="zoom">
 
-**Next**: [Using QGroundControl via Wi-Fi](gcs_bridge.md).
+**Next**: [Connecting Raspberry Pi to the flight controller](connection.md).
