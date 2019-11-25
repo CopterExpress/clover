@@ -21,7 +21,9 @@ Description of some checks:
 * Global position (GPS) — checks for presence of global position data (GPS module is required for this check);
 * Camera — checks for proper operation of the Raspberry camera.
 * ArUco — checks whether [ArUco](aruco.md) detection is working
-* VPE — checks whether VPE data is published
-* Rangefinder — checks whether [rangefinder](laser.md) data is published
+* VPE — checks whether VPE data is published.
+* Rangefinder — checks whether [rangefinder](laser.md) data is published.
+* Hardware health – checks the [onboard computer](raspberrypi.md) status.
+* CPU usage – checks the CPU load of the onboard computer.
 
 > **Caution** Pay attention on the checks marked with *WARN* sign. If necessary, contact [Copter Express technical support](tg://resolve?domain=COEXHelpdesk).
