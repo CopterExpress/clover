@@ -715,8 +715,8 @@ def check_network():
             failure('Not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
 
 
-@check('Hardware health')
-def check_hw_health():
+@check('RPi health')
+def check_rpi_health():
     # `vcgencmd get_throttled` output codes taken from
     # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
     # TODO: support more base platforms?
@@ -766,7 +766,7 @@ def selfcheck():
     check_optical_flow()
     check_vpe()
     check_rangefinder()
-    check_hw_health()
+    check_rpi_health()
     check_cpu_usage()
     check_boot_duration()
 
