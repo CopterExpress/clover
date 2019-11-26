@@ -4,7 +4,7 @@
 
 Для корректной работы всех модулей, связанных с компьютерным зрением (в том числе [полет по ArUco-маркерам](aruco.md) и [Optical Flow](optical_flow.md)) необходимо корректно выставленная ориентация основной камеры Клевера.
 
-Расположение и ориентация камеры [задается в файле](editing.md) `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
+Расположение и ориентация камеры [задается в файле](cli.md#editing) `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
 ```xml
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>

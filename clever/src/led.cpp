@@ -278,7 +278,8 @@ void handleLog(const rosgraph_msgs::Log& log)
 void handleBattery(const sensor_msgs::BatteryState& msg)
 {
 	for (auto const& voltage : msg.cell_voltage) {
-		if (voltage < low_battery_threshold) {
+		if (voltage < low_battery_threshold &&
+		    voltage > 2.0) { // voltage < 2.0 likely indicates incorrect voltage measurement
 			// notify low battery every time
 			notify("low_battery");
 		}

@@ -21,3 +21,5 @@ ssh pi@192.168.11.1
 Начиная с версии 0.11.4 [образа](image.md) доступ к шеллу также доступен через веб-браузер (с использованием [Butterfly](https://github.com/paradoxxxzero/butterfly)). Для доступа откройте страницу http://192.168.11.1 и выберите на ней ссылку *Open web terminal*:
 
 <img src="../assets/butterfly.png">
+
+**Далее**: [Командная строка](cli.md).

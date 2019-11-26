@@ -9,6 +9,7 @@
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 
+import os
 import math
 import subprocess
 import re
@@ -692,9 +693,67 @@ def check_preflight_status():
                 failure(' '.join([match.groups()[1], 'check:', check_status]))
 
 
+@check('Network')
+def check_network():
+    ros_hostname = os.environ.get('ROS_HOSTNAME').strip()
+
+    if not ros_hostname:
+        failure('No ROS_HOSTNAME is set')
+
+    elif ros_hostname.endswith('.local'):
+        # using mdns hostname
+        hosts = open('/etc/hosts', 'r')
+        for line in hosts:
+            parts = line.split()
+            if len(parts) < 2:
+                continue
+            ip = parts.pop(0).split('.')
+            if ip[0] == '127':  # loopback ip
+                if ros_hostname in parts:
+                    break
+        else:
+            failure('Not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
+
+
+@check('RPi health')
+def check_rpi_health():
+    # `vcgencmd get_throttled` output codes taken from
+    # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
+    # TODO: support more base platforms?
+    FLAG_UNDERVOLTAGE_NOW = 0x1
+    FLAG_FREQ_CAP_NOW = 0x2
+    FLAG_THROTTLING_NOW = 0x4
+    FLAG_THERMAL_LIMIT_NOW = 0x8
+    FLAG_UNDERVOLTAGE_OCCURRED = 0x10000
+    FLAG_FREQ_CAP_OCCURRED = 0x20000
+    FLAG_THROTTLING_OCCURRED = 0x40000
+    FLAG_THERMAL_LIMIT_OUCCURRED = 0x80000
+
+    try:
+        # vcgencmd outputs a single string in a form of
+        # <parameter>=<value>
+        # In case of `get_throttled`, <value> is a hexadecimal number
+        # with some of the FLAGs OR'ed together
+        output = subprocess.check_output(['vcgencmd', 'get_throttled'])
+    except OSError:
+        failure('Could not call vcgencmd binary; not a Raspberry Pi?')
+        return
+
+    throttle_mask = int(output.split('=')[1], base=16)
+    if throttle_mask & (FLAG_THROTTLING_NOW | FLAG_THROTTLING_OCCURRED):
+        failure('System throttled to prevent damage')
+    if throttle_mask & (FLAG_UNDERVOLTAGE_NOW | FLAG_UNDERVOLTAGE_OCCURRED):
+        failure('Not enough power for onboard computer, flight inadvisable')
+    if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
+        failure('CPU frequency reduced to avoid overheating')
+    if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
+        failure('CPU over soft temperature limit, expect performance loss')
+
+
 def selfcheck():
     check_image()
     check_clever_service()
+    check_network()
     check_fcu()
     check_imu()
     check_local_position()
@@ -707,6 +766,7 @@ def selfcheck():
     check_optical_flow()
     check_vpe()
     check_rangefinder()
+    check_rpi_health()
     check_cpu_usage()
     check_boot_duration()
 

@@ -14,4 +14,4 @@
 
 <img src="../assets/web.png" alt="Веб-интерфейс Клевера" class="zoom">
 
-**Далее**: [Подключение QGroundControl по Wi-Fi](gcs_bridge.md).
+**Далее**: [Подключение Raspberry Pi к полетному контроллеру](connection.md).

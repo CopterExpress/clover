@@ -67,3 +67,5 @@ Change parameter `gcs_bridge` in the launch file:
 ```
 
 After opening the QGroundControl application, the connection should be established automatically.
+
+**Next**: [Remote access using SSH](ssh.md)
