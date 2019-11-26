@@ -741,9 +741,9 @@ def check_rpi_health():
 
     throttle_mask = int(output.split('=')[1], base=16)
     if throttle_mask & (FLAG_THROTTLING_NOW | FLAG_THROTTLING_OCCURRED):
-        failure('System throttled to prevent damage')
+        failure('system throttled to prevent damage')
     if throttle_mask & (FLAG_UNDERVOLTAGE_NOW | FLAG_UNDERVOLTAGE_OCCURRED):
-        failure('Not enough power for onboard computer, flight inadvisable')
+        failure('not enough power for onboard computer, flight inadvisable')
     if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
         failure('CPU frequency reduced to avoid overheating')
     if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
