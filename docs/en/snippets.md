@@ -127,7 +127,7 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 # ...
 
 # PoseStamped object creation (or getting it from a topic):
-pose = PoseStamped()
+pose = tf2_geometry_msgs.PoseStamped()
 pose.header.frame_id = 'map' # frame, which is the position is specified
 pose.header.stamp = rospy.get_rostime() # the instant for which the position is specified (current time)
 pose.pose.position.x = 1
