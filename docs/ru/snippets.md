@@ -171,7 +171,7 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 # ...
 
 # Создаем объект PoseStamped (либо получаем из топика):
-pose = PoseStamped()
+pose = tf2_geometry_msgs.PoseStamped()
 pose.header.frame_id = 'map'  # фрейм, в котором задана позиция
 pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
 pose.pose.position.x = 1
