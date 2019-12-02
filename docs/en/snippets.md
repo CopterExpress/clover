@@ -120,6 +120,7 @@ Transforming the position (`PoseStamped`) from one system of coordinates ([of fr
 ```python
 import tf2_ros
 import tf2_geometry_msgs
+from geometry_msgs.msg import PoseStamped
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
