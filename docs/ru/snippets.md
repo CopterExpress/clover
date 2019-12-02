@@ -164,6 +164,7 @@ arming(False)  # дизарм
 ```python
 import tf2_ros
 import tf2_geometry_msgs
+from geometry_msgs.msg import PoseStamped
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -171,7 +172,7 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 # ...
 
 # Создаем объект PoseStamped (либо получаем из топика):
-pose = tf2_geometry_msgs.PoseStamped()
+pose = PoseStamped()
 pose.header.frame_id = 'map'  # фрейм, в котором задана позиция
 pose.header.stamp = rospy.get_rostime()  # момент времени, для которого задана позиция (текущее время)
 pose.pose.position.x = 1

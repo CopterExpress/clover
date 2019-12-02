@@ -120,6 +120,7 @@ Transforming the position (`PoseStamped`) from one system of coordinates ([of fr
 ```python
 import tf2_ros
 import tf2_geometry_msgs
+from geometry_msgs.msg import PoseStamped
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -127,7 +128,7 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 # ...
 
 # PoseStamped object creation (or getting it from a topic):
-pose = tf2_geometry_msgs.PoseStamped()
+pose = PoseStamped()
 pose.header.frame_id = 'map' # frame, which is the position is specified
 pose.header.stamp = rospy.get_rostime() # the instant for which the position is specified (current time)
 pose.pose.position.x = 1
