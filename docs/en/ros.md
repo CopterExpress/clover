@@ -8,13 +8,13 @@ ROS is a widely used framework for developing complex and distributed robotic sy
 Installation
 ---
 
-Main article: http://wiki.ros.org/kinetic/Installation/Ubuntu
+Main article: http://wiki.ros.org/melodic/Installation/Ubuntu
 
 ROS is already installed on [the RPi image](image.md).
 
 To use ROS on a PC, we recommend using Ubuntu Linux (or a virtual machine such as Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) or [VirtualBox](https://www.virtualbox.org)).
 
-> **Note** For ROS Kinetic distribution, we recommend using Ubuntu 16.04.
+> **Note** For ROS Melodic distribution, we recommend using Ubuntu 18.04.
 
 Concepts
 ---

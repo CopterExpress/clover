@@ -9,7 +9,7 @@
 
 Для использования rviz и rqt необходим компьютер с ОС Ubuntu Linux (либо виртуальная машина, например [Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) или [VirtualBox](https://www.virtualbox.org)).
 
-На него необходимо установить пакет `ros-kinetic-desktop-full` или `ros-kinetic-desktop`, используя [документацию по установке](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+На него необходимо установить пакет `ros-melodic-desktop-full` или `ros-melodic-desktop`, используя [документацию по установке](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 Запуск rviz
 ---
@@ -48,7 +48,7 @@ Axis или Grid настроенный на фрейм `aruco_map` будут �
 Рекомендуется также установка набора дополнительных полезных плагинов для rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). Это набор позволяет визуализировать топики типа `TwistStamped` (скорость), `CameraInfo`, `PolygonArray` и многое другое. Для установки используйте команду:
 
 ```bash
-sudo apt-get install ros-kinetic-jsk-visualization
+sudo apt-get install ros-melodic-jsk-visualization
 ```
 
 Запуск инструментов rqt
@@ -71,5 +71,5 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view
 Краткое описание полезных rqt-плагинов:
 
 * `rqt_image_view` – просмотр изображений из топиков типа `sensor_msgs/Image`;
-* `rqt_multiplot` – построение графиков по данным из произвольным топиков (установка: `sudo apt-get install ros-kinetic-rqt-multiplot`);
+* `rqt_multiplot` – построение графиков по данным из произвольным топиков (установка: `sudo apt-get install ros-melodic-rqt-multiplot`);
 * Bag – работа с [Bag-файлами](http://wiki.ros.org/rosbag).

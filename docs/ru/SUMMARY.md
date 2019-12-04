@@ -51,7 +51,7 @@
   * [Настройка PID](pid_tuning.md)
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
-  * [Установка ROS Kinetic](ros-install.md)
+  * [Установка ROS Melodic](ros-install.md)
   * [Пилотирование со смартфона](rc.md)
   * [Настройка сети RPi](network.md)
   * [Интерфейс UART](uart.md)
