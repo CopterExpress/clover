@@ -721,3 +721,15 @@ led_msgs:
 ws281x:
   debian:
     stretch: ros-melodic-ws281x
+ddynamic_reconfigure:
+  debian:
+    buster: [ros-melodic-ddynamic-reconfigure]
+librealsense2:
+  debian:
+    buster: [ros-melodic-librealsense2]
+realsense2_camera:
+  debian:
+    buster: [ros-melodic-realsense2-camera]
+realsense2_description:
+  debian:
+    buster: [ros-melodic-realsense2-description]
