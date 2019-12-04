@@ -1,726 +1,726 @@
 catkin:
   debian:
-    buster: ros-melodic-catkin
+    buster: [ros-melodic-catkin]
 genmsg:
   debian:
-    buster: ros-melodic-genmsg
+    buster: [ros-melodic-genmsg]
 gencpp:
   debian:
-    buster: ros-melodic-gencpp
+    buster: [ros-melodic-gencpp]
 geneus:
   debian:
-    buster: ros-melodic-geneus
+    buster: [ros-melodic-geneus]
 genlisp:
   debian:
-    buster: ros-melodic-genlisp
+    buster: [ros-melodic-genlisp]
 gennodejs:
   debian:
-    buster: ros-melodic-gennodejs
+    buster: [ros-melodic-gennodejs]
 genpy:
   debian:
-    buster: ros-melodic-genpy
+    buster: [ros-melodic-genpy]
 bond_core:
   debian:
-    buster: ros-melodic-bond-core
+    buster: [ros-melodic-bond-core]
 cmake_modules:
   debian:
-    buster: ros-melodic-cmake-modules
+    buster: [ros-melodic-cmake-modules]
 class_loader:
   debian:
-    buster: ros-melodic-class-loader
+    buster: [ros-melodic-class-loader]
 common_msgs:
   debian:
-    buster: ros-melodic-common-msgs
+    buster: [ros-melodic-common-msgs]
 common_tutorials:
   debian:
-    buster: ros-melodic-common-tutorials
+    buster: [ros-melodic-common-tutorials]
 cpp_common:
   debian:
-    buster: ros-melodic-cpp-common
+    buster: [ros-melodic-cpp-common]
 desktop:
   debian:
-    buster: ros-melodic-desktop
+    buster: [ros-melodic-desktop]
 diagnostics:
   debian:
-    buster: ros-melodic-diagnostics
+    buster: [ros-melodic-diagnostics]
 executive_smach:
   debian:
-    buster: ros-melodic-executive-smach
+    buster: [ros-melodic-executive-smach]
 geometry:
   debian:
-    buster: ros-melodic-geometry
+    buster: [ros-melodic-geometry]
 geometry_tutorials:
   debian:
-    buster: ros-melodic-geometry-tutorials
+    buster: [ros-melodic-geometry-tutorials]
 gl_dependency:
   debian:
-    buster: ros-melodic-gl-dependency
+    buster: [ros-melodic-gl-dependency]
 image_common:
   debian:
-    buster: ros-melodic-image-common
+    buster: [ros-melodic-image-common]
 image_pipeline:
   debian:
-    buster: ros-melodic-image-pipeline
+    buster: [ros-melodic-image-pipeline]
 image_transport_plugins:
   debian:
-    buster: ros-melodic-image-transport-plugins
+    buster: [ros-melodic-image-transport-plugins]
 laser_pipeline:
   debian:
-    buster: ros-melodic-laser-pipeline
+    buster: [ros-melodic-laser-pipeline]
 mavlink:
   debian:
-    buster: ros-melodic-mavlink
+    buster: [ros-melodic-mavlink]
 media_export:
   debian:
-    buster: ros-melodic-media-export
+    buster: [ros-melodic-media-export]
 message_generation:
   debian:
-    buster: ros-melodic-message-generation
+    buster: [ros-melodic-message-generation]
 message_runtime:
   debian:
-    buster: ros-melodic-message-runtime
+    buster: [ros-melodic-message-runtime]
 mk:
   debian:
-    buster: ros-melodic-mk
+    buster: [ros-melodic-mk]
 nodelet_core:
   debian:
-    buster: ros-melodic-nodelet-core
+    buster: [ros-melodic-nodelet-core]
 orocos_kdl:
   debian:
-    buster: ros-melodic-orocos-kdl
+    buster: [ros-melodic-orocos-kdl]
 perception:
   debian:
-    buster: ros-melodic-perception
+    buster: [ros-melodic-perception]
 perception_pcl:
   debian:
-    buster: ros-melodic-perception-pcl
+    buster: [ros-melodic-perception-pcl]
 python_orocos_kdl:
   debian:
-    buster: ros-melodic-python-orocos-kdl
+    buster: [ros-melodic-python-orocos-kdl]
 qt_dotgraph:
   debian:
-    buster: ros-melodic-qt-dotgraph
+    buster: [ros-melodic-qt-dotgraph]
 qt_gui:
   debian:
-    buster: ros-melodic-qt-gui
+    buster: [ros-melodic-qt-gui]
 qt_gui_py_common:
   debian:
-    buster: ros-melodic-qt-gui-py-common
+    buster: [ros-melodic-qt-gui-py-common]
 qwt_dependency:
   debian:
-    buster: ros-melodic-qwt-dependency
+    buster: [ros-melodic-qwt-dependency]
 robot:
   debian:
-    buster: ros-melodic-robot
+    buster: [ros-melodic-robot]
 ros:
   debian:
-    buster: ros-melodic-ros
+    buster: [ros-melodic-ros]
 ros_base:
   debian:
-    buster: ros-melodic-ros-base
+    buster: [ros-melodic-ros-base]
 ros_comm:
   debian:
-    buster: ros-melodic-ros-comm
+    buster: [ros-melodic-ros-comm]
 ros_core:
   debian:
-    buster: ros-melodic-ros-core
+    buster: [ros-melodic-ros-core]
 ros_environment:
   debian:
-    buster: ros-melodic-ros-environment
+    buster: [ros-melodic-ros-environment]
 ros_tutorials:
   debian:
-    buster: ros-melodic-ros-tutorials
+    buster: [ros-melodic-ros-tutorials]
 rosapi:
   debian:
-    buster: ros-melodic-rosapi
+    buster: [ros-melodic-rosapi]
 rosbag_migration_rule:
   debian:
-    buster: ros-melodic-rosbag-migration-rule
+    buster: [ros-melodic-rosbag-migration-rule]
 rosbash:
   debian:
-    buster: ros-melodic-rosbash
+    buster: [ros-melodic-rosbash]
 rosboost_cfg:
   debian:
-    buster: ros-melodic-rosboost-cfg
+    buster: [ros-melodic-rosboost-cfg]
 rosbridge_server:
   debian:
-    buster: ros-melodic-rosbridge-server
+    buster: [ros-melodic-rosbridge-server]
 rosbridge_suite:
   debian:
-    buster: ros-melodic-rosbridge-suite
+    buster: [ros-melodic-rosbridge-suite]
 rosbuild:
   debian:
-    buster: ros-melodic-rosbuild
+    buster: [ros-melodic-rosbuild]
 rosclean:
   debian:
-    buster: ros-melodic-rosclean
+    buster: [ros-melodic-rosclean]
 roscpp_core:
   debian:
-    buster: ros-melodic-roscpp-core
+    buster: [ros-melodic-roscpp-core]
 roscpp_traits:
   debian:
-    buster: ros-melodic-roscpp-traits
+    buster: [ros-melodic-roscpp-traits]
 roscreate:
   debian:
-    buster: ros-melodic-roscreate
+    buster: [ros-melodic-roscreate]
 rosgraph:
   debian:
-    buster: ros-melodic-rosgraph
+    buster: [ros-melodic-rosgraph]
 roslang:
   debian:
-    buster: ros-melodic-roslang
+    buster: [ros-melodic-roslang]
 roslint:
   debian:
-    buster: ros-melodic-roslint
+    buster: [ros-melodic-roslint]
 roslisp:
   debian:
-    buster: ros-melodic-roslisp
+    buster: [ros-melodic-roslisp]
 rosmake:
   debian:
-    buster: ros-melodic-rosmake
+    buster: [ros-melodic-rosmake]
 rosmaster:
   debian:
-    buster: ros-melodic-rosmaster
+    buster: [ros-melodic-rosmaster]
 rospack:
   debian:
-    buster: ros-melodic-rospack
+    buster: [ros-melodic-rospack]
 roslib:
   debian:
-    buster: ros-melodic-roslib
+    buster: [ros-melodic-roslib]
 rosparam:
   debian:
-    buster: ros-melodic-rosparam
+    buster: [ros-melodic-rosparam]
 rospy:
   debian:
-    buster: ros-melodic-rospy
+    buster: [ros-melodic-rospy]
 rosserial:
   debian:
-    buster: ros-melodic-rosserial
+    buster: [ros-melodic-rosserial]
 rosserial_msgs:
   debian:
-    buster: ros-melodic-rosserial-msgs
+    buster: [ros-melodic-rosserial-msgs]
 rosserial_python:
   debian:
-    buster: ros-melodic-rosserial-python
+    buster: [ros-melodic-rosserial-python]
 rosservice:
   debian:
-    buster: ros-melodic-rosservice
+    buster: [ros-melodic-rosservice]
 rostime:
   debian:
-    buster: ros-melodic-rostime
+    buster: [ros-melodic-rostime]
 roscpp_serialization:
   debian:
-    buster: ros-melodic-roscpp-serialization
+    buster: [ros-melodic-roscpp-serialization]
 python_qt_binding:
   debian:
-    buster: ros-melodic-python-qt-binding
+    buster: [ros-melodic-python-qt-binding]
 roslaunch:
   debian:
-    buster: ros-melodic-roslaunch
+    buster: [ros-melodic-roslaunch]
 rosunit:
   debian:
-    buster: ros-melodic-rosunit
+    buster: [ros-melodic-rosunit]
 angles:
   debian:
-    buster: ros-melodic-angles
+    buster: [ros-melodic-angles]
 libmavconn:
   debian:
-    buster: ros-melodic-libmavconn
+    buster: [ros-melodic-libmavconn]
 rosconsole:
   debian:
-    buster: ros-melodic-rosconsole
+    buster: [ros-melodic-rosconsole]
 pluginlib:
   debian:
-    buster: ros-melodic-pluginlib
+    buster: [ros-melodic-pluginlib]
 qt_gui_cpp:
   debian:
-    buster: ros-melodic-qt-gui-cpp
+    buster: [ros-melodic-qt-gui-cpp]
 resource_retriever:
   debian:
-    buster: ros-melodic-resource-retriever
+    buster: [ros-melodic-resource-retriever]
 rosconsole_bridge:
   debian:
-    buster: ros-melodic-rosconsole-bridge
+    buster: [ros-melodic-rosconsole-bridge]
 roslz4:
   debian:
-    buster: ros-melodic-roslz4
+    buster: [ros-melodic-roslz4]
 rosserial_client:
   debian:
-    buster: ros-melodic-rosserial-client
+    buster: [ros-melodic-rosserial-client]
 rostest:
   debian:
-    buster: ros-melodic-rostest
+    buster: [ros-melodic-rostest]
 rqt_action:
   debian:
-    buster: ros-melodic-rqt-action
+    buster: [ros-melodic-rqt-action]
 rqt_bag:
   debian:
-    buster: ros-melodic-rqt-bag
+    buster: [ros-melodic-rqt-bag]
 rqt_bag_plugins:
   debian:
-    buster: ros-melodic-rqt-bag-plugins
+    buster: [ros-melodic-rqt-bag-plugins]
 rqt_common_plugins:
   debian:
-    buster: ros-melodic-rqt-common-plugins
+    buster: [ros-melodic-rqt-common-plugins]
 rqt_console:
   debian:
-    buster: ros-melodic-rqt-console
+    buster: [ros-melodic-rqt-console]
 rqt_dep:
   debian:
-    buster: ros-melodic-rqt-dep
+    buster: [ros-melodic-rqt-dep]
 rqt_graph:
   debian:
-    buster: ros-melodic-rqt-graph
+    buster: [ros-melodic-rqt-graph]
 rqt_gui:
   debian:
-    buster: ros-melodic-rqt-gui
+    buster: [ros-melodic-rqt-gui]
 rqt_logger_level:
   debian:
-    buster: ros-melodic-rqt-logger-level
+    buster: [ros-melodic-rqt-logger-level]
 rqt_moveit:
   debian:
-    buster: ros-melodic-rqt-moveit
+    buster: [ros-melodic-rqt-moveit]
 rqt_msg:
   debian:
-    buster: ros-melodic-rqt-msg
+    buster: [ros-melodic-rqt-msg]
 rqt_nav_view:
   debian:
-    buster: ros-melodic-rqt-nav-view
+    buster: [ros-melodic-rqt-nav-view]
 rqt_plot:
   debian:
-    buster: ros-melodic-rqt-plot
+    buster: [ros-melodic-rqt-plot]
 rqt_pose_view:
   debian:
-    buster: ros-melodic-rqt-pose-view
+    buster: [ros-melodic-rqt-pose-view]
 rqt_publisher:
   debian:
-    buster: ros-melodic-rqt-publisher
+    buster: [ros-melodic-rqt-publisher]
 rqt_py_console:
   debian:
-    buster: ros-melodic-rqt-py-console
+    buster: [ros-melodic-rqt-py-console]
 rqt_reconfigure:
   debian:
-    buster: ros-melodic-rqt-reconfigure
+    buster: [ros-melodic-rqt-reconfigure]
 rqt_robot_dashboard:
   debian:
-    buster: ros-melodic-rqt-robot-dashboard
+    buster: [ros-melodic-rqt-robot-dashboard]
 rqt_robot_monitor:
   debian:
-    buster: ros-melodic-rqt-robot-monitor
+    buster: [ros-melodic-rqt-robot-monitor]
 rqt_robot_plugins:
   debian:
-    buster: ros-melodic-rqt-robot-plugins
+    buster: [ros-melodic-rqt-robot-plugins]
 rqt_robot_steering:
   debian:
-    buster: ros-melodic-rqt-robot-steering
+    buster: [ros-melodic-rqt-robot-steering]
 rqt_runtime_monitor:
   debian:
-    buster: ros-melodic-rqt-runtime-monitor
+    buster: [ros-melodic-rqt-runtime-monitor]
 rqt_service_caller:
   debian:
-    buster: ros-melodic-rqt-service-caller
+    buster: [ros-melodic-rqt-service-caller]
 rqt_shell:
   debian:
-    buster: ros-melodic-rqt-shell
+    buster: [ros-melodic-rqt-shell]
 rqt_srv:
   debian:
-    buster: ros-melodic-rqt-srv
+    buster: [ros-melodic-rqt-srv]
 rqt_tf_tree:
   debian:
-    buster: ros-melodic-rqt-tf-tree
+    buster: [ros-melodic-rqt-tf-tree]
 rqt_top:
   debian:
-    buster: ros-melodic-rqt-top
+    buster: [ros-melodic-rqt-top]
 rqt_topic:
   debian:
-    buster: ros-melodic-rqt-topic
+    buster: [ros-melodic-rqt-topic]
 rqt_web:
   debian:
-    buster: ros-melodic-rqt-web
+    buster: [ros-melodic-rqt-web]
 smach:
   debian:
-    buster: ros-melodic-smach
+    buster: [ros-melodic-smach]
 smclib:
   debian:
-    buster: ros-melodic-smclib
+    buster: [ros-melodic-smclib]
 std_msgs:
   debian:
-    buster: ros-melodic-std-msgs
+    buster: [ros-melodic-std-msgs]
 actionlib_msgs:
   debian:
-    buster: ros-melodic-actionlib-msgs
+    buster: [ros-melodic-actionlib-msgs]
 bond:
   debian:
-    buster: ros-melodic-bond
+    buster: [ros-melodic-bond]
 diagnostic_msgs:
   debian:
-    buster: ros-melodic-diagnostic-msgs
+    buster: [ros-melodic-diagnostic-msgs]
 geometry_msgs:
   debian:
-    buster: ros-melodic-geometry-msgs
+    buster: [ros-melodic-geometry-msgs]
 eigen_conversions:
   debian:
-    buster: ros-melodic-eigen-conversions
+    buster: [ros-melodic-eigen-conversions]
 kdl_conversions:
   debian:
-    buster: ros-melodic-kdl-conversions
+    buster: [ros-melodic-kdl-conversions]
 nav_msgs:
   debian:
-    buster: ros-melodic-nav-msgs
+    buster: [ros-melodic-nav-msgs]
 rosbridge_msgs:
   debian:
-    buster: ros-melodic-rosbridge-msgs
+    buster: [ros-melodic-rosbridge-msgs]
 rosgraph_msgs:
   debian:
-    buster: ros-melodic-rosgraph-msgs
+    buster: [ros-melodic-rosgraph-msgs]
 rosmsg:
   debian:
-    buster: ros-melodic-rosmsg
+    buster: [ros-melodic-rosmsg]
 rqt_py_common:
   debian:
-    buster: ros-melodic-rqt-py-common
+    buster: [ros-melodic-rqt-py-common]
 shape_msgs:
   debian:
-    buster: ros-melodic-shape-msgs
+    buster: [ros-melodic-shape-msgs]
 smach_msgs:
   debian:
-    buster: ros-melodic-smach-msgs
+    buster: [ros-melodic-smach-msgs]
 std_srvs:
   debian:
-    buster: ros-melodic-std-srvs
+    buster: [ros-melodic-std-srvs]
 tf2_msgs:
   debian:
-    buster: ros-melodic-tf2-msgs
+    buster: [ros-melodic-tf2-msgs]
 tf2:
   debian:
-    buster: ros-melodic-tf2
+    buster: [ros-melodic-tf2]
 tf2_eigen:
   debian:
-    buster: ros-melodic-tf2-eigen
+    buster: [ros-melodic-tf2-eigen]
 trajectory_msgs:
   debian:
-    buster: ros-melodic-trajectory-msgs
+    buster: [ros-melodic-trajectory-msgs]
 control_msgs:
   debian:
-    buster: ros-melodic-control-msgs
+    buster: [ros-melodic-control-msgs]
 urdf_parser_plugin:
   debian:
-    buster: ros-melodic-urdf-parser-plugin
+    buster: [ros-melodic-urdf-parser-plugin]
 urdfdom_py:
   debian:
-    buster: ros-melodic-urdfdom-py
+    buster: [ros-melodic-urdfdom-py]
 uuid_msgs:
   debian:
-    buster: ros-melodic-uuid-msgs
+    buster: [ros-melodic-uuid-msgs]
 geographic_msgs:
   debian:
-    buster: ros-melodic-geographic-msgs
+    buster: [ros-melodic-geographic-msgs]
 vision_opencv:
   debian:
-    buster: ros-melodic-vision-opencv
+    buster: [ros-melodic-vision-opencv]
 visualization_msgs:
   debian:
-    buster: ros-melodic-visualization-msgs
+    buster: [ros-melodic-visualization-msgs]
 visualization_tutorials:
   debian:
-    buster: ros-melodic-visualization-tutorials
+    buster: [ros-melodic-visualization-tutorials]
 viz:
   debian:
-    buster: ros-melodic-viz
+    buster: [ros-melodic-viz]
 webkit_dependency:
   debian:
-    buster: ros-melodic-webkit-dependency
+    buster: [ros-melodic-webkit-dependency]
 xmlrpcpp:
   debian:
-    buster: ros-melodic-xmlrpcpp
+    buster: [ros-melodic-xmlrpcpp]
 roscpp:
   debian:
-    buster: ros-melodic-roscpp
+    buster: [ros-melodic-roscpp]
 bondcpp:
   debian:
-    buster: ros-melodic-bondcpp
+    buster: [ros-melodic-bondcpp]
 bondpy:
   debian:
-    buster: ros-melodic-bondpy
+    buster: [ros-melodic-bondpy]
 nodelet:
   debian:
-    buster: ros-melodic-nodelet
+    buster: [ros-melodic-nodelet]
 nodelet_tutorial_math:
   debian:
-    buster: ros-melodic-nodelet-tutorial-math
+    buster: [ros-melodic-nodelet-tutorial-math]
 pluginlib_tutorials:
   debian:
-    buster: ros-melodic-pluginlib-tutorials
+    buster: [ros-melodic-pluginlib-tutorials]
 roscpp_tutorials:
   debian:
-    buster: ros-melodic-roscpp-tutorials
+    buster: [ros-melodic-roscpp-tutorials]
 rosout:
   debian:
-    buster: ros-melodic-rosout
+    buster: [ros-melodic-rosout]
 async_web_server_cpp:
   debian:
-    buster: ros-melodic-async-web-server-cpp
+    buster: [ros-melodic-async-web-server-cpp]
 camera_calibration:
   debian:
-    buster: ros-melodic-camera-calibration
+    buster: [ros-melodic-camera-calibration]
 diagnostic_aggregator:
   debian:
-    buster: ros-melodic-diagnostic-aggregator
+    buster: [ros-melodic-diagnostic-aggregator]
 diagnostic_updater:
   debian:
-    buster: ros-melodic-diagnostic-updater
+    buster: [ros-melodic-diagnostic-updater]
 diagnostic_common_diagnostics:
   debian:
-    buster: ros-melodic-diagnostic-common-diagnostics
+    buster: [ros-melodic-diagnostic-common-diagnostics]
 dynamic_reconfigure:
   debian:
-    buster: ros-melodic-dynamic-reconfigure
+    buster: [ros-melodic-dynamic-reconfigure]
 filters:
   debian:
-    buster: ros-melodic-filters
+    buster: [ros-melodic-filters]
 joint_state_publisher:
   debian:
-    buster: ros-melodic-joint-state-publisher
+    buster: [ros-melodic-joint-state-publisher]
 message_filters:
   debian:
-    buster: ros-melodic-message-filters
+    buster: [ros-melodic-message-filters]
 ros_pytest:
   debian:
-    buster: ros-melodic-ros-pytest
+    buster: [ros-melodic-ros-pytest]
 rosauth:
   debian:
-    buster: ros-melodic-rosauth
+    buster: [ros-melodic-rosauth]
 rosbag_storage:
   debian:
-    buster: ros-melodic-rosbag-storage
+    buster: [ros-melodic-rosbag-storage]
 rosnode:
   debian:
-    buster: ros-melodic-rosnode
+    buster: [ros-melodic-rosnode]
 rospy_tutorials:
   debian:
-    buster: ros-melodic-rospy-tutorials
+    buster: [ros-melodic-rospy-tutorials]
 rosshow:
   debian:
-    buster: ros-melodic-rosshow
+    buster: [ros-melodic-rosshow]
 rostopic:
   debian:
-    buster: ros-melodic-rostopic
+    buster: [ros-melodic-rostopic]
 rqt_gui_cpp:
   debian:
-    buster: ros-melodic-rqt-gui-cpp
+    buster: [ros-melodic-rqt-gui-cpp]
 rqt_gui_py:
   debian:
-    buster: ros-melodic-rqt-gui-py
+    buster: [ros-melodic-rqt-gui-py]
 self_test:
   debian:
-    buster: ros-melodic-self-test
+    buster: [ros-melodic-self-test]
 smach_ros:
   debian:
-    buster: ros-melodic-smach-ros
+    buster: [ros-melodic-smach-ros]
 tf2_py:
   debian:
-    buster: ros-melodic-tf2-py
+    buster: [ros-melodic-tf2-py]
 topic_tools:
   debian:
-    buster: ros-melodic-topic-tools
+    buster: [ros-melodic-topic-tools]
 rosbag:
   debian:
-    buster: ros-melodic-rosbag
+    buster: [ros-melodic-rosbag]
 actionlib:
   debian:
-    buster: ros-melodic-actionlib
+    buster: [ros-melodic-actionlib]
 actionlib_tutorials:
   debian:
-    buster: ros-melodic-actionlib-tutorials
+    buster: [ros-melodic-actionlib-tutorials]
 diagnostic_analysis:
   debian:
-    buster: ros-melodic-diagnostic-analysis
+    buster: [ros-melodic-diagnostic-analysis]
 nodelet_topic_tools:
   debian:
-    buster: ros-melodic-nodelet-topic-tools
+    buster: [ros-melodic-nodelet-topic-tools]
 roswtf:
   debian:
-    buster: ros-melodic-roswtf
+    buster: [ros-melodic-roswtf]
 rqt_launch:
   debian:
-    buster: ros-melodic-rqt-launch
+    buster: [ros-melodic-rqt-launch]
 sensor_msgs:
   debian:
-    buster: ros-melodic-sensor-msgs
+    buster: [ros-melodic-sensor-msgs]
 camera_calibration_parsers:
   debian:
-    buster: ros-melodic-camera-calibration-parsers
+    buster: [ros-melodic-camera-calibration-parsers]
 cv_bridge:
   debian:
-    buster: ros-melodic-cv-bridge
+    buster: [ros-melodic-cv-bridge]
 image_geometry:
   debian:
-    buster: ros-melodic-image-geometry
+    buster: [ros-melodic-image-geometry]
 image_transport:
   debian:
-    buster: ros-melodic-image-transport
+    buster: [ros-melodic-image-transport]
 camera_info_manager:
   debian:
-    buster: ros-melodic-camera-info-manager
+    buster: [ros-melodic-camera-info-manager]
 compressed_depth_image_transport:
   debian:
-    buster: ros-melodic-compressed-depth-image-transport
+    buster: [ros-melodic-compressed-depth-image-transport]
 compressed_image_transport:
   debian:
-    buster: ros-melodic-compressed-image-transport
+    buster: [ros-melodic-compressed-image-transport]
 cv_camera:
   debian:
-    buster: ros-melodic-cv-camera
+    buster: [ros-melodic-cv-camera]
 image_proc:
   debian:
-    buster: ros-melodic-image-proc
+    buster: [ros-melodic-image-proc]
 image_publisher:
   debian:
-    buster: ros-melodic-image-publisher
+    buster: [ros-melodic-image-publisher]
 map_msgs:
   debian:
-    buster: ros-melodic-map-msgs
+    buster: [ros-melodic-map-msgs]
 mavros_msgs:
   debian:
-    buster: ros-melodic-mavros-msgs
+    buster: [ros-melodic-mavros-msgs]
 pcl_msgs:
   debian:
-    buster: ros-melodic-pcl-msgs
+    buster: [ros-melodic-pcl-msgs]
 pcl_conversions:
   debian:
-    buster: ros-melodic-pcl-conversions
+    buster: [ros-melodic-pcl-conversions]
 polled_camera:
   debian:
-    buster: ros-melodic-polled-camera
+    buster: [ros-melodic-polled-camera]
 rqt_image_view:
   debian:
-    buster: ros-melodic-rqt-image-view
+    buster: [ros-melodic-rqt-image-view]
 stereo_msgs:
   debian:
-    buster: ros-melodic-stereo-msgs
+    buster: [ros-melodic-stereo-msgs]
 image_view:
   debian:
-    buster: ros-melodic-image-view
+    buster: [ros-melodic-image-view]
 rosbridge_library:
   debian:
-    buster: ros-melodic-rosbridge-library
+    buster: [ros-melodic-rosbridge-library]
 stereo_image_proc:
   debian:
-    buster: ros-melodic-stereo-image-proc
+    buster: [ros-melodic-stereo-image-proc]
 tf2_ros:
   debian:
-    buster: ros-melodic-tf2-ros
+    buster: [ros-melodic-tf2-ros]
 depth_image_proc:
   debian:
-    buster: ros-melodic-depth-image-proc
+    buster: [ros-melodic-depth-image-proc]
 mavros:
   debian:
-    buster: ros-melodic-mavros
+    buster: [ros-melodic-mavros]
 tf:
   debian:
-    buster: ros-melodic-tf
+    buster: [ros-melodic-tf]
 interactive_markers:
   debian:
-    buster: ros-melodic-interactive-markers
+    buster: [ros-melodic-interactive-markers]
 interactive_marker_tutorials:
   debian:
-    buster: ros-melodic-interactive-marker-tutorials
+    buster: [ros-melodic-interactive-marker-tutorials]
 laser_geometry:
   debian:
-    buster: ros-melodic-laser-geometry
+    buster: [ros-melodic-laser-geometry]
 laser_assembler:
   debian:
-    buster: ros-melodic-laser-assembler
+    buster: [ros-melodic-laser-assembler]
 laser_filters:
   debian:
-    buster: ros-melodic-laser-filters
+    buster: [ros-melodic-laser-filters]
 pcl_ros:
   debian:
-    buster: ros-melodic-pcl-ros
+    buster: [ros-melodic-pcl-ros]
 tf2_geometry_msgs:
   debian:
-    buster: ros-melodic-tf2-geometry-msgs
+    buster: [ros-melodic-tf2-geometry-msgs]
 image_rotate:
   debian:
-    buster: ros-melodic-image-rotate
+    buster: [ros-melodic-image-rotate]
 tf2_kdl:
   debian:
-    buster: ros-melodic-tf2-kdl
+    buster: [ros-melodic-tf2-kdl]
 tf2_web_republisher:
   debian:
-    buster: ros-melodic-tf2-web-republisher
+    buster: [ros-melodic-tf2-web-republisher]
 tf_conversions:
   debian:
-    buster: ros-melodic-tf-conversions
+    buster: [ros-melodic-tf-conversions]
 theora_image_transport:
   debian:
-    buster: ros-melodic-theora-image-transport
+    buster: [ros-melodic-theora-image-transport]
 turtlesim:
   debian:
-    buster: ros-melodic-turtlesim
+    buster: [ros-melodic-turtlesim]
 turtle_actionlib:
   debian:
-    buster: ros-melodic-turtle-actionlib
+    buster: [ros-melodic-turtle-actionlib]
 turtle_tf:
   debian:
-    buster: ros-melodic-turtle-tf
+    buster: [ros-melodic-turtle-tf]
 turtle_tf2:
   debian:
-    buster: ros-melodic-turtle-tf2
+    buster: [ros-melodic-turtle-tf2]
 urdf:
   debian:
-    buster: ros-melodic-urdf
+    buster: [ros-melodic-urdf]
 kdl_parser:
   debian:
-    buster: ros-melodic-kdl-parser
+    buster: [ros-melodic-kdl-parser]
 kdl_parser_py:
   debian:
-    buster: ros-melodic-kdl-parser-py
+    buster: [ros-melodic-kdl-parser-py]
 mavros_extras:
   debian:
-    buster: ros-melodic-mavros-extras
+    buster: [ros-melodic-mavros-extras]
 robot_state_publisher:
   debian:
-    buster: ros-melodic-robot-state-publisher
+    buster: [ros-melodic-robot-state-publisher]
 rviz:
   debian:
-    buster: ros-melodic-rviz
+    buster: [ros-melodic-rviz]
 librviz_tutorial:
   debian:
-    buster: ros-melodic-librviz-tutorial
+    buster: [ros-melodic-librviz-tutorial]
 rqt_rviz:
   debian:
-    buster: ros-melodic-rqt-rviz
+    buster: [ros-melodic-rqt-rviz]
 rviz_plugin_tutorials:
   debian:
-    buster: ros-melodic-rviz-plugin-tutorials
+    buster: [ros-melodic-rviz-plugin-tutorials]
 rviz_python_tutorial:
   debian:
-    buster: ros-melodic-rviz-python-tutorial
+    buster: [ros-melodic-rviz-python-tutorial]
 urdf_tutorial:
   debian:
-    buster: ros-melodic-urdf-tutorial
+    buster: [ros-melodic-urdf-tutorial]
 usb_cam:
   debian:
-    buster: ros-melodic-usb-cam
+    buster: [ros-melodic-usb-cam]
 visualization_marker_tutorials:
   debian:
-    buster: ros-melodic-visualization-marker-tutorials
+    buster: [ros-melodic-visualization-marker-tutorials]
 vl53l1x:
   debian:
-    buster: ros-melodic-vl53l1x
+    buster: [ros-melodic-vl53l1x]
 web_video_server:
   debian:
-    buster: ros-melodic-web-video-server
+    buster: [ros-melodic-web-video-server]
 xacro:
   debian:
-    buster: ros-melodic-xacro
+    buster: [ros-melodic-xacro]
 led_msgs:
   debian:
-    buster: ros-melodic-led-msgs
+    buster: [ros-melodic-led-msgs]
 ws281x:
   debian:
-    stretch: ros-melodic-ws281x
+    buster: [ros-melodic-ws281x]
 ddynamic_reconfigure:
   debian:
     buster: [ros-melodic-ddynamic-reconfigure]
