@@ -249,11 +249,14 @@ def check_fcu():
 
         try:
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
-            cell = battery.cell_voltage[0]
-            if cell > 4.3 or cell < 3.0:
-                failure('Incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
-            elif cell < 3.7:
-                failure('Critically low cell voltage: %.2f V, recharge battery', cell)
+            if not battery.cell_voltage:
+                failure('cell voltage is not available, https://clever.coex.tech/power')
+            else:
+                cell = battery.cell_voltage[0]
+                if cell > 4.3 or cell < 3.0:
+                    failure('incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
+                elif cell < 3.7:
+                    failure('critically low cell voltage: %.2f V, recharge battery', cell)
         except rospy.ROSException:
             failure('no battery state')
 
