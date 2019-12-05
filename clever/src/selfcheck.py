@@ -95,7 +95,7 @@ def get_param(name):
         return None
 
     if not res.success:
-        failure('Unable to retrieve PX4 parameter %s', name)
+        failure('unable to retrieve PX4 parameter %s', name)
     else:
         if res.value.integer != 0:
             return res.value.integer
@@ -245,7 +245,7 @@ def check_fcu():
 
         cbrk_usb_chk = get_param('CBRK_USB_CHK')
         if cbrk_usb_chk != 197848:
-            failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+            failure('set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
 
         try:
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
@@ -701,7 +701,7 @@ def check_network():
     ros_hostname = os.environ.get('ROS_HOSTNAME').strip()
 
     if not ros_hostname:
-        failure('No ROS_HOSTNAME is set')
+        failure('no ROS_HOSTNAME is set')
 
     elif ros_hostname.endswith('.local'):
         # using mdns hostname
@@ -715,7 +715,7 @@ def check_network():
                 if ros_hostname in parts:
                     break
         else:
-            failure('Not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
+            failure('not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
 
 
 @check('RPi health')
@@ -739,7 +739,7 @@ def check_rpi_health():
         # with some of the FLAGs OR'ed together
         output = subprocess.check_output(['vcgencmd', 'get_throttled'])
     except OSError:
-        failure('Could not call vcgencmd binary; not a Raspberry Pi?')
+        failure('could not call vcgencmd binary; not a Raspberry Pi?')
         return
 
     throttle_mask = int(output.split('=')[1], base=16)
