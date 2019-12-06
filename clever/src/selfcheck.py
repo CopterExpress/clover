@@ -95,7 +95,7 @@ def get_param(name):
         return None
 
     if not res.success:
-        failure('Unable to retrieve PX4 parameter %s', name)
+        failure('unable to retrieve PX4 parameter %s', name)
     else:
         if res.value.integer != 0:
             return res.value.integer
@@ -245,15 +245,18 @@ def check_fcu():
 
         cbrk_usb_chk = get_param('CBRK_USB_CHK')
         if cbrk_usb_chk != 197848:
-            failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+            failure('set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
 
         try:
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
-            cell = battery.cell_voltage[0]
-            if cell > 4.3 or cell < 3.0:
-                failure('Incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
-            elif cell < 3.7:
-                failure('Critically low cell voltage: %.2f V, recharge battery', cell)
+            if not battery.cell_voltage:
+                failure('cell voltage is not available, https://clever.coex.tech/power')
+            else:
+                cell = battery.cell_voltage[0]
+                if cell > 4.3 or cell < 3.0:
+                    failure('incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
+                elif cell < 3.7:
+                    failure('critically low cell voltage: %.2f V, recharge battery', cell)
         except rospy.ROSException:
             failure('no battery state')
 
@@ -698,7 +701,7 @@ def check_network():
     ros_hostname = os.environ.get('ROS_HOSTNAME').strip()
 
     if not ros_hostname:
-        failure('No ROS_HOSTNAME is set')
+        failure('no ROS_HOSTNAME is set')
 
     elif ros_hostname.endswith('.local'):
         # using mdns hostname
@@ -712,7 +715,7 @@ def check_network():
                 if ros_hostname in parts:
                     break
         else:
-            failure('Not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
+            failure('not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
 
 
 @check('RPi health')
@@ -736,14 +739,14 @@ def check_rpi_health():
         # with some of the FLAGs OR'ed together
         output = subprocess.check_output(['vcgencmd', 'get_throttled'])
     except OSError:
-        failure('Could not call vcgencmd binary; not a Raspberry Pi?')
+        failure('could not call vcgencmd binary; not a Raspberry Pi?')
         return
 
     throttle_mask = int(output.split('=')[1], base=16)
     if throttle_mask & (FLAG_THROTTLING_NOW | FLAG_THROTTLING_OCCURRED):
-        failure('System throttled to prevent damage')
+        failure('system throttled to prevent damage')
     if throttle_mask & (FLAG_UNDERVOLTAGE_NOW | FLAG_UNDERVOLTAGE_OCCURRED):
-        failure('Not enough power for onboard computer, flight inadvisable')
+        failure('not enough power for onboard computer, flight inadvisable')
     if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
         failure('CPU frequency reduced to avoid overheating')
     if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
