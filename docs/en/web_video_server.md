@@ -36,7 +36,7 @@ Parameters `width`, `height`, etc. re also available. Read more about `web_video
 
 ## Browse with rqt_image_view
 
-To browse images with the rqt tools the user needs a computer with Ubuntu 16.04 и [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+To browse images with the rqt tools the user needs a computer with Ubuntu 18.04 and [ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 [Connect to the Clever Wi-Fi network](wifi.md) an run `rqt_image_view` with its IP-address:
 

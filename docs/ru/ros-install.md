@@ -1,14 +1,10 @@
-# Установка и настройка пакета ROS Kinetic
+# Установка и настройка пакета ROS Melodic
 
 Для работы с такими инструментами как: rqt, rviz и т. д., а также для запуска симулятора (SITL) вам потребуется установленный и настроенный пакет ROS.
 
-> **Hint** Более подробную инструкцию по установке смотрите в [основной статье](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+> **Hint** Более подробную инструкцию по установке смотрите в [основной статье](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
-<!-- -->
-
-> **Hint** В случае, если вы используете Ubuntu версии 18.04, вместо ROS Kinetic вам нужно будет установить ROS Melodic. Полную инструкцию по установке вы можете найти [здесь](http://wiki.ros.org/melodic/Installation/Ubuntu).
-
-## Установка ROS Kinetic на Ubuntu
+## Установка ROS Melodic на Ubuntu
 
 Для того, чтобы загрузить и установить правильную версию пакета требуется сделать настройки репозиториев, для этого откройте "Программы и обновления" и разрешите `restricted`, `universe` и `multiverse`.
 
@@ -35,13 +31,13 @@ sudo apt-get update
 + Если вы планируете использовать ROS вместе с симуляцией (также содержит инструменты: rqt, rviz и т. д):
 
     ```bash
-    sudo apt-get install ros-kinetic-desktop-full
+    sudo apt-get install ros-melodic-desktop-full
     ```
 
 + Если вы планируете использовать ROS исключительно работать с инструментами rqt, rviz и т. д:
 
     ```bash
-    sudo apt-get install ros-kinetic-desktop
+    sudo apt-get install ros-melodic-desktop
     ```
 
 После установки пакета вам нужно инициализировать `rosdep`.
@@ -55,12 +51,12 @@ rosdep update
 Если вам не удобно запускать переменное окружение вручную каждый раз, вы можете настроить его так, чтобы оно добавлялось в ваш сеанс bash при каждом запуске новой оболочки:
 
 ```bash
-echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Если вы хотите установить какие-либо дополнительные пакеты для вашего ROS Kinetic просто используйте:
+Если вы хотите установить какие-либо дополнительные пакеты для вашего ROS Melodic просто используйте:
 
 ```bash
-sudo apt-get install ros-kinetic-PACKAGE
+sudo apt-get install ros-melodic-PACKAGE
 ```

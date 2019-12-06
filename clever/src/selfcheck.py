@@ -607,7 +607,7 @@ def check_rangefinder():
 @check('Boot duration')
 def check_boot_duration():
     output = subprocess.check_output('systemd-analyze')
-    r = re.compile(r'([\d\.]+)s$')
+    r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
     if duration > 15:
         failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
