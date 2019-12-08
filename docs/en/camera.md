@@ -48,7 +48,7 @@ Additionally you can specify an arbitrary capture parameter using its [OpenCV co
 
 ## Computer vision
 
-The [SD card image](image.md) comes with a preinstalled [OpenCV](https://opencv.org) library, which is commonly used for various comupter vision-related tasks. Additional libraries for converting from ROS messages to OpenCV images and back are preinstalled as well.
+The [SD card image](image.md) comes with a preinstalled [OpenCV](https://opencv.org) library, which is commonly used for various computer vision-related tasks. Additional libraries for converting from ROS messages to OpenCV images and back are preinstalled as well.
 
 ### Python
 
