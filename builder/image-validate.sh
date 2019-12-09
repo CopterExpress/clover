@@ -24,6 +24,7 @@ source /home/pi/catkin_ws/devel/setup.bash
 cd /home/pi/catkin_ws/src/clever/builder/test/
 ./tests.sh
 ./tests.py
+./tests_py3.py
 
 echo "Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
