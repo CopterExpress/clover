@@ -279,6 +279,9 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
 
 1. Prepare the laser rangefinder by soldering leads to it.
 2. Use four 2x5 self-tapping screws to secure the camera.
+
+    > **Warning** Make sure the screws don't touch any components on the camera PCB! Otherwise the camera may not function properly.
+
 3. Mount the laser rangefinder on the lower deck using two M3x8 screws and steel nuts.
 
     <div class="image-group">
