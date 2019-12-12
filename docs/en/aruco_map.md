@@ -10,7 +10,7 @@
 
 ## Configuration
 
-Set the `aruco` argument in `~/catkin_ws/src/clever/clever/launch/aruco.launch` to `true`:
+Set the `aruco` argument in `~/catkin_ws/src/clever/clever/launch/clever.launch` to `true`:
 
 ```xml
 <arg name="aruco" default="true"/>
