@@ -71,5 +71,8 @@
     <include file="$(find clever)/launch/led.launch" if="$(arg led)"/>
 
     <!-- rc backend -->
-    <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)"/>
+    <node name="rc" pkg="clever" type="rc" output="screen" if="$(arg rc)" clear_params="true">
+        <!-- Send fake GCS heartbeats. Set to "true" for upstream PX4 -->
+        <param name="use_fake_gcs" value="false"/>
+    </node>
 </launch>
