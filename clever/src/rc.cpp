@@ -34,12 +34,16 @@ public:
 		nh(),
 		nh_priv("~")
 	{
+		bool use_fake_gcs = nh_priv.param("use_fake_gcs", true);
 		// Create socket thread
 		std::thread t(&RC::socketThread, this);
 		t.detach();
 
-		std::thread gcst(&RC::fakeGCSThread, this);
-		gcst.detach();
+		if (use_fake_gcs)
+		{
+			std::thread gcst(&RC::fakeGCSThread, this);
+			gcst.detach();
+		}
 
 		initLatchedState();
 	}
