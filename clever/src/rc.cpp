@@ -39,8 +39,7 @@ public:
 		std::thread t(&RC::socketThread, this);
 		t.detach();
 
-		if (use_fake_gcs)
-		{
+		if (use_fake_gcs) {
 			std::thread gcst(&RC::fakeGCSThread, this);
 			gcst.detach();
 		}
