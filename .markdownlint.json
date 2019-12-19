@@ -105,7 +105,8 @@
             "TCP",
             "UDP",
             "QR",
-            "Li-ion"
+            "Li-ion",
+            "Nvidia"
         ],
         "code_blocks": false
     },
