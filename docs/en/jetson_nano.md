@@ -22,6 +22,10 @@ For the initial setup you'll need an HDMI or DisplayPort monitor, a keyboard and
 
 > **Hint** Jetson Nano can be powered by a microUSB cable, but we strongly suggest using a good power supply and a barrel jack connector. You'll need to put a jumper on the J48 pins (they are right next to the CSI connector on the carrier board).
 
+Accept the Nvidia EULA and follow the installer prompts. The system will reboot after installation. Login with your username and password.
+
+> **Info** We strongly recommend to choose the English system language/locale for Jetson Nano to avoid ROS compatibility issues!
+
 If you've installed a Wi-Fi adapter, you may want to configure your Jetson Nano to connect to your Wi-Fi network automatically. Once the system is installed and booted up, click on the "wireless network" icon in the top bar, choose "Edit Connections..." in the drop-down menu, select your network name from the list and click on the gear icon at the bottom of the window.
 
 <img src="../assets/jetson_nano/01-network-config.png" class="zoom">
