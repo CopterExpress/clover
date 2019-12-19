@@ -143,4 +143,4 @@ You may also notice that the camera image has a red tint that is more pronounced
 
 ### LED strip
 
-Jetson Nano currently does not support LED strips.
+Jetson Nano currently does not support LED strips over GPIO.
