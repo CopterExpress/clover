@@ -133,7 +133,7 @@ roslaunch clever clever.launch
 
 ### CSI cameras
 
-Jetson Nano currently does not support older Raspberry Pi v1 cameras (that are based on the Omnivision OV5647 sensor). Raspberry Pi v2 cameras (the ones that use Sony imx219) are supported, but are not available as Video4Linux devices.
+Jetson Nano currently does not support older Raspberry Pi v1 cameras (that are based on the Omnivision OV5647 sensor). Raspberry Pi v2 cameras (the ones that use Sony IMX219) are supported, but are not available as Video4Linux devices.
 
 Fortunately, these cameras are available using GStreamer. You can try using the [`gscam`](http://wiki.ros.org/gscam) ROS package or our [`jetson_camera`](https://github.com/sfalexrog/jetson_camera) node. The latter requires you to build OpenCV 3.4 from source with GStreamer support.
 
