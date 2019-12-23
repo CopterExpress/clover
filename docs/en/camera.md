@@ -29,7 +29,7 @@ sudo systemctl stop clever
 Then use `raspistill` to capture an image from the camera:
 
 ```bash
-raspistill -o test-image.jpeg
+raspistill -o test.jpg
 ```
 
 If it doesn't work, check the camera cable connections and the cable itself. Replace the cable if it is damaged. Also, make sure the camera screws don't touch any components on the camera board.

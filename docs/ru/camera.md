@@ -31,7 +31,7 @@ sudo systemctl stop clever
 Получите картинку с камеры утилитой `raspistill`:
 
 ```bash
-raspistill -o test-image.jpg
+raspistill -o test.jpg
 ```
 
 Если команда завершается с ошибкой, проверьте качество подключения шлейфа камеры к Raspberry Pi или замените его.
