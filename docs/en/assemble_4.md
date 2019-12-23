@@ -407,4 +407,10 @@ Check the quadrotor assembly:
 
 <img src="../assets/assembling_clever4/final_1.png" width=300 class="zoom border center">
 
+Be sure to install and setup the voltage indicator before flying, so as not to overdischarge the battery. To configure the indicator, use the button located at its base. The displayed numbers during setup indicate the minimum possible voltage in each [cell](gloss.md#battery-cell) of the battery, the recommended value is **3.5**.
+
+> **Info** Sound indication means that your battery is low and needs to be charged.
+
+<img src="../assets/assembling_clever4/pishalka.png" width=300 class="zoom border center">
+
 > **Success** The drone is ready to fly!
