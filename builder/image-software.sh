@@ -68,9 +68,7 @@ apt-get update \
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
 echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
 echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
-# FIXME: We still don't have these packages built for Buster
-# FIXME: Check these packages after their installation
-echo "deb http://deb.coex.tech/clever stretch main" > /etc/apt/sources.list.d/clever.list
+echo "deb http://deb.coex.tech/clever buster main" > /etc/apt/sources.list.d/clever.list
 
 echo_stamp "Update apt cache"
 
