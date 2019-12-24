@@ -18,8 +18,6 @@
   <depend>tf2</depend>
   <depend>tf2_ros</depend>
   <depend>tf2_geometry_msgs</depend>
-  <!-- FIXME: OpenCV3 is not in Melodic -->
-  <!-- <depend>opencv3</depend> -->
   <depend>cv_bridge</depend>
   <depend>image_transport</depend>
   <depend>message_generation</depend>
