@@ -52,6 +52,7 @@
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Melodic](ros-install.md)
+  * [Подключение клевера по 4G](4g.md)
   * [Пакеты Клевера на Jetson Nano](jetson_nano.md)
   * [Пилотирование со смартфона](rc.md)
   * [Настройка сети RPi](network.md)
