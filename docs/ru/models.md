@@ -4,15 +4,13 @@
 
 ## Клевер 4
 
-### Холдер для АКБ
+### 3D печать
 
-Файл: [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/battery_holder.stl).
+* АКБ холдер – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/battery_holder.stl). Материал печати: PLA/ABS/SBS. Заполнение: не менее 50%.
 
-Материал печати: PLA/ABS/SBS.
+### Лазерная резка
 
-Заполнение: не менее 50%.
-
-Функция: устанавливается на деталь "дека монтажная", после чего позволяет надежно фиксировать АКБ с помощью ремешка. Также имеется возможность установки индикатора напряжения (с помощью 3М-скотча).
+* Ремонтная накладка – [`reinforcing_pad.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/reinforcing_pad.dxf)
 
 ## Клевер 3
 
