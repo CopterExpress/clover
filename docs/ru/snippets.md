@@ -343,12 +343,14 @@ set_mode(custom_mode='STABILIZED')
 
 ### # {#flip}
 
-Флип по крену:
+Универсальный флип:
 
 ```python
 import math
 
 # ...
+
+PI_2 = math.pi / 2
 
 def flip():
     start = get_telemetry()  # memorize starting position
@@ -356,12 +358,13 @@ def flip():
     set_rates(thrust=1)  # bump up
     rospy.sleep(0.2)
 
-    set_rates(roll_rate=30, thrust=0.2)  # maximum roll rate
+    set_rates(pitch_rate=30, thrust=0.2)  # pitch flip
+    # set_rates(roll_rate=30, thrust=0.2)  # roll flip
 
     while True:
         telem = get_telemetry()
-
-        if abs(telem.roll) > math.pi/2:
+        flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+        if flipped:
             break
 
     rospy.loginfo('finish flip')
