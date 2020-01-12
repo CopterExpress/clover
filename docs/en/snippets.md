@@ -151,7 +151,7 @@ Determining whether the copter is turned upside-down:
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
+flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
 ```
 
 ### # {#angle-hor}
@@ -299,7 +299,7 @@ set_mode(custom_mode='STABILIZED')
 
 ### # {#flip}
 
-Universal flip:
+Flip:
 
 ```python
 import math
