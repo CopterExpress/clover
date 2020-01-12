@@ -51,6 +51,7 @@
   * [PID Setup](calibratePID.md)
   * [Model files for parts](models.md)
   * [ROS Melodic installation](ros-install.md)
+  * [Quadcopter control with 4G communication](4g.md)
   * [Clever and Jetson Nano](jetson_nano.md)
   * [Remote control app](rc.md)
   * [Wi-Fi Configuration](network.md)
