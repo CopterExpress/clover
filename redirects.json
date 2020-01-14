@@ -55,7 +55,7 @@
         { "from": "leds/", "to": "ru/leds.html" },
         { "from": "hostname/", "to": "ru/hostname.html" },
 
-        { "from": "ru/microsd_images.html", "to": "ru/image.html" },
-        { "from": "en/microsd_images.html", "to": "en/image.html" }
+        { "from": "ru/microsd_images.html", "to": "image.html" },
+        { "from": "en/microsd_images.html", "to": "image.html" }
     ]
 }
