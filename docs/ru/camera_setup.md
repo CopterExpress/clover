@@ -19,7 +19,7 @@
 
 <img src="../assets/focused.png" width=300>
 
-## Настройка расположения камеры
+## Настройка расположения камеры {#frame}
 
 Расположение и ориентация камеры [задается в файле](cli.md#editing) `~/catkin_ws/src/clever/clever/launch/main_camera.launch`:
 
