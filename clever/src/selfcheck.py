@@ -730,7 +730,7 @@ def check_rpi_health():
     FLAG_UNDERVOLTAGE_OCCURRED = 0x10000
     FLAG_FREQ_CAP_OCCURRED = 0x20000
     FLAG_THROTTLING_OCCURRED = 0x40000
-    FLAG_THERMAL_LIMIT_OUCCURRED = 0x80000
+    FLAG_THERMAL_LIMIT_OCCURRED = 0x80000
 
     try:
         # vcgencmd outputs a single string in a form of
@@ -749,7 +749,7 @@ def check_rpi_health():
         failure('not enough power for onboard computer, flight inadvisable')
     if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
         failure('CPU frequency reduced to avoid overheating')
-    if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
+    if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OCCURRED):
         failure('CPU over soft temperature limit, expect performance loss')
 
 
