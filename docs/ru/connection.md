@@ -1,56 +1,46 @@
-Подключение Pixhawk/Pixracer к Raspberry Pi
-===
+# Подключение Raspberry Pi к полетному контроллеру
 
-Для программирования [автономных полетов](simple_offboard.md), [работы с Pixhawk (Pixracer) по Wi-Fi](gcs_bridge.md), использования [телефонного пульта](rc.md) и других функций необходимо подсоединить Raspberry Pi к Pixhawk (Pixracer).
+Для программирования [автономных полетов](simple_offboard.md), [работы с Pixhawk (Pixracer) по Wi-Fi](gcs_bridge.md), использования [телефонного пульта](rc.md) и других функций необходимо соединение Raspberry Pi и полетного контроллера.
 
-Убедиться в работоспособности подключения, [выполнив на Raspberry Pi](ssh.md):
+## Подключение по USB
 
-```bash
-rostopic echo /mavros/state
-```
+Основным способом подключения является подключение по интерфейсу USB.
 
-Поле `connected` должно содержать значение `True`.
+1. Соедините Raspberry Pi и полетный контроллер micro-USB to USB кабелем.
+2. [Подключитесь в Raspberry Pi по SSH](ssh.md).
+3. Убедитесь в работоспособности подключения, [выполнив на Raspberry Pi](ssh.md):
 
-Подключение по USB
----
+    ```bash
+    rostopic echo /mavros/state
+    ```
 
-Соедините Pixhawk/Pixracer и Raspberry Pi micro-USB to USB кабелем.
-
-Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения установлен на USB:
-
-```xml
-<arg name="fcu_conn" default="usb"/>
-```
-
-При изменении launch-файла необходимо перезапустить пакет `clever`:
-
-```bash
-sudo systemctl restart clever
-```
+    Поле `connected` должно содержать значение `True`.
 
 > **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](px4_parameters.md) `CBRK_USB_CHK` на 197848.
 
-Подключение по UART
----
+## Подключение по UART
 
-TODO схема подключения
+<!-- TODO схема подключения -->
 
-Необходимо убедиться, что в launch-файле Клевера (`~/catkin_ws/src/clever/clever/clever.launch`) тип подключения установлен на UART:
+Дополнительным способом подключения является подключение подключение по интерйсу UART.
 
-```xml
-<arg name="fcu_conn" default="uart"/>
-```
+1. Подключите Raspberry Pi к полетному контроллеру по UART.
+2. [Подключитесь в Raspberry Pi по SSH](ssh.md).
+3. Поменяйте в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения на UART:
 
-При изменении launch-файла необходимо перезапустить пакет `clever`:
+    ```xml
+    <arg name="fcu_conn" default="uart"/>
+    ```
 
-```bash
-sudo systemctl restart clever
-```
+    При изменении launch-файла необходимо перезапустить пакет `clever`:
 
-> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.
+    ```bash
+    sudo systemctl restart clever
+    ```
 
-Подключение к SITL
----
+> **Hint** Для корректной работы подключения Raspberry Pi и полетного контроллера по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.
+
+## Подключение к SITL
 
 Для того, чтобы подсоединиться к локально/удаленно запущенному [SITL](sitl.md), необходимо установить аргумент `fcu_conn` в `udp`, и `fcu_ip` в IP-адрес машины, где запущен SITL (`127.0.0.1` для локального):
 
@@ -58,3 +48,5 @@ sudo systemctl restart clever
 <arg name="fcu_conn" default="udp"/>
 <arg name="fcu_ip" default="127.0.0.1"/>
 ```
+
+**Далее**: [Подключение QGroundControl по Wi-Fi](gcs_bridge.md).

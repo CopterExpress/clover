@@ -33,7 +33,6 @@
   <depend>mavros_extras</depend>
   <depend>cv_camera</depend>
   <depend>cv_bridge</depend>
-  <depend>opencv3</depend>
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
   <depend>tf2_web_republisher</depend>

@@ -19,11 +19,13 @@
 #include <geometry_msgs/TransformStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
+#include <std_srvs/Trigger.h>
 // #include <aruco_pose/MarkerArray.h>
 
 using std::string;
 using namespace geometry_msgs;
 
+bool reset_flag = false;
 string local_frame_id, frame_id, child_frame_id, offset_frame_id;
 tf2_ros::Buffer tf_buffer;
 ros::Publisher vpe_pub;
@@ -84,13 +86,14 @@ void callback(const T& msg)
 
 		// offset
 		if (!offset_frame_id.empty()) {
-			if (msg->header.stamp - vpe.header.stamp > offset_timeout) {
+			if (reset_flag || msg->header.stamp - vpe.header.stamp > offset_timeout) {
 				// calculate the offset
 				offset = tf_buffer.lookupTransform(local_frame_id, frame_id,
 				                                   msg->header.stamp, ros::Duration(0.02));
 				// offset.header.frame_id = vpe.header.frame_id;
 				offset.child_frame_id = offset_frame_id;
 				br.sendTransform(offset);
+				reset_flag = false;
 				ROS_INFO("offset reset");
 			}
 			// apply the offset
@@ -104,6 +107,13 @@ void callback(const T& msg)
 	} catch (const tf2::TransformException& e) {
 		ROS_WARN_THROTTLE(5, "%s", e.what());
 	}
+}
+
+bool reset(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
+{
+	reset_flag = true;
+	res.success = true;
+	return true;
 }
 
 int main(int argc, char **argv) {
@@ -138,6 +148,8 @@ int main(int argc, char **argv) {
 		publish_zero_duration = ros::Duration(nh_priv.param("publish_zero_duration", 5.0));
 		local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &localPositionCallback);
 	}
+
+	auto reset_serv = nh_priv.advertiseService("reset", &reset);
 
 	ROS_INFO("ready");
 	ros::spin();

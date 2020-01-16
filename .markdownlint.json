@@ -20,6 +20,7 @@
             "MAVLink",
             "ROS",
             "ROS Kinetic",
+            "ROS Melodic",
             "OpenCV",
             "Gazebo",
             "GitHub",
@@ -104,7 +105,8 @@
             "TCP",
             "UDP",
             "QR",
-            "Li-ion"
+            "Li-ion",
+            "Nvidia"
         ],
         "code_blocks": false
     },

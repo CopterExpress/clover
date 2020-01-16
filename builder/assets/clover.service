@@ -1,7 +1,6 @@
 [Unit]
 Description=Clover ROS package
 Requires=roscore.service
-After=network.target
 
 [Service]
 User=pi

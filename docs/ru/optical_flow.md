@@ -1,10 +1,10 @@
 # Использование Optical Flow
 
-При использовании технологии Optical Flow возможен полет в режиме POSCTL и автономные полеты по камере, направленной вниз, за счет измерения сдвигов текстуры поверхности пола.
+При использовании технологии Optical Flow возможен полет в режиме POSCTL и автономные полеты ([режим OFFBOARD](simple_offboard.md)) по камере, направленной вниз, за счет измерения сдвигов текстуры поверхности пола.
 
 ## Включение
 
-> **Hint** Рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
+> **Hint** Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
@@ -20,17 +20,7 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 
 ## Настройка полетного контроллера
 
-При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
-
-* `EKF2_AID_MASK` – включен флажок use optical flow.
-* `EKF2_OF_DELAY` – 0.
-* `EKF2_OF_QMIN` – 10.
-* `EKF2_OF_N_MIN` – 0.05.
-* `EKF2_OF_N_MAX` - 0.2.
-* `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
-* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
-* Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
+> **Hint** При использовании [сборки PX4 для Клевера](firmware.md#прошивка-для-клевера) необходимые параметры PX4 применятся автоматически.
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
@@ -43,6 +33,18 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
 * `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
+
+При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
+
+* `EKF2_AID_MASK` – включен флажок use optical flow.
+* `EKF2_OF_DELAY` – 0.
+* `EKF2_OF_QMIN` – 10.
+* `EKF2_OF_N_MIN` – 0.05.
+* `EKF2_OF_N_MAX` - 0.2.
+* `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
+* `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
+* Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
 
@@ -63,7 +65,13 @@ navigate(z=1.5, frame_id='body', auto_arm=True)
 Полет вперед на 1 м:
 
 ```python
-navigate(x=1.5, frame_id='body')
+navigate(x=1, frame_id='body')
+```
+
+Полет назад на 1 м (относительно предыдущей целевой точки):
+
+```python
+navigate(x=-1, frame_id='navigate_target')
 ```
 
 При использовании Optical Flow возможна также [навигация по ArUco-маркерам](aruco_marker.md), в том числе [используя VPE](aruco_map.md).

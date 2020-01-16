@@ -8,7 +8,7 @@
 <arg name="main_camera" default="true"/>
 ```
 
-Также нужно убедиться, что для камеры [указано корректное расположение и ориентация](camera_frame.md).
+Также нужно убедиться, что камера [сфокусирована и для нее указано корректное расположение и ориентация](camera_setup.md).
 
 При изменении launch-файла необходимо перезапустить пакет `clever`:
 
@@ -31,10 +31,22 @@ sudo systemctl stop clever
 Получите картинку с камеры утилитой `raspistill`:
 
 ```bash
-raspistill -o test-image.jpg
+raspistill -o test.jpg
 ```
 
 Если команда завершается с ошибкой, проверьте качество подключения шлейфа камеры к Raspberry Pi или замените его.
+
+## Настройки камеры
+
+Ряд параметров камеры - размер изображения, максимальную частоту кадров, экспозицию - можно настроить в файле `main_camera.launch`. Список настраиваемых параметров можно [посмотреть в репозитории cv_camera](https://github.com/OTL/cv_camera#parameters).
+
+Параметры, не указанные в этом списке, можно указывать через [код параметра OpenCV](https://docs.opencv.org/3.3.1/d4/d15/group__videoio__flags__base.html). Например, для установки фиксированной экспозиции добавьте следующие параметры в ноду камеры:
+
+```xml
+<param name="property_0_code" value="21"/> <!-- property code 21 is CAP_PROP_AUTO_EXPOSURE -->
+<param name="property_0_value" value="0.25"/> <!-- property values are normalized as per OpenCV specs, even for "menu" controls; 0.25 means "use manual exposure" -->
+<param name="cv_cap_prop_exposure" value="0.3"/> <!-- set exposure to 30% of maximum value -->
+```
 
 ## Компьютерное зрение
 

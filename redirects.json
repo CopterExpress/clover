@@ -1,6 +1,5 @@
 {
     "redirects": [
-        { "from": "index.html", "to": "ru/index.html" },
         { "from": "assemble.html", "to": "ru/assemble_2.html" },
         { "from": "assemble_clever3_4in1.html", "to": "ru/assemble_3.html" },
         { "from": "glossary.html", "to": "ru/gloss.html" },
@@ -32,7 +31,8 @@
         { "from": "aruco.html", "to": "ru/aruco.html" },
         { "from": "selfcheck.html", "to": "ru/selfcheck.html" },
         { "from": "snippets.html", "to": "ru/snippets.html" },
-        { "from": "camera_frame.html", "to": "ru/camera_frame.html" },
+        { "from": "camera_frame.html", "to": "ru/camera_setup.html" },
+        { "from": "ru/camera_frame.html", "to": "camera_setup.html" },
         { "from": "camera.html", "to": "ru/camera.html" },
         { "from": "led.html", "to": "ru/leds.html" },
         { "from": "leds.html", "to": "ru/leds.html" },
@@ -54,8 +54,9 @@
         { "from": "laser/", "to": "ru/laser.html" },
         { "from": "led/", "to": "ru/leds.html" },
         { "from": "leds/", "to": "ru/leds.html" },
+        { "from": "hostname/", "to": "ru/hostname.html" },
 
-        { "from": "ru/microsd_images.html", "to": "ru/image.html" },
-        { "from": "en/microsd_images.html", "to": "en/image.html" }
+        { "from": "ru/microsd_images.html", "to": "image.html" },
+        { "from": "en/microsd_images.html", "to": "image.html" }
     ]
 }

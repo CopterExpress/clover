@@ -36,7 +36,7 @@ http://192.168.11.1:8080/stream_viewer?topic=/main_camera/image_raw&type=mjpeg&q
 
 ## Просмотр через rqt_image_view
 
-Для просмотра изображений через инструменты rqt необходим компьютер с установленной Ubuntu 16.04 и [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+Для просмотра изображений через инструменты rqt необходим компьютер с установленной Ubuntu 18.04 и [ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 [Подключитесь к Wi-Fi сети Клевера](wifi.md) и запустите `rqt_image_view` с указанием его IP-адреса:
 

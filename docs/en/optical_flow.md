@@ -4,7 +4,7 @@ Running the technology "Optical Flow" offers the possibility of POSCTL flight mo
 
 ## Enabling
 
-> **Hint** It is recommanded to use [special PX4 firmware for Clever](firmware.md#прошивка-для-клевера).
+> **Hint** It is recommended to use [special PX4 firmware for Clever](firmware.md#прошивка-для-клевера).
 
 The use of a rangefinder is essential. [Connect and setup laser-ranging sensor VL53L1X](laser.md), according to the manual.
 
@@ -14,11 +14,13 @@ Enable Optical Flow in the file `~/catkin_ws/src/clever/clever/launch/clever.lau
 <arg name="optical_flow" default="true"/>
 ```
 
-Optical Flow publishes data in `mavros/px4flow/raw/send` topic. In the topic `optical_flow/debug` is also published a vizualization, that can be viewed with [web_video_server](web_video_server.md).
+Optical Flow publishes data in `mavros/px4flow/raw/send` topic. In the topic `optical_flow/debug` is also published a visualization, that can be viewed with [web_video_server](web_video_server.md).
 
-> **Info** Correct connexion and [setup](camera.md) of the camera module is needed for proper functioning.
+> **Info** Correct connection and [setup](camera.md) of the camera module is needed for proper functioning.
 
-## Setup of the flight controler
+## Setup of the flight controller
+
+> **Hint** Suggested parameters are applied automatically in [our custom PX4 firmware](firmware.md#modified-firmware-for-clever).
 
 When using **EKF2** (parameter `SYS_MC_EST_GROUP` = `ekf2`):
 
@@ -44,7 +46,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
 * Optional: `LPE_FUSION` – falg 'pub agl as lpos down' is on (сf. [rangefinder setup](laser.md).
 
-[The `selfcheck.py` utility](selfcheck.md) will help you verify that all settings are corectly set.
+[The `selfcheck.py` utility](selfcheck.md) will help you verify that all settings are correctly set.
 
 ## POSCTL flight
 
@@ -72,7 +74,7 @@ navigate(x=1.5, frame_id='body')
 
 <!-- TODO: статья по пидам -->
 
-If the copter has an unstable position using VPE, try to increase the *P* coefficient of speed PID controler - parameters are `MPC_XY_VEL_P` and `MPC_Z_VEL_P`.
+If the copter has an unstable position using VPE, try to increase the *P* coefficient of speed PID controller - parameters are `MPC_XY_VEL_P` and `MPC_Z_VEL_P`.
 
 If the copter has an unstable height, try increasing `MPC_Z_VEL_P` coefficient or getting better hover throttle - `MPC_THR_HOVER`.
 

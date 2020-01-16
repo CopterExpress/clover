@@ -8,7 +8,7 @@
     <arg name="optical_flow" default="false"/>
     <arg name="aruco" default="false"/>
     <arg name="rangefinder_vl53l1x" default="false"/>
-    <arg name="led" default="false"/>
+    <arg name="led" default="true"/>
     <arg name="rc" default="true"/>
 
     <!-- log formatting -->
@@ -63,11 +63,16 @@
     <!-- vl53l1x ToF rangefinder -->
     <node name="rangefinder" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(arg rangefinder_vl53l1x)">
         <param name="frame_id" value="rangefinder"/>
+        <param name="min_signal" value="0.4"/>
+        <param name="pass_statuses" type="yaml" value="[0, 6, 7, 11]"/>
     </node>
 
     <!-- led strip -->
     <include file="$(find clover)/launch/led.launch" if="$(arg led)"/>
 
     <!-- rc backend -->
-    <node name="rc" pkg="clover" type="rc" output="screen" if="$(arg rc)"/>
+    <node name="rc" pkg="clover" type="rc" output="screen" if="$(arg rc)" clear_params="true">
+        <!-- Send fake GCS heartbeats. Set to "true" for upstream PX4 -->
+        <param name="use_fake_gcs" value="false"/>
+    </node>
 </launch>

@@ -9,7 +9,7 @@ The [rviz] tool(http://wiki.ros.org/rviz) allows real-time visualization of all 
 
 To use rviz and rqt, a PC running Ubuntu Linux (or a virtual machine such as [Parallels Desktop Lite] (https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) or [VirtualBox] (https://www.virtualbox.org)) is required.
 
-Install package `ros-kinetic-desktop-full` or `ros-kinetic-desktop` using the [installation documentation](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+Install package `ros-melodic-desktop-full` or `ros-melodic-desktop` using the [installation documentation](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 Start rviz
 ---
@@ -48,7 +48,7 @@ Axis or Grid configured to frame `aruco_map` will visualize the location [on the
 It is also recommended to install additional useful plugins for rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). This kit allows visualizing topics like `TwistStamped` (velocity) `CameraInfo`, `PolygonArray`, and many more. To install, use command:
 
 ```(bash)
-sudo apt-get install ros-kinetic-jsk-visualization
+sudo apt-get install ros-melodic-jsk-visualization
 ```
 
 Starting the rqt toolkit
@@ -71,5 +71,5 @@ ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view
 Brief description of useful rqt plugins:
 
 * `rqt_image_view` – viewing images from topics like `sensor_msgs/Image`;
-* `rqt_multiplot` – Building charts from the data from of arbitrary topics (installation: `sudo apt-get install ros-kinetic-rqt-multiplot`);
+* `rqt_multiplot` – Building charts from the data from of arbitrary topics (installation: `sudo apt-get install ros-melodic-rqt-multiplot`);
 * Bag – working with [Bag-files](http://wiki.ros.org/rosbag).

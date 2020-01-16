@@ -9,6 +9,7 @@
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 
+import os
 import math
 import subprocess
 import re
@@ -94,7 +95,7 @@ def get_param(name):
         return None
 
     if not res.success:
-        failure('Unable to retrieve PX4 parameter %s', name)
+        failure('unable to retrieve PX4 parameter %s', name)
     else:
         if res.value.integer != 0:
             return res.value.integer
@@ -224,6 +225,12 @@ def check_fcu():
             else:
                 info('LPE_FUSION: barometer fusion is disabled')
 
+            mag_yaw_w = get_param('ATT_W_MAG')
+            if mag_yaw_w == 0:
+                info('magnetometer weight (ATT_W_MAG) is zero, better for indoor flights')
+            else:
+                info('magnetometer weight (ATT_W_MAG) is non-zero (%.2f), better for outdoor flights', mag_yaw_w)
+
         elif est == 2:
             info('selected estimator: EKF2')
         else:
@@ -238,15 +245,18 @@ def check_fcu():
 
         cbrk_usb_chk = get_param('CBRK_USB_CHK')
         if cbrk_usb_chk != 197848:
-            failure('Set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
+            failure('set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
 
         try:
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
-            cell = battery.cell_voltage[0]
-            if cell > 4.3 or cell < 3.0:
-                failure('Incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
-            elif cell < 3.7:
-                failure('Critically low cell voltage: %.2f V, recharge battery', cell)
+            if not battery.cell_voltage:
+                failure('cell voltage is not available, https://clever.coex.tech/power')
+            else:
+                cell = battery.cell_voltage[0]
+                if cell > 4.3 or cell < 3.0:
+                    failure('incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
+                elif cell < 3.7:
+                    failure('critically low cell voltage: %.2f V, recharge battery', cell)
         except rospy.ROSException:
             failure('no battery state')
 
@@ -477,7 +487,7 @@ def check_local_position():
 @check('Velocity estimation')
 def check_velocity():
     try:
-        velocity = rospy.wait_for_message('mavros/local_position/velocity', TwistStamped, timeout=1)
+        velocity = rospy.wait_for_message('mavros/local_position/velocity_local', TwistStamped, timeout=1)
         horiz = math.hypot(velocity.twist.linear.x, velocity.twist.linear.y)
         vert = velocity.twist.linear.z
         if abs(horiz) > 0.1:
@@ -485,6 +495,7 @@ def check_velocity():
         if abs(vert) > 0.1:
             failure('vertical velocity estimation is %.2f m/s; is copter staying still?' % vert)
 
+        velocity = rospy.wait_for_message('mavros/local_position/velocity_body', TwistStamped, timeout=1)
         angular = velocity.twist.angular
         ANGULAR_VELOCITY_LIMIT = 0.1
         if abs(angular.x) > ANGULAR_VELOCITY_LIMIT:
@@ -596,7 +607,7 @@ def check_rangefinder():
 @check('Boot duration')
 def check_boot_duration():
     output = subprocess.check_output('systemd-analyze')
-    r = re.compile(r'([\d\.]+)s$')
+    r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
     if duration > 15:
         failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
@@ -685,9 +696,67 @@ def check_preflight_status():
                 failure(' '.join([match.groups()[1], 'check:', check_status]))
 
 
+@check('Network')
+def check_network():
+    ros_hostname = os.environ.get('ROS_HOSTNAME').strip()
+
+    if not ros_hostname:
+        failure('no ROS_HOSTNAME is set')
+
+    elif ros_hostname.endswith('.local'):
+        # using mdns hostname
+        hosts = open('/etc/hosts', 'r')
+        for line in hosts:
+            parts = line.split()
+            if len(parts) < 2:
+                continue
+            ip = parts.pop(0).split('.')
+            if ip[0] == '127':  # loopback ip
+                if ros_hostname in parts:
+                    break
+        else:
+            failure('not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
+
+
+@check('RPi health')
+def check_rpi_health():
+    # `vcgencmd get_throttled` output codes taken from
+    # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
+    # TODO: support more base platforms?
+    FLAG_UNDERVOLTAGE_NOW = 0x1
+    FLAG_FREQ_CAP_NOW = 0x2
+    FLAG_THROTTLING_NOW = 0x4
+    FLAG_THERMAL_LIMIT_NOW = 0x8
+    FLAG_UNDERVOLTAGE_OCCURRED = 0x10000
+    FLAG_FREQ_CAP_OCCURRED = 0x20000
+    FLAG_THROTTLING_OCCURRED = 0x40000
+    FLAG_THERMAL_LIMIT_OUCCURRED = 0x80000
+
+    try:
+        # vcgencmd outputs a single string in a form of
+        # <parameter>=<value>
+        # In case of `get_throttled`, <value> is a hexadecimal number
+        # with some of the FLAGs OR'ed together
+        output = subprocess.check_output(['vcgencmd', 'get_throttled'])
+    except OSError:
+        failure('could not call vcgencmd binary; not a Raspberry Pi?')
+        return
+
+    throttle_mask = int(output.split('=')[1], base=16)
+    if throttle_mask & (FLAG_THROTTLING_NOW | FLAG_THROTTLING_OCCURRED):
+        failure('system throttled to prevent damage')
+    if throttle_mask & (FLAG_UNDERVOLTAGE_NOW | FLAG_UNDERVOLTAGE_OCCURRED):
+        failure('not enough power for onboard computer, flight inadvisable')
+    if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
+        failure('CPU frequency reduced to avoid overheating')
+    if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
+        failure('CPU over soft temperature limit, expect performance loss')
+
+
 def selfcheck():
     check_image()
     check_clover_service()
+    check_network()
     check_fcu()
     check_imu()
     check_local_position()
@@ -700,6 +769,7 @@ def selfcheck():
     check_optical_flow()
     check_vpe()
     check_rangefinder()
+    check_rpi_health()
     check_cpu_usage()
     check_boot_duration()
 

@@ -18,8 +18,8 @@ Use it to learn how to assemble, configure, pilot and program autonomous CLEVER 
 
 Image includes:
 
-* Raspbian Stretch
-* ROS Kinetic
+* Raspbian Buster
+* ROS Melodic
 * Configured networking
 * OpenCV
 * mavros
@@ -30,7 +30,7 @@ API description (in Russian) for autonomous flights is available [on GitBook](ht
 
 ## Manual installation
 
-Install ROS Kinetic according to the [documentation](http://wiki.ros.org/kinetic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
+Install ROS Melodic according to the [documentation](http://wiki.ros.org/melodic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
 
 Clone this repo to directory `~/catkin_ws/src/clever`:
 

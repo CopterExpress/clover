@@ -1,16 +1,33 @@
 Coordinate systems (frames)
 ===
 
-> **Note** Documentation for the [image](image.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/frames.md).
+> **Note** The following applies to [image](image.md) version 0.15 and up. See [previous version of the article](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/frames.md) (Russian only) for older images.
 
-![Clever coordinates systems (TF2)](../assets/frames.png)
+![TF2 Clever frames](../assets/frames.png)
 
-Main frames in package `clever`:
+Main frames in the `clever` package:
 
-* `map` coordinates relative to the point of flight controller initialization: the white grid in the illustration;
-* `base_link` — coordinates relative to the quadcopter: schematic image of the quadcopter in the illustration;
-* `body` — coordinates relative to the quadcopter regardless of pitch and roll: red, blue and green lines in the illustration.
+* `map` has its origin at the flight controller initialization point and may be considered stationary. It is shown as a white grid on the image above;
+* `base_link` is rigidly bound to the drone. It is shown by the simplified drone model on the image above;
+* `body` is bound to the drone, but its Z axis points up regardless of the drone's pitch and roll. It is shown by the red, blue and green lines in the illustration;
+* `navigate_target` is bound to the current navigation target (as set by the [navigate](simple_offboard.md#navigate) service).
 
-> **Hint** In accordance with [the agreement](http://www.ros.org/reps/rep-0103.html), for frames associated with the copter, the X-axis directed forward, Y – to the left, and Z – up.
+Additional frames become available when [ArUco positioning system](aruco.md) is active:
 
-More clearly, 3D visualization of the coordinate systems can be viewed using [rviz](rviz.md).
+* `aruco_map` is bound to the currently active [ArUco map](aruco_map.md);
+* `aruco_N` is bound to the [marker](aruco_marker.md) with ID=N.
+
+> **Hint** Frames that are bound to the drone are oriented according to [the ROS convention](http://www.ros.org/reps/rep-0103.html): the X axis points forward, Y to the left, and Z up.
+
+3D visualization of the coordinate systems can be viewed using [rviz](rviz.md).
+
+tf2
+--
+
+Read more at http://wiki.ros.org/tf2
+
+tf2 ROS package is used extensively in the Clever platform. tf2 is a set of libraries for C++, Python and other programming languages that are used to work with the frames. Internally, ROS nodes publish `TransformStamped` messages to `/tf` topic with transforms between frames at certain points in time.
+
+The [`simple_offboard`](simple_offboard.md) node can be used to request the drone position in an arbitrary frame by setting the `frame_id` argument appropriately in a call to `get_telemetry` service.
+
+tf2 can be used from Python to transform coordinates (for objects like PoseStamped and PointStamped) from one frame to another

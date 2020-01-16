@@ -70,6 +70,7 @@ def fall(gpio, level, tick):
     done.set()
 
 def read_distance():
+    global low
     done.clear()
     pi.gpio_trigger(TRIG, 50, 1)
     done.wait(timeout=5)
@@ -123,7 +124,7 @@ Ultrasonic distance gage RCW-0001 is compatible with distance gage HC-SR04. Use 
 An example of a flight program with the use of [simple_offboard](simple_offboard.md), which makes the copter fly forward until the connected ultrasonic distance gage detects an obstacle:
 
 ```python
-set_velocity(x=0.5, frame_id='body', auto_arm=True) # flying forward at the velocity of 0.5 mps
+set_velocity(vx=0.5, frame_id='body', auto_arm=True) # flying forward at the velocity of 0.5 mps
 
 while True:
     if read_distance_filtered() < 1:

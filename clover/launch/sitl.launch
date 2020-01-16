@@ -13,6 +13,7 @@
         <arg name="rosbridge" value="$(arg rosbridge)"/>
         <arg name="aruco" default="false"/>
         <arg name="rangefinder_vl53l1x" default="false"/>
+        <arg name="led" default="false"/>
         <arg name="rc" default="false"/>
     </include>
 </launch>

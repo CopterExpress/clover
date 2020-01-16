@@ -38,7 +38,6 @@ rosversion clever
 rosversion clever # old name
 rosversion aruco_pose
 rosversion vl53l1x
-rosversion opencv3
 rosversion mavros
 rosversion mavros_extras
 rosversion dynamic_reconfigure

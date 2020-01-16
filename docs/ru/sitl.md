@@ -77,22 +77,22 @@ roslaunch mavros px4.launch fcu_url:=udp://@127.0.0.1:14557
 
 Для того, чтобы запустить симулятор полета дрона, Gazebo или jMAVSim вам потребуется сделать соответственные настройки вашей среды.
 
-> **Caution** Среда `ROS Kinetic` в изначально ориентированна для `Ubuntu (Xenial)` версии 16.04, по этому актуальность данной инструкции гарантируется только для соответственной версии операционной системы.
+> **Caution** Среда `ROS Melodic` изначально ориентированна для Ubuntu версии 18.04 (Bionic), поэтому актуальность данной инструкции гарантируется только для данной версии операционной системы.
 
-В первую очередь вам потребуется установить полный пакет ROS Kinetic desktop-full, инструкцию по установке вы можете найти в [статье по установке ROS](ros-install.md).
+В первую очередь вам потребуется установить полный пакет ROS Melodic desktop-full, инструкцию по установке вы можете найти в [статье по установке ROS](ros-install.md).
 
 После того, как вы выполнили указанные выше инструкции, вам нужно проверить, есть ли в вашем пакете `ROS` все нужные пакеты.
 
 ```bash
-sudo apt-get install ros-kinetic-gazebo-ros \
-					 ros-kinetic-gazebo-dev \
-					 ros-kinetic-gazebo-plugins \
-					 ros-kinetic-gazebo-ros-pkgs \
-					 ros-kinetic-gazebo-msgs \
-					 ros-kinetic-geographic-msgs
+sudo apt-get install ros-melodic-gazebo-ros \
+					 ros-melodic-gazebo-dev \
+					 ros-melodic-gazebo-plugins \
+					 ros-melodic-gazebo-ros-pkgs \
+					 ros-melodic-gazebo-msgs \
+					 ros-melodic-geographic-msgs
 ```
 
-Чтобы избежать ошибок во время запуска симулятора, вам нужно будет установить Gazebo v7.14, для этого подключите необходимый репозиторий и добавьте соответствующие ключи:
+Чтобы избежать ошибок во время запуска симулятора, вам нужно будет установить Gazebo v9.11, для этого подключите необходимый репозиторий и добавьте соответствующие ключи:
 
 ```bash
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'

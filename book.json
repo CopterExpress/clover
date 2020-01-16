@@ -2,7 +2,7 @@
     "title": "Clever",
     "description": "Конструктор квадрокоптера «Клевер»",
     "author": "Copter Express",
-    "language": "ru",
+    "language": "en",
     "root": "docs/",
     "gitbook": "^3.2.2",
     "plugins": [

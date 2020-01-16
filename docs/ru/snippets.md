@@ -164,6 +164,7 @@ arming(False)  # дизарм
 ```python
 import tf2_ros
 import tf2_geometry_msgs
+from geometry_msgs.msg import PoseStamped
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -194,7 +195,7 @@ new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
+flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
 ```
 
 ### # {#angle-hor}
@@ -342,12 +343,14 @@ set_mode(custom_mode='STABILIZED')
 
 ### # {#flip}
 
-Флип по крену:
+Флип:
 
 ```python
 import math
 
 # ...
+
+PI_2 = math.pi / 2
 
 def flip():
     start = get_telemetry()  # memorize starting position
@@ -355,12 +358,13 @@ def flip():
     set_rates(thrust=1)  # bump up
     rospy.sleep(0.2)
 
-    set_rates(roll_rate=30, thrust=0.2)  # maximum roll rate
+    set_rates(pitch_rate=30, thrust=0.2)  # pitch flip
+    # set_rates(roll_rate=30, thrust=0.2)  # roll flip
 
     while True:
         telem = get_telemetry()
-
-        if abs(telem.roll) > math.pi/2:
+        flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+        if flipped:
             break
 
     rospy.loginfo('finish flip')

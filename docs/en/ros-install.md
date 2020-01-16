@@ -1,14 +1,10 @@
-# ROS Kinetic package installation and setup
+# ROS Melodic package installation and setup
 
 In order to use tools such as rqt, rviz and others as well as running the simulator (SITL), you will need to install and setup ROS package
 
-> **Hint** For more details on installation refer to [the main article](http://wiki.ros.org/kinetic/Installation/Ubuntu).
+> **Hint** For more details on installation refer to [the main article](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
-<!-- -->
-
-> **Hint** If you are using Ubuntu 18.04, you will need to install ROS Melodic instead of ROS Kinetic. A complete guide of the installation is available [here](http://wiki.ros.org/melodic/Installation/Ubuntu).
-
-## ROS Kinetic installation on Ubuntu
+## ROS Melodic installation on Ubuntu
 
 To find the correct package version, you will need to change the settings of your repositories. Go to "Software and updates" and enable `restricted`, `universe` and `multiverse`.
 
@@ -35,13 +31,13 @@ Now you can install the ROS package itself.
 + If you plan to use ROS together with the simulator (also includes tools such as rqt, rviz and others):
 
     ```bash
-    sudo apt-get install ros-kinetic-desktop-full
+    sudo apt-get install ros-melodic-desktop-full
     ```
 
 + If you plan to use ROS exclusively for tools rqt, rviz etc.:
 
     ```bash
-    sudo apt-get install ros-kinetic-desktop
+    sudo apt-get install ros-melodic-desktop
     ```
 
 After the package has installed, initialize `rosdep`.
@@ -55,12 +51,12 @@ rosdep update
 If you are not confortable with entering environment variables manually each time, you may configure it in a way that it add itself in your bash session on every new shell startup:
 
 ```bash
-echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-If you whish to install any additionnal packages for yout ROS Kinetic simply use:
+If you whish to install any additionnal packages for yout ROS Melodic simply use:
 
 ```bash
-sudo apt-get install ros-kinetic-PACKAGE
+sudo apt-get install ros-melodic-PACKAGE
 ```

@@ -1,11 +1,11 @@
 Simple OFFBOARD
 ===
 
-> **Note** Documentation for the [image](image.md), versions, starting with **0.15**. For older versions refer to [documentation for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+> **Note** The following applies to [image](image.md) versions **0.15** and up. Older documentation is still avaliable [for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md) (Russian only).
 
 <!-- -->
 
-> **Hint** For autonomous flights it is recommanded to use [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever).
+> **Hint** We recommend using our [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever) for autonomous flights.
 
 The `simple_offboard` module of the `clever` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
@@ -140,6 +140,12 @@ Flying 3 m to the right from the drone:
 navigate(x=0, y=-3, z=0, speed=1, frame_id='body')
 ```
 
+Flying 2 m to the left from the last navigation target:
+
+```python
+navigate(x=0, y=2, z=0, speed=1, frame_id='navigate_target')
+```
+
 Turn 90 degrees counterclockwise:
 
 ```python
@@ -169,6 +175,8 @@ Ascending to the altitude of 2 m (command line):
 ```(bash)
 rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
 ```
+
+> **Note** Consider using the `navigate_target` frame instead of `body` for missions that primarily use relative movements forward/back/left/right. This negates inaccuracies in relative point calculations.
 
 ### navigate_global
 
