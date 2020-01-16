@@ -25,7 +25,7 @@
   * [Viewing images from cameras](web_video_server.md)
 * Programming
   * [Overview](programming.md)
-  * [Camera orientation](camera_frame.md)
+  * [Camera setup](camera_setup.md)
   * Fiducial markers (ArUco)
     * [Overview](aruco.md)
     * [Marker detection](aruco_marker.md)
