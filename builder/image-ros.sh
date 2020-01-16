@@ -119,7 +119,7 @@ cd /home/pi/catkin_ws/src/clover
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
 NPM_CONFIG_UNSAFE_PERM=true gitbook install
 gitbook build
-touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clever/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
+touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Installing additional ROS packages"
 apt-get install -y --no-install-recommends \
