@@ -14,8 +14,6 @@ from mavros_msgs.msg import State, StatusText, ExtendedState
 from mavros_msgs.srv import CommandBool, CommandLong, SetMode
 
 from std_srvs.srv import Trigger
-from clever.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
-    SetAttitude, SetRates, SetLEDEffect  # old name
 from clover.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
     SetAttitude, SetRates, SetLEDEffect
 

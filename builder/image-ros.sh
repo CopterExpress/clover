@@ -94,14 +94,16 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 echo_stamp "Make clever package for backwards compatibility"
 cd /home/pi/catkin_ws
+cd src; pwd; ls -la; cd ..
 mkdir -p src/clever/clever/srv src/clever/clever/launch
 cd src/clever/clever/srv && ln -s ../../../clover/clover/srv/* ./
 cd ../launch && ln -s ../../../clover/clover/launch/* ./
 ln -s clover.launch clever.launch
+pwd; ls -la
 cd /home/pi/catkin_ws
-cp src/clover/clover/package.xml src/clever/clever/package.xml
-cp src/clover/builder/assets/clever/CMakeLists.txt src/clever/clever/CMakeLists.txt
-sed -i 's/<name>clover<\/name>/<name>clever<\/name>/' src/clever/clever/package.xml
+cp src/clover/builder/assets/clever/CMakeLists.txt src/clever/clever/
+cp src/clover/builder/assets/clever/_package.xml src/clever/clever/package.xml
+pwd; ls -la
 
 echo_stamp "Build and install Clover"
 resolve_rosdep $(pwd)
@@ -109,6 +111,9 @@ my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/melodic/setup.bash
 catkin_make -j2 -DCMAKE_BUILD_TYPE=Release
+
+echo_stamp "Add deprecation warning to clever srv files"
+cp -r src/clover/builder/assets/clever/srv /home/pi/catkin_ws/devel/lib/python2.7/dist-packages/clever/
 
 echo_stamp "Enable ROS services"
 systemctl enable roscore

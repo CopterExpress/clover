@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>clever</name>
+  <version>0.0.1</version>
+  <description>Clever pseudopackage made for backwards compatibility</description>
+  <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

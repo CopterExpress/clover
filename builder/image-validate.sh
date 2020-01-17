@@ -25,6 +25,7 @@ cd /home/pi/catkin_ws/src/clover/builder/test/
 ./tests.sh
 ./tests.py
 ./tests_py3.py
+[[ $(./tests_clever.py) == "Warning: clever package is renamed to clover" ]]  # test backwards compatibility
 
 echo "Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
