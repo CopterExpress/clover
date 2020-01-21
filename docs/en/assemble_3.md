@@ -152,7 +152,7 @@ article [remote faults](radioerrors.md).
 1. Install the Pixracer flight controller on double-sided 3M adhesive tape (2 – 3 layers).
     The flight controller may also be removed from the housing and firmly mounted on the М3х6 leg.
 
-2. Install 40 mm legs using М3х87 screws.
+2. Install 40 mm legs using М3х8 screws.
 
     Connect the POWER connector.
 
