@@ -68,7 +68,11 @@ my_travis_retry() {
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
+<<<<<<< HEAD
 echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+=======
+echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+>>>>>>> master
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -94,16 +98,13 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 echo_stamp "Make clever package for backwards compatibility"
 cd /home/pi/catkin_ws
-cd src; pwd; ls -la; cd ..
 mkdir -p src/clever/clever/srv src/clever/clever/launch
 cd src/clever/clever/srv && ln -s ../../../clover/clover/srv/* ./
 cd ../launch && ln -s ../../../clover/clover/launch/* ./
 ln -s clover.launch clever.launch
-pwd; ls -la
 cd /home/pi/catkin_ws
 cp src/clover/builder/assets/clever/CMakeLists.txt src/clever/clever/
 cp src/clover/builder/assets/clever/_package.xml src/clever/clever/package.xml
-pwd; ls -la
 
 echo_stamp "Build and install Clover"
 resolve_rosdep $(pwd)

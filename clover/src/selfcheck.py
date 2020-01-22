@@ -730,7 +730,18 @@ def check_rpi_health():
     FLAG_UNDERVOLTAGE_OCCURRED = 0x10000
     FLAG_FREQ_CAP_OCCURRED = 0x20000
     FLAG_THROTTLING_OCCURRED = 0x40000
-    FLAG_THERMAL_LIMIT_OUCCURRED = 0x80000
+    FLAG_THERMAL_LIMIT_OCCURRED = 0x80000
+
+    FLAG_DESCRIPTIONS = (
+        (FLAG_THROTTLING_NOW, 'system throttled to prevent damage'),
+        (FLAG_THROTTLING_OCCURRED, 'your system is susceptible to throttling'),
+        (FLAG_UNDERVOLTAGE_NOW, 'not enough power for onboard computer, flight inadvisable'),
+        (FLAG_UNDERVOLTAGE_OCCURRED, 'power supply cannot provide enough power'),
+        (FLAG_FREQ_CAP_NOW, 'CPU reached thermal limit and is throttled now'),
+        (FLAG_FREQ_CAP_OCCURRED, 'CPU may overheat during drone operation, consider additional cooling'),
+        (FLAG_THERMAL_LIMIT_NOW, 'CPU reached soft thermal limit, frequency reduced'),
+        (FLAG_THERMAL_LIMIT_OUCCURRED, 'CPU may reach soft thermal limit, consider additional cooling'),
+    )
 
     try:
         # vcgencmd outputs a single string in a form of
@@ -743,14 +754,9 @@ def check_rpi_health():
         return
 
     throttle_mask = int(output.split('=')[1], base=16)
-    if throttle_mask & (FLAG_THROTTLING_NOW | FLAG_THROTTLING_OCCURRED):
-        failure('system throttled to prevent damage')
-    if throttle_mask & (FLAG_UNDERVOLTAGE_NOW | FLAG_UNDERVOLTAGE_OCCURRED):
-        failure('not enough power for onboard computer, flight inadvisable')
-    if throttle_mask & (FLAG_FREQ_CAP_NOW | FLAG_FREQ_CAP_OCCURRED):
-        failure('CPU frequency reduced to avoid overheating')
-    if throttle_mask & (FLAG_THERMAL_LIMIT_NOW | FLAG_THERMAL_LIMIT_OUCCURRED):
-        failure('CPU over soft temperature limit, expect performance loss')
+    for flag_description in FLAG_DESCRIPTIONS:
+        if throttle_mask & flag_description[0]:
+            failure(flag_description[1])
 
 
 def selfcheck():
