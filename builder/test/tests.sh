@@ -34,7 +34,7 @@ mjpg_streamer --version
 # ros stuff
 
 roscore -h
-rosversion clever
+rosversion clover
 rosversion clever # old name
 rosversion aruco_pose
 rosversion vl53l1x
