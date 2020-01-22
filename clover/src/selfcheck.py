@@ -200,16 +200,16 @@ def check_fcu():
             info('no version data available from SITL')
 
         r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
-        is_clever_firmware = False
+        is_clover_firmware = False
         for ver_line in version_str.split('\n'):
             match = r.search(ver_line)
             if match is not None:
                 field, version = match.groups()
                 info('firmware %s: %s' % (field, version))
-                if 'clever' in version:
-                    is_clever_firmware = True
+                if 'clover' in version or 'clever' in version:
+                    is_clover_firmware = True
 
-        if not is_clever_firmware:
+        if not is_clover_firmware:
             failure('not running Clover PX4 firmware, https://clever.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
