@@ -516,7 +516,7 @@ def check_global_position():
     try:
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
-        failure('no global position')
+        info('no global position')
 
 
 @check('Optical flow')
