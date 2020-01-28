@@ -378,6 +378,10 @@ private:
 		parameters_->perspectiveRemoveIgnoredMarginPerCell = config.perspectiveRemoveIgnoredMarginPerCell;
 		parameters_->perspectiveRemovePixelPerCell = config.perspectiveRemovePixelPerCell;
 		parameters_->polygonalApproxAccuracyRate = config.polygonalApproxAccuracyRate;
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 4) && (CV_VERSION_REVISION >= 2)) || (CV_VERSION_MAJOR > 3)
+		parameters_->aprilTagQuadDecimate = config.aprilTagQuadDecimate;
+		parameters_->aprilTagQuadSigma = config.aprilTagQuadSigma;
+#endif
 	}
 };
 
