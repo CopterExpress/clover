@@ -120,6 +120,7 @@ def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
         telem = get_telemetry(frame_id='navigate_target')
         if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
             break
+        rospy.sleep(0.2)
 ```
 
 Такой код может быть использован для полета в том числе с использованием фрейма `body`.

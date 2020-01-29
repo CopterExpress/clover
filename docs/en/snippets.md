@@ -80,6 +80,34 @@ while not rospy.is_shutdown():
     rospy.sleep(0.2)
 ```
 
+This code can be wrapped into a function:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id=frame_id)
+        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+A more universal solution, utilizing the `navigate_target` frame, which corresponds to the navigating target point of the drone:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+This code also can be used for navigating using `body` frame.
+
 ### # {#block-land}
 
 Landing and waiting until the copter lands:
