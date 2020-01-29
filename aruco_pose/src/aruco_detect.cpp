@@ -30,6 +30,7 @@
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
+#include <dynamic_reconfigure/server.h>
 #include <geometry_msgs/Vector3.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/PoseStamped.h>
@@ -46,8 +47,11 @@
 
 #include <aruco_pose/Marker.h>
 #include <aruco_pose/MarkerArray.h>
+#include <aruco_pose/DetectorConfig.h>
 
 #include "utils.h"
+#include <memory>
+#include <functional>
 
 using std::vector;
 using cv::Mat;
@@ -58,6 +62,7 @@ private:
 	tf2_ros::TransformBroadcaster br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
+	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
 	cv::Ptr<cv::aruco::Dictionary> dictionary_;
 	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
 	image_transport::Publisher debug_pub_;
@@ -109,6 +114,12 @@ public:
 		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
 		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
+
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
+		dynamic_reconfigure::Server<aruco_pose::DetectorConfig>::CallbackType cb;
+
+		cb = std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
+		dyn_srv_->setCallback(cb);
 
 		NODELET_INFO("ready");
 	}
@@ -340,6 +351,37 @@ private:
 		for (auto const& marker : msg.markers) {
 			map_markers_ids_.insert(marker.id);
 		}
+	}
+
+	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)
+	{
+		parameters_->adaptiveThreshConstant = config.adaptiveThreshConstant;
+		parameters_->adaptiveThreshWinSizeMin = config.adaptiveThreshWinSizeMin;
+		parameters_->adaptiveThreshWinSizeMax = config.adaptiveThreshWinSizeMax;
+		parameters_->adaptiveThreshWinSizeStep = config.adaptiveThreshWinSizeStep;
+		parameters_->cornerRefinementMaxIterations = config.cornerRefinementMaxIterations;
+		parameters_->cornerRefinementMethod = config.cornerRefinementMethod;
+		parameters_->cornerRefinementMinAccuracy = config.cornerRefinementMinAccuracy;
+		parameters_->cornerRefinementWinSize = config.cornerRefinementWinSize;
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 4) && (CV_VERSION_REVISION >= 7)) || (CV_VERSION_MAJOR > 3)
+		parameters_->detectInvertedMarker = config.detectInvertedMarker;
+#endif
+		parameters_->errorCorrectionRate = config.errorCorrectionRate;
+		parameters_->minCornerDistanceRate = config.minCornerDistanceRate;
+		parameters_->markerBorderBits = config.markerBorderBits;
+		parameters_->maxErroneousBitsInBorderRate = config.maxErroneousBitsInBorderRate;
+		parameters_->minDistanceToBorder = config.minDistanceToBorder;
+		parameters_->minMarkerDistanceRate = config.minMarkerDistanceRate;
+		parameters_->minMarkerPerimeterRate = config.minMarkerPerimeterRate;
+		parameters_->maxMarkerPerimeterRate = config.maxMarkerPerimeterRate;
+		parameters_->minOtsuStdDev = config.minOtsuStdDev;
+		parameters_->perspectiveRemoveIgnoredMarginPerCell = config.perspectiveRemoveIgnoredMarginPerCell;
+		parameters_->perspectiveRemovePixelPerCell = config.perspectiveRemovePixelPerCell;
+		parameters_->polygonalApproxAccuracyRate = config.polygonalApproxAccuracyRate;
+#if ((CV_VERSION_MAJOR == 3) && (CV_VERSION_MINOR >= 4) && (CV_VERSION_REVISION >= 2)) || (CV_VERSION_MAJOR > 3)
+		parameters_->aprilTagQuadDecimate = config.aprilTagQuadDecimate;
+		parameters_->aprilTagQuadSigma = config.aprilTagQuadSigma;
+#endif
 	}
 };
 
