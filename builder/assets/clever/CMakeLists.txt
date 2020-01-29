@@ -11,22 +11,7 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  nodelet
-  pluginlib
-  roscpp
-  genmsg
-  rospy
-  std_msgs
   message_generation
-  geometry_msgs
-  sensor_msgs
-  geographic_msgs
-  tf
-  tf2
-  tf2_geometry_msgs
-  tf2_ros
-  image_transport
-  cv_bridge
 )
 
 ## System dependencies are found with CMake's conventions
@@ -91,8 +76,8 @@ add_service_files(
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
-  DEPENDENCIES
-  std_msgs  # Or other packages containing msgs
+  # DEPENDENCIES
+  # std_msgs  # Or other packages containing msgs
 )
 
 ################################################
