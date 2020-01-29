@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_geometry_msgs
   sensor_msgs
   message_generation
+  dynamic_reconfigure
 )
 
 find_package(OpenCV 3 REQUIRED COMPONENTS core imgproc calib3d)
@@ -111,10 +112,9 @@ generate_messages(
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/DetectorParams.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -151,7 +151,7 @@ add_library(aruco_pose
   src/draw.cpp
 )
 
-add_dependencies(${PROJECT_NAME} aruco_pose_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_generate_messages_cpp ${PROJECT_NAME}_gencfg)
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
