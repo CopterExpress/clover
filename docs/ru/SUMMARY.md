@@ -43,6 +43,9 @@
   * [Автозапуск ПО](autolaunch.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
+  * Отладка системы
+    * [Отладка ROS](ros_debug.md)
+    * [Отладка PX4](px4_debug.md)
 * Дополнительные материалы
   * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)
