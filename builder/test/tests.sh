@@ -35,7 +35,6 @@ mjpg_streamer --version
 
 roscore -h
 rosversion clover
-rosversion clever # old name
 rosversion aruco_pose
 rosversion vl53l1x
 rosversion mavros
