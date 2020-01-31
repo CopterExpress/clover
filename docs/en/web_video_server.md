@@ -8,7 +8,7 @@ See read more about [using rqt](rviz.md).
 
 ### Configuration
 
-Make sure that in Clever launch-file \(`~/catkin_ws/src/clever/clever/launch/clever.launch`\), starting `web_video_server` is enabled:
+Make sure that in Clover launch-file \(`~/catkin_ws/src/clever/clever/launch/clever.launch`\), starting `web_video_server` is enabled:
 
 ```xml
 <arg name="web_video_server" default="true"/>
@@ -22,7 +22,7 @@ sudo systemctl restart clever
 
 ### Viewing
 
-To view a video-stream, you have to [connect to Wi-Fi](wifi.md) of Clever \(`CLEVER-xxxx`\), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
+To view a video-stream, you have to [connect to Wi-Fi](wifi.md) of Clover \(`Clover-xxxx`\), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
 
 ![Viewing web_video_server](../assets/web_video_server.png)
 
@@ -38,7 +38,7 @@ Parameters `width`, `height`, etc. re also available. Read more about `web_video
 
 To browse images with the rqt tools the user needs a computer with Ubuntu 18.04 and [ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
-[Connect to the Clever Wi-Fi network](wifi.md) an run `rqt_image_view` with its IP-address:
+[Connect to the Clover Wi-Fi network](wifi.md) an run `rqt_image_view` with its IP-address:
 
 ```bash
 ROS_MASTER_URI=http://192.168.11.1:11311 rqt_image_view

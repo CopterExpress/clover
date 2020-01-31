@@ -1,9 +1,9 @@
-Controlling Clever from a smartphone
+Controlling Clover from a smartphone
 ===
 
 <a href="https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8"><img src="../assets/appstore.svg"></a><a href="https://play.google.com/store/apps/details?id=express.copter.cleverrc"><img src="../assets/google_play.png" width="15%"></a>
 
-To control Clever from a smartphone via Wi-Fi, you have to install the appropriate application – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), Android (https://play.google.com/store/apps/details?id=express.copter.cleverrc).
+To control Clover from a smartphone via Wi-Fi, you have to install the appropriate application – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), Android (https://play.google.com/store/apps/details?id=express.copter.cleverrc).
 
 ![CLEVER RC](../assets/IMG_4397.PNG)
 
@@ -16,7 +16,7 @@ Configuring
 
 > **Warning** An open QGroundControl or rviz connection sends large amounts of data over Wi-Fi, which can adversely affect responsiveness of the mobile transmitter. It is recommended not to use these applications together with it.
 
-Install [Clever image on RPi](image.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`) should be enabled:
+Install [Clover image on RPi](image.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`) should be enabled:
 
 ```xml
 <arg name="rosbridge" default="true"/>
@@ -44,7 +44,7 @@ Additional PX4 parameters:
 Connection
 ---
 
-Connect the smartphone to Clever [Wi-Fi](wifi.md) network (`CLEVER-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
+Connect the smartphone to Clover [Wi-Fi](wifi.md) network (`Clover-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
 
 The sticks on the screen of the application work just like real sticks. To arm the copter, hold the left stick in the bottom right corner for several seconds. To disarm — in the bottom left corner.
 

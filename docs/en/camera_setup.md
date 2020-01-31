@@ -41,7 +41,7 @@ Camera frame (that is, [frame of reference](frames.md)) is aligned as follows:
 
 Shifts are set in meters, angles are in radians. You can check the transform for correctness using [rviz](rviz.md).
 
-## Presets for Clever
+## Presets for Clover
 
 The presets for usual camera orientations are available in the `main_camera.launch` file. The images should help you choose the one that is right for you: the first one is how your drone will be displayed in [rviz](rviz.md), the second is how the camera is actually mounted on the drone.
 

@@ -3,17 +3,17 @@ Pixhawk / Pixracer firmware flashing
 
 Pixhawk or Pixracer firmware may be flashed using QGroundControl or command line utilities.
 
-Modified firmware for Clever
+Modified firmware for Clover
 ---
 
-It is advisable to use a specialized build of PX4 with the necessary fixes and better defaults for the Clever drone. Use the latest stable release in our [GitHub repository](https://github.com/CopterExpress/Firmware/releases) with the word `clever`, for example, `v1.8.2-clever.5`.
+It is advisable to use a specialized build of PX4 with the necessary fixes and better defaults for the Clover drone. Use the latest stable release in our [GitHub repository](https://github.com/CopterExpress/Firmware/releases) with the word `clever`, for example, `v1.8.2-clever.5`.
 
 <div id="release" style="display:none">
 <p>Latest stable release: <strong><a id="download-latest-release"></a></strong>.</p>
 
 <ul>
-<li>Firmware for Pixracer (<strong>Clever 4 / Clever 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
-<li>Firmware for Pixhawk (<strong>Clever 2</strong>) – <a id="firmware-pixhawk" href=""><code>px4fmu-v2_lpe.px4</code></a>.</li>
+<li>Firmware for Pixracer (<strong>Clover 4 / Clover 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
+<li>Firmware for Pixhawk (<strong>Clover 2</strong>) – <a id="firmware-pixhawk" href=""><code>px4fmu-v2_lpe.px4</code></a>.</li>
 </ul>
 </div>
 
@@ -60,8 +60,8 @@ Firmware variants
 
 The name of the firmware file contains information about the target flight controller and build variant. For example:
 
-* `px4fmu-v4_default.px4` — firmware for Pixhawk with EKF2 and LPE (**Clever 3** / **Clever 4**).
-* `px4fmu-v2_lpe.px4` — firmware for Pixhawk with LPE (**Clever 2**).
+* `px4fmu-v4_default.px4` — firmware for Pixhawk with EKF2 and LPE (**Clover 3** / **Clover 4**).
+* `px4fmu-v2_lpe.px4` — firmware for Pixhawk with LPE (**Clover 2**).
 * `px4fmu-v2_default.px4` — firmware for Pixhawk with EKF2.
 * `px4fmu-v3_default.px4` — firmware for newer Pixhawk versions (rev. 3 chip, see Fig. + Bootloader v5) with EKF2 and LPE.
 

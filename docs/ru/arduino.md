@@ -79,7 +79,7 @@ for(int i=0; i<8; i++) {
 // Подключение библиотек для работы с rosseral
 #include <ros.h>
 
-// Подключение заголовочных файлов сообщений пакета Clever и MAVROS
+// Подключение заголовочных файлов сообщений пакета Clover и MAVROS
 #include <clever/Navigate.h>
 #include <mavros_msgs/SetMode.h>
 

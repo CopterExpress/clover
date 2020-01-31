@@ -5,7 +5,7 @@ Simple OFFBOARD
 
 <!-- -->
 
-> **Hint** We recommend using our [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever) for autonomous flights.
+> **Hint** We recommend using our [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clever) for autonomous flights.
 
 The `simple_offboard` module of the `clever` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 

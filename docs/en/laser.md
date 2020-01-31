@@ -4,7 +4,7 @@
 
 ## VL53L1X Rangefinder
 
-The rangefinder model recommended for Clever is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
+The rangefinder model recommended for Clover is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
 
 The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS driver.
 

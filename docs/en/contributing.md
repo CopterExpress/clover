@@ -1,12 +1,12 @@
-# Contribution to Clever
+# Contribution to Clover
 
-Clever is mostly an [open source](https://en.wikipedia.org/wiki/Open-source_software) and [open hardware](https://en.wikipedia.org/wiki/Open-source_hardware) project aimed at lowering the entry threshold to development of the projects related to flying robotics. You can contribute to the project by offering fixes and improvements for Clever documentation and software.
+Clover is mostly an [open source](https://en.wikipedia.org/wiki/Open-source_software) and [open hardware](https://en.wikipedia.org/wiki/Open-source_hardware) project aimed at lowering the entry threshold to development of the projects related to flying robotics. You can contribute to the project by offering fixes and improvements for Clover documentation and software.
 
-> **Note** To offer changes to Clever documentation or SW, you should have an account at [GitHub](https://github.com).
+> **Note** To offer changes to Clover documentation or SW, you should have an account at [GitHub](https://github.com).
 
 ## Markdown
 
-All Clever documentation is written in the widespread [Markdown](https://ru.wikipedia.org/wiki/Markdown) format. There are many guides on it on the Internet.
+All Clover documentation is written in the widespread [Markdown](https://ru.wikipedia.org/wiki/Markdown) format. There are many guides on it on the Internet.
 
 In Russian: https://guides.hexlet.io/markdown/.
 
@@ -38,8 +38,8 @@ More information about Pull Requests is available [at GitHub](https://help.githu
 TODO
 -->
 
-## Your project with Clever
+## Your project with Clover
 
-If you have implemented your own interesting project using clever, you can add an article about it in section "Clever-based projects".
+If you have implemented your own interesting project using clever, you can add an article about it in section "Clover-based projects".
 
 <!-- TODO -->

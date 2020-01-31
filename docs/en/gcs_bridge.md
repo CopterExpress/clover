@@ -4,9 +4,9 @@ Using QGroundControl via Wi-Fi
 ![QGroundControl](../assets/qground.png)
 
 You can monitor, control, calibrate and configure the flight controller of the quadcopter using QGroundControl via Wi-Fi.
-This requires [connecting to Wi-Fi](wifi.md) of the `CLEVER-xxxx` network.
+This requires [connecting to Wi-Fi](wifi.md) of the `Clover-xxxx` network.
 
-After that, in the Clever launch-file `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch`, choose one of the preconfigured bridge modes.
+After that, in the Clover launch-file `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch`, choose one of the preconfigured bridge modes.
 
 After editing the launch-file, restart the clever service:
 
@@ -27,7 +27,7 @@ Then in the QGroundControl program, choose Application Settings > Comm Links > A
 
 ![QGroundControl TCP connection](../assets/bridge_tcp.png)
 
-Then choose "Clever" from the list of connections, and click "Connect".
+Then choose "Clover" from the list of connections, and click "Connect".
 
 UDP bridge (with automated connection)
 ---
@@ -53,7 +53,7 @@ Then in the QGroundControl program, choose Application Settings > Comm Links > A
 
 ![QGroundControl UDP connection](../assets/bridge_udp.png)
 
-Then choose "CLEVER" from the list of connections, and click "Connect".
+Then choose "Clover" from the list of connections, and click "Connect".
 
 UDP broadcast bridge
 ---

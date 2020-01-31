@@ -68,7 +68,7 @@ To display the settings of all ESCs simultaneously, you can use the ESC Overview
 
 ESC firmware files are located [here](https://github.com/cleanflight/blheli-multishot/tree/master/BLHeli_S%20SiLabs/Hex%20Files).
 
-To flesh ESCs, click on button Flash BLHeli and choose the firmware file with the type of the controller, the name of which is indicated in the firmware name frame on top of the screen in tab Silabs ESC Setup (for the controller that is used in Clever 2, it is A-H-70).
+To flesh ESCs, click on button Flash BLHeli and choose the firmware file with the type of the controller, the name of which is indicated in the firmware name frame on top of the screen in tab Silabs ESC Setup (for the controller that is used in Clover 2, it is A-H-70).
 
 To re-flash an individual ESC, disable all other ESCs.
 

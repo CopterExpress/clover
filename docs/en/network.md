@@ -90,7 +90,7 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     country=GB
 
     network={
-        ssid="CLEVER-1234"
+        ssid="Clover-1234"
         psk="cleverwifi"
         mode=2
         proto=RSN
@@ -101,7 +101,7 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     }
     ```
 
-    where `CLEVER-1234` is the network name and `cleverwifi` is the password.
+    where `Clover-1234` is the network name and `cleverwifi` is the password.
 
 3. Enable the `dnsmasq` service.
 
@@ -155,7 +155,7 @@ update_config=1
 country=GB
 
 network={
-        ssid=\"CLEVER-SMIRNOV\"
+        ssid=\"Clover-SMIRNOV\"
         psk=\"cleverwifi\"
         mode=2
         proto=RSN

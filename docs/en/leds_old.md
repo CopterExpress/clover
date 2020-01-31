@@ -103,7 +103,7 @@ Main strip control methods:
 
 ## Does it have to be this way?
 
-The LED strip type used in the Clever kits use the following protocol: a data source (a Raspberry Pi, for example) sends a bit stream, 24 bits per LED. Each LED reads the first 24 bits from the stream and sets its color accordingly while passing the rest of the stream to the next LED. Zeroes and ones are encoded by different pulse lengths.
+The LED strip type used in the Clover kits use the following protocol: a data source (a Raspberry Pi, for example) sends a bit stream, 24 bits per LED. Each LED reads the first 24 bits from the stream and sets its color accordingly while passing the rest of the stream to the next LED. Zeroes and ones are encoded by different pulse lengths.
 
 This LED strip is supported by the [rpi_ws281x](https://github.com/jgarff/rpi_ws281x) library. The library uses the DMA (direct memory access) module of the Raspberry CPU and can utilize one of the three periphery channels: PWM, PCM or SPI. This allows the library to drive the strip consistently in a multitasking environment.
 

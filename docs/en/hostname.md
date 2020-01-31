@@ -1,18 +1,18 @@
 # Hostname
 
-[By default](image.md) the hostname of the Clever drone is set to `clever-xxxx`, where `xxxx` are random numbers. These numbers are the same as in the [Wi-Fi SSID](wifi.md).
+[By default](image.md) the hostname of the Clover drone is set to `clover-xxxx`, where `xxxx` are random numbers. These numbers are the same as in the [Wi-Fi SSID](wifi.md).
 
-Thus, Clever is accessible on machines that support mDNS as `clever-xxxx.local`. You can use this name to access Clever over SSH:
+Thus, Clover is accessible on machines that support mDNS as `clover-xxxx.local`. You can use this name to access Clover over SSH:
 
 ```bash
-ssh pi@clever-xxxx.local
+ssh pi@clover-xxxx.local
 ```
 
-Also, this name can be used in place of IP-address to open Clever web pages in browser, accessing ROS master, etc.
+Also, this name can be used in place of IP-address to open Clover web pages in browser, accessing ROS master, etc.
 
 ## Changing hostname
 
-In some situations it is necessary to change Clever's hostname. You can use the `hostnamectl` utility for that:
+In some situations it is necessary to change Clover's hostname. You can use the `hostnamectl` utility for that:
 
 ```bash
 sudo hostnamectl set-hostname newname

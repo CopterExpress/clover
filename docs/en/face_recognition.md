@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Recently, face recognition systems have been getting a wider use, the application scope of this technology is really expansive: from regular selfie drones to police drones. Everywhere it is being integrated into various devices. The recognition process itself is really fascinating, and that's what inspired me to create a project associated with it.  The purpose of my internship project was to create a simple open source system for face recognition with a Clever quadcopter. The program takes images from the quadcopter's camera and processes it on a PC. Therefore, all other instructions are executed on a PC.
+Recently, face recognition systems have been getting a wider use, the application scope of this technology is really expansive: from regular selfie drones to police drones. Everywhere it is being integrated into various devices. The recognition process itself is really fascinating, and that's what inspired me to create a project associated with it.  The purpose of my internship project was to create a simple open source system for face recognition with a Clover quadcopter. The program takes images from the quadcopter's camera and processes it on a PC. Therefore, all other instructions are executed on a PC.
 
 ## Development
 
@@ -93,7 +93,7 @@ Further explanation of the code is available at GitHub of the used API in the co
 
 ## Using
 
-It is enough to connect to "Clever" via Wi-Fi and check whether the video stream from the camera is working correctly.
+It is enough to connect to "Clover" via Wi-Fi and check whether the video stream from the camera is working correctly.
 
 Then just run the script:
 

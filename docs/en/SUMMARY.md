@@ -4,9 +4,9 @@
 * [Glossary](gloss.md)
 * [Safety tips](safety.md)
 * Assembly
-  * [Clever 4 assembly](assemble_4.md)
-  * [Clever 3 assembly](assemble_3.md)
-  * [Clever 2 assembly](assemble_2.md)
+  * [Clover 4 assembly](assemble_4.md)
+  * [Clover 3 assembly](assemble_3.md)
+  * [Clover 2 assembly](assemble_2.md)
 * Configuration
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
@@ -52,7 +52,7 @@
   * [Model files for parts](models.md)
   * [ROS Melodic installation](ros-install.md)
   * [Quadcopter control with 4G communication](4g.md)
-  * [Clever and Jetson Nano](jetson_nano.md)
+  * [Clover and Jetson Nano](jetson_nano.md)
   * [Remote control app](rc.md)
   * [Wi-Fi Configuration](network.md)
   * [UART settings](uart.md)
@@ -74,7 +74,7 @@
   * [Soldering safety](tb.md)
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
-* Clever-based projects
+* Clover-based projects
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)

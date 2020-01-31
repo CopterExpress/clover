@@ -86,7 +86,7 @@ After drying, the guard is ready for installation and for the first test flight!
 
 ## First flights
 
-We have made a guard for the Clever 2 copter, which is a learning aid for quadcopters assembly and setup and is installed on it without modification. The guard weighs 70g more (139 grams) than the standard one, and almost does not affect controllability and flying time.
+We have made a guard for the Clover 2 copter, which is a learning aid for quadcopters assembly and setup and is installed on it without modification. The guard weighs 70g more (139 grams) than the standard one, and almost does not affect controllability and flying time.
 
 It should also be said that excessive vibrations, if any, may be removed by more rigid attachment to the copter.
 

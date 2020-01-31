@@ -1,6 +1,6 @@
 # Подключение QGroundControl по Wi-Fi
 
-Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi. Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `CLEVER-xxxx`.
+Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi. Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `Clover-xxxx`.
 
 ## Подключение
 
@@ -9,7 +9,7 @@
 1. На первой вкладке QGroundControl выберите меню *Comm Links*.
 2. Нажмите кнопку *Add*, чтобы добавить новое подключение.
 3. Введите параметры подключения:
-    * Name: *Clever*.
+    * Name: *Clover*.
     * Type: *TCP*.
     * Host Address: *192.168.11.1*.
     * TCP Port: *5760*.
@@ -40,7 +40,7 @@ sudo systemctl restart clever
 
     ![QGroundControl UDP connection](../assets/bridge_udp.png)
 
-3. Выберите в списке подключений *CLEVER* и нажмите *Connect*.
+3. Выберите в списке подключений *Clover* и нажмите *Connect*.
 
 ## UDP broadcast-бридж
 

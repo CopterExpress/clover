@@ -1,4 +1,4 @@
-# Clever and Jetson Nano
+# Clover and Jetson Nano
 
 ## Jetson Nano overview
 
@@ -12,7 +12,7 @@ Jetson Nano developer kits come with a carrier board that has USB 3.0, CSI and E
 
 ## Setting up
 
-Nvidia provides an SD card image with an operating system based on Ubuntu Linux 18.04 for Jetson Nano. This image is a good starting point for ROS and Clever installation.
+Nvidia provides an SD card image with an operating system based on Ubuntu Linux 18.04 for Jetson Nano. This image is a good starting point for ROS and Clover installation.
 
 ### Initial system setup
 
@@ -70,9 +70,9 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python ./get-pip.py
 ```
 
-### Building Clever nodes
+### Building Clover nodes
 
-Create a "workspace" directory in your home folder and populate it with Clever packages:
+Create a "workspace" directory in your home folder and populate it with Clover packages:
 
 ```bash
 mkdir -p ~/catkin_ws/src
@@ -103,7 +103,7 @@ Install development libraries for OpenCV 3.2 (recent Jetson Nano images have Ope
 sudo apt install libopencv-dev=3.2.0+dfsg-4ubuntu0.1
 ```
 
-Finally, build the Clever nodes:
+Finally, build the Clover nodes:
 
 ```bash
 cd ~/catkin_ws
@@ -112,7 +112,7 @@ catkin_make
 
 > **Hint** You may also want to add udev rules for PX4 flight controllers. Copy [the rules file](https://github.com/CopterExpress/clever/blob/master/clever/config/99-px4fmu.rules) to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules && sudo udevadm trigger`.
 
-### Running Clever nodes
+### Running Clover nodes
 
 Set up the workspace environment:
 
@@ -127,7 +127,7 @@ Configure the launch files to your taste and use `roslaunch` to launch the nodes
 roslaunch clever clever.launch
 ```
 
-> **Hint** You may want to start the Clever nodes automatically. This can be done with `systemd`: look at service files for [`roscore`](https://github.com/CopterExpress/clever/blob/master/builder/assets/roscore.service) and [`clever`](https://github.com/CopterExpress/clever/blob/master/builder/assets/clever.service) that are used in our image and adjust them as necessary.
+> **Hint** You may want to start the Clover nodes automatically. This can be done with `systemd`: look at service files for [`roscore`](https://github.com/CopterExpress/clever/blob/master/builder/assets/roscore.service) and [`clever`](https://github.com/CopterExpress/clever/blob/master/builder/assets/clever.service) that are used in our image and adjust them as necessary.
 
 ## Caveats
 

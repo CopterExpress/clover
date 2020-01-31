@@ -90,7 +90,7 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     country=GB
 
     network={
-        ssid="CLEVER-1234"
+        ssid="Clover-1234"
         psk="cleverwifi"
         mode=2
         proto=RSN
@@ -101,7 +101,7 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
     }
     ```
 
-    где `CLEVER-1234` – название сети, а `cleverwifi` – пароль.
+    где `Clover-1234` – название сети, а `cleverwifi` – пароль.
 
 3. Включите службу `dnsmasq`.
 
@@ -155,7 +155,7 @@ update_config=1
 country=GB
 
 network={
-        ssid=\"CLEVER-SMIRNOV\"
+        ssid=\"Clover-SMIRNOV\"
         psk=\"cleverwifi\"
         mode=2
         proto=RSN

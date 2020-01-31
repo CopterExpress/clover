@@ -6,7 +6,7 @@ systemd
 
 Main documentation: [https://wiki.archlinux.org/index.php/Systemd_(Russian)](https://wiki.archlinux.org/index.php/Systemd_(Russian)).
 
-All automatically started Clever software is launched as a `clever.service` systemd service.
+All automatically started Clover software is launched as a `clever.service` systemd service.
 
 The service may be restarted by the `systemctl` command:
 
@@ -20,14 +20,14 @@ Text output of the software can be viewed using the `journalctl` command:
 journalctl -u clever
 ```
 
-To run Clever software directly in the current console session, you can use the `roslaunch` command:
+To run Clover software directly in the current console session, you can use the `roslaunch` command:
 
 ```(bash)
 sudo systemctl restart clever
 roslaunch clever clever.launch
 ```
 
-You can disable Clever software autolaunch using the `disable` command:
+You can disable Clover software autolaunch using the `disable` command:
 
 ```(bash)
 sudo systemctl disable clever

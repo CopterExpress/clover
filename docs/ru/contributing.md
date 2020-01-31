@@ -75,7 +75,7 @@
 
     ```bash
     git add docs/
-    git commit -m "Add new article for Clever"
+    git commit -m "Add new article for Clover"
     ```
 
 8. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:

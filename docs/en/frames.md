@@ -3,7 +3,7 @@ Coordinate systems (frames)
 
 > **Note** The following applies to [image](image.md) version 0.15 and up. See [previous version of the article](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/frames.md) (Russian only) for older images.
 
-![TF2 Clever frames](../assets/frames.png)
+![TF2 Clover frames](../assets/frames.png)
 
 Main frames in the `clever` package:
 
@@ -26,7 +26,7 @@ tf2
 
 Read more at http://wiki.ros.org/tf2
 
-tf2 ROS package is used extensively in the Clever platform. tf2 is a set of libraries for C++, Python and other programming languages that are used to work with the frames. Internally, ROS nodes publish `TransformStamped` messages to `/tf` topic with transforms between frames at certain points in time.
+tf2 ROS package is used extensively in the Clover platform. tf2 is a set of libraries for C++, Python and other programming languages that are used to work with the frames. Internally, ROS nodes publish `TransformStamped` messages to `/tf` topic with transforms between frames at certain points in time.
 
 The [`simple_offboard`](simple_offboard.md) node can be used to request the drone position in an arbitrary frame by setting the `frame_id` argument appropriately in a call to `get_telemetry` service.
 

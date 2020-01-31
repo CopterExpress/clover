@@ -20,7 +20,7 @@ You may use rqt or [web_video_server](web_video_server.md) to view the camera st
 
 If the camera stream is missing, try using the [`raspistill`](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md) utility to check whether the camera works.
 
-First, stop the Clever service:
+First, stop the Clover service:
 
 ```bash
 sudo systemctl stop clever

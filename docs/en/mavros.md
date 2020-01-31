@@ -6,7 +6,7 @@ MAVROS \(MAVLink + ROS\) is a ROS package that allows controlling drones via the
 
 MAVROS subscribes to certain ROS topics that can be used to send commands, publishes telemetry to other topics, and provides services.
 
-The MAVROS node is automatically started in the Clever launch-file. In order to [set the type of connection](connection.md), change the `fcu_conn` argument.
+The MAVROS node is automatically started in the Clover launch-file. In order to [set the type of connection](connection.md), change the `fcu_conn` argument.
 
 > **Hint** Simplified interaction with the drone is possible with the use of [`simple_offboard`] package (simple_offboard.md).
 

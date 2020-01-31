@@ -4,7 +4,7 @@ For interaction with ROS topics and services on a Raspberry Pi, you can use the 
 
 The main tutorial for rosserial: http://wiki.ros.org/rosserial_arduino/Tutorials
 
-Arudino is to be installed on Clever and connected via a USB port.
+Arduino is to be installed on Clover and connected via a USB port.
 
 ## Configuring Arduino IDE
 
@@ -24,7 +24,7 @@ To run the program on Arduino once, you can use command:
 roslaunch clever arduino.launch
 ```
 
-To start the link with Arduino at the startup automatically, set argument `arudino` in the Clever launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`):
+To start the link with Arduino at the startup automatically, set argument `arudino` in the Clover launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`):
 
 ```xml
 <arg name="arduino" default="true"/>
@@ -59,7 +59,7 @@ for(int i=0; i<8; i++) {
 }
 ```
 
-## Working with Clever
+## Working with Clover
 
 The set of services and topics is similar to the regular set in [simple_offboard](simple_offboard.md) and [mavros](mavros.md).
 
@@ -69,7 +69,7 @@ An example of a program that controls the copter by position using the `navigate
 // Connecting libraries for working with rosseral
 #include <ros.h>
 
-// Connecting Clever and MAVROS package message header files
+// Connecting Clover and MAVROS package message header files
 #include <clever/Navigate.h>
 #include <mavros_msgs/SetMode.h>
 
