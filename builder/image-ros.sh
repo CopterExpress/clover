@@ -65,10 +65,10 @@ my_travis_retry() {
   return $result
 }
 
-# TODO: 'kinetic-rosdep-clever.yaml' should add only if we use our repo?
+# TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clever.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -88,30 +88,33 @@ resolve_rosdep() {
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
-echo_stamp "Reconfiguring Clever repository for simplier unshallowing"
-cd /home/pi/catkin_ws/src/clever
+echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clover
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
-echo_stamp "Installing CLEVER" \
-&& cd /home/pi/catkin_ws/src/clever \
-&& git status \
-&& cd /home/pi/catkin_ws \
-&& resolve_rosdep $(pwd) \
-&& my_travis_retry pip install wheel \
-&& my_travis_retry pip install -r /home/pi/catkin_ws/src/clever/clever/requirements.txt \
-&& source /opt/ros/melodic/setup.bash \
-&& catkin_make -j2 -DCMAKE_BUILD_TYPE=Release \
-&& systemctl enable roscore \
-&& systemctl enable clever \
-&& echo_stamp "All CLEVER was installed!" "SUCCESS" \
-|| (echo_stamp "CLEVER installation was failed!" "ERROR"; exit 1)
+echo_stamp "Build and install Clover"
+cd /home/pi/catkin_ws
+resolve_rosdep $(pwd)
+my_travis_retry pip install wheel
+my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
+source /opt/ros/melodic/setup.bash
+catkin_make -j2 -DCMAKE_BUILD_TYPE=Release
 
-echo_stamp "Build CLEVER documentation"
-cd /home/pi/catkin_ws/src/clever
+echo_stamp "Enable ROS services"
+systemctl enable roscore
+systemctl enable clover
+
+echo_stamp "Install clever package (for backwards compatibility)"
+cd /home/pi/catkin_ws/src/clover/builder/assets/clever
+./setup.py install
+rm -rf build  # remove build artifacts
+
+echo_stamp "Build Clover documentation"
+cd /home/pi/catkin_ws/src/clover
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
 NPM_CONFIG_UNSAFE_PERM=true gitbook install
 gitbook build
-touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clever/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
+touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Installing additional ROS packages"
 apt-get install -y --no-install-recommends \

@@ -20,7 +20,7 @@
     # Example:
     #      DocumentRoot /home/krypton/htdocs
 
-    DocumentRoot /home/pi/catkin_ws/src/clever/clever/www
+    DocumentRoot /home/pi/catkin_ws/src/clover/clover/www
 
     # Redirect:
     # ---------

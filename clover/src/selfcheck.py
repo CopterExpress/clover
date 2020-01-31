@@ -200,17 +200,17 @@ def check_fcu():
             info('no version data available from SITL')
 
         r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
-        is_clever_firmware = False
+        is_clover_firmware = False
         for ver_line in version_str.split('\n'):
             match = r.search(ver_line)
             if match is not None:
                 field, version = match.groups()
                 info('firmware %s: %s' % (field, version))
-                if 'clever' in version:
-                    is_clever_firmware = True
+                if 'clover' in version or 'clever' in version:
+                    is_clover_firmware = True
 
-        if not is_clever_firmware:
-            failure('not running Clever PX4 firmware, https://clever.coex.tech/firmware')
+        if not is_clover_firmware:
+            failure('not running Clover PX4 firmware, https://clever.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
@@ -629,16 +629,16 @@ def check_cpu_usage():
                     cpu.strip(), cmd.strip(), pid.strip())
 
 
-@check('clever.service')
-def check_clever_service():
+@check('clover.service')
+def check_clover_service():
     try:
-        output = subprocess.check_output('systemctl show -p ActiveState --value clever.service'.split(),
+        output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
                                          stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         failure('systemctl returned %s: %s', e.returncode, e.output)
         return
     if 'inactive' in output:
-        failure('service is not running, try sudo systemctl restart clever')
+        failure('service is not running, try sudo systemctl restart clover')
         return
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
@@ -646,7 +646,7 @@ def check_clever_service():
     r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
     error_count = OrderedDict()
     try:
-        for line in open('/tmp/clever.err', 'r'):
+        for line in open('/tmp/clover.err', 'r'):
             node_error = r.search(line)
             if node_error:
                 msg = node_error.groups()[1] + ': ' + node_error.groups()[2]
@@ -670,9 +670,9 @@ def check_clever_service():
 @check('Image')
 def check_image():
     try:
-        info('version: %s', open('/etc/clever_version').read().strip())
+        info('version: %s', open('/etc/clover_version').read().strip())
     except IOError:
-        info('no /etc/clever_version file, not the Clever image?')
+        info('no /etc/clover_version file, not the Clover image?')
 
 
 @check('Preflight status')
@@ -761,7 +761,7 @@ def check_rpi_health():
 
 def selfcheck():
     check_image()
-    check_clever_service()
+    check_clover_service()
     check_network()
     check_fcu()
     check_imu()

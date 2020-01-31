@@ -3,7 +3,7 @@
 
     <node pkg="mavros" type="mavros_node" name="mavros" required="true" output="screen">
         <param name="fcu_url" value="udp://@127.0.1:14557"/>
-        <rosparam command="load" file="$(find clever)/launch/mavros_config.yaml"/>
+        <rosparam command="load" file="$(find clover)/launch/mavros_config.yaml"/>
     </node>
 
     <node name="visualization" pkg="mavros_extras" type="visualization" required="true">
@@ -23,19 +23,19 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped" required="true"/>
 
-    <node name="simple_offboard" pkg="clever" type="simple_offboard" required="true" output="screen">
+    <node name="simple_offboard" pkg="clover" type="simple_offboard" required="true" output="screen">
         <param name="reference_frames/body" value="map"/>
         <param name="reference_frames/base_link" value="map"/>
     </node>
 
     <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" required="true"/>
 
-    <node name="rc" pkg="clever" type="rc" required="true" output="screen"/>
+    <node name="rc" pkg="clover" type="rc" required="true" output="screen"/>
 
-    <node pkg="clever" name="led_effect" type="led" ns="led" clear_params="true" output="screen" required="true">
+    <node pkg="clover" name="led_effect" type="led" ns="led" clear_params="true" output="screen" required="true">
         <rosparam param="notify">startup: { r: 255, g: 255, b: 255 }</rosparam>
     </node>
 
-    <param name="test_module" value="$(find clever)/test/basic.py"/>
+    <param name="test_module" value="$(find clover)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>

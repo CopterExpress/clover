@@ -37,18 +37,18 @@
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
 
-#include <clever/GetTelemetry.h>
-#include <clever/Navigate.h>
-#include <clever/NavigateGlobal.h>
-#include <clever/SetPosition.h>
-#include <clever/SetVelocity.h>
-#include <clever/SetAttitude.h>
-#include <clever/SetRates.h>
+#include <clover/GetTelemetry.h>
+#include <clover/Navigate.h>
+#include <clover/NavigateGlobal.h>
+#include <clover/SetPosition.h>
+#include <clover/SetVelocity.h>
+#include <clover/SetAttitude.h>
+#include <clover/SetRates.h>
 
 using std::string;
 using namespace geometry_msgs;
 using namespace sensor_msgs;
-using namespace clever;
+using namespace clover;
 using mavros_msgs::PositionTarget;
 using mavros_msgs::AttitudeTarget;
 using mavros_msgs::Thrust;
