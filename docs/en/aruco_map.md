@@ -1,6 +1,6 @@
 # Map-based navigation with ArUco markers
 
-> **Info** Marker detection requires the camera module to be correctly plugged in and [configured](camera.md).
+> **Info** Marker detection requires the camera module to be correctly plugged in and [configured](camera_setup.md).
 
 <!-- -->
 
