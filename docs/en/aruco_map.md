@@ -148,7 +148,7 @@ If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` paramete
 
 ![Ceiling markers](../assets/IMG_4175.JPG)
 
-In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_frame.md).
+In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_setup.md).
 
 You should also set the `known_tilt` parameter to `map_flipped` in both `aruco_detect` and `aruco_map` sections of `~/catkin_ws/src/clever/clever/launch/aruco.launch`:
 

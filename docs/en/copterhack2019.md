@@ -28,7 +28,7 @@ Raspberry Pi version 4: [v0.19-alpha.1](https://github.com/CopterExpress/clever/
 
 Some drones have the camera mounted with the cable going forward. You should set this orientation in the `main_camera.launch` file in the `clever` package.
 
-Further reading: [Camera orientation](camera_frame.md)
+Further reading: [Camera orientation](camera_setup.md)
 
 ### Using Optical Flow
 
