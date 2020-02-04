@@ -34,30 +34,14 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "#1 Write to /etc/wpa_supplicant/wpa_supplicant.conf"
-
-# TODO: Use wpa_cli insted direct file edit
-cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
-network={
-    ssid="clover"
-    psk="cloverwifi"
-    mode=2
-    proto=WPA RSN
-    key_mgmt=WPA-PSK
-    pairwise=CCMP
-    group=CCMP
-    auth_alg=OPEN
-}
-EOF
-
-echo_stamp "#2 Write STATIC to /etc/dhcpcd.conf"
+echo_stamp "#1 Write STATIC to /etc/dhcpcd.conf"
 
 cat << EOF >> /etc/dhcpcd.conf
 interface wlan0
 static ip_address=192.168.11.1/24
 EOF
 
-echo_stamp "#3 Write dhcp-config to /etc/dnsmasq.conf"
+echo_stamp "#2 Write dhcp-config to /etc/dnsmasq.conf"
 
 cat << EOF >> /etc/dnsmasq.conf
 interface=wlan0
@@ -70,4 +54,4 @@ domain-needed
 quiet-dhcp6
 EOF
 
-echo_stamp "#5 End of network installation"
+echo_stamp "#3 End of network installation"

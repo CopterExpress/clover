@@ -37,7 +37,19 @@ echo_stamp() {
 
 NEW_SSID='clover-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
 echo_stamp "Setting SSID to ${NEW_SSID}"
-sudo sed -i.OLD "s/clover/${NEW_SSID}/" /etc/wpa_supplicant/wpa_supplicant.conf
+# TODO: Use wpa_cli insted direct file edit
+cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
+network={
+    ssid="${NEW_SSID}"
+    psk="cloverwifi"
+    mode=2
+    proto=WPA RSN
+    key_mgmt=WPA-PSK
+    pairwise=CCMP
+    group=CCMP
+    auth_alg=OPEN
+}
+EOF
 
 NEW_HOSTNAME=$(echo ${NEW_SSID} | tr '[:upper:]' '[:lower:]')
 echo_stamp "Setting hostname to $NEW_HOSTNAME"
