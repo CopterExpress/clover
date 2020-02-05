@@ -740,7 +740,7 @@ def check_rpi_health():
         (FLAG_FREQ_CAP_NOW, 'CPU reached thermal limit and is throttled now'),
         (FLAG_FREQ_CAP_OCCURRED, 'CPU may overheat during drone operation, consider additional cooling'),
         (FLAG_THERMAL_LIMIT_NOW, 'CPU reached soft thermal limit, frequency reduced'),
-        (FLAG_THERMAL_LIMIT_OUCCURRED, 'CPU may reach soft thermal limit, consider additional cooling'),
+        (FLAG_THERMAL_LIMIT_OCCURRED, 'CPU may reach soft thermal limit, consider additional cooling'),
     )
 
     try:
