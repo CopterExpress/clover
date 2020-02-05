@@ -740,7 +740,7 @@ def check_rpi_health():
         (FLAG_FREQ_CAP_NOW, 'CPU reached thermal limit and is throttled now'),
         (FLAG_FREQ_CAP_OCCURRED, 'CPU may overheat during drone operation, consider additional cooling'),
         (FLAG_THERMAL_LIMIT_NOW, 'CPU reached soft thermal limit, frequency reduced'),
-        (FLAG_THERMAL_LIMIT_OUCCURRED, 'CPU may reach soft thermal limit, consider additional cooling'),
+        (FLAG_THERMAL_LIMIT_OCCURRED, 'CPU may reach soft thermal limit, consider additional cooling'),
     )
 
     try:
@@ -759,8 +759,17 @@ def check_rpi_health():
             failure(flag_description[1])
 
 
+@check('Board')
+def check_board():
+    try:
+        info('%s', open('/proc/device-tree/model').readline())
+    except IOError:
+        info('could not open /proc/device-tree/model, not a Raspberry Pi?')
+
+
 def selfcheck():
     check_image()
+    check_board()
     check_clover_service()
     check_network()
     check_fcu()
