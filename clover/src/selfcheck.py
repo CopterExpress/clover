@@ -759,8 +759,17 @@ def check_rpi_health():
             failure(flag_description[1])
 
 
+@check('Board')
+def check_board():
+    try:
+        info('%s', open('/proc/device-tree/model').readline())
+    except IOError:
+        info('could not open /proc/device-tree/model, not a Raspberry Pi?')
+
+
 def selfcheck():
     check_image()
+    check_board()
     check_clover_service()
     check_network()
     check_fcu()
