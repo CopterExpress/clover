@@ -3,7 +3,7 @@
     <arg name="led_effect" default="true"/>
     <arg name="led_notify" default="true"/>
 
-    <!-- For additional help go to https://clever.coex.tech/led -->
+    <!-- For additional help go to https://clover.coex.tech/led -->
 
     <!-- ws281x led strip driver -->
     <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">
@@ -17,7 +17,7 @@
     </node>
 
     <!-- high level led effects control, events notification with leds -->
-    <node pkg="clever" name="led_effect" type="led" ns="led" clear_params="true" output="screen" if="$(arg led_effect)">
+    <node pkg="clover" name="led_effect" type="led" ns="led" clear_params="true" output="screen" if="$(arg led_effect)">
         <param name="blink_rate" value="2"/>
         <param name="fade_period" value="0.5"/>
         <param name="rainbow_period" value="5"/>

@@ -1,0 +1,5 @@
+<library path="lib/libclover">
+   <class name="clover/optical_flow" type="OpticalFlow" base_class_type="nodelet::Nodelet">
+      <description/>
+   </class>
+</library>

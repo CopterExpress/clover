@@ -31,7 +31,7 @@
     </node>
 
     <!-- vpe publisher from aruco markers -->
-    <node name="vpe_publisher" pkg="clever" type="vpe_publisher" if="$(arg aruco_vpe)" output="screen" clear_params="true">
+    <node name="vpe_publisher" pkg="clover" type="vpe_publisher" if="$(arg aruco_vpe)" output="screen" clear_params="true">
         <remap from="~pose_cov" to="aruco_map/pose"/>
         <remap from="~vpe" to="mavros/vision_pose/pose"/>
         <param name="frame_id" value="aruco_map_detected"/>

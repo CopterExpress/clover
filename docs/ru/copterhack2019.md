@@ -28,7 +28,7 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 На многих дронах камера ориентирована шлейфом вперёд. Это следует отразить в файле `main_camera.launch` в пакете `clever`.
 
-Подробнее см. статью [Ориентация камеры](camera_frame.md).
+Подробнее см. статью [Ориентация камеры](camera_setup.md).
 
 ### Полет с использованием Optical Flow
 

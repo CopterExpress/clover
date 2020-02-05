@@ -233,7 +233,7 @@ and replace map.txt with your map name.
 
 - Edit the `main_camera.launch` for setting up the camera:
 
-  Read more in the article. "[Camera orientation](camera_frame.md)".
+  Read more in the article. "[Camera orientation](camera_setup.md)".
 
   In this file, you need to edit the line with the camera location parameters. The line looks like this:
 

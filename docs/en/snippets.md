@@ -39,7 +39,7 @@ print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 # Waiting for takeoff
 while not rospy.is_shutdown():
     # Checking current altitude
-    if get_telemetry().z - start.z + z < tolerance:
+    if start.z + z - get_telemetry().z < tolerance:
         # Takeoff complete
         break
     rospy.sleep(0.2)
@@ -53,7 +53,7 @@ def takeoff_wait(alt, speed=0.5, tolerance=0.2):
     print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
 
     while not rospy.is_shutdown():
-        if get_telemetry().z - start.z + z < tolerance:
+        if start.z + alt - get_telemetry().z < tolerance:
             break
 
         rospy.sleep(0.2)
