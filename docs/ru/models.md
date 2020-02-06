@@ -6,13 +6,19 @@
 
 ### 3D печать
 
-* АКБ холдер – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/battery_holder.stl). Материал печати: PLA/ABS/SBS. Заполнение: не менее 50%.
+* АКБ холдер – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/battery_holder.stl). Материал печати: PLA/ABS/SBS. Заполнение: не менее 50%.
 
 ### Лазерная резка
 
 * Ремонтная накладка – [`reinforcing_pad.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/reinforcing_pad.dxf)
 
 ## Клевер 3
+
+### 3D печать
+
+* Camera case – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Материал печати: PLA/ABS/SBS.
+* Camera mount – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Материал печати: PLA/ABS/SBS.
+* Camera plate – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Материал печати: PLA/ABS/SBS.
 
 ### Лазерная резка
 

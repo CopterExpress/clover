@@ -14,6 +14,12 @@ This page contains models and drawings of some of the drone parts. They can be u
 
 ## Clover 3
 
+### 3D print
+
+* Кейс для камеры – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Filament: PLA/ABS/SBS.
+* Крепежная пластина для камеры – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Filament: PLA/ABS/SBS.
+* Пластина жесткости для камеры – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Filament: PLA/ABS/SBS.
+
 ### Laser cut
 
 * Big leg – [`big_leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/big_leg.dxf).
