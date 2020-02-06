@@ -16,9 +16,9 @@
 
 ### 3D печать
 
-* Camera case – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Материал печати: PLA/ABS/SBS.
-* Camera mount – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Материал печати: PLA/ABS/SBS.
-* Camera plate – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Материал печати: PLA/ABS/SBS.
+* Кейс для камеры – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Материал печати: PLA/ABS/SBS.
+* Крепежная пластина для камеры – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Материал печати: PLA/ABS/SBS.
+* Пластина жесткости для камеры – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Материал печати: PLA/ABS/SBS.
 
 ### Лазерная резка
 
