@@ -81,6 +81,7 @@ add_service_files(
   SetAttitude.srv
   SetRates.srv
   SetLEDEffect.srv
+  Execute.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -167,6 +168,8 @@ add_executable(vpe_publisher src/vpe_publisher.cpp)
 
 add_executable(led src/led.cpp)
 
+add_executable(shell src/shell.cpp)
+
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
@@ -180,9 +183,13 @@ target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 target_link_libraries(led ${catkin_LIBRARIES})
 
+target_link_libraries(shell ${catkin_LIBRARIES})
+
 add_dependencies(simple_offboard ${PROJECT_NAME}_generate_messages_cpp)
 
 add_dependencies(led ${PROJECT_NAME}_generate_messages_cpp)
+
+add_dependencies(shell ${PROJECT_NAME}_generate_messages_cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
