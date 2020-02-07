@@ -8,7 +8,17 @@
 	<li><a href="aruco_map.html">3D visualization for markers map</a> (<code>ros3djs</code>)</li>
 </ul>
 
+<div class="version"></div>
+
+<script src="js/roslib.js"></script>
 <script type="text/javascript">
 	document.querySelector("#wvs").href = location.origin + ':8080';
 	document.querySelector("#butterfly").href = location.origin + ':57575';
+
+	// Determine image version
+	var ros = new ROSLIB.Ros({ url: 'ws://' + location.hostname + ':9090' });
+	var exec = new ROSLIB.Service({ ros: ros, name : '/exec', serviceType : 'clover/Execute' });
+	exec.callService(new ROSLIB.ServiceRequest({ cmd: 'cat /etc/clover_version' }), function(result) {
+		document.querySelector('.version').innerHTML = 'Version: ' + result.output;
+	});
 </script>
