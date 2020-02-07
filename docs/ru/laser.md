@@ -74,7 +74,6 @@ def range_callback(msg):
 rospy.Subscriber('rangefinder/range', Range, range_callback)
 ```
 
-
 ### Визуализация данных
 
 Для построения графика по данным с дальномера может быть использован rqt_multiplot.
