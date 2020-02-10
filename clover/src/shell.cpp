@@ -12,33 +12,26 @@
 ros::Duration timeout;
 
 // TODO: handle timeout
-std::string exec(const char *cmd) {
-	ros::Time start = ros::Time::now();
-
-	std::array<char, 128> buffer;
-	std::string result;
-	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-	if (!pipe) {
-		throw std::runtime_error("popen() failed!");
-	}
-
-
-	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-		result += buffer.data();
-
-		if (ros::Time::now() - start > timeout) {
-			ROS_INFO("Timeout: %s", cmd);
-			return result;
-		}
-	}
-
-	return result;
-}
-
 bool handle(clover::Execute::Request& req, clover::Execute::Response& res)
 {
 	ROS_INFO("Execute: %s", req.cmd.c_str());
-	res.output = exec(req.cmd.c_str());
+
+	std::array<char, 128> buffer;
+	std::string result;
+
+	FILE *fp = popen(req.cmd.c_str(), "r");
+
+	if (fp == NULL) {
+		res.code = clover::Execute::Request::CODE_FAIL;
+		res.output = "popen() failed";
+		return true;
+	}
+
+	while (fgets(buffer.data(), buffer.size(), fp) != nullptr) {
+		res.output += buffer.data();
+	}
+
+	res.code = pclose(fp);
 	return true;
 }
 
