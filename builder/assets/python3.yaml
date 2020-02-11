@@ -1,9 +1,9 @@
 python3-wxgtk:
-    debian:
-      buster: [python3-wxgtk4.0]
-  python3-serial:
-    debian:
-      buster: [python3-serial]
-  python3-requests:
-    debian:
-      buster: [python3-requests]
+  debian:
+    buster: [python3-wxgtk4.0]
+python3-serial:
+  debian:
+    buster: [python3-serial]
+python3-requests:
+  debian:
+    buster: [python3-requests]
