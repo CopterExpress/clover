@@ -17,6 +17,8 @@ from std_srvs.srv import Trigger
 from clover.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
     SetAttitude, SetRates, SetLEDEffect
 
+get_telemetry = rospy.ServiceProxy('get_telemetry', GetTelemetry)
+
 import tf2_ros
 import tf2_geometry_msgs
 
