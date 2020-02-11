@@ -92,3 +92,12 @@ function addArucoMap() {
 		rootObject: viewer.scene
 	});
 }
+
+function addDirection() {
+	new ROS3D.MarkerArrayClient({
+		ros: ros,
+		tfClient: tfClient,
+		topic: '/main_camera/direction_markers',
+		rootObject: viewer.scene
+	});
+}

@@ -20,7 +20,7 @@ using namespace visualization_msgs;
 double markers_scale;
 std::string camera_frame;
 
-MarkerArray createMarkers() {
+MarkerArray createCameraMarkers() {
 	MarkerArray markers;
 
 	Marker lens;
@@ -82,6 +82,30 @@ MarkerArray createMarkers() {
 	return markers;
 }
 
+MarkerArray createDirectionMarkers() {
+	MarkerArray markers;
+
+	Marker arrow;
+	arrow.header.frame_id = camera_frame;
+	arrow.ns = "camera_markers";
+	arrow.id = 0;
+	arrow.action = Marker::ADD;
+	arrow.type = Marker::ARROW;
+	arrow.frame_locked = true;
+	arrow.scale.x = 0.18 * markers_scale;
+	arrow.color.r = 0.62;
+	arrow.color.g = 0.09;
+	arrow.color.b = 0.61;
+	arrow.color.a = 0.8;
+	arrow.pose.position.z = -0.07;
+	arrow.pose.orientation.z = -0.7071;
+	arrow.pose.orientation.w = 0.7071;
+
+	markers.markers.push_back(arrow);
+
+	return markers;
+}
+
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "camera_markers", ros::init_options::AnonymousName);
@@ -94,7 +118,10 @@ int main(int argc, char **argv)
 	camera_frame = camera_info->header.frame_id;
 
 	ros::Publisher markers_pub = nh.advertise<visualization_msgs::MarkerArray>("camera_markers", 1, true);
-	markers_pub.publish(createMarkers());
+	ros::Publisher direction_pub = nh.advertise<visualization_msgs::MarkerArray>("direction_markers", 1, true);
+
+	direction_pub.publish(createDirectionMarkers());
+	markers_pub.publish(createCameraMarkers());
 
 	ROS_INFO("Camera markers initialized");
 	ros::spin();
