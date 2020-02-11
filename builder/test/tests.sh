@@ -20,14 +20,16 @@ nmap --version
 lsof -v
 git --version
 vim --version
-pip --version
-pip2 --version
 pip3 --version
 tcpdump --version
 monkey --version
 pigpiod -v
 i2cdetect -V
+# butterfly uses its own venv, so we honor that
+. /root/butterfly_env/bin/activate
 butterfly -h
+# deactivate venv as needed
+deactivate
 espeak --version
 mjpg_streamer --version
 

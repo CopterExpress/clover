@@ -67,7 +67,7 @@ apt-get update \
 
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
 echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
-echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
+echo "deb http://deb.coex.tech/meodic-py3 buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
 echo "deb http://deb.coex.tech/clover buster main" > /etc/apt/sources.list.d/clover.list
 
 echo_stamp "Update apt cache"
@@ -95,20 +95,21 @@ libjpeg8 \
 tcpdump \
 ltrace \
 libpoco-dev \
-python-rosdep \
-python-rosinstall-generator \
-python-wstool \
-python-rosinstall \
+python3-rosdep \
+python3-rosinstall-generator \
+python3-wstool \
+python3-rosinstall \
 build-essential \
 libffi-dev \
 monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-espeak espeak-data python-espeak \
+espeak espeak-data python3-espeak \
 ntpdate \
 python-dev \
 python3-dev \
-python-systemd \
+python3-venv \
+python3-systemd \
 mjpg-streamer \
 python3-opencv \
 && echo_stamp "Everything was installed!" "SUCCESS" \
@@ -121,7 +122,8 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 echo_stamp "Installing pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-python get-pip.py
+# Don't even bother installing pip for python2.7
+# python get-pip.py
 rm get-pip.py
 #my_travis_retry pip install --upgrade pip
 #my_travis_retry pip3 install --upgrade pip
@@ -132,10 +134,14 @@ pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
-my_travis_retry pip3 install tornado==5.1.1
-my_travis_retry pip3 install butterfly
-my_travis_retry pip3 install butterfly[systemd]
+cd /root
+python3 -m venv butterfly_env
+source butterfly_env/bin/activate
+my_travis_retry pip install tornado==5.1.1
+my_travis_retry pip install butterfly
+my_travis_retry pip install butterfly[systemd]
 systemctl enable butterfly.socket
+deactivate
 
 echo_stamp "Install ws281x library"
 my_travis_retry pip install --prefer-binary rpi_ws281x

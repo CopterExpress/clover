@@ -18,6 +18,7 @@ echo "Run image tests"
 
 export ROS_DISTRO='melodic'
 export ROS_IP='127.0.0.1'
+export ROS_PYTHON_VERSION=3
 source /opt/ros/melodic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 
