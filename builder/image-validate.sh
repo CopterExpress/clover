@@ -25,7 +25,8 @@ source /home/pi/catkin_ws/devel/setup.bash
 cd /home/pi/catkin_ws/src/clover/builder/test/
 ./tests.sh
 ./tests.py
-./tests_py2.py
+# Disable Python 2 tests for image - we're dropping support, right?
+# ./tests_py2.py
 [[ $(./tests_clever.py) == "Warning: clever package is renamed to clover" ]]  # test backwards compatibility
 
 echo "Move /etc/ld.so.preload back to its original position"
