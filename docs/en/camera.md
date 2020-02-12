@@ -6,7 +6,7 @@ Make sure the camera is enabled in the `~/catkin_ws/src/clever/clever/launch/cle
 <arg name="main_camera" default="true"/>
 ```
 
-Also make sure that [position and orientation of the camera](camera_frame.md) is correct.
+Also make sure that [position and orientation of the camera](camera_setup.md) is correct.
 
 The `clever` package must be restarted after the launch-file has been edited:
 

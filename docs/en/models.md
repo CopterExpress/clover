@@ -6,13 +6,19 @@ This page contains models and drawings of some of the drone parts. They can be u
 
 ### 3D print
 
-* Battery holder – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/battery_holder.stl). Filament: PLA/ABS/SBS. Infill: 50% or more.
+* Battery holder – [`battery_holder.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/battery_holder.stl). Filament: PLA/ABS/SBS. Infill: 50% or more.
 
 ### Laser cut
 
 * Reinforcing Pad – [`reinforcing_pad.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/reinforcing_pad.dxf)
 
 ## Clover 3
+
+### 3D print
+
+* Camera case – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Filament: PLA/ABS/SBS.
+* Camera mount – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Filament: PLA/ABS/SBS.
+* Camera plate – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Filament: PLA/ABS/SBS.
 
 ### Laser cut
 

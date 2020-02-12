@@ -39,7 +39,7 @@ print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
 # Waiting for takeoff
 while not rospy.is_shutdown():
     # Checking current altitude
-    if get_telemetry().z - start.z + z < tolerance:
+    if start.z + z - get_telemetry().z < tolerance:
         # Takeoff complete
         break
     rospy.sleep(0.2)
@@ -53,7 +53,7 @@ def takeoff_wait(alt, speed=0.5, tolerance=0.2):
     print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
 
     while not rospy.is_shutdown():
-        if get_telemetry().z - start.z + z < tolerance:
+        if start.z + alt - get_telemetry().z < tolerance:
             break
 
         rospy.sleep(0.2)
@@ -79,6 +79,34 @@ while not rospy.is_shutdown():
         break
     rospy.sleep(0.2)
 ```
+
+This code can be wrapped into a function:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id=frame_id)
+        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+A more universal solution, utilizing the `navigate_target` frame, which corresponds to the navigating target point of the drone:
+
+```python
+def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
+    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+This code also can be used for navigating using `body` frame.
 
 ### # {#block-land}
 

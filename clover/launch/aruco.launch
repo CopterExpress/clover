@@ -10,6 +10,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="map_markers" to="aruco_map/markers" if="$(arg aruco_map)"/>
+        <param name="cornerRefinementMethod" value="2"/>
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="known_tilt" value="map"/>
@@ -31,7 +32,7 @@
     </node>
 
     <!-- vpe publisher from aruco markers -->
-    <node name="vpe_publisher" pkg="clever" type="vpe_publisher" if="$(arg aruco_vpe)" output="screen" clear_params="true">
+    <node name="vpe_publisher" pkg="clover" type="vpe_publisher" if="$(arg aruco_vpe)" output="screen" clear_params="true">
         <remap from="~pose_cov" to="aruco_map/pose"/>
         <remap from="~vpe" to="mavros/vision_pose/pose"/>
         <param name="frame_id" value="aruco_map_detected"/>
