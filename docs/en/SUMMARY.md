@@ -60,6 +60,7 @@
   * [MAVLink](mavlink.md)
   * [PX4 Logs and Topics](flight_logs.md)
   * [Camera calibration](calibration.md)
+  * [Trainer mode](trainer_mode.md)
   * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
 * Textbook
   * [Theory and Videos](lessons.md)
