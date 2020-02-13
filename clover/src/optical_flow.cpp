@@ -46,7 +46,9 @@ private:
 	image_transport::CameraSubscriber img_sub_;
 	image_transport::Publisher img_pub_;
 	mavros_msgs::OpticalFlowRad flow_;
-	int roi_, roi_2_;
+	int roi_px_;
+	double roi_rad_;
+	cv::Rect roi_;
 	Mat hann_;
 	Mat prev_, curr_;
 	Mat camera_matrix_, dist_coeffs_;
@@ -63,8 +65,8 @@ private:
 
 		nh.param<std::string>("mavros/local_position/tf/frame_id", local_frame_id_, "map");
 		nh.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "base_link");
-		nh_priv.param("roi", roi_, 128);
-		roi_2_ = roi_ / 2;
+		nh_priv.param("roi", roi_px_, 128);
+		nh_priv.param("roi_rad", roi_rad_, 0.0);
 		nh_priv.param("calc_flow_gyro", calc_flow_gyro_, false);
 
 		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
@@ -112,9 +114,31 @@ private:
 
 		auto img = cv_bridge::toCvShare(msg, "mono8")->image;
 
-		// Apply ROI
-		if (roi_ != 0) {
-			img = img(cv::Rect((msg->width / 2 - roi_2_), (msg->height / 2 - roi_2_), roi_, roi_));
+		if (roi_.width == 0) { // ROI is not calculated
+			// Calculate ROI
+			if (roi_rad_ != 0) {
+				std::vector<cv::Point3f> object_points = {
+					cv::Point3f(-sin(roi_rad_ / 2), -sin(roi_rad_ / 2), cos(roi_rad_ / 2)),
+					cv::Point3f(sin(roi_rad_ / 2), sin(roi_rad_ / 2), cos(roi_rad_ / 2)),
+				};
+
+				std::vector<double> vec { 0, 0, 0 };
+				std::vector<cv::Point2f> img_points;
+				cv::projectPoints(object_points, vec, vec, camera_matrix_, dist_coeffs_, img_points);
+
+				roi_ = cv::Rect(cv::Point2i(round(img_points[0].x), round(img_points[0].y)), 
+					cv::Point2i(round(img_points[1].x), round(img_points[1].y)));
+
+				ROS_INFO("ROI: %d %d - %d %d ", roi_.tl().x, roi_.tl().y, roi_.br().x, roi_.br().y);
+
+			} else if (roi_px_ != 0) {
+				roi_ = cv::Rect((msg->width / 2 - roi_px_ / 2), (msg->height / 2 - roi_px_ / 2), roi_px_, roi_px_);
+			}
+		}
+
+		if (roi_.width != 0) { // ROI is set
+			// Apply ROI
+			img = img(roi_);
 		}
 
 		img.convertTo(curr_, CV_32F);
