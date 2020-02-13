@@ -73,6 +73,7 @@
   * [Протокол MAVLink](mavlink.md)
   * [Работа с логами PX4](flight_logs.md)
   * [Калибровка камеры](calibration.md)
+  * [Настройка режима тренера](trainer_mode.md)
   * [Работа с ИК датчиками](ir_sensors.md)
   * [Подключение PX4FLOW](px4flow.md)
   * [Модуль ESP8266](esp8266_bridge.md)
