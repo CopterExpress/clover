@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Usage
-# fpv_camera <video_device> <http port>
+# camera_stream <video_device> <http port>
 
-echo "Starting FPV camera $1 on :$2"
+echo "Starting camera stream $1 on :$2"
 mjpg_streamer -i "/usr/lib/input_uvc.so -d $1 -r 320x240 -f 30" -o "/usr/lib/output_http.so -w /usr/share/mjpg_streamer/www -p $2"
