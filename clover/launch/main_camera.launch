@@ -18,7 +18,7 @@
     <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" clear_params="true">
         <param name="device_path" value="/dev/video0"/> <!-- v4l2 device -->
         <param name="frame_id" value="main_camera_optical"/>
-        <param name="camera_info_url" value="file://$(find clover)/camera_info/fisheye_cam_320.yaml"/>
+        <param name="camera_info_url" value="file://$(find clover)/camera_info/fisheye_cam.yaml"/>
 
         <param name="rate" value="100"/> <!-- poll rate -->
         <param name="cv_cap_prop_fps" value="40"/> <!-- camera FPS -->
