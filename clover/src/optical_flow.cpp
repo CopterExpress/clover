@@ -114,7 +114,7 @@ private:
 
 		auto img = cv_bridge::toCvShare(msg, "mono8")->image;
 
-		if (roi_.empty()) {
+		if (roi_.width == 0) { // ROI is not calculated
 			// Calculate ROI
 			if (roi_rad_ != 0) {
 				std::vector<cv::Point3f> object_points = {
@@ -136,7 +136,7 @@ private:
 			}
 		}
 
-		if (!roi_.empty()) {
+		if (roi_.width != 0) { // ROI is set
 			// Apply ROI
 			img = img(roi_);
 		}
