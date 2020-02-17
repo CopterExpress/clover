@@ -12,6 +12,10 @@ python3 --version
 ipython --version
 ipython3 --version
 
+# ptvsd does not have a stand-alone binary
+python -m ptvsd --version
+python3 -m ptvsd --version
+
 node -v
 npm -v
 
