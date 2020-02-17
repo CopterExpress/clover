@@ -121,9 +121,9 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 
 echo_stamp "Installing pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# Install pip for python2 first, so that pip binary will default to pip3
+python get-pip.py
 python3 get-pip.py
-# Don't even bother installing pip for python2.7
-# python get-pip.py
 rm get-pip.py
 #my_travis_retry pip install --upgrade pip
 #my_travis_retry pip3 install --upgrade pip
