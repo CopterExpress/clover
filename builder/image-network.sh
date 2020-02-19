@@ -42,6 +42,7 @@ static ip_address=192.168.11.1/24
 EOF
 
 echo_stamp "#2 Set wpa_supplicant country"
+
 cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
 country=GB
 EOF
