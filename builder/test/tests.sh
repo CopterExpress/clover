@@ -28,7 +28,6 @@ monkey --version
 pigpiod -v
 i2cdetect -V
 butterfly -h
-deactivate
 espeak --version
 mjpg_streamer --version
 
