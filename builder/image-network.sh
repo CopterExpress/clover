@@ -41,7 +41,12 @@ interface wlan0
 static ip_address=192.168.11.1/24
 EOF
 
-echo_stamp "#2 Write dhcp-config to /etc/dnsmasq.conf"
+echo_stamp "#2 Set wpa_supplicant country"
+cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
+country=GB
+EOF
+
+echo_stamp "#3 Write dhcp-config to /etc/dnsmasq.conf"
 
 cat << EOF >> /etc/dnsmasq.conf
 interface=wlan0
@@ -54,4 +59,4 @@ domain-needed
 quiet-dhcp6
 EOF
 
-echo_stamp "#3 End of network installation"
+echo_stamp "#4 End of network installation"
