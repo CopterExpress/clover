@@ -31,3 +31,5 @@
 <img src="../assets/qgc-esc.png" class="zoom">
 
 Дополнительная информация: https://docs.px4.io/v1.9.0/en/advanced_config/esc_calibration.html.
+
+**Далее**: [настройка Failsafe](failsafe.md).
