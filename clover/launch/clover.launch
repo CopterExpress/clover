@@ -5,7 +5,7 @@
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="main_camera" default="true"/>
-    <arg name="optical_flow" default="false"/>
+    <arg name="optical_flow" default="true"/>
     <arg name="aruco" default="false"/>
     <arg name="rangefinder_vl53l1x" default="true"/>
     <arg name="led" default="true"/>
