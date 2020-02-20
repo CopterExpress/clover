@@ -10,6 +10,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="map_markers" to="aruco_map/markers" if="$(arg aruco_map)"/>
+        <param name="cornerRefinementMethod" value="2"/>
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="known_tilt" value="map"/>

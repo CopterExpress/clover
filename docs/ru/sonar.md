@@ -73,8 +73,8 @@ def read_distance():
     global low
     done.clear()
     pi.gpio_trigger(TRIG, 50, 1)
-    done.wait(timeout=5)
-    return low / 58.0 / 100.0
+    if done.wait(timeout=5):
+        return low / 58.0 / 100.0
 
 pi.set_mode(TRIG, pigpio.OUTPUT)
 pi.set_mode(ECHO, pigpio.INPUT)

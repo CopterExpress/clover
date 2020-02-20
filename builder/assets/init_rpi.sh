@@ -51,6 +51,9 @@ network={
 }
 EOF
 
+echo_stamp "Unblocking wireless interface"
+rfkill unblock wifi
+
 NEW_HOSTNAME=$(echo ${NEW_SSID} | tr '[:upper:]' '[:lower:]')
 echo_stamp "Setting hostname to $NEW_HOSTNAME"
 hostnamectl set-hostname $NEW_HOSTNAME

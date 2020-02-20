@@ -5,7 +5,7 @@
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
     <arg name="main_camera" default="true"/>
-    <arg name="optical_flow" default="false"/>
+    <arg name="optical_flow" default="true"/>
     <arg name="aruco" default="false"/>
     <arg name="rangefinder_vl53l1x" default="true"/>
     <arg name="led" default="true"/>
@@ -35,6 +35,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
+        <param name="roi_rad" value="0.8"/>
     </node>
 
     <!-- main nodelet manager -->

@@ -13,6 +13,7 @@
   * [Настройка пульта](radio.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
+  * [Настройка failsafe](failsafe.md)
 * Работа с Raspberry Pi
   * [Raspberry Pi](raspberry.md)
   * [Образ для RPi](image.md)
