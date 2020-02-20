@@ -25,7 +25,7 @@
         <param name="capture_delay" value="0.02"/> <!-- approximate delay on frame retrieving -->
         <param name="rescale_camera_info" value="true"/> <!-- automatically rescale camera calibration info -->
 
-        <!-- camera resolution, NOTE: camera_info file should match it -->
+        <!-- camera resolution -->
         <param name="image_width" value="320"/>
         <param name="image_height" value="240"/>
     </node>
