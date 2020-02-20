@@ -156,7 +156,7 @@ rm -rf node-v10.15.0-linux-armv6l/
 rm node-v10.15.0-linux-armv6l.tar.gz
 
 echo_stamp "Installing ptvsd"
-my_travis_retry pip install ptvsd
+my_travis_retry pip2 install ptvsd
 my_travis_retry pip3 install ptvsd
 
 echo_stamp "Add .vimrc"
