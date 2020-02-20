@@ -88,6 +88,46 @@ image_pub = rospy.Publisher('~debug', Image)
 image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 ```
 
+> **Warning** Если обработка изображения занимает значительное время, то её следует вынести в отдельный поток. Связь между потоками можно осуществлять через очередь (библиотека `queue` в Python). Пример программы с потоком обработки представлен ниже.
+
+```python
+import rospy
+import cv2
+from thread import start_new_thread
+from queue import Queue
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+rospy.init_node('computer_vision_multithreaded')
+bridge = CvBridge()
+img_queue = Queue()
+img_pub = rospy.Publisher('~debug', Image, queue_size=1)
+
+
+def img_thread():
+    # Wait for first image
+    img_msg = img_queue.get(block=True)
+    while True:
+        # Get newest message
+        while not img_queue.empty():
+            img_msg = img_queue.get(block=False)
+
+        img = bridge.cv2_to_imgmsg(img_msg, 'bgr8')
+        # Do any image processing with cv2...
+        img_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
+
+
+def image_callback(data):
+    img_queue.put(data)
+
+
+img_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
+# Start processing thread
+start_new_thread(img_thread, ())
+
+rospy.spin()
+```
+
 Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md).
 
 > **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clever.launch`.
