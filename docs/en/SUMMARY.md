@@ -13,6 +13,7 @@
   * [RC setup](radio.md)
   * [Flight modes](modes.md)
   * [Power setup](power.md)
+  * [Failsafe configuration](failsafe.md)
 * Working with Raspberry Pi
   * [Raspberry Pi](raspberry.md)
   * [RPi Image](image.md)
