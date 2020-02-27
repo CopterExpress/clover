@@ -49,6 +49,7 @@
   * [Гид по автономному полету](auto_setup.md)
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
+  * [Управление в режиме тренера](trainer_mode.md)
   * [Настройка PID](pid_tuning.md)
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
