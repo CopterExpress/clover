@@ -17,14 +17,14 @@ Usage:
   genmap.py (-h | --help)
 
 Options:
-  <length>        Marker side length
-  <x>             Marker count along X axis
-  <y>             Marker count along Y axis
-  <dist_x>        Distance between markers along X axis
-  <dist_y>        Distance between markers along Y axis
-  <first>         First marker ID
-  <--top-left>    First marker is on top-left (default)
-  <--bottom-left> First marker is on bottom-left
+  <length>       Marker side length
+  <x>            Marker count along X axis
+  <y>            Marker count along Y axis
+  <dist_x>       Distance between markers along X axis
+  <dist_y>       Distance between markers along Y axis
+  <first>        First marker ID
+  --top-left     First marker is on top-left (default)
+  --bottom-left  First marker is on bottom-left
 """
 
 from __future__ import print_function
