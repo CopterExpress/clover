@@ -53,7 +53,7 @@ Grid maps may be generated using the `genmap.py` script:
 rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
 ```
 
-`length` is the size of each marker, `x` is the marker count along the *x* axis, `y` is the marker count along the *y* axis, `dist_x` is the distance between the centers of adjacent markers along the *x* axis, `dist_y` is the distance between the centers of the *y* axis, `first` is the ID of the first marker (bottom left marker, unless `--top-left` is specified), `test_map.txt` is the name of the generated map file. The optional `--top-left` parameter changes the numbering of markers, making the top left marker the first one.
+`length` is the size of each marker, `x` is the marker count along the *x* axis, `y` is the marker count along the *y* axis, `dist_x` is the distance between the centers of adjacent markers along the *x* axis, `dist_y` is the distance between the centers of the *y* axis, `first` is the ID of the first marker (top left marker, unless `--bottom-left` is specified), `test_map.txt` is the name of the generated map file. The optional `--bottom-left` parameter changes the numbering of markers, making the bottom left marker the first one.
 
 Usage example:
 
