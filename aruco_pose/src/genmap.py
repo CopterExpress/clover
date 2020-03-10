@@ -25,6 +25,9 @@ Options:
   <first>        First marker ID
   --top-left     First marker is on top-left (default)
   --bottom-left  First marker is on bottom-left
+
+Example:
+  rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > $(catkin_find aruco_pose map)/test_map.txt
 """
 
 from __future__ import print_function
