@@ -146,7 +146,7 @@ Flying 2 m to the left from the last navigation target:
 navigate(x=0, y=2, z=0, speed=1, frame_id='navigate_target')
 ```
 
-Turn 90 degrees counterclockwise:
+Turn 90 degrees clockwise:
 
 ```python
 navigate(yaw=math.radians(-90), frame_id='body')
