@@ -47,6 +47,7 @@ bottom_left = arguments['--bottom-left']
 
 max_y = (markers_y - 1) * dist_y
 
+print('# id\tlength\tx\ty\tz\trot_z\trot_y\trot_x')
 for y in range(markers_y):
     for x in range(markers_x):
         pos_x = x * dist_x
