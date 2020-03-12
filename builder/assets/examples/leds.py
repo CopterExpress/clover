@@ -1,7 +1,7 @@
 import rospy
 from clover.srv import SetLEDEffect
 
-rospy.init_node('flight')
+rospy.init_node('leds')
 
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)  # define proxy to ROS-service
 
