@@ -1,3 +1,5 @@
+# Information: https://clever.coex.tech/en/programming.html
+
 import rospy
 from clover import srv
 from std_srvs.srv import Trigger
