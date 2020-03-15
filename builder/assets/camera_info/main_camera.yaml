@@ -1,7 +1,7 @@
 image_width: 320
 image_height: 240
 distortion_model: plumb_bob
-camera_name: raspicam
+camera_name: main_camera
 camera_matrix:
   rows: 3
   cols: 3

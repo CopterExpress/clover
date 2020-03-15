@@ -125,7 +125,8 @@ apt-get install -y --no-install-recommends \
     ros-melodic-usb-cam \
     ros-melodic-vl53l1x \
     ros-melodic-ws281x \
-    ros-melodic-rosshow
+    ros-melodic-rosshow \
+    ros-melodic-camera-info-manager-py
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
@@ -134,6 +135,10 @@ echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 # FIXME: Buster comes with tornado==5.1.1 but we need tornado==4.2.1 for rosbridge_suite
 # (note that Python 3 will still have a more recent version)
 pip install tornado==4.2.1
+
+# Install camera calibrations
+mkdir -p /home/pi/.ros/camera_info
+cp /home/pi/catkin_ws/src/clover/builder/assets/camera_info/* /home/pi/.ros/camera_info/
 
 echo_stamp "Running tests"
 cd /home/pi/catkin_ws

@@ -28,3 +28,11 @@ import pigpio
 from espeak import espeak
 
 print cv2.getBuildInformation()
+
+# check main calibration installed
+import camera_info_manager
+m = camera_info_manager.CameraInfoManager('main_camera')
+m.loadCameraInfo()
+camera_info = m.getCameraInfo()
+assert camera_info.image_width == 320
+assert camera_info.image_height == 240
