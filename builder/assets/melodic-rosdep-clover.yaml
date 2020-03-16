@@ -733,3 +733,6 @@ realsense2_camera:
 realsense2_description:
   debian:
     buster: [ros-melodic-realsense2-description]
+camera_info_manager_py:
+  debian:
+    buster: [ros-melodic-camera-info-manager-py]
