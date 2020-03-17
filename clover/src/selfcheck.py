@@ -340,7 +340,7 @@ def is_process_running(binary, exact=False, full=False):
 def check_aruco():
     if is_process_running('aruco_detect', full=True):
         info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
-        known_tilt = rospy.get_param('aruco_detect/known_tilt')
+        known_tilt = rospy.get_param('aruco_detect/known_tilt', '')
         if known_tilt == 'map':
             known_tilt += ' (ALL markers are on the floor)'
         elif known_tilt == 'map_flipped':
@@ -356,7 +356,7 @@ def check_aruco():
         return
 
     if is_process_running('aruco_map', full=True):
-        known_tilt = rospy.get_param('aruco_map/known_tilt')
+        known_tilt = rospy.get_param('aruco_map/known_tilt', '')
         if known_tilt == 'map':
             known_tilt += ' (marker\'s map is on the floor)'
         elif known_tilt == 'map_flipped':
