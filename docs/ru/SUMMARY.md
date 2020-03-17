@@ -53,6 +53,7 @@
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Melodic](ros-install.md)
+  * [Калибровка камеры](camera_calibration.md)
   * [Управление мультикоптером при помощи 4G связи](4g.md)
   * [Пакеты Клевера на Jetson Nano](jetson_nano.md)
   * [Пилотирование со смартфона](rc.md)
@@ -66,7 +67,6 @@
   * [Неисправности радиоаппаратуры](radioerrors.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Настройка режима тренера](trainer_mode.md)
-  * [Калибровка камеры](camera_calibration.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [Подключение GPS](gps.md)
   * [Работа с ИК датчиками](ir_sensors.md)
@@ -95,6 +95,7 @@
   * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
+  * [Калибровка камеры (legacy)](camera_calib.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
 
 ## Учебник
