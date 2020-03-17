@@ -32,6 +32,8 @@
 
     <node name="rc" pkg="clover" type="rc" required="true" output="screen"/>
 
+    <node name="shell" pkg="clover" type="shell" required="true" output="screen"/>
+
     <node pkg="clover" name="led_effect" type="led" ns="led" clear_params="true" output="screen" required="true">
         <rosparam param="notify">startup: { r: 255, g: 255, b: 255 }</rosparam>
     </node>
