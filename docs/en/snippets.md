@@ -362,3 +362,35 @@ flip()
 ```
 
 Requires the [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever). Before running a flip, take all necessary safty precautions.
+
+### # {#calibrate-gyro}
+
+Perform gyro calibration:
+
+```python
+from pymavlink import mavutil
+from mavros_msgs.srv import CommandLong
+from mavros_msgs.msg import State
+
+# ...
+
+send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+
+def calibrate_gyro():
+    rospy.loginfo('Calibrate gyro')
+    if not send_command(command=mavutil.mavlink.MAV_CMD_PREFLIGHT_CALIBRATION, param1=1).success:
+        return False
+
+    calibrating = False
+    while not rospy.is_shutdown():
+        state = rospy.wait_for_message('mavros/state', State)
+        if state.system_status == mavutil.mavlink.MAV_STATE_CALIBRATING or state.system_status == mavutil.mavlink.MAV_STATE_UNINIT:
+            calibrating = True
+        elif calibrating and state.system_status == mavutil.mavlink.MAV_STATE_STANDBY:
+            rospy.loginfo('Calibrating finished')
+            return True
+
+calibrate_gyro()
+```
+
+> **Note** In process of calibration the drone should not be moved.

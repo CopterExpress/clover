@@ -74,7 +74,7 @@ navigate(x=1.5, frame_id='body')
 
 <!-- TODO: статья по пидам -->
 
-If the copter has an unstable position using VPE, try to increase the *P* coefficient of speed PID controller - parameters are `MPC_XY_VEL_P` and `MPC_Z_VEL_P`.
+If the copter has an unstable position, try to increase the *P* coefficient of speed PID controller - parameters are `MPC_XY_VEL_P` and `MPC_Z_VEL_P`.
 
 If the copter has an unstable height, try increasing `MPC_Z_VEL_P` coefficient or getting better hover throttle - `MPC_THR_HOVER`.
 
@@ -84,6 +84,8 @@ If the copter is consistently yawing, try:
 * recalibrate magnetometer;
 * different values for `EKF2_MAG_TYPE` parameter, that indicates how data from the magnetometer is used in EKF2;
 * changing values of `EKF2_MAG_NOISE`, `EKF2_GYR_NOISE`, `EKF2_GYR_B_NOISE` parameters.
+
+> **Note** For better results perform gyro calibration directly before taking off, using [appropriate snippet](snippets.md#calibrate-gyro).
 
 If the copter's height is deviating, try:
 
