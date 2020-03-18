@@ -9,5 +9,6 @@
         <param name="map" value="$(find aruco_pose)/test/largemap.txt"/>
     </node>
 
-    <test test-name="test_aruco_pose_largemap" pkg="aruco_pose" type="largemap.py"/>
+    <param name="test_module" value="$(find aruco_pose)/test/largemap.py"/>
+    <test test-name="test_node_pass" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>
