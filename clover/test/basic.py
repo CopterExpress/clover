@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import rospy
 import pytest
 from mavros_msgs.msg import State
