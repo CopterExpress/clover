@@ -1,3 +1,4 @@
+# id	length	x	y	z	rot_z	rot_y	rot_x
 1	0.33	0	0	0	0	0	0
 2	0.33	1	0	0	0	0	0
 3	0.33	0	1	0	0	0	0

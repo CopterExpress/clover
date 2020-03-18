@@ -38,7 +38,12 @@ echo_stamp() {
 NEW_SSID='clover-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
 echo_stamp "Setting SSID to ${NEW_SSID}"
 # TODO: Use wpa_cli insted direct file edit
-cat << EOF >> /etc/wpa_supplicant/wpa_supplicant.conf
+# FIXME: We rely on raspberrypi-net-mods to copy our file to /etc/wpa_supplicant.
+# This is not very reliable, but seems to fix our rfkill problem.
+cat << EOF >> /boot/wpa_supplicant.conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=GB
 network={
     ssid="${NEW_SSID}"
     psk="cloverwifi"
@@ -50,9 +55,6 @@ network={
     auth_alg=OPEN
 }
 EOF
-
-echo_stamp "Unblocking wireless interface"
-rfkill unblock wifi
 
 NEW_HOSTNAME=$(echo ${NEW_SSID} | tr '[:upper:]' '[:lower:]')
 echo_stamp "Setting hostname to $NEW_HOSTNAME"

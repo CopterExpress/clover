@@ -1,0 +1,7 @@
+int32 CODE_FAIL = -1
+int32 CODE_TIMEOUT = -2
+
+string cmd
+---
+string output
+int32 code

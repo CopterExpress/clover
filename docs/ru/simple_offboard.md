@@ -146,7 +146,7 @@ navigate(x=0, y=-3, z=0, speed=1, frame_id='body')
 navigate(x=0, y=2, z=0, speed=1, frame_id='navigate_target')
 ```
 
-Повернуться на 90 градусов против часовой:
+Повернуться на 90 градусов по часовой:
 
 ```python
 navigate(yaw=math.radians(-90), frame_id='body')

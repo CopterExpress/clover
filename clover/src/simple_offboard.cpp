@@ -90,7 +90,7 @@ PositionTarget position_raw_msg;
 AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
 TwistStamped rates_msg;
-TransformStamped target;
+TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
 
 // State
@@ -433,6 +433,17 @@ void publish(const ros::Time stamp)
 			position_raw_msg.position = position_msg.pose.position;
 			position_raw_pub.publish(position_raw_msg);
 		}
+
+		// publish setpoint frame
+		if (!setpoint.child_frame_id.empty()) {
+			setpoint.transform.translation.x = position_msg.pose.position.x;
+			setpoint.transform.translation.y = position_msg.pose.position.y;
+			setpoint.transform.translation.z = position_msg.pose.position.z;
+			setpoint.transform.rotation = position_msg.pose.orientation;
+			setpoint.header.frame_id = position_msg.header.frame_id;
+			setpoint.header.stamp = position_msg.header.stamp;
+			transform_broadcaster->sendTransform(setpoint);
+		}
 	}
 
 	if (setpoint_type == VELOCITY) {
@@ -764,6 +775,7 @@ int main(int argc, char **argv)
 	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
 	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
 	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
+	nh_priv.param("setpoint", setpoint.child_frame_id, string("setpoint"));
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("nav_from_sp", nav_from_sp, true);
