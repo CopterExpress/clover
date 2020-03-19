@@ -21,8 +21,14 @@ navigate(x=0, y=0, z=1, frame_id='body', auto_arm=True)
 # Wait for 3 seconds
 rospy.sleep(3)
 
-# Fly forward 1 m
-navigate(x=1, y=0, z=0, frame_id='body')
+# Fly 1 meter above ArUco marker 0
+navigate(x=0, y=0, z=1, frame_id='aruco_0')
+
+# Wait for 3 seconds
+rospy.sleep(3)
+
+# Fly to x=1 y=1 z=1 relative to ArUco markers map
+navigate(x=1, y=1, z=1, frame_id='aruco_map')
 
 # Wait for 3 seconds
 rospy.sleep(3)
