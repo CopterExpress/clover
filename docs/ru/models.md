@@ -32,7 +32,6 @@
     Материал: PLA/ABS(или аналог). Заполнение 60%.  
     Количество: 1шт.
 
-
 ### Лазерная резка
 
 * **Ножка** (вариант с захватом) – [`big_leg.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/big_leg.dxf)  
