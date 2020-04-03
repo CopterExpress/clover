@@ -27,6 +27,11 @@
     Функция: Пластина для закрепление модуля камеры в кейсе.  
     Материал: PLA/ABS(или аналог). Заполнение 30%.  
     Количество: 1шт.
+* **Малая монтажная дека** – [`mounting_deck_small.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/mounting_deck_small.stl).
+    Функция: Крепление камеры и полетного контроллера.  
+    Материал: PLA/ABS(или аналог). Заполнение 60%.  
+    Количество: 1шт.
+
 
 ### Лазерная резка
 
@@ -55,9 +60,13 @@
     Материал: Монолитный поликарбонат 2мм.  
     Количество: 4шт.
 * **Обруч (LED)** – [`led_mount_plate.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/led_mount_plate.dxf).  
-    Функция: Крепление светодиодной ленты  
+    Функция: Крепление светодиодной ленты.  
     Материал: Монолитный поликарбонат 2мм.  
     Количество: 4шт.
+* **Малая монтажная дека** – [`mounting_deck_small.dxf`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/mounting_deck_small.dxf).
+    Функция: Крепление камеры и полетного контроллера.  
+    Материал: Монолитный поликарбонат 2мм.  
+    Количество: 1шт.
 
 ### Фрезеровка
 
