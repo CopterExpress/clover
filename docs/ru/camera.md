@@ -138,7 +138,7 @@ image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, que
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw/throttled"/>
+    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw/throttled`.
+Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw_throttled`.

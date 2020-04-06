@@ -134,7 +134,7 @@ The script will take up to 100% CPU capacity. To slow down the script artificial
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw/throttled"/>
+    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-The topic for the subscriber in this case should be changed for `main_camera/image_raw/throttled`.
+The topic for the subscriber in this case should be changed for `main_camera/image_raw_throttled`.
