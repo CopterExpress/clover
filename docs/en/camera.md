@@ -97,6 +97,8 @@ The obtained images can be viewed using [web_video_server](web_video_server.md).
 To program actions of the copter upon detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [pyZBar](https://pypi.org/project/pyzbar/). It should be installed using pip:
 
 ```bash
+sudo apt update
+sudo apt install libzbar0
 sudo pip install pyzbar
 ```
 

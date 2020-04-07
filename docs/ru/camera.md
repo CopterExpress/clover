@@ -101,6 +101,8 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать библиотеку [pyZBar](https://pypi.org/project/pyzbar/). Ее нужно установить в помощью pip:
 
 ```bash
+sudo apt update
+sudo apt install libzbar0
 sudo pip install pyzbar
 ```
 
