@@ -26,5 +26,6 @@ from pymavlink import mavutil
 import rpi_ws281x
 import pigpio
 from espeak import espeak
+from pyzbar import pyzbar
 
 print cv2.getBuildInformation()
