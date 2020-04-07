@@ -121,12 +121,12 @@ def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     barcodes = pyzbar.decode(cv_image)
     for barcode in barcodes:
-        bData = barcode.data.encode("utf-8")
-        bType = barcode.type
+        b_data = barcode.data.encode("utf-8")
+        b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print ("Found barcode type {} with data {} with center at x={}, y={}".format(bType, bData, xc, yc))
+        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 
