@@ -94,13 +94,7 @@ The obtained images can be viewed using [web_video_server](web_video_server.md).
 
 > **Hint** For high-speed recognition and positioning, it is better to use [ArUco markers](aruco.md).
 
-To program actions of the copter upon detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [pyZBar](https://pypi.org/project/pyzbar/). It should be installed using pip:
-
-```bash
-sudo apt update
-sudo apt install libzbar0
-sudo pip install pyzbar
-```
+To program actions of the copter for the detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [pyZBar](https://pypi.org/project/pyzbar/). This lib is installed in the last image for Raspberry Pi.
 
 QR codes recognition in Python:
 
