@@ -16,13 +16,22 @@
 
 ## Настройка расположения камеры
 
-Чтобы установить расположение камеры под необходимым вам углом, откройте файл `main_camera.launch`, расположенный в *~/catkin_ws/src/clever/clever/launch/*.
+Чтобы установить расположение камеры под необходимым углом, откройте файл `main_camera.launch`, расположенный в *~/catkin_ws/src/clever/clover/launch/*.
 
 ```bash
-nano ~/catkin_ws/src/clever/clever/launch/main_camera.launch
+nano ~/catkin_ws/src/clever/clover/launch/main_camera.launch
 ```
 
-Необходимо или отредактировать одну из конфигурационных строк или добавить строку представленную ниже:
+### Версии 0.20>
+
+В параметрах *direction_x*, *direction_y*, установите оставьте пустые значения. Измените их вручную или введите строки:
+
+```bash
+sed -i "/direction_x/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clever/launch/aruco.launch
+sed -i "/direction_y/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clever/launch/aruco.launch
+```
+
+Отредактируйте одну из конфигурационных строк или добавить строку представленную ниже:
 
 ```
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.05 -1.5707963 0 -1.5707963 base_link main_camera_optical"/>
@@ -48,4 +57,4 @@ nano ~/catkin_ws/src/clever/clever/launch/main_camera.launch
 sed -i "/known_tilt/s/value=\".*\"/value=\"\"/" /home/pi/catkin_ws/src/clever/clever/launch/aruco.launch
 ```
 
-После всех настроек вызовите `sudo systemctl restart clover`, для перезагрузки сервиса *clover*.
+После всех настроек вызовите `sudo systemctl restart clover` для перезагрузки сервиса *clover*.
