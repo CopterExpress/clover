@@ -95,6 +95,7 @@ libjpeg8 \
 tcpdump \
 ltrace \
 libpoco-dev \
+libzbar0 \
 python-rosdep \
 python-rosinstall-generator \
 python-wstool \
