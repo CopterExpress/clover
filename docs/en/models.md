@@ -19,7 +19,7 @@ This page contains models and drawings of some of the drone parts. They can be u
 * Camera case – [`camera_case.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_case.stl). Filament: PLA/ABS/SBS.
 * Camera mount – [`camera_mount.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_mount.stl). Filament: PLA/ABS/SBS.
 * Camera plate – [`camera_plate.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/camera_plate.stl). Filament: PLA/ABS/SBS.
-* Mounting deck small – [`mounting_deck_small.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/mounting_deck_small.stl). Filament: PLA/ABS/SBS.
+* Mounting deck small – [`mounting_deck_small.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/mounting_deck_small.stl). Filament: PLA/ABS/SBS.
 
 ### Laser cut
 

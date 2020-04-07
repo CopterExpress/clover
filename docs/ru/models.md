@@ -27,7 +27,7 @@
     Функция: Пластина для закрепление модуля камеры в кейсе.  
     Материал: PLA/ABS(или аналог). Заполнение 30%.  
     Количество: 1шт.
-* **Малая монтажная дека** – [`mounting_deck_small.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/dxf/mounting_deck_small.stl).
+* **Малая монтажная дека** – [`mounting_deck_small.stl`](https://github.com/CopterExpress/clever/raw/master/docs/assets/stl/mounting_deck_small.stl).
     Функция: Крепление камеры и полетного контроллера.  
     Материал: PLA/ABS(или аналог). Заполнение 60%.  
     Количество: 1шт.
