@@ -24,14 +24,14 @@ nano ~/catkin_ws/src/clever/clover/launch/main_camera.launch
 
 ### Версии 0.20>
 
-В параметрах *direction_x*, *direction_y*, установите оставьте пустые значения. Измените их вручную или введите строки:
+В параметрах *direction_x*, *direction_y*, установите пустые значения вручную или введите строки:
 
 ```bash
-sed -i "/direction_x/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clever/launch/aruco.launch
-sed -i "/direction_y/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clever/launch/aruco.launch
+sed -i "/direction_z/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clover/launch/main_camera.launch
+sed -i "/direction_y/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clever/clover/launch/main_camera.launch
 ```
 
-Отредактируйте одну из конфигурационных строк или добавить строку представленную ниже:
+Отредактируйте одну из конфигурационных строк или добавьте строку представленную ниже:
 
 ```
 <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 0.05 -1.5707963 0 -1.5707963 base_link main_camera_optical"/>
