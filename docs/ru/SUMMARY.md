@@ -50,6 +50,7 @@
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
   * [Настройка PID](pid_tuning.md)
+  * [Навигация по настенным маркерам](wall_aruco.md)
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Melodic](ros-install.md)
