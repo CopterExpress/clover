@@ -92,6 +92,24 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 > **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clever.launch`.
 
+#### Получение одного кадра
+
+Существует возможность единоразового получения кадра с камеры. Этот способ работает медленнее, чем подписка на топик; его не следует применять в случае необходимости постоянной обработки изображений.
+
+```python
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+rospy.init_node('computer_vision_sample')
+bridge = CvBridge()
+
+# ...
+
+# Получение кадра:
+img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
+```
+
 ### Примеры
 
 #### Работа с QR-кодами

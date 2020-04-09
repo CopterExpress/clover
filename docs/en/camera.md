@@ -88,6 +88,24 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 The obtained images can be viewed using [web_video_server](web_video_server.md).
 
+#### Retrieving one frame
+
+It's possibly to retrieve one camera frame at a time. This method works slower than normal topic subscribing and should not be used when it's necessary to process camera images continuously.
+
+```python
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+rospy.init_node('computer_vision_sample')
+bridge = CvBridge()
+
+# ...
+
+# Retrieve a frame:
+img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
+```
+
 ### Examples
 
 #### Working with QR codes
