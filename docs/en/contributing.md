@@ -92,3 +92,7 @@ Prepare your article and send it as a pull request to the [Clever repository](ht
 
 10. Wait for the review, be ready to make changes if needed.
 11. Look at your new and useful article at https://clever.coex.tech !
+
+## Easy way
+
+If the above instructions are too difficult for you, send your fixes and new articles by e-mail (<a href="mailto:okalachev@gmail.com">okalachev@gmail.com</a>) or in Telegram messenger (user <a href="tg://resolve?domain=okalachev">@okalachev</a>).
