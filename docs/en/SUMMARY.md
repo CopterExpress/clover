@@ -76,6 +76,7 @@
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
 * Clever-based projects
+  * [Drone show](clever-show.md)
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)
