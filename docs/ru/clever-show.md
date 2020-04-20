@@ -8,7 +8,7 @@
 
 ## Демонстрационное видео
 
-<iframe width="966" height="543" src="https://www.youtube.com/embed/HdHbZFz7nR0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HdHbZFz7nR0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 12 дронов выступают в Электротеатре Станиславский, Москва.
 
