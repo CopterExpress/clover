@@ -33,7 +33,7 @@ Image features:
 
 API description for autonomous flights is available [on GitBook](https://clever.coex.tech/en/simple_offboard.html).
 
-For manual package installation and running see [`clover` package documentation](blob/master/clover/README.md).
+For manual package installation and running see [`clover` package documentation](clover/README.md).
 
 ## License
 
