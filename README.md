@@ -18,7 +18,7 @@ Clover drone is used on a wide range of educational events, including [Copter Ha
 
 Preconfigured image for Raspberry Pi with installed and configured software, ready to fly, is available [in the Releases section](https://github.com/CopterExpress/clever/releases).
 
-[![Build Status](https://travis-ci.org/CopterExpress/clever.svg?branch=master)](https://travis-ci.org/CopterExpress/clever)
+[![Build Status](https://travis-ci.org/CopterExpress/clover.svg?branch=master)](https://travis-ci.org/CopterExpress/clever)
 
 Image features:
 
