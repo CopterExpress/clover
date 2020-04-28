@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="constants" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+</robot>

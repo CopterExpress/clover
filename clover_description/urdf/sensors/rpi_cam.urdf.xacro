@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="rpi_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find clover_description)/urdf/constants.urdf.xacro"/>
+  <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
+
+  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 r:=0 p:=0 y:=0">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${x} ${y} ${z}"
+              rpy="${r} ${p} ${y}"/>
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.01 0.01 0.01"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.015"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="4.15e-6" iyy="2.407e-6" izz="2.407e-6" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <camera_sensor name="${name}" width="320" height="240" rate="40" horizontal_fov="${120*M_PI/180}"/>
+  </xacro:macro>
+
+  <rpi_cam name="main_camera" parent="drone"/>
+
+</robot>
