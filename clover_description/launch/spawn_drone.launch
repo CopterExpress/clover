@@ -2,5 +2,6 @@
 <launch>
     <arg name="cmd" default="$(find xacro)/xacro $(find clover_description)/urdf/drones/clover_base.xacro"/>
     <param command="$(arg cmd)" name="camera_description"/>
-    <node name="$(anon spawn)" output="screen" pkg="gazebo_ros" type="spawn_model" args="-urdf -param camera_description -model clover"/> <!-- missing flag:  -package_to_model -->
+    <!-- Note: -package_to_model replaces all mentions of "package://" with "model://" in urdf URIs -->
+    <node name="$(anon spawn)" output="screen" pkg="gazebo_ros" type="spawn_model" args="-urdf -param camera_description -model clover"/> 
 </launch>
