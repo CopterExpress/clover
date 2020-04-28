@@ -36,7 +36,8 @@
       </inertial>
 
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <!-- Shift the mesh down, since its origin is not at center -->
+        <origin xyz="0 0 ${-body_height/2}" rpy="0 0 0" />
         <geometry>
           <mesh filename="package://clover_description/meshes/${mesh_file}"
             scale="${mesh_scale}" />
@@ -44,10 +45,36 @@
         </geometry>
       </visual>
 
-      <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+      <!-- FIXME: Add proper collision boxes -->
+      <!-- FIXME: Maybe add these boxes in a separate macro? -->
+      <collision name="body_collision_box">
+        <origin xyz="0 0 ${body_height/4}" rpy="0 0 0" />
         <geometry>
-          <box size="${body_width} ${body_width} ${body_height}" /> <!-- [m] [m] [m] -->
+          <box size="${body_width} ${body_width} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="front_left_leg_collision_box">
+        <origin xyz="${-body_width/5} ${body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/15} ${body_width/15} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="front_right_leg_collision_box">
+        <origin xyz="${body_width/5} ${body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/15} ${body_width/15} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="back_left_leg_collision_box">
+        <origin xyz="${-body_width/5} ${-body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/15} ${body_width/15} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="back_right_leg_collision_box">
+        <origin xyz="${body_width/5} ${-body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/15} ${body_width/15} ${body_height/2}" /> <!-- [m] [m] [m] -->
         </geometry>
       </collision>
     </link>

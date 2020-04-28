@@ -22,7 +22,7 @@
   <xacro:arg name='enable_lockstep' default='true' />
   <xacro:arg name='use_tcp' default='true' />
   <xacro:arg name='vehicle_is_tailsitter' default='false' />
-  <xacro:arg name='visual_material' default='DarkGrey' />
+  <xacro:arg name='visual_material' default='Grey' />
   <xacro:arg name='enable_mavlink_interface' default='true' />
   <xacro:arg name='enable_wind' default='false' />
   <!-- The following causes segfault with multiple vehicles if defaults to true!!! -->
