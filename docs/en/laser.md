@@ -74,6 +74,16 @@ def range_callback(msg):
 rospy.Subscriber('rangefinder/range', Range, range_callback)
 ```
 
+Also it's possible to read one rangefinder measurement at a time:
+
+```python
+from sensor_msgs.msg import Range
+
+# ...
+
+data = rospy.wait_for_message('rangefinder/range', Range)
+```
+
 ### Data visualization
 
 You may use rqt_multiplot tool to plot rangefinder data.

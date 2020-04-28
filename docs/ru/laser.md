@@ -74,6 +74,16 @@ def range_callback(msg):
 rospy.Subscriber('rangefinder/range', Range, range_callback)
 ```
 
+Также существует возможность однократного получения данных с дальномера:
+
+```python
+from sensor_msgs.msg import Range
+
+# ...
+
+data = rospy.wait_for_message('rangefinder/range', Range)
+```
+
 ### Визуализация данных
 
 Для построения графика по данным с дальномера может быть использован rqt_multiplot.
