@@ -1,6 +1,6 @@
 # Camera calibration
 
-Camera calibration can significantly improve the quality of nodes related to computer vision: [ArUco Marker Detection](aruco.md) and [Optical Flow](optical_flow.md).
+Camera calibration can significantly improve the quality of nodes related to computer vision: [ArUco markers detection](aruco.md) and [optical flow](optical_flow.md).
 
 Camera calibration process allows to define the parameters reflecting the specific lens installed. These parameters include focal lengths, principal point (which depends on camera lens placement regarding the centre), distortion coefficient *D*. You can read more about camera distortion model used in the [OpenCV documentation](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html).
 
