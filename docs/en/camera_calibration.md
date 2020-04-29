@@ -1,228 +1,45 @@
 # Camera calibration
 
-Computer vision is becoming more and more widespread. Often, computer vision algorithms are not precise and obtain distorted images from the camera, which is especially true for fisheye cameras.
+Camera calibration can significantly improve the quality of nodes related to computer vision: [ArUco Marker Detection](aruco.md) and [Optical Flow](optical_flow.md).
 
-![img](../assets/img1.jpg)
+Camera calibration process allows to define the parameters reflecting the specific lens installed. These parameters include focal lengths, principal point (which depends on camera lens placement regarding the centre), distortion coefficient *D*. You can read more about camera distortion model used in the [OpenCV documentation](https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html).
 
-> The image is "rounded" closer to the edge.
+There are several tools allowing to calibrate the camera and store calculated parameters into the system. Usually they use calibration images, "chessboards" or combinations of "chessboards" and ArUco-marker grids ([ChArUco](https://docs.opencv.org/3.4/df/d4a/tutorial_charuco_detection.html)).
 
-Any computer vision algorithm will perceive the picture incorrectly. To remove such distortion, the camera that receives the image is to be calibrated in accordance with its own peculiarities.
+## camera_calibration ROS-package
 
-## Script installation
+Main tutorial: http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration.
 
-First, you have to install the necessary libraries:
+In order to calibrate the camera with the `camera_calibration` ROS-package you need a computer with OS GNU/Linux and [ROS Melodic](ros-install.md) installed.
 
-```
-pip install numpy
-pip install opencv-python
-pip install glob
-pip install pyyaml
-pip install urllib.request
-```
+<img src="../assets/camera_calibration.png" alt="ROS Camera Calibrator" class="zoom center" width=600>
 
-Then download the script from the repository:
+1. Using the Terminal, install `camera_calibration` package to your computer:
 
-```(bash)
-git clone https://github.com/tinderad/clever_cam_calibration.git
-```
+    ```bash
+    sudo apt-get install ros-melodic-camera-calibration
+    ```
 
-Go to the downloaded folder and install the script:
+2. Download the chessboard – [chessboard.pdf](../assets/chessboard.pdf). Print the chessboard on paper or open it on the computer screen.
 
-```(bash)
-cd clever_cam_calibration
-sudo python setup.py build
-sudo python setup.py install
-```
+3. Connect to the [Clover Wi-Fi network](wifi.md).
 
-If you are using Windows, download the archive from the [repository](https://github.com/tinderad/clever_cam_calibration/archive/master.zip), unzip it and install:
+4. Run camera calibration (on your computer):
 
-```(bash)
-cd path\to\archive\clever_cam_calibration\
-python setup.py build
-python setup.py install
-```
+   ```bash
+   ROS_MASTER_URI=http://192.168.11.1:11311 rosrun camera_calibration cameracalibrator.py --size 6x8 --square 0.108 image:=/main_camera/image_raw camera:=/main_camera
+   ```
 
-> path\to\archive – path to unpacked archive.
+   > **Note** Change the value *0.108* to actual size a square on the chessboard in metres. For example, value *0.03* corresponds to 3 cm.
 
-## Preparing for calibration
+5. When the calibration program starts, move the drone so the calibration board is observed from different angles:
 
-You will have to prepare a calibration target. It looks like a chessboard. The file is available for downloading [here](https://www.oreilly.com/library/view/learning-opencv-3/9781491937983/assets/lcv3_ac01.png).
-Glue a printed target to any solid surface. Count the number of intersections on the board lengthwise and widthwise, measure the size of a cell (mm).
+   * Place the chessboard in the left, right, top and bottom part of the frame.
+   * Rotate the chessboard around all 3 axes.
+   * Move camera toward and away from the chessboard, so that it is observed from different distance.
 
-![img](../assets/chessboard.jpg)
+6. Click the *CALIBRATE* button, when it's active. The process of calculation will take several minutes.
 
-Turn on Clever and connect to its Wi-Fi.
+   When the calculation is done, you'll see calculated parameters in the terminal. The corrected camera image view will be displayed as well. If calibration was successful all straight lines will remain straight on the image displayed.
 
-> Navigate to 192.168.11.1:8080 and check whether the computer receives images from the image_raw topic.
-
-## Calibration
-
-Run script **_calibrate_cam_**:
-
-**Windows:**
-
- ```(bash)
->path\to\python\Scripts\calibrate_cam.exe
-```
-
-> path\to\Python – path to the Python folder
-
-**Linux:**
-
-```(bash)
->calibrate_cam
-```
-
-Specify board parameters:
-
-```(bash)
->calibrate_cam
-Chessboard width: # Intersections widthwise
-Chessboard height: # Intersections heightwise
-Square size: # Length of cell edge (mm)
-Saving mode (YES - on): # Save mode
-```
-
-> Save mode: if enabled, all received pictures will be saved in the current folder.
-
-The script will start running:
-
-```
-Calibration started!
-Commands:
-help, catch (key: Enter), delete, restart, stop, finish
-```
-
-To calibrate the camera, make at least 25 photos of the chessboard at various angles.
-
-![img](../assets/calibration.jpg)
-
-To make a photo, enter command **_catch_**.
-
-```(bash)
->catch
-```
-
-The program will inform you about the calibration status.
-
-```(bash)
-...
-Chessboard not found, now 0 (25 required)
->  # Enter
----
-Image added, now 1 (25 required)
-```
-
-> Instead of entering command **_catch_** each time, you can just press **_Enter_** (enter a blank line).
-
-After you have made a sufficient number of images, enter command **_finish_**.
-
-```(bash)
-...
->finish
-Calibration successful!
-```
-
-### Calibration by the existing images
-
-If you already have images, you can calibrate the camera by them with the help of script **_calibrate_cam_ex_**.
-
-```(bash)
->calibrate_cam_ex
-```
-
-Specify target characteristics and the path to the folder with images:
-
-```(bash)
->calibrate_cam_ex
-Chessboard width: # Intersections widthwise
-Chessboard height: # Intersections heightwise
-Square size: # Length of cell edge (mm)
-Path: # Path to the folder with images
-```
-
-Apart from that, this script works similarly to **_calibrate_cam_**.
-
-The program will process all received pictures, and create file **_camera_info_****_._****_yaml_** in the current folder. Using this file, you can equalize distortions in the images obtained from this camera.
-
-> If you change the resolution of the received image, you will have to re-calibrate the camera.
-
-## Correcting distortions
-
-Function **_get_undistorted_image(cv2_image, camera_info)_** is responsible for obtaining a corrected image:
-
-* **_cv2_image_**: An image encoded into a cv2 array.
-* **_camera_****___****_info_**: The path to the calibration file.¬
-
-The function returns a cv2 array, into which the corrected image is coded.
-
-> If you are using a fisheye camera provided with Clever, for processing images with resolution 320x240 or 640x480, you can use the existing calibration settings. To do this, pass parameters **_clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_320_** or **_clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_640_** as argument **_camera_info_**, respectively.
-
-## Examples of operation
-
-Source images:
-
-![img](../assets/img1.jpg)
-
-![img](../assets/img2.jpg)
-
-Corrected images:
-
-![img](../assets/calibresult.jpg)
-
-![img](../assets/calibresult1.jpg)
-
-## An example of usage
-
-**Processing image stream from the camera**.
-
-This program receives images from the camera on Clever and displays them on the screen in corrected for, using the existing calibration file.
-
-```python
-import clevercamcalib.clevercamcalib as ccc
-import cv2
-import urllib.request
-import numpy as np
-while True:
-	req = urllib.request.urlopen('http://192.168.11.1:8080/snapshot?topic=/main_camera/image_raw')
-    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-    image = cv2.imdecode(arr, -1)
-    undistorted_img = ccc.get_undistorted_image(image, ccc.CLEVER_FISHEYE_CAM_640)
-    cv2.imshow("undistort", undistorted_img)
-    cv2.waitKey(33)
-cv2.destroyAllWindows()
-```
-
-## The usage for ArUco
-
-To apply the calibration parameters to the ArUco navigation system, move the calibration .yaml file to Raspberry Pi of Clever, and initialize it.
-
-> Don't forget to connect to Wi-Fi of Clever.
-
-The SFTP protocol is used for transferring the file. This example, WinSCP program is used.
-
-Connect to Raspberry Pi via SFTP:
-
-> Password: _**raspberry**_
-
-![img](../assets/wcp1.png)
-
-Press “Enter”. Go to _**/home/pi/catkin_ws/src/clever/clever/camera_info/**_, and copy the calibration .yaml file to this folder:
-
-![img](../assets/wcp2.jpg)
-
-Now we have to select this file in ArUco configuration. Connection via SSH is used for this purpose. This example, PuTTY program is used.
-
-Connect to Raspberry Pi via SSH:
-
-![img](../assets/pty1.jpg)
-
-Log in with username _**pi**_ and password _**raspberry**_, go to directory _**/home/pi/catkin_ws/src/clever/clever/launch**_ and start editing configuration _**main_camera.launch**_:
-
-![img](../assets/pty2.jpg)
-
-In line _**camera node**_, change parameter _**camera_info**_ to _**camera_info.yaml**_:
-
-![img](../assets/pty3.jpg)
-
-> Don't forget to change camera resolution.
+7. Click the *COMMIT* button to store calculated calibration parameters. The result will be stored in the main Clover camera calibration file: `/home/pi/catkin_ws/src/clever/clever/camera_info/fisheye_cam_320.yaml`.

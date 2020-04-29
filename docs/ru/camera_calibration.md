@@ -44,9 +44,3 @@
 
 7. Нажмите *COMMIT*, чтобы сохранить полученные параметры калибровки. Результат будет записан в файл калибровки основной камеры Клевера:
 `/home/pi/catkin_ws/src/clever/clever/camera_info/fisheye_cam_320.yaml`.
-
-8. Перезапустите сервисы Клевера:
-
-   ```bash
-   sudo systemctl restart clever
-   ```
