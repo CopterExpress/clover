@@ -1,6 +1,6 @@
 # Migration to version 0.20
 
-[Image](image.md) version v0.20 includes significant changes in comparison with the version 0.19. When transitioning please nott changes presented below.
+[Image](image.md) version v0.20 includes significant changes in comparison with the version 0.19. When transitioning please note the changes presented below.
 
 ## ROS package `clever` is renamed to `clover`
 
@@ -9,8 +9,6 @@ All the imports in Python scripts should be changed.
 Before:
 
 ```python
-# coding: utf8
-
 import rospy
 from clever import srv
 from std_srvs.srv import Trigger
@@ -68,7 +66,7 @@ sudo systemctl restart clover
 
 ## Path to platform's files changed
 
-The `~/catkin_ws/src/clever/` directory is renamed to `~/catkin_ws/src/clover`. Thus, configuration files (`.launch`) are to be edited using the new path.
+The `~/catkin_ws/src/clever/` directory is renamed to `~/catkin_ws/src/clover`. Thus, configuration files (`*.launch`) are to be edited using the new path.
 
 For example, `~/catkin_ws/src/clever/clever/launch/clever.launch` file is now `~/catkin_ws/src/clover/clover/launch/clover.launch`.
 
