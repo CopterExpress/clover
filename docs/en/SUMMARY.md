@@ -75,6 +75,7 @@
   * [Soldering safety](tb.md)
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
+  * [Migration to v0.20](migrate20.md)
 * Clover-based projects
   * [Drone show](clever-show.md)
   * [Copter spheric guard](shield.md)

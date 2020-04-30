@@ -72,6 +72,7 @@ sudo systemctl restart clover
 
 Например, файл `~/catkin_ws/src/clever/clever/launch/clever.launch` теперь называется `~/catkin_ws/src/clover/clover/launch/clover.launch`.
 
+<!--
 ## Переход на Python 3
 
 Python 2 был признан [устаревшим](https://www.python.org/doc/sunset-python-2/), начиная с 1 января 2020 года. Платформа Клевера переходит на использование Python 3.
@@ -119,11 +120,12 @@ Python 3:
 Указание кодировки файла (`# coding: utf8`) перестало быть необходимым.
 
 Полное описание всех изменений языка смотрите в [соответствующей статье](https://pythonworld.ru/osnovy/python2-vs-python3-razlichiya-sintaksisa.html).
+-->
 
 ## Настройки Wi-Fi сети
 
 SSID Wi-Fi сети изменен на `clover-XXXX ` (где X – случайная цифра), пароль изменен на `cloverwifi`.
 
-## Новый способ настройки ориентации камеры
+## Способ настройки ориентации камеры изменен
 
 Подробнее читайте в статье про [настройку камеру](camera_setup.md#frame).
