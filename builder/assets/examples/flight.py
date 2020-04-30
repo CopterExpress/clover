@@ -1,4 +1,4 @@
-# Information: https://clever.coex.tech/en/programming.html
+# Information: https://clover.coex.tech/programming
 
 import rospy
 from clover import srv

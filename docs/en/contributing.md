@@ -91,7 +91,7 @@ Prepare your article and send it as a pull request to the [Clover repository](ht
     <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
 
 10. Wait for the review, be ready to make changes if needed.
-11. Look at your new and useful article at https://clever.coex.tech !
+11. Look at your new and useful article at https://clover.coex.tech !
 
 ## Easy way
 

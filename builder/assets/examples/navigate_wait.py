@@ -1,4 +1,4 @@
-# Information: https://clever.coex.tech/en/snippets.html#block-nav
+# Information: https://clover.coex.tech/en/snippets.html#block-nav
 
 import math
 import rospy

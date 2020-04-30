@@ -1,5 +1,5 @@
 <launch>
-    <!-- article about camera setup: https://clever.coex.tech/camera_frame -->
+    <!-- article about camera setup: https://clover.coex.tech/camera_setup -->
 
     <arg name="direction_z" default="down"/> <!-- direction the camera points: down, up -->
     <arg name="direction_y" default="backward"/> <!-- direction the camera cable points: backward, forward -->

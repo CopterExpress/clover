@@ -27,8 +27,8 @@
         { "from": "ros.html", "to": "ru/ros.html" },
         { "from": "mavros.html", "to": "ru/mavros.html" },
         { "from": "simple_offboard.html", "to": "ru/simple_offboard.html" },
-        { "from": "aruco/", "to": "ru/aruco.html" },
-        { "from": "aruco.html", "to": "ru/aruco.html" },
+        { "from": "aruco/", "to": "en/aruco.html" },
+        { "from": "aruco.html", "to": "en/aruco.html" },
         { "from": "selfcheck.html", "to": "ru/selfcheck.html" },
         { "from": "snippets.html", "to": "ru/snippets.html" },
         { "from": "camera_frame.html", "to": "ru/camera_setup.html" },
@@ -46,7 +46,7 @@
         { "from": "flight_logs.html", "to": "ru/flight_logs.html" },
 
         { "from": "modes/", "to": "ru/modes.html" },
-        { "from": "firmware/", "to": "ru/firmware.html" },
+        { "from": "firmware/", "to": "en/firmware.html" },
         { "from": "simple_offboard/", "to": "ru/simple_offboard.html" },
         { "from": "camera/", "to": "ru/camera.html" },
         { "from": "snippets/", "to": "ru/snippets.html" },
@@ -54,7 +54,11 @@
         { "from": "laser/", "to": "ru/laser.html" },
         { "from": "led/", "to": "ru/leds.html" },
         { "from": "leds/", "to": "ru/leds.html" },
-        { "from": "hostname/", "to": "ru/hostname.html" },
+        { "from": "hostname/", "to": "en/hostname.html" },
+        { "from": "programming/", "to": "en/programming.html" },
+        { "from": "camera_setup/", "to": "en/camera_setup.html" },
+        { "from": "power/", "to": "en/power.html" },
+        { "from": "connection/", "to": "en/connection.html" },
 
         { "from": "ru/microsd_images.html", "to": "image.html" },
         { "from": "en/microsd_images.html", "to": "image.html" }

@@ -210,7 +210,7 @@ def check_fcu():
                     is_clover_firmware = True
 
         if not is_clover_firmware:
-            failure('not running Clover PX4 firmware, https://clever.coex.tech/firmware')
+            failure('not running Clover PX4 firmware, https://clover.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
@@ -250,11 +250,11 @@ def check_fcu():
         try:
             battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
             if not battery.cell_voltage:
-                failure('cell voltage is not available, https://clever.coex.tech/power')
+                failure('cell voltage is not available, https://clover.coex.tech/power')
             else:
                 cell = battery.cell_voltage[0]
                 if cell > 4.3 or cell < 3.0:
-                    failure('incorrect cell voltage: %.2f V, https://clever.coex.tech/power', cell)
+                    failure('incorrect cell voltage: %.2f V, https://clover.coex.tech/power', cell)
                 elif cell < 3.7:
                     failure('critically low cell voltage: %.2f V, recharge battery', cell)
         except rospy.ROSException:
@@ -718,7 +718,7 @@ def check_network():
                 if ros_hostname in parts:
                     break
         else:
-            failure('not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clever.coex.tech/hostname', ros_hostname)
+            failure('not found %s in /etc/hosts, ROS will malfunction if network interfaces are down, https://clover.coex.tech/hostname', ros_hostname)
 
 
 @check('RPi health')
