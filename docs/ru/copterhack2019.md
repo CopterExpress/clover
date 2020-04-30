@@ -20,9 +20,9 @@ Timepad: https://copterexpress.timepad.ru/event/1017592/.
 
 ### Рекомендуемая версия образа
 
-Для Raspberry Pi версий до 3B+: [v0.18](https://github.com/CopterExpress/clever/releases/tag/v0.18)
+Для Raspberry Pi версий до 3B+: [v0.18](https://github.com/CopterExpress/clover/releases/tag/v0.18)
 
-Для Raspberry Pi версии 4: [v0.19-alpha.1](https://github.com/CopterExpress/clever/releases/tag/v0.19-alpha.1)
+Для Raspberry Pi версии 4: [v0.19-alpha.1](https://github.com/CopterExpress/clover/releases/tag/v0.19-alpha.1)
 
 ### Ориентация камеры
 

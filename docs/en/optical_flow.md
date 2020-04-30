@@ -4,7 +4,7 @@ Running the technology "Optical Flow" offers the possibility of POSCTL flight mo
 
 ## Enabling
 
-> **Hint** It is recommended to use [special PX4 firmware for Clever](firmware.md#прошивка-для-клевера).
+> **Hint** It is recommended to use [special PX4 firmware for Clover](firmware.md).
 
 The use of a rangefinder is essential. [Connect and setup laser-ranging sensor VL53L1X](laser.md), according to the manual.
 

@@ -41,13 +41,13 @@ A rechargeable power source for the drone. Quadrotors typically use LiPo (lithiu
 
 Single element of the battery pack. Typical drone batteries contain several (2 to 6) cells connected in series. Maximum LiPo cell voltage is 4.2 v; battery voltage is a sum of each cell's voltage (if they are connected in series). The number of cells connected in series is marked by the letter *S*, as in *2S* (two cells in series), *3S*, *4S*.
 
-Clever kits typically use *3S* batteries.
+Clover kits typically use *3S* batteries.
 
 ## Remote control / radio control equipment
 
 A radio-operated quadcopter remote control. Operation of the remote control requires connecting a receiver to the flight controller.
 
-Clever may also be [controlled from a smartphone](rc.md).
+Clover may also be [controlled from a smartphone](rc.md).
 
 ## Telemetry
 
@@ -55,7 +55,7 @@ Clever may also be [controlled from a smartphone](rc.md).
 
 **2\.** The data about the aircraft state (height, orientation, global coordinates, etc.).
 
-**3\.** A system for transmitting the data about the  aircraft state or commands to it over the air. Examples: radio modems (RFD900, 3DR Radio Modem), Wi-Fi modules (ESP-07). Raspberry Pi may also be used in Clever as a telemetry module: [the use of QGroundControl via Wi-Fi](gcs_bridge.md).
+**3\.** A system for transmitting the data about the  aircraft state or commands to it over the air. Examples: radio modems (RFD900, 3DR Radio Modem), Wi-Fi modules (ESP-07). Raspberry Pi may also be used in Clover as a telemetry module: [the use of QGroundControl via Wi-Fi](gcs_bridge.md).
 
 ## Arming
 
@@ -65,17 +65,17 @@ The opposite state is Disarmed.
 
 ## PX4
 
-A popular open source flight controller software that works with the Pixhawk series of flight controllers, Pixracer, and others. PX4 is recommended to be used with Clever.
+A popular open source flight controller software that works with the Pixhawk series of flight controllers, Pixracer, and others. PX4 is recommended to be used with Clover.
 
 ## Raspberry Pi
 
-[A popular single-board computer](raspberry.md) that is used in the Clever kit.
+[A popular single-board computer](raspberry.md) that is used in the Clover kit.
 
 ## SD card image
 
 A complete digital copy of SD card contents stored in a single file. This file may be written to an SD card using special software like Etcher. A Raspberry Pi's SD card is the only long-term memory of the single-board computer.
 
-The Clever kit includes a [recommended SD card image](image.md)
+The Clover kit includes a [recommended SD card image](image.md)
 
 ## APM / ArduPilot
 

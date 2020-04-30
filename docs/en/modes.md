@@ -39,7 +39,7 @@ In manual mode the pilot controls the drone directly. GPS, computer vision data,
 
 In autonomous flight modes the quadcopter ignores the control signals from the transmitter and uses a program to fly.
 
-* **OFFBOARD** mode uses an external computer (like a [Raspberry Pi](raspberry.md)). This mode is used in Clever for [autonomous flights](simple_offboard.md).
+* **OFFBOARD** mode uses an external computer (like a [Raspberry Pi](raspberry.md)). This mode is used in Clover for [autonomous flights](simple_offboard.md).
 * **AUTO.MISSION** – PX4 uses the mission pre-loaded into the drone (the mission is uploaded using ground control station over [MAVLink](mavlink.md)). This mode is commonly used to move in a pre-planned path using GPS as a position source, for example, in photogrammetry.
 * **AUTO.RTL** – the copter automatically returns to the takeoff (launch) point.
 * **AUTO.LAND** – the copter lands at the current position.

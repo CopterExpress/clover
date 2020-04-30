@@ -1,11 +1,11 @@
 Simple OFFBOARD
 ===
 
-> **Note** The following applies to [image](image.md) versions **0.15** and up. Older documentation is still avaliable [for version **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md) (Russian only).
+> **Note** The following applies to [image](image.md) versions **0.15** and up. Older documentation is still avaliable [for version **0.14**](https://github.com/CopterExpress/clover/blob/v0.14/docs/ru/simple_offboard.md) (Russian only).
 
 <!-- -->
 
-> **Hint** We recommend using our [special PX4 firmware for Clever](firmware.md#modified-firmware-for-clever) for autonomous flights.
+> **Hint** We recommend using our [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clever) for autonomous flights.
 
 The `simple_offboard` module of the `clever` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 

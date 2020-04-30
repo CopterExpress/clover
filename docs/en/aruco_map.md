@@ -45,7 +45,7 @@ Map path is defined in the `map` parameter:
 <param name="map" value="$(find aruco_pose)/map/map.txt"/>
 ```
 
-Some map examples are provided in [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clever/tree/master/aruco_pose/map).
+Some map examples are provided in [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
 
 Grid maps may be generated using the `genmap.py` script:
 

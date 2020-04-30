@@ -4,7 +4,7 @@ Basic documentation: https://mavlink.io/en/.
 
 MAVLink is a communication protocol between autonomous aircraft and vehicle systems (drones, planes, vehicles). The MAVLink protocol lies at the base of interaction between Pixhawk and Raspberry Pi.
 
-Clever contains two wrappers for this protocol: [MAVROS](mavros.md) and [simple_offboard](simple_offboard.md).
+Clover contains two wrappers for this protocol: [MAVROS](mavros.md) and [simple_offboard](simple_offboard.md).
 
 The code for sending an arbitrary MAVLink message may be found in [the examples](snippets.md#mavlink).
 
@@ -35,7 +35,7 @@ A complete list of MAVLink messages is available in [MAVLink documentation] (htt
 
 Each device (a drone, a base station, etc.) has an ID in the MAVLink network. In PX4 MAVLink, ID is changed using parameter `MAV_SYS_ID`. Each MAVLink message contains a field with the ID of the originating system. Besides, some messages (for example, `COMMAND_LONG`) also contain the ID of the target system.
 
-In addition to IDs of the systems, the messages may contain IDs of the originating component and the target component. Examples of the system components: a flight controller, an external camera, a controlling onboard computer (Raspberry Pi in case of Clever), etc.
+In addition to IDs of the systems, the messages may contain IDs of the originating component and the target component. Examples of the system components: a flight controller, an external camera, a controlling onboard computer (Raspberry Pi in case of Clover), etc.
 
 ### An example of a package
 

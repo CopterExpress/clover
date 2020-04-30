@@ -24,7 +24,7 @@ Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and
 
 ### Reading the data
 
-To read the data from distance gage HC-SR04 library for working with <abbr title="General-Purpose Input/Output">GPIO</abbr> is used – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). This library is pre-installed in the [Clever image](image.md), starting with version **v0.14**. For older versions of the image, use [an installation guide](http://abyz.me.uk/rpi/pigpio/download.html).
+To read the data from distance gage HC-SR04 library for working with <abbr title="General-Purpose Input/Output">GPIO</abbr> is used – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). This library is pre-installed in the [Clover image](image.md), starting with version **v0.14**. For older versions of the image, use [an installation guide](http://abyz.me.uk/rpi/pigpio/download.html).
 
 To work with `pigpio`, start appropriate daemon:
 

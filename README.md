@@ -1,6 +1,6 @@
 # COEX Clover Drone Kit
 
-<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="CLEVER drone">
+<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="Clover Drone">
 
 Clover is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. The kit includes Pixracer-compatible autopilot running PX4 firmware, Raspberry Pi 4 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
 
@@ -16,9 +16,9 @@ Clover drone is used on a wide range of educational events, including [Copter Ha
 
 ## Raspberry Pi image
 
-Preconfigured image for Raspberry Pi with installed and configured software, ready to fly, is available [in the Releases section](https://github.com/CopterExpress/clever/releases).
+Preconfigured image for Raspberry Pi with installed and configured software, ready to fly, is available [in the Releases section](https://github.com/CopterExpress/clover/releases).
 
-[![Build Status](https://travis-ci.org/CopterExpress/clover.svg?branch=master)](https://travis-ci.org/CopterExpress/clever)
+[![Build Status](https://travis-ci.org/CopterExpress/clover.svg?branch=master)](https://travis-ci.org/CopterExpress/clover)
 
 Image features:
 

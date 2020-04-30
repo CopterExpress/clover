@@ -10,7 +10,7 @@
 
 ## Реализация
 
-Команда использовала квадрокоптер на базе рамы F450 и [платформу Клевер](https://github.com/CopterExpress/clever). Полный итоговый исходный код доступен для изучения [на GitHub](https://github.com/CopterExpress/robocross2019/).
+Команда использовала квадрокоптер на базе рамы F450 и [платформу Клевер](https://github.com/CopterExpress/clover). Полный итоговый исходный код доступен для изучения [на GitHub](https://github.com/CopterExpress/robocross2019/).
 
 Разработанный пакет `robocross2019` разбит на модули: ROS-нодлет `red_dead_detection` распознает красный шар, `balloon.py` реализует высокоуровневую логику полета коптера.
 

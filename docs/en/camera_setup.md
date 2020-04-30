@@ -1,8 +1,8 @@
 # Camera setup
 
-> **Note** The following applies to [image version](image.md) **0.15** and up. See [previous version of the article](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/camera_frame.md) (Russian only) for older images.
+> **Note** The following applies to [image version](image.md) **0.15** and up. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.14/docs/ru/camera_frame.md) (Russian only) for older images.
 
-Computer vision modules (like [ArUco markers](aruco.md) and [Optical Flow](optical_flow.md)) require adjusting the camrea focus and set up camera position and orientation relative to the drone body.
+Computer vision modules (like [ArUco markers](aruco.md) and [Optical Flow](optical_flow.md)) require adjusting the camera focus and set up camera position and orientation relative to the drone body.
 
 ## Focusing the camera lens
 
@@ -39,7 +39,7 @@ Camera frame (that is, [frame of reference](frames.md)) is aligned as follows:
 
 Shifts are set in meters, angles are in radians. You can check the transform for correctness using [rviz](rviz.md).
 
-## Presets for Clever
+## Presets for Clover
 
 The presets for usual camera orientations are available in the `main_camera.launch` file. The images should help you choose the one that is right for you: the first one is how your drone will be displayed in [rviz](rviz.md), the second is how the camera is actually mounted on the drone.
 

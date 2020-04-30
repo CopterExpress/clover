@@ -145,7 +145,7 @@ Animation is created by [this](https://justsketchme.web.app/)
 ## References
 
 - [Human pose estimation guide](https://blog.nanonets.com/human-pose-estimation-2d-guide/)
-- [Clever drones tutorials](https://clever.coex.tech/en/)
+- [Clover drones tutorials](https://clever.coex.tech/en/)
 - [Posenet GitHub repo](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
 - [Posenet meduim article](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5)
 - [Tensorflow.js demos](https://www.tensorflow.org/js/demos)

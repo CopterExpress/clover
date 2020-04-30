@@ -10,7 +10,7 @@ Clone this repo to directory `~/catkin_ws/src/clover`:
 
 ```bash
 cd ~/catkin_ws/src
-git clone https://github.com/CopterExpress/clever.git clover
+git clone https://github.com/CopterExpress/clover.git clover
 ```
 
 All the required ROS packages (including `mavros` and `opencv`) can be installed using `rosdep`:

@@ -4,7 +4,7 @@ Main article: https://dev.px4.io/en/advanced/parameter_reference.html
 
 > **Note** This is a description some of the most important PX4 parameters as of version 1.8.0. The full list is available at the link above.
 
-To change PX4 parameters, you can use the QGroundControl application [by connecting to Clever via Wi-Fi](gcs_bridge.md):
+To change PX4 parameters, you can use the QGroundControl application [by connecting to Clover via Wi-Fi](gcs_bridge.md):
 
 ![PX4 parameters in QGroundControl](../assets/qgc-params.png)
 

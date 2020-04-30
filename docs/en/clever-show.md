@@ -1,6 +1,6 @@
 # clever-show
 
-Software for making the drone show controlled by Raspberry Pi, PX4 and COEX [Clever](https://github.com/CopterExpress/clever) package.
+Software for making the drone show controlled by Raspberry Pi, PX4 and COEX [Clover](https://github.com/CopterExpress/clover) package.
 
 Create animation in Blender, convert it to drone paths, set up the drones and run your own show!
 

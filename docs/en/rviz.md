@@ -14,13 +14,13 @@ Install package `ros-melodic-desktop-full` or `ros-melodic-desktop` using the [i
 Start rviz
 ---
 
-To start еру visualization of the state of Clever in real time, connect to it via Wi-Fi (`CLEVER-xxx`) and run rviz, specifying an appropriate ROS_MASTER_URI:
+To start еру visualization of the state of Clover in real time, connect to it via Wi-Fi (`CLEVER-xxx`) and run rviz, specifying an appropriate ROS_MASTER_URI:
 
 ```(bash)
 ROS_MASTER_URI=http://192.168.11.1:11311 rviz
 ```
 
-If connection is not established, make sure the `.bashrc` of Clever contains line:
+If connection is not established, make sure the `.bashrc` of Clover contains line:
 
 ```(bash)
 export ROS_HOSTNAME=`hostname`.local
@@ -56,7 +56,7 @@ Starting the rqt toolkit
 
 ![rqt](../assets/rqt.png)
 
-To start rqt for monitoring Clever status, use command:
+To start rqt for monitoring Clover status, use command:
 
 ```(bash)
 ROS_MASTER_URI=http://192.168.11.1:11311 rqt

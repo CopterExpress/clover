@@ -101,7 +101,7 @@ You can also work with the services using the `rosservice` utility. For instance
 rosservice call /get_telemetry "{frame_id: ''}"
 ```
 
-More examples of using the services for Clever quadcopter autonomous flights are available in the [documentation for node simple_offboard](simple_offboard.md).
+More examples of using the services for Clover quadcopter autonomous flights are available in the [documentation for node simple_offboard](simple_offboard.md).
 
 Working on several PCs
 ---

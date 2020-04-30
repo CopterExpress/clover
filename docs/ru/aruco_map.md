@@ -45,7 +45,7 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 <param name="map" value="$(find aruco_pose)/map/map.txt"/>
 ```
 
-Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clever/tree/master/aruco_pose/map).
+Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
 
 Файл карты может быть сгенерирован с помощью инструмента `genmap.py`:
 

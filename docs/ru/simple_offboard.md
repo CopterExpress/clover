@@ -1,7 +1,7 @@
 Автономный полет (OFFBOARD)
 ===
 
-> **Note** Документация для версий [образа](image.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+> **Note** Документация для версий [образа](image.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clover/blob/v0.14/docs/ru/simple_offboard.md).
 
 <!-- -->
 

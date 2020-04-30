@@ -1,7 +1,7 @@
 Copter Hack 2017
 ===
 
-On July 28 – 30, 2017, Copter Express held a hackathon named "Copter Hack 2017", where the objective was to program a Clever to dance-fly autonomously to random music.
+On July 28 – 30, 2017, Copter Express held a hackathon named "Copter Hack 2017", where the objective was to program a Clover to dance-fly autonomously to random music.
 
 The team "Pangolins" became the winners.
 

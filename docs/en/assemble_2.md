@@ -1,7 +1,7 @@
-Clever 2 construction kit assembly instruction
+Clover 2 construction kit assembly instruction
 ============================================
 
-![Clever](../assets/clever2.jpg)
+![Clover](../assets/clever2.jpg)
 
 ## The constructor kit contents
 
@@ -78,7 +78,7 @@ Clever 2 construction kit assembly instruction
 
 ## Additional equipment
 
-### This equipment is not part of the Clever 2 constructor kit, but it is required for the assembly process
+### This equipment is not part of the Clover 2 constructor kit, but it is required for the assembly process
 
 1. Soldering iron
 2. Colophony/ Flux (neutral)

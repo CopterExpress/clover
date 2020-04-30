@@ -20,9 +20,9 @@ This parameter is used for *IMU* orientation correction.
 
 ### Suggested image versions
 
-Raspberry Pi versions 3B+ and lower: [v0.18](https://github.com/CopterExpress/clever/releases/tag/v0.18)
+Raspberry Pi versions 3B+ and lower: [v0.18](https://github.com/CopterExpress/clover/releases/tag/v0.18)
 
-Raspberry Pi version 4: [v0.19-alpha.1](https://github.com/CopterExpress/clever/releases/tag/v0.19-alpha.1)
+Raspberry Pi version 4: [v0.19-alpha.1](https://github.com/CopterExpress/clover/releases/tag/v0.19-alpha.1)
 
 ### Camera orientation
 

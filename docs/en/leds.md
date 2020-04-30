@@ -2,7 +2,7 @@
 
 > **Note** The following applies to image version 0.18 and up. See [previous version of the article](leds_old.md) for older images.
 
-Clever drone kits contain addressable LED strips based on *ws281x* drivers. Each LED may be set to any one of 16 million possible colors (each color is encoded by a 24-bit number). This allows making the Clever flight more spectacular, as well as show flight modes, display stages of current user program, and notify the pilot of other events.
+Clover drone kits contain addressable LED strips based on *ws281x* drivers. Each LED may be set to any one of 16 million possible colors (each color is encoded by a 24-bit number). This allows making the Clover flight more spectacular, as well as show flight modes, display stages of current user program, and notify the pilot of other events.
 
 <img src="../assets/clever-led.png" class="center" width=600>
 
@@ -99,7 +99,7 @@ disconnected: { effect: blink, r: 255, g: 50, b: 50 }
 
 The left part is one of the possible events that the strip reacts to. The right part contains the effect description that you want to execute for this event. Here is the list of supported events:
 
-* `startup` – Clever system startup;
+* `startup` – Clover system startup;
 * `connected` – successful connection to the flight controller;
 * `disconnected` – connection to the flight controller lost;
 * `armed` – flight controller transitioned to armed state;

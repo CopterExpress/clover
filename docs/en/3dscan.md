@@ -6,7 +6,7 @@ The project was created in collaboration with Texel inc. that develops 3D-scanne
 
 Our fellows from Texel provided a module consisting of a Raspberry Pi and a PrimeSense 3D-sensor.
 
-We provided a Clever 3 drone that's capable of autonomous flight and wrote a flight program.
+We provided a Clover 3 drone that's capable of autonomous flight and wrote a flight program.
 
 To make it all work we conducted many tests, made changes in the drone's design and tuned the drone properly.
 
