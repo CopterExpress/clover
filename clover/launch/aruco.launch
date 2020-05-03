@@ -10,11 +10,13 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="map_markers" to="aruco_map/markers" if="$(arg aruco_map)"/>
-        <param name="cornerRefinementMethod" value="2"/>
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="known_tilt" value="map"/>
         <param name="length" value="0.33"/>
+        <!-- aruco detector parameters -->
+        <param name="cornerRefinementMethod" value="2"/> <!-- contour refinement -->
+        <param name="minMarkerPerimeterRate" value="0.075"/> <!-- 0.075 for 320x240, 0.0375 for 640x480 -->
     </node>
 
     <!-- aruco_map: estimate aruco map pose -->
