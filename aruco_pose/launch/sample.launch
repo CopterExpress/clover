@@ -14,6 +14,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="length" value="0.33"/>
+        <rosparam command="load" file="$(dirname)/aruco_detector_config.yaml"/>
     </node>
 
     <!-- aruco map -->

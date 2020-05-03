@@ -1,0 +1,53 @@
+# Detector parameters for aruco_detect nodelet
+# Constant for adaptive thresholding before finding contours
+adaptiveThreshConstant: 7.0
+# Minimum window size for adaptive thresholding before finding contours
+adaptiveThreshWinSizeMin: 3
+# Maximum window size for adaptive thresholding before finding contours
+adaptiveThreshWinSizeMax: 23
+# Increments from adaptiveThreshWinSizeMin to adaptiveThreshWinSizeMax during the thresholding
+adaptiveThreshWinSizeStep: 10
+# Maximum number of iterations for stop criteria of the corner refinement process
+cornerRefinementMaxIterations: 30
+# Corner refinement method:
+#  0 - no refinement;
+#  1 - do subpixel refinement;
+#  2 - use contour-points (OpenCV 3.3+); 
+#  3 - use the AprilTag2 approach (OpenCV 3.3+).
+cornerRefinementMethod: 2
+# Minimum error for the stop criteria of the corner refinement process
+cornerRefinementMinAccuracy: 0.1
+# Window size for the corner refinement process (in pixels)
+cornerRefinementWinSize: 5
+# (OpenCV 3.4.7+) check if there is a white marker
+detectInvertedMarker: false
+# Error correction rate respect to the maximum error correction capability for each dictionary
+errorCorrectionRate: 0.6
+# Minimum distance between corners for detected markers relative to its perimeter
+minCornerDistanceRate: 0.05
+# Number of bits of the marker border, i.e. marker border width
+markerBorderBits: 1
+# Maximum number of accepted erroneous bits in the border (i.e. number of allowed white bits in the border)
+maxErroneousBitsInBorderRate: 0.35
+# Minimum distance of any corner to the image border for detected markers (in pixels)
+minDistanceToBorder: 3
+# minimum mean distance beetween two marker corners to be considered similar, so that the smaller one is removed. The rate is relative to the smaller perimeter of the two markers
+minMarkerDistanceRate: 0.05
+# Determine minimum perimeter for marker contour to be detected. This is defined as a rate respect to the maximum dimension of the input image
+# Smallest detectable marker from 4x4 dicts would have a perimeter of 24 pixels ((4 inner pixels + 2 border pixels) * 4 sides)
+# Set this to at least 0.0375 for 640x480 images, 0.075 for 320x240 images
+minMarkerPerimeterRate: 0.075
+# Determine maximum perimeter for marker contour to be detected. This is defined as a rate respect to the maximum dimension of the input image
+maxMarkerPerimeterRate: 4.0
+# Minimun standard deviation in pixels values during the decodification step to apply Otsu thresholding (otherwise, all the bits are set to 0 or 1 depending on mean higher than 128 or not)
+minOtsuStdDev: 5.0
+# Width of the margin of pixels on each cell not considered for the determination of the cell bit. Represents the rate respect to the total size of the cell, i.e. perpectiveRemovePixelPerCell
+perspectiveRemoveIgnoredMarginPerCell: 0.13
+# Number of bits (per dimension) for each cell of the marker when removing the perspective
+perspectiveRemovePixelPerCell: 4
+# Minimum accuracy during the polygonal approximation process to determine which contours are squares
+polygonalApproxAccuracyRate: 0.03
+# Detection of quads can be done on a lower-resolution image, improving speed at a cost of pose accuracy and a slight decrease in detection rate. Decoding the binary payload is still done at full resolution
+aprilTagQuadDecimate: 0.0
+# What Gaussian blur should be applied to the segmented image (used for quad detection?) Parameter is the standard deviation in pixels. Very noisy images benefit from non-zero values
+aprilTagQuadSigma: 0.0
