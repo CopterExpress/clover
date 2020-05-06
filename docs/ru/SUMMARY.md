@@ -67,7 +67,6 @@
   * [Использование мультиметра](test_connection.md)
   * [Неисправности радиоаппаратуры](radioerrors.md)
   * [Прошивка ESC контроллеров](esc_firmware.md)
-  * [Калибровка камеры](camera_calibration.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [Подключение GPS](gps.md)
   * [Работа с ИК датчиками](ir_sensors.md)
