@@ -1,6 +1,7 @@
 <launch>
     <arg name="fcu_conn" default="usb"/>
     <arg name="fcu_ip" default="127.0.0.1"/>
+    <arg name="fcu_sys_id" default="1"/>
     <arg name="gcs_bridge" default="tcp"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
@@ -19,6 +20,7 @@
     <include file="$(find clover)/launch/mavros.launch">
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
+        <arg name="fcu_sys_id" value="$(arg fcu_sys_id)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
     </include>
 
