@@ -92,53 +92,66 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 > **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clever.launch`.
 
+#### Получение одного кадра
+
+Существует возможность единоразового получения кадра с камеры. Этот способ работает медленнее, чем подписка на топик; его не следует применять в случае необходимости постоянной обработки изображений.
+
+```python
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+rospy.init_node('computer_vision_sample')
+bridge = CvBridge()
+
+# ...
+
+# Получение кадра:
+img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
+```
+
 ### Примеры
 
 #### Работа с QR-кодами
 
 > **Hint** Для высокоскоростного распознавания и позиционирования лучше использовать [ArUco-маркеры](aruco.md).
 
-Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать библиотеку [ZBar](http://zbar.sourceforge.net). Ее нужно установить в помощью pip:
-
-```bash
-sudo pip install zbar
-```
+Для программирования различных действий коптера при детектировании нужных [QR-кодов](https://ru.wikipedia.org/wiki/QR-код) можно использовать библиотеку [pyZBar](https://pypi.org/project/pyzbar/). Она уже установлена в последнем образе для Raspberry Pi.
 
 Распознавание QR-кодов на Python:
 
 ```python
-import cv2
-import zbar
+import rospy
+from pyzbar import pyzbar
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 
 bridge = CvBridge()
-scanner = zbar.ImageScanner()
-scanner.parse_config('enable')
+
+rospy.init_node('barcode_test')
 
 # Image subscriber callback function
 def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
-    gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY, dstCn=0)
-
-    pil = ImageZ.fromarray(gray)
-    raw = pil.tobytes()
-
-    image = zbar.Image(320, 240, 'Y800', raw)  # Image params
-    scanner.scan(image)
-
-    for symbol in image:
-        # print detected QR code
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+    barcodes = pyzbar.decode(cv_image)
+    for barcode in barcodes:
+        b_data = barcode.data.encode("utf-8")
+        b_type = barcode.type
+        (x, y, w, h) = barcode.rect
+        xc = x + w/2
+        yc = y + h/2
+        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
+
+rospy.spin()
 ```
 
 Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить [throttling](http://wiki.ros.org/topic_tools/throttle) кадров с камеры, например, в 5 Гц (`main_camera.launch`):
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw/throttled"/>
+    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw/throttled`.
+Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw_throttled`.

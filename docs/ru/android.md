@@ -15,11 +15,11 @@ git clone https://github.com/Tennessium/android
 
 ## Обертка
 
-Начнем с самого простого - внешнего вида нашего приложения. На [**гитхабе**](https://github.com/CopterExpress/clever/tree/master/apps/android/app/src/main/assets) вы можете найти *HTML*, *CSS* и *JavaScript* файлы, это и есть веб страница с которой будет происходить управление коптером. Чтобы эта страница отображалась у нас в приложении надо:
+Начнем с самого простого - внешнего вида нашего приложения. На [**гитхабе**](https://github.com/CopterExpress/clover/tree/master/apps/android/app/src/main/assets) вы можете найти *HTML*, *CSS* и *JavaScript* файлы, это и есть веб страница с которой будет происходить управление коптером. Чтобы эта страница отображалась у нас в приложении надо:
 
 1. Создать папку **assets** в главной папке приложения **app**
 
-2. Добавить в нее файлы все файлы [отсюда](https://github.com/CopterExpress/clever/tree/master/apps/android/app/src/main/assets)
+2. Добавить в нее файлы все файлы [отсюда](https://github.com/CopterExpress/clover/tree/master/apps/android/app/src/main/assets)
 
 Если вы дошли до этого этапа то у вас уже есть необходимая веб страница, поздравляю! Теперь нам надо её как-то отобразить в приложении. Для этого в классе вашего *activity* в методе **onCreate** необходимо написать следующий код:
 

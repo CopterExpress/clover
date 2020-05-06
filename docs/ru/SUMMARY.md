@@ -50,9 +50,11 @@
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
   * [Настройка PID](pid_tuning.md)
+  * [Навигация по настенным маркерам](wall_aruco.md)
   * [CAD-модели Клевера](models.md)
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Melodic](ros-install.md)
+  * [Калибровка камеры](camera_calibration.md)
   * [Управление мультикоптером при помощи 4G связи](4g.md)
   * [Пакеты Клевера на Jetson Nano](jetson_nano.md)
   * [Пилотирование со смартфона](rc.md)
@@ -79,6 +81,7 @@
   * [Подключение регулятора 4 в 1](4in1.md)
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
+  * [Переход на версию 0.20](migrate20.md)
 * Мероприятия
   * [CopterHack-2019](copterhack2019.md)
   * [Олимпиада НТИ 2019](nti2019.md)
@@ -86,6 +89,8 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Проекты на базе Клевера
+  * [Шоу коптеров](clever-show.md)
+  * [Олимпиада НТИ 2020 (P4DF2)](nti2020_p4df2.md)
   * [Генератор ArUco карт](arucogenmap.md)
   * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
@@ -95,6 +100,7 @@
   * [Подсчет количества объектов c камеры](object_counting.md)
   * [Пульт на Андроид](android.md)
   * [Блочный конструктор полета](clever_blocks.md)
+  * [Калибровка камеры (legacy)](camera_calib.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
 
 ## Учебник

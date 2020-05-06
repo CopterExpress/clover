@@ -1,8 +1,8 @@
-# Assembly of Clever 3
+# Assembly of Clover 3
 
-This manual discusses the assembly of the COEX Clever 3 kit with a 4 in 1 EDC circuit-board.
+This manual discusses the assembly of the COEX Clover 3 kit with a 4 in 1 EDC circuit-board.
 
-![Clever 3](../assets/clever3_main.jpg)
+![Clover 3](../assets/clever3_main.jpg)
 
 > **Caution** Before using soldering equipment, be sure to read the [safety precautions when soldering](tb.md).
 

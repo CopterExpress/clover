@@ -1,6 +1,7 @@
 <launch>
     <arg name="fcu_conn" default="usb"/>
     <arg name="fcu_ip" default="127.0.0.1"/>
+    <arg name="fcu_sys_id" default="1"/>
     <arg name="gcs_bridge" default="tcp"/>
     <arg name="web_video_server" default="true"/>
     <arg name="rosbridge" default="true"/>
@@ -10,6 +11,7 @@
     <arg name="rangefinder_vl53l1x" default="true"/>
     <arg name="led" default="true"/>
     <arg name="rc" default="true"/>
+    <arg name="shell" default="true"/>
 
     <!-- log formatting -->
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger}: ${message}"/>
@@ -18,6 +20,7 @@
     <include file="$(find clover)/launch/mavros.launch">
         <arg name="fcu_conn" value="$(arg fcu_conn)"/>
         <arg name="fcu_ip" value="$(arg fcu_ip)"/>
+        <arg name="fcu_sys_id" value="$(arg fcu_sys_id)"/>
         <arg name="gcs_bridge" value="$(arg gcs_bridge)"/>
     </include>
 
@@ -76,4 +79,7 @@
         <!-- Send fake GCS heartbeats. Set to "true" for upstream PX4 -->
         <param name="use_fake_gcs" value="false"/>
     </node>
+
+    <!-- Shell access through ROS service -->
+    <node name="shell" pkg="clover" type="shell" output="screen" if="$(arg shell)"/>
 </launch>

@@ -88,53 +88,66 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 The obtained images can be viewed using [web_video_server](web_video_server.md).
 
+#### Retrieving one frame
+
+It's possibly to retrieve one camera frame at a time. This method works slower than normal topic subscribing and should not be used when it's necessary to process camera images continuously.
+
+```python
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+rospy.init_node('computer_vision_sample')
+bridge = CvBridge()
+
+# ...
+
+# Retrieve a frame:
+img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
+```
+
 ### Examples
 
 #### Working with QR codes
 
 > **Hint** For high-speed recognition and positioning, it is better to use [ArUco markers](aruco.md).
 
-To program actions of the copter upon detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [ZBar] library (http://zbar.sourceforge.net). It should be installed using pip:
-
-```bash
-sudo pip install zbar
-```
+To program actions of the copter for the detection of [QR codes](https://en.wikipedia.org/wiki/QR_code) you can use the [pyZBar](https://pypi.org/project/pyzbar/). This lib is installed in the last image for Raspberry Pi.
 
 QR codes recognition in Python:
 
 ```python
-import cv2
-import zbar
+import rospy
+from pyzbar import pyzbar
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 
 bridge = CvBridge()
-scanner = zbar.ImageScanner()
-scanner.parse_config('enable')
+
+rospy.init_node('barcode_test')
 
 # Image subscriber callback function
 def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
-    gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY, dstCn=0)
-
-    pil = ImageZ.fromarray(gray)
-    raw = pil.tobytes()
-
-    image = zbar.Image(320, 240, 'Y800', raw)  # Image params
-    scanner.scan(image)
-
-    for symbol in image:
-        # print detected QR code
-        print 'decoded', symbol.type, 'symbol', '"%s"' % symbol.data
+    barcodes = pyzbar.decode(cv_image)
+    for barcode in barcodes:
+        b_data = barcode.data.encode("utf-8")
+        b_type = barcode.type
+        (x, y, w, h) = barcode.rect
+        xc = x + w/2
+        yc = y + h/2
+        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
+
+rospy.spin()
 ```
 
 The script will take up to 100% CPU capacity. To slow down the script artificially, you can use [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw/throttled"/>
+    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-The topic for the subscriber in this case should be changed for `main_camera/image_raw/throttled`.
+The topic for the subscriber in this case should be changed for `main_camera/image_raw_throttled`.

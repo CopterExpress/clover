@@ -1,7 +1,7 @@
 Автономный полет (OFFBOARD)
 ===
 
-> **Note** Документация для версий [образа](image.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clever/blob/v0.14/docs/ru/simple_offboard.md).
+> **Note** Документация для версий [образа](image.md), начиная с **0.15**. Для более ранних версий см. [документацию для версии **0.14**](https://github.com/CopterExpress/clover/blob/v0.14/docs/ru/simple_offboard.md).
 
 <!-- -->
 
@@ -146,7 +146,7 @@ navigate(x=0, y=-3, z=0, speed=1, frame_id='body')
 navigate(x=0, y=2, z=0, speed=1, frame_id='navigate_target')
 ```
 
-Повернуться на 90 градусов против часовой:
+Повернуться на 90 градусов по часовой:
 
 ```python
 navigate(yaw=math.radians(-90), frame_id='body')

@@ -100,10 +100,6 @@ my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements
 source /opt/ros/melodic/setup.bash
 catkin_make -j2 -DCMAKE_BUILD_TYPE=Release
 
-echo_stamp "Enable ROS services"
-systemctl enable roscore
-systemctl enable clover
-
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
 ./setup.py install

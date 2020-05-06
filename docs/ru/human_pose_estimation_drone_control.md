@@ -9,7 +9,7 @@
 ## Ссылки на литературу
 
 - [Руководство по оценке позы человека](https://blog.nanonets.com/human-pose-estimation-2d-guide/)
-- [Умные беспилотники учебники](https://clever.coex.tech/en/)
+- [Умные беспилотники учебники](https://clover.coex.tech/en/)
 - [Posnet GitHub РЕПО](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
 - [Posnet Medium артикул](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5)
 - [Tensorflow.js Демонстрация](https://www.tensorflow.org/js/demos)

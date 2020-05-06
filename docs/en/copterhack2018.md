@@ -30,7 +30,7 @@ Winning teams:
 
 1. Starshine (Moscow) — controlling the drone using a "smart" glove.
 2. Alcopter (Moscow) — controlling the drone with gestures and pose change.
-3. Merry copter (Samara) — a Vkontakte bot for controlling the copter, a joint flight of "Zhuzha" and "Clever 3".
+3. Merry copter (Samara) — a Vkontakte bot for controlling the copter, a joint flight of "Zhuzha" and "Clover 3".
 4. International Post (Novosibirsk) — automatic scattering leaflets from the drone.
 5. LAMAR (Yekaterinburg) — an automatic quadcopter battery replacement station.
 

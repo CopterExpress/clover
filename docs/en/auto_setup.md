@@ -1,4 +1,4 @@
-# Step-by-step guide on autonomous flight with Clever 4
+# Step-by-step guide on autonomous flight with Clover 4
 
 This manual contains links to other articles in which each of the topics addressed is discussed in more detail. If you encounter difficulties while reading one of these articles, it is recommended that you return to this manual, since many operations here are described step by step and some unnecessary steps are skipped.
 
@@ -15,9 +15,9 @@ This manual contains links to other articles in which each of the topics address
 
 - Connect to Wi-Fi and open the web interface ([this article](wifi.md)).
 
-   After the first power-up, the network appears with a delay. You need to wait until the system is fully loaded. If the Clever network does not appear in the list of networks for a long time, reopen the window with the network selection. Then the list of networks will be updated.
+   After the first power-up, the network appears with a delay. You need to wait until the system is fully loaded. If the Clover network does not appear in the list of networks for a long time, reopen the window with the network selection. Then the list of networks will be updated.
 
-> **Hint** Now if you have connected to the Clever's Wi-Fi network, it is recommended to open the [local version of this guide](http://192.168.11.1/docs/ru/auto_setup.html), otherwise the links will not work.
+> **Hint** Now if you have connected to the Clover's Wi-Fi network, it is recommended to open the [local version of this guide](http://192.168.11.1/docs/ru/auto_setup.html), otherwise the links will not work.
 
 - Connect to Raspberry Pi via SSH.
 
@@ -47,7 +47,7 @@ This manual contains links to other articles in which each of the topics address
 
 ## Basic commands
 
-You will need the basic Linux commands, as well as special Clever commands, to work efficiently in the system.
+You will need the basic Linux commands, as well as special Clover commands, to work efficiently in the system.
 
 Show list of files and folders:
 
@@ -289,7 +289,7 @@ and replace map.txt with your map name.
 
 - Connect remotely to the flight controller through QGroundControl.
 
-  All the necessary settings for that are already set in Clever. Now you need to create a new connection in QGroundControl. Use the settings from [this article](gcs_bridge.md).
+  All the necessary settings for that are already set in Clover. Now you need to create a new connection in QGroundControl. Use the settings from [this article](gcs_bridge.md).
 
 ## Remote controller setup
 
@@ -297,7 +297,7 @@ and replace map.txt with your map name.
 
   Set channel 5 to SwC switch; channel 5 to SwA switch. Or you can use any other switches you like.
 
-## Clever selfcheck
+## Clover selfcheck
 
 Perform selfcheck when you have set up your drone or when you have faced problems. The selfcheck process is described in the article "[Automated self checks](selfcheck.md)"
 

@@ -95,6 +95,7 @@ libjpeg8 \
 tcpdump \
 ltrace \
 libpoco-dev \
+libzbar0 \
 python-rosdep \
 python-rosinstall-generator \
 python-wstool \
@@ -156,6 +157,10 @@ rm node-v10.15.0-linux-armv6l.tar.gz
 echo_stamp "Installing ptvsd"
 my_travis_retry pip install ptvsd
 my_travis_retry pip3 install ptvsd
+
+echo_stamp "Installing pyzbar"
+my_travis_retry pip install pyzbar
+my_travis_retry pip3 install pyzbar
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc

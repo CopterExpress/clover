@@ -263,7 +263,10 @@ void handleMavrosState(const mavros_msgs::State& msg)
 			// remove the part before "."
 			mode = mode.substr(mode.find(".") + 1);
 		}
-		notify(mode);
+		std::string err;
+		if (ros::names::validate(mode, err)) {
+			notify(mode);
+		}
 	}
 	mavros_state = msg;
 }

@@ -1,6 +1,7 @@
 <launch>
     <arg name="fcu_conn" default="usb"/> <!-- options: usb, uart, tcp, udp, sitl -->
     <arg name="fcu_ip" default="127.0.0.1"/>
+    <arg name="fcu_sys_id" default="1"/>
     <arg name="gcs_bridge" default="tcp"/>
     <arg name="viz" default="true"/>
     <arg name="respawn" default="true"/>
@@ -18,6 +19,9 @@
 
         <!-- sitl since PX4 1.9.0 -->
         <param name="fcu_url" value="udp://@$(arg fcu_ip):14580" if="$(eval fcu_conn == 'sitl')"/>
+
+        <!-- set target_system_id -->
+        <param name="target_system_id" value="$(arg fcu_sys_id)" />
 
         <!-- gcs bridge -->
         <param name="gcs_url" value="tcp-l://0.0.0.0:5760" if="$(eval gcs_bridge == 'tcp')"/>

@@ -27,7 +27,7 @@ Main article: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
 
 > **Note** Do not connect your flight controller prior to flashing.
 
-We recommend using the modified version of PX4 by CopterExpress for the Clever drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
+We recommend using the modified version of PX4 by CopterExpress for the Clover drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
 
 Flash the flight controller with this firmware:
 
@@ -87,7 +87,7 @@ Press the *Save* button to save the changed value to the flight controller. Chan
 
 #### Configuring PID regulators
 
-##### Averaged PID coefficients for the Clever 4 drone
+##### Averaged PID coefficients for the Clover 4 drone
 
 * `MC_PITCHRATE_P` = 0.087
 * `MC_PITCHRATE_I` = 0.037
@@ -103,7 +103,7 @@ Press the *Save* button to save the changed value to the flight controller. Chan
 * `MPC_Z_VEL_P` = 0.24
 * `MPC_Z_P` = 1.2
 
-##### Averaged PID coefficients for the Clever 3 drone
+##### Averaged PID coefficients for the Clover 3 drone
 
 * `MC_PITCHRATE_P` = 0.145
 * `MC_PITCHRATE_I` = 0.050

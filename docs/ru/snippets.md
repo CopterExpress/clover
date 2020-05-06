@@ -379,3 +379,35 @@ flip()
 ```
 
 Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера). Перед выполнением флипа необходимо принять все меры безопасности.
+
+### # {#calibrate-gyro}
+
+Произвести калибровку гироскопа:
+
+```python
+from pymavlink import mavutil
+from mavros_msgs.srv import CommandLong
+from mavros_msgs.msg import State
+
+# ...
+
+send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+
+def calibrate_gyro():
+    rospy.loginfo('Calibrate gyro')
+    if not send_command(command=mavutil.mavlink.MAV_CMD_PREFLIGHT_CALIBRATION, param1=1).success:
+        return False
+
+    calibrating = False
+    while not rospy.is_shutdown():
+        state = rospy.wait_for_message('mavros/state', State)
+        if state.system_status == mavutil.mavlink.MAV_STATE_CALIBRATING or state.system_status == mavutil.mavlink.MAV_STATE_UNINIT:
+            calibrating = True
+        elif calibrating and state.system_status == mavutil.mavlink.MAV_STATE_STANDBY:
+            rospy.loginfo('Calibrating finished')
+            return True
+
+calibrate_gyro()
+```
+
+> **Note** В процессе калибровки гироскопов дрон нельзя двигать.

@@ -1,4 +1,4 @@
-Connecting to Clever via Wi-Fi
+Connecting to Clover via Wi-Fi
 ===
 
 [RPi image](image.md) provides a pre-configured Wi-Fi access point with SSID `CLEVER-xxxx`, where `xxxx` are four random numbers that are assigned when your Raspberry Pi is run for the first time.
@@ -11,7 +11,7 @@ To edit Wi-Fi settings, or to obtain more detailed information about the network
 
 ## Web interface
 
-After connecting to Clever Wi-Fi, open http://192.168.11.1 in you web browser. It contains all the basic web tools of Clever: viewing image topics, web terminal (Butterfly), and the full copy of this documentation.
+After connecting to Clover Wi-Fi, open http://192.168.11.1 in you web browser. It contains all the basic web tools of Clover: viewing image topics, web terminal (Butterfly), and the full copy of this documentation.
 
 <img src="../assets/web.png" alt="Веб-интерфейс Клевера" class="zoom">
 

@@ -1,6 +1,6 @@
 # Работа с лазерным дальномером
 
-> **Note** Документация для версий [образа](image.md), начиная с **0.18**. Для более ранних версий см. [документацию для версии **0.17**](https://github.com/CopterExpress/clever/blob/v0.17/docs/ru/laser.md).
+> **Note** Документация для версий [образа](image.md), начиная с **0.18**. Для более ранних версий см. [документацию для версии **0.17**](https://github.com/CopterExpress/clover/blob/v0.17/docs/ru/laser.md).
 
 ## Дальномер VL53L1X
 
@@ -72,6 +72,16 @@ def range_callback(msg):
     print 'Rangefinder distance:', msg.range
 
 rospy.Subscriber('rangefinder/range', Range, range_callback)
+```
+
+Также существует возможность однократного получения данных с дальномера:
+
+```python
+from sensor_msgs.msg import Range
+
+# ...
+
+data = rospy.wait_for_message('rangefinder/range', Range)
 ```
 
 ### Визуализация данных

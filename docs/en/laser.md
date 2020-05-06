@@ -1,10 +1,10 @@
 # Working with a laser rangefinder
 
-> **Note** Documentation for the [image](image.md), versions, starting with **0.18**. For older versions refer to [documentation for version **0.17**](https://github.com/CopterExpress/clever/blob/v0.17/docs/en/laser.md).
+> **Note** Documentation for the [image](image.md), versions, starting with **0.18**. For older versions refer to [documentation for version **0.17**](https://github.com/CopterExpress/clover/blob/v0.17/docs/en/laser.md).
 
 ## VL53L1X Rangefinder
 
-The rangefinder model recommended for Clever is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
+The rangefinder model recommended for Clover is STM VL53L1X. This rangefinder can measure distances from 0 to 4 m while ensuring high measurement accuracy.
 
 The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS driver.
 
@@ -72,6 +72,16 @@ def range_callback(msg):
     print 'Rangefinder distance:', msg.range
 
 rospy.Subscriber('rangefinder/range', Range, range_callback)
+```
+
+Also it's possible to read one rangefinder measurement at a time:
+
+```python
+from sensor_msgs.msg import Range
+
+# ...
+
+data = rospy.wait_for_message('rangefinder/range', Range)
 ```
 
 ### Data visualization

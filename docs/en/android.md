@@ -14,11 +14,11 @@ However, to make you fully understand the application, I will tell you about eac
 
 ## Wrapper
 
-Let's start with the simplest thing — the appearance of our application. At [**GitHub**](https://github.com/CopterExpress/clever/tree/master/apps/android/app/src/main/assets), you can find *HTML*, *CSS* and *JavaScript* files, which make up the web page to be used for controlling the copter. To have this page displayed in our application, do the following:
+Let's start with the simplest thing — the appearance of our application. At [**GitHub**](https://github.com/CopterExpress/clover/tree/master/apps/android/app/src/main/assets), you can find *HTML*, *CSS* and *JavaScript* files, which make up the web page to be used for controlling the copter. To have this page displayed in our application, do the following:
 
 1. Create folder **assets** in the main folder of the app named **app**
 
-2. Add to it all files from [here](https://github.com/CopterExpress/clever/tree/master/apps/android/app/src/main/assets)
+2. Add to it all files from [here](https://github.com/CopterExpress/clover/tree/master/apps/android/app/src/main/assets)
 
 If you reached this stage, you already have the web page you want, congratulations! Now we have to display it somehow in the app. To do this, in class *activity* in method **onCreate**, write the following code:
 

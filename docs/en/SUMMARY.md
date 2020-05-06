@@ -4,9 +4,9 @@
 * [Glossary](gloss.md)
 * [Safety tips](safety.md)
 * Assembly
-  * [Clever 4 assembly](assemble_4.md)
-  * [Clever 3 assembly](assemble_3.md)
-  * [Clever 2 assembly](assemble_2.md)
+  * [Clover 4 assembly](assemble_4.md)
+  * [Clover 3 assembly](assemble_3.md)
+  * [Clover 2 assembly](assemble_2.md)
 * Configuration
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
@@ -52,8 +52,9 @@
   * [PID Setup](calibratePID.md)
   * [Model files for parts](models.md)
   * [ROS Melodic installation](ros-install.md)
+  * [Camera calibration](camera_calibration.md)
   * [Quadcopter control with 4G communication](4g.md)
-  * [Clever and Jetson Nano](jetson_nano.md)
+  * [Clover and Jetson Nano](jetson_nano.md)
   * [Remote control app](rc.md)
   * [Wi-Fi Configuration](network.md)
   * [UART settings](uart.md)
@@ -64,7 +65,6 @@
   * [Multimeter usage](test_connection.md)
   * [RC Troubleshooting](radioerrors.md)
   * [Flashing ESCs](esc_firmware.md)
-  * [Camera calibration](camera_calibration.md)
   * [Interfacing with Arduino](arduino.md)
   * [Connecting GPS](gps.md)
   * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
@@ -76,7 +76,9 @@
   * [Soldering safety](tb.md)
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
-* Clever-based projects
+  * [Migration to v0.20](migrate20.md)
+* Clover-based projects
+  * [Drone show](clever-show.md)
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)
@@ -85,3 +87,4 @@
   * [Copter Hack 2019](copterhack2019.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
+  * [Camera calibration (legacy)](camera_calib.md)

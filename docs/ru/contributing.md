@@ -22,7 +22,7 @@
 
 Если вы нашли ошибку в документации или хотите ее улучшить, используйте механизм **Pull Request**'ов.
 
-1. Найдите файл с интересующей вас статьей в репозитории – https://github.com/CopterExpress/clever/tree/master/docs.
+1. Найдите файл с интересующей вас статьей в репозитории – https://github.com/CopterExpress/clover/tree/master/docs.
 2. Нажмите кнопку "Редактировать".
 
     <img src="../assets/github-edit.png" alt="GitHub Edit">
@@ -38,7 +38,7 @@
 
 > **Note** Если вы реализовали собственный интересный проект на Клевере, вы можете добавить статью о нем в раздел "Проекты на базе Клевера".
 
-Подготовьте вашу статью и пришлите Pull Request с ней в [репозиторий Клевера](https://github.com/CopterExpress/clever).
+Подготовьте вашу статью и пришлите Pull Request с ней в [репозиторий Клевера](https://github.com/CopterExpress/clover).
 
 1. Сделайте форк репозитория Клевера:
 
@@ -75,7 +75,7 @@
 
     ```bash
     git add docs/
-    git commit -m "Add new article for Clever"
+    git commit -m "Add new article for Clover"
     ```
 
 8. Загрузите вашу новую ветку с изменениями на ваш GitHub репозиторий с форком Клевера:
@@ -91,4 +91,8 @@
     <img src="../assets/github-pull-request-create.png" alt="GitHub Create Pull">
 
 10. Дождитесь комментариев на свою статью, сделайте правки, если потребуется.
-11. Порадуйтесь своей новой полезной статье, опубликованной на https://clever.coex.tech !
+11. Порадуйтесь своей новой полезной статье, опубликованной на https://clover.coex.tech !
+
+## Простой способ
+
+Если вышеприведенные инструкции для вас оказываются слишком сложными, отправляйте правки или новые статьи по e-mail (<a href="mailto:okalachev@gmail.com">okalachev@gmail.com</a>) или в Telegram (пользователь <a href="tg://resolve?domain=okalachev">@okalachev</a>).

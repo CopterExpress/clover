@@ -394,7 +394,7 @@ publish_debug:
 		int num_markers = board_->dictionary->bytesList.rows;
 		if (num_markers <= id) {
 			NODELET_ERROR("Marker id %d is not in dictionary; current dictionary contains %d markers. "
-			              "Please see https://github.com/CopterExpress/clever/blob/master/aruco_pose/README.md#parameters for details",
+			              "Please see https://github.com/CopterExpress/clover/blob/master/aruco_pose/README.md#parameters for details",
 					  id, num_markers);
 			return;
 		}

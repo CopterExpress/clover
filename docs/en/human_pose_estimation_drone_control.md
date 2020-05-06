@@ -31,7 +31,7 @@ Before you test it you need to install on your laptop:
 - Install Nodejs from [here](https://nodejs.org/en/download/). For [Ubuntu installation](https://tecadmin.net/install-latest-nodejs-npm-on-ubuntu/)
 - Install Yarn package manager from [here](https://yarnpkg.com/lang/en/docs/install/). [Usual problem](https://github.com/yarnpkg/yarn/issues/3189) while installing and using yarn with Ubuntu.
 - Have an experience in manual control on the drone in case of any weird behavior happen.
-- Worked before with COEX drones, if this is your first time to work with COEX drones check [this](https://clever.coex.tech/en/).
+- Worked before with COEX drones, if this is your first time to work with COEX drones check [this](https://clover.coex.tech/en/).
 
 and you are ready to build and use the required codes.
 
@@ -145,7 +145,7 @@ Animation is created by [this](https://justsketchme.web.app/)
 ## References
 
 - [Human pose estimation guide](https://blog.nanonets.com/human-pose-estimation-2d-guide/)
-- [Clever drones tutorials](https://clever.coex.tech/en/)
+- [Clover drones tutorials](https://clover.coex.tech/en/)
 - [Posenet GitHub repo](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
 - [Posenet meduim article](https://medium.com/tensorflow/real-time-human-pose-estimation-in-the-browser-with-tensorflow-js-7dd0bc881cd5)
 - [Tensorflow.js demos](https://www.tensorflow.org/js/demos)
