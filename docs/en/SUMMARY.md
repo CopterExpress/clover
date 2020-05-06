@@ -69,6 +69,7 @@
   * [Connecting GPS](gps.md)
   * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
   * [FPV Setup](fpv.md)
+  * [Trainer mode](trainer_mode.md)
   * [Tinning](tinning.md)
   * [Types of power connectors](connectortypes.md)
   * [Connecting 4 in 1 ESCs](4in1.md)
