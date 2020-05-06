@@ -62,6 +62,10 @@ hostnamectl set-hostname $NEW_HOSTNAME
 sed -i 's/127\.0\.1\.1.*/127.0.1.1\t'${NEW_HOSTNAME}' '${NEW_HOSTNAME}'.local/g' /etc/hosts
 # .local (mdns) hostname added to make it accesable when wlan and ethernet interfaces are down
 
+echo_stamp "Enable ROS services"
+systemctl enable roscore
+systemctl enable clover
+
 echo_stamp "Harware setup"
 /root/hardware_setup.sh
 
