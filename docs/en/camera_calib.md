@@ -57,7 +57,7 @@ Turn on Clover and connect to its Wi-Fi.
 
 ## Calibration
 
-Run script **_calibrate_cam_**:
+Run script ***calibrate_cam***:
 
 **Windows:**
 
@@ -97,7 +97,7 @@ To calibrate the camera, make at least 25 photos of the chessboard at various an
 
 ![img](../assets/calibration.jpg)
 
-To make a photo, enter command **_catch_**.
+To make a photo, enter command ***catch***.
 
 ```(bash)
 >catch
@@ -113,9 +113,9 @@ Chessboard not found, now 0 (25 required)
 Image added, now 1 (25 required)
 ```
 
-> Instead of entering command **_catch_** each time, you can just press **_Enter_** (enter a blank line).
+> Instead of entering command ***catch*** each time, you can just press ***Enter*** (enter a blank line).
 
-After you have made a sufficient number of images, enter command **_finish_**.
+After you have made a sufficient number of images, enter command ***finish***.
 
 ```(bash)
 ...
@@ -125,7 +125,7 @@ Calibration successful!
 
 ### Calibration by the existing images
 
-If you already have images, you can calibrate the camera by them with the help of script **_calibrate_cam_ex_**.
+If you already have images, you can calibrate the camera by them with the help of script ***calibrate_cam_ex***.
 
 ```(bash)
 >calibrate_cam_ex
@@ -141,22 +141,22 @@ Square size: # Length of cell edge (mm)
 Path: # Path to the folder with images
 ```
 
-Apart from that, this script works similarly to **_calibrate_cam_**.
+Apart from that, this script works similarly to ***calibrate_cam***.
 
-The program will process all received pictures, and create file **_camera_info_****_._****_yaml_** in the current folder. Using this file, you can equalize distortions in the images obtained from this camera.
+The program will process all received pictures, and create file ***camera_info.yaml*** in the current folder. Using this file, you can equalize distortions in the images obtained from this camera.
 
 > If you change the resolution of the received image, you will have to re-calibrate the camera.
 
 ## Correcting distortions
 
-Function **_get_undistorted_image(cv2_image, camera_info)_** is responsible for obtaining a corrected image:
+Function ***get_undistorted_image(cv2_image, camera_info)*** is responsible for obtaining a corrected image:
 
-* **_cv2_image_**: An image encoded into a cv2 array.
-* **_camera_****___****_info_**: The path to the calibration file.¬
+* ***cv2_image***: An image encoded into a cv2 array.
+* ***camera_info***: The path to the calibration file.¬
 
 The function returns a cv2 array, into which the corrected image is coded.
 
-> If you are using a fisheye camera provided with Clover, for processing images with resolution 320x240 or 640x480, you can use the existing calibration settings. To do this, pass parameters **_clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_320_** or **_clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_640_** as argument **_camera_info_**, respectively.
+> If you are using a fisheye camera provided with Clover, for processing images with resolution 320x240 or 640x480, you can use the existing calibration settings. To do this, pass parameters ***clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_320*** or ***clever_cam_calibration.clevercamcalib.CLEVER_FISHEYE_CAM_640*** as argument ***camera_info***, respectively.
 
 ## Examples of operation
 
@@ -203,11 +203,11 @@ The SFTP protocol is used for transferring the file. This example, WinSCP progra
 
 Connect to Raspberry Pi via SFTP:
 
-> Password: _**raspberry**_
+> Password: ***raspberry***
 
 ![img](../assets/wcp1.png)
 
-Press “Enter”. Go to _**/home/pi/catkin_ws/src/clever/clever/camera_info/**_, and copy the calibration .yaml file to this folder:
+Press “Enter”. Go to ***/home/pi/catkin_ws/src/clever/clever/camera_info/***, and copy the calibration .yaml file to this folder:
 
 ![img](../assets/wcp2.jpg)
 
@@ -217,11 +217,11 @@ Connect to Raspberry Pi via SSH:
 
 ![img](../assets/pty1.jpg)
 
-Log in with username _**pi**_ and password _**raspberry**_, go to directory _**/home/pi/catkin_ws/src/clever/clever/launch**_ and start editing configuration _**main_camera.launch**_:
+Log in with username ***pi*** and password ***raspberry***, go to directory ***/home/pi/catkin_ws/src/clever/clever/launch*** and start editing configuration ***main_camera.launch***:
 
 ![img](../assets/pty2.jpg)
 
-In line _**camera node**_, change parameter _**camera_info**_ to _**camera_info.yaml**_:
+In line ***camera node***, change parameter ***camera_info*** to ***camera_info.yaml***:
 
 ![img](../assets/pty3.jpg)
 
