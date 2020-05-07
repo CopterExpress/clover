@@ -1,3 +1,11 @@
 <launch>
-
+    <!-- FIXME: This .launch file will not work as of right now without a PX4 binary somewhere. -->
+    <!-- Gazebo instance -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="true"/>
+        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/empty.world"/>
+        <arg name="verbose" value="true"/>
+    </include>
+    <!-- Clover model -->
+    <include file="$(find clover_description)/launch/spawn_drone.launch"/>
 </launch>
