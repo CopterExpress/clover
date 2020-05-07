@@ -1,0 +1,18 @@
+syntax = "proto2";
+package sensor_msgs.msgs;
+
+message OpticalFlow
+{
+  required int64 time_usec              = 1;
+  required int32 sensor_id              = 2;
+  required int32 integration_time_us    = 3;
+  required float integrated_x           = 4;
+  required float integrated_y           = 5;
+  required float integrated_xgyro       = 6;
+  required float integrated_ygyro       = 7;
+  required float integrated_zgyro       = 8;
+  required float temperature            = 9;
+  required int32 quality                = 10;
+  required int32 time_delta_distance_us = 11;
+  required float distance               = 12;
+}

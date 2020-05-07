@@ -1,0 +1,10 @@
+syntax = "proto2";
+package sensor_msgs.msgs;
+import "vector3d.proto";
+
+message MagneticField
+{
+  required int64 time_usec                     = 1;
+  required gazebo.msgs.Vector3d magnetic_field = 2;
+  repeated float magnetic_field_covariance     = 3 [packed=true]; //r.p.y
+}

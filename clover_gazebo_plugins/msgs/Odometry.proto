@@ -1,0 +1,15 @@
+syntax = "proto2";
+package nav_msgs.msgs;
+import "quaternion.proto";
+import "vector3d.proto";
+
+message Odometry
+{
+  required int64 time_usec                       = 1;
+  required gazebo.msgs.Vector3d position         = 2;
+  required gazebo.msgs.Quaternion orientation    = 3;
+  required gazebo.msgs.Vector3d linear_velocity  = 4;
+  required gazebo.msgs.Vector3d angular_velocity = 5;
+  repeated float pose_covariance                 = 6 [packed=true]; // x.y.z.r.p.y.
+  repeated float velocity_covariance             = 7 [packed=true]; // vx.vy.vz.rr.pr.yr
+}
