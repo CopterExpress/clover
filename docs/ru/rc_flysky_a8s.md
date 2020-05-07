@@ -10,54 +10,64 @@
 
 1. Аккуратно извлеките жёлтый провод из коннектора, идущего к приёмнику. Для того, чтобы вытащить провод, приподнимите острым пинцетом замок коннектора:
 
-    ![a8s wire removal 1](../assets/flysky_a8s/01_remove_cable_fs.png)
-    ![a8s wire removal 2](../assets/flysky_a8s/02_remove_cable_fs.png)
+    <div class="image-group">
+        <img src="../assets/flysky_a8s/01_remove_cable_fs.png" width=300 class="zoom border" alt="a8s wire removal 1">
+        <img src="../assets/flysky_a8s/02_remove_cable_fs.png" width=300 class="zoom border" alt="a8s wire removal 2">
+    </div>
 
 2. (При использовании полётного контроллера Pixracer) Извлеките 2 провода (зелёный и коричневый) из 5-пинового коннектора для полётного контроллера:
 
-    ![pixracer wire removal 1](../assets/flysky_a8s/03_remove_cable_pixracer.png)
-    ![pixracer wire removal 2](../assets/flysky_a8s/04_remove_cable_pixracer.png)
+    <div class="image-group">
+        <img src="../assets/flysky_a8s/03_remove_cable_pixracer.png" width=300 class="zoom border" alt="pixracer wire removal 1">
+        <img src="../assets/flysky_a8s/04_remove_cable_pixracer.png" width=300 class="zoom border" alt="pixracer wire removal 2">
+    </div>
 
 3. (При использовании полётного контроллера COEX Pix) Извлеките зелёный (или синий, в зависимости от комплектации) провод из 4-пинового коннектора для полётного контроллера:
 
-    ![coexpix wire removal 1](../assets/flysky_a8s/05_remove_cable_coexpix.png)
-    ![coexpix wire removal 2](../assets/flysky_a8s/06_remove_cable_coexpix.png)
+    <div class="image-group">
+        <img src="../assets/flysky_a8s/05_remove_cable_coexpix.png" width=300 class="zoom border" alt="coexpix wire removal 1">
+        <img src="../assets/flysky_a8s/06_remove_cable_coexpix.png" width=300 class="zoom border" alt="coexpix wire removal 2">
+    </div>
 
 4. С помощью бокорезов обрежьте концы кабелей с разъёмами Dupont (чёрными):
 
-    ![wire cutting](../assets/flysky_a8s/07_wirecuts_1.png)
-    ![wire cuts](../assets/flysky_a8s/08_wirecuts_2.png)
+    <div class="image-group">
+        <img src="../assets/flysky_a8s/07_wirecuts_1.png" width=300 class="zoom border" alt="wire cutting">
+        <img src="../assets/flysky_a8s/08_wirecuts_2.png" width=300 class="zoom border" alt="wire cuts">
+    </div>
 
 5. Зачистите и залудите 5-7 мм провода с каждой стороны:
 
-    ![tinning prep](../assets/flysky_a8s/09_wirecuts_stripped.png)
+    <img src="../assets/flysky_a8s/09_wirecuts_stripped.png" width=300 class="zoom border center" alt="tinning prep">
 
 6. Наденьте термоусадочные трубки на провода:
 
-    ![shrink tubing](../assets/flysky_a8s/10_heatshrink.png)
+    <img src="../assets/flysky_a8s/10_heatshrink.png" width=300 class="zoom border center" alt="shrink tubing">
 
 7. Спаяйте провода по следующей схеме:
     * чёрный провод приёмника с чёрным проводом кабеля полётного контроллера;
     * красный провод приёмника с красным проводом кабеля полётного контроллера;
     * белый провод приёмника с белым (при использовании Pixracer) или жёлтым (при использовании COEX Pix) проводом кабеля полётного контроллера:
 
-    ![wire soldering](../assets/flysky_a8s/11_solder_scheme.png)
+    <img src="../assets/flysky_a8s/11_solder_scheme.png" width=300 class="zoom border center" alt="wire soldering">
 
 8. Переместите термоусадочные трубки на места пайки и прогрейте их феном:
 
-    ![shrink tube heating](../assets/flysky_a8s/12_heatshrink_heat.png)
+    <img src="../assets/flysky_a8s/12_heatshrink_heat.png" width=300 class="zoom border center" alt="shrink tube heating">
 
 9. Скрутите готовые кабели:
 
-    ![twisted cables](../assets/flysky_a8s/13_cable_twist.png)
+    <img src="../assets/flysky_a8s/13_cable_twist.png" width=300 class="zoom border center" alt="twisted cables">
 
 С помощью изготовленного кабеля подключите приёмник к полётному контроллеру к порту RC IN:
 
-![pixracer connection](../assets/flysky_a8s/14_pixracer_rcin.png)
-![coex pix connection](../assets/flysky_a8s/14_coexpix_rcin.png)
+<div class="image-group">
+    <img src="../assets/flysky_a8s/14_pixracer_rcin.png" width=300 class="zoom border center" alt="pixracer connection">
+    <img src="../assets/flysky_a8s/14_coexpix_rcin.png" width=300 class="zoom border center" alt="coex pix connection">
+</div>
 
-> **Hint** Убедитесь, что провод, идущий в COEX Pix, подключен к пину RC IN:
-![coex pix pinout](../assets/coexpix_bottom.jpg)
+> **Hint** Убедитесь, что провод, идущий в COEX Pix, подключен к порту RC IN:
+<img src="../assets/coexpix-bottom.jpg" width=300 class="zoom border center" alt="coex pix pinout">
 
 ## Сопряжение приёмника с пультом {#rc_bind}
 
@@ -66,23 +76,23 @@
 1. Убедитесь, что полётный контроллер выключен.
 2. Зажмите кнопку **BIND** на приёмнике:
 
-    ![bind key](../assets/flysky_a8s/15_bind_key.png)
+    <img src="../assets/flysky_a8s/15_bind_key.png" width=300 class="zoom border center" alt="bind key">
 
 3. Включите полётный контроллер. Светодиод на приёмнике должен заморгать с высокой частотой.
 
-    ![fast blink](../assets/flysky_a8s/16_bind_indicator.png)
+    <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="fast blink">
 
 4. Зажмите клавишу **BIND KEY** на пульте и включите его. На пульте должно появиться сообщение **RX Binding...**
 
-    ![rx binding](../assets/flysky_a8s/17_controller_rxbind.png)
+    <img src="../assets/flysky_a8s/17_controller_rxbind.png" width=300 class="zoom border center" alt="rx binding">
 
 5. Светодиод на приёмнике должен заморгать с низкой частотой.
 
-    ![slow blink](../assets/flysky_a8s/16_bind_indicator.png)
+    <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="slow blink">
 
 6. Выключите и включите пульт. Светодиод на приёмнике должен перестать мограть.
 
-    ![steady glow](../assets/flysky_a8s/16_bind_indicator.png)
+    <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="steady glow">
 
 > **Note** Данный приёмник не передаёт телеметрию обратно на пульт. Это значит, что на экране пульта не будет отображаться информация об уровне сигнала и напряжении на приёмнике. Эта особенность приёмника не является неисправностью и не влияет на управление.
 
