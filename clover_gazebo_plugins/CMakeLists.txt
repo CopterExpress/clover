@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(clover_gazebo_plugins VERSION 1.0.0)
 
-find_package(catkin COMPONENTS REQUIRED
+find_package(catkin COMPONENTS
   gazebo_ros
   geometry_msgs
   roscpp
