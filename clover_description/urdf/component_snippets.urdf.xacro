@@ -501,6 +501,11 @@
       <child link="${namespace}/imu${imu_suffix}_link" />
       <!-- <limit upper="0" lower="0" effort="0" velocity="0" /> -->
     </joint>
+    <!-- Well, now I know why: because Gazebo helpfully tries to "lump together" all fixed joints. Apparently there's a way to disable this behavior that is implemented here in its entirety: -->
+    <gazebo reference="${namespace}/imu${imu_suffix}_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+      <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
     <gazebo>
       <plugin filename="libgazebo_imu_plugin.so" name="rotors_gazebo_imu${imu_suffix}_plugin">
       <!-- A good description of the IMU parameters can be found in the kalibr documentation:
