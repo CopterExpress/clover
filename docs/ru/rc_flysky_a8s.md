@@ -20,8 +20,8 @@
 
 3. (При использовании полётного контроллера COEX Pix) Извлеките зелёный (или синий, в зависимости от комплектации) провод из 4-пинового коннектора для полётного контроллера:
 
-    ![coexpix wire removal 1](../assets/flysky_a8s_05_remove_cable_coexpix.png)
-    ![coexpix wire removal 2](../assets/flysky_a8s_06_remove_cable_coexpix.png)
+    ![coexpix wire removal 1](../assets/flysky_a8s/05_remove_cable_coexpix.png)
+    ![coexpix wire removal 2](../assets/flysky_a8s/06_remove_cable_coexpix.png)
 
 4. С помощью бокорезов обрежьте концы кабелей с разъёмами Dupont (чёрными):
 
@@ -45,7 +45,7 @@
 
 8. Переместите термоусадочные трубки на места пайки и прогрейте их феном:
 
-    ![shrink tube heating](../assets/flysky_a8s/12_heatsrhink_heat.png)
+    ![shrink tube heating](../assets/flysky_a8s/12_heatshrink_heat.png)
 
 9. Скрутите готовые кабели:
 
