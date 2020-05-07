@@ -15,7 +15,7 @@ ls
 Change current (working) directory:
 
 ```bash
-cd catkin_ws/src/clever/clever/launch
+cd catkin_ws/src/clover/clover/launch
 ```
 
 Go one directory level up:
@@ -65,16 +65,16 @@ You can use **nano** to edit files on the Raspberry Pi. It is one of the more us
    For example:
 
    ```bash
-   nano ~/catkin_ws/src/clever/clever/launch/clever.launch
+   nano ~/catkin_ws/src/clover/clover/launch/clover.launch
    ```
 
    <img src="../assets/nano.png" alt="Editing files in nano" data-action="zoom">
 2. Edit the file.
 3. Press `Ctrl`+`X`, `Y`, `Enter` to save your file and exit.
-4. Restart the `clever` package if you've changed .launch files:
+4. Restart the `clover` service if you've changed .launch files:
 
    ```bash
-   sudo systemctl restart clever
+   sudo systemctl restart clover
    ```
 
 You may also use other editors like **vim** if you prefer.

@@ -15,7 +15,7 @@ ls
 Перейти в директорию:
 
 ```bash
-cd catkin_ws/src/clever/clever/launch/
+cd catkin_ws/src/clover/clover/launch/
 ```
 
 Перейти на директорию выше:
@@ -65,16 +65,16 @@ sudo reboot
    Например:
 
    ```bash
-   nano ~/catkin_ws/src/clever/clever/launch/clever.launch
+   nano ~/catkin_ws/src/clover/clover/launch/clover.launch
    ```
 
    <img src="../assets/nano.png" alt="Редактирование файла в nano" data-action="zoom">
 2. Отредактируйте файл.
 3. Для выхода с сохранением нажмите `Ctrl`+`X`, `Y`, `Enter`.
-4. При изменении .launch-файлов необходимо перезапустить пакет `clever`:
+4. При изменении .launch-файлов необходимо перезапустить пакет `clover`:
 
    ```bash
-   sudo systemctl restart clever
+   sudo systemctl restart clover
    ```
 
 Для редактирования файлов также можно использовать и другие редакторы, например, **vim**.

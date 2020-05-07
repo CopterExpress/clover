@@ -10,13 +10,13 @@
 
 ## Конфигурирование
 
-Аргумент `aruco` в файле `~/catkin_ws/src/clever/clever/launch/clever.launch` должен быть в значении `true`:
+Аргумент `aruco` в файле `~/catkin_ws/src/clover/clover/launch/clover.launch` должен быть в значении `true`:
 
 ```xml
 <arg name="aruco" default="true"/>
 ```
 
-Для включения распознавания карт маркеров аргументы `aruco_map` и `aruco_detect` в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` должны быть в значении `true`:
+Для включения распознавания карт маркеров аргументы `aruco_map` и `aruco_detect` в файле `~/catkin_ws/src/clover/clover/launch/aruco.launch` должны быть в значении `true`:
 
 ```xml
 <arg name="aruco_detect" default="true"/>
@@ -45,12 +45,12 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 <param name="map" value="$(find aruco_pose)/map/map.txt"/>
 ```
 
-Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
+Смотрите примеры карт маркеров в каталоге [`~/catkin_ws/src/clover/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
 
 Файл карты может быть сгенерирован с помощью инструмента `genmap.py`:
 
 ```bash
-rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
 ```
 
 Где `length` – размер маркера, `x` – количество маркеров по оси *x*, `y` - количество маркеров по оси *y*, `dist_x` – расстояние между центрами маркеров по оси *x*, `y` – расстояние между центрами маркеров по оси *y*, `first` – ID первого (левого нижнего) маркера, `test_map.txt` – название файла с картой. Дополнительный ключ `--bottom-left` позволяет нумеровать маркеры с левого нижнего угла.
@@ -58,7 +58,7 @@ rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/cle
 Пример:
 
 ```bash
-rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
 ```
 
 Дополнительную информацию по утилите можно получить по ключу `-h`: `rosrun aruco_pose genmap.py -h`.
@@ -154,7 +154,7 @@ navigate(frame_id='aruco_5', x=0, y=0, z=1)
 
 Для навигации по маркерам, расположенным на потолке, необходимо поставить основную камеру так, чтобы она смотрела вверх и [установить соответствующий фрейм камеры](camera_setup.md#frame).
 
-Также в файле `~/catkin_ws/src/clever/clever/launch/aruco.launch` необходимо установить параметр `known_tilt` в секциях `aruco_detect` и `aruco_map` в значение `map_flipped`:
+Также в файле `~/catkin_ws/src/clover/clover/launch/aruco.launch` необходимо установить параметр `known_tilt` в секциях `aruco_detect` и `aruco_map` в значение `map_flipped`:
 
 ```xml
 <param name="known_tilt" value="map_flipped"/>

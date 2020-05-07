@@ -16,7 +16,7 @@ Configuring
 
 > **Warning** An open QGroundControl or rviz connection sends large amounts of data over Wi-Fi, which can adversely affect responsiveness of the mobile transmitter. It is recommended not to use these applications together with it.
 
-Install [Clover image on RPi](image.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`) should be enabled:
+Install [Clover image on RPi](image.md). For running the application, settings `rosbridge` and `rc` in the launch file (`~/catkin_ws/src/clover/clover/launch/clover.launch`) should be enabled:
 
 ```xml
 <arg name="rosbridge" default="true"/>
@@ -26,10 +26,10 @@ Install [Clover image on RPi](image.md). For running the application, settings `
 <arg name="rc" default="true"/>
 ```
 
-After the launch-file is edited, restart package `clever`:
+After the launch-file is edited, restart package `clover`:
 
-```(bash)
-sudo systemctl restart clever
+```bash
+sudo systemctl restart clover
 ```
 
 Also make sure that PX4-parameter `COM_RC_IN_MODE` is set to `0` (RC Transmitter).
@@ -44,7 +44,7 @@ Additional PX4 parameters:
 Connection
 ---
 
-Connect the smartphone to Clover [Wi-Fi](wifi.md) network (`CLEVER-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
+Connect the smartphone to Clover [Wi-Fi](wifi.md) network (`clover-xxxx`). The application should connect to the copter automatically. Upon successful connection, the current [mode](modes.md) and the battery charge level should be displayed.
 
 The sticks on the screen of the application work just like real sticks. To arm the copter, hold the left stick in the bottom right corner for several seconds. To disarm — in the bottom left corner.
 

@@ -20,7 +20,7 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     ```txt
     network={
         ssid="my-super-ssid"
-        psk="cleverwifi123"
+        psk="cloverwifi123"
         mode=2
         proto=RSN
         key_mgmt=WPA-PSK
@@ -90,8 +90,8 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     country=GB
 
     network={
-        ssid="CLEVER-1234"
-        psk="cleverwifi"
+        ssid="clover-1234"
+        psk="cloverwifi"
         mode=2
         proto=RSN
         key_mgmt=WPA-PSK
@@ -101,7 +101,7 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     }
     ```
 
-    where `CLEVER-1234` is the network name and `cleverwifi` is the password.
+    where `clover-1234` is the network name and `cloverwifi` is the password.
 
 3. Enable the `dnsmasq` service.
 
@@ -155,8 +155,8 @@ update_config=1
 country=GB
 
 network={
-        ssid=\"CLEVER-SMIRNOV\"
-        psk=\"cleverwifi\"
+        ssid=\"my-clover\"
+        psk=\"cloverwifi\"
         mode=2
         proto=RSN
         key_mgmt=WPA-PSK
@@ -212,7 +212,7 @@ sudo apt install dnsmasq-base
 
 ```bash
 # Calling dnsmasq-base
-sudo dnsmasq --interface=wlan0 --address=/clever/coex/192.168.11.1 --no-daemon --dhcp-range=192.168.11.100,192.168.11.200,12h --no-hosts --filterwin2k --bogus-priv --domain-needed --quiet-dhcp6 --log-queries
+sudo dnsmasq --interface=wlan0 --address=/clover/coex/192.168.11.1 --no-daemon --dhcp-range=192.168.11.100,192.168.11.200,12h --no-hosts --filterwin2k --bogus-priv --domain-needed --quiet-dhcp6 --log-queries
 
 # More about dnsmasq-base
 dnsmasq --help
@@ -230,7 +230,7 @@ sudo apt install dnsmasq
 ```bash
 cat << EOF | sudo tee -a /etc/dnsmasq.conf
 interface=wlan0
-address=/clever/coex/192.168.11.1
+address=/clover/coex/192.168.11.1
 dhcp-range=192.168.11.100,192.168.11.200,12h
 no-hosts
 filterwin2k

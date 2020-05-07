@@ -10,18 +10,7 @@
 
 ### Подключение к Raspberry Pi
 
-> **Note** Для корректной работы лазерного дальномера с полетным контроллером необходима <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">кастомная прошивка PX4</a>. Подробнее про прошивку см. [соответствующую статью](firmware.md).
-
-<script type="text/javascript">
-    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
-        for (let release of data) {
-            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
-                document.querySelector('#download-firmware').href = release.html_url;
-                return;
-            }
-        }
-    });
-</script>
+> **Hint** Для корректной работы лазерного дальномера с полетным контроллером рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
 
 Подключите дальномер по интерфейсу I²C к пинам 3V, GND, SCL и SDA:
 
@@ -33,7 +22,7 @@
 
 ### Включение
 
-[Подключитесь по SSH](ssh.md) и отредактируйте файл `~/catkin_ws/src/clever/clever/launch/clever.launch` так, чтобы драйвер VL53L1X был включен:
+[Подключитесь по SSH](ssh.md) и отредактируйте файл `~/catkin_ws/src/clover/clover/launch/clover.launch` так, чтобы драйвер VL53L1X был включен:
 
 ```xml
 <arg name="rangefinder_vl53l1x" default="true"/>
