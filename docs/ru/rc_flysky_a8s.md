@@ -80,7 +80,7 @@
 
 3. Включите полётный контроллер. Светодиод на приёмнике должен заморгать с высокой частотой.
 
-    <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="fast blink">
+    <img src="../assets/flysky_a8s/16_blink_fast.gif" width=300 class="zoom border center" alt="fast blink">
 
 4. Зажмите клавишу **BIND KEY** на пульте и включите его. На пульте должно появиться сообщение **RX Binding...**
 
@@ -88,7 +88,7 @@
 
 5. Светодиод на приёмнике должен заморгать с низкой частотой.
 
-    <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="slow blink">
+    <img src="../assets/flysky_a8s/16_blink_slow.gif" width=300 class="zoom border center" alt="slow blink">
 
 6. Выключите и включите пульт. Светодиод на приёмнике должен перестать мограть.
 
