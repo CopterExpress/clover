@@ -15,14 +15,14 @@
         <img src="../assets/flysky_a8s/02_remove_cable_fs.png" width=300 class="zoom border" alt="a8s wire removal 2">
     </div>
 
-2. (При использовании полётного контроллера Pixracer) Извлеките 2 провода (зелёный и коричневый) из 5-пинового коннектора для полётного контроллера:
+2. [При использовании полётного контроллера Pixracer] Извлеките 2 провода - зелёный и коричневый - из 5-пинового коннектора для полётного контроллера:
 
     <div class="image-group">
         <img src="../assets/flysky_a8s/03_remove_cable_pixracer.png" width=300 class="zoom border" alt="pixracer wire removal 1">
         <img src="../assets/flysky_a8s/04_remove_cable_pixracer.png" width=300 class="zoom border" alt="pixracer wire removal 2">
     </div>
 
-3. (При использовании полётного контроллера COEX Pix) Извлеките зелёный (или синий, в зависимости от комплектации) провод из 4-пинового коннектора для полётного контроллера:
+3. [При использовании полётного контроллера COEX Pix] Извлеките зелёный (или синий, в зависимости от комплектации) провод из 4-пинового коннектора для полётного контроллера:
 
     <div class="image-group">
         <img src="../assets/flysky_a8s/05_remove_cable_coexpix.png" width=300 class="zoom border" alt="coexpix wire removal 1">
