@@ -78,7 +78,7 @@
 
     <img src="../assets/flysky_a8s/15_bind_key.png" width=300 class="zoom border center" alt="bind key">
 
-3. Включите полётный контроллер. Светодиод на приёмнике должен заморгать с высокой частотой.
+3. Включите полётный контроллер. Светодиод на приёмнике должен замигать с высокой частотой.
 
     <img src="../assets/flysky_a8s/16_blink_fast.gif" width=300 class="zoom border center" alt="fast blink">
 
@@ -86,11 +86,11 @@
 
     <img src="../assets/flysky_a8s/17_controller_rxbind.png" width=300 class="zoom border center" alt="rx binding">
 
-5. Светодиод на приёмнике должен заморгать с низкой частотой.
+5. Светодиод на приёмнике должен замигать с низкой частотой.
 
     <img src="../assets/flysky_a8s/16_blink_slow.gif" width=300 class="zoom border center" alt="slow blink">
 
-6. Выключите и включите пульт. Светодиод на приёмнике должен перестать мограть.
+6. Выключите и включите пульт. Светодиод на приёмнике должен светиться непрерывно.
 
     <img src="../assets/flysky_a8s/16_bind_indicator.png" width=300 class="zoom border center" alt="steady glow">
 
