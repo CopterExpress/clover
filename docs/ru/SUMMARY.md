@@ -42,6 +42,7 @@
   * [Компьютерное зрение](camera.md)
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
+  * [Использование JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * Дополнительные материалы

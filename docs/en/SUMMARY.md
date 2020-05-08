@@ -41,7 +41,8 @@
   * [Interfacing with a sonar](sonar.md)
   * [Computer vision basics](camera.md)
   * [Using rviz and rqt](rviz.md)
-  * [Software autorun](autolaunch.md)  
+  * [Software autorun](autolaunch.md)
+  * [Using JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * Supplementary materials
