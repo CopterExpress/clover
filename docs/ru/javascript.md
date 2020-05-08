@@ -20,7 +20,7 @@
 			alert('Connected');
 		});
 		
-		// Declare get_telemetry service
+		// Declare get_telemetry service client
 		var getTelemetry = new ROSLIB.Service({ ros: ros, name : '/get_telemetry', serviceType : 'clover/GetTelemetry' });
 
 		// Call get_telemetry
