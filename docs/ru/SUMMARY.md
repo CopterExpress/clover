@@ -43,8 +43,15 @@
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
   * [Использование JavaScript](javascript.md)
-  * [ROS](ros.md)
-  * [MAVROS](mavros.md)
+  * [`mavros`](mavros.md)
+* ROS: учебник
+  * [Общая информация](ros.md)
+  * [ROS-ноды](ros_node.md)
+  * [ROS-топики](ros_topic.md)
+  * [ROS-сервисы](ros_service.md)
+  * [ROS-параметры](ros_params.md)
+  * [Графические инструменты](ros_gui.md)
+  * [Продвинутое использование](ros_advanced.md)
 * Дополнительные материалы
   * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)
