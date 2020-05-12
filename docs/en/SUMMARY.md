@@ -11,6 +11,7 @@
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
   * [RC setup](radio.md)
+    * [Using FS-A8S](rc_flysky_a8s.md)
   * [Flight modes](modes.md)
   * [Power setup](power.md)
   * [Failsafe configuration](failsafe.md)
