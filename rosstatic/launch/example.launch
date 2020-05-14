@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="rosstatic" name="rosstatic" type="main.py" clear_params="true" output="screen">
+        <param name="index" value="$(find aruco_pose)/www/index.html"/>
+    </node>
+</launch>

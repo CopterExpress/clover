@@ -82,4 +82,9 @@
 
     <!-- Shell access through ROS service -->
     <node name="shell" pkg="clover" type="shell" output="screen" if="$(arg shell)"/>
+
+    <!-- Update static directory -->
+    <node pkg="rosstatic" name="rosstatic" type="main.py" clear_params="true">
+        <param name="index" value="$(find clover)/www/index.html"/>
+    </node>
 </launch>
