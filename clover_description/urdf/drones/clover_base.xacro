@@ -56,6 +56,25 @@
     >
   </xacro:gps_plugin_macro>
 
+  <!-- Instantiate magnetometer plugin. -->
+  <xacro:magnetometer_plugin_macro
+    namespace="${namespace}"
+    pub_rate="20"
+    noise_density="0.0004"
+    random_walk="0.0000064"
+    bias_correlation_time="600"
+    mag_topic="/mag"
+    >
+  </xacro:magnetometer_plugin_macro>
+
+  <!-- Instantiate barometer plugin. -->
+  <xacro:barometer_plugin_macro
+    namespace="${namespace}"
+    pub_rate="10"
+    baro_topic="/baro"
+    >
+  </xacro:barometer_plugin_macro>
+
   <xacro:if value="$(arg enable_mavlink_interface)">
   <!-- Instantiate mavlink telemetry interface. -->
   <xacro:mavlink_interface_macro
