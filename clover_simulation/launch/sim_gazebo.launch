@@ -1,5 +1,15 @@
 <launch>
     <!-- FIXME: This .launch file will not work as of right now without a PX4 binary somewhere. -->
+    <arg name="px4_source_path" default="/home/clever/Firmware"/>
+    <arg name="est" default="lpe"/>
+    <arg name="vehicle" default="iris"/>
+    <!-- PX4 instance -->
+    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
+        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
+        <arg name="est" value="$(arg est)"/>
+        <arg name="ID" value="0"/>
+        <arg name="interactive" value="true"/>
+    </include>
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="true"/>

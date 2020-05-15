@@ -1,0 +1,20 @@
+<launch>
+    <!-- Path to PX4 source tree -->
+    <arg name="px4_source_path" default="/home/clever/Firmware"/>
+    <!-- The following parameters mimic px4's own launch file-->
+    <!-- Default estimator-->
+    <arg name="est" default="ekf2"/>
+    <arg name="vehicle" default="iris"/>
+    <arg name="ID" default="0"/>
+    <arg name="interactive" value="true"/>
+
+    <!-- PX4 instance -->
+    <node name="sitl_$(arg ID)" pkg="clover_simulation" type="run_px4.py" required="true" clear_params="true">
+        <env name="PX4_SIM_MODEL" value="$(arg vehicle)"/>
+        <env name="PX4_ESTIMATOR" value="$(arg est)"/>
+        <param name="px4_source_path" value="$(arg px4_source_path)"/>
+        <param name="interactive" value="$(arg interactive)"/>
+        <param name="est" value="$(arg est)"/>
+        <param name="ID" value="$(arg ID)"/>
+    </node>
+</launch>
