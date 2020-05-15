@@ -14,7 +14,8 @@ rospy.init_node('rosstatic')
 rospack = rospkg.RosPack()
 
 www = rospkg.get_ros_home() + '/www'
-index_file = rospy.get_param('~index', None)
+index_file = rospy.get_param('~index_file', None)
+default_package = rospy.get_param('~default_package', None)
 
 shutil.rmtree(www, ignore_errors=True)  # reset www directory content
 os.mkdir(www)
@@ -30,7 +31,10 @@ for name in packages:
         os.symlink(path + '/www', www + '/' + name)
         index += '<li><a href="{name}/">{name}</a></li>'.format(name=name)
 
-if index_file is not None:
+if default_package is not None:
+    redirect_html = '<meta http-equiv=refresh content="0; url={name}">'.format(name=default_package)
+    open(www + '/index.html', 'w').write(redirect_html)
+elif index_file is not None:
     rospy.loginfo('symlinking index file')
     os.symlink(index_file, www + '/index.html')
 else:
