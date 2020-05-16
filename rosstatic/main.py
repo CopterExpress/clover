@@ -3,7 +3,6 @@
 # TODO: add custom header, footer
 # TODO: symlinks or copy param
 
-import subprocess
 import os
 import shutil
 import rospy
