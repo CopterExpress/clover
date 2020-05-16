@@ -85,6 +85,6 @@
 
     <!-- Update static directory -->
     <node pkg="rosstatic" name="rosstatic" type="main.py" clear_params="true">
-        <param name="index" value="$(find clover)/www/index.html"/>
+        <param name="default_package" value="clover"/>
     </node>
 </launch>
