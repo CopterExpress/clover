@@ -5,6 +5,7 @@
 * [Безопасность](safety.md)
 * Сборка
   * [Клевер 4](assemble_4.md)
+    * [Промежуточная версия](assemble_4_intermediate.md)
   * [Клевер 3](assemble_3.md)
   * [Клевер 2](assemble_2.md)
 * Настройка
