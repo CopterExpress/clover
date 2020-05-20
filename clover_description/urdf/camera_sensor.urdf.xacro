@@ -12,7 +12,7 @@
             <height>${height}</height>
           </image>
           <clip>
-            <near>0.01</near>
+            <near>0.02</near>
             <far>1000</far>
           </clip>
           <distortion>
