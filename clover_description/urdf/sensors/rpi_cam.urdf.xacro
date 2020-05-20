@@ -3,7 +3,7 @@
   <xacro:include filename="$(find clover_description)/urdf/constants.urdf.xacro"/>
   <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
 
-  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0">
+  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 width:=320 height:=240 rate:=40">
     <joint name="${name}_joint" type="fixed">
       <origin xyz="${x} ${y} ${z}"
               rpy="${roll} ${pitch} ${yaw}"/>
@@ -15,13 +15,13 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.01 0.01 0.01"/>
+          <box size="0.005 0.005 0.005"/>
         </geometry>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.01 0.01 0.01"/>
+          <box size="0.005 0.005 0.005"/>
         </geometry>
       </collision>
       <inertial>
@@ -34,7 +34,7 @@
       <disableFixedJointLumping>true</disableFixedJointLumping>
       <preserveFixedJoint>true</preserveFixedJoint>
     </gazebo>
-    <camera_sensor name="${name}" width="320" height="240" rate="40" horizontal_fov="${120*M_PI/180}"/>
+    <camera_sensor name="${name}" width="${width}" height="${height}" rate="${rate}" horizontal_fov="${120*M_PI/180}"/>
   </xacro:macro>
 
   <!-- <rpi_cam name="main_camera" parent="base_link"/> -->
