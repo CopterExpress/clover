@@ -85,7 +85,6 @@ cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
 my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro melodic --os=debian:buster \
   --skip-keys=gazebo_ros
-resolve_rosdep $(pwd)
 my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/melodic/setup.bash
