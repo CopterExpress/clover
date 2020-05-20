@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 
-
-
 <robot name="clover" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Properties that can be assigned at build time as arguments.
   Is there a reason not to make all properties arguments?
