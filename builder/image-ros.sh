@@ -105,7 +105,7 @@ gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Installing additional ROS packages"
-apt-get install -y --no-install-recommends \
+my_travis_retry apt-get install -y --no-install-recommends \
     ros-melodic-dynamic-reconfigure \
     ros-melodic-compressed-image-transport \
     ros-melodic-rosbridge-suite \

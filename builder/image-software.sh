@@ -76,8 +76,9 @@ echo_stamp "Update apt cache"
 apt-get update
 # && apt upgrade -y
 
+# Let's retry fetching those packages several times, just in case
 echo_stamp "Software installing"
-apt-get install --no-install-recommends -y \
+my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
 ipython \
@@ -111,9 +112,7 @@ python-dev \
 python3-dev \
 python-systemd \
 mjpg-streamer \
-python3-opencv \
-&& echo_stamp "Everything was installed!" "SUCCESS" \
-|| (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
+python3-opencv
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
