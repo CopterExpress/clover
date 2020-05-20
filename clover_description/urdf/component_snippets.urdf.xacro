@@ -5,10 +5,13 @@
   Copyright 2015 Mina Kamel, ASL, ETH Zurich, Switzerland
   Copyright 2015 Janosch Nikolic, ASL, ETH Zurich, Switzerland
   Copyright 2015 Markus Achtelik, ASL, ETH Zurich, Switzerland
+
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
+
   http://www.apache.org/licenses/LICENSE-2.0
+
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -285,198 +288,6 @@
     </gazebo>
   </xacro:macro>
 
-  <!-- Macro to add the mavlink interface for a fixed-wing model. -->
-  <xacro:macro name="mavlink_interface_macro_fw" params="namespace imu_sub_topic gps_sub_topic mag_sub_topic baro_sub_topic mavlink_addr mavlink_udp_port mavlink_tcp_port serial_enabled serial_device baudrate qgc_addr qgc_udp_port sdk_addr sdk_udp_port hil_mode hil_state_level vehicle_is_tailsitter send_vision_estimation send_odometry enable_lockstep use_tcp">
-    <gazebo>
-      <plugin name="mavlink_interface" filename="libgazebo_mavlink_interface.so">
-        <robotNamespace>${namespace}</robotNamespace>
-        <imuSubTopic>${imu_sub_topic}</imuSubTopic>
-        <gpsSubTopic>${gps_sub_topic}</gpsSubTopic>
-        <magSubTopic>${mag_sub_topic}</magSubTopic>
-        <baroSubTopic>${baro_sub_topic}</baroSubTopic>
-        <mavlink_addr>$(arg mavlink_addr)</mavlink_addr>
-        <mavlink_udp_port>$(arg mavlink_udp_port)</mavlink_udp_port>
-        <mavlink_tcp_port>$(arg mavlink_tcp_port)</mavlink_tcp_port>
-        <serialEnabled>$(arg serial_enabled)</serialEnabled>
-        <serialDevice>$(arg serial_device)</serialDevice>
-        <baudRate>$(arg baudrate)</baudRate>
-        <qgc_addr>$(arg qgc_addr)</qgc_addr>
-        <qgc_udp_port>$(arg qgc_udp_port)</qgc_udp_port>
-        <sdk_addr>$(arg sdk_addr)</sdk_addr>
-        <sdk_udp_port>$(arg sdk_udp_port)</sdk_udp_port>
-        <hil_mode>$(arg hil_mode)</hil_mode>
-        <hil_state_level>$(arg hil_state_level)</hil_state_level>
-        <vehicle_is_tailsitter>$(arg vehicle_is_tailsitter)</vehicle_is_tailsitter>
-        <send_vision_estimation>$(arg send_vision_estimation)</send_vision_estimation>
-        <send_odometry>$(arg send_odometry)</send_odometry>
-        <enable_lockstep>$(arg enable_lockstep)</enable_lockstep>
-        <use_tcp>$(arg use_tcp)</use_tcp>
-        <motorSpeedCommandPubTopic>/gazebo/command/motor_speed</motorSpeedCommandPubTopic>
-        <control_channels>
-          <channel name="rudder">
-            <input_index>2</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>rudder_joint</joint_name>
-          </channel>
-          <channel name="rotor_4">
-            <input_index>4</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>3500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_4_joint</joint_name>
-          </channel>
-          <channel name="left_aileron">
-            <input_index>5</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>left_elevon_joint</joint_name>
-          </channel>
-          <channel name="right_aileron">
-            <input_index>6</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>right_elevon_joint</joint_name>
-          </channel>
-          <channel name="elevator">
-            <input_index>7</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>elevator_joint</joint_name>
-          </channel>
-        </control_channels>
-      </plugin>
-    </gazebo>
-  </xacro:macro>
-
-  <!-- Macro to add the mavlink interface for a fixed-wing model. -->
-  <xacro:macro name="mavlink_interface_macro_vtol" params="namespace imu_sub_topic gps_sub_topic mag_sub_topic baro_sub_topic mavlink_addr mavlink_udp_port mavlink_tcp_port serial_enabled serial_device baudrate qgc_addr qgc_udp_port sdk_addr sdk_udp_port hil_mode hil_state_level vehicle_is_tailsitter send_vision_estimation send_odometry enable_lockstep use_tcp">
-    <gazebo>
-      <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
-        <robotNamespace>${namespace}</robotNamespace>
-        <imuSubTopic>${imu_sub_topic}</imuSubTopic>
-        <gpsSubTopic>${gps_sub_topic}</gpsSubTopic>
-        <magSubTopic>${mag_sub_topic}</magSubTopic>
-        <baroSubTopic>${baro_sub_topic}</baroSubTopic>
-        <mavlink_addr>$(arg mavlink_addr)</mavlink_addr>
-        <mavlink_udp_port>$(arg mavlink_udp_port)</mavlink_udp_port>
-        <mavlink_tcp_port>$(arg mavlink_tcp_port)</mavlink_tcp_port>
-        <serialEnabled>$(arg serial_enabled)</serialEnabled>
-        <serialDevice>$(arg serial_device)</serialDevice>
-        <baudRate>$(arg baudrate)</baudRate>
-        <qgc_addr>$(arg qgc_addr)</qgc_addr>
-        <qgc_udp_port>$(arg qgc_udp_port)</qgc_udp_port>
-        <sdk_addr>$(arg sdk_addr)</sdk_addr>
-        <sdk_udp_port>$(arg sdk_udp_port)</sdk_udp_port>
-        <hil_mode>$(arg hil_mode)</hil_mode>
-        <hil_state_level>$(arg hil_state_level)</hil_state_level>
-        <vehicle_is_tailsitter>$(arg vehicle_is_tailsitter)</vehicle_is_tailsitter>
-        <send_vision_estimation>$(arg send_vision_estimation)</send_vision_estimation>
-        <send_odometry>$(arg send_odometry)</send_odometry>
-        <enable_lockstep>$(arg enable_lockstep)</enable_lockstep>
-        <use_tcp>$(arg use_tcp)</use_tcp>
-        <motorSpeedCommandPubTopic>/gazebo/command/motor_speed</motorSpeedCommandPubTopic>
-        <control_channels>
-          <channel name="rotor0">
-            <input_index>0</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_0_joint</joint_name>
-          </channel>
-          <channel name="rotor1">
-            <input_index>1</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_1_joint</joint_name>
-          </channel>
-          <channel name="rotor2">
-            <input_index>2</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_2_joint</joint_name>
-          </channel>
-          <channel name="rotor3">
-            <input_index>3</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_3_joint</joint_name>
-          </channel>
-          <channel name="rotor4">
-            <input_index>4</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>5500</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>velocity</joint_control_type>
-            <joint_name>rotor_puller_joint</joint_name>
-          </channel>
-          <channel name="left_elevon">
-            <input_index>5</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>left_elevon_joint</joint_name>
-          </channel>
-          <channel name="right_elevon">
-            <input_index>6</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>right_elevon_joint</joint_name>
-          </channel>
-          <channel name="elevator">
-            <input_index>7</input_index>
-            <input_offset>0</input_offset>
-            <input_scaling>1</input_scaling>
-            <zero_position_disarmed>0</zero_position_disarmed>
-            <zero_position_armed>0</zero_position_armed>
-            <joint_control_type>position_kinematic</joint_control_type>
-            <joint_name>elevator_joint</joint_name>
-          </channel>
-        </control_channels>
-        <left_elevon_joint>
-          left_elevon_joint
-        </left_elevon_joint>
-        <right_elevon_joint>
-          right_elevon_joint
-        </right_elevon_joint>
-        <elevator_joint>
-          elevator_joint
-        </elevator_joint>
-      </plugin>
-    </gazebo>
-  </xacro:macro>
-
   <!-- Macro to add an IMU. -->
   <xacro:macro name="imu_plugin_macro"
     params="namespace imu_suffix parent_link imu_topic
@@ -590,12 +401,12 @@
         <linkName>base_link</linkName>
         <robotNamespace>${namespace}</robotNamespace>
         <xyzOffset>${xyz_offset}</xyzOffset> <!-- [m] [m] [m] -->
-        <windDirectionMean>${wind_direction}</windDirectionMean>
-        <windVelocityMean>${wind_force_mean}</windVelocityMean> <!-- [N] -->
+        <windDirection>${wind_direction}</windDirection>
+        <windForceMean>${wind_force_mean}</windForceMean> <!-- [N] -->
         <windGustDirection>${wind_gust_direction}</windGustDirection>
         <windGustDuration>${wind_gust_duration}</windGustDuration> <!-- [s] -->
         <windGustStart>${wind_gust_start}</windGustStart> <!-- [s] -->
-        <windGustVelocityMean>${wind_gust_force_mean}</windGustVelocityMean> <!-- [N] -->
+        <windGustForceMean>${wind_gust_force_mean}</windGustForceMean> <!-- [N] -->
       </plugin>
     </gazebo>
   </xacro:macro>
