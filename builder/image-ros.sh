@@ -74,18 +74,6 @@ my_travis_retry rosdep update
 echo_stamp "Populate rosdep for ROS user"
 my_travis_retry sudo -u pi rosdep update
 
-resolve_rosdep() {
-  # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
-  CATKIN_PATH=$1
-  ROS_DISTRO='melodic'
-  OS_DISTRO='debian'
-  OS_VERSION='buster'
-
-  echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
-  cd ${CATKIN_PATH}
-  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=${OS_DISTRO}:${OS_VERSION}
-}
-
 export ROS_IP='127.0.0.1' # needed for running tests
 
 echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
@@ -94,6 +82,9 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
+# Don't try to install gazebo_ros
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro melodic --os=debian:buster \
+  --skip-keys=gazebo_ros
 resolve_rosdep $(pwd)
 my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
