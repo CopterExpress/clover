@@ -84,7 +84,7 @@
     <node name="shell" pkg="clover" type="shell" output="screen" if="$(arg shell)"/>
 
     <!-- Update static directory -->
-    <node pkg="rosstatic" name="rosstatic" type="main.py" clear_params="true">
+    <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">
         <param name="default_package" value="clover"/>
     </node>
 </launch>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(rosstatic)
+project(roswww_static)
 
 find_package(catkin REQUIRED)
 

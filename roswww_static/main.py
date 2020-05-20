@@ -8,7 +8,7 @@ import shutil
 import rospy
 import rospkg
 
-rospy.init_node('rosstatic')
+rospy.init_node('roswww_static')
 
 rospack = rospkg.RosPack()
 
@@ -31,7 +31,7 @@ for name in packages:
         index += '<li><a href="{name}/">{name}</a></li>'.format(name=name)
 
 if default_package is not None:
-    redirect_html = '<meta http-equiv=refresh content="0; url={name}">'.format(name=default_package)
+    redirect_html = '<meta http-equiv=refresh content="0; url={name}/">'.format(name=default_package)
     open(www + '/index.html', 'w').write(redirect_html)
 elif index_file is not None:
     rospy.loginfo('symlinking index file')
