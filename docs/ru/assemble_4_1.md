@@ -4,7 +4,7 @@
 
 **Особенность сборки.** Сборка рамы, крепление моторов и PDB аналогичны сборке из старой версии. Отличается крепление Raspberry Pi к центральной деке. Направление вращения моторов во время сборки проверить нельзя из-за особенностей радиоприёмника, однако можно однозначно запаять провода моторов к регуляторам. Остальная сборка аналогична сборке нового беспаечного набора.
 
-<img src="../assets/assembling_clover4_im/assembly.jpg" width=900 class="zoom center">
+<img src="../assets/assembling_clover4_1/assembly.jpg" width=900 class="zoom center">
 
 ## Сборка основы для рамы
 
@@ -60,17 +60,17 @@
 
 2. Зафиксируйте лучи на раме, используя 8 винтов М3х8 и 8 стальных гаек.
 
-    <img src="../assets/assembling_clover4_im/motor_4.png" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/motor_4.png" width=300 class="zoom border">
 
 ## Монтаж PDB
 
 1. Установите 4 стойки "папа-мама" 6 мм на центральную деку винтами М3х6.
 
-    <img src="../assets/assembling_clover4_im/pdb_1.png" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/pdb_1.png" width=300 class="zoom border">
 
 2. Установите COEX PDB на стойки. Припаяйте к площадкам GND и 5V провод для питания Raspberry Pi. Его можно сделать из 3 pin провода для телеметрии, который есть в комплекте.
 
-    <img src="../assets/assembling_clover4_im/pdb.jpg" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/pdb.jpg" width=300 class="zoom border center">
 
 3. Разъём для подключения аккумулятора должен быть направлен к задней части рамы.
 
@@ -80,7 +80,7 @@
 2. Припаяйте фазные провода моторов к регуляторам, чтобы провода не пересекались и проходили к контактам регулятора по кратчайшему расстоянию.
 3. Припаяйте силовые провода регуляторов к контактным площадкам платы (**<font color=red>красный</font>** к **«+»**, **черный** к **«-»**).
 
-    <img src="../assets/assembling_clover4_im/esc_bec.jpg" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/esc_bec.jpg" width=300 class="zoom border">
 
 4. С помощью мультиметра проверьте, что в цепи нет короткого замыкания.
 
@@ -88,88 +88,88 @@
 
 1. Установите 4 стойки "папа-мама" 6 мм на PDB, затем установите поликарбонатную пластину, затем закрутите её нейлоновыми гайками, затем установите резиновые стойки 6мм.
 
-    <img src="../assets/assembling_clover4_im/fcu_1.jpg" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/fcu_1.jpg" width=300 class="zoom border center">
 
 2. Закрепите *COEX Pix* на резиновых стойках с помощью нейлоновых гаек.
 
-    <img src="../assets/assembling_clover4_im/coex_pix.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/coex_pix.png" width=300 class="zoom border center">
 
 ## Подключение полетного контроллера
 
 1. Подключите регуляторы оборотов к полетному контроллеру в соответствии со схемой.
 
-    <img src="../assets/assembling_clover4_im/fc_connection_1.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/fc_connection_1.png" width=300 class="zoom border center">
 
 2. Подключите кабель питания к плате распределения питания и соответствующему разъему на полетном контроллере.
 
-    <img src="../assets/assembling_clover4_im/fc_connection_2.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/fc_connection_2.png" width=300 class="zoom border center">
 
 Установите алюминиевые стойки 40мм на болты М3х12.
 
 <div class="image-group">
-    <img src="../assets/assembling_clover4_im/fc_connection_3.png" width=300 class="zoom border">
-    <img src="../assets/assembling_clover4_im/fc_connection_4.png" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/fc_connection_3.png" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/fc_connection_4.png" width=300 class="zoom border">
 </div>
 
 ## Установка Raspberry Pi, камеры, дальномера и радиоприёмника
 
 1. На нижнюю грань основной деки установите 4 стойки 15мм, закрепите их с помощью болтов М3х8.
 
-    <img src="../assets/assembling_clover4_im/raspberry_0.jpg" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/raspberry_0.jpg" width=300 class="zoom border">
 
 2. На монтажную деку установите 4 стойки 6мм и 4 стойки 30мм, закрепите их с помощью болтов М3х6 и М3х12.
 
-    <img src="../assets/assembling_clover4_im/raspberry_1.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_1.png" width=300 class="zoom border center">
 
 3. Установите собранную монтажную деку на основную и закрепите с помощью болтов М3х8.
 
-    <img src="../assets/assembling_clover4_im/raspberry_2.jpg" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_2.jpg" width=300 class="zoom border center">
 
 4. Установите плату *Raspberry Pi* и зафиксируйте с помощью нейлоновых гаек.
 
-    <img src="../assets/assembling_clover4_im/raspberry_3.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_3.png" width=300 class="zoom border center">
 
 5. На деку захвата установите дальномер с помощью самоконтрящихся гаек и болтов М3х8, и приклейте радиоприемник `FS-A8S` с помощью двустороннего скотча. Подключение приёмника к полётному контроллеру и его сопряжение с пультом описано статье [Работа с приёмником Flysky FS-A8S](rc_flysky_a8s.md).
 
-    <img src="../assets/assembling_clover4_im/raspberry_5.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_5.png" width=300 class="zoom border center">
 
 6. Установите 4 стойки 20мм и закрепите их с помощью болтов М3х8.
 
-    <img src="../assets/assembling_clover4_im/raspberry_6.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_6.png" width=300 class="zoom border center">
 
 7. На малую монтажную деку установите камеру и зафиксируйте ее с помощью 2ух маленьких саморезов, в верхнем левом и нижнем правом углах.
 
-    <img src="../assets/assembling_clover4_im/raspberry_7.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_7.png" width=300 class="zoom border center">
 
 8. Установите модуль камеры на деку захвата и закрепите с помощью болтов М3х8.
 
-    <img src="../assets/assembling_clover4_im/raspberry_8.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_8.png" width=300 class="zoom border center">
 
 9. Установите собранную деку захвата и зафиксируйте с помощью болтов М3х8.
 
-    <img src="../assets/assembling_clover4_im/raspberry_9.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_9.png" width=300 class="zoom border center">
 
 10. Подключите к *Raspberry Pi* дальномер и кабель питания.
 
-    <img src="../assets/assembling_clover4_im/raspberry_10.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_10.png" width=300 class="zoom border center">
 
 11. Подключите шлейф камеры к *Raspberry Pi*.
 
-    <img src="../assets/assembling_clover4_im/raspberry_11.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/raspberry_11.png" width=300 class="zoom border center">
 
 ## Установка LED ленты
 
 1. Соберите обруч для светодиодной ленты, объединив замок на концах.
 
-    <img src="../assets/assembling_clover4_im/led_1.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/led_1.png" width=300 class="zoom border center">
 
 2. Наклейте светодиодную ленту на обруч, для большей крепкости притяните ее с помощью 3-4 хомутов. Припаяйте к ленте 2 силовых провода и один сигнальный провод для подключения к Raspberry Pi.
 
-    <img src="../assets/assembling_clover4_im/led_2.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/led_2.png" width=300 class="zoom border center">
 
 3. Установите обруч на раму. Припаяйте питание светодиодной ленты (красный, черный кабели) к свободным площадкам 5V и GND соответственно на COEX PDB. Подключите сигнальный выход светодиодной ленты(белый кабель) в *Raspberry Ri*, к пину *GPIO 21*.
 
-    <img src="../assets/assembling_clover4_im/led_5.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/led_5.png" width=300 class="zoom border center">
 
 ## Монтаж ножек
 
@@ -196,7 +196,7 @@
 
 3. Установите монтажную деку и закрепите ее болтами М3х8.
 
-    <img src="../assets/assembling_clover4_im/guard_3.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clover4_1/guard_3.png" width=300 class="zoom border center">
 
 4. Установите защиту на коптер, с помощью 4 винтов М3х10 и стальных гаек.
 
@@ -206,7 +206,7 @@
 
 1. Подключите полётный контроллер по micro USB проводу к Raspberry Pi. Закрепите улитку с проводом таким образом, чтобы она находилась ниже уровня установки пропеллеров, чтобы пропеллеры не повредили провод во время полёта. Для крепления улитки можно воспользоваться стяжкой.
 
-    <img src="../assets/assembling_clover4_im/micro_USB.jpg" width=300 class="zoom border">
+    <img src="../assets/assembling_clover4_1/micro_USB.jpg" width=300 class="zoom border">
 
 2. Произведите настройку компонентов квадрокоптера, используя раздел ["Настройка"](setup.md).
 
@@ -232,7 +232,7 @@
 * Все провода, идущие от PDB и полетного контроллера, должны быть зафиксированы липучкой или обмотаны вокруг алюминиевых стоек.
 * Пропеллеры установлены правильной стороной и соответствуют направлению вращения моторов.
 
-<img src="../assets/assembling_clover4_im/assembly.jpg" width=300 class="zoom border center">
+<img src="../assets/assembling_clover4_1/assembly.jpg" width=300 class="zoom border center">
 
 Обязательно установите и настройте индикатор напряжения перед полетом, чтобы не переразрядить аккумулятор. Для настройки индикатора используйте кнопку, расположенную в его основании. Отображаемые цифры во время настройки обозначают минимально возможное напряжение в каждой [ячейке](gloss.md#ячейка--банка-акб) аккумулятора, рекомендуемое значение **3.5**.
 
