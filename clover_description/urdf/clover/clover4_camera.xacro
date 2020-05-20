@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="clover_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_base.xacro" />
+  <xacro:include filename="$(find clover_description)/urdf/sensors/rpi_cam.urdf.xacro"/>
+
+  <rpi_cam name="main_camera" parent="base_link" x="0.055" y="0.0" z="-0.03" roll="0" pitch="${M_PI / 2}" yaw="0" width="640" height="480" rate="60"/>
+
+</robot>
