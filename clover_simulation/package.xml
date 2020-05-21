@@ -18,8 +18,11 @@
 
     <buildtool_depend>catkin</buildtool_depend>
     <depend>xacro</depend>
+    <exec_depend>gazebo_ros</exec_depend>
 
     <export>
-        <gazebo_ros gazebo_media_path="${prefix}" gazebo_model_path="${prefix}/models" gazebo_resource_path="${prefix}/resources"/>
+        <gazebo_ros gazebo_media_path="${prefix}"/>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+        <gazebo_ros gazebo_resource_path="${prefix}/resources"/>
     </export>
 </package>
