@@ -12,6 +12,7 @@ rospy.loginfo('PX4 sim model: {}'.format(os.environ['PX4_SIM_MODEL']))
 rospy.loginfo('PX4 estimator: {}'.format(os.environ['PX4_ESTIMATOR']))
 
 px4_source_path = rospy.get_param('~px4_source_path', None)
+px4_data_path = rospy.get_param('~px4_data_path', os.path.join(px4_source_path, 'ROMFS', 'px4fmu_common'))
 ID = rospy.get_param('~ID', 0)
 
 if px4_source_path is None:
@@ -36,4 +37,4 @@ if px4_binary_path is None:
 
 rospy.loginfo('PX4 binary path: {}'.format(px4_binary_path))
 
-os.execv(px4_binary_path, [px4_binary_path, '-w', px4_source_path, '{}/ROMFS/px4fmu_common'.format(px4_source_path), '-s', 'etc/init.d-posix/rcS', '-i', str(ID)])
+os.execv(px4_binary_path, [px4_binary_path, '-w', px4_source_path, px4_data_path, '-s', 'etc/init.d-posix/rcS', '-i', str(ID)])
