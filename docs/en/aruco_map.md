@@ -91,13 +91,6 @@ The marker map adheres to the [ROS coordinate system convention](http://www.ros.
 
 In order to enable vision position estimation you should use the following [PX4 parameters](px4_parameters.md).
 
-If you're using **EKF2** estimator (`SYS_MC_EST_GROUP` parameter is set to `ekf2`), make sure the following is set:
-
-* `EKF2_AID_MASK` should have `vision position fusion` and `vision yaw fusion` flags set.
-* Vision angle observations noise: `EKF2_EVA_NOISE` = 0.1 rad.
-* Vision position observations noise: `EKF2_EVP_NOISE` = 0.1 m.
-* `EKF2_EV_DELAY` = 0.
-
 If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_estimator,attitude_estimator_q`):
 
 * `LPE_FUSION` should have `vision position` and `land detector` flags set. We suggest unsetting the `baro` flag for indoor flights.
@@ -107,6 +100,13 @@ If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_
 * `LPE_VIS_DELAY` = 0 sec.
 
 <!-- * Compass should not be fused: `ATT_W_MAG` = 0 -->
+
+If you're using **EKF2** estimator (`SYS_MC_EST_GROUP` parameter is set to `ekf2`), make sure the following is set:
+
+* `EKF2_AID_MASK` should have `vision position fusion` and `vision yaw fusion` flags set.
+* Vision angle observations noise: `EKF2_EVA_NOISE` = 0.1 rad.
+* Vision position observations noise: `EKF2_EVP_NOISE` = 0.1 m.
+* `EKF2_EV_DELAY` = 0.
 
 > **Hint** We recommend using **LPE** for marker-based navigation.
 
