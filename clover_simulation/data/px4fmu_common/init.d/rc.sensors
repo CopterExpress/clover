@@ -1,0 +1,118 @@
+#!/bin/sh
+#
+# Standard startup script for sensor drivers.
+#
+# NOTE: Script variables are declared/initialized/unset in the rcS script.
+#
+
+if ! ver hwcmp AEROFC_V1 OMNIBUS_F4SD
+then
+	if ! ver hwcmp BITCRAZE_CRAZYFLIE
+	then
+		# Configure all I2C buses to 100 KHz as they
+		# are all external or slow
+		fmu i2c 1 100000
+		fmu i2c 2 100000
+	fi
+
+
+	adc start
+fi
+
+###############################################################################
+#                           Begin Optional drivers                            #
+###############################################################################
+
+if [ ${VEHICLE_TYPE} = fw -o ${VEHICLE_TYPE} = vtol ]
+then
+	if param compare CBRK_AIRSPD_CHK 0
+	then
+		sdp3x_airspeed start -a
+
+		# Pixhawk 2.1 has a MS5611 on I2C which gets wrongly
+		# detected as MS5525 because the chip manufacturer was so
+		# clever to assign the same I2C address and skip a WHO_AM_I
+		# register.
+		if [ $BOARD_FMUV3 = 21 ]
+		then
+			ms5525_airspeed start -b 2
+		else
+			ms5525_airspeed start -a
+		fi
+
+		ms4525_airspeed start -a
+
+		ets_airspeed start -a
+
+	fi
+fi
+
+if param compare -s SENS_EN_BATT 1
+then
+	batt_smbus start -X
+fi
+
+# Sensors on the PWM interface bank
+if param compare -s SENS_EN_LL40LS 1
+then
+	if pwm_input start
+	then
+		ll40ls start pwm
+	fi
+fi
+
+# Lidar-Lite on I2C
+if param compare -s SENS_EN_LL40LS 2
+then
+	ll40ls start i2c -a
+fi
+
+# mappydot lidar sensor
+if param compare -s SENS_EN_MPDT 1
+then
+	mappydot start -a
+fi
+
+# mb12xx sonar sensor
+if param greater -s SENS_EN_MB12XX 0
+then
+	mb12xx start -a
+fi
+
+# pga460 sonar sensor
+if param greater -s SENS_EN_PGA460 0
+then
+	pga460 start
+fi
+
+# Lightware i2c lidar sensor
+if param greater -s SENS_EN_SF1XX 0
+then
+	sf1xx start -a
+fi
+
+# Heater driver for temperature regulated IMUs.
+if param compare -s SENS_EN_THERMAL 1
+then
+	heater start
+fi
+
+# Teraranger one tof sensor
+if param greater -s SENS_EN_TRANGER 0
+then
+	teraranger start -a
+fi
+
+# Possible pmw3901 optical flow sensor
+if param greater -s SENS_EN_PMW3901 0
+then
+	pmw3901 start
+fi
+
+###############################################################################
+#                            End Optional drivers                             #
+###############################################################################
+
+# Wait 20 ms for sensors (because we need to wait for the HRT and work queue callbacks to fire)
+usleep 20000
+sensors start
