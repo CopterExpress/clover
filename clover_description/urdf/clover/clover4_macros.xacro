@@ -74,12 +74,6 @@
           <box size="${body_width} ${body_width} ${body_height}" /> <!-- [m] [m] [m] -->
         </geometry>
       </collision>
-      <collision name="back_right_leg">
-        <origin xyz="${-body_width/5} ${-body_width/5} ${-body_height/4}" rpy="0 0 0" />
-        <geometry>
-          <box size="${body_width/10} ${body_width/10} ${body_height/2}" /> <!-- [m] [m] [m] -->
-        </geometry>
-      </collision>
     </link>
 
     <!-- This link is here for a single reason: to draw transparent parts (oh, and also to be the bane of my existence).
@@ -165,19 +159,10 @@
       <material>Polycarbonate</material>
     </gazebo>
     <gazebo reference="base_link">
-      <collision name='base_link_inertia_collision'>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0.0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <kp>10000.0</kp>
+      <kd>10.0</kd>
+      <maxVel>10.0</maxVel>
+      <minDepth>0.001</minDepth>
    </gazebo>
   </xacro:macro>
 
