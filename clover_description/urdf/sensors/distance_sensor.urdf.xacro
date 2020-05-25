@@ -15,13 +15,13 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.005 0.005 0.001"/>
+          <box size="0.001 0.005 0.005"/>
         </geometry>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <box size="0.001 0.005 0.005"/>
+          <box size="0.001 0.001 0.005"/>
         </geometry>
       </collision>
       <inertial>
@@ -49,7 +49,7 @@
             </horizontal>
           </scan>
           <range>
-            <min>${range_min}</min>
+            <min>0.03</min> <!-- Note: This is a hack, since the rangefinder is inside the drone collision box -->
             <max>${range_max}</max>
             <resolution>${resolution}</resolution>
           </range>

@@ -6,6 +6,6 @@
   <xacro:include filename="$(find clover_description)/urdf/sensors/distance_sensor.urdf.xacro"/>
 
   <xacro:rpi_cam name="main_camera" parent="base_link" x="0.055" y="0.0" z="-0.03" roll="0" pitch="${M_PI / 2}" yaw="0" width="320" height="240" rate="40"/>
-  <xacro:distance_sensor parent="base_link" x="0.0" y="0.0" z="-0.03" roll="0" pitch="${M_PI / 2}" yaw="0"/>
+  <xacro:distance_sensor parent="base_link" x="0.0" y="0.0" z="-0.04" roll="0" pitch="${M_PI / 2}" yaw="0"/>
 
 </robot>
