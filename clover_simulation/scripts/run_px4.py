@@ -19,10 +19,6 @@ if px4_source_path is None:
     rospy.logerr('px4_source_path is not set. Set it to your PX4 source checkout')
     exit(1)
 
-if not os.path.exists('{}/ROMFS'.format(px4_source_path)):
-    rospy.logerr('Could not find ROMFS in {}, set px4_source_path to your PX4 source checkout'.format(px4_source_path))
-    exit(1)
-
 rospy.loginfo('Looking for PX4 binary in {}'.format(px4_source_path))
 
 px4_binary_path = None
