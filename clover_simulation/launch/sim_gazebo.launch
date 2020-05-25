@@ -7,6 +7,7 @@
     <include file="$(find clover_simulation)/launch/px4_sitl.launch">
         <arg name="px4_source_path" value="$(arg px4_source_path)"/>
         <arg name="est" value="$(arg est)"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
         <arg name="ID" value="0"/>
         <arg name="interactive" value="true"/>
     </include>
