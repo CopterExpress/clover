@@ -68,10 +68,34 @@
            So yeah, good luck improving this.
            - sfalexrog
       -->
-      <collision>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+      <collision name="upper_body">
+        <origin xyz="0 0 ${body_height/4}" rpy="0 0 0" />
         <geometry>
-          <box size="${body_width} ${body_width} ${body_height}" /> <!-- [m] [m] [m] -->
+          <box size="${body_width} ${body_width} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="front_left_leg">
+        <origin xyz="${body_width/5} ${body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/10} ${body_width/10} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="front_right_leg">
+        <origin xyz="${body_width/5} ${-body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/10} ${body_width/10} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="back_left_leg">
+        <origin xyz="${-body_width/5} ${body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/10} ${body_width/10} ${body_height/2}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <collision name="back_right_leg">
+        <origin xyz="${-body_width/5} ${-body_width/5} ${-body_height/4}" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width/10} ${body_width/10} ${body_height/2}" /> <!-- [m] [m] [m] -->
         </geometry>
       </collision>
     </link>
