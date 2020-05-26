@@ -64,11 +64,11 @@ private:
 		tf_buffer_.reset(new tf2_ros::Buffer());
 		tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_, nh));
 
-		nh.param<std::string>("mavros/local_position/tf/frame_id", local_frame_id_, "map");
-		nh.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "base_link");
-		nh_priv.param("roi", roi_px_, 128);
-		nh_priv.param("roi_rad", roi_rad_, 0.0);
-		nh_priv.param("calc_flow_gyro", calc_flow_gyro_, false);
+		local_frame_id_ = nh.param<std::string>("mavros/local_position/tf/frame_id", "map");
+		fcu_frame_id_ = nh.param<std::string>("mavros/local_position/tf/child_frame_id", "base_link");
+		roi_px_ = nh_priv.param("roi", 128);
+		roi_rad_ = nh_priv.param("roi_rad", 0.0);
+		calc_flow_gyro_ = nh_priv.param("calc_flow_gyro", false);
 
 		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
