@@ -89,4 +89,5 @@
   * [Copter Hack 2019](copterhack2019.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
+  * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
