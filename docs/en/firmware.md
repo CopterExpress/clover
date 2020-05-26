@@ -6,7 +6,7 @@ Pixhawk or Pixracer firmware may be flashed using QGroundControl or command line
 Modified firmware for Clover
 ---
 
-It is advisable to use a specialized build of PX4 with the necessary fixes and better defaults for the Clover drone. Use the latest stable release in our [GitHub repository](https://github.com/CopterExpress/Firmware/releases) with the word `clever`, for example, `v1.8.2-clever.5`.
+It is advisable to use a specialized build of PX4 with the necessary fixes and better defaults for the Clover drone. Use the latest stable release in our [GitHub repository](https://github.com/CopterExpress/Firmware/releases) with the word `clover`, for example, `v1.8.2-clover.5`.
 
 <div id="release" style="display:none">
 <p>Latest stable release: <strong><a id="download-latest-release"></a></strong>.</p>
@@ -25,8 +25,8 @@ It is advisable to use a specialized build of PX4 with the necessary fixes and b
         // look for stable release
         let stable;
         for (let release of data) {
-            let clever = release.name.indexOf('clever') != -1;
-            if (clever && !release.prerelease && !release.draft) {
+            let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
+            if (clover && !release.prerelease && !release.draft) {
                 stable = release;
                 break;
             }

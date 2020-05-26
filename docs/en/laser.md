@@ -1,6 +1,6 @@
 # Working with a laser rangefinder
 
-> **Note** Documentation for the [image](image.md), versions, starting with **0.18**. For older versions refer to [documentation for version **0.17**](https://github.com/CopterExpress/clover/blob/v0.17/docs/en/laser.md).
+> **Note** Documentation for the [image](image.md), versions, starting with **0.20**. For older versions refer to [documentation for version **0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/laser.md).
 
 ## VL53L1X Rangefinder
 
@@ -10,18 +10,7 @@ The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS 
 
 ### Connecting to Raspberry Pi
 
-> **Note** You need to flash a <a id="download-firmware" href="https://github.com/CopterExpress/Firmware/releases">custom PX4 firmware</a> on your flight controller for the rangefinder to work correctly. See more about firmware in the [corresponding article](firmware.md).
-
-<script type="text/javascript">
-    fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(res => res.json()).then(function(data) {
-        for (let release of data) {
-            if (!release.prerelease && !release.draft && release.tag_name.includes('-clever.')) {
-                document.querySelector('#download-firmware').href = release.html_url;
-                return;
-            }
-        }
-    });
-</script>
+> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
 
 Connect the rangefinder to the 3V, GND, SCL and SDA pins via the I²C interface:
 
@@ -33,7 +22,7 @@ If the pin marked GND is occupied, you can use any other ground pin (look at the
 
 ### Enabling the rangefinder
 
-[Connect via SSH](ssh.md) and edit file `~/catkin_ws/src/clever/clever/launch/clever.launch` so that the VL53L1X driver is enabled:
+[Connect via SSH](ssh.md) and edit file `~/catkin_ws/src/clover/clover/launch/clover.launch` so that the VL53L1X driver is enabled:
 
 ```xml
 <arg name="rangefinder_vl53l1x" default="true"/>

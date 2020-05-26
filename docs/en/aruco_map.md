@@ -10,13 +10,13 @@
 
 ## Configuration
 
-Set the `aruco` argument in `~/catkin_ws/src/clever/clever/launch/clever.launch` to `true`:
+Set the `aruco` argument in `~/catkin_ws/src/clover/clover/launch/clover.launch` to `true`:
 
 ```xml
 <arg name="aruco" default="true"/>
 ```
 
-In order to enable map detection set `aruco_map` and `aruco_detect` arguments to `true` in `~/catkin_ws/src/clever/clever/launch/aruco.launch`:
+In order to enable map detection set `aruco_map` and `aruco_detect` arguments to `true` in `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
 
 ```xml
 <arg name="aruco_detect" default="true"/>
@@ -45,12 +45,12 @@ Map path is defined in the `map` parameter:
 <param name="map" value="$(find aruco_pose)/map/map.txt"/>
 ```
 
-Some map examples are provided in [`~/catkin_ws/src/clever/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
+Some map examples are provided in [`~/catkin_ws/src/clover/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
 
 Grid maps may be generated using the `genmap.py` script:
 
 ```bash
-rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
 ```
 
 `length` is the size of each marker, `x` is the marker count along the *x* axis, `y` is the marker count along the *y* axis, `dist_x` is the distance between the centers of adjacent markers along the *x* axis, `dist_y` is the distance between the centers of the *y* axis, `first` is the ID of the first marker (top left marker, unless `--bottom-left` is specified), `test_map.txt` is the name of the generated map file. The optional `--bottom-left` parameter changes the numbering of markers, making the bottom left marker the first one.
@@ -58,7 +58,7 @@ rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/cle
 Usage example:
 
 ```bash
-rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
 ```
 
 Additional information on the utility can be obtained using `-h` key: `rosrun aruco_pose genmap.py -h`.
@@ -91,13 +91,6 @@ The marker map adheres to the [ROS coordinate system convention](http://www.ros.
 
 In order to enable vision position estimation you should use the following [PX4 parameters](px4_parameters.md).
 
-If you're using **EKF2** estimator (`SYS_MC_EST_GROUP` parameter is set to `ekf2`), make sure the following is set:
-
-* `EKF2_AID_MASK` should have `vision position fusion` and `vision yaw fusion` flags set.
-* Vision angle observations noise: `EKF2_EVA_NOISE` = 0.1 rad.
-* Vision position observations noise: `EKF2_EVP_NOISE` = 0.1 m.
-* `EKF2_EV_DELAY` = 0.
-
 If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_estimator,attitude_estimator_q`):
 
 * `LPE_FUSION` should have `vision position` and `land detector` flags set. We suggest unsetting the `baro` flag for indoor flights.
@@ -107,6 +100,13 @@ If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_
 * `LPE_VIS_DELAY` = 0 sec.
 
 <!-- * Compass should not be fused: `ATT_W_MAG` = 0 -->
+
+If you're using **EKF2** estimator (`SYS_MC_EST_GROUP` parameter is set to `ekf2`), make sure the following is set:
+
+* `EKF2_AID_MASK` should have `vision position fusion` and `vision yaw fusion` flags set.
+* Vision angle observations noise: `EKF2_EVA_NOISE` = 0.1 rad.
+* Vision position observations noise: `EKF2_EVP_NOISE` = 0.1 m.
+* `EKF2_EV_DELAY` = 0.
 
 > **Hint** We recommend using **LPE** for marker-based navigation.
 
@@ -152,7 +152,7 @@ If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` paramete
 
 In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_setup.md).
 
-You should also set the `known_tilt` parameter to `map_flipped` in both `aruco_detect` and `aruco_map` sections of `~/catkin_ws/src/clever/clever/launch/aruco.launch`:
+You should also set the `known_tilt` parameter to `map_flipped` in both `aruco_detect` and `aruco_map` sections of `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
 
 ```xml
 <param name="known_tilt" value="map_flipped"/>

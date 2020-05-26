@@ -21,19 +21,19 @@ The obtained folder `ros_lib` is to be copied to `<sketches folder>/libraries` o
 To run the program on Arduino once, you can use command:
 
 ```(bash)
-roslaunch clever arduino.launch
+roslaunch clover arduino.launch
 ```
 
-To start the link with Arduino at the startup automatically, set argument `arudino` in the Clover launch file (`~/catkin_ws/src/clever/clever/launch/clever.launch`):
+To start the link with Arduino at the startup automatically, set argument `arudino` in the Clover launch file (`~/catkin_ws/src/clover/clover/launch/clover.launch`):
 
 ```xml
 <arg name="arduino" default="true"/>
 ```
 
-After the launch file is edited, restart package `clever`:
+After the launch file is edited, restart the `clover` service:
 
 ```(bash)
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 ## Delays
@@ -70,10 +70,10 @@ An example of a program that controls the copter by position using the `navigate
 #include <ros.h>
 
 // Connecting Clover and MAVROS package message header files
-#include <clever/Navigate.h>
+#include <clover/Navigate.h>
 #include <mavros_msgs/SetMode.h>
 
-using namespace clever;
+using namespace clover;
 using namespace mavros_msgs;
 
 ros::NodeHandle nh;
@@ -174,7 +174,7 @@ With Arduino, you can use the [`get_telemetry` service](simple_offboard.md). To 
 
 // ...
 
-#include <clever/GetTelemetry.h>
+#include <clover/GetTelemetry.h>
 
 // ...
 

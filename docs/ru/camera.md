@@ -1,8 +1,10 @@
 # Работа с камерой
 
+> **Note** В версии образа **0.20** пакет и сервис `clever` был переименован в `clover`. Для более ранних версий см. документацию для версии [**0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/ru/camera.md).
+
 <!-- TODO: физическое подключение -->
 
-Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
 ```xml
 <arg name="main_camera" default="true"/>
@@ -10,10 +12,10 @@
 
 Также нужно убедиться, что камера [сфокусирована и для нее указано корректное расположение и ориентация](camera_setup.md).
 
-При изменении launch-файла необходимо перезапустить пакет `clever`:
+При изменении launch-файла необходимо перезапустить пакет `clover`:
 
 ```bash
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 Для мониторинга изображения с камеры можно использовать [rqt](rviz.md) или [web_video_server](web_video_server.md).
@@ -25,7 +27,7 @@ sudo systemctl restart clever
 Остановите сервисы Клевера:
 
 ```bash
-sudo systemctl stop clever
+sudo systemctl stop clover
 ```
 
 Получите картинку с камеры утилитой `raspistill`:
@@ -90,7 +92,7 @@ image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
 Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md).
 
-> **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clever.launch`.
+> **Warning** По умолчанию web_video_server показывает изображения из топиков со сжатием (например, /main_camera/image_raw/compressed). Ноды на Python не публикуют такие топики, поэтому для их просмотра следует добавлять `&type=mjpeg` в адресную стоку страницы web_video_server или изменить параметр `default_stream_type` на `mjpeg` в файле `clover.launch`.
 
 #### Получение одного кадра
 
