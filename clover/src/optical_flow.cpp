@@ -35,7 +35,6 @@ class OpticalFlow : public nodelet::Nodelet
 public:
 	OpticalFlow():
 		camera_matrix_(3, 3, CV_64F),
-		dist_coeffs_(8, 1, CV_64F),
 		tf_listener_(tf_buffer_)
 	{}
 
@@ -91,9 +90,7 @@ private:
 				camera_matrix_.at<double>(i, j) = cinfo->K[3 * i + j];
 			}
 		}
-		for (int k = 0; k < cinfo->D.size(); k++) {
-			dist_coeffs_.at<double>(k) = cinfo->D[k];
-		}
+		dist_coeffs_ = cv::Mat(cinfo->D, true);
 	}
 
 	void drawFlow(Mat& frame, double x, double y, double quality) const
