@@ -24,6 +24,8 @@ rospy.loginfo('Looking for PX4 binary in {}'.format(px4_source_path))
 px4_binary_path = None
 
 for root, dirs, files in os.walk(px4_source_path):
+    if '.git' in dirs:
+        dirs.remove('.git')
     if 'px4' in files:
         px4_binary_path = os.path.join(root, 'px4')
         break
