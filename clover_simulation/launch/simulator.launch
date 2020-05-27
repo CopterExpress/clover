@@ -23,15 +23,8 @@
     <include file="$(find clover_description)/launch/spawn_drone_camera.launch"/>
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">
+        <arg name="simulated" value="true"/>
         <arg name="fcu_conn" value="sitl"/>
         <arg name="fcu_ip" value="127.0.0.1"/>
-        <arg name="optical_flow" value="true"/>
-        <arg name="web_video_server" default="true"/>
-        <arg name="main_camera" default="false"/>
-        <arg name="rosbridge" value="true"/>
-        <arg name="aruco" default="true"/>
-        <arg name="rangefinder_vl53l1x" default="false"/>
-        <arg name="led" default="false"/>
-        <arg name="rc" default="false"/>
     </include>
 </launch>

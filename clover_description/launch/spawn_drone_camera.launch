@@ -4,10 +4,4 @@
     <param command="$(arg cmd)" name="drone_description"/>
     <!-- Note: -package_to_model replaces all mentions of "package://" with "model://" in urdf URIs -->
     <node name="$(anon spawn)" output="screen" pkg="gazebo_ros" type="spawn_model" args="-urdf -param drone_description -model clover -z 0.3"/>
-    <!-- We need to create a transform for our camera to work properly -->
-    <!-- TODO: Maybe use a better solution with Clover nodes directly? -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>
-    <node pkg="clover" type="camera_markers" ns="main_camera" name="main_camera_markers">
-        <param name="scale" value="3.0"/>
-    </node>
 </launch>
