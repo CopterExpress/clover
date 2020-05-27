@@ -3,14 +3,7 @@
     <arg name="px4_source_path" default="/home/clever/Firmware"/>
     <arg name="est" default="ekf2"/>
     <arg name="vehicle" default="clover"/>
-    <!-- PX4 instance -->
-    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
-        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
-        <arg name="est" value="$(arg est)"/>
-        <arg name="vehicle" value="$(arg vehicle)"/>
-        <arg name="ID" value="0"/>
-        <arg name="interactive" value="true"/>
-    </include>
+
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <!-- Workaround for crashes in VMware -->
@@ -19,8 +12,19 @@
         <arg name="world_name" value="$(find clover_simulation)/resources/worlds/empty.world"/>
         <arg name="verbose" value="true"/>
     </include>
+
+    <!-- PX4 instance -->
+    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
+        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
+        <arg name="est" value="$(arg est)"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
+        <arg name="ID" value="0"/>
+        <arg name="interactive" value="true"/>
+    </include>
+
     <!-- Clover model -->
     <include file="$(find clover_description)/launch/spawn_drone_camera.launch"/>
+
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">
         <arg name="simulated" value="true"/>
