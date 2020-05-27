@@ -1,8 +1,17 @@
 <launch>
     <!-- FIXME: This .launch file will not work as of right now without a PX4 binary somewhere. -->
     <arg name="px4_source_path" default="/home/clever/Firmware"/>
+    <!-- PX4 estimator: lpe, ekf2 -->
     <arg name="est" default="ekf2"/>
+    <!-- PX4 vehicle configuration: clover -->
     <arg name="vehicle" default="clover"/>
+    <!-- Simulated vehicle parameters: -->
+    <!-- Main camera -->
+    <arg name="main_camera" default="true"/>
+    <!-- Rangefinder -->
+    <arg name="rangefinder" default="true"/>
+    <!-- Simulated GPS -->
+    <arg name="gps" default="true"/>
 
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -23,7 +32,11 @@
     </include>
 
     <!-- Clover model -->
-    <include file="$(find clover_description)/launch/spawn_drone_camera.launch"/>
+    <include file="$(find clover_description)/launch/spawn_drone.launch">
+        <arg name="main_camera" value="$(arg main_camera)"/>
+        <arg name="rangefinder" value="$(arg rangefinder)"/>
+        <arg name="gps" value="$(arg gps)"/>
+    </include>
 
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">

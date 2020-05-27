@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-    <arg name="cmd" default="$(find xacro)/xacro $(find clover_description)/urdf/clover/clover4_base.xacro"/>
+    <!-- Toggleable model parameters -->
+    <!-- Main camera -->
+    <arg name="main_camera" default="true"/>
+    <arg name="rangefinder" default="true"/>
+    <arg name="gps" default="true"/>
+
+    <arg name="cmd" default="$(find xacro)/xacro $(find clover_description)/urdf/clover/clover4.xacro main_camera:=$(arg main_camera) rangefinder:=$(arg rangefinder) gps:=$(arg gps)"/>
     <param command="$(arg cmd)" name="drone_description"/>
     <!-- Note: -package_to_model replaces all mentions of "package://" with "model://" in urdf URIs -->
     <node name="$(anon spawn)" output="screen" pkg="gazebo_ros" type="spawn_model" args="-urdf -param drone_description -model clover -z 0.3"/> 
