@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-# @name Plane SITL with camera
-#
-
-sh /etc/init.d-posix/1030_plane

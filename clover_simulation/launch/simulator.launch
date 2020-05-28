@@ -1,16 +1,9 @@
 <launch>
-    <!-- FIXME: This .launch file will not work as of right now without a PX4 binary somewhere. -->
-    <arg name="px4_source_path" default="/home/clever/Firmware"/>
-    <!-- PX4 estimator: lpe, ekf2 -->
-    <arg name="est" default="ekf2"/>
-    <!-- PX4 vehicle configuration: clover -->
+    <arg name="mav_id" default="0"/>
+    <arg name="est" default="lpe"/> <!-- PX4 estimator: lpe, ekf2 -->
     <arg name="vehicle" default="clover"/>
-    <!-- Simulated vehicle parameters: -->
-    <!-- Main camera -->
     <arg name="main_camera" default="true"/>
-    <!-- Rangefinder -->
     <arg name="rangefinder" default="true"/>
-    <!-- Simulated GPS -->
     <arg name="gps" default="true"/>
 
     <!-- Gazebo instance -->
@@ -23,13 +16,10 @@
     </include>
 
     <!-- PX4 instance -->
-    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
-        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
-        <arg name="est" value="$(arg est)"/>
-        <arg name="vehicle" value="$(arg vehicle)"/>
-        <arg name="ID" value="0"/>
-        <arg name="interactive" value="true"/>
-    </include>
+    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)">
+        <env name="PX4_SIM_MODEL" value="$(arg vehicle)"/>
+        <env name="PX4_ESTIMATOR" value="$(arg est)"/>
+    </node>
 
     <!-- Clover model -->
     <include file="$(find clover_description)/launch/spawn_drone.launch">
