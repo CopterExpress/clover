@@ -2,12 +2,12 @@
     <arg name="ws281x" default="true"/>
     <arg name="led_effect" default="true"/>
     <arg name="led_notify" default="true"/>
-    <arg name="simulated" default="false"/>
+    <arg name="simulator" default="false"/>
 
     <!-- For additional help go to https://clover.coex.tech/led -->
 
     <!-- ws281x led strip driver -->
-    <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(eval ws281x and not simulated)">
+    <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(eval ws281x and not simulator)">
         <param name="led_count" value="58"/>
         <param name="gpio_pin" value="21"/>
         <param name="brightness" value="64"/>
