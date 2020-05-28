@@ -104,7 +104,6 @@ public:
 
 		dictionary_ = cv::aruco::getPredefinedDictionary(static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(dictionary));
 		parameters_ = cv::aruco::DetectorParameters::create();
-		parameters_->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
 
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
