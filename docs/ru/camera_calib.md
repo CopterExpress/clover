@@ -224,7 +224,7 @@ cv2.destroyAllWindows()
 
 ![img](../assets/wcp1.png)
 
-Нажимаем “Войти”. Переходим в ***/home/pi/catkin_ws/src/clever/clever/camera_info/*** и копируем туда калибровочный .yaml файл:
+Нажимаем “Войти”. Переходим в ***/home/pi/catkin_ws/src/clover/clover/camera_info/*** и копируем туда калибровочный .yaml файл:
 
 ![img](../assets/wcp2.jpg)
 
@@ -234,7 +234,7 @@ cv2.destroyAllWindows()
 
 ![img](../assets/pty1.jpg)
 
-Войдем под логином ***pi*** и паролем ***raspberry***, перейдем в директорию ***/home/pi/catkin_ws/src/clever/clever/launch*** и начнем редактировать конфигурацию ***main_camera.launch***:
+Войдем под логином ***pi*** и паролем ***raspberry***, перейдем в директорию ***/home/pi/catkin_ws/src/clover/clover/launch*** и начнем редактировать конфигурацию ***main_camera.launch***:
 
 ![img](../assets/pty2.jpg)
 

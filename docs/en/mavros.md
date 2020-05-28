@@ -12,7 +12,7 @@ The MAVROS node is automatically started in the Clover launch-file. In order to 
 
 <!-- -->
 
-> **Note** Some MAVROS plugins are disabled by default in the `clever` package in order to save resources. For more information, see the `plugin_blacklist` parameter in `/home/pi/catkin_ws/src/clever/clever/launch/mavros.launch`.
+> **Note** Some MAVROS plugins are disabled by default in the `clover` package in order to save resources. For more information, see the `plugin_blacklist` parameter in `/home/pi/catkin_ws/src/clover/clover/launch/mavros.launch`.
 
 ## Main services
 

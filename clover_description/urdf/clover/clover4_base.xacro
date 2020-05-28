@@ -49,14 +49,6 @@
         />
   </xacro:if>
 
-
-  <!-- Instantiate gps plugin. -->
-  <xacro:gps_plugin_macro
-    namespace="${namespace}"
-    gps_noise="true"
-    >
-  </xacro:gps_plugin_macro>
-
   <!-- Instantiate magnetometer plugin. -->
   <xacro:magnetometer_plugin_macro
     namespace="${namespace}"

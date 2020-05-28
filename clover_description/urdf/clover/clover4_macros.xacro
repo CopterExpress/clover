@@ -159,19 +159,10 @@
       <material>Polycarbonate</material>
     </gazebo>
     <gazebo reference="base_link">
-      <collision name='base_link_inertia_collision'>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0.0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
+      <kp>10000.0</kp>
+      <kd>10.0</kd>
+      <maxVel>10.0</maxVel>
+      <minDepth>0.001</minDepth>
    </gazebo>
   </xacro:macro>
 

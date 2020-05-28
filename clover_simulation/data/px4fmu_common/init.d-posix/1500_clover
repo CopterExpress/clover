@@ -11,6 +11,7 @@ set MIXER quad_x
 
 if [ $AUTOCNF = yes ]
 then
+# PID values - same as in Clover
 	param set MC_PITCHRATE_P 0.087
 	param set MC_PITCHRATE_I 0.037
 	param set MC_PITCHRATE_D 0.0044
@@ -24,4 +25,21 @@ then
 	param set MPC_XY_P 1.1
 	param set MPC_Z_VEL_P 0.24
 	param set MPC_Z_P 1.2
+# Default values for optical flow
+# EKF2: GPS fusion, optical flow (0x1 | 0x2)
+	param set EKF2_AID_MASK 3
+	param set EKF2_OF_DELAY 0
+	param set EKF2_OF_QMIN 10
+	param set EKF2_OF_N_MIN 0.05
+	param set EKF2_OF_N_MAX 0.20
+	param set SENS_FLOW_ROT 0
+	param set SENS_FLOW_MINHGT 0.01
+	param set SENS_FLOW_MAXHGT 4.0
+# LPE: GPS, optical flow, land detector, pub agl as lpos down, flow gyro comp
+# (0x1 | 0x2 | 0x10 | 0x20 | 0x40)
+	param set LPE_FUSION 115
+	param set LPE_FLW_QMIN 10
+	param set LPE_FLW_SCALE 1.0
+	param set LPE_FLW_R 0.2
+	param set LPE_FLW_RR 0.0
 fi

@@ -11,6 +11,7 @@
   * [Первоначальная настройка](setup.md)
   * [Калибровка датчиков](calibration.md)
   * [Настройка пульта](radio.md)
+    * [Работа с FS-A8S](rc_flysky_a8s.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
   * [Настройка failsafe](failsafe.md)
@@ -42,6 +43,7 @@
   * [Компьютерное зрение](camera.md)
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
+  * [Использование JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * Дополнительные материалы

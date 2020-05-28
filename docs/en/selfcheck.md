@@ -7,7 +7,7 @@ It is generally a good idea to perform this check before flight, especially befo
 In order to run it, enter the following command in [the Raspberry Pi console](ssh.md):
 
 ```(bash)
-rosrun clever selfcheck.py
+rosrun clover selfcheck.py
 ```
 
 <img src="../assets/selfcheck.png">

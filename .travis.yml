@@ -83,18 +83,18 @@ jobs:
         - ./check_unused_assets.py
         - gitbook install
         - gitbook build
-      deploy:
-        provider: pages
-        local_dir: _book
-        skip_cleanup: true
-        token: ${GITHUB_OAUTH_TOKEN}
-        keep_history: true
-        target_branch: master
-        repo: CopterExpress/clover.coex.tech
-        fqdn: clover.coex.tech
-        verbose: true
-        on:
-          branch: master
+      # deploy:
+      #   provider: pages
+      #   local_dir: _book
+      #   skip_cleanup: true
+      #   token: ${GITHUB_OAUTH_TOKEN}
+      #   keep_history: true
+      #   target_branch: master
+      #   repo: CopterExpress/clover.coex.tech
+      #   fqdn: clover.coex.tech
+      #   verbose: true
+      #   on:
+      #     branch: master
     - stage: Annotate
       name: Auto-generate changelog
       language: python

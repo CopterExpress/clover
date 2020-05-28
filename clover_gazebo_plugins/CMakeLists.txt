@@ -313,14 +313,6 @@ set(plugins
   # add_dependencies(${plugin} physics_msgs)
 # endforeach()
 
-# Configure the setup script
-if (catkin_FOUND)
-  catkin_add_env_hooks(50_sitl_gazebo_setup
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/cmake
-    SHELLS sh)
-endif()
-
-
 ################
 ## Unit Tests ##
 ################
@@ -347,9 +339,6 @@ set(RESOURCE_PATH ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME})
 # install(TARGETS ${plugins} mav_msgs nav_msgs std_msgs sensor_msgs DESTINATION ${PLUGIN_PATH})
 # install(DIRECTORY ${models_list} DESTINATION ${MODEL_PATH})
 # install(FILES ${worlds_list} DESTINATION ${RESOURCE_PATH}/worlds)
-
-configure_file(src/setup.sh.in "${CMAKE_CURRENT_BINARY_DIR}/setup.sh" @ONLY)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/setup.sh DESTINATION ${RESOURCE_PATH})
 
 install(FILES ${PROJECT_SOURCE_DIR}/package.xml DESTINATION ${RESOURCE_PATH})
 

@@ -1,34 +1,47 @@
 <launch>
     <!-- FIXME: This .launch file will not work as of right now without a PX4 binary somewhere. -->
     <arg name="px4_source_path" default="/home/clever/Firmware"/>
+    <!-- PX4 estimator: lpe, ekf2 -->
     <arg name="est" default="ekf2"/>
+    <!-- PX4 vehicle configuration: clover -->
     <arg name="vehicle" default="clover"/>
-    <!-- PX4 instance -->
-    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
-        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
-        <arg name="est" value="$(arg est)"/>
-        <arg name="ID" value="0"/>
-        <arg name="interactive" value="true"/>
-    </include>
+    <!-- Simulated vehicle parameters: -->
+    <!-- Main camera -->
+    <arg name="main_camera" default="true"/>
+    <!-- Rangefinder -->
+    <arg name="rangefinder" default="true"/>
+    <!-- Simulated GPS -->
+    <arg name="gps" default="true"/>
+
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!-- Workaround for crashes in VMware -->
+        <env name="SVGA_VGPU10" value="0"/>
         <arg name="gui" value="true"/>
         <arg name="world_name" value="$(find clover_simulation)/resources/worlds/empty.world"/>
         <arg name="verbose" value="true"/>
     </include>
+
+    <!-- PX4 instance -->
+    <include file="$(find clover_simulation)/launch/px4_sitl.launch">
+        <arg name="px4_source_path" value="$(arg px4_source_path)"/>
+        <arg name="est" value="$(arg est)"/>
+        <arg name="vehicle" value="$(arg vehicle)"/>
+        <arg name="ID" value="0"/>
+        <arg name="interactive" value="true"/>
+    </include>
+
     <!-- Clover model -->
-    <include file="$(find clover_description)/launch/spawn_drone_camera.launch"/>
+    <include file="$(find clover_description)/launch/spawn_drone.launch">
+        <arg name="main_camera" value="$(arg main_camera)"/>
+        <arg name="rangefinder" value="$(arg rangefinder)"/>
+        <arg name="gps" value="$(arg gps)"/>
+    </include>
+
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">
+        <arg name="simulated" value="true"/>
         <arg name="fcu_conn" value="sitl"/>
         <arg name="fcu_ip" value="127.0.0.1"/>
-        <arg name="optical_flow" value="true"/>
-        <arg name="web_video_server" default="true"/>
-        <arg name="main_camera" default="false"/>
-        <arg name="rosbridge" value="true"/>
-        <arg name="aruco" default="true"/>
-        <arg name="rangefinder_vl53l1x" default="false"/>
-        <arg name="led" default="false"/>
-        <arg name="rc" default="false"/>
     </include>
 </launch>

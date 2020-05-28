@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(find clover_description)/urdf/drones/clover_base_dae.xacro"/>
+  <arg name="model" default="$(find clover_description)/urdf/drones/clover4.xacro"/>
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)"/>
 

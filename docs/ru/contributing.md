@@ -47,7 +47,7 @@
 2. Склонируйте форк на компьютер:
 
     ```bash
-    git clone https://github.com/<USERNAME>/clever.git
+    git clone https://github.com/<USERNAME>/clover.git
     ```
 
 3. Перейдите в директорию с форком и создайте новую ветку с названием вашей статьи (например `new-article`):

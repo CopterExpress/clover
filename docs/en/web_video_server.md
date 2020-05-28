@@ -1,28 +1,12 @@
 # Viewing images from cameras
 
-To view images from cameras (or other ROS topics), you can use [rviz](rviz.md), rqt, or watch them in a browser using web\_video\_server.
+To view images from cameras (or other ROS topics), you can use [rviz](rviz.md), rqt, or watch them in a browser using web_video_server.
 
 See read more about [using rqt](rviz.md).
 
 ## Viewing in a browser
 
-### Configuration
-
-Make sure that in Clover launch-file \(`~/catkin_ws/src/clever/clever/launch/clever.launch`\), starting `web_video_server` is enabled:
-
-```xml
-<arg name="web_video_server" default="true"/>
-```
-
-After the launch-file is edited, restart package `clever`:
-
-```bash
-sudo systemctl restart clever
-```
-
-### Viewing
-
-To view a video-stream, you have to [connect to Wi-Fi](wifi.md) of Clover \(`CLEVER-xxxx`\), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
+To view a video-stream, you have to [connect to Wi-Fi network](wifi.md) of the Clover (`clover-xxxx`), navigate to page [http://192.168.11.1:8080/](http://192.168.11.1:8080/), and choose the topic.
 
 ![Viewing web_video_server](../assets/web_video_server.png)
 

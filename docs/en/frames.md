@@ -3,7 +3,7 @@ Coordinate systems (frames)
 
 ![TF2 Clover frames](../assets/frames.png)
 
-Main frames in the `clever` package:
+Main frames in the `clover` package:
 
 * `map` has its origin at the flight controller initialization point and may be considered stationary. It is shown as a white grid on the image above;
 * `base_link` is rigidly bound to the drone. It is shown by the simplified drone model on the image above;
