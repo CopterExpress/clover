@@ -1,7 +1,0 @@
-syntax = "proto2";
-package std_msgs.msgs;
-
-message Int32
-{
-  required int32   data  = 1;
-}
