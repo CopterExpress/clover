@@ -88,19 +88,19 @@ public:
 		tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_, nh_));
 
 		int dictionary;
-		nh_priv_.param("dictionary", dictionary, 2);
-		nh_priv_.param("estimate_poses", estimate_poses_, true);
-		nh_priv_.param("send_tf", send_tf_, true);
+		dictionary = nh_priv_.param("dictionary", 2);
+		estimate_poses_ = nh_priv_.param("estimate_poses", true);
+		send_tf_ = nh_priv_.param("send_tf", true);
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
 			NODELET_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
 		}
 		readLengthOverride(nh_priv_);
 
-		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
-		nh_priv_.param("auto_flip", auto_flip_, false);
+		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		auto_flip_ = nh_priv_.param("auto_flip", false);
 
-		nh_priv_.param<std::string>("frame_id_prefix", frame_id_prefix_, "aruco_");
+		frame_id_prefix_ = nh_priv_.param<std::string>("frame_id_prefix", "aruco_");
 
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
 
@@ -329,8 +329,7 @@ private:
 
 	void readLengthOverride(const ros::NodeHandle& nh)
 	{
-		std::map<std::string, double> length_override;
-		nh.getParam("length_override", length_override);
+		auto length_override = nh.param("length_override", std::map<std::string, double>{});
 		for (auto const& item : length_override) {
 			length_override_[std::stoi(item.first)] = item.second;
 		}

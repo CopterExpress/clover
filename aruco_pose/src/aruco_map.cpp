@@ -97,16 +97,16 @@ public:
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
 
 		std::string type, map;
-		nh_priv_.param<std::string>("type", type, "map");
-		nh_priv_.param<std::string>("frame_id", transform_.child_frame_id, "aruco_map");
-		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
-		nh_priv_.param("auto_flip", auto_flip_, false);
-		nh_priv_.param("image_width", image_width_, 2000);
-		nh_priv_.param("image_height", image_height_, 2000);
-		nh_priv_.param("image_margin", image_margin_, 200);
-		nh_priv_.param("image_axis", image_axis_, true);
-		nh_priv_.param<std::string>("markers/frame_id", markers_parent_frame_, transform_.child_frame_id);
-		nh_priv_.param<std::string>("markers/child_frame_id_prefix", markers_frame_, "");
+		type = nh_priv_.param<std::string>("type", "map");
+		transform_.child_frame_id = nh_priv_.param<std::string>("frame_id", "aruco_map");
+		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		auto_flip_ = nh_priv_.param("auto_flip", false);
+		image_width_ = nh_priv_.param("image_width" , 2000);
+		image_height_ = nh_priv_.param("image_height", 2000);
+		image_margin_ = nh_priv_.param("image_margin", 200);
+		image_axis_ = nh_priv_.param("image_axis", true);
+		markers_parent_frame_ = nh_priv_.param<std::string>("markers/frame_id", transform_.child_frame_id);
+		markers_frame_ = nh_priv_.param<std::string>("markers/child_frame_id_prefix", "");
 
 		// createStripLine();
 
@@ -337,9 +337,9 @@ publish_debug:
 		int markers_x, markers_y, first_marker;
 		double markers_side, markers_sep_x, markers_sep_y;
 		std::vector<int> marker_ids;
-		nh.param<int>("markers_x", markers_x, 10);
-		nh.param<int>("markers_y", markers_y, 10);
-		nh.param<int>("first_marker", first_marker, 0);
+		markers_x = nh.param("markers_x", 10);
+		markers_y = nh.param("markers_y", 10);
+		first_marker = nh.param("first_marker", 0);
 
 		param(nh, "markers_side", markers_side);
 		param(nh, "markers_sep_x", markers_sep_x);
