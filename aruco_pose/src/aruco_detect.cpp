@@ -327,7 +327,7 @@ private:
 		return frame_id_prefix_ + std::to_string(id);
 	}
 
-	void readLengthOverride(ros::NodeHandle& nh)
+	void readLengthOverride(const ros::NodeHandle& nh)
 	{
 		std::map<std::string, double> length_override;
 		nh.getParam("length_override", length_override);
