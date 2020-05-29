@@ -4,14 +4,14 @@
 
 ## Сборка рамы
 
-1. Совместите 4 луча с центральной декой, зафиксируйте их при помощи болтов М3х8 и гаек с нейлоновой вставкой.
+1. Совместите 4 луча с центральной декой, зафиксируйте их при помощи винтов М3х8 и гаек с нейлоновой вставкой.
 
     <div class="image-group">
         <img src="../assets/assembling_clev4/frame_1.png" width=300 class="zoom border">
         <img src="../assets/assembling_clev4/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. На центральные отверстия в главной деке установите 2 стойки 20мм и закрепите их с помощью болтов М3х8.
+2. На центральные отверстия в главной деке установите 2 стойки 20мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clev4/frame_3.png" width=300 class="zoom border center">
 
@@ -19,7 +19,7 @@
 
     <img src="../assets/assembling_clev4/frame_4.png" width=300 class="zoom border center">
 
-4. Прижмите пластину жесткости к главной деке.
+4. Прижмите пластины жесткости к главной деке.
 
     <img src="../assets/assembling_clev4/frame_5.png" width=300 class="zoom border center">
 
@@ -27,7 +27,7 @@
 
     <img src="../assets/assembling_clev4/frame_6.png" width=300 class="zoom border center">
 
-6. Установите 4 стойки 6мм и закрепите их с помощью болтов М3х6.
+6. Установите 4 стойки 6мм и закрепите их с помощью винтов М3х6.
 
     <img src="../assets/assembling_clev4/frame_7.png" width=300 class="zoom border center">
 
@@ -35,9 +35,9 @@
 
 1. При установке моторов обратите внимание на схему вращения моторов. Маркировка вращения на моторах должна совпадать со схемой вращения.
 
-    <img src="../assets/assembling_clev4/props_rotation.png" width=300 class="zoom border center">
+    <img id="prop_rotation" src="../assets/assembling_clev4/props_rotation.png" width=300 class="zoom border center">
 
-2. Установите мотор на соответствующие отверстия в луче с помощью болтов М3х5.
+2. Установите мотор на соответствующие отверстия в луче с помощью **винтов М3х5**.
 
     <div class="image-group">
         <img src="../assets/assembling_clev4/motor_1.png" width=300 class="zoom border">
@@ -46,14 +46,14 @@
 
 ## Установка ESC и PDB
 
-1. Подсоедините к моторам регуляторы оборотов с помощью разъемов MR30 и закрепите их на лучах с помощью хомутов.
+1. Подсоедините к моторам регуляторы оборотов(ESC) с помощью разъемов MR30 и закрепите их на лучах с помощью хомутов.
 
     <div class="image-group">
         <img src="../assets/assembling_clev4/esc_1.png" width=300 class="zoom border">
         <img src="../assets/assembling_clev4/esc_2.png" width=300 class="zoom border">
     </div>
 
-2. На заранее закрепленные стойки установите плату распределения питания и зафиксируйте ее стойками 6мм. Плата распределения питания должна быть установлена таким образом, чтобы кабель подключения питания был направлен в сторону хвоста вашего коптера.
+2. На заранее закрепленные стойки установите плату распределения питания(PDB) и зафиксируйте ее стойками 6мм. Плата распределения питания должна быть установлена таким образом, чтобы кабель подключения питания был направлен в сторону хвоста коптера.
 
     <img src="../assets/assembling_clev4/pdb_1.png" width=300 class="zoom border center">
 
@@ -68,6 +68,8 @@
 > **Caution** При установке полетного контроллера обратите внимание на стрелку, расположенную на плате, при монтаже она должна быть направлена к носу коптера.
 
 ### COEX Pix
+
+>**Hint** Перед установкой резиновых стоек, накрутите 2 слоя нейлоновых гаек, для более прочного крепления или откусите лишнюю резьбу с помощью бокорезов.
 
 Установите резиновые стойки 6мм, на них закрепите *COEX Pix* с помощью нейлоновых гаек.
 
@@ -102,7 +104,7 @@
 
 ## Установка Raspberry Pi
 
-1. На основную деку установите стойки 20мм, закрепите их с помощью болтов М3х8.
+1. На основную деку установите стойки 20мм, закрепите их с помощью винтов М3х8.
 
     <div class="image-group">
         <img src="../assets/assembling_clev4/fc_connection_5.png" width=300 class="zoom border">
@@ -113,7 +115,7 @@
 
     <img src="../assets/assembling_clev4/raspberry_1.png" width=300 class="zoom border center">
 
-3. Установите собранную монтажную деку на основную и закрепите с помощью болтов М3х8.
+3. Установите собранную монтажную деку на основную и закрепите с помощью винтов М3х8.
 
     <img src="../assets/assembling_clev4/raspberry_2.png" width=300 class="zoom border center">
 
@@ -121,11 +123,11 @@
 
     <img src="../assets/assembling_clev4/raspberry_3.png" width=300 class="zoom border center">
 
-5. На деку захвата установите дальномер с помощью самоконтрящихся гаек и болтов М3х8, и приклейте радиоприемник с помощью двустороннего скотча.
+5. На деку захвата установите дальномер с помощью самоконтрящихся гаек и винтов М3х8, и приклейте радиоприемник с помощью двустороннего скотча.
 
     <img src="../assets/assembling_clev4/raspberry_5.png" width=300 class="zoom border center">
 
-6. Установите 4 стойки 20мм и закрепите их с помощью болтов М3х8.
+6. Установите 4 стойки 20мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clev4/raspberry_6.png" width=300 class="zoom border center">
 
@@ -135,11 +137,11 @@
 
 #TODO Нужен скрин с подключением шлефа к камере
 
-8. Установите модуль камеры на деку захвата и закрепите с помощью болтов М3х8.
+8. Установите модуль камеры на деку захвата и закрепите с помощью винтов М3х8.
 
     <img src="../assets/assembling_clev4/raspberry_8.png" width=300 class="zoom border center">
 
-9. Установите собранную деку захвата и зафиксируйте с помощью болтов М3х8.
+9. Установите собранную деку захвата и зафиксируйте с помощью винтов М3х8.
 
     <img src="../assets/assembling_clev4/raspberry_9.png" width=300 class="zoom border center">
 
@@ -161,7 +163,7 @@
 
     <img src="../assets/assembling_clev4/led_2.png" width=300 class="zoom border center">
 
-3. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и болтов М3х8 используя только крайние монтажные отверстия. Снизу, между пластинами ножек установите демпферное силиконовое колечко.
+3. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и винтов М3х8 используя только крайние монтажные отверстия. Снизу, между пластинами ножек установите демпферное силиконовое колечко.
 
     <img src="../assets/assembling_clev4/led_3.png" width=300 class="zoom border center">
 
@@ -169,7 +171,7 @@
 
     <img src="../assets/assembling_clev4/led_4.png" width=300 class="zoom border center">
 
-5. За крепите ножки с помощью самоконтрящихся гаек и болтов болтов М3х8.
+5. За крепите ножки с помощью самоконтрящихся гаек и винтов М3х8.
 
     <img src="../assets/assembling_clev4/led_5.png" width=300 class="zoom border center">
 
@@ -183,11 +185,11 @@
 
 ## Установка защиты
 
-1. Соберите нижний уровень защиты с помощью стоек 40мм и болтов М3х12.
+1. Соберите нижний уровень защиты с помощью стоек 40мм и винтов М3х12.
 
     <img src="../assets/assembling_clev4/guard_1.png" width=300 class="zoom border center">
 
-2. Соберите верхний уровень защиты с помощью болтов М3х12.
+2. Соберите верхний уровень защиты с помощью винтов М3х12.
 
     <img src="../assets/assembling_clev4/guard_2.png" width=300 class="zoom border center">
 
@@ -195,6 +197,25 @@
 
     <img src="../assets/assembling_clev4/guard_3.png" width=300 class="zoom border center">
 
-4. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и болтов М3х8.
+4. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х8.
 
-    <img src="../assets/assembling_clev4/guard_2.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clev4/guard_4.png" width=300 class="zoom border center">
+
+## Подготовка к полету
+
+1. Установите ремешок для аккумулятора и подключите полетный контроллер к *Raspberry Pi* с помощью USB кабеля.
+
+    <div class="image-group">
+        <img src="../assets/assembling_clev4/final_1.png" width=300 class="zoom border">
+        <img src="../assets/assembling_clev4/final_2.png" width=300 class="zoom border">
+    </div>
+
+2. Установите пропеллеры в соответствии со [схемой направления движения моторов](prop_rotation).
+
+    <img src="../assets/assembling_clev4/final_3.png" width=300 class="zoom border center">
+
+3. Установите аккумулятор.
+
+    <img src="../assets/assembling_clev4/final_4.png" width=300 class="zoom border center">
+
+> **Success** Дрон собран, далее произведите ["настройку"](setup.md).
