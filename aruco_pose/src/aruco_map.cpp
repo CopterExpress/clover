@@ -329,7 +329,7 @@ publish_debug:
 		NODELET_INFO("loading %s complete (%d markers)", filename.c_str(), static_cast<int>(board_->ids.size()));
 	}
 
-	void createGridBoard(const ros::NodeHandle& nh)
+	void createGridBoard(ros::NodeHandle& nh)
 	{
 		NODELET_INFO("generate gridboard");
 		NODELET_WARN("gridboard maps are deprecated");
