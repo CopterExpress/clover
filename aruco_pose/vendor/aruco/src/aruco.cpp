@@ -924,6 +924,8 @@ static void _refineCandidateLines(std::vector<Point>& nContours, std::vector<Poi
 	// calculate the line :: who passes through the grouped points
 	Point3f lines[4];
 	for(int i=0; i<4; i++){
+		// Don't try to "interpolate" single points
+		if (cntPts[i].size() < 2) return;
 		lines[i]=_interpolate2Dline(cntPts[i]);
 	}
 

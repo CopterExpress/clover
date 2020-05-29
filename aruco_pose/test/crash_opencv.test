@@ -1,0 +1,51 @@
+<launch>
+    <arg name="corner_method" default="2"/>
+
+    <node pkg="image_publisher" type="image_publisher" name="imgpub_01" args="$(find aruco_pose)/test/crash_image_01.png">
+        <param name="frame_id" value="main_camera_optical"/>
+        <param name="publish_rate" value="10"/>
+        <param name="camera_info_url" value="file://$(find aruco_pose)/test/camera_info.yaml" />
+    </node>
+
+    <node pkg="image_publisher" type="image_publisher" name="imgpub_02" args="$(find aruco_pose)/test/crash_image_02.png">
+        <param name="frame_id" value="main_camera_optical"/>
+        <param name="publish_rate" value="10"/>
+        <param name="camera_info_url" value="file://$(find aruco_pose)/test/camera_info.yaml" />
+    </node>
+
+    <node pkg="image_publisher" type="image_publisher" name="imgpub_03" args="$(find aruco_pose)/test/crash_image_03.png">
+        <param name="frame_id" value="main_camera_optical"/>
+        <param name="publish_rate" value="10"/>
+        <param name="camera_info_url" value="file://$(find aruco_pose)/test/camera_info.yaml" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager_01" args="manager"/>
+
+    <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect_01" args="load aruco_pose/aruco_detect nodelet_manager_01">
+        <remap from="image_raw" to="imgpub_01/image_raw"/>
+        <remap from="camera_info" to="imgpub_01/camera_info"/>
+        <param name="length" value="0.33"/>
+        <param name="cornerRefinementMethod" value="$(arg corner_method)"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager_02" args="manager"/>
+
+    <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect_02" args="load aruco_pose/aruco_detect nodelet_manager_02">
+        <remap from="image_raw" to="imgpub_02/image_raw"/>
+        <remap from="camera_info" to="imgpub_02/camera_info"/>
+        <param name="length" value="0.33"/>
+        <param name="cornerRefinementMethod" value="$(arg corner_method)"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager_03" args="manager"/>
+
+    <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect_03" args="load aruco_pose/aruco_detect nodelet_manager_03">
+        <remap from="image_raw" to="imgpub_03/image_raw"/>
+        <remap from="camera_info" to="imgpub_03/camera_info"/>
+        <param name="length" value="0.33"/>
+        <param name="cornerRefinementMethod" value="$(arg corner_method)"/>
+    </node>
+
+    <param name="test_module" value="$(find aruco_pose)/test/crash_opencv.py"/>
+    <test test-name="crash_opencv" pkg="ros_pytest" type="ros_pytest_runner"/>
+</launch>
