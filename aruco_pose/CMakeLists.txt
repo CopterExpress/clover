@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(aruco_pose)
 
-add_definitions(-std=c++11 -Wall -g)
-
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
