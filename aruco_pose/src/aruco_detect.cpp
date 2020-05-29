@@ -103,7 +103,6 @@ public:
 		nh_priv_.param<std::string>("frame_id_prefix", frame_id_prefix_, "aruco_");
 
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
-		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
 		dictionary_ = cv::aruco::getPredefinedDictionary(static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(dictionary));
 		parameters_ = cv::aruco::DetectorParameters::create();

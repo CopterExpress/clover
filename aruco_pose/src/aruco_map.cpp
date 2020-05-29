@@ -95,7 +95,6 @@ public:
 		board_->dictionary = cv::aruco::getPredefinedDictionary(
 			                 static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(nh_priv_.param("dictionary", 2)));
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
-		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
 		std::string type, map;
 		nh_priv_.param<std::string>("type", type, "map");
