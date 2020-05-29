@@ -58,7 +58,6 @@ typedef message_filters::sync_policies::ExactTime<Image, CameraInfo, MarkerArray
 
 class ArucoMap : public nodelet::Nodelet {
 private:
-	ros::NodeHandle nh_, nh_priv_;
 	ros::Publisher img_pub_, pose_pub_, markers_pub_, vis_markers_pub_;
 	image_transport::Publisher debug_pub_;
 	message_filters::Subscriber<Image> image_sub_;
@@ -83,8 +82,8 @@ private:
 public:
 	virtual void onInit()
 	{
-		nh_ = getNodeHandle();
-		nh_priv_ = getPrivateNodeHandle();
+		ros::NodeHandle &nh_ = getNodeHandle();
+		ros::NodeHandle &nh_priv_ = getPrivateNodeHandle();
 
 		image_transport::ImageTransport it_priv(nh_priv_);
 
@@ -116,7 +115,7 @@ public:
 			param(nh_priv_, "map", map);
 			loadMap(map);
 		} else if (type == "gridboard") {
-			createGridBoard();
+			createGridBoard(nh_priv_);
 		} else {
 			NODELET_FATAL("unknown type: %s", type.c_str());
 			ros::shutdown();
@@ -331,7 +330,7 @@ publish_debug:
 		NODELET_INFO("loading %s complete (%d markers)", filename.c_str(), static_cast<int>(board_->ids.size()));
 	}
 
-	void createGridBoard()
+	void createGridBoard(ros::NodeHandle& nh)
 	{
 		NODELET_INFO("generate gridboard");
 		NODELET_WARN("gridboard maps are deprecated");
@@ -339,15 +338,15 @@ publish_debug:
 		int markers_x, markers_y, first_marker;
 		double markers_side, markers_sep_x, markers_sep_y;
 		std::vector<int> marker_ids;
-		nh_priv_.param<int>("markers_x", markers_x, 10);
-		nh_priv_.param<int>("markers_y", markers_y, 10);
-		nh_priv_.param<int>("first_marker", first_marker, 0);
+		nh.param<int>("markers_x", markers_x, 10);
+		nh.param<int>("markers_y", markers_y, 10);
+		nh.param<int>("first_marker", first_marker, 0);
 
-		param(nh_priv_, "markers_side", markers_side);
-		param(nh_priv_, "markers_sep_x", markers_sep_x);
-		param(nh_priv_, "markers_sep_y", markers_sep_y);
+		param(nh, "markers_side", markers_side);
+		param(nh, "markers_sep_x", markers_sep_x);
+		param(nh, "markers_sep_y", markers_sep_y);
 
-		if (nh_priv_.getParam("marker_ids", marker_ids)) {
+		if (nh.getParam("marker_ids", marker_ids)) {
 			if ((unsigned int)(markers_x * markers_y) != marker_ids.size()) {
 				NODELET_FATAL("~marker_ids length should be equal to ~markers_x * ~markers_y");
 				ros::shutdown();
