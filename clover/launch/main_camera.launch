@@ -16,7 +16,7 @@
     <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/> -->
 
     <!-- camera node -->
-    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodele nodelet_manager" clear_params="true" unless="$(arg simulator)">
+    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" clear_params="true" unless="$(arg simulator)">
         <param name="device_path" value="/dev/video0"/> <!-- v4l2 device -->
         <param name="frame_id" value="main_camera_optical"/>
         <param name="camera_info_url" value="file://$(find clover)/camera_info/fisheye_cam.yaml"/>
