@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(aruco_pose)
 
-add_definitions(-std=c++11 -Wall -g)
-
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
@@ -25,7 +23,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 find_package(OpenCV 3 REQUIRED COMPONENTS core imgproc calib3d)
-if ("${OpenCV_VERSION_MINOR}" LESS "3")
+if ("${OpenCV_VERSION_MINOR}" LESS "9")
   message(STATUS "OpenCV version too low, using vendored ArUco package")
   include(vendor/VendorOpenCV.cmake)
 else()
@@ -229,4 +227,5 @@ if (CATKIN_ENABLE_TESTING)
   add_rostest(test/test_parser_empty_map.test)
   add_rostest(test/test_node_failure.test)
   add_rostest(test/largemap.test)
+  add_rostest(test/crash_opencv.test)
 endif()
