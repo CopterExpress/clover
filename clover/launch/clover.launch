@@ -12,8 +12,8 @@
     <arg name="led" default="true"/>
     <arg name="rc" default="true"/>
     <arg name="shell" default="true"/>
-    <!-- Flag that we are operating on a simulated drone.  -->
-    <arg name="simulated" default="false"/>
+
+    <arg name="simulator" default="false"/> <!-- flag that we are operating on a simulated drone -->
 
     <!-- log formatting -->
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger}: ${message}"/>
@@ -59,7 +59,7 @@
 
     <!-- main camera -->
     <include file="$(find clover)/launch/main_camera.launch" if="$(arg main_camera)">
-        <arg name="simulated" value="$(arg simulated)"/>
+        <arg name="simulator" value="$(arg simulator)"/>
     </include>
 
     <!-- rosbridge -->
@@ -69,7 +69,7 @@
     <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" output="screen" if="$(arg rosbridge)"/>
 
     <!-- vl53l1x ToF rangefinder -->
-    <node name="rangefinder" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(eval rangefinder_vl53l1x and not simulated)">
+    <node name="rangefinder" pkg="vl53l1x" type="vl53l1x_node" output="screen" if="$(eval rangefinder_vl53l1x and not simulator)">
         <param name="frame_id" value="rangefinder"/>
         <param name="min_signal" value="0.4"/>
         <param name="pass_statuses" type="yaml" value="[0, 6, 7, 11]"/>
@@ -77,7 +77,7 @@
 
     <!-- led strip -->
     <include file="$(find clover)/launch/led.launch" if="$(arg led)">
-        <arg name="simulated" value="$(arg simulated)"/>
+        <arg name="simulator" value="$(arg simulator)"/>
     </include>
 
     <!-- rc backend -->

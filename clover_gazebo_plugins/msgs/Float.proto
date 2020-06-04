@@ -1,7 +1,0 @@
-syntax = "proto2";
-package std_msgs.msgs;
-
-message Float
-{
-  required float   data  = 1;
-}
