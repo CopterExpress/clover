@@ -21,6 +21,7 @@ material loop_solid
 	{
 		pass
 		{
+			scene_blend alpha_blend
 			texture_unit
 			{
 				texture loop_solid.png
