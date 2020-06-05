@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.5">
-    <model name="loop">
+    <model name="loop_line">
         <static>true</static>
         <link name="loop_link">
             <pose>0 0 1e-3 0 0 0</pose>
@@ -13,8 +13,8 @@
                 </geometry>
                 <material>
                     <script>
-                        <uri>model://loop/materials/scripts</uri>
-                        <uri>model://loop/materials/textures</uri>
+                        <uri>model://loop_line/materials/scripts</uri>
+                        <uri>model://loop_line/materials/textures</uri>
                         <name>loop_dashed</name>
                     </script>
                 </material>
