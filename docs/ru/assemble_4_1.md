@@ -104,7 +104,7 @@
 
     <img src="../assets/assembling_clover4_1/fc_connection_2.png" width=300 class="zoom border center">
 
-Установите алюминиевые стойки 40мм на болты М3х12.
+3. Установите алюминиевые стойки 40мм на болты М3х12.
 
 <div class="image-group">
     <img src="../assets/assembling_clover4_1/fc_connection_3.png" width=300 class="zoom border">
@@ -163,7 +163,7 @@
 
     <img src="../assets/assembling_clover4_1/led_1.png" width=300 class="zoom border center">
 
-2. Наклейте светодиодную ленту на обруч, для большей крепкости притяните ее с помощью 3-4 хомутов. Припаяйте к ленте 2 силовых провода и один сигнальный провод для подключения к Raspberry Pi.
+2. Наклейте светодиодную ленту на обруч, для большей прочности притяните ее с помощью 3-4 хомутов. Припаяйте к ленте 2 силовых провода и один сигнальный провод для подключения к Raspberry Pi.
 
     <img src="../assets/assembling_clover4_1/led_2.png" width=300 class="zoom border center">
 
