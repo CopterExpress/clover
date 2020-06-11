@@ -29,13 +29,32 @@ bool setLeds(led_msgs::SetLEDs::Request& req, led_msgs::SetLEDs::Response& resp)
 		msg.set_type(gazebo::msgs::Visual::VISUAL);
 
 		std::string num = std::to_string(led.index);
+		std::string num1 = std::to_string(led.index + 1);
 
-		msg.set_name("led_strip::led_" + num + "_link::led_" + num + "_visual");
-		msg.set_parent_name("led_strip::led_" + num + "_link");
+		msg.set_parent_name("clover::base_link");
+		msg.set_name("clover::base_link::base_link_fixed_joint_lump__led_" + num + "_visual_visual_" + num1);
 
+		// TODO: remove ambient, diffuse, specular from here, set on init
+		msg.mutable_material()->mutable_ambient()->set_r(0);
+		msg.mutable_material()->mutable_ambient()->set_g(0);
+		msg.mutable_material()->mutable_ambient()->set_b(0);
+		msg.mutable_material()->mutable_ambient()->set_a(1);
+
+		msg.mutable_material()->mutable_diffuse()->set_r(0);
+		msg.mutable_material()->mutable_diffuse()->set_g(0);
+		msg.mutable_material()->mutable_diffuse()->set_b(0);
+		msg.mutable_material()->mutable_diffuse()->set_a(1);
+
+		msg.mutable_material()->mutable_specular()->set_r(0);
+		msg.mutable_material()->mutable_specular()->set_g(0);
+		msg.mutable_material()->mutable_specular()->set_b(0);
+		msg.mutable_material()->mutable_specular()->set_a(0);
+
+		// set emissive
 		msg.mutable_material()->mutable_emissive()->set_r(led.r / 255.0);
 		msg.mutable_material()->mutable_emissive()->set_g(led.g / 255.0);
 		msg.mutable_material()->mutable_emissive()->set_b(led.b / 255.0);
+		msg.mutable_material()->mutable_emissive()->set_a(1);
 
 		pub->Publish(msg);
 

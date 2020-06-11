@@ -17,6 +17,10 @@
         <param name="invert" value="false"/>
     </node>
 
+    <node pkg="clover_simulation" name="led" type="led_strip" clear_params="true" output="screen" if="$(eval ws281x and simulator)">
+        <param name="led_count" value="40"/>
+    </node>
+
     <!-- high level led effects control, events notification with leds -->
     <node pkg="clover" name="led_effect" type="led" ns="led" clear_params="true" output="screen" if="$(arg led_effect)">
         <param name="blink_rate" value="2"/>

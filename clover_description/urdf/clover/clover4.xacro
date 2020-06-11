@@ -3,6 +3,7 @@
 
   <xacro:arg name="main_camera" default="true"/>
   <xacro:arg name="rangefinder" default="true"/>
+  <xacro:arg name="led" default="true"/>
   <xacro:arg name="gps" default="true"/>
 
   <xacro:include filename="$(find clover_description)/urdf/clover/clover4_base.xacro" />
@@ -18,6 +19,258 @@
   <xacro:if value="$(arg rangefinder)">
     <xacro:distance_sensor parent="base_link" x="0.0" y="0.0" z="-0.04" roll="0" pitch="${M_PI / 2}" yaw="0"/>
   </xacro:if>
+
+  <!-- Add LED strip model TODO: redo -->
+  <joint name="led_strip_joint" type="fixed">
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="led_link"/>
+  </joint>
+
+  <!-- TODO: remove hardcode -->
+  <link name="led_link">
+    <visual name="led_0_visual">
+      <origin rpy="0  0  0" xyz="0    0.08  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_1_visual">
+      <origin rpy="0  0  0" xyz="0.01251  0.07901  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_2_visual">
+      <origin rpy="0  0  0" xyz="0.02472  0.07608  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_3_visual">
+      <origin rpy="0  0  0" xyz="0.03631  0.07128  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_4_visual">
+      <origin rpy="0  0  0" xyz="0.04702  0.06472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_5_visual">
+      <origin rpy="0  0  0" xyz="0.05656  0.05656  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_6_visual">
+      <origin rpy="0  0  0" xyz="0.06472  0.04702  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_7_visual">
+      <origin rpy="0  0  0" xyz="0.07128  0.03631  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_8_visual">
+      <origin rpy="0  0  0" xyz="0.07608  0.02472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_9_visual">
+      <origin rpy="0  0  0" xyz="0.07901  0.01251  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_10_visual">
+      <origin rpy="0  0  0" xyz="0.08  0    0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_11_visual">
+      <origin rpy="0  0  0" xyz="0.07901 -0.01251  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_12_visual">
+      <origin rpy="0  0  0" xyz="0.07608 -0.02472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_13_visual">
+      <origin rpy="0  0  0" xyz="0.07128 -0.03631  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_14_visual">
+      <origin rpy="0  0  0" xyz="0.06472 -0.04702  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_15_visual">
+      <origin rpy="0  0  0" xyz="0.05656 -0.05656  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_16_visual">
+      <origin rpy="0  0  0" xyz="0.04702 -0.06472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_17_visual">
+      <origin rpy="0  0  0" xyz="0.03631 -0.07128  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_18_visual">
+      <origin rpy="0  0  0" xyz="0.02472 -0.07608  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_19_visual">
+      <origin rpy="0  0  0" xyz="0.01251 -0.07901  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_20_visual">
+      <origin rpy="0  0  0" xyz="0   -0.08  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_21_visual">
+      <origin rpy="0  0  0" xyz="-0.01251 -0.07901  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_22_visual">
+      <origin rpy="0  0  0" xyz="-0.02472 -0.07608  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_23_visual">
+      <origin rpy="0  0  0" xyz="-0.03631 -0.07128  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_24_visual">
+      <origin rpy="0  0  0" xyz="-0.04702 -0.06472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_25_visual">
+      <origin rpy="0  0  0" xyz="-0.05656 -0.05656  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_26_visual">
+      <origin rpy="0  0  0" xyz="-0.06472 -0.04702  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_27_visual">
+      <origin rpy="0  0  0" xyz="-0.07128 -0.03631  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_28_visual">
+      <origin rpy="0  0  0" xyz="-0.07608 -0.02472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_29_visual">
+      <origin rpy="0  0  0" xyz="-0.07901 -0.01251  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_30_visual">
+      <origin rpy="0  0  0" xyz="-0.08  0    0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_31_visual">
+      <origin rpy="0  0  0" xyz="-0.07901  0.01251  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_32_visual">
+      <origin rpy="0  0  0" xyz="-0.07608  0.02472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_33_visual">
+      <origin rpy="0  0  0" xyz="-0.07128  0.03631  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_34_visual">
+      <origin rpy="0  0  0" xyz="-0.06472  0.04702  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_35_visual">
+      <origin rpy="0  0  0" xyz="-0.05656  0.05656  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_36_visual">
+      <origin rpy="0  0  0" xyz="-0.04702  0.06472  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_37_visual">
+      <origin rpy="0  0  0" xyz="-0.03631  0.07128  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_38_visual">
+      <origin rpy="0  0  0" xyz="-0.02472  0.07608  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+    <visual name="led_39_visual">
+      <origin rpy="0  0  0" xyz="-0.01251  0.07901  0"/>
+      <geometry>
+        <sphere radius="0.005"/>
+      </geometry>
+    </visual>
+  </link>
 
   <xacro:if value="$(arg gps)">
     <!-- Instantiate gps plugin. -->

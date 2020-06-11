@@ -4,6 +4,7 @@
     <arg name="vehicle" default="clover"/> <!-- PX4 vehicle configuration: clover -->
     <arg name="main_camera" default="true"/> <!-- Simulated vision position estimation camera (optical flow, ArUco) -->
     <arg name="rangefinder" default="true"/> <!-- Simulated downward-facing rangefinder, vl53l1x-like -->
+    <arg name="led" default="true"/> <!-- Simulated LED strip, ws281x-like -->
     <arg name="gps" default="true"/> <!--Simulated GPS module -->
 
     <!-- Gazebo instance -->
@@ -25,6 +26,7 @@
     <include file="$(find clover_description)/launch/spawn_drone.launch">
         <arg name="main_camera" value="$(arg main_camera)"/>
         <arg name="rangefinder" value="$(arg rangefinder)"/>
+        <arg name="led" value="$(arg led)"/>
         <arg name="gps" value="$(arg gps)"/>
     </include>
 
