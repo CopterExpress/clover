@@ -35,9 +35,7 @@ static void parseCameraInfo(const sensor_msgs::CameraInfoConstPtr& cinfo, cv::Ma
 	for (unsigned int i = 0; i < 3; ++i)
 		for (unsigned int j = 0; j < 3; ++j)
 			matrix.at<double>(i, j) = cinfo->K[3 * i + j];
-
-	for (unsigned int k = 0; k < cinfo->D.size(); k++)
-		dist.at<double>(k) = cinfo->D[k];
+	dist = cv::Mat(cinfo->D, true);
 }
 
 inline void rotatePoint(cv::Point3f& p, cv::Point3f origin, float angle)
