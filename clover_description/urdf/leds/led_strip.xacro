@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="led_strip" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- LED strip macro
+        Parameters:
+          name: Name of the LED strip
+          parent: Name of the parent link (likely to be base_link)
+          radius: Radius of the strip
+          bulb_radius: Radius (for spheres)/side (for boxes) of the LED
+          led_count: Number of LEDs in a strip
+          use_plugin: Attach the controller plugin to LEDs
+    -->
+    <xacro:macro name="led_strip" params="name parent radius:=0.08 bulb_radius:=0.005 led_count:=58 shift:=0 use_plugin:=false x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0">
+        <joint name="${name}_joint" type="fixed">
+            <origin xyz="${x} ${y} ${z}"
+                    rpy="${roll} ${pitch} ${yaw}"/>
+            <parent link="${parent}"/>
+            <child link="${name}_link"/>
+        </joint>
+
+        <link name="${name}_link">
+            <inertial>
+                <origin xyz="0 0 0"/>
+                <mass value="0.0001"/>
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+            </inertial>
+
+            <xacro:macro name="loop_links" params="link_i links_total">
+                <visual>
+                    <origin xyz="${radius*cos(2 * pi * link_i / links_total)} ${radius*sin(2 * pi * link_i / links_total)} 0"
+                            rpy="0 0 ${2 * pi * link_i / links_total}"/>
+                    <geometry>
+                        <box size="${bulb_radius} ${bulb_radius} ${bulb_radius}"/>
+                    </geometry>
+                </visual>
+                <xacro:unless value="${link_i + 1 == links_total}">
+                    <xacro:loop_links link_i="${link_i + 1}" links_total="${links_total}"/>
+                </xacro:unless>
+            </xacro:macro>
+            <xacro:loop_links link_i="0" links_total="${led_count}"/>
+        </link>
+
+        <xacro:if value="${use_plugin}">
+        <gazebo reference="${name}_link">
+            <visual>
+                <plugin name="${name}_controller" filename="libsim_leds.so">
+                    <robotNamespace></robotNamespace>
+                    <ledCount>${led_count}</ledCount>
+                </plugin>
+                <cast_shadows>false</cast_shadows>
+                <material>
+                    <ambient>0 0 0 1</ambient>
+                    <diffuse>0 0 0 1</diffuse>
+                    <specular>0 0 0 1</specular>
+                    <emissive>0 0 0 1</emissive>
+                </material>
+            </visual>
+        </gazebo>
+        </xacro:if>
+        <gazebo reference="${name}_joint">
+            <disableFixedJointLumping>true</disableFixedJointLumping>
+            <preserveFixedJoint>true</preserveFixedJoint>
+        </gazebo>
+        <!-- <gazebo>
+            <static>true</static>
+        </gazebo> -->
+    </xacro:macro>
+
+</robot>
