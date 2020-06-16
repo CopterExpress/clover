@@ -170,7 +170,6 @@ public:
 			return;
 		}
 		int totalLeds = sdf->Get<int>("ledCount");
-		gzwarn << "Total leds: " << totalLeds << "\n";
 
 		vptr = visual;
 		led_controller::get(ns).registerPlugin(this, myIndex, totalLeds);
