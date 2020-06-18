@@ -17,8 +17,9 @@
     <url type="bugtracker">https://github.com/CopterExpress/clover/issues</url>
 
     <buildtool_depend>catkin</buildtool_depend>
+    <depend>led_msgs</depend>
     <depend>xacro</depend>
-    <exec_depend>gazebo_ros</exec_depend>
+    <depend>gazebo_ros</depend>
 
     <export>
         <gazebo_ros gazebo_media_path="${prefix}"/>
