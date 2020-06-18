@@ -5,10 +5,13 @@ find_package(catkin REQUIRED)
 
 # Gazebo LED strip node
 
-find_package(gazebo REQUIRED)
-#include_directories(${GAZEBO_INCLUDE_DIRS})
-#link_directories(${GAZEBO_LIBRARY_DIRS})
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
+find_package(gazebo)
+
+# Gazebo does not seem to export GAZEBO_FOUND, so here's a matching hack
+if (NOT "${GAZEBO_CONFIG_INCLUDED}")
+  message(STATUS "Gazebo not found, skipping")
+  return()
+endif()
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
