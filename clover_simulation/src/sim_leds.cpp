@@ -5,7 +5,14 @@
 #include <ros/callback_queue.h>
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/rendering/rendering.hh>
+
+#if GAZEBO_MAJOR_VERSION >= 9
 #include <ignition/math/Color.hh>
+using GazeboColor = ignition::math::Color;
+#else
+#include <gazebo/common/Color.hh>
+using GazeboColor = gazebo::common::Color;
+#endif
 
 #include <string>
 #include <unordered_map>
@@ -180,7 +187,7 @@ public:
 		led_controller::get(ns).unregisterPlugin(this);
 	}
 
-	void SetColor(const ignition::math::Color& emissive)
+	void SetColor(const GazeboColor& emissive)
 	{
 		vptr->SetEmissive(emissive);
 	}
@@ -195,7 +202,7 @@ bool led_controller::LedController::setLeds(led_msgs::SetLEDs::Request &req, led
 	for(const auto& led : req.leds)
 	{
 		if (led.index < registeredLeds.size()) {
-			auto color = ignition::math::Color(led.r / 255.0f, led.g / 255.0f, led.b / 255.0f);
+			auto color = GazeboColor(led.r / 255.0f, led.g / 255.0f, led.b / 255.0f);
 			auto ledPlugin = registeredLeds[led.index];
 			if (ledPlugin) ledPlugin->SetColor(color);
 			ledState.leds[led.index].r = led.r;
@@ -215,7 +222,7 @@ void led_controller::LedController::handleLedsMsg(const led_msgs::LEDStateArrayC
 	{
 		if (led.index < registeredLeds.size())
 		{
-			auto color = ignition::math::Color(led.r / 255.0f, led.g / 255.0f, led.b / 255.0f);
+			auto color = GazeboColor(led.r / 255.0f, led.g / 255.0f, led.b / 255.0f);
 			auto ledPlugin = registeredLeds[led.index];
 			if (ledPlugin) ledPlugin->SetColor(color);
 		}
