@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot name="rpi_camera" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:include filename="$(find clover_description)/urdf/constants.urdf.xacro"/>
   <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
 
   <xacro:macro name="distance_sensor" params="name:=lidar_vl53l1x parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 range_min:=0.01 range_max:=4.0 resolution:=0.01 rate:=10">
