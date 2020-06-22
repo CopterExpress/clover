@@ -5,7 +5,7 @@
 Для запуска наберите в [консоли Raspberry Pi](ssh.md):
 
 ```bash
-rosrun clever selfcheck.py
+rosrun clover selfcheck.py
 ```
 
 <img src="../assets/selfcheck.png">

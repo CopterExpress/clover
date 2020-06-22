@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Perform a "standalone install" in a Docker container
-
+set -e
 # Step 1: Install pip
 apt update
 apt install -y curl

@@ -12,8 +12,8 @@
 
 <script src="js/roslib.js"></script>
 <script type="text/javascript">
-	document.querySelector("#wvs").href = location.origin + ':8080';
-	document.querySelector("#butterfly").href = location.origin + ':57575';
+	document.querySelector("#wvs").href = location.protocol + '//' + location.hostname + ':8080';
+	document.querySelector("#butterfly").href = location.protocol + '//' + location.hostname + ':57575';
 
 	// Determine image version
 	var ros = new ROSLIB.Ros({ url: 'ws://' + location.hostname + ':9090' });

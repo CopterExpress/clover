@@ -1,8 +1,10 @@
 # Подключение к Клеверу по Wi-Fi
 
-На [образе для RPi](image.md) преднастроена раздача Wi-Fi с SSID `CLEVER-xxxx`, где xxxx – 4 случайных цифры, назначаемых при первом включении Raspberry Pi.
+> **Note** Документация для версий [образа](image.md), начиная с **0.20**. Для более ранних версий см. [документацию для версии **0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/ru/wifi.md).
 
-Подключитесь к Wi-Fi, используя пароль `cleverwifi`.
+На [образе для RPi](image.md) преднастроена раздача Wi-Fi с SSID `clover-xxxx`, где xxxx – 4 случайных цифры, назначаемых при первом включении Raspberry Pi.
+
+Подключитесь к Wi-Fi, используя пароль `cloverwifi`.
 
 <img src="../assets/ssid.png" width="300px" alt="Подключение по Wi-Fi">
 

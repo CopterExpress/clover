@@ -20,22 +20,24 @@
 
 ## Подключение по UART
 
+> **Note** В версии образа **0.20** пакет и сервис `clever` был переименован в `clover`. Для более ранних версий см. документацию для версии [**0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/ru/connection.md).
+
 <!-- TODO схема подключения -->
 
 Дополнительным способом подключения является подключение подключение по интерфейсу UART.
 
 1. Подключите Raspberry Pi к полетному контроллеру по UART.
 2. [Подключитесь в Raspberry Pi по SSH](ssh.md).
-3. Поменяйте в launch-файле Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`) тип подключения на UART:
+3. Поменяйте в launch-файле Клевера (`~/catkin_ws/src/clover/clover/launch/clover.launch`) тип подключения на UART:
 
     ```xml
     <arg name="fcu_conn" default="uart"/>
     ```
 
-    При изменении launch-файла необходимо перезапустить пакет `clever`:
+    При изменении launch-файла необходимо перезапустить сервис `clover`:
 
     ```bash
-    sudo systemctl restart clever
+    sudo systemctl restart clover
     ```
 
 > **Hint** Для корректной работы подключения Raspberry Pi и полетного контроллера по UART необходимо установить значение параметра `SYS_COMPANION` на 921600.

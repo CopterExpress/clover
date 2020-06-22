@@ -8,7 +8,7 @@ Running the technology "Optical Flow" offers the possibility of POSCTL flight mo
 
 The use of a rangefinder is essential. [Connect and setup laser-ranging sensor VL53L1X](laser.md), according to the manual.
 
-Enable Optical Flow in the file `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+Enable Optical Flow in the file `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
 ```xml
 <arg name="optical_flow" default="true"/>
@@ -20,7 +20,7 @@ Optical Flow publishes data in `mavros/px4flow/raw/send` topic. In the topic `op
 
 ## Setup of the flight controller
 
-> **Hint** Suggested parameters are applied automatically in [our custom PX4 firmware](firmware.md#modified-firmware-for-clever).
+> **Hint** Suggested parameters are applied automatically in [our custom PX4 firmware](firmware.md#modified-firmware-for-clover).
 
 When using **EKF2** (parameter `SYS_MC_EST_GROUP` = `ekf2`):
 

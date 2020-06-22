@@ -20,22 +20,24 @@ USB connection is the preferred way to connect to the flight controller.
 
 ## UART connection
 
+> **Note** In the image version **0.20** `clever` package and service was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/connection.md) for older images.
+
 <!-- TODO: Connection scheme -->
 
 UART connection is another way for the Raspberry Pi and FCU to communicate.
 
 1. Connect Raspberry Pi to your FCU using a UART cable.
 2. [Connect to the Raspberry Pi over SSH](ssh.md).
-3. Change the connection type in `~/catkin_ws/src/clever/clever/launch/clever.launch` to UART:
+3. Change the connection type in `~/catkin_ws/src/clover/clover/launch/clover.launch` to UART:
 
     ```xml
     <arg name="fcu_conn" default="uart"/>
     ```
 
-    Be sure to restart the `clever` service after editing the .launch file:
+    Be sure to restart the `clover` service after editing the .launch file:
 
     ```bash
-    sudo systemctl restart clever
+    sudo systemctl restart clover
     ```
 
 > **Hint** Set the `SYS_COMPANION` PX4 parameter to 921600 to enable UART on the FCU.

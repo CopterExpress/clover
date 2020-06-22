@@ -361,7 +361,7 @@ rospy.loginfo('flip')
 flip()
 ```
 
-Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clever). Before running a flip, take all necessary safty precautions.
+Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clover). Before running a flip, take all necessary safty precautions.
 
 ### # {#calibrate-gyro}
 

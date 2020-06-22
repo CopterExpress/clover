@@ -1,6 +1,6 @@
 # Подключение QGroundControl по Wi-Fi
 
-Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi. Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `CLEVER-xxxx`.
+Возможны контроль, управление, калибровка и настройка полетного контроллера квадрокоптера с помощью программы QGroundControl по Wi-Fi. Для этого необходимо [подключиться к Wi-Fi](wifi.md) сети `clover-xxxx`.
 
 ## Подключение
 
@@ -20,12 +20,12 @@
 
 ## UDP
 
-Также возможна настройка подключения по протоколу UDP. Для выбора различных вариантов подключения по UDP необходимо отредактировать параметр `gcs_bridge` в launch-файле `/home/pi/catkin_ws/src/clever/clever/launch/clever.launch`.
+Также возможна настройка подключения по протоколу UDP. Для выбора различных вариантов подключения по UDP необходимо отредактировать параметр `gcs_bridge` в launch-файле `/home/pi/catkin_ws/src/clover/clover/launch/clover.launch`.
 
-После изменения launch-файла необходимо перезагрузить сервис clever:
+После изменения launch-файла необходимо перезагрузить сервис clover:
 
 ```(bash)
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 ## UDP-бридж с автоматическим подключением
@@ -40,7 +40,7 @@ sudo systemctl restart clever
 
     ![QGroundControl UDP connection](../assets/bridge_udp.png)
 
-3. Выберите в списке подключений *CLEVER* и нажмите *Connect*.
+3. Выберите созданное подключение и нажмите *Connect*.
 
 ## UDP broadcast-бридж
 

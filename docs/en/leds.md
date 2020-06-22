@@ -1,6 +1,6 @@
 # Working with a LED strip
 
-> **Note** The following applies to image version 0.18 and up. See [previous version of the article](leds_old.md) for older images.
+> **Note** Documentation for the [image](image.md) versions, starting with **0.20**. For older versions refer to [documentation for version **0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/leds.md).
 
 Clover drone kits contain addressable LED strips based on *ws281x* drivers. Each LED may be set to any one of 16 million possible colors (each color is encoded by a 24-bit number). This allows making the Clover flight more spectacular, as well as show flight modes, display stages of current user program, and notify the pilot of other events.
 
@@ -17,13 +17,13 @@ Our [Raspberry Pi image](image.md) contains preinstalled modules for interfacing
 ## High-level control
 
 1. Connect the +5v and GND leads of your LED to a power source and the DIN (data in) lead to GPIO21. Consult the [assembly instructions](assemble_4.md#Connecting-the-LED-strip-to-Raspberry-Pi) for details.
-2. Enable LED strip support in `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+2. Enable LED strip support in `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
     ```xml
     <arg name="led" default="true"/>
     ```
 
-3. Configure the *ws281x* parameters in `~/catkin_ws/src/clever/clever/launch/led.launch`. Change the number of addressable LEDs and the GPIO pin used for control to match your configuration:
+3. Configure the *ws281x* parameters in `~/catkin_ws/src/clover/clover/launch/led.launch`. Change the number of addressable LEDs and the GPIO pin used for control to match your configuration:
 
     ```xml
     <param name="led_count" value="30"/>  <!-- Number of LEDs in the strip -->
@@ -50,13 +50,11 @@ Python example:
 
 ```python
 import rospy
-from clever.srv import SetLEDEffect
+from clover.srv import SetLEDEffect
 
-# ...
+rospy.init_node('flight')
 
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)  # define proxy to ROS-service
-
-# ..
 
 set_effect(r=255, g=0, b=0)  # fill strip with red color
 rospy.sleep(2)
@@ -88,7 +86,7 @@ rosservice call /led/set_effect "{effect: 'rainbow'}"
 
 ## Configuring event visualizations
 
-It is possible to display current flight controller status and notify the user about some events with the LED strip. This is configured in the `~/catkin_ws/src/clever/clever/launch/led.launch` file in the *events effects table* section. Here is a sample configuration:
+It is possible to display current flight controller status and notify the user about some events with the LED strip. This is configured in the `~/catkin_ws/src/clover/clover/launch/led.launch` file in the *events effects table* section. Here is a sample configuration:
 
 ```xml
 startup: { r: 255, g: 255, b: 255 }
@@ -110,7 +108,7 @@ The left part is one of the possible events that the strip reacts to. The right 
 
 > **Note** You need to [calibrate the power sensor](power.md#calibrating-the-power-sensor) for the `low_battery` event to work properly.
 
-In order to disable LED strip notifications set `led_notify` argument in `~/catkin_ws/src/clever/clever/launch/led.launch` to `false`:
+In order to disable LED strip notifications set `led_notify` argument in `~/catkin_ws/src/clover/clover/launch/led.launch` to `false`:
 
 ```xml
 <arg name="led_notify" default="false"/>
@@ -127,11 +125,9 @@ import rospy
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 
-# ...
+rospy.init_node('flight')
 
 set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)  # define proxy to ROS service
-
-# ...
 
 # switch LEDs number 0, 1 and 2 to red, green and blue color:
 set_leds([LEDState(0, 255, 0, 0), LEDState(1, 0, 255, 0), LEDState(2, 0, 0, 255)])
