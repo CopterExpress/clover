@@ -1,0 +1,36 @@
+<launch>
+    <arg name="mav_id" default="0"/>
+    <arg name="est" default="lpe"/> <!-- PX4 estimator: lpe, ekf2 -->
+    <arg name="vehicle" default="iris"/>
+    <arg name="main_camera" default="true"/> <!-- Simulated vision position estimation camera (optical flow, ArUco) -->
+    <arg name="rangefinder" default="true"/> <!-- Simulated downward-facing rangefinder, vl53l1x-like -->
+    <arg name="led" default="true"/> <!-- Simulated LED strip, ws281x-like -->
+    <arg name="gps" default="false"/> <!--Simulated GPS module -->
+
+    <!-- Gazebo instance -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <!-- Workaround for crashes in VMware -->
+        <env name="SVGA_VGPU10" value="0"/>
+        <arg name="gui" value="true"/>
+        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover.world"/>
+        <arg name="verbose" value="true"/>
+    </include>
+
+    <!-- PX4 instance -->
+    <node name="sitl" pkg="px4" type="px4" output="screen" args="$(find px4) $(find px4)/posix-configs/SITL/init/$(arg est)/$(arg vehicle)" required="true"/>
+
+    <!-- Clover model -->
+    <include file="$(find clover_description)/launch/spawn_drone.launch">
+        <arg name="main_camera" value="$(arg main_camera)"/>
+        <arg name="rangefinder" value="$(arg rangefinder)"/>
+        <arg name="led" value="$(arg led)"/>
+        <arg name="gps" value="$(arg gps)"/>
+    </include>
+
+    <!-- Clover services -->
+    <include file="$(find clover)/launch/clover.launch">
+        <arg name="simulator" value="true"/>
+        <arg name="fcu_conn" value="udp"/>
+        <arg name="fcu_ip" value="127.0.0.1"/>
+    </include>
+</launch>
