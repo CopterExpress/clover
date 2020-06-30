@@ -73,8 +73,10 @@ jobs:
       node_js:
         - "10"
       before_script:
+        - sudo apt update && sudo apt install -y calibre
         - npm install gitbook-cli -g
         - npm install markdownlint-cli -g
+        - npm install svgexport -g
         - gitbook -V
         - markdownlint -V
       script:
@@ -83,6 +85,8 @@ jobs:
         - ./check_unused_assets.py
         - gitbook install
         - gitbook build
+        - gitbook pdf
+        - cp *.pdf _book/
       deploy:
         provider: pages
         local_dir: _book
