@@ -86,7 +86,7 @@ jobs:
         - gitbook install
         - gitbook build
         - gitbook pdf ./ _book/clover.pdf
-        deploy:
+      deploy:
         provider: pages
         local_dir: _book
         skip_cleanup: true
