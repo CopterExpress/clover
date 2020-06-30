@@ -12,4 +12,4 @@ If you have studied the documentation but have not found an answer to your quest
 
 We also have a chat for programmers coding for PX4, autonomous navigation indoors, and drone swarms: [@DroneCode](tg://resolve?domain=DroneCode).
 
-You can download [PDF-version](../clover_en.pdf) of this documentation.
+You can download [PDF-version](https://clover.coex.tech/clover_en.pdf) of this documentation.
