@@ -11,3 +11,5 @@ The Clover platform contains a [pre-configured image for Raspberry Pi](image.md)
 If you have studied the documentation but have not found an answer to your question, join our support chat and our specialists will be happy to answer you: [@COEXHelpdesk](tg://resolve?domain=COEXHelpdesk).
 
 We also have a chat for programmers coding for PX4, autonomous navigation indoors, and drone swarms: [@DroneCode](tg://resolve?domain=DroneCode).
+
+You can download [PDF-version](../clover_en.pdf) of this documentation.
