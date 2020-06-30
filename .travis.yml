@@ -73,7 +73,8 @@ jobs:
       node_js:
         - "10"
       before_script:
-        - sudo apt update && sudo apt install -y calibre
+        - sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
+        - sudo apt update && sudo apt install -y calibre msttcorefonts
         - npm install gitbook-cli -g
         - npm install markdownlint-cli -g
         - npm install svgexport -g
