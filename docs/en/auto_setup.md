@@ -1,5 +1,7 @@
 # Step-by-step guide on autonomous flight with Clover 4
 
+> **Note** The following applies to [image version](image.md) **0.20** and up. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/auto_setup.md) for older images.
+
 This manual contains links to other articles in which each of the topics addressed is discussed in more detail. If you encounter difficulties while reading one of these articles, it is recommended that you return to this manual, since many operations here are described step by step and some unnecessary steps are skipped.
 
 ## Raspberry Pi initial setup
@@ -55,10 +57,10 @@ Show list of files and folders:
 ls
 ```
 
-Go to certain directory by entering the path too it (catkin_ws/src/clever/clever/launch/):
+Go to certain directory by entering the path too it (catkin_ws/src/clover/clover/launch/):
 
 ```bash
-cd catkin_ws/src/clever/clever/launch/
+cd catkin_ws/src/clover/clover/launch/
 ```
 
 Go to home directory:
@@ -73,10 +75,10 @@ Open the file `file.py`:
 nano file.py
 ```
 
-Open the file clever.launch by entering the full path to it (it works even if you're in a different directory):
+Open the file clover.launch by entering the full path to it (it works even if you're in a different directory):
 
 ```bash
-nano ~/catkin_ws/src/clever/clever/launch/clever.launch
+nano ~/catkin_ws/src/clover/clover/launch/clover.launch
 ```
 
 Save file (press sequentially):
@@ -103,16 +105,16 @@ Raspberry Pi complete reboot:
 sudo reboot
 ```
 
-Reboot only Clever package:
+Reboot only the `clover` service:
 
 ```bash
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 Perform selfcheck:
 
 ```bash
-rosrun clever selfcheck.py
+rosrun clover selfcheck.py
 ```
 
 Stop a program:
@@ -127,10 +129,10 @@ Start a program `myprogram.py` using Python:
 python myprogram.py
 ```
 
-Journal of the events related to Clever package. Scroll the list by pressing Enter or Ctrl+V (scrolls faster):
+Journal of the events related to `clover` package. Scroll the list by pressing Enter or Ctrl+V (scrolls faster):
 
 ```bash
-journalctl -u clever
+journalctl -u clover
 ```
 
 Open the sudoers file with super user rights (this particular file doesn't open without sudo. You can use sudo to open other locked files or run programs that require super user rights):
@@ -141,45 +143,45 @@ sudo nano /etc/sudoers
 
 ## Setting Raspberry Pi for autonomous flight
 
-Most of the parameters for autonomous flight are located in the following directory: `~/catkin_ws/src/clever/clever/launch/`.
+Most of the parameters for autonomous flight are located in the following directory: `~/catkin_ws/src/clover/clover/launch/`.
 
 - Enter the directory:
 
   ```bash
-  cd ~/catkin_ws/src/clever/clever/launch/
+  cd ~/catkin_ws/src/clover/clover/launch/
   ```
 
   The `~` symbol stands for home directory of your user. If you are already in the directory, you can go with just the command:
 
   ```bash
-  cd catkin_ws/src/clever/clever/launch/
+  cd catkin_ws/src/clover/clover/launch/
   ```
 
-  > **Hint** Tab can automatically complete the names of files, folders or commands. You need to start entering the desired name and press Tab. If there are no conflicts, the name will be auto completed. For example, to quickly enter the path to the `catkin_ws/src/clever/clever/launch/` directory, after entering `cd`, you can start typing the following key combination:`c-Tab-s-Tab-c-Tab-c-Tab-l-Tab`. This way you can save a lot of time when writing a long command, and also avoid possible mistakes in writing the path.
+  > **Hint** Tab can automatically complete the names of files, folders or commands. You need to start entering the desired name and press Tab. If there are no conflicts, the name will be auto completed. For example, to quickly enter the path to the `catkin_ws/src/clover/clover/launch/` directory, after entering `cd`, you can start typing the following key combination:`c-Tab-s-Tab-c-Tab-c-Tab-l-Tab`. This way you can save a lot of time when writing a long command, and also avoid possible mistakes in writing the path.
 
 - In this folder you need to configure three files:
 
-  - `clever.launch`
+  - `clover.launch`
   - `aruco.launch`
   - `main_camera.launch`
 
-- Open the file `clever.launch`:
+- Open the file `clover.launch`:
 
   ```bash
-  nano clever.launch
+  nano clover.launch
   ```
 
   You must be in the directory in which the file is located. If you are in other directory, you can open the file by writing the full path to it:
 
   ```bash
-  nano ~/catkin_ws/src/clever/clever/launch/clever.launch
+  nano ~/catkin_ws/src/clover/clover/launch/clover.launch
   ```
 
   If two users are editing a file at the same time, or if previously the file was closed incorrectly, nano will not display the file contents, it will ask for permission to display the file. To grant permission, press Y.
 
   If the content of a file is still empty, you may have entered the file name incorrectly. You need to pay attention to the extension. If you entered a wrong name or extension, nano will create a new empty file named this way, which is undesirable. Such file should be deleted.
 
-- Find the following line in clever.launch file:
+- Find the following line in clover.launch file:
 
   ```xml
   <arg name="aruco" default="false"/>
@@ -222,7 +224,7 @@ Most of the parameters for autonomous flight are located in the following direct
   - the marker map numbering is from the top left corner (key `--top-left`)
 
   ```bash
-  rosrun aruco_pose genmap.py 0.335 10 10 1 1 0 > ~/catkin_ws/src/clever/aruco_pose/map/map.txt --top-left
+  rosrun aruco_pose genmap.py 0.335 10 10 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/map/map.txt --top-left
   ```
 
   In most maps, numbering starts with a zero marker. Also, in most cases, numbering starts from the upper left corner, so when generating, it is very important to enter the key `--top-left`.
@@ -269,10 +271,10 @@ and replace map.txt with your map name.
   Ctrl+x; y; Enter
   ```
 
-- Restart the `clever` service:
+- Restart the `clover` service:
 
   ```bash
-  sudo systemctl restart clever
+  sudo systemctl restart clover
   ```
 
 ## Setting the flight controller
@@ -304,7 +306,7 @@ Perform selfcheck when you have set up your drone or when you have faced problem
 - Run the command:
 
   ```bash
-  rosrun clever selfcheck.py
+  rosrun clover selfcheck.py
   ```
 
 ## Writing a program
@@ -368,7 +370,7 @@ The article "[Simple OFFBOARD](simple_offboard.md)" describes working with `simp
 
 ## Writing the program to the drone
 
-The easiest way to send the program is to copy the content of the program, create a new file on the Clever command line and paste the program text into the file.
+The easiest way to send the program is to copy the content of the program, create a new file in the command line and paste the program text into the file.
 
 - To create the file `myprogram.py`, run the command:
 

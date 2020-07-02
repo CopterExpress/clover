@@ -14,7 +14,7 @@ Install package `ros-melodic-desktop-full` or `ros-melodic-desktop` using the [i
 Start rviz
 ---
 
-To start еру visualization of the state of Clover in real time, connect to it via Wi-Fi (`CLEVER-xxx`) and run rviz, specifying an appropriate ROS_MASTER_URI:
+To start еру visualization of the state of Clover in real time, connect to it via Wi-Fi (`clover-xxx`) and run rviz, specifying an appropriate ROS_MASTER_URI:
 
 ```(bash)
 ROS_MASTER_URI=http://192.168.11.1:11311 rviz

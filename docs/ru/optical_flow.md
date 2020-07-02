@@ -8,7 +8,7 @@
 
 Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
 
-Включите Optical Flow в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+Включите Optical Flow в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
 ```xml
 <arg name="optical_flow" default="true"/>

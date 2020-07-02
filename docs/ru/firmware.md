@@ -6,7 +6,7 @@ Pixhawk или Pixracer можно прошить, используя QGroundCon
 Прошивка для Клевера
 ---
 
-Для Клевера рекомендуется использование специальной сборки PX4, которая содержит необходимые исправления и более подходящие параметры по умолчанию. Используйте последний стабильный релиз в [GitHub-репозитории](https://github.com/CopterExpress/Firmware/releases), содержащий слово `clever`, например `v1.8.2-clever.4`.
+Для Клевера рекомендуется использование специальной сборки PX4, которая содержит необходимые исправления и более подходящие параметры по умолчанию. Используйте последний стабильный релиз в [GitHub-репозитории](https://github.com/CopterExpress/Firmware/releases), содержащий слово `clover`, например `v1.8.2-clover.4`.
 
 <div id="release" style="display:none">
 <p>Последний стабильный релиз: <strong><a id="download-latest-release"></a></strong>.</p>
@@ -25,8 +25,8 @@ Pixhawk или Pixracer можно прошить, используя QGroundCon
         // look for stable release
         let stable;
         for (let release of data) {
-            let clever = release.name.indexOf('clever') != -1;
-            if (clever && !release.prerelease && !release.draft) {
+            let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
+            if (clover && !release.prerelease && !release.draft) {
                 stable = release;
                 break;
             }

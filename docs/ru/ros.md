@@ -84,11 +84,11 @@ rostopic echo /mavros/state
 Пример вызова ROS-сервиса из языка Python:
 
 ```python
-from clever.srv import GetTelemetry
+from clover.srv import GetTelemetry
 
 # ...
 
-# Создаем обертку над сервисом get_telemetry пакета clever с типом GetTelemetry:
+# Создаем обертку над сервисом get_telemetry пакета clover с типом GetTelemetry:
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 
 # Вызываем сервис и получаем телеметрию квадрокоптера:

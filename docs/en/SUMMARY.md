@@ -12,6 +12,7 @@
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
   * [RC setup](radio.md)
+    * [Using FS-A8S](rc_flysky_a8s.md)
   * [Flight modes](modes.md)
   * [Power setup](power.md)
   * [Failsafe configuration](failsafe.md)
@@ -42,7 +43,8 @@
   * [Interfacing with a sonar](sonar.md)
   * [Computer vision basics](camera.md)
   * [Using rviz and rqt](rviz.md)
-  * [Software autorun](autolaunch.md)  
+  * [Software autorun](autolaunch.md)
+  * [Using JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * Supplementary materials
@@ -88,4 +90,5 @@
   * [Copter Hack 2019](copterhack2019.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
+  * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)

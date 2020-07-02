@@ -84,11 +84,11 @@ A service can be assimilated to the a function that can be called from one node,
 An example ROS service invoking from Python:
 
 ```python
-from clever.srv import GetTelemetry
+from clover.srv import GetTelemetry
 
 # ...
 
-# Creating a wrapper for the get_telemetry service of the clever package with the GetTelemetry type:
+# Creating a wrapper for the get_telemetry service of the clover package with the GetTelemetry type:
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 
 # Invoking the service, and receiving the quadcopter telemetry:

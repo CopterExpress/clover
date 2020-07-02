@@ -701,7 +701,7 @@ def check_preflight_status():
 
 @check('Network')
 def check_network():
-    ros_hostname = os.environ.get('ROS_HOSTNAME').strip()
+    ros_hostname = os.environ.get('ROS_HOSTNAME', '').strip()
 
     if not ros_hostname:
         failure('no ROS_HOSTNAME is set')

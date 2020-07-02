@@ -5,6 +5,7 @@
 * [Безопасность](safety.md)
 * Сборка
   * [Клевер 4.2](assemble_4_2.md)
+  * [Клевер 4.1](assemble_4_1.md)
   * [Клевер 4.0](assemble_4_0.md)
   * [Клевер 3](assemble_3.md)
   * [Клевер 2](assemble_2.md)
@@ -12,6 +13,7 @@
   * [Первоначальная настройка](setup.md)
   * [Калибровка датчиков](calibration.md)
   * [Настройка пульта](radio.md)
+    * [Работа с FS-A8S](rc_flysky_a8s.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
   * [Настройка failsafe](failsafe.md)
@@ -43,6 +45,7 @@
   * [Компьютерное зрение](camera.md)
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
+  * [Использование JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * Дополнительные материалы

@@ -18,7 +18,7 @@ rosrun rosserial_arduino make_libraries.py .
 
 ## Настройка Raspberry Pi
 
-Для запуска `rosserial` создайте файл `arduino.launch` в каталоге `~/catkin_ws/src/clever/clever/launch/` со следующим содержимым:
+Для запуска `rosserial` создайте файл `arduino.launch` в каталоге `~/catkin_ws/src/clover/clover/launch/` со следующим содержимым:
 
 ```xml
 <launch>
@@ -31,19 +31,19 @@ rosrun rosserial_arduino make_libraries.py .
 Чтобы единоразово запустить программу на Arduino, можно будет воспользоваться командой:
 
 ```bash
-roslaunch clever arduino.launch
+roslaunch clover arduino.launch
 ```
 
-Чтобы запускать связку с Arduino при старте системы автоматически, необходимо добавить запуск созданного launch-файла в основной launch-файл Клевера (`~/catkin_ws/src/clever/clever/launch/clever.launch`). Добавьте в конец этого файла строку:
+Чтобы запускать связку с Arduino при старте системы автоматически, необходимо добавить запуск созданного launch-файла в основной launch-файл Клевера (`~/catkin_ws/src/clover/clover/launch/clover.launch`). Добавьте в конец этого файла строку:
 
 ```xml
-<include file="$(find clever)/launch/arduino.launch"/>
+<include file="$(find clover)/launch/arduino.launch"/>
 ```
 
-При изменении launch-файла необходимо перезапустить пакет `clever`:
+При изменении launch-файла необходимо перезапустить пакет `clover`:
 
 ```bash
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 ## Задержки
@@ -79,11 +79,11 @@ for(int i=0; i<8; i++) {
 // Подключение библиотек для работы с rosseral
 #include <ros.h>
 
-// Подключение заголовочных файлов сообщений пакета Clever и MAVROS
-#include <clever/Navigate.h>
+// Подключение заголовочных файлов сообщений пакета clover и MAVROS
+#include <clover/Navigate.h>
 #include <mavros_msgs/SetMode.h>
 
-using namespace clever;
+using namespace clover;
 using namespace mavros_msgs;
 
 ros::NodeHandle nh;
@@ -184,7 +184,7 @@ void loop()
 
 // ...
 
-#include <clever/GetTelemetry.h>
+#include <clover/GetTelemetry.h>
 
 // ...
 

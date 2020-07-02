@@ -69,7 +69,7 @@ sudo systemctl disable hciuart.service
 
 ## Default image configuration
 
-In image CLEVER, we initially disabled Mini UART and the Bluetooth module.
+In the [Clover image for RPi](image.md), we initially disabled Mini UART and the Bluetooth module.
 
 Bugs
 ----

@@ -1,6 +1,8 @@
 # Working with the camera
 
-Make sure the camera is enabled in the `~/catkin_ws/src/clever/clever/launch/clever.launch` file:
+> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/camera.md) for older images.
+
+Make sure the camera is enabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
 
 ```xml
 <arg name="main_camera" default="true"/>
@@ -8,10 +10,10 @@ Make sure the camera is enabled in the `~/catkin_ws/src/clever/clever/launch/cle
 
 Also make sure that [position and orientation of the camera](camera_setup.md) is correct.
 
-The `clever` package must be restarted after the launch-file has been edited:
+The `clover` service must be restarted after the launch-file has been edited:
 
 ```(bash)
-sudo systemctl restart clever
+sudo systemctl restart clover
 ```
 
 You may use rqt or [web_video_server](web_video_server.md) to view the camera stream.
@@ -20,10 +22,10 @@ You may use rqt or [web_video_server](web_video_server.md) to view the camera st
 
 If the camera stream is missing, try using the [`raspistill`](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md) utility to check whether the camera works.
 
-First, stop the Clever service:
+First, stop the `clover` service:
 
 ```bash
-sudo systemctl stop clever
+sudo systemctl stop clover
 ```
 
 Then use `raspistill` to capture an image from the camera:
