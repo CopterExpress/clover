@@ -75,7 +75,7 @@
 
 ### COEX Pix
 
-> **Hint** Перед установкой резиновых стоек, накрутите 2 слоя нейлоновых гаек, для более прочного крепления или откусите лишнюю резьбу с помощью бокорезов.
+> **Hint** Перед установкой демпферных стоек, накрутите 2 слоя нейлоновых гаек, для более прочного крепления или откусите лишнюю резьбу с помощью бокорезов.
 
 Установите демпферные стойки 6мм, на них закрепите *COEX Pix* с помощью нейлоновых гаек.
 
@@ -97,11 +97,11 @@
 
     <img src="../assets/assembling_clever4_2/fc_connection_1.png" width=300 class="zoom border center">
 
-2. Подключите кабель питания к плате распределения питания и соответствующему разъему на полетном контроллере.
+2. Подключите кабель питания к плате распределения питания(PDB) и соответствующему разъему на полетном контроллере.
 
     <img src="../assets/assembling_clever4_2/fc_connection_2.png" width=300 class="zoom border center">
 
-Установите алюминиевые стойки 40мм на болты М3х12.
+3. Установите алюминиевые стойки 40мм на винты М3х12.
 
 <div class="image-group">
     <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
@@ -117,7 +117,7 @@
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью болто М3х6 и М3х12.
+2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х6 и М3х12 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -197,7 +197,7 @@
 
     <img src="../assets/assembling_clever4_2/guard_2.png" width=300 class="zoom border center">
 
-3. Установите монтажную деку и закрепите ее болтами М3х8.
+3. Установите монтажную деку и закрепите ее винтами М3х8.
 
     <img src="../assets/assembling_clever4_2/guard_3.png" width=300 class="zoom border center">
 
