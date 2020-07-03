@@ -103,10 +103,10 @@
 
 3. Установите алюминиевые стойки 40мм на винты М3х12.
 
-<div class="image-group">
-    <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
-    <img src="../assets/assembling_clever4_2/fc_connection_4.png" width=300 class="zoom border">
-</div>
+    <div class="image-group">
+        <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
+        <img src="../assets/assembling_clever4_2/fc_connection_4.png" width=300 class="zoom border">
+    </div>
 
 ## Установка Raspberry Pi
 
@@ -153,7 +153,11 @@
 
     <img src="../assets/assembling_clever4_2/raspberry_10.png" width=300 class="zoom border center">
 
-11. Подключите шлейф камеры к *Raspberry Pi*.
+11. Подключите радиоприемник к полетному контроллеру используя разъем *RCIN*.
+
+    <img src="../assets/assembling_clever4_2/radio.png" width=300 class="zoom border center">
+
+12. Подключите шлейф камеры к *Raspberry Pi*.
 
     <img src="../assets/assembling_clever4_2/raspberry_11.png" width=300 class="zoom border center">
 
@@ -175,17 +179,17 @@
 
     <img src="../assets/assembling_clever4_2/led_4.png" width=300 class="zoom border center">
 
-5. За крепите ножки с помощью самоконтрящихся гаек и винтов М3х8.
+5. Закрепите ножки с помощью самоконтрящихся гаек и винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
 6. Подключите питание светодиодной ленты(красный, черный кабели) в короткий разъем JST на плате распределения питания.
 
-    <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
 
 7. Подключите сигнальный выход светодиодной ленты(белый кабель) в *Raspberry Ri*, к пину *GPIO 21*.
 
-    <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_clever4_2/led_7.png" width=300 class="zoom border center">
 
 ## Установка защиты
 
