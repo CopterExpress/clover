@@ -5,6 +5,7 @@
   <xacro:arg name="rangefinder" default="true"/>
   <xacro:arg name="led" default="true"/>
   <xacro:arg name="gps" default="true"/>
+  <xacro:arg name="maintain_camera_rate" default="false"/>
 
   <xacro:include filename="$(find clover_description)/urdf/clover/clover4_base.xacro" />
   <xacro:include filename="$(find clover_description)/urdf/sensors/rpi_cam.urdf.xacro"/>
@@ -13,7 +14,7 @@
 
   <!-- Create camera plugin -->
   <xacro:if value="$(arg main_camera)">
-    <xacro:rpi_cam name="main_camera" parent="base_link" x="0.055" y="0.0" z="-0.03" roll="0" pitch="${pi / 2}" yaw="0" width="320" height="240" rate="40"/>
+    <xacro:rpi_cam name="main_camera" parent="base_link" x="0.055" y="0.0" z="-0.03" roll="0" pitch="${pi / 2}" yaw="0" width="320" height="240" rate="40" do_throttling="$(arg maintain_camera_rate)"/>
   </xacro:if>
 
   <!-- Create rangefinder plugin -->

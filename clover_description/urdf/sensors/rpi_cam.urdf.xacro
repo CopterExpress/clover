@@ -2,7 +2,7 @@
 <robot name="rpi_camera" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
 
-  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 width:=320 height:=240 rate:=40">
+  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 width:=320 height:=240 rate:=40 do_throttling:=false">
     <joint name="${name}_joint" type="fixed">
       <origin xyz="${x} ${y} ${z}"
               rpy="${roll} ${pitch} ${yaw}"/>
@@ -53,6 +53,7 @@
       height="${height}"
       rate="${rate}"
       horizontal_fov="${120 * pi / 180}"
+      do_throttling="${do_throttling}"
     />
   </xacro:macro>
 
