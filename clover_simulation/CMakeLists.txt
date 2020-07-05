@@ -42,11 +42,15 @@ target_compile_options(sim_leds PRIVATE -std=c++11)
 add_dependencies(sim_leds ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 # Gazebo throttling camera plugin
+# for some reason, CMake does not support per-target link directories, and Gazebo does not put
+# CameraPlugin into ${GAZEBO_LIBRARIES}
+
+link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_library(throttling_camera src/throttling_camera.cpp)
 
 target_include_directories(throttling_camera PRIVATE ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
-target_link_libraries(throttling_camera PRIVATE ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+target_link_libraries(throttling_camera PRIVATE ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} CameraPlugin)
 target_compile_options(throttling_camera PRIVATE -std=c++11)
 
 add_dependencies(throttling_camera ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
