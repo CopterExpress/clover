@@ -41,7 +41,7 @@ An example of a web page, working with `roslib.js`:
 
 [Taking off, landing and all the rest operations](programming.md) can be implemented in a similar way.
 
-The page should be placed in the `/home/pi/catkin_ws/src/clover/clover/www/` directory. After that, it will be available at `http://192.168.11.1/<page_name>.html`. When the page is opened, browser should show an alert with the drone telemetry and constantly print the state of the flight controller to the console.
+The page should be placed in the `/home/pi/catkin_ws/src/clover/clover/www/` directory. After that, it will be available at `http://192.168.11.1/clover/<page_name>.html`. When the page is opened, browser should show an alert with the drone telemetry and constantly print the state of the flight controller to the console.
 
 <img src="../assets/js-ros.png" class="center zoom"/>
 
@@ -49,6 +49,6 @@ See additional information in [`roslibjs` tutorial](http://wiki.ros.org/roslibjs
 
 ## Web GCS
 
-See an example of simplified web ground control station on Clover at http://192.168.11.1/gcs.html.
+See an example of simplified web ground control station on Clover at http://192.168.11.1/clover/gcs.html.
 
 <img src="../assets/web-gcs.png" class="center zoom"/>

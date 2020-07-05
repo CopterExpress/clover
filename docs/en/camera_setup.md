@@ -13,7 +13,7 @@ In order to focus the camera lens, do the following:
 1. Open the live camera stream in your browser using [web_video_server](web_video_server.md).
 2. Rotate the lens to adjust the image. Make sure the objects that are 2-3 m from the camera are in focus.
 
-|Focused image|Unfocused image|
+|Unfocused image|Focused image|
 |-|-|
 |<img src="../assets/unfocused.png" width=300 class=zoom>|<img src="../assets/focused.png" width=300 class=zoom>|
 

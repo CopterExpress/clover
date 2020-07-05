@@ -52,11 +52,9 @@
 import rospy
 from clover.srv import SetLEDEffect
 
-# ...
+rospy.init_node('flight')
 
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)  # define proxy to ROS-service
-
-# ..
 
 set_effect(r=255, g=0, b=0)  # fill strip with red color
 rospy.sleep(2)
@@ -127,11 +125,9 @@ import rospy
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 
-# ...
+rospy.init_node('flight')
 
 set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)  # define proxy to ROS service
-
-# ...
 
 # switch LEDs number 0, 1 and 2 to red, green and blue color:
 set_leds([LEDState(0, 255, 0, 0), LEDState(1, 0, 255, 0), LEDState(2, 0, 0, 255)])
