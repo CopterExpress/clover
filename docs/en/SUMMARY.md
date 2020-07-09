@@ -5,7 +5,7 @@
 * [Safety tips](safety.md)
 * Assembly
   * [Clover 4.2 assembly](assemble_4_2.md)
-  * [Clover 4.0 assembly](assemble_4_0.md)
+  * [Clover 4 assembly](assemble_4.md)
   * [Clover 3 assembly](assemble_3.md)
   * [Clover 2 assembly](assemble_2.md)
 * Configuration
