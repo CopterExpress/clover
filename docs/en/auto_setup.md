@@ -6,7 +6,7 @@ This manual contains links to other articles in which each of the topics address
 
 ## Raspberry Pi initial setup
 
-- Install Raspberry Pi and a camera on the drone according to the [manual](assemble_4.md#installing-the-raspberry-pi).
+- Install Raspberry Pi and a camera on the drone according to the [manual](assemble_4_2.md#installing-the-raspberry-pi).
 - Download the system image [here](image.md).
 - Burn the image to the microSD card.
 - Insert the card into Raspberry Pi.

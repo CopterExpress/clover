@@ -4,8 +4,9 @@
 * [Глоссарий](gloss.md)
 * [Безопасность](safety.md)
 * Сборка
-  * [Клевер 4](assemble_4.md)
+  * [Клевер 4.2](assemble_4_2.md)
   * [Клевер 4.1](assemble_4_1.md)
+  * [Клевер 4.0](assemble_4_0.md)
   * [Клевер 3](assemble_3.md)
   * [Клевер 2](assemble_2.md)
 * Настройка
