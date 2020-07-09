@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot name="camera_sensor" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:macro name="camera_sensor_base"
-      params="name width height rate horizontal_fov frame_name k1 k2 k3 p1 p2 cx cy cx_prime">
+      params="name width height rate horizontal_fov frame_name k1 k2 k3 p1 p2 cx cy cx_prime ros_plugin_name min_rate window_size max_st_dev">
     <gazebo reference="${name}_link">
       <sensor type="camera" name="${name}">
         <camera>
@@ -27,7 +27,7 @@
         <always_on>1</always_on>
         <update_rate>${rate}</update_rate>
         <visualize>1</visualize>
-        <plugin name="camera_plugin" filename="libgazebo_ros_camera.so">
+        <plugin name="camera_plugin" filename="${ros_plugin_name}">
           <alwaysOn>true</alwaysOn>
           <imageTopicName>image_raw</imageTopicName>
           <cameraTopicName>camera_info</cameraTopicName>
@@ -42,12 +42,22 @@
           <distortionK3>${k3}</distortionK3>
           <distortionT1>${p1}</distortionT1>
           <distortionT2>${p2}</distortionT2>
+          <!-- throttling_camera specific options start here -->
+          <minUpdateRate>${min_rate}</minUpdateRate>
+          <windowSize>${window_size}</windowSize>
+          <maxStDev>${max_st_dev}</maxStDev>
         </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>
 
-  <xacro:macro name="camera_sensor" params="name width height rate horizontal_fov k1:=0 k2:=0 k3:=0 p1:=0 p2:=0">
+  <xacro:macro name="camera_sensor" params="name width height rate horizontal_fov k1:=0 k2:=0 k3:=0 p1:=0 p2:=0 do_throttling:=false">
+    <xacro:if value="${do_throttling}">
+      <xacro:property name="ros_plugin_name" value="libthrottling_camera.so"/>
+    </xacro:if>
+    <xacro:unless value="${do_throttling}">
+      <xacro:property name="ros_plugin_name" value="libgazebo_ros_camera.so"/>
+    </xacro:unless>
     <xacro:camera_sensor_base
       name="${name}"
       width="${width}"
@@ -63,6 +73,10 @@
       cx="${(width + 1.0)/2.0}"
       cy="${(height + 1.0)/2.0}"
       cx_prime="${(width + 1.0)/2.0}"
+      ros_plugin_name="${ros_plugin_name}"
+      min_rate="${rate * 0.95}"
+      window_size="${rate}"
+      max_st_dev="${3.0 / rate}"
     />
 
   </xacro:macro>

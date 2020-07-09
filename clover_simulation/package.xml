@@ -20,6 +20,7 @@
     <depend>led_msgs</depend>
     <depend>xacro</depend>
     <depend>gazebo_ros</depend>
+    <depend>gazebo_plugins</depend>
 
     <export>
         <gazebo_ros gazebo_media_path="${prefix}"/>

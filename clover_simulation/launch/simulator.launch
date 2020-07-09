@@ -1,11 +1,11 @@
 <launch>
     <arg name="mav_id" default="0"/>
-    <arg name="est" default="lpe"/> <!-- PX4 estimator: lpe, ekf2 -->
-    <arg name="vehicle" default="clover"/> <!-- PX4 vehicle configuration: clover -->
+    <arg name="est" default="ekf2"/> <!-- PX4 estimator: lpe, ekf2 -->
+    <arg name="vehicle" default="clover"/> <!-- PX4 vehicle configuration: clover, clover_vpe -->
     <arg name="main_camera" default="true"/> <!-- Simulated vision position estimation camera (optical flow, ArUco) -->
     <arg name="rangefinder" default="true"/> <!-- Simulated downward-facing rangefinder, vl53l1x-like -->
     <arg name="led" default="true"/> <!-- Simulated LED strip, ws281x-like -->
-    <arg name="gps" default="true"/> <!--Simulated GPS module -->
+    <arg name="gps" default="false"/> <!--Simulated GPS module -->
 
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">

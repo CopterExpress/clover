@@ -73,8 +73,11 @@ jobs:
       node_js:
         - "10"
       before_script:
+        - sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
+        - sudo apt update && sudo apt install -y calibre msttcorefonts
         - npm install gitbook-cli -g
         - npm install markdownlint-cli -g
+        - npm install svgexport -g
         - gitbook -V
         - markdownlint -V
       script:
@@ -83,18 +86,19 @@ jobs:
         - ./check_unused_assets.py
         - gitbook install
         - gitbook build
-      # deploy:
-      #   provider: pages
-      #   local_dir: _book
-      #   skip_cleanup: true
-      #   token: ${GITHUB_OAUTH_TOKEN}
-      #   keep_history: true
-      #   target_branch: master
-      #   repo: CopterExpress/clover.coex.tech
-      #   fqdn: clover.coex.tech
-      #   verbose: true
-      #   on:
-      #     branch: master
+        - gitbook pdf ./ _book/clover.pdf
+      deploy:
+        provider: pages
+        local_dir: _book
+        skip_cleanup: true
+        token: ${GITHUB_OAUTH_TOKEN}
+        keep_history: true
+        target_branch: master
+        repo: CopterExpress/clover.coex.tech
+        fqdn: clover.coex.tech
+        verbose: true
+        on:
+          branch: master
     - stage: Annotate
       name: Auto-generate changelog
       language: python

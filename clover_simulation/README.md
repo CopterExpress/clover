@@ -68,3 +68,15 @@ The plugin will provide the following topics:
 Other nodes are not expected to write to `led/state` topic.
 
 All provided topics and services will be namespaced according to the `robotNamespace` parameter.
+
+## Throttling camera plugin (throttling_camera)
+
+By default, Gazebo camera sensors will use their `update_rate` parameter as an upper bound for the actual rate. This may result in much lower rates than expected. This may be fine for object recognition tasks where the camera is not the primary positioning sensor, but is not desirable in our case, when the camera is used for position calculation.
+
+We provide a Gazebo-ROS plugin for the camera sensor that will throttle down the simulation to maintain update rate. The plugin API is based on the `gazebo_ros_camera` plugin, and respects the following parameters in SDF:
+
+* `<minUpdateRate>` (*double*, default: same as `<updateRate>`) - least allowed publish/update rate for the camera (in Hz);
+* `<windowSize>` (*integer*, default: 10) - number of last update intervals that are considered for throttling;
+* `<maxStDev>` (*double*, default: 0.02) - maximum standard deviation value for update intervals.
+
+The simulation will be slowed down if the average update rate (averaged over `<windowSize>` samples) is lower than `<minUpdateRate>` and is consistent (standard deviation over `<windowSize>` samples is less than `<maxStDev>`).
