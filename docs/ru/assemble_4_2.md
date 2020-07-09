@@ -39,7 +39,7 @@
 
 1. При установке моторов обратите внимание на схему вращения моторов. Маркировка вращения на моторах должна совпадать со схемой вращения.
 
-    <img id="prop_rotation" src="../assets/assembling_clever4_0/props_rotation.png" width=300 class="zoom border center">
+    <img id="prop_rotation" src="../assets/assembling_clever4/props_rotation.png" width=300 class="zoom border center">
 
 2. Установите мотор на соответствующие отверстия в луче с помощью **винтов М3х5**.
 

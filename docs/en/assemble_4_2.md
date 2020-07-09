@@ -39,7 +39,7 @@
 
 1. When installing motors, pay attention to the rotation scheme of the motors. The rotation marking on the motors must match the rotation pattern.
 
-    <img id="prop_rotation" src="../assets/assembling_clever4_0/props_rotation.png" width=300 class="zoom border center">
+    <img id="prop_rotation" src="../assets/assembling_clever4/props_rotation.png" width=300 class="zoom border center">
 
 2. Mount the motor on the corresponding holes in the beam using **M3x5 screws**.
 
