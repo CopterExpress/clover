@@ -70,7 +70,6 @@
   * [Flashing ESCs](esc_firmware.md)
   * [Interfacing with Arduino](arduino.md)
   * [Connecting GPS](gps.md)
-  * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
   * [FPV Setup](fpv.md)
   * [Trainer mode](trainer_mode.md)
   * [Tinning](tinning.md)
