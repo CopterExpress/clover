@@ -1,5 +1,7 @@
 # Working with IR sensors on Raspberry Pi 3
 
+> **Caution** This article is not relevant for the latest versions of the * clover * image and works only on the versions * clover_v0.16-clover_v0.17 *.
+
 Infrared sensors are a convenient tool for transmitting any commands to the copter. They are flexible in configuration, and interaction with them is possible in Python.
 
 ## Connecting the IR receiver

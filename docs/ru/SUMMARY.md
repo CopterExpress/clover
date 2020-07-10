@@ -73,6 +73,7 @@
   * [Прошивка ESC контроллеров](esc_firmware.md)
   * [Взаимодействие с Arduino](arduino.md)
   * [Подключение GPS](gps.md)
+  * [Работа с ИК датчиками](ir_sensors.md)
   * [Установка FPV](fpv.md)
   * [Управление в режиме тренера](trainer_mode.md)
   * [Техника лужения](tinning.md)
