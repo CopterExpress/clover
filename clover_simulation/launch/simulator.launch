@@ -6,6 +6,7 @@
     <arg name="rangefinder" default="true"/> <!-- Simulated downward-facing rangefinder, vl53l1x-like -->
     <arg name="led" default="true"/> <!-- Simulated LED strip, ws281x-like -->
     <arg name="gps" default="false"/> <!--Simulated GPS module -->
+    <arg name="use_clover_physics" default="false"/> <!-- Use inertial parameters from CAD models -->
 
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -28,6 +29,7 @@
         <arg name="rangefinder" value="$(arg rangefinder)"/>
         <arg name="led" value="$(arg led)"/>
         <arg name="gps" value="$(arg gps)"/>
+        <arg name="use_clover_physics" value="$(arg use_clover_physics)"/>
     </include>
 
     <!-- Clover services -->
