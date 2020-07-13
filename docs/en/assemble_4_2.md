@@ -4,7 +4,56 @@
 
 > **Hint** During assembly, screws and racks of various sizes are used, using fasteners of the wrong size can damage the copter.
 
-<img src="../assets/assembling_clever4_2/mounts_size_en.png" width=500 class="zoom border">
+<table class="type_table">
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
+        <td>Screw M3x10</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
+        <td>Aluminium rack 40mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
+        <td>Screw M3x8</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
+        <td>Aluminium rack 20mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x6.png" width=50 class="center"></td>
+        <td>Screw M3x6</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
+        <td>Nylon rack 40mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
+        <td>Screw M3x5</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
+        <td>Nylon rack 30mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
+        <td>Screw M2x5</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
+        <td>Nylon rack 20mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
+        <td> Nut M3 (self-locking)</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
+        <td>Nylon rack 15mm</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
+        <td> Nut M3 (nylon)</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
+        <td> Nylon rack 6mm</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
+        <td>Damper rack</td>
+    </tr>
+</table>
 
 ## Frame Assembly
 

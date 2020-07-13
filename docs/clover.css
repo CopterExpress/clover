@@ -60,3 +60,8 @@ footer img {
 	float: left;
 	margin-right: .85em;
 }
+
+/*Assemble clover 4.2 article*/
+.type_table tr td {
+	padding: 14px 20px;
+}

@@ -4,7 +4,56 @@
 
 > **Hint** Во время сборки используются винты и стойки различных размеров, использование крепежа не соответствующего размера может повредить коптер.
 
-<img src="../assets/assembling_clever4_2/mounts_size.png" width=500 class="zoom border">
+<table class="type_table">
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
+        <td >Винт M3x10</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
+        <td >Стойка алюминиевая 40мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
+        <td >Винт M3x8</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
+        <td >Стойка алюминиевая 20мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x6.png" width=50 class="center"></td>
+        <td >Винт M3x6</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
+        <td >Стойка нейлоновая 40мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
+        <td >Винт M3x5</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
+        <td >Стойка нейлоновая 30мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
+        <td >Саморез M2x5</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
+        <td >Стойка нейлоновая 20мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
+        <td >Гайка M3 (самоконтрящаяся)</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
+        <td >Стойка нейлоновая 15мм</td>
+    </tr>
+    <tr>
+        <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
+        <td >Гайка M3 (нейлоновая)</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
+        <td >Стойка нейлоновая 6мм</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
+        <td >Стойка демпферная</td>
+    </tr>
+</table>
 
 ## Сборка рамы
 
