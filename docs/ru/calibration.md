@@ -2,6 +2,8 @@
 
 Чтобы откалибровать датчики зайдите во вкладку *Vehicle Setup* и выберите меню *Sensors*.
 
+> **Caution** Если вы используете полетный контроллер *COEX Pix*, во всех графах *Autopilot Orientation* необходимо указать значение *ROTATION_ROLL_180_YAW_90*, иначе полетный контроллер будет не корректно воспринимать наклоны и повороты коптера.
+
 ## Компас
 
 <img src="../assets/qgc-cal-compass.png" alt="QGroundControl compass calibration" class="zoom">
