@@ -11,6 +11,25 @@
     Материал: ABS пластик(или аналог). Заполнение не менее 50%.  
     Количество: 1шт.
 
+## Дополнительные модели для Клевер 4
+
+Усиленная пластина для монтажа [Jetson Nano](jetson_nano.md) и дополнительного оборудования, автор: Вячеслав Бузов.
+
+### Лазерная резка
+
+* **Усиленная пластина - основа** – [`reinforced_plate_base.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_base.dxf)  
+    Функция: Крепление компьютеров формата Jetson Nano и виброразвязок на раме Клевер 4.  
+    Материал: Монолитный поликарбонат 2мм.  
+    Количество: 1шт.
+* **Ребро жёсткости усиленной пластины** – [`reinforced_plate_rib.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_rib.dxf)  
+    Функция: Увеличение жёсткости сборки.  
+    Материал: Монолитный поликарбонат 2мм.
+    Количество: 2шт.
+* **Пластина для камеры** – [`reinforced_plate_camera_pad.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_camera_pad.dxf)
+    Функция: Крепление камеры при использовании усиленной пластины.  
+    Материал: Монолитный поликарбонат 2мм.
+    Количество: 1шт.
+
 ## Клевер 3
 
 ### 3D печать

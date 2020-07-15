@@ -12,6 +12,16 @@ This page contains models and drawings of some of the drone parts. They can be u
 
 * Reinforcing Pad – [`reinforcing_pad.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforcing_pad.dxf)
 
+## Contributed models for Clover 4
+
+Reinforced mounting plate for [Jetson Nano](jetson_nano.md) and additional equipment by Vyacheslav Buzov.
+
+### Laser cut
+
+* Reinforced plate base (for Jetson Nano) – [`reinforced_plate_base.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_base.dxf)
+* Reinforced plate rib – [`reinforced_plate_rib.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_rib.dxf) (x2)
+* Camera pad for reinforced plate – [`reinforced_plate_camera_pad.dxf`](https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/reinforced_plate_camera_pad.dxf)
+
 ## Clover 3
 
 ### 3D print
