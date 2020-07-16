@@ -15,43 +15,37 @@
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
         <td>Screw M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td>Aluminium rack 20mm</td>
-    </tr>
-    <tr>
-        <td><img src="../assets/assembling_clever4_2/type_size/m3x6.png" width=50 class="center"></td>
-        <td>Screw M3x6</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td>Nylon rack 40mm</td>
+        <td>Aluminium rack 15mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
         <td>Screw M3x5</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td>Nylon rack 30mm</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
+        <td>Nylon rack 40mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
         <td>Screw M2x5</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td>Nylon rack 20mm</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
+        <td>Nylon rack 30mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
         <td> Nut M3 (self-locking)</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td>Nylon rack 15mm</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
+        <td>Nylon rack 20mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
         <td> Nut M3 (nylon)</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td> Nylon rack 6mm</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
+        <td>Nylon rack 15mm</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
         <td>Damper rack</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
+        <td> Nylon rack 6mm</td>
     </tr>
 </table>
 
@@ -64,7 +58,7 @@
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. Install 2 20mm posts on the center holes in the main deck and fix them with the M3x8 screws.
+2. Install 2 15mm posts on the center holes in the main deck and fix them with the M3x8 screws.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
@@ -80,7 +74,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_6.png" width=300 class="zoom border center">
 
-6. Install 4 6mm nylon posts and fix them with the M3x6 screws.
+6. Install 4 6mm nylon posts and fix them with the M3x8 screws.
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
@@ -166,7 +160,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install 6mm racks and 30mm racks, fasten them with the M3x6 and M3x12 bolts, respectively.
+2. On a mounting deck, install 6mm racks and 30mm racks, fasten them with the M3x8 and M3x12 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 

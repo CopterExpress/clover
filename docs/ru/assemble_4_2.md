@@ -15,43 +15,37 @@
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
         <td >Винт M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td >Стойка алюминиевая 20мм</td>
-    </tr>
-    <tr>
-        <td><img src="../assets/assembling_clever4_2/type_size/m3x6.png" width=50 class="center"></td>
-        <td >Винт M3x6</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td >Стойка нейлоновая 40мм</td>
+        <td >Стойка алюминиевая 15мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
         <td >Винт M3x5</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td >Стойка нейлоновая 30мм</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
+        <td >Стойка нейлоновая 40мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
         <td >Саморез M2x5</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td >Стойка нейлоновая 20мм</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
+        <td >Стойка нейлоновая 30мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
         <td >Гайка M3 (самоконтрящаяся)</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td >Стойка нейлоновая 15мм</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
+        <td >Стойка нейлоновая 20мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
         <td >Гайка M3 (нейлоновая)</td>
-        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td >Стойка нейлоновая 6мм</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
+        <td >Стойка нейлоновая 15мм</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
         <td >Стойка демпферная</td>
+        <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
+        <td >Стойка нейлоновая 6мм</td>
     </tr>
 </table>
 
@@ -64,7 +58,7 @@
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. На центральные отверстия в главной деке установите 2 стойки 20мм и закрепите их с помощью винтов М3х8.
+2. На центральные отверстия в главной деке установите 2 стойки 15мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
@@ -80,7 +74,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_6.png" width=300 class="zoom border center">
 
-6. Установите 4 нейлоновые стойки 6мм и закрепите их с помощью винтов М3х6.
+6. Установите 4 нейлоновые стойки 6мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
@@ -166,7 +160,7 @@
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х6 и М3х12 соответственно.
+2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х8 и М3х12 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
