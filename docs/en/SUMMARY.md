@@ -82,6 +82,7 @@
   * [Migration to v0.20](migrate20.md)
 * Clover-based projects
   * [Drone show](clever-show.md)
+  * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)
