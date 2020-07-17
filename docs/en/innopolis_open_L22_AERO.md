@@ -54,7 +54,7 @@ Algorithm:
 
 During the development, our own message types and a service for changing the detector parameters during the landing were created. (`ColorMarker`, `ColorMarkerArray`, `SetParameters`).
 
-To convert the position of colored objects into `aruco_map` frame TF library was used ([http://wiki.ros.org/tf](http://wiki.ros.org/tf))
+To convert the position of colored objects into `aruco_map` frame TF library was used. ([http://wiki.ros.org/tf](http://wiki.ros.org/tf))
 
 Due to distortions at the edges of the image from the fisheye lens, all the recognized contours located near the edge of the image are ignored. This filter is disabled during landing. The object type is determined using the contour analysis functions  (`approxPolyDP` - number of vertexes; `minAreaRect`, `contourArea` - area of bounding rect / area of the contour; `minAreaRect` - aspect ratio).
 
@@ -84,7 +84,7 @@ Landing is performed in 3 stages:
 
 1. Flight to the intended landing zone and hovering at an altitude of 1.5 m.
 2. Descending to a height of 0.85 m with 3 adjustments to the marker coordinates relative to `aruco_map` frame.
-3. Descending for several seconds with adjustments based on the coordinates of the landing marker in `body` coordinate system (since ArUco-markers may no longer be visible), instead of `navigate`,` set_position` is used.
+3. Descending for several seconds with adjustments based on the coordinates of the landing marker in `body` coordinate system (since ArUco-markers may no longer be visible), instead of `navigate`,`set_position` is used.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8nVGoWkdYcA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
