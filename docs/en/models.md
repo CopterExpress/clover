@@ -14,7 +14,7 @@ This page contains models and drawings of some of the drone parts. They can be u
 
 ## Contributed models for Clover 4
 
-Reinforced mounting plate for [Jetson Nano](jetson_nano.md) and additional equipment by Vyacheslav Buzov.
+Reinforced mounting plate for [Jetson Nano](jetson_nano.md) and additional equipment by [Vyacheslav Buzov](https://t.me/buzyakabarbuzyaka).
 
 ### Laser cut
 
