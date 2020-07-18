@@ -6,6 +6,7 @@
   <xacro:arg name="led" default="true"/>
   <xacro:arg name="gps" default="true"/>
   <xacro:arg name="maintain_camera_rate" default="false"/>
+  <xacro:arg name="use_clover_physics" default="false"/>
 
   <xacro:include filename="$(find clover_description)/urdf/clover/clover4_base.xacro" />
   <xacro:include filename="$(find clover_description)/urdf/sensors/rpi_cam.urdf.xacro"/>
