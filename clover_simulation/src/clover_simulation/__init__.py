@@ -19,6 +19,7 @@ Usage:
             [--offset-roll=<rad>] [--offset-pitch=<rad>] [--offset-yaw=<rad>]
             [--dictionary=<id>] [--single-model]
             [--source-world=<path>] [--inplace]
+            [--model-path=<path>]
             <aruco_map_file>
   aruco_gen -h | --help
 
@@ -35,6 +36,8 @@ Options:
                          markers.
   --source-world=<path>  Path to existing Gazebo world.
   --inplace              Modify source world.
+  --model-path=<path>    Folder where generated models will be saved
+                         [default: ~/.gazebo/models]
   aruco_map_file         Full path to the ArUco map file
 
 '''
@@ -56,7 +59,7 @@ def aruco_gen():
     off_pitch = float(opts['--offset-pitch'])
     off_yaw = float(opts['--offset-yaw'])
 
-    model_base_path = path.expanduser('~/.gazebo/models')
+    model_base_path = path.expanduser(opts['--model-path'])
 
     markers = parse(mapfile)
 
