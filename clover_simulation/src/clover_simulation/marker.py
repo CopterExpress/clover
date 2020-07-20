@@ -83,6 +83,17 @@ material aruco/marker_${marker_id}
 ''')
 
 
+def model_name(model_directory):
+    '''
+    Extract model name from model directory.
+
+    model_directory: Full path to the model.
+
+    Returns Gazebo-compatible model name (available through model:// URI schema)
+    '''
+    return path.split(model_directory)[1]
+
+
 def generate_markers(markers, model_directory, dictionary_id=2, map_source=''):
     '''
     Generate markers from a list. Result is a single Gazebo
@@ -130,7 +141,7 @@ def generate_markers(markers, model_directory, dictionary_id=2, map_source=''):
             roll=marker.roll,
             pitch=marker.pitch,
             yaw=marker.yaw + (math.pi / 2),
-            model_directory=path.split(model_directory)[1],
+            model_directory=model_name(model_directory),
             marker_full_size=marker.size * marker_border_bits / marker_outer_bits
         ))
     

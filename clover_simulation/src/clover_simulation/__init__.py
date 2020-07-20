@@ -1,8 +1,12 @@
 from docopt import docopt
 from os import path
+from sys import stdout
 
 from .map_parser import parse
-from .marker import generate_markers
+from .marker import Marker, generate_markers
+
+from .world import load_world, add_model, save_world
+
 
 USAGE = '''
 
@@ -42,11 +46,21 @@ def aruco_gen():
     dictionary_id = int(opts['--dictionary'])
     mapfile = opts['<aruco_map_file>']
     single_model = opts['--single-model']
+    source_world = opts['--source-world']
+    inplace = opts['--inplace']
+
+    off_x = float(opts['--offset-x'])
+    off_y = float(opts['--offset-y'])
+    off_z = float(opts['--offset-z'])
+    off_roll = float(opts['--offset-roll'])
+    off_pitch = float(opts['--offset-pitch'])
+    off_yaw = float(opts['--offset-yaw'])
 
     model_base_path = path.expanduser('~/.gazebo/models')
 
     markers = parse(mapfile)
-    if (single_model):
+
+    if single_model:
         mapname = path.split(mapfile)[-1]
         model_path = path.join(model_base_path, 'aruco_{}'.format(mapname.replace('.', '_')))
         generate_markers(markers, model_path, dictionary_id=dictionary_id, map_source=mapname)
@@ -54,4 +68,23 @@ def aruco_gen():
         for marker in markers:
             model_name = 'aruco_{}_{}'.format(dictionary_id, marker.id_)
             model_path = path.join(model_base_path, model_name)
-            generate_markers([marker], model_path, dictionary_id=dictionary_id)
+            generate_markers([Marker(marker.id_, marker.size, 0, 0, 0, 0, 0, 0)],
+                model_path, dictionary_id=dictionary_id)
+
+    if source_world is not None:
+        world_tree = load_world(source_world)
+        if single_model:
+            world_tree = add_model(world_tree, 'aruco_{}'.format(mapname.replace('.', '_')),
+                off_x, off_y, off_z,
+                off_roll, off_pitch, off_yaw)
+        else:
+            if (abs(off_roll) > 0.001) or (abs(off_pitch) > 0.001) or (abs(off_yaw) > 0.001):
+                raise NotImplementedError('Sorry, angular offsets are not currently implemented for multimodel generation')
+            for marker in markers:
+                world_tree = add_model(world_tree, 'aruco_{}_{}'.format(dictionary_id, marker.id_),
+                    off_x + marker.x, off_y + marker.y, off_z + marker.z,
+                    marker.roll, marker.pitch, marker.yaw)
+
+        output = open(source_world, 'w') if inplace else stdout
+
+        save_world(world_tree, output)
