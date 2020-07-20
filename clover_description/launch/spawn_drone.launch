@@ -4,7 +4,7 @@
     <!-- Main camera -->
     <arg name="main_camera" default="true"/>
     <!-- Slow simulation down to maintain camera rate -->
-    <arg name="maintain_camera_rate" default="true"/>
+    <arg name="maintain_camera_rate" default="false"/>
     <arg name="rangefinder" default="true"/>
     <arg name="led" default="true"/>
     <arg name="gps" default="true"/>
