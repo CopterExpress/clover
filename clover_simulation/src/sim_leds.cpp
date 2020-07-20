@@ -98,7 +98,7 @@ public:
 			registeredLeds.resize(totalLeds);
 			ledState.leds.resize(totalLeds);
 		}
-		ROS_INFO_NAMED(("LedController_" + robotNamespace).c_str(), "Registering LED visual plugin to %s (LED id=%d)", (role == Role::Client) ? "client" : "server", ledIdx);
+		ROS_DEBUG_NAMED(("LedController_" + robotNamespace).c_str(), "Registering LED visual plugin to %s (LED id=%d)", (role == Role::Client) ? "client" : "server", ledIdx);
 		registeredLeds[ledIdx] = plugin;
 		ledState.leds[ledIdx].index = ledIdx;
 		if (role == Role::Server)
@@ -111,7 +111,7 @@ public:
 		auto it = std::find(registeredLeds.begin(), registeredLeds.end(), plugin);
 		if (it != registeredLeds.end())
 		{
-			ROS_INFO_STREAM_NAMED(("LedController_" + robotNamespace).c_str(), "Unregistering LED visual plugin (LED id=" << (it - registeredLeds.begin()) << ")");
+			ROS_DEBUG_STREAM_NAMED(("LedController_" + robotNamespace).c_str(), "Unregistering LED visual plugin (LED id=" << (it - registeredLeds.begin()) << ")");
 			*it = nullptr;
 		}
 	}
