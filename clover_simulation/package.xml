@@ -21,6 +21,7 @@
     <depend>xacro</depend>
     <depend>gazebo_ros</depend>
     <depend>gazebo_plugins</depend>
+    <depend>rospy</depend>
 
     <export>
         <gazebo_ros gazebo_media_path="${prefix}"/>

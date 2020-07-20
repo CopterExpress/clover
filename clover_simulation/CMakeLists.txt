@@ -18,7 +18,10 @@ find_package(catkin REQUIRED COMPONENTS
   led_msgs
   gazebo_ros
   gazebo_plugins
+  rospy
 )
+
+catkin_python_setup()
 
 catkin_package(
   CATKIN_DEPENDS led_msgs gazebo_ros gazebo_plugins
@@ -58,3 +61,7 @@ add_dependencies(throttling_camera ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 install(DIRECTORY meshes DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 install(DIRECTORY resources DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+catkin_install_python(PROGRAMS scripts/aruco_gen.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
