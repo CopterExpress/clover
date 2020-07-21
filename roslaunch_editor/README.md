@@ -2,7 +2,7 @@
 
 Web-based ROS launch-files editor, created for making configuration of your robot more user-friendly for novices.
 
-<img src="roslaunch_editor.jpg">
+<img src="roslaunch_editor.jpg" width=450>
 
 ## Quick launch
 
