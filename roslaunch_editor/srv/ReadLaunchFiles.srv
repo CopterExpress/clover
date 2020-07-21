@@ -1,0 +1,7 @@
+# Read launch-files
+
+LaunchFile[] files # content field is ignored
+---
+bool success
+string message
+LaunchFile[] files

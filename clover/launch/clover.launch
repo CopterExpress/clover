@@ -1,16 +1,15 @@
 <launch>
-    <arg name="fcu_conn" default="usb"/>
-    <arg name="fcu_ip" default="127.0.0.1"/>
-    <arg name="fcu_sys_id" default="1"/>
-    <arg name="gcs_bridge" default="tcp"/>
-    <arg name="web_video_server" default="true"/>
-    <arg name="rosbridge" default="true"/>
-    <arg name="main_camera" default="true"/>
-    <arg name="optical_flow" default="true"/>
-    <arg name="aruco" default="false"/>
-    <arg name="rangefinder_vl53l1x" default="true"/>
-    <arg name="led" default="true"/>
-    <arg name="rc" default="true"/>
+    <arg name="fcu_conn" default="usb"/> <!-- FCU connection type: usb, uart, tcp, udp, sitl -->
+    <arg name="fcu_ip" default="127.0.0.1"/> <!-- FCU IP adddress (if using TCP/UDP) -->
+    <arg name="fcu_sys_id" default="1"/> <!-- MAVLink system ID, noeditor -->
+    <arg name="gcs_bridge" default="tcp"/> <!-- GCS bridge type: tcp, udp, udp-b, udp-pb -->
+    <arg name="web_video_server" default="true"/> <!-- web video server enabled -->
+    <arg name="rosbridge" default="true"/> <!-- rosbridge_suite enabled, noeditor -->
+    <arg name="main_camera" default="true"/> <!-- main camera enabled -->
+    <arg name="optical_flow" default="true"/> <!-- optical flow enabled -->
+    <arg name="rangefinder_vl53l1x" default="true"/> <!-- VL53l1X rangefinder enabled -->
+    <arg name="led" default="true"/> <!-- LED strip driver enabled -->
+    <arg name="rc" default="true"/> <!-- support for mobile RC enabled -->
     <arg name="shell" default="true"/>
 
     <!-- log formatting -->
@@ -31,7 +30,7 @@
     </node>
 
     <!-- aruco markers -->
-    <include file="$(find clover)/launch/aruco.launch" if="$(arg aruco)"/>
+    <include file="$(find clover)/launch/aruco.launch"/>
 
     <!-- optical flow -->
     <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
@@ -87,4 +86,11 @@
     <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">
         <param name="default_package" value="clover"/>
     </node>
+
+    <!-- roslaunch editor parameters -->
+    <group ns="roslaunch_editor">
+        <param name="items" type="yaml" value="[clover/clover.launch, clover/main_camera.launch, clover/aruco.launch, clover/led.launch]"/>
+        <param name="apply_command" value="sudo systemctl restart clover"/>
+        <param name="hide_uncommented" value="true"/>
+    </group>
 </launch>

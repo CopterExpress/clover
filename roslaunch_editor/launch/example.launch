@@ -1,0 +1,11 @@
+<launch>
+    <include file="$(find roswww)/launch/roswww.launch"/>
+
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+
+    <node name="roslaunch_editor" pkg="roslaunch_editor" type="editor">
+        <param name="items" type="yaml" value="[roslaunch_editor/test.launch]"/>
+        <param name="reference_frames/base_link" value="map"/>
+        <param name="reference_frames/navigate_target" value="map"/>
+    </node>
+</launch>

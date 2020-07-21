@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+
+import rospy
+import os
+import shutil
+import rospkg
+
+from std_srvs.srv import Trigger
+from roslaunch_editor.srv import ReadLaunchFiles, ReadLaunchFilesResponse, WriteLaunchFiles
+from roslaunch_editor.msg import LaunchFile
+
+rospy.init_node('roslaunch_editor')
+rospack = rospkg.RosPack()
+backup = rospy.get_param('~backup', True)
+apply_command = rospy.get_param('~apply_command', '')
+
+
+def get_launch_file_path(package, name):
+    path = rospack.get_path(package)
+    for root, dirnames, filenames in os.walk(path):
+        if name in filenames:
+            return os.path.join(root, name)
+    raise Exception('Launch file %s/%s not found' % (package, name))
+
+
+def read(req):
+    try:
+        res = ReadLaunchFilesResponse()
+        for launch_file in req.files:
+            path = get_launch_file_path(launch_file.package, launch_file.name)
+            rospy.loginfo('read file %s', path)
+            launch_file.content = open(path, 'r').read()
+            res.files.append(launch_file)
+        res.success = True
+        return res
+    except Exception as e:
+        rospy.logerr(str(e))
+        return {'success': False, 'message': str(e)}
+
+
+def write(req):
+    try:
+        # write files
+        for launch_file in req.files:
+            if not launch_file.name.endswith('.launch'):
+                raise Exception('Launch file name should end with .launch')
+            path = get_launch_file_path(launch_file.package, launch_file.name)
+            rospy.loginfo('write file %s', path)
+            if backup:
+                shutil.copyfile(path, path + '.bak.launch')
+            with open(path, 'w') as f:
+                f.write(launch_file.content)
+
+        # restart the system
+        if not apply_command:
+            return {'success': True}
+
+        rospy.loginfo('apply: %s', apply_command)
+        res = os.system(apply_command)
+        if res == 0:
+            return {'success': True}
+        else:
+            return {'success': False, 'message': 'Error invoking %s' % apply_command}
+    except Exception as e:
+        rospy.logerr(str(e))
+        return {'success': False, 'message': str(e)}
+
+
+rospy.Service('~read', ReadLaunchFiles, read)
+rospy.Service('~write', WriteLaunchFiles, write)
+
+
+rospy.spin()

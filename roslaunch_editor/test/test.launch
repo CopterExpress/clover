@@ -1,0 +1,34 @@
+<launch>
+    <arg name="string" default="value"/> <!-- simple string value -->
+    <arg name="no_comment" default="value"/>
+    <arg name="boolean" default="true"/> <!-- simple boolean -->
+    <arg name="hidden" default="value"/> <!-- hiddent arg, noeditor -->
+    <arg name="without_default"/> <!-- without default -->
+
+    <arg name="options" default="bar"/> <!-- simple options: foo, bar, baz, killa, gorilla -->
+    <arg name="options_extra" default="extra"/> <!-- options with extra value: foo, bar, baz -->
+
+    <!-- arg with preceding comment -->
+    <arg name="preceding_comment" default="value"/>
+
+    <arg name="dirty_string" default="hello &quot;quotes&quot; and &lt;tags&gt;"/> <!-- "dirty" <arg>'s and comment value -->
+
+    <arg name="long_long_long_long_long_arg" default="very long long long long long long long long value"/> <!-- long_long_long_long_long_arg is loooooooooooooooooooooooooooooooooooooooooooooong -->
+
+    <arg name="no_subseqent_comment" default="value"/>
+    <!-- this comment should not be displayed -->
+
+    <arg name="integer" default="-245"/> <!-- integer value -->
+
+    <arg name="float" default="-0.045"/> <!-- float value -->
+
+    <arg name="float_dot" default=".2"/> <!-- float without leading zero -->
+
+    <arg name="float_scientific" default="-1e-5"/> <!-- scientific float value -->
+
+    <arg name="nan" default="nan"/> <!-- nan value -->
+
+    <arg name="inf" default="inf"/> <!-- inf value -->
+
+    <arg name="null" default="null"/> <!-- null value -->
+</launch>

@@ -1,0 +1,140 @@
+<html>
+	<head>
+		<script src="roslib.js"></script>
+		<style>
+			body {
+				font-family: sans-serif;
+				font-size: 14px;
+				background: white;
+				padding: 0;
+				margin: 0;
+			}
+			body.connected {
+				background: white;
+			}
+			h1 {
+				margin-top: 20px;
+				text-align: center;
+			}
+			.editor {
+				margin: 0px auto;
+				width: 800px;
+				overflow: hidden;
+				text-align: center;
+			}
+			.editor label code {
+				width: 200px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: inline-block;
+				white-space: nowrap;
+				vertical-align: middle;
+			}
+			fieldset {
+				border: 1px solid rgb(232, 232, 232);
+				padding: 20px;
+				text-align: left;
+				margin: 20px 0;
+			}
+			.editor label {
+				display: block;
+				padding: 10px 0;
+				-webkit-user-select: none;
+				user-select: none;
+				/* margin-bottom: 20px; */
+				border-bottom: 1px solid rgb(232, 232, 232);
+				white-space: nowrap;
+			}
+			.editor label:last-of-type {
+				border-bottom: none;
+			}
+			.editor label input, select {
+				font-size: 15px;
+				font-family: monospace;
+				width: 200px;
+				vertical-align: middle;
+			}
+			.editor .switch {
+				width: 200px;
+				vertical-align: middle;
+				display: inline-block;
+			}
+			.editor .comment {
+				margin-left: 10px;
+				vertical-align: middle;
+				display: inline-block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				vertical-align: middle;
+				max-width: 320px;
+			}
+			button {
+				font-size: 20px;
+				border-radius: 5px;
+				padding: 10px;
+				border: none;
+				cursor: pointer;
+				margin: 20px;
+				width: 200px;
+				background: #4b9dd7;
+				color: white;
+				visibility: hidden;
+			}
+			body.loaded button {
+				visibility: visible;
+			}
+			textarea {
+				margin-left: 50px;
+				font-family: monospace;
+				vertical-align: top;
+				font-size: 15px;
+				white-space: nowrap;
+				overflow: auto;
+				font-size: 10px;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			.panel {
+				text-align: center;
+				position: sticky;
+				bottom: 0;
+				width: 100%;
+				background: rgba(255, 255, 255, 0.9);
+			}
+			.loader-overlay {
+				background: rgba(0,0,0,0.5);
+				position: fixed;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				right: 0;
+			}
+			.loader {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			body.loaded.connected .loader-overlay {
+				display: none;
+			}
+		</style>
+		<link rel="stylesheet" href="switch.css">
+		<link rel="stylesheet" href="loader.css">
+		<title>roslaunch editor</title>
+	</head>
+	<body>
+		<form class="editor">
+		</form>
+		<div class="panel">
+			<button id=applybtn onclick="apply()">Apply</button>
+		</div>
+		<div class="loader-overlay">
+			<div class="loader lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+		</div>
+	</body>
+	<script src="ros.js"></script>
+	<script src="main.js"></script>
+</html>
