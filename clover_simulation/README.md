@@ -34,9 +34,9 @@ Note that Gazebo may slow the simulation down automatically. This may not be han
 
 ### Changing initial world
 
-By default, the `simulator.launch` file will start the simulation with [`resources/worlds/empty.world`](resources/worlds/empty.world) as its base world. Note that the `real_time_update_rate` is set to 250 - this is required for PX4 lockstep simulation to work correctly.
+By default, the `simulator.launch` file will start the simulation with [`resources/worlds/clover.world`](resources/worlds/clover.world) as its base world. Note that the `real_time_update_rate` is set to 250 - this is required for PX4 lockstep simulation to work correctly.
 
-If you wish to create your own world for the simulation, be sure to derive it from `empty.world` to avoid issues with PX4 plugins.
+If you wish to create your own world for the simulation, be sure to derive it from `clover.world` to avoid issues with PX4 plugins.
 
 You may set the world name in `simulator.launch` as the `world_name` parameter for `gazebo_ros` instance.
 
