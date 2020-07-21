@@ -1,7 +1,7 @@
 <launch>
-    <arg name="ws281x" default="true"/>
-    <arg name="led_effect" default="true"/>
-    <arg name="led_notify" default="true"/>
+    <arg name="ws281x" default="true"/> <!-- LED strip driver enabled -->
+    <arg name="led_effect" default="true"/> <!-- LED effect API enabled -->
+    <arg name="led_notify" default="all"/> <!-- LED strip notifications: all, battery, none -->
 
     <!-- For additional help go to https://clover.coex.tech/led -->
 
@@ -22,7 +22,7 @@
         <param name="fade_period" value="0.5"/>
         <param name="rainbow_period" value="5"/>
         <!-- events effects table -->
-        <rosparam param="notify" if="$(arg led_notify)">
+        <rosparam param="notify" if="$(eval led_notify == 'all')">
             startup: { r: 255, g: 255, b: 255 }
             connected: { effect: rainbow }
             disconnected: { effect: blink, r: 255, g: 50, b: 50 }
@@ -33,6 +33,9 @@
             offboard: { r: 220, g: 20, b: 250 }
             low_battery: { threshold: 3.7, effect: blink_fast, r: 255, g: 0, b: 0 }
             error: { effect: flash, r: 255, g: 0, b: 0 }
+        </rosparam>
+        <rosparam param="notify" if="$(eval led_notify == 'battery')">
+            low_battery: { threshold: 3.7, effect: blink_fast, r: 255, g: 0, b: 0 }
         </rosparam>
     </node>
 </launch>

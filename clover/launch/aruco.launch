@@ -1,5 +1,5 @@
 <launch>
-    <arg name="aruco_detect" default="true"/>
+    <arg name="aruco_detect" default="false"/>
     <arg name="aruco_map" default="false"/>
     <arg name="aruco_vpe" default="false"/>
 
