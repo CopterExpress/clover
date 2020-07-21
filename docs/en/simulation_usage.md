@@ -16,15 +16,15 @@ roslaunch clover_simulation simulator.launch
 
 This will launch Gazebo server and client, the PX4 SITL binary and Clover nodes. The terminal in which the command was run will display diagnostic messages from the nodes and PX4, and will accept input for the PX4 command interpreter:
 
-![Gazebo simulation screenshot](../assets/simulation_usage/01_running_gazebo.png)
+![Gazebo simulation screenshot](../assets/simulation_usage/01_running_gazebo.jpg)
 
 You can use QGroundControl to configure the simulated drone parameters, plan missions (if GPS is simulated) and control the drone using a joystick:
 
-![Gazebo and QGC](../assets/simulation_usage/02_gazebo_qgc.png)
+![Gazebo and QGC](../assets/simulation_usage/02_gazebo_qgc.jpg)
 
 You can also use [our simplified OFFBOARD control](simple_offboard.md) to control the drone, and traditional ROS GUI utilities like [rviz and rqt](rviz.md) to analyze the drone state:
 
-![Gazebo and RQT](../assets/simulation_usage/03_gazebo_rqt.png)
+![Gazebo and RQT](../assets/simulation_usage/03_gazebo_rqt.jpg)
 
 ## Configuring the simulation
 
@@ -32,7 +32,7 @@ The simulation can be configured by passing additional arguments to the `roslaun
 
 ### Changing the drone parameters
 
-![vscode with simulator.launch open](../assets/simulation_usage/04_vscode_config.png)
+![vscode with simulator.launch open](../assets/simulation_usage/04_vscode_config.jpg)
 
 You can enable or disable some of the drone sensors by changing parameters in the `simulator.launch` file. For example, in order to enable GPS, set the `gps` argument to `true`:
 
