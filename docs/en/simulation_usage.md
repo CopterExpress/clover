@@ -22,7 +22,7 @@ You can use QGroundControl to configure the simulated drone parameters, plan mis
 
 ![Gazebo and QGC](../assets/simulation_usage/02_gazebo_qgc.png)
 
-You can also use [our simplified offboard control](simple_offboard.md) to control the drone, and traditional ROS GUI utilities like [rviz and rqt](rviz.md) to analyze the drone state:
+You can also use [our simplified OFFBOARD control](simple_offboard.md) to control the drone, and traditional ROS GUI utilities like [rviz and rqt](rviz.md) to analyze the drone state:
 
 ![Gazebo and RQT](../assets/simulation_usage/03_gazebo_rqt.png)
 
