@@ -27,13 +27,6 @@ catkin_package(
   CATKIN_DEPENDS led_msgs gazebo_ros gazebo_plugins
 )
 
-add_executable(led_strip src/led_strip.cpp)
-target_include_directories(led_strip PRIVATE ${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
-target_link_libraries(led_strip ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-target_compile_options(led_strip PRIVATE -std=c++11)
-
-add_dependencies(led_strip ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
 # Gazebo LED plugin
 
 add_library(sim_leds src/sim_leds.cpp)
