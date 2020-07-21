@@ -144,10 +144,10 @@ def generate_markers(markers, model_directory, dictionary_id=2, map_source=''):
             model_directory=model_name(model_directory),
             marker_full_size=marker.size * marker_border_bits / marker_outer_bits
         ))
-    
+
     with open(path.join(script_directory, 'aruco_materials.material'), 'w') as f:
         f.write(''.join(materials))
-    
+
     with open(path.join(model_directory, 'aruco_model.sdf'), 'w') as f:
         f.write(MARKER_MODEL_SDF_TEMPLATE.substitute(
             model_name='aruco_{}_{}'.format(dictionary_id, len(markers)),
