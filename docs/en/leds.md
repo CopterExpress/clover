@@ -17,7 +17,7 @@ Our [Raspberry Pi image](image.md) contains preinstalled modules for interfacing
 ## High-level control
 
 1. Connect the +5v and GND leads of your LED to a power source and the DIN (data in) lead to GPIO21. Consult the [assembly instructions](assemble_4_2.md#installing-led-strip) for details.
-2. Enable LED strip support in `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+2. Enable LED strip support in `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
     ```xml
     <arg name="led" default="true"/>
