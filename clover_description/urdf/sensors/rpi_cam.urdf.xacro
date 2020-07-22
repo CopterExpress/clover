@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="rpi_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
+
+  <xacro:macro name="rpi_cam" params="name:=rpi_cam parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 width:=320 height:=240 rate:=40 do_throttling:=false">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${x} ${y} ${z}"
+              rpy="${roll} ${pitch} ${yaw}"/>
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.005 0.005"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.005 0.005 0.005"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.015"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="4.15e-6" iyy="2.407e-6" izz="2.407e-6" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <gazebo reference="${name}_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+      <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <!-- <xacro:camera_sensor_base name="${name}"
+      frame_name="/${name}_optical"
+      width="${width}"
+      height="${height}"
+      rate="${rate}"
+      horizontal_fov="1.6075201319067056"
+      k1="-0.273377"
+      k2="0.0642871"
+      p1="-0.00086158"
+      p2="-0.000443529"
+      k3="-0.00599387"
+      cx="158.0735"
+      cy="108.513"
+      cx_prime="158.0735"
+      /> -->
+    <xacro:camera_sensor name="${name}"
+      width="${width}"
+      height="${height}"
+      rate="${rate}"
+      horizontal_fov="${120 * pi / 180}"
+      do_throttling="${do_throttling}"
+    />
+  </xacro:macro>
+
+</robot>

@@ -166,13 +166,14 @@ add_library(${PROJECT_NAME}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(simple_offboard src/simple_offboard.cpp)
 
-add_executable(rc src/rc.cpp)
+# PX4 already has rc and led targets, so we prefix ours with clover_
+add_executable(clover_rc src/rc.cpp)
 
 add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(vpe_publisher src/vpe_publisher.cpp)
 
-add_executable(led src/led.cpp)
+add_executable(clover_led src/led.cpp)
 
 add_executable(shell src/shell.cpp)
 
@@ -181,19 +182,24 @@ target_link_libraries(simple_offboard
   ${GeographicLib_LIBRARIES}
 )
 
-target_link_libraries(rc ${catkin_LIBRARIES})
+# Don't change actual binary names
+set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
+
+set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
+
+target_link_libraries(clover_rc ${catkin_LIBRARIES})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
-target_link_libraries(led ${catkin_LIBRARIES})
+target_link_libraries(clover_led ${catkin_LIBRARIES})
 
 target_link_libraries(shell ${catkin_LIBRARIES})
 
 add_dependencies(simple_offboard ${PROJECT_NAME}_generate_messages_cpp)
 
-add_dependencies(led ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(clover_led ${PROJECT_NAME}_generate_messages_cpp)
 
 add_dependencies(shell ${PROJECT_NAME}_generate_messages_cpp)
 

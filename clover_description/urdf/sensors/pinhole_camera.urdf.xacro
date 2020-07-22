@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="pinhole_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
+  <xacro:camera_sensor name="main_camera" width="640" height="480" rate="30" horizontal_fov="${120.0*pi/180.0}"/>
+</robot>
