@@ -47,9 +47,9 @@
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
   * Simulation
-    * [Overview](simulation_overview.md)
-    * [Native setup](simulation_setup_native.md)
-    * [VM setup](simulation_setup_vm.md)
+    * [Overview](simulation.md)
+    * [Native setup](simulation_native.md)
+    * [VM setup](simulation_vm.md)
     * [Usage](simulation_usage.md)
 * Supplementary materials
   * [COEX Pix](coex_pix.md)
