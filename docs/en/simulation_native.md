@@ -51,7 +51,10 @@ You may want to skip installing the ARM toolchain if you're not planning on comp
 ```
 sudo ./ubuntu.sh --no-nuttx
 ```
-## Patch sitl_gazebo  
+
+## Patch Gazebo plugins
+
+The `sitl_gazebo` package containing required Gazebo plugins needs patching due to recent changes in MAVLink. These patches are already preapplied in the [virtual machine image](simulation_vm.md) and are stored in the VM repository. Run the following commands to download and apply the patches:
 
 ```bash
 cd ~/catkin_ws/src/Firmware/Tools/sitl_gazebo  
@@ -59,6 +62,7 @@ wget https://raw.githubusercontent.com/CopterExpress/clover_vm/master/assets/pat
 patch -p1 < sitl_gazebo.patch
 rm sitl_gazebo.patch  
 ```
+
 ## Install geographiclib datasets
 
 `mavros` requires geographiclib datasets to be present:
