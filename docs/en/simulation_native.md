@@ -51,14 +51,22 @@ You may want to skip installing the ARM toolchain if you're not planning on comp
 ```
 sudo ./ubuntu.sh --no-nuttx
 ```
+## Patch sitl_gazebo  
 
+```bash
+cd ~/catkin_ws/src/Firmware/Tools/sitl_gazebo  
+wget https://raw.githubusercontent.com/CopterExpress/clover_vm/master/assets/patches/sitl_gazebo.patch  
+patch -p1 < sitl_gazebo.patch
+rm sitl_gazebo.patch  
+```
 ## Install geographiclib datasets
 
 `mavros` requires geographiclib datasets to be present:
 
 ```bash
 cd ~
-wget https://raw.githubusercontent.com/mavlink/mavros/6f5bd5a1a67c19c2e605f33de296b1b1be9d02fc/mavros/scripts/install_geographiclib_datasets.sh
+wget https://raw.githubusercontent.com/mavlink/mavros/6f5bd5a1a67c19c2e605f33de296b1b1be9d02fc/mavros/scripts/install_geographiclib_datasets.sh  
+chmod +x ./install_geographiclib_datasets.sh
 sudo ./install_geographiclib_datasets.sh
 rm ./install_geographiclib_datasets.sh
 ```
