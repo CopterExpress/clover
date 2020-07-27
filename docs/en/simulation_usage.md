@@ -1,10 +1,10 @@
 # Using the simulator
 
-The Clover simulation environment allows the user to test their code without any risk of equipment damage. Additionally, the [virtual machine](simulation_setup_vm.md)-based environment has additional (non-ROS) services that are present on a real drone, like Monkey web server.
+The Clover simulation environment allows the user to test their code without any risk of equipment damage. Additionally, the [virtual machine](simulation_vm.md)-based environment has additional (non-ROS) services that are present on a real drone, like Monkey web server.
 
 ## Running the simulation
 
-After [setting up the simulation packages](simulation_setup_native.md) or [importing and running the VM](simulation_setup_vm.md), you can use `roslaunch` to start Gazebo simulation:
+After [setting up the simulation packages](simulation_native.md) or [importing and running the VM](simulation_vm.md), you can use `roslaunch` to start Gazebo simulation:
 
 ```bash
 # Be sure to activate your workspace first
