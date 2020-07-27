@@ -12,7 +12,7 @@ Basic, user-installable environment includes:
 * sample models and worlds;
 * [`roslaunch`](https://wiki.ros.org/roslaunch) files for quick simulation launching and configuration.
 
-Additionally, a [virtual machine image](simulation_setup_vm.md) that mimics the real drone as closely as possible is provided with the following features:
+Additionally, a [virtual machine image](simulation_vm.md) that mimics the real drone as closely as possible is provided with the following features:
 
 * easy access to the simulation environment;
 * Visual Studio Code editor, preconfigured to work with ROS packages;
