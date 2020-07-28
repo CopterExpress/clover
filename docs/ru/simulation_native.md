@@ -13,7 +13,7 @@
 ```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/CopterExpress/clover -b clover_description
+git clone https://github.com/CopterExpress/clover
 git clone https://github.com/CopterExpress/ros_led
 ```
 
