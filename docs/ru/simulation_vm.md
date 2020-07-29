@@ -18,9 +18,9 @@
 
 ## Установка виртуальной машины
 
-Для запуска виртуальной машины разработчика требуется использовать одну из совместимых сред виртуализации: [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [VMware Player](https://www.vmware.com/products/workstation-player.html), [VMware Workstation](https://www.vmware.com/products/workstation-pro.html).
+Для запуска виртуальной машины разработчика требуется использовать одну из совместимых сред виртуализации: [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [VMware Player](https://www.vmware.com/products/workstation-player.html), [VMware Workstation](https://www.vmware.com/products/workstation-pro.html).
 
-> **Note** На момент написания данной статьи Virtualbox не обеспечивал достаточный уровень совместимости с виртуальной машиной. Рекомендуется по возможности использовать VMware Player или VMware Workstation; дальнейшая инструкция будет преимущественно написана для VMware Player.
+> **Note** На момент написания данной статьи VirtualBox не обеспечивал достаточный уровень совместимости с виртуальной машиной. Рекомендуется по возможности использовать VMware Player или VMware Workstation; дальнейшая инструкция будет преимущественно написана для VMware Player.
 
 Убедитесь, что поддержка аппаратной виртуализации включена в настройках BIOS/UEFI вашего компьютера. Шаги для включения аппаратной виртуализации, как правило, описаны в руководстве пользователя компьютера. Проконсультируйтесь с производителем компьютера, если включить виртуализацию не получается.
 
