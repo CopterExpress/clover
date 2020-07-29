@@ -28,8 +28,8 @@
 
     ![Open dialog with clever-devel.ova selected](../assets/simulation_setup_vm/01_import_vm.png)
 
-    > **Note** При импорте архива, скорее всего, появится окно с предупреждением о формате виртуальной машины:  
-    ![Import failure dialog](../assets/simulation_setup_vm/02_import_failure.png)  
+    > **Note** При импорте архива, скорее всего, появится окно с предупреждением о формате виртуальной машины:
+    ![Import failure dialog](../assets/simulation_setup_vm/02_import_failure.png)
     Это предупреждение можно игнорировать и нажать кнопку **Retry**.
 
 2. Откройте окно настроек виртуальной машины и измените параметры для наилучшего соответствия основной системе:
