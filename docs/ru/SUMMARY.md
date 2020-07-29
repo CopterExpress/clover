@@ -48,6 +48,11 @@
   * [Использование JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
+  * Симулятор
+    * [Общая информация](simulation.md)
+    * [Сборка на собственной машине](simulation_native.md)
+    * [Установка виртуальной машины](simulation_vm.md)
+    * [Использование симулятора](simulation_usage.md)
 * Дополнительные материалы
   * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)
