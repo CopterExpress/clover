@@ -7,7 +7,7 @@
 После [сборки симулятора с нуля](simulation_native.md) или [запуска виртуальной машины](simulation_vm.md), вы можете использовать `roslaunch` для запуска симулятора Gazebo:
 
 ```bash
-# Не забудьте сначала активировать вашу рабочую область
+# Не забудьте сначала активировать ваше рабочее пространство
 source ~/catkin_ws/devel/setup.bash
 roslaunch clover_simulation simulator.launch
 ```
