@@ -606,12 +606,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
 			// destination point and/or yaw
-			static PoseStamped ps;
+			PoseStamped ps;
 			ps.header.frame_id = frame_id;
 			ps.header.stamp = stamp;
 			ps.pose.position.x = x;
 			ps.pose.position.y = y;
 			ps.pose.position.z = z;
+			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
 
 			if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
