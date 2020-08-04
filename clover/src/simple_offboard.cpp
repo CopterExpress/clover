@@ -417,8 +417,9 @@ void publish(const ros::Time stamp)
 	}
 
 	if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
+		position_msg.header.stamp = stamp;
+
 		if (setpoint_yaw_type == YAW || setpoint_yaw_type == TOWARDS) {
-			position_msg.header.stamp = stamp;
 			position_pub.publish(position_msg);
 
 		} else {
