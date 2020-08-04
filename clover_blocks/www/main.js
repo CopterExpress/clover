@@ -133,7 +133,7 @@ Blockly.Blocks['get_position'] = {
 			.setCheck("Number")
 			.appendField("with ID")
 			.setVisible(false)
-		this.setOutput(true, "Boolean");
+		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
 		this.setHelpUrl("");
