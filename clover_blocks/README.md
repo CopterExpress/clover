@@ -2,4 +2,4 @@
 
 Blockly programming support for Clover.
 
-<img src="screenshot.png">
+<img src="screenshot.png" width=700>
