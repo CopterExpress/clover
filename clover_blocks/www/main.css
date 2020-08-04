@@ -1,0 +1,9 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+#blockly {
+	width: 100%;
+	height: 700px;
+}
