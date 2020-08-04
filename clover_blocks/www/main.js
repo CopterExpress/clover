@@ -1,4 +1,14 @@
-var workspace = Blockly.inject('blockly', { toolbox: document.getElementById('toolbox') });
+var workspace = Blockly.inject('blockly', { 
+	toolbox: document.getElementById('toolbox'),
+	grid: {
+		spacing: 25,
+		length: 3,
+		colour: '#ccc',
+		snap: true
+	},
+	zoom: { controls: true, wheel: true },
+	media: 'blockly/media/',
+});
 
 workspace.addChangeListener(function (e) {
 	if (e instanceof Blockly.Events.Change) {
