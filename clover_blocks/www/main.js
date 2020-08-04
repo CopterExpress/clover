@@ -235,7 +235,7 @@ Blockly.Blocks['set_led'] = {
 Blockly.Blocks['set_effect'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField("set LED effect to")
+			.appendField("set LED effect")
 			.appendField(new Blockly.FieldDropdown([["fill", "FILL"], ["blink", "BLINK"], ["fast blink", "BLINK_FAST"], ["fade", "FADE"], ["wipe", "WIPE"], ["flash", "FLASH"], ["rainbow", "RAINBOW"], ["rainbow fill", "RAINBOW_FILL"]]), "EFFECT");
 		this.appendValueInput("COLOR")
 			.setCheck("Colour")
