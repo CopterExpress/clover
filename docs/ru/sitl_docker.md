@@ -1,5 +1,7 @@
 # Docker-контейнер с преднастроенным SITL
 
+> **Warning** Рекомендуется использовать [образ виртуальной машины](simulation_vm.md) или [нативную установку](simulation_native.md) для работы в симуляторе.
+
 ![SITL demo](../assets/sitl_docker_demo.png)
 
 Для упрощения запуска симулятора предлагается использовать предварительно настроенный [Docker-контейнер](https://hub.docker.com/r/sfalexrog/clever-sitl) с симулятором [Gazebo](http://gazebosim.org/), автопилотом [PX4](https://px4.io/) и предустановленными пакетами Клевера.

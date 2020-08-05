@@ -74,18 +74,6 @@ my_travis_retry rosdep update
 echo_stamp "Populate rosdep for ROS user"
 my_travis_retry sudo -u pi rosdep update
 
-resolve_rosdep() {
-  # TEMPLATE: resolve_rosdep <CATKIN_PATH> <ROS_DISTRO> <OS_DISTRO> <OS_VERSION>
-  CATKIN_PATH=$1
-  ROS_DISTRO='melodic'
-  OS_DISTRO='debian'
-  OS_VERSION='buster'
-
-  echo_stamp "Installing dependencies apps with rosdep in ${CATKIN_PATH}"
-  cd ${CATKIN_PATH}
-  my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=${OS_DISTRO}:${OS_VERSION}
-}
-
 export ROS_IP='127.0.0.1' # needed for running tests
 
 echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
@@ -94,11 +82,14 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
-resolve_rosdep $(pwd)
+# Don't try to install gazebo_ros
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro melodic --os=debian:buster \
+  --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
 my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/melodic/setup.bash
-catkin_make -j2 -DCMAKE_BUILD_TYPE=Release
+# Don't build simulation plugins for actual drone
+catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
@@ -113,7 +104,7 @@ gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Installing additional ROS packages"
-apt-get install -y --no-install-recommends \
+my_travis_retry apt-get install -y --no-install-recommends \
     ros-melodic-dynamic-reconfigure \
     ros-melodic-compressed-image-transport \
     ros-melodic-rosbridge-suite \

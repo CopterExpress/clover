@@ -47,11 +47,18 @@
   * [Автозапуск ПО](autolaunch.md)
   * [Использование JavaScript](javascript.md)
   * [`mavros`](mavros.md)
+  * Симулятор
+    * [Общая информация](simulation.md)
+    * [Сборка на собственной машине](simulation_native.md)
+    * [Установка виртуальной машины](simulation_vm.md)
+    * [Использование симулятора](simulation_usage.md)
 * ROS: учебник
   * [Общая информация](ros.md)
   * [Графические инструменты](ros_gui.md)
   * [Соглашения ROS](ros_conventions.md)
   * [Продвинутое использование](ros_advanced.md)
+  * [ROS](ros.md)
+  * [MAVROS](mavros.md)
 * Дополнительные материалы
   * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="rpi_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find clover_description)/urdf/camera_sensor.urdf.xacro"/>
+
+  <xacro:macro name="distance_sensor" params="name:=lidar_vl53l1x parent x:=0 y:=0 z:=0 roll:=0 pitch:=0 yaw:=0 range_min:=0.01 range_max:=4.0 resolution:=0.01 rate:=10">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${x} ${y} ${z}"
+              rpy="${roll} ${pitch} ${yaw}"/>
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.001 0.005 0.005"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.001 0.001 0.005"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.015"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="4.15e-6" iyy="2.407e-6" izz="2.407e-6" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+
+    <gazebo reference="${name}_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+      <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+
+    <gazebo reference="${name}_link">
+      <sensor type="ray" name="${name}">
+        <pose>0 0 0 0 0 0</pose>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>-0</min_angle>
+              <max_angle>0</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.03</min> <!-- Note: This is a hack, since the rangefinder is inside the drone collision box -->
+            <max>${range_max}</max>
+            <resolution>${resolution}</resolution>
+          </range>
+        </ray>
+        <plugin name="laser" filename="libgazebo_ros_range.so">
+          <robotNamespace></robotNamespace> <!-- FIXME: fill namespace? -->
+          <topicName>/rangefinder/range</topicName>
+          <frameName>rangefinder</frameName>
+          <radiation>infrared</radiation>
+          <fov>0.01</fov>
+          <gaussianNoise>0.001</gaussianNoise>
+          <updateRate>${rate}</updateRate>
+          <min_distance>${range_min}</min_distance>
+          <max_distance>${range_max}</max_distance>
+        </plugin>
+        <always_on>1</always_on>
+        <update_rate>${rate}</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

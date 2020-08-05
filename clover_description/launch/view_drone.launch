@@ -1,0 +1,7 @@
+<launch>
+  <arg name="model" default="$(find clover_description)/urdf/drones/clover4.xacro"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true"/>
+</launch>

@@ -160,7 +160,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install 6mm racks and 30mm racks, fasten them with the M3x8 and M3x12 bolts, respectively.
+2. On a mounting deck, install 6mm racks and 30mm racks, fasten them with the M3x5 and M3x12 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 

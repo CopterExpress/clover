@@ -160,7 +160,7 @@
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х8 и М3х12 соответственно.
+2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х5 и М3х12 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -203,6 +203,10 @@
 12. Подключите шлейф камеры к *Raspberry Pi*.
 
     <img src="../assets/assembling_clever4_2/raspberry_11.png" width=300 class="zoom border center">
+
+13. Подключите полетный контроллер к *Raspberry Pi* с помощью USB кабеля.
+
+    <img src="../assets/assembling_clever4_2/final_2.png" width=300 class="zoom border">
 
 ## Установка LED ленты
 
@@ -251,22 +255,5 @@
 4. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/guard_4.png" width=300 class="zoom border center">
-
-## Подготовка к полету
-
-1. Установите ремешок для аккумулятора и подключите полетный контроллер к *Raspberry Pi* с помощью USB кабеля.
-
-    <div class="image-group">
-        <img src="../assets/assembling_clever4_2/final_1.png" width=300 class="zoom border">
-        <img src="../assets/assembling_clever4_2/final_2.png" width=300 class="zoom border">
-    </div>
-
-2. Установите пропеллеры в соответствии со [схемой направления движения моторов](#prop_rotation).
-
-    <img src="../assets/assembling_clever4_2/final_3.png" width=300 class="zoom border center">
-
-3. Установите аккумулятор.
-
-    <img src="../assets/assembling_clever4_2/final_4.png" width=300 class="zoom border center">
 
 > **Success** Дрон собран, далее произведите ["настройку"](setup.md).

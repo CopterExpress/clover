@@ -1,0 +1,33 @@
+material square_dashed
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture square_dashed.png
+				filtering none
+				scale 1.0 1.0
+			}
+		}
+	}
+}
+
+material square_solid
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture square_solid.png
+				filtering none
+				scale 1.0 1.0
+			}
+		}
+	}
+}

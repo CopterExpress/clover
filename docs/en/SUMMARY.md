@@ -47,6 +47,11 @@
   * [Using JavaScript](javascript.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
+  * Simulation
+    * [Overview](simulation.md)
+    * [Native setup](simulation_native.md)
+    * [VM setup](simulation_vm.md)
+    * [Usage](simulation_usage.md)
 * Supplementary materials
   * [COEX Pix](coex_pix.md)
   * [Guide on autonomous flight](auto_setup.md)
