@@ -49,11 +49,8 @@
   * [`mavros`](mavros.md)
 * ROS: учебник
   * [Общая информация](ros.md)
-  * [ROS-ноды](ros_node.md)
-  * [ROS-топики](ros_topic.md)
-  * [ROS-сервисы](ros_service.md)
-  * [ROS-параметры](ros_params.md)
   * [Графические инструменты](ros_gui.md)
+  * [Соглашения ROS](ros_conventions.md)
   * [Продвинутое использование](ros_advanced.md)
 * Дополнительные материалы
   * [COEX Pix](coex_pix.md)
