@@ -34,9 +34,7 @@ class OpticalFlow : public nodelet::Nodelet
 {
 public:
 	OpticalFlow():
-		camera_matrix_(3, 3, CV_64F),
-		dist_coeffs_(8, 1, CV_64F),
-		tf_listener_(tf_buffer_)
+		camera_matrix_(3, 3, CV_64F)
 	{}
 
 private:
@@ -52,8 +50,8 @@ private:
 	Mat hann_;
 	Mat prev_, curr_;
 	Mat camera_matrix_, dist_coeffs_;
-	tf2_ros::Buffer tf_buffer_;
-	tf2_ros::TransformListener tf_listener_;
+	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	bool calc_flow_gyro_;
 
 	void onInit()
@@ -63,11 +61,14 @@ private:
 		image_transport::ImageTransport it(nh);
 		image_transport::ImageTransport it_priv(nh_priv);
 
-		nh.param<std::string>("mavros/local_position/tf/frame_id", local_frame_id_, "map");
-		nh.param<std::string>("mavros/local_position/tf/child_frame_id", fcu_frame_id_, "base_link");
-		nh_priv.param("roi", roi_px_, 128);
-		nh_priv.param("roi_rad", roi_rad_, 0.0);
-		nh_priv.param("calc_flow_gyro", calc_flow_gyro_, false);
+		tf_buffer_.reset(new tf2_ros::Buffer());
+		tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_, nh));
+
+		local_frame_id_ = nh.param<std::string>("mavros/local_position/tf/frame_id", "map");
+		fcu_frame_id_ = nh.param<std::string>("mavros/local_position/tf/child_frame_id", "base_link");
+		roi_px_ = nh_priv.param("roi", 128);
+		roi_rad_ = nh_priv.param("roi_rad", 0.0);
+		calc_flow_gyro_ = nh_priv.param("calc_flow_gyro", false);
 
 		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
@@ -91,9 +92,7 @@ private:
 				camera_matrix_.at<double>(i, j) = cinfo->K[3 * i + j];
 			}
 		}
-		for (int k = 0; k < cinfo->D.size(); k++) {
-			dist_coeffs_.at<double>(k) = cinfo->D[k];
-		}
+		dist_coeffs_ = cv::Mat(cinfo->D, true);
 	}
 
 	void drawFlow(Mat& frame, double x, double y, double quality) const
@@ -186,7 +185,7 @@ private:
 			flow_camera.vector.x = flow_y; // +y means counter-clockwise rotation around Y axis
 			flow_camera.vector.y = -flow_x; // +x means clockwise rotation around X axis
 			try {
-				tf_buffer_.transform(flow_camera, flow_fcu, fcu_frame_id_);
+				tf_buffer_->transform(flow_camera, flow_fcu, fcu_frame_id_);
 			} catch (const tf2::TransformException& e) {
 				// transform is not available yet
 				return;
@@ -200,7 +199,7 @@ private:
 				try {
 					auto flow_gyro_camera = calcFlowGyro(msg->header.frame_id, prev_stamp_, msg->header.stamp);
 					static geometry_msgs::Vector3Stamped flow_gyro_fcu;
-					tf_buffer_.transform(flow_gyro_camera, flow_gyro_fcu, fcu_frame_id_);
+					tf_buffer_->transform(flow_gyro_camera, flow_gyro_fcu, fcu_frame_id_);
 					flow_.integrated_xgyro = flow_gyro_fcu.vector.x;
 					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
 					flow_.integrated_zgyro = flow_gyro_fcu.vector.z;
@@ -247,8 +246,8 @@ private:
 	geometry_msgs::Vector3Stamped calcFlowGyro(const std::string& frame_id, const ros::Time& prev, const ros::Time& curr)
 	{
 		tf2::Quaternion prev_rot, curr_rot;
-		tf2::fromMsg(tf_buffer_.lookupTransform(frame_id, local_frame_id_, prev).transform.rotation, prev_rot);
-		tf2::fromMsg(tf_buffer_.lookupTransform(frame_id, local_frame_id_, curr, ros::Duration(0.1)).transform.rotation, curr_rot);
+		tf2::fromMsg(tf_buffer_->lookupTransform(frame_id, local_frame_id_, prev).transform.rotation, prev_rot);
+		tf2::fromMsg(tf_buffer_->lookupTransform(frame_id, local_frame_id_, curr, ros::Duration(0.1)).transform.rotation, curr_rot);
 
 		geometry_msgs::Vector3Stamped flow;
 		flow.header.frame_id = frame_id;

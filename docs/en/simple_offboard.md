@@ -107,7 +107,7 @@ Fly to the designated point in a straight line.
 
 Parameters:
 
-* `x`, `y` — coordinates *(m)*;
+* `x`, `y`, `z` — coordinates *(m)*;
 * `yaw` — yaw angle *(radians)*;
 * `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;

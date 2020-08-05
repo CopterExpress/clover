@@ -16,8 +16,8 @@
 
 ## Высокоуровневое управление лентой
 
-1. Для работы с лентой подключите ее к питанию +5v – 5v, земле GND – GND и сигнальному порту DIN – GPIO21. Обратитесь [к инструкции по сборке](assemble_4.md#Подключение-светодиодной-ленты-к-Raspberry-Pi) для подробностей.
-2. Включите поддержку LED-ленты в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
+1. Для работы с лентой подключите ее к питанию +5v – 5v, земле GND – GND и сигнальному порту DIN – GPIO21. Обратитесь [к инструкции по сборке](assemble_4_2.md#установка-led-ленты) для подробностей.
+2. Включите поддержку LED-ленты в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
 
     ```xml
     <arg name="led" default="true"/>
@@ -52,11 +52,9 @@
 import rospy
 from clover.srv import SetLEDEffect
 
-# ...
+rospy.init_node('flight')
 
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)  # define proxy to ROS-service
-
-# ..
 
 set_effect(r=255, g=0, b=0)  # fill strip with red color
 rospy.sleep(2)
@@ -127,11 +125,9 @@ import rospy
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 
-# ...
+rospy.init_node('flight')
 
 set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)  # define proxy to ROS service
-
-# ...
 
 # switch LEDs number 0, 1 and 2 to red, green and blue color:
 set_leds([LEDState(0, 255, 0, 0), LEDState(1, 0, 255, 0), LEDState(2, 0, 0, 255)])

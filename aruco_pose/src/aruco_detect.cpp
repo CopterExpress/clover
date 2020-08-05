@@ -58,10 +58,9 @@ using cv::Mat;
 
 class ArucoDetect : public nodelet::Nodelet {
 private:
-	ros::NodeHandle nh_, nh_priv_;
-	tf2_ros::TransformBroadcaster br_;
-	tf2_ros::Buffer tf_buffer_;
-	tf2_ros::TransformListener tf_listener_{tf_buffer_};
+	std::unique_ptr<tf2_ros::TransformBroadcaster> br_;
+	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
+	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
 	cv::Ptr<cv::aruco::Dictionary> dictionary_;
 	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
@@ -81,30 +80,32 @@ private:
 public:
 	virtual void onInit()
 	{
-		nh_ = getNodeHandle();
-		nh_priv_ = getPrivateNodeHandle();
+		ros::NodeHandle& nh_ = getNodeHandle();
+		ros::NodeHandle& nh_priv_ = getPrivateNodeHandle();
+
+		br_.reset(new tf2_ros::TransformBroadcaster());
+		tf_buffer_.reset(new tf2_ros::Buffer());
+		tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_, nh_));
 
 		int dictionary;
-		nh_priv_.param("dictionary", dictionary, 2);
-		nh_priv_.param("estimate_poses", estimate_poses_, true);
-		nh_priv_.param("send_tf", send_tf_, true);
+		dictionary = nh_priv_.param("dictionary", 2);
+		estimate_poses_ = nh_priv_.param("estimate_poses", true);
+		send_tf_ = nh_priv_.param("send_tf", true);
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
 			NODELET_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
 		}
-		readLengthOverride();
+		readLengthOverride(nh_priv_);
 
-		nh_priv_.param<std::string>("known_tilt", known_tilt_, "");
-		nh_priv_.param("auto_flip", auto_flip_, false);
+		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		auto_flip_ = nh_priv_.param("auto_flip", false);
 
-		nh_priv_.param<std::string>("frame_id_prefix", frame_id_prefix_, "aruco_");
+		frame_id_prefix_ = nh_priv_.param<std::string>("frame_id_prefix", "aruco_");
 
 		camera_matrix_ = cv::Mat::zeros(3, 3, CV_64F);
-		dist_coeffs_ = cv::Mat::zeros(8, 1, CV_64F);
 
 		dictionary_ = cv::aruco::getPredefinedDictionary(static_cast<cv::aruco::PREDEFINED_DICTIONARY_NAME>(dictionary));
 		parameters_ = cv::aruco::DetectorParameters::create();
-		parameters_->cornerRefinementMethod = cv::aruco::CORNER_REFINE_SUBPIX;
 
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
@@ -170,8 +171,8 @@ private:
 
 				if (!known_tilt_.empty()) {
 					try {
-						snap_to = tf_buffer_.lookupTransform(msg->header.frame_id, known_tilt_,
-						                                     msg->header.stamp, ros::Duration(0.02));
+						snap_to = tf_buffer_->lookupTransform(msg->header.frame_id, known_tilt_,
+						                                      msg->header.stamp, ros::Duration(0.02));
 					} catch (const tf2::TransformException& e) {
 						NODELET_WARN_THROTTLE(5, "can't snap: %s", e.what());
 					}
@@ -205,7 +206,7 @@ private:
 						if (map_markers_ids_.find(ids[i]) == map_markers_ids_.end()) {
 							transform.transform.rotation = marker.pose.orientation;
 							fillTranslation(transform.transform.translation, tvecs[i]);
-							br_.sendTransform(transform);
+							br_->sendTransform(transform);
 						}
 					}
 				}
@@ -326,10 +327,10 @@ private:
 		return frame_id_prefix_ + std::to_string(id);
 	}
 
-	void readLengthOverride()
+	void readLengthOverride(ros::NodeHandle& nh)
 	{
 		std::map<std::string, double> length_override;
-		nh_priv_.getParam("length_override", length_override);
+		nh.getParam("length_override", length_override);
 		for (auto const& item : length_override) {
 			length_override_[std::stoi(item.first)] = item.second;
 		}

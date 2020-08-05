@@ -91,22 +91,22 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/m
 
 Для работы механизма Vision Position Estimation необходимы следующие [настройки PX4](px4_parameters.md).
 
-При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
-
-* В параметре `EKF2_AID_MASK` включены флажки `vision position fusion`, `vision yaw fusion`.
-* Шум угла по зрению: `EKF2_EVA_NOISE` = 0.1 rad
-* Шум позиции по зрению: `EKF2_EVP_NOISE` = 0.1 m
-* `EKF2_EV_DELAY` = 0
-
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 
 * В параметре `LPE_FUSION` включены флажки `vision position`, `land detector`. Флажок `baro` рекомендуется отключить.
 * Вес угла по рысканью по зрению: `ATT_W_EXT_HDG` = 0.5
 * Включена ориентация по Yaw по зрению: `ATT_EXT_HDG_M` = 1 `Vision`.
 * Шумы позиции по зрению: `LPE_VIS_XY` = 0.1 m, `LPE_VIS_Z` = 0.1 m.
-* `LPE_VIS_DELAY` = 0 sec
+* `LPE_VIS_DELAY` = 0 sec.
 
 <!-- * Выключен компас: `ATT_W_MAG` = 0 -->
+
+При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
+
+* В параметре `EKF2_AID_MASK` включены флажки `vision position fusion`, `vision yaw fusion`.
+* Шум угла по зрению: `EKF2_EVA_NOISE` = 0.1 rad.
+* Шум позиции по зрению: `EKF2_EVP_NOISE` = 0.1 m.
+* `EKF2_EV_DELAY` = 0.
 
 > **Hint** На данный момент для полета по маркерам рекомендуется использование **LPE**.
 

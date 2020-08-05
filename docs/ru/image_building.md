@@ -8,7 +8,7 @@
 
 ## Добавление скриптов сборки
 
-1. Для осуществления сборки образа добавьте в свой проект build скрипты, модифицирующие исходный образ. За основу можно взять скрипты из репозитория Клевера \(папка [builder](https://github.com/CopterExpress/clover/tree/master/builder)\) или из репозитория шоу дронов на основе клеверов \(тоже папка [builder](https://github.com/artem30801/CleverSwarm/tree/master/builder)\). Опорный скрипт, который исполняется безусловно Docker образом в этих проектах - `builder/image-build.sh`.
+1. Для осуществления сборки образа добавьте в свой проект build скрипты, модифицирующие исходный образ. За основу можно взять скрипты из репозитория Клевера \(папка [builder](https://github.com/CopterExpress/clover/tree/master/builder)\) или из репозитория шоу дронов на основе Клеверов \(тоже папка [builder](https://github.com/artem30801/CleverSwarm/tree/master/builder)\). Опорный скрипт, который исполняется безусловно Docker образом в этих проектах - `builder/image-build.sh`.
 2. Для автоматического запуска сборки в облаке добавьте в свой проект `.travis.yml` файл, описывающий последовательность этапов выполнения сборки и правила для выкладки образов. [Пример](https://github.com/CopterExpress/clover/blob/master/.travis.yml) из репозитория Клевера, [пример](https://github.com/artem30801/CleverSwarm/blob/master/.travis.yml) из репозитория шоу дронов. Документация по составлению `.travis.yml` файла находится [здесь](https://docs.travis-ci.com/user/tutorial/).
 
 ## Настройка инструмента сборки travis-ci.com

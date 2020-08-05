@@ -143,7 +143,6 @@ echo_stamp "Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
-ROS_DISTRO='melodic'
 export ROS_HOSTNAME=\`hostname\`.local
 source /opt/ros/melodic/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash

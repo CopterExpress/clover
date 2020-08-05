@@ -57,6 +57,10 @@ my_travis_retry() {
   return $result
 }
 
+echo_stamp "Increase apt retries"
+
+echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
+
 echo_stamp "Install apt keys & repos"
 
 # TODO: This STDOUT consist 'OK'

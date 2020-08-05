@@ -4,6 +4,8 @@
 * [Глоссарий](gloss.md)
 * [Безопасность](safety.md)
 * Сборка
+  * [Клевер 4.2](assemble_4_2.md)
+  * [Клевер 4.1](assemble_4_1.md)
   * [Клевер 4](assemble_4.md)
   * [Клевер 3](assemble_3.md)
   * [Клевер 2](assemble_2.md)
@@ -11,6 +13,7 @@
   * [Первоначальная настройка](setup.md)
   * [Калибровка датчиков](calibration.md)
   * [Настройка пульта](radio.md)
+    * [Работа с FS-A8S](rc_flysky_a8s.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
   * [Настройка failsafe](failsafe.md)
@@ -96,7 +99,9 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * Проекты на базе Клевера
+  * [Список проектов](projects.md)
   * [Шоу коптеров](clever-show.md)
+  * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Олимпиада НТИ 2020 (P4DF2)](nti2020_p4df2.md)
   * [Генератор ArUco карт](arucogenmap.md)
   * [Модель аэротакси в городе](bigchallenges.md)

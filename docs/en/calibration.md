@@ -2,6 +2,8 @@
 
 In order to perform the sensor calibration, select the *Vehicle Setup* tab and choose the *Sensors* menu.
 
+> **Caution** If you use the flight controller *COEX Pix*, all *Autopilot Orientation* columns must specify `ROTATION_ROLL_180_YAW_90`, otherwise the flight controller will not correctly perceive the tilt and rotation of the copter.
+
 ## Compass
 
 <img src="../assets/qgc-cal-compass.png" alt="QGroundControl compass calibration" class="zoom">

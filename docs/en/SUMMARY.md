@@ -4,6 +4,7 @@
 * [Glossary](gloss.md)
 * [Safety tips](safety.md)
 * Assembly
+  * [Clover 4.2 assembly](assemble_4_2.md)
   * [Clover 4 assembly](assemble_4.md)
   * [Clover 3 assembly](assemble_3.md)
   * [Clover 2 assembly](assemble_2.md)
@@ -11,6 +12,7 @@
   * [Initial setup](setup.md)
   * [Sensor calibration](calibration.md)
   * [RC setup](radio.md)
+    * [Using FS-A8S](rc_flysky_a8s.md)
   * [Flight modes](modes.md)
   * [Power setup](power.md)
   * [Failsafe configuration](failsafe.md)
@@ -68,7 +70,7 @@
   * [Flashing ESCs](esc_firmware.md)
   * [Interfacing with Arduino](arduino.md)
   * [Connecting GPS](gps.md)
-  * [Working with IR sensors on Raspberry Pi 3](ir_sensors.md)
+  * [Working with IR sensors](ir_sensors.md)
   * [FPV Setup](fpv.md)
   * [Trainer mode](trainer_mode.md)
   * [Tinning](tinning.md)
@@ -80,6 +82,7 @@
   * [Migration to v0.20](migrate20.md)
 * Clover-based projects
   * [Drone show](clever-show.md)
+  * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)
   * [Android RC app](android.md)
@@ -88,4 +91,5 @@
   * [Copter Hack 2019](copterhack2019.md)
   * [Copter Hack 2018](copterhack2018.md)
   * [Copter Hack 2017](copterhack2017.md)
+  * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
