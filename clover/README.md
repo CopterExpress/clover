@@ -44,13 +44,6 @@ Alternatively you may change the `fcu_url` property in `mavros.launch` file to p
 
 ## Running
 
-Enable systemd service `roscore` (if not running):
-
-```bash
-sudo systemctl enable /home/<username>/catkin_ws/src/clover/builder/assets/roscore.service
-sudo systemctl start roscore
-```
-
 To start connection to SITL, use:
 
 ```bash
@@ -68,6 +61,8 @@ roslaunch clover clover.launch
 Also, you can enable and start the systemd service:
 
 ```bash
-sudo systemctl enable /home/<username>/catkin_ws/src/clover/deploy/clover.service
+sudo systemctl enable /home/<username>/catkin_ws/src/clover/builder/assets/clover.service
 sudo systemctl start clover
 ```
+
+Note, that it's intended for Raspbian OS, so it uses `pi` username by default.
