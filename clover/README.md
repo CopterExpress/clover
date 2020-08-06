@@ -57,12 +57,3 @@ roslaunch clover clover.launch
 ```
 
 > Note that the package is configured to connect to `/dev/px4fmu` by default (see [previous section](#manual-installation)). Install udev rules or specify path to your FCU device in `mavros.launch`.
-
-Also, you can enable and start the systemd service:
-
-```bash
-sudo systemctl enable /home/<username>/catkin_ws/src/clover/builder/assets/clover.service
-sudo systemctl start clover
-```
-
-Note, that it's intended for Raspbian OS, so it uses `pi` username by default.
