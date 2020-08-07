@@ -41,7 +41,7 @@ jobs:
         - git config --local user.name "goldarte"
         - git config --local user.email "goldartt@gmail.com"
         - sudo chmod -R 777 *
-        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size: %s\n" ${IMAGE_NAME}.zip
+        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
       deploy:
         provider: releases
         token: ${GITHUB_OAUTH_TOKEN}
