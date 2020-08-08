@@ -7,7 +7,7 @@ env:
   global:
     - DOCKER="sfalexrog/img-tool:qemu-update"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
-    - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
+    - IMAGE_VERSION=${TRAVIS_TAG:-${TRAVIS_COMMIT}}
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 50
