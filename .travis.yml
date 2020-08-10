@@ -7,7 +7,7 @@ env:
   global:
     - DOCKER="sfalexrog/img-tool:qemu-update"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
-    - if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="${TRAVIS_COMMIT}}"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
+    - IMAGE_VERSION=${TRAVIS_TAG:-${TRAVIS_COMMIT:0:7}}
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
   depth: 50
@@ -36,12 +36,13 @@ jobs:
           fi
       before_cache:
         - cp images/*.zip imgcache
+      after_success:
+        - sudo chmod -R 777 *
+        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
       before_deploy:
         # Set up git user name and tag this commit
         - git config --local user.name "goldarte"
         - git config --local user.email "goldartt@gmail.com"
-        - sudo chmod -R 777 *
-        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME}
       deploy:
         provider: releases
         token: ${GITHUB_OAUTH_TOKEN}
