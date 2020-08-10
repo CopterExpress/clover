@@ -8,9 +8,7 @@
 
 Управление дроном происходит с помощью двух стиков на аппаратуре. По умолчанию левый стик отвечает за газ и рысканье, а правый за крен и тангаж. Данные термины используются для всех летательных судов, от самолетов до квадрокоптеров.
 
-TODO: Скрин с коптером и осями координат
-
-<img src="../assets/flight/rc_basic_commands.png" width=400 class="center">
+<img src="../assets/flight/rc_basic_commands.jpg" width=400 class="zoom border center">
 
 * Газ (*throttle*) – отвечает за скорость вращения двигателей.
 * Рысканье (*yaw*) – отвечает за повороты вокруг вертикальной оси (Z), по часовой (при наклоне вправо) и против часовой (при наклоне влево) стрелки.
@@ -19,7 +17,7 @@ TODO: Скрин с коптером и осями координат
 
 Данные описания предполагают, что коптер находится задней частью к пилоту.
 
-<img src="../assets/flight/basic_movements_multicopter.png" width=400 class="center">
+<img src="../assets/flight/basic_movements_multicopter.jpg" width=400 class="zoom border center">
 
 ## Полетные режимы
 
@@ -62,11 +60,23 @@ TODO: Скрин с коптером и осями координат
 
     <img src="../assets/assembling_clever4_2/final_3.png" width=300 class="zoom border center">
 
-3. Установите аккумулятор.
+3. Закрепите пищалку и установите аккумулятор.
 
-    <img src="../assets/assembling_clever4_2/final_4.png" width=300 class="zoom border center">
+    <div class="image-group">
+        <img src="../assets/flight/buzzer_acb.png" width=200 class="zoom border">
+        <img src="../assets/assembling_clever4_2/final_4.png" width=300 class="zoom border">
+    </div>
 
-TODO: Рендер настройки пищалки и установки ее на акб
+### Настройка пищалки
+
+Для того, чтобы не переразрядить и не испортить аккумулятор, рекомендуется использовать индикатор напряжения(*пищалка*).
+
+Для настройки *пищалки* подключите ее к балансировочному разъему вашего аккумулятора. Теперь, нажимая на кнопку в основании будет изменяться минимальное напряжение на ячейках. Оптимальное значение минимального напряжения является *3.5-3.6 V*.
+
+<div class="image-group">
+    <img src="../assets/flight/buzzer_connection.png" width=300 class="zoom border">
+    <img src="../assets/flight/buzzer.png" width=300 class="zoom border">
+</div>
 
 ### Состояния готовности к полету
 
@@ -82,6 +92,8 @@ TODO: Рендер настройки пищалки и установки ее 
 * С помощью стика – переведите левый стик вниз вправо и подождите пару секунд.
 * С помощью тумблера – состояния Armed/Disarmed можно настроить на один из тумблеров. Подробнее о настройке в смотрите в статье про [полетные режимы](modes.md).
 * С помощью QGC – вы можете заармить ваш дрон программно. Для этого нажмите на надпись *Disarm* в шапке и выберите другое состояние.
+
+<img src="../assets/flight/controller_arm.png" width=300 class="zoom border center">
 
 ### Kill switch
 
