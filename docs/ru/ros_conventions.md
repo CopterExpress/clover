@@ -10,7 +10,7 @@
 
 ## Единцы измерения
 
-Основной REP: https://www.ros.org/reps/rep-0103.html.
+Основной <abbr title="ROS Enhancement Proposals, предложение по улучшению ROS">REP</abbr>: https://www.ros.org/reps/rep-0103.html.
 
 Все ноды ROS должны (если возможно) использовать следующие единицы измерения во всех своих внешних интерфейсах.
 
