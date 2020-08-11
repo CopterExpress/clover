@@ -8,7 +8,7 @@
 
 Управление дроном происходит с помощью двух стиков на аппаратуре. По умолчанию левый стик отвечает за газ и рысканье, а правый за крен и тангаж. Данные термины используются для всех летательных судов, от самолетов до квадрокоптеров.
 
-<img src="../assets/flight/rc_basic_commands.jpg" width=400 class="zoom border center">
+<img src="../assets/flight/rc_basic_commands.svg" width=400 class="zoom border center">
 
 * Газ (*throttle*) – отвечает за скорость вращения двигателей.
 * Рысканье (*yaw*) – отвечает за повороты вокруг вертикальной оси (Z), по часовой (при наклоне вправо) и против часовой (при наклоне влево) стрелки.
@@ -17,7 +17,7 @@
 
 Данные описания предполагают, что коптер находится задней частью к пилоту.
 
-<img src="../assets/flight/basic_movements_multicopter.jpg" width=400 class="zoom border center">
+<img src="../assets/flight/basic_movements_multicopter.svg" width=400 class="zoom border center">
 
 ## Полетные режимы
 
