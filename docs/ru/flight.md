@@ -63,7 +63,7 @@
 3. Закрепите пищалку и установите аккумулятор.
 
     <div class="image-group">
-        <img src="../assets/flight/buzzer_acb.png" width=200 class="zoom border">
+        <img src="../assets/flight/buzzer_acb.jpg" width=200 class="zoom border">
         <img src="../assets/assembling_clever4_2/final_4.png" width=300 class="zoom border">
     </div>
 
@@ -74,8 +74,8 @@
 Для настройки *пищалки* подключите ее к балансировочному разъему вашего аккумулятора. Теперь, нажимая на кнопку в основании будет изменяться минимальное напряжение на ячейках. Оптимальное значение минимального напряжения является *3.5-3.6 V*.
 
 <div class="image-group">
-    <img src="../assets/flight/buzzer_connection.png" width=300 class="zoom border">
-    <img src="../assets/flight/buzzer.png" width=300 class="zoom border">
+    <img src="../assets/flight/buzzer_connection.jpg" width=300 class="zoom border">
+    <img src="../assets/flight/buzzer.jpg" width=300 class="zoom border">
 </div>
 
 ### Состояния готовности к полету
@@ -93,7 +93,7 @@
 * С помощью тумблера – состояния Armed/Disarmed можно настроить на один из тумблеров. Подробнее о настройке в смотрите в статье про [полетные режимы](modes.md).
 * С помощью QGC – вы можете заармить ваш дрон программно. Для этого нажмите на надпись *Disarm* в шапке и выберите другое состояние.
 
-<img src="../assets/flight/controller_arm.png" width=300 class="zoom border center">
+<img src="../assets/flight/controller_arm.jpg" width=300 class="zoom border center">
 
 ### Kill switch
 
