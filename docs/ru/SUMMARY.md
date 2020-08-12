@@ -17,6 +17,9 @@
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
   * [Настройка failsafe](failsafe.md)
+* Ручной полет
+  * [Основы](flight.md)
+  * [Упражнения](flight_exercises.md)
 * Работа с Raspberry Pi
   * [Raspberry Pi](raspberry.md)
   * [Образ для RPi](image.md)
