@@ -100,14 +100,6 @@ jobs:
         verbose: true
         on:
           branch: master
-    - stage: Annotate
-      name: Auto-generate changelog
-      language: python
-      python: 3.6
-      install:
-        - pip install GitPython PyGithub
-      script:
-        - PYTHONUNBUFFERED=1 python ./gen_changelog.py
     - stage: Build
       name: Editorconfig-lint
       language: generic
@@ -118,7 +110,6 @@ jobs:
         - ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt|aruco_pose/vendor|\.stl|\.dxf|\.dae"
 stages:
   - Build
-  - Annotate
 # More info there
 # https://github.com/travis-ci/travis-ci/issues/6893
 # https://docs.travis-ci.com/user/customizing-the-build/
