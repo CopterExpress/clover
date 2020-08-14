@@ -84,6 +84,21 @@ Blockly.Python.navigate = function(block) {
 	}
 }
 
+Blockly.Python.set_velocity = function(block) {
+	let x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_NONE);
+	let y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_NONE);
+	let z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_NONE);
+	let frameId = buildFrameId(block);
+
+	simpleOffboard();
+
+	if (frameId == 'body') {
+		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, frame_id='${frameId}')\n`;
+	} else {
+		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, yaw=float('nan'), frame_id='${frameId}')\n`;
+	}
+}
+
 Blockly.Python.take_off = function(block) {
 	autoArm = false; // lower auto_arm flag after take off
 	simpleOffboard();
