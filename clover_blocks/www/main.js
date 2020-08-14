@@ -10,12 +10,13 @@ var workspace = Blockly.inject('blockly', {
 	media: 'blockly/media/',
 });
 
+// TODO: use mutators. bug on restore
 workspace.addChangeListener(function (e) {
 	if (e instanceof Blockly.Events.Change) {
 		let block = workspace.getBlockById(e.blockId);
 		if (e.name == 'FRAME_ID') {
 			if (block.getInput('X')) { // block has x-y-z fields
-				if (e.newValue == 'body' || e.newValue == 'navigate_target' || e.newValue == 'base_link') {
+				if (e.newValue == 'BODY' || e.newValue == 'NAVIGATE_TARGET' || e.newValue == 'BASE_LINK') {
 					block.getInput('X').fieldRow[0].setValue('forward');
 					block.getInput('Y').fieldRow[0].setValue('left');
 					block.getInput('Z').fieldRow[0].setValue('up');
@@ -45,7 +46,7 @@ const COLOR_FLIGHT = 293;
 const COLOR_STATE = 36;
 const COLOR_LED = 143;
 
-var frameIds = [["body", "body"], ["markers map", "aruco_map"], ["marker", "aruco"], ["last navigate target", "navigate_target"]];
+var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]];
 
 Blockly.Blocks['navigate'] = {
 	init: function () {
@@ -156,7 +157,7 @@ Blockly.Blocks['voltage'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["total", "TOTAL"], ["cell", "CELL"]]), "NAME")
+			.appendField(new Blockly.FieldDropdown([["total", "VOLTAGE"], ["cell", "CELL_VOLTAGE"]]), "TYPE")
 			.appendField("voltage");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
