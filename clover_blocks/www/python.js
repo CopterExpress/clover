@@ -125,6 +125,19 @@ Blockly.Python.land = function(block) {
 	}
 }
 
+const WAIT_ARRIVAL = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
+	while not rospy.is_shutdown():
+		telem = get_telemetry(frame_id='navigate_target')
+		if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+			return
+		rospy.sleep(0.2)`;
+
+Blockly.Python.wait_arrival = function(block) {
+	simpleOffboard();
+	var waitArrival = Blockly.Python.provideFunction_('wait_arrival', [WAIT_ARRIVAL]);
+	return `${waitArrival}()\n`;
+}
+
 Blockly.Python.wait = function(block) {
 	initNode();
 	return `rospy.sleep(${Blockly.Python.valueToCode(block, 'TIME', Blockly.Python.ORDER_NONE)})\n`;
