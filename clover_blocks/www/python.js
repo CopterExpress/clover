@@ -110,7 +110,7 @@ Blockly.Python.take_off = function(block) {
 		return `${functionName}(z=${z}, frame_id='body', auto_arm=True)\n`;
 
 	} else {
-		return `navigate(=${z}, frame_id='body', auto_arm=True)\n`;
+		return `navigate(z=${z}, frame_id='body', auto_arm=True)\n`;
 	}
 }
 
