@@ -36,6 +36,9 @@ const LAND_WAIT = `def land_wait():
 
 var autoArm = true;
 
+// Adjust indentation
+Blockly.Python.INDENT = '    ';
+
 function getAutoArm() {
 	if (autoArm) {
 		autoArm = false;
