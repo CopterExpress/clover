@@ -18,16 +18,16 @@ function simpleOffboard() {
 }
 
 const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='body', tolerance=0.2, auto_arm=False):
-	res = navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
+  res = navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
-	if not res.success:
-		raise Exception(res.message)
+  if not res.success:
+    raise Exception(res.message)
 
-	while not rospy.is_shutdown():
-		telem = get_telemetry(frame_id='navigate_target')
-		if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
-			return
-		rospy.sleep(0.2)`;
+  while not rospy.is_shutdown():
+    telem = get_telemetry(frame_id='navigate_target')
+    if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+      return
+    rospy.sleep(0.2)`;
 
 const LAND_WAIT = `def land_wait():
 	land()
@@ -126,11 +126,11 @@ Blockly.Python.land = function(block) {
 }
 
 const WAIT_ARRIVAL = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
-	while not rospy.is_shutdown():
-		telem = get_telemetry(frame_id='navigate_target')
-		if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
-			return
-		rospy.sleep(0.2)`;
+  while not rospy.is_shutdown():
+    telem = get_telemetry(frame_id='navigate_target')
+    if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+      return
+    rospy.sleep(0.2)`;
 
 Blockly.Python.wait_arrival = function(block) {
 	simpleOffboard();
@@ -187,7 +187,7 @@ function parseColor(color) {
 }
 
 const PARSE_COLOR = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(color):
-	return {'r': int(color[1:3], 16), 'g': int(color[3:5], 16), 'b': int(color[5:7], 16)}`;
+  return {'r': int(color[1:3], 16), 'g': int(color[3:5], 16), 'b': int(color[5:7], 16)}`;
 
 // TODO: weird code with colour_rgb block
 Blockly.Python.set_effect = function(block) {
