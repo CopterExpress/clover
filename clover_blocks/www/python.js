@@ -51,7 +51,7 @@ function buildFrameId(block) {
 	let frame = block.getFieldValue('FRAME_ID').toLowerCase();
 	let id = Blockly.Python.valueToCode(block, 'ID', Blockly.Python.ORDER_NONE);
 	// TODO: check empty aruco id
-	return Blockly.Python.quote_(frame + (frame == 'aruco' ? '_' + id : ''));
+	return frame + (frame == 'aruco' ? '_' + id : '');
 }
 
 Blockly.Python.navigate = function(block) {
@@ -61,11 +61,7 @@ Blockly.Python.navigate = function(block) {
 	let frameId = buildFrameId(block);
 	let speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_NONE);
 
-	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id=${frameId}`, `speed=${speed}`];
-
-	if (frameId != 'body') {
-		params.push(`yaw=float('nan')`);
-	}
+	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id='${frameId}'`, `speed=${speed}`];
 
 	if (getAutoArm()) {
 		params.push('auto_arm=True');
@@ -81,6 +77,9 @@ Blockly.Python.navigate = function(block) {
 		return `${functionName}(${params.join(', ')})\n`;
 
 	} else {
+		if (frameId != 'body') {
+			params.push(`yaw=float('nan')`);
+		}
 		return `navigate(${params.join(', ')})\n`;
 	}
 }
@@ -119,7 +118,7 @@ Blockly.Python.wait = function(block) {
 Blockly.Python.get_position = function(block) {
 	simpleOffboard();
 	let frameId = buildFrameId(block);
-	var code = `get_telemetry(${frameId}).${block.getFieldValue('FIELD').toLowerCase()}`;
+	var code = `get_telemetry('${frameId}').${block.getFieldValue('FIELD').toLowerCase()}`;
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
