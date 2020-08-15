@@ -27,7 +27,7 @@ workspace.addChangeListener(function (e) {
 				}
 			}
 			if (block.getInput('ID')) { // block has marker id field
-				block.getInput('ID').setVisible(e.newValue == 'aruco'); // toggle id field
+				block.getInput('ID').setVisible(e.newValue == 'ARUCO'); // toggle id field
 			}
 			block.render();
 		}
