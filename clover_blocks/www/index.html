@@ -41,7 +41,9 @@
 			<!-- <block type="key_pressed"></block> -->
 		</category>
 		<category name="State" colour="#ff9a00">
-			<block type="get_position"></block>
+			<block type="get_position">
+				<field name="FRAME_ID">ARUCO_MAP</field>
+			</block>
 			<block type="get_attitude"></block>
 			<block type="distance">
 				<value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
