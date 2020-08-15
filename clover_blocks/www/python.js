@@ -1,3 +1,9 @@
+// If any new block imports any library, add that library name here.
+Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
+Blockly.Python.addReservedWords('srv,Trigger,get_telemetry,navigate,set_velocity,land');
+Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
+Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
+
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
 
