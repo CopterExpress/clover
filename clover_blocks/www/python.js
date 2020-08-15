@@ -29,10 +29,10 @@ const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x=0, y=0
       return
     rospy.sleep(0.2)`;
 
-const LAND_WAIT = `def land_wait():
-	land()
-	while get_telemetry().armed:
-		rospy.sleep(0.2)`;
+const LAND_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
+  land()
+  while get_telemetry().armed:
+    rospy.sleep(0.2)`;
 
 var autoArm = true;
 
