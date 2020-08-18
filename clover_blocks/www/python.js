@@ -23,15 +23,16 @@ function simpleOffboard() {
 	Blockly.Python.definitions_['offboard'] = OFFBOARD;
 }
 
-const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='body', tolerance=0.2, auto_arm=False):
-  res = navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
+// TODO: tolerance to parameters
+const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x, y, z, speed=0.5, frame_id='body', auto_arm=False):
+  res = navigate(x, y, z, yaw=float('yaw'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
   if not res.success:
     raise Exception(res.message)
 
   while not rospy.is_shutdown():
     telem = get_telemetry(frame_id='navigate_target')
-    if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+    if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
       return
     rospy.sleep(0.2)`;
 
