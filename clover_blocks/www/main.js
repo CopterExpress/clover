@@ -1,3 +1,15 @@
+// Tabs
+document.getElementById('tabs').addEventListener('click', function(e) {
+	var tab = e.target.getAttribute('data-tab');
+	if (tab) {
+		for (let elem of e.target.parentElement.querySelectorAll('[data-tab]')) {
+			elem.classList.remove('selected');
+		}
+		e.target.classList.add('selected');
+		document.body.setAttribute('data-tab', tab);
+	}
+});
+
 var workspace = Blockly.inject('blockly', { 
 	toolbox: document.getElementById('toolbox'),
 	grid: {

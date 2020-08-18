@@ -6,14 +6,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="main.css">
 	<link rel="icon" href="data:,">
-
 	<script src="blockly/blockly_compressed.js"></script>
 	<script src="blockly/blocks_compressed.js"></script>
 	<script src="blockly/msg/js/en.js"></script>
 </head>
 
-<body>
-	<div id="blockly"></div>
+<body data-tab="blocks">
+	<ul id="tabs">
+		<li class="selected" data-tab="blocks">Blocks</li>
+		<li data-tab="python">Python</li>
+	</ul>
+
+	<div id="tools">
+		<button onclick="runProgram()">Run</button>
+		<button onclick="stopProgram()">Stop</button>
+	</div>
+
+	<div id="blockly" class="content"></div>
+	<pre readonly id="python" class="content"></pre>
 
 	<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 		<category name="Flight" colour="#870b99">
