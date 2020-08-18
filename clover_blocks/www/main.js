@@ -58,7 +58,6 @@ var pythonArea = document.getElementById('python');
 
 // update Python code
 workspace.addChangeListener(function (e) {
-	console.log(e);
 	pythonArea.innerHTML = generateUserCode();
 	hljs.highlightBlock(pythonArea);
 });
