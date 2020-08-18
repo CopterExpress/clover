@@ -23,7 +23,7 @@ var workspace = Blockly.inject('blockly', {
 });
 
 // TODO: use mutators. bug on restore
-workspace.addChangeListener(function (e) {
+workspace.addChangeListener(function(e) {
 	if (e instanceof Blockly.Events.Change) {
 		let block = workspace.getBlockById(e.blockId);
 		if (e.name == 'FRAME_ID') {
@@ -54,3 +54,11 @@ workspace.addChangeListener(function (e) {
 	}
 });
 
+var pythonArea = document.getElementById('python');
+
+// update Python code
+workspace.addChangeListener(function (e) {
+	console.log(e);
+	pythonArea.innerHTML = generateUserCode();
+	hljs.highlightBlock(pythonArea);
+});

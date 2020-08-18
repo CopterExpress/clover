@@ -46,6 +46,12 @@ var autoArm = true;
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
+function generateUserCode() {
+	autoArm = true;
+	Blockly.Python.STATEMENT_PREFIX = null;
+	return Blockly.Python.workspaceToCode(workspace);
+}
+
 function getAutoArm() {
 	if (autoArm) {
 		autoArm = false;
