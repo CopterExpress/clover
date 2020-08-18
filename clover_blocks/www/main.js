@@ -1,3 +1,5 @@
+import {generateCode, generateUserCode} from './python.js';
+
 // Tabs
 document.getElementById('tabs').addEventListener('click', function(e) {
 	var tab = e.target.getAttribute('data-tab');
@@ -58,6 +60,6 @@ var pythonArea = document.getElementById('python');
 
 // update Python code
 workspace.addChangeListener(function(e) {
-	pythonArea.innerHTML = generateUserCode();
+	pythonArea.innerHTML = generateUserCode(workspace);
 	hljs.highlightBlock(pythonArea);
 });

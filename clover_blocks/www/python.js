@@ -46,7 +46,7 @@ var autoArm = true;
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
-function generateUserCode() {
+export function generateUserCode(workspace) {
 	autoArm = true;
 	Blockly.Python.STATEMENT_PREFIX = null;
 	return Blockly.Python.workspaceToCode(workspace);
