@@ -228,7 +228,7 @@ Blockly.Python.get_attitude = function(block) {
 Blockly.Python.rangefinder_distance = function(block) {
 	initNode();
 	Blockly.Python.definitions_['import_range'] = 'from sensor_msgs.msg import Range';
-	return [`rospy.wait_for_message('rangefinder/range', Range)`, Blockly.Python.ORDER_FUNCTION_CALL]
+	return [`rospy.wait_for_message('rangefinder/range', Range).range`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 Blockly.Python.mode = function(block) {
