@@ -1,8 +1,11 @@
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('srv,Trigger,get_telemetry,navigate,set_velocity,land');
+Blockly.Python.addReservedWords('navigate_wait,land_wait');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
+
+var userCode = true; // global flag indicating whether the code for GUI is generating
 
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
@@ -10,22 +13,11 @@ from std_srvs.srv import Trigger`;
 const OFFBOARD = `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
-land = rospy.ServiceProxy('land', Trigger)`;
-
-function initNode() {
-	Blockly.Python.definitions_['import_rospy'] = 'import rospy';
-	Blockly.Python.definitions_['init_node'] = `rospy.init_node('flight')`;
-}
-
-function simpleOffboard() {
-	initNode();
-	Blockly.Python.definitions_['import_srv'] = IMPORT_SRV;
-	Blockly.Python.definitions_['offboard'] = OFFBOARD;
-}
+land = rospy.ServiceProxy('land', Trigger)\n`;
 
 // TODO: tolerance to parameters
-const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x, y, z, speed=0.5, frame_id='body', auto_arm=False):
-  res = navigate(x, y, z, yaw=float('yaw'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
+const NAVIGATE_WAIT = `def navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
+  res = navigate(x=x, y=y, z=z, yaw=float('nan'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
   if not res.success:
     raise Exception(res.message)
@@ -34,22 +26,85 @@ const NAVIGATE_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(x, y, z,
     telem = get_telemetry(frame_id='navigate_target')
     if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
       return
-    rospy.sleep(0.2)`;
+    else:
+      print(telem)
+      print(math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2))
+    rospy.sleep(0.2)\n`;
 
-const LAND_WAIT = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
+const LAND_WAIT = `def land_wait():
   land()
   while get_telemetry().armed:
-    rospy.sleep(0.2)`;
+    rospy.sleep(0.2)\n`;
+
+var rosDefinitions = {};
+
+function generateROSDefinitions() {
+	// order for ROS definitions is significant, so generate all ROS definitions as one
+	var code = `rospy.init_node('flight', anonymous=True)\n\n`;
+	if (!userCode) {
+		code += `block_pub = rospy.Publisher('/clover_blocks/block', String, queue_size=10, latch=True)\n`;
+	}
+	if (rosDefinitions.print) {
+		code += `print_pub = rospy.Publisher('/clover_blocks/print', String, queue_size=10, latch=True)\n`
+	}
+	if (rosDefinitions.offboard) {
+		code += OFFBOARD;
+	}
+	if (rosDefinitions.setEffect) {
+		code += `set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)\n`;
+	}
+	if (rosDefinitions.setLeds) {
+		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)\n`;
+	}
+	if (rosDefinitions.navigateWait) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += NAVIGATE_WAIT;
+	}
+	if (rosDefinitions.landWait) {
+		code += LAND_WAIT;
+	}
+	Blockly.Python.definitions_['ros'] = code;
+}
+
+function initNode() {
+	Blockly.Python.definitions_['import_rospy'] = 'import rospy';
+	generateROSDefinitions();
+}
+
+function simpleOffboard() {
+	rosDefinitions.offboard = true;
+	Blockly.Python.definitions_['import_srv'] = IMPORT_SRV;
+	initNode();
+}
+
 
 var autoArm = true;
 
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
+var origInit = Blockly.Python.init;
+
+// Blockly.Python.init = function() {
+// 	origInit.apply(this, arguments);
+// 	if (!userCode) {
+// 		Blockly.Python.definitions_['block_pub'] = `block_pub = rospy.Publisher('clover_blocks/block', String, queue_size=10, latch=True)`;
+// 	}
+// }
+
 export function generateUserCode(workspace) {
+	userCode = true;
 	autoArm = true;
 	Blockly.Python.STATEMENT_PREFIX = null;
 	return Blockly.Python.workspaceToCode(workspace);
+}
+
+export function generateCode(workspace) {
+	userCode = false;
+	Blockly.Python.STATEMENT_PREFIX = 'block_pub.publish(%1)\n';
+	var code = Blockly.Python.workspaceToCode(workspace);
+	code += "block_pub.publish('')\n"; // end of program
+	return code;
 }
 
 function getAutoArm() {
@@ -83,11 +138,10 @@ Blockly.Python.navigate = function(block) {
 	simpleOffboard();
 
 	if (block.getFieldValue('WAIT') == 'TRUE') {
-		let functionName = Blockly.Python.provideFunction_(
-			'navigate_wait',
-			[NAVIGATE_WAIT]);
+		rosDefinitions.navigateWait = true;
+		simpleOffboard();
 
-		return `${functionName}(${params.join(', ')})\n`;
+		return `navigate_wait(${params.join(', ')})\n`;
 
 	} else {
 		if (frameId != 'body') {
@@ -119,9 +173,9 @@ Blockly.Python.take_off = function(block) {
 	let z = Blockly.Python.valueToCode(block, 'ALT', Blockly.Python.ORDER_NONE);
 
 	if (block.getFieldValue('WAIT') == 'TRUE') {
-		let functionName = Blockly.Python.provideFunction_('navigate_wait', [NAVIGATE_WAIT]);
-		return `${functionName}(z=${z}, frame_id='body', auto_arm=True)\n`;
+		rosDefinitions.navigateWait = true;
 
+		return `navigate_wait(z=${z}, frame_id='body', auto_arm=True)\n`;
 	} else {
 		return `navigate(z=${z}, frame_id='body', auto_arm=True)\n`;
 	}
@@ -131,8 +185,10 @@ Blockly.Python.land = function(block) {
 	simpleOffboard();
 
 	if (block.getFieldValue('WAIT') == 'TRUE') {
-		let functionName = Blockly.Python.provideFunction_('land_wait', [LAND_WAIT]);
-		return `${functionName}()\n`;
+		rosDefinitions.landWait = true;
+		simpleOffboard();
+
+		return `land_wait()\n`;
 	} else {
 		return 'land()\n';
 	}
@@ -176,7 +232,7 @@ Blockly.Python.rangefinder_distance = function(block) {
 }
 
 Blockly.Python.mode = function(block) {
-	simpleOffboard();	
+	simpleOffboard();
 	return [`get_telemetry().mode`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
@@ -204,9 +260,9 @@ const PARSE_COLOR = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}(color):
 
 // TODO: weird code with colour_rgb block
 Blockly.Python.set_effect = function(block) {
+	rosDefinitions.setEffect = true;
 	initNode();
 	Blockly.Python.definitions_['import_led_effect'] = 'from clover.srv import SetLEDEffect';
-	Blockly.Python.definitions_['set_effect'] = `set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)`;
 
 	var effect = block.getFieldValue('EFFECT').toLowerCase();
 
@@ -226,9 +282,9 @@ Blockly.Python.set_effect = function(block) {
 }
 
 Blockly.Python.set_led = function(block) {
+	rosDefinitions.setLeds = true;
 	initNode();
 	Blockly.Python.definitions_['import_set_led'] = 'from led_msgs.srv import SetLEDs\nfrom led_msgs.msg import LEDState';
-	Blockly.Python.definitions_['set_leds'] = `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)`;
 
 	var index = Blockly.Python.valueToCode(block, 'INDEX', Blockly.Python.ORDER_NONE);
 	var colorCode = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_NONE);
