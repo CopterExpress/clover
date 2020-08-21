@@ -13,6 +13,10 @@ Python
 Flying towards a point and waiting for copter's arrival:
 
 ```python
+import math
+
+#...
+
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
@@ -53,6 +57,23 @@ Usage:
 
 ```python
 land_wait()
+```
+
+### # {#wait_arrival}
+
+Wait for copter's arrival to the [navigate](simple_offboard.md#navigate) target:
+
+```python
+import math
+
+# ...
+
+def wait_arrival(tolerance=0.2):
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+        rospy.sleep(0.2)
 ```
 
 ### # {#get_distance}
