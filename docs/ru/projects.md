@@ -9,7 +9,7 @@
 |Интеграция системы позиционирования [Pozyx](https://www.pozyx.io)|[Наработки](https://github.com/goldarte/pozyx_clever).|
 |Интеграция системы позиционирования типа Motion Capture||
 |Разработка и интеграция дешевого Motion Capture||
-|Интеграция блочного программирования (Scratch, Blockly)|[Решение с программы стажировок](clever_blocks.md). Официальное решение COEX в разработке.|
+|Интеграция блочного программирования (Scratch, Blockly)|[Решение с программы стажировок](clever_blocks.md). Официальное решение COEX [в разработке](https://github.com/CopterExpress/clover/tree/blockly).|
 |Улучшение алгоритма визуального позиционирования (optical flow): трекинг по фичам, расчет угла по yaw||
 |Симулятор Клевера|[Решение от COEX](https://github.com/CopterExpress/clover_vm) (на основе Gazebo). Проект продолжает разрабатываться.|
 |Облачная платформа для симулятора Клевера|По аналогии или на основе [ROS Development Studio](http://rosds.online/).|
