@@ -1,8 +1,6 @@
-Code examples
-===
+# Code examples
 
-Python
----
+## Python
 
 ### # {#navigate_wait}
 
@@ -10,7 +8,7 @@ Python
 
 <a name="block-takeoff"></a><!-- old name of anchor -->
 
-Flying towards a point and waiting for copter's arrival:
+Fly towards a point and wait for copter's arrival:
 
 ```python
 import math
@@ -45,7 +43,7 @@ navigate_wait(z=1, frame_id='body', auto_arm=True)
 
 <a name="block-land"></a><!-- old name of anchor -->
 
-Landing and waiting until the copter lands:
+Land and wait until the copter lands:
 
 ```python
 land()
@@ -78,7 +76,7 @@ def wait_arrival(tolerance=0.2):
 
 ### # {#get_distance}
 
-Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
+Calculate the distance between two points (**important**: the points are to be in the same [coordinate system](frames.md)):
 
 ```python
 def get_distance(x1, y1, z1, x2, y2, z2):
@@ -96,7 +94,7 @@ def get_distance_global(lat1, lon1, lat2, lon2):
 
 ### # {#disarm}
 
-Quadcopter disarm (disabling propellers **the copter will fall down**):
+Disarm the drone (propellers will stop, **the drone will fall down**):
 
 ```python
 # Declaring a proxy:
@@ -110,7 +108,7 @@ arming(False)  # дизарм
 
 ### # {#transform}
 
-Transforming the position (`PoseStamped`) from one system of coordinates ([of frame](frames.md)) to another one using [tf2] (http://wiki.ros.org/tf2):
+Transform the position (`PoseStamped`) from one [coordinate system](frames.md) to another using [tf2](http://wiki.ros.org/tf2):
 
 ```python
 import tf2_ros
@@ -122,25 +120,25 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 # ...
 
-# PoseStamped object creation (or getting it from a topic):
+# Create PoseStamped object (or get it from a topic):
 pose = PoseStamped()
-pose.header.frame_id = 'map' # frame, which is the position is specified
-pose.header.stamp = rospy.get_rostime() # the instant for which the position is specified (current time)
+pose.header.frame_id = 'map' # coordinate frame, in which the position is specified
+pose.header.stamp = rospy.get_rostime() # the time for which the position is specified (current time)
 pose.pose.position.x = 1
 pose.pose.position.y = 2
 pose.pose.position.z = 3
 pose.pose.orientation.w = 1
 
-frame_id = 'base_link' # target frame
-transform_timeout = rospy.Duration(0.2) # wait for transformation timeout
+frame_id = 'base_link' # target coordinate frame
+transform_timeout = rospy.Duration(0.2) # timeout for transformation
 
-# Transforming the position from the old frame to the new one:
+# Transform the position from the old frame to the new one:
 new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
 ```
 
 ### # {#upside-down}
 
-Determining whether the copter is turned upside-down:
+Determine whether the copter is turned upside-down:
 
 ```python
 PI_2 = math.pi / 2
@@ -151,7 +149,7 @@ flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
 
 ### # {#angle-hor}
 
-Calculating the copter total horizontal angle:
+Calculate the copter horizontal angle:
 
 ```python
 PI_2 = math.pi / 2
@@ -165,7 +163,7 @@ if flipped:
 
 ### # {#circle}
 
-Flying along a circular path:
+Fly along a circular path:
 
 ```python
 RADIUS = 0.6  # m
@@ -187,7 +185,7 @@ while not rospy.is_shutdown():
 
 ### # {#rate}
 
-repeating an action at a frequency of 10 Hz:
+Repeat an action at a frequency of 10 Hz:
 
 ```python
 r = rospy.Rate(10)
@@ -198,7 +196,7 @@ while not rospy.is_shutdown():
 
 ### # {#mavros-sub}
 
-An example of subscription to a topic from MAVROS
+An example of subscription to a topic from MAVROS:
 
 ```python
 from geometry_msgs.msg import PoseStamped, TwistStamped
@@ -228,7 +226,7 @@ Information about MAVROS topics is available at [the link](mavros.md).
 
 <!-- markdownlint-enable MD044 -->
 
-Sending an arbitrary [MAVLink message](mavlink.md) to the copter:
+Send an arbitrary [MAVLink message](mavlink.md) to the copter:
 
 ```python
 # ...
@@ -252,15 +250,15 @@ mavlink_pub.publish(ros_msg)
 
 ### # {#rc-sub}
 
-Return on mode switching with the transmitter (may be used for starting an autonomous flight, see [example](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
+React to the drone's mode switching (may be used for starting an autonomous flight, see [example](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
 
 ```python
 from mavros_msgs.msg import RCIn
 
 # Called when new data is received from the transmitter
 def rc_callback(data):
-    # Return on switch toggling of the transmitter
-        if data.channels[5] < 1100:
+    # React on toggling the mode of the transmitter
+    if data.channels[5] < 1100:
         # ...
         pass
     elif data.channels[5] > 1900:
@@ -328,7 +326,7 @@ rospy.loginfo('flip')
 flip()
 ```
 
-Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clover). Before running a flip, take all necessary safty precautions.
+Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clover). Before running a flip, take all necessary safety precautions.
 
 ### # {#calibrate-gyro}
 
