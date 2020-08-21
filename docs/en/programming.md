@@ -76,7 +76,7 @@ rospy.sleep(3)
 land()
 ```
 
-> **Note** The `navigate` function call is not blocking; that is, the program will continue executing the next commands before the drone arrives at the set point. Look at the [`navigate_wait`](snippets.md#block-nav) snippet for a blocking function.
+> **Note** The `navigate` function call is not blocking; that is, the program will continue executing the next commands before the drone arrives at the set point. Look at the [`navigate_wait`](snippets.md#navigate_wait) snippet for a blocking function.
 
 Note that only the first `navigate` call has its `auto_arm` parameter set to `True`. This parameter arms the drone and transitions it to the OFFBOARD flight mode.
 

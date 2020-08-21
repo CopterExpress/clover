@@ -4,100 +4,17 @@ Code examples
 Python
 ---
 
-### # {#distance}
+### # {#navigate_wait}
 
-Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
+<a name="block-nav"></a><!-- old name of anchor -->
 
-```python
-def get_distance(x1, y1, z1, x2, y2, z2):
-    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
-```
-
-### # {#distance-global}
-
-Approximation of distance (in meters) between two global coordinates (latitude/longitude):
-
-```python
-def get_distance_global(lat1, lon1, lat2, lon2):
-    return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
-```
-
-### # {#block-takeoff}
-
-Takeoff and waiting for it to finish:
-
-```python
-z = 2  # altitude
-tolerance = 0.2 # precision of altitude check (m)
-
-# Saving the initial point
-start = get_telemetry()
-
-# Take off and leveling at 2 m above the ground
-print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
-
-# Waiting for takeoff
-while not rospy.is_shutdown():
-    # Checking current altitude
-    if start.z + z - get_telemetry().z < tolerance:
-        # Takeoff complete
-        break
-    rospy.sleep(0.2)
-```
-
-This code can be wrapped in a function:
-
-```python
-def takeoff_wait(alt, speed=0.5, tolerance=0.2):
-    start = get_telemetry()
-    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
-
-    while not rospy.is_shutdown():
-        if start.z + alt - get_telemetry().z < tolerance:
-            break
-
-        rospy.sleep(0.2)
-```
-
-### # {#block-nav}
+<a name="block-takeoff"></a><!-- old name of anchor -->
 
 Flying towards a point and waiting for copter's arrival:
 
 ```python
-tolerance = 0.2 # precision of arrival check (m)
-frame_id='aruco_map'
-
-# Flying to point 1:2:3 in the field of ArUco markers
-print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
-
-# Wait for the copter to arrive at the requested point
-while not rospy.is_shutdown():
-    telem = get_telemetry(frame_id=frame_id)
-    # Calculating the distance to the requested point
-    if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
-        # Arrived at the requested point
-        break
-    rospy.sleep(0.2)
-```
-
-This code can be wrapped into a function:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
-
-    while not rospy.is_shutdown():
-        telem = get_telemetry(frame_id=frame_id)
-        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
-            break
-        rospy.sleep(0.2)
-```
-
-A more universal solution, utilizing the `navigate_target` frame, which corresponds to the navigating target point of the drone:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
+    navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -106,9 +23,23 @@ def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
         rospy.sleep(0.2)
 ```
 
-This code also can be used for navigating using `body` frame.
+This function utilizes [`navigate_target`](frames.md#navigate_target) frame for computing the distance to the target.
+
+Using the function for flying to the point x=3, y=2, z=1 in [marker's map](aruco_map.md):
+
+```python
+navigate_wait(x=3, y=2, z=1, frame_id='aruco_map')
+```
+
+This function can be used for taking off as well:
+
+```python
+navigate_wait(z=1, frame_id='body', auto_arm=True)
+```
 
 ### # {#block-land}
+
+<a name="block-land"></a><!-- old name of anchor -->
 
 Landing and waiting until the copter lands:
 
@@ -118,13 +49,28 @@ while get_telemetry().armed:
     rospy.sleep(0.2)
 ```
 
-This code can be wrapped in a function:
+Usage:
 
 ```python
-def land_wait():
-    land()
-    while get_telemetry().armed:
-        rospy.sleep(0.2)
+land_wait()
+```
+
+### # {#get_distance}
+
+Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
+
+```python
+def get_distance(x1, y1, z1, x2, y2, z2):
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
+```
+
+### # {#get_distance_global}
+
+Approximation of distance (in meters) between two global coordinates (latitude/longitude):
+
+```python
+def get_distance_global(lat1, lon1, lat2, lon2):
+    return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
 
 ### # {#disarm}
