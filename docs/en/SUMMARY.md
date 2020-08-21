@@ -16,6 +16,9 @@
   * [Flight modes](modes.md)
   * [Power setup](power.md)
   * [Failsafe configuration](failsafe.md)
+* Manual flight
+  * [Basics](flight.md)
+  * [Exercises](flight_exercises.md)
 * Working with Raspberry Pi
   * [Raspberry Pi](raspberry.md)
   * [RPi Image](image.md)
