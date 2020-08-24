@@ -27,21 +27,21 @@ The main manual modes are discussed below.
 
 **STABILIZED** - horizontal position stabilization mode. In this mode, the aircraft will hold the horizon if not controlled. Purpose of sticks:
 
-* Gas - the average speed of rotation of the motors.
+* Throttle - the average speed of rotation of the motors.
 * Yaw - angular velocity around the vertical axis.
 * Pitch - the angle of inclination around the transverse axis (forward / backward).
 * Roll - the angle of inclination around the longitudinal axis (left / right).
 
 **POSCTL** - position holding mode (requires enabled positioning system). Purpose of sticks:
 
-* Gas - vertical flight speed.
+* Throttle - vertical flight speed.
 * Yaw - angular velocity around the vertical axis.
 * Pitch is the linear speed of the drone (forward / backward).
 * Roll - the linear speed of the drone (left / right).
 
 **ACRO** - mode for controlling the average rotational speed of the motors and angular speeds of the drone. This mode is the most difficult to fly and is most often used by drone racers and 3D piloting shows to perform stunts. Purpose of sticks:
 
-* Gas - the average speed of rotation of the motors.
+* Throttle - the average speed of rotation of the motors.
 * Yaw - angular velocity around the vertical axis.
 * Pitch - angular velocity around the transverse axis (forward / backward).
 * Roll - angular velocity around the longitudinal axis (left / right).
@@ -93,7 +93,7 @@ There are several ways to put a copter into the *Armed* state:
 
 <img src="../assets/flight/controller_arm.jpg" width=300 class="zoom border center">
 
-* Using the toggle switch - the Armed / Disarmed states can be set to one of the toggle switches. For more information on setting up, see the article on [flight modes] (modes.md).
+* Using the toggle switch - the Armed / Disarmed states can be set to one of the toggle switches. For more information on setting up, see the article on [flight modes](modes.md).
 * With QGC - you can arm your drone programmatically. To do this, click on the inscription *Disarm* in the header and select another state.
 * With the help of the program - the copter can enter the *Armed* state if the parameter `auto_arm = True` is specified in the navigation command, such as: navigate, set_position, etc.
 
