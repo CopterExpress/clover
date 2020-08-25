@@ -1,6 +1,6 @@
 # Flight
 
-This section explains the basics of controlling a quadcopter using the radio remote control in different modes (for autonomous flying see "[Programming](programming.md)").
+This section explains the basics of controlling the quadcopter using radio remote control in different modes (for autonomous flying see "[Programming](programming.md)") section.
 
 ## Main features of radio equipment
 
