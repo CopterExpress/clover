@@ -4,7 +4,7 @@ This section explains the basics of controlling a quadcopter using the radio rem
 
 ## Main features of radio equipment
 
-Before you can launch your drone, you need to understand how the radio remote control ("hardware" in conventional aircraft modeling terminology) works.
+Before you can launch your drone, you need to understand how the radio remote control works.
 
 The drone is controlled using two sticks on the equipment. By default, the left stick controls throttle and yaw, and the right stick controls roll and pitch. These terms are used for all aircraft, from airplanes to quadcopters.
 
