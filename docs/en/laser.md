@@ -52,15 +52,18 @@ Set the following parameters when LPE is used (`SYS_MC_EST_GROUP` = `local_posit
 In order to receive data from the topic, create a subscriber:
 
 ```python
+import rospy
 from sensor_msgs.msg import Range
 
-# ...
+rospy.init_node('flight')
 
 def range_callback(msg):
     # Process data from the rangefinder
     print 'Rangefinder distance:', msg.range
 
 rospy.Subscriber('rangefinder/range', Range, range_callback)
+
+rospy.spin()
 ```
 
 Also it's possible to read one rangefinder measurement at a time:
