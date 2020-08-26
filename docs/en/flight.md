@@ -8,7 +8,7 @@ Before you can launch your drone, you need to understand how the radio remote co
 
 The drone is controlled using two sticks on the equipment. By default, the left stick controls throttle and yaw, and the right stick controls roll and pitch. These terms are used for all aircraft, from airplanes to quadcopters.
 
-<img src="../assets/flight/rc_basic_commands.svg" width=400 class="zoom border center">
+<img src="../assets/flight/rc_basic_commands.svg" width=400 class="zoom center">
 
 * Throttle - is responsible for the speed of rotation of the engines.
 * Yaw - responsible for turns around the vertical axis (Z), clockwise (when tilted to the right) and counterclockwise (when tilted to the left) arrows.
@@ -17,7 +17,7 @@ The drone is controlled using two sticks on the equipment. By default, the left 
 
 These descriptions assume the aircraft is with its back to the pilot.
 
-<img src="../assets/flight/basic_movements_multicopter.svg" width=400 class="zoom border center">
+<img src="../assets/flight/basic_movements_multicopter.svg" width=400 class="zoom center">
 
 ## Flight Modes
 
@@ -91,7 +91,7 @@ There are several ways to put a copter into the *Armed* state:
 
 * Using the stick - move the left stick down to the right and wait a couple of seconds.
 
-<img src="../assets/flight/controller_arm.jpg" width=300 class="zoom border center">
+<img src="../assets/flight/controller_arm.jpg" width=300 class="zoom center">
 
 * Using the toggle switch - the Armed / Disarmed states can be set to one of the toggle switches. For more information on setting up, see the article on [flight modes](modes.md).
 * With QGC - you can arm your drone programmatically. To do this, click on the inscription *Disarm* in the header and select another state.

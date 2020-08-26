@@ -8,7 +8,7 @@
 
 Управление дроном происходит с помощью двух стиков на аппаратуре. По умолчанию левый стик отвечает за газ и рысканье, а правый за крен и тангаж. Данные термины используются для всех летательных судов, от самолетов до квадрокоптеров.
 
-<img src="../assets/flight/rc_basic_commands.svg" width=400 class="zoom border center">
+<img src="../assets/flight/rc_basic_commands.svg" width=400 class="zoom center">
 
 * Газ (*throttle*) – отвечает за скорость вращения двигателей.
 * Рысканье (*yaw*) – отвечает за повороты вокруг вертикальной оси (Z), по часовой (при наклоне вправо) и против часовой (при наклоне влево) стрелки.
@@ -17,7 +17,7 @@
 
 Данные описания предполагают, что коптер находится задней частью к пилоту.
 
-<img src="../assets/flight/basic_movements_multicopter.svg" width=400 class="zoom border center">
+<img src="../assets/flight/basic_movements_multicopter.svg" width=400 class="zoom center">
 
 ## Полетные режимы
 
@@ -91,7 +91,7 @@
 
 * С помощью стика – переведите левый стик вниз вправо и подождите пару секунд.
 
-<img src="../assets/flight/controller_arm.jpg" width=300 class="zoom border center">
+<img src="../assets/flight/controller_arm.jpg" width=300 class="zoom center">
 
 * С помощью тумблера – состояния Armed/Disarmed можно настроить на один из тумблеров. Подробнее о настройке в смотрите в статье про [полетные режимы](modes.md).
 * С помощью QGC – вы можете заармить ваш дрон программно. Для этого нажмите на надпись *Disarm* в шапке и выберите другое состояние.
