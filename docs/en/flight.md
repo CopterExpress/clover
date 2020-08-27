@@ -107,4 +107,4 @@ When the *Kill Switch* is activated, no control signals are sent to the motors a
 
 Before disabling the *Kill Switch*, make sure the throttle stick is its down position and the aircraft is in *Disarmed* state. If the throttle stick is not in the lower position, when the *Kill Switch* is turned off, a signal corresponding to the stick position will be sent to the motors, which will lead your copter to jerk.
 
-**Next**: [Exercises to control the copter](flight_exercises.md)
+**Next**: [Drone control exercises](flight_exercises.md).
