@@ -3,25 +3,22 @@
 * [Введение](README.md)
 * [Глоссарий](gloss.md)
 * [Безопасность](safety.md)
-* Сборка
+* [Сборка](assembly.md)
   * [Клевер 4.2](assemble_4_2.md)
   * [Клевер 4.1](assemble_4_1.md)
   * [Клевер 4](assemble_4.md)
   * [Клевер 3](assemble_3.md)
   * [Клевер 2](assemble_2.md)
-* Настройка
-  * [Первоначальная настройка](setup.md)
+* [Настройка](setup.md)
   * [Калибровка датчиков](calibration.md)
   * [Настройка пульта](radio.md)
     * [Работа с FS-A8S](rc_flysky_a8s.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
   * [Настройка failsafe](failsafe.md)
-* Ручной полет
-  * [Основы](flight.md)
+* [Ручной полет](flight.md)
   * [Упражнения](flight_exercises.md)
-* Работа с Raspberry Pi
-  * [Raspberry Pi](raspberry.md)
+* [Работа с Raspberry Pi](raspberry.md)
   * [Образ для RPi](image.md)
   * [Подключение по Wi-Fi](wifi.md)
   * [Подключение к Pixracer](connection.md)
@@ -30,8 +27,7 @@
   * [Командная строка](cli.md)
   * [Автоматическая проверка](selfcheck.md)
   * [Просмотр видеострима с камер](web_video_server.md)
-* Программирование
-  * [Общая информация](programming.md)
+* [Программирование](programming.md)
   * [Настройка камеры](camera_setup.md)
   * Визуальные маркеры (ArUco)
     * [Общая информация](aruco.md)
@@ -56,7 +52,7 @@
     * [Сборка на собственной машине](simulation_native.md)
     * [Установка виртуальной машины](simulation_vm.md)
     * [Использование симулятора](simulation_usage.md)
-* Дополнительные материалы
+* [Дополнительные материалы](supplementary.md)
   * [COEX Pix](coex_pix.md)
   * [Гид по автономному полету](auto_setup.md)
   * [Имя хоста](hostname.md)
@@ -93,13 +89,13 @@
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
   * [Переход на версию 0.20](migrate20.md)
-* Мероприятия
+* [Мероприятия](events.md)
   * [CopterHack-2019](copterhack2019.md)
   * [Олимпиада НТИ 2019](nti2019.md)
   * [Робокросс-2019](robocross2019.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
-* Проекты на базе Клевера
+* [Проекты на базе Клевера](projects.md)
   * [Список проектов](projects.md)
   * [Шоу коптеров](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
@@ -120,4 +116,4 @@
 
 * [Теория и видеоуроки](lessons.md)
 * [Учебно-методическое пособие](metod.md)
-* [Контрольные и проверочные материалы](tests.md)
+* [Контрольные материалы](tests.md)
