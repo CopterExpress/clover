@@ -83,11 +83,11 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
-my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro melodic --os=debian:buster \
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro noetic --os=debian:buster \
   --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
 my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 # Don't build simulation plugins for actual drone
 catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
 
@@ -105,14 +105,14 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
-    ros-melodic-dynamic-reconfigure \
-    ros-melodic-compressed-image-transport \
-    ros-melodic-rosbridge-suite \
-    ros-melodic-rosserial \
-    ros-melodic-usb-cam \
-    ros-melodic-vl53l1x \
-    ros-melodic-ws281x \
-    ros-melodic-rosshow
+    ros-noetic-dynamic-reconfigure \
+    ros-noetic-compressed-image-transport \
+    ros-noetic-rosbridge-suite \
+    ros-noetic-rosserial \
+    ros-noetic-usb-cam \
+    ros-noetic-vl53l1x \
+    ros-noetic-ws281x \
+    ros-noetic-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \

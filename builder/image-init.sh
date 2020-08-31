@@ -55,7 +55,4 @@ echo_stamp "Set max space for syslogs"
 # https://unix.stackexchange.com/questions/139513/how-to-clear-journalctl
 sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
 
-echo_stamp "Move /etc/ld.so.preload out of the way"
-mv /etc/ld.so.preload /etc/ld.so.preload.disabled-for-build
-
 echo_stamp "End of init image"
