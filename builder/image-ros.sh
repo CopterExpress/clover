@@ -68,7 +68,8 @@ my_travis_retry() {
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+# FIXME: Re-add this after missing packages are built
+#echo "yaml file:///etc/ros/rosdep/noetic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
