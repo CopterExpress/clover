@@ -310,3 +310,19 @@ Blockly.Python.set_led = function(block) {
 		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode})])\n`;
 	}
 }
+
+var origPrint = Blockly.Python.text_print; // original print
+
+Blockly.Python['text_print'] = function (block) {
+	if (userCode) {
+		return origPrint.apply(this, arguments);
+	}
+
+	rosDefinitions.print = true;
+	initNode();
+	Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
+
+	var msg = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || '\'\'';
+
+	return `print_pub.publish(str(${msg}))\n`;
+};
