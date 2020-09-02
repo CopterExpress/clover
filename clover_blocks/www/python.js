@@ -194,6 +194,19 @@ Blockly.Python.land = function(block) {
 	}
 }
 
+Blockly.Python.angle = function(block) {
+	// return [block.getFieldValue('ANGLE'), Blockly.Python.ORDER_UNARY_SIGN];
+	Blockly.Python.definitions_['import_math'] = 'import math';
+	return [`math.radians(${block.getFieldValue('ANGLE')})`, Blockly.Python.ORDER_FUNCTION_CALL];
+
+}
+
+Blockly.Python.set_yaw = function(block) {
+	simpleOffboard();
+	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
+	return `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id='body')\n`;
+}
+
 const WAIT_ARRIVAL = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
   while not rospy.is_shutdown():
     telem = get_telemetry(frame_id='navigate_target')
