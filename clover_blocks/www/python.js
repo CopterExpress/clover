@@ -83,15 +83,6 @@ var autoArm = true;
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
-var origInit = Blockly.Python.init;
-
-// Blockly.Python.init = function() {
-// 	origInit.apply(this, arguments);
-// 	if (!userCode) {
-// 		Blockly.Python.definitions_['block_pub'] = `block_pub = rospy.Publisher('clover_blocks/block', String, queue_size=10, latch=True)`;
-// 	}
-// }
-
 export function generateUserCode(workspace) {
 	userCode = true;
 	autoArm = true;
