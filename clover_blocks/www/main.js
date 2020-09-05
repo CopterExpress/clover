@@ -65,6 +65,24 @@ workspace.addChangeListener(function(e) {
 	pythonArea.innerHTML = generateUserCode(workspace);
 	hljs.highlightBlock(pythonArea);
 });
+
+workspace.addChangeListener(function(e) {
+	var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+	localStorage.setItem("blockly.xml", xmlText);
+});
+
+function loadWorkspace() {
+	var xmlText = localStorage.getItem("blockly.xml");
+	if (xmlText) {
+		Blockly.mainWorkspace.clear();
+		var xmlDom = Blockly.Xml.textToDom(xmlText);
+		Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
+	}
+}
+
+loadWorkspace();
+
 new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
 	console.log(msg);
 	workspace.highlightBlock(msg.data);
