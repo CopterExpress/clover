@@ -1,6 +1,7 @@
 const COLOR_FLIGHT = 293;
 const COLOR_STATE = 36;
 const COLOR_LED = 143;
+const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
 var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]];
 
@@ -35,7 +36,7 @@ Blockly.Blocks['navigate'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -64,7 +65,7 @@ Blockly.Blocks['set_velocity'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -75,7 +76,7 @@ Blockly.Blocks['rangefinder_distance'] = {
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -93,7 +94,7 @@ Blockly.Blocks['get_position'] = {
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -105,7 +106,7 @@ Blockly.Blocks['get_attitude'] = {
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -118,7 +119,7 @@ Blockly.Blocks['voltage'] = {
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -130,7 +131,7 @@ Blockly.Blocks['armed'] = {
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -142,7 +143,7 @@ Blockly.Blocks['mode'] = {
 		this.setOutput(true, "String");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -155,7 +156,7 @@ Blockly.Blocks['wait_arrival'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -167,7 +168,7 @@ Blockly.Blocks['arrived'] = {
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -185,7 +186,7 @@ Blockly.Blocks['set_led'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_LED);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -202,7 +203,7 @@ Blockly.Blocks['set_effect'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_LED);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -218,7 +219,7 @@ Blockly.Blocks['take_off'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -234,7 +235,7 @@ Blockly.Blocks['land'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -246,7 +247,7 @@ Blockly.Blocks['global_position'] = {
 		this.setOutput(true, "Number");
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -257,7 +258,7 @@ Blockly.Blocks['on_take_off'] = {
 			.appendField("When took off");
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -268,7 +269,7 @@ Blockly.Blocks['on_landing'] = {
 			.appendField("When landed");
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -279,7 +280,7 @@ Blockly.Blocks['on_armed'] = {
 			.appendField("when armed");
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -293,7 +294,7 @@ Blockly.Blocks['angle'] = {
 		this.setOutput(true, "Number");
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -309,7 +310,7 @@ Blockly.Blocks['set_yaw'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -337,7 +338,7 @@ Blockly.Blocks['distance'] = {
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -353,7 +354,7 @@ Blockly.Blocks['wait'] = {
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
 
@@ -371,6 +372,6 @@ Blockly.Blocks['key_pressed'] = {
 		this.setNextStatement(true, null);
 		this.setColour(230);
 		this.setTooltip("");
-		this.setHelpUrl("");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
