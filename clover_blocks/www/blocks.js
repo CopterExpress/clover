@@ -306,6 +306,10 @@ Blockly.Blocks['set_yaw'] = {
 		this.appendDummyInput()
 			.appendField("relative to")
 			.appendField(new Blockly.FieldDropdown([["body", "body"], ["markers map", "aruco_map"], ["last navigate target", "navigate_target"]]), "FRAME_ID");
+		this.appendDummyInput()
+			.appendField("wait")
+			.appendField(new Blockly.FieldCheckbox("TRUE"), "WAIT");
+		this.setInputsInline(true);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);

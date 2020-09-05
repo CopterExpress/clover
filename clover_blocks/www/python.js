@@ -1,7 +1,7 @@
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook');
-Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,get_distance');
+Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
@@ -38,6 +38,14 @@ const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='b
 const LAND_WAIT = `\ndef land_wait():
     land()
     while get_telemetry().armed:
+        rospy.sleep(0.2)\n`;
+
+// TODO: tolerance to parameters
+const WAIT_YAW = `\ndef wait_yaw():
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if abs(telem.yaw) < math.radians(20):
+            return
         rospy.sleep(0.2)\n`;
 
 // TODO: tolerance to parameters
@@ -112,6 +120,10 @@ function generateROSDefinitions() {
 	if (rosDefinitions.arrived) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
 		code += ARRIVED;
+	}
+	if (rosDefinitions.waitYaw) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += WAIT_YAW;
 	}
 	if (rosDefinitions.distance) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
@@ -252,7 +264,13 @@ Blockly.Python.angle = function(block) {
 Blockly.Python.set_yaw = function(block) {
 	simpleOffboard();
 	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
-	return `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id='body')\n`;
+	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id='body')\n`;
+	if (block.getFieldValue('WAIT') == 'TRUE') {
+		rosDefinitions.waitYaw = true;
+		simpleOffboard();
+		code += 'wait_yaw()\n';
+	}
+	return code;
 }
 
 Blockly.Python.wait_arrival = function(block) {
