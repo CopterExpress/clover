@@ -115,6 +115,14 @@ window.stopProgram = function() {
 
 var runButton = document.getElementById('run');
 
+ros.on('connection', function () {
+	runButton.disabled = false;
+});
+
+ros.on('close', function () {
+	runButton.disabled = true;
+});
+
 window.runProgram = function() {
 	if (!confirm('Run program?')) return;
 
