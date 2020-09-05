@@ -63,7 +63,7 @@ function generateROSDefinitions() {
 	// order for ROS definitions is significant, so generate all ROS definitions as one
 	var code = `rospy.init_node('flight', anonymous=True)\n\n`;
 	if (!userCode) {
-		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
+		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
 		Blockly.Python.definitions_['import_sys'] = 'import sys';
 		code += `block_pub = rospy.Publisher('/clover_blocks/block', String, queue_size=10, latch=True)\n`;
 		code += `error_pub = rospy.Publisher('/clover_blocks/error', String, queue_size=10, latch=True)\n`;
