@@ -16,7 +16,7 @@ set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 land = rospy.ServiceProxy('land', Trigger)\n`;
 
 // TODO: tolerance to parameters
-const NAVIGATE_WAIT = `def navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
+const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
     res = navigate(x=x, y=y, z=z, yaw=float('nan'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
@@ -28,7 +28,7 @@ const NAVIGATE_WAIT = `def navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='bod
             return
         rospy.sleep(0.2)\n`;
 
-const LAND_WAIT = `def land_wait():
+const LAND_WAIT = `\ndef land_wait():
     land()
     while get_telemetry().armed:
         rospy.sleep(0.2)\n`;
