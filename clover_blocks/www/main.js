@@ -59,29 +59,6 @@ workspace.addChangeListener(function(e) {
 });
 
 var pythonArea = document.getElementById('python');
-var runButton = document.getElementById('run');
-
-var runTimer;
-runButton.addEventListener('mousedown', function() {
-	runTimer = setTimeout(function() {
-		runTimer = null;
-		runButton.innerText = 'Run';
-	}, 1000);
-	runButton.innerText = 'Hold';
-});
-
-runButton.addEventListener('mouseup', function() {
-	runButton.innerText = 'Run';
-	clearTimeout(runTimer);
-	if (!runTimer) {
-		runProgram();
-	}
-})
-
-document.addEventListener('mouseup', function() {
-	runButton.innerText = 'Run';
-	clearTimeout(runTimer);
-})
 
 // update Python code
 workspace.addChangeListener(function(e) {
@@ -114,7 +91,11 @@ window.stopProgram = function() {
 	}, err => alert(err))
 }
 
+var runButton = document.getElementById('run');
+
 window.runProgram = function() {
+	if (!confirm('Run program?')) return;
+
 	runButton.disabled = true;
 	var code = generateCode(workspace);
 	console.log(code);
