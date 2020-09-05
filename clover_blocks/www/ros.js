@@ -4,7 +4,6 @@ export var ros = new ROSLIB.Ros({ url });
 ros.on('connection', function () {
 	console.log('connection')
 	document.body.classList.add('connected');
-	document.title = 'connected';
 });
 
 ros.on('close', function () {
