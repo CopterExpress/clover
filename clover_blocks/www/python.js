@@ -1,11 +1,18 @@
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub');
+Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook');
 Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,get_distance');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
 var userCode = true; // global flag indicating whether the code for GUI is generating
+
+const EXCEPT_HOOK = `\ndef _except_hook(exctype, value, traceback):
+    print(value)
+    error_pub.publish(str(value))
+    block_pub.publish('')
+
+sys.excepthook = _except_hook\n`;
 
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
@@ -57,7 +64,10 @@ function generateROSDefinitions() {
 	var code = `rospy.init_node('flight', anonymous=True)\n\n`;
 	if (!userCode) {
 		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
+		Blockly.Python.definitions_['import_sys'] = 'import sys';
 		code += `block_pub = rospy.Publisher('/clover_blocks/block', String, queue_size=10, latch=True)\n`;
+		code += `error_pub = rospy.Publisher('/clover_blocks/error', String, queue_size=10, latch=True)\n`;
+		code += EXCEPT_HOOK + '\n'; // handle all global exceptions
 	}
 	if (rosDefinitions.print) {
 		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;

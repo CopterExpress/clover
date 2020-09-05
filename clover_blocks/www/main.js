@@ -93,6 +93,10 @@ new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/print', messageType: 'std_msg
 	alert(msg.data);
 });
 
+new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+	alert('Error: ' + msg.data);
+});
+
 new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
 	var response = prompt(msg.message);
 	new ROSLIB.Topic({
