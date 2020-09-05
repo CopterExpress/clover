@@ -1,4 +1,4 @@
-import {ros, runService, stopService} from './ros.js';
+import {ros, runService, stopService, landService} from './ros.js';
 import './blocks.js';
 import {generateCode, generateUserCode} from './python.js';
 
