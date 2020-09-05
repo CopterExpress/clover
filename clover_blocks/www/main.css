@@ -18,6 +18,7 @@ body {
 #tools, #tabs {
 	background: #dddddd;
 	border-bottom: 2px rgb(192, 192, 192) solid;
+	white-space: nowrap;
 }
 
 #tools {
@@ -25,8 +26,15 @@ body {
 	white-space: nowrap;
 	padding: 10px;
 	display: flex;
-
+	align-items: center;
 }
+
+.disconnected {
+	color: red;
+	margin-right: 20px;
+}
+
+.connected .disconnected { display: none; }
 
 #tools button {
 	font-size: 20px;
@@ -51,7 +59,11 @@ body {
 	background: white;
 }
 
-.content { 
+#run {
+	width: 70px;
+}
+
+.content {
 	display: none;
 	grid-area: content;
 }

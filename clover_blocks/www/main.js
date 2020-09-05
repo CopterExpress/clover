@@ -59,9 +59,71 @@ workspace.addChangeListener(function(e) {
 });
 
 var pythonArea = document.getElementById('python');
+var runButton = document.getElementById('run');
+
+var runTimer;
+runButton.addEventListener('mousedown', function() {
+	runTimer = setTimeout(function() {
+		runTimer = null;
+		runButton.innerText = 'Run';
+	}, 1000);
+	runButton.innerText = 'Hold';
+});
+
+runButton.addEventListener('mouseup', function() {
+	runButton.innerText = 'Run';
+	clearTimeout(runTimer);
+	if (!runTimer) {
+		runProgram();
+	}
+})
+
+document.addEventListener('mouseup', function() {
+	runButton.innerText = 'Run';
+	clearTimeout(runTimer);
+})
 
 // update Python code
 workspace.addChangeListener(function(e) {
 	pythonArea.innerHTML = generateUserCode(workspace);
 	hljs.highlightBlock(pythonArea);
 });
+new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
+	console.log(msg);
+	workspace.highlightBlock(msg.data);
+	runButton.disabled = Boolean(msg.data);
+});
+
+new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+	alert(msg.data);
+});
+
+new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
+	var response = prompt(msg.message);
+	new ROSLIB.Topic({
+		ros: ros,
+		name: '/clover_blocks/input/' + msg.id,
+		messageType: 'std_msgs/String',
+		latch: true
+	}).publish(new ROSLIB.Message({ data: response }));
+});
+
+window.stopProgram = function() {
+	stopService.callService(new ROSLIB.ServiceRequest(), function(res) {
+		if (!res.success) alert(res.message);
+	}, err => alert(err))
+}
+
+window.runProgram = function() {
+	runButton.disabled = true;
+	var code = generateCode(workspace);
+	console.log(code);
+	runService.callService(new ROSLIB.ServiceRequest({ code: code } ), function(res) {
+		if (!res.success) alert(res.message);
+		runButton.disabled = false;
+	}, function(err) {
+		runButton.disabled = false;
+		alert(err);
+	})
+}
+
