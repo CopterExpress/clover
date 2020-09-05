@@ -1,8 +1,7 @@
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,get_distance');
-// Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,prompt');
+Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub');
+Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,get_distance');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
@@ -66,7 +65,7 @@ function generateROSDefinitions() {
 	}
 	if (rosDefinitions.prompt) {
 		Blockly.Python.definitions_['import_prompt'] = 'from clover_blocks.msg import Prompt';
-		Blockly.Python.definitions_['import_uuid'] = `import uuid`;
+		Blockly.Python.definitions_['import_uuid'] = 'import uuid';
 		code += `prompt_pub = rospy.Publisher('/clover_blocks/prompt', Prompt, queue_size=10, latch=True)\n`;
 	}
 	if (rosDefinitions.offboard) {
@@ -81,7 +80,7 @@ function generateROSDefinitions() {
 		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)\n`;
 	}
 	if (rosDefinitions.prompt) {
-		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
+		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
 		code += PROMPT;
 	}
 	if (rosDefinitions.navigateWait) {
