@@ -48,6 +48,11 @@ const WAIT_ARRIVAL = `\ndef wait_arrival():
             return
         rospy.sleep(0.2)\n`;
 
+// TODO: tolerance to parameters
+const ARRIVED = `\ndef arrived():
+    telem = get_telemetry(frame_id='navigate_target')
+    return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2\n`
+
 const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
     telem = get_telemetry(frame_id)
     return math.sqrt((x - telem.x) ** 2 + (y - telem.y) ** 2 + (z - telem.z) ** 2)\n`;
@@ -103,6 +108,10 @@ function generateROSDefinitions() {
 	if (rosDefinitions.waitArrival) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
 		code += WAIT_ARRIVAL;
+	}
+	if (rosDefinitions.arrived) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += ARRIVED;
 	}
 	if (rosDefinitions.distance) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
@@ -250,6 +259,12 @@ Blockly.Python.wait_arrival = function(block) {
 	rosDefinitions.waitArrival = true;
 	simpleOffboard();
 	return 'wait_arrival()\n';
+}
+
+Blockly.Python.arrived = function(block) {
+	rosDefinitions.arrived = true;
+	simpleOffboard();
+	return ['arrived()', Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
 Blockly.Python.wait = function(block) {
