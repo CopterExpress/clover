@@ -126,3 +126,11 @@ window.runProgram = function() {
 	})
 }
 
+window.land = function() {
+	window.stopProgram();
+	landService.callService(new ROSLIB.ServiceRequest(), function(result) {
+	}, function(err) {
+		alert('Unable to land: ' + err);
+	});
+}
+
