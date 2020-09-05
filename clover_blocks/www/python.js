@@ -1,7 +1,7 @@
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('navigate_wait,land_wait');
+Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,get_distance');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
@@ -33,6 +33,18 @@ const LAND_WAIT = `\ndef land_wait():
     while get_telemetry().armed:
         rospy.sleep(0.2)\n`;
 
+// TODO: tolerance to parameters
+const WAIT_ARRIVAL = `\ndef wait_arrival():
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            return
+        rospy.sleep(0.2)\n`;
+
+const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
+    telem = get_telemetry(frame_id)
+    return math.sqrt((x - telem.x) ** 2 + (y - telem.y) ** 2 + (z - telem.z) ** 2)\n`;
+
 var rosDefinitions = {};
 
 function generateROSDefinitions() {
@@ -59,6 +71,14 @@ function generateROSDefinitions() {
 	}
 	if (rosDefinitions.landWait) {
 		code += LAND_WAIT;
+	}
+	if (rosDefinitions.waitArrival) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += WAIT_ARRIVAL;
+	}
+	if (rosDefinitions.distance) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += GET_DISTANCE;
 	}
 	Blockly.Python.definitions_['ros'] = code;
 }
@@ -195,17 +215,10 @@ Blockly.Python.set_yaw = function(block) {
 	return `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id='body')\n`;
 }
 
-const WAIT_ARRIVAL = `def ${Blockly.Python.FUNCTION_NAME_PLACEHOLDER_}():
-  while not rospy.is_shutdown():
-    telem = get_telemetry(frame_id='navigate_target')
-    if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
-      return
-    rospy.sleep(0.2)`;
-
 Blockly.Python.wait_arrival = function(block) {
+	rosDefinitions.waitArrival = true;
 	simpleOffboard();
-	var waitArrival = Blockly.Python.provideFunction_('wait_arrival', [WAIT_ARRIVAL]);
-	return `${waitArrival}()\n`;
+	return 'wait_arrival()\n';
 }
 
 Blockly.Python.wait = function(block) {
@@ -224,6 +237,18 @@ Blockly.Python.get_attitude = function(block) {
 	simpleOffboard();
 	var code = `get_telemetry().${block.getFieldValue('FIELD').toLowerCase()}`;
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
+Blockly.Python.distance = function(block) {
+	rosDefinitions.distance = true;
+	simpleOffboard();
+
+	let x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_NONE);
+	let y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_NONE);
+	let z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_NONE);
+	let frameId = buildFrameId(block);
+
+	return [`get_distance(${x}, ${y}, ${z}, '${frameId}')`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 Blockly.Python.rangefinder_distance = function(block) {
