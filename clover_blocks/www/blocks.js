@@ -283,10 +283,13 @@ Blockly.Blocks['on_armed'] = {
 	}
 };
 
+Blockly.FieldAngle.WRAP = 180;
+Blockly.FieldAngle.ROUND = 10;
+
 Blockly.Blocks['angle'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField(new Blockly.FieldAngle(90), "NAME");
+			.appendField(new Blockly.FieldAngle(90), "ANGLE");
 		this.setOutput(true, "Number");
 		this.setColour(230);
 		this.setTooltip("");

@@ -26,9 +26,6 @@ const NAVIGATE_WAIT = `def navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='bod
     telem = get_telemetry(frame_id='navigate_target')
     if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
       return
-    else:
-      print(telem)
-      print(math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2))
     rospy.sleep(0.2)\n`;
 
 const LAND_WAIT = `def land_wait():

@@ -1,3 +1,5 @@
+import {ros, runService, stopService} from './ros.js';
+import './blocks.js';
 import {generateCode, generateUserCode} from './python.js';
 
 // Tabs
@@ -12,7 +14,7 @@ document.getElementById('tabs').addEventListener('click', function(e) {
 	}
 });
 
-var workspace = Blockly.inject('blockly', { 
+var workspace = Blockly.inject('blockly', {
 	toolbox: document.getElementById('toolbox'),
 	grid: {
 		spacing: 25,
