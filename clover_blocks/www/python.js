@@ -44,7 +44,7 @@ const LAND_WAIT = `\ndef land_wait():
 const WAIT_ARRIVAL = `\ndef wait_arrival():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
             return
         rospy.sleep(0.2)\n`;
 
