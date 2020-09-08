@@ -2,6 +2,7 @@
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook');
 Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
+Blockly.Python.addReservedWords('pigpio,pi,sys,String,Prompt,Range,uuid');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
