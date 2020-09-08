@@ -1,6 +1,7 @@
 const COLOR_FLIGHT = 293;
 const COLOR_STATE = 36;
 const COLOR_LED = 143;
+const COLOR_GPIO = 200;
 const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
 var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]];
@@ -386,7 +387,7 @@ Blockly.Blocks['gpio_read'] = {
 			.setCheck("Number")
 			.appendField("read GPIO pin");
 		this.setOutput(true, "Boolean");
-		this.setColour(200);
+		this.setColour(COLOR_GPIO);
 		this.setTooltip("Returns if there is voltage on a GPIO pin");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
@@ -401,7 +402,7 @@ Blockly.Blocks['gpio_write'] = {
 			.setCheck("Boolean")
 			.appendField("to");
 		this.setInputsInline(true);
-		this.setColour(200);
+		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set GPIO pin level");
@@ -418,7 +419,7 @@ Blockly.Blocks['set_servo'] = {
 			.setCheck("Number")
 			.appendField("to PWM");
 		this.setInputsInline(true);
-		this.setColour(200);
+		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set PWM on a GPIO pin to control servo, PWM is specified in range of 500–2500 ms.");
