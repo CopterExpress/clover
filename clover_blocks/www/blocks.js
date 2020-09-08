@@ -357,7 +357,7 @@ Blockly.Blocks['set_yaw'] = {
 Blockly.Blocks['distance'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField("distance to");
+			.appendField("distance to point");
 		this.appendValueInput("X")
 			.setCheck("Number")
 			.appendField("x");
@@ -369,7 +369,7 @@ Blockly.Blocks['distance'] = {
 			.appendField("z");
 		this.appendDummyInput()
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown([["markers map", "aruco_map"], ["marker", "aruco"], ["last navigate target", "navigate_target"]]), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown([["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]]), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")
