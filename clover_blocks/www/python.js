@@ -386,6 +386,46 @@ Blockly.Python.set_led = function(block) {
 	}
 }
 
+function pigpio() {
+	Blockly.Python.definitions_['import_pigpio'] = 'import pigpio';
+	Blockly.Python.definitions_['init_pigpio'] = 'pi = pigpio.pi()';
+}
+
+const GPIO_READ = `\ndef gpio_read(pin):
+	pi.set_mode(pin, pigpio.INPUT)
+	return pi.read(pin)\n`;
+
+const GPIO_WRITE = `\ndef gpio_write(pin, level):
+	pi.set_mode(pin, pigpio.OUTPUT)
+	pi.write(pin, level)\n`;
+
+const SET_SERVO = `\ndef gpio_write(pin, pwm):
+	pi.set_mode(pin, pigpio.OUTPUT)
+	pi.set_servo_pulsewidth(pin, pwm)\n`;
+
+Blockly.Python.gpio_read = function(block) {
+	pigpio();
+	Blockly.Python.definitions_['gpio_read'] = GPIO_READ;
+	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
+	return [`gpio_read(${pin}))`, Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
+Blockly.Python.gpio_write = function(block) {
+	pigpio();
+	Blockly.Python.definitions_['gpio_write'] = GPIO_WRITE;
+	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
+	var level = Blockly.Python.valueToCode(block, 'LEVEL', Blockly.Python.ORDER_NONE);
+	return `gpio_write(${pin}, ${level})\n`;
+}
+
+Blockly.Python.set_servo = function(block) {
+	pigpio();
+	Blockly.Python.definitions_['set_servo'] = SET_SERVO;
+	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
+	var pwm = Blockly.Python.valueToCode(block, 'PWM', Blockly.Python.ORDER_NONE);
+	return `set_servo(${pin}, ${pwm})\n`;
+}
+
 var origPrint = Blockly.Python.text_print; // original print
 
 Blockly.Python['text_print'] = function (block) {

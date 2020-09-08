@@ -83,6 +83,19 @@
 				<value name="COLOR"><shadow type="colour_picker"></shadow></value>
 			</block>
 		</category>
+		<category name="GPIO" colour="#5b97cc">
+			<block type="gpio_read">
+				<value name="PIN"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+			</block>
+			<block type="gpio_write">
+				<value name="PIN"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				<value name="LEVEL"><shadow type="logic_boolean"></shadow></value>
+			</block>
+			<block type="set_servo">
+				<value name="PIN"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				<value name="PWM"><shadow type="math_number"><field name="NUM">1500</field></shadow></value>
+			</block>
+		</category>
 		<sep></sep>
 		<category name="Logic" colour="#5b80a5">
 			<block type="controls_if"></block>

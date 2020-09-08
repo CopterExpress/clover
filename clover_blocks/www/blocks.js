@@ -379,3 +379,49 @@ Blockly.Blocks['key_pressed'] = {
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
+
+Blockly.Blocks['gpio_read'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("read GPIO pin");
+		this.setOutput(true, "Boolean");
+		this.setColour(200);
+		this.setTooltip("Returns if there is voltage on a GPIO pin");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
+
+Blockly.Blocks['gpio_write'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("set GPIO pin");
+		this.appendValueInput("LEVEL")
+			.setCheck("Boolean")
+			.appendField("to");
+		this.setInputsInline(true);
+		this.setColour(200);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setTooltip("Set GPIO pin level");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
+
+Blockly.Blocks['set_servo'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("set GPIO pin");
+		this.appendValueInput("PWM")
+			.setCheck("Number")
+			.appendField("to PWM");
+		this.setInputsInline(true);
+		this.setColour(200);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setTooltip("Set PWM on a GPIO pin to control servo, PWM is specified in range of 500–2500 ms.");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
