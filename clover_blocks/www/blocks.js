@@ -35,7 +35,7 @@ Blockly.Blocks['navigate'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Navigate to the specified point, coordinates are in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -64,7 +64,7 @@ Blockly.Blocks['set_velocity'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Set the drone velocity (cancels navigation requests).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -93,7 +93,7 @@ Blockly.Blocks['get_position'] = {
 			.setVisible(false)
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current position or velocity.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -105,7 +105,7 @@ Blockly.Blocks['get_attitude'] = {
 			.appendField(new Blockly.FieldDropdown([["pitch", "PITCH"], ["roll", "ROLL"], ["pitch rate", "PITCH_RATE"], ["roll rate", "ROLL_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current orientation or angle rates.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -118,7 +118,7 @@ Blockly.Blocks['voltage'] = {
 			.appendField("voltage");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current battery voltage.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -130,7 +130,7 @@ Blockly.Blocks['armed'] = {
 			.appendField("armed?");
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns if the drone armed.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -155,7 +155,7 @@ Blockly.Blocks['wait_arrival'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Wait until the drone arrives to the navigation target.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -167,7 +167,7 @@ Blockly.Blocks['arrived'] = {
 			.appendField("arrived?");
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns if the drone arrived to the navigation target.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -185,7 +185,7 @@ Blockly.Blocks['set_led'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_LED);
-		this.setTooltip("");
+		this.setTooltip("Set an individual LED to specified color.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -202,7 +202,7 @@ Blockly.Blocks['set_effect'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_LED);
-		this.setTooltip("");
+		this.setTooltip("Set desired LED strip effect.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -218,7 +218,7 @@ Blockly.Blocks['take_off'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Take off, altitude is specified in meters");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -313,7 +313,7 @@ Blockly.Blocks['set_yaw'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Rotate the drone to the specified angle in degree (not radian).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -341,7 +341,7 @@ Blockly.Blocks['distance'] = {
 		this.setInputsInline(false);
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns the distance to the given point in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
