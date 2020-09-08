@@ -149,6 +149,16 @@ var autoArm = true;
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
+var pythonInit = Blockly.Python.init;
+
+Blockly.Python.init = function() {
+	// override init function
+	pythonInit.apply(this, arguments);
+	if (!userCode) {
+		initNode(); // ROS needed for backend code anyways for ~block topic
+	}
+}
+
 export function generateUserCode(workspace) {
 	userCode = true;
 	autoArm = true;
