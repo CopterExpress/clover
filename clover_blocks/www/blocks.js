@@ -6,6 +6,28 @@ const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
 var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]];
 
+function considerFrameId(e) {
+	if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
+
+	var frameId = this.getFieldValue('FRAME_ID');
+	// set appropriate coordinates labels
+	if (this.getInput('X')) { // block has x-y-z fields
+		if (frameId == 'BODY' || frameId == 'NAVIGATE_TARGET' || frameId == 'BASE_LINK') {
+			this.getInput('X').fieldRow[0].setValue('forward');
+			this.getInput('Y').fieldRow[0].setValue('left');
+			this.getInput('Z').fieldRow[0].setValue('up');
+		} else {
+			this.getInput('X').fieldRow[0].setValue('x');
+			this.getInput('Y').fieldRow[0].setValue('y');
+			this.getInput('Z').fieldRow[0].setValue('z');
+		}
+	}
+	if (this.getInput('ID')) { // block has marker id field
+		this.getInput('ID').setVisible(frameId == 'ARUCO'); // toggle id field
+	}
+	this.render();
+}
+
 Blockly.Blocks['navigate'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -38,6 +60,7 @@ Blockly.Blocks['navigate'] = {
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("Navigate to the specified point, coordinates are in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(considerFrameId);
 	}
 };
 
@@ -67,6 +90,7 @@ Blockly.Blocks['set_velocity'] = {
 		this.setColour(COLOR_FLIGHT);
 		this.setTooltip("Set the drone velocity (cancels navigation requests).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(considerFrameId);
 	}
 };
 
@@ -96,6 +120,7 @@ Blockly.Blocks['get_position'] = {
 		this.setColour(COLOR_STATE);
 		this.setTooltip("Returns current position or velocity.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(considerFrameId);
 	}
 };
 
@@ -205,6 +230,16 @@ Blockly.Blocks['set_effect'] = {
 		this.setColour(COLOR_LED);
 		this.setTooltip("Set desired LED strip effect.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
+
+		this.setOnChange(function(e) {
+			if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
+
+			// Hide color field on some effects
+			var effect = this.getFieldValue('EFFECT');
+			var hideColor = effect == 'RAINBOW' || effect == 'RAINBOW_FILL';
+			this.inputList[1].setVisible(!hideColor);
+			this.render();
+		});
 	}
 };
 
@@ -344,6 +379,7 @@ Blockly.Blocks['distance'] = {
 		this.setColour(COLOR_STATE);
 		this.setTooltip("Returns the distance to the given point in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(considerFrameId);
 	}
 };
 
