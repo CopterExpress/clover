@@ -97,7 +97,12 @@ new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/error', messageType: 'std_msg
 	alert('Error: ' + msg.data);
 });
 
+var shownPrompts = new Set();
+
 new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
+	if (shownPrompts.has(msg.id)) return;
+	shownPrompts.add(msg.id);
+
 	var response = prompt(msg.message);
 	new ROSLIB.Topic({
 		ros: ros,
