@@ -303,7 +303,7 @@ Blockly.Blocks['set_yaw'] = {
 	init: function () {
 		this.appendValueInput("YAW")
 			.setCheck("Number")
-			.appendField("rotate on");
+			.appendField("rotate by");
 		this.appendDummyInput()
 			.appendField("relative to")
 			.appendField(new Blockly.FieldDropdown([["body", "body"], ["markers map", "aruco_map"], ["last navigate target", "navigate_target"]]), "FRAME_ID");
