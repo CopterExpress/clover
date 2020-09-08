@@ -84,7 +84,7 @@ function generateROSDefinitions() {
 	}
 	if (rosDefinitions.print) {
 		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
-		code += `print_pub = rospy.Publisher('/clover_blocks/print', String, queue_size=10, latch=True)\n`
+		code += `print_pub = rospy.Publisher('/clover_blocks/print', String, queue_size=10)\n`
 	}
 	if (rosDefinitions.prompt) {
 		Blockly.Python.definitions_['import_prompt'] = 'from clover_blocks.msg import Prompt';
