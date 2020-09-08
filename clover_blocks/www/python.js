@@ -188,8 +188,15 @@ function getAutoArm() {
 function buildFrameId(block) {
 	let frame = block.getFieldValue('FRAME_ID').toLowerCase();
 	let id = Blockly.Python.valueToCode(block, 'ID', Blockly.Python.ORDER_NONE);
-	// TODO: check empty aruco id
-	return frame + (frame == 'aruco' ? '_' + id : '');
+	if (frame == 'aruco') { // aruco marker frame
+		if (id.match(/^[0-9]+$/)) { // id is positive integer
+			return `'${frame}_${id}'`;
+		} else { // something else...
+			return `'${frame}_' + str(int(${id}))`;
+		}
+	} else {
+		return `'${frame}'`;
+	}
 }
 
 Blockly.Python.navigate = function(block) {
@@ -199,7 +206,7 @@ Blockly.Python.navigate = function(block) {
 	let frameId = buildFrameId(block);
 	let speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_NONE);
 
-	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id='${frameId}'`, `speed=${speed}`];
+	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id=${frameId}`, `speed=${speed}`];
 
 	if (getAutoArm()) {
 		params.push('auto_arm=True');
@@ -229,10 +236,10 @@ Blockly.Python.set_velocity = function(block) {
 
 	simpleOffboard();
 
-	if (frameId == 'body') {
-		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, frame_id='${frameId}')\n`;
+	if (frameId == `'body'`) {
+		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, frame_id=${frameId})\n`;
 	} else {
-		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, yaw=float('nan'), frame_id='${frameId}')\n`;
+		return `set_velocity(vx=${x}, vy=${y}, vz=${z}, yaw=float('nan'), frame_id=${frameId})\n`;
 	}
 }
 
@@ -304,7 +311,7 @@ Blockly.Python.wait = function(block) {
 Blockly.Python.get_position = function(block) {
 	simpleOffboard();
 	let frameId = buildFrameId(block);
-	var code = `get_telemetry('${frameId}').${block.getFieldValue('FIELD').toLowerCase()}`;
+	var code = `get_telemetry(${frameId}).${block.getFieldValue('FIELD').toLowerCase()}`;
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
@@ -323,7 +330,7 @@ Blockly.Python.distance = function(block) {
 	let z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_NONE);
 	let frameId = buildFrameId(block);
 
-	return [`get_distance(${x}, ${y}, ${z}, '${frameId}')`, Blockly.Python.ORDER_FUNCTION_CALL]
+	return [`get_distance(${x}, ${y}, ${z}, ${frameId})`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 Blockly.Python.rangefinder_distance = function(block) {
