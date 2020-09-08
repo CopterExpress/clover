@@ -1,4 +1,4 @@
-import {ros, runService, stopService, landService} from './ros.js';
+import * as ros from './ros.js';
 import './blocks.js';
 import {generateCode, generateUserCode} from './python.js';
 
@@ -53,29 +53,28 @@ function loadWorkspace() {
 
 loadWorkspace();
 
-new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
-	console.log(msg);
+new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
 	workspace.highlightBlock(msg.data);
 	runButton.disabled = Boolean(msg.data);
 });
 
-new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
 	alert(msg.data);
 });
 
-new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
 	alert('Error: ' + msg.data);
 });
 
 var shownPrompts = new Set();
 
-new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
 	if (shownPrompts.has(msg.id)) return;
 	shownPrompts.add(msg.id);
 
 	var response = prompt(msg.message);
 	new ROSLIB.Topic({
-		ros: ros,
+		ros: ros.ros,
 		name: '/clover_blocks/input/' + msg.id,
 		messageType: 'std_msgs/String',
 		latch: true
@@ -83,18 +82,18 @@ new ROSLIB.Topic({ ros: ros, name: '/clover_blocks/prompt', messageType: 'clover
 });
 
 window.stopProgram = function() {
-	stopService.callService(new ROSLIB.ServiceRequest(), function(res) {
+	ros.stopService.callService(new ROSLIB.ServiceRequest(), function(res) {
 		if (!res.success) alert(res.message);
 	}, err => alert(err))
 }
 
 var runButton = document.getElementById('run');
 
-ros.on('connection', function () {
+ros.ros.on('connection', function () {
 	runButton.disabled = false;
 });
 
-ros.on('close', function () {
+ros.ros.on('close', function () {
 	runButton.disabled = true;
 });
 
@@ -104,7 +103,7 @@ window.runProgram = function() {
 	runButton.disabled = true;
 	var code = generateCode(workspace);
 	console.log(code);
-	runService.callService(new ROSLIB.ServiceRequest({ code: code } ), function(res) {
+	ros.runService.callService(new ROSLIB.ServiceRequest({ code: code } ), function(res) {
 		if (!res.success) alert(res.message);
 		runButton.disabled = false;
 	}, function(err) {
@@ -115,7 +114,7 @@ window.runProgram = function() {
 
 window.land = function() {
 	window.stopProgram();
-	landService.callService(new ROSLIB.ServiceRequest(), function(result) {
+	ros.landService.callService(new ROSLIB.ServiceRequest(), function(result) {
 	}, function(err) {
 		alert('Unable to land: ' + err);
 	});
