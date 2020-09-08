@@ -282,7 +282,8 @@ Blockly.Python.angle = function(block) {
 Blockly.Python.set_yaw = function(block) {
 	simpleOffboard();
 	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
-	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id='body')\n`;
+	let frameId = buildFrameId(block);
+	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id=${frameId})\n`;
 	if (block.getFieldValue('WAIT') == 'TRUE') {
 		rosDefinitions.waitYaw = true;
 		simpleOffboard();
