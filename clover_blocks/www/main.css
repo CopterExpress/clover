@@ -36,6 +36,21 @@ body {
 
 .connected .disconnected { display: none; }
 
+@keyframes blink {
+	0% { opacity: 1; }
+	50% { opacity: 0.5; }
+	100% { opacity: 1; }
+}
+
+#running {
+	color: green;
+	margin-right: 20px;
+	animation: 1s blink linear infinite;
+	display: none;
+}
+
+.running #running { display: block; }
+
 #tools button {
 	font-size: 20px;
 	margin-left: 10px;

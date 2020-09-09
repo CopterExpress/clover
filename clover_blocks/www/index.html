@@ -24,9 +24,10 @@
 
 	<div id="tools">
 		<div class="disconnected">Disconnected</div>
-		<button onclick="runProgram()" id="run" disabled>Run</button>
-		<button onclick="stopProgram()">Stop</button>
-		<button onclick="land()">Land</button>
+		<div id="running">Running...</div>
+		<button onclick="runProgram()" id="run" disabled title="Run the program">Run</button>
+		<button onclick="stopProgram()" title="Stop the program">Stop</button>
+		<button onclick="land()" title="Stop the program and land">Land</button>
 	</div>
 
 	<div id="notifications"></div>
