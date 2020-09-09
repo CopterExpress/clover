@@ -65,8 +65,6 @@ new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/block', messageType: 'std
 
 var notifElem = document.getElementById('notifications');
 
-new Draggable.default(document.body, { draggable: '#notifications' });
-
 function z(n) { return (n < 10 ? '0' : '') + n; } // add leading zero
 
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
