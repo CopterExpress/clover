@@ -63,6 +63,25 @@ body {
 	width: 70px;
 }
 
+#notifications {
+	position: absolute;
+	right: 10px;
+	background: rgba(0, 0, 0, 0.7);
+	color: white;
+	max-width: 350px;
+	top: 53px;
+	/* border: white solid 3px; */
+	z-index: 1;
+	padding: 10px;
+	font-family: monospace;
+	font-size: 16px;
+	white-space: pre;
+	max-height: 400px;
+	overflow: scroll;
+}
+
+#notifications:empty { display: none; }
+
 .content {
 	display: none;
 	grid-area: content;

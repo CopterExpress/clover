@@ -63,8 +63,17 @@ new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/block', messageType: 'std
 	update();
 });
 
+var notifElem = document.getElementById('notifications');
+
+new Draggable.default(document.body, { draggable: '#notifications' });
+
+function z(n) { return (n < 10 ? '0' : '') + n; } // add leading zero
+
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
-	alert(msg.data);
+	var d = new Date(); // TODO: use StringStamped?
+	var timestamp = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
+	notifElem.innerHTML += `${timestamp}: ${msg.data}\n`;
+	notifElem.scrollTop = notifElem.scrollHeight;
 });
 
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
