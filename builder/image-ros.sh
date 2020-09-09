@@ -122,10 +122,6 @@ my_travis_retry apt-get install -y --no-install-recommends \
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
-# FIXME: Buster comes with tornado==5.1.1 but we need tornado==4.2.1 for rosbridge_suite
-# (note that Python 3 will still have a more recent version)
-pip install tornado==4.2.1
-
 echo_stamp "Running tests"
 cd /home/pi/catkin_ws
 # FIXME: Investigate failing tests
