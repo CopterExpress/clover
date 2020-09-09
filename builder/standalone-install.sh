@@ -15,11 +15,27 @@ echo "yaml file:///etc/ros/rosdep/coex.yaml" > /etc/ros/rosdep/sources.list.d/99
 cat <<EOF > /etc/ros/rosdep/coex.yaml
 led_msgs:
   ubuntu:
-    xenial: ros-kinetic-led-msgs
-    bionic: ros-melodic-led-msgs
+    xenial: [ros-kinetic-led-msgs]
+    bionic: [ros-melodic-led-msgs]
+    focal: [ros-noetic-led-msgs]
   debian:
-    stretch: ros-kinetic-led-msgs
-    buster: ros-melodic-led-msgs
+    stretch: [ros-kinetic-led-msgs]
+    buster: [ros-melodic-led-msgs]
+async_web_server_cpp:
+  ubuntu:
+    focal: [ros-noetic-async-web-server-cpp]
+ros_pytest:
+  ubuntu:
+    focal: [ros-noetic-ros-pytest]
+tf2_web_republisher:
+  ubuntu:
+    focal: [ros-noetic-tf2-web-republisher]
+web_video_server:
+  ubuntu:
+    focal: [ros-noetic-web-video-server]
+ws281x:
+  ubuntu:
+    focal: [ros-noetic-ws281x]
 EOF
 apt update
 rosdep update
