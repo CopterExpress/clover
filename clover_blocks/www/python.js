@@ -135,6 +135,9 @@ function generateROSDefinitions() {
 		Blockly.Python.definitions_['import_math'] = 'import math';
 		code += GET_DISTANCE;
 	}
+	if (!userCode) {
+		code += '\nrospy.sleep(0.5)\n'; // rospy need some more time to initialize publishers
+	}
 	Blockly.Python.definitions_['ros'] = code;
 }
 
