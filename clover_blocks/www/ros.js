@@ -48,6 +48,9 @@ export function readParam(name, fromUrl, _default) {
 	});
 }
 
-export var runService = new ROSLIB.Service({ ros: ros, name: '/clover_blocks/run', serviceType: 'clover_blocks/Run' });
-export var stopService = new ROSLIB.Service({ ros: ros, name: '/clover_blocks/stop', serviceType: 'std_srvs/Trigger' });
-export var landService = new ROSLIB.Service({ ros: ros, name : '/land', serviceType : 'std_srvs/Trigger' });
+export const namespace = '/';
+export const priv = namespace + 'clover_blocks/';
+
+export var runService = new ROSLIB.Service({ ros: ros, name: priv + 'run', serviceType: 'clover_blocks/Run' });
+export var stopService = new ROSLIB.Service({ ros: ros, name: priv + 'stop', serviceType: 'std_srvs/Trigger' });
+export var landService = new ROSLIB.Service({ ros: ros, name : namespace + 'land', serviceType : 'std_srvs/Trigger' });

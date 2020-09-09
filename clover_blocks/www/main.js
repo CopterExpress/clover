@@ -56,7 +56,7 @@ loadWorkspace();
 var running = false;
 var runRequest = false;
 
-new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
 	workspace.highlightBlock(msg.data);
 	running = Boolean(msg.data);
 	runRequest = false;
@@ -67,14 +67,14 @@ var notifElem = document.getElementById('notifications');
 
 function z(n) { return (n < 10 ? '0' : '') + n; } // add leading zero
 
-new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
 	var d = new Date(); // TODO: use StringStamped?
 	var timestamp = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
 	notifElem.innerHTML += `${timestamp}: ${msg.data}\n`;
 	notifElem.scrollTop = notifElem.scrollHeight;
 });
 
-new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
 	alert('Error: ' + msg.data);
 });
 
@@ -87,14 +87,14 @@ function update() {
 
 var shownPrompts = new Set();
 
-new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
+new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'prompt', messageType: 'clover_blocks/Prompt'}).subscribe(function(msg) {
 	if (shownPrompts.has(msg.id)) return;
 	shownPrompts.add(msg.id);
 
 	var response = prompt(msg.message);
 	new ROSLIB.Topic({
 		ros: ros.ros,
-		name: '/clover_blocks/input/' + msg.id,
+		name: ros.priv + 'input/' + msg.id,
 		messageType: 'std_msgs/String',
 		latch: true
 	}).publish(new ROSLIB.Message({ data: response }));
