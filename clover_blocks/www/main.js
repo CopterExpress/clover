@@ -53,9 +53,14 @@ function loadWorkspace() {
 
 loadWorkspace();
 
+var running = false;
+var runRequest = false;
+
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
 	workspace.highlightBlock(msg.data);
-	runButton.disabled = Boolean(msg.data);
+	running = Boolean(msg.data);
+	runRequest = false;
+	update();
 });
 
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
@@ -65,6 +70,13 @@ new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/print', messageType: 'std
 new ROSLIB.Topic({ ros: ros.ros, name: '/clover_blocks/error', messageType: 'std_msgs/String'}).subscribe(function(msg) {
 	alert('Error: ' + msg.data);
 });
+
+var runButton = document.getElementById('run');
+
+function update() {
+	document.body.classList.toggle('running', running);
+	runButton.disabled = !ros.ros.isConnected || runRequest || running;
+}
 
 var shownPrompts = new Set();
 
@@ -87,27 +99,26 @@ window.stopProgram = function() {
 	}, err => alert(err))
 }
 
-var runButton = document.getElementById('run');
+ros.ros.on('connection', update);
 
-ros.ros.on('connection', function () {
-	runButton.disabled = false;
-});
-
-ros.ros.on('close', function () {
-	runButton.disabled = true;
-});
+ros.ros.on('close', update);
 
 window.runProgram = function() {
 	if (!confirm('Run program?')) return;
 
-	runButton.disabled = true;
+	runRequest = true;
+	update();
 	var code = generateCode(workspace);
 	console.log(code);
 	ros.runService.callService(new ROSLIB.ServiceRequest({ code: code } ), function(res) {
-		if (!res.success) alert(res.message);
-		runButton.disabled = false;
+		if (!res.success) {
+			runRequest = false;
+			update();
+			alert(res.message);
+		}
 	}, function(err) {
-		runButton.disabled = false;
+		runRequest = false;
+		update();
 		alert(err);
 	})
 }
