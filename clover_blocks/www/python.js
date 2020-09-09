@@ -1,3 +1,5 @@
+import {priv} from './ros.js';
+
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook');
@@ -69,7 +71,7 @@ const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
 const PROMPT = `\ndef prompt(message):
     prompt_id = str(uuid.uuid4()).replace('-', '')
     prompt_pub.publish(message=message, id=prompt_id)
-    return rospy.wait_for_message('/clover_blocks/input/' + prompt_id, String, timeout=30).data\n`;
+    return rospy.wait_for_message('${priv}input/' + prompt_id, String, timeout=30).data\n`;
 
 var rosDefinitions = {};
 
@@ -84,18 +86,18 @@ function generateROSDefinitions() {
 	if (!userCode) {
 		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
 		Blockly.Python.definitions_['import_sys'] = 'import sys';
-		code += `block_pub = rospy.Publisher('/clover_blocks/block', String, queue_size=10, latch=True)\n`;
-		code += `error_pub = rospy.Publisher('/clover_blocks/error', String, queue_size=10, latch=True)\n`;
+		code += `block_pub = rospy.Publisher('${priv}block', String, queue_size=10, latch=True)\n`;
+		code += `error_pub = rospy.Publisher('${priv}error', String, queue_size=10, latch=True)\n`;
 		code += EXCEPT_HOOK + '\n'; // handle all global exceptions
 	}
 	if (rosDefinitions.print) {
 		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
-		code += `print_pub = rospy.Publisher('/clover_blocks/print', String, queue_size=10)\n`
+		code += `print_pub = rospy.Publisher('${priv}print', String, queue_size=10)\n`
 	}
 	if (rosDefinitions.prompt) {
 		Blockly.Python.definitions_['import_prompt'] = 'from clover_blocks.msg import Prompt';
 		Blockly.Python.definitions_['import_uuid'] = 'import uuid';
-		code += `prompt_pub = rospy.Publisher('/clover_blocks/prompt', Prompt, queue_size=10, latch=True)\n`;
+		code += `prompt_pub = rospy.Publisher('${priv}prompt', Prompt, queue_size=10, latch=True)\n`;
 	}
 	if (rosDefinitions.offboard) {
 		code += OFFBOARD;
