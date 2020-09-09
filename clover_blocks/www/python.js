@@ -75,7 +75,12 @@ var rosDefinitions = {};
 
 function generateROSDefinitions() {
 	// order for ROS definitions is significant, so generate all ROS definitions as one
-	var code = `rospy.init_node('flight', anonymous=True)\n\n`;
+	var code;
+	if (!userCode) {
+		code = `rospy.init_node('flight', anonymous=True, disable_signals=True)\n\n`;
+	} else {
+		code = `rospy.init_node('flight')\n\n`;
+	}
 	if (!userCode) {
 		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
 		Blockly.Python.definitions_['import_sys'] = 'import sys';
