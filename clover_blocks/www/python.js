@@ -9,8 +9,8 @@ Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 var userCode = true; // global flag indicating whether the code for GUI is generating
 
 const EXCEPT_HOOK = `\ndef _except_hook(exctype, value, traceback):
-    print(value)
-    error_pub.publish(str(value))
+    if exctype != KeyboardInterrupt:
+        error_pub.publish(str(value))
     block_pub.publish('')
 
 sys.excepthook = _except_hook\n`;
