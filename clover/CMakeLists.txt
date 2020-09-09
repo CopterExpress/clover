@@ -30,7 +30,15 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 find_package(GeographicLib REQUIRED)
 
-find_package(OpenCV 3 REQUIRED
+# Workaround for OpenCV 3/4 support
+set(_opencv_version 4)
+find_package(OpenCV ${_opencv_version} QUIET)
+if (NOT OpenCV_FOUND)
+  message(STATUS "Did not find OpenCV 4, searching for OpenCV 3")
+  set(_opencv_version 3)
+endif()
+
+find_package(OpenCV ${_opencv_version} REQUIRED
   COMPONENTS
     calib3d
     imgproc
