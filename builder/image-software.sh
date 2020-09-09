@@ -71,7 +71,7 @@ apt-get update \
 
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
 echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
-echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
+echo "deb http://deb.coex.tech/ros buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
 echo "deb http://deb.coex.tech/clover buster main" > /etc/apt/sources.list.d/clover.list
 
 echo_stamp "Update apt cache"
