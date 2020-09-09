@@ -21,6 +21,9 @@ INSTALL_ROS_PACK_SOURCES=$3
 DISCOVER_ROS_PACK=$4
 NUMBER_THREADS=$5
 
+# Current ROS distribution
+ROS_DISTRO=noetic
+
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
@@ -69,7 +72,7 @@ my_travis_retry() {
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
 # FIXME: Re-add this after missing packages are built
-#echo "yaml file:///etc/ros/rosdep/noetic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+#echo "yaml file:///etc/ros/rosdep/${ROS_DISTRO}-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -84,11 +87,11 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
-my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro noetic --os=debian:buster \
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:buster \
   --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
 my_travis_retry pip install wheel
 my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
-source /opt/ros/noetic/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
 catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
 
@@ -106,14 +109,14 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
-    ros-noetic-dynamic-reconfigure \
-    ros-noetic-compressed-image-transport \
-    ros-noetic-rosbridge-suite \
-    ros-noetic-rosserial \
-    ros-noetic-usb-cam \
-    ros-noetic-vl53l1x \
-    ros-noetic-ws281x \
-    ros-noetic-rosshow
+    ros-${ROS_DISTRO}-dynamic-reconfigure \
+    ros-${ROS_DISTRO}-compressed-image-transport \
+    ros-${ROS_DISTRO}-rosbridge-suite \
+    ros-${ROS_DISTRO}-rosserial \
+    ros-${ROS_DISTRO}-usb-cam \
+    ros-${ROS_DISTRO}-vl53l1x \
+    ros-${ROS_DISTRO}-ws281x \
+    ros-${ROS_DISTRO}-rosshow
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
@@ -136,7 +139,7 @@ cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 export ROS_HOSTNAME=\`hostname\`.local
-source /opt/ros/melodic/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
