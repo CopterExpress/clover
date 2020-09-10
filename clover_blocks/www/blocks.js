@@ -88,7 +88,7 @@ Blockly.Blocks['set_velocity'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("Set the drone velocity (cancels navigation requests).");
+		this.setTooltip("Set the drone velocity in meters per second (cancels navigation requests).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 		this.setOnChange(considerFrameId);
 	}
@@ -161,7 +161,7 @@ Blockly.Blocks['voltage'] = {
 			.appendField("voltage");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("Returns current battery voltage.");
+		this.setTooltip("Returns current battery voltage in volts.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -271,7 +271,7 @@ Blockly.Blocks['take_off'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("Take off, altitude is specified in meters");
+		this.setTooltip("Take off on desired altitude in meters");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -441,7 +441,7 @@ Blockly.Blocks['gpio_read'] = {
 			.appendField("read GPIO pin");
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_GPIO);
-		this.setTooltip("Returns if there is voltage on a GPIO pin");
+		this.setTooltip("Returns if there is voltage on a GPIO pin.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -458,7 +458,7 @@ Blockly.Blocks['gpio_write'] = {
 		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setTooltip("Set GPIO pin level");
+		this.setTooltip("Set GPIO pin level.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -475,7 +475,7 @@ Blockly.Blocks['set_servo'] = {
 		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setTooltip("Set PWM on a GPIO pin to control servo, PWM is specified in range of 500–2500 ms.");
+		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 ms.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
