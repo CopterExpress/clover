@@ -140,7 +140,7 @@ my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
 
 echo_stamp "Install ws281x library"
-my_travis_retry pip install --prefer-binary rpi_ws281x
+my_travis_retry pip3 install --prefer-binary rpi_ws281x
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
