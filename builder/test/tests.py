@@ -28,4 +28,4 @@ import pigpio
 from espeak import espeak
 from pyzbar import pyzbar
 
-print cv2.getBuildInformation()
+print(cv2.getBuildInformation())
