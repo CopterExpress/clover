@@ -2,7 +2,7 @@ import {priv} from './ros.js';
 
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook');
+Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook,_block,_published_block');
 Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
 Blockly.Python.addReservedWords('pigpio,pi,sys,String,Prompt,Range,uuid');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
@@ -13,10 +13,12 @@ var userCode = true; // global flag indicating whether the code for GUI is gener
 // TODO: parametrize
 const navigate_tolerance = 0.2;
 const sleep_time = 0.2;
+const block_rate = 0.05;
+
 const EXCEPT_HOOK = `\ndef _except_hook(exctype, value, traceback):
     if exctype != KeyboardInterrupt:
         error_pub.publish(str(value))
-    block_pub.publish('')
+    _block = ''
 
 sys.excepthook = _except_hook\n`;
 
@@ -76,6 +78,18 @@ const PROMPT = `\ndef prompt(message):
     prompt_pub.publish(message=message, id=prompt_id)
     return rospy.wait_for_message('${priv}input/' + prompt_id, String, timeout=30).data\n`;
 
+const BLOCK_PUB = `\nblock_pub = rospy.Publisher('${priv}block', String, queue_size=1, latch=True)\n
+
+_block = None
+_published_block = None
+
+def _publish_block(event):
+    global _published_block
+    if _published_block != _block: block_pub.publish(_block)
+    _published_block = _block
+
+rospy.Timer(rospy.Duration(${block_rate}), _publish_block)\n`
+
 var rosDefinitions = {};
 
 function generateROSDefinitions() {
@@ -89,7 +103,7 @@ function generateROSDefinitions() {
 	if (!userCode) {
 		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
 		Blockly.Python.definitions_['import_sys'] = 'import sys';
-		code += `block_pub = rospy.Publisher('${priv}block', String, queue_size=10, latch=True)\n`;
+		code += BLOCK_PUB + '\n';
 		code += `error_pub = rospy.Publisher('${priv}error', String, queue_size=10, latch=True)\n`;
 		code += EXCEPT_HOOK + '\n'; // handle all global exceptions
 	}
@@ -184,9 +198,9 @@ export function generateUserCode(workspace) {
 export function generateCode(workspace) {
 	userCode = false;
 	rosDefinitions = {};
-	Blockly.Python.STATEMENT_PREFIX = 'block_pub.publish(%1)\n';
+	Blockly.Python.STATEMENT_PREFIX = '_block = %1\n';
 	var code = Blockly.Python.workspaceToCode(workspace);
-	code += "block_pub.publish('')\n"; // end of program
+	code += "_block = ''\n"; // end of program
 	return code;
 }
 
