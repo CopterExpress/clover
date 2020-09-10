@@ -108,7 +108,7 @@ libffi-dev \
 monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-espeak espeak-data python-espeak \
+espeak espeak-data python-espeak python3-espeak \
 ntpdate \
 python-dev \
 python3-dev \
