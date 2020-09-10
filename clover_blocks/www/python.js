@@ -10,6 +10,9 @@ Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
 var userCode = true; // global flag indicating whether the code for GUI is generating
 
+// TODO: parametrize
+const navigate_tolerance = 0.2;
+const sleep_time = 0.2;
 const EXCEPT_HOOK = `\ndef _except_hook(exctype, value, traceback):
     if exctype != KeyboardInterrupt:
         error_pub.publish(str(value))
@@ -34,14 +37,14 @@ const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='b
 
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}:
             return
-        rospy.sleep(0.2)\n`;
+        rospy.sleep(${sleep_time})\n`;
 
 const LAND_WAIT = `\ndef land_wait():
     land()
     while get_telemetry().armed:
-        rospy.sleep(0.2)\n`;
+        rospy.sleep(${sleep_time})\n`;
 
 // TODO: tolerance to parameters
 const WAIT_YAW = `\ndef wait_yaw():
@@ -49,20 +52,20 @@ const WAIT_YAW = `\ndef wait_yaw():
         telem = get_telemetry(frame_id='navigate_target')
         if abs(telem.yaw) < math.radians(20):
             return
-        rospy.sleep(0.2)\n`;
+        rospy.sleep(${sleep_time})\n`;
 
 // TODO: tolerance to parameters
 const WAIT_ARRIVAL = `\ndef wait_arrival():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2:
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}:
             return
         rospy.sleep(0.2)\n`;
 
 // TODO: tolerance to parameters
 const ARRIVED = `\ndef arrived():
     telem = get_telemetry(frame_id='navigate_target')
-    return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < 0.2\n`
+    return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}\n`
 
 const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
     telem = get_telemetry(frame_id)
