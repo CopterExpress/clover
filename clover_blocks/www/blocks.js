@@ -131,7 +131,7 @@ Blockly.Blocks['get_attitude'] = {
 			.appendField(new Blockly.FieldDropdown([["pitch", "PITCH"], ["roll", "ROLL"], ["pitch rate", "PITCH_RATE"], ["roll rate", "ROLL_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("Returns current orientation or angle rates.");
+		this.setTooltip("Returns current orientation or angle rates in degree or degree per second (not radian).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };

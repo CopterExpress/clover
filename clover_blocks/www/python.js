@@ -345,7 +345,8 @@ Blockly.Python.get_position = function(block) {
 
 Blockly.Python.get_attitude = function(block) {
 	simpleOffboard();
-	var code = `get_telemetry().${block.getFieldValue('FIELD').toLowerCase()}`;
+	Blockly.Python.definitions_['import_math'] = 'import math';
+	var code = `math.degrees(get_telemetry().${block.getFieldValue('FIELD').toLowerCase()})`;
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
