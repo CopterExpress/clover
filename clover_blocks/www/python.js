@@ -60,7 +60,7 @@ const WAIT_ARRIVAL = `\ndef wait_arrival():
         telem = get_telemetry(frame_id='navigate_target')
         if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}:
             return
-        rospy.sleep(0.2)\n`;
+        rospy.sleep(${sleep_time})\n`;
 
 // TODO: tolerance to parameters
 const ARRIVED = `\ndef arrived():
