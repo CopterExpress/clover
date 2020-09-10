@@ -107,11 +107,11 @@ function generateROSDefinitions() {
 	}
 	if (rosDefinitions.setEffect) {
 		Blockly.Python.definitions_['import_led_effect'] = 'from clover.srv import SetLEDEffect';
-		code += `set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)\n`;
+		code += `set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect, persistent=True)\n`;
 	}
 	if (rosDefinitions.setLeds) {
 		Blockly.Python.definitions_['import_set_led'] = 'from led_msgs.srv import SetLEDs\nfrom led_msgs.msg import LEDState';
-		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)\n`;
+		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs, persistent=True)\n`;
 	}
 	if (rosDefinitions.prompt) {
 		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
