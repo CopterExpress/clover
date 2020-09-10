@@ -58,8 +58,16 @@ var runRequest = false;
 
 new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'block', messageType: 'std_msgs/String' }).subscribe(function(msg) {
 	workspace.highlightBlock(msg.data);
-	running = Boolean(msg.data);
 	runRequest = false;
+	update();
+});
+
+new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'running' }).subscribe(function(msg) {
+	running = msg.data;
+	runRequest = false;
+	if (!running) {
+		workspace.highlightBlock('');
+	}
 	update();
 });
 
