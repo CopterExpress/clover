@@ -4,7 +4,7 @@ const COLOR_LED = 143;
 const COLOR_GPIO = 200;
 const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
-var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]];
+var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"], ["map", "MAP"]];
 
 function considerFrameId(e) {
 	if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
