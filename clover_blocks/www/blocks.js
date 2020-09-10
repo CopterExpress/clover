@@ -109,7 +109,7 @@ Blockly.Blocks['get_position'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["x", "X"], ["y", "Y"], ["z", "Z"], ["yaw", "YAW"], ["vx", "VX"], ["vy", "VY"], ["vz", "VZ"]]), "FIELD")
+			.appendField(new Blockly.FieldDropdown([["x", "X"], ["y", "Y"], ["z", "Z"], ["vx", "VX"], ["vy", "VY"], ["vz", "VZ"]]), "FIELD")
 			.appendField("relative to")
 			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
 		this.appendValueInput("ID")
@@ -118,7 +118,24 @@ Blockly.Blocks['get_position'] = {
 			.setVisible(false)
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("Returns current position or velocity.");
+		this.setTooltip("Returns current position or velocity in meters or meters per second.");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(considerFrameId);
+	}
+};
+
+Blockly.Blocks['get_yaw'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("current yaw relative to")
+			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+		this.appendValueInput("ID")
+			.setCheck("Number")
+			.appendField("with ID")
+			.setVisible(false)
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_STATE);
+		this.setTooltip("Returns current yaw in degree (not radian).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 		this.setOnChange(considerFrameId);
 	}

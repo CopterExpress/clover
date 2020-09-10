@@ -343,6 +343,14 @@ Blockly.Python.get_position = function(block) {
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
+Blockly.Python.get_yaw = function(block) {
+	simpleOffboard();
+	Blockly.Python.definitions_['import_math'] = 'import math';
+	let frameId = buildFrameId(block);
+	var code = `math.degrees(get_telemetry(${frameId}).yaw)`;
+	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
 Blockly.Python.get_attitude = function(block) {
 	simpleOffboard();
 	Blockly.Python.definitions_['import_math'] = 'import math';
