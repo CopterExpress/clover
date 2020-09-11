@@ -99,10 +99,10 @@ cmake \
 tcpdump \
 libpoco-dev \
 libzbar0 \
-python-rosdep \
-python-rosinstall-generator \
-python-wstool \
-python-rosinstall \
+python3-rosdep \
+python3-rosinstall-generator \
+python3-wstool \
+python3-rosinstall \
 build-essential \
 libffi-dev \
 monkey \
