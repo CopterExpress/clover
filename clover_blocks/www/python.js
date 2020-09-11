@@ -325,6 +325,11 @@ Blockly.Python.wait_arrival = function(block) {
 	return 'wait_arrival()\n';
 }
 
+Blockly.Python.get_time = function(block) {
+	initNode();
+	return ['rospy.get_time()', Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
 Blockly.Python.arrived = function(block) {
 	rosDefinitions.arrived = true;
 	simpleOffboard();

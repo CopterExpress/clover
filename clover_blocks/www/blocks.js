@@ -203,6 +203,16 @@ Blockly.Blocks['wait_arrival'] = {
 	}
 };
 
+Blockly.Blocks['get_time'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("time");
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_STATE);
+		this.setTooltip("Returns current timestamp in seconds.");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
 
 Blockly.Blocks['arrived'] = {
 	init: function () {
