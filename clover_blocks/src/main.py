@@ -54,8 +54,43 @@ def stop(req):
         return {'success': True, 'message': 'Program not running'}
 
 
+programs_path = rospy.get_param('~programs_dir', os.path.dirname(os.path.abspath(__file__)) + '/../programs')
+
+
+def load(req):
+    res = {'names': [], 'programs': [], 'success': True}
+    programs = []
+    try:
+        for currentpath, folders, files in os.walk(programs_path):
+            for f in files:
+                filename = os.path.join(currentpath, f)
+                res['names'].append(os.path.relpath(filename, programs_path))
+                res['programs'].append(open(filename, 'r').read())
+        return res
+    except Exception as e:
+        rospy.logerr(e)
+        return {'names': [], 'programs': [], 'message': str(e)}
+
+
+name_regexp = re.compile(r'^[a-zA-Z-_.]{0,20}$')
+
+def store(req):
+    if not name_regexp.match(req.name):
+        return {'message': 'Bad program name'}
+
+    filename = os.path.abspath(os.path.join(programs_path, req.name))
+    try:
+        open(filename, 'w').write(req.program)
+        return {'success': True, 'message': 'Stored to ' + filename}
+    except Exception as e:
+        rospy.logerr(e)
+        return {'names': [], 'programs': [], 'message': str(e)}
+
+
 rospy.Service('~run', Run, run)
 rospy.Service('~stop', Trigger, stop)
+rospy.Service('~load', Load, load)
+rospy.Service('~store', Store, store)
 
 
 rospy.loginfo('Ready')

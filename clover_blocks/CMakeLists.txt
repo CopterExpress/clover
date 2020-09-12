@@ -11,6 +11,8 @@ add_message_files(
 add_service_files(
   FILES
   Run.srv
+  Load.srv
+  Store.srv
 )
 
 generate_messages(
