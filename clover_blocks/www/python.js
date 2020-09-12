@@ -172,8 +172,6 @@ function simpleOffboard() {
 }
 
 
-var autoArm = true;
-
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
 
@@ -189,7 +187,6 @@ Blockly.Python.init = function() {
 
 export function generateUserCode(workspace) {
 	userCode = true;
-	autoArm = true;
 	rosDefinitions = {};
 	Blockly.Python.STATEMENT_PREFIX = null;
 	return Blockly.Python.workspaceToCode(workspace);
@@ -202,14 +199,6 @@ export function generateCode(workspace) {
 	var code = Blockly.Python.workspaceToCode(workspace);
 	code += "_block = ''\n"; // end of program
 	return code;
-}
-
-function getAutoArm() {
-	if (autoArm) {
-		autoArm = false;
-		return true;
-	}
-	return false;
 }
 
 function buildFrameId(block) {
@@ -234,10 +223,6 @@ Blockly.Python.navigate = function(block) {
 	let speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_NONE);
 
 	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id=${frameId}`, `speed=${speed}`];
-
-	if (getAutoArm()) {
-		params.push('auto_arm=True');
-	}
 
 	simpleOffboard();
 
@@ -271,7 +256,6 @@ Blockly.Python.set_velocity = function(block) {
 }
 
 Blockly.Python.take_off = function(block) {
-	autoArm = false; // lower auto_arm flag after take off
 	simpleOffboard();
 
 	let z = Blockly.Python.valueToCode(block, 'ALT', Blockly.Python.ORDER_NONE);
