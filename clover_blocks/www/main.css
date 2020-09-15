@@ -98,14 +98,15 @@ body {
 #notifications:empty { display: none; }
 
 .content {
-	display: none;
+	display: none !important;
 	grid-area: content;
 }
 
-body[data-tab="blocks"] #blockly { display: block; }
-body[data-tab="python"] #python { display: block; }
+body[data-tab="blocks"] #blockly { display: block !important; }
+body[data-tab="python"] #python { display: block !important; }
 
 #python {
 	margin: 0px;
 	padding: 10px;
+	z-index: 999999; /* overlap some Blockly's popups */
 }
