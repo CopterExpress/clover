@@ -53,4 +53,6 @@ export const priv = namespace + 'clover_blocks/';
 
 export var runService = new ROSLIB.Service({ ros: ros, name: priv + 'run', serviceType: 'clover_blocks/Run' });
 export var stopService = new ROSLIB.Service({ ros: ros, name: priv + 'stop', serviceType: 'std_srvs/Trigger' });
+export var loadService = new ROSLIB.Service({ ros: ros, name : priv + 'load', serviceType : 'clover_blocks/Load' });
+export var storeService = new ROSLIB.Service({ ros: ros, name : priv + 'store', serviceType : 'clover_blocks/Store' });
 export var landService = new ROSLIB.Service({ ros: ros, name : namespace + 'land', serviceType : 'std_srvs/Trigger' });

@@ -36,23 +36,6 @@ workspace.addChangeListener(function(e) {
 	hljs.highlightBlock(pythonArea);
 });
 
-workspace.addChangeListener(function(e) {
-	var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-	localStorage.setItem("blockly.xml", xmlText);
-});
-
-function loadWorkspace() {
-	var xmlText = localStorage.getItem("blockly.xml");
-	if (xmlText) {
-		Blockly.mainWorkspace.clear();
-		var xmlDom = Blockly.Xml.textToDom(xmlText);
-		Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
-	}
-}
-
-loadWorkspace();
-
 var running = false;
 var runRequest = false;
 
@@ -146,3 +129,171 @@ window.land = function() {
 	});
 }
 
+function getProgramXml() {
+	var xmlDom = Blockly.Xml.workspaceToDom(workspace);
+	return Blockly.Xml.domToPrettyText(xmlDom);
+}
+
+function setProgramXml(xml) {
+	workspace.clear();
+	if (xml) {
+		let xmlDom = Blockly.Xml.textToDom(xml);
+		Blockly.Xml.domToWorkspace(xmlDom, workspace);
+	}
+}
+
+workspace.addChangeListener(function(e) {
+	localStorage.setItem('xml', getProgramXml());
+});
+
+var programSelect = document.querySelector('#program-name');
+var userPrograms = programSelect.querySelector('optgroup[data-type=user]');
+var examplePrograms = programSelect.querySelector('optgroup[data-type=example]');
+
+var programs = {};
+var program = '';
+
+function loadWorkspace() {
+	var xml = localStorage.getItem('xml');
+	if (xml) {
+		setProgramXml(xml);
+	}
+	program = localStorage.getItem('program') || '';
+}
+
+loadWorkspace();
+
+function loadPrograms() {
+	ros.loadService.callService(new ROSLIB.ServiceRequest(), function(res) {
+		if (!res.success) alert(res.message);
+
+		for (let i = 0; i < res.names.length; i++) {
+			let name = res.names[i];
+			let program = res.programs[i];
+			let option = document.createElement('option');
+			option.innerHTML = res.names[i];
+			if (name.startsWith('examples/')) {
+				examplePrograms.appendChild(option);
+			} else {
+				userPrograms.appendChild(option);
+			}
+
+			programs[name] = program;
+		}
+
+		if (program) {
+			programSelect.value = program;
+		}
+		updateChanged();
+	}, function(err) {
+		alert(err);
+	})
+}
+
+loadPrograms();
+
+function getProgramName() {
+	if (programSelect.value.startsWith('@')) {
+		return ''
+	}
+	return programSelect.value;
+}
+
+function updateChanged() {
+	var name = program;
+	document.body.classList.toggle('changed', name in programs && (programs[name].trim() != getProgramXml().trim()));
+}
+
+workspace.addChangeListener(function(e) {
+	if (e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create || e instanceof Blockly.Events.Delete) {
+		updateChanged();
+	}
+});
+
+function saveProgram() {
+	var name = getProgramName();
+
+	if (!name) {
+		name = prompt('Enter new program name:');
+		if (!name) {
+			programSelect.value = program;
+			return;
+		}
+		if (!name.endsWith('.xml')) {
+			name += '.xml';
+		}
+		let option = document.createElement('option');
+		option.innerHTML = name;
+		userPrograms.appendChild(option);
+	}
+
+	let xml = getProgramXml();
+	ros.storeService.callService(new ROSLIB.ServiceRequest({
+		name: name,
+		program: xml
+	}), function(result) {
+		if (!result.success) {
+			alert(result.message);
+			return;
+		}
+		console.log(result.message);
+		programSelect.blur();
+		program = name;
+		localStorage.setItem('program', name);
+		programs[name] = xml;
+		programSelect.value = program;
+		updateChanged();
+	}, function(err) {
+		alert('Unable to store: ' + err);
+		programSelect.blur();
+		programSelect.value = program;
+	});
+}
+
+window.addEventListener('keydown', function(e) {
+	if ((e.metaKey || e.ctrlKey) && e.key == 's') { // ctrl+s/cmd+s
+		e.preventDefault();
+		if (!document.body.classList.contains('changed')) { // if not changed, ignore
+			return;
+		}
+		saveProgram();
+	}
+});
+
+programSelect.addEventListener('change', function(e) {
+	if (programSelect.value == '@clear') {
+		if (!confirm('Clear workspace?')) {
+			programSelect.value = program;
+			return;
+		}
+		localStorage.removeItem('program');
+		program = '';
+		setProgramXml('');
+		programSelect.value = program;
+		programSelect.blur();
+	} else if (programSelect.value == '@save') {
+		saveProgram();
+	} else {
+		// load program
+		if (program == '' || document.body.classList.contains('changed')) {
+			if (!confirm('Discard changes?')) {
+				programSelect.value = program;
+				return;
+			}
+		}
+		let name = programSelect.value;
+		let lastProgram = getProgramXml();
+		programSelect.blur();
+		try {
+			setProgramXml(programs[name]);
+			program = name;
+			localStorage.setItem('program', name);
+		} catch(e) {
+			alert(e);
+			setProgramXml(lastProgram);
+			program = ''
+			programSelect.value = program;
+		}
+		updateChanged();
+	}
+});
