@@ -20,6 +20,12 @@ The frontend files are located in [`www`](./www/) subdirectory. The frontend app
 
 * `~run` ([*clover_blocks/Run*](srv/Run.srv)) – run Blockly-generated program (in Python).
 * `~stop` ([*std_srvs/Trigger*](http://docs.ros.org/melodic/api/std_srvs/html/srv/Trigger.html)) – terminate the running program.
+* `~store` ([*clover_blocks/load*](srv/Store.srv)) – store a user program (to `<package_path>/programs` by default).
+* `~load` ([*clover_blocks/load*](srv/Load.srv)) – load all the stored programs.
+
+### Parameters
+
+* `programs_dir` (*string*) – directory for user programs.
 
 ### Topics
 
