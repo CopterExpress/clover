@@ -25,6 +25,13 @@
 	<div id="tools">
 		<div class="disconnected">Disconnected</div>
 		<div id="running">Running...</div>
+		<select id="program-name">
+				<option value="" disabled selected>&lt;Unsaved&gt;</option>
+				<option value="@clear">Clear...</option>
+				<option style="font-style: italic;" value="@save">Save... (Ctrl+S)</option>
+			<optgroup label="User" data-type="user"></optgroup>
+			<optgroup label="Examples" data-type="example"></optgroup>
+		</select>
 		<button onclick="runProgram()" id="run" disabled title="Run the program">Run</button>
 		<button onclick="stopProgram()" title="Stop the program">Stop</button>
 		<button onclick="land()" title="Stop the program and land">Land</button>
