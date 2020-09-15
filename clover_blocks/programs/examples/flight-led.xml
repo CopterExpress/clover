@@ -1,0 +1,97 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="take_off" id="R@=3~Fq;AxFaRO{ZDFUM" x="162" y="63">
+    <field name="WAIT">TRUE</field>
+    <value name="ALT">
+      <shadow type="math_number" id="cf8/,N48N;Fvn@EWB%,B">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="set_effect" id="5K8qDD0/@Ab!k+ad6IPj">
+        <field name="EFFECT">FILL</field>
+        <value name="COLOR">
+          <shadow type="colour_picker" id="=*Y*L:1DI7y$.RR$6jNQ">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="navigate" id="kE7TL3+{PI.GiXby~SyO">
+            <field name="FRAME_ID">BODY</field>
+            <field name="WAIT">TRUE</field>
+            <value name="X">
+              <shadow type="math_number" id="W$eQ*Xv/e(*`e%8--W:P">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number" id="i~r{%5mpU|}FL|9p!5yG">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="Z">
+              <shadow type="math_number" id="fZ{Cz~^LoWvM#,#;!co_">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="ID">
+              <shadow type="math_number" id="z$Hj|-?4e3zy@Jx$/THh">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="SPEED">
+              <shadow type="math_number" id="FjRM:aex=:/l_``^zcO]">
+                <field name="NUM">0.5</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="set_effect" id="Q^DQoW/6G$7#YPlXc}%]">
+                <field name="EFFECT">FILL</field>
+                <value name="COLOR">
+                  <shadow type="colour_picker" id="mjOY6]=uMY4$r8^n:n|}">
+                    <field name="COLOUR">#3333ff</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="navigate" id=";|j@sXR{9)9@ran7g[;~">
+                    <field name="FRAME_ID">BODY</field>
+                    <field name="WAIT">TRUE</field>
+                    <value name="X">
+                      <shadow type="math_number" id="TH(htYn}*/a{[::sFQ[x">
+                        <field name="NUM">-1</field>
+                      </shadow>
+                    </value>
+                    <value name="Y">
+                      <shadow type="math_number" id="h@`=v?y+Tuh,I)wv?+`f">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="Z">
+                      <shadow type="math_number" id="pzz:U%?m/~~B$-FF!fD?">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="ID">
+                      <shadow type="math_number" id="Ze2Nun;[K{X.1kE0anMF">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="SPEED">
+                      <shadow type="math_number" id="+[A5TSXF:hw4T1M]e~Wu">
+                        <field name="NUM">0.5</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="land" id="G5+Fs.6Y4(K9Dw`wjgua">
+                        <field name="WAIT">TRUE</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
