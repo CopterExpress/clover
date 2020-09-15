@@ -63,6 +63,8 @@ def load(req):
     try:
         for currentpath, folders, files in os.walk(programs_path):
             for f in files:
+                if not f.endswith('.xml'):
+                    continue
                 filename = os.path.join(currentpath, f)
                 res['names'].append(os.path.relpath(filename, programs_path))
                 res['programs'].append(open(filename, 'r').read())
