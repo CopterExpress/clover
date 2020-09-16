@@ -26,7 +26,6 @@ var workspace = Blockly.inject('blockly', {
 	media: 'blockly/media/',
 });
 
-});
 
 var pythonArea = document.getElementById('python');
 
