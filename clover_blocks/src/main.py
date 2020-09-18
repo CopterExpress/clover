@@ -6,15 +6,85 @@ import subprocess
 import threading
 import signal
 import re
-from std_msgs.msg import Bool
+import uuid
+from std_msgs.msg import Bool, String
 from std_srvs.srv import Trigger
+from clover_blocks.msg import Prompt
 from clover_blocks.srv import Run, Load, Store
 
+
 rospy.init_node('clover_blocks')
-process = None
+
+stop = None
+block = ''
+published_block = None
 running_lock = threading.Lock()
+
 running_pub = rospy.Publisher('~running', Bool, queue_size=1, latch=True)
+block_pub = rospy.Publisher('~block', String, queue_size=1, latch=True)
+print_pub = rospy.Publisher('~print', String, queue_size=10)
+prompt_pub = rospy.Publisher('~prompt', Prompt, queue_size=10)
+error_pub = rospy.Publisher('~error', String, queue_size=10)
+
+
 running_pub.publish(False)
+
+
+class Stop(Exception):
+    pass
+
+
+def publish_block(event):
+    global published_block, block
+    if published_block != block:
+        block_pub.publish(block)
+    published_block = block
+
+
+rospy.Timer(rospy.Duration(rospy.get_param('block_rate', 0.2)), publish_block)
+
+
+def change_block(_block):
+    global block
+    block = _block
+    if stop: raise Stop
+
+
+rospy_sleep = rospy.sleep
+
+
+def sleep(duration):
+    time_start = rospy.get_time()
+
+    if isinstance(duration, rospy.Duration):
+        duration = duration.to_sec()
+
+    time_until = time_start + duration
+
+    while not rospy.is_shutdown():
+        if stop: raise Stop  # check stop condition every half-second
+        if (time_until - rospy.get_time()) > 0.5:
+            print('sleep 0.5')
+            rospy_sleep(0.5)
+        else:
+            rospy_sleep(time_until - rospy.get_time())
+            return
+
+
+rospy.sleep = sleep
+rospy.init_node = lambda *args, **kwargs: None
+
+
+def _print(s):
+    rospy.loginfo(str(s))
+    print_pub.publish(str(s))
+
+
+def _input(s):
+    rospy.loginfo('Input with message %s', s)
+    prompt_id = str(uuid.uuid4()).replace('-', '')
+    prompt_pub.publish(message=str(s), id=prompt_id)
+    return rospy.wait_for_message('~input/' + prompt_id, String, timeout=30).data;
 
 
 def run(req):
@@ -22,18 +92,30 @@ def run(req):
         return {'message': 'Already running'}
 
     try:
-        global process
         rospy.loginfo('Run program')
         running_pub.publish(True)
-        process = subprocess.Popen([sys.executable, '-c', req.code])
 
-        def wait_thread():
-            process.wait()
+        def program_thread():
+            global stop
+            stop = False
+            g = {'rospy': rospy,
+                '_b': change_block,
+                '_print': _print,  # TODO: change to print in Python 3
+                'raw_input': _input}
+            try:
+                exec req.code in g
+            except Stop:
+                rospy.loginfo('Program forced to stop')
+            except Exception as e:
+                rospy.logerr(str(e))
+                error_pub.publish(str(e))
+
             rospy.loginfo('Program terminated')
             running_lock.release()
             running_pub.publish(False)
+            change_block('')
 
-        t = threading.Thread(target=wait_thread)
+        t = threading.Thread(target=program_thread)
         t.start()
 
         return {'success': True}
@@ -44,14 +126,10 @@ def run(req):
 
 
 def stop(req):
-    global process
-    if process:
-        rospy.loginfo('Stop program')
-        process.send_signal(signal.SIGINT)
-        process = None
-        return {'success': True}
-    else:
-        return {'success': True, 'message': 'Program not running'}
+    global stop
+    rospy.loginfo('Stop program')
+    stop = True
+    return {'success': True}
 
 
 programs_path = rospy.get_param('~programs_dir', os.path.dirname(os.path.abspath(__file__)) + '/../programs')

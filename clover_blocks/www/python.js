@@ -1,10 +1,10 @@
 import {priv} from './ros.js';
 
 // If any new block imports any library, add that library name here.
+Blockly.Python.addReservedWords('_b,_print');
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
-Blockly.Python.addReservedWords('block_pub,print_pub,prompt_pub,error_pub,_except_hook,_block,_published_block');
-Blockly.Python.addReservedWords('prompt,navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
-Blockly.Python.addReservedWords('pigpio,pi,sys,String,Prompt,Range,uuid');
+Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
+Blockly.Python.addReservedWords('pigpio,pi,Range');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
@@ -13,14 +13,6 @@ var userCode = true; // global flag indicating whether the code for GUI is gener
 // TODO: parametrize
 const navigate_tolerance = 0.2;
 const sleep_time = 0.2;
-const block_rate = 0.05;
-
-const EXCEPT_HOOK = `\ndef _except_hook(exctype, value, traceback):
-    if exctype != KeyboardInterrupt:
-        error_pub.publish(str(value))
-    _block = ''
-
-sys.excepthook = _except_hook\n`;
 
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
@@ -73,49 +65,11 @@ const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
     telem = get_telemetry(frame_id)
     return math.sqrt((x - telem.x) ** 2 + (y - telem.y) ** 2 + (z - telem.z) ** 2)\n`;
 
-const PROMPT = `\ndef prompt(message):
-    prompt_id = str(uuid.uuid4()).replace('-', '')
-    prompt_pub.publish(message=message, id=prompt_id)
-    return rospy.wait_for_message('${priv}input/' + prompt_id, String, timeout=30).data\n`;
-
-const BLOCK_PUB = `\nblock_pub = rospy.Publisher('${priv}block', String, queue_size=1, latch=True)\n
-
-_block = None
-_published_block = None
-
-def _publish_block(event):
-    global _published_block
-    if _published_block != _block: block_pub.publish(_block)
-    _published_block = _block
-
-rospy.Timer(rospy.Duration(${block_rate}), _publish_block)\n`
-
 var rosDefinitions = {};
 
 function generateROSDefinitions() {
 	// order for ROS definitions is significant, so generate all ROS definitions as one
-	var code;
-	if (!userCode) {
-		code = `rospy.init_node('flight', anonymous=True, disable_signals=True)\n\n`;
-	} else {
-		code = `rospy.init_node('flight')\n\n`;
-	}
-	if (!userCode) {
-		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
-		Blockly.Python.definitions_['import_sys'] = 'import sys';
-		code += BLOCK_PUB + '\n';
-		code += `error_pub = rospy.Publisher('${priv}error', String, queue_size=10, latch=True)\n`;
-		code += EXCEPT_HOOK + '\n'; // handle all global exceptions
-	}
-	if (rosDefinitions.print) {
-		Blockly.Python.definitions_['import_string'] = `from std_msgs.msg import String`;
-		code += `print_pub = rospy.Publisher('${priv}print', String, queue_size=10)\n`
-	}
-	if (rosDefinitions.prompt) {
-		Blockly.Python.definitions_['import_prompt'] = 'from clover_blocks.msg import Prompt';
-		Blockly.Python.definitions_['import_uuid'] = 'import uuid';
-		code += `prompt_pub = rospy.Publisher('${priv}prompt', Prompt, queue_size=10, latch=True)\n`;
-	}
+	var code = `rospy.init_node('flight')\n\n`;
 	if (rosDefinitions.offboard) {
 		code += OFFBOARD;
 	}
@@ -126,10 +80,6 @@ function generateROSDefinitions() {
 	if (rosDefinitions.setLeds) {
 		Blockly.Python.definitions_['import_set_led'] = 'from led_msgs.srv import SetLEDs\nfrom led_msgs.msg import LEDState';
 		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs, persistent=True)\n`;
-	}
-	if (rosDefinitions.prompt) {
-		Blockly.Python.definitions_['import_string'] = 'from std_msgs.msg import String';
-		code += PROMPT;
 	}
 	if (rosDefinitions.navigateWait) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
@@ -154,9 +104,6 @@ function generateROSDefinitions() {
 		Blockly.Python.definitions_['import_math'] = 'import math';
 		code += GET_DISTANCE;
 	}
-	if (!userCode) {
-		code += '\nrospy.sleep(0.5)\n'; // rospy need some more time to initialize publishers
-	}
 	Blockly.Python.definitions_['ros'] = code;
 }
 
@@ -171,19 +118,8 @@ function simpleOffboard() {
 	initNode();
 }
 
-
 // Adjust indentation
 Blockly.Python.INDENT = '    ';
-
-var pythonInit = Blockly.Python.init;
-
-Blockly.Python.init = function() {
-	// override init function
-	pythonInit.apply(this, arguments);
-	if (!userCode) {
-		initNode(); // ROS needed for backend code anyways for ~block topic
-	}
-}
 
 export function generateUserCode(workspace) {
 	userCode = true;
@@ -195,9 +131,8 @@ export function generateUserCode(workspace) {
 export function generateCode(workspace) {
 	userCode = false;
 	rosDefinitions = {};
-	Blockly.Python.STATEMENT_PREFIX = '_block = %1\n';
+	Blockly.Python.STATEMENT_PREFIX = '_b(%1)\n';
 	var code = Blockly.Python.workspaceToCode(workspace);
-	code += "_block = ''\n"; // end of program
 	return code;
 }
 
@@ -477,29 +412,7 @@ Blockly.Python['text_print'] = function (block) {
 		return origPrint.apply(this, arguments);
 	}
 
-	rosDefinitions.print = true;
-	initNode();
-
 	var msg = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || '\'\'';
 
-	return `print_pub.publish(str(${msg}))\n`;
-};
-
-var origPrompt = Blockly.Python.text_prompt;
-
-Blockly.Python['text_prompt_ext'] = function(block) {
-	if (userCode) {
-		return origPrompt.apply(this, arguments);
-	}
-
-	rosDefinitions.prompt = true;
-	initNode();
-
-	var msg = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || '\'\'';
-
-	if (block.getFieldValue('TYPE') == 'NUMBER') {
-		return [`float(prompt(${msg}))`, Blockly.Python.ORDER_FUNCTION_CALL];
-	} else {
-		return [`prompt(${msg})`, Blockly.Python.ORDER_FUNCTION_CALL];
-	}
+	return `_print(${msg})\n`;
 };
