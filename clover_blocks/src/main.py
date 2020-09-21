@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 import rospy
 import os, sys
 import subprocess
@@ -100,7 +102,7 @@ def run(req):
             stop = False
             g = {'rospy': rospy,
                 '_b': change_block,
-                '_print': _print,  # TODO: change to print in Python 3
+                'print': _print,
                 'raw_input': _input}
             try:
                 exec req.code in g

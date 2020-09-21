@@ -404,15 +404,3 @@ Blockly.Python.set_servo = function(block) {
 	var pwm = Blockly.Python.valueToCode(block, 'PWM', Blockly.Python.ORDER_NONE);
 	return `set_servo(${pin}, ${pwm})\n`;
 }
-
-var origPrint = Blockly.Python.text_print; // original print
-
-Blockly.Python['text_print'] = function (block) {
-	if (userCode) {
-		return origPrint.apply(this, arguments);
-	}
-
-	var msg = Blockly.Python.valueToCode(block, 'TEXT', Blockly.Python.ORDER_NONE) || '\'\'';
-
-	return `_print(${msg})\n`;
-};
