@@ -4,5 +4,5 @@
 node_modules/
 _book/
 package-lock.json
-clover_blocks/programs/
-!clover_blocks/programs/examples/
+clover_blocks/programs/*.*
+!clover_blocks/programs/examples/*
