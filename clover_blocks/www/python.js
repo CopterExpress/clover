@@ -386,7 +386,7 @@ Blockly.Python.gpio_read = function(block) {
 	pigpio();
 	Blockly.Python.definitions_['gpio_read'] = GPIO_READ;
 	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
-	return [`gpio_read(${pin}))`, Blockly.Python.ORDER_FUNCTION_CALL];
+	return [`gpio_read(${pin})`, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
 Blockly.Python.gpio_write = function(block) {
