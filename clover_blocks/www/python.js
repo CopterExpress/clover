@@ -378,7 +378,7 @@ const GPIO_WRITE = `\ndef gpio_write(pin, level):
 	pi.set_mode(pin, pigpio.OUTPUT)
 	pi.write(pin, level)\n`;
 
-const SET_SERVO = `\ndef gpio_write(pin, pwm):
+const SET_SERVO = `\ndef set_servo(pin, pwm):
 	pi.set_mode(pin, pigpio.OUTPUT)
 	pi.set_servo_pulsewidth(pin, pwm)\n`;
 
