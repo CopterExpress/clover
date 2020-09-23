@@ -2,7 +2,9 @@
 
 Возможность блочного визуального программирования автономных полетов Клевера добавлена в [образ для RPi](image.md), начиная с версии **0.21**. Реализация блочного программирования основана на [Google Blockly](https://developers.google.com/blockly). Интеграция Blockly в Клевер позволяет понизить входной порог в программирование автономных полетов до минимального уровня.
 
-Для того, чтобы открыть интерфейс блочного программирования в Клевере, [подключитесь к Клеверу по Wi-Fi](wifi.md) и перейдите на страницу http://192.168.11.1:8080/clover_blocks/ либо нажмите ссылку *Blocks Programming* на основной веб-странице Клевера. Аргумент `blocks` в launch-файле Клевера (`~/catkin_ws/src/clover/clover/launch/clover.launch`) должен быть в значении `true`:
+Для того, чтобы открыть интерфейс блочного программирования в Клевере, [подключитесь к Клеверу по Wi-Fi](wifi.md) и перейдите на страницу http://192.168.11.1:8080/clover_blocks/ либо нажмите ссылку *Blocks Programming* на основной веб-странице Клевера.
+
+Аргумент `blocks` в launch-файле Клевера (`~/catkin_ws/src/clover/clover/launch/clover.launch`) [должен быть в значении](cli.md#editing) `true`:
 
 ```xml
 <arg name="blocks" default="true"/>
@@ -27,7 +29,7 @@
 * *LED* – блоки для управления [LED-лентой](leds.md).
 * *GPIO* – блоки для работы с [GPIO-пинами](gpio.md).
 
-В категориях ниже находятся стандартные блоки Google Blockly.
+В остальных категориях находятся стандартные блоки Google Blockly.
 
 ### take_off
 
@@ -45,7 +47,7 @@
 
 <img src="../assets/blocks/navigate.png" srcset="../assets/blocks/navigate.png 2x">
 
-В блоке указывается [система координат](frames.md), в которой задана целевая точка. TODO
+В блоке задается также [система координат](frames.md), в которой задана целевая точка. TODO
 
 ### land
 
@@ -71,6 +73,8 @@
 
 <img src="../assets/blocks/random-color.png" srcset="../assets/blocks/random-color.png 2x">
 
-### gpio
+### GPIO-блоки
 
-TODO: link to pinout
+TODO
+
+Подробнее о GPIO-пинах Raspberry Pi вы можете прочитать в [соответствующей статье](gpio.md).
