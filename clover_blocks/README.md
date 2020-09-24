@@ -32,11 +32,6 @@ The frontend files are located in [`www`](./www/) subdirectory. The frontend app
 #### Published
 
 * `~running` ([*std_msgs/Bool*](http://docs.ros.org/melodic/api/std_msgs/html/msg/Bool.html)) – indicates if the program is currently running.
-
-#### Generated code topics
-
-The following topics are published from the code, generated at the frontend side.
-
 * `~block` ([*std_msgs/String*](http://docs.ros.org/melodic/api/std_msgs/html/msg/String.html)) – current executing block (maximum topic rate is limited).
 * `~error` ([*std_msgs/String*](http://docs.ros.org/melodic/api/std_msgs/html/msg/String.html)) – user program errors and exceptions.
 * `~prompt` ([*clover_blocks/Prompt*](msg/Prompt.msg)) – user input request (includes random request ID string).
