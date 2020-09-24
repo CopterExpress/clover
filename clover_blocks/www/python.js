@@ -335,7 +335,7 @@ Blockly.Python.set_effect = function(block) {
 	var effect = block.getFieldValue('EFFECT').toLowerCase();
 
 	if (effect == 'rainbow' || effect == 'rainbow_fill') {
-		return `set_effect(effect='${effect}')`;
+		return `set_effect(effect='${effect}')\n`;
 	} else {
 		let colorCode = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_NONE);
 
