@@ -90,6 +90,13 @@
   * [Migration to v0.20](migrate20.md)
 * Clover-based projects
   * [Drone show](clever-show.md)
+    * [Quick start](clever-show/start-tutorial.md)
+    * [clever-show client](clever-show/client.md)
+    * [clever-show server](clever-show/server.md)
+    * [Positioning setup](clever-show/positioning.md)
+    * [Animation module](clever-show/animation.md)
+    * [Exporting animations from Blender](clever-show/blender-addon.md)
+    * [Building modified clever-show image](clever-show/image-building.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Copter spheric guard](shield.md)
   * [Face recognition system](face_recognition.md)

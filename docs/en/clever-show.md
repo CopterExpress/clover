@@ -14,5 +14,5 @@ Project repository: https://github.com/CopterExpress/clever-show.
 
 ## Team
 
-* Arthur Golubtsov, software engineer in COEX, https://github.com/goldarte
-* Artem Vasyunik, software engineer intern in COEX, https://github.com/artem30801
+* Arthur Golubtsov, ex-software engineer in COEX, https://github.com/goldarte
+* Artem Vasyunik, software engineer in COEX, https://github.com/artem30801
