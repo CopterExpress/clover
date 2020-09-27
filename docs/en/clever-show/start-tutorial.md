@@ -84,7 +84,7 @@ Further instructions are written for copters assembled according to [assembly in
 * RC setup
 * Flight modes
 
-Before proceeding with the software setup, make sure that the copter is controlled from the remote control with the `Stabilized` mode. 
+Before proceeding with the software setup, make sure that the copter is controlled from the remote control with the `Stabilized` mode.
 
 Turn on your copter and run the server application on your computer. Wait until the copter is connected to the server and its telemetry is displayed in a table.
 
@@ -106,7 +106,7 @@ You can configure the copter to utilize a different positioning system. The foll
 
 ### LED Strip Operation Check
 
-The LED strip should be connected to the GPIO 21 Raspberry Pi pin and have no more than 60 LEDs in order to work with the default `clever-show' image. Check the functioning of the LED strip by selecting the desired copter in the table and pressing the button `Test leads` - the strip on the copter should blink white twice.
+The LED strip should be connected to the GPIO 21 Raspberry Pi pin and have no more than 60 LEDs in order to work with the default `clever-show` image. Check the functioning of the LED strip by selecting the desired copter in the table and pressing the button `Test leads` - the strip on the copter should blink white twice.
 
 You can find a description of setup and operation of the LED strip in `clover` [documentation](https://clover.coex.tech/en/leds.html) .
 

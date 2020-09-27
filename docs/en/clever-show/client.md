@@ -12,18 +12,18 @@ Application for remote synchronized drone control in show and emergency drone pr
 
 ## Client workflow the Raspberry Pi image
 
-The client is the `clever-show` service in the copter operating system. The service runs the [client.py](.../.../drone/client.py) script and starts automatically when the operating system boots. If it is necessary to apply the parameters of the updated client configuration, the service can be restarted. The `clever-show' service is designed to manage and configure the copter for group flight through the server application.
+The client is the `clever-show` service in the copter operating system. The service runs the [client.py](.../.../drone/client.py) script and starts automatically when the operating system boots. If it is necessary to apply the parameters of the updated client configuration, the service can be restarted. The `clever-show` service is designed to manage and configure the copter for group flight through the server application.
 
 Along with the client, the emergency drone protection service `failsafe` is registered in the operating system. This service launches the script [failsafe.py](.../../drone/failsafe.py) and starts automatically when the operating system boots . The service can be restarted if it is necessary to apply parameters of the updated client configuration.
 
-The ''failsafe'' service is designed for automatic landing of the copter in emergency situations:
+The `failsafe` service is designed for automatic landing of the copter in emergency situations:
 
 * if there are no messages about the drone position from the `/mavros/vision_pose/pose` topic.
 * in case of collision with objects in flight, when the distance between the current point where the copter is and the point where it should be according to the flight task exceeds the threshold value.
 
-Also `failsafe` provides '`/emergency_land` ROS service, which can be accessed by the client upon command from the server for emergency drone landing.
+Also `failsafe` provides `/emergency_land` ROS service, which can be accessed by the client upon command from the server for emergency drone landing.
 
-Logs of both services are written to the`/var/log/syslog` file of the drone's on-board computer Raspberry Pi  operating system. The log files of the current session are available for viewing upon execution of the commands `journalctl -u clever-show` for the client and `journalctl -u failsafe` for the service of emergency drone protection in the terminal connected to Raspberry Pi. Logs may be useful for analysis of unexpected behavior or emergencies during the flight under control of the client application.
+Logs of both services are written to the `/var/log/syslog` file of the drone's on-board computer Raspberry Pi  operating system. The log files of the current session are available for viewing upon execution of the commands `journalctl -u clever-show` for the client and `journalctl -u failsafe` for the service of emergency drone protection in the terminal connected to Raspberry Pi. Logs may be useful for analysis of unexpected behavior or emergencies during the flight under control of the client application.
 
 ## Client configuration
 
@@ -87,7 +87,7 @@ This section describes the offset of the coordinate system with the name `floor`
 * `translation` - offset of the `floor` coordinate system along the axes (x, y, z) from the `parent` coordinate system, in meters.
 * `rotation` - rotation of `floor` coordinate system by angles (roll, pitch, yaw) around axes (x, y, z) relative to `parent` coordinate system, in degrees.
 
-**Warning!** Rotations `roll`, `pitch`, `yaw` are made sequentially in the stated order.
+> **Warning!** Rotations `roll`, `pitch`, `yaw` are made sequentially in the stated order.
 
 #### GPS FRAME section
 
@@ -103,14 +103,14 @@ This section describes creation of a coordinate system with the name `gps`. The 
 This section configures the animation processing. A separate module [animation](../../drone/modules/animation.py) is responsible for animation processing. When an animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
 
 1. Copter is stationary at the beginning of the animation - `static_begin`.
-2. Copter takes off - `takeoff'.
+2. Copter takes off - `takeoff`.
 3. Copter follows the animation path - `route`.
 4. Copter performs landing - `land`
 5. Copter is stationary until the end of the animation file - `static_end`.
 
 An animation frame is a set of data necessary to position the copter and determine its led strip color. In the current version of the software the animation frame is represented by a sequence of numbers `x y zaw r g b` in the line `.csv` of the animation file, where:
 
-* `x', `y', `z' - copter coordinates in the current frame, in meters
+* `x`, `y`, `z` - copter coordinates in the current frame, in meters
 * `yaw` - the copter's yaw in radians
 * `r`, `g`, `b` - components of the color of the copter led strip, integers from 0 to 255
 
@@ -126,65 +126,56 @@ If the copter takes off from the ground in the animation file, at the start of t
 
  If in the animation file the copter starts to fly in the air, at the start of the animation will be applied **flight logic to the first point (takeoff)**: The copter with the motors turned off plays the color from the animation as long as it is stationary, turns the motors on before takeoff, then takes off in `takeoff_height` time, then moves to the first point in `reach_first_point_time` and then starts to follow the points specified in the animation.
 
-* `takeoff_level` - takeoff level to automatically detect the first action of the copter when the animation starts
-
+* `takeoff_level` - takeoff level to automatically detect the first action of the copter when the animation starts.
 * `ground_level` - ground level, used to check if the copter will try to fly underground when playing the animation. Available settings:
-  
   * `current` - the current height level of the copter before the start is taken as the ground level.
   * z coordinate in meters
-  
 * `check_ground` - boolean value, determines whether to check the ground level in the animation.
-
-* `frame_delay` - playback time of one frame in seconds
-
-* `yaw` - copter rotation during flight to points, in degrees. If `nan', the copter preserves its original orientation in flight. If `animation` - the copter rotates by yaw from the animation file.
-
+* `frame_delay` - playback time of one frame in seconds.
+* `yaw` - copter rotation during flight to points, in degrees. If `nan`, the copter preserves its original orientation in flight. If `animation` - the copter rotates by yaw from the animation file.
 * `ratio` - scale of animation (ratio_x, ratio_y, ratio_z) along the axis (x, y, z)
-
 * `common_offset` - Animation offset relative to the current system, common for all copters, in meters. List of 3 values (x, y, z): each value sets the offset on the corresponding axis.
-
 * `private_offset` - Animation offset relative to the current system, only for this copter, in meters. List of 3 values (x, y, z): each value sets the offset on the corresponding axis.
-
 * `[[OUTPUT]]` - flags that define which steps will be included in the output frame sequence.
 
 #### LED section
 
-Settings of the LED strip use on the copter. To configure the LED strip itself, you need to configure the `led.launch` file, see [LED strip in Clover](https://clover.coex.tech/ru/leds.html) for details.
+Settings of the LED strip use on the copter. To configure the LED strip itself, you need to configure the `led.launch` file, see [LED strip in Clover](leds.md) for details.
 
-* `use` - boolean value, determines whether the LED strip is used
-* `takeoff_indication` - boolean value, determines whether to use the LEDs to indicate takeoff
-* `land_indication` - boolean value, determines whether to use the LEDs to indicate land
+* `use` - Boolean value, determines whether the LED strip is used.
+* `takeoff_indication` - Boolean value, determines whether to use the LEDs to indicate takeoff.
+* `land_indication` - Boolean value, determines whether to use the LEDs to indicate land.
 
 #### FAILSAFE section
 
 This section configures the program of emergency protection of the copter from a position loss or collision with an object. The `failsafe` module provides the service `/emergency_land` at startup, its configuration is located in the [EMERGENCY LAND](#emergency-land-section) section.
 
-* `enabled` - boolean value, determines whether to use emergency protection in case of loss of visual position or collision with an object.
-* `log_state` -  boolean value, determines whether the copter state will be logged in the service log:  `armed: {} | mode: {} | vis_dt: {:.2f} | pos_delta: {:.2f} | pos_dt: {:.2f} | range: {:.2f} | watchdog_action: {}`.
-* `action` - action upon emergency protection triggering. Available options: `land` - landing of the copter in the flight controllers mode AUTO.LAND, `emergency_land` - landing of the copter with the gradual reduction of the motor power, `disarm` - switching off the motors. ** Attention!** It is not recommended to use the AUTO.LAND mode with the barometer turned off - when the altitude source in flight is lost, e.g. laser reading or visual position, the AUTO.LAND mode does not guarantee the landing of the copter, because it is oriented to the altitude reading. It is recommended to use the `emergency_land` mode to land the copter when positioning it using a visual position or laser and the possibility of losing data from these systems.
-* `vision_pose_delay_after_arm` - time after takeoff of the copter in seconds, required to get the visual position. During this time after takeoff, the visual position loss protection will not work. This parameter is useful when using the emergency protection module in conjunction with the positioning system with aruco markers located on the floor: at takeoff copter has no visual position for some time.
-* `vision_pose_timeout` - time in seconds after losing the visual position, after which the emergency protection is triggered.
-* `position_delta_max` - the maximum distance between the current position and the point where the copter should now be in meters. Required to check for collision of the copter with objects. If the distance between the current position of the copter and the point where the copter should be now is greater than this number (in meters), an emergency protection is triggered.
-* `disarm_timeout` - time after which the copter will unconditionally shut down the motors after the emergency protection is triggered, in seconds.
+* `enabled` - Boolean value, determines whether to use emergency protection in case of loss of visual position or collision with an object.
+* `log_state` -  Boolean value, determines whether the copter state will be logged in the service log:  `armed: {} | mode: {} | vis_dt: {:.2f} | pos_delta: {:.2f} | pos_dt: {:.2f} | range: {:.2f} | watchdog_action: {}`.
+* `action` - Action upon emergency protection triggering. Available options: `land` - landing of the copter in the flight controllers mode AUTO.LAND, `emergency_land` - landing of the copter with the gradual reduction of the motor power, `disarm` - switching off the motors. **Warning!** It is not recommended to use the AUTO.LAND mode with the barometer turned off - when the altitude source in flight is lost, e.g. laser reading or visual position, the AUTO.LAND mode does not guarantee the landing of the copter, because it is oriented to the altitude reading. It is recommended to use the `emergency_land` mode to land the copter when positioning it using a visual position or laser and the possibility of losing data from these systems.
+* `vision_pose_delay_after_arm` - Time after takeoff of the copter in seconds, required to get the visual position. During this time after takeoff, the visual position loss protection will not work. This parameter is useful when using the emergency protection module in conjunction with the positioning system with aruco markers located on the floor: at takeoff copter has no visual position for some time.
+* `vision_pose_timeout` - Time in seconds after losing the visual position, after which the emergency protection is triggered.
+* `position_delta_max` - The maximum distance between the current position and the point where the copter should now be in meters. Required to check for collision of the copter with objects. If the distance between the current position of the copter and the point where the copter should be now is greater than this number (in meters), an emergency protection is triggered.
+* `disarm_timeout` - Time after which the copter will unconditionally shut down the motors after the emergency protection is triggered, in seconds.
 
 #### EMERGENCY LAND section
 
 Settings of emergency landing parameters in case of `emergency_land` emergency protection action or when calling the `/emergency_land` ROS service.
 
-* `thrust` - the initial power supplied to the motors in the event of a `emergency_land` action when the emergency protection is triggered. Measurementless value, from 0 (no thrust) to 1 (full thrust). For a guaranteed fit it is recommended to set it to a value 5-10 percent lower than the hanging gas (parameter `MPC_THR_HOVER` in px4). **Warning!** Incorrect configuration of this option may cause the copter to rise up instead of landing!
-* `decrease_thrust_after` - the time after which the power on the motors slowly begins to decrease (in seconds) if the action `emergency_land` is selected when the emergency protection is triggered.
+* `thrust` - The initial power supplied to the motors in the event of a `emergency_land` action when the emergency protection is triggered. Measurementless value, from 0 (no thrust) to 1 (full thrust). For a guaranteed fit it is recommended to set it to a value 5-10 percent lower than the hanging gas (parameter `MPC_THR_HOVER` in PX4). **Warning!** Incorrect configuration of this option may cause the copter to rise up instead of landing!
+* `decrease_thrust_after` - The time after which the power on the motors slowly begins to decrease (in seconds) if the action `emergency_land` is selected when the emergency protection is triggered.
 
 #### SYSTEM section
 
 System settings for client's service commands
 
-* `change_hostname` - boolean option, determines whether a change of hostname is required when renaming the copter `id`.
-* `restart_after_rename` - boolean option, determines whether it is necessary to reboot the copter when renaming its `id` remotely from the server.
+* `change_hostname` - Boolean value, determines whether a change of hostname is required when renaming the copter `id`.
+* `restart_after_rename` - Boolean value, determines whether it is necessary to reboot the copter when renaming its `id` remotely from the server.
 
 #### NTP section
 
-In addition to time synchronization (with millisecond precision) using the chrony package, there is an alternative - the ability to use external (in case the local network has a connection to the Internet) or intranet NTP-servers. ** Attention!** For correct system operation, both the server and the clients** must use a single method of time synchronization (a set of parameters in this section). This section is fully unified for both server and clients.
+In addition to time synchronization (with millisecond precision) using the chrony package, there is an alternative - the ability to use external (in the presence of a local network connection to the Internet) or intranet NTP-servers. **Warning!** For proper system operation, both **the server and the clients** must use a single method of time synchronization (set of parameters in this section). This section is fully unified for both server and clients.
 
-* `use_ntp` - determines whether time synchronization using NTP will be used. (if `False', the local OS time will be used (synchronized automatically when using chrony). * It is recommended to use chrony instead of NTP*.
-* `host` - host name or IP address of the NTP server (local or remote)
-* `port` -  port used by the NTP server
+* `use` - determines whether time synchronization using NTP will be used. (if `False`, the local OS time will be used (synchronized automatically when using chrony). *It is recommended to use chrony instead of NTP*.
+* `host` - host name or IP address of the NTP server (local or remote).
+* `port` - port used by the NTP server.

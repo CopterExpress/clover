@@ -11,7 +11,7 @@ Application for creating and running shows, configuring drones, animation and mu
 
 The server has a visual graphical interface for user-friendly interaction.
 
-![Интерфейс сервера](../assets/server-gui.png)
+![Server interface](../assets/server-gui.png)
 
 ### Copter status table
 
@@ -33,19 +33,19 @@ The copter is considered **ready to fly** if all cells in the row except `animat
 
 #### Table columns
 
-* `copter ID` - the client name. Can be configured on the client side. Displayed immediately when the client is connected. Next to each Copter ID there is a checkbox - Copters whose ID is marked with a positive checkbox (tick) are considered * selected*. Cells in this column are always pass the check.
+* `copter ID` - the client name. Can be configured on the client side. Displayed immediately when the client is connected. Next to each Copter ID there is a checkbox - Copters whose ID is marked with a positive checkbox (tick) are considered *selected*. Cells in this column are always pass the check.
   * By double-clicking on this field you can enter a new `copter ID` of the client and rename it. As a name, combinations of Latin letters, digits and dashes (A-Z, a-z, 0-9, '-') not longer than 63 characters are permitted. The dash cannot be the first character.
 * `version` - a hash code of the current git version of the client. Cells in this column are checked when [check_git_version](#checks section) is enabled (value `true`) in the server settings. A cell in this column passes the check if the hash code of the git version of the given client and the server match (if the server is not located in the git repository, the check is passed out automatically).
 * `configuration` -  a user-defined version of the client configuration. Cells in this column are always pass the check.
   * Cells of this column supports *drag-and-drop*. When you drag and drop a cell to any third-party application that supports files (e.g. "Explorer"), the client configuration file will be copied to the specified location. When a cell is dragged to another cell, the configuration file will be copied from one cell to another. When a file is dragged to a cell, it will be written to the client as a configuration (subject to validation). When the configuration is transferred to the client, the `PRIVATE` section will not be sent.
-* `animation ID` - an internal name of the animation file loaded by the client. A cell in this column does not pass the check if there is no animation (value `No animation`). In other cases, if a cell is not empty, it will be checked. ** Attention!** Check if the names of the animation files correspond to the copters before starting.
+* `animation ID` - an internal name of the animation file loaded by the client. A cell in this column does not pass the check if there is no animation (value `No animation`). In other cases, if a cell is not empty, it will be checked. **Warning!** Check if the names of the animation files correspond to the copters before starting.
 * `battery` - a value of voltage on the copter battery in volts and charge in percent according to the flight controller. A cell in this column passes the check if the battery charge value is higher than [battery_percentage_min](#section-checks) specified in the server settings. In other cases, if a cell is not empty, it does not pass the check.
 * `system` - a flight controller status. A cell in this column passes the check if its value is `STANDBY`. In other cases, if a cell is not empty, it does not pass the check.
 * `sensors` - calibration status of the flight controller compass, accelerometer and gyroscope. A cell in this column passes the check if its value is `OK`.  In other cases, if a cell is not empty, it does not pass the check.
-* `mode` - flight controller mode. A cell in this column does not pass the check if its value `NO_FCU` or contains `CMODE`. In other cases, if a cell is not empty, it passes the check.
+* `mode` - flight controller mode. A cell in this column does not pass the check if its value `NO_FCU` or contains `CMODE`. In other cases, if a cell is not empty, it passes the chseck.
 * `checks`  - copter self-test state. A cell in this column passes the check if its value is `OK`. In other cases, if a cell is not empty, it does not pass the check.
   * Double-clicking on a cell if there are errors will show a dialog box with full detailed information about all errors.
-* `current x y z yaw frame_id` - current copter position with the coordinate system name. The cell is automatically passes the check if [check_current_position](#section-checks) is set to `false'. Otherwise, a cell in this column does not pass the check if its value is `NO_POS' or contains `nan'. Otherwise, if a cell is not empty, it passes the check.
+* `current x y z yaw frame_id` - current copter position with the coordinate system name. The cell is automatically passes the check if [check_current_position](#section-checks) is set to `false`. Otherwise, a cell in this column does not pass the check if its value is `NO_POS` or contains `nan`. Otherwise, if a cell is not empty, it passes the check.
 * `start x y z action delay` - start position of the copter for playback of the animation, the first action during playback of the animation and the time after which the first action will be performed after the start of the animation. A cell in this column does not pass the check if its value `NO_POS`, the distance between the current and the starting position of the copter is greater than [start_pos_delta_max](#section-checks) or the client's animation module generates an error when processing the animation and checking that all points of the animation are above ground level.  Otherwise, if a cell is not empty, it passes the check.
 * `dt` - the delay between the time on the server and the client in seconds, including network latency. A cell in this column passes the check if its value is less than [time_delta_max](#checks-section) specified in the server configuration. In other cases, if a cell is not empty, it does not pass the check. If the values are too high, it signals that there is no time synchronization between the copter and the client.
 
@@ -53,11 +53,11 @@ The copter is considered **ready to fly** if all cells in the row except `animat
 
 #### Selected drones section
 
-![Скриншот раздела Selected drones - Send](../assets/server-drone-send.png)
+![Screenshot of the section - Selected drones - Send](../assets/server-drone-send.png)
 
 This section contains several utilities to send various data and commands to *selected* clients. **Warning!** Do not use these commands during the flight of copters!
 
-*  `Send` subsection
+* `Send` subsection
 
   `<clever-show>` - location of the `clever-show` software on the client.
 
@@ -75,7 +75,7 @@ This section contains several utilities to send various data and commands to *se
 
   * `Configuration` - sends *a single* client configuration file to all selected clients. In the dialog box you need to select *one* configuration file in the set format. The configuration file may be incomplete, in this case only the parameters specified in the file will be overwritten. **Warning!** It is not recommended to use this action for mass overwriting of `copter ID`, except for the `/hostname` value. **Warning!** DO NOT send the server configuration file to clients.
 
-  * `Launch files folder` - sends `.launch` files of `clover` service configuration. In the dialog box, select *folder*, which contains configuration files with extension `.launch` and `.yaml`. All files with this extension will be sent * to each* of the clients in the directory `<clover_dir>/launch`. ** Warning!** Existing configuration files on copters will be overwritten, but files not sent by the server will not be deleted or modified.
+  * `Launch files folder` - sends `.launch` files of `clover` service configuration. In the dialog box, select *folder*, which contains configuration files with extension `.launch` and `.yaml`. All files with this extension will be sent *to each* of the clients in the directory `<clover_dir>/launch`. **Warning!** Existing configuration files on copters will be overwritten, but files not sent by the server will not be deleted or modified.
 
   * `FCU parameters file` - sends and records *single* flight controller (FCU) configuration file to all selected clients. In the dialog box you need to select the *one* parameter file in the set format. The parameters on the flight controller will be overwritten.
 
@@ -93,7 +93,7 @@ This section contains several utilities to send various data and commands to *se
 
 * `Restart Service` subsection
 
-  ![Скриншот раздела Selected drones - Restart](../assets/server-drone-restart.png)
+  ![Screenshot of the section - Selected drones - Restart](../assets/server-drone-restart.png)
 
   * `chrony` - restarts the `chrony` time synchronization service on selected clients. Use it for manual synchronization if time between server and clients is not synchronized.
   * `clever` - restarts the `clover` service on selected clients. In order to resume flight functions and to get some telemetry values *it is necessary to wait* some time until the service is fully started.
@@ -111,7 +111,7 @@ This section contains several utilities to send various data and commands to *se
 ---
 
 * `Developer mode` subsection:  **Warning!** Use these actions with great caution.
-* `Update clever-show git` - updates the `clever-show` repository folder on selected clients. The client configuration files * will not be overwritten*. ** Warning!** For the changes to take effect, the `clever-show` service needs to be restarted*.
+* `Update clever-show git` - updates the `clever-show` repository folder on selected clients. The client configuration files *will not be overwritten*. **Warning!** For the changes to take effect, the `clever-show` service needs to be restarted*.
 
 ---
 
@@ -121,7 +121,7 @@ This section contains several utilities to send various data and commands to *se
 
 * `Music` subsection
 
-  ![Скриншот раздела Server - music](../assets/server-music.png)
+  ![Screenshot of the section - Server - music](../assets/server-music.png)
 
   * `Select music file` - loads the selected music file for further manual playback or after a certain time after the start of the animation. Supported extensions: `.mp3` and`.wav`.
   * `Play music` - plays the loaded music.
@@ -139,7 +139,7 @@ This section contains several utilities to send various data and commands to *se
 
 #### Раздел Table
 
-![Скриншот раздела Table](../assets/server-table.png)
+![Screenshot of the section - Table](../assets/server-table.png)
 
 * `Toggle select` (`Ctrl+A`) - selects all copters or deselects all copters. If not all copters are selected in the table, then *selects all* copters. Otherwise (if all the copters have been selected) *deselects* all the copters.
 * `Select all` - selects all copters in the table.
@@ -153,9 +153,9 @@ This section contains several utilities to send various data and commands to *se
 
 * `Configure columns` - opens the [built-in configurator](#column-preset-editor) of table column presets.
 
-### Боковая панель команд
+### Commands sidepanel
 
-![Скриншот боковой панели](../assets/server-sidemenu.png)
+![Screenshot of the side panel](../assets/server-sidemenu.png)
 
 #### Control
 
@@ -187,11 +187,11 @@ This section contains commands to directly control the copters in order to check
 * `Takeoff` button - all the selected copters take off vertically, and then hover over the takeoff point. The button is active only * if all selected copters are ready to fly. ** Warning!** Use it carefully, follow the safety procedures. Do not use it while performing other flight functions!
   * `Z`checkbox - if the checkbox is active, the copter will take off to the specified `z` value. Otherwise, the copters will use their default values specified in their configurations, and the takeoff will be performed relative to the current height.
   * `Z` spinbox - sets the `z` coordinate value of takeoff of the copters, in meters. Active only when the `Z` checkbox is enabled.
-* `Flip` button - all the selected copters **make a flip ** - a 360 degree flip around one of the *horizontal* axes. **Warning!** Use with care, follow the safety procedure. **Warning!** To execute a flip, the copter must have a minimum height of more than 2m. **Warning!** Do not use during other flight functions!
+* `Flip` button - all the selected copters **make a flip** - a 360 degree flip around one of the *horizontal* axes. **Warning!** Use with care, follow the safety procedure. **Warning!** To execute a flip, the copter must have a minimum height of more than 2m. **Warning!** Do not use during other flight functions!
 
 This section contains commands that are executed directly on the copter flight controller.
 
-* `Reboot FCU` button - restarts flight controllers of all selected copters. You can use it to update the rotation of the copter when it is determined only by the inertial copter system, e.g. when flying through the Pozyx positioning system or using Optical Flow. To resume flight functions and get some telemetry values * you need to wait* some time before rebooting the flight controller.
+* `Reboot FCU` button - restarts flight controllers of all selected copters. You can use it to update the rotation of the copter when it is determined only by the inertial copter system, e.g. when flying through the Pozyx positioning system or using Optical Flow. To resume flight functions and get some telemetry values *you need to wait* some time before rebooting the flight controller.
 * `Calibrate gyro` button - switches flight controllers of all selected copters to the gyroscope calibration mode. **Warning!** The copters must be stationary during the calibration.
 * `Calibrate gyro` button - switches flight controllers of all selected copters to the gyroscope calibration mode.  **Warning!** The copters must be stationary during the calibration.
 
@@ -226,8 +226,8 @@ In this section, you specify the parameters of copter checks which are being per
 * `check_git_version` - Whether there will be a check of conformity of git versions of the client and a server for indication in cells of the `version` column.
 * `check_current_position` - Whether the current copter coordinates will be checked for errors in cells of the `current x y zaw frame_id` column.
 * `battery_percentage_min` - Minimal battery charge of the copter, allowed for takeoff. Specified *in percent* (fractional value from 0 to 100). A value in the `battery` column less than the specified one will not pass the check in the `battery` column.
-* `start_pos_delta_max` - Maximum distance between the current position of the copter and its point of takeoff in the animation file, allowable for takeoff. It is specified *in meters* (fractional value from 0 to `inf`).  A distance greater than the specified one will not pass the check in ` start x y z` column. T It is allowed to use the string `inf` for any valid distance.
-* `time_delta_max` - Maximal  time (including network delay) difference (absolute value) between server and client, allowable for takeoff. Specified *in seconds* (fractional value from 0 to `inf`). A difference greater than the specified one will not pass the check in the `dt` column. 
+* `start_pos_delta_max` - Maximum distance between the current position of the copter and its point of takeoff in the animation file, allowable for takeoff. It is specified *in meters* (fractional value from 0 to `inf`).  A distance greater than the specified one will not pass the check in `start x y z` column. T It is allowed to use the string `inf` for any valid distance.
+* `time_delta_max` - Maximal  time (including network delay) difference (absolute value) between server and client, allowable for takeoff. Specified *in seconds* (fractional value from 0 to `inf`). A difference greater than the specified one will not pass the check in the `dt` column.
 
 #### BROADCAST section
 
@@ -242,7 +242,7 @@ The server can use UDP broadcast to send clients actual information about the se
 
 In addition to time synchronization (with millisecond precision) using the chrony package, there is an alternative - the ability to use external (in the presence of a local network connection to the Internet) or intranet NTP-servers. **Warning!** For proper system operation, both **the server and the clients** must use a single method of time synchronization (set of parameters in this section). This section is fully unified for both server and clients.
 
-* `use` - determines whether time synchronization using NTP will be used. (if `False', the local OS time will be used (synchronized automatically when using chrony). *It is recommended to use chrony instead of NTP*.
+* `use` - determines whether time synchronization using NTP will be used. (if `False`, the local OS time will be used (synchronized automatically when using chrony). *It is recommended to use chrony instead of NTP*.
 * `host` - host name or IP address of the NTP server (local or remote)
 * `port` - port used by the NTP server
 
@@ -303,14 +303,14 @@ The configuration file is displayed as a tree in the editor. Each "line" in the 
 
 #### Context menu and configuration editor commands
 
-![Cconfig editor context menu](../assets/server-config-editor-menu.png)
+![Config editor context menu](../assets/server-config-editor-menu.png)
 
 * `Duplicate` (`Shift+D`) - makes a copy of an option or a section (with all the options it contains). Numbering will be added to the option or section name to avoid repeating names.
 * `Toggle exclude` (`Alt+Del`) - excludes an option or a section from the configuration. The option or section *not* will be deleted, but *not* will be written when you save it. Repeatedly applying this command to already excluded options or sections will return them to normal state.
 * `Remove from config` (`Del`) - *removes* an option or a section from the configuration. **Warning!** This action is irreversible!
 * `Clear item value` (`Shift+R`) -  *clears* the  *value*  of an option or of all the section options (if used on a section). It also resets the option value type, and it will be restored from the next text input when editing the value. **Warning!** This action is irreversible!
 * `Reset value to default` (`Ctrl+R`) - brings to the default value (from the configuration specification) the value of the option or all the options of the section (if used on the section). It also resets the option value type, and it will be restored from the next text input when editing the value. **Warning!** This action is irreversible!
-  * `Reset all changes` (`Alt+R`) - restores an option or all the options of the section (if used on the section) to its original state. **Warning!** This action is irreversible!	
+  * `Reset all changes` (`Alt+R`) - restores an option or all the options of the section (if used on the section) to its original state. **Warning!** This action is irreversible!
 * `Add option` (`Shift+A`) - adds an option with an empty value, the first editing of the value will determine its type.
 * `Add section`(`Ctrl+A`) - adds section.
 
@@ -328,7 +328,7 @@ Can be opened by right-clicking on a table header.
 
 * `Column list` By drag-and-drop, you can change the order of columns. The changes will be applied instantly and automatically saved to the server configuration.
 * `Drop-down preset list` - Allows to load and automatically apply any of the preset recorded in the server configuration file.
-*  `Manage presets button` -  opens a preset editing dialog box (see below).
+* `Manage presets button` -  opens a preset editing dialog box (see below).
 
 #### Dialog box
 

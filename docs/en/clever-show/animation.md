@@ -3,7 +3,7 @@
 A separate module [animation](../../drone/modules/animation.py) is responsible for animation processing. When animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
 
 1. The copter is stationary at the beginning of the animation - `static_begin`.
-2. Copter takes off - `takeoff'.
+2. Copter takes off - `takeoff`.
 3. The copter follows the route of animation - `route`.
 4. Copter performs landing - `land`.
 5. The copter is stationary until the animation file - `static_end` is finished.
@@ -26,7 +26,7 @@ The key parameter that defines the logic of animation playback is the `start_act
 * `fly` - executing *the logic of immediate flight*
 * `takeoff` - execution of *the logic of flight to the first point*
 
-f the copter takes off from the ground in the animation file, at the start of the animation, the instantaneous playback logic (fly)** will be applied: the copter with the motors turned off plays the color from the animation as long as it is stationary, turns the motors on before the moment of takeoff, then after `arming_time` starts to follow the points specified in the animation.
+If the copter takes off from the ground in the animation file, at the start of the animation, the instantaneous playback logic (fly)** will be applied: the copter with the motors turned off plays the color from the animation as long as it is stationary, turns the motors on before the moment of takeoff, then after `arming_time` starts to follow the points specified in the animation.
 
  If in the animation file the copter starts to fly in the air, at the start of the animation will be applied **flight logic to the first point (takeoff)**: The copter with the motors turned off plays the color from the animation as long as it is stationary, turns the motors on before takeoff, then takes off in `takeoff_height` time, then moves to the first point in `reach_first_point_time` and then starts to follow the points specified in the animation.
 

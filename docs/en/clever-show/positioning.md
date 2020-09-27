@@ -17,8 +17,8 @@ Configure one copter to work with any of listed above positioning systems. Setup
 * Editing `.launch` files of ROS package `clover`. These files are located in the directory `/home/pi/catkin_ws/src/clover/clover/launch` on the copter (on Raspberry Pi).
 * Configuring the flight controller parameters.
 * Editing [client](client.md) `clever-show` configuration file.
-* Editing [сервера](server.md) `clever-show` configuration file.
-* [Calibrating camera](https://clover.coex.tech/en/camera_calibration.html).
+* Editing [server](server.md) `clever-show` configuration file.
+* [Calibrating camera](../camera_calibration.html).
 
 Make sure that the copter holds the position autonomously: mark the checkbox near the name of the copter and press the "Takeoff" button in the right panel of the server interface. The copter should take off at the height specified in the `takeoff_height` parameter of the "FLIGHT" section in the [client configuration](.../drone/config/spec/configspec_client.ini). By default, this height is 1 meter. If the copter takes off and holds a position at 1 meter height, the check is passed. Put the copter on the ground by pressing the `Land` or `Land All` button. **Warning!** For your safety it is recommended to perform a test of autonomous takeoff with the remote control turned on and ability to intercept the copter into the manual mode.
 
@@ -28,13 +28,13 @@ If the takeoff was successful, reproduce the client configuration, positioning s
 * The copter configuration file (`.ini`) can be saved by right-clicking on the row with the configured copter, selecting `Edit config` from the drop-down menu and then clicking the button `Save as`. You can also drag a cell from the `configuration` column to the file manager of your system - the server will automatically copy the configuration file to the open directory of the file manager.
 * The server configuration file (`.ini`) can be saved by selecting `Server -> Edit server config` from the top menu and then clicking the button `Save as`.
 * The flight controller configuration file can be saved by connecting to the flight controller through [QGroundControl](http://qgroundcontrol.com) application. It is possible to connect directly to the flight controller [via USB port](https://clover.coex.tech/en/connection.html) or  [via TCP or UDP bridge](https://clover.coex.tech/en/gcs_bridge.html)  (the TCP bridge is configured in the `clever-show` image by default,  in the `Host Address` field you can enter the name of the copter instead of the ip address with the addition of .local at the end, e.g. clover-1.local). After connection you should go to [section](https://docs.px4.io/master/en/advanced_config/parameters.html#tools) `Parameters -> Tools -> Save to file...` and choose the path to save the parameter file.
-* * The camera calibration file is useful for refinement of visual positioning. The name of the calibration file should consist of the id of the copter, for which the calibration was made, with the addition of the extension `.yaml', e.g. `clover-1.yaml'. To get the calibration files, use the [manual](https://clover.coex.tech/ru/camera_calibration.html).
+* The camera calibration file is useful for refinement of visual positioning. The name of the calibration file should consist of the id of the copter, for which the calibration was made, with the addition of the extension `.yaml', e.g.`clover-1.yaml'. To get the calibration files, use the [manual](https://clover.coex.tech/ru/camera_calibration.html).
 
 After loading the necessary files from the configured copter, copy these files to the other copters: select the necessary copters in the table and use the commands `Send -> Configuration`, `Send -> Launch files folder`, `Send -> FCU parameters file`, `Send -> Camera calibrations` from the `Selected drones` section of the [server](server.md#Selected-drones) application .
 
 ## Settings of clever-show server and client
 
-The `clever-show' software suite includes many status checks of the copters to minimize the number of failed launches as well as a set of parameters to configure the positioning systems. All settings are stored in client and server application configuration files. Each positioning system has its own features that need to be taken into account when configuring the server-client interaction. Below are the settings that you need to pay attention to when configuring the client and server:
+The `clever-show` software suite includes many status checks of the copters to minimize the number of failed launches as well as a set of parameters to configure the positioning systems. All settings are stored in client and server application configuration files. Each positioning system has its own features that need to be taken into account when configuring the server-client interaction. Below are the settings that you need to pay attention to when configuring the client and server:
 
 * Server:
   * [CHECKS](server.md#checks) section - server side copter telemetry checks
@@ -99,7 +99,7 @@ Server configuration with values applicable to work with `optical flow`: [server
 
 To set the parameters manually, use the command `Server -> Edit config` from the top menu of the server.
 
-#### Option 2. Reset all server configuration settings
+#### Option 2. Reset all server configuration options
 
 In order to configure the server configuration for positioning by optical flow, you can reset the configuration data to default values. To do this, delete the generated configuration file on the server:
 

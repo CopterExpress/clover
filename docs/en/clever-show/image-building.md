@@ -12,8 +12,8 @@ sudo apt install docker.io
 
 ## Local build with modified Clover settings
 
-* Place the Clover configuration folders (`launch`, `map` and `camera_info`) in the`builder/clever-config`  [folder](../../builder/clever-config)  in the clever-show source directory. 
-  * All files from the `launch` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/launch' directory in the built image.
+* Place the Clover configuration folders (`launch`, `map` and `camera_info`) in the `builder/clever-config` [folder](../../builder/clever-config) in the clever-show source directory.
+  * All files from the `launch` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/launch` directory in the built image.
   * All files from the `map` folder will be copied to the `/home/pi/catkin_ws/src/clever/aruco_pose/map` directory in the built image.
   * All files from the `camera_info` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/camera_info` directory in the built image.
 * Build your image with docker:
