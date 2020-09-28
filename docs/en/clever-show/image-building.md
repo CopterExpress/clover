@@ -4,7 +4,7 @@ Sometimes it is necessary to build an image with copter settings different from 
 
 ## Building preparation
 
-Install [docker](https://www.docker.com):
+Install [Docker](https://www.docker.com):
 
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -17,7 +17,7 @@ sh get-docker.sh
   * All files from the `launch` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/launch` directory in the built image.
   * All files from the `map` folder will be copied to the `/home/pi/catkin_ws/src/clever/aruco_pose/map` directory in the built image.
   * All files from the `camera_info` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/camera_info` directory in the built image.
-* Build your image with docker:
+* Build your image with Docker:
 
 ```bash
 cd <source-dir>

@@ -3,8 +3,8 @@
 The `clover` software officially supports the following [positioning systems](../programming.md) :
 
 * [optical flow](../optical_flow.md).
-* [aruco](../aruco.md).
-* [gps](../gps.md).
+* [ArUco](../aruco.md).
+* [GPS](../gps.md).
 
 The `clever-show` software supports all positioning systems supporte by`clover`.
 
@@ -42,7 +42,7 @@ The `clever-show` software suite includes many status checks of the copters to m
 * Client:
   * [FLIGHT](client.md#flight-section) section - name of the frame_id reference coordinate system, flight parameters
   * [FLOOR FRAME](client.md#floor-frame section) section - allows to create a new coordinate system with the name `floor` in relation to any existing coordinate system:
-    * `map` - matches the starting position of the copter when using optical flow or gps
+    * `map` - matches the starting position of the copter when using optical flow or GPS
     * `aruco_map` - matches the origin of ArUco marker map coordinates
     * `gps` - the origin of coordinates is in the specified GPS coordinate with rotation by the specified angle relative to the north, it is adjusted in [GPS FRAME] (client.md#gps-frame-section) and allows to set the coordinate system with a common origin for all copters.
   * [FAILSAFE](client.md#failsafe-section) section - disabled by default, but allows you to configure emergency landing conditions of the copter:

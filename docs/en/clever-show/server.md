@@ -70,7 +70,7 @@ This section contains several utilities to send various data and commands to *se
 
   ---
 
-  * `Aruco map` - sends *single* aruco marker map file to all selected clients. In the dialog box, select *one* card file in the specified format. File on client will be overwritten and saved as `<clover_dir>/.../aruco_pose/map/animation_map.txt`. Once the file is received and written, the client will automatically restart the `clover` service. In order to resume flight functions and to receive some telemetry values *it is necessary to wait* some time until the service is fully started.
+  * `Aruco map` - sends *single* ArUco marker map file to all selected clients. In the dialog box, select *one* card file in the specified format. File on client will be overwritten and saved as `<clover_dir>/.../aruco_pose/map/animation_map.txt`. Once the file is received and written, the client will automatically restart the `clover` service. In order to resume flight functions and to receive some telemetry values *it is necessary to wait* some time until the service is fully started.
 
   * `Animation` - sends *a single* animation file to all selected clients. In the dialog box you need to select *one* animation file. On the client, the file will be saved as `<clever-show>/drone/animation.csv`. This is a useful feature to quickly test multiple drones when used in combination with `Set start X Y to current position`.
 

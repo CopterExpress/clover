@@ -42,7 +42,7 @@ In order to make a centralized upload of the configuration to all the copters th
 * `config_name` - configuration name
 * `config_version` - configuration version
 * `id` - the name of the copter displayed in the table. If the value is `/hostname` - name is determined from the `/etc/hostname` file.
-* `clover_dir` - path to the directory with the [clover](https://github.com/CopterExpress/clover) ROS package. It is necessary to load files with aruco maps and launch configuration files for starting `clover` service. If the value `auto` - the client tries to define the required directory of the package `clover` (or `clever`) by itself through `rospkg` at the first launch. If the directory of the `clover` package cannot be determined, the value is set to `error` and files specific to ROS configuration of the `clover` package are not transferred from server to client.
+* `clover_dir` - path to the directory with the [clover](https://github.com/CopterExpress/clover) ROS package. It is necessary to load files with ArUco maps and launch configuration files for starting `clover` service. If the value `auto` - the client tries to define the required directory of the package `clover` (or `clever`) by itself through `rospkg` at the first launch. If the directory of the `clover` package cannot be determined, the value is set to `error` and files specific to ROS configuration of the `clover` package are not transferred from server to client.
 
 #### SERVER section
 
@@ -108,11 +108,11 @@ This section configures the animation processing. A separate module [animation](
 4. Copter performs landing - `land`
 5. Copter is stationary until the end of the animation file - `static_end`.
 
-An animation frame is a set of data necessary to position the copter and determine its led strip color. In the current version of the software the animation frame is represented by a sequence of numbers `x y zaw r g b` in the line `.csv` of the animation file, where:
+An animation frame is a set of data necessary to position the copter and determine its LED strip color. In the current version of the software the animation frame is represented by a sequence of numbers `x y zaw r g b` in the line `.csv` of the animation file, where:
 
 * `x`, `y`, `z` - copter coordinates in the current frame, in meters
 * `yaw` - the copter's yaw in radians
-* `r`, `g`, `b` - components of the color of the copter led strip, integers from 0 to 255
+* `r`, `g`, `b` - components of the color of the copter LED strip, integers from 0 to 255
 
 After splitting the animation into key stages, the module generates an output sequence of frames defining the position of the copter and its led strip color as well as the sequence of actions when flying to the first point of the animation. Adjustment of the module is performed using the following parameters:
 
@@ -153,7 +153,7 @@ This section configures the program of emergency protection of the copter from a
 * `enabled` - Boolean value, determines whether to use emergency protection in case of loss of visual position or collision with an object.
 * `log_state` -  Boolean value, determines whether the copter state will be logged in the service log:  `armed: {} | mode: {} | vis_dt: {:.2f} | pos_delta: {:.2f} | pos_dt: {:.2f} | range: {:.2f} | watchdog_action: {}`.
 * `action` - Action upon emergency protection triggering. Available options: `land` - landing of the copter in the flight controllers mode AUTO.LAND, `emergency_land` - landing of the copter with the gradual reduction of the motor power, `disarm` - switching off the motors. **Warning!** It is not recommended to use the AUTO.LAND mode with the barometer turned off - when the altitude source in flight is lost, e.g. laser reading or visual position, the AUTO.LAND mode does not guarantee the landing of the copter, because it is oriented to the altitude reading. It is recommended to use the `emergency_land` mode to land the copter when positioning it using a visual position or laser and the possibility of losing data from these systems.
-* `vision_pose_delay_after_arm` - Time after takeoff of the copter in seconds, required to get the visual position. During this time after takeoff, the visual position loss protection will not work. This parameter is useful when using the emergency protection module in conjunction with the positioning system with aruco markers located on the floor: at takeoff copter has no visual position for some time.
+* `vision_pose_delay_after_arm` - Time after takeoff of the copter in seconds, required to get the visual position. During this time after takeoff, the visual position loss protection will not work. This parameter is useful when using the emergency protection module in conjunction with the positioning system with ArUco markers located on the floor: at takeoff copter has no visual position for some time.
 * `vision_pose_timeout` - Time in seconds after losing the visual position, after which the emergency protection is triggered.
 * `position_delta_max` - The maximum distance between the current position and the point where the copter should now be in meters. Required to check for collision of the copter with objects. If the distance between the current position of the copter and the point where the copter should be now is greater than this number (in meters), an emergency protection is triggered.
 * `disarm_timeout` - Time after which the copter will unconditionally shut down the motors after the emergency protection is triggered, in seconds.

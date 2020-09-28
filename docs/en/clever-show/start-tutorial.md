@@ -51,7 +51,7 @@ sudo client-setup <SSID> <password> <copter name>
 sudo apt install chrony
 ```
 
-* Set the required python packages using the command (ran from the source directory)
+* Set the required Python packages using the command (ran from the source directory)
 
 ```bash
 cd
