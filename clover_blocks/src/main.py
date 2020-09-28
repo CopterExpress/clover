@@ -137,7 +137,6 @@ programs_path = rospy.get_param('~programs_dir', os.path.dirname(os.path.abspath
 
 def load(req):
     res = {'names': [], 'programs': [], 'success': True}
-    programs = []
     try:
         for currentpath, folders, files in os.walk(programs_path):
             for f in files:
