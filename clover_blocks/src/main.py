@@ -3,10 +3,8 @@
 from __future__ import print_function
 
 import rospy
-import os, sys
-import subprocess
+import os
 import threading
-import signal
 import re
 import uuid
 from std_msgs.msg import Bool, String
