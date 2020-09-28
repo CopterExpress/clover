@@ -55,7 +55,7 @@ The copter is considered **ready to fly** if all cells in the row except `animat
 
 ![Screenshot of the section - Selected drones - Send](../../assets/clever-show/server-drone-send.png)
 
-This section contains several utilities to send various data and commands to *selected* clients. 
+This section contains several utilities to send various data and commands to *selected* clients.
 >**Warning!** Do not use these commands during the flight of copters!
 
 * `Send` subsection

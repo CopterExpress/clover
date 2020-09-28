@@ -106,7 +106,7 @@ In order to configure the server configuration for positioning by optical flow, 
 * Execute the command `rm config/server.ini` from the directory with the location of the application `server.py`.
 * Restart the server by selecting the command `Server -> Restart server` from the top menu item.
 
-## Aruco
+## ArUco
 
 ArUco-Markers is a popular technology for positioning robotic systems using computer vision. Positioning is performed by obtaining information about the location of special visual markers.
 

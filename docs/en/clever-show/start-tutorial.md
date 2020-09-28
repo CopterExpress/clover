@@ -99,11 +99,11 @@ Make sure that the copter holds the position autonomously: mark the checkbox nea
 
 You can configure the copter to utilize a different positioning system. The following [positioning systems](../programming.md#positioning) are officially supported:
 
-* optical flow
-* aruco
-* GPS
+* [optical flow](../optical_flow.md).
+* [ArUco](../aruco.md).
+* [GPS](../gps.md).
 
-**Detailed information about working with and setting up positioning systems can be found [here](positioning.md)**
+>**Detailed information about working with and setting up positioning systems can be found [here](positioning.md)**
 
 ### LED Strip Operation Check
 
