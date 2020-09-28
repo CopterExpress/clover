@@ -7,7 +7,8 @@ Sometimes it is necessary to build an image with copter settings different from 
 Install [docker](https://www.docker.com):
 
 ```bash
-sudo apt install docker.io
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 ```
 
 ## Local build with modified Clover settings
@@ -19,7 +20,7 @@ sudo apt install docker.io
 * Build your image with docker:
 
 ```bash
-cd source-dir
+cd <source-dir>
 sudo docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/mnt goldarte/img-tool:v0.5
 ```
 
@@ -28,7 +29,7 @@ sudo docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/mnt goldarte/img-t
 * Extract the file with the downloaded image, navigate to the directory with this image, and enter the image collector console using the command:
 
 ```bash
-cd image-dir
+cd <image-dir
 sudo docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/mnt goldarte/img-tool:v0.5 img-chroot /mnt/<IMAGE>
 ```
 
