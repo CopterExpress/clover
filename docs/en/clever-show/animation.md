@@ -1,6 +1,6 @@
 # Animation module
 
-A separate module [animation](../../drone/modules/animation.py) is responsible for animation processing. When animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
+A separate module [animation](https://github.com/CopterExpress/clever-show/blob/master/drone/modules/animation.py) is responsible for animation processing. When animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
 
 1. The copter is stationary at the beginning of the animation - `static_begin`.
 2. Copter takes off - `takeoff`.
@@ -16,7 +16,7 @@ An animation frame is a set of data needed to position the copter and determine 
 
 After splitting the animation into key stages, the module generates an output sequence of frames defining the position of the copter and its lED strip color as well as the sequence of actions during the flight to the first point of the animation.
 
-You can configure the module in the [ANIMATION](client.md#раздел-animation) section.
+You can configure the module in the [ANIMATION](client.md#animation-section) section.
 
 Preliminary selection of frames is carried out using a set of [[OUTPUT]] flags, which set which frame sequences out of 5 key stages will be used in flight and which will not.
 
@@ -37,13 +37,13 @@ If the `start_action` parameter is set to `takeoff` and the `takeoff` flag in th
 
 ## Animation preparation and upload
 
-Create object animations in [Blender](https://www.blender.org) or use [examples](.../../examples/animations).
+Create object animations in [Blender](https://www.blender.org) or use [examples](https://github.com/CopterExpress/clever-show/tree/master/examples/animations).
 
 The copter can be represented by any three-dimensional object (e.g., a cube or a ball), and the LED strip color will be extracted from the object color property. Consider the following facts and recommendations when creating an animation:
 
 * For easy conversion and uploading of animation to copters, objects corresponding to copters should have names corresponding to the names of these copters.
-* Blender distance units are converted into meters
-* The default delay between frames in [Copter settings](.../../drone/config/spec/configspec_client.ini) is 0.1 seconds (parameter `frame_delay` in ANIMATION section), pay attention when setting the frame rate in Blender animation.
+* Blender distance units are converted into meters.
+* The default delay between frames in [Copter settings](https://github.com/CopterExpress/clever-show/blob/master/drone/config/spec/configspec_client.ini) is 0.1 seconds (parameter `frame_delay` in ANIMATION section), pay attention when setting the frame rate in Blender animation.
 * Make sure that the speed of the copters is not too high ( maximum of 3 m/s for the room, maximum of 5 m/s for the street): the addon will give a warning but will still convert the animation.
 
 Convert the animation with [Blender addon](blender-addon.md).
@@ -54,7 +54,7 @@ Also any animation file can be loaded separately on all selected copters in the 
 
 ## Animation analysis
 
-If you need information about which points the copter will fly to as a result of loading the animation on the current client parameters, use the [animation_info](../../tools/animation_info.py) utility .
+If you need information about which points the copter will fly to as a result of loading the animation on the current client parameters, use the [animation_info](https://github.com/CopterExpress/clever-show/blob/master/tools/animation_info.py) utility .
 
 ```cmd
 usage: python animation_info.py [-h] [--config] [animation]

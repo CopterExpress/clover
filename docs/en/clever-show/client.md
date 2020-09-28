@@ -12,9 +12,9 @@ Application for remote synchronized drone control in show and emergency drone pr
 
 ## Client workflow the Raspberry Pi image
 
-The client is the `clever-show` service in the copter operating system. The service runs the [client.py](.../.../drone/client.py) script and starts automatically when the operating system boots. If it is necessary to apply the parameters of the updated client configuration, the service can be restarted. The `clever-show` service is designed to manage and configure the copter for group flight through the server application.
+The client is the `clever-show` service in the copter operating system. The service runs the [client.py](https://github.com/CopterExpress/clever-show/blob/master/drone/client.py) script and starts automatically when the operating system boots. If it is necessary to apply the parameters of the updated client configuration, the service can be restarted. The `clever-show` service is designed to manage and configure the copter for group flight through the server application.
 
-Along with the client, the emergency drone protection service `failsafe` is registered in the operating system. This service launches the script [failsafe.py](.../../drone/failsafe.py) and starts automatically when the operating system boots . The service can be restarted if it is necessary to apply parameters of the updated client configuration.
+Along with the client, the emergency drone protection service `failsafe` is registered in the operating system. This service launches the script [failsafe.py](https://github.com/CopterExpress/clever-show/blob/master/drone/failsafe.py) and starts automatically when the operating system boots . The service can be restarted if it is necessary to apply parameters of the updated client configuration.
 
 The `failsafe` service is designed for automatic landing of the copter in emergency situations:
 
@@ -29,7 +29,7 @@ Logs of both services are written to the `/var/log/syslog` file of the drone's o
 
 ### Configuration file
 
-The client configuration is created according to the [specification](../../drone/config/spec/configspec_client.ini) and the default values for any parameter after the `default` keyword can be seen in it. All changes are saved in the configuration file `client.ini` in the folder `clever-show/drone/config`. Client configuration editing is available through the GUI module `Config editor` in the server application. To edit the configuration from the server, select the line with the client for which you want to change the configuration, click with the left mouse button on any cell in the line and select `Edit config` from the context menu.
+The client configuration is created according to the [specification](https://github.com/CopterExpress/clever-show/blob/master/drone/config/spec/configspec_client.ini) and the default values for any parameter after the `default` keyword can be seen in it. All changes are saved in the configuration file `client.ini` in the folder `clever-show/drone/config`. Client configuration editing is available through the GUI module `Config editor` in the server application. To edit the configuration from the server, select the line with the client for which you want to change the configuration, click with the left mouse button on any cell in the line and select `Edit config` from the context menu.
 
 The default configuration is fully functional and does not require changes to get the client up and running quickly.
 
@@ -42,13 +42,13 @@ In order to make a centralized upload of the configuration to all the copters th
 * `config_name` - configuration name
 * `config_version` - configuration version
 * `id` - the name of the copter displayed in the table. If the value is `/hostname` - name is determined from the `/etc/hostname` file.
-* `clover_dir` - path to the directory with the [clover](https://github.com/CopterExpress/clover) ROS package. It is necessary to load files with aruco maps and launch configuration files for starting `clover` service. If the value `auto` - the client tries to define the required directory of the package `clover` (or `clever`) by itself through `rospkg` at the first launch. If the directory of the `clover` package cannot be determined, the value is set to `error` and files specific to ROS configuration of the `clover` package are not transferred from server to client.путь к директории с ROS пакетом [сlover](https://github.com/CopterExpress/clover).
+* `clover_dir` - path to the directory with the [clover](https://github.com/CopterExpress/clover) ROS package. It is necessary to load files with aruco maps and launch configuration files for starting `clover` service. If the value `auto` - the client tries to define the required directory of the package `clover` (or `clever`) by itself through `rospkg` at the first launch. If the directory of the `clover` package cannot be determined, the value is set to `error` and files specific to ROS configuration of the `clover` package are not transferred from server to client.
 
 #### SERVER section
 
 This section contains the parameters of client-server network communication. Following parameters are available:
 
-* `port` - TCP port to which incoming connections from the server will be accepted. When using the [use_broadcast](server.md#broadcast section) setting on the server, this port will be automatically configured by the client. *It is recommended to change the default value for security reasons (any five digits or more if another software does not use the selected port).*
+* `port` - TCP port to which incoming connections from the server will be accepted. When using the [use_broadcast](server.md#broadcast-section) setting on the server, this port will be automatically configured by the client. *It is recommended to change the default value for security reasons (any five digits or more if another software does not use the selected port).*
 * `host` - server IP address.
 * `buffer_size` - buffer size for data transfer. *It is not recommended to modify. It is recommended to use the same value for the server and clients.*
 
@@ -100,7 +100,7 @@ This section describes creation of a coordinate system with the name `gps`. The 
 
 #### ANIMATION section
 
-This section configures the animation processing. A separate module [animation](../../drone/modules/animation.py) is responsible for animation processing. When an animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
+This section configures the animation processing. A separate module [animation](https://github.com/CopterExpress/clever-show/blob/master/drone/modules/animation.py) is responsible for animation processing. When an animation is loaded on the copter, the module divides the sequence of animation frames into 5 key stages:
 
 1. Copter is stationary at the beginning of the animation - `static_begin`.
 2. Copter takes off - `takeoff`.
@@ -140,7 +140,7 @@ If the copter takes off from the ground in the animation file, at the start of t
 
 #### LED section
 
-Settings of the LED strip use on the copter. To configure the LED strip itself, you need to configure the `led.launch` file, see [LED strip in Clover](leds.md) for details.
+Settings of the LED strip use on the copter. To configure the LED strip itself, you need to configure the `led.launch` file, see [LED strip in Clover](../leds.md) for details.
 
 * `use` - Boolean value, determines whether the LED strip is used.
 * `takeoff_indication` - Boolean value, determines whether to use the LEDs to indicate takeoff.

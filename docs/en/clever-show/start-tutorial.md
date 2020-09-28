@@ -78,7 +78,7 @@ python3 server.py
 
 ## Copter preparation
 
-Further instructions are written for copters assembled according to [assembly instructions](https://clover.coex.tech/en/assemble_4.html). The flight controller of the copter should be pre-configured and calibrated according to [configuration instructions](https://clover.coex.tech/en/setup.html):
+Further instructions are written for copters assembled according to [assembly instructions](../assemble_4_2.md). The flight controller of the copter should be pre-configured and calibrated according to [configuration instructions](../setup.md):
 
 * Initial setup
 * Sensor calibration
@@ -93,11 +93,11 @@ Turn on your copter and run the server application on your computer. Wait until 
 
 For autonomous animation playback, all copters must have a configured positioning system. The `clever-show` image for the copter is set by default to fly with the `optical flow`: a laser rangefinder should be installed on the copter and the camera should be tilted backwards by the plume. This positioning system is suitable for demonstration flight of one copter or for synchronous flight of several copters using the same indoor animation.
 
-Before checking the autonomous takeoff, perform an automatic check of the copter configuration according to [article](https://clover.coex.tech/en/selfcheck.html).
+Before checking the autonomous takeoff, perform an automatic check of the copter configuration according to [article](../selfcheck.md).
 
-Make sure that the copter holds the position autonomously: mark the checkbox near the name of the copter and press the "Takeoff" button in the right panel of the server interface. The copter should take off at the height specified in the `takeoff_height` parameter of the "FLIGHT" section in the [client configuration](.../drone/config/spec/configspec_client.ini). By default, this height is 1 meter. If the copter takes off and holds a position at 1 meter height, the check is passed. Put the copter on the ground by pressing the `Land` or `Land All` button. **Warning!** For your safety it is recommended to perform a test of autonomous takeoff with the remote control turned on and ability to intercept the copter into the manual mode.
+Make sure that the copter holds the position autonomously: mark the checkbox near the name of the copter and press the "Takeoff" button in the right panel of the server interface. The copter should take off at the height specified in the `takeoff_height` parameter of the "FLIGHT" section in the [client configuration](https://github.com/CopterExpress/clever-show/blob/master/drone/config/spec/configspec_client.ini). By default, this height is 1 meter. If the copter takes off and holds a position at 1 meter height, the check is passed. Put the copter on the ground by pressing the `Land` or `Land All` button. **Warning!** For your safety it is recommended to perform a test of autonomous takeoff with the remote control turned on and ability to intercept the copter into the manual mode.
 
-You can configure the copter to utilize a different positioning system. The following [positioning systems](https://clover.coex.tech/en/programming.html#positioning) are officially supported:
+You can configure the copter to utilize a different positioning system. The following [positioning systems](../programming.md#positioning) are officially supported:
 
 * optical flow
 * aruco
@@ -109,7 +109,7 @@ You can configure the copter to utilize a different positioning system. The foll
 
 The LED strip should be connected to the GPIO 21 Raspberry Pi pin and have no more than 60 LEDs in order to work with the default `clever-show` image. Check the functioning of the LED strip by selecting the desired copter in the table and pressing the button `Test leads` - the strip on the copter should blink white twice.
 
-You can find a description of setup and operation of the LED strip in `clover` [documentation](https://clover.coex.tech/en/leds.html) .
+You can find a description of setup and operation of the LED strip in `clover` [documentation](../leds.md) .
 
 ### Time synchronization
 
@@ -119,11 +119,11 @@ After the first copter connection to the server, the `chrony` service on the cop
 
 ## Animation preparation and execution
 
-By default [basic](.../examples/animations/basic/basic.csv) animation is already uploaded to the client:
+By default [basic](https://github.com/CopterExpress/clever-show/blob/master/examples/animations/basic/basic.csv) animation is already uploaded to the client:
 
-<img src="../../examples/animations/basic/basic.gif" width="400px" alt="basic animation">
+<img src="../../assets/clever-show/basic_animation.gif" width="400px" alt="basic animation">
 
-The red line is x axis, the green line is y axis. The cube in the animation moves in a positive direction along the x axis. The animation playback module will draw the copter along the points specified in the animation file relative to the coordinate system specified in the `frame_id` option in the FLIGHT [client configuration](.../../drone/config/spec/configspec_client.ini) (`map` by default). The copter will start the motors before takeoff and turn them off after landing. The moments of takeoff and landing of the copter are determined automatically.
+The red line is x axis, the green line is y axis. The cube in the animation moves in a positive direction along the x axis. The animation playback module will draw the copter along the points specified in the animation file relative to the coordinate system specified in the `frame_id` option in the FLIGHT [client configuration](https://github.com/CopterExpress/clever-show/blob/master/drone/config/spec/configspec_client.ini) (`map` by default). The copter will start the motors before takeoff and turn them off after landing. The moments of takeoff and landing of the copter are determined automatically.
 
 Information about the current position of the copter is displayed in the `current x y zaw frame_id` column of the server table. Information about the starting point of the animation and the takeoff time is displayed in the `start x y z yaw action delay` column. For the first check of the animation it is important that the coordinates in these columns match. If not, the easiest way to solve this problem is to reboot the copter and wait for it to load.
 
@@ -131,6 +131,6 @@ Check the playback of the animation by pressing the `Start animation` button: th
 
 The result of the animation should look like this (up to the accuracy of PID tuning):
 
-<img src="../../examples/animations/basic/basic_real.gif" width="400px" alt="basic animation">
+<img src="../../assets/clever-show/basic_animation_irl.gif" width="400px" alt="basic animation">
 
 **The detailed information on the animation module is located [here](animation.md).**

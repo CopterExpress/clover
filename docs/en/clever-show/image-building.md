@@ -13,7 +13,7 @@ sh get-docker.sh
 
 ## Local build with modified Clover settings
 
-* Place the Clover configuration folders (`launch`, `map` and `camera_info`) in the `builder/clever-config` [folder](../../builder/clever-config) in the clever-show source directory.
+* Place the Clover configuration folders (`launch`, `map` and `camera_info`) in the `builder/clever-config` [folder](https://github.com/CopterExpress/clever-show/tree/master/builder/clover-config) in the clever-show source directory.
   * All files from the `launch` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/launch` directory in the built image.
   * All files from the `map` folder will be copied to the `/home/pi/catkin_ws/src/clever/aruco_pose/map` directory in the built image.
   * All files from the `camera_info` folder will be copied to the `/home/pi/catkin_ws/src/clever/clever/camera_info` directory in the built image.
@@ -59,4 +59,4 @@ sudo docker run --privileged -it --rm -v /dev:/dev -v $(pwd):/mnt goldarte/img-t
 
 ## Builder scripts modification
 
-The article on changing the image building and custom building scripts is avialiable [here](https://clever.copterexpress.com/ru/image_building.html).
+The article on changing the image building and custom building scripts is avialiable [here](../../ru/image_building.md) (only in Russian for the moment).

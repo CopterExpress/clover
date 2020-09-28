@@ -11,7 +11,7 @@ Application for creating and running shows, configuring drones, animation and mu
 
 The server has a visual graphical interface for user-friendly interaction.
 
-![Server interface](../assets/server-gui.png)
+![Server interface](../../assets/clever-show/server-gui.png)
 
 ### Copter status table
 
@@ -35,27 +35,28 @@ The copter is considered **ready to fly** if all cells in the row except `animat
 
 * `copter ID` - the client name. Can be configured on the client side. Displayed immediately when the client is connected. Next to each Copter ID there is a checkbox - Copters whose ID is marked with a positive checkbox (tick) are considered *selected*. Cells in this column are always pass the check.
   * By double-clicking on this field you can enter a new `copter ID` of the client and rename it. As a name, combinations of Latin letters, digits and dashes (A-Z, a-z, 0-9, '-') not longer than 63 characters are permitted. The dash cannot be the first character.
-* `version` - a hash code of the current git version of the client. Cells in this column are checked when [check_git_version](#checks section) is enabled (value `true`) in the server settings. A cell in this column passes the check if the hash code of the git version of the given client and the server match (if the server is not located in the git repository, the check is passed out automatically).
+* `version` - a hash code of the current git version of the client. Cells in this column are checked when [check_git_version](#checks-section) is enabled (value `true`) in the server settings. A cell in this column passes the check if the hash code of the git version of the given client and the server match (if the server is not located in the git repository, the check is passed out automatically).
 * `configuration` -  a user-defined version of the client configuration. Cells in this column are always pass the check.
   * Cells of this column supports *drag-and-drop*. When you drag and drop a cell to any third-party application that supports files (e.g. "Explorer"), the client configuration file will be copied to the specified location. When a cell is dragged to another cell, the configuration file will be copied from one cell to another. When a file is dragged to a cell, it will be written to the client as a configuration (subject to validation). When the configuration is transferred to the client, the `PRIVATE` section will not be sent.
 * `animation ID` - an internal name of the animation file loaded by the client. A cell in this column does not pass the check if there is no animation (value `No animation`). In other cases, if a cell is not empty, it will be checked. **Warning!** Check if the names of the animation files correspond to the copters before starting.
-* `battery` - a value of voltage on the copter battery in volts and charge in percent according to the flight controller. A cell in this column passes the check if the battery charge value is higher than [battery_percentage_min](#section-checks) specified in the server settings. In other cases, if a cell is not empty, it does not pass the check.
+* `battery` - a value of voltage on the copter battery in volts and charge in percent according to the flight controller. A cell in this column passes the check if the battery charge value is higher than [battery_percentage_min](#checks-section) specified in the server settings. In other cases, if a cell is not empty, it does not pass the check.
 * `system` - a flight controller status. A cell in this column passes the check if its value is `STANDBY`. In other cases, if a cell is not empty, it does not pass the check.
 * `sensors` - calibration status of the flight controller compass, accelerometer and gyroscope. A cell in this column passes the check if its value is `OK`.  In other cases, if a cell is not empty, it does not pass the check.
 * `mode` - flight controller mode. A cell in this column does not pass the check if its value `NO_FCU` or contains `CMODE`. In other cases, if a cell is not empty, it passes the chseck.
 * `checks`  - copter self-test state. A cell in this column passes the check if its value is `OK`. In other cases, if a cell is not empty, it does not pass the check.
   * Double-clicking on a cell if there are errors will show a dialog box with full detailed information about all errors.
-* `current x y z yaw frame_id` - current copter position with the coordinate system name. The cell is automatically passes the check if [check_current_position](#section-checks) is set to `false`. Otherwise, a cell in this column does not pass the check if its value is `NO_POS` or contains `nan`. Otherwise, if a cell is not empty, it passes the check.
-* `start x y z action delay` - start position of the copter for playback of the animation, the first action during playback of the animation and the time after which the first action will be performed after the start of the animation. A cell in this column does not pass the check if its value `NO_POS`, the distance between the current and the starting position of the copter is greater than [start_pos_delta_max](#section-checks) or the client's animation module generates an error when processing the animation and checking that all points of the animation are above ground level.  Otherwise, if a cell is not empty, it passes the check.
+* `current x y z yaw frame_id` - current copter position with the coordinate system name. The cell is automatically passes the check if [check_current_position](#checks-section) is set to `false`. Otherwise, a cell in this column does not pass the check if its value is `NO_POS` or contains `nan`. Otherwise, if a cell is not empty, it passes the check.
+* `start x y z action delay` - start position of the copter for playback of the animation, the first action during playback of the animation and the time after which the first action will be performed after the start of the animation. A cell in this column does not pass the check if its value `NO_POS`, the distance between the current and the starting position of the copter is greater than [start_pos_delta_max](#checks-section) or the client's animation module generates an error when processing the animation and checking that all points of the animation are above ground level.  Otherwise, if a cell is not empty, it passes the check.
 * `dt` - the delay between the time on the server and the client in seconds, including network latency. A cell in this column passes the check if its value is less than [time_delta_max](#checks-section) specified in the server configuration. In other cases, if a cell is not empty, it does not pass the check. If the values are too high, it signals that there is no time synchronization between the copter and the client.
 
 ### Menu
 
 #### Selected drones section
 
-![Screenshot of the section - Selected drones - Send](../assets/server-drone-send.png)
+![Screenshot of the section - Selected drones - Send](../../assets/clever-show/server-drone-send.png)
 
-This section contains several utilities to send various data and commands to *selected* clients. **Warning!** Do not use these commands during the flight of copters!
+This section contains several utilities to send various data and commands to *selected* clients. 
+>**Warning!** Do not use these commands during the flight of copters!
 
 * `Send` subsection
 
@@ -93,7 +94,7 @@ This section contains several utilities to send various data and commands to *se
 
 * `Restart Service` subsection
 
-  ![Screenshot of the section - Selected drones - Restart](../assets/server-drone-restart.png)
+  ![Screenshot of the section - Selected drones - Restart](../../assets/clever-show/server-drone-restart.png)
 
   * `chrony` - restarts the `chrony` time synchronization service on selected clients. Use it for manual synchronization if time between server and clients is not synchronized.
   * `clever` - restarts the `clover` service on selected clients. In order to resume flight functions and to get some telemetry values *it is necessary to wait* some time until the service is fully started.
@@ -121,7 +122,7 @@ This section contains several utilities to send various data and commands to *se
 
 * `Music` subsection
 
-  ![Screenshot of the section - Server - music](../assets/server-music.png)
+  ![Screenshot of the section - Server - music](../../assets/clever-show/server-music.png)
 
   * `Select music file` - loads the selected music file for further manual playback or after a certain time after the start of the animation. Supported extensions: `.mp3` and`.wav`.
   * `Play music` - plays the loaded music.
@@ -137,9 +138,9 @@ This section contains several utilities to send various data and commands to *se
 
 * `Restart server` - completely restarts the server. **Warning!** After the restart the server will no longer be connected to the console it was originally started from, if the server was originally started from the console.
 
-#### Раздел Table
+#### Table section
 
-![Screenshot of the section - Table](../assets/server-table.png)
+![Screenshot of the section - Table](../../assets/clever-show/server-table.png)
 
 * `Toggle select` (`Ctrl+A`) - selects all copters or deselects all copters. If not all copters are selected in the table, then *selects all* copters. Otherwise (if all the copters have been selected) *deselects* all the copters.
 * `Select all` - selects all copters in the table.
@@ -155,7 +156,7 @@ This section contains several utilities to send various data and commands to *se
 
 ### Commands sidepanel
 
-![Screenshot of the side panel](../assets/server-sidemenu.png)
+![Screenshot of the side panel](../../assets/clever-show//server-sidemenu.png)
 
 #### Control
 
@@ -199,7 +200,7 @@ This section contains commands that are executed directly on the copter flight c
 
 ### Configuration file
 
-The server configuration is created according to the [specification](../../Server/config/spec/configspec_server.ini), you can see the default values for any parameter after the `default` keyword. All changes are saved in the `server.ini` configuration file in the `clever-show/server/config` folder.
+The server configuration is created according to the [specification](https://github.com/CopterExpress/clever-show/blob/master/server/config/spec/configspec_server.ini), you can see the default values for any parameter after the `default` keyword. All changes are saved in the `server.ini` configuration file in the `clever-show/server/config` folder.
 
 Server configuration editing is available via `Config editor` GUI module through menu `Server -> Edit server configuration`.
 
@@ -266,7 +267,7 @@ Visual Emergency Landing Module, designed for quick search by the operator of a 
 
 #### Interface
 
-![LED Visual Land](../assets/server-led-emergency-land.png)
+![LED Visual Land](../../assets/clever-show/server-led-emergency-land.png)
 
 When you click the `Visual land` button, all copters are divided into two equal groups arranged in the order shown in the table. The first half of the copters lights the LED strip green, the second half lights it red. At pressing the green or red button the group corresponding to the color of the pressed button is selected. The copters of the selected color are again divided into two halves, and each half lights the LED strip with green and red color respectively. The other copters turn off the LED strip.
 
@@ -286,7 +287,7 @@ For `Value` column values (actual option values) the corresponding built-in valu
 
 When editing a option without a value you can specify a value `<list>` or as a list in the form of `[1, 2, 3]` or `(1, 2, 3)` - this automatically converts the value into a list.
 
-![Config editor](../assets/server-config-editor.png)
+![Config editor](../../assets/clever-show/server-config-editor.png)
 
 The configuration file is displayed as a tree in the editor. Each "line" in the view is a section or a configuration option. Sections of the configuration can be minimized. Each line can be moved using drag-n-drop to change the order of parameters and the structure of the partitions (it is possible to drag-n-drop a line *to* a configuration section to move another section or option into it). If you hold down the `alt` key while dragging, the option or section will be copied.
 
@@ -303,7 +304,7 @@ The configuration file is displayed as a tree in the editor. Each "line" in the 
 
 #### Context menu and configuration editor commands
 
-![Config editor context menu](../assets/server-config-editor-menu.png)
+![Config editor context menu](../../assets/clever-show/server-config-editor-menu.png)
 
 * `Duplicate` (`Shift+D`) - makes a copy of an option or a section (with all the options it contains). Numbering will be added to the option or section name to avoid repeating names.
 * `Toggle exclude` (`Alt+Del`) - excludes an option or a section from the configuration. The option or section *not* will be deleted, but *not* will be written when you save it. Repeatedly applying this command to already excluded options or sections will return them to normal state.
@@ -322,7 +323,7 @@ The window of the table column editor has two appearances:
 
 #### Context menu
 
-![Column preset editor context menu](../assets/server-column-popup.png)
+![Column preset editor context menu](../../assets/clever-show/server-column-popup.png)
 
 Can be opened by right-clicking on a table header.
 
@@ -332,7 +333,7 @@ Can be opened by right-clicking on a table header.
 
 #### Dialog box
 
-![Column preset editor dialog](../assets/server-column-editor.png)
+![Column preset editor dialog](../../assets/clever-show/server-column-editor.png)
 
 Can be opened from the server context menu or from the server menu in the `Table` section.
 
