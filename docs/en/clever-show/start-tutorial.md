@@ -54,7 +54,8 @@ sudo apt install chrony
 * Set the required python packages using the command (ran from the source directory)
 
 ```bash
-pip3 install -r requirements.txt
+cd
+pip3 install -r server/requirements.txt
 ```
 
 * Connect to the wifi network of the router where your copters are connected.
