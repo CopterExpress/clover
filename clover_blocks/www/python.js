@@ -17,11 +17,6 @@ const sleep_time = 0.2;
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
 
-const OFFBOARD = `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
-navigate = rospy.ServiceProxy('navigate', srv.Navigate)
-set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
-land = rospy.ServiceProxy('land', Trigger)\n`;
-
 // TODO: tolerance to parameters
 const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
     res = navigate(x=x, y=y, z=z, yaw=float('nan'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -71,7 +66,18 @@ function generateROSDefinitions() {
 	// order for ROS definitions is significant, so generate all ROS definitions as one
 	var code = `rospy.init_node('flight')\n\n`;
 	if (rosDefinitions.offboard) {
-		code += OFFBOARD;
+		code += `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)\n`;
+		code += `navigate = rospy.ServiceProxy('navigate', srv.Navigate)\n`;
+		if (rosDefinitions.setVelocity) {
+			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
+		}
+		if (rosDefinitions.setAttitude) {
+			code += `set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)\n`;
+		}
+		if (rosDefinitions.setRates) {
+			code += `set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)\n`;
+		}
+		code += `land = rospy.ServiceProxy('land', Trigger)\n`;
 	}
 	if (rosDefinitions.setEffect) {
 		Blockly.Python.definitions_['import_led_effect'] = 'from clover.srv import SetLEDEffect';
@@ -258,6 +264,32 @@ Blockly.Python.arrived = function(block) {
 Blockly.Python.wait = function(block) {
 	initNode();
 	return `rospy.sleep(${Blockly.Python.valueToCode(block, 'TIME', Blockly.Python.ORDER_NONE)})\n`;
+}
+
+Blockly.Python.setpoint = function(block) {
+	var type = block.getFieldValue('TYPE');
+	let frameId = buildFrameId(block);
+	let vx = Blockly.Python.valueToCode(block, 'VX', Blockly.Python.ORDER_NONE);
+	let vy = Blockly.Python.valueToCode(block, 'VY', Blockly.Python.ORDER_NONE);
+	let vz = Blockly.Python.valueToCode(block, 'VZ', Blockly.Python.ORDER_NONE);
+	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
+	let pitch = Blockly.Python.valueToCode(block, 'PITCH', Blockly.Python.ORDER_NONE);
+	let roll = Blockly.Python.valueToCode(block, 'ROLL', Blockly.Python.ORDER_NONE);
+	let thrust = Blockly.Python.valueToCode(block, 'THRUST', Blockly.Python.ORDER_NONE);
+
+	if (type == 'VELOCITY') {
+		rosDefinitions.setVelocity = true;
+		simpleOffboard();
+		return `set_velocity(vx=${vx}, vy=${vy}, vz=${vz}, frame_id=${frameId}, yaw=float('nan'))\n`;
+	} else if (type == 'ATTITUDE') {
+		rosDefinitions.setAttitude = true;
+		simpleOffboard();
+		return `set_attitude(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
+	} else if (type == 'RATES') {
+		rosDefinitions.setRates = true;
+		simpleOffboard();
+		return `set_rate(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust})\n`;
+	}
 }
 
 Blockly.Python.get_position = function(block) {

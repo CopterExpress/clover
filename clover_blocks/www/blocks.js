@@ -28,6 +28,31 @@ function considerFrameId(e) {
 	this.render();
 }
 
+function updateSetpointBlock(e) {
+	if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
+
+	considerFrameId.apply(this, arguments);
+
+	var type = this.getFieldValue('TYPE');
+	var velocity = type == 'VELOCITY';
+	var attitude = type == 'ATTITUDE' || type == 'RATES';
+
+	this.getInput('VX').setVisible(velocity);
+	this.getInput('VY').setVisible(velocity);
+	this.getInput('VZ').setVisible(velocity);
+	this.getInput('YAW').setVisible(attitude);
+	this.getInput('PITCH').setVisible(attitude);
+	this.getInput('ROLL').setVisible(attitude);
+	this.getInput('THRUST').setVisible(attitude);
+	this.getInput('RELATIVE_TO').setVisible(type != 'RATES');
+
+	if (type == 'RATES') {
+		this.getInput('ID').setVisible(false);
+	}
+
+	this.render();
+}
+
 Blockly.Blocks['navigate'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -91,6 +116,54 @@ Blockly.Blocks['set_velocity'] = {
 		this.setTooltip("Set the drone velocity in meters per second (cancels navigation requests).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 		this.setOnChange(considerFrameId);
+	}
+};
+
+Blockly.Blocks['setpoint'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("set");
+		this.appendDummyInput()
+			.appendField(new Blockly.FieldDropdown([["velocity", "VELOCITY"], ["attitude", "ATTITUDE"], ["angular rates", "RATES"]]), "TYPE");
+		this.appendValueInput("VX")
+			.setCheck("Number")
+			.appendField("vx");
+		this.appendValueInput("VY")
+			.setCheck("Number")
+			.appendField("vy");
+		this.appendValueInput("VZ")
+			.setCheck("Number")
+			.appendField("vz");
+		this.appendValueInput("PITCH")
+			.setCheck("Number")
+			.appendField("pitch")
+			.setVisible(false);
+		this.appendValueInput("ROLL")
+			.setCheck("Number")
+			.appendField("roll")
+			.setVisible(false);
+		this.appendValueInput("YAW")
+			.setCheck("Number")
+			.appendField("yaw")
+			.setVisible(false);
+		this.appendValueInput("THRUST")
+			.setCheck("Number")
+			.appendField("thrust")
+			.setVisible(false);
+		this.appendDummyInput('RELATIVE_TO')
+			.appendField("relative to")
+			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+		this.appendValueInput("ID")
+			.setCheck("Number")
+			.appendField("with ID")
+			.setVisible(false);
+		this.setInputsInline(false);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(COLOR_FLIGHT);
+		this.setTooltip("Set the drone's setpoints of different types (cancels navigation requests).");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setOnChange(updateSetpointBlock);
 	}
 };
 
