@@ -185,7 +185,9 @@ function loadPrograms() {
 		}
 		updateChanged();
 	}, function(err) {
-		alert(err);
+		document.querySelector('.backend-fail').style.display = 'inline';
+		alert(`Error loading programs list.\n\nHave you enabled clover_blocks in clover.launch?`);
+		runButton.disabled = true;
 	})
 }
 
