@@ -45,6 +45,7 @@
   * [Using rviz and rqt](rviz.md)
   * [Software autorun](autolaunch.md)
   * [Using JavaScript](javascript.md)
+  * [Blocks programmin](blocks.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
   * Simulation
