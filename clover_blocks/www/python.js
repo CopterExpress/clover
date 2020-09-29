@@ -8,8 +8,6 @@ Blockly.Python.addReservedWords('pigpio,pi,Range');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
-var userCode = true; // global flag indicating whether the code for GUI is generating
-
 // TODO: parametrize
 const navigate_tolerance = 0.2;
 const sleep_time = 0.2;
@@ -128,14 +126,12 @@ function simpleOffboard() {
 Blockly.Python.INDENT = '    ';
 
 export function generateUserCode(workspace) {
-	userCode = true;
 	rosDefinitions = {};
 	Blockly.Python.STATEMENT_PREFIX = null;
 	return Blockly.Python.workspaceToCode(workspace);
 }
 
 export function generateCode(workspace) {
-	userCode = false;
 	rosDefinitions = {};
 	Blockly.Python.STATEMENT_PREFIX = '_b(%1)\n';
 	var code = Blockly.Python.workspaceToCode(workspace);
