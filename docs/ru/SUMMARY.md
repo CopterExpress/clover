@@ -67,6 +67,7 @@
   * [Docker-контейнер с симулятором](sitl_docker.md)
   * [Установка ROS Melodic](ros-install.md)
   * [Калибровка камеры](camera_calibration.md)
+  * [Подключение к VPN Hamachi](hamachi_vpn.md)
   * [Управление мультикоптером при помощи 4G связи](4g.md)
   * [Пакеты Клевера на Jetson Nano](jetson_nano.md)
   * [Пилотирование со смартфона](rc.md)
