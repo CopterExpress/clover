@@ -58,7 +58,7 @@ var notifElem = document.getElementById('notifications');
 function z(n) { return (n < 10 ? '0' : '') + n; } // add leading zero
 
 new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'print', messageType: 'std_msgs/String'}).subscribe(function(msg) {
-	var d = new Date(); // TODO: use StringStamped?
+	var d = new Date(); // TODO: use rosgraph_msgs/Log?
 	var timestamp = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
 	notifElem.innerHTML += `${timestamp}: ${msg.data}\n`;
 	notifElem.scrollTop = notifElem.scrollHeight;
