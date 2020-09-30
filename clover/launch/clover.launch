@@ -82,7 +82,7 @@
     </include>
 
     <!-- Clover Blocks -->
-    <node name="clover_blocks" pkg="clover_blocks" type="main.py" output="screen" if="$(arg blocks)"/>
+    <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" if="$(arg blocks)"/>
 
     <!-- rc backend -->
     <node name="rc" pkg="clover" type="rc" output="screen" if="$(arg rc)" clear_params="true">

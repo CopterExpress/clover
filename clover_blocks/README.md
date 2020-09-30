@@ -12,9 +12,9 @@ Internal package documentation is given below.
 
 The frontend files are located in [`www`](./www/) subdirectory. The frontend application uses [`roblib.js`](http://wiki.ros.org/roslibjs) library for communicating with backend node and other ROS resources.
 
-## `main.py` node
+## `clover_blocks` node
 
-`main.py` is the blocks programming backend. This node names itself `clover_blocks`, so this namespace is used for all the private topics and services.
+`clover_blocks` is the blocks programming backend, implementing all the services and topics needed for running Blockly-generated Python script.
 
 ### Services
 
