@@ -25,7 +25,18 @@ The frontend files are located in [`www`](./www/) subdirectory. The frontend app
 
 ### Parameters
 
-* `programs_dir` (*string*) – directory for user programs.
+* `~programs_dir` (*string*) – directory for user programs.
+
+Parameters read by frontend:
+
+* `~navigate_tolerance` (*float*) – distance tolerance in meters, used for navigate-like blocks (default: 0.2).
+* `~sleep_time` (*float*) – duration of sleep in loop cycles, used for navigate-like blocks (default: 0.2).
+
+These parameters also can be set as URL GET-parameters, for example:
+
+```
+http://<hostname>/clover_blocks/?navigate_tolerance=0.5&sleep_time=0.1
+```
 
 ### Topics
 

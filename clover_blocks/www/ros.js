@@ -17,6 +17,9 @@ ros.on('close', function () {
 ros.on('error', function(err) {
 });
 
+export const namespace = '/';
+export const priv = namespace + 'clover_blocks/';
+
 export var params = {}; // parameters storage
 
 export function readParam(name, fromUrl, _default) {
@@ -31,7 +34,7 @@ export function readParam(name, fromUrl, _default) {
 			return;
 		}
 		// read from ROS params
-		new ROSLIB.Param({ ros: ros, name: '/clover_blocks/' + name }).get(function(val) {
+		new ROSLIB.Param({ ros: ros, name: priv + name }).get(function(val) {
 			if (val === null) {
 				if (_default === undefined) {
 					alert('Cannot read required parameter ' + name);
@@ -48,8 +51,6 @@ export function readParam(name, fromUrl, _default) {
 	});
 }
 
-export const namespace = '/';
-export const priv = namespace + 'clover_blocks/';
 
 export var runService = new ROSLIB.Service({ ros: ros, name: priv + 'run', serviceType: 'clover_blocks/Run' });
 export var stopService = new ROSLIB.Service({ ros: ros, name: priv + 'stop', serviceType: 'std_srvs/Trigger' });

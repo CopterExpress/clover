@@ -26,13 +26,23 @@ var workspace = Blockly.inject('blockly', {
 	media: 'blockly/media/',
 });
 
+function readParams() {
+	return Promise.all([
+		ros.readParam('navigate_tolerance', true, 0.2),
+		ros.readParam('sleep_time', true, 0.2)
+	]);
+}
+
+var ready = readParams(); // initialization complete promise
 
 var pythonArea = document.getElementById('python');
 
 // update Python code
 workspace.addChangeListener(function(e) {
-	pythonArea.innerHTML = generateUserCode(workspace);
-	hljs.highlightBlock(pythonArea);
+	ready.then(function() {
+		pythonArea.innerHTML = generateUserCode(workspace);
+		hljs.highlightBlock(pythonArea);
+	});
 });
 
 var running = false;
@@ -99,6 +109,8 @@ window.stopProgram = function() {
 ros.ros.on('connection', update);
 
 ros.ros.on('close', update);
+
+ready.then(() => runButton.disabled = false);
 
 window.runProgram = function() {
 	if (!confirm('Run program?')) return;

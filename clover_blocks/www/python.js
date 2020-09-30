@@ -1,4 +1,4 @@
-import {priv} from './ros.js';
+import {params} from './ros.js';
 
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('_b,_print');
@@ -16,7 +16,7 @@ const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
 
 // TODO: tolerance to parameters
-const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
+const NAVIGATE_WAIT = () => `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
     res = navigate(x=x, y=y, z=z, yaw=float('nan'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
@@ -24,35 +24,35 @@ const NAVIGATE_WAIT = `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='b
 
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}:
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${params.navigate_tolerance}:
             return
-        rospy.sleep(${sleep_time})\n`;
+        rospy.sleep(${params.sleep_time})\n`;
 
-const LAND_WAIT = `\ndef land_wait():
+const LAND_WAIT = () => `\ndef land_wait():
     land()
     while get_telemetry().armed:
-        rospy.sleep(${sleep_time})\n`;
+        rospy.sleep(${params.sleep_time})\n`;
 
 // TODO: tolerance to parameters
-const WAIT_YAW = `\ndef wait_yaw():
+const WAIT_YAW = () => `\ndef wait_yaw():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
         if abs(telem.yaw) < math.radians(20):
             return
-        rospy.sleep(${sleep_time})\n`;
+        rospy.sleep(${params.sleep_time})\n`;
 
 // TODO: tolerance to parameters
-const WAIT_ARRIVAL = `\ndef wait_arrival():
+const WAIT_ARRIVAL = () => `\ndef wait_arrival():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}:
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${params.navigate_tolerance}:
             return
-        rospy.sleep(${sleep_time})\n`;
+        rospy.sleep(${params.sleep_time})\n`;
 
 // TODO: tolerance to parameters
-const ARRIVED = `\ndef arrived():
+const ARRIVED = () => `\ndef arrived():
     telem = get_telemetry(frame_id='navigate_target')
-    return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${navigate_tolerance}\n`
+    return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${params.navigate_tolerance}\n`
 
 const GET_DISTANCE = `\ndef get_distance(x, y, z, frame_id):
     telem = get_telemetry(frame_id)
@@ -87,22 +87,22 @@ function generateROSDefinitions() {
 	}
 	if (rosDefinitions.navigateWait) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
-		code += NAVIGATE_WAIT;
+		code += NAVIGATE_WAIT();
 	}
 	if (rosDefinitions.landWait) {
-		code += LAND_WAIT;
+		code += LAND_WAIT();
 	}
 	if (rosDefinitions.waitArrival) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
-		code += WAIT_ARRIVAL;
+		code += WAIT_ARRIVAL();
 	}
 	if (rosDefinitions.arrived) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
-		code += ARRIVED;
+		code += ARRIVED();
 	}
 	if (rosDefinitions.waitYaw) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
-		code += WAIT_YAW;
+		code += WAIT_YAW();
 	}
 	if (rosDefinitions.distance) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
