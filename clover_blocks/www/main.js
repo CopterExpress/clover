@@ -257,6 +257,7 @@ function saveProgram() {
 		programSelect.value = program;
 		updateChanged();
 	}, function(err) {
+		// TODO: restore previous state correctly
 		alert('Unable to store: ' + err);
 		programSelect.blur();
 		programSelect.value = program;
