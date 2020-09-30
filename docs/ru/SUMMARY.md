@@ -49,6 +49,7 @@
   * [Визуализация с помощью rviz](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
   * [Использование JavaScript](javascript.md)
+  * [Блочное программирование](blocks.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
   * Симулятор
