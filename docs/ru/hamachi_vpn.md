@@ -10,25 +10,25 @@
 
 После входа вы увидите основное меню управления вашими сетями.
 
-    <img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
 
 Выберите пункт *Создать сети*.
 
 В открывшемся окне введите название сети и выберите тип *Ячеистая*.
 
-    <img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
 
 В следующем окне в меню *Запросы на подключение* выберите *Требовать подключение*.
 
-    <img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
 
 Нажмите *Готово* и перейдите к настройки сети.
 
-    <img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
 
 В открывшемся окне *Изменить сеть* необходимо запомнить значение поля *Идентификатор сети*, он будет использоваться в дальнейшем для подключения.
 
-    <img src="../assets/logmein_vpn/change_net.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/change_net.png" width=300 class="zoom border center">
 
 ## Установка менеджера *Hamachi* и подключение к сети
 
