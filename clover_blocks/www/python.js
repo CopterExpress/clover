@@ -284,7 +284,7 @@ Blockly.Python.setpoint = function(block) {
 	} else if (type == 'RATES') {
 		rosDefinitions.setRates = true;
 		simpleOffboard();
-		return `set_rate(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust})\n`;
+		return `set_rates(pitch_rate=${pitch}, roll_rate=${roll}, yaw_rate=${yaw}, thrust=${thrust})\n`;
 	}
 }
 
