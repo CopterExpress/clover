@@ -14,7 +14,7 @@
 
 > **Caution** Обратите внимание, что светодиодную ленту нужно питать от стабильного источника энергии. Если вы подключите питание напрямую к Raspberry, то это создаст слишком большую нагрузку на ваш микрокомпьютер. Для снятия нагрузки с Raspberry можно подключить питание к преобразователю BEC.
 
-## Высокоуровневое управление лентой
+## Высокоуровневое управление лентой {#set_effect}
 
 1. Для работы с лентой подключите ее к питанию +5v – 5v, земле GND – GND и сигнальному порту DIN – GPIO21. Обратитесь [к инструкции по сборке](assemble_4_2.md#установка-led-ленты) для подробностей.
 2. Включите поддержку LED-ленты в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
@@ -95,16 +95,26 @@ disconnected: { effect: blink, r: 255, g: 50, b: 50 }
 <!-- ... -->
 ```
 
-В левой части таблицы указывается событие, на которая лента должна среагировать. В правой части указывается эффект (анимация), который необходимо включить при возникновении события. Список поддерживаемых событий:
+В левой части таблицы указывается событие, на которая лента должна среагировать. В правой части указывается эффект (анимация), который необходимо включить при возникновении события.
 
-* `startup` – запуск всех систем Клевера;
-* `connected` – успешное подключение к полетному контроллеру;
-* `disconnected` – разрыв связи с полетным контроллером;
-* `armed` – переключение полетного контроллера в состояние Armed;
-* `disarmed` – переключение полетного контроллера в состояние Disarmed;
-* `stabilized`, `acro`, `rattitude`, `altctl`, `posctl`, `offboard`, `mission`, `rtl`, `land` – переключение полетных режимов;
-* `error` – возникновение ошибки в ROS-нодах или полетном контроллере (*ERROR*-сообщение в топике `/rosout`);
-* `low_battery` – низкий заряд батареи (порог настраивается в параметре `threshold`).
+Список поддерживаемых событий:
+
+<table>
+  <tr><th>Событие</th><th>Описание</th><th>Эффект по умолчанию</th></tr>
+  <tr><td><code>startup</code></td><td>Запуск всех систем Клевера</td><td>Белый</div></td></tr>
+  <tr><td><code>connected</code></td><td>Успешное подключение к полетному контроллеру</td><td>Эффект радуги</td></tr>
+  <tr><td><code>disconnected</code></td><td>Разрыв связи с полетным контроллером</td><td><div class=circle style="background:rgb(255,50,50)"></div>Мигание красным</div></td></tr>
+  <tr><td><code>armed</code></td><td>Переход в состояние Armed</td><td></td></tr>
+  <tr><td><code>disarmed</code></td><td>Переход в состояние Disarmed</td><td></td></tr>
+  <tr><td><code>acro</code></td><td>Режим Acro</td><td><div class=circle style="background:rgb(245,155,0)"></div>Оранжевый</div></td></tr>
+  <tr><td><code>stabilized</code></td><td>Режим Stabilized</td><td><div class=circle style="background:rgb(30,180,50)"></div>Зеленый</td></tr>
+  <tr><td><code>altctl</code></td><td>Режим Altitude</td><td><div class=circle style="background:rgb(255,255,40)"></div>Желтый</td></tr>
+  <tr><td><code>posctl</code></td><td>Режим Position</td><td><div class=circle style="background:rgb(50,100,220)"></div>Синий</td></tr>
+  <tr><td><code>offboard</code></td><td>Режим Offboard</td><td><div class=circle style="background:rgb(220,20,250)"></div>Фиолетовый</td></tr>
+  <tr><td><code>rattitude</code>, <code>mission</code>, <code>rtl</code>, <code>land</code></td><td>Переход в соответствующие режимы</td><td></td></tr>
+  <tr><td><code>error</code></td><td>Возникновение ошибки в ROS-нодах или полетном контроллере (<i>ERROR</i>-сообщение в топике <code>/rosout</code>)</td><td><div class=circle style="background:rgb(255,0,0)"></div>Мигнуть красным</td></tr>
+  <tr><td><code>low_battery</code></td><td>Низкий заряд батареи (порог настраивается в параметре <code>threshold</code>)</td><td><nobr><div class=circle style="background:rgb(255,0,0)"></div>Быстрое мигание красным</nobr></td></tr>
+</table>
 
 > **Note** Для корректной работы сигнализации LED-лентой о низком заряде батареи необходимо корректная [калибровка электропитания](power.md#Калибровка-делителя-напряжения).
 

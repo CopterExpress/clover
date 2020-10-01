@@ -1,4 +1,4 @@
-# Clover 4 assembly
+# Clover 4.2 assembly
 
 ## Fasteners size
 
