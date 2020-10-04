@@ -70,7 +70,7 @@ apt-get update \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
+echo "deb http://deb.coex.tech/opencv4 buster main" > /etc/apt/sources.list.d/opencv3.list
 echo "deb http://deb.coex.tech/ros buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
 echo "deb http://deb.coex.tech/clover buster main" > /etc/apt/sources.list.d/clover.list
 
