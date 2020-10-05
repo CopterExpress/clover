@@ -41,7 +41,7 @@
   * [Работа с GPIO](gpio.md)
   * [Ультразвуковой дальномер](sonar.md)
   * [Компьютерное зрение](camera.md)
-  * [Визуализация с помощью rviz](rviz.md)
+  * [Визуализация с помощью rviz и rqt](rviz.md)
   * [Автозапуск ПО](autolaunch.md)
   * [Использование JavaScript](javascript.md)
   * [Блочное программирование](blocks.md)
