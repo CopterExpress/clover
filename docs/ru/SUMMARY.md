@@ -1,7 +1,7 @@
 # Содержание
 
 * [Введение](README.md)
-* [Глоссарий](gloss.md)
+* [Глоссарий](glossary.md)
 * [Безопасность](safety.md)
 * [Сборка](assembly.md)
   * [Клевер 4.2](assemble_4_2.md)

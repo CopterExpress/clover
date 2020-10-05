@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Glossary](gloss.md)
+* [Glossary](glossary.md)
 * [Safety tips](safety.md)
 * [Assembly](assembly.md)
   * [Clover 4.2 assembly](assemble_4_2.md)
