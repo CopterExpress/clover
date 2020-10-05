@@ -66,6 +66,10 @@ footer img {
 	padding: 14px 20px;
 }
 
+table.versions td {
+	text-align: center;
+	background: white;
+
 .circle {
 	width: 0.8em;
 	height: 0.8em;
