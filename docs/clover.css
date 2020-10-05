@@ -65,3 +65,15 @@ footer img {
 .type_table tr td {
 	padding: 14px 20px;
 }
+
+table.versions td {
+	text-align: center;
+	background: white;
+
+.circle {
+	width: 0.8em;
+	height: 0.8em;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 0.5em;
+}

@@ -2,7 +2,9 @@
     "redirects": [
         { "from": "assemble.html", "to": "ru/assemble_2.html" },
         { "from": "assemble_clever3_4in1.html", "to": "ru/assemble_3.html" },
-        { "from": "glossary.html", "to": "ru/gloss.html" },
+        { "from": "glossary.html", "to": "ru/glossary.html" },
+        { "from": "ru/gloss.html", "to": "glossary.html" },
+        { "from": "en/gloss.html", "to": "glossary.html" },
         { "from": "cl3_connectESC4in1.html", "to": "ru/4in1.html" },
         { "from": "uart.html", "to": "ru/uart.html" },
         { "from": "fpv.html", "to": "ru/fpv.html" },
