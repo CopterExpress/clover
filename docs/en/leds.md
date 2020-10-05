@@ -95,16 +95,26 @@ disconnected: { effect: blink, r: 255, g: 50, b: 50 }
 <!-- ... -->
 ```
 
-The left part is one of the possible events that the strip reacts to. The right part contains the effect description that you want to execute for this event. Here is the list of supported events:
+The left part is one of the possible events that the strip reacts to. The right part contains the effect description that you want to execute for this event.
 
-* `startup` – Clover system startup;
-* `connected` – successful connection to the flight controller;
-* `disconnected` – connection to the flight controller lost;
-* `armed` – flight controller transitioned to armed state;
-* `disarmed` – flight controller transitioned to disarmed state;
-* `stabilized`, `acro`, `rattitude`, `altctl`, `posctl`, `offboard`, `mission`, `rtl`, `land` – transition to said flight mode;
-* `error` – an error occured in one of ROS nodes or in the flight controller (*ERROR* message in `/rosout`);
-* `low_battery` – low battery (threshold is set in the `threshold` parameter).
+Here is the list of supported events:
+
+<table>
+  <tr><th>Event</th><th>Description</th><th>Default effect</th></tr>
+  <tr><td><code>startup</code></td><td>Clover system startup</td><td>White</td></tr>
+  <tr><td><code>connected</code></td><td>Successful connection to flight controller</td><td>Rainbow</td></tr>
+  <tr><td><code>disconnected</code></td><td>Connection to flight controller lost</td><td><div class=circle style="background:rgb(255,50,50)"></div>Red&nbsp;blink</td></tr>
+  <tr><td><code>armed</code></td><td>Transition to Armed state</td><td></td></tr>
+  <tr><td><code>disarmed</code></td><td>Transition to Disarmed state</td><td></td></tr>
+  <tr><td><code>acro</code></td><td>Acro mode</td><td><div class=circle style="background:rgb(245,155,0)"></div>Orange</td></tr>
+  <tr><td><code>stabilized</code></td><td>Stabilized mode</td><td><div class=circle style="background:rgb(30,180,50)"></div>Green</td></tr>
+  <tr><td><code>altctl</code></td><td>Altitude mode</td><td><div class=circle style="background:rgb(255,255,40)"></div>Yellow</td></tr>
+  <tr><td><code>posctl</code></td><td>Position mode</td><td><div class=circle style="background:rgb(50,100,220)"></div>Blue</td></tr>
+  <tr><td><code>offboard</code></td><td>Offboard mode</td><td><div class=circle style="background:rgb(220,20,250)"></div>Violet</td></tr>
+  <tr><td><code>rattitude</code>, <code>mission</code>, <code>rtl</code>, <code>land</code></td><td>Corresponding mode</td><td></td></tr>
+  <tr><td><code>error</code></td><td>Error in one of ROS nodes or in the flight controller (<i>ERROR</i> message in <code>/rosout</code>)</td><td><div class=circle style="background:rgb(255,0,0)"></div>Red flash</td></tr>
+  <tr><td><code>low_battery</code></td><td>Low battery (threshold is set in the <code>threshold</code> parameter)</td><td><nobr><div class=circle style="background:rgb(255,0,0)"></div>Red fast blink</nobr></td></tr>
+</table>
 
 > **Note** You need to [calibrate the power sensor](power.md#calibrating-the-power-sensor) for the `low_battery` event to work properly.
 

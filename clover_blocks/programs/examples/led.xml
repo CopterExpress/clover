@@ -1,0 +1,30 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="controls_whileUntil" id="A:_Z_27?K?HlScug%u|5" x="113" y="113">
+    <field name="MODE">WHILE</field>
+    <value name="BOOL">
+      <block type="logic_boolean" id="/rlzePJ6XJcv22J(Q4bs">
+        <field name="BOOL">TRUE</field>
+      </block>
+    </value>
+    <statement name="DO">
+      <block type="set_effect" id="GT~AX(j]r)u^,f_n0agS">
+        <field name="EFFECT">WIPE</field>
+        <value name="COLOR">
+          <shadow type="colour_picker" id="G`I)ZAuIGcnWNyO@N(sH">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+          <block type="colour_random" id="}(${|~%[}eJ.QUY?FWi_"></block>
+        </value>
+        <next>
+          <block type="wait" id="Ux(J;l+?5Gq2n^*!jXj^">
+            <value name="TIME">
+              <shadow type="math_number" id=")As9bASkedr9x@M)*)Pf">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

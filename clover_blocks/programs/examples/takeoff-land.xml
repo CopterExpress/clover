@@ -1,0 +1,60 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="text_print" id="2p:*N].+8c=|ZJXCWVn[" x="162" y="88">
+    <value name="TEXT">
+      <shadow type="text" id="9H+7z4A.pZ:Zz)7}H3Y7">
+        <field name="TEXT">Start mission</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="take_off" id="R@=3~Fq;AxFaRO{ZDFUM">
+        <field name="WAIT">TRUE</field>
+        <value name="ALT">
+          <shadow type="math_number" id="cf8/,N48N;Fvn@EWB%,B">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="text_print" id="|Tdajnf]Rz@ajSW`0Skv">
+            <value name="TEXT">
+              <shadow type="text" id="Wqr:Hf~r2d.A%S7%%4.)">
+                <field name="TEXT">Take off complete, wait</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="wait" id="-]MH9NMT#N-w!5yI1$F)">
+                <value name="TIME">
+                  <shadow type="math_number" id="?k~ZUNcrx-iC;LFmarbm">
+                    <field name="NUM">3</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="text_print" id="SXJsfN{P13FL~n9;|%P:">
+                    <value name="TEXT">
+                      <shadow type="text" id="[Z5,f|El:VX5zcRaMtXa">
+                        <field name="TEXT">Land</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="land" id="G5+Fs.6Y4(K9Dw`wjgua">
+                        <field name="WAIT">TRUE</field>
+                        <next>
+                          <block type="text_print" id="o?bvXARz^4_U0oXC-#.V">
+                            <value name="TEXT">
+                              <shadow type="text" id="`tadiS,[OZ`#f:=u.:9~">
+                                <field name="TEXT">Mission finished</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

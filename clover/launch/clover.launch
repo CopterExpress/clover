@@ -10,6 +10,7 @@
     <arg name="aruco" default="false"/>
     <arg name="rangefinder_vl53l1x" default="true"/>
     <arg name="led" default="true"/>
+    <arg name="blocks" default="false"/>
     <arg name="rc" default="true"/>
     <arg name="shell" default="true"/>
 
@@ -80,6 +81,9 @@
     <include file="$(find clover)/launch/led.launch" if="$(arg led)">
         <arg name="simulator" value="$(arg simulator)"/>
     </include>
+
+    <!-- Clover Blocks -->
+    <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" if="$(arg blocks)"/>
 
     <!-- rc backend -->
     <node name="rc" pkg="clover" type="rc" output="screen" if="$(arg rc)" clear_params="true">

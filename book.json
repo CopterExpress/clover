@@ -9,6 +9,7 @@
         "richquotes@https://github.com/okalachev/gitbook-plugin-richquotes.git",
         "yametrika",
         "anchors",
+        "collapsible-menu",
         "validate-links",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
