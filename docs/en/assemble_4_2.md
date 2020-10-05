@@ -1,4 +1,4 @@
-# Clover 4 assembly
+# Clover 4.2 assembly
 
 ## Fasteners size
 
@@ -74,7 +74,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_6.png" width=300 class="zoom border center">
 
-6. Install 4 6mm nylon posts and fix them with the M3x8 screws.
+6. Install 4 6mm nylon posts and fix them with the M3x5 screws.
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
@@ -200,7 +200,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_11.png" width=300 class="zoom border center">
 
-## Installing LED strip
+## Installing LED strip and legs
 
 1. Assemble the hoop for the LED strip by combining the lock on the ends.
 

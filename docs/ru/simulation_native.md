@@ -1,6 +1,6 @@
 # Сборка на собственной машине
 
-Настройка среды для симуляции с нуля требует некоторых усилий, однако это приведет к улучшению производительности и к уменьшению вероятности появления проблем с драйверами.  
+Настройка среды для симуляции с нуля требует некоторых усилий, однако это приведет к улучшению производительности и к уменьшению вероятности появления проблем с драйверами.
 
 Требования для сборки: установлены Ubuntu 18.04 и [ROS](ros-install.md).
 
@@ -57,10 +57,10 @@ sudo ./ubuntu.sh --no-nuttx
 Пакет `sitl_gazebo`, содержащий плагины нужно пропатчить, из-за недавних изменений в MAVLink. Эти патчи уже применены в [образе виртуальной машины](simulation_vm.md) и хранятся в репозитории CopterExpress/VM. Запустите следующие команды для загрузки и применения патчей:
 
 ```bash
-cd ~/catkin_ws/src/Firmware/Tools/sitl_gazebo  
-wget https://raw.githubusercontent.com/CopterExpress/clover_vm/master/assets/patches/sitl_gazebo.patch  
+cd ~/catkin_ws/src/Firmware/Tools/sitl_gazebo
+wget https://raw.githubusercontent.com/CopterExpress/clover_vm/master/assets/patches/sitl_gazebo.patch
 patch -p1 < sitl_gazebo.patch
-rm sitl_gazebo.patch  
+rm sitl_gazebo.patch
 ```
 
 ## Установка датасетов geographiclib
@@ -69,7 +69,7 @@ rm sitl_gazebo.patch
 
 ```bash
 cd ~
-wget https://raw.githubusercontent.com/mavlink/mavros/6f5bd5a1a67c19c2e605f33de296b1b1be9d02fc/mavros/scripts/install_geographiclib_datasets.sh  
+wget https://raw.githubusercontent.com/mavlink/mavros/6f5bd5a1a67c19c2e605f33de296b1b1be9d02fc/mavros/scripts/install_geographiclib_datasets.sh
 chmod +x ./install_geographiclib_datasets.sh
 sudo ./install_geographiclib_datasets.sh
 rm ./install_geographiclib_datasets.sh

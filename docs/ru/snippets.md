@@ -1,8 +1,6 @@
-Примеры кода
-===
+# Примеры кода
 
-Python
----
+## Python
 
 <!-- markdownlint-disable MD031 -->
 
@@ -13,7 +11,80 @@ Python
 
 <!-- markdownlint-enable MD031 -->
 
-### # {#distance}
+### # {#navigate_wait}
+
+<a name="block-nav"></a><!-- old name of anchor -->
+
+<a name="block-takeoff"></a><!-- old name of anchor -->
+
+Полет в точку и ожидание окончания полета:
+
+```python
+import math
+
+# ...
+
+def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
+    navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+Для того, чтобы определить расстояние до целевой точки, функция использует фрейм [`navigate_target`](frames.md#navigate_target).
+
+Использование функции для полета в точку x=3, y=2, z=1 [относительно карты маркеров](aruco_map.md):
+
+```python
+navigate_wait(x=3, y=2, z=1, frame_id='aruco_map')
+```
+
+Эту функцию можно использовать и для взлета:
+
+```python
+navigate_wait(z=1, frame_id='body', auto_arm=True)
+```
+
+### # {#land_wait}
+
+<a name="block-land"></a><!-- old name of anchor -->
+
+Посадка и ожидание окончания посадки:
+
+```python
+def land_wait():
+    land()
+    while get_telemetry().armed:
+        rospy.sleep(0.2)
+```
+
+Использование:
+
+```python
+land_wait()
+```
+
+### # {#wait_arrival}
+
+Ожидание окончания прилета в [navigate](simple_offboard.md#navigate)-точку:
+
+```python
+import math
+
+# ...
+
+def wait_arrival(tolerance=0.2):
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
+        rospy.sleep(0.2)
+```
+
+### # {#get_distance}
 
 Функция определения расстояния между двумя точками (**важно**: точки должны быть в одной [системе координат](frames.md)):
 
@@ -26,7 +97,7 @@ def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
 
-### # {#distance-global}
+### # {#get_distance_global}
 
 Функция для приблизительного определения расстояния (в метрах) между двумя глобальными координатами (широта/долгота):
 
@@ -37,111 +108,6 @@ import math
 
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
-```
-
-### # {#block-takeoff}
-
-Взлет и ожидание окончания взлета:
-
-```python
-z = 2  # высота
-tolerance = 0.2  # точность проверки высоты (м)
-
-# Запоминаем изначальную точку
-start = get_telemetry()
-
-# Взлетаем на 2 м
-print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
-
-# Ожидаем взлета
-while not rospy.is_shutdown():
-    # Проверяем текущую высоту
-    if start.z + z - get_telemetry().z < tolerance:
-        # Взлет завершен
-        break
-    rospy.sleep(0.2)
-```
-
-Вышеприведенный код может быть обернут в функцию:
-
-```python
-def takeoff_wait(alt, speed=0.5, tolerance=0.2):
-    start = get_telemetry()
-    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
-
-    while not rospy.is_shutdown():
-        if start.z + alt - get_telemetry().z < tolerance:
-            break
-
-        rospy.sleep(0.2)
-```
-
-### # {#block-nav}
-
-Лететь в точку и ждать пока коптер долетит в нее:
-
-```python
-tolerance = 0.2  # точность проверки прилета (м)
-frame_id='aruco_map'
-
-# Летим в точку 1:2:3 в поле ArUco-маркеров
-print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
-
-# Ждем, пока коптер долетит до запрошенной точки
-while not rospy.is_shutdown():
-    telem = get_telemetry(frame_id=frame_id)
-    # Вычисляем расстояние до заданной точки
-    if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
-        # Долетели до необходимой точки
-        break
-    rospy.sleep(0.2)
-```
-
-Вышеприведенный код может быть обернут в функцию:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
-
-    while not rospy.is_shutdown():
-        telem = get_telemetry(frame_id=frame_id)
-        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
-            break
-        rospy.sleep(0.2)
-```
-
-Более универсальная функция с использованием фрейма `navigate_target`, который совпадает с целевой точкой навигации дрона:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
-
-    while not rospy.is_shutdown():
-        telem = get_telemetry(frame_id='navigate_target')
-        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
-            break
-        rospy.sleep(0.2)
-```
-
-Такой код может быть использован для полета в том числе с использованием фрейма `body`.
-
-### # {#block-land}
-
-Посадка и ожидание окончания посадки:
-
-```python
-land()
-while get_telemetry().armed:
-    rospy.sleep(0.2)
-```
-
-Вышеприведенный код может быть обернут в функцию:
-
-```python
-def land_wait():
-    land()
-    while get_telemetry().armed:
-        rospy.sleep(0.2)
 ```
 
 ### # {#disarm}

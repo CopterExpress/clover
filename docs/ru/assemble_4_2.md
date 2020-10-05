@@ -1,4 +1,4 @@
-# Сборка Клевера 4
+# Сборка Клевера 4.2
 
 ## Размер крепежа
 
@@ -74,7 +74,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_6.png" width=300 class="zoom border center">
 
-6. Установите 4 нейлоновые стойки 6мм и закрепите их с помощью винтов М3х8.
+6. Установите 4 нейлоновые стойки 6мм и закрепите их с помощью винтов М3х5.
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
@@ -208,7 +208,7 @@
 
     <img src="../assets/assembling_clever4_2/final_2.png" width=300 class="zoom border">
 
-## Установка LED ленты
+## Установка LED ленты и ножек
 
 1. Соберите обруч для светодиодной ленты, объединив замок на концах.
 

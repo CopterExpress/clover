@@ -19,7 +19,7 @@
 			// Connection callback
 			alert('Connected');
 		});
-		
+
 		// Declare get_telemetry service client
 		var getTelemetry = new ROSLIB.Service({ ros: ros, name : '/get_telemetry', serviceType : 'clover/GetTelemetry' });
 
@@ -49,6 +49,6 @@
 
 ## Браузерная GCS
 
-Смотрите также пример реализации упрощенной браузерной наземной станции (GCS) на Клевере по адресу http://192.168.11.1/clover/gcs.html.
+Смотрите также пример реализации ([`gcs.html`](https://github.com/CopterExpress/clover/blob/master/clover/www/gcs.html), [`gcs.js`](https://github.com/CopterExpress/clover/blob/master/clover/www/js/gcs.js)) упрощенной браузерной наземной станции (GCS) на Клевере по адресу http://192.168.11.1/clover/gcs.html.
 
 <img src="../assets/web-gcs.png" class="center zoom"/>

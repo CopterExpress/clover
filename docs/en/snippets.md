@@ -1,103 +1,22 @@
-Code examples
-===
+# Code examples
 
-Python
----
+## Python
 
-### # {#distance}
+### # {#navigate_wait}
 
-Calculating the distance between two points (**important**: the points are to be in the same [system of coordinates](frames.md)):
+<a name="block-nav"></a><!-- old name of anchor -->
 
-```python
-def get_distance(x1, y1, z1, x2, y2, z2):
-    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
-```
+<a name="block-takeoff"></a><!-- old name of anchor -->
 
-### # {#distance-global}
-
-Approximation of distance (in meters) between two global coordinates (latitude/longitude):
+Fly towards a point and wait for copter's arrival:
 
 ```python
-def get_distance_global(lat1, lon1, lat2, lon2):
-    return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
-```
+import math
 
-### # {#block-takeoff}
+#...
 
-Takeoff and waiting for it to finish:
-
-```python
-z = 2  # altitude
-tolerance = 0.2 # precision of altitude check (m)
-
-# Saving the initial point
-start = get_telemetry()
-
-# Take off and leveling at 2 m above the ground
-print navigate(z=z, speed=0.5, frame_id='body', auto_arm=True)
-
-# Waiting for takeoff
-while not rospy.is_shutdown():
-    # Checking current altitude
-    if start.z + z - get_telemetry().z < tolerance:
-        # Takeoff complete
-        break
-    rospy.sleep(0.2)
-```
-
-This code can be wrapped in a function:
-
-```python
-def takeoff_wait(alt, speed=0.5, tolerance=0.2):
-    start = get_telemetry()
-    print navigate(z=alt, speed=speed, frame_id='body', auto_arm=True)
-
-    while not rospy.is_shutdown():
-        if start.z + alt - get_telemetry().z < tolerance:
-            break
-
-        rospy.sleep(0.2)
-```
-
-### # {#block-nav}
-
-Flying towards a point and waiting for copter's arrival:
-
-```python
-tolerance = 0.2 # precision of arrival check (m)
-frame_id='aruco_map'
-
-# Flying to point 1:2:3 in the field of ArUco markers
-print navigate(frame_id=frame_id, x=1, y=2, z=3, speed=0.5)
-
-# Wait for the copter to arrive at the requested point
-while not rospy.is_shutdown():
-    telem = get_telemetry(frame_id=frame_id)
-    # Calculating the distance to the requested point
-    if get_distance(1, 2, 3, telem.x, telem.y, telem.z) < tolerance:
-        # Arrived at the requested point
-        break
-    rospy.sleep(0.2)
-```
-
-This code can be wrapped into a function:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
-
-    while not rospy.is_shutdown():
-        telem = get_telemetry(frame_id=frame_id)
-        if get_distance(x, y, z, telem.x, telem.y, telem.z) < tolerance:
-            break
-        rospy.sleep(0.2)
-```
-
-A more universal solution, utilizing the `navigate_target` frame, which corresponds to the navigating target point of the drone:
-
-```python
-def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
-    navigate(x=x, y=y, z=z, speed=speed, frame_id=frame_id)
+def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
+    navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -106,11 +25,25 @@ def navigate_wait(x, y, z, speed, frame_id, tolerance=0.2):
         rospy.sleep(0.2)
 ```
 
-This code also can be used for navigating using `body` frame.
+This function utilizes [`navigate_target`](frames.md#navigate_target) frame for computing the distance to the target.
+
+Using the function for flying to the point x=3, y=2, z=1 in [marker's map](aruco_map.md):
+
+```python
+navigate_wait(x=3, y=2, z=1, frame_id='aruco_map')
+```
+
+This function can be used for taking off as well:
+
+```python
+navigate_wait(z=1, frame_id='body', auto_arm=True)
+```
 
 ### # {#block-land}
 
-Landing and waiting until the copter lands:
+<a name="block-land"></a><!-- old name of anchor -->
+
+Land and wait until the copter lands:
 
 ```python
 land()
@@ -118,18 +51,50 @@ while get_telemetry().armed:
     rospy.sleep(0.2)
 ```
 
-This code can be wrapped in a function:
+Usage:
 
 ```python
-def land_wait():
-    land()
-    while get_telemetry().armed:
+land_wait()
+```
+
+### # {#wait_arrival}
+
+Wait for copter's arrival to the [navigate](simple_offboard.md#navigate) target:
+
+```python
+import math
+
+# ...
+
+def wait_arrival(tolerance=0.2):
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
+            break
         rospy.sleep(0.2)
+```
+
+### # {#get_distance}
+
+Calculate the distance between two points (**important**: the points are to be in the same [coordinate system](frames.md)):
+
+```python
+def get_distance(x1, y1, z1, x2, y2, z2):
+    return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
+```
+
+### # {#get_distance_global}
+
+Approximation of distance (in meters) between two global coordinates (latitude/longitude):
+
+```python
+def get_distance_global(lat1, lon1, lat2, lon2):
+    return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
 
 ### # {#disarm}
 
-Quadcopter disarm (disabling propellers **the copter will fall down**):
+Disarm the drone (propellers will stop, **the drone will fall down**):
 
 ```python
 # Declaring a proxy:
@@ -143,7 +108,7 @@ arming(False)  # дизарм
 
 ### # {#transform}
 
-Transforming the position (`PoseStamped`) from one system of coordinates ([of frame](frames.md)) to another one using [tf2] (http://wiki.ros.org/tf2):
+Transform the position (`PoseStamped`) from one [coordinate system](frames.md) to another using [tf2](http://wiki.ros.org/tf2):
 
 ```python
 import tf2_ros
@@ -155,25 +120,25 @@ tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 # ...
 
-# PoseStamped object creation (or getting it from a topic):
+# Create PoseStamped object (or get it from a topic):
 pose = PoseStamped()
-pose.header.frame_id = 'map' # frame, which is the position is specified
-pose.header.stamp = rospy.get_rostime() # the instant for which the position is specified (current time)
+pose.header.frame_id = 'map' # coordinate frame, in which the position is specified
+pose.header.stamp = rospy.get_rostime() # the time for which the position is specified (current time)
 pose.pose.position.x = 1
 pose.pose.position.y = 2
 pose.pose.position.z = 3
 pose.pose.orientation.w = 1
 
-frame_id = 'base_link' # target frame
-transform_timeout = rospy.Duration(0.2) # wait for transformation timeout
+frame_id = 'base_link' # target coordinate frame
+transform_timeout = rospy.Duration(0.2) # timeout for transformation
 
-# Transforming the position from the old frame to the new one:
+# Transform the position from the old frame to the new one:
 new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
 ```
 
 ### # {#upside-down}
 
-Determining whether the copter is turned upside-down:
+Determine whether the copter is turned upside-down:
 
 ```python
 PI_2 = math.pi / 2
@@ -184,7 +149,7 @@ flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
 
 ### # {#angle-hor}
 
-Calculating the copter total horizontal angle:
+Calculate the copter horizontal angle:
 
 ```python
 PI_2 = math.pi / 2
@@ -198,7 +163,7 @@ if flipped:
 
 ### # {#circle}
 
-Flying along a circular path:
+Fly along a circular path:
 
 ```python
 RADIUS = 0.6  # m
@@ -220,7 +185,7 @@ while not rospy.is_shutdown():
 
 ### # {#rate}
 
-repeating an action at a frequency of 10 Hz:
+Repeat an action at a frequency of 10 Hz:
 
 ```python
 r = rospy.Rate(10)
@@ -231,7 +196,7 @@ while not rospy.is_shutdown():
 
 ### # {#mavros-sub}
 
-An example of subscription to a topic from MAVROS
+An example of subscription to a topic from MAVROS:
 
 ```python
 from geometry_msgs.msg import PoseStamped, TwistStamped
@@ -261,7 +226,7 @@ Information about MAVROS topics is available at [the link](mavros.md).
 
 <!-- markdownlint-enable MD044 -->
 
-Sending an arbitrary [MAVLink message](mavlink.md) to the copter:
+Send an arbitrary [MAVLink message](mavlink.md) to the copter:
 
 ```python
 # ...
@@ -285,15 +250,15 @@ mavlink_pub.publish(ros_msg)
 
 ### # {#rc-sub}
 
-Return on mode switching with the transmitter (may be used for starting an autonomous flight, see [example](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
+React to the drone's mode switching (may be used for starting an autonomous flight, see [example](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
 
 ```python
 from mavros_msgs.msg import RCIn
 
 # Called when new data is received from the transmitter
 def rc_callback(data):
-    # Return on switch toggling of the transmitter
-        if data.channels[5] < 1100:
+    # React on toggling the mode of the transmitter
+    if data.channels[5] < 1100:
         # ...
         pass
     elif data.channels[5] > 1900:
@@ -361,7 +326,7 @@ rospy.loginfo('flip')
 flip()
 ```
 
-Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clover). Before running a flip, take all necessary safty precautions.
+Requires the [special PX4 firmware for Clover](firmware.md#modified-firmware-for-clover). Before running a flip, take all necessary safety precautions.
 
 ### # {#calibrate-gyro}
 

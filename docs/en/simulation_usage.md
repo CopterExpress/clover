@@ -79,7 +79,7 @@ In this example you should set `PX4_SIM_SPEED_FACTOR` to `0.42` when launching t
 PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 ```
 
-> **Note** If you are using the VM, it may be convenient to put the value in the Gazebo desktop shortcut. Right-click on the Gazebo icon, select "Properties..." and add `PX4_SIM_SPEED_FACTOR=0.42` to the Command field as follows:  
+> **Note** If you are using the VM, it may be convenient to put the value in the Gazebo desktop shortcut. Right-click on the Gazebo icon, select "Properties..." and add `PX4_SIM_SPEED_FACTOR=0.42` to the Command field as follows:
 ![Gazebo PX4 launcher command](../assets/simulation_usage/06_gazebo_px4_launcher.png)
 
 ### Allocate more resources to the VM

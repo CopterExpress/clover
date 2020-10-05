@@ -26,8 +26,8 @@ Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it ma
 
     ![Open dialog with clever-devel.ova selected](../assets/simulation_setup_vm/01_import_vm.png)
 
-    > **Note** You may see a dialog box with a warning about the VM format:  
-    ![Import failure dialog](../assets/simulation_setup_vm/02_import_failure.png)  
+    > **Note** You may see a dialog box with a warning about the VM format:
+    ![Import failure dialog](../assets/simulation_setup_vm/02_import_failure.png)
     You can safely ignore the warning and press **Retry**.
 
 2. Right-click on the VM name and select **Virtual Machine Settings**. In the new window, set the following parameters:
