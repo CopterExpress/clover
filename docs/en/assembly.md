@@ -25,3 +25,5 @@ This section contains articles describing the assembly of each version of Clover
           <td><img src="../assets/versions/clover_2.jpg" width=200></td>
      </tr>
 </table>
+
+Links to Clover's parts CAD-models are available in the "[CAD-models](models.md)" article.

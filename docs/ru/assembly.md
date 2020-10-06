@@ -25,3 +25,5 @@
           <td><img src="../assets/versions/clover_2.jpg" width=200></td>
      </tr>
 </table>
+
+Ссылки на CAD-модели деталей Клевера доступны в статье "[CAD-модели](models.md)".
