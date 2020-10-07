@@ -16,15 +16,15 @@
 
 В открывшемся окне введите название сети и выберите тип *Ячеистая*.
 
-<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/add_net_1.png" width=300 class="zoom border center">
 
-В следующем окне в меню *Запросы на подключение* выберите *Требовать подключение*.
+Далее меню *Запросы на подключение* выберите *Требовать подключение*.
 
-<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/add_net_2.png" width=300 class="zoom border center">
 
 Нажмите *Готово* и перейдите к настройки сети.
 
-<img src="../assets/logmein_vpn/main_menu.png" width=300 class="zoom border center">
+<img src="../assets/logmein_vpn/add_net_3.png" width=300 class="zoom border center">
 
 В открывшемся окне *Изменить сеть* необходимо запомнить значение поля *Идентификатор сети*, он будет использоваться в дальнейшем для подключения.
 
