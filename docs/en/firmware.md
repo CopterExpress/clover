@@ -1,7 +1,7 @@
 Pixhawk / Pixracer firmware flashing
 ===
 
-Pixhawk or Pixracer firmware may be flashed using QGroundControl or command line utilities.
+Pixhawk, Pixracer or [COEX Pix](coex_pix.md) firmware may be flashed using QGroundControl or command line utilities.
 
 Modified firmware for Clover
 ---
@@ -12,7 +12,7 @@ It is advisable to use a specialized build of PX4 with the necessary fixes and b
 <p>Latest stable release: <strong><a id="download-latest-release"></a></strong>.</p>
 
 <ul>
-<li>Firmware for Pixracer (<strong>Clover 4 / Clover 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
+<li>Firmware for COEX Pix and Pixracer (<strong>Clover 4 / Clover 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
 <li>Firmware for Pixhawk (<strong>Clover 2</strong>) – <a id="firmware-pixhawk" href=""><code>px4fmu-v2_lpe.px4</code></a>.</li>
 </ul>
 </div>
@@ -49,7 +49,7 @@ It is advisable to use a specialized build of PX4 with the necessary fixes and b
 QGroundControl
 ---
 
-Open the Firmware section in QGroundControl. Then, connect your Pixhawk or Pixracer via USB.
+Open the Firmware section in QGroundControl. Then, connect your flight controller via USB.
 
 Choose PX4 Flight Stack. If you wish to install the official firmware (with EKF2 for Pixhawk), choose "Standard version". In order to flash custom firmware, choose "Custom firmware file..." and click OK.
 
@@ -60,7 +60,7 @@ Firmware variants
 
 The name of the firmware file contains information about the target flight controller and build variant. For example:
 
-* `px4fmu-v4_default.px4` — firmware for Pixhawk with EKF2 and LPE (**Clover 3** / **Clover 4**).
+* `px4fmu-v4_default.px4` — firmware for COEX Pix and Pixracer with EKF2 and LPE (**Clover 3** / **Clover 4**).
 * `px4fmu-v2_lpe.px4` — firmware for Pixhawk with LPE (**Clover 2**).
 * `px4fmu-v2_default.px4` — firmware for Pixhawk with EKF2.
 * `px4fmu-v3_default.px4` — firmware for newer Pixhawk versions (rev. 3 chip, see Fig. + Bootloader v5) with EKF2 and LPE.

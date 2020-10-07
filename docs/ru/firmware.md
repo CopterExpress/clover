@@ -1,7 +1,7 @@
 Прошивка полетного контроллера
 ===
 
-Pixhawk или Pixracer можно прошить, используя QGroundControl или утилиты командной строки.
+Pixhawk, Pixracer и [COEX Pix](coex_pix.md) можно прошить, используя QGroundControl или утилиты командной строки.
 
 Прошивка для Клевера
 ---
@@ -12,7 +12,7 @@ Pixhawk или Pixracer можно прошить, используя QGroundCon
 <p>Последний стабильный релиз: <strong><a id="download-latest-release"></a></strong>.</p>
 
 <ul>
-<li>Скачать файл прошивки для Pixracer (<strong>Клевер 4 / Клевер 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
+<li>Скачать файл прошивки для COEX Pix и Pixracer (<strong>Клевер 4 / Клевер 3</strong>) – <a id="firmware-pixracer" href=""><code>px4fmu-v4_default.px4</code></a>.</li>
 <li>Скачать файл прошивки для Pixhawk (<strong>Клевер 2</strong>) – <a id="firmware-pixhawk" href=""><code>px4fmu-v2_lpe.px4</code></a>.</li>
 </ul>
 </div>
@@ -49,7 +49,7 @@ Pixhawk или Pixracer можно прошить, используя QGroundCon
 QGroundControl
 ---
 
-В QGroundControl откройте раздел Firmware. **После** этого подключите Pixhawk / Pixracer по USB.
+В QGroundControl откройте раздел Firmware. **После** этого подключите полетный контроллер по USB.
 
 Выберите PX4 Flight Stack. Для скачивания и загрузки стандартной прошивки (вариант с EKF2 для Pixhawk) выберите пункт меню "Standard Version", для загрузки собственного файла прошивки выберите пункт "Custom firmware file...", затем нажмите OK.
 
@@ -62,7 +62,7 @@ QGroundControl
 
 В названии файла прошивки кодируется информации о целевой плате и варианте сборки. Примеры:
 
-* `px4fmu-v4_default.px4` — прошивка для Pixracer с EKF2 и LPE (**Клевер 3** / **Клевер 4**).
+* `px4fmu-v4_default.px4` — прошивка для COEX Pix и Pixracer с EKF2 и LPE (**Клевер 3** / **Клевер 4**).
 * `px4fmu-v2_lpe.px4` — прошивка для Pixhawk с LPE (**Клевер 2**).
 * `px4fmu-v2_default.px4` — прошивка для Pixhawk с EKF2.
 * `px4fmu-v3_default.px4` — прошивка для более новых версий Pixhawk (чип ревизии 3, см. илл. + Bootloader v5) с EKF2 и LPE.
