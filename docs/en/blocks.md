@@ -18,7 +18,7 @@ To run Clover's blocks programming interface, [connect to Clover's Wi-Fi](wifi.m
 
 The page looks as follows:
 
-<img src="../assets/blocks/blocks.png" width=600>
+<img src="../assets/blocks/blocks.png" width=600 class=center>
 
 Assemble your program using blocks in the menu at the left and then click *Run* button for running. You can also view generated Python-code, switching to *Python* tab.
 

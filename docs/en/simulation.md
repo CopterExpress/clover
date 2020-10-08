@@ -2,6 +2,8 @@
 
 The Clover simulation environment allows users to run and debug their code within a simulator while using most of the features available on the real drone. The simulation utilizes [PX4 SITL mode](sitl.md) and uses the same ROS code as the real drone. Most hardware is simulated as well.
 
+<img src="../assets/simulator.jpg" width=600 class=center>
+
 ## Features
 
 Basic, user-installable environment includes:
