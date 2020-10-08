@@ -7,45 +7,45 @@
 <table class="type_table">
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
-        <td >Винт M3x10</td>
+        <td>Винт M3x10</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
-        <td >Стойка алюминиевая 40 мм</td>
+        <td>Стойка алюминиевая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
-        <td >Винт M3x8</td>
+        <td>Винт M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td >Стойка алюминиевая 15 мм</td>
+        <td>Стойка алюминиевая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
-        <td >Винт M3x5</td>
+        <td>Винт M3x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td >Стойка нейлоновая 40 мм</td>
+        <td>Стойка нейлоновая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
-        <td >Саморез M2x5</td>
+        <td>Саморез M2x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td >Стойка нейлоновая 30 мм</td>
+        <td>Стойка нейлоновая 30 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
-        <td >Гайка M3 (самоконтрящаяся)</td>
+        <td>Гайка M3 (самоконтрящаяся)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td >Стойка нейлоновая 20 мм</td>
+        <td>Стойка нейлоновая 20 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
-        <td >Гайка M3 (нейлоновая)</td>
+        <td>Гайка M3 (нейлоновая)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td >Стойка нейлоновая 15 мм</td>
+        <td>Стойка нейлоновая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
-        <td >Стойка демпферная</td>
+        <td>Стойка демпферная</td>
         <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td >Стойка нейлоновая 6 мм</td>
+        <td>Стойка нейлоновая 6 мм</td>
     </tr>
 </table>
 
@@ -112,7 +112,7 @@
 
 ## Установка полетного контроллера
 
-Набор *Клевер 4* позволяет установить различные полетные контроллеры, к примеру *COEX Pix* и *Pixracer*.
+Набор "Клевер 4" позволяет установить различные полетные контроллеры, к примеру COEX Pix и Pixracer.
 
 > **Caution** При установке полетного контроллера обратите внимание на стрелку, расположенную на плате, при монтаже она должна быть направлена к носу коптера.
 
@@ -120,7 +120,7 @@
 
 > **Hint** Перед установкой демпферных стоек, накрутите 2 слоя нейлоновых гаек, для более прочного крепления или откусите лишнюю резьбу с помощью бокорезов.
 
-Установите демпферные стойки 6мм, на них закрепите *COEX Pix* с помощью нейлоновых гаек.
+Установите демпферные стойки 6мм, на них закрепите COEX Pix с помощью нейлоновых гаек.
 
 <img src="../assets/assembling_clever4_2/coex_pix.png" width=300 class="zoom border center">
 
@@ -130,7 +130,7 @@
 
     <img src="../assets/assembling_clever4_2/pixracer_1.png" width=300 class="zoom border center">
 
-2. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
+2. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху Pixracer.
 
     <img src="../assets/assembling_clever4_2/pixracer_2.png" width=300 class="zoom border center">
 
@@ -168,7 +168,7 @@
 
     <img src="../assets/assembling_clever4_2/raspberry_2.png" width=300 class="zoom border center">
 
-4. Установите плату *Raspberry Pi* и зафиксируйте с помощью нейлоновых гаек.
+4. Установите плату Raspberry Pi и зафиксируйте с помощью нейлоновых гаек.
 
     <img src="../assets/assembling_clever4_2/raspberry_3.png" width=300 class="zoom border center">
 
@@ -198,7 +198,7 @@
 
     <img src="../assets/assembling_clever4_2/raspberry_9.png" width=300 class="zoom border center">
 
-10. Подключите к *Raspberry Pi* дальномер и кабель питания.
+10. Подключите к Raspberry Pi дальномер и кабель питания.
 
     <img src="../assets/assembling_clever4_2/raspberry_10.png" width=300 class="zoom border center">
 
@@ -206,11 +206,11 @@
 
     <img src="../assets/assembling_clever4_2/radio.png" width=300 class="zoom border center">
 
-12. Подключите шлейф камеры к *Raspberry Pi*.
+12. Подключите шлейф камеры к Raspberry Pi.
 
     <img src="../assets/assembling_clever4_2/raspberry_11.png" width=300 class="zoom border center">
 
-13. Подключите полетный контроллер к *Raspberry Pi* с помощью USB кабеля.
+13. Подключите полетный контроллер к Raspberry Pi с помощью USB-кабеля.
 
     <img src="../assets/assembling_clever4_2/final_2.png" width=300 class="zoom border">
 
@@ -240,7 +240,7 @@
 
     <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
 
-7. Подключите сигнальный выход светодиодной ленты (белый кабель) в *Raspberry Ri*, к пину *GPIO 21*.
+7. Подключите сигнальный выход светодиодной ленты (белый кабель) в Raspberry Ri, к пину *GPIO21*.
 
     <img src="../assets/assembling_clever4_2/led_7.png" width=300 class="zoom border center">
 
