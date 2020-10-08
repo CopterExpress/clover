@@ -9,43 +9,43 @@
         <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
         <td >Винт M3x10</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
-        <td >Стойка алюминиевая 40мм</td>
+        <td >Стойка алюминиевая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
         <td >Винт M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td >Стойка алюминиевая 15мм</td>
+        <td >Стойка алюминиевая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
         <td >Винт M3x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td >Стойка нейлоновая 40мм</td>
+        <td >Стойка нейлоновая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
         <td >Саморез M2x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td >Стойка нейлоновая 30мм</td>
+        <td >Стойка нейлоновая 30 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
         <td >Гайка M3 (самоконтрящаяся)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td >Стойка нейлоновая 20мм</td>
+        <td >Стойка нейлоновая 20 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
         <td >Гайка M3 (нейлоновая)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td >Стойка нейлоновая 15мм</td>
+        <td >Стойка нейлоновая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
         <td >Стойка демпферная</td>
         <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td >Стойка нейлоновая 6мм</td>
+        <td >Стойка нейлоновая 6 мм</td>
     </tr>
 </table>
 
@@ -58,7 +58,7 @@
         <img src="../assets/assembling_soldering_clever_4/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. На центральные отверстия в главной деке установите 2 стойки 15мм и закрепите их с помощью винтов М3х8.
+2. На центральные отверстия в главной деке установите 2 стойки 15 мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_soldering_clever_4/frame_3.png" width=300 class="zoom border center">
 
@@ -95,14 +95,14 @@
 
 ## Установка ESC и PDB
 
-1. На заранее закрепленные стойки установите плату распределения питания(PDB), она должна быть установлена таким образом, чтобы силовой кабель питания был направлен в сторону хвоста коптера.
+1. На заранее закрепленные стойки установите плату распределения питания (PDB), она должна быть установлена таким образом, чтобы силовой кабель питания был направлен в сторону хвоста коптера.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_1.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_2.png" width=300 class="zoom border">
     </div>
 
-2. Установите регуляторы оборотов(ESC) в соответствующие места на луче и притяните хомутами.
+2. Установите регуляторы оборотов (ESC) в соответствующие места на луче и притяните хомутами.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_3.png" width=300 class="zoom border">
@@ -172,7 +172,7 @@
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_1.png" width=300 class="zoom border center">
 
-3. Склейте 3-4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
+3. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_2.png" width=300 class="zoom border center">
 
@@ -186,14 +186,14 @@
 
     <img src="../assets/assembling_soldering_clever_4/fc_connection_1.png" width=300 class="zoom border center">
 
-2. Подключите кабель питания к плате распределения питания(PDB) и соответствующему разъему на полетном контроллере.
+2. Подключите кабель питания к плате распределения питания (PDB) и соответствующему разъему на полетном контроллере.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/fc_connection_2.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/fc_connection_3.png" width=300 class="zoom border">
     </div>
 
-3. Установите алюминиевые стойки 40мм на винты М3х12.
+3. Установите алюминиевые стойки 40 мм на винты М3х12.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/fc_connection_4.png" width=300 class="zoom border">
@@ -202,7 +202,7 @@
 
 ## Установка Raspberry Pi
 
-1. На монтажную деку установите стойки 20мм и 40мм, закрепите их с помощью винтов М3х8.
+1. На монтажную деку установите стойки 20 мм и 40 мм, закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_1.png" width=300 class="zoom border center">
 
@@ -223,11 +223,11 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_5.png" width=300 class="zoom border center">
 
-6. Подключите разъем 5v *JST* в соответствующие пины питания *Raspberry Pi*.
+6. Подключите разъем 5V *JST* в соответствующие пины питания *Raspberry Pi*.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_6.png" width=300 class="zoom border center">
 
-7. Возьмите 4 провода *Dupont*, обрежьте 5-7см кабеля и припаяйте к соответствующим пинам дальномера.
+7. Возьмите 4 провода *Dupont*, обрежьте 5–7 см кабеля и припаяйте к соответствующим пинам дальномера.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/raspberry_7.png" width=300 class="zoom border">
@@ -292,11 +292,11 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_2.png" width=300 class="zoom border center">
 
-3. Наклейте светодиодную ленту на обруч, для большей крепкости притяните ее с помощью 3-4 хомутов.
+3. Наклейте светодиодную ленту на обруч, для большей крепкости притяните ее с помощью 3–4 хомутов.
 
     <img src="../assets/assembling_soldering_clever_4/led_3.png" width=300 class="zoom border center">
 
-4. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и винтов М3х8 используя только крайние монтажные отверстия. Снизу, между пластинами ножек установите демпферное силиконовое колечко.
+4. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и винтов М3х8 используя только крайние монтажные отверстия. Снизу, между пластинами ножек, установите демпферное силиконовое колечко.
 
     <img src="../assets/assembling_soldering_clever_4/led_4.png" width=300 class="zoom border center">
 
@@ -308,7 +308,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_6.png" width=300 class="zoom border center">
 
-7. Подключите питание светодиодной ленты в разъем *JST* 5v на плате распределения питания.
+7. Подключите питание светодиодной ленты в разъем *JST* 5V на плате распределения питания.
 
     <img src="../assets/assembling_soldering_clever_4/led_7.png" width=300 class="zoom border center">
 
@@ -322,7 +322,7 @@
 
 ## Установка защиты
 
-1. Соберите нижний уровень защиты с помощью стоек 40мм и винтов М3х12.
+1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х12.
 
     <img src="../assets/assembling_soldering_clever_4/guard_1.png" width=300 class="zoom border center">
 
@@ -334,4 +334,4 @@
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
 
-> **Success** Дрон собран, далее произведите ["настройку"](setup.md).
+> **Success** Дрон собран, далее произведите [настройку](setup.md).
