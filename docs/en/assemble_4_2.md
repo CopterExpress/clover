@@ -78,7 +78,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
-## Installating motors
+## Installing motors
 
 1. When installing motors, pay attention to the rotation scheme of the motors. The rotation marking on the motors must match the rotation pattern.
 
