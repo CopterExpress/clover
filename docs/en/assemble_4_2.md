@@ -9,43 +9,43 @@
         <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
         <td>Screw M3x10</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
-        <td>Aluminium rack 40mm</td>
+        <td>Aluminium rack 40 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
         <td>Screw M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td>Aluminium rack 15mm</td>
+        <td>Aluminium rack 15 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
         <td>Screw M3x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td>Nylon rack 40mm</td>
+        <td>Nylon rack 40 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
         <td>Screw M2x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td>Nylon rack 30mm</td>
+        <td>Nylon rack 30 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
         <td> Nut M3 (self-locking)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td>Nylon rack 20mm</td>
+        <td>Nylon rack 20 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
         <td> Nut M3 (nylon)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td>Nylon rack 15mm</td>
+        <td>Nylon rack 15 mm</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
         <td>Damper rack</td>
         <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td> Nylon rack 6mm</td>
+        <td> Nylon rack 6 mm</td>
     </tr>
 </table>
 
@@ -112,7 +112,7 @@
 
 ## Installing Flight Controller
 
-Set *Clover 4* allows you to install various flight controllers, for example *COEX Pix* and *Pixracer*.
+Clover 4 drone kit allows you to install various flight controllers, for example COEX Pix and Pixracer.
 
 > **Caution** During installation the flight controller, pay attention to the arrow located on the board, it should be directed to the copter bow.
 
@@ -120,7 +120,7 @@ Set *Clover 4* allows you to install various flight controllers, for example *CO
 
 > **Hint** Before installing the damper struts, screw 2 layers of nylon nuts, for a stronger fix or bite off the excess thread using side cutters.
 
-Install the damper struts, fix *COEX Pix* on them with nylon nuts.
+Install the damper struts, fix COEX Pix on them with nylon nuts.
 
 <img src="../assets/assembling_clever4_2/coex_pix.png" width=300 class="zoom border center">
 
@@ -130,7 +130,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/pixracer_1.png" width=300 class="zoom border center">
 
-2. Glue 3-4 layers of double-sided tape, glue it in the center of the small deck and install *Pixracer* on top.
+2. Glue 3-4 layers of double-sided tape, glue it in the center of the small deck and install Pixracer on top.
 
     <img src="../assets/assembling_clever4_2/pixracer_2.png" width=300 class="zoom border center">
 
@@ -153,14 +153,14 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
 ## Installing Raspberry Pi
 
-1. Install the 20mm racks on the main deck, fix them with the M3x8 screws.
+1. Install the 20 mm racks on the main deck, fix them with the M3x8 screws.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/fc_connection_5.png" width=300 class="zoom border">
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install 6mm racks and 30mm racks, fasten them with the M3x5 and M3x12 bolts, respectively.
+2. On a mounting deck, install 6 mm racks and 30 mm racks, fasten them with the M3x5 and M3x12 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -168,7 +168,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_2.png" width=300 class="zoom border center">
 
-4. Install the *Raspberry Pi* circuit board and fix with nylon nuts.
+4. Install the Raspberry Pi circuit board and fix with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_3.png" width=300 class="zoom border center">
 
@@ -176,7 +176,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_5.png" width=300 class="zoom border center">
 
-6. Install 4 20mm racks and fix them with the M3x8 screws.
+6. Install 4 20 mm racks and fix them with the M3x8 screws.
 
     <img src="../assets/assembling_clever4_2/raspberry_6.png" width=300 class="zoom border center">
 
@@ -192,11 +192,11 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_9.png" width=300 class="zoom border center">
 
-10. Connect to the *Raspberry Pi* rangefinder and power cable.
+10. Connect to the Raspberry Pi rangefinder and power cable.
 
     <img src="../assets/assembling_clever4_2/raspberry_10.png" width=300 class="zoom border center">
 
-11. Connect the camera cable to *Raspberry Pi*.
+11. Connect the camera cable to Raspberry Pi.
 
     <img src="../assets/assembling_clever4_2/raspberry_11.png" width=300 class="zoom border center">
 
@@ -226,7 +226,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
-7. Connect the signal output of the LED strip (white cable) to *Raspberry Ri*, to pin *GPIO 21*.
+7. Connect the signal output of the LED strip (white cable) to Raspberry Ri, to pin *GPIO21*.
 
     <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
 
@@ -250,7 +250,7 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
 ## Flight preparation
 
-1. Install the battery strap and connect the flight controller to the *Raspberry Pi* using a USB cable.
+1. Install the battery strap and connect the flight controller to the Raspberry Pi using a USB cable.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/final_1.png" width=300 class="zoom border">
@@ -265,4 +265,4 @@ Install the damper struts, fix *COEX Pix* on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/final_4.png" width=300 class="zoom border center">
 
-> **Success** The drone is assembled, then make ["setup"](setup.md).
+> **Success** The drone is assembled, then perform [setup](setup.md).
