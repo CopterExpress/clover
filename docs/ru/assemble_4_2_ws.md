@@ -109,7 +109,7 @@
         <img src="../assets/assembling_soldering_clever_4/esc_4.png" width=300 class="zoom border">
     </div>
 
-3. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежте лишнее.
+3. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежьте лишнее.
 
 4. Зачистите и залудите обрезанные провода
 
@@ -122,9 +122,9 @@
         <img src="../assets/assembling_soldering_clever_4/esc_6.png" width=300 class="zoom border">
     </div>
 
-    > **Caution** Будте внимательны к подписям контактов на плате. Красный провод должен идти к площадке с подписью *+*, а черный к подписи *-*.
+    > **Caution** Будьте внимательны к подписям контактов на плате. Красный провод должен идти к площадке с подписью *+*, а черный к подписи *-*.
 
-7. Обрежте лишний фазный кабель идущий от моторов.
+7. Обрежьте лишний фазный кабель идущий от моторов.
 
 8. Зачистите и залудите фазные кабели.
 
@@ -160,7 +160,7 @@
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_pix_1.png" width=300 class="zoom border center">
 
-3. Вставьте флеш карту для записи логов в полетный контроллер.
+3. Вставьте флеш-карту для записи логов в полетный контроллер.
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_pix_2.png" width=300 class="zoom border center">
 
@@ -176,7 +176,7 @@
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_2.png" width=300 class="zoom border center">
 
-4. Вставьте флеш карту для записи логов в полетный контроллер.
+4. Вставьте флеш-карту для записи логов в полетный контроллер.
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_3.png" width=300 class="zoom border center">
 
@@ -206,7 +206,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_1.png" width=300 class="zoom border center">
 
-2. Нарежте резьбу М3 в крепежных отверстиях *Raspberry Pi* с помощью болта М3х12.
+2. Нарежьте резьбу М3 в крепежных отверстиях *Raspberry Pi* с помощью болта М3х12.
 
 3. Вкрутите в плату *Raspberry Pi* стойки 6мм, при необходимости закрепите их нейлоновыми гайками.
 
@@ -219,15 +219,15 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_4.png" width=300 class="zoom border center">
 
-5. Установите собранный модуль в соответсвующие пазы основной деке дрона.
+5. Установите собранный модуль в соответствующие пазы основной деке дрона.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_5.png" width=300 class="zoom border center">
 
-6. Подключите разъем 5v *JST* в соответсвующие пины питания *Raspberry Pi*.
+6. Подключите разъем 5v *JST* в соответствующие пины питания *Raspberry Pi*.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_6.png" width=300 class="zoom border center">
 
-7. Возьмите 4 провода *Dupont*, обрежте 5-7см кабеля и припаяйте к соответсвующим пинам дальномера.
+7. Возьмите 4 провода *Dupont*, обрежьте 5-7см кабеля и припаяйте к соответствующим пинам дальномера.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/raspberry_7.png" width=300 class="zoom border">
@@ -274,11 +274,11 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_16.png" width=300 class="zoom border center">
 
-14. Подсоедините дальномер к *Raspberry Pi* в соответсвующие пины.
+14. Подсоедините дальномер к *Raspberry Pi* в соответствующие пины.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_17.png" width=300 class="zoom border center">
 
-15. Соедините с радиоприемник и полетный комнтроллер с помощью соответсвующего кабеля.
+15. Соедините с радиоприемник и полетный контроллер с помощью соответствующего кабеля.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_18.png" width=300 class="zoom border center">
 
