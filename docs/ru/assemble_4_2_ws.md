@@ -137,7 +137,7 @@
         <img src="../assets/assembling_soldering_clever_4/esc_8.png" width=300 class="zoom border">
     </div>
 
-11. Припаяйте 3 разъема *JST* мама к 2ум площадкам *5v* и площадке *bat+*
+11. Припаяйте 3 разъема JST мама к 2ум площадкам *5V* и площадке *bat+*
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_9.png" width=300 class="zoom border">
@@ -146,7 +146,7 @@
 
 ## Установка полетного контроллера
 
-Набор *Клевер 4* позволяет установить различные полетные контроллеры, к примеру *COEX Pix* и *Pixracer*.
+Набор "Клевер 4" позволяет установить различные полетные контроллеры, к примеру, COEX Pix и Pixracer.
 
 > **Caution** При установке полетного контроллера обратите внимание на стрелку, расположенную на плате, при монтаже она должна быть направлена к носу коптера.
 
@@ -172,7 +172,7 @@
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_1.png" width=300 class="zoom border center">
 
-3. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
+3. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху Pixracer.
 
     <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/coex_fc_2.png" width=300 class="zoom border center">
 
@@ -206,16 +206,16 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_1.png" width=300 class="zoom border center">
 
-2. Нарежьте резьбу М3 в крепежных отверстиях *Raspberry Pi* с помощью болта М3х12.
+2. Нарежьте резьбу М3 в крепежных отверстиях Raspberry Pi с помощью болта М3х12.
 
-3. Вкрутите в плату *Raspberry Pi* стойки 6мм, при необходимости закрепите их нейлоновыми гайками.
+3. Вкрутите в плату Raspberry Pi стойки 6мм, при необходимости закрепите их нейлоновыми гайками.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/raspberry_2.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/raspberry_3.png" width=300 class="zoom border">
     </div>
 
-4. Установите *Raspberry Pi* на монтажную деку закрепив ее болтами М3х6.
+4. Установите Raspberry Pi на монтажную деку закрепив ее болтами М3х6.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_4.png" width=300 class="zoom border center">
 
@@ -223,11 +223,11 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_5.png" width=300 class="zoom border center">
 
-6. Подключите разъем 5V *JST* в соответствующие пины питания *Raspberry Pi*.
+6. Подключите разъем 5V JST в соответствующие пины питания Raspberry Pi.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_6.png" width=300 class="zoom border center">
 
-7. Возьмите 4 провода *Dupont*, обрежьте 5–7 см кабеля и припаяйте к соответствующим пинам дальномера.
+7. Возьмите 4 провода Dupont, обрежьте 5–7 см кабеля и припаяйте к соответствующим пинам дальномера.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/raspberry_7.png" width=300 class="zoom border">
@@ -266,15 +266,15 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_14.png" width=300 class="zoom border center">
 
-12. Собранный модуль установите на над модулем *Raspberry Pi* и зафиксируйте болтами М3х8.
+12. Собранный модуль установите на над модулем Raspberry Pi и зафиксируйте болтами М3х8.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_15.png" width=300 class="zoom border center">
 
-13. Соедините камеру и *Raspberry Pi* с помощью шлейфа.
+13. Соедините камеру и Raspberry Pi с помощью шлейфа.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_16.png" width=300 class="zoom border center">
 
-14. Подсоедините дальномер к *Raspberry Pi* в соответствующие пины.
+14. Подсоедините дальномер к Raspberry Pi в соответствующие пины.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_17.png" width=300 class="zoom border center">
 
@@ -288,7 +288,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_1.png" width=300 class="zoom border center">
 
-2. Припаяйте *JST* папа к площадке питания и *Dupont* мама к сигнальной площадке.
+2. Припаяйте JST-папа к площадке питания и Dupont-мама к сигнальной площадке.
 
     <img src="../assets/assembling_soldering_clever_4/led_2.png" width=300 class="zoom border center">
 
@@ -308,11 +308,11 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_6.png" width=300 class="zoom border center">
 
-7. Подключите питание светодиодной ленты в разъем *JST* 5V на плате распределения питания.
+7. Подключите питание светодиодной ленты в разъем JST 5V на плате распределения питания.
 
     <img src="../assets/assembling_soldering_clever_4/led_7.png" width=300 class="zoom border center">
 
-8. Подключите сигнальный выход светодиодной ленты в *Raspberry Ri*, к пину *GPIO 21*.
+8. Подключите сигнальный выход светодиодной ленты в Raspberry Ri, к пину *GPIO21*.
 
     <img src="../assets/assembling_soldering_clever_4/led_8.png" width=300 class="zoom border center">
 
