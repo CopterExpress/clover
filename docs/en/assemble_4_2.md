@@ -112,7 +112,7 @@
 
 ## Installing Flight Controller
 
-Clover 4 drone kit allows you to install various flight controllers, for example COEX Pix and Pixracer.
+Clover 4 drone kit allows you to install various flight controllers, for example [COEX Pix](coex_pix.md) and Pixracer.
 
 > **Caution** During installation the flight controller, pay attention to the arrow located on the board, it should be directed to the copter bow.
 
