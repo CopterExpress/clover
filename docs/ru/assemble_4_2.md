@@ -9,43 +9,43 @@
         <td><img src="../assets/assembling_clever4_2/type_size/m3x10.png" width=70 class="center"></td>
         <td >Винт M3x10</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_40.png" width=100 class="center"></td>
-        <td >Стойка алюминиевая 40мм</td>
+        <td >Стойка алюминиевая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x8.png" width=60 class="center"></td>
         <td >Винт M3x8</td>
         <td><img src="../assets/assembling_clever4_2/type_size/aluminium_20.png" width=70 class="center"></td>
-        <td >Стойка алюминиевая 15мм</td>
+        <td >Стойка алюминиевая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m3x5.png" width=40 class="center"></td>
         <td >Винт M3x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-40.png" width=100 class="center"></td>
-        <td >Стойка нейлоновая 40мм</td>
+        <td >Стойка нейлоновая 40 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/m2x5.png" width=40 class="center"></td>
         <td >Саморез M2x5</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-30.png" width=80 class="center"></td>
-        <td >Стойка нейлоновая 30мм</td>
+        <td >Стойка нейлоновая 30 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_metal.png" width=25 class="center"></td>
         <td >Гайка M3 (самоконтрящаяся)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-20.png" width=70 class="center"></td>
-        <td >Стойка нейлоновая 20мм</td>
+        <td >Стойка нейлоновая 20 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/nut_nylon.png" width=25 class="center"></td>
         <td >Гайка M3 (нейлоновая)</td>
         <td><img src="../assets/assembling_clever4_2/type_size/htp-15.png" width=60 class="center"></td>
-        <td >Стойка нейлоновая 15мм</td>
+        <td >Стойка нейлоновая 15 мм</td>
     </tr>
     <tr>
         <td><img src="../assets/assembling_clever4_2/type_size/dumper.png" width=50 class="center"></td>
         <td >Стойка демпферная</td>
         <td><img src="../assets/assembling_clever4_2/type_size/hts-6.png" width=50 class="center"></td>
-        <td >Стойка нейлоновая 6мм</td>
+        <td >Стойка нейлоновая 6 мм</td>
     </tr>
 </table>
 
@@ -58,7 +58,7 @@
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. На центральные отверстия в главной деке установите 2 стойки 15мм и закрепите их с помощью винтов М3х8.
+2. На центральные отверстия в главной деке установите 2 стойки 15 мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
@@ -74,7 +74,7 @@
 
     <img src="../assets/assembling_clever4_2/frame_6.png" width=300 class="zoom border center">
 
-6. Установите 4 нейлоновые стойки 6мм и закрепите их с помощью винтов М3х5.
+6. Установите 4 нейлоновые стойки 6 мм и закрепите их с помощью винтов М3х5.
 
     <img src="../assets/assembling_clever4_2/frame_7.png" width=300 class="zoom border center">
 
@@ -95,14 +95,14 @@
 
 ## Установка ESC и PDB
 
-1. Подсоедините к моторам регуляторы оборотов(ESC) с помощью разъемов MR30 и закрепите их на лучах с помощью хомутов.
+1. Подсоедините к моторам регуляторы оборотов (ESC) с помощью разъемов MR30 и закрепите их на лучах с помощью хомутов.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/esc_1.png" width=300 class="zoom border">
         <img src="../assets/assembling_clever4_2/esc_2.png" width=300 class="zoom border">
     </div>
 
-2. На заранее закрепленные стойки установите плату распределения питания(PDB) и зафиксируйте ее стойками 6мм. Плата распределения питания должна быть установлена таким образом, чтобы кабель подключения питания был направлен в сторону хвоста коптера.
+2. На заранее закрепленные стойки установите плату распределения питания (PDB) и зафиксируйте ее стойками 6мм. Плата распределения питания должна быть установлена таким образом, чтобы кабель подключения питания был направлен в сторону хвоста коптера.
 
     <img src="../assets/assembling_clever4_2/pdb_1.png" width=300 class="zoom border center">
 
@@ -130,7 +130,7 @@
 
     <img src="../assets/assembling_clever4_2/pixracer_1.png" width=300 class="zoom border center">
 
-2. Склейте 3-4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
+2. Склейте 3–4 слоя двустороннего скотча, приклейте его в центр малой деки и установите сверху *Pixracer*.
 
     <img src="../assets/assembling_clever4_2/pixracer_2.png" width=300 class="zoom border center">
 
@@ -140,11 +140,11 @@
 
     <img src="../assets/assembling_clever4_2/fc_connection_1.png" width=300 class="zoom border center">
 
-2. Подключите кабель питания к плате распределения питания(PDB) и соответствующему разъему на полетном контроллере.
+2. Подключите кабель питания к плате распределения питания (PDB) и соответствующему разъему на полетном контроллере.
 
     <img src="../assets/assembling_clever4_2/fc_connection_2.png" width=300 class="zoom border center">
 
-3. Установите алюминиевые стойки 40мм на винты М3х12.
+3. Установите алюминиевые стойки 40 мм на винты М3х12.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
@@ -153,14 +153,14 @@
 
 ## Установка Raspberry Pi
 
-1. На основную деку установите стойки 20мм, закрепите их с помощью винтов М3х8.
+1. На основную деку установите стойки 20 мм, закрепите их с помощью винтов М3х8.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/fc_connection_5.png" width=300 class="zoom border">
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки 6мм и стойки 30мм, закрепите их с помощью винт М3х5 и М3х12 соответственно.
+2. На монтажную деку установите стойки 6мм и стойки 30 мм, закрепите их с помощью винт М3х5 и М3х12 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -236,17 +236,17 @@
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
-6. Подключите питание светодиодной ленты(красный, черный кабели) в короткий разъем JST на плате распределения питания.
+6. Подключите питание светодиодной ленты (красный, черный кабели) в короткий разъем JST на плате распределения питания.
 
     <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
 
-7. Подключите сигнальный выход светодиодной ленты(белый кабель) в *Raspberry Ri*, к пину *GPIO 21*.
+7. Подключите сигнальный выход светодиодной ленты (белый кабель) в *Raspberry Ri*, к пину *GPIO 21*.
 
     <img src="../assets/assembling_clever4_2/led_7.png" width=300 class="zoom border center">
 
 ## Установка защиты
 
-1. Соберите нижний уровень защиты с помощью стоек 40мм и винтов М3х12.
+1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х12.
 
     <img src="../assets/assembling_clever4_2/guard_1.png" width=300 class="zoom border center">
 
@@ -262,4 +262,4 @@
 
     <img src="../assets/assembling_clever4_2/guard_4.png" width=300 class="zoom border center">
 
-> **Success** Дрон собран, далее произведите ["настройку"](setup.md).
+> **Success** Дрон собран, далее произведите [настройку](setup.md).
