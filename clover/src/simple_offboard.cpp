@@ -75,7 +75,7 @@ ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
 float default_speed;
 bool auto_release;
-bool land_only_in_offboard, nav_from_sp;
+bool land_only_in_offboard, nav_from_sp, check_kill_switch;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -836,6 +836,7 @@ int main(int argc, char **argv)
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("nav_from_sp", nav_from_sp, true);
+	nh_priv.param("check_kill_switch", check_kill_switch, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
