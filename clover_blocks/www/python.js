@@ -8,14 +8,9 @@ Blockly.Python.addReservedWords('pigpio,pi,Range');
 Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
-// TODO: parametrize
-const navigate_tolerance = 0.2;
-const sleep_time = 0.2;
-
 const IMPORT_SRV = `from clover import srv
 from std_srvs.srv import Trigger`;
 
-// TODO: tolerance to parameters
 const NAVIGATE_WAIT = () => `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame_id='body', auto_arm=False):
     res = navigate(x=x, y=y, z=z, yaw=float('nan'), speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
@@ -41,7 +36,6 @@ const WAIT_YAW = () => `\ndef wait_yaw():
             return
         rospy.sleep(${params.sleep_time})\n`;
 
-// TODO: tolerance to parameters
 const WAIT_ARRIVAL = () => `\ndef wait_arrival():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -49,7 +43,6 @@ const WAIT_ARRIVAL = () => `\ndef wait_arrival():
             return
         rospy.sleep(${params.sleep_time})\n`;
 
-// TODO: tolerance to parameters
 const ARRIVED = () => `\ndef arrived():
     telem = get_telemetry(frame_id='navigate_target')
     return math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${params.navigate_tolerance}\n`
