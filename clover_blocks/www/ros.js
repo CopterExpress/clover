@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2020 Copter Express Technologies
+ *
+ * Author: Oleg Kalachev <okalachev@gmail.com>
+ *
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 var url = 'ws://' + location.hostname + ':9090';
 export var ros = new ROSLIB.Ros({ url });
 

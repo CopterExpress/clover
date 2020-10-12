@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2020 Copter Express Technologies
+ *
+ * Author: Oleg Kalachev <okalachev@gmail.com>
+ *
+ * Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ */
+
 const COLOR_FLIGHT = 293;
 const COLOR_STATE = 36;
 const COLOR_LED = 143;

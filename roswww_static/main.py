@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+# Copyright (C) 2020 Copter Express Technologies
+#
+# Author: Oleg Kalachev <okalachev@gmail.com>
+#
+# Distributed under MIT License (available at https://opensource.org/licenses/MIT).
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
 # TODO: add custom header, footer
 # TODO: symlinks or copy param
 
