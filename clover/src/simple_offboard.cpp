@@ -36,6 +36,7 @@
 #include <mavros_msgs/Thrust.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
+#include <mavros_msgs/ManualControl.h>
 
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
@@ -122,6 +123,7 @@ enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
 // Last received telemetry messages
 mavros_msgs::State state;
 mavros_msgs::StatusText statustext;
+mavros_msgs::ManualControl manual_control;
 PoseStamped local_position;
 TwistStamped velocity;
 NavSatFix global_position;
@@ -860,6 +862,7 @@ int main(int argc, char **argv)
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto manual_control_sub = nh.subscribe("mavros/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
 	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
