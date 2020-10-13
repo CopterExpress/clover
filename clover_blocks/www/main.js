@@ -107,7 +107,7 @@ new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'prompt', messageType: 'clover
 		name: ros.priv + 'input/' + msg.id,
 		messageType: 'std_msgs/String',
 		latch: true
-	}).publish(new ROSLIB.Message({ data: response }));
+	}).publish(new ROSLIB.Message({ data: response || '' }));
 });
 
 window.stopProgram = function() {
