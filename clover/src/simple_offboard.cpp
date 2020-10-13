@@ -488,6 +488,18 @@ void publishSetpoint(const ros::TimerEvent& event)
 	publish(event.current_real);
 }
 
+inline void checkKillSwitch()
+{
+	if (!TIMEOUT(manual_control, state_timeout))
+		throw std::runtime_error("Manual control timeout, can't check kill switch status");
+
+	const KILL_SWITCH_BIT = 12; // TODO: link to source file
+	bool kill_switch = manual_control.buttons & (1 << KILL_SWITCH_BIT);
+
+	if (kill_switch)
+		throw std::runtime_error("Kill switch is on");
+}
+
 inline void checkState()
 {
 	if (TIMEOUT(state, state_timeout))
@@ -514,6 +526,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		// Checks
 		checkState();
+
+		if (check_kill_switch) {
+			checkKillSwitch();
+		}
 
 		// default frame is local frame
 		if (frame_id.empty())
