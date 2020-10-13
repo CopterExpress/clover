@@ -38,11 +38,10 @@ const LAND_WAIT = () => `\ndef land_wait():
     while get_telemetry().armed:
         rospy.sleep(${params.sleep_time})\n`;
 
-// TODO: tolerance to parameters
 const WAIT_YAW = () => `\ndef wait_yaw():
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
-        if abs(telem.yaw) < math.radians(20):
+        if abs(telem.yaw) < math.radians(${params.yaw_tolerance}):
             return
         rospy.sleep(${params.sleep_time})\n`;
 

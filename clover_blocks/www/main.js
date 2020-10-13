@@ -39,6 +39,7 @@ var workspace = Blockly.inject('blockly', {
 function readParams() {
 	return Promise.all([
 		ros.readParam('navigate_tolerance', true, 0.2),
+		ros.readParam('yaw_tolerance', true, 20),
 		ros.readParam('sleep_time', true, 0.2),
 		ros.readParam('confirm_run', true, true),
 	]);
