@@ -2,6 +2,84 @@
 
 На этой странице представлены CAD-модели некоторых деталей квадрокоптеров Клевер.
 
+## Клевер 4.2
+
+### Фрезеровка
+
+<table>
+    <tr><th width=150>Изображение</th><th>Деталь</th><th width=1>Файл</th></tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount.dxf"><code>deck_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount_small.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount_small.dxf"><code>deck_mount_small.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/grab_deck.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grab_deck.dxf"><code>grab_deck.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/led_mount_plate.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 3 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/led_mount_plate.dxf"><code>led_mount_plate.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 20 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard.dxf"><code>prop_guard.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard_mount.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 10 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard_mount.dxf"><code>prop_guard_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/small_leg.png"></td>
+        <td>
+            <b>Название детали</b>.<br>
+            Функция: ?.<br>
+            Материал: ?.<br>
+            Количество: 10 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/small_leg.dxf"><code>small_leg.dxf</code></a></td>
+    </tr>
+</table>
+
 ## Клевер 4
 
 ### 3D печать

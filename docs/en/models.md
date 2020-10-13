@@ -2,6 +2,84 @@
 
 This page contains models and drawings of some of the drone parts. They can be used for 3D printing and/or laser cutting replacement parts.
 
+## Clover 4.2
+
+### Milling
+
+<table>
+    <tr><th width=150>Preview</th><th>Part</th><th width=1>File</th></tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 2 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount.dxf"><code>deck_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount_small.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount_small.dxf"><code>deck_mount_small.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/grab_deck.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grab_deck.dxf"><code>grab_deck.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/led_mount_plate.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 3 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/led_mount_plate.dxf"><code>led_mount_plate.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 20 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard.dxf"><code>prop_guard.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard_mount.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 10 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard_mount.dxf"><code>prop_guard_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/small_leg.png"></td>
+        <td>
+            <b>Part name</b>.<br>
+            Function: ?.<br>
+            Material: ?.<br>
+            Quantity: 10 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/small_leg.dxf"><code>small_leg.dxf</code></a></td>
+    </tr>
+</table>
+
 ## Clover 4
 
 ### 3D print
