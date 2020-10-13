@@ -31,6 +31,7 @@ Parameters read by frontend:
 
 * `~navigate_tolerance` (*float*) – distance tolerance in meters, used for navigate-like blocks (default: 0.2).
 * `~sleep_time` (*float*) – duration of sleep in loop cycles, used for navigate-like blocks (default: 0.2).
+* `~confirm_run` (*bool*) – enable confirmation to run the program (default: true).
 
 These parameters also can be set as URL GET-parameters, for example:
 
