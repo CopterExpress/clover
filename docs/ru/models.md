@@ -11,70 +11,70 @@
     <tr>
         <td><img src="../assets/dxf/4.2/deck_mount.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 2 шт.
+            <b>Дека монтажная</b>.<br>
+            Функция: Дека для установки АКБ и Raspberry Pi.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 1 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount.dxf"><code>deck_mount.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/deck_mount_small.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 2 шт.
+            <b>Дека монтажная малая</b>.<br>
+            Функция: Дека для установки FPV камеры и крепления пластин жесткости.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 1 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount_small.dxf"><code>deck_mount_small.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/grab_deck.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 2 шт.
+            <b>Дека захвата</b>.<br>
+            Функция: Дека для установки захватов и внешней переферии(камера, дальномер).<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 1 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grab_deck.dxf"><code>grab_deck.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/led_mount_plate.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 3 шт.
+            <b>Пластина для LED</b>.<br>
+            Функция: Крепление светодиодной ленты.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 1 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/led_mount_plate.dxf"><code>led_mount_plate.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/prop_guard.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 20 шт.
+            <b>Дуга</b>.<br>
+            Функция: Предотвращение повреждения пропеллеров.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 4 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard.dxf"><code>prop_guard.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/prop_guard_mount.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 10 шт.
+            <b>Дуга монтажная.</b>.<br>
+            Функция: Дуга для закрепления контура защиты.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 2 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard_mount.dxf"><code>prop_guard_mount.dxf</code></a></td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/small_leg.png"></td>
         <td>
-            <b>Название детали</b>.<br>
-            Функция: ?.<br>
-            Материал: ?.<br>
-            Количество: 10 шт.
+            <b>Ножка маленькая</b>.<br>
+            Функция: Стандартный опорный элемент.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 2 шт.
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/small_leg.dxf"><code>small_leg.dxf</code></a></td>
     </tr>
