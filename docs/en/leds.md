@@ -1,6 +1,6 @@
 # Working with a LED strip
 
-> **Note** Documentation for the [image](image.md) versions, starting with **0.20**. For older versions refer to [documentation for version **0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/leds.md).
+> **Note** Documentation for the [image](image.md) versions, starting with **0.21**. For older versions refer to [documentation for version **0.20**](https://github.com/CopterExpress/clover/blob/v0.20/docs/en/leds.md).
 
 Clover drone kits contain addressable LED strips based on *ws281x* drivers. Each LED may be set to any one of 16 million possible colors (each color is encoded by a 24-bit number). This allows making the Clover flight more spectacular, as well as show flight modes, display stages of current user program, and notify the pilot of other events.
 
@@ -26,8 +26,8 @@ Our [Raspberry Pi image](image.md) contains preinstalled modules for interfacing
 3. Configure the *ws281x* parameters in `~/catkin_ws/src/clover/clover/launch/led.launch`. Change the number of addressable LEDs and the GPIO pin used for control to match your configuration:
 
     ```xml
-    <param name="led_count" value="30"/>  <!-- Number of LEDs in the strip -->
-    <param name="gpio_pin" value="21"/>   <!-- GPIO data pin -->
+    <arg name="led_count" default="58"/>  <!-- Number of LEDs in the strip -->
+    <arg name="gpio_pin" default="21"/>   <!-- GPIO data pin -->
     ```
 
 High-level interface allows changing current effect (or animation) on the strip. It is exposed as the `/led/set_effect` service. It has the following arguments:
