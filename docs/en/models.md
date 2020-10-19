@@ -2,6 +2,84 @@
 
 This page contains models and drawings of some of the drone parts. They can be used for 3D printing and/or laser cutting replacement parts.
 
+## Clover 4.2
+
+### Milling
+
+<table>
+    <tr><th width=150>Preview</th><th>Part</th><th width=1>File</th></tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount.png"></td>
+        <td>
+            <b>Deck mount</b>.<br>
+            Function: Deck for installing battery and Raspberry Pi<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 1 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount.dxf"><code>deck_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/deck_mount_small.png"></td>
+        <td>
+            <b>Deck mount small</b>.<br>
+            Function: Deck for mounting FPV cameras and mounting stiffening plates.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 1 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount_small.dxf"><code>deck_mount_small.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/grab_deck.png"></td>
+        <td>
+            <b>Grab deck</b>.<br>
+            Function: Deck for installing grippers and external peripherals (camera, rangefinder).<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 1 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grab_deck.dxf"><code>grab_deck.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/led_mount_plate.png"></td>
+        <td>
+            <b>Led mount plate</b>.<br>
+            Function: Fixing the LED strip.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 1 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/led_mount_plate.dxf"><code>led_mount_plate.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard.png"></td>
+        <td>
+            <b>Prop guard</b>.<br>
+            Function: Prevent damage of propellers.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 4 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard.dxf"><code>prop_guard.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/prop_guard_mount.png"></td>
+        <td>
+            <b>Prop guard mount</b>.<br>
+            Function: Arc for securing the guard.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 2 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard_mount.dxf"><code>prop_guard_mount.dxf</code></a></td>
+    </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/small_leg.png"></td>
+        <td>
+            <b>Small leg</b>.<br>
+            Function: Standard footing element.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
+            Quantity: 2 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/small_leg.dxf"><code>small_leg.dxf</code></a></td>
+    </tr>
+</table>
+
 ## Clover 4
 
 ### 3D print
