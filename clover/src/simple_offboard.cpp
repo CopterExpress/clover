@@ -493,7 +493,7 @@ inline void checkKillSwitch()
 	if (!TIMEOUT(manual_control, state_timeout))
 		throw std::runtime_error("Manual control timeout, can't check kill switch status");
 
-	const KILL_SWITCH_BIT = 12; // TODO: link to source file
+	const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
 	bool kill_switch = manual_control.buttons & (1 << KILL_SWITCH_BIT);
 
 	if (kill_switch)
@@ -527,7 +527,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// Checks
 		checkState();
 
-		if (check_kill_switch) {
+		if (auto_arm && check_kill_switch) {
 			checkKillSwitch();
 		}
 
