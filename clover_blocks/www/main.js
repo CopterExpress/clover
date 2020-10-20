@@ -39,7 +39,9 @@ var workspace = Blockly.inject('blockly', {
 function readParams() {
 	return Promise.all([
 		ros.readParam('navigate_tolerance', true, 0.2),
-		ros.readParam('sleep_time', true, 0.2)
+		ros.readParam('yaw_tolerance', true, 20),
+		ros.readParam('sleep_time', true, 0.2),
+		ros.readParam('confirm_run', true, true),
 	]);
 }
 
@@ -107,7 +109,7 @@ new ROSLIB.Topic({ ros: ros.ros, name: ros.priv + 'prompt', messageType: 'clover
 		name: ros.priv + 'input/' + msg.id,
 		messageType: 'std_msgs/String',
 		latch: true
-	}).publish(new ROSLIB.Message({ data: response }));
+	}).publish(new ROSLIB.Message({ data: response || '' }));
 });
 
 window.stopProgram = function() {
@@ -123,7 +125,7 @@ ros.ros.on('close', update);
 ready.then(() => runButton.disabled = false);
 
 window.runProgram = function() {
-	if (!confirm('Run program?')) return;
+	if (ros.params.confirm_run && !confirm('Run program?')) return;
 
 	runRequest = true;
 	update();
