@@ -54,7 +54,7 @@ id_маркера размер_маркера x y z угол_z угол_y уго
 Файл карты может быть сгенерирован с помощью инструмента `genmap.py`:
 
 ```bash
-rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py length x y dist_x dist_y first -o test_map.txt
 ```
 
 Где `length` – размер маркера, `x` – количество маркеров по оси *x*, `y` - количество маркеров по оси *y*, `dist_x` – расстояние между центрами маркеров по оси *x*, `y` – расстояние между центрами маркеров по оси *y*, `first` – ID первого (левого нижнего) маркера, `test_map.txt` – название файла с картой. Дополнительный ключ `--bottom-left` позволяет нумеровать маркеры с левого нижнего угла.
@@ -62,7 +62,7 @@ rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clo
 Пример:
 
 ```bash
-rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 -o test_map.txt
 ```
 
 Дополнительную информацию по утилите можно получить по ключу `-h`: `rosrun aruco_pose genmap.py -h`.
