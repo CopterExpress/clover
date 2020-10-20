@@ -13,7 +13,7 @@
 Generate map file for aruco_map nodelet.
 
 Usage:
-  genmap.py <length> <x> <y> <dist_x> <dist_y> [<first>] [<x0>] [<y0>] [--top-left | --bottom-left]
+  genmap.py <length> <x> <y> <dist_x> <dist_y> [<first>] [<x0>] [<y0>] [--top-left | --bottom-left] [-o <filename>]
   genmap.py (-h | --help)
 
 Options:
@@ -27,6 +27,7 @@ Options:
   <y0>           Y coordinate for the first marker [default: 0]
   --top-left     First marker is on top-left (default)
   --bottom-left  First marker is on bottom-left
+  -o <filename>  Output map file name in the 'map' subdirectory of aruco_pose package
 
 Example:
   rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > $(catkin_find aruco_pose map)/test_map.txt
@@ -34,6 +35,8 @@ Example:
 
 from __future__ import print_function
 
+import sys
+from os import path
 from docopt import docopt
 
 
@@ -49,14 +52,19 @@ dist_x = float(arguments['<dist_x>'])
 dist_y = float(arguments['<dist_y>'])
 bottom_left = arguments['--bottom-left']
 
+if arguments['-o'] is None:
+    output = sys.stdout
+else:
+    output = open(path.join(path.dirname(__file__), '..', 'map', arguments['-o']), 'w')
+
 max_y = y0 + (markers_y - 1) * dist_y
 
-print('# id\tlength\tx\ty\tz\trot_z\trot_y\trot_x')
+output.write('# id\tlength\tx\ty\tz\trot_z\trot_y\trot_x\n')
 for y in range(markers_y):
     for x in range(markers_x):
         pos_x = x0 + x * dist_x
         pos_y = y0 + y * dist_y
         if not bottom_left:
             pos_y = max_y - pos_y
-        print('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(first, length, pos_x, pos_y, 0, 0, 0, 0))
+        output.write('{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\n'.format(first, length, pos_x, pos_y, 0, 0, 0, 0))
         first += 1
