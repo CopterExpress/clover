@@ -4,7 +4,7 @@ A bundle for autonomous navigation and drone control.
 
 ## Manual installation
 
-Install ROS Melodic according to the [documentation](http://wiki.ros.org/melodic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
+Install ROS Noetic according to the [documentation](http://wiki.ros.org/noetic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
 
 Clone this repo to directory `~/catkin_ws/src/clover`:
 
