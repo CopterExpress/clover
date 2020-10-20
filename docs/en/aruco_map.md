@@ -50,7 +50,7 @@ Some map examples are provided in [`~/catkin_ws/src/clover/aruco_pose/map`](http
 Grid maps may be generated using the `genmap.py` script:
 
 ```bash
-rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py length x y dist_x dist_y first -o test_map.txt
 ```
 
 `length` is the size of each marker, `x` is the marker count along the *x* axis, `y` is the marker count along the *y* axis, `dist_x` is the distance between the centers of adjacent markers along the *x* axis, `dist_y` is the distance between the centers of the *y* axis, `first` is the ID of the first marker (top left marker, unless `--bottom-left` is specified), `test_map.txt` is the name of the generated map file. The optional `--bottom-left` parameter changes the numbering of markers, making the bottom left marker the first one.
@@ -58,7 +58,7 @@ rosrun aruco_pose genmap.py length x y dist_x dist_y first > ~/catkin_ws/src/clo
 Usage example:
 
 ```bash
-rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 > ~/catkin_ws/src/clover/aruco_pose/map/test_map.txt
+rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 -o test_map.txt
 ```
 
 Additional information on the utility can be obtained using `-h` key: `rosrun aruco_pose genmap.py -h`.
