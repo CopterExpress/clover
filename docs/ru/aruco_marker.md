@@ -110,9 +110,9 @@ rospy.init_node('my_node')
 # ...
 
 def markers_callback(msg):
-    print 'Detected markers:':
+    print('Detected markers:'):
     for marker in msg.markers:
-        print 'Marker: %s' % marker
+        print('Marker: %s' % marker)
 
 # Подписываемся. При получении сообщения в топик aruco_detect/markers будет вызвана функция markers_callback.
 rospy.Subscriber('aruco_detect/markers', MarkerArray, markers_callback)

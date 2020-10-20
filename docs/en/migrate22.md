@@ -19,7 +19,7 @@ python3 flight.py
 Python 3 has certain syntax differences in comparison with the old version. Instead of `print` *operator*:
 
 ```python
-print 'Clover is the best'
+print 'Clover is the best'  # this won't work
 ```
 
 use `print` *function*:

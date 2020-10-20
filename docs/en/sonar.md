@@ -83,7 +83,7 @@ pi.callback(ECHO, pigpio.FALLING_EDGE, fall)
 
 while True:
     # Reading the distance:
-    print read_distance()
+    print(read_distance())
 
 ```
 
@@ -104,7 +104,7 @@ def read_distance_filtered():
     return numpy.median(history)
 
 while True:
-    print read_distance_filtered()
+    print(read_distance_filtered())
 ```
 
 An example of charts of initial and filtered data:

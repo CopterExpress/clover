@@ -34,10 +34,10 @@ Read more in the [GPS connection](gps.md) article.
 
 > **Info** For studying Python programming language, see [tutorial](https://www.learnpython.org/en/Welcome).
 
-After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts. In order to run a Python script use the `python` command:
+After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts. In order to run a Python script use the `python3` command:
 
 ```bash
-python flight.py
+python3 flight.py
 ```
 
 Below is a complete flight program that performs a takeoff, flies forward and lands:

@@ -140,7 +140,7 @@ def image_callback(data):
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 

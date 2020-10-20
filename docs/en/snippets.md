@@ -319,7 +319,7 @@ def flip():
     rospy.loginfo('finish flip')
     set_position(x=start.x, y=start.y, z=start.z, yaw=start.yaw)  # finish flip
 
-print navigate(z=2, speed=1, frame_id='body', auto_arm=True)  # take off
+print(navigate(z=2, speed=1, frame_id='body', auto_arm=True))  # take off
 rospy.sleep(10)
 
 rospy.loginfo('flip')
