@@ -36,6 +36,7 @@
 #include <mavros_msgs/Thrust.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
+#include <mavros_msgs/ManualControl.h>
 
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
@@ -74,7 +75,7 @@ ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
 float default_speed;
 bool auto_release;
-bool land_only_in_offboard, nav_from_sp;
+bool land_only_in_offboard, nav_from_sp, check_kill_switch;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -122,6 +123,7 @@ enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
 // Last received telemetry messages
 mavros_msgs::State state;
 mavros_msgs::StatusText statustext;
+mavros_msgs::ManualControl manual_control;
 PoseStamped local_position;
 TwistStamped velocity;
 NavSatFix global_position;
@@ -486,6 +488,18 @@ void publishSetpoint(const ros::TimerEvent& event)
 	publish(event.current_real);
 }
 
+inline void checkKillSwitch()
+{
+	if (!TIMEOUT(manual_control, state_timeout))
+		throw std::runtime_error("Manual control timeout, can't check kill switch status");
+
+	const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
+	bool kill_switch = manual_control.buttons & (1 << KILL_SWITCH_BIT);
+
+	if (kill_switch)
+		throw std::runtime_error("Kill switch is on");
+}
+
 inline void checkState()
 {
 	if (TIMEOUT(state, state_timeout))
@@ -512,6 +526,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		// Checks
 		checkState();
+
+		if (auto_arm && check_kill_switch) {
+			checkKillSwitch();
+		}
 
 		// default frame is local frame
 		if (frame_id.empty())
@@ -834,6 +852,7 @@ int main(int argc, char **argv)
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("nav_from_sp", nav_from_sp, true);
+	nh_priv.param("check_kill_switch", check_kill_switch, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
@@ -860,6 +879,7 @@ int main(int argc, char **argv)
 	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
 	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto manual_control_sub = nh.subscribe("mavros/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
 	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
