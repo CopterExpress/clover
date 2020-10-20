@@ -2,6 +2,9 @@
     <arg name="aruco_detect" default="true"/>
     <arg name="aruco_map" default="false"/>
     <arg name="aruco_vpe" default="false"/>
+    <arg name="placement" default="floor"/> <!-- markers placement: floor, ceiling, unknown -->
+    <arg name="length" default="0.33"/> <!-- not-in-map markers length, m -->
+    <arg name="map" default="map.txt"/> <!-- markers map file name -->
 
     <!-- For additional help go to https://clover.coex.tech/aruco -->
 
@@ -12,11 +15,14 @@
         <remap from="map_markers" to="aruco_map/markers" if="$(arg aruco_map)"/>
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
-        <param name="known_tilt" value="map"/>
-        <param name="length" value="0.33"/>
+        <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
+        <param name="known_tilt" value="map_flipped" if="$(eval position == 'ceiling')"/>
+        <param name="length" value="$(arg length)"/>
         <!-- aruco detector parameters -->
         <param name="cornerRefinementMethod" value="2"/> <!-- contour refinement -->
         <param name="minMarkerPerimeterRate" value="0.075"/> <!-- 0.075 for 320x240, 0.0375 for 640x480 -->
+        <!-- length override example: -->
+        <!-- <param name="length_override/3" value="0.1"/> -->
     </node>
 
     <!-- aruco_map: estimate aruco map pose -->
@@ -24,8 +30,9 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
-        <param name="map" value="$(find aruco_pose)/map/map.txt"/>
-        <param name="known_tilt" value="map"/>
+        <param name="map" value="$(find aruco_pose)/map/$(arg map)"/>
+        <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
+        <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
         <param name="image_axis" value="true"/>
         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
         <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
