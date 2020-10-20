@@ -84,6 +84,7 @@
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
   * [Migration to v0.20](migrate20.md)
+  * [Migration to v0.22](migrate22.md)
 * [Clover-based projects](projects.md)
   * [Drone show](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)

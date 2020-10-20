@@ -90,6 +90,7 @@
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
   * [Переход на версию 0.20](migrate20.md)
+  * [Переход на версию 0.22](migrate22.md)
 * [Мероприятия](events.md)
   * [CopterHack-2021](copterhack2021.md)
   * [CopterHack-2019](copterhack2019.md)
