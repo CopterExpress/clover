@@ -47,3 +47,9 @@ Python 3:
 Указание кодировки файла (`# coding: utf8`) перестало быть необходимым.
 
 Полное описание всех изменений языка смотрите в [соответствующей статье](https://pythonworld.ru/osnovy/python2-vs-python3-razlichiya-sintaksisa.html).
+
+## Переход на ROS Noetic
+
+<img src="../assets/noetic.png" width=200>
+
+Версия ROS Melodic обновлена до ROS Noetic. Смотрите полный список изменений в [официальной документации ROS](http://wiki.ros.org/noetic/Migration).

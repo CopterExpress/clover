@@ -47,3 +47,9 @@ For strings `unicode` type is used by default (instead of `str` type).
 Encoding specification (`# coding: utf8`) is not necessary any more.
 
 More details on all the language changes see in [appropriate article](https://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html).
+
+## Move to ROS Noetic
+
+<img src="../assets/noetic.png" width=200>
+
+ROS Melodic version was updated to ROS Noetic. See the full list of changes in the [ROS official documentation](http://wiki.ros.org/noetic/Migration).
