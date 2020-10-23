@@ -12,7 +12,7 @@ Read more about the interface and the Protocol in [this article](https://habr.co
 
 ## Linux TTY
 
-In Linux, there is the concept of Posix Terminal Interface (read more [here](https://ru.wikipedia.org/wiki/TTY-абстракция)). It is an abstraction over the serial or virtual interface that allows several agents to work with the device simultaneously.
+In Linux, there is the concept of POSIX Terminal Interface (read more [here](https://en.wikipedia.org/wiki/POSIX_terminal_interface). It is an abstraction over the serial or virtual interface that allows several agents to work with the device simultaneously.
 
 An example of such abstraction in Raspbian may be `/dev/tty1` – the device for text output to the screen connected via HDMI.
 

@@ -14,7 +14,7 @@ Consult the [official QGroundControl user guide](https://docs.qgroundcontrol.com
 
 Prepare the MicroSD card for your flight controller.
 
-<img src="../assets/pix-sd.png" alt="Pixracer и MicroSD-карта" class="zoom center" width=400>
+<img src="../assets/pix-sd.png" alt="Pixracer and MicroSD-card" class="zoom center" width=400>
 
 * Put the card into your computer (use an adapter if necessary).
 * Format the card to FAT32 filesystem. Right click on the SD card icon in Windows Explorer and select "Format". Use the Disk Utility in macOS.
