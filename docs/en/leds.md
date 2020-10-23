@@ -12,7 +12,7 @@ Our [Raspberry Pi image](image.md) contains preinstalled modules for interfacing
 * control individual LED colors (low-level control);
 * configure the strip to display flight events.
 
-> **Caution** LED strip can consume a lot of power! Powering it from a Raspyerry Pi may overload the computer's power circuitry. Consider using a separate BEC as a power source.
+> **Caution** LED strip can consume a lot of power! Powering it from a Raspberry Pi may overload the computer's power circuitry. Consider using a separate BEC as a power source.
 
 ## High-level control
 

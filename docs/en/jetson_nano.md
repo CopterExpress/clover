@@ -137,7 +137,7 @@ Jetson Nano currently does not support older Raspberry Pi v1 cameras (that are b
 
 Fortunately, these cameras are available using GStreamer. You can try using the [`gscam`](http://wiki.ros.org/gscam) ROS package or our [`jetson_camera`](https://github.com/sfalexrog/jetson_camera) node. The latter requires you to build OpenCV 3.4 from source with GStreamer support.
 
-The GStreamer pipelines are available at [JetsonHacksNano CSI camera reposotory](https://github.com/JetsonHacksNano/CSI-Camera).
+The GStreamer pipelines are available at [JetsonHacksNano CSI camera repository](https://github.com/JetsonHacksNano/CSI-Camera).
 
 You may also notice that the camera image has a red tint that is more pronounced near the edges. This can be fixed by image signal processor tuning. Generally this should be done by your camera manufacturer; [here is a sample ISP configuration](https://www.arducam.com/docs/camera-for-jetson-nano/fix-red-tint-with-isp-tuning/) from Adrucam
 

@@ -4,7 +4,7 @@ For interaction with ROS topics and services on a Raspberry Pi, you can use the 
 
 The main tutorial for rosserial: http://wiki.ros.org/rosserial_arduino/Tutorials
 
-Arudino is to be installed on Clover and connected via a USB port.
+Arduino is to be installed on Clover and connected via a USB port.
 
 ## Configuring Arduino IDE
 
@@ -14,7 +14,7 @@ To work with ROS and Arduino, you should understand the format of installed pack
 rosrun rosserial_arduino make_libraries.py.
 ```
 
-The obtained folder `ros_lib` is to be copied to `<sketches folder>/libraries` on a computer with Arudino IDE.
+The obtained folder `ros_lib` is to be copied to `<sketches folder>/libraries` on a computer with Arduino IDE.
 
 ## Configuring Raspberry Pi
 
@@ -24,7 +24,7 @@ To run the program on Arduino once, you can use command:
 roslaunch clover arduino.launch
 ```
 
-To start the link with Arduino at the startup automatically, set argument `arudino` in the Clover launch file (`~/catkin_ws/src/clover/clover/launch/clover.launch`):
+To start the link with Arduino at the startup automatically, set argument `arduino` in the Clover launch file (`~/catkin_ws/src/clover/clover/launch/clover.launch`):
 
 ```xml
 <arg name="arduino" default="true"/>
@@ -202,7 +202,7 @@ getTelemetry.call(gt_req, gt_res);
 
 ## Problem
 
-When using Arudino Nano, RAM may be insufficient. In this case, messages will appear in the Aruino IDE like:
+When using Arduino Nano, RAM may be insufficient. In this case, messages will appear in the Arduino IDE like:
 
 ```
 Global variables use 1837 bytes (89%) of the dynamic memory, leaving 211 bytes for local variables. The maximum is 2048 bytes.

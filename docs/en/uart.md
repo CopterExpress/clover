@@ -37,7 +37,7 @@ By default, Raspberry Pi 3 PL011 is connected to the Bluetooth module. And Mini 
 For the sake of convenience of working with these outputs, aliases exist in Raspbian:
 
 * `/dev/serial0` – always points to the TTY device that is connected to the GPIO ports.
-* `/dev/serial1` – always points to the TTY device that is connected to the Bluetooh module.
+* `/dev/serial1` – always points to the TTY device that is connected to the Bluetooth module.
 
 ### Configuration of UART on Raspberry Pi 3
 
