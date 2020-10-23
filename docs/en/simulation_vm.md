@@ -16,9 +16,9 @@ You can download the latest VM image [in the VM releases repository](https://git
 
 ## Setting up the VM
 
-You need to use a VM manager that supports OVF format, like [Virtualbox](https://www.virtualbox.org/wiki/Downloads), [VMware Player](https://www.vmware.com/products/workstation-player.html) or [VMware Workstation](https://www.vmware.com/products/workstation-pro.html).
+You need to use a VM manager that supports OVF format, like [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [VMware Player](https://www.vmware.com/products/workstation-player.html) or [VMware Workstation](https://www.vmware.com/products/workstation-pro.html).
 
-> **Note** At the time of writing Virtualbox had issues running the VM, particularly with 3D applications. We recommend using VMware Player or VMware Workstation if possible. The following steps assume you're using VMware Player.
+> **Note** At the time of writing VirtualBox had issues running the VM, particularly with 3D applications. We recommend using VMware Player or VMware Workstation if possible. The following steps assume you're using VMware Player.
 
 Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it may be supported by your hardware but turned off by default). The steps to enable virtualization differ from manufacturer to manufacturer, but should be described in your system manual. Consult your system's manufacturer if you're having trouble turning virtualization on.
 
@@ -33,7 +33,7 @@ Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it ma
 2. Right-click on the VM name and select **Virtual Machine Settings**. In the new window, set the following parameters:
 
     * increase the amount of memory available to the virtual machine (a good rule of thumb is 2048 MB per CPU core, but no less than 4 GB):
-    ![Increasing avaliable memory](../assets/simulation_setup_vm/03_max_memory.png)
+    ![Increasing available memory](../assets/simulation_setup_vm/03_max_memory.png)
     * increase the amount available CPU cores:
     ![Increasing cpu cores](../assets/simulation_setup_vm/04_core_count.png)
     * enable 3D acceleration:
