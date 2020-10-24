@@ -53,3 +53,7 @@ Python 3:
 <img src="../assets/noetic.png" width=200>
 
 Версия ROS Melodic обновлена до ROS Noetic. Смотрите полный список изменений в [официальной документации ROS](http://wiki.ros.org/noetic/Migration).
+
+## Изменения в launch-файлах
+
+Упрощено конфигурирование навигации с использованием ArUco-маркеров. Подробнее в статьях по [навигации по маркерам](aruco_marker.md) и [навигации по картам маркеров](aruco_map.md).
