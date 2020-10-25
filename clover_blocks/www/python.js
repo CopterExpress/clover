@@ -391,7 +391,7 @@ Blockly.Python.set_led = function(block) {
 		return `set_leds([LEDState(index=${index}, r=${color.r}, g=${color.g}, b=${color.b})])\n`;
 	} else {
 		let parseColor = Blockly.Python.provideFunction_('parse_color', [PARSE_COLOR]);
-		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode})])\n`;
+		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode}))])\n`;
 	}
 }
 
