@@ -334,4 +334,4 @@ The *Clover 4* set allows you to install various flight controllers, for example
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
 
-> **Success** The drone is assembled, then perform ["setup"](setup.md).
+> **Success** The drone is assembled, next perform the ["setup"](setup.md) step.
