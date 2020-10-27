@@ -8,6 +8,8 @@ In addition to [native installation instructions](simulation_native.md), we prov
 * preconfigured Gazebo simulation environment;
 * Visual Studio Code with C++ and Python plugins.
 
+> **Info** The default username on the VM is `clover`, with password `clover`.
+
 The VM is an easy way to set up a simulation environment, but can be used as a development environment for a real drone as well.
 
 You can download the latest VM image [in the VM releases repository](https://github.com/CopterExpress/clover_vm/releases).
