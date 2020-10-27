@@ -109,13 +109,13 @@
         <img src="../assets/assembling_soldering_clever_4/esc_4.png" width=300 class="zoom border">
     </div>
 
-3. Притяните регуляторы оборотов (ESC) хомутами
+3. Притяните регуляторы оборотов (ESC) хомутами.
 
     <img id="prop_rotation" src="../assets/assembling_clever4/esc_5.png" width=300 class="zoom border center">
 
 4. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежьте лишнее.
 
-5. Зачистите и залудите обрезанные провода
+5. Зачистите и залудите обрезанные провода.
 
 6. Залудите контактные площадки на плате распределения питания.
 
@@ -141,7 +141,7 @@
         <img src="../assets/assembling_soldering_clever_4/esc_9.png" width=300 class="zoom border">
     </div>
 
-12. Припаяйте 3 разъема JST мама к 2ум площадкам *5V* и площадке *bat+*
+12. Припаяйте 3 разъема JST мама к 2ум площадкам *5V* и площадке *bat+*.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_10.png" width=300 class="zoom border">
