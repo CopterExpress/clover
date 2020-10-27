@@ -1,13 +1,5 @@
 # clover🍀: create autonomous drones easily
 
-<table align=center>
-    <tr>
-        <td align=center><a href="https://px4.io"><img src="docs/assets/px4.svg" height=32></a></td>
-        <td align=center><a href="https://www.raspberrypi.org"><img src="docs/assets/rpi.svg" height=36></a></td>
-        <td align=center><a href="https://www.ros.org"><img src="docs/assets/ros.svg" height=24></a></td>
-    </tr>
-</table>
-
 <img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="COEX Clover Drone">
 
 Clover is an open source [ROS](https://www.ros.org)-based framework, providing user-friendly tools to control [PX4](https://px4.io)-powered drones. Clover is available as a ROS package, but is shipped mainly as a preconfigured image for Raspberry Pi. Once you've installed Raspberry Pi on your drone and flashed the image to its microSD card, taking the drone up in the air is a matter of minutes.
