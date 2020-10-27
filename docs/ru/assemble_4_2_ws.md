@@ -102,46 +102,50 @@
         <img src="../assets/assembling_soldering_clever_4/esc_2.png" width=300 class="zoom border">
     </div>
 
-2. Установите регуляторы оборотов (ESC) в соответствующие места на луче и притяните хомутами.
+2. Установите регуляторы оборотов (ESC) в соответствующие места на луче.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_3.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_4.png" width=300 class="zoom border">
     </div>
 
-3. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежьте лишнее.
+3. Притяните регуляторы оборотов (ESC) хомутами
 
-4. Зачистите и залудите обрезанные провода
+    <img id="prop_rotation" src="../assets/assembling_clever4/esc_5.png" width=300 class="zoom border center">
 
-5. Залудите контактные площадки на плате распределения питания.
+4. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежьте лишнее.
 
-6. Припаяйте силовые провода регуляторов оборотов к плате распределения питания.
+5. Зачистите и залудите обрезанные провода
+
+6. Залудите контактные площадки на плате распределения питания.
+
+7. Припаяйте силовые провода регуляторов оборотов к плате распределения питания.
 
     <div class="image-group">
-        <img src="../assets/assembling_soldering_clever_4/esc_5.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_6.png" width=300 class="zoom border">
+        <img src="../assets/assembling_soldering_clever_4/esc_7.png" width=300 class="zoom border">
     </div>
 
     > **Caution** Будьте внимательны к подписям контактов на плате. Красный провод должен идти к площадке с подписью *+*, а черный к подписи *-*.
 
-7. Обрежьте лишний фазный кабель идущий от моторов.
+8. Обрежьте лишний фазный кабель идущий от моторов.
 
-8. Зачистите и залудите фазные кабели.
+9. Зачистите и залудите фазные кабели.
 
-9. Залудите контактные площадки регуляторов оборотов.
+10. Залудите контактные площадки регуляторов оборотов.
 
-10. Припаяйте фазные кабели к контактным площадкам регуляторов в любом порядке.
+11. Припаяйте фазные кабели к контактным площадкам регуляторов в любом порядке.
 
     <div class="image-group">
-        <img src="../assets/assembling_soldering_clever_4/esc_7.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_8.png" width=300 class="zoom border">
+        <img src="../assets/assembling_soldering_clever_4/esc_9.png" width=300 class="zoom border">
     </div>
 
-11. Припаяйте 3 разъема JST мама к 2ум площадкам *5V* и площадке *bat+*
+12. Припаяйте 3 разъема JST мама к 2ум площадкам *5V* и площадке *bat+*
 
     <div class="image-group">
-        <img src="../assets/assembling_soldering_clever_4/esc_9.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_10.png" width=300 class="zoom border">
+        <img src="../assets/assembling_soldering_clever_4/esc_11.png" width=300 class="zoom border">
     </div>
 
 ## Установка полетного контроллера
@@ -333,5 +337,16 @@
 3. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х8.
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
+
+4. Подключите полетный контролер к Raspberry Pi с помощью USB к кабеля.
+
+    <div class="image-group">
+        <img src="../assets/assembling_soldering_clever_4/guard_4.png" width=300 class="zoom border">
+        <img src="../assets/assembling_soldering_clever_4/guard_5.png" width=300 class="zoom border">
+    </div>
+
+5. Установите ремешок для крепления АКБ.
+
+    <img src="../assets/assembling_soldering_clever_4/guard_6.png" width=300 class="zoom border center">
 
 > **Success** Дрон собран, далее произведите [настройку](setup.md).
