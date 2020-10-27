@@ -16,7 +16,7 @@
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
-        <param name="known_tilt" value="map_flipped" if="$(eval position == 'ceiling')"/>
+        <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
         <param name="length" value="$(arg length)"/>
         <!-- aruco detector parameters -->
         <param name="cornerRefinementMethod" value="2"/> <!-- contour refinement -->
