@@ -180,6 +180,13 @@ target_link_libraries(aruco_pose
   ${OpenCV_LIBRARIES}
 )
 
+# Prevent aruco_pose from having undefined symbols
+set_property(TARGET aruco_pose
+  APPEND
+  PROPERTY LINK_FLAGS
+  -Wl,--no-undefined
+)
+
 #############
 ## Install ##
 #############
