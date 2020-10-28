@@ -111,7 +111,7 @@
 
 3. Притяните регуляторы оборотов (ESC) хомутами.
 
-    <img id="prop_rotation" src="../assets/assembling_clever4/esc_5.png" width=300 class="zoom border center">
+    <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/esc_5.png" width=300 class="zoom border center">
 
 4. Отмерьте необходимое количество силового провода регуляторов оборотов(ESC), и обрежьте лишнее.
 
