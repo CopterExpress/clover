@@ -7,6 +7,7 @@ endif()
 
 message(STATUS "Adding vendored aruco_pose OpenCV module")
 add_library(_opencv_aruco STATIC
+  vendor/aruco/src/apriltag_quad_thresh.cpp
   vendor/aruco/src/aruco.cpp
   vendor/aruco/src/charuco.cpp
   vendor/aruco/src/dictionary.cpp
