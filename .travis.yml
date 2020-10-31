@@ -38,7 +38,7 @@ jobs:
         - cp images/*.zip imgcache
       after_success:
         - sudo chmod -R 777 *
-        - cd images && zip ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
+        - cd images && zip -7 ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
       before_deploy:
         # Set up git user name and tag this commit
         - git config --local user.name "goldarte"
