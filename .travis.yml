@@ -10,7 +10,7 @@ env:
     - IMAGE_VERSION=${TRAVIS_TAG:-${TRAVIS_COMMIT:0:7}}
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
 git:
-  depth: 50
+  depth: 25
 jobs:
   fast_finish: true
   include:
