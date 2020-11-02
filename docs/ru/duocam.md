@@ -1,6 +1,6 @@
 # COEX DuoCam
 
-![duocam](../assets/duocam/gitup_seek.png)
+![duocam](../assets/duocam/gitup_seek.jpg)
 
 "COEX DuoCam" - это программно-аппаратный комплекс, позволяющий получать комбинированное визуально-тепловизионное изображение.
 
