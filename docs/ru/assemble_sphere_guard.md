@@ -73,18 +73,14 @@
 
 2. Установите корзинку в середину верхней части сферы.
 
-    <div class="image-group">
-        <img src="../assets/sphere_guard/sphere_17.svg" width=300 class="zoom border">
-        <img src="../assets/sphere_guard/sphere_18.svg" width=300 class="zoom border">
-    </div>
+    <img src="../assets/sphere_guard/sphere_17.svg" width=300 class="zoom border center">
 
 ## Сборка нижней части сферы
 
 1. Соберите нижнюю часть сферы.
 
-    <div class="image-group">
-        <img src="../assets/sphere_guard/sphere_19.svg" width=300 class="zoom border">
-        <img src="../assets/sphere_guard/sphere_20.svg" width=300 class="zoom border">
-    </div>
+    <img src="../assets/sphere_guard/sphere_18.svg" width=300 class="zoom border center">
 
 2. Соберите шаровую защиту из 3-х частей.
+
+    <img src="../assets/sphere_guard/sphere_19.svg" width=300 class="zoom border center">
