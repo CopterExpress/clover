@@ -102,20 +102,24 @@
         <img src="../assets/assembling_soldering_clever_4/esc_2.png" width=300 class="zoom border">
     </div>
 
-2. Install the speed controllers (ESC) in the appropriate positions on the beam and tighten with cable ties.
+2. Install the speed controllers (ESC) to the appropriate positions on the beam.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_3.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_4.png" width=300 class="zoom border">
     </div>
 
-3. Measure out the required amount of ESC power wire, and cut off the excess.
+3. Tighten the speed controllers (ESC) with cable ties.
 
-4. Strip and tin the cut wires
+    <img id="prop_rotation" src="../assets/assembling_soldering_clever_4/esc_5.png" width=300 class="zoom border center">
 
-5. Tin the contact pads on the power distribution board.
+4. Measure out the required amount of ESC power wire, and cut off the excess.
 
-6. Solder the ESC power wires to the power distribution board.
+5. Strip and tin the cut wires
+
+6. Tin the contact pads on the power distribution board.
+
+7. Solder the ESC power wires to the power distribution board.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_5.png" width=300 class="zoom border">
@@ -124,20 +128,20 @@
 
      > **Caution** Be careful with the pin signatures on the board. The red wire should go to the site with the signature *+*, and the black one to the signature *-*.
 
-7. Cut off the excess phase cable coming from the motors.
+8. Cut off the excess phase cable coming from the motors.
 
-8. Strip and tin the phase cables.
+9. Strip and tin the phase cables.
 
-9. Tin the contact pads of the governors.
+10. Tin the contact pads of the governors.
 
-10. Solder the phase cables to the contact pads of the regulators in any order.
+11. Solder the phase cables to the contact pads of the regulators in any order.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_7.png" width=300 class="zoom border">
         <img src="../assets/assembling_soldering_clever_4/esc_8.png" width=300 class="zoom border">
     </div>
 
-11. Solder 3 female JST connectors to *5V* pads and *bat+* pad
+12. Solder 3 female JST connectors to *5V* pads and *bat+* pad
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/esc_9.png" width=300 class="zoom border">
@@ -333,5 +337,16 @@ The *Clover 4* set allows you to install various flight controllers, for example
 3. Install the protection and fix it to the beams with self-locking nuts and M3x8 screws.
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
+
+4. Connect the flight controller to your Raspberry Pi using the USB cable.
+
+    <div class="image-group">
+        <img src="../assets/assembling_soldering_clever_4/guard_4.png" width=300 class="zoom border">
+        <img src="../assets/assembling_soldering_clever_4/guard_5.png" width=300 class="zoom border">
+    </div>
+
+5. Install the battery strap.
+
+    <img src="../assets/assembling_soldering_clever_4/guard_6.png" width=300 class="zoom border center">
 
 > **Success** The drone is assembled, next perform the ["setup"](setup.md) step.
