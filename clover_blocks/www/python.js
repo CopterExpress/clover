@@ -401,16 +401,16 @@ function pigpio() {
 }
 
 const GPIO_READ = `\ndef gpio_read(pin):
-	pi.set_mode(pin, pigpio.INPUT)
-	return pi.read(pin)\n`;
+    pi.set_mode(pin, pigpio.INPUT)
+    return pi.read(pin)\n`;
 
 const GPIO_WRITE = `\ndef gpio_write(pin, level):
-	pi.set_mode(pin, pigpio.OUTPUT)
-	pi.write(pin, level)\n`;
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.write(pin, level)\n`;
 
 const SET_SERVO = `\ndef set_servo(pin, pwm):
-	pi.set_mode(pin, pigpio.OUTPUT)
-	pi.set_servo_pulsewidth(pin, pwm)\n`;
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.set_servo_pulsewidth(pin, pwm)\n`;
 
 Blockly.Python.gpio_read = function(block) {
 	pigpio();
