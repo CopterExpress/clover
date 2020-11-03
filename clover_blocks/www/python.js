@@ -15,7 +15,7 @@ Blockly.Python.addReservedWords('_b,_print');
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
 Blockly.Python.addReservedWords('pigpio,pi,Range');
-Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
+Blockly.Python.addReservedWords('SetLEDEffect,set_effect,led_count,get_led_count');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
 const IMPORT_SRV = `from clover import srv
@@ -86,6 +86,9 @@ function generateROSDefinitions() {
 	if (rosDefinitions.setLeds) {
 		Blockly.Python.definitions_['import_set_led'] = 'from led_msgs.srv import SetLEDs\nfrom led_msgs.msg import LEDState';
 		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs, persistent=True)\n`;
+	}
+	if (rosDefinitions.ledStateArray) {
+		Blockly.Python.definitions_['import_led_state_array'] = 'from led_msgs.msg import LEDStateArray';
 	}
 	if (rosDefinitions.navigateWait) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
@@ -393,6 +396,21 @@ Blockly.Python.set_led = function(block) {
 		let parseColor = Blockly.Python.provideFunction_('parse_color', [PARSE_COLOR]);
 		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode}))])\n`;
 	}
+}
+
+const GET_LED_COUNT = `led_count = None
+
+def get_led_count():
+    global led_count
+    if led_count is None:
+        led_count = len(rospy.wait_for_message('led/state', LEDStateArray, timeout=10).leds)
+    return led_count\n`;
+
+Blockly.Python.led_count = function(block) {
+	rosDefinitions.ledStateArray = true;
+	initNode();
+	Blockly.Python.definitions_['get_led_count'] = GET_LED_COUNT;
+	return [`get_led_count()`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 function pigpio() {

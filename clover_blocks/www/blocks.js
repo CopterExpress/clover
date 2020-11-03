@@ -353,6 +353,17 @@ Blockly.Blocks['set_effect'] = {
 	}
 };
 
+Blockly.Blocks['led_count'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("LED count");
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_LED);
+		this.setTooltip("Returns the number of LEDs (configured in led.launch).");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
+
 Blockly.Blocks['take_off'] = {
 	init: function () {
 		this.appendValueInput("ALT")
