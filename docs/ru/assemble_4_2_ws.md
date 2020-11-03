@@ -51,7 +51,7 @@
 
 ## Сборка рамы
 
-1. Совместите 4 луча с центральной декой, зафиксируйте их при помощи винтов М3х8 и гаек с нейлоновой вставкой.
+1. Совместите 4 луча с центральной декой, зафиксируйте их при помощи винтов М3х8 и самоконтрящихся гаек.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/frame_1.png" width=300 class="zoom border">
@@ -219,7 +219,7 @@
         <img src="../assets/assembling_soldering_clever_4/raspberry_3.png" width=300 class="zoom border">
     </div>
 
-4. Установите Raspberry Pi на монтажную деку закрепив ее болтами М3х6.
+4. Установите Raspberry Pi на монтажную деку, закрепив ее болтами М3х6.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_4.png" width=300 class="zoom border center">
 
@@ -260,7 +260,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_12.png" width=300 class="zoom border center">
 
-10. На малую монтажную деку установите камеру и зафиксируйте ее двумя короткими саморезами, как указано на рисунке.
+10. На малую монтажную деку установите камеру и зафиксируйте ее двумя короткими саморезами.
 
     > **Caution** Если закрепить камеру в верхнем правом углу и шляпка самореза будет касаться элемента на камере, камера не будет работать.
 
@@ -270,7 +270,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_14.png" width=300 class="zoom border center">
 
-12. Собранный модуль установите на над модулем Raspberry Pi и зафиксируйте болтами М3х8.
+12. Собранный модуль установите над модулем Raspberry Pi и зафиксируйте болтами М3х8.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_15.png" width=300 class="zoom border center">
 
@@ -282,7 +282,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_17.png" width=300 class="zoom border center">
 
-15. Соедините с радиоприемник и полетный контроллер с помощью соответствующего кабеля.
+15. Соедините радиоприемник и полетный контроллер с помощью 4-х пинового кабеля.
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_18.png" width=300 class="zoom border center">
 
