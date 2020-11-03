@@ -80,6 +80,7 @@
   * [Подключение GPS](gps.md)
   * [Работа с ИК датчиками](ir_sensors.md)
   * [Установка FPV](fpv.md)
+  * [Сборка шаровой защиты](sphere_guard.md)
   * [Управление в режиме тренера](trainer_mode.md)
   * [Техника лужения](tinning.md)
   * [Подключение PX4FLOW](px4flow.md)
