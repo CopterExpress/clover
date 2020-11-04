@@ -1,5 +1,7 @@
 # Сборка сферической защиты
 
+<img src="../assets/sphere_guard/clover4_sphere_guard.png" width=300 class="zoom border center">
+
 ## Сборка пояса сферы
 
 1. Соберите передние крепления коптера.
