@@ -32,7 +32,7 @@ find_package(GeographicLib REQUIRED)
 
 # Workaround for OpenCV 3/4 support
 set(_opencv_version 4)
-find_package(OpenCV ${_opencv_version} QUIET)
+find_package(OpenCV ${_opencv_version} QUIET COMPONENTS calib3d imgproc)
 if (NOT OpenCV_FOUND)
   message(STATUS "Did not find OpenCV 4, searching for OpenCV 3")
   set(_opencv_version 3)
