@@ -24,7 +24,7 @@ target_compile_definitions(_opencv_aruco PRIVATE
   CV_OVERRIDE=override
 )
 target_compile_options(_opencv_aruco PRIVATE
-  -fpic -fPIC
+  -fpic -fPIC -fvisibility=hidden
 )
 
 target_include_directories(_opencv_aruco PUBLIC
