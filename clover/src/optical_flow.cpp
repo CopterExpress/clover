@@ -70,7 +70,6 @@ private:
 		roi_rad_ = nh_priv.param("roi_rad", 0.0);
 		calc_flow_gyro_ = nh_priv.param("calc_flow_gyro", false);
 
-		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
 		flow_pub_ = nh.advertise<mavros_msgs::OpticalFlowRad>("mavros/px4flow/raw/send", 1);
 		velo_pub_ = nh_priv.advertise<geometry_msgs::TwistStamped>("angular_velocity", 1);
@@ -82,6 +81,8 @@ private:
 		flow_.time_delta_distance_us = 0;
 		flow_.distance = -1; // no distance sensor available
 		flow_.temperature = 0;
+
+		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 
 		NODELET_INFO("Optical Flow initialized");
 	}

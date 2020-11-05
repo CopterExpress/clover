@@ -110,17 +110,17 @@ public:
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
 
-		map_markers_sub_ = nh_.subscribe("map_markers", 1, &ArucoDetect::mapMarkersCallback, this);
-		debug_pub_ = it_priv.advertise("debug", 1);
-		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
-		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
-		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
-
 		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
 		dynamic_reconfigure::Server<aruco_pose::DetectorConfig>::CallbackType cb;
 
 		cb = std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
 		dyn_srv_->setCallback(cb);
+
+		debug_pub_ = it_priv.advertise("debug", 1);
+		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
+		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
+		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
+		map_markers_sub_ = nh_.subscribe("map_markers", 1, &ArucoDetect::mapMarkersCallback, this);
 
 		NODELET_INFO("ready");
 	}

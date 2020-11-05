@@ -124,17 +124,17 @@ public:
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1, true);
 		debug_pub_ = it_priv.advertise("debug", 1);
 
+		publishMarkersFrames();
+		publishMarkers();
+		publishMapImage();
+		vis_markers_pub_.publish(vis_array_);
+
 		image_sub_.subscribe(nh_, "image_raw", 1);
 		info_sub_.subscribe(nh_, "camera_info", 1);
 		markers_sub_.subscribe(nh_, "markers", 1);
 
 		sync_.reset(new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), image_sub_, info_sub_, markers_sub_));
 		sync_->registerCallback(boost::bind(&ArucoMap::callback, this, _1, _2, _3));
-
-		publishMarkersFrames();
-		publishMarkers();
-		publishMapImage();
-		vis_markers_pub_.publish(vis_array_);
 
 		NODELET_INFO("ready");
 	}
