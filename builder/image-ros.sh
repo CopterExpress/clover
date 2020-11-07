@@ -109,7 +109,7 @@ my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
-catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
