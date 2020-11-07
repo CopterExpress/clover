@@ -37,7 +37,7 @@
     <include file="$(find clover)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen" respawn="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
@@ -45,7 +45,7 @@
     </node>
 
     <!-- main nodelet manager -->
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true" respawn="true">
         <param name="num_worker_threads" value="2"/>
     </node>
 

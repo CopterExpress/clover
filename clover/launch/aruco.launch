@@ -9,7 +9,7 @@
     <!-- For additional help go to https://clover.coex.tech/aruco -->
 
     <!-- aruco_detect: detect aruco markers, estimate poses -->
-    <node name="aruco_detect" pkg="nodelet" if="$(arg aruco_detect)" type="nodelet" args="load aruco_pose/aruco_detect nodelet_manager" output="screen" clear_params="true">
+    <node name="aruco_detect" pkg="nodelet" if="$(arg aruco_detect)" type="nodelet" args="load aruco_pose/aruco_detect nodelet_manager" output="screen" clear_params="true" respawn="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="map_markers" to="aruco_map/markers" if="$(arg aruco_map)"/>
@@ -26,7 +26,7 @@
     </node>
 
     <!-- aruco_map: estimate aruco map pose -->
-    <node name="aruco_map" pkg="nodelet" type="nodelet" if="$(arg aruco_map)" args="load aruco_pose/aruco_map nodelet_manager" output="screen" clear_params="true">
+    <node name="aruco_map" pkg="nodelet" type="nodelet" if="$(arg aruco_map)" args="load aruco_pose/aruco_map nodelet_manager" output="screen" clear_params="true" respawn="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
