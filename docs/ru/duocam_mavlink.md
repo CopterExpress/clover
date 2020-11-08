@@ -2,19 +2,19 @@
 
 Полётные контроллеры поддерживают разные способы взаимодействия с внешними камерами, включая протокол MAVLink. Обычно коммуникация с помощью данного протокола требует использования UART-порта на полётном контроллере, но есть возможность работать с камерой в основном потоке MAVLink-телеметрии с БПЛА.
 
-Утилита **duocam-mavlink** отвечает за работу виртуальной MAVLink-камеры и встраивается в общую телеметрию между полётным контроллером и QGroundControl.
+Утилита `duocam-mavlink` отвечает за работу виртуальной MAVLink-камеры и встраивается в общую телеметрию между полётным контроллером и QGroundControl.
 
 ![Блок-схема COEX DuoCam](../assets/duocam/duocam.png)
 
 На блок-схеме прямыми линиями обозначены взаимодействия между блоками, пунктирными линиями уточняется характер взаимодействия.
 
-**Внимание!** Протокол взаимодействия находится в процессе модификации. В новых версиях планируется избавиться от прямой отправки значений параметров и их количества от **duocam-mavlink** к QGroundControl.
+**Внимание!** Протокол взаимодействия находится в процессе модификации. В новых версиях планируется избавиться от прямой отправки значений параметров и их количества от `duocam-mavlink` к QGroundControl.
 
-**duocam-camera** и **duocam-mavlink** обмениваются данными с помощью очередей POSIX. Имена очередей и формат сообщений доступен в репозитории [duocam-common](https://github.com/CopterExpress/duocam-common).
+**duocam-camera** и `duocam-mavlink` обмениваются данными с помощью очередей POSIX. Имена очередей и формат сообщений доступен в репозитории [duocam-common](https://github.com/CopterExpress/duocam-common).
 
-Для объединения блоков, взаимодействующих через MAVLink, можно использовать любой MAVLink-коммутатор/маршрутизатор, который либо позволяет отключить таблицу коммутации, либо заполняет её по схеме **MAVLink ID:Component ID** (например, **cmavnode**, **mavlink-fast-switch**, **mavlink-switch**).
+Для объединения блоков, взаимодействующих через MAVLink, можно использовать любой MAVLink-коммутатор/маршрутизатор, который либо позволяет отключить таблицу коммутации, либо заполняет её по схеме **MAVLink ID:Component ID** (например, `cmavnode`, `mavlink-fast-switch`, `mavlink-switch`).
 
-**Внимание!** При использовании **mavlink-fast-switch** требуется использовать **mavlink-serial-bridge**, либо любой другой мост для передачи MAVLink из последовательного порта в UDP, так как **mavlink-fast-switch** работает только с UDP.
+**Внимание!** При использовании `mavlink-fast-switch` требуется использовать `mavlink-serial-bridge`, либо любой другой мост для передачи MAVLink из последовательного порта в UDP, так ка `mavlink-fast-switch` работает только с UDP.
 
 ## Конфигурационный файл
 
@@ -22,7 +22,7 @@
 
 Также можно зайти по **SSH** на работающую RPi4 и отредактировать конфигурационный файл внутри системы по тому же пути.
 
-Для корректной работы **duocam-mavlink** требуется **MAVLink ID** полётного контроллера (параметр `vehicle_id`) и **MAVLink ID** **QGroundControl** (параметр `qgc_vehicle_id`). **duocam-mavlink** ожидает телеметрию на **UDP** (параметры `ip` и `port`) и отправляет сообщения **HEARTBEAT** с частотой, согласно параметру `heartbeat_frequency`, представляясь, как компонент полётного контроллера **MAV_COMP_ID_CAMERA**.
+Для корректной работы `duocam-mavlink` требуется **MAVLink ID** полётного контроллера (параметр `vehicle_id`) и **MAVLink ID** **QGroundControl** (параметр `qgc_vehicle_id`). `duocam-mavlink` ожидает телеметрию на **UDP** (параметры `ip` и `port`) и отправляет сообщения **HEARTBEAT** с частотой, согласно параметру `heartbeat_frequency`, представляясь, как компонент полётного контроллера **MAV_COMP_ID_CAMERA**.
 
 Максимальная задержка от **duocam-camera** задаётся параметром `command_timeout`.
 
@@ -38,7 +38,7 @@ no_gps: False
 # QGC vehicle ID
 qgc_vehicle_id: 255
 mavlink:
-  # IP adress of the interface to listen port on (0.0.0.0 for all interfaces)
+  # IP address of the interface to listen port on (0.0.0.0 for all interfaces)
   ip: 127.0.0.1
   # UDP port
   port: 14540
@@ -48,7 +48,7 @@ mavlink:
 command_timeout: 3.0
 ```
 
-## Пример конфигурационного файла для mavlink-fast-switch
+## Пример конфигурационного файла для `mavlink-fast-switch`
 
 ```yaml
 # MAVLink endpoints
@@ -72,7 +72,7 @@ endpoints:
 id-table: False
 ```
 
-## Пример конфигурационного файла для mavlink-serial-bridge
+## Пример конфигурационного файла для `mavlink-serial-bridge`
 
 ```yaml
 # Serial device settings
@@ -93,7 +93,7 @@ udp:
     port: 14588
     # Lock remote host on the initial value (optional, False by default)
     lock: True
-    # Brodcast mode (optional, False by default)
+    # Broadcast mode (optional, False by default)
     broadcast: False
   # Local settings (optional, all interfaces and a random port by default)
   local:
