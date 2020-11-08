@@ -91,6 +91,7 @@
   * [Вклад в Клевер](contributing.md)
   * [Переход на версию 0.20](migrate20.md)
   * [COEX Duocam](duocam.md)
+  * [Виртуальная MAVLink-камера COEX Duocam](duocam_mavlink.md)
 * [Мероприятия](events.md)
   * [CopterHack-2021](copterhack2021.md)
   * [CopterHack-2019](copterhack2019.md)
