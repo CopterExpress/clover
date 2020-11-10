@@ -579,7 +579,7 @@ Blockly.Blocks['set_servo'] = {
 		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 ms.");
+		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 μs.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
