@@ -108,3 +108,14 @@
 Пример использования блока для установки случайного цвета (блоки, связанные с цветами находятся в категории *Colour*):
 
 <img src="../assets/blocks/random-color.png" srcset="../assets/blocks/random-color.png 2x">
+
+### Работа с GPIO {#GPIO}
+
+Категория <span style="padding:2px;color:white;background:#5b97cc">GPIO</span> содержит блоки для работы с GPIO. Обратите внимание, что для корректной работы этих блоков демон для работы с GPIO `pigpiod` должен быть включен:
+
+```bash
+sudo systemctl enable pigpiod.service
+sudo systemctl start pigpiod.service
+```
+
+Более подробную информацию о GPIO читайте в [соответствующей статье](gpio.md).

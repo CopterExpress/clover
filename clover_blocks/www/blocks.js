@@ -546,7 +546,7 @@ Blockly.Blocks['gpio_read'] = {
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_GPIO);
 		this.setTooltip("Returns if there is voltage on a GPIO pin.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
 
@@ -563,7 +563,7 @@ Blockly.Blocks['gpio_write'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set GPIO pin level.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
 
@@ -580,6 +580,6 @@ Blockly.Blocks['set_servo'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 μs.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
