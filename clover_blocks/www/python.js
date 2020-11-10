@@ -430,6 +430,10 @@ const SET_SERVO = `\ndef set_servo(pin, pwm):
     pi.set_mode(pin, pigpio.OUTPUT)
     pi.set_servo_pulsewidth(pin, pwm)\n`;
 
+const SET_DUTY_CYCLE = `\ndef set_duty_cycle(pin, duty_cycle):
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.set_PWM_dutycycle(pin, duty_cycle * 255)\n`;
+
 Blockly.Python.gpio_read = function(block) {
 	pigpio();
 	Blockly.Python.definitions_['gpio_read'] = GPIO_READ;
@@ -451,4 +455,12 @@ Blockly.Python.set_servo = function(block) {
 	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
 	var pwm = Blockly.Python.valueToCode(block, 'PWM', Blockly.Python.ORDER_NONE);
 	return `set_servo(${pin}, ${pwm})\n`;
+}
+
+Blockly.Python.set_duty_cycle = function(block) {
+	pigpio();
+	Blockly.Python.definitions_['set_duty_cycle'] = SET_DUTY_CYCLE;
+	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
+	var dutyCycle = Blockly.Python.valueToCode(block, 'DUTY_CYCLE', Blockly.Python.ORDER_NONE);
+	return `set_duty_cycle(${pin}, ${dutyCycle})\n`;
 }

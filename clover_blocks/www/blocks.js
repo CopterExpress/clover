@@ -583,3 +583,20 @@ Blockly.Blocks['set_servo'] = {
 		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
+
+Blockly.Blocks['set_duty_cycle'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("set GPIO pin");
+		this.appendValueInput("DUTY_CYCLE")
+			.setCheck("Number")
+			.appendField("to duty cycle");
+		this.setInputsInline(true);
+		this.setColour(COLOR_GPIO);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setTooltip("Set PWM duty cycle on a GPIO pin (better to control LEDs, etc). Duty cycle is set in range of 0–1.");
+		this.setHelpUrl(DOCS_URL + '#GPIO');
+	}
+};
