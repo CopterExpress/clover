@@ -73,6 +73,7 @@ ros::Duration state_timeout;
 ros::Duration velocity_timeout;
 ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
+ros::Duration manual_control_timeout;
 float default_speed;
 bool auto_release;
 bool land_only_in_offboard, nav_from_sp, check_kill_switch;
@@ -488,16 +489,25 @@ void publishSetpoint(const ros::TimerEvent& event)
 	publish(event.current_real);
 }
 
-inline void checkKillSwitch()
+inline void checkManualControl()
 {
-	if (!TIMEOUT(manual_control, state_timeout))
-		throw std::runtime_error("Manual control timeout, can't check kill switch status");
+	if (!manual_control_timeout.isZero() && TIMEOUT(manual_control, manual_control_timeout)) {
+		throw std::runtime_error("Manual control timeout, RC is switched off?");
+	}
 
-	const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
-	bool kill_switch = manual_control.buttons & (1 << KILL_SWITCH_BIT);
+	if (check_kill_switch) {
+		// switch values: https://github.com/PX4/PX4-Autopilot/blob/c302514a0809b1765fafd13c014d705446ae1113/msg/manual_control_setpoint.msg#L3
+		const uint8_t SWITCH_POS_NONE = 0; // switch is not mapped
+		const uint8_t SWITCH_POS_ON = 1; // switch activated
+		const uint8_t SWITCH_POS_MIDDLE = 2; // middle position
+		const uint8_t SWITCH_POS_OFF = 3; // switch not activated
 
-	if (kill_switch)
-		throw std::runtime_error("Kill switch is on");
+		const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
+		uint8_t kill_switch = (manual_control.buttons & (0b11 << KILL_SWITCH_BIT)) >> KILL_SWITCH_BIT;
+
+		if (kill_switch == SWITCH_POS_ON)
+			throw std::runtime_error("Kill switch is on");
+	}
 }
 
 inline void checkState()
@@ -527,8 +537,8 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// Checks
 		checkState();
 
-		if (auto_arm && check_kill_switch) {
-			checkKillSwitch();
+		if (auto_arm) {
+			checkManualControl();
 		}
 
 		// default frame is local frame
@@ -862,6 +872,7 @@ int main(int argc, char **argv)
 	velocity_timeout = ros::Duration(nh_priv.param("velocity_timeout", 2.0));
 	global_position_timeout = ros::Duration(nh_priv.param("global_position_timeout", 10.0));
 	battery_timeout = ros::Duration(nh_priv.param("battery_timeout", 2.0));
+	manual_control_timeout = ros::Duration(nh_priv.param("manual_control_timeout", 0.0));
 
 	transform_timeout = ros::Duration(nh_priv.param("transform_timeout", 0.5));
 	telemetry_transform_timeout = ros::Duration(nh_priv.param("telemetry_transform_timeout", 0.5));

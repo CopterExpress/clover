@@ -41,21 +41,21 @@ Now you can install the ROS package itself.
     ```
 
 After the package has installed, initialize `rosdep`.
-Package `rosdep` will allow to easily install dependecies for the source files that you whish to compile. Running some essential components of ROS will as well require this package.
+Package `rosdep` will allow to easily install dependencies for the source files that you whish to compile. Running some essential components of ROS will as well require this package.
 
 ```bash
 sudo rosdep init
 rosdep update
 ```
 
-If you are not confortable with entering environment variables manually each time, you may configure it in a way that it add itself in your bash session on every new shell startup:
+If you are not comfortable with entering environment variables manually each time, you may configure it in a way that it add itself in your bash session on every new shell startup:
 
 ```bash
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-If you whish to install any additionnal packages for yout ROS Melodic simply use:
+If you whish to install any additional packages for your ROS Melodic simply use:
 
 ```bash
 sudo apt-get install ros-melodic-PACKAGE

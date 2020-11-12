@@ -20,7 +20,7 @@ This is a group of modules that calculates the current state of the copter using
 * Copter orientation (in the local coordinate system) – pitch, roll, yaw (one of presentations);
 * Copter position (in the local coordinate system) – x, y, z;
 * Copter speed (in the local coordinate system) – vx, vy, vz;
-* Global coordinates of the copter – lattitude, longitude, altitude;
+* Global coordinates of the copter – latitude, longitude, altitude;
 * Altitude above the surface;
 * Other parameters (the drift of gyroscopes, wind speed, etc.).
 
@@ -39,15 +39,15 @@ This is a group of modules that calculates the current state of the copter using
 
 Variant 2 is the most accurate; however, it is correct to use it only if the surface the copter flies over is flat. Otherwise, the Z axis origin will move up and down with the altitude of the surface.
 
-## Multicopter Control Position (flying by position)
+## Multicopter Position Control
 
 These parameters adjust the flight of the copter by position (POSCTL, OFFBOARD, AUTO modes).
 
 `MPC_THR_HOVER` — hovering throttle. This option is to set to the approximate percentage of throttle needed to make the copter maintain its altitude. If copter has a tendency to gain or lose altitude during the hovering mode, reduce or increase this value.
 
-`MPC_XY_P` – position factor *P* of the ESC. This parameter affects how sharply the copter will react to the position commands. A too high value may cause {перестрелы}.
+`MPC_XY_P` – position factor *P* of the ESC. This parameter affects how sharply the copter will react to the position commands. A too high value may cause overshoots.
 
-`MPC_XY_VEL_P` – speed factor *P* of the ESC. This parameter also affects the accuracy and sharpness of copter execution of the given position. A too high value may cause {перестрелы}.
+`MPC_XY_VEL_P` – speed factor *P* of the ESC. This parameter also affects the accuracy and sharpness of copter execution of the given position. A too high value may cause overshoots.
 
 `MPC_XY_VEL_MAX` — the maximum horizontal speed in POSCTL, OFFBOARD, AUTO modes.
 

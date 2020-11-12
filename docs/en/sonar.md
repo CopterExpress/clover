@@ -89,7 +89,7 @@ while True:
 
 ### Filtering the data
 
-To filter (smooth out) the data and delete [emission](https://ru.wikipedia.org/wiki/Outbreak_%28statistics%29) [Kalman filter] (https://ru.wikipedia.org/wiki/Фильтр_Калмана) or a simple [median filter](https://ru.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
+To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://ru.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
 
 ```python
 import collections
@@ -97,7 +97,7 @@ import numpy
 
 # ...
 
-history = collections.deque(maxlen=10)  # 10 - количество сэмплов для усреднения
+history = collections.deque(maxlen=10)  # 10 - number of samples for averaging
 
 def read_distance_filtered():
     history.append(read_distance())

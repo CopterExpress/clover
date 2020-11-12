@@ -46,7 +46,7 @@ set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
 
-# Take off 1 м
+# Take off 1 m
 navigate(x=0, y=0, z=1, frame_id='body', auto_arm=True)
 ```
 

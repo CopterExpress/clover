@@ -14,7 +14,7 @@ Consult the [official QGroundControl user guide](https://docs.qgroundcontrol.com
 
 Prepare the MicroSD card for your flight controller.
 
-<img src="../assets/pix-sd.png" alt="Pixracer и MicroSD-карта" class="zoom center" width=400>
+<img src="../assets/pix-sd.png" alt="Pixracer and MicroSD-card" class="zoom center" width=400>
 
 * Put the card into your computer (use an adapter if necessary).
 * Format the card to FAT32 filesystem. Right click on the SD card icon in Windows Explorer and select "Format". Use the Disk Utility in macOS.
@@ -114,7 +114,7 @@ Press the *Save* button to save the changed value to the flight controller. Chan
 
 > **Hint** Note that you should fine-tune the PID parameters for each drone individually.  <!-- TODO: add PID article link -->
 
-#### Cicruit breaker parameters
+#### Circuit breaker parameters
 
 1. Set `CBRK_USB_CHK` to 197848 to allow flights with the USB cable connected.
 2. Disable safety switch check: `CBRK_IO_SAFETY` = 22027.

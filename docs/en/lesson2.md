@@ -117,12 +117,11 @@ In a closed electric circuit, the sum of all the EMF is equal to the sum of the 
 
 In making equations, the direction of circuit traversal is chosen and arbitrarily specified directions of currents are specified.
 
-If an electric circuit contains two power sources, the directions of electromotive forces of which coincide, i.е., connected according to Fig. 1, the EMF across the entire circuit shall be equal to the sum of the EMFs of the sources,
-т. i.е.,
+If an electric circuit contains two power sources, the directions of electromotive forces of which coincide, i.e., connected according to Fig. 1, the EMF across the entire circuit shall be equal to the sum of the EMFs of the sources, i.e.,
 
 **E = E1+E2.**
 
-If a circuit contains two sources of EDS with opposite directions,  i.е., connected according to Fig. 2, the total EMF of the circuit will be equal to the difference of EMFs of these sources
+If a circuit contains two sources of EDS with opposite directions,  i.e., connected according to Fig. 2, the total EMF of the circuit will be equal to the difference of EMFs of these sources
 
 **Е = Е1—Е2.**
 

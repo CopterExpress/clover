@@ -103,7 +103,7 @@ arming = rospy.ServiceProxy('mavros/cmd/arming', CommandBool)
 
 # ...
 
-arming(False)  # дизарм
+arming(False)  # disarm
 ```
 
 ### # {#transform}

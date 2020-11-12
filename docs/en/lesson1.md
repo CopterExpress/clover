@@ -60,7 +60,7 @@ An Unmanned Aerial Vehicle (UAV) is an aircraft flying without a pilot (crew) on
 Types and configuration
 -------------------
 
-There are many engines configurations: a tricopter, a hexacopter, or an octocopter, but the simplest one in terms of assembly and operation is a quadcopter, i. e., a multi-rotor platform with four engines. In turn, a quadcopter may have + and х configuration. In copters with a "+" configuration, one of the beams faces forward, while in platforms with the "x" configuration, the main direction of movement is between two adjacent beams.
+There are many engines configurations: a tricopter, a hexacopter, or an octocopter, but the simplest one in terms of assembly and operation is a quadcopter, i. e., a multi-rotor platform with four engines. In turn, a quadcopter may have + and x configuration. In copters with a "+" configuration, one of the beams faces forward, while in platforms with the "x" configuration, the main direction of movement is between two adjacent beams.
 
 ![Types](../assets/1_4.png)
 

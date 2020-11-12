@@ -15,7 +15,7 @@ Blockly.Python.addReservedWords('_b,_print');
 Blockly.Python.addReservedWords('rospy,srv,Trigger,get_telemetry,navigate,set_velocity,land');
 Blockly.Python.addReservedWords('navigate_wait,land_wait,wait_arrival,wait_yaw,get_distance');
 Blockly.Python.addReservedWords('pigpio,pi,Range');
-Blockly.Python.addReservedWords('SetLEDEffect,set_effect');
+Blockly.Python.addReservedWords('SetLEDEffect,set_effect,led_count,get_led_count');
 Blockly.Python.addReservedWords('SetLEDs,LEDState,set_leds');
 
 const IMPORT_SRV = `from clover import srv
@@ -86,6 +86,9 @@ function generateROSDefinitions() {
 	if (rosDefinitions.setLeds) {
 		Blockly.Python.definitions_['import_set_led'] = 'from led_msgs.srv import SetLEDs\nfrom led_msgs.msg import LEDState';
 		code += `set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs, persistent=True)\n`;
+	}
+	if (rosDefinitions.ledStateArray) {
+		Blockly.Python.definitions_['import_led_state_array'] = 'from led_msgs.msg import LEDStateArray';
 	}
 	if (rosDefinitions.navigateWait) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
@@ -391,8 +394,23 @@ Blockly.Python.set_led = function(block) {
 		return `set_leds([LEDState(index=${index}, r=${color.r}, g=${color.g}, b=${color.b})])\n`;
 	} else {
 		let parseColor = Blockly.Python.provideFunction_('parse_color', [PARSE_COLOR]);
-		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode})])\n`;
+		return `set_leds([LEDState(index=${index}, **${parseColor}(${colorCode}))])\n`;
 	}
+}
+
+const GET_LED_COUNT = `led_count = None
+
+def get_led_count():
+    global led_count
+    if led_count is None:
+        led_count = len(rospy.wait_for_message('led/state', LEDStateArray, timeout=10).leds)
+    return led_count\n`;
+
+Blockly.Python.led_count = function(block) {
+	rosDefinitions.ledStateArray = true;
+	initNode();
+	Blockly.Python.definitions_['get_led_count'] = GET_LED_COUNT;
+	return [`get_led_count()`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 function pigpio() {
@@ -401,16 +419,20 @@ function pigpio() {
 }
 
 const GPIO_READ = `\ndef gpio_read(pin):
-	pi.set_mode(pin, pigpio.INPUT)
-	return pi.read(pin)\n`;
+    pi.set_mode(pin, pigpio.INPUT)
+    return pi.read(pin)\n`;
 
 const GPIO_WRITE = `\ndef gpio_write(pin, level):
-	pi.set_mode(pin, pigpio.OUTPUT)
-	pi.write(pin, level)\n`;
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.write(pin, level)\n`;
 
 const SET_SERVO = `\ndef set_servo(pin, pwm):
-	pi.set_mode(pin, pigpio.OUTPUT)
-	pi.set_servo_pulsewidth(pin, pwm)\n`;
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.set_servo_pulsewidth(pin, pwm)\n`;
+
+const SET_DUTY_CYCLE = `\ndef set_duty_cycle(pin, duty_cycle):
+    pi.set_mode(pin, pigpio.OUTPUT)
+    pi.set_PWM_dutycycle(pin, duty_cycle * 255)\n`;
 
 Blockly.Python.gpio_read = function(block) {
 	pigpio();
@@ -433,4 +455,12 @@ Blockly.Python.set_servo = function(block) {
 	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
 	var pwm = Blockly.Python.valueToCode(block, 'PWM', Blockly.Python.ORDER_NONE);
 	return `set_servo(${pin}, ${pwm})\n`;
+}
+
+Blockly.Python.set_duty_cycle = function(block) {
+	pigpio();
+	Blockly.Python.definitions_['set_duty_cycle'] = SET_DUTY_CYCLE;
+	var pin = Blockly.Python.valueToCode(block, 'PIN', Blockly.Python.ORDER_NONE);
+	var dutyCycle = Blockly.Python.valueToCode(block, 'DUTY_CYCLE', Blockly.Python.ORDER_NONE);
+	return `set_duty_cycle(${pin}, ${dutyCycle})\n`;
 }

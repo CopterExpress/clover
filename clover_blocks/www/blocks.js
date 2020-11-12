@@ -353,6 +353,17 @@ Blockly.Blocks['set_effect'] = {
 	}
 };
 
+Blockly.Blocks['led_count'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("LED count");
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_LED);
+		this.setTooltip("Returns the number of LEDs (configured in led.launch).");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+};
+
 Blockly.Blocks['take_off'] = {
 	init: function () {
 		this.appendValueInput("ALT")
@@ -535,7 +546,7 @@ Blockly.Blocks['gpio_read'] = {
 		this.setOutput(true, "Boolean");
 		this.setColour(COLOR_GPIO);
 		this.setTooltip("Returns if there is voltage on a GPIO pin.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
 
@@ -552,7 +563,7 @@ Blockly.Blocks['gpio_write'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setTooltip("Set GPIO pin level.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
 
@@ -568,7 +579,24 @@ Blockly.Blocks['set_servo'] = {
 		this.setColour(COLOR_GPIO);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 ms.");
-		this.setHelpUrl(DOCS_URL + '#' + this.type);
+		this.setTooltip("Set PWM on a GPIO pin to control servo. PWM is specified in range of 500–2500 μs.");
+		this.setHelpUrl(DOCS_URL + '#GPIO');
+	}
+};
+
+Blockly.Blocks['set_duty_cycle'] = {
+	init: function () {
+		this.appendValueInput("PIN")
+			.setCheck("Number")
+			.appendField("set GPIO pin");
+		this.appendValueInput("DUTY_CYCLE")
+			.setCheck("Number")
+			.appendField("to duty cycle");
+		this.setInputsInline(true);
+		this.setColour(COLOR_GPIO);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setTooltip("Set PWM duty cycle on a GPIO pin (better to control LEDs, etc). Duty cycle is set in range of 0–1.");
+		this.setHelpUrl(DOCS_URL + '#GPIO');
 	}
 };
