@@ -12,7 +12,7 @@
 
     <img src="../assets/magnet_grip/magnet1.png" width=300 class="zoom border center">
 
-2. Припаяйте контакты с другой стороны платы и откусите оставшиеся ножки элементов.
+2. Припаяйте контакты с другой стоgit роны платы и откусите оставшиеся ножки элементов.
 3. Соедините контакты резистора и двух крайних ножек транзистора.
 
     <img src="../assets/magnet_grip/magnet2.png" width=300 class="zoom border center">
@@ -51,11 +51,11 @@
 
 Удобно ее располагать на той же паечной плате. Для этого вставьте ее в подходящие отверстия и припаяйте с обратной стороны к плате.
 
-<img src="../assets/magnet_grip/magnet_adruino1.png" width=300 class="zoom border center">
+<img src="../assets/magnet_grip/magnet_arduino1.png" width=300 class="zoom border center">
 
 Затем подключите сигнальный выход схемы к выбранному порту и припаяйте провод *Dupont*-мама к выбранному сигнальному порту.
 
-<img src="../assets/magnet_grip/magnet_adruino2.png" width=300 class="zoom border center">
+<img src="../assets/magnet_grip/magnet_arduino2.png" width=300 class="zoom border center">
 
 ## Установка электромагнитного захвата
 
