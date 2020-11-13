@@ -70,6 +70,6 @@
 
 ### Схемы расположения контактов
 
-<img src="../assets/coex_pix/coexpix-top-rev1.2.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-top-rev1.2.png" width=400 class=zoom>
 
-<img src="../assets/coex_pix/coexpix-bottom-rev1.2.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-bottom-rev1.2.png" width=400 class=zoom>
