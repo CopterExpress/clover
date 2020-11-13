@@ -13,7 +13,7 @@ The `simple_offboard` module of the `clover` package is intended for simplified 
 
 Main services are [`get_telemetry`](#gettelemetry) (receive telemetry data), [`navigate`](#navigate) (fly to a given point along a straight line), [`navigate_global`](#navigateglobal) (fly to a point specified as latitude and longitude along a straight line), [`land`](#land) (switch to landing mode).
 
-Python samples
+Python examples
 ---
 
 You need to create proxies for services before calling them. Use the following template for your programs:

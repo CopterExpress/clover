@@ -1,12 +1,14 @@
-# COEX Clover Drone Kit
+# clover🍀: create autonomous drones easily
 
-<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="Clover Drone">
+<img src="docs/assets/clever4-front-white.png" align="right" width="400px" alt="COEX Clover Drone">
 
-Clover is an educational programmable drone kit consisting of an unassembled quadcopter, open source software and documentation. The kit includes Pixracer-compatible autopilot running PX4 firmware, Raspberry Pi 4 as companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices.
+Clover is an open source [ROS](https://www.ros.org)-based framework, providing user-friendly tools to control [PX4](https://px4.io)-powered drones. Clover is available as a ROS package, but is shipped mainly as a preconfigured image for Raspberry Pi. Once you've installed Raspberry Pi on your drone and flashed the image to its microSD card, taking the drone up in the air is a matter of minutes.
 
-The main documentation is available [on Gitbook](https://clover.coex.tech/).
+COEX Clover Drone is an educational programmable drone kit, suited perfectly for running clover software. The kit is shipped unassembled and includes Pixracer-compatible autopilot running PX4 firmware, Raspberry Pi 4 as a companion computer, a camera for computer vision navigation as well as additional sensors and peripheral devices. Batteries included.
 
-Official website: <a href="https://coex.tech/clover">coex.tech/clover</a>.
+The main documentation is available at [https://clover.coex.tech](https://clover.coex.tech/). Official website: [coex.tech/clover](https://coex.tech/clover).
+
+[__Support us on Kickstarter!__](https://www.kickstarter.com/projects/copterexpress/cloverdrone)
 
 ## Video compilation
 

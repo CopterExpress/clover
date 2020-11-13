@@ -35,9 +35,9 @@
 
 ### Схемы расположения контактов
 
-<img src="../assets/coexpix-top.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-top.jpg" width=400 class=zoom>
 
-<img src="../assets/coexpix-bottom.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-bottom.jpg" width=400 class=zoom>
 
 > **Note** На плате ревизии 1.0 RC IN разъем располагался на месте разъема Micro SD. Распиновка самого разъема осталась такой же.
 
@@ -58,3 +58,18 @@
 ### Особенности платы
 
 Для повышения надежности и стабильности, плата оснащена низкошумящими понижающими преобразователями. Установлен входной LC фильтр, а также ферритовые фильтры в цепях питания.
+
+## Ревизия 1.2
+
+### Нововведения
+
+* Заменен разъем USB Micro-B на раазъем USB Type-C.
+* Изменен слот для MicroSD карт, на более глубокий.
+* Изменены назначения пинов на разьеме I2C.
+* Добавлены ферритовые фильтры в цепи питания.
+
+### Схемы расположения контактов
+
+<img src="../assets/coex_pix/coexpix-top-rev1.2.png" width=400 class=zoom>
+
+<img src="../assets/coex_pix/coexpix-bottom-rev1.2.png" width=400 class=zoom>

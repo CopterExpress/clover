@@ -92,6 +92,8 @@ Read more in the [coordinate systems](frames.md) article.
 
 You can also use the ["Autonomous flight"](simple_offboard.md) article as an API reference.
 
+> **Hint** Clover supports [blocks-based programming](blocks.md) as well.
+
 ## Additional periphery
 
 The Clover platform also exposes APIs for interacting with other peripherals. Read more in the following articles:

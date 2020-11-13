@@ -8,7 +8,7 @@ Connect the +5v and GND leads of your LED to a power source and the DIN (data in
 
 <img src="../assets/led_connection.png" height="400px" alt="leds">
 
-> **Caution** LED strip can consume a lot of power! Powering it from a Raspyerry Pi may overload the computer's power circuitry. Consider using a separate BEC as a power source.
+> **Caution** LED strip can consume a lot of power! Powering it from a Raspberry Pi may overload the computer's power circuitry. Consider using a separate BEC as a power source.
 
 <!-- -->
 

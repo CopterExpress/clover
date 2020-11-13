@@ -108,3 +108,14 @@ The block allows to set animations to LED strip, similarly to [`set_effect`](led
 Example of using the block with a random color (colors-related blocks are located in *Colour* category):
 
 <img src="../assets/blocks/random-color.png" srcset="../assets/blocks/random-color.png 2x">
+
+### Work with GPIO {#GPIO}
+
+<span style="padding:2px;color:white;background:#5b97cc">GPIO</span> category contains blocks for working with GPIO. Note, that for correct work of these blocks, `pigpiod` daemon should be running:
+
+```bash
+sudo systemctl enable pigpiod.service
+sudo systemctl start pigpiod.service
+```
+
+See details on GPIO in the [appropriate article](gpio.md).
