@@ -15,7 +15,7 @@ If there is no voltage indicator or manual calibration is not possible, set the 
     * Put the battery voltage into the prompt and click *Calculate*.
     * Press *Close* to save the calculated value.
 
-<img src="../assets/qgc-battery.png" class="zoom">
+<img src="../assets/qgc-voltage-divider.png" class="zoom">
 
 Further reading: https://docs.qgroundcontrol.com/en/SetupView/Power.html.
 
@@ -28,7 +28,7 @@ Further reading: https://docs.qgroundcontrol.com/en/SetupView/Power.html.
 3. Connect the battery when prompted.
 4. Wait for the *Calibration complete*.
 
-<img src="../assets/qgc-esc.png" class="zoom">
+<img src="../assets/qgc-power.png" class="zoom">
 
 Further reading: https://docs.px4.io/v1.9.0/en/advanced_config/esc_calibration.html.
 

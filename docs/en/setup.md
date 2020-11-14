@@ -68,12 +68,12 @@ This is how the main QGroundControl settings window will look like:
 
 ### Selecting the airframe
 
-<img src="../assets/qgc-frame-apply.png" alt="QGroundControl frame selection" class="zoom">
+<img src="../assets/qgc-frame-apply-clover4.png" alt="QGroundControl frame selection" class="zoom">
 
 1. Open the *Vehicle Setup* tab.
 2. Select the *Airframe* menu.
 3. Select the *Quadrotor X* airframe type.
-4. Select the *Generic Quadrotor X* from the dropdown menu.
+4. For Clover 4 select *COEX Clover 4* from the dropdown menu. Otherwise select *Generic Quadrotor X*.
 5. Return to the top of the list and press *Apply and Restart* button, confirm by pressing *Apply*.
 6. Wait for the settings to be applied and for the flight controller to restart.
 
@@ -86,6 +86,8 @@ Open the *Vehicle Setup* tab and select the *Parameters* menu. You can use the *
 Press the *Save* button to save the changed value to the flight controller. Changing some parameters require rebooting the flight controller. You can do that by pressing the *Tools* button and selecting the *Reboot vehicle* option.
 
 #### Configuring PID regulators
+
+> **Info** Selecting *COEX Clover 4* frame subtype doesn't require setting PID coefficients.
 
 ##### Averaged PID coefficients for the Clover 4 drone
 

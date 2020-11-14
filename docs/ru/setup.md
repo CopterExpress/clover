@@ -68,12 +68,12 @@
 
 ### Выбор рамы
 
-<img src="../assets/qgc-frame-apply.png" alt="QGroundControl frame selection" class="zoom">
+<img src="../assets/qgc-frame-apply-clover4.png" alt="QGroundControl frame selection" class="zoom">
 
 1. Зайдите во вкладку *Vehicle Setup*.
 2. Выберите меню *Airframe*.
 3. Выберите тип рамы *Quadrotor X*.
-4. Выберите подтип рамы *Generic Quadrotor X*.
+4. Для Клевера 4 выберите подтипа рамы *COEX Clover 4*. В ином случае – *Generic Quadrotor X*.
 5. Переместитесь в начало списка и нажмите кнопку *Apply and Restart*, подтвердите нажатием *Apply*.
 6. Дождитесь применения настроек и перезагрузки полетного контроллера.
 
@@ -86,6 +86,8 @@
 После установки параметра необходимо нажать кнопку *Save*. При необходимости – перезагрузить полетный контроллер, нажав кнопку *Tools*, затем *Reboot vehicle*.
 
 #### Настройка PID-регуляторов
+
+> **Info** Использование типа рамы *COEX Clover 4* не требует ввода коэффициентов PID.
 
 ##### Усредненные коэффициенты PID для Клевера 4
 
