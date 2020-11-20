@@ -12,7 +12,7 @@
 
     <img src="../assets/magnet_grip/magnet1.png" width=300 class="zoom border center">
 
-2. Припаяйте контакты с другой стоgit роны платы и откусите оставшиеся ножки элементов.
+2. Припаяйте контакты с другой стороны платы и откусите оставшиеся ножки элементов.
 3. Соедините контакты резистора и двух крайних ножек транзистора.
 
     <img src="../assets/magnet_grip/magnet2.png" width=300 class="zoom border center">

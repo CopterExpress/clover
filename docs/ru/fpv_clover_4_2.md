@@ -2,20 +2,14 @@
 
 ## Подготовка и установка камеры и передатчика
 
-    <img src="../assets/magnet_grip/magnet5.png" width=300 class="zoom border center">
-
-
-    <div class="image-group">
-        <img src="../assets/fpv/fpv_1.png" width=300 class="zoom border">
-        <img src="../assets/fpv/fpv_2.png" width=300 class="zoom border">
-    </div>
-
 1. Установите малую монтажную деку на основную раму.
 
     <div class="image-group">
         <img src="../assets/fpv/fpv_1.png" width=300 class="zoom border">
         <img src="../assets/fpv/fpv_2.png" width=300 class="zoom border">
     </div>
+
+        <img src="../assets/fpv/fpv_1.jpg" width=300 class="zoom border">
 
 2. Установите скобу для крепления камеры в соответствующие отверстия.
 
