@@ -9,8 +9,6 @@
         <img src="../assets/fpv/fpv_2.png" width=300 class="zoom border">
     </div>
 
-        <img src="../assets/fpv/fpv_1.jpg" width=300 class="zoom border">
-
 2. Установите скобу для крепления камеры в соответствующие отверстия.
 
     <div class="image-group">
