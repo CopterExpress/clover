@@ -14,7 +14,7 @@ For correct work of the blocks programming, `blocks` argument in the Clover laun
 
 ## Running
 
-To run Clover's blocks programming interface, [connect to Clover's Wi-Fi](wifi.md) and go to web-page http://192.168.11.1:8080/clover_blocks/ or click the link *Blocks programming* at the [main page](wifi.md#web-interface).
+To run Clover's blocks programming interface, [connect to Clover's Wi-Fi](wifi.md) and go to web-page http://192.168.11.1/clover_blocks/ or click the link *Blocks programming* at the [main page](wifi.md#web-interface).
 
 The page looks as follows:
 
