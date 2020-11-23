@@ -80,6 +80,24 @@
     </tr>
 </table>
 
+## Клевер 4.2 WorldSkills
+
+### Фрезеровка
+
+<table>
+    <tr><th width=150>Изображение</th><th>Деталь</th><th width=1>Файл</th></tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/big_leg.png"></td>
+        <td>
+            <b>Ножка большая</b>.<br>
+            Функция: Опорный элемент увеличенной высоты.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/big_leg.dxf"><code>big_leg.dxf</code></a></td>
+    </tr>
+</table>
+
 ## Клевер 4
 
 ### 3D печать

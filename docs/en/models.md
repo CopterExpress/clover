@@ -80,6 +80,24 @@ This page contains models and drawings of some of the drone parts. They can be u
     </tr>
 </table>
 
+## Clover 4.2 WorldSkills
+
+### Milling
+
+<table>
+    <tr><th width=150>Preview</th><th>Part</th><th width=1>File</th></tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/big_leg.png"></td>
+        <td>
+            <b>Big leg</b>.<br>
+            Function: Extended footing element.<br>
+            Материал: Monolithic polycarbonate 2mm.<br>
+            Quantity: 2 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/big_leg.dxf"><code>big_leg.dxf</code></a></td>
+    </tr>
+</table>
+
 ## Clover 4
 
 ### 3D print
