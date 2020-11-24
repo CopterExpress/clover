@@ -2,9 +2,9 @@
 
 <img src="../assets/programming.png" width="250" align="right">
 
-The Clover platform allows a [Raspberry Pi](raspberry.md) computer to be used for programming autonomous flights. The flight program is typically written using the Python programming language. The program may [receive telemetry data](simple_offboard.md#get_telemetry) (which includes battery data, attitude, position, and other parameters) and send commands like: [fly to a point in space](simple_offboard.md#navigate), [set attitude](simple_offboard.md#set_attitude), [set angular rates](simple_offboard.md#set_rates), and others.
+The Clover platform allows a [Raspberry Pi](raspberry.md) computer to be used for programming autonomous flights. The flight program is typically written using the Python programming language. The program may [receive telemetry data](simple_offboard.md#get_telemetry) (which includes battery data, altitude, position, and other parameters) and send commands like: [fly to a point in space](simple_offboard.md#navigate), [set attitude](simple_offboard.md#set_attitude), [set angular rates](simple_offboard.md#set_rates), and others.
 
-The platform utilizes the [ROS framework](ros.md), which allows the user program to communicate with the Clover services that are running as a `clover` systemd daemon. The [MAVROS](mavros.md) package is used to interact with the flight controller.
+The platform utilizes the [ROS framework](ros.md), which allows the user program to communicate with the Clover services that are running as a `clover` system daemon. The [MAVROS](mavros.md) package is used to interact with the flight controller.
 
 PX4 uses [OFFBOARD mode](modes.md#auto) for autonomous flights. The Clover API can be used to transition the drone to this flight mode automatically. If you need to interrupt the autonomous flight, use your flight mode stick on your RC controller to transition to any other flight mode.
 
