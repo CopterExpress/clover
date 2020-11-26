@@ -32,3 +32,9 @@ The simulation environment is based on the following components:
 * ROS packages and Gazebo plugins.
 
 <!-- TODO: Write more, add a diagram, etc -->
+
+## Video
+
+Short video review of the simulator:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8HYXREMDfzQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
