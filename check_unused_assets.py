@@ -4,7 +4,7 @@ import os
 import sys
 import subprocess
 
-EXCLUDE = ('clever4-front-white.png', '.DS_Store', 'clever4-front-black-large.png')
+EXCLUDE = ('clever4-front-white.png', 'clever4-front-white-large.png', '.DS_Store', 'clever4-front-black-large.png')
 code = 0
 
 os.chdir('./docs')
