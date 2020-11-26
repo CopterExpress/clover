@@ -1,6 +1,6 @@
 # Клевер
 
-<img class="center bigclever zoom" src="../assets/clever4-front-white-large.png" width="80%" alt="Клевер 4">
+<img class="center zoom" src="../assets/clover42-main.png" width="80%" alt="Клевер 4.2">
 
 **«Клевер»** — это учебный конструктор программируемого квадрокоптера, состоящего из популярных открытых компонентов, а также набор необходимой документации и библиотек для работы с ним.
 
