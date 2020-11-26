@@ -6,7 +6,7 @@ In order to configure flight modes:
 
 1. Open the *Vehicle Setup* tab in QGroundControl.
 2. Select the *Flight Modes* menu.
-3. Choose SwC (Channel 5) as mode selection switch.
+3. Choose SwC (Channel 6) as mode selection switch.
 4. Set desired flight modes.
 
     The following flight modes are recommended:
@@ -16,7 +16,7 @@ In order to configure flight modes:
     * Flight Mode 6: *Position*.
 
 5. Check mode switching by changing the switch position.
-6. Choose SwA (Channel 6) as emergency motor stop (*Kill switch*).
+6. Choose SwA (Channel 5) as emergency motor stop (*Kill switch*).
 
 <img src="../assets/qgc-modes.png" class="zoom" alt="QGroundControl modes">
 
