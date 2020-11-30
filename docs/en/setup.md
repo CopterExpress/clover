@@ -29,6 +29,8 @@ Main article: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
 
 We recommend using the modified version of PX4 by CopterExpress for the Clover drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
 
+> **Info** For Pixhawk-based quadcopters there is a separate firmware version. See details in "[Pixhawk / Pixracer firmware flashing](firmware.md)" article.
+
 Flash the flight controller with this firmware:
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">

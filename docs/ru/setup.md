@@ -29,7 +29,9 @@
 
 Для Клевера, в особенности для осуществления автономных полетов, рекомендуется использовать версию прошивки PX4 от Copter Express. Скачайте актуальную версию прошивки на GitHub — **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">скачать</a>**.
 
-Далее загрузите прошивку в полетный контролер.
+> **Info** Для квадрокоптеров с Pixhawk (Клевер 2) существует отдельная версия прошивки. Подробности смотрите в статье "[Прошивка полетного контроллера](firmware.md)".
+
+Загрузите прошивку в полетный контролер:
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
