@@ -53,7 +53,7 @@
 
 <img src="../assets/magnet_grip/magnet_arduino1.png" width=300 class="zoom border center">
 
-Затем подключите сигнальный выход схемы к выбранному порту и припаяйте провод *Dupont*-мама к выбранному сигнальному порту.
+Затем подключите сигнальный выход схемы к выбранному порту и припаяйте провод *Dupont*-мама к выбранному сигнальному порту на плате.
 
 <img src="../assets/magnet_grip/magnet_arduino2.png" width=300 class="zoom border center">
 
