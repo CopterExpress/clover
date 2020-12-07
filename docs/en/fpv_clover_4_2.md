@@ -64,7 +64,7 @@
 
     <img src="../assets/fpv/fpv_16.png" width=300 class="zoom border center">
 
-11. Place the camera in the bracket and secure it with the 4 supplied bolts. The camera should be at an angle of 15°-20° relative to the plane of the aircraft.
+11. Place the camera in the bracket and secure it with the 4 attached bolts. The camera should be at an angle of 15°-20° relative to the plane of the aircraft.
 
     <div class="image-group">
         <img src="../assets/fpv/fpv_17.png" width=300 class="zoom border">
