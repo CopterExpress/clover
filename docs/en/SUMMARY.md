@@ -57,6 +57,7 @@
   * [Guide on autonomous flight](auto_setup.md)
   * [Hostname](hostname.md)
   * [PX4 Simulation](sitl.md)
+  * [Navigation using vertical ArUco-markers](wall_aruco.md)
   * [PID Setup](calibratePID.md)
   * [Model files for parts](models.md)
   * [ROS Melodic installation](ros-install.md)

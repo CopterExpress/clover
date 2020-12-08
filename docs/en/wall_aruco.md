@@ -1,4 +1,4 @@
-# Navigation through ArUco-markers
+# Navigation using vertical ArUco-markers
 
 The algorithm of the navigation through visual ArUco-markers, that was implemented in the Clever image, supports the flexible configuration of the markers in area. It allows you to place them on any surface, at any angle.
 
