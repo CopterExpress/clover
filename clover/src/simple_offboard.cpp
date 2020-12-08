@@ -41,6 +41,7 @@
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
 #include <clover/NavigateGlobal.h>
+#include <clover/TakeOff.h>
 #include <clover/SetPosition.h>
 #include <clover/SetVelocity.h>
 #include <clover/SetAttitude.h>
@@ -781,6 +782,10 @@ bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res)
 	return serve(NAVIGATE_GLOBAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, req.lat, req.lon, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
+bool takeOff(TakeOff::Request& req, TakeOff::Response& res) {
+	return serve(NAVIGATE, 0, 0, req.alt, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, 0, NAN, NAN, NAN, req.speed, body.child_frame_id, true, res.success, res.message);
+}
+
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
 	return serve(POSITION, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
@@ -905,6 +910,7 @@ int main(int argc, char **argv)
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);
 	auto na_serv = nh.advertiseService("navigate", &navigate);
 	auto ng_serv = nh.advertiseService("navigate_global", &navigateGlobal);
+	auto to_serv = nh.advertiseService("take_off", &takeOff);
 	auto sp_serv = nh.advertiseService("set_position", &setPosition);
 	auto sv_serv = nh.advertiseService("set_velocity", &setVelocity);
 	auto sa_serv = nh.advertiseService("set_attitude", &setAttitude);
