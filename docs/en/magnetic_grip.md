@@ -25,7 +25,7 @@ The following is an example of assembling an electromagnetic capture circuit on 
 
     <img src="../assets/magnet_grip/magnet4.png" width=300 class="zoom border center">
 
-6. Solder the *Dupont* -dad wires to the transistor and diode leg (red, black wires), and the *Dupont* -mama wire to the opposite transistor leg (white wire).
+6. Solder the *Dupont* - male wires to the transistor and diode leg (red, black wires), and the *Dupont* - fmale wire to the opposite transistor leg (white wire).
 
     <img src="../assets/magnet_grip/magnet5.png" width=300 class="zoom border center">
 
@@ -49,7 +49,7 @@ An example of the code activating the magnetic gripper can be found [here](gpio.
 
 Connect the gripper to the Arduino Nano board in order to control it manually.
 
-It is convenient to place it on the same soldering board -- insert it into the appropriate holes and solder it from the back to the board.
+It is convenient to place it on the same soldering board — insert it into the appropriate holes and solder it from the back to the board.
 
 <img src="../assets/magnet_grip/magnet_arduino1.png" width=300 class="zoom border center">
 
