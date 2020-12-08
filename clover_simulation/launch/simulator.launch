@@ -1,4 +1,5 @@
 <launch>
+    <arg name="type" default="gazebo"/> <!-- gazebo, jmavsim, none (only clover packages) -->
     <arg name="mav_id" default="0"/>
     <arg name="est" default="ekf2"/> <!-- PX4 estimator: lpe, ekf2 -->
     <arg name="vehicle" default="clover"/> <!-- PX4 vehicle configuration: clover, clover_vpe -->
@@ -9,7 +10,7 @@
     <arg name="use_clover_physics" default="false"/> <!-- Use inertial parameters from CAD models -->
 
     <!-- Gazebo instance -->
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(eval type == 'gazebo')">
         <!-- Workaround for crashes in VMware -->
         <env name="SVGA_VGPU10" value="0"/>
         <arg name="gui" value="true"/>
@@ -18,13 +19,13 @@
     </include>
 
     <!-- PX4 instance -->
-    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)">
+    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)" unless="$(eval type == 'none')">
         <env name="PX4_SIM_MODEL" value="$(arg vehicle)"/>
         <env name="PX4_ESTIMATOR" value="$(arg est)"/>
     </node>
 
     <!-- Clover model -->
-    <include file="$(find clover_description)/launch/spawn_drone.launch">
+    <include file="$(find clover_description)/launch/spawn_drone.launch" if="$(eval type == 'gazebo')">
         <arg name="main_camera" value="$(arg main_camera)"/>
         <arg name="rangefinder" value="$(arg rangefinder)"/>
         <arg name="led" value="$(arg led)"/>
@@ -32,10 +33,20 @@
         <arg name="use_clover_physics" value="$(arg use_clover_physics)"/>
     </include>
 
+    <node name="jmavsim" pkg="px4" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')"/>
+
+    <param name="use_sim_time" value="false" if="$(eval type == 'jmavsim')"/>
+
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">
         <arg name="simulator" value="true"/>
         <arg name="fcu_conn" value="sitl"/>
         <arg name="fcu_ip" value="127.0.0.1"/>
+        <arg name="gcs_bridge" value=""/>
+        <arg name="rc" default="false"/>
+        <arg name="web_video_server" default="false" if="$(eval type == 'jmavsim')"/>
+        <arg name="main_camera" default="false" if="$(eval type == 'jmavsim')"/>
+        <arg name="aruco" default="false" if="$(eval type == 'jmavsim')"/>
+        <arg name="led" default="false" if="$(eval type == 'jmavsim')"/>
     </include>
 </launch>
