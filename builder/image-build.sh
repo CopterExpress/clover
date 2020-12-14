@@ -50,14 +50,11 @@ IMAGES_DIR="${REPO_DIR}/images"
 [[ ! -d ${SCRIPTS_DIR} ]] && (echo_stamp "Directory ${SCRIPTS_DIR} doesn't exist" "ERROR"; exit 1)
 [[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo_stamp "Directory ${IMAGES_DIR} was created successful" "SUCCESS"
 
-echo ${TRAVIS_TAG}
-echo ${REPO_DIR}
-
 if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="$(cd ${REPO_DIR}; git log --format=%h -1)"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
 #IMAGE_VERSION="${TRAVIS_TAG:=$(cd ${REPO_DIR}; git log --format=%h -1)}"
 REPO_URL="$(cd ${REPO_DIR}; git remote --verbose | grep origin | grep fetch | cut -f2 | cut -d' ' -f1 | sed 's/git@github\.com\:/https\:\/\/github.com\//')"
 REPO_NAME="$(basename -s '.git' ${REPO_URL})"
-IMAGE_NAME='clover.img' #"${REPO_NAME}_${IMAGE_VERSION}.img"
+IMAGE_NAME="${REPO_NAME}_${IMAGE_VERSION}.img"
 IMAGE_PATH="${IMAGES_DIR}/${IMAGE_NAME}"
 
 get_image() {
@@ -78,14 +75,13 @@ get_image() {
   || (echo_stamp "Unzipping was failed!" "ERROR"; exit 1)
 }
 
-echo ${IMAGE_PATH} ${SOURCE_IMAGE}
-#get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
+get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
 
 # Make free space
-#${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH} max '10G'
+${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH} max '7G'
 
-#${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/init_rpi.sh' '/root/'
-#${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/hardware_setup.sh' '/root/'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/init_rpi.sh' '/root/'
+${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${SCRIPTS_DIR}'/assets/hardware_setup.sh' '/root/'
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-init.sh' ${IMAGE_VERSION} ${SOURCE_IMAGE}
 
 # Copy cloned repository to the image
@@ -94,7 +90,6 @@ shopt -s dotglob
 for dir in ${REPO_DIR}/*; do
   # Don't try to copy image into itself
   if [[ $dir != *"images" && $dir != *"imgcache" ]]; then
-    echo ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy $dir '/home/pi/catkin_ws/src/clover/'
     ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy $dir '/home/pi/catkin_ws/src/clover/'
   fi;
 done
@@ -133,4 +128,4 @@ ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} copy ${REPO_DIR}'/clover/config/99-
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-ros.sh' ${REPO_URL} ${IMAGE_VERSION} false false ${NUMBER_THREADS}
 ${BUILDER_DIR}/image-chroot.sh ${IMAGE_PATH} exec ${SCRIPTS_DIR}'/image-validate.sh'
 
-#${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH}
+${BUILDER_DIR}/image-resize.sh ${IMAGE_PATH}
