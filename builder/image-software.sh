@@ -69,6 +69,8 @@ apt-get update \
 && apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
+wget -O - 'https://tech0x.github.io/raspbian/key.asc' | sudo apt-key add -
+echo 'deb https://tech0x.github.io/raspbian stable main' > /etc/apt/sources.list.d/ros-noetic.list
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
 echo "deb http://deb.coex.tech/opencv4 buster main" > /etc/apt/sources.list.d/opencv3.list
 echo "deb http://deb.coex.tech/ros buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
@@ -149,11 +151,11 @@ systemctl enable monkey.service
 
 echo_stamp "Install Node.js"
 cd /home/pi
-wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-arm64.tar.gz
-tar -xzf node-v10.15.0-linux-arm64.tar.gz
-cp -R node-v10.15.0-linux-arm64/* /usr/local/
-rm -rf node-v10.15.0-linux-arm64/
-rm node-v10.15.0-linux-arm64.tar.gz
+wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv7l.tar.gz
+tar -xzf node-v10.15.0-linux-armv7l.tar.gz
+cp -R node-v10.15.0-linux-armv7l/* /usr/local/
+rm -rf node-v10.15.0-linux-armv7l
+rm node-v10.15.0-linux-armv7l.tar.gz
 
 echo_stamp "Installing ptvsd"
 my_travis_retry pip install ptvsd

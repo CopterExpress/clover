@@ -91,7 +91,7 @@ apt install -y --no-install-recommends \
 ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
 ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
 ros-${ROS_DISTRO}-cv-camera=0.5.0-0buster \
-ros-${ROS_DISTRO}-image-publisher=1.15.2-0buster \
+ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
 ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
 apt-mark hold \
 ros-${ROS_DISTRO}-compressed-image-transport \
@@ -109,6 +109,12 @@ my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
+
+if [ ! -f /usr/lib/arm-linux-gnueabihf/libpthreads.so ];
+then
+    ln -s /usr/lib/arm-linux-gnueabihf/libpthread.so /usr/lib/arm-linux-gnueabihf/libpthreads.so
+fi
+
 catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
 
 echo_stamp "Install clever package (for backwards compatibility)"
