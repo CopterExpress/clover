@@ -5,7 +5,7 @@ services:
   - docker
 env:
   global:
-    - DOCKER="sfalexrog/img-tool-arm:0.1-armhf"
+    - DOCKER="sfalexrog/img-tool:qemu-update"
     - TARGET_REPO="https://github.com/${TRAVIS_REPO_SLUG}.git"
     - IMAGE_VERSION=${TRAVIS_TAG:-${TRAVIS_COMMIT:0:7}}
     - IMAGE_NAME="$(basename -s '.git' ${TARGET_REPO})_${IMAGE_VERSION}.img"
