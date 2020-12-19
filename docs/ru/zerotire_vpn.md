@@ -2,7 +2,7 @@
 
 ## Создание и управление сетью ZeroTire
 
-1. Зайдите на сайт ZeroTire.
+1. Зайдите на сайт [ZeroTire](https://www.zerotier.com/).
 
     <img src="../assets/zerotire/login_1.png" width=300 class="zoom border center">
 
@@ -145,12 +145,26 @@
 
 1. Перейдите на сайт ZeroTire.
 
+    <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
+
 2. Нажмите на иконку MacOS.
+
+    <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
 3. Скачайте и запустите файл `ZeroTire One.pkg`.
 
+4. Установите приложение ZeroTire One.
+
 ### Настройка
 
-1. Перейдите на сайт ZeroTire.
+1. Запустите приложение ZeroTire One.
 
-2. Нажмите на иконку используемой вами системы.
+2. В панеле задач нажмите на иконку ZeroTire One.
+
+3. В открывшемся окне нажмите *Join Network...*.
+
+    <img src="../assets/zerotire/macos_1.png" width=300 class="zoom border center">
+
+4. В поле *Enter Network ID* введите ID вашей сети.
+
+    <img src="../assets/zerotire/macos_2.png" width=300 class="zoom border center">
