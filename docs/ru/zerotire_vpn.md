@@ -139,7 +139,7 @@
 
 3. При успешном подключении, в консоле будет выведено соответствующее сообщение.
 
-## Установка и настройка на MacOS
+## Установка и настройка на macOS
 
 ### Установка
 
@@ -147,7 +147,7 @@
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
-2. Нажмите на иконку MacOS.
+2. Нажмите на иконку macOS.
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
