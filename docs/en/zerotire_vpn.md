@@ -76,8 +76,6 @@
 
 5. Allow using the new network.
 
-    <img src="../assets/zerotire/windows_5.png" width=300 class="zoom border center">
-
 ## Setup on iOS
 
 ### Installing the app
