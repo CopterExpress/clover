@@ -62,6 +62,7 @@
   * [Model files for parts](models.md)
   * [ROS Melodic installation](ros-install.md)
   * [Camera calibration](camera_calibration.md)
+  * [VPN ZeroTire Connection](zerotire_vpn.md)
   * [Quadcopter control with 4G communication](4g.md)
   * [Clover and Jetson Nano](jetson_nano.md)
   * [Remote control app](rc.md)
