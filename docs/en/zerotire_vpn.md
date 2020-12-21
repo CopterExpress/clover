@@ -24,7 +24,7 @@
 
     <img src="../assets/zerotire/network_3.png" width=300 class="zoom border center">
 
-7. Scroll down to the *Members*column. It will say that there are no users on the network.
+7. Scroll down to the *Members* column. It will say that there are no users on the network.
 
     <img src="../assets/zerotire/network_4.png" width=300 class="zoom border center">
 
