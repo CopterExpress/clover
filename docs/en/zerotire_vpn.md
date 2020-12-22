@@ -115,7 +115,7 @@
         <img src="../assets/zerotire/ios_5.png" width=300 class="zoom border">
     </div>
 
-## Setup on Linux
+## Setup on Linux(PC, Raspberry)
 
 ### Installing the app
 
@@ -166,3 +166,13 @@
 4. In the *Enter Network ID* field, enter your network ID.
 
     <img src="../assets/zerotire/macos_2.png" width=300 class="zoom border center">
+
+## Connecting to the copter
+
+1. Make sure that ZeroTire is working and connected to the network on the drone and control device. To do this, make sure that these have an *Online* status.
+
+     <img src="../assets/zerotire/qgc_1.png" width=300 class="zoom border center">
+
+2. Make sure that all devices have local IP addresses - *Managed IPs*.
+
+3. Open GQC and in the *Comm Links* tab add a TCP connection specifying the IP of the drone. Read more about remote connection [here](gcs_bridge.md).
