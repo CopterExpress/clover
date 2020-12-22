@@ -176,3 +176,8 @@
 2. Make sure that all devices have local IP addresses - *Managed IPs*.
 
 3. Open GQC and in the *Comm Links* tab add a TCP connection specifying the IP of the drone. Read more about remote connection [here](gcs_bridge.md).
+
+    <div class="image-group">
+        <img src="../assets/zerotire/qgc_2.png" width=300 class="zoom border">
+        <img src="../assets/zerotire/qgc_3.png" width=300 class="zoom border">
+    </div>
