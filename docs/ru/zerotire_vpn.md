@@ -117,7 +117,7 @@
         <img src="../assets/zerotire/ios_5.png" width=300 class="zoom border">
     </div>
 
-## Настройка на Linux(PC, Raspberry)
+## Настройка на Linux (PC, Raspberry Pi)
 
 ### Установка приложения
 
