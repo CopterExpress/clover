@@ -1,5 +1,7 @@
 # Clover 4 assembly
 
+Dimensional drawing – [clover-4.2-ws.pdf](https://github.com/CopterExpress/clover/raw/master/docs/assets/dimensional-drawing/clover-4.2-ws.pdf).
+
 ## Fasteners size
 
 > **Hint** During assembly, screws and racks of various sizes are used, using fasteners of the wrong size can damage the copter.
