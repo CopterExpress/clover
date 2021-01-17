@@ -66,19 +66,19 @@ yellow_orange_mask = cv2.inRange(img_hsv, yellow_orange_low, yellow_orange_high)
 brown_mask = cv2.inRange(img_hsv, brown_low, brown_high)
 
 if yellow_orange_mask[119][159] == 255:
-shape = shape_recog(yellow_orange_mask)
+    shape = shape_recog(yellow_orange_mask)
 
 elif brown_mask[119][159] == 255:
-shape = shape_recog(brown_mask) 
+    shape = shape_recog(brown_mask) 
 
 else:
-shape = 'undefined'
-color = 'undefined' 
+    shape = 'undefined'
+    color = 'undefined' 
 
 if shape = ‘brown’:
-	culture = “greshiha”
+    culture = “greshiha”
 if shape = ‘yellow_orange’:
-	culture = “pshenitsa”
+    culture = “pshenitsa”
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color) 
 ```
@@ -86,18 +86,17 @@ image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color
 Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить throttling кадров с камеры, например, в 5 Гц (main_camera.launch):
 
 ```
-<node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
+<node pkg="topic_tools" name="cam_throttle" type="throttle" args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
 Топик для подписчика в этом случае необходимо поменять на: main_camera/image_raw_throttled. 
 
 ```
-Print (culture)
+print (culture)
 while not rospy.is_shutdown():
-print("color: {}".format(color))
-print("shape: {}".format(shape))
-rospy.sleep(0.2) 
+    print("color: {}".format(color))
+    print("shape: {}".format(shape))
+    rospy.sleep(0.2) 
 ```
 
 Данная программа будет определять культуру по её оттенку. Для повышения точности определения можно использовать больше цветовых диапазонов и дрон сможет распознавать большее колличество культур.
