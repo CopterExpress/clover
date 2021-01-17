@@ -48,8 +48,8 @@ def image_colback_color(data):
 
 Каждая культура имеет свой неповторимый оттенок(пшеница- золотистая, гречиха - светло-коричневая). 
 
-<img src="../assets/field.png" width="75%">
-<img src="../assets/field2.png" width="75%">
+<img src="../assets/field.jpg" width="75%">
+<img src="../assets/field2.jpg" width="75%">
 
 Прописываем диапазоны цветов для определённых культур:
 
