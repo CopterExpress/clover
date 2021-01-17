@@ -60,9 +60,9 @@ yellow_orange_high= (52, 110, 150)
 
 #buckwheat
 brown_low = (23, 50, 50)
-brown_high= (37, 50, 50) 
+brown_high= (37, 50, 50)
 
-yellow_orange_mask = cv2.inRange(img_hsv, yellow_orange_low, yellow_orange_high) 
+yellow_orange_mask = cv2.inRange(img_hsv, yellow_orange_low, yellow_orange_high)
 brown_mask = cv2.inRange(img_hsv, brown_low, brown_high)
 
 if yellow_orange_mask[119][159] == 255:
