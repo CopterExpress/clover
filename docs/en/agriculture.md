@@ -48,8 +48,8 @@ def image_colback_color(data):
 
 Each culture has its unique shade (wheat is golden, buckwheat is light brown).
 
-<img src="../assets/field.png" width="75%">
-<img src="../assets/field2.png" width="75%">
+<img src="../assets/field.jpg" width="75%">
+<img src="../assets/field2.jpg" width="75%">
 
 We describe color ranges for certain crops:
 
