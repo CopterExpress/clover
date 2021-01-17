@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Modern agriculture in many countries is becoming one of the shining examples of the rapid and successful introduction of new technologies. Unmanned aerial vehicles are capable of performing a wide range of tasks, among which monitoring of agricultural land has now become a common tool for increasing the efficiency of agriculture. The goal of my project is to write code for recognizing crop types in mass agricultural production. In the future, from the recognition results, you can design a map of sown areas.
+Modern agriculture in many countries is becoming one of the shining examples of the rapid and successful introduction of new technologies. Unmanned aerial vehicles are capable of performing a wide range of tasks, among which monitoring of agricultural land has now become a common tool for increasing the efficiency of agriculture. The goal of my project is to write a code for recognizing crop types in mass agricultural production. In the future, from the recognition results, you can design a map of sown areas.
 
 ## Monitoring
 
-In agriculture, monitoring is necessary to obtain information on the state of land and crops. Based on the monitoring results, farmers or specialists can understand whether crops are sprouting normally, whether there is a threat from weeds and / or insects - pests, what is the degree of moisture in individual areas or entire areas, etc.
+In agriculture, monitoring is necessary to obtain information on the state of land and crops. Based on the monitoring results, farmers or specialists can understand whether crops are sprouting normally, whether there is a threat from weeds and/or insects - pests, what is the degree of moisture in individual areas or entire areas, etc.
 
 ## Explanation of the code
 
@@ -46,7 +46,7 @@ def image_colback_color(data):
     #print(img_hsv[0][0])
 ```
 
-Each culture has its own unique shade (wheat is golden, buckwheat is light brown).
+Each culture has its unique shade (wheat is golden, buckwheat is light brown).
 
 <img src="../assets/field.png" width="75%">
 <img src="../assets/field2.png" width="75%">
@@ -89,7 +89,7 @@ The script will take up to 100% CPU capacity. To slow down the script artificial
 <node pkg="topic_tools" name="cam_throttle" type="throttle" args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-The topic for the subscriber in this case should be changed for main_camera/image_raw_throttled.
+The topic for the subscriber, in this case, should be changed for main_camera/image_raw_throttled.
 
 ```
 print (culture)
@@ -99,7 +99,7 @@ while not rospy.is_shutdown():
     rospy.sleep(0.2) 
 ```
 
-This program will identify the culture by its shade. To improve the accuracy of the determination, more color ranges can be used and the drone will be able to recognize more crops.
+This program will recognize the culture by its shade. We can use more color ranges to improve the accuracy of the recognition so the drone can recognize more crops.
 
 Examples of color ranges for other colors:
 
@@ -144,4 +144,4 @@ red_violet_low = (158, 150, 150)
 red_violet_hugh= (171, 255, 255) 
 ```
 
-Note that there are two ranges for red because red is at the edges of the hsv color space.
+Note that there are two ranges for red because red is at the edges of the HSV color space.
