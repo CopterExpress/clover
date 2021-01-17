@@ -29,7 +29,7 @@ bridge = CvBridge()
 
 color = 'undefined'
 shape = 'undefined'
-culture = “”
+culture = ""
 ```
 
 Для реализации алгоритмов компьютерного зрения рекомендуется использовать предустановленную на образ Клевера библиотеку OpenCV.
@@ -75,10 +75,10 @@ else:
     shape = 'undefined'
     color = 'undefined' 
 
-if shape = ‘brown’:
-    culture = “greshiha”
-if shape = ‘yellow_orange’:
-    culture = “pshenitsa”
+if shape = 'brown':
+    culture = "greshiha"
+if shape = 'yellow_orange':
+    culture = "pshenitsa"
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color)
 ```
