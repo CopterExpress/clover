@@ -28,7 +28,7 @@ rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
 color = 'undefined'
-shape = 'undefined' 
+shape = 'undefined'
 culture = “”
 ```
 
@@ -40,9 +40,9 @@ def image_colback_color(data):
     global color, shape
 
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8') # OpenCV image
-    img_hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV) #[118:119,158:159] 
+    img_hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV) #[118:119,158:159]
 
-    #detected color 
+    #detected color
     #print(img_hsv[0][0])
 ```
 
@@ -60,16 +60,16 @@ yellow_orange_high= (52, 110, 150)
 
 #гречиха
 brown_low = (23, 50, 50)
-brown_high= (37, 50, 50) 
+brown_high= (37, 50, 50)
 
-yellow_orange_mask = cv2.inRange(img_hsv, yellow_orange_low, yellow_orange_high) 
+yellow_orange_mask = cv2.inRange(img_hsv, yellow_orange_low, yellow_orange_high)
 brown_mask = cv2.inRange(img_hsv, brown_low, brown_high)
 
 if yellow_orange_mask[119][159] == 255:
     shape = shape_recog(yellow_orange_mask)
 
 elif brown_mask[119][159] == 255:
-    shape = shape_recog(brown_mask) 
+    shape = shape_recog(brown_mask)
 
 else:
     shape = 'undefined'
@@ -80,7 +80,7 @@ if shape = ‘brown’:
 if shape = ‘yellow_orange’:
     culture = “pshenitsa”
 
-image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color) 
+image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color)
 ```
 
 Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить throttling кадров с камеры, например, в 5 Гц (main_camera.launch):
