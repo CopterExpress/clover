@@ -28,7 +28,7 @@ rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
 color = 'undefined'
-shape = 'undefined' 
+shape = 'undefined'
 culture = “”
 ```
 
@@ -42,7 +42,7 @@ def image_colback_color(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8') # OpenCV image
     img_hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV) #[118:119,158:159] 
 
-    #detected color 
+    #detected color
     #print(img_hsv[0][0])
 ```
 
@@ -69,11 +69,11 @@ if yellow_orange_mask[119][159] == 255:
     shape = shape_recog(yellow_orange_mask)
 
 elif brown_mask[119][159] == 255:
-    shape = shape_recog(brown_mask) 
+    shape = shape_recog(brown_mask)
 
 else:
     shape = 'undefined'
-    color = 'undefined' 
+    color = 'undefined'
 
 if shape = ‘brown’:
     culture = “greshiha”
@@ -96,7 +96,7 @@ print (culture)
 while not rospy.is_shutdown():
     print("color: {}".format(color))
     print("shape: {}".format(shape))
-    rospy.sleep(0.2) 
+    rospy.sleep(0.2)
 ```
 
 This program will recognize the culture by its shade. We can use more color ranges to improve the accuracy of the recognition so the drone can recognize more crops.
