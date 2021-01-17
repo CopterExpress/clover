@@ -29,7 +29,7 @@ bridge = CvBridge()
 
 color = 'undefined'
 shape = 'undefined'
-culture = “”
+culture = ""
 ```
 
 To implement computer vision algorithms, it is recommended to use the OpenCV library preinstalled on the Clover image.
@@ -75,10 +75,10 @@ else:
     shape = 'undefined'
     color = 'undefined'
 
-if shape = ‘brown’:
-    culture = “greshiha”
-if shape = ‘yellow_orange’:
-    culture = “pshenitsa”
+if shape = 'brown':
+    culture = "greshiha"
+if shape = 'yellow_orange':
+    culture = "pshenitsa"
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color) 
 ```
