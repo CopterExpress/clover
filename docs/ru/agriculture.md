@@ -12,15 +12,18 @@
 
 Подключаем библиотеки: 
 
-```import rospy
+```
+import rospy
 import cv2
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import numpy as np
 ```
+
 Создаём некоторые переменные:
 
-```rospy.init_node('computer_vision_sample')
+```
+rospy.init_node('computer_vision_sample')
 
 bridge = CvBridge()
 
@@ -28,10 +31,12 @@ color = 'undefined'
 shape = 'undefined' 
 culture = “”
 ```
+
 Для реализации алгоритмов компьютерного зрения рекомендуется использовать предустановленную на образ SD-карты библиотеку OpenCV. 
  Создаём подписчика на топик с изображением с основной камеры для обработки с использованием OpenCV:
 
-```def image_colback_color(data):
+```
+def image_colback_color(data):
     global color, shape
 
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8') # OpenCV image
@@ -43,9 +48,13 @@ culture = “”
 
 Каждая культура имеет свой неповторимый оттенок(пшеница- золотистая, гречиха - светло-коричневая). 
 
+<img src="../assets/field.png" width="75%">
+<img src="../assets/field2.png" width="75%">
+
 Прописываем диапазоны цветов для определённых культур:
 
-```#пшеница
+```
+#пшеница
 yellow_orange_low = (38, 110, 150)
 yellow_orange_high= (52, 110, 150)
 
@@ -73,21 +82,30 @@ if shape = ‘yellow_orange’:
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color) 
 ```
+
 Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить throttling кадров с камеры, например, в 5 Гц (main_camera.launch):
-```<node pkg="topic_tools" name="cam_throttle" type="throttle"
+
+```
+<node pkg="topic_tools" name="cam_throttle" type="throttle"
     args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
+
 Топик для подписчика в этом случае необходимо поменять на: main_camera/image_raw_throttled. 
-```Print (culture)
+
+```
+Print (culture)
 while not rospy.is_shutdown():
 print("color: {}".format(color))
 print("shape: {}".format(shape))
 rospy.sleep(0.2) 
 ```
+
 Данная программа будет определять культуру по её оттенку. Для повышения точности определения можно использовать больше цветовых диапазонов и дрон сможет распознавать большее колличество культур.
 
 Вот примеры цветовых диапазонов:
-```red_low1 = (0, 110, 150)
+
+```
+red_low1 = (0, 110, 150)
 red_high1= (7, 255, 255)
 
 red_low2 = (172, 110, 150)
@@ -126,5 +144,6 @@ violet_high= (157, 255, 255)
 red_violet_low = (158, 150, 150)
 red_violet_hugh= (171, 255, 255) 
 ```
+
 Обратите внимание, что для красного цвета используется два диапазона т. к. красный цвет находится на границах цветового пространства hsv.
 
