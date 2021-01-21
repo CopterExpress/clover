@@ -12,7 +12,7 @@
 
 Подключаем библиотеки:
 
-```
+```python
 import rospy
 import cv2
 from sensor_msgs.msg import Image
@@ -22,7 +22,7 @@ import numpy as np
 
 Создаём некоторые переменные:
 
-```
+```python
 rospy.init_node('computer_vision_sample')
 
 bridge = CvBridge()
@@ -35,7 +35,7 @@ culture = ""
 Для реализации алгоритмов компьютерного зрения рекомендуется использовать предустановленную на образ Клевера библиотеку OpenCV.
  Создаём подписчика на топик с изображением с основной камеры для обработки с использованием OpenCV:
 
-```
+```python
 def image_colback_color(data):
     global color, shape
 
@@ -53,7 +53,7 @@ def image_colback_color(data):
 
 Прописываем диапазоны цветов для определённых культур:
 
-```
+```python
 #пшеница
 yellow_orange_low = (38, 110, 150)
 yellow_orange_high= (52, 110, 150)
@@ -83,15 +83,15 @@ if shape = 'yellow_orange':
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color)
 ```
 
-Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить throttling кадров с камеры, например, в 5 Гц (main_camera.launch):
+Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить throttling кадров с камеры, например, в 5 Гц (`main_camera.launch`):
 
-```
+```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle" args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
 ```
 
-Топик для подписчика в этом случае необходимо поменять на: main_camera/image_raw_throttled.
+Топик для подписчика в этом случае необходимо поменять на: `main_camera/image_raw_throttled`.
 
-```
+```python
 print (culture)
 while not rospy.is_shutdown():
     print("color: {}".format(color))
@@ -103,45 +103,45 @@ while not rospy.is_shutdown():
 
 Вот примеры цветовых диапазонов:
 
-```
+```python
 red_low1 = (0, 110, 150)
-red_high1= (7, 255, 255)
+red_high1 = (7, 255, 255)
 
 red_low2 = (172, 110, 150)
-red_high2= (180, 255, 255)
+red_high2 = (180, 255, 255)
 
 red_orange_low = (8, 110, 150)
-red_orange_high= (22, 110, 150)
+red_orange_high = (22, 110, 150)
 
 orange_low = (23, 110, 150)
-orange_high= (37, 110, 150)
+orange_high = (37, 110, 150)
 
 yellow_orange_low = (38, 110, 150)
-yellow_orange_high= (52, 110, 150)
+yellow_orange_high = (52, 110, 150)
 
 yellow_low = (53, 150, 150)
-yellow_high= (67, 255, 255)
+yellow_high = (67, 255, 255)
 
 yellow_green_low = (68, 150, 150)
-yellow_green_high= (82, 255, 255)
+yellow_green_high = (82, 255, 255)
 
 green_low = (83, 150, 150)
-green_high= (97, 255, 255)
+green_high = (97, 255, 255)
 
 blue_green_low = (98, 150, 150)
-blue_green_high= (113, 255, 255)
+blue_green_high = (113, 255, 255)
 
 blue_low = (114, 150, 150)
-blue_high= (127, 255, 255)
+blue_high = (127, 255, 255)
 
 blue_violet_low = (128, 150, 150)
-blue_violet_high= (142, 255, 255)
+blue_violet_high = (142, 255, 255)
 
 violet_low = (143, 150, 150)
-violet_high= (157, 255, 255)
+violet_high = (157, 255, 255)
 
 red_violet_low = (158, 150, 150)
-red_violet_hugh= (171, 255, 255) 
+red_violet_hugh = (171, 255, 255) 
 ```
 
-Обратите внимание, что для красного цвета используется два диапазона т. к. красный цвет находится на границах цветового пространства hsv.
+Обратите внимание, что для красного цвета используется два диапазона т. к. красный цвет находится на границах цветового пространства HSV.
