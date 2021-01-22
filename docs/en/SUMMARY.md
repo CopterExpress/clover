@@ -103,3 +103,4 @@
   * [Copter Hack 2017](copterhack2017.md)
   * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
+  * [Recognition of crop types in agriculture](agriculture.md)
