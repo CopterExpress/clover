@@ -91,7 +91,7 @@ apt install -y --no-install-recommends \
 ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
 ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
 ros-${ROS_DISTRO}-cv-camera=0.5.0-0buster \
-ros-${ROS_DISTRO}-image-publisher=1.15.2-0buster \
+ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
 ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
 apt-mark hold \
 ros-${ROS_DISTRO}-compressed-image-transport \
