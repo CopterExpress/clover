@@ -14,7 +14,7 @@
         <!-- Workaround for crashes in VMware -->
         <env name="SVGA_VGPU10" value="0"/>
         <arg name="gui" value="true"/>
-        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover.world"/>
+        <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover_aruco.world"/>
         <arg name="verbose" value="true"/>
     </include>
 
