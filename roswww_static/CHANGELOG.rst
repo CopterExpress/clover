@@ -5,16 +5,10 @@ Changelog for package roswww_static
 0.21.1 (2020-11-17)
 -------------------
 * Add code headers
-* roswww_static: infrastructure for web-based Clover plugins (`#230 <https://github.com/deadln/clover/issues/230>`_)
+* roswww_static: infrastructure for web-based Clover plugins
   * Package for generating static web sites for ROS
-  * rosstatic: add CMakeLists.txt
-  * rosstatic: utilize rospkg, store static directory in ROS_HOME
   * rosstatic: default_package param
-  * rosstatic: fix URLs in docs
-  * clover.launch: make clover the default package for www
-  * Unused import
-  * Rename rosstatic to roswww_static
-  * Fixes
+
 * Contributors: Oleg Kalachev
 
 0.15.1 (2019-01-24)
