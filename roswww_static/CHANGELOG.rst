@@ -6,6 +6,7 @@ Changelog for package roswww_static
 -------------------
 * Add code headers
 * roswww_static: infrastructure for web-based Clover plugins
+
   * Package for generating static web sites for ROS
   * rosstatic: default_package param
 
