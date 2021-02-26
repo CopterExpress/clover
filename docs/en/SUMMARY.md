@@ -54,6 +54,7 @@
   * [MAVROS](mavros.md)
 * [Supplementary materials](supplementary.md)
   * [COEX Pix](coex_pix.md)
+  * [COEX Pix](coex_pdb.md)
   * [Guide on autonomous flight](auto_setup.md)
   * [Hostname](hostname.md)
   * [PX4 Simulation](sitl.md)
