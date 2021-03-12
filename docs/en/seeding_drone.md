@@ -73,28 +73,28 @@ What we get is:
 90° Rotation Angle or 2ms Duty Cycle => 2/20*100% = 10% Duty Cycle
 0° Rotation Angle or 1,5ms Duty Cycle => 1,5/20*100% = 7,5% Duty Cycle
 
-2nd picture electronic
+<img src="../assets/seeding_drone/electronics%20pictures/electronic2.png" alt="" width="400px"/>
 
 We’ll do this by using the RPi.GPIO library and writing Python code on the Raspberry Pi.
 
 -First, import the RPi.GPIO library and the sleep function.
-```
+```python
 import RPi.GPIO as GPIO
 from time import sleep
 ```
 -Then, setup the GPIO mode as BOARD 
-```
+```python
 servo = 33
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
 ```
 -Next, create a variable for the servo, pwm. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
-```
+```python
 pwm=GPIO.PWM(servo, 50)
 pwm.start(0)
 ```
 -Use the ChangeDutyCycle() function to write duty cycle percentages to the servo motor.
-```
+```python
 pwm.ChangeDutyCycle(5) # left -90 deg position
 sleep(1)
 pwm.ChangeDutyCycle(7.5) # neutral position
@@ -177,7 +177,7 @@ Advantages of paper balls:
 In order for the mission to be achieavable in the best way and within our reach, we were required to utilize the threading in python.
 
 Simple mission code.
-```
+```python
 import threading
 import time
 import rospy
