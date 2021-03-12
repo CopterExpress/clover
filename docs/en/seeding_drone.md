@@ -108,7 +108,7 @@ sleep(1)
 Fukuoka technique
 In southern Japan, the Japanese farmer and philosopher Masanobu Fukuoka invented a seed ball planting technique. The method is regarded as a natural farming technique that requires no machines, no chemicals and very little weeding. By the use of seed balls, land is cultivated without any soil preparation.
 
-1st picture
+
 
 Advantages of seed balls
 
@@ -142,13 +142,13 @@ Steps for making seed balls
 6) Insert seeds (1 to 2 seeds per seed ball for permanent trees such as mahogany, sandalwood, orange, moringa…) (± 5 seeds per seed ball for vegetables, flowers, grasses, clovers…)
 7) Dry the seed balls for one to two days in a shaded area, if properly dry, the seed balls will be protected from external predators such as chickens, birds, rats…
                     
-2nd picture
+
 
 Second technique - Paper seed capsules
 
 This method was influenced by a Korean newspaper that contained seed that could be planted outside after reading it.
-                                                                                                                                                              Paper seed capsules :
-3rd picture
+Paper seed capsules :
+
 
 Required materials :
 
@@ -165,7 +165,7 @@ Steps for making paper seed balls:
 4) Add seeds and give round shape
 5) Let it dry overnight
 
-4th picture
+
 
 Advantages of paper balls:
 
