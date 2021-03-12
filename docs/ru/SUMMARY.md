@@ -55,7 +55,6 @@
 * [Дополнительные материалы](supplementary.md)
   * [COEX Pix](coex_pix.md)
   * [COEX PDB](coex_pdb.md)
-  * [COEX GPS](coex_gps.md)
   * [Гид по автономному полету](auto_setup.md)
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)

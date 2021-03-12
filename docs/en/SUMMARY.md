@@ -55,7 +55,6 @@
 * [Supplementary materials](supplementary.md)
   * [COEX Pix](coex_pix.md)
   * [COEX PDB](coex_pdb.md)
-  * [COEX GPS](coex_gps.md)
   * [Guide on autonomous flight](auto_setup.md)
   * [Hostname](hostname.md)
   * [PX4 Simulation](sitl.md)
