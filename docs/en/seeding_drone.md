@@ -37,10 +37,11 @@ After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 <img src="../assets/seeding_drone/mechanism%20pictures/5.PNG" alt="" width="400px"/>
 
 5. Connect the Tanks carefully to Tank Holders.
+<img src="../assets/seeding_drone/mechanism%20pictures/6.jpg" alt="" width="400px"/>
 
 6. Connect SG90 servo motors to Tank using zip tie.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/6.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanism%20pictures/7.jpg" alt="" width="400px"/>
 
 GPS Module
 
@@ -109,7 +110,7 @@ Fukuoka technique
 In southern Japan, the Japanese farmer and philosopher Masanobu Fukuoka invented a seed ball planting technique. The method is regarded as a natural farming technique that requires no machines, no chemicals and very little weeding. By the use of seed balls, land is cultivated without any soil preparation.
 
 
-
+<img src="../assets/seeding_drone/seedcapsules/1.jpg" alt="" width="400px"/>
 Advantages of seed balls
 
 - It is simple and easier to make seed balls without machines
@@ -120,6 +121,8 @@ Advantages of seed balls
 - It requires low maintenance
 
 Which Seeds can be used?
+
+<img src="../assets/seeding_drone/seedcapsules/2.jpg" alt="" width="400px"/>
 
 Any seed which grows in your area (In our it’s apple seed)
 Size and weight of the seed capsule:
@@ -145,6 +148,8 @@ Steps for making seed balls
 
 
 Second technique - Paper seed capsules
+
+<img src="../assets/seeding_drone/seedcapsules/3.jpg" alt="" width="400px"/>
 
 This method was influenced by a Korean newspaper that contained seed that could be planted outside after reading it.
 Paper seed capsules :
