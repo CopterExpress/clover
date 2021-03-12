@@ -275,3 +275,9 @@ pwm2.stop()
 GPIO.cleanup()
 ```
 
+<hr>
+
+Special thanks to International Ala-Too University for funding Clover 4 kits
+
+<img src="http://alatoo.edu.kg/image;jsessionid=bLbgeCHkxN1gLSlMVitvZNn3SKa2Zk6hqIrj_7kL.unknown-host?img=image_logo_4x.png_565734559276200316.png" alt="" width="100px"/>
+
