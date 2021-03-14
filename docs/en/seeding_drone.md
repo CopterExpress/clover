@@ -1,5 +1,5 @@
-#SEED SPREADING QUADCOPTER
-##Team MINIONS
+# SEED SPREADING QUADCOPTER
+## Team MINIONS
 
 Have you ever wondered what a world without trees would look like? Close your eyes, and try to imagine a desolate Earth. There'd be no more paper, and everyone would have to resort to technological use - that is, if anyone was left. Trees are a crucial factor to our existence not only because they produce paper, lumber and chewing gum, but because they serve an important role in the carbon cycle.
 
@@ -150,8 +150,6 @@ Advantages of seed balls
 - It requires low maintenance
 
 ##### Which Seeds can be used?
-
-<img src="../assets/seeding_drone/seedcapsules/2.jpg" alt="" width="400px"/>
 
 Any seed which grows in your area (In our it’s apple seed)
 Size and weight of the seed capsule:
