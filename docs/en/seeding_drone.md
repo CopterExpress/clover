@@ -1,13 +1,42 @@
-## Problem
+#SEED SPREADING QUADCOPTER
+##Team MINIONS
+
 Have you ever wondered what a world without trees would look like? Close your eyes, and try to imagine a desolate Earth. There'd be no more paper, and everyone would have to resort to technological use - that is, if anyone was left. Trees are a crucial factor to our existence not only because they produce paper, lumber and chewing gum, but because they serve an important role in the carbon cycle.
 
 Ever since the industrial revolution between 1760 and 1840, the world has been in a never-ending carbon chaos. Trees and Plankton are our only saviours in terms of handling this problem, and we can only control one of them, trees. 
 
-## Aim
 We need to save trees by protecting them from the destructive human activities like clearance of forests, deforestation for urbanization, etc. Trees are the lungs for the earth. It is an important part of nature’s ecosystem. They balance the soil composition and also act as the barrier for wind and storm. Thus, they provide various uses to the ecosystem. For these reasons, it’s imperative that we save trees.
+
+Since there are a lot of dangerous and difficult-to-reach landsides for humans to plant, the most viable alternative is to use drones for plantation in those regions.
 
 Seed-firing drones will, as the name suggests, fire seeds into fertile soil to allow millions of trees to grow back after being cut down for industrial use. If the rate of planting exceeds the rate of cutting, eventually we will restore the trees we once felled.
 
+<img src="../assets/seeding_drone/image.jpg" alt="" width="400px"/>
+ 
+## Our Aim
+We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka Fukuoka Technique. This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
+
+https://www.youtube.com/watch?v=Nz1w59v451U
+
+We achived to do small seeding missions but we faced some problem about autonomous flying with gps.
+
+We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
+
+Special thanks to International Ala-Too University for funding Clover 4 kits
+
+Seed capsules
+
+How to assemble seeding mechanism to clover 4.2 drone
+
+How to control the seeding mechanism
+
+Programming
+
+References
+
+https://www.nationalgeographic.com/environment/article/deforestation
+http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
+https://earthenginepartners.appspot.com/
 ## How it works
 We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka [Fukuoka Technique](https://www.google.com/url?sa=t&source=web&rct=j&url=http://www.ideassonline.org/public/pdf/FukuocaRassegnaENG2.pdf&ved=2ahUKEwjTw4aY_6zvAhVkkosKHYa3DzIQFjAWegQIDxAC&usg=AOvVaw0_jfashkOl2VLci7m7e60c&cshid=1615629111443). This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
 
@@ -120,7 +149,7 @@ Advantages of seed balls
 - It is a low-cost method compared to traditional afforestation/reforestation techniques
 - It requires low maintenance
 
-Which Seeds can be used?
+##### Which Seeds can be used?
 
 <img src="../assets/seeding_drone/seedcapsules/2.jpg" alt="" width="400px"/>
 
@@ -149,11 +178,12 @@ Steps for making seed balls
 
 Second technique - Paper seed capsules
 
-<img src="../assets/seeding_drone/seedcapsules/3.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/seedcapsules/2.jpg" alt="" width="400px"/>
 
 This method was influenced by a Korean newspaper that contained seed that could be planted outside after reading it.
 Paper seed capsules :
 
+<img src="../assets/seeding_drone/seedcapsules/3.jpg" alt="" width="400px"/>
 
 Required materials :
 
@@ -170,11 +200,11 @@ Steps for making paper seed balls:
 4) Add seeds and give round shape
 5) Let it dry overnight
 
-
+<img src="../assets/seeding_drone/seedcapsules/4.jpg" alt="" width="400px"/>
 
 Advantages of paper balls:
 
-- Easy to find materils
+- Easy to find materials
 - Environmentally friendly
 
 ## CODE 
@@ -274,10 +304,3 @@ pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
 ```
-
-<hr>
-
-Special thanks to International Ala-Too University for funding Clover 4 kits
-
-<img src="http://alatoo.edu.kg/image;jsessionid=bLbgeCHkxN1gLSlMVitvZNn3SKa2Zk6hqIrj_7kL.unknown-host?img=image_logo_4x.png_565734559276200316.png" alt="" width="100px"/>
-
