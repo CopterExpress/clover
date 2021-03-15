@@ -66,7 +66,7 @@ After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 <img src="../assets/seeding_drone/mechanismpictures/5.PNG" alt="" width="400px"/>
 
 5. Connect the Tanks carefully to Tank Holders.
-<img src="../assets/seeding_drone/mechanism%20pictures/6.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/6.jpg" alt="" width="400px"/>
 
 6. Connect SG90 servo motors to Tank using zip tie.
 
@@ -304,12 +304,18 @@ GPIO.cleanup()
 ```
 [code_download](../assets/seeding_drone/main.py)
 
-## files to download
+## Files to download
+
 [ALL](../assets/seeding_drone/CADFILES/ALL.dwg)
 
 [LOWER_TANK_HOLDER_LEFT](../assets/seeding_drone/CADFILES/LOWER_TANK_HOLDER_LEFT.stl)
+
 [LOWER_TANK_HOLDER_RIGHT](../assets/seeding_drone/CADFILES/LOWER_TANK_HOLDER_RIGHT.stl)
+
 [PUSHER](../assets/seeding_drone/CADFILES/PUSHER.stl)
+
 [TANK](../assets/seeding_drone/CADFILES/TANK.stl)
+
 [UPPER_TANK_HOLDER_LEFT](../assets/seeding_drone/CADFILES/UPPER_TANK_HOLDER_LEFT.stl)
+
 [UPPER_TANK_HOLDER_RIGHT](../assets/seeding_drone/CADFILES/UPPER_TANK_HOLDER_RIGHT.stl)
