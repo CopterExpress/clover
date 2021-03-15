@@ -46,41 +46,41 @@ Video link - https://www.youtube.com/watch?v=Nz1w59v451U
 
 After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/1.PNG" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/1.PNG" alt="" width="400px"/>
 
 
 1. Install the Lower Tank Holders to top Deck mount and fix with the M3x8 screws.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/2.PNG" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/2.PNG" alt="" width="400px"/>
 
 2. Install Nylon rack(40 mm) to 4 sides of the Deck mount.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/3.PNG" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/3.PNG" alt="" width="400px"/>
 
 3. Install the Grab deck and fix with the M3x8 screws.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/4.PNG" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/4.PNG" alt="" width="400px"/>
 
 4. Install the Upper Tank Holders to top Grab mount and fix with the M3x8 screws.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/5.PNG" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/5.PNG" alt="" width="400px"/>
 
 5. Connect the Tanks carefully to Tank Holders.
 <img src="../assets/seeding_drone/mechanism%20pictures/6.jpg" alt="" width="400px"/>
 
 6. Connect SG90 servo motors to Tank using zip tie.
 
-<img src="../assets/seeding_drone/mechanism%20pictures/7.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/7.jpg" alt="" width="400px"/>
 
 GPS Module
 
 We installed the GPS Module to the top using 2 Nylon rack(40 mm)
 
-<img src="../assets/seeding_drone/mechanism%20pictures/8.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/8.jpg" alt="" width="400px"/>
 
 We coated the battery to protect it from the cold weather
 
-<img src="../assets/seeding_drone/mechanism%20pictures/9.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/mechanismpictures/9.jpg" alt="" width="400px"/>
 
 ## Electronics
 
@@ -90,7 +90,7 @@ Electronic part of seed dropping mechanism consists of:
 - PDB (Power Distribution Board) of Coex Clover 4
 Servo motor’s signal pins are connected to Raspberry Pi’s Hardware PWM pins 32 and 33, and power is taken from Power Distribution Board (5 V). 
 
-<img src="../assets/seeding_drone/electronics%20pictures/electronic1.png" alt="" width="400px"/>
+<img src="../assets/seeding_drone/electronicspictures/electronic1.png" alt="" width="400px"/>
 
 Explanation of code for controlling servo motors:
 Servo motors are controlled using a PWM (Pulse-Width Modulation) signal from Raspberry Pi.
@@ -103,28 +103,28 @@ What we get is:
 90° Rotation Angle or 2ms Duty Cycle => 2/20*100% = 10% Duty Cycle
 0° Rotation Angle or 1,5ms Duty Cycle => 1,5/20*100% = 7,5% Duty Cycle
 
-<img src="../assets/seeding_drone/electronics%20pictures/electronic2.png" alt="" width="400px"/>
+<img src="../assets/seeding_drone/electronicspictures/electronic2.png" alt="" width="400px"/>
 
 We’ll do this by using the RPi.GPIO library and writing Python code on the Raspberry Pi.
 
 -First, import the RPi.GPIO library and the sleep function.
-```python
+```py
 import RPi.GPIO as GPIO
 from time import sleep
 ```
 -Then, setup the GPIO mode as BOARD 
-```python
+```py
 servo = 33
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
 ```
 -Next, create a variable for the servo, pwm. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
-```python
+```py
 pwm=GPIO.PWM(servo, 50)
 pwm.start(0)
 ```
 -Use the ChangeDutyCycle() function to write duty cycle percentages to the servo motor.
-```python
+```py
 pwm.ChangeDutyCycle(5) # left -90 deg position
 sleep(1)
 pwm.ChangeDutyCycle(7.5) # neutral position
@@ -204,13 +204,13 @@ Advantages of paper balls:
 
 - Easy to find materials
 - Environmentally friendly
-
+<img src="../assets/seeding_drone/seedcapsules/5.jpg" alt="" width="400px"/>
 ## CODE 
 
 In order for the mission to be achieavable in the best way and within our reach, we were required to utilize the threading in python.
 
 Simple mission code.
-```python
+```py
 import threading
 import time
 import rospy
@@ -302,3 +302,14 @@ pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
 ```
+[code_download](../assets/seeding_drone/main.py)
+
+## files to download
+[ALL](../assets/seeding_drone/CADFILES/ALL.dwg)
+
+[LOWER_TANK_HOLDER_LEFT](../assets/seeding_drone/CADFILES/LOWER_TANK_HOLDER_LEFT.stl)
+[LOWER_TANK_HOLDER_RIGHT](../assets/seeding_drone/CADFILES/LOWER_TANK_HOLDER_RIGHT.stl)
+[PUSHER](../assets/seeding_drone/CADFILES/PUSHER.stl)
+[TANK](../assets/seeding_drone/CADFILES/TANK.stl)
+[UPPER_TANK_HOLDER_LEFT](../assets/seeding_drone/CADFILES/UPPER_TANK_HOLDER_LEFT.stl)
+[UPPER_TANK_HOLDER_RIGHT](../assets/seeding_drone/CADFILES/UPPER_TANK_HOLDER_RIGHT.stl)
