@@ -134,6 +134,9 @@ echo_stamp "Make sure both pip and pip3 are installed"
 pip --version
 pip3 --version
 
+echo_stamp "Install Rust"  # needed for cryptography module
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
 my_travis_retry pip3 install tornado==5.1.1
