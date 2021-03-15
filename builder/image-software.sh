@@ -136,7 +136,8 @@ pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
-CRYPTOGRAPHY_DONT_BUILD_RUST=1 my_travis_retry pip3 install tornado==5.1.1
+export CRYPTOGRAPHY_DONT_BUILD_RUST=1
+my_travis_retry pip3 install tornado==5.1.1
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
