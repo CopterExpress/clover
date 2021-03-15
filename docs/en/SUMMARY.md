@@ -106,3 +106,4 @@
   * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
   * [Recognition of crop types in agriculture](agriculture.md)
+  * [3D-printed Generative Design Frame](generative_design_frame.md)
