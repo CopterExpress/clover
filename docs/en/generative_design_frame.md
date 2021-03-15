@@ -32,10 +32,12 @@ After printing the first version of the frame we discovered the following proble
 - Support Structure: The support structure for the frame is very complex and the parameters used in the slicer resulted in it being unable to be removed without destroying the model
 - Arm Strength: Some parts of the arms to the motor mounts were very thin, resulting in them breaking easily and removing the support structure resulted in breaking them
 To conquer those problems we made several changes. We increased the minimal thickness for the generated structures and generated a new model. We changed the settings in the slicer so that the support structure could be removed easier as well as changed the infill structure. Finally we changed the filament and increased the printing temperature. Further we concluded that printing with a water dissolvable support structure would be optimal, however as of right now we don’t have access to a printer capable of that.
+
 ![Prototype 1](../assets/generative-design-frame/p1.JPG)
 
 #### Prototype 2
 This prototype took 48 hours of printing and used 277 grams of filament including 100 grams for the support. Installation of the components is very easy as no other tools than a screwdriver are needed. This prototype was the first to take flight in January 2021. Please see [this](https://youtu.be/M4f8_JmJADM) video.
+
 <p float="left">
   <img src="../assets/generative-design-frame/p21.png" width="32%" />
   <img src="../assets/generative-design-frame/p22.png" width="32%" /> 
