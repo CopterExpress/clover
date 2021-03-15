@@ -1,6 +1,6 @@
 # Граффити коптер D-drone
 
-<img class="center" src="../assets/ddrone/heart.gif" width="600">
+<img class="center" src="../assets/ddrone/final.gif" width="600">
 
 ## Введение
 

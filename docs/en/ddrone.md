@@ -1,6 +1,6 @@
 # D-drone Copter Hack 2021 by AT Makers
 
-<img class="center" src="../assets/ddrone/heart.gif" width="600">
+<img class="center" src="../assets/ddrone/final.gif" width="600">
 
 ## Intro
 
