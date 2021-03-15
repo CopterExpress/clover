@@ -10,6 +10,8 @@
 
 <img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
+<img class="center" src="../assets/ddrone/full_holder_in _real.jpg" width="300">
+
 Для выполнения проекта вам нужно иметь в наличии:
 
 - аэрозольная краска
@@ -39,6 +41,8 @@
 **Схема нажатия.** Для нажатия клапана будем использовать винтовую передачу с неподвижной гайкой. К сервоприводу будут прикреплена планка с отверстиями, в которых будут входить стойки, закрепленные к гайке. Это помогает сервоприводу двигаться только по одной оси, вверх вниз. Также мы смоделировали крышку для кнопки баллончика, так как поверхность насадки не ровная.
 
 <img class="center" src="../assets/ddrone/pressing_mechanism.png" width="300"  >
+
+<img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300"  >
 
 ## Перед запуском
 
@@ -83,3 +87,9 @@ mv visual_ddrone-master ddrone
 ## Полеты
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ErtioCj5iMw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Благодарность
+
+Хотим выразить благодарность Международному университету Ала-Тоо за предоставленную финансовую помощь в осущствлении данного проекта.
+
+![Ala-Too University](https://my.alatoo.edu.kg/images/logo_text.png)

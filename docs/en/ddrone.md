@@ -10,6 +10,8 @@ People strive to teach artificial intelligence everything they can do themselves
 
 <img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
+<img class="center" src="../assets/ddrone/full_holder_in _real.jpg" width="300">
+
 To complete the project you need to have in stock:
 
 - spray paint
@@ -40,6 +42,8 @@ If the diameter of the can is less than the diameter of the holder, we use the p
 **Pressing mechanism.** To push the valve, we will use a screw drive with a fixed nut. A bar with holes will be attached to the servo, which will include the racks attached to the nut. This helps the servo to move only on one axis, up and down. We also modeled the cap for the spray can button, since the surface of the nozzle is uneven.
 
 <img class="center" src="../assets/ddrone/pressing_mechanism.png" width="300"  >
+
+<img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300"  >
 
 ## Before launching
 
@@ -84,3 +88,9 @@ We pick the web interface to control the copter because it is easier for the use
 ## Flights
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ErtioCj5iMw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Special Thanks
+
+Project was created with financial support of International Ala-Too University.
+
+![Ala-Too University](https://my.alatoo.edu.kg/images/logo_text.png)
