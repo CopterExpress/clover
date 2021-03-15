@@ -92,6 +92,8 @@
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
   * [Migration to v0.20](migrate20.md)
+* [Events](events.md)
+  * [CopterHack-2021](copterhack2021.md)
 * [Clover-based projects](projects.md)
   * [Drone show](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
