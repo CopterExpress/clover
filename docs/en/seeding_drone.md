@@ -22,8 +22,6 @@ We achived to do small seeding missions but we faced some problem about autonomo
 
 We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
 
-Special thanks to International Ala-Too University for funding Clover 4 kits
-
 Seed capsules
 
 How to assemble seeding mechanism to clover 4.2 drone
@@ -39,3 +37,5 @@ https://www.nationalgeographic.com/environment/article/deforestation
 http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
 
 https://earthenginepartners.appspot.com/
+
+Special thanks to International Ala-Too University for funding Clover 4 kits
