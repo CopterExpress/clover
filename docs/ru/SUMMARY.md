@@ -122,6 +122,7 @@
   * [Калибровка камеры (legacy)](camera_calib.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
   * [Распознавание видов агрокультур](agriculture.md)
+  * [Граффити коптер D-drone](ddrone.md)
 
 ## Учебник
 
