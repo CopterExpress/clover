@@ -254,8 +254,8 @@ GPIO.setup(servo2,GPIO.OUT)
 pwm1 = GPIO.PWM(servo1,50)    #create PWM instance with frequency
 pwm2 = GPIO.PWM(servo2,50)
 
-pwm1.start(0)        #start PWM of required Duty Cycle 
-pwm2.start(0)  
+pwm1.start(0)        #start PWM of required Duty Cycle
+pwm2.start(0)
 
 
 def servo_drop(seconds):   #function to drop seed capsules from 2 tanks
@@ -268,14 +268,14 @@ def servo_drop(seconds):   #function to drop seed capsules from 2 tanks
             time.sleep(0.5)
             pwm1.ChangeDutyCycle(5) # push then drop the capsule
             time.sleep(0.5)
-            i = 2                   #changing the variable for to use the second tank in next dropping       
-            
+            i = 2                   #changing the variable for to use the second tank in next dropping
+
         elif(i == 2):               #first tank
             pwm2.ChangeDutyCycle(10) # release one seed capsule
             time.sleep(0.5)
             pwm2.ChangeDutyCycle(5) # push then drop the capsule
             time.sleep(0.5)
-            i = 1                   #changing the variable for to use the first tank in next dropping 
+            i = 1                   #changing the variable for to use the first tank in next dropping
 
         print(num)
         time.sleep(2)
