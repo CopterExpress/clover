@@ -139,7 +139,7 @@
 
 4. Установите верхние держатели бака на верхнее захватное крепление и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/mechanismpictures /4.PNG" width = "400px" class = "center" />
+    <img src = "../assets/seeding_drone/mechanismpictures/4.PNG" width = "400px" class = "center" />
 
 5. Осторожно подсоедините резервуары к держателям резервуаров.
 
@@ -191,14 +191,14 @@
 
 Сначала импортируйте библиотеку RPi.GPIO и функцию сна:
 
-```py
+```python
 import RPi.GPIO as GPIO
 from time import sleep
 ```
 
 Затем установите режим GPIO как BOARD:
 
-```py
+```python
 servo = 33
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
@@ -206,14 +206,14 @@ GPIO.setup(servo, GPIO.OUT)
 
 Далее создайте переменную для сервопривода ШИМ. Затем отправьте сигнал ШИМ 50 Гц на этот вывод GPIO с помощью функции GPIO.PWM(). Начните сигнал с 0.
 
-```py
+```python
 pwm=GPIO.PWM(servo, 50)
 pwm.start(0)
 ```
 
 Используйте функцию `ChangeDutyCycle()`, чтобы записать проценты рабочего цикла в серводвигатель.
 
-```py
+```python
 pwm.ChangeDutyCycle(5) # left -90 deg position
 sleep(1)
 pwm.ChangeDutyCycle(7.5) # neutral position
