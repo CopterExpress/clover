@@ -98,6 +98,7 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * [Clover-based projects](projects.md)
+  * [Autonomous Multirotor Landing System (AMLS)](amls.md)
   * [Drone show](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Copter spheric guard](shield.md)
