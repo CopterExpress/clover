@@ -16,7 +16,7 @@ Seed-firing drones will, as the name suggests, fire seeds into fertile soil to a
 
 We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka Fukuoka Technique. This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
 
-Youtube video link - <https://www.youtube.com/embed/Nz1w59v451U>
+Youtube video link - (https://www.youtube.com/embed/Nz1w59v451U)[https://www.youtube.com/embed/Nz1w59v451U]
 
 We achived to do small seeding missions but we faced some problem about autonomous flying with GPS.
 
@@ -32,7 +32,7 @@ We coated our battery to protect it from cold weather, seeding missions need to 
 
 ## Link for the all files used in this project
 
-<https://github.com/Sahinysf/TreeSeedQuad>
+(https://github.com/Sahinysf/TreeSeedQuad)[https://github.com/Sahinysf/TreeSeedQuad]
 
 REREFENCES
 
