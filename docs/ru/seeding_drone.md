@@ -124,23 +124,23 @@
 
 1. Установите нижние держатели бака на крепление верхней палубы и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/Mechanismpictures/1.png" alt = "" width = "400px" class = "center" />
+    <img src = "../assets/seeding_drone/Mechanismpictures/1.PNG" alt = "" width = "400px" class = "center" />
 
 2. Установите нейлоновую стойку (40 мм) с 4 сторон крепления для деки.
 
-    <img src = "../assets/seeding_drone/Mechanismpictures/2.png" alt = "" width = "400px" class= "center" />
+    <img src = "../assets/seeding_drone/Mechanismpictures/2.PNG" alt = "" width = "400px" class= "center" />
 
 3. Установите поручень и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/Mechanismpictures/3.png" alt = "" width = "400px" class = "center" />
+    <img src = "../assets/seeding_drone/Mechanismpictures/3.PNG" alt = "" width = "400px" class = "center" />
 
 4. Установите верхние держатели бака на верхнее захватное крепление и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/Mechanismpictures /4.png" alt = "" width = "400px" class = "center" />
+    <img src = "../assets/seeding_drone/Mechanismpictures /4.PNG" alt = "" width = "400px" class = "center" />
 
 5. Осторожно подсоедините резервуары к держателям резервуаров.
 
-    <img src = "../assets/seeding_drone/ Mechanismpictures/5.png" alt = "" width = "400px" class = "center" />
+    <img src = "../assets/seeding_drone/ Mechanismpictures/5.PNG" alt = "" width = "400px" class = "center" />
 
 6. Подсоедините серводвигатели SG90 к резервуару с помощью стяжки.
 
