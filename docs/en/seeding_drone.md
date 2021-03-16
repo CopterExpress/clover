@@ -35,5 +35,7 @@ Programming
 References
 
 https://www.nationalgeographic.com/environment/article/deforestation
+
 http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
+
 https://earthenginepartners.appspot.com/
