@@ -21,7 +21,7 @@ To complete the project you need to have in stock:
 - spray can extension straw
 - velcro
 - 4 long screws and nuts M4 or M3
-- 2-4 short self-tapping screws M4 or M3
+- 2-4 short self-tapping screws M4 or M3.
 
 [Download](https://github.com/PerizatKurmanbaeva/D-drone/tree/master/details) and 3D-print details:
 
@@ -29,7 +29,7 @@ To complete the project you need to have in stock:
 - screw
 - rack_holder_with_nut
 - rack x2
-- servo_holder
+- servo_holder.
 
 **Spray holder.** The spray holder is attached to the deck with 4 screws and nuts. To fasten the can to the holder, we used a tape with velcro. With 4 nuts and screws, we fix the drone's upper deck with spray holder.
 
@@ -51,13 +51,13 @@ If the diameter of the can is less than the diameter of the holder, we use the p
 
 Before starting the copter, you need to download [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/master/examples/servo.py) and move it to RPi. You can simply copy and paste using the clipboard. Or copy it using the scp command. For instance:
 
-```shell
+```bash
 scp servo.py pi@192.168.11.1:/home/pi
 ```
 
 Then run the following commands remotely on the Raspberry Pi:
 
-```shell
+```bash
 sudo pigpiod
 python servo.py
 ```
@@ -66,14 +66,14 @@ python servo.py
 
 Download this [repository](https://github.com/PerizatKurmanbaeva/visual_ddrone) in .zip format. Copy to RPi and unpack using the following commands:
 
-```shell
+```bash
 scp visual_ddrone-master.zip pi@192.168.11.1:/home/pi
 cd catkin_ws/src/clover/clover/www
 unzip /home/pi/visual_ddrone-master.zip .
 mv visual_ddrone-master ddrone
 ```
 
-Now to open the web interface, click on the link [192.168.11.1/clover/drone](192.168.11.1/clover/drone)
+Now to open the web interface, click on the link [http://192.168.11.1/clover/drone](http://192.168.11.1/clover/drone).
 
 ## Web interface
 
