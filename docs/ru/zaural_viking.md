@@ -13,8 +13,8 @@
 Задумка проекта началась с конструирования основы под электронные компоненты на гусеничной базе (рис. 1). В качестве основных компонентов выбрал полетный контроллер COEX Pix и микрокомпьютер Raspberry Pi 3 B+. Используя среду программирования [Blockly](blocks.md), получилось привести робота в движение.
 
 <div class="image-group">
-	<img src="../assets/zaural_viking/1.jpg" width=300 class="zoom border">
-	<img src="../assets/zaural_viking/2.jpg" width=300 class="zoom border">
+    <img src="../assets/zaural_viking/1.jpg" width=300 class="zoom border">
+    <img src="../assets/zaural_viking/2.jpg" width=300 class="zoom border">
 </div>
 
 *Рис. 1. Гусеничный робот с COEX Pix и Raspberry Pi 3 B+.*
@@ -22,8 +22,8 @@
 Следующим этапом разработки колесной базы для квадрокоптера стало использование конструктора четырехколесной платформы Pirate. Вес платформы с драйвером моторов составил 345 грамм (рис. 2). С учетом увеличения взлетной массы и для увеличения мощности, принято использовать пропеллеры 3-лопастные 6040 (рис. 3).
 
 <div class="image-group">
-	<img title="Рис. 2. Вес платформы" src="../assets/zaural_viking/3.jpg" width=300 class="zoom border">
-	<img title="Рис. 3. Собранная конструкция" src="../assets/zaural_viking/4.jpg" width=300 class="zoom border">
+    <img title="Рис. 2. Вес платформы" src="../assets/zaural_viking/3.jpg" width=300 class="zoom border">
+    <img title="Рис. 3. Собранная конструкция" src="../assets/zaural_viking/4.jpg" width=300 class="zoom border">
 </div>
 
 *Рис. 2. Вес платформы. Рис. 3. Собранная конструкция.*
@@ -39,8 +39,8 @@
 Следующим шагом для снижения веса, стало решение использовать микросхему драйвера двигателей L293D (рис. 5), вместо модуля драйвера двигателей L298N (рис. 6).
 
 <div class="image-group">
-	<img title="Рис. 5. Драйвер двигателей L293D" src="../assets/zaural_viking/6.jpg" width=300 class="zoom border">
-	<img title="Рис. 6. Драйвер двигателей L298N" src="../assets/zaural_viking/7.jpg" width=300 class="zoom border">
+    <img title="Рис. 5. Драйвер двигателей L293D" src="../assets/zaural_viking/6.jpg" width=300 class="zoom border">
+    <img title="Рис. 6. Драйвер двигателей L298N" src="../assets/zaural_viking/7.jpg" width=300 class="zoom border">
 </div>
 
 *Рис. 5. Драйвер двигателей L293D. Рис. 6. Драйвер двигателей L298N.*
