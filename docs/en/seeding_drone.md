@@ -1,7 +1,5 @@
 # SEED SPREADING QUADCOPTER
 
-## Team MINIONS
-
 Have you ever wondered what a world without trees would look like? Close your eyes, and try to imagine a desolate Earth. There'd be no more paper, and everyone would have to resort to technological use - that is, if anyone was left. Trees are a crucial factor to our existence not only because they produce paper, lumber and chewing gum, but because they serve an important role in the carbon cycle.
 
 Ever since the industrial revolution between 1760 and 1840, the world has been in a never-ending carbon chaos. Trees and Plankton are our only saviours in terms of handling this problem, and we can only control one of them, trees.
@@ -12,13 +10,13 @@ Since there are a lot of dangerous and difficult-to-reach landsides for humans t
 
 Seed-firing drones will, as the name suggests, fire seeds into fertile soil to allow millions of trees to grow back after being cut down for industrial use. If the rate of planting exceeds the rate of cutting, eventually we will restore the trees we once felled.
 
-<img src="../assets/seeding_drone/image.jpg" alt="" width="400px"/>
+<img src="../assets/seeding_drone/image.jpg" alt="" width="400px" class="center"/>
 
 ## Our Aim
 
 We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka Fukuoka Technique. This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
 
-[![YouTube link](https://i.ibb.co/N64Mw87/Screenshot-2021-03-16-120100.png)](https://www.youtube.com/embed/Nz1w59v451U "Click here")
+Youtube video link - <https://www.youtube.com/embed/Nz1w59v451U>
 
 We achived to do small seeding missions but we faced some problem about autonomous flying with gps.
 
@@ -26,11 +24,15 @@ We coated our battery to protect it from cold weather, seeding missions need to 
 
 - [Seed capsules](#seed-capsules)
 
-- How to assemble seeding mechanism to clover 4.2 drone
+- [How to assemble seeding mechanism to clover 4.2 drone](#how-to-assemble-seeding-mechanism-to-clover-42-drone)
 
-- How to control the seeding mechanism
+- [How to control the seeding mechanism](#how-to-control-the-seeding-mechanism)
 
-- Programming
+- [Programming](#programming)
+
+## Link for the all files used in this project
+
+<https://github.com/Sahinysf/TreeSeedQuad>
 
 REREFENCES
 
@@ -40,14 +42,12 @@ REREFENCES
 
 <https://earthenginepartners.appspot.com/>
 
-Special thanks to International Ala-Too University for funding Clover 4 kits
-
 ## Seed capsules
 
 Fukuoka technique
 In southern Japan, the Japanese farmer and philosopher Masanobu Fukuoka invented a seed ball planting technique. The method is regarded as a natural farming technique that requires no machines, no chemicals and very little weeding. By the use of seed balls, land is cultivated without any soil preparation.
 
-1st picture
+<img src="../assets/seeding_drone/seedcapsules/1.jpg" alt="" width="250px" class="center"/>
 
 Advantages of seed balls
 
@@ -81,13 +81,12 @@ Steps for making seed balls
 6) Insert seeds (1 to 2 seeds per seed ball for permanent trees such as mahogany, sandalwood, orange, moringa…) (± 5 seeds per seed ball for vegetables, flowers, grasses, clovers…)
 7) Dry the seed balls for one to two days in a shaded area, if properly dry, the seed balls will be protected from external predators such as chickens, birds, rats…
 
-2nd picture
+<img src="../assets/seeding_drone/seedcapsules/3.jpg" alt="" width="250px" class="center"/>
 
 Second technique - Paper seed capsules
 
 This method was influenced by a Korean newspaper that contained seed that could be planted outside after reading it.
                                                                                                                                                               Paper seed capsules :
-3rd picture
 
 Required materials :
 
@@ -104,14 +103,14 @@ Steps for making paper seed balls:
 4) Add seeds and give round shape
 5) Let it dry overnight
 
-4th picture
+<img src="../assets/seeding_drone/seedcapsules/2.jpg" alt="" width="400px" class="center"/>
 
 Advantages of paper balls:
 
 - Easy to find materils
 - Environmentally friendly
 
-References
+REREFENCES
 
 <https://web.archive.org/web/20090115211020/http://www.rmaf.org.ph/Awardees/Biography/BiographyFukuokaMas.htm>
 <http://www.guerrillagardening.org/ggseedbombs.html>
@@ -122,41 +121,41 @@ HOW TO ASSEMBLE SEEDING MECHANISM
 
 After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 
-1st picture mechanism
-
 1. Install the Lower Tank Holders to top Deck mount and fix with the M3x8 screws.
 
-    2nd picture mechanism
+    <img src="../assets/seeding_drone/mechanismpictures/1.png" alt="" width="400px" class="center"/>
 
 2. Install Nylon rack(40 mm) to 4 sides of the Deck mount.
 
-    3rd picture mechanism
+    <img src="../assets/seeding_drone/mechanismpictures/2.png" alt="" width="400px" class="center"/>
 
 3. Install the Grab deck and fix with the M3x8 screws.
 
-    4th picture mechanism
+    <img src="../assets/seeding_drone/mechanismpictures/3.png" alt="" width="400px" class="center"/>
 
 4. Install the Upper Tank Holders to top Grab mount and fix with the M3x8 screws.
 
-    5th picture mechanism
+    <img src="../assets/seeding_drone/mechanismpictures/4.png" alt="" width="400px" class="center"/>
 
 5. Connect the Tanks carefully to Tank Holders.
 
+    <img src="../assets/seeding_drone/mechanismpictures/5.png" alt="" width="400px" class="center"/>
+
 6. Connect SG90 servo motors to Tank using zip tie.
 
-6th picture - 7th picture mechanism
+Final view of seeding drone
+
+<img src="../assets/seeding_drone/mechanismpictures/6.jpg" alt="" width="400px" class="center"/>
 
 GPS Module
 
 We installed the GPS Module to the top using 2 Nylon rack(40 mm)
 
-8th picture mechanism
+<img src="../assets/seeding_drone/mechanismpictures/7.jpg" alt="" width="400px" class="center"/>
 
 We coated the battery to protect it from the cold weather
 
-9th picture mechanism
-
-Link for the all cad files
+<img src="../assets/seeding_drone/mechanismpictures/8.jpg" alt="" width="400px" class="center"/>
 
 ## How to control the seeding mechanism
 
@@ -167,7 +166,7 @@ Electronic part of seed dropping mechanism consists of:
 - PDB (Power Distribution Board) of Coex Clover 4
 Servo motor’s signal pins are connected to Raspberry Pi’s Hardware PWM pins 32 and 33, and power is taken from Power Distribution Board (5 V).
 
-1st picture electronic
+<img src="../assets/seeding_drone/electronicspictures/electronic1.png" alt="" width="400px" class="center"/>
 
 Explanation of code for controlling servo motors:
 Servo motors are controlled using a PWM (Pulse-Width Modulation) signal from Raspberry Pi.
@@ -180,20 +179,20 @@ What we get is:
 90° Rotation Angle or 2ms Duty Cycle => 2/20*100% = 10% Duty Cycle
 0° Rotation Angle or 1,5ms Duty Cycle => 1,5/20*100% = 7,5% Duty Cycle
 
-2nd picture electronic
+<img src="../assets/seeding_drone/electronicspictures/electronic2.png" alt="" width="400px" class="center"/>
 
 We’ll do this by using the RPi.GPIO library and writing Python code on the Raspberry Pi.
 
 -First, import the RPi.GPIO library and the sleep function.
 
-```python
+```py
 import RPi.GPIO as GPIO
 from time import sleep
 ```
 
 -Then, setup the GPIO mode as BOARD
 
-```python
+```py
 servo = 33
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
@@ -201,14 +200,14 @@ GPIO.setup(servo, GPIO.OUT)
 
 -Next, create a variable for the servo, pwm. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
 
-```python
+```py
 pwm=GPIO.PWM(servo, 50)
 pwm.start(0)
 ```
 
 -Use the ChangeDutyCycle() function to write duty cycle percentages to the servo motor.
 
-```python
+```py
 pwm.ChangeDutyCycle(5) # left -90 deg position
 sleep(1)
 pwm.ChangeDutyCycle(7.5) # neutral position
@@ -223,7 +222,7 @@ In order for the mission to be achieavable in the best way and within our reach,
 
 Simple mission code.
 
-```python
+```py
 import threading
 import time
 import rospy
@@ -315,3 +314,9 @@ pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
 ```
+
+## Developed by Team MINIONS
+
+### Special thanks to International Ala-Too University for funding Clover 4 kits
+
+<img src="https://pms.alatoo.edu.kg/images/logo_text.png">
