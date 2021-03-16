@@ -123,6 +123,7 @@
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
   * [Распознавание видов агрокультур](agriculture.md)
   * [Граффити коптер D-drone](ddrone.md)
+  * [Программируемый летающий автомобиль](zaural_viking.md)
 
 ## Учебник
 
