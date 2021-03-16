@@ -106,3 +106,4 @@
   * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
   * [Recognition of crop types in agriculture](agriculture.md)
+  * [Seeding Drone](seeding_drone.md)

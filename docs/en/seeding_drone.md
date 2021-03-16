@@ -18,7 +18,7 @@ We will make drones able to hold seeds onboard and drop them in an area which we
 
 Youtube video link - <https://www.youtube.com/embed/Nz1w59v451U>
 
-We achived to do small seeding missions but we faced some problem about autonomous flying with gps.
+We achived to do small seeding missions but we faced some problem about autonomous flying with GPS.
 
 We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
 
@@ -161,9 +161,9 @@ We coated the battery to protect it from the cold weather
 
 Electronic part of seed dropping mechanism consists of:
 
-- Raspberry Pi 4 B of Coex Clover 4
+- Raspberry Pi 4 B of COEX Clover 4
 - 2 Micro Servo Motors SG90
-- PDB (Power Distribution Board) of Coex Clover 4
+- PDB (Power Distribution Board) of COEX Clover 4
 Servo motor’s signal pins are connected to Raspberry Pi’s Hardware PWM pins 32 and 33, and power is taken from Power Distribution Board (5 V).
 
 <img src="../assets/seeding_drone/electronicspictures/electronic1.png" alt="" width="400px" class="center"/>
@@ -198,7 +198,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
 ```
 
--Next, create a variable for the servo, pwm. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
+-Next, create a variable for the servo, PWM. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
 
 ```py
 pwm=GPIO.PWM(servo, 50)
@@ -218,7 +218,7 @@ sleep(1)
 
 ## Programming
 
-In order for the mission to be achieavable in the best way and within our reach, we were required to utilize the threading in python.
+In order for the mission to be achieavable in the best way and within our reach, we were required to utilize the threading in Python.
 
 Simple mission code.
 
