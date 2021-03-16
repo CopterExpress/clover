@@ -123,6 +123,7 @@
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
   * [Распознавание видов агрокультур](agriculture.md)
   * [Дрон для высаживания семян](seeding_drone.md)
+  * [Граффити коптер D-drone](ddrone.md)
 
 ## Учебник
 
