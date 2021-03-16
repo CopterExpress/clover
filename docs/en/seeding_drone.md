@@ -1,9 +1,10 @@
 # SEED SPREADING QUADCOPTER
+
 ## Team MINIONS
 
 Have you ever wondered what a world without trees would look like? Close your eyes, and try to imagine a desolate Earth. There'd be no more paper, and everyone would have to resort to technological use - that is, if anyone was left. Trees are a crucial factor to our existence not only because they produce paper, lumber and chewing gum, but because they serve an important role in the carbon cycle.
 
-Ever since the industrial revolution between 1760 and 1840, the world has been in a never-ending carbon chaos. Trees and Plankton are our only saviours in terms of handling this problem, and we can only control one of them, trees. 
+Ever since the industrial revolution between 1760 and 1840, the world has been in a never-ending carbon chaos. Trees and Plankton are our only saviours in terms of handling this problem, and we can only control one of them, trees.
 
 We need to save trees by protecting them from the destructive human activities like clearance of forests, deforestation for urbanization, etc. Trees are the lungs for the earth. It is an important part of nature’s ecosystem. They balance the soil composition and also act as the barrier for wind and storm. Thus, they provide various uses to the ecosystem. For these reasons, it’s imperative that we save trees.
 
@@ -12,18 +13,18 @@ Since there are a lot of dangerous and difficult-to-reach landsides for humans t
 Seed-firing drones will, as the name suggests, fire seeds into fertile soil to allow millions of trees to grow back after being cut down for industrial use. If the rate of planting exceeds the rate of cutting, eventually we will restore the trees we once felled.
 
 <img src="../assets/seeding_drone/image.jpg" alt="" width="400px"/>
- 
+
 ## Our Aim
+
 We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka Fukuoka Technique. This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
 
-[![](https://i.ibb.co/N64Mw87/Screenshot-2021-03-16-120100.png)](https://www.youtube.com/embed/Nz1w59v451U "Click here")
-
+[![YouTube link](https://i.ibb.co/N64Mw87/Screenshot-2021-03-16-120100.png)](https://www.youtube.com/embed/Nz1w59v451U "Click here")
 
 We achived to do small seeding missions but we faced some problem about autonomous flying with gps.
 
 We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
 
-- Seed capsules
+- [Seed capsules](#seed-capsules)
 
 - How to assemble seeding mechanism to clover 4.2 drone
 
@@ -33,15 +34,15 @@ We coated our battery to protect it from cold weather, seeding missions need to 
 
 REREFENCES
 
-https://www.nationalgeographic.com/environment/article/deforestation
+<https://www.nationalgeographic.com/environment/article/deforestation>
 
-http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
+<http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf>
 
-https://earthenginepartners.appspot.com/
+<https://earthenginepartners.appspot.com/>
 
 Special thanks to International Ala-Too University for funding Clover 4 kits
 
-# Seed capsules
+## Seed capsules
 
 Fukuoka technique
 In southern Japan, the Japanese farmer and philosopher Masanobu Fukuoka invented a seed ball planting technique. The method is regarded as a natural farming technique that requires no machines, no chemicals and very little weeding. By the use of seed balls, land is cultivated without any soil preparation.
@@ -62,7 +63,7 @@ Which Seeds can be used?
 Any seed which grows in your area (In our it’s apple seed)
 Size and weight of the seed capsule:
 Size and Weight of seed capsules are very important for this project. After some experiments we decided that best size is  16-18mm  diameter and maximum weight is 10 gram
-   
+
 Required materials for making seed balls:
 
 1) 1 bucket Clay
@@ -79,7 +80,7 @@ Steps for making seed balls
 5) Seed balls must be a perfectly round shape otherwise they will be stuck while throwing with the quadcopter
 6) Insert seeds (1 to 2 seeds per seed ball for permanent trees such as mahogany, sandalwood, orange, moringa…) (± 5 seeds per seed ball for vegetables, flowers, grasses, clovers…)
 7) Dry the seed balls for one to two days in a shaded area, if properly dry, the seed balls will be protected from external predators such as chickens, birds, rats…
-                    
+
 2nd picture
 
 Second technique - Paper seed capsules
@@ -112,10 +113,10 @@ Advantages of paper balls:
 
 References
 
-https://web.archive.org/web/20090115211020/http://www.rmaf.org.ph/Awardees/Biography/BiographyFukuokaMas.htm
-http://www.guerrillagardening.org/ggseedbombs.html
+<https://web.archive.org/web/20090115211020/http://www.rmaf.org.ph/Awardees/Biography/BiographyFukuokaMas.htm>
+<http://www.guerrillagardening.org/ggseedbombs.html>
 
-# How to assemble seeding mechanism to clover 4.2 drone
+## How to assemble seeding mechanism to clover 4.2 drone
 
 HOW TO ASSEMBLE SEEDING MECHANISM
 
@@ -125,19 +126,19 @@ After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 
 1. Install the Lower Tank Holders to top Deck mount and fix with the M3x8 screws.
 
-2nd picture mechanism
+    2nd picture mechanism
 
 2. Install Nylon rack(40 mm) to 4 sides of the Deck mount.
 
-3rd picture mechanism
+    3rd picture mechanism
 
 3. Install the Grab deck and fix with the M3x8 screws.
 
-4th picture mechanism
+    4th picture mechanism
 
 4. Install the Upper Tank Holders to top Grab mount and fix with the M3x8 screws.
 
-5th picture mechanism
+    5th picture mechanism
 
 5. Connect the Tanks carefully to Tank Holders.
 
@@ -157,15 +158,14 @@ We coated the battery to protect it from the cold weather
 
 Link for the all cad files
 
-
-
-# How to control the seeding mechanism
+## How to control the seeding mechanism
 
 Electronic part of seed dropping mechanism consists of:
-- Raspberry Pi 4 B of Coex Clover 4 
+
+- Raspberry Pi 4 B of Coex Clover 4
 - 2 Micro Servo Motors SG90
 - PDB (Power Distribution Board) of Coex Clover 4
-Servo motor’s signal pins are connected to Raspberry Pi’s Hardware PWM pins 32 and 33, and power is taken from Power Distribution Board (5 V). 
+Servo motor’s signal pins are connected to Raspberry Pi’s Hardware PWM pins 32 and 33, and power is taken from Power Distribution Board (5 V).
 
 1st picture electronic
 
@@ -185,32 +185,45 @@ What we get is:
 We’ll do this by using the RPi.GPIO library and writing Python code on the Raspberry Pi.
 
 -First, import the RPi.GPIO library and the sleep function.
+
+```python
 import RPi.GPIO as GPIO
 from time import sleep
+```
 
--Then, setup the GPIO mode as BOARD 
+-Then, setup the GPIO mode as BOARD
+
+```python
 servo = 33
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(servo, GPIO.OUT)
+```
 
 -Next, create a variable for the servo, pwm. Then, send a 50 Hz PWM signal on that GPIO pin using the GPIO.PWM() function. Start the signal at 0.
+
+```python
 pwm=GPIO.PWM(servo, 50)
 pwm.start(0)
+```
 
 -Use the ChangeDutyCycle() function to write duty cycle percentages to the servo motor.
+
+```python
 pwm.ChangeDutyCycle(5) # left -90 deg position
 sleep(1)
 pwm.ChangeDutyCycle(7.5) # neutral position
 sleep(1)
 pwm.ChangeDutyCycle(10) # right +90 deg position
 sleep(1)
+```
 
-# Programming
+## Programming
 
 In order for the mission to be achieavable in the best way and within our reach, we were required to utilize the threading in python.
 
 Simple mission code.
 
+```python
 import threading
 import time
 import rospy
@@ -301,3 +314,4 @@ if name == "main":
 pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
+```
