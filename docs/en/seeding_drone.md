@@ -37,7 +37,3 @@ References
 https://www.nationalgeographic.com/environment/article/deforestation
 http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
 https://earthenginepartners.appspot.com/
-## How it works
-We will make drones able to hold seeds onboard and drop them in an area which we drove in a special application. We can control the density of the seeds and the height of the drop. We also thought about protection of the seeds from insects, animals and dehydration. We choose the earth ball technique invented by Masanobu Fukuoka, aka [Fukuoka Technique](https://www.google.com/url?sa=t&source=web&rct=j&url=http://www.ideassonline.org/public/pdf/FukuocaRassegnaENG2.pdf&ved=2ahUKEwjTw4aY_6zvAhVkkosKHYa3DzIQFjAWegQIDxAC&usg=AOvVaw0_jfashkOl2VLci7m7e60c&cshid=1615629111443). This earth ball contains all needed elements to grow, plant seeds and earth for protection. When we drop it on the ground, the earth ball will hold seeds until it gets the needed amount of water and seeds will begin to grow.
-
-Video link - https://www.youtube.com/watch?v=Nz1w59v451U
