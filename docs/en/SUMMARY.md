@@ -106,4 +106,5 @@
   * [Robocross-2019](robocross2019.md)
   * [Camera calibration (legacy)](camera_calib.md)
   * [Recognition of crop types in agriculture](agriculture.md)
+  * [D-drone Copter Hack 2021 by AT Makers](ddrone.md)
   * [3D-printed Generative Design Frame](generative_design_frame.md)
