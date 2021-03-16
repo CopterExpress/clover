@@ -123,7 +123,7 @@ After finishing step 4, at section Installing guard of Clover 4.2 assembly.
 
 1. Install the Lower Tank Holders to top Deck mount and fix with the M3x8 screws.
 
-    <img src="../assets/seeding_drone/mechanismpictures/1.png" alt="" width="400px" class="center"/>
+    <img src="../assets/seeding_drone/mechanismpictures/1.png" alt="a" width="400px" class="center"/>
 
 2. Install Nylon rack(40 mm) to 4 sides of the Deck mount.
 
