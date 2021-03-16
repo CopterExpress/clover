@@ -18,6 +18,7 @@ We will make drones able to hold seeds onboard and drop them in an area which we
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Nz1w59v451U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+
 We achived to do small seeding missions but we faced some problem about autonomous flying with gps.
 
 We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
