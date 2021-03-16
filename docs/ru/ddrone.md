@@ -10,7 +10,7 @@
 
 <img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
-<img class="center" src="../assets/ddrone/full_holder_in _real.jpg" width="300">
+<img class="center" src="../assets/ddrone/full_holder_in_real.jpg" width="300">
 
 Для выполнения проекта вам нужно иметь в наличии:
 

@@ -10,7 +10,7 @@ People strive to teach artificial intelligence everything they can do themselves
 
 <img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
-<img class="center" src="../assets/ddrone/full_holder_in _real.jpg" width="300">
+<img class="center" src="../assets/ddrone/full_holder_in_real.jpg" width="300">
 
 To complete the project you need to have in stock:
 
