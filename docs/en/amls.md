@@ -1,6 +1,6 @@
 # Autonomous Multirotor Landing System (AMLS) - EN
 
-![Logo](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/logo_book.png "Logo")
+![Logo](../assets/amls/logo_book.png "Logo")
 
 ## The goal is to automatically land a drone on a moving platform
 
@@ -15,7 +15,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 - Andrey Kabalin: astik452@gmail.com
 - Vladislav Yasnetsky: vlad.yasn@gmail.com
 
-![Drone 1](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Drone%20GIF.jpg "Drone 1")
+![Drone 1](../assets/amls/Drone%20GIF.jpg "Drone 1")
 
 -----------
 
@@ -52,11 +52,11 @@ The AMLS system consists of two parts:
 
 - The drone
 
-![Liberty-X](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/liberty-x_side_cutout_2_small.png "Liberty-X")
+![Liberty-X](../assets/amls/liberty-x_side_cutout_2_small.png "Liberty-X")
 
 - And the platform either mobile (implemented on a vehicle), either stable (pick-up-point)
 
-![Platform](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/platform_side_transparent.png "Platform")
+![Platform](../assets/amls/platform_side_transparent.png "Platform")
 
 How the system operates:
 - Firstly, a drone with a delivery package is far from the platform and it has no visual contact with it. The drone recieves GPS coordinates of a platform by using cellular communication or any other radio channel (The drone has Liberty-Link implemented on it. This module is able to adjust its position, whatever the firmware of the flight controller. The module is installed inside the line between a receiver and a flight controller.
@@ -72,7 +72,7 @@ How the system operates:
 - Landing accomplished!  
 
 ### Short video about our project (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/ALMS%20Results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
+[![Watch the video](../assets/amls/ALMS%20Results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
 
 ## 1. GPS hold and Flight to waypoints functions
 
@@ -81,11 +81,11 @@ As stated earlier, the drone is equipped with "universal" module Liberty-Link, w
 GPS module will be built in Liberty-Link, so it would have the ability to maintain the drone's GPS position and follow GPS points. 
 
 The result of the GPS hold algorithm (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/GPS%20HOLDING.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/GPS%20HOLDING.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
 
 GPS-module will be used from the UBlox group (for instance, UBlox Neo-M8). There will be 1 or 3 (to minimize the error) modules.
 
-![GPS Module](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/liberty-x_front_cutout_2_small_gps.png "GPS Module")
+![GPS Module](../assets/amls/liberty-x_front_cutout_2_small_gps.png "GPS Module")
 
 Modules operate via UART, configured to send data 5 times per second. The Liberty-Link firmware will read data from the modules and calculate the coordinates of the current position.
 
@@ -326,7 +326,7 @@ And only after 3 months, we thought of a simple soulution: to change the values 
 Prior to this, all testing of the algorithm was carried out using the PX4 firmware toolkit and the Gazebo drone motion simulator. As a result, many formalities were overcome in terms of communicating with the simulator and increasing performance (click on the picture to see the video).
 
 The result of the GPS prediction (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/GAZEBO.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
+[![Watch the video](../assets/amls/GAZEBO.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
 
 The end result reached a point when the error of the predicted postition varies from 0 to 70 centimeters.
 
@@ -366,12 +366,12 @@ Before optical stabilization launches (during GPS stabilization process), our Li
 
 The platform, as well as the Liberty-Link, will have MS5611 barometers
 
-![MS5611](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/ms5611_barometer.png "MS5611") 
+![MS5611](../assets/amls/ms5611_barometer.png "MS5611") 
 
 According to the documentation, the height resolution is 10 cm. The algorithm will take the pressure values and by passing it through the PID-controller will stabilize the drone's altitude by changing the Throttle (3rd channel).
 
 Altitude hold test (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/youtube_pressure_holding.jpg)](https://youtu.be/xmvcGeZzEfc)
+[![Watch the video](../assets/amls/youtube_pressure_holding.jpg)](https://youtu.be/xmvcGeZzEfc)
 
 During the flight along the waypoint, the setpoint of the pressure will decrease in order to increase the altitude (it is safer to fly in a straight line at a high altitude, so the drone would not crash into anything). And during GPS stabilization (when the drone is already close to the platform), the drone will be set with a setpoint of pressure that correlates with ~ 1.5-2m height above the platform.
 
@@ -386,7 +386,7 @@ And as we couldn't predict the possibility of accomplishing our task, first of a
 Our first idea was to attach Raspberry Pi with Liberty_X as it was embodied in COEX Clover and to let Raspberry Pi handle all of the maths.
 
 First optical stabilization prototype test (Сlickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/5%20ARUCO.jpg)](https://youtu.be/TrrxXOHAqbQ)
+[![Watch the video](../assets/amls/5%20ARUCO.jpg)](https://youtu.be/TrrxXOHAqbQ)
 
 But few tests showed that Raspberry Pi computing power is not enough for amount of data needed to stabilize the drone. Furthermore, the idea of installing a Raspberry Pi on each drone is irrational for its own.
 
@@ -398,12 +398,12 @@ Then we came up with the idea of separating drone and stabilization system so th
 This was how we ended up with our current optical stabilization algorithm - the camera which is connected to a powerful machine and the machine is attached to the platform. The drone only has 4x4 ARUco tag and its controller.
 
 (clickable)
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Stabilization%20v1.jpg)](https://youtu.be/A2oq6zCebVo)
+[![Watch the video](../assets/amls/Stabilization%20v1.jpg)](https://youtu.be/A2oq6zCebVo)
 
 Then, we came up with using Pose Estimation algorithms from OpenCV library. The first tests showed us that we are on the right track!
 
 Pose Estimation Pyhton (Clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Stabilization%20v2%20.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
+[![Watch the video](../assets/amls/Stabilization%20v2%20.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
 
 But, the algorithms were far from perfect. For example, since the code was written in Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), the performance was not satisfyingly, and there was no suitable threading control either. Therefore, we had to change something.
 
@@ -411,7 +411,7 @@ But, the algorithms were far from perfect. For example, since the code was writt
 Having weighed all the pros and cons, it was decided to rewrite all optical stabilization using Java. This is how the first version of Liberty-Way appeared. This time, it was decided to approach the OOP thoroughly, and, after a little tweaking, an excellent stabilization and landing algorithm was obtained.
 
 Landing test on Liberty-Way v.beta_0.0.1 (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Landing%20Test%203%20cams.jpg)](https://youtu.be/8VAobWPFG8g))
+[![Watch the video](../assets/amls/Landing%20Test%203%20cams.jpg)](https://youtu.be/8VAobWPFG8g))
 
 ### 5.5. Liberty-Way
 Then many improvements and bug fixes followed. As a result, Liberty-Way is a cross-platform web sarvar application that is very convenient for configuration and debugging. Also, in the latest versions (beta_1.0.3 - beta_1.1.2) a blackbox feature was introduced (for recording logs), as well as communication with the platform and many other necessary algorithms.
@@ -420,23 +420,23 @@ Full description, including all settings, startup, etc. you can find in our GitH
 
 Video of static stabilization (clickable):
 
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Static%20stabilization%20test%20.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/Static%20stabilization%20test%20.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
 
 Liberty-Way can even stabilize a "thrown" drone (clickable):
 
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Optical%20catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/Optical%20catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
 
 There is a small bug in the video with the rotation angle, in the new release it has been fixed!
 
 And, of course, example of how it works in motion (tested with beta_0.0.3 release) (clickable):
 
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Holding%20in%20motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/Holding%20in%20motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
 
 All basic settings are conveniently placed in separate JSON files (settings, pid), which allows a user to quickly change the required parameters without rebuilding the application. In fact, to run the application, you just need to download the latest release, unpack the archive and run it through the launcher corresponding to the preferable OS.
 
 ### 5.6. Communication with the drone
 The Liberty-Way connects to the Liberty-Link module installed on the drone and adjusts its position by directly controlling four main channels of the remote control. In one cycle (each frame from the camera), 12 bytes of correction data are sent to the module:
-![Packet](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Data_structure.png "Data packet")
+![Packet](../assets/amls/Data_structure.png "Data packet")
 
 Bytes description:
 - **Roll bytes** - Roll correction values 
@@ -519,19 +519,19 @@ To operate our system in real conditions, it is required to minimize camera shak
 
 Camera mount:
 
- ![Camera mount](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/gimbal_camera_mount.png "Camera mount")
+ ![Camera mount](../assets/amls/gimbal_camera_mount.png "Camera mount")
  
 Camera wire fixing (ferrite filter on the wire):
 
- ![Filter mount](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/gimbal_filter_mount.png "Filter mount")
+ ![Filter mount](../assets/amls/gimbal_filter_mount.png "Filter mount")
  
 Fixing of the "crabs" latches on the suspension substrate:
 
- ![Plane mount](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/gimbal_plane_mount.png "Plane mount")
+ ![Plane mount](../assets/amls/gimbal_plane_mount.png "Plane mount")
  
 An approximate view of the assembly of the entire suspension mechanism:
 
- ![Assembly](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/gimbal_assembly.png "Assembly")
+ ![Assembly](../assets/amls/gimbal_assembly.png "Assembly")
 
 -----------
 
@@ -541,26 +541,26 @@ The platform is an interconnected system for landing the drone. The platform was
 ### 6.1. Grabbing system
 As you may know it doesn't matter how good is our stabilization, without grabbing system the drone will crash eventually. Hence we developed a 3D model of a grabbing system with 4 grips that have a hook at the end of each one. This will allow the system to slowly grab the drone while it lands and hold it steady after landing.
 
-![Screenshot](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/grabbing_system_1.png "Screenshot")
+![Screenshot](../assets/amls/grabbing_system_1.png "Screenshot")
 
-![Screenshot](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/grabbing_system_2.png "Screenshot")
+![Screenshot](../assets/amls/grabbing_system_2.png "Screenshot")
 
 ### 6.2. Weather protection system
 As for the weather protection, we developed a 3D model to create a roof that will protect the drone from weather conditions while it is on the platform.
 The AMLS weather protection system consists of scissor-like mechanisms covered with a canvas, which are located around the edges of the platform. 
 After a successful landing, the mechanisms on both sides of the platform close and protect the drone from external influences. The roof structure itself makes it light and strong, and the scissor-like mechanisms allow it to simply fold and unfold itself. Moreover, the assembly of such mechanisms will be simple and reliable.
 
-![Screenshot](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/platform_side_transparent.png "Screenshot")
+![Screenshot](../assets/amls/platform_side_transparent.png "Screenshot")
 
-![Screenshot](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/platform_roof.png "Screenshot")
+![Screenshot](../assets/amls/platform_roof.png "Screenshot")
 
 ### 6.3. Platform speedometer
 In order to land on a quickly moving platform, it is very useful to know its speed. For now, the platform does not have a GPS module, or any other way to measure absolute speed. Therefore, for a temporary solution to this problem, it was decided to calculate the speed using an accelerometer. For example, MPU6050. The IMU is mounted into the prototype platform through a soft backing and it's covered with a cap to protect it from the wind. The stabilization algorithm (Liberty-Way) sends a request to the platform `L1` to test the speed. A message `S0 L <speed in km / h>` is returned as a response.
 
-![MPU6050](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/mpu6050_gyro.png "MPU6050")
+![MPU6050](../assets/amls/mpu6050_gyro.png "MPU6050")
 
 Speedometer test (inside the gray circle, lower right parameter (SPD) - speed in km / h) (Clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/youtube_speedometer_test.jpg)](https://youtu.be/yvCo6tYjdM0)
+[![Watch the video](../assets/amls/youtube_speedometer_test.jpg)](https://youtu.be/yvCo6tYjdM0)
 
 To calculate the speed, the acceleration is taken for short time periods, then multiplied with time, which results with the instantaneous speed. Then this speed is constantly added to the previous value:
 
@@ -605,13 +605,13 @@ As our platform must work in various environmental conditions, and optical stabi
 
 In the current version of the prototype, 6 LEDs are used as a light sensor and an ADC built into the microcontroller. The stabilization algorithm (Liberty-Way) sends a request `L0` to the platform to check the illumination level. A message `S0 L <luminance>` is returned as a response.
 
-![Light sensors](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/light_sensors.png "Light sensors")
+![Light sensors](../assets/amls/light_sensors.png "Light sensors")
 
 Test for determining the level of illumination using LEDs (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/Light%20sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/Light%20sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
 
 Exposure adjustment and adding additional illumination tests (clickable):
-[![Watch the video](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/youtube_exposure_test.jpg)](https://youtu.be/iMORim6zxsg)
+[![Watch the video](../assets/amls/youtube_exposure_test.jpg)](https://youtu.be/iMORim6zxsg)
 
 -----------
 
@@ -625,4 +625,4 @@ Follow the updates:
 
 In the future, we plan to do much more new and interesting stuff!
 
-![Follow the white rabbit](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/follow_the_white_rabbit.png "Follow the white rabbit")
+![Follow the white rabbit](../assets/amls/follow_the_white_rabbit.png "Follow the white rabbit")
