@@ -6,9 +6,9 @@
 
 ### Contact
 
-[Website](www.aachen-drone.de)
-[Mail](daniel.honies@rwth-aachen.de)
-Telegram: @danielhonies
+[Website](www.aachen-drone.de),
+[Mail](daniel.honies@rwth-aachen.de),
+Telegram: @danielhonies.
 
 ## Introduction
 
