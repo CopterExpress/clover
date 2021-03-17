@@ -4,6 +4,14 @@
 
 <iframe width="640" height="480" src="https://www.youtube.com/embed/EAGNmtpuTDc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+### Contact
+
+[Website](www.aachen-drone.de)
+[Mail](daniel.honies@rwth-aachen.de)
+Telegram: @danielhonies
+
+## Introduction
+
 At the Aachen Drone Development Initiative we aim to develop a new frame for the clover drone by implementing the latest state of the art CAD-Design techniques as well as advanced manufacturing methods.
 
 Three main goals have to be taken into consideration when designing a new frame:
