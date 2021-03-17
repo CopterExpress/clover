@@ -65,6 +65,8 @@ We use 3rd version of YoLo neural network, pretrained on customly-built dataset 
 
 Detecting people without masks is cool, no doubt.
 <img src="../assets/en/masks.jpg" title="Master and his apprentice">
+
+
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person
 <img src="../assets/en/release.jpg" title="Mask release in cad">
 <img src="../assets/en/release_Cad.jpg" title="Mask release manufactured">
@@ -76,6 +78,6 @@ This device needs further engineering because current iterations are too fragile
 
 ## Final thoughts
 
-This project will still be useful even when thr Coronavirus crisis will be over. It can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is popular in US and UK, so why not try to automate it a bit. The working principle and hardware will remain the same, but software will need an update
+This project will still be useful even when the Coronavirus crisis will be over. It can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is popular in US and UK, so why not try to automate it a bit. The working principle and hardware will remain the same, but software will need an update
 
 Stay safe folks!
