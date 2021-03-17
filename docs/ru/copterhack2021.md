@@ -10,4 +10,4 @@ CopterHack 2021 – это командный конкурс по разраб�
 |-|-|
 |D-drone|[Граффити-коптер](ddrone.md)|
 |Зауральский Викинг|[Программируемый летающий автомобиль](zaural_viking.md)|
-|ADDI|[3D-printed generative design frame](generative_design_frame.md)|
+|ADDI|[3D-printed generative design frame](../en/generative_design_frame.html)|
