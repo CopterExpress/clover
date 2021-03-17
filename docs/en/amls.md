@@ -1,6 +1,6 @@
 # Autonomous Multirotor Landing System (AMLS) - EN
 
-![Logo](https://github.com/XxOinvizioNxX/Liberty-Way/blob/main/git_images/logo_book.png "Logo")
+![Logo](../assets/logo_book.png "Logo")
 
 ## The goal: Automatically land a drone on a platform in motion
 
