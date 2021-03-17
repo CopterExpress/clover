@@ -17,3 +17,8 @@ My main goal with this project was accessibility. I wanted to make a drone that 
 Check out the video below to see it in action:
 
 <iframe width="966" height="543" src="https://www.youtube.com/embed/jsVY0DM9Sew" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Contact info
+
+Email - jadenbh12@gmail.com
+Telegram - @jadenbh12
