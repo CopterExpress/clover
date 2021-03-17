@@ -85,4 +85,4 @@ In our work for this years competition we presented a new way to design and manu
 ### CAD Files
 
 You are welcome to test out these frame yourself and you are free to modify them in any way, shape or form. We would appreciate feedback and encourage submitting your modifications in a pull request so other people can benefit from this open source development.
-The CAD Files can be found on our [GitHub Page](https://github.com/Aachen-Drone-Development-Initiative/generative-clover-frame)
+The CAD Files can be found on our [GitHub Page](https://github.com/Aachen-Drone-Development-Initiative/generative-clover-frame).
