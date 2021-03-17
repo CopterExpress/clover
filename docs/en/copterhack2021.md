@@ -9,4 +9,5 @@ All information about the event can be found on the official website: https://co
 |Team|Project|
 |-|-|
 |D-drone|[Graffiti-copter](ddrone.md)|
+|ADDI|[3D-printed generative design frame](generative_design_frame.md)|
 |Zaural Viking|[Программируемый летающий автомобиль](../ru/zaural_viking.html)|
