@@ -109,4 +109,4 @@
   * [Camera calibration (legacy)](camera_calib.md)
   * [Recognition of crop types in agriculture](agriculture.md)
   * [D-drone Copter Hack 2021 by AT Makers](ddrone.md)
-  * [Bennie?](bennie.md)
+  * [Retail Drone](bennie.md)
