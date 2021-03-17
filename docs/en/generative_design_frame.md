@@ -35,16 +35,16 @@ After printing the first version of the frame we discovered the following proble
 
 To conquer those problems we made several changes. We increased the minimal thickness for the generated structures and generated a new model. We changed the settings in the slicer so that the support structure could be removed easier as well as changed the infill structure. Finally we changed the filament and increased the printing temperature. Further we concluded that printing with a water dissolvable support structure would be optimal, however as of right now we don’t have access to a printer capable of that.
 
-![Prototype 1](../assets/generative-design-frame/p1.JPG)
+![Prototype 1](../assets/generative-design-frame/p1.jpg)
 
 #### Prototype 2
 
 This prototype took 48 hours of printing and used 277 grams of filament including 100 grams for the support. Installation of the components is very easy as no other tools than a screwdriver are needed. This prototype was the first to take flight in January 2021. Please see [this](https://youtu.be/M4f8_JmJADM) video.
 
 <p float="left">
-  <img src="../assets/generative-design-frame/p21.JPG" width="32%" />
-  <img src="../assets/generative-design-frame/p22.png" width="32%" />
-  <img src="../assets/generative-design-frame/p23.png" width="32%" />
+  <img src="../assets/generative-design-frame/p21.jpg" width="32%" />
+  <img src="../assets/generative-design-frame/p22.jpg" width="32%" />
+  <img src="../assets/generative-design-frame/p23.jpg" width="32%" />
 </p>
 
 #### Prototype 3
@@ -57,16 +57,15 @@ Videos:
 - [Prop Guard Test](https://youtu.be/UdnqIuXV2UI)
 
 <p float="left">
-  <img src="../assets/generative-design-frame/p31.png" width="49%" />
-  <img src="../assets/generative-design-frame/p32.png" width="49%" />
-  
+  <img src="../assets/generative-design-frame/p31.jpg" width="49%" />
+  <img src="../assets/generative-design-frame/p32.jpg" width="49%" />
 </p>
 
 #### Final Prototype
 
 In this final prototype we have changed the preserved geometry on the bottom to form a rectangle for added stability. We have also changed some of the forces on the points we observed breakings in our previous tests. We have also updated the prop guard to make it more stable and increased the area around the screws, so it would break harder. The frame without the prop guard weighs only 150g making it significantly lighter than the default frame.
 
-![final prototype](../assets/generative-design-frame/f.JPG)
+![final prototype](../assets/generative-design-frame/f.jpg)
 
 ### Benefits
 
