@@ -64,9 +64,6 @@ We use 3rd version of YoLo neural network, pretrained on customly-built dataset 
 ## Mask release
 
 Detecting people without masks is cool, no doubt.
-
-### Mask release
-* Detecting people without masks is cool, no doubt
 <img src="../assets/en/drone_frame.jpg" title="Master and his apprentice">
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person
 <img src="../assets/en/release.jpg" title="Mask release in cad">
