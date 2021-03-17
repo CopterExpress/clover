@@ -19,13 +19,9 @@ Since we do not have the Clover drone, we will use an airframe built and designe
 
 The main idea is to use truss structure, because it works well against twisting and warping.
 
-<<<<<<< HEAD
 * The main idea is to use truss structure, because it works well against twisting and warping 
 <img src="../assets/en/drone_frame.jpg" title="Frame">
 * The main advantage of such a system is that it distributes impact between beams and effectively dissipates it. However, engine mounts are not impact-proof, this is because we sacrifice them, but save much more expensive and not-readily-available engine. This is why mounts are quickly-replaceable (only 3 screws) and mate of cheap PLA plastic
-=======
-![](https://i.imgur.com/NpX6YnA.png)
->>>>>>> 197273961a014b70f0f95b7aeaff1ccf097eed8a
 
 The main advantage of such a system is that it distributes impact between beams and effectively dissipates it. However, engine mounts are not impact-proof, this is because we sacrifice them, but save much more expensive and not-readily-available engine. This is why mounts are quickly-replaceable (only 3 screws) and mate of cheap PLA plastic.
 
@@ -39,20 +35,12 @@ All sensory equipment, like cameras, rangefinder, etc can be easily mounted on t
 
 We used two T-265 cameras for visual odometry (fuse them together with Kalman filter). And one D-435 depth camera for both video input for neural net and for map-building (collision avoidance). Also, we use dampers to prevent odometry drift.
 
-<<<<<<< HEAD
 * We used two T-265 cameras for visual odometry (fuse them together with Kalman filter)
 And one D-435 depth camer for both video input for neural net and for map-building (collision avoidance)
 <img src="../assets/en/camera.jpg" title="Begone odometry drift">
 
-* Here are the photo of assembled drone
-<img src="../assets/en/drone_assembled.jpg" title="Ready to fight corona">
-=======
-![](https://i.imgur.com/ECDIwJw.jpg)
-
 Here are the photo of assembled drone:
 
-![](https://i.imgur.com/eUnbIjA.jpg)
->>>>>>> 197273961a014b70f0f95b7aeaff1ccf097eed8a
 
 ## Software
 
@@ -77,22 +65,13 @@ We use 3rd version of YoLo neural network, pretrained on customly-built dataset 
 
 Detecting people without masks is cool, no doubt.
 
-<<<<<<< HEAD
 ### Mask release
 * Detecting people without masks is cool, no doubt
 <img src="../assets/en/drone_frame.jpg" title="Master and his apprentice">
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person
 <img src="../assets/en/release.jpg" title="Mask release in cad">
 <img src="../assets/en/release_Cad.jpg" title="Mask release manufactured">
-=======
-![](https://i.imgur.com/1BUSPOx.png)
 
-But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person.
-
-![](https://i.imgur.com/ehA8iBw.png)
-
-![](https://i.imgur.com/iSkEhK2.jpg)
->>>>>>> 197273961a014b70f0f95b7aeaff1ccf097eed8a
 
 This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels.
 
