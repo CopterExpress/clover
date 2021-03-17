@@ -15,24 +15,23 @@ There are laws in place to enforce mask wearing, but there is just not enough co
 * Since we do not have the Clover drone, we will use an airframe built and designed by us.
 
 * The main idea is to use truss structure, because it works well against twisting and warping 
-![](https://i.imgur.com/NpX6YnA.png)
+<img src="../assets/en/drone_frame.jpg" title="Frame">
 * The main advantage of such a system is that it distributes impact between beams and effectively dissipates it. However, engine mounts are not impact-proof, this is because we sacrifice them, but save much more expensive and not-readily-available engine. This is why mounts are quickly-replaceable (only 3 screws) and mate of cheap PLA plastic
 
 
 * The space inside the central rhombus is occupied by the on-board equipment: batteries, PX4 flight controller, Jetson Xavier NX / AGX
 * As it is shown on this picture, AGX is mounted on top of the platform, while NX can be mounted on the bottom, and completely protected from any damage by beams and landing legs 
 
-![](https://i.imgur.com/BjIqQ4t.png)
+<img src="../assets/en/drone_with_jetson.jpg" title="AGX is safe">
 
 * All sensory equipment, like cameras, rangefinder, etc can be easily mounted on the beams with special connectors, which provide flexibility because you can fine-tune camera angle or position before tightening screws and fixing it firmly in place, which is especially relelvant for tracker-cameras
 
 * We used two T-265 cameras for visual odometry (fuse them together with Kalman filter)
 And one D-435 depth camer for both video input for neural net and for map-building (collision avoidance)
-Also, we use dampers to prevent odometry drift 
-![](https://i.imgur.com/ECDIwJw.jpg)
+<img src="../assets/en/camera.jpg" title="Begone odometry drift">
 
 * Here are the photo of assembled drone
-![](https://i.imgur.com/eUnbIjA.jpg)
+<img src="../assets/en/drone_assembled.jpg" title="Ready to fight corona">
 
 
 ### Software
@@ -56,10 +55,10 @@ Pipeline image is made as lightweight as possible, so it should be runnable even
 
 ### Mask release
 * Detecting people without masks is cool, no doubt
-![](https://i.imgur.com/1BUSPOx.png)
+<img src="../assets/en/drone_frame.jpg" title="Master and his apprentice">
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person
-![](https://i.imgur.com/ehA8iBw.png)
-![](https://i.imgur.com/iSkEhK2.jpg)
+<img src="../assets/en/release.jpg" title="Mask release in cad">
+<img src="../assets/en/release_Cad.jpg" title="Mask release manufactured">
 
 
 * This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels
