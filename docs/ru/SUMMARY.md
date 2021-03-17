@@ -55,6 +55,7 @@
 * [Дополнительные материалы](supplementary.md)
   * [COEX Pix](coex_pix.md)
   * [COEX PDB](coex_pdb.md)
+  * [COEX GPS](coex_gps.md)
   * [Гид по автономному полету](auto_setup.md)
   * [Имя хоста](hostname.md)
   * [Симулятор](sitl.md)
@@ -121,6 +122,8 @@
   * [Калибровка камеры (legacy)](camera_calib.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
   * [Распознавание видов агрокультур](agriculture.md)
+  * [Граффити коптер D-drone](ddrone.md)
+  * [Программируемый летающий автомобиль](zaural_viking.md)
   * [Дрон-Агроном](dron-agronom.md)
 ## Учебник
  
