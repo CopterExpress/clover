@@ -1,6 +1,6 @@
-# Jetson TX2?
+# Retail Drone - CopterHack 2021 article
 
-CopterHack-2021, team: **Bennie**.
+CopterHack-2021, team: Bennie and the Jetson TX2.
 
 My project is a drone that can scan a store shelf and determine if the representation of a specific brand is adequate for what the vendor paid for. In most retail stores, a brand will pay for space on a shelf in order to be more eye catching to the customer and eventually get more sales, which is why bigger brands are generally seen more. However because of either employee ineptitude or general non-compliance up to 15% of a brand’s space on a shelf that it paid for can be lost, which can lose the brand upwards of 5% loss in overall sales.
 
