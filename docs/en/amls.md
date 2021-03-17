@@ -1,6 +1,6 @@
 # Autonomous Multirotor Landing System (AMLS) - EN
 
-![Logo](../assets/logo_book.png "Logo")
+![Logo](../assets/amls/logo_book.png "Logo")
 
 ## The goal: Automatically land a drone on a platform in motion
 
