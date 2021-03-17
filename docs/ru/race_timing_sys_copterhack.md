@@ -41,7 +41,7 @@ https://github.com/stinger000/CopterHack2020_IR_LED
   > git clone https://github.com/stinger000/CopterHack2020_IR_LED_Desktop_GUI
   ```
 
-- Зайдите в папку Signal_handler репозитория **CopterHack2020_IR_LED** и откройте в Arduino IDE файл **AnalogReadSerial_filtered_v2.ino** 
+- Зайдите в папку Signal_handler репозитория **CopterHack2020_IR_LED** и откройте в Arduino IDE файл **AnalogReadSerial_filtered_v2.ino**
 
 - Надо раскомментировать  строки
 
@@ -76,14 +76,13 @@ https://github.com/stinger000/CopterHack2020_IR_LED
 
 - Затем закомментируйте и раскомментируйте обратно строки кода и перепрошейте Arduino.
 
-- В терминале запустите файл с графическим интерефейсом  (# такой то файл) 
+- В терминале запустите файл с графическим интерефейсом  (# такой то файл)
 
   ``` bash
   ~{your_path}> cd CopterHack2020_IR_LED_Desktop_GUI
   ~{your_path}/CopterHack2020_IR_LED_Desktop_GUI> python main.py
   ```
 
-- Затем подключите arduino через usb-кабель в ваш компьютер и нажмите "Connect"
+- Затем подключите Arduino через usb-кабель в ваш компьютер и нажмите "Connect"
 
 - Начало и конец отсчета замеров производиться кнопками "start" и "stop"
-
