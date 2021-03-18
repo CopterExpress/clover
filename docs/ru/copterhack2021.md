@@ -10,5 +10,6 @@ CopterHack 2021 – это командный конкурс по разраб�
 |-|-|
 |D-drone|[Граффити-коптер](ddrone.md)|
 |Зауральский Викинг|[Программируемый летающий автомобиль](zaural_viking.md)|
+|Atomic Ferrets|[Система засечки для дронов](race_timing_sys_copterhack.md)|
 |ADDI|[3D-printed generative design frame](../en/generative_design_frame.html)|
 |Bennie and the Jetson TX2|[Retail Drone](../en/bennie.html)|
