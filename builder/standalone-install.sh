@@ -5,7 +5,7 @@ set -e
 # Step 1: Install pip
 apt update
 apt install -y curl
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 python ./get-pip.py
 
 # Step 1.5: Add deb.coex.tech to apt
