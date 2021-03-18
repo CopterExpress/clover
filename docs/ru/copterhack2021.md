@@ -13,6 +13,7 @@ CopterHack 2021 – это командный конкурс по разраб�
 |Quadrotor|[Дрон-Агроном](drone-agronom.md)|
 |Atomic Ferrets|[Система засечки для дронов](race_timing_sys_copterhack.md)|
 |MINIONS|[Дрон для высаживания семян](seeding_drone.md)|
+|FTL|[AdvancedClover](advanced_clover.md)|
 |ADDI|[3D-printed generative design frame](../en/generative_design_frame.html)|
 |Bennie and the Jetson TX2|[Retail Drone](../en/bennie.html)|
 |DroMap|[The Indoor Mapping Drone](../en/dromap.html)|

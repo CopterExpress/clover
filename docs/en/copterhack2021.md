@@ -17,3 +17,4 @@ All information about the event can be found on the official website: https://co
 |Zaural Viking|[Программируемый летающий автомобиль](../ru/zaural_viking.html)|
 |Quadrotor|[Дрон-Агроном](../ru/drone-agronom.html)|
 |Atomic Ferrets|[Система засечки для дронов](../ru/race_timing_sys_copterhack.html)|
+|FTL|[AdvancedClover](../ru/advanced_clover.html)|
