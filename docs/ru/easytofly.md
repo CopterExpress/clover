@@ -37,7 +37,7 @@ Telegram: [@bart02](https://t.me/bart02), [@maerans](https://t.me/maerans)
 8. Разработка программной подсистемы АПК «Монитор состояния БПЛА».
 9. Разработка аппаратной составляющей АПК.
 
-![Лого](https://user-images.githubusercontent.com/19249148/89198142-edf20400-d5d6-11ea-9a83-c4ec9c989313.png)
+![Лого](../assets/easytofly/logo.png)
 
 ## Выбор платформы
 
