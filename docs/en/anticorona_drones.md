@@ -1,5 +1,7 @@
 # Drones to fight Corona
 
+[CopterHack-2021](copterhack2021.md), team: **Drones to fight Corona**. E-mail: [y.suhorukov@innopolis.ru](mailto:y.suhorukov@innopolis.ru).
+
 ## Team
 
 * Daria Miklashevskaya
