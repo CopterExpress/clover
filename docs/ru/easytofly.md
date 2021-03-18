@@ -103,8 +103,8 @@ Telegram: [@bart02](https://t.me/bart02), [@maerans](https://t.me/maerans)
 
 Вам понадобится:
 
-- **4x** стойки M3x6
-- **1x** крепление для батареи (ССЫЛКА)
+- **4x** стойки M3x26
+- **1x** [крепление для батареи](https://github.com/easy-to-fly/easy-to-fly/blob/master/hard/3d_models/case.stl)
 
 ### Сборка системы из 4-х лазерных дальномеров
 
@@ -115,7 +115,7 @@ Telegram: [@bart02](https://t.me/bart02), [@maerans](https://t.me/maerans)
 - **4x** дальнедистанционный датчик времени пролета VL53L1X
 - **1x** Arduino Nano
 
-1. Разведите платы согласно развертке из [файлов](https://github.com/bart02/EasyToFly/raw/master/hard/pcb/Gerber_PCB_2020-06-27_16-49-58_20200803233043.zip) (вы можете использовать http://gerbv.geda-project.org/ для открытия)  
+1. Разведите платы согласно развертке из [файлов](https://github.com/easy-to-fly/easy-to-fly/raw/master/hard/pcb/sensors_4.zip) (вы можете использовать http://gerbv.geda-project.org/ для открытия)  
 2. Припаять пины для установки Arduino Nano и датчиков на каждую из плат.
 3. Расположить платы как показано на развёртке.
 
