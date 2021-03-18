@@ -33,14 +33,6 @@ We coated our battery to protect it from cold weather, seeding missions need to 
 
 Link for the all files used in this project: [https://github.com/Sahinysf/TreeSeedQuad](https://github.com/Sahinysf/TreeSeedQuad).
 
-REREFENCES
-
-<https://www.nationalgeographic.com/environment/article/deforestation>
-
-<http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf>
-
-<https://earthenginepartners.appspot.com/>
-
 ## Seed capsules
 
 ### Fukuoka technique
@@ -316,6 +308,12 @@ pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
 ```
+
+### References
+
+- https://www.nationalgeographic.com/environment/article/deforestation
+- http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
+- https://earthenginepartners.appspot.com/
 
 ## Developed by Team MINIONS
 
