@@ -85,7 +85,7 @@
 
 [Видео](https://disk.yandex.ru/d/6kNI1smfWhWYXA?w=1) о команде и с полётной зоны.
 
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/6R4tLkZVmcs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+< iframe width = "1280" height = "720" src = " https://www.youtube.com/embed/6R4tLkZVmcs " frameborder = " 0 " allow = " accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in -Picture " allowfullscreen > </ Iframe >
 
 ## Освещение мероприятия в СМИ
 
