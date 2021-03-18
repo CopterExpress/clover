@@ -56,7 +56,7 @@
     git checkout -b new-article
     ```
 
-4. Напишите новую статью в разделе `docs/ru` или `docs/en` в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown) (например `docs/ru/new_article.md`).
+4. Напишите новую статью в разделе `docs/ru` или `docs/en` в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown) (например `docs/ru/new_article.md`). Не забудьте указать контактную информацию (e-mail / Telegram /...) для авторских статей.
 5. Поместите дополнительные визуальные материалы в папку `docs/assets` и оформите на них ссылки в вашей статье.
 6. Добавьте статью в файл оглавления `SUMMARY.md` в том разделе, где вы её написали (например в `docs/ru/SUMMARY.md`):
 
