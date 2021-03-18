@@ -22,7 +22,7 @@ YouTube video link - [https://www.youtube.com/embed/Nz1w59v451U](https://www.you
 
 We achieved to do small seeding missions but we faced some problem about autonomous flying with GPS.
 
-We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormacy.
+We coated our battery to protect it from cold weather, seeding missions need to start in winter since apple seeds need to stay in a cold place for some time to break dormancy.
 
 - [Seed capsules](#seed-capsules)
 - [How to assemble seeding mechanism to clover 4.2 drone](#how-to-assemble-seeding-mechanism-to-clover-42-drone)
