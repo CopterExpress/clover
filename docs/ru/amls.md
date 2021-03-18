@@ -15,7 +15,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 - Андрей Кабалин: astik452@gmail.com
 - Владислав Яснецкий: vlad.yasn@gmail.com
 
-![Drone 1](../assets/amls/Drone%20GIF.jpg "Drone 1")
+![Drone 1](../assets/amls/drone_meme.jpg "Drone 1")
 
 -----------
 
@@ -76,7 +76,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
 <a name="short-video-about-our-project-clickable"></a>
 ### Видео про наш проект (кликабельно):
-[![Watch the video](../assets/amls/ALMS%20Results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
+[![Watch the video](../assets/amls/youtube_amls_results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
 
 -----------
 
@@ -86,7 +86,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 Как уже было сказано ранее, на дроне установлен "универсальный" модуль Liberty-Link, принимающий команды с платформы и корректирующий положение дрона, вмешиваясь в сигнал с пульта управления (подробнее об этом в следующих пунктах). 
 
 В Liberty-Link будет встроенный GPS модуль, и, соответственно, возможность поддержания положения по GPS и следования по точкам. Результат работы алгоритма поддержания позиции по GPS (кликабельно):
-[![Watch the video](../assets/amls/GPS%20HOLDING.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_gps_hold.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
 
 GPS-модуль будет использоваться из семейства UBlox (например, UBlox Neo-M8). Установлено будет 1 или 3 (для минимизации погрешности) модуля.
 
@@ -340,7 +340,7 @@ if (waypoint_set == 1) {
 Для начала был придуман простейший алгоритм расчета коэффициента изменения координат. Реализация производилась на языке Python. На этапе тестирования данного алгоритма встала проблема симуляции генерации GPS-координат. Дабы разрешить эту проблему, было испробовано много различных ресурсов: от открытых исходных кодов самодельных навигаторов до попытки использовать API Google Maps, Yandex Maps или 2GIS. И лишь спустя семестр мы додумались до простого изменения значений по некоторой дельте с отрисовкой в MatPlotLib либо PyQtGraph. До этого всё тестирование алгоритма производилось с использованием инструментария прошивки PX4, симулятора движения дрона Gazebo. Как следствие было преодолено много формальностей в вопросах общения с симулятором и увеличением производительности.
 
 Видео работы алгоритма предсказания GPS координат (кликабельно)
-[![Watch the video](../assets/amls/GAZEBO.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
+[![Watch the video](../assets/amls/youtube_gazebo.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
 
 Конечный результат ошибки предсказанных координат достиг диапазона от 0 до 70 см.
 
@@ -409,7 +409,7 @@ else if (actual_compass_heading >= 360) actual_compass_heading -= 360;
 Одной из самых первых идей - было приделать Raspberry Pi к дрону, как это сделано на платформе Клевер, и стабилизироваться по метке на платформе.
 
 Тест прототипа первой оптической стабилизации (кликабельно):
-[![Watch the video](../assets/amls/5%20ARUCO.jpg)](https://youtu.be/TrrxXOHAqbQ)
+[![Watch the video](../assets/amls/youtube_first_tests.jpg)](https://youtu.be/TrrxXOHAqbQ)
 
 Но, проведя пару тестов от этой идеи мы быстро отказались. Для начала, Raspberry Pi очень слабая для быстрого вычисления такого объема данных, во вторых, сама идея установки на каждый дрон компьютера выглядит нерациональной.
 
@@ -420,12 +420,12 @@ else if (actual_compass_heading >= 360) actual_compass_heading -= 360;
 Так мы и пришли к текущему виду оптической стабилизации, когда камера с мощным компьютером расположены на платформе, а на дроне лишь ARUco 4x4 метка и модуль, управляющий им.
 
 Самые первые тесты, в этом примере даже нет оценки положения маркера (pose estimation)(кликабельно):
-[![Watch the video](../assets/amls/Stabilization%20v1.jpg)](https://youtu.be/A2oq6zCebVo)
+[![Watch the video](../assets/amls/youtube_stabilization_1.jpg)](https://youtu.be/A2oq6zCebVo)
 
 Далее, были внедрены алгоритмы Pose Estimation благодаря библиотеке OpenCV. Первые тесты показали что мы на верном пути!
 
 Pose Estimation Pyhton (кликабельно):
-[![Watch the video](../assets/amls/Stabilization%20v2%20.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
+[![Watch the video](../assets/amls/youtube_stabilization_2.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
 
 Но, по прежнему, алгоритмы были далеки от идеала. Например, т.к. код писался на Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), производительность была не велика, также, не было нормального контроля потоков. Поэтому, пришлось что-то менять.
       
@@ -435,7 +435,7 @@ Pose Estimation Pyhton (кликабельно):
 Взвесив все ЗА и ПРОТИВ, было решено переписать всю оптическую стабилизацию на Java. Так и появилась первая версия Liberty-Way. На этот раз было решено подойти к ООП основательно, и, после небольшой настройки получился отличный алгоритм стабилизации и посадки.
 
 Тест посадки на Liberty-Way v.beta_0.0.1 (кликабельно):
-[![Watch the video](../assets/amls/Landing%20Test%203%20cams.jpg)](https://youtu.be/8VAobWPFG8g)
+[![Watch the video](../assets/amls/youtube_landing_test.jpg)](https://youtu.be/8VAobWPFG8g)
 
 
 <a name="55-liberty-way"></a>
@@ -446,17 +446,17 @@ Pose Estimation Pyhton (кликабельно):
 
 Видео работы статичной стабилизации (кликабельно):
 
-[![Watch the video](../assets/amls/Static%20stabilization%20test%20.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/youtube_static_stabilization.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
 
 Liberty-Way может даже стабилизировать "брошенный" дрон (кликабельно):
 
-[![Watch the video](../assets/amls/Optical%20catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_optical_catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
 
 Да, на видео есть небольшой баг с поворотом, в новом релизе он исправлен
 
 И, конечно же, работа в движении (тестировалось ещё на beta_0.0.3)(кликабельно):
 
-[![Watch the video](../assets/amls/Holding%20in%20motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/youtube_holding_in_motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
 
 Все основные настройки удобно вынесены в отельный JSON-файлы (settings, pid), что позволяет без пересборки приложения быстро менять нужные параметры. Фактически, для запуска приложения, достаточно скачать последний релиз, распаковать архив и запустить через соответствующий вашей ОС лаунчер.
 
@@ -464,7 +464,7 @@ Liberty-Way может даже стабилизировать "брошенны
 <a name="56-communication-with-the-drone"></a>
 ### 5.6. Связь с дроном
 Liberty-Way подключается к модулю Liberty-Link, установленному на дроне, и, корректирует его положение, управляя напрямую первыми четырьмя основными каналами пульта. За один цикл (каждый фрейм с камеры) на модуль отправляются 12 байт данных корректировки:
-![Packet](../assets/amls/Data_structure.png "Data packet")
+![Packet](../assets/amls/data_structure.png "Data packet")
 
 - **Roll bytes** - Корректировка крена (1000-2000) 
 - **Pitch bytes** - Корректировка тангажа (1000-2000)
@@ -646,7 +646,7 @@ void speed_handler(void) {
 ![Light sensors](../assets/amls/light_sensors.png "Light sensors")
 
 Тест определения уровня освещённости с помощью светодиодов (кликабельно):
-[![Watch the video](../assets/amls/Light%20sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_light_sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
 
 Тест регулировки выдержки и включения дополнительной подсветки (кликабельно):
 [![Watch the video](../assets/amls/youtube_exposure_test.jpg)](https://youtu.be/iMORim6zxsg)
