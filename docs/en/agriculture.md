@@ -40,7 +40,7 @@ def image_colback_color(data):
     global color, shape
 
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8') # OpenCV image
-    img_hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV) #[118:119,158:159] 
+    img_hsv = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV) #[118:119,158:159]
 
     #detected color
     #print(img_hsv[0][0])
@@ -80,7 +80,7 @@ if shape = 'brown':
 if shape = 'yellow_orange':
     culture = "pshenitsa"
 
-image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color) 
+image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color)
 ```
 
 The script will take up to 100% CPU capacity. To slow down the script artificially, you can use throttling of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
@@ -141,7 +141,7 @@ violet_low = (143, 150, 150)
 violet_high = (157, 255, 255)
 
 red_violet_low = (158, 150, 150)
-red_violet_hugh = (171, 255, 255) 
+red_violet_hugh = (171, 255, 255)
 ```
 
 Note that there are two ranges for red because red is at the edges of the HSV color space.
