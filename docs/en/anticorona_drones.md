@@ -2,8 +2,8 @@
 
 ## Team
 
-- Daria Miklashevskaya
-- Yuriy Sukhorukov
+* Daria Miklashevskaya
+* Yuriy Sukhorukov
 
 Innopolis University, B17-DS-II, B17-RO-I
 
@@ -19,9 +19,7 @@ Since we do not have the Clover drone, we will use an airframe built and designe
 
 The main idea is to use truss structure, because it works well against twisting and warping.
 
-* The main idea is to use truss structure, because it works well against twisting and warping 
-<img src="../assets/en/drone_frame.jpg" title="Frame">
-* The main advantage of such a system is that it distributes impact between beams and effectively dissipates it. However, engine mounts are not impact-proof, this is because we sacrifice them, but save much more expensive and not-readily-available engine. This is why mounts are quickly-replaceable (only 3 screws) and mate of cheap PLA plastic
+<img src="../assets/anticorona/drone_frame.jpg" title="Frame">
 
 The main advantage of such a system is that it distributes impact between beams and effectively dissipates it. However, engine mounts are not impact-proof, this is because we sacrifice them, but save much more expensive and not-readily-available engine. This is why mounts are quickly-replaceable (only 3 screws) and mate of cheap PLA plastic.
 
@@ -29,18 +27,19 @@ The space inside the central rhombus is occupied by the on-board equipment: batt
 
 As it is shown on this picture, AGX is mounted on top of the platform, while NX can be mounted on the bottom, and completely protected from any damage by beams and landing legs.
 
-<img src="../assets/en/drone_with_jetson.jpg" title="AGX is safe">
+<img src="../assets/anticorona/drone_with_jetson.jpg" title="AGX is safe">
 
 All sensory equipment, like cameras, rangefinder, etc can be easily mounted on the beams with special connectors, which provide flexibility because you can fine-tune camera angle or position before tightening screws and fixing it firmly in place, which is especially relevant for tracker-cameras.
 
 We used two T-265 cameras for visual odometry (fuse them together with Kalman filter). And one D-435 depth camera for both video input for neural net and for map-building (collision avoidance). Also, we use dampers to prevent odometry drift.
 
-* We used two T-265 cameras for visual odometry (fuse them together with Kalman filter)
-And one D-435 depth camer for both video input for neural net and for map-building (collision avoidance)
-<img src="../assets/en/camera.jpg" title="Begone odometry drift">
+And one D-435 depth camera for both video input for neural net and for map-building (collision avoidance).
+
+<img src="../assets/anticorona/camera.jpg" title="Begone odometry drift" width=400 class="zoom center">
 
 Here are the photo of assembled drone:
 
+<img src="../assets/anticorona/drone_assembled.jpg" title="Assembled drone" width=400 class="zoom center">
 
 ## Software
 
@@ -51,7 +50,7 @@ We have split our drone software into two modules:
 * Pipeline, which manages communication with ROS.
 * Neural net module, which talks with the pipeline via sockets.
 
-The reason for this is simple - ROS supports ony Python 2, and I do not feel like I'm building it with Python 3 because it is a bit troublesome. Our neural net, on the other hand, uses pytorch which is Python 3 only.
+The reason for this is simple - ROS supports ony Python 2, and I do not feel like I'm building it with Python 3 because it is a bit troublesome. Our neural net, on the other hand, uses Pytorch which is Python 3 only.
 
 But apart from compatibility issue, such an arrangement allows us to run inference module anywhere we want, like in more powerful desktop PC or even somewhere in the cloud.
 
@@ -64,13 +63,14 @@ We use 3rd version of YoLo neural network, pretrained on customly-built dataset 
 ## Mask release
 
 Detecting people without masks is cool, no doubt.
-<img src="../assets/en/masks.jpg" title="Master and his apprentice">
 
+<img src="../assets/anticorona/masks.jpg" title="Master and his apprentice" width=400 class="zoom center">
 
-But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person
-<img src="../assets/en/release.jpg" title="Mask release in cad">
-<img src="../assets/en/release_Cad.jpg" title="Mask release manufactured">
+But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person.
 
+<img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
+
+<img src="../assets/anticorona/release_Cad.jpg" title="Mask release manufactured" width=300 class="zoom center">
 
 This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels.
 
@@ -78,6 +78,6 @@ This device needs further engineering because current iterations are too fragile
 
 ## Final thoughts
 
-This project will still be useful even when the Coronavirus crisis will be over. It can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is popular in US and UK, so why not try to automate it a bit. The working principle and hardware will remain the same, but software will need an update
+This project will still be useful even when the Coronavirus crisis will be over. It can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is popular in US and UK, so why not try to automate it a bit. The working principle and hardware will remain the same, but software will need an update.
 
 Stay safe folks!
