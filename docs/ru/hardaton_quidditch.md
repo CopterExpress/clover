@@ -84,7 +84,7 @@
 Предложенные участниками хардатона [инженерные решения](https://disk.yandex.ru/d/2TbB8SSM4a6jsw?w=1) по разработке захвата и защиты на квадрокоптер:
 
 [Видео](https://disk.yandex.ru/d/6kNI1smfWhWYXA?w=1) о команде и с полётной зоны.
-[![Watch the video](../assets/Hardaton_Quidditch/forever.png)](https://youtu.be/6R4tLkZVmcs)
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/6R4tLkZVmcs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Освещение мероприятия в СМИ
 
