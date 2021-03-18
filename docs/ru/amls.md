@@ -14,9 +14,9 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
 ### Разработчики
 
-- Павел Нешумов: xxoinvizionxx@gmail.com
-- Андрей Кабалин: astik452@gmail.com
-- Владислав Яснецкий: vlad.yasn@gmail.com
+- [Павел Нешумов](mailto:xxoinvizionxx@gmail.com)
+- [Андрей Кабалин](mailto:astik452@gmail.com)
+- [Владислав Яснецкий](mailto:vlad.yasn@gmail.com)
 
 ![Drone 1](../assets/amls/drone_meme.jpg "Drone 1")
 
