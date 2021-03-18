@@ -24,37 +24,35 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
 ## Оглавление
 
-- [0. Как это работает?](#0-how-it-works)
+- [0. Как это работает?](#how-it-works)
   - [0.1. Видео про наш проект](#short-video-about-our-project-clickable)
-- [1. Удержание по GPS и полёт по точкам](#1-gps-hold-and-flight-to-waypoints-functions)
-  - [1.1. Чтение данных из UART](#11-serial-reading)
-  - [1.2. Парсинг протокола UBlox](#12-ublox-gps-parsing)
-  - [1.3. Установка текущей путевой точки](#13-set-current-waypoint)
-  - [1.4. Изменение точек (Чтобы летать по координатам)](#14-waypoint-edit-to-fly-to-waypoints)
-  - [1.5. Удержание конкретной позиции](#15-waypoint-stabilization)
-- [2. Следование за платформой](#2-gps-following)
-- [3. Компас](#3-compass)
-- [4. Удержание высоты (барометр)](#4-altitude-stabilization-barometer)
-- [5. Оптическая стабилизация](#5-optical-stabilization)
-  - [5.1. Так сложно и так важно](#51-so-difficult-and-so-important)
-  - [5.2. Первые шаги](#52-first-steps)
-  - [5.3. Инверсия](#53-inverse-approach)
-  - [5.4. Версия на Java](#54-java-edition)
-  - [5.5. Liberty-Way](#55-liberty-way)
-  - [5.6. Связь с дроном](#56-communication-with-the-drone)
-  - [5.7. Подвес для камеры](#57-camera-gimbal)
-- [6. Платформа Eitude](#6-eitude-amls-platform)
-  - [6.1. Система захватов](#61-grabbing-system)
-  - [6.2. Крыша](#62-weather-protection-system)
-  - [6.3. Спидометр](#63-platform-speedometer)
-  - [6.4. Датчики уровня освещённости](#64-platform-light-sensor)
-- [7. Заключение](#7-conclusion)
+- [1. Удержание по GPS и полёт по точкам](#gps-hold-and-flight-to-waypoints-functions)
+  - [1.1. Чтение данных из UART](#serial-reading)
+  - [1.2. Парсинг протокола UBlox](#ublox-gps-parsing)
+  - [1.3. Установка текущей путевой точки](#set-current-waypoint)
+  - [1.4. Изменение точек (Чтобы летать по координатам)](#waypoint-edit-to-fly-to-waypoints)
+  - [1.5. Удержание конкретной позиции](#waypoint-stabilization)
+- [2. Следование за платформой](#gps-following)
+- [3. Компас](#compass)
+- [4. Удержание высоты (барометр)](#altitude-stabilization-barometer)
+- [5. Оптическая стабилизация](#optical-stabilization)
+  - [5.1. Так сложно и так важно](#so-difficult-and-so-important)
+  - [5.2. Первые шаги](#first-steps)
+  - [5.3. Инверсия](#inverse-approach)
+  - [5.4. Версия на Java](#java-edition)
+  - [5.5. Liberty-Way](#liberty-way)
+  - [5.6. Связь с дроном](#communication-with-the-drone)
+  - [5.7. Подвес для камеры](#camera-gimbal)
+- [6. Платформа Eitude](#eitude-amls-platform)
+  - [6.1. Система захватов](#grabbing-system)
+  - [6.2. Крыша](#weather-protection-system)
+  - [6.3. Спидометр](#platform-speedometer)
+  - [6.4. Датчики уровня освещённости](#platform-light-sensor)
+- [7. Заключение](#conclusion)
 
 -----------
 
-<a name="0-how-it-works"></a>
-
-## 0. Как это работает?
+## 0. Как это работает? {#how-it-works}
 
 Система состоит из двух частей:
 
@@ -80,22 +78,18 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 - После поимки дрона, происходит его обслуживание, разгрузка посылки и закрытие крыши над платформой (для защиты от неблагоприятных погодных условий).
 - На этом посадка завершена!
 
-<a name="short-video-about-our-project-clickable"></a>
+### Видео про наш проект (кликабельно) {#short-video-about-our-project-clickable}
 
-### Видео про наш проект (кликабельно)
-
-[![Watch the video](../assets/amls/youtube_amls_results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=6qjS-iq6a3k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 -----------
 
-<a name="1-gps-hold-and-flight-to-waypoints-functions"></a>
-
-## 1. Удержание по GPS и полёт по точкам
+## 1. Удержание по GPS и полёт по точкам {#gps-hold-and-flight-to-waypoints-functions}
 
 Как уже было сказано ранее, на дроне установлен "универсальный" модуль Liberty-Link, принимающий команды с платформы и корректирующий положение дрона, вмешиваясь в сигнал с пульта управления (подробнее об этом в следующих пунктах).
 
 В Liberty-Link будет встроенный GPS модуль, и, соответственно, возможность поддержания положения по GPS и следования по точкам. Результат работы алгоритма поддержания позиции по GPS (кликабельно):
-[![Watch the video](../assets/amls/youtube_gps_hold.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 GPS-модуль будет использоваться из семейства UBlox (например, UBlox Neo-M8). Установлено будет 1 или 3 (для минимизации погрешности) модуля.
 
@@ -103,9 +97,7 @@ GPS-модуль будет использоваться из семейства
 
 Модули работают по UART-интерфейсу. Настроены на частоту отправки 5 раз в секунду. Прошивка Liberty-Link будет читать данные с модулей и вычислять координаты текущего положения.
 
-<a name="11-serial-reading"></a>
-
-### 1.1. Чтение данных из UART
+### 1.1. Чтение данных из UART {#serial-reading}
 
 Чтение данных с модуля в буфер выглядит так:
 
@@ -134,9 +126,7 @@ while (GPS_serial.available() && new_line_found == 0) {
 }
 ```
 
-<a name="12-ublox-gps-parsing"></a>
-
-### 1.2. Парсинг протокола UBlox
+### 1.2. Парсинг протокола UBlox {#ublox-gps-parsing}
 
 После, из заполненного буфера вычисляются широта, долгота, тип корректировки (2D, 3D) и количество спутников.
 Парсинг GPS данных протокола UBlox выглядит так:
@@ -239,9 +229,7 @@ if (new_line_found == 1) {
 }
 ```
 
-<a name="13-set-current-waypoint"></a>
-
-### 1.3. Установка текущей путевой точки
+### 1.3. Установка текущей путевой точки {#set-current-waypoint}
 
 Далее, с полученными данными и происходит самая магия. Для включения поддержания текущего положения достаточно установить флаг `waypoint_set = 1;` и установить текущие координаты как waypoint:
 
@@ -254,7 +242,7 @@ l_lon_waypoint = l_lon_gps;
 
 <a name="14-waypoint-edit-to-fly-to-waypoints"></a>
 
-### 1.4. Изменение точек (Чтобы летать по координатам)
+### 1.4. Изменение точек (Чтобы летать по координатам) {#waypoint-edit-to-fly-to-waypoints}
 
 Если просто задать новые `l_lat_waypoint` и `l_lon_wayoint`, находящиеся на большом удалении от дрона, он не сможет нормально прилететь и стабилизироваться на этих координатах. Для плавного изменения можно использовать переменные `l_lat_gps_float_adjust` и `l_lon_gps_float_adjust`. Это переменные типа `float`, изменяя которые, `l_lat_waypoint` и `l_lon_waypoint` будут плавно меняться.
 
@@ -267,9 +255,7 @@ l_lat_gps_float_adjust += 0.0015;
 При установленном waypoint, дрон будет плавно перемещаться в заданном направлении.
 В дальнейшим это будет использоваться для плавного ускорения и замедления во время движения к точке.
 
-<a name="15-waypoint-stabilization"></a>
-
-### 1.5. Удержание конкретной позиции
+### 1.5. Удержание конкретной позиции {#waypoint-stabilization} 
 
 ```cpp
 if (waypoint_set == 1) {                           
@@ -350,24 +336,21 @@ if (waypoint_set == 1) {
 
 ```
 
-<a name="2-gps-following"></a>
-
-## 2. Следование за платформой
+## 2. Следование за платформой (#gps-following)
 
 Основной задачей стабилизации по GPS-координатам стала разработка алгоритма предсказания положения дрона. Самым простым способом представилось использовать математический расчет следующего положения дрона. Это вычисляется для наиболее точного позиционирования дрона в отношении посадочной платформы.
 
 Для начала был придуман простейший алгоритм расчета коэффициента изменения координат. Реализация производилась на языке Python. На этапе тестирования данного алгоритма встала проблема симуляции генерации GPS-координат. Дабы разрешить эту проблему, было испробовано много различных ресурсов: от открытых исходных кодов самодельных навигаторов до попытки использовать API Google Maps, Yandex Maps или 2GIS. И лишь спустя семестр мы додумались до простого изменения значений по некоторой дельте с отрисовкой в MatPlotLib либо PyQtGraph. До этого всё тестирование алгоритма производилось с использованием инструментария прошивки PX4, симулятора движения дрона Gazebo. Как следствие было преодолено много формальностей в вопросах общения с симулятором и увеличением производительности.
 
 Видео работы алгоритма предсказания GPS координат (кликабельно)
-[![Watch the video](../assets/amls/youtube_gazebo.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
-
+<iframe width="560" height="315" src="https://youtu.be/Rg-Y_fl4BKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 Конечный результат ошибки предсказанных координат достиг диапазона от 0 до 70 см.
 
 -----------
 
 <a name="3-compass"></a>
 
-## 3. Компас
+## 3. Компас {#compass}
 
 До момента оптической стабилизации (во время GPS стабилизации), для вычисления вектора корректировки по GPS требуется знать точный угол по компасу. Для этого используется встроенный в GPS модуль компас.
 
@@ -396,9 +379,7 @@ else if (actual_compass_heading >= 360) actual_compass_heading -= 360;
 
 -----------
 
-<a name="4-altitude-stabilization-barometer"></a>
-
-## 4. Удержание высоты (барометр)
+## 4. Удержание высоты (барометр) {#altitude-stabilization-barometer}
 
 До момента оптической стабилизации (во время GPS стабилизации), наш модуль Liberty-Link будет иметь возможность поддержания высоты при помощи барометра.
 
@@ -409,65 +390,48 @@ else if (actual_compass_heading >= 360) actual_compass_heading -= 360;
 Согласно документации, разрешение по высоте составляет 10см. Алгоритм будет брать значения давления и, пропуская его через ПИД-регулятор, стабилизировать высоту дрона, изменяя Throttle (3-ий канал).
 
 Видео работы алгоритма удержания высоты по барометру (кликабельно):
-[![Watch the video](../assets/amls/youtube_pressure_holding.jpg)](https://youtu.be/xmvcGeZzEfc)
-
+<iframe width="560" height="315" src="https://youtu.be/xmvcGeZzEfc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 Во время полёта по точкам, setpoint давления будет уменьшаться, для повышения высоты (лететь по прямой безопаснее на большой высоте, чтобы ни во что не врезаться). А во время стабилизации по GPS (когда дрон находится уже близко к платформе), дрону будет задан setpoint по давлению такой, чтобы соответствовать ~1.5-2м высоты над платформой.
 
 -----------
 
-<a name="5-optical-stabilization"></a>
+## 5. Оптическая стабилизация {#optical-stabilization}
 
-## 5. Оптическая стабилизация
-
-<a name="51-so-difficult-and-so-important"></a>
-
-### 5.1. Так сложно и так важно
+### 5.1. Так сложно и так важно {#so-difficult-and-so-important}
 
 Оптическая стабилизация - самая важная и сложная часть нашего проекта. Только благодаря этим алгоритмам в наших условиях возможно достаточно точно удерживать дрон над платформой. Текущая версия алгоритма оптической стабилизации вместе с описанием для повторения, доступна в нашем основном репозитории на GitHub. В дальнейшем, к ней добавится и стабилизация по GPS.
 
-<a name="52-first-steps"></a>
-
-### 5.2. Первые шаги
+### 5.2. Первые шаги {#first-steps}
 
 Так как мы не знали насколько реальным окажется выполнение этой далеко не простой задачи, первое что мы сделали, это определились, с помощью чего возможно точно стабилизировать дрон в пространстве.
 И тут, практически единогласно победил вариант с оптической стабилизации при помощи меток дополненной реальности. Во первых, это достаточно бюджетно, не нужны дорогостоящие системы GPS RTK, а, во вторых, дает требуемую точность.
 Одной из самых первых идей - было приделать Raspberry Pi к дрону, как это сделано на платформе Клевер, и стабилизироваться по метке на платформе.
 
 Тест прототипа первой оптической стабилизации (кликабельно):
-[![Watch the video](../assets/amls/youtube_first_tests.jpg)](https://youtu.be/TrrxXOHAqbQ)
-
+<iframe width="560" height="315" src="https://youtu.be/TrrxXOHAqbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 Но, проведя пару тестов от этой идеи мы быстро отказались. Для начала, Raspberry Pi очень слабая для быстрого вычисления такого объема данных, во вторых, сама идея установки на каждый дрон компьютера выглядит нерациональной.
 
 Также, у нас были промежуточные прототипы, например, попытки использовать цветовые маркеры (окружности различных цветов), но эти идеи не оказались достаточно работоспособными.
 
-<a name="53-inverse-approach"></a>
-
-### 5.3. Инверсия
+### 5.3. Инверсия {#inverse-approach}
 
 Так мы и пришли к текущему виду оптической стабилизации, когда камера с мощным компьютером расположены на платформе, а на дроне лишь ArUco 4x4 метка и модуль, управляющий им.
 
 Самые первые тесты, в этом примере даже нет оценки положения маркера (pose estimation)(кликабельно):
-[![Watch the video](../assets/amls/youtube_stabilization_1.jpg)](https://youtu.be/A2oq6zCebVo)
-
+<iframe width="560" height="315" src="https://youtu.be/A2oq6zCebVo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 Далее, были внедрены алгоритмы Pose Estimation благодаря библиотеке OpenCV. Первые тесты показали что мы на верном пути!
 
 Pose Estimation Pyhton (кликабельно):
-[![Watch the video](../assets/amls/youtube_stabilization_2.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
-
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=kE3UmJZ00so" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 Но, по прежнему, алгоритмы были далеки от идеала. Например, т.к. код писался на Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), производительность была не велика, также, не было нормального контроля потоков. Поэтому, пришлось что-то менять.
 
-<a name="54-java-edition"></a>
-
-### 5.4. Версия на Java
+### 5.4. Версия на Java {#java-edition}
 
 Взвесив все ЗА и ПРОТИВ, было решено переписать всю оптическую стабилизацию на Java. Так и появилась первая версия Liberty-Way. На этот раз было решено подойти к ООП основательно, и, после небольшой настройки получился отличный алгоритм стабилизации и посадки.
 
 Тест посадки на Liberty-Way v.beta_0.0.1 (кликабельно):
-[![Watch the video](../assets/amls/youtube_landing_test.jpg)](https://youtu.be/8VAobWPFG8g)
-
-<a name="55-liberty-way"></a>
-
-### 5.5. Liberty-Way
+<iframe width="560" height="315" src="https://youtu.be/8VAobWPFG8g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+### 5.5. Liberty-Way {#liberty-way}
 
 Далее последовало много доработок и исправлений ошибок. В результате, Liberty-Way представляет собой кроссплатформенное приложение, управляющееся через веб сарвар, что очень удобно для настройки и отладки. Также, в последних версиях (beta_1.0.3 - beta_1.1.2) был внедрён blackbox (для записи логов), а также общение с платформой и много других необходимых алгоритмов.
 
@@ -475,23 +439,21 @@ Pose Estimation Pyhton (кликабельно):
 
 Видео работы статичной стабилизации (кликабельно):
 
-[![Watch the video](../assets/amls/youtube_static_stabilization.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Liberty-Way может даже стабилизировать "брошенный" дрон (кликабельно):
 
-[![Watch the video](../assets/amls/youtube_optical_catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Да, на видео есть небольшой баг с поворотом, в новом релизе он исправлен
 
 И, конечно же, работа в движении (тестировалось ещё на beta_0.0.3)(кликабельно):
 
-[![Watch the video](../assets/amls/youtube_holding_in_motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Все основные настройки удобно вынесены в отельный JSON-файлы (settings, PID), что позволяет без пересборки приложения быстро менять нужные параметры. Фактически, для запуска приложения, достаточно скачать последний релиз, распаковать архив и запустить через соответствующий вашей ОС лаунчер.
 
-<a name="56-communication-with-the-drone"></a>
-
-### 5.6. Связь с дроном
+### 5.6. Связь с дроном {#communication-with-the-drone}
 
 Liberty-Way подключается к модулю Liberty-Link, установленному на дроне, и, корректирует его положение, управляя напрямую первыми четырьмя основными каналами пульта. За один цикл (каждый фрейм с камеры) на модуль отправляются 12 байт данных корректировки:
 ![Packet](../assets/amls/data_structure.png "Data packet")
@@ -574,9 +536,7 @@ direct_throttle_control
 Которые напрямую прибавляются к данным, поступающим с пульта управления.
 Вероятно, в дальнейшем, будут добавлены и другие данные, как минимум, для работы с GPS. Следите за обновлениями в нашем репозитории.
 
-<a name="57-camera-gimbal"></a>
-
-### 5.7. Подвес для камеры
+### 5.7. Подвес для камеры {#camera-gimbal}
 
 Для эксплуатации нашей системы в реальных условиях, требуется минимизировать тряску камеры, чтобы не потерять метку на дроне. Для этого, была разработана 3Д-модель крепления подвеса от дрона к нашей платформе для стабилизации обычной веб камеры
 
@@ -598,16 +558,12 @@ direct_throttle_control
 
 -----------
 
-<a name="6-eitude-amls-platform"></a>
-
-## 6. Платформа Eitude
+## 6. Платформа Eitude {#eitude-amls-platform}
 
 Платформа - взаимосвязанная система для посадки дрона. Управляться платформа планируется через Serial-интерфейс, с помощью G-Code команд:
 Текущий код платформы можно в репозитории Eitude на GitHub: https://github.com/XxOinvizioNxX/Eitude.
 
-<a name="61-grabbing-system"></a>
-
-### 6.1. Система захватов
+### 6.1. Система захватов {#grabbing-system}
 
 Но ведь логично, что в реальности, без системы захватов невозможно посадить дрон, не повредив никого. Пока что, у нас есть прототип в виде 3Д модели. Для реализации захвата дрона будут изготовлены 4 длинных захвата с крючками на концах и по мере посадки коптера на платформу, шасси будут захватываться этими 4-мя крючками и удерживаться по мере снижения и после него.
 
@@ -615,9 +571,7 @@ direct_throttle_control
 
 ![Screenshot](../assets/amls/grabbing_system_2.png "Screenshot")
 
-<a name="62-weather-protection-system"></a>
-
-### 6.2. Крыша
+### 6.2. Крыша {#weather-protection-system}
 
 Для защиты от неблагоприятных погодных условий, мы разработали механизм крыши - ножничные механизмы, обтянутые брезентом, которые находятся на краях платформы и после успешной посадки механизмы с обеих сторон платформы будут закрываться и защищать дрон от внешнего воздействия, Сама конструкция крыши делает её достаточно лёгкой и прочной, а ножничный механизм позволяет просто складывается и раскладывается при этом сборка такого механизма будет простой и надежной.
 
@@ -625,16 +579,14 @@ direct_throttle_control
 
 ![Screenshot](../assets/amls/platform_roof.png "Screenshot")
 
-<a name="63-platform-speedometer"></a>
-
-### 6.3. Спидометр
+### 6.3. Спидометр {#platform-speedometer}
 
 Для будущей посадки на быстро движущуюся платформу, очень полезно знать скорость её движения. На данный момент на платформе нет GPS модуля, или иных способов измерить абсолютную скорость. Поэтому, для временного решения этой проблемы, решено было вычислять скорость по ускорению, используя акселерометр. Для примера, MPU6050. IMU-модуль через мягкую подложку установлен на прототип платформы и прикрыт крышкой для защиты от ветра. Алгоритм стабилизации (Liberty-Way) посылает на платформу запрос `L1` для проверки скорости. В качестве ответа возвращается `S0 L<скорость в км/ч>`.
 
 ![MPU6050](../assets/amls/mpu6050_gyro.png "MPU6050")
 
 Тест спидометра (внутри серого круга нижний правый параметр (SPD) - скорость в км/ч) (кликабельно):
-[![Watch the video](../assets/amls/youtube_speedometer_test.jpg)](https://youtu.be/yvCo6tYjdM0)
+<iframe width="560" height="315" src="https://youtu.be/yvCo6tYjdM0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 Для вычисления скорости, берётся ускорение за маленькие промежутки времени, перемножается со временем, получая моментальную скорость. Которая постоянно прибавляется к предыдущей сумме:
 
@@ -675,9 +627,7 @@ void speed_handler(void) {
 
 Полный код спидометра можно найти в репозитории Eitude на GitHub: https://github.com/XxOinvizioNxX/Eitude
 
-<a name="64-platform-light-sensor"></a>
-
-### 6.4. Датчики уровня освещённости
+### 6.4. Датчики уровня освещённости {#platform-light-sensor}
 
 Т.к. наша платформа должна работать в различных окружающих условиях, а оптическая стабилизация очень требовательна к видимости ArUco маркера, важно иметь автоматическую систему измерения выдержки камеры по уровню освещённости, а, при её нехватке, даже включать дополнительную подсветку. В долгосрочной перспективе в качестве датчиков света планируется использовать специализированные сенсоры, например, BH1750.
 
@@ -686,16 +636,14 @@ void speed_handler(void) {
 ![Light sensors](../assets/amls/light_sensors.png "Light sensors")
 
 Тест определения уровня освещённости с помощью светодиодов (кликабельно):
-[![Watch the video](../assets/amls/youtube_light_sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 Тест регулировки выдержки и включения дополнительной подсветки (кликабельно):
-[![Watch the video](../assets/amls/youtube_exposure_test.jpg)](https://youtu.be/iMORim6zxsg)
+<iframe width="560" height="315" src="https://youtu.be/iMORim6zxsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
 
 -----------
 
-<a name="7-conclusion"></a>
-
-## 7. Заключение
+## 7. Заключение {#conclusion}
 
 На данный момент, имеется отлаженный прототип оптической стабилизации, GPS удержания, стабилизации высоты по барометру, платформы и множество 3Д-моделей, жаждущих реализации.
 Проект автоматической посадки дрона на движущуюся платформу ещё не закончен.
