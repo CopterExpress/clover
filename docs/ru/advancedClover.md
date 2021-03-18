@@ -15,12 +15,15 @@
   * Упрощение работы с навигацией
   * Упрощение работы с камерой
 
-![Пример автокомплита, терминала и файлового менеджера ](https://i.imgur.com/9JwgXQH.png)
-![Пример инструментов ROS и Copter Status](https://i.imgur.com/zraUiw3.png)
+![Пример автокомплита, терминала и файлового менеджера ](../assets/advancedClover1.png)
+![Пример инструментов ROS и Copter Status](../assets/advancedClover2.png)
 
-![Пример полёта по квадрату с использованием advancedClover](https://i.imgur.com/huSJpW3.png)
+![Пример полёта по квадрату с использованием advancedClover](../assets/advancedClover3.png)
 
 Более подробно об установке и использовании advacnedClover можно почитать [здесь](https://ftl-team.github.io/cloverIDE)
+
+Создано командой FTL
+Контакты: @maximmasterr в telegram
 
 ## Технические подробности
 
