@@ -14,9 +14,9 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
 ### Developers
 
-- Pavel Neshumov: [mailto](mailto:xxoinvizionxx@gmail.com)
-- Andrey Kabalin: [mailto](mailto:astik452@gmail.com)
-- Vladislav Yasnetsky: [mailto](mailto:vlad.yasn@gmail.com)
+- [Pavel Neshumov](mailto:xxoinvizionxx@gmail.com)
+- [Andrey Kabalin](mailto:astik452@gmail.com)
+- [Vladislav Yasnetsky](mailto:vlad.yasn@gmail.com)
 
 ![Drone 1](../assets/amls/drone_meme.jpg "Drone 1")
 
