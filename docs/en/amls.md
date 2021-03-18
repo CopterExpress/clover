@@ -47,7 +47,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
   - [6.1. Grabbing system](#61-grabbing-system)
   - [6.2. Weather protection system](#62-weather-protection-system)
   - [6.3. Speed measurement system](#63-platform-speedometer)
-  - [6.4. Illumination system](#64-platform-light-sensor) 
+  - [6.4. Illumination system](#64-platform-light-sensor)
 - [7. Conclusion](#7-conclusion)
 
 -----------
