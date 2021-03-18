@@ -2,11 +2,11 @@
 
 Название проекта: Инженерное командное соревнование - хардатон «Квиддич на квадрокоптерах».
 
-![Название проекта](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/Hardaton.jpg)
+![Название проекта](../assets/Hardaton.jpg)
 
 ## Команда проекта
 
-![Команда проекта](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/team.jpg)
+![Команда проекта](../assets/team.jpg)
 
 * Бокта Оксана Александровна - лидер проекта, руководитель Центра по работе с одарёнными детьми МАОУ «Лицей № 176» г.Новосибирска.
 * Шунаев Никита Александрович – проектный менеджер, куратор IT-направления.
@@ -42,10 +42,10 @@
 
 Пример оформления и зонирования площадки:
 
-![Картинка 1](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/1.jpg)
-![Картинка 2](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/2.jpg)
-![Картинка 3](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/3.jpg)
-![Картинка 4](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/4.jpg)
+![Картинка 1](../assets/1.jpg)
+![Картинка 2](../assets/2.jpg)
+![Картинка 3](../assets/3.jpg)
+![Картинка 4](../assets/4.jpg)
 
 Дизайн помещений, названия и содержание испытаний схожи со сценами из знаменитого фильма «Гарри Поттер». Задания по компетенциям имеют дифференциацию по уровню подготовки участников (начальный, продолжающий, продвинутый). Ключевым испытанием является квиддич на квадрокоптерах. Победу одерживает команда, набравшая большее количество очков по всем испытаниям. К судейству могут привлекаться эксперты в компетенциях, не заинтересованные наставники команд, представители компаний-партнёров из реального сектора экономики, представители инженерных ВУЗов и др. Все участники, не прошедшие в финал хардатона, получают сертификаты участников; участники финала, не занявшие места, получают диплом участника финала; команды, занявшие места в квиддиче, получают дипломы победителей или призёров и ценные подарки.
 
@@ -76,10 +76,10 @@
 
 В очном мероприятии приняли участие 27 команд из города Новосибирска, 81 участник из образовательных организаций и организаций дополнительного образования детей города Новосибирска, 14 наставников, 5 волонтёров, 3 эксперта, 5 помощников эксперта, 3 организатора. Общий охват мероприятия-111 человек.
 
-![Картинка 5](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/5.jpg)
-![Картинка 6](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/6.png)
-![Картинка 7](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/7.png)
-![Картинка 8](https://github.com/Ivan-Alekov/clover/blob/Hardaton_Quidditch/docs/assets/Hardaton_Quidditch/8.png)
+![Картинка 5](../assets/5.jpg)
+![Картинка 6](../assets/6.png)
+![Картинка 7](../assets/7.png)
+![Картинка 8](../assets/8.png)
 
 Предложенные участниками хардатона [инженерные решения](https://disk.yandex.ru/d/2TbB8SSM4a6jsw?w=1) по разработке захвата и защиты на квадрокоптер:
 
