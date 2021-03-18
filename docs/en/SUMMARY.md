@@ -113,3 +113,4 @@
   * [3D-printed Generative Design Frame](generative_design_frame.md)
   * [Retail Drone](bennie.md)
   * [The Indoor Mapping Drone](dromap.md)
+  * [Seeding Drone](seeding_drone.md)
