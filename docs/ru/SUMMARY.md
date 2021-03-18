@@ -124,7 +124,7 @@
   * [Распознавание видов агрокультур](agriculture.md)
   * [Граффити коптер D-drone](ddrone.md)
   * [Программируемый летающий автомобиль](zaural_viking.md)
-  * [Хардатон_Квиддич](Hardaton_Quidditch.md)
+  * [Хардатон Квиддич](hardaton_quidditch.md)
 
 ## Учебник
 
