@@ -60,9 +60,9 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
     ![Liberty-X](../assets/amls/liberty-x_side_cutout_2_small.png "Liberty-X")
 
-    - И платформы, или подвижной (на автомобиле), или статичной (на постамате)
+- И платформы, или подвижной (на автомобиле), или статичной (на постамате)
 
-![Platform](../assets/amls/platform_side_transparent.png "Platform")
+    ![Platform](../assets/amls/platform_side_transparent.png "Platform")
 
 Порядок действий выглядит так:
 
