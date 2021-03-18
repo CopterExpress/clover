@@ -105,6 +105,9 @@ Telegram: [@bart02](https://t.me/bart02), [@maerans](https://t.me/maerans)
 
 - **4x** стойки M3x26
 - **1x** [крепление для батареи](https://github.com/easy-to-fly/easy-to-fly/blob/master/hard/3d_models/case.stl)
+- **1x** [платформа для крепления](https://github.com/easy-to-fly/easy-to-fly/blob/master/hard/dwgs/sensors_mount.dwg)
+
+Соедините всё как показано на [модели](https://a360.co/2ZfKyW8).
 
 ### Сборка системы из 4-х лазерных дальномеров
 
@@ -144,6 +147,20 @@ cd easy-to-fly
 ./install/ros_deps.sh
 ./install/arduino_deps.sh  # только если собираетесь использовать систему из 4-х лазерных дальномеров
 ```
+
+### Запуск предотвращения столкновений
+
+Для работы с лидаром необходимо изменить параметр `CP_DIST` PX4. Рекомендуется установить 0.5 м.
+
+Теперь полетный контроллер будет получать сообщения от компьютера о расстоянии вокруг в специальном формате (читать доп. [https://mavlink.io/en/messages/common.html#OBSTACLE_DISTANCE](https://mavlink.io/en/messages/common.html#OBSTACLE_DISTANCE)).
+
+Теперь задача заключается в передаче сообщения такого типа на полетный контроллер.
+
+В библиотеке MAVROS есть специальный плагин для этих целей: [https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance](https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance). 
+
+Таким образом, достаточно ее включить в `<rosparam param="plugin_whitelist">` в файле `mavros.launch`.
+
+Далее, запускаем один из `.launch` файлов.
 
 ## Заключение
 
