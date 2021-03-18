@@ -5,12 +5,15 @@
 ## The goal is to automatically land a drone on a moving platform
 
 ### AMLS Article
+
 In this Article we will describe AMLS project. Namely, AMLS Optical stabilization, GPS holding, GPS following, Altitude holding, Grapling, Weather protection, Speed measurement and Illumination systems. In addition, we will make clear of how it works and how it was done!
 
 ### Our main GitHub repository:
+
 https://github.com/XxOinvizioNxX/Liberty-Way
 
 ### Developers:
+
 - Pavel Neshumov: xxoinvizionxx@gmail.com
 - Andrey Kabalin: astik452@gmail.com
 - Vladislav Yasnetsky: vlad.yasn@gmail.com
@@ -20,6 +23,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 -----------
 
 ## Table of contents
+
    * [0. How does it work?](#0-how-does-it-work)
       * [0.1. A video about our project](#short-video-about-our-project-clickable)
    * [1. GPS hold and Flight to waypoints functions](#1-gps-hold-and-flight-to-waypoints-functions)
@@ -48,6 +52,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 -----------
 
 ## 0. How does it work?
+
 The AMLS system consists of two parts:
 
 - The drone
@@ -72,6 +77,7 @@ How the system operates:
 - Landing accomplished!  
 
 ### Short video about our project (clickable):
+
 [![Watch the video](../assets/amls/youtube_amls_results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
 
 ## 1. GPS hold and Flight to waypoints functions
@@ -90,6 +96,7 @@ GPS-module will be used from the UBlox group (for instance, UBlox Neo-M8). There
 Modules operate via UART, configured to send data 5 times per second. The Liberty-Link firmware will read data from the modules and calculate the coordinates of the current position.
 
 ### 1.1. Serial reading
+
 Reading data from a module into a buffer looks like this:
 
 ```cpp
@@ -118,6 +125,7 @@ while (GPS_serial.available() && new_line_found == 0) {
 ```
 
 ### 1.2. UBlox GPS parsing
+
 After that, latitude, longitude, a type of correction (2D, 3D) and the number of satellites are calculated from the filled buffer.
 Parsing GPS data of the UBlox protocol looks like this:
 
@@ -220,6 +228,7 @@ if (new_line_found == 1) {
 ```
 
 ### 1.3. Set current waypoint
+
 When required data is received the main magic happens. To enable maintaining of the current position it will be enough to set the flag `waypoint_set = 1;` and set current coordinates as a waypoint:
 ```cpp
 l_lat_waypoint = l_lat_gps;
@@ -229,6 +238,7 @@ l_lon_waypoint = l_lon_gps;
 After that, the calculation of the error in the coordinates will begin, correction works with the help of a PD - regulator. For D - component we use rotation memory.
 
 ### 1.4. Waypoint edit (To fly to waypoints)
+
 If you just set the new `l_lat_waypoint` and `l_lon_wayoint`, which are located at a great distance from the drone, the drone will not be able to fly normally and stabilize at these coordinates. For smooth adjustments `l_lat_gps_float_adjust` and `l_lon_gps_float_adjust` can be used. These are `float` variables, changing which will smoothly shift `l_lat_waypoint` and `l_lon_waypoint`.
 
 For example, if in the main loop you will constantly add a certain value to these variables:
@@ -319,6 +329,7 @@ if (waypoint_set == 1) {
 
 ```
 ## 2. GPS following
+
 The main part of stabilization using GPS coordinates was the development of an algorithm for predicting the position of the drone. The simplest idea was to use a mathematical calculation of the next drone's position. This is calculated for the most accurate positioning in relation to the landing platform.
 
 At the beginning we developed a simple algorithm for calculating the coefficient of coordinates' change. The development was done using Python. At the stage of testing this algorithm, the problem of simulating the generation of GPS coordinates arose. To solve this problem, many different resources were used: from open source homemade navigators to trying to use the Google Maps, Yandex Maps or 2GIS APIs. 
@@ -333,6 +344,7 @@ The end result reached a point when the error of the predicted postition varies 
 -----------
 
 ## 3. Compass
+
 Before optical stabilization launches (during GPS stabilization process), to calculate the GPS correction vector, you need to know the exact angle from the compass. For this, a compass built into the GPS module is used.
 
 Because during the flight, the roll and pitch angles change and a user needs to correct the values from the compass.
@@ -362,6 +374,7 @@ It is clear that the angle from the compass can also be used to maintain the yaw
 ------------
 
 ## 4. Altitude stabilization (barometer)
+
 Before optical stabilization launches (during GPS stabilization process), our Liberty-Link module will be able to maintain altitude using a barometer.
 
 The platform, as well as the Liberty-Link, will have MS5611 barometers
@@ -378,10 +391,13 @@ During the flight along the waypoint, the setpoint of the pressure will decrease
 -----------
 
 ## 5. Optical stabilization
+
 ### 5.1. So difficult and so important
+
 Optical stabilization is the most important and challenging part of our project. In the current condition it is possible to keep the drone above the platform still only using these algorithms. The current version of the OIS algorithm, along with a description of the usage and making, is available in our main GitHub repository. In the future, GPS stabilization will be added to it.
 
 ### 5.2. First steps
+
 And as we couldn't predict the possibility of accomplishing our task, first of all, we started to think about the solution for the stabilization system. Afterwards, we settled with the stabilization using augmented reality tags. Firstly, it won't take much finances as we do not need GPS or RTK systems and it will be accurate enough to accomplish its purpose.
 Our first idea was to attach Raspberry Pi with Liberty_X as it was embodied in COEX Clover and to let Raspberry Pi handle all of the maths.
 
@@ -393,6 +409,7 @@ But few tests showed that Raspberry Pi computing power is not enough for amount 
 Also, we had middling prototypes, for example, attempts to use color markers (circles of different colors), but these ideas did not work well enough.
 
 ### 5.3. Inverse approach
+
 Then we came up with the idea of separating drone and stabilization system so the main math will be accomplished on the landing platform with powerful machine.
 
 This was how we ended up with our current optical stabilization algorithm - the camera which is connected to a powerful machine and the machine is attached to the platform. The drone only has 4x4 ARUco tag and its controller.
@@ -408,12 +425,14 @@ Pose Estimation Pyhton (Clickable):
 But, the algorithms were far from perfect. For example, since the code was written in Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), the performance was not satisfyingly, and there was no suitable threading control either. Therefore, we had to change something.
 
 ### 5.4. Java edition
+
 Having weighed all the pros and cons, it was decided to rewrite all optical stabilization using Java. This is how the first version of Liberty-Way appeared. This time, it was decided to approach the OOP thoroughly, and, after a little tweaking, an excellent stabilization and landing algorithm was obtained.
 
 Landing test on Liberty-Way v.beta_0.0.1 (clickable):
 [![Watch the video](../assets/amls/youtube_landing_test.jpg)](https://youtu.be/8VAobWPFG8g))
 
 ### 5.5. Liberty-Way
+
 Then many improvements and bug fixes followed. As a result, Liberty-Way is a cross-platform web sarvar application that is very convenient for configuration and debugging. Also, in the latest versions (beta_1.0.3 - beta_1.1.2) a blackbox feature was introduced (for recording logs), as well as communication with the platform and many other necessary algorithms.
 
 Full description, including all settings, startup, etc. you can find in our GitHub repository: https://github.com/XxOinvizioNxX/Liberty-Way
@@ -435,6 +454,7 @@ And, of course, example of how it works in motion (tested with beta_0.0.3 releas
 All basic settings are conveniently placed in separate JSON files (settings, pid), which allows a user to quickly change the required parameters without rebuilding the application. In fact, to run the application, you just need to download the latest release, unpack the archive and run it through the launcher corresponding to the preferable OS.
 
 ### 5.6. Communication with the drone
+
 The Liberty-Way connects to the Liberty-Link module installed on the drone and adjusts its position by directly controlling four main channels of the remote control. In one cycle (each frame from the camera), 12 bytes of correction data are sent to the module:
 ![Packet](../assets/amls/data_structure.png "Data packet")
 
@@ -515,6 +535,7 @@ Which are directly added to the data received from the control panel.
 Probably, in the future, other data will be added, at least for working with GPS. Stay tuned for updates in our repository.
 
 ### 5.7. Camera gimbal
+
 To operate our system in real conditions, it is required to minimize camera shaking if we don't want to lose the tag on the drone. For that reason, a 3D model of a gimbal for attaching the drone to the platform was developed to stabilize a conventional webcam.
 
 Camera mount:
@@ -536,9 +557,11 @@ An approximate view of the assembly of the entire suspension mechanism:
 -----------
 
 ## 6. Eitude AMLS Platform
+
 The platform is an interconnected system for landing the drone. The platform was planned to be controlled via the Serial interface, using the G-Code commands: The current platform code can be found in the Eitude GitHub repository: https://github.com/XxOinvizioNxX/Eitude
 
 ### 6.1. Grabbing system
+
 As you may know it doesn't matter how good is our stabilization, without grabbing system the drone will crash eventually. Hence we developed a 3D model of a grabbing system with 4 grips that have a hook at the end of each one. This will allow the system to slowly grab the drone while it lands and hold it steady after landing.
 
 ![Screenshot](../assets/amls/grabbing_system_1.png "Screenshot")
@@ -546,6 +569,7 @@ As you may know it doesn't matter how good is our stabilization, without grabbin
 ![Screenshot](../assets/amls/grabbing_system_2.png "Screenshot")
 
 ### 6.2. Weather protection system
+
 As for the weather protection, we developed a 3D model to create a roof that will protect the drone from weather conditions while it is on the platform.
 The AMLS weather protection system consists of scissor-like mechanisms covered with a canvas, which are located around the edges of the platform. 
 After a successful landing, the mechanisms on both sides of the platform close and protect the drone from external influences. The roof structure itself makes it light and strong, and the scissor-like mechanisms allow it to simply fold and unfold itself. Moreover, the assembly of such mechanisms will be simple and reliable.
@@ -555,6 +579,7 @@ After a successful landing, the mechanisms on both sides of the platform close a
 ![Screenshot](../assets/amls/platform_roof.png "Screenshot")
 
 ### 6.3. Platform speedometer
+
 In order to land on a quickly moving platform, it is very useful to know its speed. For now, the platform does not have a GPS module, or any other way to measure absolute speed. Therefore, for a temporary solution to this problem, it was decided to calculate the speed using an accelerometer. For example, MPU6050. The IMU is mounted into the prototype platform through a soft backing and it's covered with a cap to protect it from the wind. The stabilization algorithm (Liberty-Way) sends a request to the platform `L1` to test the speed. A message `S0 L <speed in km / h>` is returned as a response.
 
 ![MPU6050](../assets/amls/mpu6050_gyro.png "MPU6050")
@@ -601,6 +626,7 @@ Despite having various filters, due to the error, the speed may not "return" to 
 The complete code of the speedometer can be found in the Eitude repository on GitHub: https://github.com/XxOinvizioNxX/Eitude
 
 ### 6.4. Platform light sensor
+
 As our platform must work in various environmental conditions, and optical stabilization is very demanding on the visibility of the ARUco marker, it is important to have an automatic system for measuring the camera exposure by the level of illumination around it, and turning on additional illumination if there is a lack of lighting. In the long term, it is planned to use specialized sensors, for example, the BH1750, as light sensors.
 
 In the current version of the prototype, 6 LEDs are used as a light sensor and an ADC built into the microcontroller. The stabilization algorithm (Liberty-Way) sends a request `L0` to the platform to check the illumination level. A message `S0 L <luminance>` is returned as a response.
@@ -616,6 +642,7 @@ Exposure adjustment and adding additional illumination tests (clickable):
 -----------
 
 ## 7. Conclusion
+
 At the moment, there is a debugged prototype of optical stabilization, GPS holding, altitude stabilization via barometer, different platform prototypes and a great amount of 3D models eager to be constructed. 
 The project of the automatical landing of a drone onto a moving platform is not yet complete.
 
