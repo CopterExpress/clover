@@ -18,7 +18,9 @@
 
 Мы сделаем дроны способными удерживать семена на борту и сбрасывать их в область, которую мы проехали в специальном приложении. Мы можем контролировать плотность семян и высоту капли. Мы также думали о защите семян от насекомых, животных и обезвоживания. Мы выбираем технику шара земли, изобретенную Масанобу Фукуока, также известную как Техника Фукуока. Этот земной шар содержит все необходимые элементы для выращивания, семена растений и землю для защиты. Когда мы бросаем его на землю, земной шар будет удерживать семена, пока он не получит необходимое количество воды, и семена не начнут прорастать.
 
-Ссылка на видео YouTube - [https://www.youtube.com/embed/Nz1w59v451U](https://www.youtube.com/embed/Nz1w59v451U).
+Ссылка на видео YouTube:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Nz1w59v451U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Нам удалось выполнить небольшие посевные миссии, но мы столкнулись с некоторыми проблемами, связанными с автономным полетом с GPS.
 
@@ -33,13 +35,7 @@
 
 Ссылка на все файлы, используемые в этом проекте: [https://github.com/Sahinysf/TreeSeedQuad](https://github.com/Sahinysf/TreeSeedQuad).
 
-### Литература
-
-- https://www.nationalgeographic.com/environment/article/deforestation
-- http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
-- https://earthenginepartners.appspot.com/
-
-## Семенные капсулы
+## Капсулы с семенами
 
 ### Техника Фукуока
 
@@ -114,16 +110,9 @@
 - легко найти материалы;
 - экологически чистый.
 
-СПИСОК ЛИТЕРАТУРЫ
 
-<https://web.archive.org/web/20090115211020/http://www.rmaf.org.ph/Awardees/Biography/BiographyFukuokaMas.htm>
-<http://www.guerrillagarpting.org/ggseedbombs.html>
+## Как собрать высевной механизм для Clover 4.2
 
-## Как собрать высевной механизм на дрон Clover 4.2
-
-КАК СБОРКОВАТЬ МЕХАНИЗМ ПОСЕВА
-
-После завершения шага 4, в разделе Установка защитного кожуха Clover 4.2 в сборе.
 
 1. Установите нижние держатели бака на крепление верхней палубы и закрепите винтами M3x8.
 
@@ -320,6 +309,14 @@ pwm1.stop()
 pwm2.stop()
 GPIO.cleanup()
 ```
+
+### Литература
+
+- [Deforestation explained](https://www.nationalgeographic.com/environment/article/deforestation)
+- http://www.fao.org/fileadmin/templates/rap/files/NRE/Forestry_Group/Landslide_PolicyBrief.pdf
+- [Global Forest Change](https://earthenginepartners.appspot.com/)
+- https://web.archive.org/web/20090115211020/http://www.rmaf.org.ph/Awardees/Biography/BiographyFukuokaMas.htm
+- http://www.guerrillagarpting.org/ggseedbombs.html
 
 ## Разработано командой MINIONS
 
