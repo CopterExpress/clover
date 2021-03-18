@@ -15,7 +15,7 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 - Andrey Kabalin: astik452@gmail.com
 - Vladislav Yasnetsky: vlad.yasn@gmail.com
 
-![Drone 1](../assets/amls/Drone%20GIF.jpg "Drone 1")
+![Drone 1](../assets/amls/drone_meme.jpg "Drone 1")
 
 -----------
 
@@ -72,7 +72,7 @@ How the system operates:
 - Landing accomplished!  
 
 ### Short video about our project (clickable):
-[![Watch the video](../assets/amls/ALMS%20Results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
+[![Watch the video](../assets/amls/youtube_amls_results.jpg)](https://www.youtube.com/watch?v=6qjS-iq6a3k)
 
 ## 1. GPS hold and Flight to waypoints functions
 
@@ -81,7 +81,7 @@ As stated earlier, the drone is equipped with "universal" module Liberty-Link, w
 GPS module will be built in Liberty-Link, so it would have the ability to maintain the drone's GPS position and follow GPS points. 
 
 The result of the GPS hold algorithm (clickable):
-[![Watch the video](../assets/amls/GPS%20HOLDING.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_gps_hold.jpg)](https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech)
 
 GPS-module will be used from the UBlox group (for instance, UBlox Neo-M8). There will be 1 or 3 (to minimize the error) modules.
 
@@ -326,7 +326,7 @@ And only after 3 months, we thought of a simple soulution: to change the values 
 Prior to this, all testing of the algorithm was carried out using the PX4 firmware toolkit and the Gazebo drone motion simulator. As a result, many formalities were overcome in terms of communicating with the simulator and increasing performance (click on the picture to see the video).
 
 The result of the GPS prediction (clickable):
-[![Watch the video](../assets/amls/GAZEBO.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
+[![Watch the video](../assets/amls/youtube_gazebo.jpg)](https://youtu.be/Rg-Y_fl4BKQ)
 
 The end result reached a point when the error of the predicted postition varies from 0 to 70 centimeters.
 
@@ -386,7 +386,7 @@ And as we couldn't predict the possibility of accomplishing our task, first of a
 Our first idea was to attach Raspberry Pi with Liberty_X as it was embodied in COEX Clover and to let Raspberry Pi handle all of the maths.
 
 First optical stabilization prototype test (Сlickable):
-[![Watch the video](../assets/amls/5%20ARUCO.jpg)](https://youtu.be/TrrxXOHAqbQ)
+[![Watch the video](../assets/amls/youtube_first_tests.jpg)](https://youtu.be/TrrxXOHAqbQ)
 
 But few tests showed that Raspberry Pi computing power is not enough for amount of data needed to stabilize the drone. Furthermore, the idea of installing a Raspberry Pi on each drone is irrational for its own.
 
@@ -398,12 +398,12 @@ Then we came up with the idea of separating drone and stabilization system so th
 This was how we ended up with our current optical stabilization algorithm - the camera which is connected to a powerful machine and the machine is attached to the platform. The drone only has 4x4 ARUco tag and its controller.
 
 (clickable)
-[![Watch the video](../assets/amls/Stabilization%20v1.jpg)](https://youtu.be/A2oq6zCebVo)
+[![Watch the video](../assets/amls/youtube_stabilization_1.jpg)](https://youtu.be/A2oq6zCebVo)
 
 Then, we came up with using Pose Estimation algorithms from OpenCV library. The first tests showed us that we are on the right track!
 
 Pose Estimation Pyhton (Clickable):
-[![Watch the video](../assets/amls/Stabilization%20v2%20.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
+[![Watch the video](../assets/amls/youtube_stabilization_2.jpg)](https://www.youtube.com/watch?v=kE3UmJZ00so)
 
 But, the algorithms were far from perfect. For example, since the code was written in Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), the performance was not satisfyingly, and there was no suitable threading control either. Therefore, we had to change something.
 
@@ -411,7 +411,7 @@ But, the algorithms were far from perfect. For example, since the code was writt
 Having weighed all the pros and cons, it was decided to rewrite all optical stabilization using Java. This is how the first version of Liberty-Way appeared. This time, it was decided to approach the OOP thoroughly, and, after a little tweaking, an excellent stabilization and landing algorithm was obtained.
 
 Landing test on Liberty-Way v.beta_0.0.1 (clickable):
-[![Watch the video](../assets/amls/Landing%20Test%203%20cams.jpg)](https://youtu.be/8VAobWPFG8g))
+[![Watch the video](../assets/amls/youtube_landing_test.jpg)](https://youtu.be/8VAobWPFG8g))
 
 ### 5.5. Liberty-Way
 Then many improvements and bug fixes followed. As a result, Liberty-Way is a cross-platform web sarvar application that is very convenient for configuration and debugging. Also, in the latest versions (beta_1.0.3 - beta_1.1.2) a blackbox feature was introduced (for recording logs), as well as communication with the platform and many other necessary algorithms.
@@ -420,23 +420,23 @@ Full description, including all settings, startup, etc. you can find in our GitH
 
 Video of static stabilization (clickable):
 
-[![Watch the video](../assets/amls/Static%20stabilization%20test%20.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/youtube_static_stabilization.jpg)](https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech) 
 
 Liberty-Way can even stabilize a "thrown" drone (clickable):
 
-[![Watch the video](../assets/amls/Optical%20catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_optical_catch.jpg)](https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech)
 
 There is a small bug in the video with the rotation angle, in the new release it has been fixed!
 
 And, of course, example of how it works in motion (tested with beta_0.0.3 release) (clickable):
 
-[![Watch the video](../assets/amls/Holding%20in%20motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
+[![Watch the video](../assets/amls/youtube_holding_in_motion.jpg)](https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech) 
 
 All basic settings are conveniently placed in separate JSON files (settings, pid), which allows a user to quickly change the required parameters without rebuilding the application. In fact, to run the application, you just need to download the latest release, unpack the archive and run it through the launcher corresponding to the preferable OS.
 
 ### 5.6. Communication with the drone
 The Liberty-Way connects to the Liberty-Link module installed on the drone and adjusts its position by directly controlling four main channels of the remote control. In one cycle (each frame from the camera), 12 bytes of correction data are sent to the module:
-![Packet](../assets/amls/Data_structure.png "Data packet")
+![Packet](../assets/amls/data_structure.png "Data packet")
 
 Bytes description:
 - **Roll bytes** - Roll correction values 
@@ -608,7 +608,7 @@ In the current version of the prototype, 6 LEDs are used as a light sensor and a
 ![Light sensors](../assets/amls/light_sensors.png "Light sensors")
 
 Test for determining the level of illumination using LEDs (clickable):
-[![Watch the video](../assets/amls/Light%20sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
+[![Watch the video](../assets/amls/youtube_light_sensor.jpg)](https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech)
 
 Exposure adjustment and adding additional illumination tests (clickable):
 [![Watch the video](../assets/amls/youtube_exposure_test.jpg)](https://youtu.be/iMORim6zxsg)
