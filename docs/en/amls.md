@@ -6,7 +6,7 @@
 
 ### AMLS Article
 
-In this Article we will describe AMLS project. Namely, AMLS Optical stabilization, GPS holding, GPS following, Altitude holding, Grapling, Weather protection, Speed measurement and Illumination systems. In addition, we will make clear of how it works and how it was done!
+In this Article we will describe AMLS project. Namely, AMLS Optical stabilization, GPS holding, GPS following, Altitude holding, Grabbing, Weather protection, Speed measurement and Illumination systems. In addition, we will make clear of how it works and how it was done!
 
 ### Our main GitHub repository
 
@@ -84,7 +84,7 @@ How the system operates:
 
 ## 1. GPS hold and Flight to waypoints functions {#gps-hold-and-flight-to-waypoints-functions}
 
-As stated earlier, the drone is equipped with "universal" module Liberty-Link, which is receiving commands from the platform and adjusting the drone's position by intervering into the remote control signal (More in the following paragraphs).
+At the beginning, the drone with the package is far from the platform. Then via cellular communication or another suitable radio channel, platform GPS coordinates are sent to the drone (the Liberty-Link module is installed on the drone, this module is capable of correcting its position, regardless of the firmware of the flight controller. (The module is placed between the receiver (RC) and the flight controller)
 
 GPS module will be built in Liberty-Link, so it would have the ability to maintain the drone's GPS position and follow GPS points.
 
@@ -106,9 +106,9 @@ while (GPS_serial.available() && new_line_found == 0) {
 	// Stay in this loop as long as there is serial information from the GPS available
 	char read_serial_byte = GPS_serial.read();
 	if (read_serial_byte == '$') {
-		// Clear the old data from the incomming buffer array if the new byte equals a $ character
+		// Clear the old data from the incoming buffer array if the new byte equals a $ character
 		for (message_counter = 0; message_counter <= 99; message_counter++) {
-			incomming_message[message_counter] = '-';
+			incoming_message[message_counter] = '-';
 		}
 		// Reset the message_counter variable because we want to start writing at the begin of the array
 		message_counter = 0;
@@ -117,8 +117,8 @@ while (GPS_serial.available() && new_line_found == 0) {
 	else if (message_counter <= 99)
 		message_counter++;
 	
-	// Write the new received byte to the new position in the incomming_message array
-	incomming_message[message_counter] = read_serial_byte;
+	// Write the new received byte to the new position in the incoming_message array
+	incoming_message[message_counter] = read_serial_byte;
 
 	// Every NMEA line ends with a '*'. If this character is detected the new_line_found variable is set to 1
 	if (read_serial_byte == '*') new_line_found = 1;
@@ -135,7 +135,7 @@ Parsing GPS data of the UBlox protocol looks like this:
 if (new_line_found == 1) {
 	// Reset the new_line_found variable for the next line
 	new_line_found = 0;
-	if (incomming_message[4] == 'L' && incomming_message[5] == 'L' && incomming_message[7] == ',') {
+	if (incoming_message[4] == 'L' && incoming_message[5] == 'L' && incoming_message[7] == ',') {
 		// When there is no GPS fix or latitude/longitude information available
 		// Set some variables to 0 if no valid information is found by the GPS module. This is needed for the GPS loss when flying
 		l_lat_gps = 0;
@@ -145,48 +145,48 @@ if (new_line_found == 1) {
 		number_used_sats = 0;
 	}
 	// If the line starts with GA and if there is a GPS fix we can scan the line for the latitude, longitude and number of satellites
-	if (incomming_message[4] == 'G' && incomming_message[5] == 'A' && (incomming_message[44] == '1' || incomming_message[44] == '2')) {
+	if (incoming_message[4] == 'G' && incoming_message[5] == 'A' && (incoming_message[44] == '1' || incoming_message[44] == '2')) {
 		// Filter the minutes for the GGA line multiplied by 10
-		lat_gps_actual = ((int)incomming_message[19] - 48) * (long)10000000;
-		lat_gps_actual += ((int)incomming_message[20] - 48) * (long)1000000;
-		lat_gps_actual += ((int)incomming_message[22] - 48) * (long)100000;
-		lat_gps_actual += ((int)incomming_message[23] - 48) * (long)10000;
-		lat_gps_actual += ((int)incomming_message[24] - 48) * (long)1000;
-		lat_gps_actual += ((int)incomming_message[25] - 48) * (long)100;
-		lat_gps_actual += ((int)incomming_message[26] - 48) * (long)10;
+		lat_gps_actual = ((int)incoming_message[19] - 48) * (long)10000000;
+		lat_gps_actual += ((int)incoming_message[20] - 48) * (long)1000000;
+		lat_gps_actual += ((int)incoming_message[22] - 48) * (long)100000;
+		lat_gps_actual += ((int)incoming_message[23] - 48) * (long)10000;
+		lat_gps_actual += ((int)incoming_message[24] - 48) * (long)1000;
+		lat_gps_actual += ((int)incoming_message[25] - 48) * (long)100;
+		lat_gps_actual += ((int)incoming_message[26] - 48) * (long)10;
 		// To convert minutes to degrees we need to divide minutes by 6
 		lat_gps_actual /= (long)6;
 		// Add multiply degrees by 10
-		lat_gps_actual += ((int)incomming_message[17] - 48) * (long)100000000;
-		lat_gps_actual += ((int)incomming_message[18] - 48) * (long)10000000;
+		lat_gps_actual += ((int)incoming_message[17] - 48) * (long)100000000;
+		lat_gps_actual += ((int)incoming_message[18] - 48) * (long)10000000;
 		// Divide everything by 10
 		lat_gps_actual /= 10;
 
 		// Filter minutes for the GGA line multiplied by 10
-		lon_gps_actual = ((int)incomming_message[33] - 48) * (long)10000000; 
-		lon_gps_actual += ((int)incomming_message[34] - 48) * (long)1000000;
-		lon_gps_actual += ((int)incomming_message[36] - 48) * (long)100000;
-		lon_gps_actual += ((int)incomming_message[37] - 48) * (long)10000;
-		lon_gps_actual += ((int)incomming_message[38] - 48) * (long)1000;
-		lon_gps_actual += ((int)incomming_message[39] - 48) * (long)100;
-		lon_gps_actual += ((int)incomming_message[40] - 48) * (long)10;
+		lon_gps_actual = ((int)incoming_message[33] - 48) * (long)10000000; 
+		lon_gps_actual += ((int)incoming_message[34] - 48) * (long)1000000;
+		lon_gps_actual += ((int)incoming_message[36] - 48) * (long)100000;
+		lon_gps_actual += ((int)incoming_message[37] - 48) * (long)10000;
+		lon_gps_actual += ((int)incoming_message[38] - 48) * (long)1000;
+		lon_gps_actual += ((int)incoming_message[39] - 48) * (long)100;
+		lon_gps_actual += ((int)incoming_message[40] - 48) * (long)10;
 		// To convert minutes to degrees we need to divide minutes by 6
 		lon_gps_actual /= (long)6;
 		// Add multiply degrees by 10
-		lon_gps_actual += ((int)incomming_message[30] - 48) * (long)1000000000;
-		lon_gps_actual += ((int)incomming_message[31] - 48) * (long)100000000;
-		lon_gps_actual += ((int)incomming_message[32] - 48) * (long)10000000;
+		lon_gps_actual += ((int)incoming_message[30] - 48) * (long)1000000000;
+		lon_gps_actual += ((int)incoming_message[31] - 48) * (long)100000000;
+		lon_gps_actual += ((int)incoming_message[32] - 48) * (long)10000000;
 		// Divide everything by 10
 		lon_gps_actual /= 10;
 
-		if (incomming_message[28] == 'N')
+		if (incoming_message[28] == 'N')
 			// When flying north of the equator the latitude_north variable will be set to 1
 			latitude_north = 1;
 		else
 			// When flying south of the equator the latitude_north variable will be set to 0
 			latitude_north = 0;
 
-		if (incomming_message[42] == 'E')
+		if (incoming_message[42] == 'E')
 			// When flying east of the prime meridian the longiude_east variable will be set to 1
 			longiude_east = 1;
 		else
@@ -194,8 +194,8 @@ if (new_line_found == 1) {
 			longiude_east = 0;
 			
 		// Filter the number of satillites from the GGA line
-		number_used_sats = ((int)incomming_message[46] - 48) * (long)10;
-		number_used_sats += (int)incomming_message[47] - 48;
+		number_used_sats = ((int)incoming_message[46] - 48) * (long)10;
+		number_used_sats += (int)incoming_message[47] - 48;
 
 		if (lat_gps_previous == 0 && lon_gps_previous == 0) {
 			// If this is the first time the GPS code is used
@@ -222,8 +222,8 @@ if (new_line_found == 1) {
 	}
 
 	// If the line starts with SA and if there is a GPS fix we can scan the line for the fix type (none, 2D or 3D)
-	if (incomming_message[4] == 'S' && incomming_message[5] == 'A')
-		fix_type = (int)incomming_message[9] - 48;
+	if (incoming_message[4] == 'S' && incoming_message[5] == 'A')
+		fix_type = (int)incoming_message[9] - 48;
 
 }
 ```
@@ -324,7 +324,7 @@ if (waypoint_set == 1) {
 	gps_roll_adjust = ((float)gps_roll_adjust_north * cos(angle_yaw * 0.017453)) + ((float)gps_pitch_adjust_north * cos((angle_yaw - 90) * 0.017453));
 	gps_pitch_adjust = ((float)gps_pitch_adjust_north * cos(angle_yaw * 0.017453)) + ((float)gps_roll_adjust_north * cos((angle_yaw + 90) * 0.017453));
 
-	//Limit the maximum correction to 300. This way we still have the full controll of the drone with the pitch and roll sticks on the transmitter.
+	//Limit the maximum correction to 300. This way we still have the full control of the drone with the pitch and roll sticks on the transmitter.
 	if (gps_roll_adjust > 300) gps_roll_adjust = 300;
 	if (gps_roll_adjust < -300) gps_roll_adjust = -300;
 	if (gps_pitch_adjust > 300) gps_pitch_adjust = 300;
