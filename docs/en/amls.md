@@ -26,13 +26,13 @@ https://github.com/XxOinvizioNxX/Liberty-Way
 
 - [0. How does it work?](#how-does-it-work)
   - [0.1. A video about our project](#short-video-about-our-project-clickable)
-- [1. GPS hold and Flight to waypoints functions](#gps-hold-and-flight-to-waypoints-functions)
+- [1. GPS hold and Flight to waypoints functions](#hold-and-flight-to-waypoints-functions)
   - [1.1. Serial reading](#serial-reading)
-  - [1.2. UBlox GPS parsing](#ublox-gps-parsing)
+  - [1.2. UBlox GPS parsing](#ublox-parsing)
   - [1.3. Set current waypoint](#set-current-waypoint)
   - [1.4. Waypoint edition (To fly to waypoints)](#waypoint-edit-to-fly-to-waypoints)
   - [1.5. Waypoint stabilization](#waypoint-stabilization)
-- [2. GPS following](#gps-following)
+- [2. GPS following](#following)
 - [3. Compass](#compass)
 - [4. Altitude stabilization (barometer)](#altitude-stabilization-barometer)
 - [5. Optical stabilization](#optical-stabilization)
@@ -82,7 +82,7 @@ How the system operates:
 
 <iframe width="560" height="315" src="https://www.youtube.com/watch?v=6qjS-iq6a3k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## 1. GPS hold and Flight to waypoints functions {#gps-hold-and-flight-to-waypoints-functions}
+## 1. GPS hold and Flight to waypoints functions {#hold-and-flight-to-waypoints-functions}
 
 At the beginning, the drone with the package is far from the platform. Then via cellular communication or another suitable radio channel, platform GPS coordinates are sent to the drone (the Liberty-Link module is installed on the drone, this module is capable of correcting its position, regardless of the firmware of the flight controller. (The module is placed between the receiver (RC) and the flight controller)
 
@@ -125,7 +125,7 @@ while (GPS_serial.available() && new_line_found == 0) {
 }
 ```
 
-### 1.2. UBlox GPS parsing {#ublox-gps-parsing}
+### 1.2. UBlox GPS parsing {#ublox-parsing}
 
 After that, latitude, longitude, a type of correction (2D, 3D) and the number of satellites are calculated from the filled buffer.
 Parsing GPS data of the UBlox protocol looks like this:
@@ -332,7 +332,7 @@ if (waypoint_set == 1) {
 }
 ```
 
-## 2. GPS following {#gps-following}
+## 2. GPS following {#following}
 
 The main part of stabilization using GPS coordinates was the development of an algorithm for predicting the position of the drone. The simplest idea was to use a mathematical calculation of the next drone's position. This is calculated for the most accurate positioning in relation to the landing platform.
 
@@ -646,7 +646,6 @@ In the current version of the prototype, 6 LEDs are used as a light sensor and a
 
 Test for determining the level of illumination using LEDs (clickable):
 <iframe width="560" height="315" src="https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 Exposure adjustment and adding additional illumination tests (clickable):
 <iframe width="560" height="315" src="https://youtu.be/iMORim6zxsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
