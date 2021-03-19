@@ -67,6 +67,7 @@ We use 3rd version of YoLo neural network, pretrained on custom dataset for 50 e
 It runs 10-15 FPS on Jetson NX, which is enough for our task
 
 ## Exploration and collision avoidance
+
 To make our drone useful and to operate it safely, we should somehow make the drone aware of its current position and surrounding objects. There are two ways we can solve this problem
 
 * Use pre-built map as a ground truth and then calculate the position with e.g. Particle Filter
@@ -105,6 +106,7 @@ This device looks like a regular firearm mag, and functions exactly in the same 
 This device needs further engineering because current iterations are too fragile and unreliable, probably the best solution will be to use linear actuator and push the "casing" out of the action, like in actual firearm. 
 
 ## Final thoughts
+
 We all hope that Corona crisis will soon be over, and when it will be finally over, our drones will be still useful. We can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is very popular in US and UK, so why not try to automate it. 
 
 This is an MVP, so some improvements are to be done. For example, payload refill and battery swaps are done manually for now, but this task should be automated. Actually, some work is already done in this direction:
@@ -118,6 +120,7 @@ For the general-purpose delivery drone, the working principle and hardware will 
 Stay safe folks!
 
 ## References
+
 [^1]: Massagué Respall, Victor & Devitt, Dmitry & Fedorenko, Roman. (2020). Unmanned Aerial Vehicle Path Planning for Exploration Mapping. 1-6. 10.1109/NIR50484.2020.9290232. 
 
 [^2]: Nisarg Pethani & Harshal Vora. (2020) https://github.com/NisargPethani/Face-Mask-Detection-using-YOLO-v3
