@@ -108,12 +108,14 @@
   * [CopterHack-2017](copterhack2017.md)
 * [Проекты на базе Клевера](projects.md)
   * [Система автоматической посадки (AMLS)](amls.md)
+  * [Разработка системы для управления БПЛА с помощью шлема виртуальной реальности](remote-control-with-oculusvr.md)
   * [Шоу коптеров](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
   * [Олимпиада НТИ 2020 (P4DF2)](nti2020_p4df2.md)
   * [Генератор ArUco карт](arucogenmap.md)
   * [Модель аэротакси в городе](bigchallenges.md)
   * [Шаровая защита коптера](shield.md)
+  * [Система засечки для дронов](race_timing_sys_copterhack.md)
   * [Дрон для 3D-сканирования человека](3dscan.md)
   * [Распознавание лиц](face_recognition.md)
   * [Управление дроном силой мысли](control_emotions.md)
@@ -123,8 +125,13 @@
   * [Калибровка камеры (legacy)](camera_calib.md)
   * [Управление дроном для оценки позы человека](human_pose_estimation_drone_control.md)
   * [Распознавание видов агрокультур](agriculture.md)
+  * [AdvancedClover](advanced_clover.md)
+  * [Дрон для высаживания семян](seeding_drone.md)
   * [Граффити коптер D-drone](ddrone.md)
   * [Программируемый летающий автомобиль](zaural_viking.md)
+  * [Дрон-Агроном](drone-agronom.md)
+  * [Easy To Fly](easytofly.md)
+  * [Хардатон Квиддич](hardaton_quidditch.md)
 
 ## Учебник
 
