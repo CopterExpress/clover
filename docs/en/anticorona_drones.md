@@ -6,9 +6,9 @@ team: **Drones to fight Corona**
 
 ## Team
 
-* Daria Miklashevskaya 
+* Daria Miklashevskaya
 [d.miklashevskaya@innopolis.ru](mailto:d.miklashevskaya@innopolis.ru)
-* Yuriy Sukhorukov 
+* Yuriy Sukhorukov
 [y.suhorukov@innopolis.ru](mailto:y.suhorukov@innopolis.ru)
 
 Innopolis University, B17-DS-II, B17-RO-I
@@ -62,7 +62,7 @@ This means that we can make our drone lighter by excluding heavy on-board comput
 
 ## Neural net [^1]
 
-We use 3rd version of YoLo neural network, pretrained on custom dataset for 50 epochs. 
+We use 3rd version of YoLo neural network, pretrained on custom dataset for 50 epochs.
 
 It runs 10-15 FPS on Jetson NX, which is enough for our task
 
@@ -84,7 +84,6 @@ Horizon Next-Best-View Planner is presented, which uses Rapidly-exploring Random
   <img src="../assets/anticorona/human_view.jpg" title="Mask release in cad" width=300 class="zoom center">
 </p>
 
-
 The algorithm is lightweight, so even the small computer like Latte Panda can run it with high enough frequency, and since it is CPU-bound, it will not compete for resources with the neural net, which is almost entirely GPU-bound.
 
 ## Mask release
@@ -103,11 +102,11 @@ But we want not only to detect them but to give him a mask as well, so, we have 
 
 This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels.
 
-This device needs further engineering because current iterations are too fragile and unreliable, probably the best solution will be to use linear actuator and push the "casing" out of the action, like in actual firearm. 
+This device needs further engineering because current iterations are too fragile and unreliable, probably the best solution will be to use linear actuator and push the "casing" out of the action, like in actual firearm.
 
 ## Final thoughts
 
-We all hope that Corona crisis will soon be over, and when it will be finally over, our drones will be still useful. We can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is very popular in US and UK, so why not try to automate it. 
+We all hope that Corona crisis will soon be over, and when it will be finally over, our drones will be still useful. We can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is very popular in US and UK, so why not try to automate it.
 
 This is an MVP, so some improvements are to be done. For example, payload refill and battery swaps are done manually for now, but this task should be automated. Actually, some work is already done in this direction:
 
@@ -121,6 +120,6 @@ Stay safe folks!
 
 ## References
 
-[^1]: Massagué Respall, Victor & Devitt, Dmitry & Fedorenko, Roman. (2020). Unmanned Aerial Vehicle Path Planning for Exploration Mapping. 1-6. 10.1109/NIR50484.2020.9290232. 
+[^1]: Massagué Respall, Victor & Devitt, Dmitry & Fedorenko, Roman. (2020). Unmanned Aerial Vehicle Path Planning for Exploration Mapping. 1-6. 10.1109/NIR50484.2020.9290232.
 
 [^2]: Nisarg Pethani & Harshal Vora. (2020) https://github.com/NisargPethani/Face-Mask-Detection-using-YOLO-v3
