@@ -1,4 +1,4 @@
-# Autonomous Multirotor Landing System (AMLS) - EN
+# Autonomous Multirotor Landing System (AMLS)
 
 ![Logo](../assets/amls/logo_book.png "Logo")
 
