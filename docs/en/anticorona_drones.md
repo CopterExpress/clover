@@ -36,6 +36,7 @@ As it is shown on this picture, computers can be mounted on the bottom and compl
 All sensory equipment, like cameras, rangefinder, etc can be easily mounted on the beams with special bracket connectors. This type of connection provides flexibility because you can fine-tune camera angle or position before tightening screws and fixing it firmly in place, which is especially relevant for tracker-cameras.
 
 We used  one T-265 camera for visual odometry and one D-435 depth camera for both video input for neural net and for map-building (collision avoidance). T-265 suffers from "odometry drift" especially when engines are beat-up, which eventually happens after a number of crashes, so we have incorporated dampers to solve this problem.
+
 <img src="../assets/anticorona/camera.jpg" title="Begone odometry drift" width=400 class="zoom center">
 
 Finally, the drone with all equipment installed looks like this
@@ -76,9 +77,12 @@ The second approach is more robust, because it does not rely on any external map
 We use a path planner, described in [\[1\]](https://www.researchgate.net/publication/348093195_Unmanned_Aerial_Vehicle_Path_Planning_for_Exploration_Mapping). In this paper Receding
 Horizon Next-Best-View Planner is presented, which uses Rapidly-exploring Random trees to navigate and explore the environment. It yields the following results, here is the occupancy map and the corresponding tunnel as it is seen by human being
 
-<img src="../assets/anticorona/robot_view.jpg" title="Mask release manufactured" width=300 class="zoom center">
+<p align="center">
+  <img src="../assets/anticorona/robot_view.jpg" title="Mask release manufactured" width=300 class="zoom center">
+&nbsp; &nbsp;
+  <img src="../assets/anticorona/human_view.jpg" title="Mask release in cad" width=300 class="zoom center">
+</p>
 
-<img src="../assets/anticorona/human_view.jpg" title="Mask release in cad" width=300 class="zoom center">
 
 The algorithm is lightweight, so even the small computer like Latte Panda can run it with high enough frequency, and since it is CPU-bound, it will not compete for resources with the neural net, which is almost entirely GPU-bound.
 
@@ -90,9 +94,11 @@ Detecting people without masks is cool, no doubt.
 
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person.
 
-<img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
-
-<img src="../assets/anticorona/release_Cad.jpg" title="Mask release manufactured" width=300 class="zoom center">
+<p align="center">
+  <img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
+&nbsp; &nbsp;
+  <img src="../assets/anticorona/release_Cad.jpg" title="Mask release manufactured" width=300 class="zoom center">
+</p>
 
 This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels.
 
