@@ -156,7 +156,7 @@ cd easy-to-fly
 
 Теперь задача заключается в передаче сообщения такого типа на полетный контроллер.
 
-В библиотеке MAVROS есть специальный плагин для этих целей: [https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance](https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance). 
+В библиотеке MAVROS есть специальный плагин для этих целей: [https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance](https://github.com/mavlink/mavros/tree/master/mavros_extras#obstacle_distance).
 
 Таким образом, достаточно ее включить в `<rosparam param="plugin_whitelist">` в файле `mavros.launch`.
 
