@@ -80,7 +80,7 @@ How the system operates:
 
 ### Short video about our project (clickable) {#short-video-about-our-project-clickable}
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=6qjS-iq6a3k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6qjS-iq6a3k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 1. GPS hold and Flight to waypoints functions {#hold-and-flight-to-waypoints-functions}
 
@@ -88,7 +88,7 @@ At the beginning, the drone with the package is far from the platform. Then via 
 
 GPS module will be built in Liberty-Link, so it would have the ability to maintain the drone's GPS position and follow GPS points.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=x364giIt6lc&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x364giIt6lc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 GPS-module will be used from the UBlox group (for instance, UBlox Neo-M8). There will be 1 or 3 (to minimize the error) modules.
 
@@ -341,7 +341,8 @@ And only after 3 months, we thought of a simple solution: to change the values w
 Prior to this, all testing of the algorithm was carried out using the PX4 firmware toolkit and the Gazebo drone motion simulator. As a result, many formalities were overcome in terms of communicating with the simulator and increasing performance (click on the picture to see the video).
 
 The result of the GPS prediction (clickable):
-<iframe width="560" height="315" src="https://youtu.be/Rg-Y_fl4BKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Rg-Y_fl4BKQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 The end result reached a point when the error of the predicted position varies from 0 to 70 centimeters.
 
@@ -388,7 +389,8 @@ The platform, as well as the Liberty-Link, will have MS5611 barometers.
 According to the documentation, the height resolution is 10 cm. The algorithm will take the pressure values and by passing it through the PID-controller will stabilize the drone's altitude by changing the Throttle (3rd channel).
 
 Altitude hold test (clickable):
-<iframe width="560" height="315" src="https://youtu.be/xmvcGeZzEfc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xmvcGeZzEfc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 During the flight along the waypoint, the setpoint of the pressure will decrease in order to increase the altitude (it is safer to fly in a straight line at a high altitude, so the drone would not crash into anything). And during GPS stabilization (when the drone is already close to the platform), the drone will be set with a setpoint of pressure that correlates with ~ 1.5-2m height above the platform.
 
@@ -407,7 +409,7 @@ Our first idea was to attach Raspberry Pi with Liberty_X as it was embodied in C
 
 First optical stabilization prototype test (clickable):
 
-<iframe width="560" height="315" src="https://youtu.be/TrrxXOHAqbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TrrxXOHAqbQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 But few tests showed that Raspberry Pi computing power is not enough for amount of data needed to stabilize the drone. Furthermore, the idea of installing a Raspberry Pi on each drone is irrational for its own.
 
@@ -419,14 +421,13 @@ Then we came up with the idea of separating drone and stabilization system so th
 
 This was how we ended up with our current optical stabilization algorithm - the camera which is connected to a powerful machine and the machine is attached to the platform. The drone only has 4x4 ArUco tag and its controller.
 
-(clickable)
-<iframe width="560" height="315" src="https://youtu.be/A2oq6zCebVo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/A2oq6zCebVo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Then, we came up with using Pose Estimation algorithms from OpenCV library. The first tests showed us that we are on the right track!
 
 Pose Estimation Python (clickable):
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=kE3UmJZ00so" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kE3UmJZ00so" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 But, the algorithms were far from perfect. For example, since the code was written in Python (https://github.com/XxOinvizioNxX/Liberty-X_Point), the performance was not satisfyingly, and there was no suitable threading control either. Therefore, we had to change something.
 
@@ -435,7 +436,8 @@ But, the algorithms were far from perfect. For example, since the code was writt
 Having weighed all the pros and cons, it was decided to rewrite all optical stabilization using Java. This is how the first version of Liberty-Way appeared. This time, it was decided to approach the OOP thoroughly, and, after a little tweaking, an excellent stabilization and landing algorithm was obtained.
 
 Landing test on Liberty-Way v.beta_0.0.1 (clickable):
-<iframe width="560" height="315" src="https://youtu.be/8VAobWPFG8g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8VAobWPFG8g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### 5.5. Liberty-Way {#liberty-way}
 
@@ -445,17 +447,17 @@ Full description, including all settings, startup, etc. you can find in our GitH
 
 Video of static stabilization (clickable):
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=adR38R27MEU&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/adR38R27MEU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Liberty-Way can even stabilize a "thrown" drone (clickable):
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=gAaGQSC-r2g&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gAaGQSC-r2g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 There is a small bug in the video with the rotation angle, in the new release it has been fixed!
 
 And, of course, example of how it works in motion (tested with beta_0.0.3 release) (clickable):
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=8vB-8QIBoJU&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8vB-8QIBoJU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 All basic settings are conveniently placed in separate JSON files (settings, PID), which allows a user to quickly change the required parameters without rebuilding the application. In fact, to run the application, you just need to download the latest release, unpack the archive and run it through the launcher corresponding to the preferable OS.
 
@@ -595,7 +597,8 @@ In order to land on a quickly moving platform, it is very useful to know its spe
 ![MPU6050](../assets/amls/mpu6050_gyro.png "MPU6050")
 
 Speedometer test (inside the gray circle, lower right parameter (SPD) - speed in km / h) (Clickable):
-<iframe width="560" height="315" src="https://youtu.be/yvCo6tYjdM0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yvCo6tYjdM0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 To calculate the speed, the acceleration is taken for short time periods, then multiplied with time, which results with the instantaneous speed. Then this speed is constantly added to the previous value:
 
@@ -645,10 +648,12 @@ In the current version of the prototype, 6 LEDs are used as a light sensor and a
 ![Light sensors](../assets/amls/light_sensors.png "Light sensors")
 
 Test for determining the level of illumination using LEDs (clickable):
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=xQeiA945aRA&ab_channel=AMLSMosPolytech" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xQeiA945aRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Exposure adjustment and adding additional illumination tests (clickable):
-<iframe width="560" height="315" src="https://youtu.be/iMORim6zxsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iMORim6zxsg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 -----------
 
