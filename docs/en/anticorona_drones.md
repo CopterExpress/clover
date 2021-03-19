@@ -91,7 +91,7 @@ Detecting people without masks is cool, no doubt.
 
 <img src="../assets/anticorona/masks.jpg" title="Master and his apprentice" width=400 class="zoom center">
 
-But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person.
+But we want not only to detect such persons but to give them a mask as well, so, we have built this system that can store masks and drop one when needed
 
 <p align="center">
   <img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
