@@ -107,6 +107,7 @@
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
 * [Проекты на базе Клевера](projects.md)
+  * [Система автоматической посадки (AMLS)](amls.md)
   * [Разработка системы для управления БПЛА с помощью шлема виртуальной реальности](remote-control-with-oculusvr.md)
   * [Шоу коптеров](clever-show.md)
   * [Innopolis Open 2020 (L22_ÆRO)](innopolis_open_L22_AERO.md)
