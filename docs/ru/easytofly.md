@@ -12,7 +12,7 @@
 - Никита Локтев [@nikilokser](https://github.com/nikilokser) (Специалист отдела Hard)
 - Даниил Руфин (Специалист отдела Hard)
 
-Email: a@batalov.me  
+E-mail: a@batalov.me<br>
 Telegram: [@bart02](https://t.me/bart02), [@maerans](https://t.me/maerans)
 
 ## Введение
