@@ -60,7 +60,7 @@ This means that we can make our drone lighter by excluding heavy on-board comput
 
 * More detailed instructions on how to build and run our software are available in our [Gitlab repo](https://gitlab.com/k0t1k/thegreateye/-/tree/master)
 
-## Neural net [\[2\]](https://github.com/NisargPethani/Face-Mask-Detection-using-YOLO-v3)
+## Neural net [^1]
 
 We use 3rd version of YoLo neural network, pretrained on custom dataset for 50 epochs. 
 
@@ -74,7 +74,7 @@ To make our drone useful and to operate it safely, we should somehow make the dr
 
 The second approach is more robust, because it does not rely on any external map, which can be erroneous or just missing and hence we opted for it.
 
-We use a path planner, described in [\[1\]](https://www.researchgate.net/publication/348093195_Unmanned_Aerial_Vehicle_Path_Planning_for_Exploration_Mapping). In this paper Receding
+We use a path planner, described in [^2]. In this paper Receding
 Horizon Next-Best-View Planner is presented, which uses Rapidly-exploring Random trees to navigate and explore the environment. It yields the following results, here is the occupancy map and the corresponding tunnel as it is seen by human being
 
 <p align="center">
@@ -118,6 +118,6 @@ For the general-purpose delivery drone, the working principle and hardware will 
 Stay safe folks!
 
 ## References
-> \[1\] https://www.researchgate.net/publication/348093195_Unmanned_Aerial_Vehicle_Path_Planning_for_Exploration_Mapping
+[^1]: Massagué Respall, Victor & Devitt, Dmitry & Fedorenko, Roman. (2020). Unmanned Aerial Vehicle Path Planning for Exploration Mapping. 1-6. 10.1109/NIR50484.2020.9290232. 
 
-> \[2\] https://github.com/NisargPethani/Face-Mask-Detection-using-YOLO-v3
+[^2]: Nisarg Pethani & Harshal Vora. (2020) https://github.com/NisargPethani/Face-Mask-Detection-using-YOLO-v3
