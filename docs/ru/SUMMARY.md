@@ -129,6 +129,7 @@
   * [Граффити коптер D-drone](ddrone.md)
   * [Программируемый летающий автомобиль](zaural_viking.md)
   * [Дрон-Агроном](drone-agronom.md)
+  * [Easy To Fly](easytofly.md)
 
 ## Учебник
 
