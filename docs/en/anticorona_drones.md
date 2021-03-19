@@ -93,9 +93,11 @@ Detecting people without masks is cool, no doubt.
 
 But we want not only to detect them but to give him a mask as well, so, we have built this system that can give a mask to person.
 
-<img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
-
-<img src="../assets/anticorona/release_Cad.jpg" title="Mask release manufactured" width=300 class="zoom center">
+<p align="center">
+  <img src="../assets/anticorona/release.jpg" title="Mask release in cad" width=300 class="zoom center">
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="../assets/anticorona/release_Cad.jpg" title="Mask release manufactured" width=300 class="zoom center">
+</p>
 
 This device looks like a regular firearm mag, and functions exactly in the same way. Masks can be loaded into containers made out of 20ml syringe barrels.
 
