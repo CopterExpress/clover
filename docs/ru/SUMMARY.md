@@ -130,6 +130,7 @@
   * [Программируемый летающий автомобиль](zaural_viking.md)
   * [Дрон-Агроном](drone-agronom.md)
   * [Easy To Fly](easytofly.md)
+  * [Хардатон Квиддич](hardaton_quidditch.md)
 
 ## Учебник
 

@@ -16,6 +16,7 @@ CopterHack 2021 – это командный конкурс по разраб�
 |FTL|[AdvancedClover](advanced_clover.md)|
 |ProCleVeR|[Разработка системы для управления БПЛА с помощью шлема виртуальной реальности](remote-control-with-oculusvr.md)|
 |EasyToFly|[EasyToFly](easytofly.md)|
+|Хардатон|[Хардатон Квиддич](hardaton_quidditch.md)|
 |ADDI|[3D-printed generative design frame](../en/generative_design_frame.html)|
 |Bennie and the Jetson TX2|[Retail Drone](../en/bennie.html)|
 |DroMap|[The Indoor Mapping Drone](../en/dromap.html)|
