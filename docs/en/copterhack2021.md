@@ -8,7 +8,7 @@ All information about the event can be found on the official website: https://co
 
 |Team|Project|
 |-|-|
-|D-drone|[Graffiti-copter](ddrone.md)|
+|AT Makers|[D-drone Graffiti-copter](ddrone.md)|
 |ADDI|[3D-printed generative design frame](generative_design_frame.md)|
 |Bennie and the Jetson TX2|[Retail Drone](bennie.md)|
 |DroMap|[The Indoor Mapping Drone](dromap.md)|
