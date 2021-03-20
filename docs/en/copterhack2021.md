@@ -23,3 +23,4 @@ All information about the event can be found on the official website: https://co
 |ProCleVeR|[Разработка системы для управления БПЛА с помощью шлема виртуальной реальности](../ru/remote-control-with-oculusvr.html)|
 |EasyToFly|[EasyToFly](../ru/easytofly.html)|
 |Hardaton|[Хардатон Квиддич](../ru/hardaton_quidditch.html)|
+|PаD30DЖ|[Октокоптер со специфичным расположением пропеллеров](../ru/oktazodg.html)|
