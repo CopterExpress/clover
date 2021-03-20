@@ -115,3 +115,4 @@
   * [Retail Drone](bennie.md)
   * [The Indoor Mapping Drone](dromap.md)
   * [Seeding Drone](seeding_drone.md)
+  * [Blue Jay Eindhoven](blue_jay_eindhoven.md)
