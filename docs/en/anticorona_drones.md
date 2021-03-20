@@ -104,6 +104,10 @@ This device looks like a regular firearm mag, and functions exactly in the same 
 
 This device needs further engineering because current iterations are too fragile and unreliable, probably the best solution will be to use linear actuator and push the "casing" out of the action, like in actual firearm.
 
+## 3D models
+
+All the 3D models used to build this cute drone can be found in our [gdrive](https://drive.google.com/drive/folders/1tR5ePX24_i9tpllOPMcnZIUfse89c1YI?usp=sharing)
+
 ## Final thoughts
 
 We all hope that Corona crisis will soon be over, and when it will be finally over, our drones will be still useful. We can deliver some small objects, like cosmetics or shaving blades to the customers' door, the task that currently is done by a human courier. This service (with shaving blades), when a guy comes and brings a new set of shaving blades every week is very popular in US and UK, so why not try to automate it.
