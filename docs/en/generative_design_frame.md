@@ -27,8 +27,8 @@ For the first stage of the design we will focus on the first two points.
 For designing our drone we use Autodesk Fusion 360. It comes with a generative design feature. This makes it possible to create rule-driven designs. First the preserved geometry is defined. Usually this includes all kinds of mounts like motor mounts, flight controller mounts, RPi mount etc. Then obstacle geometry is defined. This for example includes space for the propellers and the airflow. After that forces are defined. Then Fusion 360 will automatically calculate optimal connections for the aforementioned preserved geometry.
 
 <p float="left">
-  <img src="../assets/generative-design-frame/preservedgeometry.png" width="49%" />
-  <img src="../assets/generative-design-frame/obstacle.png" width="49%" />
+  <img src="../assets/generative-design-frame/preservedgeometry.png" width="49%" class="zoom"/>
+  <img src="../assets/generative-design-frame/obstacle.png" width="49%" class="zoom"/>
 </p>
 
 ### Prototypes
@@ -50,9 +50,9 @@ To conquer those problems we made several changes. We increased the minimal thic
 This prototype took 48 hours of printing and used 277 grams of filament including 100 grams for the support. Installation of the components is very easy as no other tools than a screwdriver are needed. This prototype was the first to take flight in January 2021. Please see [this](https://youtu.be/M4f8_JmJADM) video.
 
 <p float="left">
-  <img src="../assets/generative-design-frame/p21.JPG" width="32%" />
-  <img src="../assets/generative-design-frame/p22.jpg" width="32%" />
-  <img src="../assets/generative-design-frame/p23.jpg" width="32%" />
+  <img src="../assets/generative-design-frame/p21.JPG" width="32%" class="zoom"/>
+  <img src="../assets/generative-design-frame/p22.jpg" width="32%" class="zoom"/>
+  <img src="../assets/generative-design-frame/p23.jpg" width="32%" class="zoom"/>
 </p>
 
 #### Prototype 3
@@ -65,8 +65,8 @@ Videos:
 - [Prop Guard Test](https://youtu.be/UdnqIuXV2UI)
 
 <p float="left">
-  <img src="../assets/generative-design-frame/p31.jpg" width="49%" />
-  <img src="../assets/generative-design-frame/p32.jpg" width="49%" />
+  <img src="../assets/generative-design-frame/p31.jpg" width="49%" class="zoom"/>
+  <img src="../assets/generative-design-frame/p32.jpg" width="49%" class="zoom"/>
 </p>
 
 #### Final Prototype
