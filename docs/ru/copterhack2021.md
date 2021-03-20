@@ -18,6 +18,7 @@ CopterHack 2021 – это командный конкурс по разраб�
 |EasyToFly|[EasyToFly](easytofly.md)|
 |Хардатон|[Хардатон Квиддич](hardaton_quidditch.md)|
 |AMLS|[Система автоматической посадки](amls.md)|
+|PаD30DЖ|[Октокоптер со специфичным расположением пропеллеров](oktazodg.md)|
 |ADDI|[3D-printed generative design frame](../en/generative_design_frame.html)|
 |Bennie and the Jetson TX2|[Retail Drone](../en/bennie.html)|
 |DroMap|[The Indoor Mapping Drone](../en/dromap.html)|
