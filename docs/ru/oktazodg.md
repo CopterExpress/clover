@@ -2,7 +2,7 @@
 
 [CopterHack-2021](copterhack2021.md), команда **PаD30DЖ**.
 
-<img src="../assets/oktapadzog/image.gif">
+<img src="../assets/oktapadzog/image.gif" class="center">
 
 ## Введение
 
