@@ -1,4 +1,4 @@
-# Blue Jay Eindhoven
+# Designing a drone and a path planning algorithm
 
 [CopterHack-2021](copterhack2021.md), team: **Blue Jay Eindhoven**.
 

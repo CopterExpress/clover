@@ -15,7 +15,7 @@ All information about the event can be found on the official website: https://co
 |Drones to fight Corona|[Drones to fight Corona](anticorona_drones.md)|
 |MINIONS|[Seed spreading quadcopter](seeding_drone.md)|
 |AMLS|[Autonomous Multirotor Landing System](amls.md)|
-|Blue Jay Eindhoven|[Blue Jay Eindhoven](blue_jay_eindhoven.md)|
+|Blue Jay Eindhoven|[Designing a drone and a path planning algorithm](blue_jay_eindhoven.md)|
 |Zaural Viking|[Программируемый летающий автомобиль](../ru/zaural_viking.html)|
 |Quadrotor|[Дрон-Агроном](../ru/drone-agronom.html)|
 |Atomic Ferrets|[Система засечки для дронов](../ru/race_timing_sys_copterhack.html)|
