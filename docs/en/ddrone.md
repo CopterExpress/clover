@@ -45,6 +45,65 @@ If the diameter of the can is less than the diameter of the holder, we use the p
 
 <img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300"  >
 
+## Servo control
+
+Creating a topic in [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/15f285edeed929488c2813193674bb0961d7aaf9/examples/servo.py#L36):
+
+```py
+rospy.Subscriber('/paint', String, paint)
+```
+
+Connecting to[index.html](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/index.html#L162):
+
+```js
+var cmd = new ROSLIB.Topic({
+    ros: ros,
+    name: '/paint',
+    messageType: 'std_msgs/String'
+});
+```
+
+Creating a message in [draw.js](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/js/draw.js#L87):
+
+```js
+canvas.addEventListener("mousedown", function(e) {
+
+    #...
+
+    gcodeArr.push([x, y, "down"]);
+    
+}, false);
+canvas.addEventListener("mouseup", function(e) {
+
+    #...
+
+    gcodeArr.push([x, y, "up"]);
+}, false);
+canvas.addEventListener("mousemove", function(e) {
+    mousePos = getMousePos(canvas, e);
+}, false);
+```
+
+Sending a message in [index.html](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/index.html#L191):
+
+```js
+if (gcodeArr[0].length === 3) {
+    let position = gcodeArr[0][2];
+    var mess = new ROSLIB.Message({data: position});
+    cmd.publish(mess);
+    console.log("cordinate" + gcodeArr[0]);
+}
+```
+
+Action based on the message in [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/15f285edeed929488c2813193674bb0961d7aaf9/examples/servo.py#L24):
+
+```py
+if (msg == 'down'):
+ pi.set_servo_pulsewidth(23, 2000)
+else:
+ pi.set_servo_pulsewidth(23, 500) # ~0
+```
+
 ## Before launching
 
 ### Configuring the servo scripts
@@ -88,6 +147,8 @@ We pick the web interface to control the copter because it is easier for the use
 ## Flights
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ErtioCj5iMw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hx1arCtNMKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Special Thanks
 

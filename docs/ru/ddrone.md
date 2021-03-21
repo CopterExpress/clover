@@ -10,27 +10,27 @@
 
 <img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
-<img class="center" src="../assets/ddrone/full_holder_in_real.jpg" width="300">
+<img class="center" src="../assets/ddrone/full_holder_in _real.jpg" width="300">
 
 Для выполнения проекта вам нужно иметь в наличии:
 
 - аэрозольная краска
-- сервопривод MG90S;
-- 3D-принтер;
-- удлинитель распылителя;
-- лента с липучкой (желательно);
-- 4 длинных винта M4 или;
-- 2-4 коротких самореза M4 или M3.
+- сервопривод MG90S
+- 3D-принтер
+- удлинитель распылителя
+- лента с липучкой (желательно)
+- 4 длинных винта m4 или
+- 2-4 коротких самореза m4 или m3
 
 [Скачать](https://github.com/PerizatKurmanbaeva/D-drone/tree/master/details) и распечатать детали:
 
-- держатель;
-- винт;
-- держатель стоек с гайкой;
-- стойки (2 шт.);
-- держатель для серво.
+- держатель
+- винт
+- держатель стоек с гайкой
+- стойки (2 шт.)
+- держатель для серво
 
-**Держатель баллончика.** Держатель баллончика прикрепляется к деке 4 винтами и гайками. Чтобы закрепить баллончик к держателю мы использовали ленту с липучкой. С помощью 4 гаек и винтов закрепляем деку с держателем сверху дрона.
+**Держатель баллончика.** Держатель баллончика прикрепляется к деке 4 винтами и гайками. Чтобы закрепить баллончик к держателю мы использовали ленту с липучкой. С помощью 4 стоек и винтов закрепляем деку с держателем сверху дрона.
 
 Вес держателя: 90 г.
 
@@ -44,19 +44,78 @@
 
 <img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300"  >
 
+## Управление сервоприводом
+
+Создание топика в [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/15f285edeed929488c2813193674bb0961d7aaf9/examples/servo.py#L36):
+
+```py
+rospy.Subscriber('/paint', String, paint)
+```
+
+Подключение в [index.html](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/index.html#L162):
+
+```js
+var cmd = new ROSLIB.Topic({
+    ros: ros,
+    name: '/paint',
+    messageType: 'std_msgs/String'
+});
+```
+
+Создание сообщения в [draw.js](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/js/draw.js#L87):
+
+```js
+canvas.addEventListener("mousedown", function(e) {
+
+    #...
+
+    gcodeArr.push([x, y, "down"]);
+    
+}, false);
+canvas.addEventListener("mouseup", function(e) {
+
+    #...
+
+    gcodeArr.push([x, y, "up"]);
+}, false);
+canvas.addEventListener("mousemove", function(e) {
+    mousePos = getMousePos(canvas, e);
+}, false);
+```
+
+Отправка сообщения в [index.html](https://github.com/PerizatKurmanbaeva/visual_ddrone/blob/520ee56c17166c509af58aedf329055d4193dd8c/index.html#L191):
+
+```js
+if (gcodeArr[0].length === 3) {
+    let position = gcodeArr[0][2];
+    var mess = new ROSLIB.Message({data: position});
+    cmd.publish(mess);
+    console.log("cordinate" + gcodeArr[0]);
+}
+```
+
+Действие на основе сообщения в [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/15f285edeed929488c2813193674bb0961d7aaf9/examples/servo.py#L24):
+
+```py
+if (msg == 'down'):
+ pi.set_servo_pulsewidth(23, 2000)
+else:
+ pi.set_servo_pulsewidth(23, 500) # ~0
+```
+
 ## Перед запуском
 
-### Настройка работы сервопривода
+### Настройка работы серво
 
-Перед запуском коптера нужно скачать [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/master/examples/servo.py) и перенести его на RPi. Можно просто скопировать и вставить используя буфер обмена. Или скопировать используя команду scp. Например, так:
+Перед запуском коптера нужно скачать [servo.py](https://github.com/PerizatKurmanbaeva/D-drone/blob/master/examples/servo.py) и перенести его на RPi. Можно просто скопировать и вставить используя буфер обмена. Или скопировать используя команду scp. Например так:
 
-```bash
+```shell
 scp servo.py pi@192.168.11.1:/home/pi
 ```
 
 Затем выполнить удаленно на Raspberry Pi следующие команды:
 
-```bash
+```shell
 sudo pigpiod
 python servo.py
 ```
@@ -65,14 +124,14 @@ python servo.py
 
 Нужно скачать [репозиторий](https://github.com/PerizatKurmanbaeva/visual_ddrone) в формате .zip. Копируем на RPi и распаковываем с помощью следующих команд:
 
-```bash
+```shell
 scp visual_ddrone-master.zip pi@192.168.11.1:/home/pi
 cd catkin_ws/src/clover/clover/www
 unzip /home/pi/visual_ddrone-master.zip .
 mv visual_ddrone-master ddrone
 ```
 
-Теперь чтобы открыть веб-интерфейс нужно перейти по ссылке [http://192.168.11.1/clover/ddrone](http://192.168.11.1/clover/ddrone).
+Теперь чтобы открыть веб-интерфейс нужно перейти по ссылке [192.168.11.1/clover/ddrone](192.168.11.1/clover/ddrone)
 
 ## Веб-интерфейс
 
@@ -87,6 +146,8 @@ mv visual_ddrone-master ddrone
 ## Полеты
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ErtioCj5iMw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hx1arCtNMKY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Благодарность
 
