@@ -28,7 +28,7 @@ A questionnaire was conducted for this project to study the need for an indoor m
 
 * The positioning system calculates the odometry data based on the laser scanner poses. This might misestimate the drone’s position with respect to the surroundings.
 * The LiDAR readings could be infinite if the distance between the LiDAR and the surrounding walls exceeds the LiDAR range.
-* The communication between the Raspberry Pi and the pc relies heavily on Wi-Fi. Therefore, any loss in the Wi-Fi signal would terminate the communication between the drone and PC.
+* The communication between the Raspberry Pi and the PC relies heavily on Wi-Fi. Therefore, any loss in the Wi-Fi signal would terminate the communication between the drone and PC.
 
 #### Non-technical Challenges
 
@@ -55,7 +55,7 @@ Furthermore, since the project employs multiple concepts related to indoor robot
 
 ## Proposed solution
 
-DroMap project consists mainly of two major components: the drone and the drone add-on. The drone is responsible for the physical movement of the entire system. The drone add-ons consist of necessary sensors for mapping, path planning, and mounting equipment such as Raspberry Pi 4, RPLiDAR A1M8, Sonar, and range finder. The raspberry pi collects the data from the sensors. While the data is being collected by the raspberry pi, the Hector SLAM will process these data in real-time to formulate 2-dimensional maps. After that, the map will be sent wirelessly to a remote PC and visualized through RVIZ software tool.
+DroMap project consists mainly of two major components: the drone and the drone add-on. The drone is responsible for the physical movement of the entire system. The drone add-ons consist of necessary sensors for mapping, path planning, and mounting equipment such as Raspberry Pi 4, RPLiDAR A1M8, Sonar, and range finder. The Raspberry Pi collects the data from the sensors. While the data is being collected by the Raspberry Pi, the Hector SLAM will process these data in real-time to formulate 2-dimensional maps. After that, the map will be sent wirelessly to a remote PC and visualized through RVIZ software tool.
 
 ![](../assets/dromap/HLA.jpg)
 
@@ -193,7 +193,7 @@ The following video demonstrates an autonomous maze exploration with Hector SLAM
 
 ### The physical hardware
 
-This section illustrates the progress done regarding the hardware components. The first step done was to establish a Wi-Fi communication between the raspberry pi and the remote PC. The second step was to install the hector SLAM and robot Localization packages in the raspberry pi to visualize the maps remotely.
+This section illustrates the progress done regarding the hardware components. The first step done was to establish a Wi-Fi communication between the Raspberry Pi and the remote PC. The second step was to install the hector SLAM and robot Localization packages in the Raspberry Pi to visualize the maps remotely.
 
 #### Initial Setup
 
@@ -201,7 +201,7 @@ The drone is assembled and configured correctly to accomplish the autonomous map
 
 <img src="../assets/dromap/3.jpeg" width=400 class="center zoom">
 
-To set up the drone ready for mapping, the raspberry pi image created by COEX was installed on the micro-SD card. COEX raspberry pi image, COEX pixracer image and COEX virtual machine were selected as they contain all the necessary tools and packages to work efficiently with clover platform. The installed platform is based on Raspbian operating system and ROS. After flashing the image on the SD, the next step is to connect clover to Wi-Fi.
+To set up the drone ready for mapping, the raspberry pi image created by COEX was installed on the micro-SD card. COEX Raspberry Pi image, COEX pixracer image and COEX virtual machine were selected as they contain all the necessary tools and packages to work efficiently with clover platform. The installed platform is based on Raspbian operating system and ROS. After flashing the image on the SD, the next step is to connect clover to Wi-Fi.
 
 #### Network Setup
 
