@@ -6,6 +6,11 @@ CopterHack 2021 – это командный конкурс по разраб�
 
 Полная запись трансляции финала: https://www.youtube.com/watch?v=Z06vxuAHmuE.
 
+<div class="image-group">
+    <img src="../assets/copterhack2021/1.jpg" class="zoom border">
+    <img src="../assets/copterhack2021/2.jpg" class="zoom border">
+</div>
+
 ## Отчетные статьи команд-участников
 
 |Место|Команда|Проект|Балл|

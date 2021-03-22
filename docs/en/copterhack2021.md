@@ -6,6 +6,11 @@ All information about the event can be found on the official website: https://co
 
 Full stream of the final: https://www.youtube.com/watch?v=Z06vxuAHmuE.
 
+<div class="image-group">
+    <img src="../assets/copterhack2021/1.jpg" class="zoom border">
+    <img src="../assets/copterhack2021/2.jpg" class="zoom border">
+</div>
+
 ## Participating teams articles
 
 |Place|Team|Project|Points|
