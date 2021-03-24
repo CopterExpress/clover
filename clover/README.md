@@ -44,16 +44,12 @@ Alternatively you may change the `fcu_url` property in `mavros.launch` file to p
 
 ## Running
 
-To start connection to SITL, use:
-
-```bash
-roslaunch clover sitl.launch
-```
-
 To start connection to the flight controller, use:
 
 ```bash
 roslaunch clover clover.launch
 ```
+
+For the simulation information see the [corresponding article](https://clover.coex.tech/en/simulation.html).
 
 > Note that the package is configured to connect to `/dev/px4fmu` by default (see [previous section](#manual-installation)). Install udev rules or specify path to your FCU device in `mavros.launch`.

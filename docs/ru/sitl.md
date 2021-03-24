@@ -198,7 +198,7 @@ catkin_make
 
 ```bash
 . devel/setup.bash
-roslaunch clover sitl.launch
+roslaunch clover_simulation simulator.launch type:=none
 ```
 
 Для того, чтобы воспользоваться функциями предоставляемыми нашим пакетом, в новом окне терминала подтяните зависимости из файла `setup`:
@@ -207,4 +207,4 @@ roslaunch clover sitl.launch
 source ~/catkin_ws/devel/setup.bash
 ```
 
-Теперь вы можете воспользоваться всеми возможностями пакета `Clover` в вашем симуляторе.
+Теперь вы можете воспользоваться всеми возможностями пакета `clover` в вашем симуляторе.

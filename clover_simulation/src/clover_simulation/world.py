@@ -5,10 +5,10 @@ import xml.etree.ElementTree as ET
 from string import Template
 
 WORLD_INCLUDE = Template('''
-<include>
-    <uri>model://${model_name}</uri>
-    <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
-</include>
+    <include>
+      <uri>model://${model_name}</uri>
+      <pose>${x} ${y} ${z} ${roll} ${pitch} ${yaw}</pose>
+    </include>
 ''')
 
 def load_world(world_file):
@@ -32,6 +32,7 @@ def add_model(world, model_name, x, y, z, roll, pitch, yaw, index=0):
         pitch=pitch,
         yaw=yaw
     ))
+    model_elem.tail = '\n    '
     world_elem.insert(index, model_elem)
     return world
 

@@ -62,6 +62,7 @@ private:
 	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
+	bool enabled_ = true;
 	cv::Ptr<cv::aruco::Dictionary> dictionary_;
 	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
 	image_transport::Publisher debug_pub_;
@@ -125,6 +126,8 @@ public:
 private:
 	void imageCallback(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr &cinfo)
 	{
+		if (!enabled_) return;
+
 		Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
 
 		vector<int> ids;
@@ -353,6 +356,7 @@ private:
 
 	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)
 	{
+		enabled_ = config.enabled;
 		parameters_->adaptiveThreshConstant = config.adaptiveThreshConstant;
 		parameters_->adaptiveThreshWinSizeMin = config.adaptiveThreshWinSizeMin;
 		parameters_->adaptiveThreshWinSizeMax = config.adaptiveThreshWinSizeMax;

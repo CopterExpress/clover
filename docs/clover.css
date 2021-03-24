@@ -40,13 +40,9 @@ section ul li:before {
 	margin-bottom: 0.85em;
 }
 
-/* Main Clover image */
-.book img.bigclever {
-	margin-bottom: -12%;
-}
-.book.color-theme-2 img.bigclever {
+.book.color-theme-2 img.big-clover {
 	/* change image for black background */
-	content:url(assets/clever4-front-black-large.png);
+	content:url(assets/clover42-black.png);
 }
 
 footer {

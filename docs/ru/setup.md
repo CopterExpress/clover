@@ -29,7 +29,9 @@
 
 Для Клевера, в особенности для осуществления автономных полетов, рекомендуется использовать версию прошивки PX4 от Copter Express. Скачайте актуальную версию прошивки на GitHub — **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">скачать</a>**.
 
-Далее загрузите прошивку в полетный контролер.
+> **Info** Для квадрокоптеров с Pixhawk (Клевер 2) существует отдельная версия прошивки. Подробности смотрите в статье "[Прошивка полетного контроллера](firmware.md)".
+
+Загрузите прошивку в полетный контролер:
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
@@ -68,12 +70,12 @@
 
 ### Выбор рамы
 
-<img src="../assets/qgc-frame-apply.png" alt="QGroundControl frame selection" class="zoom">
+<img src="../assets/qgc-frame-apply-clover4.png" alt="QGroundControl frame selection" class="zoom">
 
 1. Зайдите во вкладку *Vehicle Setup*.
 2. Выберите меню *Airframe*.
 3. Выберите тип рамы *Quadrotor X*.
-4. Выберите подтип рамы *Generic Quadrotor X*.
+4. Для Клевера 4 выберите подтипа рамы *COEX Clover 4*. В ином случае – *Generic Quadrotor X*.
 5. Переместитесь в начало списка и нажмите кнопку *Apply and Restart*, подтвердите нажатием *Apply*.
 6. Дождитесь применения настроек и перезагрузки полетного контроллера.
 
@@ -86,6 +88,8 @@
 После установки параметра необходимо нажать кнопку *Save*. При необходимости – перезагрузить полетный контроллер, нажав кнопку *Tools*, затем *Reboot vehicle*.
 
 #### Настройка PID-регуляторов
+
+> **Info** Использование типа рамы *COEX Clover 4* не требует ввода коэффициентов PID.
 
 ##### Усредненные коэффициенты PID для Клевера 4
 

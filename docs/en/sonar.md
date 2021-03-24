@@ -12,11 +12,11 @@ The distance gage is attached to the body using double-sided tape. For obtaining
 
 ### Connection
 
-Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and 2.2 kΩ resistors and any free GPIO pins, e.g., 23 and 24:
+Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and 2.2 kΩ resistors and any free GPIO pins, e.g., 23 and 24:
 
 <img src="../assets/raspberry-hc-sr04.png" alt="Connecting HC-SR04" height=600>
 
-> **Hint** Instead of a 2.2 kΩ resistor, you can use two 1 kΩ resistors connected in series.
+> **Hint** Instead of a 2.2 kΩ resistor, you can use two 1 kΩ resistors connected in series.
 
 <!-- -->
 
@@ -54,8 +54,8 @@ import time
 import threading
 import pigpio
 
-TRIG = 23 is the No. of the pin connected to the Trig contact of the distance gage
-TRIG = 24 is the No. of the pin connected to the Echo contact of the distance gage
+TRIG = 23  # pin connected to the Trig pin of the sonar
+ECHO = 24  # pin connected to the Echo pin of the sonar
 
 pi = pigpio.pi()
 done = threading.Event()

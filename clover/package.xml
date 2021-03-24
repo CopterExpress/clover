@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>clover</name>
-  <version>0.0.1</version>
+  <version>0.21.1</version>
   <description>The Clover package</description>
 
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>

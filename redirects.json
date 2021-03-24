@@ -54,7 +54,7 @@
         { "from": "snippets/", "to": "ru/snippets.html" },
         { "from": "optical_flow/", "to": "ru/optical_flow.html" },
         { "from": "laser/", "to": "ru/laser.html" },
-        { "from": "led/", "to": "ru/leds.html" },
+        { "from": "led/", "to": "en/leds.html" },
         { "from": "leds/", "to": "ru/leds.html" },
         { "from": "hostname/", "to": "en/hostname.html" },
         { "from": "programming/", "to": "en/programming.html" },

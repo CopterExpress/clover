@@ -1,7 +1,7 @@
 PX4 Simulation
 ===
 
-> **Hint** This article is about running a standalone PX4 simulation with a generic quadcopter. Consider using [our configuration](simulation.md) for a more Clover-like experience.
+> **Warning** This article is about running a standalone PX4 simulation with a generic quadcopter and **is outdated**. Consider using [our configuration](simulation.md) for a more Clover-like experience.
 
 Main article: https://dev.px4.io/en/simulation/
 

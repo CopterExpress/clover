@@ -6,13 +6,7 @@ set -e
 apt update
 apt install -y curl
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-if [ "x${ROS_PYTHON_VERSION}" = "x3" ]; then
-  PYTHON=python3
-else
-  PYTHON=python
-fi
-
-${PYTHON} ./get-pip.py
+python3 ./get-pip.py
 
 # Step 1.5: Add deb.coex.tech to apt
 curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -

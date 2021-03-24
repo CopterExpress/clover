@@ -32,7 +32,7 @@ monkey --version
 pigpiod -v
 i2cdetect -V
 butterfly -h
-espeak --version
+# espeak --version
 mjpg_streamer --version
 
 # ros stuff

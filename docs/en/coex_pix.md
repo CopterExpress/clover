@@ -35,9 +35,9 @@ The **COEX Pix** flight controller is a modified [Pixracer](https://docs.px4.io/
 
 ### Port pinouts
 
-<img src="../assets/coexpix-top.jpg" width="400" class="zoom">
+<img src="../assets/coex_pix/coexpix-top.jpg" width="400" class="zoom">
 
-<img src="../assets/coexpix-bottom.jpg" width="400" class="zoom">
+<img src="../assets/coex_pix/coexpix-bottom.jpg" width="400" class="zoom">
 
 > **Note** On rev. 1.0 boards *RC IN* port and microSD slot are switched. Pinout for the *RC IN* port is the same on these boards.
 
@@ -70,6 +70,6 @@ The board utilizes low-noise DC-DC converters, voltage inputs have LC and ferrit
 
 ### Port pinouts
 
-<img src="../assets/coex_pix/coexpix-top-rev1.2.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-top-rev1.2.png" width=400 class=zoom>
 
-<img src="../assets/coex_pix/coexpix-bottom-rev1.2.jpg" width=400 class=zoom>
+<img src="../assets/coex_pix/coexpix-bottom-rev1.2.png" width=400 class=zoom>

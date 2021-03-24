@@ -34,3 +34,9 @@
 * пакеты ROS и плагины Gazebo;
 
 <!-- TODO: Write more, add a diagram, etc -->
+
+## Видео
+
+Короткий видеообзор симулятора:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8HYXREMDfzQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

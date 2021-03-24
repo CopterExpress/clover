@@ -295,6 +295,8 @@ Parameters:
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 
+The positive direction of `yaw_rate` rotation (when viewed from the top) is counterclockwise,`pitch_rate` rotation is forward, `roll_rate` rotation is to the left.
+
 ### land
 
 Switch the drone to landing [mode](modes.md) (`AUTO.LAND` or similar).
