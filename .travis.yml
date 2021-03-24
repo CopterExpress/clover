@@ -87,7 +87,7 @@ jobs:
         - ./check_unused_assets.py
         - gitbook install
         - gitbook build
-        - gitbook pdf ./ _book/clover.pdf
+        - for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
       deploy:
         provider: pages
         local_dir: _book
