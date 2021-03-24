@@ -150,11 +150,11 @@ systemctl enable monkey.service
 
 echo_stamp "Install Node.js"
 cd /home/pi
-wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv7l.tar.gz
-tar -xzf node-v10.15.0-linux-arm64.tar.gz		 tar -xzf node-v10.15.0-linux-armv7l.tar.gz
-cp -R node-v10.15.0-linux-arm64/* /usr/local/		 cp -R node-v10.15.0-linux-armv7l/* /usr/local/
-rm -rf node-v10.15.0-linux-arm64/		 rm -rf node-v10.15.0-linux-armv7l
-rm node-v10.15.0-linux-arm64.tar.gz		 rm node-v10.15.0-linux-armv7l.tar.gz
+wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
+tar -xzf node-v10.15.0-linux-armv6l.tar.gz
+cp -R node-v10.15.0-linux-armv6l/* /usr/local/
+rm -rf node-v10.15.0-linux-armv6l/
+rm node-v10.15.0-linux-armv6l.tar.gz
 
 echo_stamp "Installing ptvsd"
 my_travis_retry pip install ptvsd
