@@ -87,7 +87,7 @@ jobs:
         - ./check_unused_assets.py
         - gitbook install
         - gitbook build
-        - gitbook pdf ./ _book/clover.pdf || echo "error building the PDF"
+        - gitbook pdf ./ _book/clover.pdf
       deploy:
         provider: pages
         local_dir: _book
