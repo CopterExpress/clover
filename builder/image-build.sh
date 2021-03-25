@@ -15,7 +15,7 @@
 
 set -e # Exit immidiately on non-zero result
 
-SOURCE_IMAGE="https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite.zip"
+SOURCE_IMAGE="https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-01-12/2021-01-11-raspios-buster-armhf-lite.zip"
 
 export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
