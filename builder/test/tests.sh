@@ -43,6 +43,8 @@ rosversion aruco_pose
 rosversion vl53l1x
 rosversion mavros
 rosversion mavros_extras
+rosversion ws281x
+rosversion led_msgs
 rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
 rosversion compressed_image_transport
