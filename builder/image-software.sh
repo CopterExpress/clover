@@ -74,9 +74,6 @@ echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/op
 echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
 echo "deb http://deb.coex.tech/clover buster main" > /etc/apt/sources.list.d/clover.list
 
-wget -O - 'http://packages.coex.tech/key.asc' | sudo apt-key add -
-echo 'deb http://packages.coex.tech buster main' | sudo tee -a /etc/apt/sources.list
-
 echo_stamp "Update apt cache"
 
 # TODO: FIX ERROR: /usr/bin/apt-key: 596: /usr/bin/apt-key: cannot create /dev/null: Permission denied
