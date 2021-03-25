@@ -84,7 +84,7 @@ apt-get update
 echo_stamp "Software installing"
 apt-cache policy cmake
 apt-cache policy cmake-data
-my_travis_retry apt-get install --no-install-recommends -y cmake=3.13.4-1
+my_travis_retry apt-get install --no-install-recommends -y cmake-data=3.13.4-1 cmake=3.13.4-1
 my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
