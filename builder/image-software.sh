@@ -84,7 +84,7 @@ apt-get update
 echo_stamp "Software installing"
 apt-cache policy cmake
 apt-cache policy cmake-data
-my_travis_retry apt-get install --no-install-recommends -y \
+my_travis_retry apt-get install --no-install-recommends -y -f \
 unzip \
 zip \
 ipython \
