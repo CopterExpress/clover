@@ -96,7 +96,7 @@ git \
 dnsmasq  \
 tmux \
 vim \
-cmake=3.6.2 \
+cmake=3.13.4-1 \
 libjpeg8 \
 tcpdump \
 ltrace \
