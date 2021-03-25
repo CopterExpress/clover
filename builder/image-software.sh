@@ -83,6 +83,7 @@ apt-get update
 # Let's retry fetching those packages several times, just in case
 echo_stamp "Software installing"
 apt-cache policy cmake
+apt-cache policy cmake-data
 my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
