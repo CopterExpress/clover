@@ -84,7 +84,8 @@ apt-get update
 echo_stamp "Software installing"
 apt-cache policy cmake
 apt-cache policy cmake-data
-my_travis_retry apt-get install --no-install-recommends -y -f \
+my_travis_retry apt-get install --no-install-recommends -y cmake=3.13.4-1
+my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
 ipython \
@@ -97,7 +98,6 @@ git \
 dnsmasq  \
 tmux \
 vim \
-cmake=3.13.4-1 \
 libjpeg8 \
 tcpdump \
 ltrace \
