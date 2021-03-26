@@ -1,6 +1,6 @@
 <package format="2">
   <name>clover_description</name>
-  <version>0.21.1</version>
+  <version>0.21.2</version>
   <description>The clover_description package provides URDF models of the Clover series of quadcopters.</description>
 
   <maintainer email="sfalexrog@gmail.com">Alexey Rogachevskiy</maintainer>

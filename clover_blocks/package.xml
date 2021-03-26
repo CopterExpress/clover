@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>clover_blocks</name>
-  <version>0.21.1</version>
+  <version>0.21.2</version>
   <description>Blockly programming support for Clover</description>
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
   <license>MIT</license>
