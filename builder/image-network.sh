@@ -60,4 +60,25 @@ domain-needed
 quiet-dhcp6
 EOF
 
-echo_stamp "#4 End of network installation"
+echo_stamp "#4 Build the RTL8814AU Wi-Fi adapter driver"
+wget http://archive.raspberrypi.org/debian/pool/main/r/raspberrypi-firmware/raspberrypi-kernel-headers_1.20210108-1_armhf.deb
+dpkg -i raspberrypi-kernel-headers_1.20210108-1_armhf.deb
+cd /home/pi
+git clone https://github.com/aircrack-ng/rtl8812au.git --depth=1
+cd rtl8812au
+echo kernel version: $(uname -r)
+echo kernel version from procfs: $(cat /proc/version)
+echo version: $(git describe --tags --always)
+sed -i 's/CONFIG_PLATFORM_I386_PC = y/CONFIG_PLATFORM_I386_PC = n/g' Makefile # https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi
+sed -i 's/CONFIG_PLATFORM_ARM_RPI = n/CONFIG_PLATFORM_ARM_RPI = y/g' Makefile
+# sed -i 's/CONFIG_PLATFORM_ARM64_RPI = n/CONFIG_PLATFORM_ARM64_RPI = y/g' Makefile
+apt-cache policy raspberrypi-kernel-headers
+# apt-get install -y raspberrypi-kernel-headers=1.20210108 dkms
+apt-get install -y dkms
+ls /lib/modules
+echo make
+make KERNEL_VER=5.4.83-v7l+ KVER=5.4.83-v7l+
+echo make install
+make install KERNEL_VER=5.4.83-v7l+ KVER=5.4.83-v7l+
+
+echo_stamp "#5 End of network installation"
