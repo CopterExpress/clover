@@ -77,7 +77,7 @@ apt-cache policy raspberrypi-kernel-headers
 apt-get install -y dkms
 ls /lib/modules
 echo make
-make KERNEL_VER=5.4.83-v7l+ KVER=5.4.83-v7l+
+make KERNEL_VER=5.4.83-v7l+ KVER=5.4.83-v7l+ # TODO: determine kernel version from fs
 echo make install
 make install KERNEL_VER=5.4.83-v7l+ KVER=5.4.83-v7l+
 
