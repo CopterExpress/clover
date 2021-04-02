@@ -79,4 +79,10 @@ if ! grep -q "^bcm2835-v4l2" /etc/modules;
 then printf "bcm2835-v4l2\n" >> /etc/modules
 fi
 
-echo_stamp "#8 End of configure hardware interfaces"
+echo_stamp "#8 Check if Compute Module 4"
+if grep -q "Compute Module 4" "/proc/device-tree/model"; then
+  echo_stamp "Enable USB on Compute Module 4"
+  echo "dtoverlay=dwc2,dr_mode=host" >> /boot/config.txt
+fi
+
+echo_stamp "#9 End of configure hardware interfaces"
