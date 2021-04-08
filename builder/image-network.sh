@@ -73,9 +73,9 @@ sed -i 's/CONFIG_PLATFORM_ARM_RPI = n/CONFIG_PLATFORM_ARM_RPI = y/g' Makefile
 apt-cache policy raspberrypi-kernel-headers
 apt-get install -y raspberrypi-kernel-headers dkms
 ls /lib/modules
-KERNEL_VERSION=5.10.17-v7l+ # TODO: get kernel version from the fs
+KERNEL_VERSION=$(cd /lib/modules && echo *-v7l+) # can't use `uname` as it gives incorrect value in emulated environment
 echo make
-make KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION # TODO: determine kernel version from fs
+make KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
 echo make install
 make install KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
 
