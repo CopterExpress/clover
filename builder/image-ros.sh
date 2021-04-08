@@ -133,6 +133,9 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-ws281x \
     ros-${ROS_DISTRO}-rosshow
 
+echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+my_travis_retry apt-get install -y --no-install-recommends libboost-dev
+
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
