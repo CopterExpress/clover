@@ -100,6 +100,9 @@ ros-${ROS_DISTRO}-cv-camera \
 ros-${ROS_DISTRO}-image-publisher \
 ros-${ROS_DISTRO}-web-video-server
 
+echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+my_travis_retry apt-get install -y --no-install-recommends libboost-dev
+
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
@@ -132,9 +135,6 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-vl53l1x \
     ros-${ROS_DISTRO}-ws281x \
     ros-${ROS_DISTRO}-rosshow
-
-echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
-my_travis_retry apt-get install -y --no-install-recommends libboost-dev
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
