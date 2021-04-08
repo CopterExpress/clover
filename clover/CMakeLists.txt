@@ -44,6 +44,10 @@ find_package(OpenCV ${_opencv_version} REQUIRED
     imgproc
 )
 
+# Fix https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
