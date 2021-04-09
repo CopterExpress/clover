@@ -196,7 +196,7 @@ add_executable(shell src/shell.cpp)
 # message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
 # message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
 
-list(REMOVE_ITEM ${catkin_LIBRARIES} "-lpthreads")
+string(REPLACE "-lpthreads;" "" ${catkin_LIBRARIES} ${catkin_LIBRARIES})
 
 macro(print_all_variables)
     message(STATUS "print_all_variables------------------------------------------{")
