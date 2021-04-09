@@ -50,7 +50,7 @@ cd /root/catkin_ws
 catkin_make
 
 # Step 4: Run tests
-${PYTHON} -m pip install --upgrade pytest
+python3 -m pip install --upgrade pytest # TODO: https://github.com/CopterExpress/clover/commit/5b970d51970cfa6f46e5c0b34acb7889d36b89c8
 cd /root/catkin_ws
 source devel/setup.bash
 catkin_make run_tests && catkin_test_results
