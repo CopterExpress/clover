@@ -44,7 +44,6 @@ find_package(OpenCV ${_opencv_version} REQUIRED
     imgproc
 )
 
-set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
 ## System dependencies are found with CMake's conventions
@@ -191,6 +190,7 @@ add_executable(shell src/shell.cpp)
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
+  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 # Don't change actual binary names
@@ -200,9 +200,9 @@ set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
 
 target_link_libraries(clover_rc ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-target_link_libraries(camera_markers ${catkin_LIBRARIES})
+target_link_libraries(camera_markers ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 target_link_libraries(clover_led ${catkin_LIBRARIES})
 
