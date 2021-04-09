@@ -196,6 +196,8 @@ add_executable(shell src/shell.cpp)
 # message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
 # message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
 
+string(REPLACE "-lpthreads;" "" ${catkin_LIBRARIES} ${catkin_LIBRARIES})
+
 macro(print_all_variables)
     message(STATUS "print_all_variables------------------------------------------{")
     get_cmake_property(_variableNames VARIABLES)
@@ -210,7 +212,6 @@ print_all_variables()
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
-  Threads::Threads
 )
 
 # Don't change actual binary names
@@ -218,11 +219,11 @@ set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
 
 set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
 
-target_link_libraries(clover_rc ${catkin_LIBRARIES} Threads::Threads)
+target_link_libraries(clover_rc ${catkin_LIBRARIES})
 
-target_link_libraries(camera_markers ${catkin_LIBRARIES} Threads::Threads)
+target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
-target_link_libraries(vpe_publisher ${catkin_LIBRARIES} Threads::Threads)
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
 target_link_libraries(clover_led ${catkin_LIBRARIES})
 
