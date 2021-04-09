@@ -187,14 +187,19 @@ add_executable(clover_led src/led.cpp)
 
 add_executable(shell src/shell.cpp)
 
+message(STATUS "catkin_LIBRARIES value: ${catkin_LIBRARIES}")
+message(STATUS "GeographicLib_LIBRARIES value: ${GeographicLib_LIBRARIES}")
+message(STATUS "Compiler flags:" ${CMAKE_CXX_COMPILE_FLAGS})
+message(STATUS "Compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
+message(STATUS "Compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
+message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
+message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
+
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
   Threads::Threads
 )
-
-message(STATUS "catkin_LIBRARIES value: ${catkin_LIBRARIES}")
-message(STATUS "GeographicLib_LIBRARIES value: ${GeographicLib_LIBRARIES}")
 
 # Don't change actual binary names
 set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
