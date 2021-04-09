@@ -81,6 +81,7 @@ apt-get update
 
 # Let's retry fetching those packages several times, just in case
 echo_stamp "Software installing"
+my_travis_retry apt-get install --no-install-recommends -y cmake-data=3.13.4-1 cmake=3.13.4-1 # FIXME: using older CMake due to https://travis-ci.org/github/CopterExpress/clover/jobs/764367665#L6984
 my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
@@ -94,7 +95,6 @@ git \
 dnsmasq  \
 tmux \
 vim \
-cmake \
 tcpdump \
 libpoco-dev \
 libzbar0 \
