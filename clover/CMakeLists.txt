@@ -178,9 +178,9 @@ add_library(${PROJECT_NAME}
 add_executable(simple_offboard src/simple_offboard.cpp)
 
 # PX4 already has rc and led targets, so we prefix ours with clover_
-# add_executable(clover_rc src/rc.cpp)
+add_executable(clover_rc src/rc.cpp)
 
-# add_executable(camera_markers src/camera_markers.cpp)
+add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(vpe_publisher src/vpe_publisher.cpp)
 
@@ -194,13 +194,13 @@ target_link_libraries(simple_offboard
 )
 
 # Don't change actual binary names
-# set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
+set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
 
 set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
 
-# target_link_libraries(clover_rc ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(clover_rc ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-# target_link_libraries(camera_markers ${catkin_LIBRARIES})
+target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
