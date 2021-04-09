@@ -193,6 +193,9 @@ target_link_libraries(simple_offboard
   Threads::Threads
 )
 
+message(STATUS "catkin_LIBRARIES value: ${catkin_LIBRARIES}")
+message(STATUS "GeographicLib_LIBRARIES value: ${GeographicLib_LIBRARIES}")
+
 # Don't change actual binary names
 set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
 
