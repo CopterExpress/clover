@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0)
 project(clover)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -196,7 +196,7 @@ add_executable(shell src/shell.cpp)
 # message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
 # message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
 
-string(REPLACE "-lpthreads;" "" ${catkin_LIBRARIES} ${catkin_LIBRARIES})
+# string(REPLACE "-lpthreads;" "" ${catkin_LIBRARIES} ${catkin_LIBRARIES})
 
 macro(print_all_variables)
     message(STATUS "print_all_variables------------------------------------------{")
