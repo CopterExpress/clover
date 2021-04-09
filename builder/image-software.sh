@@ -94,7 +94,9 @@ lsof \
 git \
 dnsmasq  \
 tmux \
+tree \
 vim \
+libjpeg8 \
 tcpdump \
 libpoco-dev \
 libzbar0 \

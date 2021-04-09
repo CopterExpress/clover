@@ -96,6 +96,16 @@ This page contains models and drawings of some of the drone parts. They can be u
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/big_leg.dxf"><code>big_leg.dxf</code></a></td>
     </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/grip_spacer.png"></td>
+        <td>
+            <b>Grip spacer</b>.<br>
+            Function: spacer for the gripper plates.<br>
+            Material: monolithic polycarbonate 2mm.<br>
+            Quantity: 1 pcs.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grip_spacer.dxf"><code>grip_spacer.dxf</code></a></td>
+    </tr>
 </table>
 
 ## Clover 4
