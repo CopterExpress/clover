@@ -44,6 +44,9 @@ find_package(OpenCV ${_opencv_version} REQUIRED
     imgproc
 )
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -195,7 +198,7 @@ set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
 
 set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
 
-target_link_libraries(clover_rc ${catkin_LIBRARIES})
+target_link_libraries(clover_rc ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
