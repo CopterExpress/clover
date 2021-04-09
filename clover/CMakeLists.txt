@@ -187,13 +187,25 @@ add_executable(clover_led src/led.cpp)
 
 add_executable(shell src/shell.cpp)
 
-message(STATUS "catkin_LIBRARIES value: ${catkin_LIBRARIES}")
-message(STATUS "GeographicLib_LIBRARIES value: ${GeographicLib_LIBRARIES}")
-message(STATUS "Compiler flags:" ${CMAKE_CXX_COMPILE_FLAGS})
-message(STATUS "Compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
-message(STATUS "Compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
-message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
-message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
+# message(STATUS "catkin_LIBRARIES value: ${catkin_LIBRARIES}")
+# message(STATUS "GeographicLib_LIBRARIES value: ${GeographicLib_LIBRARIES}")
+# message(STATUS "Compiler CXX flags:" ${CMAKE_CXX_COMPILE_FLAGS})
+# message(STATUS "Compiler C flags:" ${CMAKE_C_COMPILE_FLAGS})
+# message(STATUS "Compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
+# message(STATUS "Compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
+# message(STATUS "Compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
+# message(STATUS "Compiler cxx flags:" ${CMAKE_CXX_FLAGS})
+
+macro(print_all_variables)
+    message(STATUS "print_all_variables------------------------------------------{")
+    get_cmake_property(_variableNames VARIABLES)
+    foreach (_variableName ${_variableNames})
+        message(STATUS "${_variableName}=${${_variableName}}")
+    endforeach()
+    message(STATUS "print_all_variables------------------------------------------}")
+endmacro()
+
+print_all_variables()
 
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
