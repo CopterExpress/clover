@@ -190,7 +190,7 @@ add_executable(shell src/shell.cpp)
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}
-  ${CMAKE_THREAD_LIBS_INIT}
+  Threads::Threads
 )
 
 # Don't change actual binary names
@@ -198,11 +198,11 @@ set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
 
 set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
 
-target_link_libraries(clover_rc ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(clover_rc ${catkin_LIBRARIES} Threads::Threads)
 
-target_link_libraries(camera_markers ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(camera_markers ${catkin_LIBRARIES} Threads::Threads)
 
-target_link_libraries(vpe_publisher ${catkin_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(vpe_publisher ${catkin_LIBRARIES} Threads::Threads)
 
 target_link_libraries(clover_led ${catkin_LIBRARIES})
 
