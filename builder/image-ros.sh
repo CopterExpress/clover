@@ -122,6 +122,7 @@ rm -rf build  # remove build artifacts
 echo_stamp "Build Clover documentation"
 cd /home/pi/catkin_ws/src/clover
 NPM_CONFIG_UNSAFE_PERM=true npm install gitbook-cli -g
+NPM_CONFIG_UNSAFE_PERM=true gitbook fetch 3.2.3 && npm i npm@3.10.10 --prefix=~/.gitbook/versions/3.2.3/ # fixing https://travis-ci.org/github/CopterExpress/clover/jobs/766541125#L932
 NPM_CONFIG_UNSAFE_PERM=true gitbook install
 gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
