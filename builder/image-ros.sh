@@ -80,11 +80,9 @@ my_travis_retry sudo -u pi rosdep update
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
-# echo_stamp "Reconfiguring Clover repository for simplier unshallowing" # TODO: bring back
-# cd /home/pi/catkin_ws/src/clover
-# git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-echo_stamp "Remove .git from Clover to reduce the size"
-rm -rf /home/pi/catkin_ws/src/clover/.git # TODO: remove
+# echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clover
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 # This is sort of a hack to force "custom" packages to be installed - the ones built by COEX, linked against OpenCV 4.2
 # I **wish** OpenCV would not be such a mess, but, well, here we are.
