@@ -49,7 +49,8 @@
 
         { "from": "modes/", "to": "ru/modes.html" },
         { "from": "firmware/", "to": "en/firmware.html" },
-        { "from": "simple_offboard/", "to": "ru/simple_offboard.html" },
+        { "from": "simple_offboard/", "to": "en/simple_offboard.html" },
+        { "from": "offboard/", "to": "en/simple_offboard.html" },
         { "from": "camera/", "to": "ru/camera.html" },
         { "from": "snippets/", "to": "ru/snippets.html" },
         { "from": "optical_flow/", "to": "ru/optical_flow.html" },
