@@ -78,5 +78,6 @@ echo make
 make KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
 echo make install
 make install KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
+# TODO: rm -rf /home/pi/rtl8812au
 
 echo_stamp "#5 End of network installation"
