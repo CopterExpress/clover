@@ -28,19 +28,3 @@ def test_simple_offboard_services_available():
 def test_web_video_server(node):
     import urllib2
     urllib2.urlopen("http://localhost:8080").read()
-
-def test_shell(node):
-    execute = rospy.ServiceProxy('exec', srv.Execute)
-    execute.wait_for_service(5)
-
-    res = execute(cmd='echo foo')
-    assert res.code == 0
-    assert res.output == 'foo\n'
-
-    res = execute(cmd='foo')
-    assert res.code == 32512
-    assert res.output == ''
-
-    res = execute(cmd='ls foo')
-    assert res.code == 512
-    assert res.output == ''
