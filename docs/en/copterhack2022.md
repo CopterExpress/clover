@@ -8,13 +8,13 @@ The prize fund from the COEX company for the further development of projects is 
 
 ## CopterHack 2022 stages
 
-QUALIFYING ROUND. Collection of applications in online format (June 1 — October 31, 2021).
+     * QUALIFYING ROUND. Collection of applications in online format (June 1 — October 31, 2021).
 
-PROJECT DEVELOPMENT. Project mentorship in online format (June 1, 2021 — February 28, 2022).
+     * PROJECT DEVELOPMENT. Project mentorship in online format (June 1, 2021 — February 28, 2022).
 
-PRESENTATION OF RESULTS. Writing final articles in online format (March 1 — 31, 2022).
+     * PRESENTATION OF RESULTS. Writing final articles in online format (March 1 — 31, 2022).
 
-FINAL ROUND. Project presentation in a hybrid format (April 9–10, 2022).
+     * FINAL ROUND. Project presentation in a hybrid format (April 9–10, 2022).
 
 ## Сriteria for evaluating the final result
 
