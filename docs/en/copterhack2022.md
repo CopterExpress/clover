@@ -4,14 +4,14 @@ CopterHack 2022 is a team competition for the development of open source project
 
 Develop your product in partnership with COEX. 
 
-The prize fund from the COEX company for the further development of projects is 8,000 dollars.
+The prize fund from the COEX company for the further development of projects is 5,000 dollars.
 
 ## CopterHack 2022 stages
 
-1. Qualifying round. Collection of applications in online format (June 1 — October 31, 2021).
-2. Project development. Project mentorship in online format (June 1, 2021 — February 28, 2022).
-3. Presentation of results. Writing final articles in online format (March 1 — 31, 2022).
-4. Final round. Project presentation in a hybrid format (April 9–10, 2022).
+1. Qualifying round. Collection of applications (June 1 — October 31, 2021).
+2. Project development. Project mentorship (June 1, 2021 — February 28, 2022).
+3. Presentation of results. Writing final articles (March 1 — 31, 2022).
+4. Final round. Project presentation (April 9–10, 2022).
 
 ## Сriteria for evaluating the final result
 
