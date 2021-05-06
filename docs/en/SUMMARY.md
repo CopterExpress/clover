@@ -93,6 +93,7 @@
   * [Contribution Guidelines](contributing.md)
   * [Migration to v0.20](migrate20.md)
 * [Events](events.md)
+  * [CopterHack-2022](copterhack2022.md)
   * [CopterHack-2021](copterhack2021.md)
   * [CopterHack-2019](copterhack2019.md)
   * [CopterHack-2018](copterhack2018.md)
