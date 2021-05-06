@@ -42,4 +42,5 @@ cd /root/catkin_ws
 source devel/setup.bash
 catkin_make run_tests && catkin_test_results
 
+# Step 5: Run installation of packages
 catkin_make install
