@@ -111,7 +111,7 @@ generate_messages(
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
-  cfg/DetectorParams.cfg
+  cfg/Detector.cfg
 )
 
 ###################################
