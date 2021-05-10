@@ -100,6 +100,7 @@
   * [COEX Duocam](duocam.md)
     * [Виртуальная MAVLink-камера](duocam_mavlink.md)
 * [Мероприятия](events.md)
+  * [CopterHack-2022](copterhack2022.md)
   * [CopterHack-2021](copterhack2021.md)
   * [CopterHack-2019](copterhack2019.md)
   * [Олимпиада НТИ 2019](nti2019.md)
