@@ -35,7 +35,7 @@ if two conditions are met: open-source and compatible with the Clover platform
 ## How to apply?
 
 1. Prepare the following information:
-     * team information (team name, city of residence, contacts: e-mail /username in Telegram, the list of team members);
+     * team information (team name, city of residence, contacts: e-mail/username in Telegram, the list of team members);
      * project description (project idea, the potential outcomes, how will the Clover drone platform be used in your project).
 2. Add the information (point 1) to the Clover documentation site. Information about contributing an article to GitBook: https://clover.coex.tech/en/contributing.html#contributing-a-new-article 
 3. Wait for feedback.
