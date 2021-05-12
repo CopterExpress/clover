@@ -34,7 +34,15 @@ Read more in the [GPS connection](gps.md) article.
 
 > **Info** For studying Python programming language, see [tutorial](https://www.learnpython.org/en/Welcome).
 
-After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts. In order to run a Python script use the `python` command:
+After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts.
+
+Before the first flight it's recommended to check the Clover's configuration with [selfcheck.py utility](selfcheck.md):
+
+```bash
+rosrun clover selfcheck.py
+```
+
+In order to run a Python script use the `python` command:
 
 ```bash
 python flight.py

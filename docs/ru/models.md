@@ -96,6 +96,16 @@
         </td>
         <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/big_leg.dxf"><code>big_leg.dxf</code></a></td>
     </tr>
+    <tr>
+        <td><img src="../assets/dxf/4.2/grip_spacer.png"></td>
+        <td>
+            <b>Проставка для захвата</b>.<br>
+            Функция: Опорный элемент для механического захвата.<br>
+            Материал: Монолитный поликарбонат 2мм.<br>
+            Количество: 1 шт.
+        </td>
+        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grip_spacer.dxf"><code>grip_spacer.dxf</code></a></td>
+    </tr>
 </table>
 
 ## Клевер 4
