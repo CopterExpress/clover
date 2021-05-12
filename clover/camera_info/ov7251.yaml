@@ -1,0 +1,20 @@
+image_width: 640
+image_height: 480
+distortion_model: rational_polynomial
+camera_name: main_camera_optical
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [ 279.33, 0, 304.288, 0, 280.417, 268.697, 0, 0, 1, ]
+distortion_coefficients:
+  rows: 1
+  cols: 14
+  data: [ 0.155023, -0.0432218, 0.00152622, 6.48563e-05, 0.00390709, 0.495321, -0.0748121, 0.00553976, 0, 0, 0, 0, 0, 0, ]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [ 1, 0, 0, 0, 1, 0, 0, 0, 1, ]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [ 279.33, 0, 304.288, 0, 0, 280.417, 268.697, 0, 0, 0, 1, 0, ]
