@@ -12,7 +12,6 @@
     <arg name="led" default="true"/>
     <arg name="blocks" default="false"/>
     <arg name="rc" default="true"/>
-    <arg name="shell" default="true"/>
 
     <arg name="simulator" default="false"/> <!-- flag that we are operating on a simulated drone -->
 
@@ -90,9 +89,6 @@
         <!-- Send fake GCS heartbeats. Set to "true" for upstream PX4 -->
         <param name="use_fake_gcs" value="false"/>
     </node>
-
-    <!-- Shell access through ROS service -->
-    <node name="shell" pkg="clover" type="shell" output="screen" if="$(arg shell)"/>
 
     <!-- Update static directory -->
     <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">

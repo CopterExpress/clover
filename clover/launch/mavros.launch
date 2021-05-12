@@ -6,13 +6,15 @@
     <arg name="viz" default="true"/>
     <arg name="respawn" default="true"/>
     <arg name="distance_sensor_remap" default="rangefinder/range"/>
+    <arg name="usb_device" default="/dev/px4fmu"/>
+    <arg name="prefix" default="bash -c 'while [ ! -e $(arg usb_device) ]; do sleep 1; done; $0 $@'" if="$(eval fcu_conn == 'usb')"/>
 
-    <node pkg="mavros" type="mavros_node" name="mavros" required="false" clear_params="true" respawn="$(arg respawn)" unless="$(eval fcu_conn == 'none')" respawn_delay="1" output="screen">
+    <node pkg="mavros" type="mavros_node" name="mavros" launch-prefix="$(arg prefix)" required="false" clear_params="true" respawn="$(arg respawn)" unless="$(eval fcu_conn == 'none')" respawn_delay="1" output="screen">
         <!-- UART connection -->
         <param name="fcu_url" value="/dev/ttyAMA0:921600" if="$(eval fcu_conn is None or fcu_conn == 'uart')"/>
 
         <!-- USB connection -->
-        <param name="fcu_url" value="/dev/px4fmu" if="$(eval fcu_conn == 'usb')"/>
+        <param name="fcu_url" value="$(arg usb_device)" if="$(eval fcu_conn == 'usb')"/>
 
         <!-- sitl before PX4 1.9.0 -->
         <param name="fcu_url" value="udp://@$(arg fcu_ip):14557" if="$(eval fcu_conn == 'udp')"/>
