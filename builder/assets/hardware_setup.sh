@@ -83,6 +83,10 @@ echo_stamp "#8 Check if Compute Module 4"
 if grep -q "Compute Module 4" "/proc/device-tree/model"; then
   echo_stamp "Enable USB on Compute Module 4"
   echo "dtoverlay=dwc2,dr_mode=host" >> /boot/config.txt
+
+  echo_stamp "Enable OV7251 camera overlay"
+  echo "#dtoverlay=ov7251 # OV7251 camera on CAM1" >> /boot/config.txt
+  echo "dtoverlay=ov7251cam0 # OV7251 camera on CAM0" >> /boot/config.txt
 fi
 
 echo_stamp "#9 End of configure hardware interfaces"
