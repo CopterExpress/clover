@@ -24,6 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_ros
   image_transport
   cv_bridge
+  catkin_virtualenv
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
@@ -132,6 +133,16 @@ generate_messages(
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
+# Generate the virtualenv
+catkin_generate_virtualenv(INPUT_REQUIREMENTS requirements.in)
+
+# Make sure your python executables are installed using `catkin_install_python`:
+catkin_install_python(
+  PROGRAMS
+    src/selfcheck.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
 catkin_package(
 #  INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
@@ -248,11 +259,8 @@ target_link_libraries(${PROJECT_NAME}
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+ install(FILES requirements.in
+       	 DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 # Only install udev rules when building a Debian package
 # FIXME: Other operating systems may have other prefixes
