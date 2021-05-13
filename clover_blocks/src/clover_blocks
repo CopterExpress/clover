@@ -10,6 +10,7 @@
 
 from __future__ import print_function
 
+import traceback
 import rospy
 import os
 import threading
@@ -116,6 +117,7 @@ def run(req):
                 rospy.loginfo('Program forced to stop')
             except Exception as e:
                 rospy.logerr(str(e))
+                traceback.print_exc()
                 error_pub.publish(str(e))
 
             rospy.loginfo('Program terminated')
