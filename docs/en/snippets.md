@@ -359,3 +359,28 @@ calibrate_gyro()
 ```
 
 > **Note** In process of calibration the drone should not be moved.
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#aruco-detect-enabled}
+
+<!-- markdownlint-enable MD044 -->
+
+Enable and disable [ArUco markers recognition](aruco_marker.md) dynamically (for example, for saving CPU resources):
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+# ...
+
+client = dynamic_reconfigure.client.Client('aruco_detect')
+
+# Turn markers recognition off
+client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Turn markers recognition on
+client.update_configuration({'enabled': True})
+```

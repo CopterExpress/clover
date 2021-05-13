@@ -148,6 +148,7 @@ my_travis_retry pip3 install --prefer-binary rpi_ws281x
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey /etc/monkey/sites/default
+sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 systemctl enable monkey.service
 
 echo_stamp "Install Node.js"

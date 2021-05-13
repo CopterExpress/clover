@@ -54,3 +54,6 @@ python3 -m pip install --upgrade pytest # TODO: https://github.com/CopterExpress
 cd /root/catkin_ws
 source devel/setup.bash
 catkin_make run_tests && catkin_test_results
+
+# Step 5: Install packages
+catkin_make install

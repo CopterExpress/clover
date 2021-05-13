@@ -11,7 +11,8 @@
 from __future__ import print_function
 
 import rospy
-import os
+import os, sys
+import traceback
 import threading
 import re
 import uuid
@@ -116,7 +117,12 @@ def run(req):
                 rospy.loginfo('Program forced to stop')
             except Exception as e:
                 rospy.logerr(str(e))
-                error_pub.publish(str(e))
+                traceback.print_exc()
+                etype, value, tb = sys.exc_info()
+                fmt = traceback.format_exception(etype, value, tb)
+                fmt.pop(1) # remove 'clover_blocks' file frame
+                exc_info = ''.join(fmt)
+                error_pub.publish(str(e) + '\n\n' + exc_info)
 
             rospy.loginfo('Program terminated')
             running_lock.release()
