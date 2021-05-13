@@ -10,9 +10,9 @@
 
 from __future__ import print_function
 
-import traceback
 import rospy
-import os
+import os, sys
+import traceback
 import threading
 import re
 import uuid
@@ -118,7 +118,11 @@ def run(req):
             except Exception as e:
                 rospy.logerr(str(e))
                 traceback.print_exc()
-                error_pub.publish(str(e))
+                etype, value, tb = sys.exc_info()
+                fmt = traceback.format_exception(etype, value, tb)
+                fmt.pop(1) # remove 'clover_blocks' file frame
+                exc_info = ''.join(fmt)
+                error_pub.publish(str(e) + '\n\n' + exc_info)
 
             rospy.loginfo('Program terminated')
             running_lock.release()
