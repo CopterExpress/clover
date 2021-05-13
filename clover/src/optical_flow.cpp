@@ -206,7 +206,7 @@ private:
 				} catch (const tf2::TransformException& e) {
 					// Invalidate previous frame
 					prev_.release();
-					return;
+					goto publish_debug;
 				}
 			}
 
@@ -218,6 +218,10 @@ private:
 			flow_.quality = (uint8_t)(response * 255);
 			flow_pub_.publish(flow_);
 
+			prev_ = curr_.clone();
+			prev_stamp_ = msg->header.stamp;
+
+publish_debug:
 			// Publish debug image
 			if (img_pub_.getNumSubscribers() > 0) {
 				// publish debug image
@@ -234,12 +238,9 @@ private:
 			static geometry_msgs::TwistStamped velo;
 			velo.header.stamp = msg->header.stamp;
 			velo.header.frame_id = fcu_frame_id_;
-			velo.twist.angular.x = flow_.integrated_x / integration_time.toSec();
-			velo.twist.angular.y = flow_.integrated_y / integration_time.toSec();
+			velo.twist.angular.x = flow_fcu.vector.x / integration_time.toSec();
+			velo.twist.angular.y = flow_fcu.vector.y / integration_time.toSec();
 			velo_pub_.publish(velo);
-
-			prev_ = curr_.clone();
-			prev_stamp_ = msg->header.stamp;
 		}
 	}
 
