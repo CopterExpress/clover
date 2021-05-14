@@ -8,7 +8,7 @@
     <arg name="distance_sensor_remap" default="rangefinder/range"/>
     <arg name="usb_device" default="/dev/px4fmu"/>
     <arg name="prefix" default="" unless="$(eval fcu_conn == 'usb')"/>
-    <arg name="prefix" default="bash -c 'while [ ! -e $(arg usb_device) ]; do sleep 1; done; $0 $@'" if="$(eval fcu_conn == 'usb')"/>
+    <arg name="prefix" default="rosrun clover waitfile $(arg usb_device)"/>
 
     <node pkg="mavros" type="mavros_node" name="mavros" launch-prefix="$(arg prefix)" required="false" clear_params="true" respawn="$(arg respawn)" unless="$(eval fcu_conn == 'none')" respawn_delay="1" output="screen">
         <!-- UART connection -->
