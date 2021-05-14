@@ -3,7 +3,7 @@
 # $ ./waitfile <file> <command> <args...> 
 # wait until <file> appears and then invoke <command> with <args>
 
-echo "wait for file $1 to ${@:2}"
+echo "wait for file $1"
 while [ ! -e "$1" ]; do sleep 1; done;
-echo "file $1 appeared, run ${@:2}"
+echo "file $1 appeared"
 "${@:2}"
