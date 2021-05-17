@@ -1,5 +1,0 @@
-flask==1.1.1
-docopt==0.6.2
-geopy==1.11.0
-smbus2==0.3.0
-VL53L1X==0.0.5

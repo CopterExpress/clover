@@ -15,6 +15,7 @@
 
   <!-- Package format specifier version 2.0 allows specifying dependencies for both
    build- and runtime in a single <depend> element -->
+  <build_depend>catkin_virtualenv</build_depend>
   <depend>message_generation</depend>
   <depend>roscpp</depend>
   <depend>rospy</depend>
@@ -38,6 +39,7 @@
   <depend>web_video_server</depend>
   <depend>tf2_web_republisher</depend>
   <depend>python-lxml</depend>
+  <test_depend>ros_pytest</test_depend>
   <!-- <exec_depend>python-pymavlink</exec_depend> -->
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
@@ -46,5 +48,6 @@
   <export>
     <nodelet plugin="${prefix}/nodelet_plugins.xml" />
     <!-- Other tools can request additional information be placed here -->
+    <pip_requirements>requirements.in</pip_requirements>
   </export>
 </package>
