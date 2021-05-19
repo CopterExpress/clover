@@ -96,6 +96,7 @@
   * [Подключение регулятора 4 в 1](4in1.md)
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
+  * [Репозиторий пакетов COEX](packages.md)
   * [Переход на версию 0.20](migrate20.md)
   * [Переход на версию 0.22](migrate22.md)
   * [COEX Duocam](duocam.md)

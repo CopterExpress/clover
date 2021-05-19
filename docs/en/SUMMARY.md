@@ -91,6 +91,7 @@
   * [Soldering safety](tb.md)
   * [LED strip (legacy)](leds_old.md)
   * [Contribution Guidelines](contributing.md)
+  * [COEX packages repository](packages.md)
   * [Migration to v0.20](migrate20.md)
   * [Migration to v0.22](migrate22.md)
 * [Events](events.md)
