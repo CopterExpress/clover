@@ -54,6 +54,7 @@ rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
 rosversion rosshow
+rosversion nodelet
 
 # validate examples are present
 [[ $(ls /home/pi/examples/*) ]]
