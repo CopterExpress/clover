@@ -712,7 +712,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		if (sp_type == VELOCITY) {
-			static Vector3Stamped vel;
+			Vector3Stamped vel;
 			vel.header.frame_id = frame_id;
 			vel.header.stamp = stamp;
 			vel.vector.x = vx;

@@ -152,7 +152,7 @@ private:
 			cv::Point2d shift = cv::phaseCorrelate(prev_, curr_, hann_, &response);
 
 			// Publish raw shift in pixels
-			static geometry_msgs::Vector3Stamped shift_vec;
+			geometry_msgs::Vector3Stamped shift_vec;
 			shift_vec.header.stamp = msg->header.stamp;
 			shift_vec.header.frame_id = msg->header.frame_id;
 			shift_vec.vector.x = shift.x;
@@ -179,7 +179,7 @@ private:
 			double flow_y = atan2(points_undist[0].y, focal_length_y);
 
 			// // Convert to FCU frame
-			static geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
+			geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
 			flow_camera.header.frame_id = msg->header.frame_id;
 			flow_camera.header.stamp = msg->header.stamp;
 			flow_camera.vector.x = flow_y; // +y means counter-clockwise rotation around Y axis
@@ -198,7 +198,7 @@ private:
 			if (calc_flow_gyro_) {
 				try {
 					auto flow_gyro_camera = calcFlowGyro(msg->header.frame_id, prev_stamp_, msg->header.stamp);
-					static geometry_msgs::Vector3Stamped flow_gyro_fcu;
+					geometry_msgs::Vector3Stamped flow_gyro_fcu;
 					tf_buffer_->transform(flow_gyro_camera, flow_gyro_fcu, fcu_frame_id_);
 					flow_.integrated_xgyro = flow_gyro_fcu.vector.x;
 					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
@@ -235,7 +235,7 @@ publish_debug:
 			}
 
 			// Publish estimated angular velocity
-			static geometry_msgs::TwistStamped velo;
+			geometry_msgs::TwistStamped velo;
 			velo.header.stamp = msg->header.stamp;
 			velo.header.frame_id = fcu_frame_id_;
 			velo.twist.angular.x = flow_fcu.vector.x / integration_time.toSec();
