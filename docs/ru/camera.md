@@ -155,3 +155,13 @@ rospy.spin()
 ```
 
 Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw_throttled`.
+
+## Запись видео
+
+Для записи видео может использована нода [`video_recorder`](http://wiki.ros.org/image_view#image_view.2Fdiamondback.video_recorder) из пакета `image_view`:
+
+```bash
+rosrun image_view video_recorder image:=/main_camera/image_raw
+```
+
+Видео будет сохранено в файл `output.avi`. В аргументе `image` указывается название топика для записи видео.

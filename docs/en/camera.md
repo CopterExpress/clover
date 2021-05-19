@@ -153,3 +153,13 @@ The script will take up to 100% CPU capacity. To slow down the script artificial
 ```
 
 The topic for the subscriber in this case should be changed for `main_camera/image_raw_throttled`.
+
+## Video recording
+
+To record a video you can use [`video_recorder`](http://wiki.ros.org/image_view#image_view.2Fdiamondback.video_recorder) node from `image_view` package:
+
+```bash
+rosrun image_view video_recorder image:=/main_camera/image_raw
+```
+
+The video file will be saved to a file `output.avi`. The `image` argument contains the name of the topic to record.
