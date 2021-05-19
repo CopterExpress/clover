@@ -159,9 +159,6 @@ add_library(aruco_pose
 
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_generate_messages_cpp ${PROJECT_NAME}_gencfg)
 
-# FIXME: hack to fix https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6532
-# string(REPLACE "-lpthreads;" "" catkin_LIBRARIES "${catkin_LIBRARIES}")
-
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide

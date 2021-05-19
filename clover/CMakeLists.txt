@@ -185,9 +185,6 @@ add_executable(clover_led src/led.cpp)
 
 add_executable(shell src/shell.cpp)
 
-# FIXME: hack to fix https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6532
-# string(REPLACE "-lpthreads;" "" catkin_LIBRARIES "${catkin_LIBRARIES}")
-
 target_link_libraries(simple_offboard
   ${catkin_LIBRARIES}
   ${GeographicLib_LIBRARIES}

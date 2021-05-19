@@ -103,8 +103,6 @@ ros-${ROS_DISTRO}-web-video-server
 echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
 my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
 
-# cp /lib/arm-linux-gnueabihf/libpthread.so.0 /lib/arm-linux-gnueabihf/libpthreads.so
-
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
