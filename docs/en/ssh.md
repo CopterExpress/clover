@@ -15,7 +15,7 @@ Password: `raspberry`.
 
 For SSH access from Windows, you may use [PuTTY] (https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
 
-You can also gain SSH access from your smart-phone using the [Termius] app (https://www.termius.com).
+You can also gain SSH access from your smart-phone using the [Termius](https://www.termius.com) app.
 
 Read more: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
 
