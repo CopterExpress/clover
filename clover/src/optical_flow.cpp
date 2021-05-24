@@ -52,7 +52,7 @@ private:
 	Mat camera_matrix_, dist_coeffs_;
 	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
-    bool calc_flow_gyro_;
+	bool calc_flow_gyro_;
 
 	void onInit()
 	{
