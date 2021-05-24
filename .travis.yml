@@ -60,14 +60,14 @@ jobs:
     #     - docker pull ${NATIVE_DOCKER}
     #   script:
     #     - docker run --rm -v $(pwd):/root/catkin_ws/src/clover ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
-    - stage: Build
-      name: "Native Melodic build"
-      env:
-        - NATIVE_DOCKER=ros:melodic-ros-base
-      before_script:
-        - docker pull ${NATIVE_DOCKER}
-      script:
-        - docker run --rm -v $(pwd):/root/catkin_ws/src/clover ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
+    # - stage: Build
+    #   name: "Native Melodic build"
+    #   env:
+    #     - NATIVE_DOCKER=ros:melodic-ros-base
+    #   before_script:
+    #     - docker pull ${NATIVE_DOCKER}
+    #   script:
+    #     - docker run --rm -v $(pwd):/root/catkin_ws/src/clover ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
     - stage: Build
       name: "Documentation"
       language: node_js
@@ -107,14 +107,6 @@ jobs:
         verbose: true
         on:
           branch: master
-    - stage: Build
-      name: Editorconfig-lint
-      language: generic
-      before_script:
-        - wget https://github.com/okalachev/editorconfig-checker/releases/download/1.2.1-disable-spaces-amount/ec-linux-amd64
-        - chmod +x ec-linux-amd64
-      script:
-        - ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|blockly/|clover_blocks/programs/|highlight/|python.js|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt|aruco_pose/vendor|\.stl|\.dxf|\.dae"
 stages:
   - Build
 # More info there
