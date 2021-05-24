@@ -30,4 +30,4 @@ jobs:
         env:
           NATIVE_DOCKER: ros:melodic-ros-base
         run: |
-          docker run --rm -v $(pwd):/root/catkin_ws/src/vl53l1x_ros ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
+          docker run --rm -v $(pwd):/root/catkin_ws/src/clover ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
