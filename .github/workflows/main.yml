@@ -19,9 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: build image
+      - name: Build image
         run: |
           docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${{ github.event.release.tag_name }}" sfalexrog/img-tool:qemu-update
+      - name: Compress images
+        run: |
+          zip -9 $(echo images/*).zip images/* && ls -lh images
 
   # This workflow contains a single job called "build"
   build:
