@@ -24,7 +24,7 @@ jobs:
           docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${{ github.event.release.tag_name }}" sfalexrog/img-tool:qemu-update
       - name: Compress images
         run: |
-          zip -9 $(echo images/*).zip images/* && ls -lh images
+          sudo chmod -R 777 && zip -9 $(echo images/clover_*).zip images/clover_* && ls -lh images
       - name: Upload image
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/v')
