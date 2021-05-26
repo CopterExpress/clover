@@ -20,6 +20,9 @@ jobs:
         directories:
         - imgcache
       before_script:
+        - if [ -z "$DOCKER_USERNAME" ]
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          fi
         - docker pull ${DOCKER}
 # Check if there are any cached images, copy them to our "images" directory
         - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
