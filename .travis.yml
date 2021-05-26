@@ -20,7 +20,7 @@ jobs:
         directories:
         - imgcache
       before_script:
-        - if [ -z "$DOCKER_USERNAME" ]; then
+        - if [ ! -z "$DOCKER_USERNAME" ]; then
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
           fi
         - docker pull ${DOCKER}
