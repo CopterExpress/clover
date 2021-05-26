@@ -25,6 +25,13 @@ jobs:
       - name: Compress images
         run: |
           zip -9 $(echo images/*).zip images/* && ls -lh images
+      - name: Upload image
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: images/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # This workflow contains a single job called "build"
   build:
