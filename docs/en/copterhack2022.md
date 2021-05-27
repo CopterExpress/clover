@@ -4,47 +4,52 @@ CopterHack 2022 is a team competition for the development of open source project
 
 Develop your product in partnership with COEX. 
 
-## Номинация "Свой проект"
+## Nomination "Own project"
 
-На конкурс принимаются  проекты с открытым исходным кодом и совместимые с платформой квадрокоптера «Клевер». Тему проекта команды выбирают самостоятельно.
+Open source projects that are compatible with the Clover quadrocopter platform are accepted for the competition. The team chooses the project topic independently.
 
 The prize fund from the COEX company for the further development of projects:
-1st place - $3000
-2nd place - $2000
-3rd place - $1000
-4th place - $500
-5th place - $500
+  1st place - $3000
+  2nd place - $2000
+  3rd place - $1000
+  4th place - $500
+  5th place - $500
 
-Партнеры конкурса могут поощрить команды по дополнительным критериям, выявленным в результате оценки проектов в ходе финала.
+The competition partners can reward the teams according to additional criteria identified due to the evaluation of projects during the final round.
 
-## Номинация "Кейс компании"
+## Nomination "Company case"
 
-Список кейсов:
-1. Модификация прошивки PX4 версии v1.12.0 под Клевер.
+List of cases:
+1. Modification of the PX4 firmware version v1. 12. 0 for Clover.
 
-Призовой фонд от компании COEX для дальнейшего развития проектов:
-  1st place – $2500 
+Prize fund from COEX for further development of the project:
+1st place – $2500
+
+2. Development of the PX4 v flight controller board based on COEX Pix with 55*40 mm and installing Raspberry Pi Compute mode 4.
+
+Prize fund from COEX for further development of the project:
+First place - $2500
 
 ## CopterHack 2022 stages
 
-Конкурс проводится в онлайн формате, в течение конкурса команды будут писать ежемесячные апдейты и получать обратную связь от жюри. Для участия в заключительном этапе необходимо подготовить финальное видео и презентацию о результатах проекта.
+The competition is held in an online format. During the competition, teams will write monthly updates and receive feedback from the jury. To participate in the final stage, you need to prepare a final video and a presentation about the project's results.
 
 1. Qualifying round. Collection of applications (June 1 — October 31, 2021).
 2. Project development. Project mentorship (June 1, 2021 — February 28, 2022).
 3. Подготовка финального видео (March 1 — 31, 2022).
 4. Final round. Project presentation (April 9–10, 2022).
 
-## Условия и Сriteria for evaluating the final result
+## Conditions and criteria for evaluating the final result
 
-Условия, предъявляемые к проектам:
+Conditions for projects:
   * open-source;
   * compatible with the Clover platform.
 
-Критерии оценивания жюри на финале:
-1. Text description: the project article consists of a full-text description, the code (+understandable comments), flowcharts, electrical schemes, drawings, and other graphic information.
-2. Level and scope of work done: the complexity, scope, and novelty of the work done by the team within and for the CopterHack.
-3. Аpplicability and demand: the possibility of using and apply for the COEX and PX4 platform, demand, scalability, the ability to recreate.
-4. Presentation at the final round: quality, entertainment, and interest of the final presentation, completeness of the project coverage, demonstration, answers to questions. 
+Criteria for judging the jury at the final:
+1. Readiness and article: the degree of readiness of the project and its accessible and understandable description in the article on GitBook; attached code with comments, diagrams, drawings. According to the article, you can repeat the project and get the result.
+2. Amount of work done: the amount of work done by the team within CopterHack and for CopterHack, its complexity, and technical level.
+3. Usefulness for Clover: the relevance of the Clover and PX4 platform application in practice, the potential level of demand for development from other Clover users.
+4. Presentation at the final round: quality, entertainment, and interest of the final presentation; completeness of the project coverage; demonstration; answers to questions. 
 
 ## Jury
 
@@ -72,11 +77,11 @@ The main developer of the Clover platform, makes a great contribution to the imp
 2. Add the information (point 1) to the Clover documentation site. Information about contributing an article to GitBook: https://clover.coex.tech/en/contributing.html#contributing-a-new-article 
 3. Wait for feedback.
 
-## Заявки команд
+## Team applications
 
-     * заявки будут публиковаться по мере поступления.
+     * applications will be published as they become available.
 
-Ознакомиться со статьями команд-финалистов CopterHack 2021 можно по ссылке: https://clover.coex.tech/ru/copterhack2021.html
+To read the articles of the CopterHack 2021 finalist teams, follow the link: https://clover.coex.tech/ru/copterhack2021.html
 
 
 
