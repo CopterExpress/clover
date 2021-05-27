@@ -22,7 +22,7 @@ jobs:
       - name: Build image
         run: |
           docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${{ github.event.release.tag_name }}" sfalexrog/img-tool:qemu-update
-      - name: Compress images
+      - name: Compress image
         run: |
           sudo chmod -R 777 images && zip -9 $(echo images/clover_*).zip images/clover_* && ls -lh images
       - name: Upload image
