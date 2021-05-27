@@ -2,6 +2,8 @@
 
 Полетный контроллер **COEX Pix** является модифицированным аналогом полетного контроллера [Pixracer](https://docs.px4.io/v1.9.0/en/flight_controller/pixracer.html). Этот полетный контроллер поставляется с наборами **Клевер 4** и далее.
 
+> **Hint** Исходные файлы полетного контроллера COEX Pix [выложены](https://github.com/CopterExpress/hardware/tree/master/COEX%20Pix) в открытый доступ под лицензией CC BY-NC-SA.
+
 ## Ревизия 1.1
 
 ### Характеристики
