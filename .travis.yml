@@ -14,47 +14,47 @@ git:
 jobs:
   fast_finish: true
   include:
-    - stage: Build
-      name: "Raspberry Pi Image Build"
-      cache:
-        directories:
-        - imgcache
-      before_script:
-        - if [ ! -z "$DOCKER_USERNAME" ]; then
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
-          fi
-        - docker pull ${DOCKER}
-# Check if there are any cached images, copy them to our "images" directory
-        - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
-      script:
-        - if [[ -z ${TRAVIS_TAG} && "${TRAVIS_PULL_REQUEST}" != "false" ]]; then
-            echo "Commit range is ${TRAVIS_COMMIT_RANGE}" &&
-            if [ $(git diff --name-only ${TRAVIS_COMMIT_RANGE} | grep -v ^"docs/" | wc -l) -eq 0 ]; then
-              echo " === Docs-only change; skipping build ===" &&
-              export SKIP_BUILD=true;
-            fi;
-          fi
-        - if [ -z ${SKIP_BUILD} ]; then
-            docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER};
-          fi
-      before_cache:
-        - cp images/*.zip imgcache
-      after_success:
-        - sudo chmod -R 777 *
-        - cd images && zip -9 ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
-      before_deploy:
-        # Set up git user name and tag this commit
-        - git config --local user.name "goldarte"
-        - git config --local user.email "goldartt@gmail.com"
-      deploy:
-        provider: releases
-        token: ${GITHUB_OAUTH_TOKEN}
-        file: ${IMAGE_NAME}.zip
-        skip_cleanup: true
-        on:
-          tags: true
-        draft: true
-        name: ${TRAVIS_TAG}
+#     - stage: Build
+#       name: "Raspberry Pi Image Build"
+#       cache:
+#         directories:
+#         - imgcache
+#       before_script:
+#         - if [ ! -z "$DOCKER_USERNAME" ]; then
+#             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+#           fi
+#         - docker pull ${DOCKER}
+# # Check if there are any cached images, copy them to our "images" directory
+#         - if [ -n "$(ls -A imgcache/*.zip)" ]; then mkdir -p images && cp imgcache/*.zip images; fi
+#       script:
+#         - if [[ -z ${TRAVIS_TAG} && "${TRAVIS_PULL_REQUEST}" != "false" ]]; then
+#             echo "Commit range is ${TRAVIS_COMMIT_RANGE}" &&
+#             if [ $(git diff --name-only ${TRAVIS_COMMIT_RANGE} | grep -v ^"docs/" | wc -l) -eq 0 ]; then
+#               echo " === Docs-only change; skipping build ===" &&
+#               export SKIP_BUILD=true;
+#             fi;
+#           fi
+#         - if [ -z ${SKIP_BUILD} ]; then
+#             docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${TRAVIS_TAG}" ${DOCKER};
+#           fi
+#       before_cache:
+#         - cp images/*.zip imgcache
+#       after_success:
+#         - sudo chmod -R 777 *
+#         - cd images && zip -9 ${IMAGE_NAME}.zip ${IMAGE_NAME} && stat --printf="Compressed image size:%s\n" ${IMAGE_NAME}.zip
+#       before_deploy:
+#         # Set up git user name and tag this commit
+#         - git config --local user.name "goldarte"
+#         - git config --local user.email "goldartt@gmail.com"
+#       deploy:
+#         provider: releases
+#         token: ${GITHUB_OAUTH_TOKEN}
+#         file: ${IMAGE_NAME}.zip
+#         skip_cleanup: true
+#         on:
+#           tags: true
+#         draft: true
+#         name: ${TRAVIS_TAG}
     # - stage: Build
     #   name: "Native Kinetic build"
     #   env:
