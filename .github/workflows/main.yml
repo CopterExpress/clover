@@ -72,10 +72,6 @@ jobs:
           rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
           rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
           ls -lah _book/clover*.pdf
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
         if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
