@@ -63,7 +63,7 @@ jobs:
          gitbook install
          gitbook build
       - name: Generate PDF
-        if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/actions-docs' }} # TODO: change to master
+        if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         run: |
           for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
           sudo apt-get -q install ghostscript
@@ -78,9 +78,9 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
-        if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/actions-docs' }} # TODO: change to master
+        if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
-          branch: actions
+          branch: master
           folder: _book
           repository-name: CopterExpress/clover.coex.tech
           token: ${{ secrets.DOCS_DEPLOY_TOKEN }}
