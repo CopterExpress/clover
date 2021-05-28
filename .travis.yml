@@ -13,7 +13,7 @@ git:
   depth: 1
 jobs:
   fast_finish: true
-  include:
+  include: []
 #     - stage: Build
 #       name: "Raspberry Pi Image Build"
 #       cache:
@@ -71,45 +71,45 @@ jobs:
     #     - docker pull ${NATIVE_DOCKER}
     #   script:
     #     - docker run --rm -v $(pwd):/root/catkin_ws/src/clover ${NATIVE_DOCKER} /root/catkin_ws/src/clover/builder/standalone-install.sh
-    - stage: Build
-      name: "Documentation"
-      language: node_js
-      node_js:
-        - "10"
-      before_script:
-        - sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
-        - sudo apt update && sudo apt install -y calibre msttcorefonts
-        - npm install gitbook-cli -g
-        - gitbook fetch 3.2.3 && npm i npm@3.10.10 --prefix=~/.gitbook/versions/3.2.3/ # fixing https://travis-ci.org/github/CopterExpress/clover/jobs/766541125#L932
-        - npm install markdownlint-cli -g
-        - npm install svgexport -g
-        - gitbook -V
-        - markdownlint -V
-      script:
-        - markdownlint docs
-        - ./check_assets_size.py
-        - ./check_unused_assets.py
-        - gitbook install
-        - gitbook build
-        - for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
-        - sudo apt-get install ghostscript
-        - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf
-        - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf
-        - rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
-        - rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
-        - ls -lah _book/clover*.pdf
-      deploy:
-        provider: pages
-        local_dir: _book
-        skip_cleanup: true
-        token: ${GITHUB_OAUTH_TOKEN}
-        keep_history: true
-        target_branch: master
-        repo: CopterExpress/clover.coex.tech
-        fqdn: clover.coex.tech
-        verbose: true
-        on:
-          branch: master
+    # - stage: Build
+    #   name: "Documentation"
+    #   language: node_js
+    #   node_js:
+    #     - "10"
+    #   before_script:
+    #     - sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
+    #     - sudo apt update && sudo apt install -y calibre msttcorefonts
+    #     - npm install gitbook-cli -g
+    #     - gitbook fetch 3.2.3 && npm i npm@3.10.10 --prefix=~/.gitbook/versions/3.2.3/ # fixing https://travis-ci.org/github/CopterExpress/clover/jobs/766541125#L932
+    #     - npm install markdownlint-cli -g
+    #     - npm install svgexport -g
+    #     - gitbook -V
+    #     - markdownlint -V
+    #   script:
+    #     - markdownlint docs
+    #     - ./check_assets_size.py
+    #     - ./check_unused_assets.py
+    #     - gitbook install
+    #     - gitbook build
+    #     - for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
+    #     - sudo apt-get install ghostscript
+    #     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf
+    #     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf
+    #     - rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
+    #     - rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
+    #     - ls -lah _book/clover*.pdf
+    #   deploy:
+    #     provider: pages
+    #     local_dir: _book
+    #     skip_cleanup: true
+    #     token: ${GITHUB_OAUTH_TOKEN}
+    #     keep_history: true
+    #     target_branch: master
+    #     repo: CopterExpress/clover.coex.tech
+    #     fqdn: clover.coex.tech
+    #     verbose: true
+    #     on:
+    #       branch: master
 stages:
   - Build
 # More info there
