@@ -65,7 +65,7 @@ jobs:
       - name: Generate PDF
         run: |
           for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
-          sudo apt-get install ghostscript
+          sudo apt-get -q install ghostscript
           gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf
           gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf
           rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
