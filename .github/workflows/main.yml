@@ -76,7 +76,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.3
         if: ${{ github.repository == 'CopterExpress/clover' && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         with:
-          branch: master
+          branch: gh-pages
           folder: _book
           repository-name: CopterExpress/clover.coex.tech
           token: ${{ secrets.DOCS_DEPLOY_TOKEN }}
