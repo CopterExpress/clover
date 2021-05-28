@@ -82,7 +82,7 @@ jobs:
           branch: actions
           folder: _book
           repository-name: CopterExpress/clover.coex.tech
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DOCS_DEPLOY_TOKEN }}
           clean: true
   # This workflow contains a single job called "build"
   build:
