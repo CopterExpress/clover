@@ -35,7 +35,42 @@ jobs:
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with: { node-version: '10' }
+      - name: Setup tools
+        run: |
+          sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
+          sudo apt update && sudo apt install -y calibre msttcorefonts
+          npm install gitbook-cli -g
+          gitbook fetch 3.2.3 && npm i npm@3.10.10 --prefix=~/.gitbook/versions/3.2.3/ # fixing https://travis-ci.org/github/CopterExpress/clover/jobs/766541125#L932
+          npm install markdownlint-cli -g
+          npm install svgexport -g
+          gitbook -V
+          markdownlint -V
+      - name: Run markdownlint
+        run: markdownlint docs
+      - name: Check Assets
+        run: |
+          ./check_assets_size.py
+          ./check_unused_assets.py
+      - name: Build GitBook
+        run: |
+         gitbook install
+         gitbook build
+      - name: Generate PDF
+        run: |
+          for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
+          sudo apt-get install ghostscript
+          gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf
+          gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf
+          rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
+          rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
+          ls -lah _book/clover*.pdf
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
