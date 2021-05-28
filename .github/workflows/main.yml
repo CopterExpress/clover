@@ -86,7 +86,6 @@ jobs:
           token: ${{ secrets.DOCS_DEPLOY_TOKEN }}
           clean: true
           single-commit: true # to avoid multiple copies of large pdf files
-        run: echo Uploaded to https://clover.coex.tech.
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
