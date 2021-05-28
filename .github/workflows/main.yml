@@ -73,7 +73,7 @@ jobs:
           ls -lah _book/clover*.pdf
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.3
-        if: github.ref == 'ref/head/actions-docs'
+        if: ${{ github.ref == 'ref/head/actions-docs' }}
         with:
           branch: actions
           folder: _book
