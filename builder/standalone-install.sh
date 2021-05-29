@@ -3,8 +3,8 @@
 # Perform a "standalone install" in a Docker container
 set -e
 # Step 1: Install pip
-apt update
-apt install -y curl
+apt-get update
+apt-get install -y curl
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 ./get-pip.py
 
@@ -34,7 +34,7 @@ ws281x:
   ubuntu:
     ${CODENAME}: [ros-${ROS_DISTRO}-ws281x]
 EOF
-apt update
+apt-get update
 rosdep update
 
 # Step 2: Run rosdep to install all dependencies
