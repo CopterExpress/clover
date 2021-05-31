@@ -3,8 +3,8 @@
 # Perform a "standalone install" in a Docker container
 set -e
 # Step 1: Install pip
-apt update
-apt install -y curl
+apt-get update
+apt-get install -y curl
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 python ./get-pip.py
 
@@ -21,7 +21,7 @@ led_msgs:
     stretch: ros-kinetic-led-msgs
     buster: ros-melodic-led-msgs
 EOF
-apt update
+apt-get update
 rosdep update
 
 # Step 2: Run rosdep to install all dependencies
@@ -41,3 +41,6 @@ pip install --upgrade pytest
 cd /root/catkin_ws
 source devel/setup.bash
 catkin_make run_tests && catkin_test_results
+
+# Step 5: Install packages
+catkin_make install

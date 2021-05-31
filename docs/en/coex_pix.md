@@ -2,6 +2,8 @@
 
 The **COEX Pix** flight controller is a modified [Pixracer](https://docs.px4.io/v1.9.0/en/flight_controller/pixracer.html) FCU. It is a part of the **Clover 4** quadrotor kit.
 
+> **Hint** The source files of the COEX Pix flight controller are [published](https://github.com/CopterExpress/hardware/tree/master/COEX%20Pix) under the CC BY-NC-SA license.
+
 ## Revision 1.1
 
 ### Physical specs

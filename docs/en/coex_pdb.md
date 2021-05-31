@@ -4,6 +4,8 @@
 
 Board size: 35x35 mm.
 
+> **Hint** The source files of the COEX PDB board are [published](https://github.com/CopterExpress/hardware/tree/master/COEX%20PDB) under the CC BY-NC-SA license.
+
 ## Port pinouts
 
 ### Top view

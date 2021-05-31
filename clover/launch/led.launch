@@ -36,7 +36,7 @@
             posctl: { r: 50, g: 100, b: 220 }
             offboard: { r: 220, g: 20, b: 250 }
             low_battery: { threshold: 3.6, effect: blink_fast, r: 255, g: 0, b: 0 }
-            error: { effect: flash, r: 255, g: 0, b: 0 }
+            error: { effect: flash, r: 255, g: 0, b: 0, ignore: [ "[lpe] vision position timeout" ]}
         </rosparam>
     </node>
 </launch>

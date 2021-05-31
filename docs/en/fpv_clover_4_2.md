@@ -34,7 +34,7 @@
         <img src="../assets/fpv/fpv_9.png" width=300 class="zoom border">
     </div>
 
-    > **Hint** Сheck what you are wearing shrink tubes before soldering the wires.
+    > **Hint** Check what you are wearing shrink tubes before soldering the wires.
 
 6. Solder the JST male connector to the transmitter.
 
