@@ -1,28 +1,21 @@
 # CopterHack 2022
 
-CopterHack 2022 is a team competition for the development of open-source projects for the Clover quadcopter platform. CopterHack 2022 will have two tracks: "Innovative Solutions" and "Company cases".
+CopterHack 2022 is an international open-source project development competition for aerial robotics. CopterHack 2022 will have two tracks: "Open category" and "Company cases".
 
 To read the articles of the CopterHack 2021 finalist teams, follow the link: https://clover.coex.tech/ru/copterhack2021.html
 
 ## What does participation in CopterHack give?
 
-1. Personal growth
-
-Join the community of like-minded people: [DroneCode](https://t.me/DroneCode), [COEX: helpdesk](https://t.me/COEXHelpdesk), [the participants of previous years](https://t.me/CopterHack).
-
-Publish your work on the site documentation "Clover".
-You can use the project in other projects and project activities (at school, university).
-
-2. Mentorship
+1. Mentorship
 
 Get advice, technical support, and expert evaluation of your project throughout the entire life cycle.
 
 From the idea to the product level.
 Develop your idea in partnership with COEX.
 
-3. Prize fund
+2. Prize fund
 
-  * The direction of Innovative Solutions involves the following prizes from COEX based on the results of the jury evaluation at the final round:
+  * The "Open category" direction involves the following prizes from COEX based on the results of the jury evaluation at the final round:
   1st place - $3000
   2nd place - $2000
   3rd place - $1000
@@ -33,7 +26,7 @@ Develop your idea in partnership with COEX.
 
   * The "Company Cases" direction provides a prize from COEX for further developing the project of $ 2500 for the team with the best result for each of the cases.
 
-## Innovative Solutions competition
+## "Open category" competition
 
 Open source projects that are compatible with the Clover quadrocopter platform are accepted for the competition. Throughout the competition, teams work on their ideas and developments, bringing them closer to the state of the finished product. In addition, industry experts assist the participants through lectures and regular feedback.
 
@@ -42,13 +35,13 @@ Open source projects that are compatible with the Clover quadrocopter platform a
 Teams are invited to participate in the work on the following company cases:
 
 1. Modification of the PX4 firmware version v1. 12. 0 for Clover.
-2. Develop the PX4 v flight controller board based on COEX Pix with 55*40 mm and install Raspberry Pi Compute mode 4.
+2. Develop the PX4 v flight controller board based on COEX Pix with 55*40 mm and install Raspberry Pi CM 4.
 
      * The list of cases will be expanded.
 
 ## CopterHack 2022 stages
 
-The qualifying and project development stages of the competition are held in an online format; the choice of the format of the final tour remains open. The competition involves monthly updates from the teams with regular feedback from the jury. To participate in the final stage, you need to prepare a final video and a presentation about the project's results.
+The qualifying and project development stages of the competition are held in an online format; the format of the final round is a hybrid (online + offline). The competition involves monthly updates from the teams with regular feedback from the jury. To participate in the final stage, you need to prepare a final video and a presentation about the project's results.
 
 1. Qualifying round. Collection of applications (June 1 — October 31, 2021).
 2. Project development. Project mentorship (June 1, 2021 — February 28, 2022).
@@ -88,10 +81,12 @@ The main developer of the Clover platform, makes a great contribution to the imp
 ## How to apply?
 
 1. Prepare the following information:
-     * team information (team name, city of residence, contacts: e-mail/username in Telegram, the list of team members);
+     * team information (team name, contacts: e-mail/username in Telegram, the list of team members);
      * project description (project idea, the potential outcomes, how will the Clover drone platform be used in your project).
 2. Add the information (point 1) to the Clover documentation site. Information about contributing an article to GitBook: https://clover.coex.tech/en/contributing.html#contributing-a-new-article 
-3. Wait for feedback and look for your application in the section "Team applications".
+3. Wait for feedback. After submission, the application will be reviewed by the Organizing Committee and the Competition Jury.
+
+As soon as the link to the application is added to this page in the "Team Applications" section, your team has become an official member of CopterHack! Contest participants will be added to the Telegram group, where you can send the first update and get feedback from the Jury.
 
      * There are no restrictions on the age, education, and number of people in the team.
 
@@ -99,7 +94,7 @@ The main developer of the Clover platform, makes a great contribution to the imp
 
      * Applications will be published as they become available.
 
-
+Join the community of like-minded people: [DroneCode](https://t.me/DroneCode), [COEX: helpdesk](https://t.me/COEXHelpdesk), [the participants of previous years](https://t.me/CopterHack).
 
 
 
