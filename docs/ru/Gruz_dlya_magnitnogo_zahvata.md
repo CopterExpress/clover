@@ -12,7 +12,7 @@
 
 
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps1.jpg)
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/sborka.PNG)
 
 
 
@@ -24,7 +24,7 @@
 
 
 
-​               ![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps2.jpg) 
+​               ![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_pod_myach.PNG) 
 
 
 
@@ -32,13 +32,13 @@
 
 
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps3.jpg)
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/dopolnemie.PNG)
 
 
 
 В сборе это выглядит так:              
 
-​                                                                                                           ![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps4.jpg)        
+​                                                                                                           ![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_pod_stakan_v_sbore.PNG)        
 
 
 
@@ -48,7 +48,7 @@
 
 
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps5.jpg) 
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/stakan.PNG) 
 
  
 
@@ -62,14 +62,14 @@
 
 Для того, чтобы груз держался на магнитном захвате, на его верхнюю часть приклеивается комплектная пластина, и в сборке это выглядит следующим образом:
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps6.jpg) 
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/syakan%20s%20plastinoi.PNG) 
 
 На дно подставки необходимо приклеить двусторонний скотч для дальнейшей фиксации подставки на используемой в дальнейшем поверхности:
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps7.jpg) 
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/scotch_na_dne_podstavki.PNG) 
 
 В случае использования нижней части с механическим захватом также необходимо приклеить к её основанию двусторонний скотч, чтобы подставку не сдувало воздушным потоком от пропеллеров. В сборке с теннисным мячиком это выглядит следующим образом:
 
-![img](file:///C:\Users\Kristina\AppData\Local\Temp\ksohtml1068\wps8.jpg)
+![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_s_myachem.PNG)
 
 
