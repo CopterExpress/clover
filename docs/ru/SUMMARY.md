@@ -98,7 +98,7 @@
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
   * [Переход на версию 0.20](migrate20.md)
-  * [COEX Duocam](duocam.md)
+  * [COEX DuoCam](duocam.md)
     * [Виртуальная MAVLink-камера](duocam_mavlink.md)
 * [Мероприятия](events.md)
   * [CopterHack-2021](copterhack2021.md)
