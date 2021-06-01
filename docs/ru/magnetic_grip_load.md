@@ -12,7 +12,7 @@
 
 
 
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/sborka.PNG)
+![img](../assets/grip_load/assembly.png)
 
 
 
@@ -23,22 +23,19 @@
 Первая - это низ:
 
 
-
-​               ![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_pod_myach.PNG) 
-
+![img](../assets/grip_load/ball_stand.png)
 
 
 Вторая - это дополнение, чтобы добрать необходимую высоту для точного позиционирования груза на подставке:
 
 
-
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/dopolnemie.PNG)
+![img](../assets/grip_load/addition.png)
 
 
 
 В сборе это выглядит так:              
 
-​                                                                                                           ![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_pod_stakan_v_sbore.PNG)        
+![img](../assets/grip_load/cup_stand.png)
 
 
 
@@ -48,7 +45,7 @@
 
 
 
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/stakan.PNG) 
+![img](../assets/grip_load/cup.png)
 
  
 
@@ -62,14 +59,14 @@
 
 Для того, чтобы груз держался на магнитном захвате, на его верхнюю часть приклеивается комплектная пластина, и в сборке это выглядит следующим образом:
 
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/syakan%20s%20plastinoi.PNG) 
+![img](../assets/grip_load/cup_with_plate.png)
 
 На дно подставки необходимо приклеить двусторонний скотч для дальнейшей фиксации подставки на используемой в дальнейшем поверхности:
 
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/scotch_na_dne_podstavki.PNG) 
+![img](../assets/grip_load/stand_tape.png)
 
 В случае использования нижней части с механическим захватом также необходимо приклеить к её основанию двусторонний скотч, чтобы подставку не сдувало воздушным потоком от пропеллеров. В сборке с теннисным мячиком это выглядит следующим образом:
 
-![img](https://github.com/1Den4ik1/clover/blob/Gruz_dlya_magnitnogo_zahvata/docs/assets/podstavka_s_myachem.PNG)
+![img](../assets/grip_load/stand_with_ball.png)
 
 
