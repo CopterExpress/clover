@@ -86,7 +86,7 @@
   * [Установка FPV (Клевер 3)](fpv.md)
   * [Магнитный захват](magnetic_grip.md)
   * [Механический захват](mechanical_grip.md)
-  * [Груз для магнитного захвата](Gruz_dlya_magnitnogo_zahvata.md)
+  * [Груз для магнитного захвата](magnetic_grip_load.md)
   * [Сборка шаровой защиты](sphere_guard.md)
   * [Управление в режиме тренера](trainer_mode.md)
   * [Техника лужения](tinning.md)
