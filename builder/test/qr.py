@@ -33,7 +33,7 @@ image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, que
 print('Testing QR code recognition')
 import cv2
 img = cv2.imread('qr.gif')
-image_pub = rospy.Publisher('main_camera/image_raw', Image, image_callback, queue_size=1)
+image_pub = rospy.Publisher('main_camera/image_raw', Image)
 image_pub.publish(bridge.cv2_to_imgmsg(img))
 
 rospy.spin()
