@@ -10,7 +10,7 @@
 
 Груз в сборе с подставкой и пластиной для зацепа магнитного захвата выглядит следующим образом:
 
-![img](../assets/grip_load/assembly.png)
+<img src="../assets/grip_load/assembly.png" width=300 class="zoom center">
 
 ### Подставка под груз для магнитного захвата
 
@@ -18,21 +18,21 @@
 
 Первая - это низ:
 
-![img](../assets/grip_load/ball_stand.png)
+<img src="../assets/grip_load/ball_stand.png" width=300 class="zoom center">
 
 Вторая - это дополнение, чтобы добрать необходимую высоту для точного позиционирования груза на подставке:
 
-![img](../assets/grip_load/addition.png)
+<img src="../assets/grip_load/addition.png" width=300 class="zoom center">
 
 В сборе это выглядит так:
 
-![img](../assets/grip_load/cup_stand.png)
+<img src="../assets/grip_load/cup_stand.png" width=300 class="zoom center">
 
 ### Груз для подставки
 
 Сам груз отдельно от подставки выглядит следующим образом:
 
-![img](../assets/grip_load/cup.png)
+<img src="../assets/grip_load/cup.png" width=300 class="zoom center">
 
 Вес при 100% заполнении из материала PETG при печати на 3D принтере составляет 35 грамм.
 
@@ -42,12 +42,12 @@
 
 Для того, чтобы груз держался на магнитном захвате, на его верхнюю часть приклеивается комплектная пластина, и в сборке это выглядит следующим образом:
 
-![img](../assets/grip_load/cup_with_plate.png)
+<img src="../assets/grip_load/cup_with_plate.png" width=300 class="zoom center">
 
 На дно подставки необходимо приклеить двусторонний скотч для дальнейшей фиксации подставки на используемой в дальнейшем поверхности:
 
-![img](../assets/grip_load/stand_tape.png)
+<img src="../assets/grip_load/stand_tape.png" width=300 class="zoom center">
 
 В случае использования нижней части с механическим захватом также необходимо приклеить к её основанию двусторонний скотч, чтобы подставку не сдувало воздушным потоком от пропеллеров. В сборке с теннисным мячиком это выглядит следующим образом:
 
-![img](../assets/grip_load/stand_with_ball.png)
+<img src="../assets/grip_load/stand_with_ball.png" width=300 class="zoom center">
