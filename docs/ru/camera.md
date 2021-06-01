@@ -135,7 +135,7 @@ def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     barcodes = pyzbar.decode(cv_image)
     for barcode in barcodes:
-        b_data = barcode.data.encode("utf-8")
+        b_data = barcode.data.decode("utf-8")
         b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
