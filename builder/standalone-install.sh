@@ -6,8 +6,14 @@ set -e
 apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 # https://github.com/osrf/docker_images/issues/535
 apt-get update
 apt-get install -y curl
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python3 ./get-pip.py
+if [ "x${ROS_PYTHON_VERSION}" = "x3" ]; then
+  PYTHON=python3
+  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+else
+  PYTHON=python
+  curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+fi
+${PYTHON} ./get-pip.py
 
 # Step 1.5: Add deb.coex.tech to apt
 curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -
@@ -51,7 +57,7 @@ cd /root/catkin_ws
 catkin_make
 
 # Step 4: Run tests
-python3 -m pip install --upgrade pytest # TODO: https://github.com/CopterExpress/clover/commit/5b970d51970cfa6f46e5c0b34acb7889d36b89c8
+${PYTHON} -m pip install --upgrade pytest
 cd /root/catkin_ws
 source devel/setup.bash
 catkin_make run_tests && catkin_test_results
