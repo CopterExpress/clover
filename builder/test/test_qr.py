@@ -23,17 +23,17 @@ def image_callback(data):
         xc = x + w/2
         yc = y + h/2
         print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
-    rospy.signal_shutdown()
+    rospy.signal_shutdown('done')
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 
 # ==============================================================================
 # Publish test image
 
-print('Testing QR code recognition')
+rospy.sleep(2)
 import cv2
-img = cv2.imread('qr.gif')
-image_pub = rospy.Publisher('main_camera/image_raw', Image)
-image_pub.publish(bridge.cv2_to_imgmsg(img))
+img = cv2.imread('qr.png')
+image_pub = rospy.Publisher('/main_camera/image_raw', Image, queue_size=1, latch=True)
+image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 
 rospy.spin()
