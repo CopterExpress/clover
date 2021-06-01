@@ -29,3 +29,5 @@ import pigpio
 from pyzbar import pyzbar
 
 print(cv2.getBuildInformation())
+
+from . import qr
