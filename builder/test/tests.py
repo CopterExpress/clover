@@ -16,6 +16,8 @@ from mavros_msgs.srv import CommandBool, CommandLong, SetMode
 from std_srvs.srv import Trigger
 from clover.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetVelocity, \
     SetAttitude, SetRates, SetLEDEffect
+from led_msgs.srv import SetLEDs
+from led_msgs.msg import LEDStateArray, LEDState
 
 import tf2_ros
 import tf2_geometry_msgs
