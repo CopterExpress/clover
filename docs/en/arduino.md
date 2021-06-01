@@ -66,7 +66,7 @@ The set of services and topics is similar to the regular set in [simple_offboard
 An example of a program that controls the copter by position using the `navigate` and `set_mode` services:
 
 ```cpp
-// Connecting libraries for working with rosseral
+// Connecting libraries for working with rosserial
 #include <ros.h>
 
 // Connecting Clover and MAVROS package message header files

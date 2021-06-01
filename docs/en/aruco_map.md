@@ -139,7 +139,7 @@ navigate(x=2, y=2, z=2, speed=1, frame_id='aruco_map')
 
 Starting with the [image](image.md) version 0.18, the drone also can fly relative to a marker in the map, even if it is not currently visible. Like with [single-marker navigation](aruco_marker.md#working-with-detected-markers), this works by setting the frame_id parameter to aruco_ID, where ID is the desired marker number.
 
-The folloding code will move the drone to the point 1 meter above the center of marker 5:
+The following code will move the drone to the point 1 meter above the center of marker 5:
 
 ```python
 navigate(frame_id='aruco_5', x=0, y=0, z=1)
