@@ -268,12 +268,6 @@ Flying forward (relative to the drone) at the speed of 1 m/s:
 set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 ```
 
-One possible way of flying in a circle:
-
-```python
-set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='body')
-```
-
 ### set_attitude
 
 Set pitch, roll, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
