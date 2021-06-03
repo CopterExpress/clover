@@ -1,0 +1,32 @@
+name: Monitor
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # At 00:00 every day
+  workflow_dispatch:
+
+jobs:
+  check-urls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check website links accessibility
+        run: |
+          curl -ILf https://clover.coex.tech
+          curl -ILf https://clover.coex.tech/clover_en.pdf
+          curl -ILf https://clover.coex.tech/clover_ru.pdf
+          curl -ILf https://clover.coex.tech/connection
+          curl -ILf https://clover.coex.tech/aruco
+          curl -ILf https://clover.coex.tech/programming
+          curl -ILf https://clover.coex.tech/led
+          curl -ILf https://clover.coex.tech/en/snippets.html
+          curl -ILf https://clover.coex.tech/en/simulation.html
+          curl -ILf https://clover.coex.tech/aruco
+          curl -ILf https://clover.coex.tech/led
+          curl -ILf https://clover.coex.tech/camera_setup
+          curl -ILf https://clover.coex.tech/firmware
+          curl -ILf https://clover.coex.tech/power
+          curl -ILf https://clover.coex.tech/hostname
+          curl -ILf https://clover.coex.tech/en/blocks.html
+          curl -ILf https://clover.coex.tech/en/gpio.html
+          curl -ILf https://clover.coex.tech/en/leds.html
+          curl -ILf https://clover.coex.tech/en/simple_offboard.html
