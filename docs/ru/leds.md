@@ -17,7 +17,7 @@
 ## Высокоуровневое управление лентой {#set_effect}
 
 1. Для работы с лентой подключите ее к питанию +5v – 5v, земле GND – GND и сигнальному порту DIN – GPIO21. Обратитесь [к инструкции по сборке](assemble_4_2.md#установка-led-ленты) для подробностей.
-2. Включите поддержку LED-ленты в файле `~/catkin_ws/src/clever/clever/launch/clever.launch`:
+2. Включите поддержку LED-ленты в файле `~/catkin_ws/src/clever/clever/launch/clover.launch`:
 
     ```xml
     <arg name="led" default="true"/>
