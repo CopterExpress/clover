@@ -18,8 +18,13 @@
     <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
     <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/> -->
 
+    <!-- camera nodelet manager -->
+    <node pkg="nodelet" type="nodelet" name="main_camera_nodelet_manager" args="manager" output="screen" clear_params="true" respawn="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
     <!-- camera node -->
-    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" launch-prefix="rosrun clover waitfile $(arg device)" clear_params="true" unless="$(arg simulator)" respawn="true">
+    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet main_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg device)" clear_params="true" unless="$(arg simulator)" respawn="true">
         <param name="device_path" value="$(arg device)"/>
         <param name="frame_id" value="main_camera_optical"/>
         <param name="camera_info_url" value="file://$(find clover)/camera_info/fisheye_cam.yaml"/>
