@@ -108,6 +108,17 @@
     </tr>
 </table>
 
+### 3D печать
+* **Груз для магнитного захвата** - [Gruz_dlya_magnitnogo_zahvata](docs/assets/dxf/Gruz_dlya_magnitnogo_zahvata.stl)
+ 
+    [Dopolnenie_dlya_podstavki_gruza](docs/assets/dxf/Dopolnenie_dlya_podstavki_gruza.stl)
+    
+    [Podstavka_pod_tennisniy_myach_magnitnogo_zahvata](docs/assets/dxf/Podstavka_pod_tennisniy_myach_magnitnogo_zahvata.stl)
+    
+    Материал: PETG. Заполнение 100%.
+    Количество: 1шт.
+
+
 ## Клевер 4
 
 ### 3D печать
