@@ -19,7 +19,7 @@ The list of cases can be further expanded.
 
 The qualifying and project development stages of the competition are to be held in an online format. The final round is to be made in a hybrid mode (offline + online). The competition involves monthly updates from the teams with regular feedback from the Jury. All teams have to prepare a final video and presentation about the project's results to participate in the final stage.
 
-1. Qualifying round. Application for the CopterHack 2022 is open till October 31, 2021.
+1. Qualifying round. Applications due October 31, 2021.
 2. Project development stage. The competition stage assumes continuous mentorship of participants. The round starts on June 7, 2021, and lasts until  February 28, 2022.
 3. All participating teams shall prepare the final video to proceed to the final round. Final videos have to be submitted from March 1 up to March 31, 2022.
 4. Final round. Project presentation (April 9–10, 2022)
