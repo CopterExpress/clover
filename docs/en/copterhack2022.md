@@ -1,6 +1,6 @@
 # CopterHack 2022
 
-CopterHack 2022 is an international open-source project competition on aerial robotics. The primary direction of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a separate category, company case. The competition’s language is English.
+CopterHack 2022 is an international open-source project competition on aerial robotics. The primary direction of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a separate category, company case. The competition’s language is English.  
 
 You can read the articles of the CopterHack 2021 finalist teams by the link [CopterHack 2021](copterhack2021.md).
 
