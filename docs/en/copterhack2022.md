@@ -1,6 +1,6 @@
 # CopterHack 2022
 
-CopterHack 2022 is an international open-source project competition on aerial robotics. The primary direction of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a separate category, company case. The competition’s language is English.  
+CopterHack 2022 is an international open-source project competition on aerial robotics. The primary direction of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a separate category, company case. The competition’s language is English.
 
 You can read the articles of the CopterHack 2021 finalist teams by the link [CopterHack 2021](copterhack2021.md).
 
@@ -11,7 +11,7 @@ The proposed projects have to be open source and be compatible with the Clover q
 Teams are invited to dive into the development of the following company cases:
 
 1. Modification of the PX4 firmware version v1.12.0 for Clover.
-2. Development of the PX4 v.4 flight controller board based on COEX Pix (dimensions 55x40 mm) and with the opportunity of Raspberry Pi CM 4 installation.
+2. Development of the PX4v4 flight controller board based on COEX Pix (dimensions 55x40 mm) and with the opportunity of Raspberry Pi CM 4 installation.
 
 The list of cases can be further expanded.
 
@@ -20,7 +20,7 @@ The list of cases can be further expanded.
 The qualifying and project development stages of the competition are to be held in an online format. The final round is to be made in a hybrid mode (offline + online). The competition involves monthly updates from the teams with regular feedback from the Jury. All teams have to prepare a final video and presentation about the project's results to participate in the final stage.
 
 1. Qualifying round. Applications due October 31, 2021.
-2. Project development stage. The competition stage assumes continuous mentorship of participants. The round starts on June 7, 2021, and lasts until  February 28, 2022.
+2. Project development stage. The competition stage assumes continuous mentorship of participants. The round starts on June 7, 2021, and lasts until February 28, 2022.
 3. All participating teams shall prepare the final video to proceed to the final round. Final videos have to be submitted from March 1 up to March 31, 2022.
 4. Final round. Project presentation (April 9–10, 2022)
 
@@ -35,7 +35,7 @@ Criteria for judging the jury at the final:
 
 1. Readiness and article (max. 10 points): the degree of readiness of the project; an accessible and understandable description of the project in the article; attached code with comments, diagrams, drawings. According to the article, it should be possible to repeat the project and get the result.
 2. Amount of work done (max. 6 points): the amount of work done by the team in the framework of CopterHack 2022, its complexity, and technical level.
-3. Usefulness for Clover (max. 6 points): the relevance of the Clover and PX4 platform application in practice, the potential level of demand for development from other Clover users. 
+3. Usefulness for Clover (max. 6 points): the relevance of the Clover and PX4 platform application in practice, the potential level of demand for development from other Clover users.
 4. Presentation at the final (max. 3 points): quality and entertainment of the final presentation; completeness of the project coverage; demonstration; answers to the jury's questions.
 
 ## Prize fund
@@ -102,7 +102,7 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
    
     #### Additional information at the request of participants
 
-   For example, information about the team's experience working on projects, attach a link to articles, videos.
+    For example, information about the team's experience working on projects, attach a link to articles, videos.
     ```
 
 5. Go to the bottom of the page and create a new branch with the title of your article:
