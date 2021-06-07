@@ -10,7 +10,11 @@
 
 > **Warning** Протокол взаимодействия находится в процессе модификации. В новых версиях планируется избавиться от прямой отправки значений параметров и их количества от `duocam-mavlink` к QGroundControl.
 
+<!-- markdownlint-disable MD044 -->
+
 `duocam-camera` и `duocam-mavlink` обмениваются данными с помощью очередей POSIX. Имена очередей и формат сообщений доступен в репозитории [duocam-common](https://github.com/CopterExpress/duocam-common).
+
+<!-- markdownlint-enable MD044 -->
 
 Для объединения блоков, взаимодействующих через MAVLink, можно использовать любой MAVLink-коммутатор/маршрутизатор, который либо позволяет отключить таблицу коммутации, либо заполняет её по схеме *MAVLink ID:Component ID* (например, `cmavnode`, `mavlink-fast-switch`, `mavlink-switch`).
 

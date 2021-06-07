@@ -149,11 +149,12 @@ my_travis_retry pip install --prefer-binary rpi_ws281x
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey /etc/monkey/sites/default
+sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 systemctl enable monkey.service
 
 echo_stamp "Install Node.js"
 cd /home/pi
-wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
+wget --no-verbose https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
 tar -xzf node-v10.15.0-linux-armv6l.tar.gz
 cp -R node-v10.15.0-linux-armv6l/* /usr/local/
 rm -rf node-v10.15.0-linux-armv6l/

@@ -98,7 +98,7 @@ Main strip control methods:
 
 + `numPixels()` returns the number of pixels in the strip. Convenient for whole strip operations.
 + `setPixelColor(pos, color)` sets the pixel color at `pos` to `color`. Color should be a 24-bit value, where the first 8 bits are for the red channel, the next 8 bits are for the green channel, and the last 8 bits are for the blue channel. You may use the `Color(red, green, blue)` convenience function to convert colors to this format. Each color value should be an integer in the \[0..255\] range, where 0 means zero brightness and 255 means full brightness.
-+ `SetPixelColorRGB(pos, red, green, blue)` sets the pixel at `pos` to the color value with components `red`, `green` and `blue`. Each component value shoule be an integer in the \[0..255\] range, where 0 means zero brighness and 255 means full brightness.
++ `SetPixelColorRGB(pos, red, green, blue)` sets the pixel at `pos` to the color value with components `red`, `green` and `blue`. Each component value should be an integer in the \[0..255\] range, where 0 means zero brightness and 255 means full brightness.
 + `show()` updates the strip state. Any changes to the strip state are only pushed to the actual strip after calling this method.
 
 ## Does it have to be this way?

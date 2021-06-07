@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# $ ./waitfile <file> <command> <args...> 
+# wait until <file> appears and then invoke <command> with <args>
+
+echo "wait for file $1"
+while [ ! -e "$1" ]; do sleep 1; done;
+echo "file $1 appeared"
+exec "${@:2}"
