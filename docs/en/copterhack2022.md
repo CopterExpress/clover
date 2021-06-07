@@ -1,56 +1,56 @@
 # CopterHack 2022
 
-CopterHack 2022 is an international open-source project competition on aerial robotics. The primary direction of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a separate category, company case. The competition’s language is English.
+CopterHack 2022 is an international open-source projects competition on aerial robotics. The mainstream of the CopterHack 2022 is team competition with a free choice of the project topic. In addition, this year we organized a second category, company cases. The competition’s main language is English.
 
-You can read the articles of the CopterHack 2021 finalist teams by the link [CopterHack 2021](copterhack2021.md).
+You can see the articles of the CopterHack 2021 finalist teams by the link [CopterHack 2021](copterhack2021.md).
 
-The proposed projects have to be open source and be compatible with the Clover quadcopter platform. Throughout the competition, teams work on their ideas and developments, bringing them closer to the state of the complete product. In addition, industry experts assist the participants through lectures and regular feedback.
+The proposed projects have to be open-source and be compatible with the Clover quadcopter platform. Teams will work on their projects throughout the competition, bringing them closer to the state of the finished product. Industry experts will assist the participants through lectures and regular feedback.
 
 ## Company case competition
 
-Teams are invited to dive into the development of the following company cases:
+Teams are welcome to dive into the development of the following company cases:
 
-1. Modification of the PX4 firmware version v1.12.0 for Clover.
-2. Development of the PX4v4 flight controller board based on COEX Pix (dimensions 55x40 mm) and with the opportunity of Raspberry Pi CM 4 installation.
+1. To make a modification of the PX4 firmware version v1.12.0 for Clover.
+2. To develop the PX4v4 flight controller board with the dimensions 55x40 mm and the compatibility of a Raspberry Pi CM 4 installation.
 
-The list of cases can be further expanded.
+The list of cases will be further expand.
 
 ## CopterHack 2022 stages
 
-The qualifying and project development stages of the competition are to be held in an online format. The final round is to be made in a hybrid mode (offline + online). The competition involves monthly updates from the teams with regular feedback from the Jury. All teams have to prepare a final video and presentation about the project's results to participate in the final stage.
+The qualifying and project development stages are to be held in an online format. The final round is to be made in a hybrid mode (offline + online). The competition involves monthly updates from the teams with regular feedback from the Jury. All teams have to prepare a final video and presentation about the project's results to participate in the final stage.
 
-1. Qualifying round. Applications due October 31, 2021.
-2. Project development stage. The competition stage assumes continuous mentorship of participants. The round starts on June 7, 2021, and lasts until February 28, 2022.
-3. All participating teams shall prepare the final video to proceed to the final round. Final videos have to be submitted from March 1 up to March 31, 2022.
-4. Final round. Project presentation (April 9–10, 2022)
+1. Qualifying stage. Applications are wilcome due October 31, 2021.
+2. Projects development stage. This stage includes monthly updates and mentorship of participants, starts at June 10, 2021, and continuous until February 28, 2022.
+3. All participating teams should shoot the final video to proceed to the final round. Final videos have to be submitted from March 1 up to March 31, 2022.
+4. The final round. Projects presentation at April 9–10, 2022.
 
 ## Conditions and criteria for evaluating the final result
 
 General project requirements:
 
 1. Open-source.
-2. Clover platform compatibility.
+2. Compatibility with the Clover platform.
 
 Criteria for judging the jury at the final:
 
-1. Readiness and article (max. 10 points): the degree of readiness of the project; an accessible and understandable description of the project in the article; attached code with comments, diagrams, drawings. According to the article, it should be possible to repeat the project and get the result.
-2. Amount of work done (max. 6 points): the amount of work done by the team in the framework of CopterHack 2022, its complexity, and technical level.
-3. Usefulness for Clover (max. 6 points): the relevance of the Clover and PX4 platform application in practice, the potential level of demand for development from other Clover users.
+1. Readiness and the article (max. 10 points): the degree of readiness of the project; an accessible and understandable description of the project in the article; a link to the code with comments, diagrams, drawings. According to the article, it should be possible to reproduce the project and get the result.
+2. Amount of work has been done (max. 6 points): the amount of work has been done by the team in the framework of CopterHack 2022, its complexity, and the technical level.
+3. Usefulness for Clover (max. 6 points): the relevance of the Clover and PX4 platform application in practice, the potential level of demand from other Clover users.
 4. Presentation at the final (max. 3 points): quality and entertainment of the final presentation; completeness of the project coverage; demonstration; answers to the jury's questions.
 
 ## Prize fund
 
-The primary direction involves the following prizes from COEX based on the results of the jury evaluation at the final round:
+The mainstream of the CopterHack 2022 involves the following prizes from COEX based on the results of the jury's evaluation of projects at the final round:
 
-* 1st place: $3000.
-* 2nd place: $2000.
-* 3rd place: $1000.
-* 4th place: $500.
-* 5th place: $500.
+* 1st place: $3000 (USD).
+* 2nd place: $2000 (USD).
+* 3rd place: $1000 (USD).
+* 4th place: $500 (USD).
+* 5th place: $500 (USD).
 
 The competition partners can reward the teams according to additional criteria identified due to the evaluation of projects during the final round.
 
-The company case direction provides a prize of 2500$ from COEX for further project development for best teams in each case proposed by COEX company.
+The company case competition provides a prize of $2500 (USD) from COEX for further project development for the best teams in each cases.
 
 ## How to apply?
 
@@ -117,17 +117,17 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 8. In the Pull Request comments, you will be given feedback on the application. On the contest page, in the section "Projects of the contest participants", a link to your application in your fork will be published.
 
-9. During the contest, you will work on this document, bringing it closer to the state of the article. In addition, the article will show the development history and monthly updates. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack.
+9. During the contest, you will work on this document, bringing it closer to the state of the finished article. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack 2022.
 
-As soon as the link to the application is added to this page in the section "Projects of the contest participants", your team has become an official participant of CopterHack 2022!
+As soon as the link to the application is added to this page in the section "Projects of the contest's participants", your team has become an official participant of the CopterHack 2022!
 
-Contest participants will be added to the Telegram group, where you can send the first update and get feedback from the Jury. For participating teams, there is a 50% discount on the Clover drone.
+Contest participants will be added to the special Telegram group, where one can send the project's updates and get feedback from the Jury. For the all participating teams, COEX will provide a 50% discount on the Clover drone kit.
 
 > **Info** There are no restrictions on the age, education, and number of people in the team.
 
-## Projects of the contest participants
+## Projects of the contest's participants
 
-Applications will be published as they become available.
+Applications will be published as they will become available.
 
 ---
 
