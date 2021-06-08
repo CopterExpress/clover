@@ -26,7 +26,7 @@ Preconfigured image for Raspberry Pi with installed and configured software, rea
 Image features:
 
 * Raspbian Buster
-* [ROS Melodic](http://wiki.ros.org/melodic)
+* [ROS Noetic](http://wiki.ros.org/noetic)
 * Configured networking
 * OpenCV
 * [`mavros`](http://wiki.ros.org/mavros)

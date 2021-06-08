@@ -112,7 +112,7 @@ def run(req):
                 'print': _print,
                 'raw_input': _input}
             try:
-                exec req.code in g
+                exec(req.code, g)
             except Stop:
                 rospy.loginfo('Program forced to stop')
             except Exception as e:

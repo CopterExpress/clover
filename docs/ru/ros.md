@@ -63,7 +63,7 @@ foo_pub.publish(data='Hello, world!')  # публикуем сообщение
 
 ```python
 def foo_callback(msg):
-    print msg.data
+    print(msg.data)
 
 # Подписываемся. При получении сообщения в топик /foo будет вызвана функция foo_callback.
 rospy.Subscriber('/foo', String, foo_callback)

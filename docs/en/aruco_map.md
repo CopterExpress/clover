@@ -1,5 +1,9 @@
 # Map-based navigation with ArUco markers
 
+> **Note** The following applies to [image versions](image.md) **0.22** and up. Older documentation is still available for [for version **0.20**](https://github.com/CopterExpress/clover/blob/v0.20/docs/en/aruco_map.md).
+
+<!-- -->
+
 > **Info** Marker detection requires the camera module to be correctly plugged in and [configured](camera_setup.md).
 
 <!-- -->
@@ -39,13 +43,14 @@ marker_id marker_size x y z z_angle y_angle x_angle
 
 `N_angle` is the angle of rotation along the `N` axis in radians.
 
-Map path is defined in the `map` parameter:
+Файлы карт располагаются в каталоге `~/catkin_ws/src/clover/aruco_pose/map`. Название файла с картой задается в аргументе `map`:
+Map files are located at the `~/catkin_ws/src/clover/aruco_pose/map` directory. Map file name is defined in the `map` argument:
 
 ```xml
-<param name="map" value="$(find aruco_pose)/map/map.txt"/>
+<arg name="map" default="map.txt"/>
 ```
 
-Some map examples are provided in [`~/catkin_ws/src/clover/aruco_pose/map`](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
+Some map examples are provided in [the directory](https://github.com/CopterExpress/clover/tree/master/aruco_pose/map).
 
 Grid maps may be generated using the `genmap.py` script:
 
@@ -152,10 +157,10 @@ If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` paramete
 
 In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_setup.md).
 
-You should also set the `known_tilt` parameter to `map_flipped` in both `aruco_detect` and `aruco_map` sections of `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
+You should also set the `placement` parameter to `ceilin` in `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
 
 ```xml
-<param name="known_tilt" value="map_flipped"/>
+<arg name="placement" default="ceiling"/>
 ```
 
 This will flip the `aruco_map` frame (making its **<font color=blue>z</font>** axis point downward). Thus, in order to fly 2 metres below ceiling, the `z` argument for the `navigate` service should be set to 2:

@@ -75,14 +75,14 @@ Displaying drone coordinates `x`, `y` and `z` in the local system of coordinates
 
 ```python
 telemetry = get_telemetry()
-print telemetry.x, telemetry.y, telemetry.z
+print(telemetry.x, telemetry.y, telemetry.z)
 ```
 
 Displaying drone altitude relative to [the ArUco map](aruco.md):
 
 ```python
 telemetry = get_telemetry(frame_id='aruco_map')
-print telemetry.z
+print(telemetry.z)
 ```
 
 Checking global position availability:
@@ -90,9 +90,9 @@ Checking global position availability:
 ```python
 import math
 if not math.isnan(get_telemetry().lat):
-    print 'Global position is available'
+    print('Global position is available')
 else:
-    print 'No global position'
+    print('No global position')
 ```
 
 Output of current telemetry (command line):
@@ -303,7 +303,7 @@ Landing the drone:
 res = land()
 
 if res.success:
-    print 'drone is landing'
+    print('drone is landing')
 ```
 
 Landing the drone (command line):

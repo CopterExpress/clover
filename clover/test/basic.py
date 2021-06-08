@@ -26,5 +26,10 @@ def test_simple_offboard_services_available():
     rospy.wait_for_service('land', timeout=5)
 
 def test_web_video_server(node):
-    import urllib2
-    urllib2.urlopen("http://localhost:8080").read()
+    try:
+        # Python 2
+        import urllib2 as urllib
+    except ModuleNotFoundError:
+        # Python 3
+        import urllib.request as urllib
+    urllib.urlopen("http://localhost:8080").read()

@@ -75,14 +75,14 @@ land = rospy.ServiceProxy('land', Trigger)
 
 ```python
 telemetry = get_telemetry()
-print telemetry.x, telemetry.y, telemetry.z
+print(telemetry.x, telemetry.y, telemetry.z)
 ```
 
 Вывод высоты коптера относительно [карты ArUco-меток](aruco.md):
 
 ```python
 telemetry = get_telemetry(frame_id='aruco_map')
-print telemetry.z
+print(telemetry.z)
 ```
 
 Проверка доступности глобальной позиции:
@@ -90,9 +90,9 @@ print telemetry.z
 ```python
 import math
 if not math.isnan(get_telemetry().lat):
-    print 'Global position is available'
+    print('Global position is available')
 else:
-    print 'No global position'
+    print('No global position')
 ```
 
 Вывод текущей телеметрии (командная строка):
@@ -303,7 +303,7 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 res = land()
 
 if res.success:
-    print 'Copter is landing'
+    print('Copter is landing')
 ```
 
 Посадка коптера (командная строка):
