@@ -151,7 +151,8 @@ catkin_make run_tests #&& catkin_test_results
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "Change permissions for examples"
+echo_stamp "Make \$HOME/examples symlink"
+ln -s "$(catkin_find clover examples --first-only)" /home/pi
 chown -Rf pi:pi /home/pi/examples
 
 echo_stamp "Setup ROS environment"
