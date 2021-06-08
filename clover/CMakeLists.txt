@@ -266,6 +266,16 @@ catkin_install_python(PROGRAMS src/selfcheck.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+install(DIRECTORY launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(DIRECTORY examples
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+# TODO: install www
+
 # Only install udev rules when building a Debian package
 # FIXME: Other operating systems may have other prefixes
 string(FIND ${CMAKE_INSTALL_PREFIX} "/opt/ros" _PREFIX_INDEX)
