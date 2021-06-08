@@ -8,7 +8,7 @@ The repository is already addedd in [RPi image](image.md) and may be used for si
 
 ## Packages publishing
 
-You can make a Pull Request in a git repository with packages, adding or updating your package (a file with `.deb` extension), that relates to Clover or ROS. After merging your package will be available for installation with `apt` utility:
+You can make a Pull Request in a [git repository with packages](https://github.com/CopterExpress/packages), adding or updating your package (a file with `.deb` extension), that relates to Clover or ROS. After merging your package will be available for installation with `apt` utility:
 
 ```bash
 sudo apt install ros-noetic-clover-some-feature
