@@ -110,7 +110,8 @@
             "Li-ion",
             "Nvidia",
             "VirtualBox",
-            "VMware"
+            "VMware",
+            "DuoCam"
         ],
         "code_blocks": false
     },
