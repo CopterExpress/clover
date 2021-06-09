@@ -110,9 +110,10 @@ my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${RO
   --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
 my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
-source devel/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
 catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+source devel/setup.bash
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
