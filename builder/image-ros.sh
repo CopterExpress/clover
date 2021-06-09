@@ -113,6 +113,7 @@ my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirement
 source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
 catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+source devel/setup.bash
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
@@ -151,7 +152,8 @@ catkin_make run_tests #&& catkin_test_results
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "Change permissions for examples"
+echo_stamp "Make \$HOME/examples symlink"
+ln -s "$(catkin_find clover examples --first-only)" /home/pi
 chown -Rf pi:pi /home/pi/examples
 
 echo_stamp "Setup ROS environment"
