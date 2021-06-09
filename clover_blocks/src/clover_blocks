@@ -146,6 +146,7 @@ def stop(req):
     return {'success': True}
 
 
+# TODO: find dir in installed package
 programs_path = rospy.get_param('~programs_dir', os.path.dirname(os.path.abspath(__file__)) + '/../programs')
 
 

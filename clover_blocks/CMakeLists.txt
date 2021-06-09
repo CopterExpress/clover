@@ -73,6 +73,11 @@ catkin_install_python(PROGRAMS src/clover_blocks
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+# TODO: store programs in home directory?
+install(DIRECTORY programs
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 #############
 ## Testing ##
 #############
