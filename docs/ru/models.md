@@ -109,11 +109,11 @@
 </table>
 
 ### 3D печать
-* **Груз для магнитного захвата** - [Gruz_dlya_magnitnogo_zahvata](docs/assets/dxf/Gruz_dlya_magnitnogo_zahvata.stl)
+* **Груз для магнитного захвата** - [load_for_magnetic_grip](docs/assets/dxf/load_for_magnetic_grip.stl)
  
-    [Dopolnenie_dlya_podstavki_gruza](docs/assets/dxf/Dopolnenie_dlya_podstavki_gruza.stl)
+   Дополнение - [add-on_for_load_support](docs/assets/dxf/add-on_for_load_support.stl)
     
-    [Podstavka_pod_tennisniy_myach_magnitnogo_zahvata](docs/assets/dxf/Podstavka_pod_tennisniy_myach_magnitnogo_zahvata.stl)
+    Подставка под мяч на магнитном захвате -[tennis_ball_stand_for_magnetic_grip](docs/assets/dxf/tennis_ball_stand_for_magnetic_grip.stl)
     
     Материал: PETG. Заполнение 100%.
     Количество: 1шт.
