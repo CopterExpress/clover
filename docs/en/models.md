@@ -7,7 +7,7 @@ This page contains models and drawings of some of the drone parts. They can be u
 ### Milling
 
 <table>
-    <tr><th width=150>Preview</th><th>Part</th><th width=1>File</th></tr>
+    <tr><th width=150>Preview</th><th>Part</th><th width=1>Files</th></tr>
     <tr>
         <td><img src="../assets/dxf/4.2/deck_mount.png"></td>
         <td>
@@ -16,7 +16,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 1 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount.dxf"><code>deck_mount.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount/Deck%20Mount.dxf"><code>Deck&nbsp;Mount.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount/Deck%20Mount.ipt"><code>Deck&nbsp;Mount.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount/Deck%20Mount.stp"><code>Deck&nbsp;Mount.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/deck_mount_small.png"></td>
@@ -26,7 +30,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 1 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/deck_mount_small.dxf"><code>deck_mount_small.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount%20Small/Deck%20Mount%20Small.dxf"><code>Deck&nbsp;Mount&nbsp;Small.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount%20Small/Deck%20Mount%20Small.ipt"><code>Deck&nbsp;Mount&nbsp;Small.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Deck%20Mount%20Small/Deck%20Mount%20Small.stp"><code>Deck&nbsp;Mount&nbsp;Small.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/grab_deck.png"></td>
@@ -36,17 +44,25 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 1 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grab_deck.dxf"><code>grab_deck.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Deck/Grab%20Deck.dxf"><code>Grab&nbsp;Deck.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Deck/Grab%20Deck.ipt"><code>Grab&nbsp;Deck.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Deck/Grab%20Deck.stp"><code>Grab&nbsp;Deck.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/led_mount_plate.png"></td>
         <td>
-            <b>Led mount plate</b>.<br>
+            <b>LED mount plate</b>.<br>
             Function: Fixing the LED strip.<br>
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 1 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/led_mount_plate.dxf"><code>led_mount_plate.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/LED%20mount%20plate/LED%20mount%20plate.dxf"><code>LED&nbsp;mount&nbsp;plate.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/LED%20mount%20plate/LED%20mount%20plate.ipt"><code>LED&nbsp;mount&nbsp;plate.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/LED%20mount%20plate/LED%20mount%20plate.stp"><code>LED&nbsp;mount&nbsp;plate.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/prop_guard.png"></td>
@@ -56,7 +72,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 4 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard.dxf"><code>prop_guard.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard/Prop%20Guard.dxf"><code>Prop&nbsp;Guard.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard/Prop%20Guard.ipt"><code>Prop&nbsp;Guard.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard/Prop%20Guard.stp"><code>Prop&nbsp;Guard.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/prop_guard_mount.png"></td>
@@ -66,7 +86,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 2 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/prop_guard_mount.dxf"><code>prop_guard_mount.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard%20Mount/Prop%20Guard%20Mount.dxf"><code>Prop&nbsp;Guard&nbsp;Mount.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard%20Mount/Prop%20Guard%20Mount.ipt"><code>Prop&nbsp;Guard&nbsp;Mount.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Prop%20Guard%20Mount/Prop%20Guard%20Mount.stp"><code>Prop&nbsp;Guard&nbsp;Mount.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/small_leg.png"></td>
@@ -76,7 +100,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 2 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/small_leg.dxf"><code>small_leg.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Small%20Leg/Small%20Leg.dxf"><code>Small&nbsp;Leg.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Small%20Leg/Small%20Leg.ipt"><code>Small&nbsp;Leg.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Small%20Leg/Small%20Leg.stp"><code>Small&nbsp;Leg.stp</code></a>
+        </td>
     </tr>
 </table>
 
