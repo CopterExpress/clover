@@ -106,6 +106,60 @@
             <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Small%20Leg/Small%20Leg.stp"><code>Small&nbsp;Leg.stp</code></a>
         </td>
     </tr>
+    <tr>
+        <td><img src="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Arm/Arm.png" class=zoom></td>
+        <td>
+            <b>Луч</b>.<br>
+            Функция: крепление моторов.<br>
+            Материал: углепластик композитный (карбон) 2мм.<br>
+            Количество: 4 шт.
+        </td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Arm/Arm.dxf"><code>Arm.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Arm/Arm.ipt"><code>Arm.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Arm/Arm.stp"><code>Arm.stp</code></a>
+        </td>
+    </tr>
+    <tr>
+        <td><img src="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Central%20Plate/Central%20Plate.png" class=zoom></td>
+        <td>
+            <b>Пластина центральная</b>.<br>
+            Функция: установка электроники.<br>
+            Материал: углепластик композитный (карбон) 2мм.<br>
+            Количество: 1 шт.
+        </td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Central%20Plate/Central%20Plate.dxf"><code>Central&nbsp;Plate.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Central%20Plate/Central%20Plate.ipt"><code>Central&nbsp;Plate.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Central%20Plate/Central%20Plate.stp"><code>Central&nbsp;Plate.stp</code></a>
+        </td>
+    </tr><tr>
+        <td><img src="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Deck%20Mount%20Small/Deck%20Mount%20Small.png" class=zoom></td>
+        <td>
+            <b>Пластина монтажная малая</b>.<br>
+            Функция: прижатие пластины жесткости.<br>
+            Материал: углепластик композитный (карбон) 2мм.<br>
+            Количество: 1 шт.
+        </td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Deck%20Mount%20Small/Deck%20Mount%20Small.dxf"><code>Deck&nbsp;Mount&nbsp;Small.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Deck%20Mount%20Small/Deck%20Mount%20Small.ipt"><code>Deck&nbsp;Mount&nbsp;Small.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Deck%20Mount%20Small/Deck%20Mount%20Small.stp"><code>Deck&nbsp;Mount&nbsp;Small.stp</code></a>
+        </td>
+    </tr><tr>
+        <td><img src="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Stiffener%20Plate/Stiffener%20Plate.png" class=zoom></td>
+        <td>
+            <b>Пластина жесткости</b>.<br>
+            Функция: усиление рамы.<br>
+            Материал: углепластик композитный (карбон) 2мм.<br>
+            Количество: 4 шт.
+        </td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Stiffener%20Plate/Stiffener%20Plate.dxf"><code>Stiffener&nbsp;Plate.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Stiffener%20Plate/Stiffener%20Plate.ipt"><code>Stiffener&nbsp;Plate.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/Carbon/Stiffener%20Plate/Stiffener%20Plate.stp"><code>Stiffener&nbsp;Plate.stp</code></a>
+        </td>
+    </tr>
 </table>
 
 ## Клевер 4.2 WorldSkills
