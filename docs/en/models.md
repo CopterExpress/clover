@@ -167,16 +167,20 @@ This page contains models and drawings of some of the drone parts. They can be u
 ### Milling
 
 <table>
-    <tr><th width=150>Preview</th><th>Part</th><th width=1>File</th></tr>
+    <tr><th width=150>Preview</th><th>Part</th><th width=1>Files</th></tr>
     <tr>
         <td><img src="../assets/dxf/4.2/big_leg.png"></td>
         <td>
             <b>Big leg</b>.<br>
             Function: Extended footing element.<br>
             Материал: Monolithic polycarbonate 2mm.<br>
-            Quantity: 2 шт.
+            Quantity: 2 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/big_leg.dxf"><code>big_leg.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Big%20Leg/Big%20Leg.dxf"><code>Big&nbsp;Leg.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Big%20Leg/Big%20Leg.ipt"><code>Big&nbsp;Leg.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Big%20Leg/Big%20Leg.stp"><code>Big&nbsp;Leg.stp</code></a>
+        </td>
     </tr>
     <tr>
         <td><img src="../assets/dxf/4.2/grip_spacer.png"></td>
@@ -186,7 +190,11 @@ This page contains models and drawings of some of the drone parts. They can be u
             Material: monolithic polycarbonate 2mm.<br>
             Quantity: 1 pcs.
         </td>
-        <td><a href="https://github.com/CopterExpress/clover/raw/master/docs/assets/dxf/4.2/grip_spacer.dxf"><code>grip_spacer.dxf</code></a></td>
+        <td>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Spacer/Grab%20Spacer.dxf"><code>Grab&nbsp;Spacer.dxf</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Spacer/Grab%20Spacer.ipt"><code>Grab&nbsp;Spacer.ipt</code></a><br>
+            <a href="https://github.com/CopterExpress/hardware/raw/master/COEX%20Clover/4.2/PC/Grab%20Spacer/Grab%20Spacer.stp"><code>Grab&nbsp;Spacer.stp</code></a>
+        </td>
     </tr>
 </table>
 
