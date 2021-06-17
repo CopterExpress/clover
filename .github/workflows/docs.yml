@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  documentation:
+  docs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2

@@ -1,4 +1,4 @@
-name: Build RPi image
+name: RPi image
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     types: [ created ]
 
 jobs:
-  build-image:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

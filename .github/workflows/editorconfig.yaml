@@ -1,4 +1,4 @@
-name: Editorconfig lint
+name: Editorconfig
 
 on:
   push:
