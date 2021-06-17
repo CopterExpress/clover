@@ -270,6 +270,8 @@ install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 install(DIRECTORY examples DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
+install(DIRECTORY www DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
 # TODO: install www
 
 # Only install udev rules when building a Debian package
