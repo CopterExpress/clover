@@ -109,14 +109,19 @@
 </table>
 
 ### 3D печать
-* **Груз для магнитного захвата** - [Груз_для_магнитного_захвата](docs/assets/grip_load/load_for_magnetic_grip.stl)
 
-    [Дополнение_для_подставки_груза](docs/assets/grip_load/add-on_for_load_support.stl)
+* **Груз для магнитного захвата** -
 
-    [Подставка_под_теннисный_мяч_для_магнитного_захвата](docs/assets/grip_load/tennis_ball_stand_for_magnetic_grip.stl)
+   [Груз-для-магнитного_-_захвата](docs/assets/grip_load/load_for_magnetic_grip.stl)
 
-    Материал: PETG. Заполнение 100%.
-    Количество: 1шт.
+  [Дополнение-для-подставки-груза](docs/assets/grip_load/add-on_for_load_support.stl)
+
+  [Подставка-под-теннисный-мяч-для-магнитного-захвата](docs/assets/grip_load/tennis_ball_stand_for_magnetic_grip.stl)
+
+  Материал: PETG. Заполнение 100%.
+  Количество: 1шт.
+
+
 
 
 ## Клевер 4
