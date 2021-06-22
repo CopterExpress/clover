@@ -198,6 +198,16 @@
     </tr>
 </table>
 
+### 3D печать
+
+#### Груз для магнитного захвата
+
+* Груз для магнитного захвата: [`load_for_magnetic_grip.stl`](https://github.com/CopterExpress/clover/raw/master/docs/assets/grip_load/load_for_magnetic_grip.stl)
+* Дополнение-для-подставки-груза: [`add-on_for_load_support.stl`](https://github.com/CopterExpress/clover/raw/master/docs/assets/grip_load/add-on_for_load_support.stl)
+* Подставка под теннисный мяч для магнитного захвата: [`tennis_ball_stand_for_magnetic_grip.stl`](https://github.com/CopterExpress/clover/raw/master/docs/assets/grip_load/tennis_ball_stand_for_magnetic_grip.stl).
+
+Материал: PETG. Заполнение 100%. Количество: 1шт.
+
 ## Клевер 4
 
 ### 3D печать
