@@ -21,6 +21,9 @@ INSTALL_ROS_PACK_SOURCES=$3
 DISCOVER_ROS_PACK=$4
 NUMBER_THREADS=$5
 
+# Current ROS distribution
+ROS_DISTRO=noetic
+
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
@@ -68,7 +71,8 @@ my_travis_retry() {
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
-echo "yaml file:///etc/ros/rosdep/melodic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+# FIXME: Re-add this after missing packages are built
+echo "yaml file:///etc/ros/rosdep/${ROS_DISTRO}-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
@@ -76,22 +80,40 @@ my_travis_retry sudo -u pi rosdep update
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
-# echo_stamp "Reconfiguring Clover repository for simplier unshallowing" # TODO: bring back
-# cd /home/pi/catkin_ws/src/clover
-# git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-echo_stamp "Remove .git from Clover to reduce the size"
-rm -rf /home/pi/catkin_ws/src/clover/.git # TODO: remove
+# echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
+cd /home/pi/catkin_ws/src/clover
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+
+# This is sort of a hack to force "custom" packages to be installed - the ones built by COEX, linked against OpenCV 4.2
+# I **wish** OpenCV would not be such a mess, but, well, here we are.
+echo_stamp "Installing OpenCV 4.2-compatible ROS packages"
+apt install -y --no-install-recommends \
+ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
+ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
+ros-${ROS_DISTRO}-cv-camera=0.5.0-0buster \
+ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
+ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
+apt-mark hold \
+ros-${ROS_DISTRO}-compressed-image-transport \
+ros-${ROS_DISTRO}-cv-bridge \
+ros-${ROS_DISTRO}-cv-camera \
+ros-${ROS_DISTRO}-image-publisher \
+ros-${ROS_DISTRO}-web-video-server
+
+echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
 
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
-my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro melodic --os=debian:buster \
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:buster \
   --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
-my_travis_retry pip install wheel
-my_travis_retry pip install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
-source /opt/ros/melodic/setup.bash
+my_travis_retry pip3 install wheel
+my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
+source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
-catkin_make -j2 -DCMAKE_BUILD_TYPE=Release -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+source devel/setup.bash
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
@@ -108,22 +130,19 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
-    ros-melodic-dynamic-reconfigure \
-    ros-melodic-compressed-image-transport \
-    ros-melodic-rosbridge-suite \
-    ros-melodic-rosserial \
-    ros-melodic-usb-cam \
-    ros-melodic-vl53l1x \
-    ros-melodic-ws281x \
-    ros-melodic-rosshow
+    ros-${ROS_DISTRO}-dynamic-reconfigure \
+    ros-${ROS_DISTRO}-rosbridge-suite \
+    ros-${ROS_DISTRO}-rosserial \
+    ros-${ROS_DISTRO}-usb-cam \
+    ros-${ROS_DISTRO}-vl53l1x \
+    ros-${ROS_DISTRO}-ws281x \
+    ros-${ROS_DISTRO}-rosshow \
+    ros-${ROS_DISTRO}-cmake-modules \
+    ros-${ROS_DISTRO}-image-view
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
-
-# FIXME: Buster comes with tornado==5.1.1 but we need tornado==4.2.1 for rosbridge_suite
-# (note that Python 3 will still have a more recent version)
-pip install tornado==4.2.1
 
 echo_stamp "Running tests"
 cd /home/pi/catkin_ws
@@ -133,7 +152,8 @@ catkin_make run_tests #&& catkin_test_results
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "Change permissions for examples"
+echo_stamp "Make \$HOME/examples symlink"
+ln -s "$(catkin_find clover examples --first-only)" /home/pi
 chown -Rf pi:pi /home/pi/examples
 
 echo_stamp "Setup ROS environment"
@@ -141,7 +161,7 @@ cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 export ROS_HOSTNAME=\`hostname\`.local
-source /opt/ros/melodic/setup.bash
+source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 

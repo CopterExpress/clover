@@ -22,13 +22,21 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
 )
 
-find_package(OpenCV 3 REQUIRED COMPONENTS core imgproc calib3d)
+# Workaround for OpenCV 3/4 support
+set(_opencv_version 4)
+find_package(OpenCV ${_opencv_version} QUIET COMPONENTS core imgproc calib3d)
+if (NOT OpenCV_FOUND)
+  message(STATUS "Did not find OpenCV 4, searching for OpenCV 3")
+  set(_opencv_version 3)
+endif()
+
+find_package(OpenCV ${_opencv_version} REQUIRED COMPONENTS core imgproc calib3d)
 if ("${OpenCV_VERSION_MINOR}" LESS "9")
   message(STATUS "OpenCV version too low, using vendored ArUco package")
   include(vendor/VendorOpenCV.cmake)
 else()
   message(STATUS "Using system OpenCV ArUco package")
-  find_package(OpenCV 3 REQUIRED COMPONENTS aruco)
+  find_package(OpenCV ${_opencv_version} REQUIRED COMPONENTS aruco)
 endif()
 message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
 message(STATUS "OpenCV libraries: ${OpenCV_LIBRARIES}")
@@ -172,6 +180,13 @@ target_link_libraries(aruco_pose
   ${OpenCV_LIBRARIES}
 )
 
+# Prevent aruco_pose from having undefined symbols
+set_property(TARGET aruco_pose
+  APPEND
+  PROPERTY LINK_FLAGS
+  -Wl,--no-undefined
+)
+
 #############
 ## Install ##
 #############
@@ -187,11 +202,11 @@ target_link_libraries(aruco_pose
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -206,6 +221,14 @@ target_link_libraries(aruco_pose
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+catkin_install_python(PROGRAMS src/genmap.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY map DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 #############
 ## Testing ##

@@ -138,7 +138,7 @@ def mavlink_exec(cmd, timeout=3.0):
         timeout=3,
         baudrate=0,
         count=len(cmd),
-        data=map(ord, cmd.ljust(70, '\0')))
+        data=[ord(c) for c in cmd.ljust(70, '\0')])
     msg.pack(link)
     ros_msg = mavlink.convert_to_rosmsg(msg)
     mavlink_pub.publish(ros_msg)
@@ -609,7 +609,7 @@ def check_rangefinder():
 
 @check('Boot duration')
 def check_boot_duration():
-    output = subprocess.check_output('systemd-analyze')
+    output = subprocess.check_output('systemd-analyze').decode()
     r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
     if duration > 15:
@@ -620,7 +620,7 @@ def check_boot_duration():
 def check_cpu_usage():
     WHITELIST = 'nodelet',
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
-    output = subprocess.check_output(CMD, shell=True)
+    output = subprocess.check_output(CMD, shell=True).decode()
     processes = output.split('\n')
     for process in processes:
         if not process:
@@ -636,7 +636,7 @@ def check_cpu_usage():
 def check_clover_service():
     try:
         output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
-                                         stderr=subprocess.STDOUT)
+                                         stderr=subprocess.STDOUT).decode()
     except subprocess.CalledProcessError as e:
         failure('systemctl returned %s: %s', e.returncode, e.output)
         return
@@ -751,7 +751,7 @@ def check_rpi_health():
         # <parameter>=<value>
         # In case of `get_throttled`, <value> is a hexadecimal number
         # with some of the FLAGs OR'ed together
-        output = subprocess.check_output(['vcgencmd', 'get_throttled'])
+        output = subprocess.check_output(['vcgencmd', 'get_throttled']).decode()
     except OSError:
         failure('could not call vcgencmd binary; not a Raspberry Pi?')
         return

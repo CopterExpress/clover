@@ -112,7 +112,7 @@ def run(req):
                 'print': _print,
                 'raw_input': _input}
             try:
-                exec req.code in g
+                exec(req.code, g)
             except Stop:
                 rospy.loginfo('Program forced to stop')
             except Exception as e:
@@ -146,6 +146,7 @@ def stop(req):
     return {'success': True}
 
 
+# TODO: find dir in installed package
 programs_path = rospy.get_param('~programs_dir', os.path.dirname(os.path.abspath(__file__)) + '/../programs')
 
 

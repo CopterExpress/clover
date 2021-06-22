@@ -319,4 +319,4 @@ GPIO.cleanup()
 
 Special thanks to International Ala-Too University for funding the Clover 4 kits.
 
-<img src="https://pms.alatoo.edu.kg/images/logo_text.png">
+<img src="../assets/seeding_drone/ala-too.png">

@@ -6,4 +6,4 @@
 echo "wait for file $1"
 while [ ! -e "$1" ]; do sleep 1; done;
 echo "file $1 appeared"
-"${@:2}"
+exec "${@:2}"

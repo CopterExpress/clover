@@ -63,7 +63,7 @@ An example of subscription to topic `/foo`:
 
 ```python
 def foo_callback(msg):
-    print msg.data
+    print(msg.data)
 
 # Subscribing. When a message is received in topic /foo, function foo_callback will be invoked.
 rospy.Subscriber('/foo', String, foo_callback)

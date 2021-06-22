@@ -7,6 +7,7 @@ endif()
 
 message(STATUS "Adding vendored aruco_pose OpenCV module")
 add_library(_opencv_aruco STATIC
+  vendor/aruco/src/apriltag_quad_thresh.cpp
   vendor/aruco/src/aruco.cpp
   vendor/aruco/src/charuco.cpp
   vendor/aruco/src/dictionary.cpp
@@ -23,7 +24,7 @@ target_compile_definitions(_opencv_aruco PRIVATE
   CV_OVERRIDE=override
 )
 target_compile_options(_opencv_aruco PRIVATE
-  -fpic -fPIC
+  -fpic -fPIC -fvisibility=hidden
 )
 
 target_include_directories(_opencv_aruco PUBLIC
