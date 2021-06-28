@@ -12,4 +12,6 @@
 
 Также у нас есть чат для программистов, которые разрабатывают под PX4, автономную навигацию в помещениях и рои дронов: [@DroneCode](tg://resolve?domain=DroneCode).
 
+Чат по разработке самой платформы Клевера и образа для RPi: [@devclover](https://t.me/devclover).
+
 Вы можете скачать [PDF-версию](https://clover.coex.tech/clover_ru.pdf) этой документации. The English version of this documentation [is available](../en/).
