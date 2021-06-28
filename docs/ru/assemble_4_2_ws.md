@@ -240,12 +240,27 @@
         <img src="../assets/assembling_soldering_clever_4/raspberry_8.png" width=300 class="zoom border">
     </div>
 
-    | Провод | Пин дальномера |
-    |--------|----------------|
-    | <font color=red>Красный</font> | 5v |
-    | <font color=black>Черный</font> | GND |
-    | <font color=yellow>Желтый</font> | SDA |
-    | <font color=green>Зеленый</font> | SCL |
+   <table class=versions>
+        <tr><th>Провод</th><th>Пин дальномера</th></tr>
+        <tr>
+             <td>
+                  <font color=red>Красный</font>
+             </td>
+             <td>5v</td>
+        </tr>
+        <tr>
+             <td><font color=black>Черный</font></td>
+             <td>GND</td>
+        </tr>
+        <tr>
+             <td><font color=yellow>Желтый</font></td>
+             <td>SDA</td>
+        </tr>
+        <tr>
+             <td><font color=green>Зеленый</font> </td>
+             <td>SCL</td>
+        </tr>
+   </table>
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/raspberry_9.png" width=300 class="zoom border">
