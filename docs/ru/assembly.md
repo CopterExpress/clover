@@ -7,7 +7,10 @@
      <tr>
           <td>
                <a href="assemble_4_2.md">Клевер&nbsp;4.2</a>
-               <div class=subversion>(<a href="assemble_4_2_ws.md">4.2&nbsp;WorldSkills</a>)</div>
+               <div class=subversion>
+                    (<a href="assemble_4_2_ws.md">WorldSkills</a>,
+                    <a href="assemble_4_2_pro.md">Pro</a>)
+               </div>
           </td>
           <td><a href="assemble_4_2.md"><img src="../assets/versions/clover_4_2.jpg" width=200></a></td>
      </tr>
