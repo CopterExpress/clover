@@ -35,7 +35,7 @@
     * [Распознавание маркеров](aruco_marker.md)
     * [Навигация по карте маркеров](aruco_map.md)
   * [Навигация по Optical Flow](optical_flow.md)
-  * [Автономный полет в OFFBOARD](simple_offboard.md)
+  * [Автономный полет (OFFBOARD)](simple_offboard.md)
   * [Системы координат](frames.md)
   * [Примеры кода](snippets.md)
   * [Лазерный дальномер](laser.md)

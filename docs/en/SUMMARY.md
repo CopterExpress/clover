@@ -34,7 +34,7 @@
     * [Marker detection](aruco_marker.md)
     * [Map-based navigation](aruco_map.md)
   * [Optical Flow](optical_flow.md)
-  * [Simple OFFBOARD](simple_offboard.md)
+  * [Autonomous flight (OFFBOARD)](simple_offboard.md)
   * [Coordinate systems (frames)](frames.md)
   * [Code snippets](snippets.md)
   * [Interfacing with a laser rangefinder](laser.md)

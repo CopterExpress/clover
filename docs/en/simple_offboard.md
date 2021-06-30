@@ -1,4 +1,4 @@
-Simple OFFBOARD
+Autonomous flight (OFFBOARD)
 ===
 
 > **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/simple_offboard.md) for older images.
