@@ -52,5 +52,4 @@
 
 <img src="../assets/grip_load/stand_with_ball.png" width=300 class="zoom center">
 
-ссылка на файлы для 3D печати элементов захвата: 
-https://clover.coex.tech/ru/models.html
+Ссылки для скачивания файлов для 3D-печати находятся в статье [CAD-модели](models.md).
