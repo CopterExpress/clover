@@ -155,6 +155,13 @@ echo_stamp "Make \$HOME/examples symlink"
 ln -s "$(catkin_find clover examples --first-only)" /home/pi
 chown -Rf pi:pi /home/pi/examples
 
+echo_stamp "Make systemd services symlinks"
+ln -s /home/pi/catkin_ws/src/clover/builder/assets/clover.service /lib/systemd/system/
+ln -s /home/pi/catkin_ws/src/clover/builder/assets/roscore.service /lib/systemd/system/
+# validate
+[ -f /lib/systemd/system/clover.service ]
+[ -f /lib/systemd/system/roscore.service ]
+
 echo_stamp "Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
