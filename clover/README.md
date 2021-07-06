@@ -36,7 +36,7 @@ curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/inst
 You may optionally install udev rules to provide `/dev/px4fmu` symlink to your PX4-based flight controller connected over USB. Copy `99-px4fmu.rules` to your `/lib/udev/rules.d` folder:
 
 ```bash
-cd ~/catkin_ws/src/clover/clover/config
+cd ~/catkin_ws/src/clover/clover/udev
 sudo cp 99-px4fmu.rules /lib/udev/rules.d
 ```
 

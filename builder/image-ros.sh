@@ -162,6 +162,9 @@ ln -s /home/pi/catkin_ws/src/clover/builder/assets/roscore.service /lib/systemd/
 [ -f /lib/systemd/system/clover.service ]
 [ -f /lib/systemd/system/roscore.service ]
 
+echo_stamp "Make udev rules symlink"
+ln -s "$(catkin_find clover udev --first-only)"/* /lib/udev/rules.d/
+
 echo_stamp "Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'

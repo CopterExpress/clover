@@ -110,7 +110,7 @@ cd ~/catkin_ws
 catkin_make
 ```
 
-> **Hint** При подключении полётных контроллеров на базе PX4 через USB следует также добавить правила udev в систему. Скопируйте [файл с правилами](https://github.com/CopterExpress/clover/blob/master/clover/config/99-px4fmu.rules) в `/etc/udev/rules.d` и выполните команду `sudo udevadm control --reload-rules && sudo udevadm trigger`.
+> **Hint** При подключении полётных контроллеров на базе PX4 через USB следует также добавить правила udev в систему. Скопируйте [файл с правилами](https://github.com/CopterExpress/clover/blob/master/clover/udev/99-px4fmu.rules) в `/etc/udev/rules.d` и выполните команду `sudo udevadm control --reload-rules && sudo udevadm trigger`.
 
 ### Запуск Клеверных нод
 

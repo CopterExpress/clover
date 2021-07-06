@@ -280,7 +280,7 @@ string(FIND ${CMAKE_INSTALL_PREFIX} "/opt/ros" _PREFIX_INDEX)
 if (${_PREFIX_INDEX} EQUAL 0)
   message(STATUS "Building as a Debian package - adding udev rules as installable files")
   install(FILES
-    config/99-px4fmu.rules
+    udev/99-px4fmu.rules
     DESTINATION /lib/udev/rules.d
   )
 else()
