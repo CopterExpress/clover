@@ -34,6 +34,7 @@ i2cdetect -V
 butterfly -h
 # espeak --version
 mjpg_streamer --version
+systemctl --version
 
 # ros stuff
 
