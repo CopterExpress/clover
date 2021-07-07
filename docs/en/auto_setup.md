@@ -193,7 +193,7 @@ Most of the parameters for autonomous flight are located in the following direct
   <arg name="aruco" default="true"/>.
   ```
 
-  This will acticate the ArUco marker detection module.
+  This will activate the ArUco marker detection module.
 - Open the file `aruco.launch`:
 
   ```bash
