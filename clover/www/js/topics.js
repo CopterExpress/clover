@@ -47,7 +47,7 @@ function viewTopic(topic) {
 	new ROSLIB.Topic({ ros: ros, name: topic }).subscribe(function(msg) {
 		document.title = topic;
 		if (mouseDown) return;
-		topicMessage.innerHTML = JSON.stringify(msg, null, 4);
+		topicMessage.innerHTML = yamlStringify(msg); // JSON.stringify(msg, null, 4);
 	});
 }
 
