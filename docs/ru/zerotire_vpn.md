@@ -1,12 +1,12 @@
 # Создание виртуальной сети ZeroTire и подключение к ней
 
-## Создание и настройка сети ZeroTire
+## Создание и настройка сети ZeroTier
 
-1. Зайдите на сайт [ZeroTire](https://www.zerotier.com/).
+1. Зайдите на сайт [ZeroTier](https://www.zerotier.com/).
 
     <img src="../assets/zerotire/login_1.png" width=300 class="zoom border center">
 
-2. Зарегистрируйтесь в ZeroTire.
+2. Зарегистрируйтесь в ZeroTier.
 
     <img src="../assets/zerotire/login_2.png" width=300 class="zoom border center">
 
@@ -39,13 +39,13 @@
 
 9. Повторите последний шаг для всех подключаемых устройств.
 
-    > **Info** Сеть ZeroTire в случае бесплатного использования поддерживает до 50 пользователей одновременно.
+    > **Info** Сеть ZeroTier в случае бесплатного использования поддерживает до 50 пользователей одновременно.
 
 ## Настройка на Windows
 
 ### Установка приложения
 
-1. Перейдите на сайт ZeroTire.
+1. Перейдите на сайт ZeroTier.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -53,7 +53,7 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Скачайте и запустите файл `ZeroTire One.msi`.
+3. Скачайте и запустите файл `ZeroTier One.msi`.
 
     <div class="image-group">
         <img src="../assets/zerotire/windows_1.png" width=300 class="zoom border">
@@ -62,9 +62,9 @@
 
 ### Подключение к сети
 
-1. Запустите ZeroTire One.
+1. Запустите ZeroTier One.
 
-2. Нажмите на иконку ZeroTire One в панели задач.
+2. Нажмите на иконку ZeroTier One в панели задач.
 
 3. Нажмите на кнопку *Join Network...* для подключения к сети.
 
@@ -82,7 +82,7 @@
 
 ### Установка приложения
 
-1. Перейдите на сайт ZeroTire.
+1. Перейдите на сайт ZeroTier.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -90,11 +90,11 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Установите приложение *ZeroTire One*.
+3. Установите приложение *ZeroTier One*.
 
 ### Подключение к сети
 
-1. Запустите приложение *ZeroTire One*.
+1. Запустите приложение *ZeroTier One*.
 
 2. Нажмите на *+* для добавления нового подключения.
 
@@ -123,7 +123,7 @@
 
 1. Откройте консоль, для этого нажмите сочетание клавиш *Ctrl* + *Alt* + *T* или в строке поиска программ введите *Terminal*
 
-2. Введите команду установки ZeroTire.
+2. Введите команду установки ZeroTier.
 
     ```bash
     curl -s https://install.zerotier.com | sudo bash
@@ -133,7 +133,7 @@
 
 1. Откройте консоль.
 
-2. Введите команду `sudo zerotire-cli join network-id`, где `netwirk-id` это ID вашей сети.
+2. Введите команду `sudo zerotier-cli join network-id`, где `netwirk-id` это ID вашей сети.
 
     <img src="../assets/zerotire/linux_1.png" width=300 class="zoom border center">
 
@@ -143,7 +143,7 @@
 
 ### Установка приложения
 
-1. Перейдите на сайт ZeroTire.
+1. Перейдите на сайт ZeroTier.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -151,15 +151,15 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Скачайте и запустите файл `ZeroTire One.pkg`.
+3. Скачайте и запустите файл `ZeroTier One.pkg`.
 
-4. Установите приложение ZeroTire One.
+4. Установите приложение ZeroTier One.
 
 ### Подключение к сети
 
-1. Запустите приложение ZeroTire One.
+1. Запустите приложение ZeroTier One.
 
-2. В панеле задач нажмите на иконку ZeroTire One.
+2. В панеле задач нажмите на иконку ZeroTier One.
 
 3. В открывшемся окне нажмите *Join Network...*.
 
@@ -171,7 +171,7 @@
 
 ## Подключение к коптеру
 
-1. Убедитесь, что ZeroTire работает и имеет соединение с сетью на дроне и управляющем устройстве. Для этого убедитесь, что интересующие вас устройства имеют статус *Online*.
+1. Убедитесь, что ZeroTier работает и имеет соединение с сетью на дроне и управляющем устройстве. Для этого убедитесь, что интересующие вас устройства имеют статус *Online*.
 
     <img src="../assets/zerotire/qgc_1.png" width=300 class="zoom border center">
 
