@@ -4,7 +4,7 @@
 
 > **Note** Документация для версии образа, начиная с 0.14. Для более ранних версий см. [документацию для версий 0.13](https://github.com/CopterExpress/clover/blob/v0.13/docs/leds.md)
 
-Подключите светодиодную ленту к питанию +5v - 5v, земле GND - GND и сигнальному порту DIN - GPIO30, GPIO21, GPIO18.
+Подключите светодиодную ленту к питанию +5v - 5v, земле GND - GND и сигнальному порту DIN - GPIO30, **GPIO21**, GPIO18. По умолчанию нужно подключать к **GPIO21**.
 
 <img src="../assets/led_connection.png" height="400px" alt="leds">
 
