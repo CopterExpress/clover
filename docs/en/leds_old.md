@@ -4,7 +4,7 @@
 
 > **Note** The following is applicable to image versions 0.14 and up. For versions 0.13 and older see [an older revision of this article](https://github.com/CopterExpress/clover/blob/v0.16/docs/en/leds.md)
 
-Connect the +5v and GND leads of your LED to a power source and the DIN (data in) lead to GPIO18 or GPIO21.
+Connect the +5v and GND leads of your LED to a power source and the DIN (data in) lead to GPIO18 or **GPIO21** (by default).
 
 <img src="../assets/led_connection.png" height="400px" alt="leds">
 
