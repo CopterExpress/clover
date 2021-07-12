@@ -226,11 +226,11 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
 6. Connect the LED strip power (red, black cables) to the short JST connector on the PDB.
 
-    <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_soldering_clever_4/led_7.png" width=300 class="zoom border center">
 
 7. Connect the signal output of the LED strip (white cable) to Raspberry Ri, to pin *GPIO21*.
 
-    <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_soldering_clever_4/led_8.png" width=300 class="zoom border center">
 
 ## Installing guard
 
