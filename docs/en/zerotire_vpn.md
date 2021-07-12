@@ -1,12 +1,12 @@
-# Creating a virtual network ZeroTire One and connecting to it
+# Creating a virtual network ZeroTier One and connecting to it
 
-## Creating and configuring a ZeroTire network
+## Creating and configuring a ZeroTier network
 
-1. Go to [ZeroTire](https://www.zerotier.com/) website.
+1. Go to [ZeroTier](https://www.zerotier.com/) website.
 
     <img src="../assets/zerotire/login_1.png" width=300 class="zoom border center">
 
-2. Sign up on ZeroTire.
+2. Sign up on ZeroTier.
 
     <img src="../assets/zerotire/login_2.png" width=300 class="zoom border center">
 
@@ -39,13 +39,13 @@
 
 9. Repeat the last step for all the devices that you want to connect.
 
-    > **Info** ZeroTire network supports up to 50 users simultaneously for free use.
+    > **Info** ZeroTier network supports up to 50 users simultaneously for free use.
 
 ## Setup on Windows
 
 ### Installing the app
 
-1. Go to the ZeroTire website.
+1. Go to the ZeroTier website.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -53,7 +53,7 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Download and run the `Zero Tare One.msi` file.
+3. Download and run the `ZeroTier One.msi` file.
 
     <div class="image-group">
         <img src="../assets/zerotire/windows_1.png" width=300 class="zoom border">
@@ -62,9 +62,9 @@
 
 ### Network connection
 
-1. Run ZeroTire One.
+1. Run ZeroTier One.
 
-2. Click on the ZeroTire One icon in the taskbar.
+2. Click on the ZeroTier One icon in the taskbar.
 
 3. Click on the *Join Network...* to connect to the network.
 
@@ -80,7 +80,7 @@
 
 ### Installing the app
 
-1. Go to the ZeroTire website.
+1. Go to the ZeroTier website.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -88,11 +88,11 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Install the *ZeroTire One* app.
+3. Install the *ZeroTier One* app.
 
 ### Network connection
 
-1. Run ZeroTire One app.
+1. Run ZeroTier One app.
 
 2. Click on *+* to add a new connection.
 
@@ -121,7 +121,7 @@
 
 1. Open the console by pressing the keyboard shortcut *ctrl + alt + t* or type *terminal* in the program search bar.
 
-2. Enter the Zero Tare installation command.
+2. Enter the ZeroTier installation command.
 
     ```bash
     curl -s  https://install.zerotier.com  | sudo bash
@@ -131,7 +131,7 @@
 
 1. Open the console.
 
-2. Enter the command `sudo zerotire-cli join network-id`, where `network-id` is your network ID.
+2. Enter the command `sudo zerotier-cli join network-id`, where `network-id` is your network ID.
 
     <img src="../assets/zerotire/linux_1.png" width=300 class="zoom border center">
 
@@ -141,7 +141,7 @@
 
 ### Installing the app
 
-1. Go to the ZeroTire website.
+1. Go to the ZeroTier website.
 
     <img src="../assets/zerotire/download_1.png" width=300 class="zoom border center">
 
@@ -149,15 +149,15 @@
 
     <img src="../assets/zerotire/download_2.png" width=300 class="zoom border center">
 
-3. Download and run `ZeroTire One.pkg` file.
+3. Download and run `ZeroTier One.pkg` file.
 
-4. Install the ZeroTire One app.
+4. Install the ZeroTier One app.
 
 ### Network connection
 
-1. Run ZeroTire One app.
+1. Run ZeroTier One app.
 
-2. Click on the ZeroTire One icon in the taskbar .
+2. Click on the ZeroTier One icon in the taskbar .
 
 3. In the window that appears, click on *Join Network...*.
 
@@ -169,7 +169,7 @@
 
 ## Connecting to the copter
 
-1. Make sure that ZeroTire is working and connected to the network on the drone and control device. To do this, make sure that these have an *Online* status.
+1. Make sure that ZeroTier is working and connected to the network on the drone and control device. To do this, make sure that these have an *Online* status.
 
      <img src="../assets/zerotire/qgc_1.png" width=300 class="zoom border center">
 
