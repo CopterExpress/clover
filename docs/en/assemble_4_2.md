@@ -60,7 +60,7 @@ Dimensional drawing – [clover-4.2.pdf](https://github.com/CopterExpress/clove
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. Install 2 15mm posts on the center holes in the main deck and fix them with the M3x8 screws.
+2. Install 2 aluminum 15mm posts on the center holes in the main deck and fix them with the M3x8 screws.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
