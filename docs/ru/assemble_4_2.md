@@ -60,7 +60,7 @@
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. На центральные отверстия в главной деке установите 2 стойки 15 мм и закрепите их с помощью винтов М3х8.
+2. На центральные отверстия в главной деке установите 2 алюминиевые стойки 15 мм и закрепите их с помощью винтов М3х8.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
