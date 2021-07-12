@@ -12,9 +12,8 @@ The proposed projects have to be open-source and be compatible with the Clover q
 
 Teams are welcome to dive into the development of the following company cases:
 
-1. Make a modification of the PX4 firmware version v1.12.0 for Clover.
-2. Develop the PX4v4 flight controller board with the dimensions 55x40 mm and the compatibility of a Raspberry Pi CM 4 installation.
-3. Cloud platform for the [Clover simulator](https://clover.coex.tech/ru/simulation.html) similar as to/based on [ROS Development Studio](https://app.theconstructsim.com/).
+1. Develop the Pixhawk FMUv6U flight controller board with the dimensions 55x40 mm and the compatibility of a Raspberry Pi CM 4 installation.
+2. Cloud platform for the [Clover simulator](https://clover.coex.tech/ru/simulation.html) similar as to/based on [ROS Development Studio](https://app.theconstructsim.com/).
 
 The list of cases may be expanded in future.
 
