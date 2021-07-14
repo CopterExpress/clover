@@ -70,7 +70,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 
 * `~map` – path to text file with markers list
 * `~frame_id` – published frame id (default: `aruco_map`)
-* `~known_tilt` – debug image width
+* `~known_tilt` – known tilt (pitch and roll) of markers map as a frame
 * `~image_width` – debug image width (default: 2000)
 * `~image_height` – debug image height (default: 2000)
 * `~image_margin` – debug image margin (default: 200)
