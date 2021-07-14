@@ -43,7 +43,6 @@ marker_id marker_size x y z z_angle y_angle x_angle
 
 `N_angle` is the angle of rotation along the `N` axis in radians.
 
-Файлы карт располагаются в каталоге `~/catkin_ws/src/clover/aruco_pose/map`. Название файла с картой задается в аргументе `map`:
 Map files are located at the `~/catkin_ws/src/clover/aruco_pose/map` directory. Map file name is defined in the `map` argument:
 
 ```xml
