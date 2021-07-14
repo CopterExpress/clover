@@ -156,7 +156,7 @@ If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` paramete
 
 In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_setup.md).
 
-You should also set the `placement` parameter to `ceilin` in `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
+You should also set the `placement` parameter to `ceiling` in `~/catkin_ws/src/clover/clover/launch/aruco.launch`:
 
 ```xml
 <arg name="placement" default="ceiling"/>

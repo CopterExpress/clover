@@ -44,7 +44,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
 * `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
-* Optional: `LPE_FUSION` – falg 'pub agl as lpos down' is on (see [rangefinder setup](laser.md).
+* Optional: `LPE_FUSION` – flag 'pub agl as lpos down' is on (see [rangefinder setup](laser.md).
 
 [The `selfcheck.py` utility](selfcheck.md) will help you verify that all settings are correctly set.
 
