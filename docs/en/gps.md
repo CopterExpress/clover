@@ -20,4 +20,4 @@ The GPS module is connected to "GPS" and "I2C" (compass) connectors of the fligh
 
 If GPS is connected, magnetometers are to be re-calibrated in the QGroundControl application via a [Wi-Fi](wifi.md) or USB connection.
 
-Next, GPS is to be enabled in parameter `EKF2_AID_MASK` (when EKF2is used) or `LPE_FUSION` (when LPE is used).
+Next, GPS is to be enabled in parameter `EKF2_AID_MASK` (when EKF2 is used) or `LPE_FUSION` (when LPE is used). When using LPE the weight of the magnetometer should be more 0 (`ATT_W_MAG` = 0.1).
