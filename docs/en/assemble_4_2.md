@@ -162,7 +162,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install 6 mm racks and 30 mm racks, fasten them with the M3x5 and M3x12 bolts, respectively.
+2. On a mounting deck, install M2.5x6 mm racks and M3x30 mm racks, fasten them with the M2.5x4 and M3x12 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -170,7 +170,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_2.png" width=300 class="zoom border center">
 
-4. Install the Raspberry Pi circuit board and fix with nylon nuts.
+4. Install the Raspberry Pi circuit board and fix with M2.5x4 bolts.
 
     <img src="../assets/assembling_clever4_2/raspberry_3.png" width=300 class="zoom border center">
 
