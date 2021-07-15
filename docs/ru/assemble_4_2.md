@@ -162,7 +162,7 @@
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки 6мм и стойки 30 мм, закрепите их с помощью винт М3х5 и М3х12 соответственно.
+2. На монтажную деку установите стойки M2.5x6мм и стойки M3x30 мм, закрепите их с помощью винтов М2.5х4 и М3х12 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -170,7 +170,7 @@
 
     <img src="../assets/assembling_clever4_2/raspberry_2.png" width=300 class="zoom border center">
 
-4. Установите плату Raspberry Pi и зафиксируйте с помощью нейлоновых гаек.
+4. Установите плату Raspberry Pi и зафиксируйте с помощью винтов М2.5х4.
 
     <img src="../assets/assembling_clever4_2/raspberry_3.png" width=300 class="zoom border center">
 
