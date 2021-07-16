@@ -111,6 +111,8 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
     <img src="../assets/github_application/propose_new_file.png" alt="GitHub Propose New File">
 
+    > **Note** Don't commit changes directly to the `master` branch, create a new branch.
+
 6. If necessary, place additional visual assets in the `docs/assets` folder and add them to your article.
 
 7. Send a Draft Pull Request from your branch to Clover:
