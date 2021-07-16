@@ -64,7 +64,7 @@ CopterHack 2022 — это международный конкурс по ра�
 
     <img src="../assets/github_application/github-fork.png" alt="GitHub Fork">
 
-2. На web странице вашего форка зайдите в раздел `docs/ru` и создайте новый файл в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown):
+2. На странице вашего форка зайдите в раздел `docs/ru` и создайте новый файл в формате [Markdown](https://ru.wikipedia.org/wiki/Markdown):
 
     <img src="../assets/github_application/create_new_file.png" alt="GitHub Create New File">
 
