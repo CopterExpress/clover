@@ -234,7 +234,7 @@
 
     <img src="../assets/assembling_clever4_2/led_4.png" width=300 class="zoom border center">
 
-5. Закрепите ножки с помощью самоконтрящихся гаек и винтов М3х8.
+5. Закрепите ножки с помощью самоконтрящихся гаек и винтов М3х10.
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
@@ -260,7 +260,7 @@
 
     <img src="../assets/assembling_clever4_2/guard_3.png" width=300 class="zoom border center">
 
-4. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х8.
+4. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х10.
 
     <img src="../assets/assembling_clever4_2/guard_4.png" width=300 class="zoom border center">
 
