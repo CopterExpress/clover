@@ -199,7 +199,7 @@ The *Clover 4* set allows you to install various flight controllers, for example
         <img src="../assets/assembling_soldering_clever_4/fc_connection_3.png" width=300 class="zoom border">
     </div>
 
-3. Install the 40mm aluminum posts onto the M3x12 screws.
+3. Install the 40mm aluminum posts onto the M3x10 screws.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/fc_connection_4.png" width=300 class="zoom border">
@@ -212,7 +212,7 @@ The *Clover 4* set allows you to install various flight controllers, for example
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_1.png" width=300 class="zoom border center">
 
-2. Use an M3x12 bolt to cut M3 carving in the Raspberry Pi mounting holes.
+2. Use an M3x10 bolt to cut M3 carving in the Raspberry Pi mounting holes.
 
 3. Screw the 6mm racks into the Raspberry Pi board, secure them with nylon nuts if necessary.
 
@@ -310,7 +310,7 @@ The *Clover 4* set allows you to install various flight controllers, for example
 
     <img src="../assets/assembling_soldering_clever_4/led_5.png" width=300 class="zoom border center">
 
-6. Secure the legs with self-locking nuts and M3x8 screws.
+6. Secure the legs with self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_soldering_clever_4/led_6.png" width=300 class="zoom border center">
 
@@ -328,15 +328,15 @@ The *Clover 4* set allows you to install various flight controllers, for example
 
 ## Setting protection
 
-1. Assemble the lower level of protection using 40mm posts and M3x12 screws.
+1. Assemble the lower level of protection using 40mm posts and M3x10 screws.
 
     <img src="../assets/assembling_soldering_clever_4/guard_1.png" width=300 class="zoom border center">
 
-2. Assemble the upper layer of protection using the M3x12 screws.
+2. Assemble the upper layer of protection using the M3x10 screws.
 
     <img src="../assets/assembling_soldering_clever_4/guard_2.png" width=300 class="zoom border center">
 
-3. Install the protection and fix it to the beams with self-locking nuts and M3x8 screws.
+3. Install the protection and fix it to the beams with self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
 
