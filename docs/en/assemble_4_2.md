@@ -146,7 +146,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/fc_connection_2.png" width=300 class="zoom border center">
 
-3. Install 40mm aluminum racks on the M3x12 screws.
+3. Install 40mm aluminum racks on the M3x10 screws.
 
 <div class="image-group">
     <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
@@ -162,7 +162,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install M2.5x6 mm racks and M3x30 mm racks, fasten them with the M2.5x4 and M3x12 bolts, respectively.
+2. On a mounting deck, install M2.5x6 mm racks and M3x30 mm racks, fasten them with the M2.5x4 and M3x10 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -220,7 +220,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/led_4.png" width=300 class="zoom border center">
 
-5. Behind fasten the legs with self-locking nuts and M3x8 screws.
+5. Behind fasten the legs with self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
@@ -234,11 +234,11 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
 ## Installing guard
 
-1. Assemble the lower level of guard with 40mm racks and M3x12 screws.
+1. Assemble the lower level of guard with 40mm racks and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_1.png" width=300 class="zoom border center">
 
-2. Assemble the top level of protection with the M3x12 screws.
+2. Assemble the top level of protection with the M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_2.png" width=300 class="zoom border center">
 
@@ -246,7 +246,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/guard_3.png" width=300 class="zoom border center">
 
-4. Establish protection and fix on beams by means of self-locking nuts and M3x8 screws.
+4. Establish protection and fix on beams by means of self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_4.png" width=300 class="zoom border center">
 
