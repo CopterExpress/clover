@@ -146,7 +146,7 @@
 
     <img src="../assets/assembling_clever4_2/fc_connection_2.png" width=300 class="zoom border center">
 
-3. Установите алюминиевые стойки 40 мм на винты М3х12.
+3. Установите алюминиевые стойки 40 мм на винты М3х10.
 
     <div class="image-group">
         <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
@@ -162,7 +162,7 @@
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. На монтажную деку установите стойки M2.5x6мм и стойки M3x30 мм, закрепите их с помощью винтов М2.5х4 и М3х12 соответственно.
+2. На монтажную деку установите стойки M2.5x6мм и стойки M3x30 мм, закрепите их с помощью винтов М2.5х4 и М3х10 соответственно.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -248,11 +248,11 @@
 
 ## Установка защиты
 
-1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х12.
+1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х10.
 
     <img src="../assets/assembling_clever4_2/guard_1.png" width=300 class="zoom border center">
 
-2. Соберите верхний уровень защиты с помощью винтов М3х12.
+2. Соберите верхний уровень защиты с помощью винтов М3х10.
 
     <img src="../assets/assembling_clever4_2/guard_2.png" width=300 class="zoom border center">
 
