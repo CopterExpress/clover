@@ -55,7 +55,7 @@ A visual Gazebo plugin is used for the LED strip. An example of the plugin usage
 The plugin accepts the following parameters during instantiation:
 
 * `robotNamespace` (*string*, default: "") - a ROS namespace for the plugin;
-* `ledCount` (*integer*, required) - total numer of LEDs in a strip.
+* `ledCount` (*integer*, required) - total number of LEDs in a strip.
 
 The plugin will provide the following service:
 

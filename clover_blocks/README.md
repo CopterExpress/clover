@@ -10,7 +10,7 @@ Internal package documentation is given below.
 
 ## Frontend
 
-The frontend files are located in [`www`](./www/) subdirectory. The frontend application uses [`roblib.js`](http://wiki.ros.org/roslibjs) library for communicating with backend node and other ROS resources.
+The frontend files are located in [`www`](./www/) subdirectory. The frontend application uses [`roslib.js`](http://wiki.ros.org/roslibjs) library for communicating with backend node and other ROS resources.
 
 ## `clover_blocks` node
 

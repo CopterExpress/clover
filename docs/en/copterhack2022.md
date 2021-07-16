@@ -78,17 +78,17 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
     # Project name
 
     [CopterHack-2022](copterhack2022.md), team **Team name**.
-    
+
     ## Team information
 
-   The list of team members: 
-    
+    The list of team members:
+
     (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
 
-      * Alexander Sokolov, @aleksandrsokolov111, teamlead;
-      * Elena Smirnova, @elenasmirnova111, Full-stack developer.
+    * Alexander Sokolov, @aleksandrsokolov111, engineer.
+    * Elena Smirnova, @elenasmirnova111, programmer.
 
-    ##  Project description
+    ## Project description
 
     ### Project idea
 
@@ -101,7 +101,7 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
     ### Using Clover platform
 
     Describe how the Clover platform will be used in your project.
-   
+
     #### Additional information at the request of participants
 
     For example, information about the team's experience working on projects, attach a link to articles, videos.

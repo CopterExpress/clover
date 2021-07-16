@@ -133,7 +133,7 @@
 
 1. Откройте консоль.
 
-2. Введите команду `sudo zerotier-cli join network-id`, где `netwirk-id` это ID вашей сети.
+2. Введите команду `sudo zerotier-cli join network-id`, где `network-id` это ID вашей сети.
 
     <img src="../assets/zerotire/linux_1.png" width=300 class="zoom border center">
 
@@ -159,7 +159,7 @@
 
 1. Запустите приложение ZeroTier One.
 
-2. В панеле задач нажмите на иконку ZeroTier One.
+2. В панели задач нажмите на иконку ZeroTier One.
 
 3. В открывшемся окне нажмите *Join Network...*.
 
