@@ -16,7 +16,7 @@ Clover 2 construction kit assembly instruction
 * Side guard ×16.
 * Dalprop 5045 plastic propeller ×4.
 * Racerstar BR2205 2300kV brushless motor ×4.
-* Speed controllers ESC, DYS XSD20А ×4.
+* Speed controllers ESC, DYS XSD20A ×4.
 * Power controller XT60 pin ×1.
 * Power connector XT60 socket ×1.
 * Three-wire female-female flat cable ×2.
@@ -40,9 +40,9 @@ Clover 2 construction kit assembly instruction
 
 * 6 mm plastic legs ×28.
 * 30 mm plastic legs ×32.
-* М3х8 screws ×48.
-* М3х12 screws ×24.
-* М3х16 screws ×40.
+* M3x8 screws ×48.
+* M3x12 screws ×24.
+* M3x16 screws ×40.
 * Plastic nuts ×8.
 * Metal nuts ×48.
 * Stickers for the battery compartment ×8.
@@ -117,7 +117,7 @@ Tin wires
 #### Fix the motor on the mount
 
 * Install the motor on the engraved side of the mount.
-* Attach the motors to the mounts with М3х8 screws using a screwdriver.
+* Attach the motors to the mounts with M3x8 screws using a screwdriver.
 
 ![Fix the motor on the mount](../assets/brrc2205on.jpg)
 
@@ -248,14 +248,14 @@ Solder the 5V connector, taking into account the polarity on the contact pads.
 
 ### Installation of the power distribution board
 
-* Fix the power board to the frame with М3х8 screws and plastic nuts. ![Installation of the PDB board](../assets/mountPDB.png)
+* Fix the power board to the frame with M3x8 screws and plastic nuts. ![Installation of the PDB board](../assets/mountPDB.png)
     > **IMPORTANT** The white arrow on the BeeRotor board points towards the fore cutout.
 ![Installation of the PDB board](../assets/topviewmountPDB.png)
 
 #### Installation of elements
 
 1. Install the nuts into plastic holders. ![Installation of plastic holders](../assets/holderLegs.png)
-2. Fix the motor mounts to the frame with М3х16 screws.
+2. Fix the motor mounts to the frame with M3x16 screws.
     * The mounts are installed above the frame.
     * Plastic holders are installed beneath the frame. ![Installation of mounts](../assets/mountBeams.png)
 3. Arrangement of motors. Check arrangement of the motors (the motors with black nuts should be in the top left and lower right corners). ![Arrangement of motors](../assets/motorsTopview.png)
@@ -309,12 +309,12 @@ IMPORTANT NOTE about polarity
 
 ### Installation of the radio receiver
 
-1. Install the 30 mm plastic legs on the frame with М3х8 screws.
+1. Install the 30 mm plastic legs on the frame with M3x8 screws.
 2. Pass the 5V power connector through the slit. ![Installation of legs and the slot](../assets/mountReceiverStud.png)
 3. Attach the receiver to the bottom of the additional frame using double-sided adhesive tape and following the orientation of the engraved arrow. The antennas are to be pointing forward. ![Installation of the radio receiver on the deck](../assets/mountReceiverDeck.png)
 4. Install the 3-wire flat cable into the PPM / CH1 channel. ![Connecting the radio receiver](../assets/receiverPPM.png)
 5. Pass them through the slit to the 5 V connector.
-6. Screw the bottom an additional frame to the legs on the central frame with М3х8 screws. ![Bottom deck installation](../assets/mountBottomDeck.png)
+6. Screw the bottom an additional frame to the legs on the central frame with M3x8 screws. ![Bottom deck installation](../assets/mountBottomDeck.png)
     > **IMPORTANT** The directions of the arrows on the power supply board and the additional frame should coincide
 
 ### Installation of the flight controller
@@ -346,22 +346,22 @@ should be increased up to 4 – 5.
 
 ### Installation of guard
 
-1. Attach the lower guard with М3х16 screw to the motor mounts of the frame. ![Installation of beams guard](../assets/lowsafeDeck.png)
-2. Attach the feet to the plastic holders with М3х16 screws. ![Feet installation](../assets/safeLegs.png)
-3. Attach the 30 mm long legs to the holes of the lower guard with М3х12 screw. ![Installation of the lower radial guard](../assets/safelowRadial.png)
-4. Attach the top guard with М3х12 screws. ![Installation of the top radial guard](../assets/safehighRadial.png)
+1. Attach the lower guard with M3x16 screw to the motor mounts of the frame. ![Installation of beams guard](../assets/lowsafeDeck.png)
+2. Attach the feet to the plastic holders with M3x16 screws. ![Feet installation](../assets/safeLegs.png)
+3. Attach the 30 mm long legs to the holes of the lower guard with M3x12 screw. ![Installation of the lower radial guard](../assets/safelowRadial.png)
+4. Attach the top guard with M3x12 screws. ![Installation of the top radial guard](../assets/safehighRadial.png)
 
 ### Installation of the battery compartment
 
 Requires the following components:
 
-* М3х12 screws (4 pcs)
+* M3x12 screws (4 pcs)
 * M3 nuts (4 pcs)
 * Additional frame (1 pc)
 * Battery compartment (1 pc)
 
-1. Attach the battery compartment on top of the additional frame with М3х12 screws and nuts. ![Installation of the battery compartment](../assets/mountHolder.png)
-2. Attach the top additional frame to the legs with М3х8 screws. ![Installation of the battery compartment](../assets/isoViewmountHolder.png)
+1. Attach the battery compartment on top of the additional frame with M3x12 screws and nuts. ![Installation of the battery compartment](../assets/mountHolder.png)
+2. Attach the top additional frame to the legs with M3x8 screws. ![Installation of the battery compartment](../assets/isoViewmountHolder.png)
 3. Install the battery into the battery compartment.
 
 ### Installation of antennas

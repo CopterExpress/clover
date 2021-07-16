@@ -149,7 +149,7 @@ else:
 height_unz, width_unz, depth_unz = frame.shape
 ```
 
-***In this case, we pass argument ссс.CLEVER_FISHEYE_CAM_640, since the resolution of the image in this example, is 640x480; you can also use ссс.CLEVER_FISHEYE_CAM_320 for resolution 320x240, otherwise you will have to send the path to the .yaml calibration file as the second argument.***
+***In this case, we pass argument ccc.CLEVER_FISHEYE_CAM_640, since the resolution of the image in this example, is 640x480; you can also use ccc.CLEVER_FISHEYE_CAM_320 for resolution 320x240, otherwise you will have to send the path to the .yaml calibration file as the second argument.***
 
 Finally, return the image to its initial size:
 

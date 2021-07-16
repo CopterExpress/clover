@@ -23,7 +23,7 @@ TODO
 ## Motor installation
 
 1. Unpack the motors.
-2. Attach a motor to the motor mount with М3х6 hex screws (the shortest screws supplied with the motors).
+2. Attach a motor to the motor mount with M3x6 hex screws (the shortest screws supplied with the motors).
 
     A hex wrench is included.
 
@@ -31,7 +31,7 @@ TODO
 
     The choice is yours to use a long screw or pliers.
 
-4. Secure the motor mount, the lower motor mount guard and the holder with М3х12 screws, using a Phillips screwdriver.
+4. Secure the motor mount, the lower motor mount guard and the holder with M3x12 screws, using a Phillips screwdriver.
 5. Using a clamp connect the motor mount and its bottom guard.
 
     Cut the remaining part of the clamp (cable tie) with scissors.
@@ -40,9 +40,9 @@ TODO
 
 ## Frame elements installation
 
-1. Insert the M3 plastic nuts (4 pcs) for mounting the PDB on the frame with М3х8 screws.
-2. Install 6 mm legs (4 pcs) for attaching the Raspberry Pi to the frame with М3х8 screws.
-3. Attach the assembled unit to the frame with М3х16 screws, complying with the layout.
+1. Insert the M3 plastic nuts (4 pcs) for mounting the PDB on the frame with M3x8 screws.
+2. Install 6 mm legs (4 pcs) for attaching the Raspberry Pi to the frame with M3x8 screws.
+3. Attach the assembled unit to the frame with M3x16 screws, complying with the layout.
 4. Install the frame for the LED strip, using the slots in the leg holders.
 
 ![Legs installation on the frame](../assets/en/cl3_mountElements.JPG)
@@ -150,9 +150,9 @@ article [remote faults](radioerrors.md).
 ## Installation and connection of the Pixracer flight controller
 
 1. Install the Pixracer flight controller on double-sided 3M adhesive tape (2 – 3 layers).
-    The flight controller may also be removed from the housing and firmly mounted on the М3х6 leg.
+    The flight controller may also be removed from the housing and firmly mounted on the M3x6 leg.
 
-2. Install 40 mm legs using М3х8 screws.
+2. Install 40 mm legs using M3x8 screws.
 
     Connect the POWER connector.
 
@@ -184,14 +184,14 @@ article [remote faults](radioerrors.md).
 
 4. Assembling the mount for the RPi camera.
 
-    Use an М3х16 screw and an M3 nut
+    Use an M3x16 screw and an M3 nut
 
 ![Installation of Raspberry Pi Model B](../assets/cl3_mountRaspberryPi.JPG)
 
 ## Arduino and FlySky radio receiver installation
 
 1. Solder Arduino Nano micro-controller pins to its board.
-2. Install the micro-controller into a special mount, and attach to the lower deck using М3х16 screws (4 pcs).
+2. Install the micro-controller into a special mount, and attach to the lower deck using M3x16 screws (4 pcs).
 3. Using double-sided tape, attach the receiver as shown in the picture.
 4. Connect the ribbon cable from the radio receiver to Pixracer as shown in the picture.
 
@@ -204,12 +204,12 @@ article [remote faults](radioerrors.md).
 
 ## RPi camera installation
 
-1. Attach the mount for the RPi camera assembly to the lower deck with М3х12 screws (2 pcs.)
+1. Attach the mount for the RPi camera assembly to the lower deck with M3x12 screws (2 pcs.)
 2. Connect the ribbon cable to the RPi camera.
 3. Install the camera into the mount, secure it with M2 self-tappers.
 4. Attach Raspberry with 30 mm legs (4 pcs.).
 
-    Attach the lower deck assembly to the rack with М3х8 screws (4 pcs.)
+    Attach the lower deck assembly to the rack with M3x8 screws (4 pcs.)
 
 5. Install the legs into the mounts (4 pcs).
 
@@ -217,11 +217,11 @@ article [remote faults](radioerrors.md).
 
 ## Installation of the remaining structural elements
 
-1. Install the bottom guard using М3х12 screws (8 units) and the 30 mm legs (8 pcs).
-2. Install the top guard using М3х12 screws (8 pcs).
+1. Install the bottom guard using M3x12 screws (8 units) and the 30 mm legs (8 pcs).
+2. Install the top guard using M3x12 screws (8 pcs).
 3. Insert the strap into the upper deck for attaching the battery.
 
-    Secure the upper deck with М3х8 screws (4 pcs.)
+    Secure the upper deck with M3x8 screws (4 pcs.)
 
 ![Installation of the remaining structural elements](../assets/cl3_mountOtherElements.JPG)
 
