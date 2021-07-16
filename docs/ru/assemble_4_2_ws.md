@@ -199,7 +199,7 @@
         <img src="../assets/assembling_soldering_clever_4/fc_connection_3.png" width=300 class="zoom border">
     </div>
 
-3. Установите алюминиевые стойки 40 мм на винты М3х12.
+3. Установите алюминиевые стойки 40 мм на винты М3х10.
 
     <div class="image-group">
         <img src="../assets/assembling_soldering_clever_4/fc_connection_4.png" width=300 class="zoom border">
@@ -212,7 +212,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/raspberry_1.png" width=300 class="zoom border center">
 
-2. Нарежьте резьбу М3 в крепежных отверстиях Raspberry Pi с помощью болта М3х12.
+2. Нарежьте резьбу М3 в крепежных отверстиях Raspberry Pi с помощью болта М3х10.
 
 3. Вкрутите в плату Raspberry Pi стойки 6мм, при необходимости закрепите их нейлоновыми гайками.
 
@@ -317,7 +317,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_3.png" width=300 class="zoom border center">
 
-4. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и винтов М3х8 используя только крайние монтажные отверстия. Снизу, между пластинами ножек, установите демпферное силиконовое колечко.
+4. Установите ножки на пластину жесткости с помощью самоконтрящихся гаек и винтов М3х10 используя только крайние монтажные отверстия. Снизу, между пластинами ножек, установите демпферное силиконовое колечко.
 
     <img src="../assets/assembling_soldering_clever_4/led_4.png" width=300 class="zoom border center">
 
@@ -325,7 +325,7 @@
 
     <img src="../assets/assembling_soldering_clever_4/led_5.png" width=300 class="zoom border center">
 
-6. Закрепите ножки с помощью самоконтрящихся гаек и винтов М3х8.
+6. Закрепите ножки с помощью самоконтрящихся гаек и винтов М3х10.
 
     <img src="../assets/assembling_soldering_clever_4/led_6.png" width=300 class="zoom border center">
 
@@ -343,15 +343,15 @@
 
 ## Установка защиты
 
-1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х12.
+1. Соберите нижний уровень защиты с помощью стоек 40 мм и винтов М3х10.
 
     <img src="../assets/assembling_soldering_clever_4/guard_1.png" width=300 class="zoom border center">
 
-2. Соберите верхний уровень защиты с помощью винтов М3х12.
+2. Соберите верхний уровень защиты с помощью винтов М3х10.
 
     <img src="../assets/assembling_soldering_clever_4/guard_2.png" width=300 class="zoom border center">
 
-3. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х8.
+3. Установите защиту и закрепите на лучах с помощью самоконтрящихся гаек и винтов М3х10.
 
     <img src="../assets/assembling_soldering_clever_4/guard_3.png" width=300 class="zoom border center">
 
