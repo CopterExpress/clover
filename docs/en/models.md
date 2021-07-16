@@ -173,7 +173,7 @@ This page contains models and drawings of some of the drone parts. They can be u
         <td>
             <b>Big leg</b>.<br>
             Function: Extended footing element.<br>
-            Материал: Monolithic polycarbonate 2mm.<br>
+            Material: Monolithic polycarbonate 2mm.<br>
             Quantity: 2 pcs.
         </td>
         <td>
