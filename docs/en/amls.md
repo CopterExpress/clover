@@ -116,7 +116,7 @@ while (GPS_serial.available() && new_line_found == 0) {
 	// If the received byte does not equal a $ character, increase the message_counter variable
 	else if (message_counter <= 99)
 		message_counter++;
-	
+
 	// Write the new received byte to the new position in the incoming_message array
 	incoming_message[message_counter] = read_serial_byte;
 
@@ -163,7 +163,7 @@ if (new_line_found == 1) {
 		lat_gps_actual /= 10;
 
 		// Filter minutes for the GGA line multiplied by 10
-		lon_gps_actual = ((int)incoming_message[33] - 48) * (long)10000000; 
+		lon_gps_actual = ((int)incoming_message[33] - 48) * (long)10000000;
 		lon_gps_actual += ((int)incoming_message[34] - 48) * (long)1000000;
 		lon_gps_actual += ((int)incoming_message[36] - 48) * (long)100000;
 		lon_gps_actual += ((int)incoming_message[37] - 48) * (long)10000;
@@ -192,7 +192,7 @@ if (new_line_found == 1) {
 		else
 			// When flying west of the prime meridian the longiude_east variable will be set to 0
 			longiude_east = 0;
-			
+
 		// Filter the number of satillites from the GGA line
 		number_used_sats = ((int)incoming_message[46] - 48) * (long)10;
 		number_used_sats += (int)incoming_message[47] - 48;
@@ -255,9 +255,9 @@ In the future, this will be used for the smooth drone's acceleration and deceler
 ### 1.5. Waypoint stabilization {#waypoint-stabilization}
 
 ```cpp
-if (waypoint_set == 1) {                           
+if (waypoint_set == 1) {
 	//If the waypoints are stored
-	
+
 	// Adjust l_lat_waypoint
 	if (l_lat_gps_float_adjust > 1) {
 		l_lat_waypoint++;
@@ -296,7 +296,7 @@ if (waypoint_set == 1) {
 	gps_lon_rotating_mem[gps_rotating_mem_location] = gps_lon_error - gps_lon_error_previous;
 	// Add the new value to the long term avarage value
 	gps_lon_total_avarage += gps_lon_rotating_mem[gps_rotating_mem_location];
-	
+
 	// Increase the rotating memory location
 	gps_rotating_mem_location++;
 	if (gps_rotating_mem_location == 35)
@@ -613,7 +613,7 @@ void speed_handler(void) {
 	// Convert acceleration to G
 	speed /= 4096.0;
 	// Convert to m/s^2
-	speed *= 9.81;	
+	speed *= 9.81;
 	// Multiply by dt to get instant speed in m/ms
 	speed *= (millis() - speed_loop_timer);
 
@@ -621,10 +621,10 @@ void speed_handler(void) {
 	speed_loop_timer = millis();
 
 	// Convert to m/s
-	speed /= 1000.0;						
+	speed /= 1000.0;
 	// Convert to km/h
-	speed *= 3.6;						
-	
+	speed *= 3.6;
+
 	// Accumulate instantaneous speed
 	speed_accumulator += speed;
 

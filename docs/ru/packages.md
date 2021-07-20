@@ -21,7 +21,7 @@ sudo apt install ros-noetic-clover-some-feature
 На обычной Raspberry Pi OS репозиторий может быть добавлен в список источников пакетов следующими командами:
 
 ```bash
-wget -O - 'http://packages.coex.tech/key.asc' | apt-key add - 
+wget -O - 'http://packages.coex.tech/key.asc' | apt-key add -
 echo 'deb http://packages.coex.tech buster main' >> /etc/apt/sources.list
 sudo apt update
 ```
