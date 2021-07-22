@@ -26,3 +26,11 @@ This section contains articles describing the assembly of each version of Clover
 </table>
 
 Links to Clover's parts CAD-models are available in the "[CAD-models](models.md)" article.
+
+## Determination of version
+
+Use serial number to determine the version of your Clover.
+
+<img src="../assets/serial_n.png" title="Clover serial number" width=300>
+
+In this case the number *420* indicates the Clover version **4.2**.
