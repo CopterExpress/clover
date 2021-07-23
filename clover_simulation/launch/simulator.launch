@@ -43,7 +43,6 @@
         <arg name="fcu_conn" value="sitl"/>
         <arg name="fcu_ip" value="127.0.0.1"/>
         <arg name="gcs_bridge" value=""/>
-        <arg name="rc" default="false"/>
         <arg name="web_video_server" default="false" if="$(eval type == 'jmavsim')"/>
         <arg name="main_camera" default="false" if="$(eval type == 'jmavsim')"/>
         <arg name="aruco" default="false" if="$(eval type == 'jmavsim')"/>
