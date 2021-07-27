@@ -8,12 +8,13 @@
     <arg name="led" default="true"/> <!-- Simulated LED strip, ws281x-like -->
     <arg name="gps" default="false"/> <!--Simulated GPS module -->
     <arg name="use_clover_physics" default="false"/> <!-- Use inertial parameters from CAD models -->
+    <arg name="gui" default="true"/> <!-- Run Gazebo with GUI -->
 
     <!-- Gazebo instance -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(eval type == 'gazebo')">
         <!-- Workaround for crashes in VMware -->
         <env name="SVGA_VGPU10" value="0"/>
-        <arg name="gui" value="true"/>
+        <arg name="gui" value="$(arg gui)"/>
         <arg name="world_name" value="$(find clover_simulation)/resources/worlds/clover_aruco.world"/>
         <arg name="verbose" value="true"/>
     </include>
