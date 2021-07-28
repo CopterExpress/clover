@@ -1,6 +1,7 @@
 # CopterHack 2021
 
 CopterHack 2021 – это командный конкурс по разработке проектов с открытым исходным кодом для платформы квадрокоптера "Клевер". В конкурсе приняло участие 54 команды из 12 стран.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YpMT6ab8Exw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Все информацию о мероприятии смотрите на официальном сайте: https://ru.coex.tech/copterhack.
 
