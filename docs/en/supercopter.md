@@ -28,3 +28,5 @@ Describe how the Clover platform will be used in your project.
 For example, information about the team's experience working on projects, attach a link to articles, videos.
 
 Some more information.
+
+<img src="../assets/supercopter/drone.jpg" width=300>
