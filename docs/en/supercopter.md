@@ -26,3 +26,5 @@ Describe how the Clover platform will be used in your project.
 ### Additional information at the request of participants
 
 For example, information about the team's experience working on projects, attach a link to articles, videos.
+
+Some more information.
