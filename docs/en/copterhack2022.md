@@ -64,7 +64,7 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
     <img src="../assets/github_application/github-fork.png" alt="GitHub Fork">
 
-2. On the web page of your fork, go to the `docs/en` section and create a new file in the [Markdown](http://ru.wikipedia.org/wiki/Markdown) format:
+2. On the web page of your fork, go to the `docs/en` section and create a new file in the [Markdown](http://en.wikipedia.org/wiki/Markdown) format:
 
     <img src="../assets/github_application/create_new_file.png" alt="GitHub Create New File">
 
