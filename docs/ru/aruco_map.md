@@ -164,6 +164,12 @@ navigate(frame_id='aruco_5', x=0, y=0, z=1)
 <arg name="placement" default="ceiling"/>
 ```
 
+Технология [Optical Flow](optical_flow.md) не может нормально работать при таком расположении камеры, поэтому в файле `~/catkin_ws/src/clover/clover/launch/clover.launch` ее следует отключить:
+
+```xml
+<arg name="optical_flow" default="false"/>
+```
+
 При такой конфигурации фрейм `aruco_map` также окажется перевернутым. Таким образом, для полета на высоту 2 метра ниже потолка, аргумент `z` нужно устанавливать в 2:
 
 ```python

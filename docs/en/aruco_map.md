@@ -162,7 +162,13 @@ You should also set the `placement` parameter to `ceiling` in `~/catkin_ws/src/c
 <arg name="placement" default="ceiling"/>
 ```
 
-This will flip the `aruco_map` frame (making its **<font color=blue>z</font>** axis point downward). Thus, in order to fly 2 metres below ceiling, the `z` argument for the `navigate` service should be set to 2:
+With such a camera orientation the [Optical Flow](optical_flow.md) technology cannot work, so it should be disabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
+
+```xml
+<arg name="optical_flow" default="false"/>
+```
+
+Such setup will flip the `aruco_map` frame (making its **<font color=blue>z</font>** axis point downward). Thus, in order to fly 2 metres below ceiling, the `z` argument for the `navigate` service should be set to 2:
 
 ```python
 navigate(x=1, y=1.1, z=2, speed=0.5, frame_id='aruco_map')
