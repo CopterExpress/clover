@@ -179,7 +179,7 @@ private:
 			double flow_x = atan2(points_undist[0].x, focal_length_x);
 			double flow_y = atan2(points_undist[0].y, focal_length_y);
 
-			// // Convert to FCU frame
+			// Convert to FCU frame
 			geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
 			flow_camera.header.frame_id = msg->header.frame_id;
 			flow_camera.header.stamp = msg->header.stamp;
