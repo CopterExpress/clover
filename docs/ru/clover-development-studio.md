@@ -1,4 +1,4 @@
-# Облачная платформа для симулятора Клевера 
+# Облачная платформа для симулятора Клевера
 
 [CopterHack-2022](copterhack2022.md), команда **Alatoo University Team**.
 
@@ -29,6 +29,6 @@
 
 ### Дополнительная информация по желанию участников
 
-Репозиторий проекта - https://github.com/pteacher/cloversim
+Репозиторий проекта - <https://github.com/pteacher/cloversim>
 
-Демо симулятора - https://pteacher.github.io/cloversim/
+Демо симулятора - <https://pteacher.github.io/cloversim/>
