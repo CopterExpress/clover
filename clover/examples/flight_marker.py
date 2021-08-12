@@ -18,20 +18,20 @@ land = rospy.ServiceProxy('land', Trigger)
 # Take off and hover 1 m above the ground
 navigate(x=0, y=0, z=1, frame_id='body', auto_arm=True)
 
-# Wait for 3 seconds
-rospy.sleep(3)
+# Wait for 5 seconds
+rospy.sleep(5)
 
 # Fly 1 meter above ArUco marker 0
 navigate(x=0, y=0, z=1, frame_id='aruco_0')
 
-# Wait for 3 seconds
-rospy.sleep(3)
+# Wait for 5 seconds
+rospy.sleep(5)
 
 # Fly to x=1 y=1 z=1 relative to ArUco markers map
 navigate(x=1, y=1, z=1, frame_id='aruco_map')
 
-# Wait for 3 seconds
-rospy.sleep(3)
+# Wait for 5 seconds
+rospy.sleep(5)
 
 # Perform landing
 land()
