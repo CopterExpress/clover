@@ -84,7 +84,7 @@
   </xacro:unless>
 
   <!-- Included URDF Files -->
-  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_macros.xacro" />
+  <xacro:include filename="clover4_macros.xacro" />
 
   <!-- Instantiate multirotor_base_macro once -->
   <xacro:clover4_base_macro

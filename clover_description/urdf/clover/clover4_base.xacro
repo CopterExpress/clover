@@ -31,10 +31,10 @@
   <xacro:arg name='log_file' default='iris' />
 
   <!-- macros for gazebo plugins, sensors -->
-  <xacro:include filename="$(find clover_description)/urdf/component_snippets.urdf.xacro" />
+  <xacro:include filename="../component_snippets.urdf.xacro" />
 
   <!-- Instantiate iris "mechanics" -->
-  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_physics.xacro" />
+  <xacro:include filename="clover4_physics.xacro" />
 
   <xacro:if value="$(arg enable_wind)">
     <xacro:wind_plugin_macro

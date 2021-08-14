@@ -8,10 +8,10 @@
   <xacro:arg name="maintain_camera_rate" default="false"/>
   <xacro:arg name="use_clover_physics" default="false"/>
 
-  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_base.xacro" />
-  <xacro:include filename="$(find clover_description)/urdf/sensors/rpi_cam.urdf.xacro"/>
-  <xacro:include filename="$(find clover_description)/urdf/sensors/distance_sensor.urdf.xacro"/>
-  <xacro:include filename="$(find clover_description)/urdf/leds/led_strip.xacro"/>
+  <xacro:include filename="clover4_base.xacro" />
+  <xacro:include filename="../sensors/rpi_cam.urdf.xacro"/>
+  <xacro:include filename="../sensors/distance_sensor.urdf.xacro"/>
+  <xacro:include filename="../leds/led_strip.xacro"/>
 
   <!-- Create camera plugin -->
   <xacro:if value="$(arg main_camera)">
