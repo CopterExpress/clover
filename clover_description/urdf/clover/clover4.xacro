@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="clover_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="clover" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:arg name="main_camera" default="true"/>
   <xacro:arg name="rangefinder" default="true"/>
