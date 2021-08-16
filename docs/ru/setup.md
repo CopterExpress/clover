@@ -35,11 +35,12 @@
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
-1. Зайдите во вкладку *Vehicle Setup*.
-2. Выберите меню *Firmware*.
-3. Подключите Pixracer к компьютеру по USB.
-4. Дождитесь подключения Pixracer к QGroundControl.
-5. Выберите в меню справа *PX4 Flight Stack*.
+1. Запустите программу QGroundControl.
+2. Зайдите во вкладку *Vehicle Setup*.
+3. Выберите меню *Firmware*.
+4. Подключите Pixracer к компьютеру по USB.
+5. Дождитесь подключения Pixracer к QGroundControl.
+6. Выберите в меню справа *PX4 Flight Stack*.
 
 Для загрузки прошивки от Copter Express (рекомендуется):
 
