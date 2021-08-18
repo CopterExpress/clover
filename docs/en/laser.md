@@ -10,7 +10,7 @@ The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS 
 
 ### Connecting to Raspberry Pi
 
-> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
+> **Hint** Before using the rangefinder, please remove the protective film from it.
 
 Connect the rangefinder to the 3V, GND, SCL and SDA pins via the I²C interface:
 
@@ -35,6 +35,8 @@ rostopic echo /rangefinder/range
 ```
 
 ### PX4 settings
+
+> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
 
 PX4 should be properly [configured](px4_parameters.md) to use the rangefinder data.
 
