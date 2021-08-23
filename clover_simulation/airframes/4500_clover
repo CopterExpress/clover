@@ -25,7 +25,7 @@ param set SENS_FLOW_MINHGT 0.01
 param set SENS_FLOW_MAXHGT 4.0
 param set SENS_FLOW_MAXR 10.0
 
-param set EKF2_AID_MASK 26
+param set EKF2_AID_MASK 27 # gps + flow + vis pos + vis yaw
 param set EKF2_OF_DELAY 0
 param set EKF2_OF_QMIN 10
 param set EKF2_OF_N_MIN 0.05
