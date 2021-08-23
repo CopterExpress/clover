@@ -1,9 +1,8 @@
-# Трансляция изображения с DuoCam в ROS-топики
+# Трансляция изображения с DuoCam
 
-Для задач связанных с машинным зрением удобно работать с изображением с камер через ROS-топики.
-DuoCam включает в себя две камеры: визуальная камера VEYE-MIPI-327E ([MIPI Camera](http://www.veye.cc/en/product/mipi-camera/veye-mipi-327e/)) и тепловизор HT-201 ([HTI Thermal Camera HT-201](https://hti-instrument.com/products/ht-201-mobile-phone-thermal-imager)). В этой статье рассмотрим как настроить получение с них ображения и вывод его в ROS-топики.
+DuoCam включает в себя две камеры: визуальная камера VEYE-MIPI-327E ([MIPI Camera](http://www.veye.cc/en/product/mipi-camera/veye-mipi-327e/)) и тепловизор HT-201 ([HTI Thermal Camera HT-201](https://hti-instrument.com/products/ht-201-mobile-phone-thermal-imager)). В этой статье рассмотрим как установить их драйвера, настроить RTSP-трансляцию и вывести изображение с камер в ROS-топики.
 
-Для начала подготовьте Raspberry Pi 4 с образом `Clover`. Подключите Raspberry к WiFi-роутеру с интернетом по инструкции в статье "[Настройка Wi-Fi](network.md)"
+Для начала подготовьте Raspberry Pi 4 со свежем образом [Clover](https://github.com/CopterExpress/clover/releases). Подключите Raspberry к WiFi-роутеру с интернетом по инструкции в статье "[Настройка Wi-Fi](network.md)"
 
 > **Hint** Есть альтернативный, устаревший, но более простой способ подключения к WiFi-роутеру. Для этого в файл `sudo vim /etc/network/interfaces` нужно добавить строчки: 
 > ```
@@ -17,7 +16,7 @@ DuoCam включает в себя две камеры: визуальная к
 Подлючите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201:
 ![Подлючите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201](../assets/duocam/duocam_connections.png)
 
-## Установка драйвера VEYE-MIPI-327E:
+## Установка драйвера камеры VEYE-MIPI-327E:
 
 > **Info** Основаная статья: http://wiki.veye.cc/index.php/V4L2_mode_for_Raspberry_Pi
 
@@ -46,7 +45,7 @@ v4l2-ctl -d /dev/video0 -V --info --list-formats --list-formats-ext
 ```
 
 
-## Установка драйвера Seek Thermal CompactPRO:
+## Установка драйвера тепловизора Seek Thermal CompactPRO:
 Драйвер для тепловизора HT-201 такой же, как и для тепловизора Seek Thermal CompactPRO.
 
 Сначала установите необходимые пакеты командой:
@@ -75,7 +74,6 @@ SUBSYSTEM=="usb", ATTRS{idVendor}=="289d", ATTRS{idProduct}=="0011", MODE="0666"
 ```
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
-
 
 Далее в файл `sudo vim /etc/modules` добавляем строчку:
 ```
@@ -130,34 +128,42 @@ sudo systemctl enable thermal-cam.service
 v4l2-ctl -d /dev/video5 -V --info --list-formats --list-formats-ext
 ```
 
+## Трансляция видео по RTSP
 
+Чтобы запустить RTSP-трансляцию сначала нужно установить утилиту `gst-rtsp-launch`:
+```
+sudo apt install gst-rtsp-launch
+```
 
+Трансляции с тепловизора, разрешение 320x240:
+```
+gst-rtsp-launch "( v4l2src device=/dev/video5 ! video/x-raw, width=320,height=240 ! videoconvert ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=500000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
+```
 
+Трансляции с камеры VEYE-MIPI-327E, разрешение 1920x1080:
+```
+gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=(string)UYVY, width=(int)1920, height=(int)1080,framerate=(fraction)30/1 ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=6000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
+```
 
+Трансляции с камеры VEYE-MIPI-327E, разрешение 1280x720:
+```
+gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=(string)UYVY, width=(int)1920, height=(int)1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw, width=1280, height=720 ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 mtu=1024 pt=96 )"
+```
 
-> **Hint** Уже сейчас можно запустить RTSP-трансляцию с обоих камер (картинка-в-картинке в разрешении 1280x720) с помощью утилиты `sudo apt install gst-rtsp-launch`:
-> ```
-> gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw, format=(string)UYVY, width=(int)1920, height=(int)1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw, width=1280, height=720 !  queue ! mix. v4l2src device=/dev/video5 ! video/x-raw, width=(int)320, height=(int)240 ! queue ! videomixer name=mix ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
-> ```
+Трансляция с обоих камер, картинка-в-картинке, разрешение 1280x720:
+```
+gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw, format=(string)UYVY, width=(int)1920, height=(int)1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw, width=1280, height=720 !  queue ! mix. v4l2src device=/dev/video5 ! video/x-raw, width=(int)320, height=(int)240 ! queue ! videomixer name=mix ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
+```
 
 
 ## Создание ROS-топиков с изображениями с камер
 
-vim catkin_ws/src/clover/clover/launch/front_camera.launch
+Для обоих камера нужно создать файлы для запуска в пакете `Clover`.
+Для камеры VEYE-MIPI-327E создаем файл `vim catkin_ws/src/clover/clover/launch/front_camera.launch` и добавляем в него следующий текст:
 ```
 <launch>
-
-    <arg name="direction_z" default="forward"/> <!-- direction the camera points: forward, backward -->
-    <arg name="device2" default="/dev/video1"/> <!-- v4l2 device -->
-    <arg name="simulator" default="false"/>
-
-    <node if="$(eval direction_z == 'forward')" pkg="tf2_ros" type="static_transform_publisher" name="front_camera_frame" args="0.03 0 0.05 -1.5707963 0 -1.5707963 base_link front_camera_optical"/>
-    <node if="$(eval direction_z == 'backward')" pkg="tf2_ros" type="static_transform_publisher" name="front_camera_frame" args="-0.03 0 0.05 1.5707963 0 -1.5707963 base_link front_camera_optical"/>
-
-    <!-- Template for custom camera orientation -->
-    <!-- Camera position and orientation are represented by base_link -> main_camera_optical transform -->
-    <!-- static_transform_publisher arguments: x y z yaw pitch roll frame_id child_frame_id -->
-    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/> -->
+    <!-- v4l2 device -->
+    <arg name="front_device" default="/dev/video0"/>
 
     <!-- camera nodelet manager -->
     <node pkg="nodelet" type="nodelet" name="front_camera_nodelet_manager" args="manager" output="screen" clear_params="true" respawn="true">
@@ -165,18 +171,68 @@ vim catkin_ws/src/clover/clover/launch/front_camera.launch
     </node>
 
     <!-- camera node -->
-    <node pkg="nodelet" type="nodelet" name="front_camera" args="load cv_camera/CvCameraNodelet front_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg device2)" clear_params="true" unless="$(arg simulator)" respawn="true">
-        <param name="device_path" value="$(arg device2)"/>
-        <param name="frame_id" value="front_camera_optical"/>
+    <node pkg="nodelet" type="nodelet" name="front_camera" args="load cv_camera/CvCameraNodelet front_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg front_device)" clear_params="true" respawn="true">
+        <param name="device_path" value="$(arg front_device)"/>
 
-        <param name="rate" value="100"/> <!-- poll rate -->
-        <param name="cv_cap_prop_fps" value="40"/> <!-- camera FPS -->
-        <param name="capture_delay" value="0.02"/> <!-- approximate delay on frame retrieving -->
+        <!-- camera FPS -->
+        <param name="cv_cap_prop_fps" value="30"/>
 
         <!-- camera resolution -->
-        <param name="image_width" value="640"/>
-        <param name="image_height" value="480"/>
+        <param name="image_width" value="1920"/>
+        <param name="image_height" value="1080"/>
     </node>
-
 </launch>
 ```
+
+Для тепловизора создаем файл `vim catkin_ws/src/clover/clover/launch/thermal_camera.launch` и добавляем в него следующий текст:
+```
+<launch>
+    <!-- v4l2 device -->
+    <arg name="thermal_device" default="/dev/video5"/>
+
+    <!-- camera nodelet manager -->
+    <node pkg="nodelet" type="nodelet" name="thermal_camera_nodelet_manager" args="manager" output="screen" clear_params="true" respawn="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
+    <!-- camera node -->
+    <node pkg="nodelet" type="nodelet" name="thermal_camera" args="load cv_camera/CvCameraNodelet thermal_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg thermal_device)" clear_params="true" respawn="true">
+        <param name="device_path" value="$(arg thermal_device)"/>
+
+        <!-- camera FPS -->
+        <param name="cv_cap_prop_fps" value="30"/>
+
+        <!-- camera resolution -->
+        <param name="image_width" value="320"/>
+        <param name="image_height" value="240"/>
+    </node>
+</launch>
+```
+
+Далее редактируем файл `vim catkin_ws/src/clover/clover/launch/clover.launch`. Устанавливаем параметры `main_camera` и `optical_flow` в значение `false`:
+```
+    <arg name="main_camera" default="false"/>
+    <arg name="optical_flow" default="false"/>
+```
+Добавляем два новых параметра для новых камер:
+```
+    <arg name="front_camera" default="true"/>
+    <arg name="thermal_camera" default="true"/>
+```
+После секции `<!-- main camera -->` добавляем включение новых камер:
+``` 
+    <!-- front camera -->
+    <include file="$(find clover)/launch/front_camera.launch" if="$(arg front_camera)"/>
+
+    <!-- thermal camera -->
+    <include file="$(find clover)/launch/thermal_camera.launch" if="$(arg thermal_camera)"/>
+```
+
+Теперь осталось только перезагрузить сервис `Clover` командой:
+```
+sudo systemctl restart clover
+```
+
+И новые топики с камерами появятся в списке:
+    
+    
