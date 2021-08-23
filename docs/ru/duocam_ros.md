@@ -1,34 +1,60 @@
-# Трансляция изображение с DuoCam в ROS-топик
+# Трансляция изображения с DuoCam в ROS-топики
 
 Для задач связанных с машинным зрением удобно работать с изображением с камер через ROS-топики.
-DuoCam включает в себя две камеры: визуальная камера VEYE-MIPI-327E и тепловизор HT-201. В этой статье рассмотрим как настроить получение с них ображения и вывод его в ROS-топики.
+DuoCam включает в себя две камеры: визуальная камера VEYE-MIPI-327E ([MIPI Camera](http://www.veye.cc/en/product/mipi-camera/veye-mipi-327e/)) и тепловизор HT-201 ([HTI Thermal Camera HT-201](https://hti-instrument.com/products/ht-201-mobile-phone-thermal-imager)). В этой статье рассмотрим как настроить получение с них ображения и вывод его в ROS-топики.
 
+Для начала подготовьте Raspberry Pi 4 с образом `Clover`. Подключите Raspberry к WiFi-роутеру с интернетом по инструкции в статье "[Настройка Wi-Fi](network.md)"
 
+> **Hint** Есть альтернативный, устаревший, но более простой способ подключения к WiFi-роутеру. Для этого в файл `/etc/network/interfaces` нужно добавить строчки: 
+> ```
+> auto wlan0
+> allow-hotplug wlan0
+> iface wlan0 inet dhcp
+> wpa-ssid "Your Wi-Fi's Name"
+> wpa-psk "Your Wi-Fi's Password"
+> ```
 
-## VEYE-MIPI-327E driver:
-Основаная статья: http://wiki.veye.cc/index.php/V4L2_mode_for_Raspberry_Pi
+Подлючите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201:
+![Подлючите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201](../assets/duocam/duocam_connections.png)
 
-Установка драйвера:
+## Установка драйвера VEYE-MIPI-327E:
+
+> **Info** Основаная статья: http://wiki.veye.cc/index.php/V4L2_mode_for_Raspberry_Pi
+
+Для начала обновите все пакеты в системе и ядро линукса командой 
+```
+sudo apt update && sudo apt upgrade -y
+```
+
+После этого обязательно перезагрузите Raspberry Pi командой `sudo reboot`.
+
+Далее выполните команды для установки драйвера:
 ```
 git clone https://github.com/veyeimaging/raspberrypi_v4l2.git
 cd raspberrypi_v4l2/release/
 chmod +x *
 sudo ./install_driver.sh veye327
+```
 
-Check and Test the Camera:
+Перезагрузите Raspberry Pi.
+После перезагрузки проверьте, что драйвер установился корректно с помощью команд:
+```
 dmesg | grep veye
-ls /dev/video0
 v4l2-ctl --list-devices
 v4l2-ctl --list-formats-ext
+v4l2-ctl -d /dev/video0 -V --info --list-formats --list-formats-ext
 ```
 
 
+## Установка драйвера Seek Thermal CompactPRO:
+Драйвер для тепловизора HT-201 такой же, как и для тепловизора Seek Thermal CompactPRO.
 
+Сначала установите необходимые пакеты командой:
+```
+sudo apt install cmake libopencv-dev libusb-1.0-0-dev v4l2loopback-utils
+```
 
-
-
-## Seek Thermal CompactPRO driver:
-Установка драйвера тепловизора HT-201:
+Далее выполните команды для установки драйвера:
 ```
 sudo apt install cmake libopencv-dev libusb-1.0-0-dev v4l2loopback-utils
 git clone https://github.com/OpenThermal/libseek-thermal.git
@@ -39,9 +65,18 @@ cmake ..
 make
 sudo make install
 sudo ldconfig
+```
 
+Далее ....
+```
 sudo vim /etc/udev/rules.d/seekpro.rules
+```
+
+```
 SUBSYSTEM=="usb", ATTRS{idVendor}=="289d", ATTRS{idProduct}=="0011", MODE="0666", GROUP="users"
+```
+
+```
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
 seek_test_pro
@@ -61,8 +96,7 @@ v4l2-ctl -d /dev/video1 -V --info --list-formats --list-formats-ext
 
 
 
-
-## Передняя USB-камера в ROS
+## Создание ROS-топиков с изображениями с камер
 
 vim catkin_ws/src/clover/clover/launch/front_camera.launch
 ```
