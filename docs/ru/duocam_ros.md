@@ -5,7 +5,7 @@ DuoCam включает в себя две камеры: визуальная к
 
 Для начала подготовьте Raspberry Pi 4 с образом `Clover`. Подключите Raspberry к WiFi-роутеру с интернетом по инструкции в статье "[Настройка Wi-Fi](network.md)"
 
-> **Hint** Есть альтернативный, устаревший, но более простой способ подключения к WiFi-роутеру. Для этого в файл `/etc/network/interfaces` нужно добавить строчки: 
+> **Hint** Есть альтернативный, устаревший, но более простой способ подключения к WiFi-роутеру. Для этого в файл `sudo vim /etc/network/interfaces` нужно добавить строчки: 
 > ```
 > auto wlan0
 > allow-hotplug wlan0
@@ -21,12 +21,12 @@ DuoCam включает в себя две камеры: визуальная к
 
 > **Info** Основаная статья: http://wiki.veye.cc/index.php/V4L2_mode_for_Raspberry_Pi
 
-Для начала обновите все пакеты в системе и ядро линукса командой 
+Для начала обновите все пакеты в системе и ядро линукса командой:
 ```
 sudo apt update && sudo apt upgrade -y
 ```
 
-После этого обязательно перезагрузите Raspberry Pi командой `sudo reboot`.
+После этого обязательно перезагрузите Raspberry Pi командой `sudo reboot`
 
 Далее выполните команды для установки драйвера:
 ```
@@ -36,7 +36,7 @@ chmod +x *
 sudo ./install_driver.sh veye327
 ```
 
-Перезагрузите Raspberry Pi.
+Перезагрузите Raspberry Pi командой `sudo reboot`.
 После перезагрузки проверьте, что драйвер установился корректно с помощью команд:
 ```
 dmesg | grep veye
@@ -56,7 +56,6 @@ sudo apt install cmake libopencv-dev libusb-1.0-0-dev v4l2loopback-utils
 
 Далее выполните команды для установки драйвера:
 ```
-sudo apt install cmake libopencv-dev libusb-1.0-0-dev v4l2loopback-utils
 git clone https://github.com/OpenThermal/libseek-thermal.git
 cd libseek-thermal
 mkdir build
@@ -67,33 +66,79 @@ sudo make install
 sudo ldconfig
 ```
 
-Далее ....
-```
-sudo vim /etc/udev/rules.d/seekpro.rules
-```
-
+Далее создаем файл `sudo vim /etc/udev/rules.d/seekpro.rules` и добавляем в него одну строчку:
 ```
 SUBSYSTEM=="usb", ATTRS{idVendor}=="289d", ATTRS{idProduct}=="0011", MODE="0666", GROUP="users"
 ```
 
+После этого:
 ```
 sudo udevadm control --reload-rules && sudo udevadm trigger
+```
 
-seek_test_pro
-seek_create_flat_field -tseekpro
-seek_viewer --camtype=seekpro --colormap=2 --rotate=0 -F flat_field.png
 
-sudo modprobe v4l2loopback devices=1
-seek_viewer --camtype=seekpro --colormap=2 --rotate=0 --mode=v4l2 --output=/dev/video2 &
+Далее в файл `sudo vim /etc/modules` добавляем строчку:
+```
+v4l2loopback
+```
 
+Далее в файл `sudo vim /etc/modprobe.d/v4l2loopback.conf` добавляем строчку:
+```
+options v4l2loopback devices=1 exclusive_caps=1 video_nr=5 card_label="Thermal-cam"
+```
+
+Далее выполняем апдейт системы и презагружаемся:
+```
+sudo update-initramfs -c -k $(uname -r)
+sudo reboot
+```
+
+После перезагрузки проверьте, что в системе появился интерфейс `/dev/video5`:
+```
 v4l2-ctl --list-devices
-v4l2-ctl --list-formats-ext
-v4l2-ctl -d /dev/video0 -V
-v4l2-ctl -d /dev/video1 -V --info --list-formats --list-formats-ext
+```
+
+Далее нам нужно настроить автозапуск видео с тепловизора. Для этого в домашней директории создайте файл `vim thermal-cam_autostart.sh` и добавьте в него команду для запуска видео с тепловизора Seek Thermal CompactPRO:
+```
+seek_viewer --camtype=seekpro --colormap=2 --rotate=0 --mode=v4l2 --output=/dev/video5
+```
+
+Чтобы корректно запускать файл, необходимо присвоить ему соответствующие флаги доступа.
+```bash
+chmod a+x thermal-cam_autostart.sh
+```
+
+Для того, чтобы видео с тепловизора запускалась каждый раз при включении системы, необходимо создать стартап-скрипт с помощью менеджера systemd. Создайте файл `sudo vim /etc/systemd/system/thermal-cam.service` и запишите в него соответствующие строки:
+```
+[Unit]
+Description=Thermal-cam
+
+[Service]
+ExecStart=/bin/bash /home/pi/thermal-cam_autostart.sh
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Осталось только инициализировать ваш скрипт в системе и он будет запускаться при каждом ее включении.
+```bash
+sudo systemctl enable thermal-cam.service
+```
+
+Перезагрузите Raspberry Pi командой `sudo reboot`. Проверьте, что видео с тепловизора доступно в интерфейсе `/dev/video5`:
+```
+v4l2-ctl -d /dev/video5 -V --info --list-formats --list-formats-ext
 ```
 
 
 
+
+
+
+> **Hint** Уже сейчас можно запустить RTSP-трансляцию с обоих камер (картинка-в-картинке в разрешении 1280x720) с помощью утилиты `sudo apt install gst-rtsp-launch`:
+> ```
+> gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw, format=(string)UYVY, width=(int)1920, height=(int)1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw, width=1280, height=720 !  queue ! mix. v4l2src device=/dev/video5 ! video/x-raw, width=(int)320, height=(int)240 ! queue ! videomixer name=mix ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
+> ```
 
 
 ## Создание ROS-топиков с изображениями с камер
