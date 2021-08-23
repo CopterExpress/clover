@@ -183,7 +183,7 @@ inline bool waitTransform(const string& target, const string& source,
 	}
 }
 
-#define TIMEOUT(msg, timeout) (ros::Time::now() - msg.header.stamp > timeout)
+#define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
 
 bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 {
