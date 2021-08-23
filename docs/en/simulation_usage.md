@@ -30,17 +30,25 @@ You can also use [our simplified OFFBOARD control](simple_offboard.md) to contro
 
 The simulation can be configured by passing additional arguments to the `roslaunch` command or by changing the `~/catkin_ws/src/clover/clover_simulation/launch/simulator.launch` file. Nodes that provide [ArUco detection](aruco.md), [optical flow calculation](optical_flow.md) and other services can be configured by changing their respective `.launch` files, just like on a real drone.
 
-### Changing the drone parameters
-
 ![vscode with simulator.launch open](../assets/simulation_usage/04_vscode_config.jpg)
 
-You can enable or disable some of the drone sensors by changing parameters in the `simulator.launch` file. For example, in order to enable GPS, set the `gps` argument to `true`:
+### Enabling GPS
+
+In order to enable GPS sensor, set the `gps` argument in `simulator.launch` to `true`:
 
 ```xml
-    <arg name="gps" value="true"/>
+<arg name="gps" value="true"/>
 ```
 
-Note that this will simply enable the sensor, you will have to change the PX4 estimator parameters to enable GPS fusion.
+### Camera
+
+If you don't need the camera when flying using GPS, it may be disabled in `simulator.launch` file:
+
+```xml
+<arg name="main_camera" default="false"/>
+```
+
+### Another sensors
 
 If you wish to add additional sensors or change their placement, you will have to change the drone description. The description file is located in `~/catkin_ws/src/clover/clover_description/urdf/clover/clover4.xacro`, and uses the [xacro](http://wiki.ros.org/xacro) format to build URDF description.
 

@@ -26,23 +26,33 @@ roslaunch clover_simulation simulator.launch
 
 ![Gazebo и RQT](../assets/simulation_usage/03_gazebo_rqt.jpg)
 
-## Настройка симулятора
+## Конфигурация симулятора
 
 Симулятор можно настроить, передав дополнительные аргументы команде `roslaunch` или изменив файл `~/catkin_ws/src/clover/clover_simulation/launch/simulator.launch`. Ноды, обеспечивающие [распознавание ArUco](aruco.md), [расчет optical flow](optical_flow.md) и другие сервисы могут быть настроены изменением соответствующих `.launch` файлов, как на реальном дроне.
 
-### Изменение параметров дрона
-
 ![Открытый в VSCode simulator.launch](../assets/simulation_usage/04_vscode_config.jpg)
 
-Вы можете включить или отключить некоторые датчики дрона, изменив параметры в файле `simulator.launch`. Например, чтобы включить GPS, установите аргумент `gps` в значение `true`:
+### Включение GPS
+
+GPS датчик необходим полетов с использованием глобальных координат, а также для использования [полетных миссий](https://docs.px4.io/master/en/flight_modes/mission.html).
+
+Чтобы включить GPS, установите аргумент `gps` в файле `simulator.launch` в значение `true`:
 
 ```xml
-    <arg name="gps" value="true"/>
+<arg name="gps" value="true"/>
 ```
 
-Обратите внимание, что это просто включит датчик, вам придется также изменить параметры PX4.
+### Камера
 
-Если вы хотите добавить датчики или изменить их расположение, вам придется изменить файл описания дрона. Этот файл находится в `~/catkin_ws/src/clover/clover_description/urdf/clover/clover4.xacro`, и использует формат [xacro](http://wiki.ros.org/xacro) для сборки описания URDF.
+При полете по GPS камера может быть не нужна, ее также можно отключить в файле `simulator.launch`:
+
+```xml
+<arg name="main_camera" default="false"/>
+```
+
+### Другие датчики
+
+Для того, чтобы добавить датчики или изменить их расположение, необходимо изменить файл описания дрона. Этот файл находится в `~/catkin_ws/src/clover/clover_description/urdf/clover/clover4.xacro` и использует формат [xacro](http://wiki.ros.org/xacro) для сборки описания URDF.
 
 ### Изменение мира по умолчанию
 
