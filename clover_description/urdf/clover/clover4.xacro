@@ -36,11 +36,17 @@
   </xacro:if>
 
   <xacro:if value="$(arg gps)">
-    <!-- Instantiate gps plugin. -->
-    <xacro:gps_plugin_macro
-      namespace="${namespace}"
-      gps_noise="true"
-      />
+    <gazebo>
+      <include>
+        <uri>model://gps</uri>
+        <pose>0.1 0 0 0 0 0</pose>
+        <name>gps0</name>
+      </include>
+      <joint name='gps0_joint' type='fixed'>
+        <child>gps0::link</child>
+        <parent>base_link</parent>
+      </joint>  
+    </gazebo>
   </xacro:if>
 
 </robot>
