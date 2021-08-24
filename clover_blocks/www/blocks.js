@@ -268,7 +268,7 @@ Blockly.Blocks['mode'] = {
 			.appendField("current flight mode");
 		this.setOutput(true, "String");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current flight mode (POSCTL, OFFBOARD, etc).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -375,7 +375,7 @@ Blockly.Blocks['take_off'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("Take off on desired altitude in meters");
+		this.setTooltip("Take off on desired altitude in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -391,7 +391,7 @@ Blockly.Blocks['land'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Land the drone.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -403,7 +403,7 @@ Blockly.Blocks['global_position'] = {
 			.appendField(new Blockly.FieldDropdown([["latitude", "LAT"], ["longitude", "LON"], ["altitude", "ALT"]]), "FIELD");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current global position (latitude, longitude, altitude above the WGS 84 ellipsoid).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
