@@ -402,3 +402,18 @@ rospy.sleep(5)
 # Turn markers recognition on
 client.update_configuration({'enabled': True})
 ```
+
+### # {#wait-global-position}
+
+Ожидать появления глобальной позиции (окончания инициализации [GPS-приемника](gps.md)):
+
+```python
+import math
+
+# ...
+
+while not rospy.is_shutdown():
+    if math.isfinite(get_telemetry().lat):
+        break
+    rospy.sleep(0.2)
+```
