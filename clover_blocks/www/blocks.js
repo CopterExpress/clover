@@ -400,9 +400,9 @@ Blockly.Blocks['global_position'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["latitude", "LATITUDE"], ["longitude", "LONGITUDE"], ["altitude", "ALTITUDE"]]), "NAME");
+			.appendField(new Blockly.FieldDropdown([["latitude", "LAT"], ["longitude", "LON"], ["altitude", "ALT"]]), "FIELD");
 		this.setOutput(true, "Number");
-		this.setColour(230);
+		this.setColour(COLOR_STATE);
 		this.setTooltip("");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
