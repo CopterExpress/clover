@@ -105,6 +105,7 @@
   * [Переход на версию 0.22](migrate22.md)
   * [COEX DuoCam](duocam.md)
     * [Виртуальная MAVLink-камера](duocam_mavlink.md)
+    * [Настройка DuoCam](duocam_setup.md)
 * [Мероприятия](events.md)
   * [CopterHack-2022](copterhack2022.md)
   * [CopterHack-2021](copterhack2021.md)
