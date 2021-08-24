@@ -41,4 +41,4 @@ def save_world(world, file):
     '''
     Save the world to file-like object
     '''
-    return world.write(file)
+    return world.write(file, encoding='unicode')

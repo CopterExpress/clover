@@ -11,6 +11,10 @@ Full stream of the final: https://www.youtube.com/watch?v=Z06vxuAHmuE.
     <img src="../assets/copterhack2021/2.jpg" class="zoom border">
 </div>
 
+## Aftermovie
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YpMT6ab8Exw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Participating teams articles
 
 |Place|Team|Project|Points|

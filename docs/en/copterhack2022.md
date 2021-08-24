@@ -64,7 +64,7 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
     <img src="../assets/github_application/github-fork.png" alt="GitHub Fork">
 
-2. On the web page of your fork, go to the `docs/en ' section and create a new file in the [Markdown] format(http://ru.wikipedia.org/wiki/Markdown):
+2. On the web page of your fork, go to the `docs/en` section and create a new file in the [Markdown](http://en.wikipedia.org/wiki/Markdown) format:
 
     <img src="../assets/github_application/create_new_file.png" alt="GitHub Create New File">
 
@@ -74,42 +74,46 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 4. Fill out your application by the recommended template:
 
-    ```markdown
-    # Project name
+  ```markdown
+  # Project name
+  
+  [CopterHack-2022](copterhack2022.md), team **Team name**.
+  
+  ## Team information
+  
+  The list of team members:
+  
+  (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
+  
+  * Alexander Sokolov, @aleksandrsokolov111, engineer.
+  * Elena Smirnova, @elenasmirnova111, programmer.
+  
+  ## Project description
+  
+  ### Project idea
+  
+  Briefly describe the idea and stage of the project.
+  
+  ### The potential outcomes
+  
+  Describe how you see the project result.
+  
+  ### Using Clover platform
+  
+  Describe how the Clover platform will be used in your project.
+  
+  ### Additional information at the request of participants
+  
+  For example, information about the team's experience working on projects, attach a link to articles, videos.
+  ```
 
-    [CopterHack-2022](copterhack2022.md), team **Team name**.
-
-    ## Team information
-
-    The list of team members:
-
-    (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
-
-    * Alexander Sokolov, @aleksandrsokolov111, engineer.
-    * Elena Smirnova, @elenasmirnova111, programmer.
-
-    ## Project description
-
-    ### Project idea
-
-    Briefly describe the idea and stage of the project.
-
-    ### The potential outcomes
-
-    Describe how you see the project result.
-
-    ### Using Clover platform
-
-    Describe how the Clover platform will be used in your project.
-
-    #### Additional information at the request of participants
-
-    For example, information about the team's experience working on projects, attach a link to articles, videos.
-    ```
+<!-- markdownlint-disable MD029 -->
 
 5. Go to the bottom of the page and create a new branch with the title of your article:
 
     <img src="../assets/github_application/propose_new_file.png" alt="GitHub Propose New File">
+
+    > **Note** Don't commit changes directly to the `master` branch, create a new branch.
 
 6. If necessary, place additional visual assets in the `docs/assets` folder and add them to your article.
 

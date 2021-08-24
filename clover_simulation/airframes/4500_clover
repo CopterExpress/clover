@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# @name COEX Clover Simulator
+#
+# @type Quadrotor X
+#
+
+. ${R}etc/init.d-posix/airframes/10016_iris # base on iris
+
+param set ATT_W_EXT_HDG 0.5
+param set ATT_EXT_HDG_M 1
+
+param set COM_DISARM_LAND 1.0
+
+param set LPE_FLW_SCALE 1.0
+param set LPE_FLW_R 0.2
+param set LPE_FLW_RR 0.0
+param set LPE_FLW_QMIN 10
+param set LPE_VIS_DELAY 0.0
+param set LPE_VIS_Z 0.1
+param set LPE_FUSION 86
+
+param set SENS_FLOW_ROT 0
+param set SENS_FLOW_MINHGT 0.01
+param set SENS_FLOW_MAXHGT 4.0
+param set SENS_FLOW_MAXR 10.0
+
+param set EKF2_AID_MASK 27 # gps + flow + vis pos + vis yaw
+param set EKF2_OF_DELAY 0
+param set EKF2_OF_QMIN 10
+param set EKF2_OF_N_MIN 0.05
+param set EKF2_OF_N_MAX 0.2
+param set EKF2_HGT_MODE 2
+param set EKF2_EVA_NOISE 0.1
+param set EKF2_EVP_NOISE 0.1
+param set EKF2_EV_DELAY 0

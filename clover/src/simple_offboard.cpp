@@ -183,7 +183,7 @@ inline bool waitTransform(const string& target, const string& source,
 	}
 }
 
-#define TIMEOUT(msg, timeout) (ros::Time::now() - msg.header.stamp > timeout)
+#define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
 
 bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 {
@@ -441,6 +441,10 @@ void publish(const ros::Time stamp)
 
 		// publish setpoint frame
 		if (!setpoint.child_frame_id.empty()) {
+			if (setpoint.header.stamp == position_msg.header.stamp) {
+				return; // avoid TF_REPEATED_DATA warnings
+			}
+
 			setpoint.transform.translation.x = position_msg.pose.position.x;
 			setpoint.transform.translation.y = position_msg.pose.position.y;
 			setpoint.transform.translation.z = position_msg.pose.position.z;

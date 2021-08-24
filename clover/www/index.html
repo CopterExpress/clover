@@ -18,6 +18,14 @@
 	document.querySelector("#wvs").href = location.protocol + '//' + location.hostname + ':8080';
 	document.querySelector("#butterfly").href = location.protocol + '//' + location.hostname + ':57575';
 
+	document.querySelector("#butterfly").addEventListener('click', function(e) {
+		if (location.hostname == 'localhost' || location.hostname == '127.0.0.1') {
+			if (!confirm('Please use regular Terminal app on a local machine.\nClick OK to proceed to Butterfly anyway.')) {
+				e.preventDefault();
+			}
+		}
+	});
+
 	// Determine image version
 	fetch('clover_version').then(function(response) {
 		if (response.status !== 200) return;

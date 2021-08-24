@@ -315,6 +315,12 @@ Blockly.Python.get_attitude = function(block) {
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
+Blockly.Python.global_position = function(block) {
+	simpleOffboard();
+	var code = `get_telemetry().${block.getFieldValue('FIELD').toLowerCase()}`;
+	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
 Blockly.Python.distance = function(block) {
 	rosDefinitions.distance = true;
 	simpleOffboard();

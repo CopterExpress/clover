@@ -75,9 +75,6 @@ private:
 		velo_pub_ = nh_priv.advertise<geometry_msgs::TwistStamped>("angular_velocity", 1);
 		shift_pub_ = nh_priv.advertise<geometry_msgs::Vector3Stamped>("shift", 1);
 
-		flow_.integrated_xgyro = NAN; // no IMU available
-		flow_.integrated_ygyro = NAN;
-		flow_.integrated_zgyro = NAN;
 		flow_.time_delta_distance_us = 0;
 		flow_.distance = -1; // no distance sensor available
 		flow_.temperature = 0;
@@ -179,7 +176,7 @@ private:
 			double flow_x = atan2(points_undist[0].x, focal_length_x);
 			double flow_y = atan2(points_undist[0].y, focal_length_y);
 
-			// // Convert to FCU frame
+			// Convert to FCU frame
 			geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
 			flow_camera.header.frame_id = msg->header.frame_id;
 			flow_camera.header.stamp = msg->header.stamp;
@@ -196,6 +193,11 @@ private:
 			ros::Duration integration_time = msg->header.stamp - prev_stamp_;
 			uint32_t integration_time_us = integration_time.toSec() * 1.0e6;
 
+			// Calculate flow gyro
+			flow_.integrated_xgyro = NAN;
+			flow_.integrated_ygyro = NAN;
+			flow_.integrated_zgyro = NAN;
+
 			if (calc_flow_gyro_) {
 				try {
 					auto flow_gyro_camera = calcFlowGyro(msg->header.frame_id, prev_stamp_, msg->header.stamp);
@@ -205,9 +207,7 @@ private:
 					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
 					flow_.integrated_zgyro = flow_gyro_fcu.vector.z;
 				} catch (const tf2::TransformException& e) {
-					// Invalidate previous frame
-					prev_.release();
-					goto publish_debug;
+					// Transform not available, keep NANs in flow gyro
 				}
 			}
 

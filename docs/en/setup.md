@@ -35,11 +35,12 @@ Flash the flight controller with this firmware:
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
-1. Open the *Vehicle Setup* tab.
-2. Select the *Firmware* menu.
-3. Connect your flight controller to your PC over USB.
-4. Wait for the flight controller to connect to QGroundControl.
-5. Select *PX4 Flight Stack* in the right bar.
+1. Launch QGroundControl software.
+2. Open the *Vehicle Setup* tab.
+3. Select the *Firmware* menu.
+4. Connect your flight controller to your PC over USB.
+5. Wait for the flight controller to connect to QGroundControl.
+6. Select *PX4 Flight Stack* in the right bar.
 
 To use the recommended Copter Express firmware:
 

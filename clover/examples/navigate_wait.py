@@ -31,11 +31,11 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0, speed=0.5, \
             return res
         rospy.sleep(0.2)
 
-# Take off 1 meter
+print('Take off 1 meter')
 navigate_wait(z=1, frame_id='body', auto_arm=True)
 
-# Fly forward 1 m
+print('Fly forward 1 m')
 navigate_wait(x=1, frame_id='body')
 
-# Land
+print('Land')
 land()

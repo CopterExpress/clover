@@ -21,7 +21,7 @@ Packages, that extend Clover functionality are recommended to be named with `clo
 On a normal Raspberry Pi OS, the repository may be added to the sources list, this way:
 
 ```bash
-wget -O - 'http://packages.coex.tech/key.asc' | apt-key add - 
+wget -O - 'http://packages.coex.tech/key.asc' | apt-key add -
 echo 'deb http://packages.coex.tech buster main' >> /etc/apt/sources.list
 sudo apt update
 ```

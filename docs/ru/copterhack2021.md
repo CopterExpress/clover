@@ -11,6 +11,10 @@ CopterHack 2021 – это командный конкурс по разраб�
     <img src="../assets/copterhack2021/2.jpg" class="zoom border">
 </div>
 
+## Видео
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YpMT6ab8Exw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Отчетные статьи команд-участников
 
 |Место|Команда|Проект|Балл|
