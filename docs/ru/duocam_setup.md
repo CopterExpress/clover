@@ -16,7 +16,7 @@ DuoCam включает в себя две камеры: визуальная к
 
 Подключите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201:
 
-![Подключите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201](../assets/duocam/duocam_connections.png)
+![Подключите к Raspberry Pi камеры VEYE-MIPI-327E и тепловизора HT-201](../assets/duocam/duocam_connections.jpg)
 
 ## Установка драйвера камеры VEYE-MIPI-327E
 
