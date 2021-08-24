@@ -5,7 +5,7 @@ DuoCam включает в себя две камеры: визуальная к
 Для начала подготовьте Raspberry Pi 4 со свежем образом [Clover](https://github.com/CopterExpress/clover/releases). Подключите Raspberry к WiFi-роутеру с интернетом по инструкции в статье "[Настройка Wi-Fi](network.md)"
 
 > **Hint** Есть альтернативный, устаревший, но более простой способ подключения к WiFi-роутеру. Для этого в файл `sudo vim /etc/network/interfaces` нужно добавить строчки:
-> 
+>
 > ```
 > auto wlan0
 > allow-hotplug wlan0
@@ -48,6 +48,7 @@ v4l2-ctl -d /dev/video0 -V --info --list-formats-ext
 ```
 
 ## Установка драйвера тепловизора Seek Thermal CompactPRO
+
 Драйвер для тепловизора HT-201 такой же, как и для тепловизора Seek Thermal CompactPRO.
 
 Сначала установите необходимые пакеты командой:
@@ -132,6 +133,7 @@ sudo systemctl enable duocam.service
 ```
 
 Перезагрузите Raspberry Pi командой `sudo reboot`. Проверьте, что видео с тепловизора доступно в интерфейсе `/dev/video5`:
+
 ```
 v4l2-ctl -d /dev/video5 -V --info --list-formats-ext
 ```
@@ -242,7 +244,7 @@ gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=19
 
 После секции `<!-- main camera -->` добавляем включение новых камер:
 
-``` 
+```
     <!-- front camera -->
     <include file="$(find clover)/launch/front_camera.launch" if="$(arg front_camera)"/>
 
