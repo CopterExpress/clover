@@ -37,7 +37,7 @@ chmod +x *
 sudo ./install_driver.sh veye327
 ```
 
-> **Info** Важно, чтобы версия ядра Linux поддерживалась разработчиками драйвера камеры. Узнать свою версию ядра можно командой `uname -r`. Список поддерживаемых версий ядра Linux можно посмотреть в [репозитории драйвера для камеры VEYE-MIPI-327E](https://github.com/veyeimaging/raspberrypi_v4l2/tree/main/release/driver_bin). Откатиться на более старую версию ядра можно командой `sudo rpi-update commit-id` где вместо 'commit-id' нужно подставить id коммита с нужной версией ядра, список всех коммитов можно посмотреть [тут](https://github.com/Hexxeh/rpi-firmware/commits/master). Напрмиер, команда `sudo rpi-update 1fad1d2beceaaf96e84e3f5caa79f52b87332e89` откатывает ядро Linux к версии 5.10.52.
+> **Info** Важно, чтобы версия ядра Linux поддерживалась разработчиками драйвера камеры. Узнать свою версию ядра можно командой `uname -r`. Список поддерживаемых версий ядра Linux можно посмотреть в [репозитории драйвера для камеры VEYE-MIPI-327E](https://github.com/veyeimaging/raspberrypi_v4l2/tree/main/release/driver_bin). Откатиться на более старую версию ядра можно командой `sudo rpi-update commit-id` где вместо `commit-id` нужно подставить ID коммита с нужной версией ядра, список всех коммитов можно посмотреть [тут](https://github.com/Hexxeh/rpi-firmware/commits/master). Например, команда `sudo rpi-update 1fad1d2beceaaf96e84e3f5caa79f52b87332e89` откатывает ядро Linux к версии 5.10.52.
 
 Перезагрузите Raspberry Pi командой `sudo reboot`. После перезагрузки проверьте, что драйвер установился корректно с помощью команд:
 
