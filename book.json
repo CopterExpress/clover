@@ -10,7 +10,7 @@
         "yametrika",
         "anchors",
         "collapsible-menu",
-        "validate-links",
+        "validate-links@https://github.com/okalachev/gitbook-plugin-validate-links.git",
         "bulk-redirect@https://github.com/okalachev/gitbook-plugin-bulk-redirect.git",
         "sitemap@https://github.com/okalachev/plugin-sitemap.git",
         "toolbar@https://github.com/hamishwillee/gitbook-plugin-toolbar.git",
