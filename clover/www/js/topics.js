@@ -34,13 +34,15 @@ function viewTopicsList() {
 	});
 }
 
+let rosdistro;
+
 function viewTopic(topic) {
 	title.innerHTML = topic;
 	topicMessage.style.display = 'block';
 
 	ros.getTopicType(topic, function(typeStr) {
 		const [pack, type] = typeStr.split('/');
-		let href = `https://docs.ros.org/en/noetic/api/${pack}/html/msg/${type}.html`; // FIXME: determine distro
+		let href = `https://docs.ros.org/en/${rosdistro}/api/${pack}/html/msg/${type}.html`;
 		title.innerHTML = `${topic} <a id="topic-type" href=${href} target="_blank">${typeStr}</a>`;
 	});
 
@@ -62,6 +64,9 @@ function init() {
 	if (!params.topic) {
 		viewTopicsList();
 	} else {
-		viewTopic(params.topic);
+		new ROSLIB.Param({ ros: ros, name: '/rosdistro'}).get(function(value) {
+			rosdistro = value.trim();
+			viewTopic(params.topic);
+		});
 	}
 }
