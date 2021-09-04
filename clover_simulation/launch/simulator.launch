@@ -47,6 +47,7 @@
         <arg name="web_video_server" default="false" if="$(eval type == 'jmavsim')"/>
         <arg name="main_camera" default="false" if="$(eval type == 'jmavsim')"/>
         <arg name="aruco" default="false" if="$(eval type == 'jmavsim')"/>
+        <arg name="optical_flow" default="false" if="$(eval type == 'jmavsim')"/>
         <arg name="led" default="false" if="$(eval type == 'jmavsim')"/>
     </include>
 </launch>
