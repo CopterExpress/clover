@@ -107,7 +107,7 @@ v4l2-ctl --list-devices
 seek_viewer --camtype=seekpro --colormap=1 --rotate=0 --mode=v4l2 --output=/dev/video5
 ```
 
-> **Hint** Чтобы изображение с тепловизора имело красно-синюю раскраску используйте начение параметра `--colormap=2`
+> **Hint** Чтобы изображение с тепловизора имело красно-синюю раскраску используйте значение параметра `--colormap=2`.
 
 Чтобы корректно запускать файл, необходимо присвоить ему соответствующие флаги доступа.
 
@@ -166,13 +166,13 @@ gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=19
 gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=1920,height=1080,framerate=30/1 ! videoscale ! video/x-raw, width=1280, height=720 ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 mtu=1024 pt=96 )"
 ```
 
-Трансляция с обеих камер, картинка-в-картинке, разрешение 1280x720:
+Трансляция с обеих камер, "картинка в картинке", разрешение 1280x720:
 
 ```
 gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=1920,height=1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw,width=1280,height=720 !  queue ! mix. v4l2src device=/dev/video5 ! video/x-raw,width=320,height=240 ! queue ! videomixer name=mix ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
 ```
 
-Трансляция с обеих камер, картинка-в-картинке, с обрезкой изображения тепловизора по краям, разрешение 1280x720:
+Трансляция с обеих камер, "картинка в картинке", с обрезкой изображения тепловизора по краям, разрешение 1280x720:
 
 ```
 gst-rtsp-launch "( v4l2src device=/dev/video0 ! video/x-raw,format=UYVY,width=1920,height=1080,framerate=(fraction)30/1 ! videoscale ! video/x-raw,width=1280,height=720 ! queue ! mix. v4l2src device=/dev/video5 ! video/x-raw,width=320,height=240 ! videoscale ! video/x-raw, width=640, height=480 ! videocrop top=60 left=180 right=140 bottom=100 ! queue ! videomixer name=mix ! v4l2h264enc output-io-mode=4 extra-controls=\"encode,frame_level_rate_control_enable=1,h264_profile=4,h264_level=13,video_bitrate=4000000,h264_i_frame_period=5;\" ! rtph264pay name=pay0 pt=96 )"
@@ -274,17 +274,17 @@ sudo systemctl restart clover
 
 ## Обработка изображения с камер с помощью GStreamer
 
-Изображение с камер можно обрабатывать как методами Open-CV, так и GStreamer. С помощью GStreamer можно, например, обрезать или изменить размер кадра. В этом разделе расскажем как изменить разрешение передней камеры с 1920х1080 на 1280х720, а также вырезать из изображения с тепловизора (обрезать края кадра) в центральной части квадрат размером 120х120 и растянуть его до 240х240.
+Изображение с камер можно обрабатывать как методами OpenCV, так и GStreamer. С помощью GStreamer можно, например, обрезать или изменить размер кадра. В этом разделе расскажем, как изменить разрешение передней камеры с 1920х1080 на 1280х720, а также вырезать из изображения с тепловизора (обрезать края кадра) в центральной части квадрат размером 120х120 и растянуть его до 240х240.
 
-Для начала нам нужно создать еще 2 виртуальных видеоустройства, куда мы направим вывод с GStreamer. В файле `/etc/modprobe.d/v4l2loopback.conf` измените содержание на:
+Для начала нам нужно создать еще 2 виртуальных видеоустройства, куда мы направим вывод с GStreamer. В файле `/etc/modprobe.d/v4l2loopback.conf` измените содержимое на:
 
 ```
 options v4l2loopback devices=3 exclusive_caps=1 video_nr=5,6,7 card_label="Thermal-camera,Thermal-scale,Front-scale"
 ```
 
-Теперь нам нужно добавить непосредственно команды GStreamer, которые делают то, что нам нужно. Для этого в файле `duocam_autostart.sh` измените содержание на:
+Теперь нам нужно добавить непосредственно команды GStreamer, которые делают то, что нам нужно. Для этого в файле `duocam_autostart.sh` измените содержимое на:
 
-```
+```bash
 seek_viewer --camtype=seekpro --colormap=1 --rotate=0 --mode=v4l2 --output=/dev/video5 &
 
 sleep 10
