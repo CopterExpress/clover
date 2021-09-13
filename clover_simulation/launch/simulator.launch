@@ -34,7 +34,9 @@
         <arg name="use_clover_physics" value="$(arg use_clover_physics)"/>
     </include>
 
-    <node name="jmavsim" pkg="px4" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')"/>
+    <node name="jmavsim" pkg="px4" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')">
+        <env name="HEADLESS" value="1" if="$(eval not gui)"/>
+    </node>
 
     <param name="use_sim_time" value="false" if="$(eval type == 'jmavsim')"/>
 
