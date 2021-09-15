@@ -19,14 +19,14 @@ The list of team members:
 
 ### Project idea
 
-Briefly describe the idea and stage of the project.
+
 
 We will build a product which has a drone and an autonomous car for spying or delivering things 
 
 
 ### The potential outcomes
 
-Describe how you see the project result.
+
 
 We have already finish the robot car and can build the map for it to autonomous move with ROS Navigation, SLAM 
 
@@ -37,7 +37,7 @@ We will try to build some  function to make a communication between the robot ca
 
 ### Using Clover platform
 
-Describe how the Clover platform will be used in your project.
+
 
 The clover will detect the target and send navigation to car robot in the ground where we already knew the map. For the unseen map, we will use robot to control Clover to discover if the car robot can move to that terrain or not.
 
@@ -45,7 +45,6 @@ The clover will detect the target and send navigation to car robot in the ground
 
 ### Additional information at the request of participants
 
-For example, information about the team's experience working on projects, attach a link to articles, videos.
 
 We are a STEM club in FPT School in VietNam.
 Here is some products we have done
