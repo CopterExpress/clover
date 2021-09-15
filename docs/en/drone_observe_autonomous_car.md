@@ -13,24 +13,18 @@ The list of team members:
 * Vo Duc Hieu, voduchieu42@gmail.com, programmer.
 * Bui Son, bhhson@gmail.com, programmer.
 
-
-
 ## Project description
 
 ### Project idea
-
-
 
 We will build a product which has a drone and an autonomous car for spying or delivering things 
 
 
 ### The potential outcomes
 
+We have already finished the robot car and be able to build the map for autonomous moving with ROS Navigation, SLAM 
 
-
-We have already finish the robot car and can build the map for it to autonomous move with ROS Navigation, SLAM 
-
-We will try to build some  function to make a communication between the robot car and Clover Drone. The Clover will observe robot car path, if there is any obstacle on the way of robot in the map, Clover will inform to robot car to create a new path.
+We will try to build some features that make a communication between the robot car and Clover Drone. The Clover will observe robot car path, if there is any obstacle on the way of robot, Clover will inform to robot car to re-create a new path.
 
 <img src="../assets/Dragon&Tanker.png" >
 
@@ -38,15 +32,11 @@ We will try to build some  function to make a communication between the robot ca
 ### Using Clover platform
 
 
-
 The clover will detect the target and send navigation to car robot in the ground where we already knew the map. For the unseen map, we will use robot to control Clover to discover if the car robot can move to that terrain or not.
-
-
 
 ### Additional information at the request of participants
 
-
-We are a STEM club in FPT School in VietNam.
+We are a STEM club in FPT high school in VietNam.
 Here is some products we have done
  https://www.youtube.com/watch?v=PGMazPDON34
 https://www.youtube.com/watch?v=re1Jlx3aYe4
