@@ -27,7 +27,7 @@ We will try to build some features that make a communication between the robot c
 
 ### Using Clover platform
 
-The clover will detect the target and send navigation goal to car robot in the ground where we already knew the map. For the unseen map, we will use robot to control Clover to discover if the car robot can move to that terrain or not.
+The Clover will detect the target and send navigation goal to car robot in the ground where we already knew the map. For the unseen map, we will use robot to control Clover to discover if the car robot can move to that terrain or not.
 
 ### Additional information at the request of participants
 
