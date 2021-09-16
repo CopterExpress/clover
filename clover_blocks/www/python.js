@@ -33,6 +33,18 @@ const NAVIGATE_WAIT = () => `\ndef navigate_wait(x=0, y=0, z=0, speed=0.5, frame
             return
         rospy.sleep(${params.sleep_time})\n`;
 
+const NAVIGATE_GLOBAL_WAIT = () => `\ndef navigate_global_wait(lat, lon, z, speed=0.5):
+    res = navigate_global(lat=lat, lon=lon, z=z, yaw=float('inf'), speed=speed)
+
+    if not res.success:
+        raise Exception(res.message)
+
+    while not rospy.is_shutdown():
+        telem = get_telemetry(frame_id='navigate_target')
+        if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < ${params.navigate_global_tolerance}:
+            return
+        rospy.sleep(${params.sleep_time})\n`;
+
 const LAND_WAIT = () => `\ndef land_wait():
     land()
     while get_telemetry().armed:
@@ -68,6 +80,9 @@ function generateROSDefinitions() {
 	if (rosDefinitions.offboard) {
 		code += `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)\n`;
 		code += `navigate = rospy.ServiceProxy('navigate', srv.Navigate)\n`;
+		if (rosDefinitions.navigateGlobal) {
+		code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
+		}
 		if (rosDefinitions.setVelocity) {
 			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
 		}
@@ -93,6 +108,10 @@ function generateROSDefinitions() {
 	if (rosDefinitions.navigateWait) {
 		Blockly.Python.definitions_['import_math'] = 'import math';
 		code += NAVIGATE_WAIT();
+	}
+	if (rosDefinitions.navigateGlobalWait) {
+		Blockly.Python.definitions_['import_math'] = 'import math';
+		code += NAVIGATE_GLOBAL_WAIT();
 	}
 	if (rosDefinitions.landWait) {
 		code += LAND_WAIT();
@@ -161,24 +180,48 @@ Blockly.Python.navigate = function(block) {
 	let x = Blockly.Python.valueToCode(block, 'X', Blockly.Python.ORDER_NONE);
 	let y = Blockly.Python.valueToCode(block, 'Y', Blockly.Python.ORDER_NONE);
 	let z = Blockly.Python.valueToCode(block, 'Z', Blockly.Python.ORDER_NONE);
-	let frameId = buildFrameId(block);
+	let lat = Blockly.Python.valueToCode(block, 'LAT', Blockly.Python.ORDER_NONE);
+	let lon = Blockly.Python.valueToCode(block, 'LON', Blockly.Python.ORDER_NONE);
+	let wait = block.getFieldValue('WAIT') == 'TRUE';
+	let frameId = block.getFieldValue('FRAME_ID');
 	let speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_NONE);
-
-	let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id=${frameId}`, `speed=${speed}`];
 
 	simpleOffboard();
 
-	if (block.getFieldValue('WAIT') == 'TRUE') {
-		rosDefinitions.navigateWait = true;
+	// global coordinates
+	if (frameId.startsWith('GLOBAL')) {
+		rosDefinitions.navigateGlobal = true;
 		simpleOffboard();
 
-		return `navigate_wait(${params.join(', ')})\n`;
+		if (frameId == 'GLOBAL') {
+			z = `${z} + get_telemetry().alt - get_telemetry().z`;
+		}
+
+		if (wait) {
+			rosDefinitions.navigateGlobalWait = true;
+			simpleOffboard();
+			return `navigate_global_wait(lat=${lat}, lon=${lon}, z=${z}, speed=${speed})\n`;
+
+		} else {
+			return `navigate_global(lat=${lat}, lon=${lon}, z=${z}, yaw=float('inf'), speed=${speed})\n`;
+		}
 
 	} else {
-		if (frameId != 'body') {
-			params.push(`yaw=float('nan')`);
+		frameId = buildFrameId(block);
+		let params = [`x=${x}`, `y=${y}`, `z=${z}`, `frame_id=${frameId}`, `speed=${speed}`];
+
+		if (wait) {
+			rosDefinitions.navigateWait = true;
+			simpleOffboard();
+
+			return `navigate_wait(${params.join(', ')})\n`;
+
+		} else {
+			if (frameId != 'body') {
+				params.push(`yaw=float('nan')`);
+			}
+			return `navigate(${params.join(', ')})\n`;
 		}
-		return `navigate(${params.join(', ')})\n`;
 	}
 }
 

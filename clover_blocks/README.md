@@ -30,6 +30,7 @@ The frontend files are located in [`www`](./www/) subdirectory. The frontend app
 Parameters read by frontend:
 
 * `~navigate_tolerance` (*float*) – distance tolerance in meters, used for navigate-like blocks (default: 0.2).
+* `~navigate_global_tolerance` (*float*) – distance tolerance for global coordinates navigation (default: 1).
 * `~yaw_tolerance` (*float*) – yaw angle tolerance in degrees, used in set_yaw block (default: 1).
 * `~sleep_time` (*float*) – duration of sleep in loop cycles, used for navigate-like blocks (default: 0.2).
 * `~confirm_run` (*bool*) – enable confirmation to run the program (default: true).

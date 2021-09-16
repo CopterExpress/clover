@@ -31,6 +31,14 @@ function considerFrameId(e) {
 			this.getInput('Y').fieldRow[0].setValue('y');
 			this.getInput('Z').fieldRow[0].setValue('z');
 		}
+		if (this.getInput('LAT')) { // block has global coordinates
+			let global = frameId.startsWith('GLOBAL');
+			this.getInput('LAT').setVisible(global);
+			this.getInput('LON').setVisible(global);
+			this.getInput('X').setVisible(!global);
+			this.getInput('Y').setVisible(!global);
+			this.getInput('Z').fieldRow[0].setValue(frameId == 'GLOBAL' ? 'altitude' : 'z');
+		}
 	}
 	if (this.getInput('ID')) { // block has marker id field
 		this.getInput('ID').setVisible(frameId == 'ARUCO'); // toggle id field
@@ -65,6 +73,9 @@ function updateSetpointBlock(e) {
 
 Blockly.Blocks['navigate'] = {
 	init: function () {
+		let navFrameId = frameIds.slice();
+		navFrameId.push(['global', 'GLOBAL_LOCAL'])
+		navFrameId.push(['global, WGS 84 alt.', 'GLOBAL'])
 		this.appendDummyInput()
 			.appendField("navigate to point");
 		this.appendValueInput("X")
@@ -73,12 +84,20 @@ Blockly.Blocks['navigate'] = {
 		this.appendValueInput("Y")
 			.setCheck("Number")
 			.appendField("left");
+		this.appendValueInput("LAT")
+			.setCheck("Number")
+			.appendField("latitude")
+			.setVisible(false);
+		this.appendValueInput("LON")
+			.setCheck("Number")
+			.appendField("longitude")
+			.setVisible(false)
 		this.appendValueInput("Z")
 			.setCheck("Number")
 			.appendField("up");
 		this.appendDummyInput()
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown(navFrameId), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")

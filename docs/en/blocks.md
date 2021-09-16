@@ -72,6 +72,8 @@ This block allows to specify the [coordinate frame](frames.md) of the target poi
 * *marker* – coordinates, relative to an [ArUco-marker](aruco_marker.md); marker's ID input fields appears.
 * *last navigate target* – coordinates, relative to the last specified navigate point.
 * *map* – drone's local coordinate system, linked with the point of its initialization.
+* *global* – global coordinates system (latitude and longitude) and relative altitude.
+* *global, WGS 84 alt.* – global coordinates system and [WGS 84](https://en.wikipedia.org/wiki/WGS_84) altitude.
 
 ### land
 
