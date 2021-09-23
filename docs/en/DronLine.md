@@ -23,7 +23,7 @@ The list of team members:
   
 ### Project idea
 
-*Help in detecting emergency response
+* Help in detecting emergency response
 
 ### The potential outcomes
 
