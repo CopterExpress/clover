@@ -6,7 +6,7 @@
 
 The list of team members:
 
-(Describe the team: full name, contacts (e-mail / Telegram username), role in the team).
+
 
 * Pavel Kaplin, paklin2006@yandex.ru , engineer.
 * Dmitry Yudin, @ydimkin, programmer.
