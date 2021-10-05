@@ -9,12 +9,14 @@
 
 Для использования rviz и rqt необходим компьютер с ОС Ubuntu Linux (либо виртуальная машина, например [Parallels Desktop Lite](https://itunes.apple.com/ru/app/parallels-desktop-lite/id1085114709?mt=12) или [VirtualBox](https://www.virtualbox.org)).
 
+> **Hint** Вы можете можете использовать готовый [образ виртуальной машины](simulation_vm.md) с инструментами для Клевера.
+
 На него необходимо установить пакет `ros-melodic-desktop-full` или `ros-melodic-desktop`, используя [документацию по установке](http://wiki.ros.org/melodic/Installation/Ubuntu).
 
 Запуск rviz
 ---
 
-Для запуска визуализация состояния Клевера в реальном времени, необходимо подключиться к нему по Wi-Fi (`clover-xxx`) и запустить rviz, указав соответствующий ROS_MASTER_URI:
+Для запуска визуализация состояния Клевера в реальном времени, необходимо подключиться к нему по [Wi-Fi](wifi.md) (`clover-xxxx`) и запустить rviz, указав соответствующий ROS_MASTER_URI:
 
 ```bash
 ROS_MASTER_URI=http://192.168.11.1:11311 rviz
