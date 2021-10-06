@@ -2,7 +2,9 @@
 
 Настройка среды для симуляции с нуля требует некоторых усилий, однако это приведет к улучшению производительности и к уменьшению вероятности появления проблем с драйверами.
 
-Требования для сборки: установлены Ubuntu 18.04 и [ROS](ros-install.md).
+> **Hint** Смотрите актуальный набор команд установки необходимого ПО для запуска симулятора Клевера в скрипте сборки виртуальной машины с симулятором: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh).
+
+Требования для сборки: Ubuntu 20.04 и [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 ## Создание рабочего пространства для симулятора
 
@@ -13,8 +15,9 @@
 ```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/CopterExpress/clover
-git clone https://github.com/CopterExpress/ros_led
+git clone --depth 1 https://github.com/CopterExpress/clover
+git clone --depth 1 https://github.com/CopterExpress/ros_led
+git clone --depth 1 https://github.com/ethz-asl/mav_comm
 ```
 
 Установите все зависимости, используя `rosdep`:
@@ -25,14 +28,21 @@ rosdep update
 rosdep install --from-paths src --ignore-src -y
 ```
 
+Установите Python-зависимости:
+
+```bash
+sudo /usr/bin/python3 -m pip install -r ~/catkin_ws/src/clover/clover/requirements.txt
+```
+
 ## Загрузка исходного кода PX4
 
 Сборка PX4 будет осуществлена вместе с другими пакетами в нашем рабочем пространстве. Вы можете загрузить его прямо в рабочее пространство или поместить куда-нибудь и создать симлинк к `~/catkin_ws/src`. Нам также нужно будет поместить его подмодуль `sitl_gazebo` в `~/catkin_ws/src`. Для упрощения мы загрузим прошивку прямо в рабочее пространство:
 
 ```bash
 cd ~/catkin_ws/src
-git clone --recursive https://github.com/CopterExpress/Firmware -b v1.10.1-clever
-ln -s Firmware/Tools/sitl_gazebo ./sitl_gazebo
+git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+ln -s ~/PX4-Autopilot ~/catkin_ws/src/PX4-Autopilot
+ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/sitl_gazebo
 ```
 
 ## Установка зависимостей PX4
@@ -40,7 +50,7 @@ ln -s Firmware/Tools/sitl_gazebo ./sitl_gazebo
 PX4 имеет свой собственный скрипт для установки зависимостей. Воспользуемся им:
 
 ```bash
-cd ~/catkin_ws/src/Firmware/Tools/setup
+cd ~/catkin_ws/src/PX4-Autopilot/Tools/setup
 sudo ./ubuntu.sh
 ```
 
@@ -52,15 +62,12 @@ sudo ./ubuntu.sh
 sudo ./ubuntu.sh --no-nuttx
 ```
 
-## Патчинг плагинов Gazebo
+## Добавление рамы Клевера
 
-Пакет `sitl_gazebo`, содержащий плагины нужно пропатчить, из-за недавних изменений в MAVLink. Эти патчи уже применены в [образе виртуальной машины](simulation_vm.md) и хранятся в репозитории CopterExpress/VM. Запустите следующие команды для загрузки и применения патчей:
+Добавьте в PX4 раму Клевера с помощью следующей команды:
 
 ```bash
-cd ~/catkin_ws/src/Firmware/Tools/sitl_gazebo
-wget https://raw.githubusercontent.com/CopterExpress/clover_vm/master/assets/patches/sitl_gazebo.patch
-patch -p1 < sitl_gazebo.patch
-rm sitl_gazebo.patch
+ln -s "$(catkin_find clover_simulation airframes)"/* ~/PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes/
 ```
 
 ## Установка датасетов geographiclib
@@ -68,11 +75,7 @@ rm sitl_gazebo.patch
 Для `mavros` нужны датасеты geographiclib:
 
 ```bash
-cd ~
-wget https://raw.githubusercontent.com/mavlink/mavros/6f5bd5a1a67c19c2e605f33de296b1b1be9d02fc/mavros/scripts/install_geographiclib_datasets.sh
-chmod +x ./install_geographiclib_datasets.sh
-sudo ./install_geographiclib_datasets.sh
-rm ./install_geographiclib_datasets.sh
+sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh
 ```
 
 ## Сборка симулятора
