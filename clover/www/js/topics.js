@@ -53,6 +53,29 @@ function viewTopic(topic) {
 	});
 }
 
+function viewParameters() {
+	title.innerHTML = 'Parameters';
+	topicMessage.style.display = 'block';
+
+	let names = ['aruco_detect', 'main_camera', 'main_camera_nodelet_manager', 'mavros', 'optical_flow', 
+		'rangefinder', 'rosapi', 'rosbridge_websocket', 'rosdistro', 'roslaunch', 'rosversion', 
+		'roswww_static', 'run_id', 'simple_offboard', 'visualization', 'web_video_server'];
+	let params = {};
+	// ros.getParams(function(params) {
+		
+	Promise.all(names.map(function(name) {
+		return new Promise(function(resolve, reject) {
+			new ROSLIB.Param({ ros, name }).get(function(value) {
+				params[name] = value;
+				resolve();
+			})
+		});
+	})).then(function() {
+		console.log(params);
+		topicMessage.innerHTML = yamlStringify(params);
+	});
+}
+
 let mouseDown;
 
 topicMessage.addEventListener('mousedown', function() { mouseDown = true; });
@@ -60,6 +83,9 @@ topicMessage.addEventListener('mouseup', function() { mouseDown = false; });
 
 function init() {
 	const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
+	viewParameters();
+	return;
 
 	if (!params.topic) {
 		viewTopicsList();
@@ -70,3 +96,5 @@ function init() {
 		});
 	}
 }
+
+window.ros = ros;
