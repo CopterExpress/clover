@@ -69,11 +69,13 @@ def foo_callback(msg):
 rospy.Subscriber('/foo', String, foo_callback)
 ```
 
-There is also an opportunity to work with the topics using the `rostopic` utility. For example, using the following command, one can view messages published in topic `/variety of the Aegean sea/state`:
+You can also work with topics using the the `rostopic` utility. For example, using the following command, you can view messages published in topic `/mavros/state`:
 
-```(bash)
+```bash
 rostopic echo /mavros/state
 ```
+
+The `rostopic info` command shows the type of messages in the topic, and `rostopic hz` shows frequency of published messages.
 
 ### Services
 

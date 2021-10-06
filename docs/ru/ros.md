@@ -75,6 +75,8 @@ rospy.Subscriber('/foo', String, foo_callback)
 rostopic echo /mavros/state
 ```
 
+Команда `rostopic info` позволяет узнать тип сообщений в топике, команда `rostopic hz` — частоту публикуемых в топике сообщений.
+
 ### Сервисы
 
 Основная статья: http://wiki.ros.org/Services
