@@ -22,11 +22,7 @@
 ROS_MASTER_URI=http://192.168.11.1:11311 rviz
 ```
 
-Если соединение не устанавливается, необходимо убедиться, что в `.bashrc` Клевера присутствует строка:
-
-```bash
-export ROS_HOSTNAME=`hostname`.local
-```
+> **Note** В случае использования виртуальной машины для использования rviz и других инструментов может быть необходимо поменять ее сетевую конфигурацию на режим *bridge* ([см. подробности для VMware](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/16.0/com.vmware.player.win.using.doc/GUID-826323AD-D014-475D-8909-DFA73B5A3A57.html)).
 
 Использование rviz
 ---

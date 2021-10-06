@@ -22,11 +22,7 @@ To start the Clover state visualization in real time, connect to it [via Wi-Fi](
 ROS_MASTER_URI=http://192.168.11.1:11311 rviz
 ```
 
-If connection is not established, make sure the `.bashrc` of Clover contains line:
-
-```(bash)
-export ROS_HOSTNAME=`hostname`.local
-```
+> **Note** In case of using a virtual machine for using rviz and other tools it might be necessary to change its network configuration to *bridge* mode ([see details for VMware](https://docs.vmware.com/en/VMware-Workstation-Player-for-Windows/16.0/com.vmware.player.win.using.doc/GUID-826323AD-D014-475D-8909-DFA73B5A3A57.html)).
 
 Using rviz
 ---
