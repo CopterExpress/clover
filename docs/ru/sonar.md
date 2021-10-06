@@ -4,7 +4,7 @@
 
 ## Дальномер HC-SR04
 
-<img src="../assets/hc-sr04.jpg" alt="hc-sr04" width=200>
+<img src="../assets/hc-sr04.jpg" alt="HC-SR04" width=200>
 
 ## Установка
 
