@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+    <model name="aruco_100">
+        <static>true</static>
+        <link name="marker_100_link">
+            <pose>0 0 1e-3 0 0 1.5707963267948966</pose>
+            <visual name="visual_marker_100">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <box>
+                        <size>0.22 0.22 1e-3</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <uri>model://aruco_100/materials/scripts</uri>
+                        <uri>model://aruco_100/materials/textures</uri>
+                        <name>aruco/marker_100</name>
+                    </script>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>
