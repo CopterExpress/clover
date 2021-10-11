@@ -12,4 +12,6 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0016", ATTRS{produ
 SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0013", ATTRS{product}=="PX4 FMU v4.x PRO", SYMLINK+="px4fmu"
 # Omnibus
 SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="PX4 OmnibusF4SD", SYMLINK+="px4fmu"
+# CUAV X7 Pro
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3163", ATTRS{idProduct}=="004c", ATTRS{product}=="PX4 CUAV X7Pro", SYMLINK+="px4fmu"
 
