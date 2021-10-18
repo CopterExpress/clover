@@ -6,8 +6,6 @@
 
 The list of team members:
 
-(Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
-
 * Denis Konstantinov, @den_konstantinov, engineer and developer.
 
 ## Project description
