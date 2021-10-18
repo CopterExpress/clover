@@ -14,7 +14,7 @@ The list of team members:
 
 ### Project idea
 
-Design a high-speed obstacle avoidance copter based on paper [Learning High-Speed Flight in the Wild](http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf)
+Design a high-speed obstacle avoidance copter based on paper [Learning High-Speed Flight in the Wild](http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf).
 
 ### The potential outcomes
 
