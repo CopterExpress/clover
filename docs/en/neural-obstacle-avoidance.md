@@ -1,4 +1,4 @@
-# Project name
+# Neural obstacle avoidance
 
 [CopterHack-2022](copterhack2022.md), team **Stereo**.
 
