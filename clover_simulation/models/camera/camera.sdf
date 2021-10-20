@@ -6,7 +6,7 @@
             <pose>0 0 0 0 0 0</pose>
             <sensor name='camera' type='camera'>
                 <camera>
-                    <horizontal_fov>2.0944</horizontal_fov>
+                    <horizontal_fov>1.8</horizontal_fov>
                     <image>
                         <format>B8G8R8</format>
                         <width>640</width>
