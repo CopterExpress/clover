@@ -40,7 +40,7 @@ The integration with Clover platform might be simple and fully intuitive. The ma
 
 The purpose of block programming is to facilitate the development of Clover swarm applications and to be user-friendly. The tool for block programming is not defined yet because we intend to apply more studies on this topic. Essentially, it means having blocks for Clover built-in functions. Furthermore the functions that we will develop for swarm management could also be applied in blocks.
 
-The developed algorithms will be simulated through the Clover implementation in Gazebo. One of the advantages is the fidelity to the real Clover, by the PX4 flight controller simulation, which uses the MAVROS interface for the MAVLINK protocol. The intention is to allow the planning and simulation of the mission, enabling a better organization of the swarm and the previous analysis of failures.
+The developed algorithms will be simulated through the Clover implementation in Gazebo. One of the advantages is the fidelity to the real Clover, by the PX4 flight controller simulation, which uses the MAVROS interface for the MAVLink protocol. The intention is to allow the planning and simulation of the mission, enabling a better organization of the swarm and the previous analysis of failures.
 
 Finally, the application of developed and tested codes in the simulation must be minimally modified for the application in the real Clover. This concept is already used by Clover with MAVROS communication with the controller or with a base. Thus, this connection can be extended with the study of networks that allow the connection of multiple drones with a base and with each other, enabling more robust organizations methods.
 
