@@ -36,7 +36,7 @@ Additionally, the project can be used for other user-desired swarm applications,
 
 ### Using Clover platform
 
-The integration with Clover platform might be simple and fully intuitive. The main aspects of Clover that we will work are block programming, simulation and real world application. The coding, simulation and real drone deploying cycle is very useful for development and learning and will be important for decision making. 
+The integration with Clover platform might be simple and fully intuitive. The main aspects of Clover that we will work are block programming, simulation and real world application. The coding, simulation and real drone deploying cycle is very useful for development and learning and will be important for decision making.
 
 The purpose of block programming is to facilitate the development of Clover swarm applications and to be user-friendly. The tool for block programming is not defined yet because we intend to apply more studies on this topic. Essentially, it means having blocks for Clover built-in functions. Furthermore the functions that we will develop for swarm management could also be applied in blocks.
 
