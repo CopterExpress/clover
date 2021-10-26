@@ -1,6 +1,6 @@
 # Clevertron
 
-copterhack2022.md, команда **Clevertron**.
+[CopterHack-2022](copterhack2022.md),команда **Clevertron**.
 
 ## Информация о команде
 
