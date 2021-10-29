@@ -9,7 +9,7 @@
 * Tanchinets Nikolay  (tg: @lovesosae)
 
 ## Описание проекта
-?
+Today machine learning techlonologies uses everywhere and i want to make software to help another people make them
 
 ### Идея проекта
 I want to make a basic program for CV tasks such as classification, object detection,image question answering
@@ -18,10 +18,3 @@ I want to make a basic program for CV tasks such as classification, object detec
 
 I want to see ready to use user-frendly util for cv tasks
 
-### Использование платформы "Клевер"
-
-Опишите как в вашем проекте будет использоваться платформа "Клевер".
-
-### Дополнительная информация по желанию участников
-
-Например, информация об опыте работы команды над проектами, прикрепить ссылку на статьи, видео.
