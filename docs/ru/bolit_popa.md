@@ -13,4 +13,3 @@ I want to make a basic program for CV tasks such as classification, object detec
 
 ### Планируемые результаты
 I want to see ready to use user-frendly util for cv tasks
-
