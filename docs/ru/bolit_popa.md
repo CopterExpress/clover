@@ -4,8 +4,7 @@
 
 ## Информация о команде
 
-Состав команды:
-* Tanchinets Nikolay  (tg: @lovesosae)
+Состав команды: Tanchinets Nikolay  (tg: @lovesosae)
 
 ## Описание проекта
 
