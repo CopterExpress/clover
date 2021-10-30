@@ -11,7 +11,7 @@ The list of team members:
 
 ## Project description
 
-![raspberry-and-ncs2](../../rpi_ncs2.jpg)
+![raspberry-and-ncs2](../assets/rpi_ncs2.jpg)
 
 ### Project idea
 
