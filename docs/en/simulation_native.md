@@ -2,7 +2,7 @@
 
 Setting up the simulation environment from scratch requires some effort, but results in the most performant setup, with less chance of driver issues.
 
-> **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: `[install_software.sh]`(https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh).
+> **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh).
 
 Prerequisites: Ubuntu 20.04 and [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
