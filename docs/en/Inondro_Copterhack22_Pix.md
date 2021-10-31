@@ -38,3 +38,8 @@ All design files and software adjustments will be open source and available on o
 ### Using Clover platform
 
 As said above our project will be able to be fully integrated into the clover platform and replace the current Pixhawk / Raspberry Pi 4 package.
+
+### Additional information at the request of participants
+
+* Website: [Inondro](https://inondro.com).
+* Last Year's Project: [Generative Clover Frame](https://clover.coex.tech/en/generative_design_frame.html).
