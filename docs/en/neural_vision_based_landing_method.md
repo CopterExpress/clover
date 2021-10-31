@@ -17,12 +17,7 @@ The list of team members:
 
 The project involves increasing the precision of landing (one of the most dangerous maneuvers for flying machines) under operational conditions on a mobile platform and taking care of safety in its vicinity.
 
-Due to these reasons, we plan to implement autonomous landing on a specifically
-designed pad that is marked with graphical elements, making it possible to recover
-its relative pose and orientation. Additional safety measures will be
-implemented - no landing is attempted if persons are present in the vicinity of the
-landing pad. We want to achieve this using convolutional neural networks and USB
-inference accelerators, for example, Neural Compute Stick 2 or Google Coral USB Accelerator.
+Due to these reasons, we plan to implement autonomous landing on a specifically designed pad that is marked with graphical elements, making it possible to recover its relative pose and orientation. Additional safety measures will be implemented - no landing is attempted if persons are present in the vicinity of the landing pad. We want to achieve this using convolutional neural networks and USB inference accelerators, for example, Neural Compute Stick 2 or Google Coral USB Accelerator.
 
 ### The potential outcomes
 
