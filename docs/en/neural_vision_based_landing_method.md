@@ -30,7 +30,4 @@ The clover platform will be used as the basis for the safe testing of landing al
 
 ### Additional information at the request of participants
 
-We are fresh Ph.D. students at Poznan University of Technology. We have successfully
-developed an intelligent system based on a drone with an object detection algorithm
-for waste detection. The system in 2021 was awarded 3rd prize during the Teknofest
-festival’s “Free mission” contest in Turkey. Project website: [UAVVaste](https://uavvaste.github.io/).
+We are fresh Ph.D. students at Poznan University of Technology. We have successfully developed an intelligent system based on a drone with an object detection algorithm for waste detection. The system in 2021 was awarded 3rd prize during the Teknofest festival’s “Free mission” contest in Turkey. Project website: [UAVVaste](https://uavvaste.github.io/).
