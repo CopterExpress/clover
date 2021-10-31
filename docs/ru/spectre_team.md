@@ -1,6 +1,6 @@
 # Название проекта:SPECTRE
 
-[CopterHack-2022] (spectre.md), команда **SPECTRE**.
+[CopterHack-2022] (spectre_team.md), команда **SPECTRE**.
 
 ## Информация о команде
 
