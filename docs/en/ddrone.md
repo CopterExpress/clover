@@ -95,4 +95,4 @@ We pick the web interface to control the copter because it is easier for the use
 
 Project was created with financial support of International Ala-Too University.
 
-![Ala-Too University](https://my.alatoo.edu.kg/images/logo_text.png)
+![Ala-Too University](../assets/seeding_drone/ala-too.png)
