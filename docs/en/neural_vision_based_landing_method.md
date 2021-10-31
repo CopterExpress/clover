@@ -21,8 +21,7 @@ Due to these reasons, we plan to implement autonomous landing on a specifically 
 
 ### The potential outcomes
 
-Precision landing is essential for building mobile flying robots. The use of classical GPS or very costly GPS RTK allows you to move closer to the landing platform with limited precision, while a vision-based system using deep neural networks will enable not only precise landing without the need for tags, but will also take care of safety
-in its area.
+Precision landing is essential for building mobile flying robots. The use of classical GPS or very costly GPS RTK allows you to move closer to the landing platform with limited precision, while a vision-based system using deep neural networks will enable not only precise landing without the need for tags, but will also take care of safety in its area.
 
 ### Using Clover platform
 
