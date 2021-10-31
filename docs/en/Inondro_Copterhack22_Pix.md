@@ -20,20 +20,20 @@ The list of team members:
 ## Project description
 
 ### Project idea
+
 We aim to develop the company use case:
 
-"Develop the Pixhawk FMUv6U flight controller board with the dimensions 55x40 mm and the compatibility of a Raspberry Pi CM 4 installation." 
+"Develop the Pixhawk FMUv6U flight controller board with the dimensions 55x40 mm and the compatibility of a Raspberry Pi CM 4 installation."
 
-Our goal is to first do an analysis on which connectors will be needed on both the Pixhawk and the Raspberry Pi Side. We then aim to design the necessary PCB with an emphasis on size and weight. Once the design is finished the PCB wil be produced and the components put on. We can then work on doing the needed software adjustments to have the clover software run on it. Finally we will integrate it mechanically into the clover 4 plattform. 
+Our goal is to first do an analysis on which connectors will be needed on both the Pixhawk and the Raspberry Pi Side. We then aim to design the necessary PCB with an emphasis on size and weight. Once the design is finished the PCB wil be produced and the components put on. We can then work on doing the needed software adjustments to have the clover software run on it. Finally we will integrate it mechanically into the clover 4 plattform.
 
 We are currently in the analysis stage.
-
 
 ### The potential outcomes
 
 The outcome will be a new flight controller / onboard computer package fullfilling the Pixhawk FMUv6U requirements with a Raspberry Pi CM4 connector that will work flawlessy with the clover platform.
 
-All design files and software adjustments will be open source and available on our Github Org.
+All design files and software adjustments will be open source and available on our GitHub Org.
 
 ### Using Clover platform
 
