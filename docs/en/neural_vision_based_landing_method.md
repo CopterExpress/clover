@@ -15,9 +15,7 @@ The list of team members:
 
 ### Project idea
 
-The project involves increasing the precision of landing (one of the most
-dangerous maneuvers for flying machines) under operational conditions on a
- mobile platform and taking care of safety in its vicinity.
+The project involves increasing the precision of landing (one of the most dangerous maneuvers for flying machines) under operational conditions on a mobile platform and taking care of safety in its vicinity.
 
 Due to these reasons, we plan to implement autonomous landing on a specifically
 designed pad that is marked with graphical elements, making it possible to recover
