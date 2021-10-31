@@ -1,6 +1,6 @@
 # Clover Swarm
 
-[CopterHack-2022](copterhack2022.md), команда **%Team_name%**.
+[CopterHack-2022](copterhack2022.md), команда **Дрой Ронов**.
 
 ## Информация о команде
 
