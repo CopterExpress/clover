@@ -26,8 +26,7 @@ in its area.
 
 ### Using Clover platform
 
-The clover platform will be used as the basis for the safe testing of landing algorithms
-in a real-world environment.
+The clover platform will be used as the basis for the safe testing of landing algorithms in a real-world environment.
 
 ### Additional information at the request of participants
 
