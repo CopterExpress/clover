@@ -7,7 +7,7 @@
 The list of team members:
 
 * Bartosz Ptak, bartptak@gmail.com / @latajacy6, engineer and programmer.
-* Mateusz Piechocki, piechocki.mateusz97@gmail.com , engineer and programmer.
+* Mateusz Piechocki, piechocki.mateusz97@gmail.com, engineer and programmer.
 
 ## Project description
 
