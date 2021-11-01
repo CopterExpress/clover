@@ -1,6 +1,6 @@
 Drone Rover Climbing System (DRCS)
 
-[CopterHack-2022](copterhack2022.md), команда Бизнес-гуси.
+[CopterHack-2022](copterhack2022.md), команда **Бизнес-гуси**.
 
 ## Информация о команде
 
