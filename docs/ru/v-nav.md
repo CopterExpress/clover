@@ -6,9 +6,9 @@
 
 Состав команды:
 
-- Артём Баталов, [@bart02](http://t.me/bart02), программист
-- Василий Юрьев, [@vasily.yuryev](https://t.me/vasily_yuryev), программист
-- Никита Локтев, [@nikilokser](https://t.me/nikilokser) , инженер
+- Артём Баталов, [@bart02](http://t.me/bart02), программист.
+- Василий Юрьев, [@vasily.yuryev](https://t.me/vasily_yuryev), программист.
+- Никита Локтев, [@nikilokser](https://t.me/nikilokser), инженер.
 
 ## Описание проекта
 
