@@ -1,3 +1,4 @@
+# Система Дрон-Ровер
 Drone Rover Climbing System (DRCS)
 
 [CopterHack-2022](copterhack2022.md), команда **Бизнес-гуси**.
@@ -9,7 +10,7 @@ Drone Rover Climbing System (DRCS)
 Кудряшов Игорь kudriashov.is@phystech.edu , программист
 Симонян Альберт, simonian.aa@phystech.edu  , программист
 Степанов Иван , stepanov.ii@phystech.edu , инженер
-(Опишите состав команды: имя и фамилия, контакты (e-mail/имя пользователя в Telegram), роль в команде).
+.
 
 
 ## Описание проекта
