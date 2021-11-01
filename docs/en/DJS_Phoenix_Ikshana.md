@@ -7,7 +7,7 @@ We are the DJS Phoenix, the official drone team of Dwarkadas. J. Sanghvi College
 
 ## The list of team members:
 Shubham Mehta, shubhamdmehta3257@gmail.com, Mechanical.
-Akhilesh Sadalgekar, akhilesh.sadalgekar01@gmail.com, Mechanical. 
+Akhilesh Sadalgekar, akhilesh.sadalgekar01@gmail.com, Mechanical.
 Aman Bhatt, aman.bhatt0001@gmail.com, Mechanical.
 Manan Dedhia,manandedhia2001@gmail.com ,Mechanical.
 Harshal Warde, harshal.warde@gmail.com, Mechanical.
