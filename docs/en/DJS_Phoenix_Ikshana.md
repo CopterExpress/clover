@@ -6,7 +6,6 @@ Ikshana- Autonomous valet parking drone assistance
 We are the DJS Phoenix, the official drone team of Dwarkadas. J. Sanghvi College of Engineering.
 
 ## The list of team members:
-
 Shubham Mehta, shubhamdmehta3257@gmail.com, Mechanical.
 Akhilesh Sadalgekar, akhilesh.sadalgekar01@gmail.com, Mechanical. 
 Aman Bhatt, aman.bhatt0001@gmail.com, Mechanical.
