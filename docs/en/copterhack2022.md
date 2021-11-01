@@ -74,40 +74,38 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 4. Fill out your application by the recommended template:
 
-  ```markdown
-  # Project name
-  
-  [CopterHack-2022](copterhack2022.md), team **Team name**.
-  
-  ## Team information
-  
-  The list of team members:
-  
-  (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
-  
-  * Alexander Sokolov, @aleksandrsokolov111, engineer.
-  * Elena Smirnova, @elenasmirnova111, programmer.
-  
-  ## Project description
-  
-  ### Project idea
-  
-  Briefly describe the idea and stage of the project.
-  
-  ### The potential outcomes
-  
-  Describe how you see the project result.
-  
-  ### Using Clover platform
-  
-  Describe how the Clover platform will be used in your project.
-  
-  ### Additional information at the request of participants
-  
-  For example, information about the team's experience working on projects, attach a link to articles, videos.
-  ```
-
-<!-- markdownlint-disable MD029 -->
+   ```markdown
+   # Project name
+   
+   [CopterHack-2022](copterhack2022.md), team **Team name**.
+   
+   ## Team information
+   
+   The list of team members:
+   
+   (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
+   
+   * Alexander Sokolov, @aleksandrsokolov111, engineer.
+   * Elena Smirnova, @elenasmirnova111, programmer.
+   
+   ## Project description
+   
+   ### Project idea
+   
+   Briefly describe the idea and stage of the project.
+   
+   ### The potential outcomes
+   
+   Describe how you see the project result.
+   
+   ### Using Clover platform
+   
+   Describe how the Clover platform will be used in your project.
+   
+   ### Additional information at the request of participants
+   
+   For example, information about the team's experience working on projects, attach a link to articles, videos.
+   ```
 
 5. Go to the bottom of the page and create a new branch with the title of your article:
 
@@ -123,7 +121,9 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 8. In the Pull Request comments, you will be given feedback on the application. On the contest page, in the section "Projects of the contest participants", a link to your application in your fork will be published.
 
-9. During the contest, you will work on this document, bringing it closer to the state of the finished article. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack 2022.
+9. Note the *Checks* block at the bottom, a check mark should appear in the *Documentation* field. If a cross appeared, click *Details* link to see the list of issues in you article found by markdownlint. If you need to change added files, edit them in you branch – changes will appear in the Pull Request automatically. **Do not open a new Pull Request for the same application**.
+
+10. During the contest, you will work on this document, bringing it closer to the state of the finished article. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack 2022.
 
 As soon as the link to the application is added to this page in the section "Projects of the contest's participants", your team has become an official participant of the CopterHack 2022!
 
