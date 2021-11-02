@@ -1,4 +1,4 @@
-# Project name
+# AIU_CLOVER
 
 [CopterHack-2022](copterhack2022.md), team AI_U_CLOVER.
 
@@ -6,11 +6,11 @@
 
 The list of team members:
 
-* Zhibek Mukhtarbekova, @zhibekm, project manager.
+* Zhibek Mukhtarbekova, [@zhibek_mukhtarbekova](https://t.me/zhibek_mukhtarbekova), project manager.
 
 ## Project description
 
-Clover AI Flight analyzer
+Clover AI Flight analyzer.
 
 ### Project idea
 
