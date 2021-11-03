@@ -75,7 +75,7 @@ ln -s "$(catkin_find clover_simulation airframes)"/* ~/PX4-Autopilot/ROMFS/px4fm
 `mavros` package requires geographiclib datasets to be present:
 
 ```bash
-sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh```
+sudo /opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh
 ```
 
 ## Build the simulator
