@@ -2,9 +2,7 @@
 
 [CopterHack-2022](copterhack2022.md), команда Scout_Drone.
 
-## Информация о команде
-
-Состав команды:
+## Состав команды:
 
 Натур Мустафа Виссомович: 
 Mail: mustafa.natur@mail.ru;
