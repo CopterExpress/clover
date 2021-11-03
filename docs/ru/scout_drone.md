@@ -6,7 +6,7 @@
 
 [CopterHack-2022](copterhack2022.md), команда **Scout_Drone**.
 
-Состав команды:
+Состав команды
 
 * Натур Мустафа, @Stuffy_Natur, инженер-программист, mustafa.natur@mail.ru
 
