@@ -2,18 +2,13 @@
 
 Создание поисково-спасательного беспилотного летательного аппарата
 
-[CopterHack-2022](copterhack2022.md), команда Scout_Drone.
+## Информация о команде
 
-## Состав команды:
+[CopterHack-2022](copterhack2022.md), команда **Scout_Drone**.
 
-Натур Мустафа Виссомович: 
-Mail: mustafa.natur@mail.ru;
-Telegram: @Stuffy_Natur; 
-VK: https://vk.com/m.natur
-GitHub: https://github.com/MustafaNatur
+Состав команды:
 
-* Натур Мустафа, @Stuffy_Natur, инженер.
-* Натур Мустафа, @Stuffy_Natur, программист.
+* Натур Мустафа, @Stuffy_Natur, инженер, программист, mustafa.natur@mail.ru
 
 ## Описание проекта
 Создание поисково-спасательного беспилотного летательного аппарата
