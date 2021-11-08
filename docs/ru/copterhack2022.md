@@ -23,7 +23,7 @@ CopterHack 2022 — это международный конкурс по ра�
 ||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/Swarm_in_Blocks.md)||
 ||🇷🇺 Clevertron|[Clevertron](https://github.com/Daniel-drone/clover/blob/Clevertron-1/docs/ru/clevertron.md)||
 ||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
-||🇷🇺 Edgenoon|[Neural and vision-based landing method](https://github.com/edgenoon-ai/clover/blob/neural_vision_based_landing_method/docs/en/neural_vision_based_landing_method.md)||
+||🇵🇱 Edgenoon|[Neural and vision-based landing method](https://github.com/edgenoon-ai/clover/blob/neural_vision_based_landing_method/docs/en/neural_vision_based_landing_method.md)||
 ||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
 ||🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
 ||🇩🇪 Inondro|[Inondro Pix](https://github.com/Inondro/clover/blob/inondro-pix/docs/en/inondro_copterhack22_pix.md)||
