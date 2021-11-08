@@ -8,6 +8,37 @@ You can see the articles of the CopterHack 2021 finalist teams by the link [Copt
 
 The proposed projects have to be open-source and be compatible with the Clover quadcopter platform. Teams will work on their projects throughout the competition, bringing them closer to the state of the finished product. Industry experts will assist the participants through lectures and regular feedback.
 
+## Projects of the contest's participants {#participants}
+
+|Place|Team|Project|Points|
+|-|-|-|-|
+||🇰🇬 Alatoo University Team|[Облачная платформа для симулятора Клевера](https://github.com/pteacher/clover/blob/clover_simulator/docs/ru/clover-development-studio.md)||
+||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover2/docs/ru/advancedclover2.md)||
+||🇺🇸 EnviroFleet|[EnviroFleet](https://github.com/gueyman/clover/blob/envirofleet/docs/en/enviro_fleet.md)||
+||🇻🇳 Dragon&Tanker|[Dragon&Tanker](https://github.com/uml4/clover/blob/drone_observe_autonomous_car/docs/en/dragon_and_tanker_team.md)||
+||🇷🇺 Stereo|[Neural obstacle avoidance](https://github.com/den250400/clover/blob/neural-obstacle-avoidance/docs/en/neural-obstacle-avoidance.md)||
+||🇷🇺 Space clowns|[Copter For Space](https://github.com/slavikyd/clover/blob/patch-3/docs/ru/c4s.md)||
+||🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
+||🇲🇾 Moopt|[Autonomous Pesticide Spraying Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
+||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/Swarm_in_Blocks.md)||
+||🇷🇺 Clevertron|[Clevertron](https://github.com/Daniel-drone/clover/blob/Clevertron-1/docs/ru/clevertron.md)||
+||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
+||🇷🇺 Edgenoon|[Neural and vision-based landing method](https://github.com/edgenoon-ai/clover/blob/neural_vision_based_landing_method/docs/en/neural_vision_based_landing_method.md)||
+||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
+||🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
+||🇩🇪 Inondro|[Inondro Pix](https://github.com/Inondro/clover/blob/inondro-pix/docs/en/inondro_copterhack22_pix.md)||
+||🇷🇺 V-NAV|[Visual Navigation](https://github.com/v-nav/clover/blob/v-nav_article/docs/ru/v-nav.md)||
+||🇷🇺 Бизнес-гуси|[Drone Rover Climbing System](https://github.com/HexaHEX/clover/blob/CopterHack2022_Business_Geese-1/docs/ru/business_geese.md)||
+||🇷🇺 fuall|[Доставка дронами](https://github.com/Silly4s/clover/blob/master/docs/ru/dostavka.md)||
+||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix-Ikshana/docs/en/djs_phoenix_ikshana.md)||
+||🇷🇺 Джедаи 1581|[Ретранслятор на базе Клевера](https://github.com/JJNIK/clover/blob/patch-1/docs/ru/1581.md)||
+||🇷🇺 SPECTRE|[SPECTRE](https://github.com/alakhmenev/clover/blob/spectre_team/docs/ru/spectre_team.md)||
+||🇷🇺 Lucky flight|[Swarm of Improved Clover](https://github.com/bessiaka/clover/blob/Lucky-flight/docs/ru/lucky_flight.md)||
+||🇷🇺 SolidEye|[Разработка лидара без движущихся частей](https://github.com/feanorgg/clover/blob/solideye/docs/ru/solid_eye.md)||
+||🇰🇬 AI_U_CLOVER|[AIU_CLOVER](https://github.com/zhibekm/clover/blob/zhibekm-patch-1/docs/en/aiu-article.md)||
+||🇷🇺 Scout_Drone|[Создание поисково-спасательного беспилотного летательного аппарата](https://github.com/MustafaNatur/clover/blob/Scout_Drone.md/docs/ru/scout_drone.md)||
+||🇷🇺 С305|[Система мониторинга воздуха](https://github.com/Ruslan2288/clover/blob/master/docs/ru/air_monitor.md)|&nbsp;|
+
 ## Company case competition
 
 Teams are welcome to dive into the development of the following company cases:
@@ -130,10 +161,6 @@ As soon as the link to the application is added to this page in the section "Pro
 Contest participants will be added to the special Telegram group, where one can send the project's updates and get feedback from the Jury. For all participating teams, COEX will provide a 50% discount on the Clover drone kit.
 
 > **Info** There are no restrictions on the age, education, and number of people in the team.
-
-## Projects of the contest's participants
-
-Applications will be published as they will become available.
 
 ---
 
