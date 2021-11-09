@@ -1,4 +1,4 @@
-# Autonomous Pesticide Spraying Optimization
+# IoT Water Monitoring & Optimization 
 
 [CopterHack-2022](copterhack2022.md), team **Moopt**.
 
@@ -13,17 +13,17 @@ The list of team members:
 
 ### Project idea
 
-Pesticide spraying requires multi-UAVs to do blanket spraying on multiple farmlands. Such tasks not only need to ensure that all crops in the farmland are sprayed but also need to assign a specific task sequence and flight trajectory for each UAV in order for them to fly between multiple farmlands.
+Manual labor and monitoring on water quality affected the mortality of the fishes.
 
-We would like to build a model to assign the UAVs to multiple candidate farmlands for maximizing pesticides spraying effect based on the fuel limitation, flight trajectory, temperature, spraying order, spraying method, time windows, distance between farmlands, ... etc.
+Autonomously assigning the UAVs to multiple fish ponds for water quality monitoring and optimal predictive maintenance scheduling.
 
 ### The potential outcomes
 
-Assigning the UAVs to multiple candidate farmlands for maximizing pesticides spraying effect.
+Build a smart fish pond monitoring system to produce good quality fish and aquatic plants.
 
 ### Using Clover platform
 
-Clover will be used as a platform for generating time windows and routing paths dynamically according to the temperature and other variables.
+Clover will be used at the predetermined sampling points, with custom multiprobes, to measure the tempreature, carbon dioxide, ammonia, electrical conductivity, dissolved oxygen and pH of water. 
 
 ### Additional information at the request of participants
 
