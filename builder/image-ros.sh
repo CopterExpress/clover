@@ -13,7 +13,7 @@
 # copies or substantial portions of the Software.
 #
 
-set -e # Exit immidiately on non-zero result
+set -ex # exit on error, echo commands
 
 REPO=$1
 REF=$2
