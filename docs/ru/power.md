@@ -30,6 +30,6 @@
 
 <img src="../assets/qgc-power.png" class="zoom">
 
-Дополнительная информация: https://docs.px4.io/v1.9.0/en/advanced_config/esc_calibration.html.
+Дополнительная информация: https://docs.px4.io/master/en/advanced_config/esc_calibration.html.
 
 **Далее**: [настройка Failsafe](failsafe.md).
