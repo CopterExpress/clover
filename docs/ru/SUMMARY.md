@@ -17,7 +17,7 @@
     * [Работа с FS-A8S](rc_flysky_a8s.md)
   * [Полетные режимы](modes.md)
   * [Настройка питания](power.md)
-  * [Настройка failsafe](failsafe.md)
+  * [Настройка Failsafe](failsafe.md)
 * [Ручной полет](flight.md)
   * [Упражнения](flight_exercises.md)
 * [Работа с Raspberry Pi](raspberry.md)
