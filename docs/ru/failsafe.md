@@ -1,4 +1,4 @@
-# Настройка failsafe
+# Настройка Failsafe
 
 Основная статья: https://docs.px4.io/master/en/config/safety.html.
 
