@@ -620,7 +620,7 @@ def check_boot_duration():
 
 @check('CPU usage')
 def check_cpu_usage():
-    WHITELIST = 'nodelet',
+    WHITELIST = 'nodelet', 'gzclient', 'gzserver'
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
     output = subprocess.check_output(CMD, shell=True).decode()
     processes = output.split('\n')
