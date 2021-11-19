@@ -755,7 +755,7 @@ def check_rpi_health():
         # with some of the FLAGs OR'ed together
         output = subprocess.check_output(['vcgencmd', 'get_throttled']).decode()
     except OSError:
-        failure('could not call vcgencmd binary; not a Raspberry Pi?')
+        info('could not call vcgencmd binary; not a Raspberry Pi?')
         return
 
     throttle_mask = int(output.split('=')[1], base=16)
