@@ -43,6 +43,8 @@ from mavros import mavlink
 
 rospy.init_node('selfcheck')
 
+os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
+
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
