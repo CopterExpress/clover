@@ -3,11 +3,13 @@ const ros = new ROSLIB.Ros({ url: url });
 
 ros.on('connection', function () {
 	document.body.classList.add('connected');
+	document.body.classList.remove('closed');
 	init();
 });
 
 ros.on('close', function () {
 	document.body.classList.remove('connected');
+	document.body.classList.add('closed');
 	setTimeout(function() {
 		// reconnect
 		ros.connect(url);
