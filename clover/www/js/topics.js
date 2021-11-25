@@ -39,13 +39,14 @@ function viewTopicsList() {
 let rosdistro;
 
 function viewTopic(topic) {
-	title.innerHTML = topic;
+	let index = '<a href=topics.html>Topics</a>';
+	title.innerHTML = `${index}: ${topic}`;
 	topicMessage.style.display = 'block';
 
 	ros.getTopicType(topic, function(typeStr) {
 		const [pack, type] = typeStr.split('/');
 		let href = `https://docs.ros.org/en/${rosdistro}/api/${pack}/html/msg/${type}.html`;
-		title.innerHTML = `${topic} <a id="topic-type" href=${href} target="_blank">${typeStr}</a>`;
+		title.innerHTML = `${index}: ${topic} <a id="topic-type" href=${href} target="_blank">${typeStr}</a>`;
 	});
 
 	new ROSLIB.Topic({ ros: ros, name: topic }).subscribe(function(msg) {
