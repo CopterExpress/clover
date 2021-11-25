@@ -464,7 +464,7 @@ Blockly.Python.led_count = function(block) {
 
 function pigpio() {
 	Blockly.Python.definitions_['import_pigpio'] = 'import pigpio';
-	Blockly.Python.definitions_['init_pigpio'] = 'pi = pigpio.pi()';
+	Blockly.Python.definitions_['init_pigpio'] = 'pi = pigpio.pi()\nif not pi.connected: raise Exception(\'Cannot connect to pigpiod\')';
 }
 
 const GPIO_READ = `\ndef gpio_read(pin):
