@@ -648,10 +648,19 @@ def check_clover_service():
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
 
+    BLACKLIST = 'Unexpected command 520', 'Time jump detected'
+
     r = re.compile(r'^(.*)\[(FATAL|ERROR| WARN)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
     error_count = OrderedDict()
     try:
         for line in open('/tmp/clover.err', 'r'):
+            skip = False
+            for substr in BLACKLIST:
+                if substr in line:
+                    skip = True
+            if skip:
+                continue
+
             node_error = r.search(line)
             if node_error:
                 msg = node_error.groups()[1].strip() + ': ' + node_error.groups()[2]
