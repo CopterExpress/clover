@@ -61,6 +61,7 @@ std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
 std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_transform_broadcaster;
 
 // Parameters
+string mavros;
 string local_frame;
 string fcu_frame;
 ros::Duration transform_timeout;
@@ -859,8 +860,9 @@ int main(int argc, char **argv)
 	static_transform_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>();
 
 	// Params
-	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
-	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
+	nh_priv.param("mavros", mavros, string("mavros")); // for case of using multiple connections
+	nh.param<string>(mavros + "/local_position/tf/frame_id", local_frame, "map");
+	nh.param<string>(mavros + "/local_position/tf/child_frame_id", fcu_frame, "base_link");
 	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("setpoint", setpoint.child_frame_id, string("setpoint"));
 	nh_priv.param("auto_release", auto_release, true);
@@ -885,25 +887,25 @@ int main(int argc, char **argv)
 	arming_timeout = ros::Duration(nh_priv.param("arming_timeout", 4.0));
 
 	// Service clients
-	arming = nh.serviceClient<mavros_msgs::CommandBool>("mavros/cmd/arming");
-	set_mode = nh.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
+	arming = nh.serviceClient<mavros_msgs::CommandBool>(mavros + "/cmd/arming");
+	set_mode = nh.serviceClient<mavros_msgs::SetMode>(mavros + "/set_mode");
 
 	// Telemetry subscribers
-	auto state_sub = nh.subscribe("mavros/state", 1, &handleState);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
-	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
-	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
-	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
-	auto manual_control_sub = nh.subscribe("mavros/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
-	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
+	auto state_sub = nh.subscribe(mavros + "/state", 1, &handleState);
+	auto velocity_sub = nh.subscribe(mavros + "/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
+	auto global_position_sub = nh.subscribe(mavros + "/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
+	auto battery_sub = nh.subscribe(mavros + "/battery", 1, &handleMessage<BatteryState, battery>);
+	auto statustext_sub = nh.subscribe(mavros + "/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto manual_control_sub = nh.subscribe(mavros + "/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
+	auto local_position_sub = nh.subscribe(mavros + "/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
-	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);
-	position_raw_pub = nh.advertise<PositionTarget>("mavros/setpoint_raw/local", 1);
-	attitude_pub = nh.advertise<PoseStamped>("mavros/setpoint_attitude/attitude", 1);
-	attitude_raw_pub = nh.advertise<AttitudeTarget>("mavros/setpoint_raw/attitude", 1);
-	rates_pub = nh.advertise<TwistStamped>("mavros/setpoint_attitude/cmd_vel", 1);
-	thrust_pub = nh.advertise<Thrust>("mavros/setpoint_attitude/thrust", 1);
+	position_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_position/local", 1);
+	position_raw_pub = nh.advertise<PositionTarget>(mavros + "/setpoint_raw/local", 1);
+	attitude_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_attitude/attitude", 1);
+	attitude_raw_pub = nh.advertise<AttitudeTarget>(mavros + "/setpoint_raw/attitude", 1);
+	rates_pub = nh.advertise<TwistStamped>(mavros + "/setpoint_attitude/cmd_vel", 1);
+	thrust_pub = nh.advertise<Thrust>(mavros + "/setpoint_attitude/thrust", 1);
 
 	 // Service servers
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);
