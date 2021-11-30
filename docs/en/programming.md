@@ -51,8 +51,6 @@ python3 flight.py
 Below is a complete flight program that performs a takeoff, flies forward and lands:
 
 ```python
-#coding: utf8
-
 import rospy
 from clover import srv
 from std_srvs.srv import Trigger
