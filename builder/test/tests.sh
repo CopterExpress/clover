@@ -60,3 +60,8 @@ rosversion image_view
 
 # validate examples are present
 [[ $(ls /home/pi/examples/*) ]]
+
+# validate web tools present
+[ -d /home/pi/.ros/www ]
+[ "$(readlink /home/pi/.ros/www/clover)" = "/home/pi/catkin_ws/src/clover/clover/www" ]
+[ "$(readlink /home/pi/.ros/www/clover_blocks)" = "/home/pi/catkin_ws/src/clover/clover_blocks/www" ]

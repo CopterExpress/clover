@@ -10,3 +10,6 @@ install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 catkin_install_python(PROGRAMS main.py
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+add_custom_target(roswww_static ALL
+    COMMAND rosrun roswww_static main.py)
