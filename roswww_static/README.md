@@ -13,5 +13,5 @@ You can rerun `main.py` if the list of installed packages changes.
 
 ## Parameters
 
-* `index` – path for index page, otherwise packages list would be generated.
-* `default_package` – if set then the index page would redirect to this package's page.
+* `index` – path for index page, otherwise packages list would be generated.
+* `default_package` – if set then the index page would redirect to this package's page.
