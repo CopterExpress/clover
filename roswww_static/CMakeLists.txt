@@ -12,4 +12,4 @@ catkin_install_python(PROGRAMS update
 )
 
 add_custom_target(roswww_static ALL
-    COMMAND rosrun roswww_static update)
+    COMMAND ${CATKIN_ENV} rosrun roswww_static update)
