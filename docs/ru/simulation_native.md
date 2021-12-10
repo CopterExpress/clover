@@ -141,7 +141,7 @@ sudo systemctl enable roscore
 sudo systemctl start roscore
 ```
 
-Установите любой веб-сервер, чтобы раздавать веб-инструменты Клевера (директория `.ros/www`), например, Monkey:
+Установите любой веб-сервер, чтобы раздавать веб-инструменты Клевера (директория `~/.ros/www`), например, Monkey:
 
 ```bash
 wget https://github.com/CopterExpress/clover_vm/raw/master/assets/packages/monkey_1.6.9-1_amd64.deb -O /tmp/monkey_1.6.9-1_amd64.deb

@@ -141,7 +141,7 @@ sudo systemctl enable roscore
 sudo systemctl start roscore
 ```
 
-Install any web server to serve Clover's web tools (`.ros/www` directory), e. g. Monkey:
+Install any web server to serve Clover's web tools (`~/.ros/www` directory), e. g. Monkey:
 
 ```bash
 wget https://github.com/CopterExpress/clover_vm/raw/master/assets/packages/monkey_1.6.9-1_amd64.deb -O /tmp/monkey_1.6.9-1_amd64.deb
