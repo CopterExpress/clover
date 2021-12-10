@@ -48,6 +48,7 @@ git clone --depth 1 https://github.com/ethz-asl/mav_comm
 
 ```bash
 cd ~/catkin_ws
+sudo rosdep init
 rosdep update
 rosdep install --from-paths src --ignore-src -y
 ```
