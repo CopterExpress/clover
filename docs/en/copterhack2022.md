@@ -37,7 +37,7 @@ The proposed projects have to be open-source and be compatible with the Clover q
 |✕|🇺🇸 EnviroFleet|[EnviroFleet](https://github.com/gueyman/clover/blob/envirofleet/docs/en/enviro_fleet.md)||
 |✕|🇷🇺 Бизнес-гуси|[Drone Rover Climbing System](https://github.com/HexaHEX/clover/blob/CopterHack2022_Business_Geese-1/docs/ru/business_geese.md)||
 |✕|🇷🇺 fuall|[Доставка дронами](https://github.com/Silly4s/clover/blob/master/docs/ru/dostavka.md)||
-|✕|🇷🇺 Scout_Drone|[Создание поисково-спасательного беспилотного летательного аппарата](https://github.com/MustafaNatur/clover/blob/Scout_Drone.md/docs/ru/scout_drone.md)||
+|✕|🇷🇺 Scout_Drone|[Создание поисково-спасательного беспилотного летательного аппарата](https://github.com/MustafaNatur/clover/blob/Scout_Drone.md/docs/ru/scout_drone.md)|&nbsp;|
 
 ✕ – teams which haven't qualified for the Final.
 
