@@ -10,6 +10,16 @@ Requirements:
 
 - the video lasts from 6 to 60 minutes.
 
+Dates of the contest: February 12 - December 13
+
+## Prizes 
+🥇 1st place: $500 (USD)
+
+🥈 2nd place: $300 (USD)
+
+🥉 3rd place: $200 (USD)
+
+
 ## Results
 
 |Place|Participant|Link to the video|
