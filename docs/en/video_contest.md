@@ -10,7 +10,7 @@ Requirements:
 
 - the video lasts from 6 to 60 minutes.
 
-Dates of the contest: February 12 - December 13
+Dates of the contest: February 12 - December 13, 2021
 
 ## Prizes 
 🥇 1st place: $500 (USD)
