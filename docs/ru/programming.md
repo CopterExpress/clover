@@ -51,8 +51,6 @@ python3 flight.py
 Пример программы для полета (взлет, пролет вперед, посадка):
 
 ```python
-# coding: utf8
-
 import rospy
 from clover import srv
 from std_srvs.srv import Trigger
