@@ -11,5 +11,7 @@ catkin_install_python(PROGRAMS update
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+message(status "CATKIN_ENV: ${CATKIN_ENV}")
+
 add_custom_target(roswww_static ALL
     COMMAND ${CATKIN_ENV} rosrun roswww_static update)
