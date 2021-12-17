@@ -112,9 +112,13 @@ my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash
 
+tree
+
 # At first whitelist nothing to initialize the workspace:
 catkin_make -DCATKIN_WHITELIST_PACKAGES="<nothing>"
 source devel/setup.bash
+
+tree
 
 # Build everything:
 catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_WHITELIST_PACKAGES=""
