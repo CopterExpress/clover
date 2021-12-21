@@ -3,11 +3,13 @@ const ros = new ROSLIB.Ros({ url: url });
 
 ros.on('connection', function () {
 	document.body.classList.add('connected');
+	document.body.classList.remove('closed');
 	init();
 });
 
 ros.on('close', function () {
 	document.body.classList.remove('connected');
+	document.body.classList.add('closed');
 	setTimeout(function() {
 		// reconnect
 		ros.connect(url);
@@ -37,13 +39,14 @@ function viewTopicsList() {
 let rosdistro;
 
 function viewTopic(topic) {
-	title.innerHTML = topic;
+	let index = '<a href=topics.html>Topics</a>';
+	title.innerHTML = `${index}: ${topic}`;
 	topicMessage.style.display = 'block';
 
 	ros.getTopicType(topic, function(typeStr) {
 		const [pack, type] = typeStr.split('/');
 		let href = `https://docs.ros.org/en/${rosdistro}/api/${pack}/html/msg/${type}.html`;
-		title.innerHTML = `${topic} <a id="topic-type" href=${href} target="_blank">${typeStr}</a>`;
+		title.innerHTML = `${index}: ${topic} <a id="topic-type" href=${href} target="_blank">${typeStr}</a>`;
 	});
 
 	new ROSLIB.Topic({ ros: ros, name: topic }).subscribe(function(msg) {

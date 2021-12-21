@@ -100,6 +100,7 @@
   * [CopterHack-2019](copterhack2019.md)
   * [CopterHack-2018](copterhack2018.md)
   * [CopterHack-2017](copterhack2017.md)
+  * [Video contest](video_contest.md)
 * [Clover-based projects](projects.md)
   * [Autonomous Multirotor Landing System (AMLS)](amls.md)
   * [Drone show](clever-show.md)
