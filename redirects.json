@@ -26,7 +26,7 @@
         { "from": "rc.html", "to": "ru/rc.html" },
         { "from": "web_video_server.html", "to": "ru/web_video_server.html" },
         { "from": "frames.html", "to": "ru/frames.html" },
-        { "from": "ros.html", "to": "ru/ros.html" },
+        { "from": "ros.html", "to": "en/ros.html" },
         { "from": "mavros.html", "to": "ru/mavros.html" },
         { "from": "simple_offboard.html", "to": "ru/simple_offboard.html" },
         { "from": "aruco/", "to": "en/aruco.html" },
@@ -63,6 +63,7 @@
         { "from": "power/", "to": "en/power.html" },
         { "from": "connection/", "to": "en/connection.html" },
         { "from": "clover_vm/", "to": "en/simulation_vm.html" },
+        { "from": "gpio/", "to": "en/gpio.html" },
 
         { "from": "ru/microsd_images.html", "to": "image.html" },
         { "from": "en/microsd_images.html", "to": "image.html" }

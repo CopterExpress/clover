@@ -8,6 +8,39 @@ You can see the articles of the CopterHack 2021 finalist teams by the link [Copt
 
 The proposed projects have to be open-source and be compatible with the Clover quadcopter platform. Teams will work on their projects throughout the competition, bringing them closer to the state of the finished product. Industry experts will assist the participants through lectures and regular feedback.
 
+## Projects of the contest's participants {#participants}
+
+|Place|Team|Project|Points|
+|:-:|-|-|-|
+||🇰🇬 Alatoo University Team|[Облачная платформа для симулятора Клевера](https://github.com/pteacher/clover/blob/clover_simulator/docs/ru/clover-development-studio.md)||
+||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover2/docs/ru/advancedclover2.md)||
+||🇻🇳 Dragon&Tanker|[Dragon&Tanker](https://github.com/uml4/clover/blob/drone_observe_autonomous_car/docs/en/dragon_and_tanker_team.md)||
+||🇷🇺 Stereo|[Neural obstacle avoidance](https://github.com/den250400/clover/blob/neural-obstacle-avoidance/docs/en/neural-obstacle-avoidance.md)||
+||🇷🇺 Space clowns|[Copter For Space](https://github.com/slavikyd/clover/blob/patch-3/docs/ru/c4s.md)||
+||🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
+||🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
+||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/Swarm_in_Blocks.md)||
+||🇷🇺 Clevertron|[Clevertron](https://github.com/Daniel-drone/clover/blob/Clevertron-1/docs/ru/clevertron.md)||
+||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
+||🇵🇱 Edgenoon|[Neural and vision-based landing method](https://github.com/edgenoon-ai/clover/blob/neural_vision_based_landing_method/docs/en/neural_vision_based_landing_method.md)||
+||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
+||🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
+||🇩🇪 Inondro|[Inondro Pix](https://github.com/Inondro/clover/blob/inondro-pix/docs/en/inondro_copterhack22_pix.md)||
+||🇷🇺 V-NAV|[Visual Navigation](https://github.com/v-nav/clover/blob/v-nav_article/docs/ru/v-nav.md)||
+||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix-Ikshana/docs/en/djs_phoenix_ikshana.md)||
+||🇷🇺 Джедаи 1581|[Ретранслятор на базе Клевера](https://github.com/JJNIK/clover/blob/patch-1/docs/ru/1581.md)||
+||🇷🇺 SPECTRE|[SPECTRE](https://github.com/alakhmenev/clover/blob/spectre_team/docs/ru/spectre_team.md)||
+||🇷🇺 Lucky flight|[Swarm of Improved Clover](https://github.com/bessiaka/clover/blob/Lucky-flight/docs/ru/lucky_flight.md)||
+||🇷🇺 SolidEye|[Разработка лидара без движущихся частей](https://github.com/feanorgg/clover/blob/solideye/docs/ru/solid_eye.md)||
+||🇰🇬 AI_U_CLOVER|[AIU_CLOVER](https://github.com/zhibekm/clover/blob/zhibekm-patch-1/docs/en/aiu-article.md)||
+||🇷🇺 С305|[Система мониторинга воздуха](https://github.com/Ruslan2288/clover/blob/master/docs/ru/air_monitor.md)|&nbsp;|
+|✕|🇺🇸 EnviroFleet|[EnviroFleet](https://github.com/gueyman/clover/blob/envirofleet/docs/en/enviro_fleet.md)||
+|✕|🇷🇺 Бизнес-гуси|[Drone Rover Climbing System](https://github.com/HexaHEX/clover/blob/CopterHack2022_Business_Geese-1/docs/ru/business_geese.md)||
+|✕|🇷🇺 fuall|[Доставка дронами](https://github.com/Silly4s/clover/blob/master/docs/ru/dostavka.md)||
+|✕|🇷🇺 Scout_Drone|[Создание поисково-спасательного беспилотного летательного аппарата](https://github.com/MustafaNatur/clover/blob/Scout_Drone.md/docs/ru/scout_drone.md)|&nbsp;|
+
+✕ – teams which haven't qualified for the Final.
+
 ## Company case competition
 
 Teams are welcome to dive into the development of the following company cases:
@@ -74,40 +107,38 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 4. Fill out your application by the recommended template:
 
-  ```markdown
-  # Project name
-  
-  [CopterHack-2022](copterhack2022.md), team **Team name**.
-  
-  ## Team information
-  
-  The list of team members:
-  
-  (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
-  
-  * Alexander Sokolov, @aleksandrsokolov111, engineer.
-  * Elena Smirnova, @elenasmirnova111, programmer.
-  
-  ## Project description
-  
-  ### Project idea
-  
-  Briefly describe the idea and stage of the project.
-  
-  ### The potential outcomes
-  
-  Describe how you see the project result.
-  
-  ### Using Clover platform
-  
-  Describe how the Clover platform will be used in your project.
-  
-  ### Additional information at the request of participants
-  
-  For example, information about the team's experience working on projects, attach a link to articles, videos.
-  ```
-
-<!-- markdownlint-disable MD029 -->
+   ```markdown
+   # Project name
+   
+   [CopterHack-2022](copterhack2022.md), team **Team name**.
+   
+   ## Team information
+   
+   The list of team members:
+   
+   (Describe the team: full name, contacts (e-mail/Telegram username), role in the team).
+   
+   * Alexander Sokolov, @aleksandrsokolov111, engineer.
+   * Elena Smirnova, @elenasmirnova111, programmer.
+   
+   ## Project description
+   
+   ### Project idea
+   
+   Briefly describe the idea and stage of the project.
+   
+   ### The potential outcomes
+   
+   Describe how you see the project result.
+   
+   ### Using Clover platform
+   
+   Describe how the Clover platform will be used in your project.
+   
+   ### Additional information at the request of participants
+   
+   For example, information about the team's experience working on projects, attach a link to articles, videos.
+   ```
 
 5. Go to the bottom of the page and create a new branch with the title of your article:
 
@@ -123,17 +154,15 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 8. In the Pull Request comments, you will be given feedback on the application. On the contest page, in the section "Projects of the contest participants", a link to your application in your fork will be published.
 
-9. During the contest, you will work on this document, bringing it closer to the state of the finished article. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack 2022.
+9. Note the *Checks* block at the bottom, a check mark should appear in the *Documentation* field. If a cross appeared, click *Details* link to see the list of issues in you article found by markdownlint. If you need to change added files, edit them in you branch – changes will appear in the Pull Request automatically. **Do not open a new Pull Request for the same application**.
+
+10. During the contest, you will work on this document, bringing it closer to the state of the finished article. By the end of the contest, you will publish your article, which will be the result of your work in CopterHack 2022.
 
 As soon as the link to the application is added to this page in the section "Projects of the contest's participants", your team has become an official participant of the CopterHack 2022!
 
 Contest participants will be added to the special Telegram group, where one can send the project's updates and get feedback from the Jury. For all participating teams, COEX will provide a 50% discount on the Clover drone kit.
 
 > **Info** There are no restrictions on the age, education, and number of people in the team.
-
-## Projects of the contest's participants
-
-Applications will be published as they will become available.
 
 ---
 

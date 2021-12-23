@@ -13,6 +13,7 @@ time:
   time_ref_source: "fcu"  # time_reference source
   timesync_mode: MAVLINK
   timesync_avg_alpha: 0.6 # timesync averaging factor
+  publish_sim_time: false # don't publish /clock
 
 global_position:
   frame_id: "map"             # origin frame

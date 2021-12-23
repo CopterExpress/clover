@@ -399,3 +399,45 @@ while not rospy.is_shutdown():
         break
     rospy.sleep(0.2)
 ```
+
+### # {#get-param}
+
+Read flight controller's parameter:
+
+```python
+from mavros_msgs.srv import ParamGet
+from mavros_msgs.msg import ParamValue
+
+# ...
+
+param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
+
+# ...
+
+# Read parameter of type INT
+value = param_get(param_id='COM_FLTMODE1').value.integer
+
+# Read parameter of type FLOAT
+value = param_get(param_id='MPC_Z_P').value.float
+```
+
+### # {#set-param}
+
+Set flight controller's parameter:
+
+```python
+from mavros_msgs.srv import ParamSet
+from mavros_msgs.msg import ParamValue
+
+# ...
+
+param_set = rospy.ServiceProxy('mavros/param/set', ParamSet)
+
+# ...
+
+# Set parameter of type INT:
+param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
+
+# Set parameter of type FLOAT:
+param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
+```

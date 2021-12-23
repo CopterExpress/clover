@@ -181,6 +181,7 @@ inline bool waitTransform(const string& target, const string& source,
 		ros::spinOnce();
 		r.sleep();
 	}
+	return false;
 }
 
 #define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
@@ -847,6 +848,7 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		busy = false;
 		return true;
 	}
+	return false;
 }
 
 int main(int argc, char **argv)

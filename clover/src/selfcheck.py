@@ -43,6 +43,8 @@ from mavros import mavlink
 
 rospy.init_node('selfcheck')
 
+os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
+
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -618,7 +620,7 @@ def check_boot_duration():
 
 @check('CPU usage')
 def check_cpu_usage():
-    WHITELIST = 'nodelet',
+    WHITELIST = 'nodelet', 'gzclient', 'gzserver'
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
     output = subprocess.check_output(CMD, shell=True).decode()
     processes = output.split('\n')
@@ -646,13 +648,22 @@ def check_clover_service():
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
 
-    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
+    BLACKLIST = 'Unexpected command 520', 'Time jump detected', 'different index:'
+
+    r = re.compile(r'^(.*)\[(FATAL|ERROR| WARN)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
     error_count = OrderedDict()
     try:
         for line in open('/tmp/clover.err', 'r'):
+            skip = False
+            for substr in BLACKLIST:
+                if substr in line:
+                    skip = True
+            if skip:
+                continue
+
             node_error = r.search(line)
             if node_error:
-                msg = node_error.groups()[1] + ': ' + node_error.groups()[2]
+                msg = node_error.groups()[1].strip() + ': ' + node_error.groups()[2]
                 if msg in error_count:
                     error_count[msg] += 1
                 else:
@@ -753,7 +764,7 @@ def check_rpi_health():
         # with some of the FLAGs OR'ed together
         output = subprocess.check_output(['vcgencmd', 'get_throttled']).decode()
     except OSError:
-        failure('could not call vcgencmd binary; not a Raspberry Pi?')
+        info('could not call vcgencmd binary; not a Raspberry Pi?')
         return
 
     throttle_mask = int(output.split('=')[1], base=16)

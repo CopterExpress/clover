@@ -75,9 +75,9 @@ else:
     shape = 'undefined'
     color = 'undefined'
 
-if shape = 'brown':
+if shape == 'brown':
     culture = "greshiha"
-if shape = 'yellow_orange':
+if shape == 'yellow_orange':
     culture = "pshenitsa"
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_colback_color)
