@@ -14,7 +14,7 @@
 * Пакеты [ROS](http://www.ros.org/), требуемые для запуска нод Клевера
 * Собранный для симулятора PX4
 * Легковесный web-интерфейс для Gazebo [Gzweb](http://gazebosim.org/gzweb.html)
-* Web-терминал [Butterfly](http://paradoxxxzero.github.io/2014/02/28/butterfly.html)
+* Web-терминал [Butterfly](https://github.com/paradoxxxzero/butterfly)
 
 ## Предварительная настройка
 
