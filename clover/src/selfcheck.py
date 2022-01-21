@@ -617,7 +617,7 @@ def check_boot_duration():
     output = subprocess.check_output('systemd-analyze').decode()
     r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
-    if duration > 15:
+    if duration > 20:
         failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
 
 
