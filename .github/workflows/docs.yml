@@ -10,6 +10,10 @@ jobs:
   docs:
     runs-on: ubuntu-18.04
     steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
