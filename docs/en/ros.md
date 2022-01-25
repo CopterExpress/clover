@@ -49,7 +49,7 @@ Each topic has the a of messages it passes. ROS include a lot of standard messag
 |Message type|Description|
 |-|-|
 |[`std_msgs/Int64`](https://docs.ros.org/api/std_msgs/html/msg/Int64.html)|Integer number.|
-|[`std_msgs/Float64`](https://docs.ros.org/api/std_msgs/html/msg/Float64.html)|Double-precision floating-point number|
+|[`std_msgs/Float64`](https://docs.ros.org/api/std_msgs/html/msg/Float64.html)|Double-precision floating-point number.|
 |[`std_msgs/String`](https://docs.ros.org/api/std_msgs/html/msg/String.html)|String.|
 |[`geometry_msgs/PoseStamped`](https://docs.ros.org/api/geometry_msgs/html/msg/PoseStamped.html)|Position and orientation of an object in a given [coordinate system](frames.md) and a time stamp (widely used for passing the robot pose or some robot's part pose).|
 |[`geometry_msgs/TwistStamped`](https://docs.ros.org/api/geometry_msgs/html/msg/TwistStamped.html)|Linear and angular velocity of an object in a given coordinate system and a time stamp.|

@@ -6,7 +6,7 @@ Software autorun
 systemd
 ---
 
-Main documentation: [https://wiki.archlinux.org/index.php/Systemd_(Russian)](https://wiki.archlinux.org/index.php/Systemd_(Russian)).
+Main documentation: [https://wiki.archlinux.org/title/Systemd](https://wiki.archlinux.org/title/Systemd).
 
 All automatically started Clover software is launched as a `clover.service` systemd service.
 
@@ -50,12 +50,12 @@ You can add your own node to the list of automatically launched ones. To do this
 
 The started file must have *permission* to run:
 
-```(bash)
+```bash
 chmod +x my_program.py
 ```
 
-When scripting languages are used, [shebang] should be placed at the beginning of the file (https://ru.wikipedia.org/wiki/Shebang_(Unix)), for example:
+When scripting languages are used, a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) should be placed at the beginning of the file, for example:
 
-```(bash)
+```bash
 #!/usr/bin/env python
 ```
