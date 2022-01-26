@@ -45,7 +45,7 @@
         <remap from="~pose_cov" to="aruco_map/pose"/>
         <remap from="~vpe" to="mavros/vision_pose/pose"/>
         <param name="frame_id" value="aruco_map_detected"/>
-        <param name="publish_zero" value="true"/>
+        <param name="force_init" value="true"/>
         <param name="offset_frame_id" value="aruco_map"/>
     </node>
 </launch>
