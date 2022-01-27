@@ -49,3 +49,33 @@ Finally, the application of developed and tested codes in the simulation must be
 The SEMEAR Group (Solutions in Mechatronics Engineering and Application in Robotics) is a non-profit group organized by students from the University of São Paulo (USP), on the São Carlos campus. The group has more than 100 members, including undergraduate and graduate students, in addition to the support of professors advisors. Its objective is to complete the academic and professional training of its members, in addition to generating and sharing knowledge with its teaching and extension programs, development of technological projects and participation in robotics competitions.
 
 Group website for further information: [http://www.semear.eesc.usp.br/wordpress/](http://www.semear.eesc.usp.br/wordpress/)
+
+# Swarm-in-blocks
+### Usage of Swarm in Blocks
+
+
+### Compile your workspace
+
+```bash
+cd ~/catkin_ws
+catkin_make
+```
+
+### Run clover swarm simulation
+
+```bash
+roslaunch swarm_in_blocks swarm.launch
+```
+
+### Start monkey
+
+>Inside monkey folder
+
+```bash
+build/monkey
+```
+
+### Open the website
+
+
+http://localhost:2001/swarm_clover_blocks/
