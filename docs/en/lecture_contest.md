@@ -1,11 +1,18 @@
 # Contest for the best educational lecture
-## Requirements
-* the topic of the lecture is of free choice. Programmable quadcopter kit «COEX Clover 4» and/or The Clover simulation environment should be used as the main tool in the lecture; 
+The Copter Express company organizes a contest for the best educational lecture with COEX Clover 4 quadcopter kit application.
+
+The main goal of the contest is aerial robotics popularization  and community development.
+##  Lecture requirements
+* the topic of the lecture is of free choice. Programmable quadcopter kit COEX Clover 4 and/or The Clover simulation environment should be used as the main tool in the lecture; 
 > **Note** *The version of COEX Clover is not earlier than [version 4](https://clover.coex.tech/en/assemble_4.html). The virtual machine image is not earlier than [version 1.0](https://github.com/CopterExpress/clover_vm/releases/tag/v1.0). 
-* the video is uploaded to YouTube or another public platform and is public accessible;
-* the language of the lecture is any;
-* the video contains subtitles in English in case  the language is made neither of English nor Russian;
-* the duration of the lecture is not limited.
+* the video is uploaded on YouTube or another public platform and is public accessible;
+* the language of the lecture is any. The video contains subtitles in English in case  the language is made neither of English nor Russian;
+* the duration of the lecture is limited from 15 min. to 3 hours.
+
+## Requirements for the participants 
+* the participant must be the author of the lesson;
+* third parties can provide technical support for recording a lecture;
+* the status of the participant is unlimited (student, representative of a general education institution, representative of the industry, amateur).
 
 Applications deadline: September 1, 2022
 
@@ -15,7 +22,7 @@ The application to the contest is performed via the [Google Form](https://docs.g
 Participants who are the authors of the lecture are allowed to participate in the competition.
 
 ## Prizes
-Based on the results of the submitted application, the members of the Commission select the winners of the competition. The quality of the video, it is content, and audience engagement are assessed. 
+Based on the results of the submitted application, the jury selects the winners of the competition. The quality of the video, it is content, and audience engagement are assessed. 
 
 - 1st place: $500.
 - 2nd place: $400.
