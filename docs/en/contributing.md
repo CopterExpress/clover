@@ -96,3 +96,7 @@ Prepare your article and send it as a pull request to the [Clover repository](ht
 ## Easy way
 
 If the above instructions are too difficult for you, send your fixes and new articles by e-mail (<a href="mailto:okalachev@gmail.com">okalachev@gmail.com</a>) or in Telegram messenger (user <a href="tg://resolve?domain=okalachev">@okalachev</a>).
+
+## Publishing packages
+
+You also can publish a package, that extends Clover functionality, into the official [COEX Debian repository](packages.md).

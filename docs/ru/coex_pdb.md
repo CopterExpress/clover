@@ -4,6 +4,8 @@
 
 Габаритные размеры платы: 35x35 мм.
 
+> **Hint** Исходные файлы платы COEX PDB [выложены](https://github.com/CopterExpress/hardware/tree/master/COEX%20PDB) в открытый доступ под лицензией CC BY-NC-SA.
+
 ## Схемы расположения контактов
 
 ### Вид сверху

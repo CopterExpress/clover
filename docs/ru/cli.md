@@ -39,7 +39,7 @@ cat file.py
 Запустить Python-скрипт `file.py`:
 
 ```bash
-python file.py
+python3 file.py
 ```
 
 Перезагрузить Raspberry Pi:

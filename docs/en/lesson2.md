@@ -123,7 +123,7 @@ If an electric circuit contains two power sources, the directions of electromoti
 
 If a circuit contains two sources of EDS with opposite directions,  i.e., connected according to Fig. 2, the total EMF of the circuit will be equal to the difference of EMFs of these sources
 
-**Е = Е1—Е2.**
+**E = E1—E2.**
 
 ![current](../assets/2_7.png)
 

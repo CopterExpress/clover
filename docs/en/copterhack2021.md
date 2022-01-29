@@ -1,6 +1,6 @@
 # CopterHack 2021
 
-CopterHack 2021 is a team competition for the development of open source projects for the Clover quadcopter platform.
+CopterHack 2021 is a team competition for the development of open source projects for the Clover quadcopter platform. Fifty-four teams from 12 countries took part in the competition.
 
 All information about the event can be found on the official website: https://coex.tech/copterhack.
 
@@ -10,6 +10,10 @@ Full stream of the final: https://www.youtube.com/watch?v=Z06vxuAHmuE.
     <img src="../assets/copterhack2021/1.jpg" class="zoom border">
     <img src="../assets/copterhack2021/2.jpg" class="zoom border">
 </div>
+
+## Aftermovie
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YpMT6ab8Exw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Participating teams articles
 

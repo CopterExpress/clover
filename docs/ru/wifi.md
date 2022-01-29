@@ -6,7 +6,10 @@
 
 Подключитесь к Wi-Fi, используя пароль `cloverwifi`.
 
-<img src="../assets/ssid.png" width="300px" alt="Подключение по Wi-Fi">
+<div class="image-group">
+    <img src="../assets/wifi-ssid.png" width=300 class="zoom">
+    <img src="../assets/wifi-pass.png" width=300 class="zoom">
+</div>
 
 Для изменения настроек Wi-Fi или получения более детальной информации о устройстве сети на Raspberry Pi прочитайте статью "[Настройка Wi-Fi](network.md)".
 

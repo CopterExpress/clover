@@ -60,7 +60,7 @@ Dimensional drawing – [clover-4.2.pdf](https://github.com/CopterExpress/clove
         <img src="../assets/assembling_clever4_2/frame_2.png" width=300 class="zoom border">
     </div>
 
-2. Install 2 15mm posts on the center holes in the main deck and fix them with the M3x8 screws.
+2. Install 2 aluminum 15mm posts on the center holes in the main deck and fix them with the M3x8 screws.
 
     <img src="../assets/assembling_clever4_2/frame_3.png" width=300 class="zoom border center">
 
@@ -146,7 +146,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/fc_connection_2.png" width=300 class="zoom border center">
 
-3. Install 40mm aluminum racks on the M3x12 screws.
+3. Install 40mm aluminum racks on the M3x10 screws.
 
 <div class="image-group">
     <img src="../assets/assembling_clever4_2/fc_connection_3.png" width=300 class="zoom border">
@@ -162,7 +162,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
         <img src="../assets/assembling_clever4_2/fc_connection_6.png" width=300 class="zoom border">
     </div>
 
-2. On a mounting deck, install 6 mm racks and 30 mm racks, fasten them with the M3x5 and M3x12 bolts, respectively.
+2. On a mounting deck, install M2.5x6 mm racks and M3x30 mm racks, fasten them with the M2.5x4 and M3x10 bolts, respectively.
 
     <img src="../assets/assembling_clever4_2/raspberry_1.png" width=300 class="zoom border center">
 
@@ -170,7 +170,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/raspberry_2.png" width=300 class="zoom border center">
 
-4. Install the Raspberry Pi circuit board and fix with nylon nuts.
+4. Install the Raspberry Pi circuit board and fix with M2.5x4 bolts.
 
     <img src="../assets/assembling_clever4_2/raspberry_3.png" width=300 class="zoom border center">
 
@@ -220,25 +220,25 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/led_4.png" width=300 class="zoom border center">
 
-5. Behind fasten the legs with self-locking nuts and M3x8 screws.
+5. Behind fasten the legs with self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
 
 6. Connect the LED strip power (red, black cables) to the short JST connector on the PDB.
 
-    <img src="../assets/assembling_clever4_2/led_5.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_soldering_clever_4/led_7.png" width=300 class="zoom border center">
 
 7. Connect the signal output of the LED strip (white cable) to Raspberry Ri, to pin *GPIO21*.
 
-    <img src="../assets/assembling_clever4_2/led_6.png" width=300 class="zoom border center">
+    <img src="../assets/assembling_soldering_clever_4/led_8.png" width=300 class="zoom border center">
 
 ## Installing guard
 
-1. Assemble the lower level of guard with 40mm racks and M3x12 screws.
+1. Assemble the lower level of guard with 40mm racks and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_1.png" width=300 class="zoom border center">
 
-2. Assemble the top level of protection with the M3x12 screws.
+2. Assemble the top level of protection with the M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_2.png" width=300 class="zoom border center">
 
@@ -246,7 +246,7 @@ Install the damper struts, fix COEX Pix on them with nylon nuts.
 
     <img src="../assets/assembling_clever4_2/guard_3.png" width=300 class="zoom border center">
 
-4. Establish protection and fix on beams by means of self-locking nuts and M3x8 screws.
+4. Establish protection and fix on beams by means of self-locking nuts and M3x10 screws.
 
     <img src="../assets/assembling_clever4_2/guard_4.png" width=300 class="zoom border center">
 

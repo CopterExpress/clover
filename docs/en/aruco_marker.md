@@ -1,5 +1,9 @@
 # ArUco marker detection
 
+> **Note** The following applies to [image versions](image.md) **0.22** and up. Older documentation is still available for [for version **0.20**](https://github.com/CopterExpress/clover/blob/v0.20/docs/en/aruco_marker.md).
+
+<!-- -->
+
 > **Info** Marker detection requires the camera module to be correctly plugged in and [configured](camera.md).
 
 `aruco_detect` module detects ArUco markers and publishes their positions in ROS topics and as [TF frames](frames.md).
@@ -22,22 +26,20 @@ For enabling detection set the `aruco_detect` argument in `~/catkin_ws/src/clove
 <arg name="aruco_detect" default="true"/>
 ```
 
-For the module to work correctly the following parameters should be set:
+For the module to work correctly the following arguments should also be set:
 
 ```xml
-<param name="length" value="0.32"/>          <!-- length of a single marker, in meters (excluding the white border) -->
-<param name="estimate_poses" value="true"/>  <!-- position estimation for single markers -->
-<param name="send_tf" value="true"/>         <!-- TF frame creation for markers -->
-<param name="known_tilt" value="map"/>       <!-- Marker tilt, explained below -->
+<arg name="placement" default="floor"/> <!-- markers' placement, explained below  -->
+<arg name="length" default="0.33"/>     <!-- length of a single marker, in meters (excluding the white border) -->
 ```
 
-`known_tilt` should be set to:
+`placement` argument should be set to:
 
-* `map` if *all* markers are on the ground;
-* `map_flipped` if *all* markers are on the ceiling;
+* `floor` if *all* markers are on the ground;
+* `ceiling` if *all* markers are on the ceiling;
 * an empty string otherwise.
 
-You may specify length for each marker individually by using the `length_override` parameter:
+You may specify length for each marker individually by using the `length_override` parameter of the node `aruco_detect`:
 
 ```xml
 <param name="length_override/3" value="0.1"/>    <!-- marker with id=3 has a side of 0.1m -->
@@ -98,9 +100,9 @@ rospy.init_node('my_node')
 # ...
 
 def markers_callback(msg):
-    print 'Detected markers:':
+    print('Detected markers:'):
     for marker in msg.markers:
-        print 'Marker: %s' % marker
+        print('Marker: %s' % marker)
 
 # Create a Subscription object. Each time a message is posted in aruco_detect/markers, the markers_callback function is called with this message as its argument.
 rospy.Subscriber('aruco_detect/markers', MarkerArray, markers_callback)

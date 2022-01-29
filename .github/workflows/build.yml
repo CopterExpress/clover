@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  melodic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Native Melodic build
+        run: |
+          docker run --rm -v $(pwd):/root/catkin_ws/src/clover ros:melodic-ros-base /root/catkin_ws/src/clover/builder/standalone-install.sh
+  noetic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Native Noetic build
+        run: |
+          docker run --rm -v $(pwd):/root/catkin_ws/src/clover ros:noetic-ros-base /root/catkin_ws/src/clover/builder/standalone-install.sh

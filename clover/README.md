@@ -4,7 +4,7 @@ A bundle for autonomous navigation and drone control.
 
 ## Manual installation
 
-Install ROS Melodic according to the [documentation](http://wiki.ros.org/melodic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
+Install ROS Noetic according to the [documentation](http://wiki.ros.org/noetic/Installation), then [create a Catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace).
 
 Clone this repo to directory `~/catkin_ws/src/clover`:
 
@@ -36,7 +36,7 @@ curl https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/inst
 You may optionally install udev rules to provide `/dev/px4fmu` symlink to your PX4-based flight controller connected over USB. Copy `99-px4fmu.rules` to your `/lib/udev/rules.d` folder:
 
 ```bash
-cd ~/catkin_ws/src/clover/clover/config
+cd ~/catkin_ws/src/clover/clover/udev
 sudo cp 99-px4fmu.rules /lib/udev/rules.d
 ```
 

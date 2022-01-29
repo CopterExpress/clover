@@ -7,7 +7,10 @@
      <tr>
           <td>
                <a href="assemble_4_2.md">Клевер&nbsp;4.2</a>
-               <div class=subversion>(<a href="assemble_4_2_ws.md">4.2&nbsp;WorldSkills</a>)</div>
+               <div class=subversion>
+                    (<a href="assemble_4_2_ws.md">WorldSkills</a>,
+                    <a href="assemble_4_2_pro.md">Pro</a>)
+               </div>
           </td>
           <td><a href="assemble_4_2.md"><img src="../assets/versions/clover_4_2.jpg" width=200></a></td>
      </tr>
@@ -30,3 +33,11 @@
 </table>
 
 Ссылки на CAD-модели деталей Клевера доступны в статье "[CAD-модели](models.md)".
+
+## Определение версии
+
+Для определения версии Клевера 4 посмотрите на серийный номер.
+
+<img src="../assets/serial_n.png" title="Серийный номер Клевера" width=300>
+
+В данном случае число *420* обозначает версию Клевера **4.2**.

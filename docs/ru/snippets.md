@@ -17,12 +17,10 @@
 
 <a name="block-takeoff"></a><!-- old name of anchor -->
 
-Полет в точку и ожидание окончания полета:
+Функция для полета в точку и ожидание окончания полета:
 
 ```python
 import math
-
-# ...
 
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -74,8 +72,6 @@ land_wait()
 ```python
 import math
 
-# ...
-
 def wait_arrival(tolerance=0.2):
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -91,8 +87,6 @@ def wait_arrival(tolerance=0.2):
 ```python
 import math
 
-# ...
-
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -103,8 +97,6 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 
 ```python
 import math
-
-# ...
 
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
@@ -221,19 +213,16 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 from sensor_msgs.msg import BatteryState
 from mavros_msgs.msg import RCIn
 
-# ...
-
 def pose_update(pose):
     # Обработка новых данных о позиции коптера
     pass
-
-# Остальные функции-обработчики
-# ...
 
 rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
 rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
 rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
+
+rospy.spin()
 ```
 
 Информацию по топикам MAVROS см. по [ссылке](mavros.md).
@@ -247,13 +236,9 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 Пример отправки произвольного [MAVLink-сообщения](mavlink.md) коптеру:
 
 ```python
-# ...
-
 from mavros_msgs.msg import Mavlink
 from mavros import mavlink
 from pymavlink import mavutil
-
-# ...
 
 mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
 
@@ -299,8 +284,6 @@ rospy.spin()
 ```python
 from mavros_msgs.srv import SetMode
 
-# ...
-
 set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
 
 # ...
@@ -314,8 +297,6 @@ set_mode(custom_mode='STABILIZED')
 
 ```python
 import math
-
-# ...
 
 PI_2 = math.pi / 2
 
@@ -337,7 +318,7 @@ def flip():
     rospy.loginfo('finish flip')
     set_position(x=start.x, y=start.y, z=start.z, yaw=start.yaw)  # finish flip
 
-print navigate(z=2, speed=1, frame_id='body', auto_arm=True)  # take off
+print(navigate(z=2, speed=1, frame_id='body', auto_arm=True))  # take off
 rospy.sleep(10)
 
 rospy.loginfo('flip')
@@ -354,8 +335,6 @@ flip()
 from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
-
-# ...
 
 send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
 
@@ -377,3 +356,73 @@ calibrate_gyro()
 ```
 
 > **Note** В процессе калибровки гироскопов дрон нельзя двигать.
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#aruco-detect-enabled}
+
+<!-- markdownlint-enable MD044 -->
+
+Динамически включать и отключать [распознавание ArUco-маркеров](aruco_marker.md) (например, для экономии ресурсов процессора):
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+client = dynamic_reconfigure.client.Client('aruco_detect')
+
+# Включить распознавание маркеров
+client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Выключить распознавание маркеров
+client.update_configuration({'enabled': True})
+```
+
+### # {#wait-global-position}
+
+Ожидать появления глобальной позиции (окончания инициализации [GPS-приемника](gps.md)):
+
+```python
+import math
+
+while not rospy.is_shutdown():
+    if math.isfinite(get_telemetry().lat):
+        break
+    rospy.sleep(0.2)
+```
+
+### # {#get-param}
+
+Считать параметр полетного контроллера:
+
+```python
+from mavros_msgs.srv import ParamGet
+from mavros_msgs.msg import ParamValue
+
+param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
+
+# Считать параметр типа INT
+value = param_get(param_id='COM_FLTMODE1').value.integer
+
+# Считать параметр типа FLOAT
+value = param_get(param_id='MPC_Z_P').value.float
+```
+
+### # {#set-param}
+
+Изменить параметр полетного контроллера:
+
+```python
+from mavros_msgs.srv import ParamSet
+from mavros_msgs.msg import ParamValue
+
+param_set = rospy.ServiceProxy('mavros/param/set', ParamSet)
+
+# Изменить параметр типа INT:
+param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
+
+# Изменить параметр типа FLOAT:
+param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
+```

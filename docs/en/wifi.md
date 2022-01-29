@@ -7,7 +7,10 @@ Connecting to Clover via Wi-Fi
 
 Connect to this Wi-Fi using the password `cloverwifi`.
 
-<img src="../assets/ssid.png" width="300px" alt="Wi-Fi SSID">
+<div class="image-group">
+    <img src="../assets/wifi-ssid.png" width=300 class="zoom">
+    <img src="../assets/wifi-pass.png" width=300 class="zoom">
+</div>
 
 To edit Wi-Fi settings, or to obtain more detailed information about the network device on Raspberry Pi, read this [article](network.md).
 

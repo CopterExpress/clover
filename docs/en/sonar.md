@@ -83,13 +83,13 @@ pi.callback(ECHO, pigpio.FALLING_EDGE, fall)
 
 while True:
     # Reading the distance:
-    print read_distance()
+    print(read_distance())
 
 ```
 
 ### Filtering the data
 
-To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://ru.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
+To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://en.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
 
 ```python
 import collections
@@ -104,7 +104,7 @@ def read_distance_filtered():
     return numpy.median(history)
 
 while True:
-    print read_distance_filtered()
+    print(read_distance_filtered())
 ```
 
 An example of charts of initial and filtered data:

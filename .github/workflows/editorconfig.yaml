@@ -1,0 +1,18 @@
+name: Editorconfig
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  editorconfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: .editorconfig Linter
+        run: |
+          wget --no-verbose https://github.com/okalachev/editorconfig-checker/releases/download/1.2.1-disable-spaces-amount/ec-linux-amd64
+          chmod +x ec-linux-amd64
+          ./ec-linux-amd64 -spaces-after-tabs -e "roslib.js|ros3d.js|eventemitter2.js|json-to-pretty-yaml.js|draw.cpp|BinUtils.swift|\.idea|apps/android/app|blockly/|clover_blocks/programs/|highlight/|python.js|Assets.xcassets|test_parser_pass.txt|test_node_failure.txt|aruco_pose/vendor|\.stl|\.dxf|\.dae|\.material"

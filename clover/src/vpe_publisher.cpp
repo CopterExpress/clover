@@ -53,7 +53,7 @@ void publishZero(const ros::TimerEvent& e)
 	}
 
 	ROS_INFO_THROTTLE(10, "publish zero");
-	static geometry_msgs::PoseStamped zero;
+	geometry_msgs::PoseStamped zero;
 	zero.header.frame_id = local_frame_id;
 	zero.header.stamp = e.current_real;
 	zero.pose.orientation.w = 1;

@@ -1,6 +1,6 @@
 # Simulation VM setup
 
-In addition to [native installation instructions](simulation_native.md), we provide a [preconfigured developer virtual machine image](https://github.com/CopterExpress/clover_vm/releases). The image contains:
+In addition to [native installation instructions](simulation_native.md), we provide a [preconfigured developer virtual machine image](https://github.com/CopterExpress/clover_vm/releases/latest). The image contains:
 
 * Ubuntu 18.04 with XFCE lightweight desktop environment;
 * ROS packages required to develop for the Clover platform;

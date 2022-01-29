@@ -10,7 +10,7 @@
 
 ### Подключение к Raspberry Pi
 
-> **Hint** Для корректной работы лазерного дальномера с полетным контроллером рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
+> **Hint** Перед включением дальномера необходимо снять с него защитную пленку.
 
 Подключите дальномер по интерфейсу I²C к пинам 3V, GND, SCL и SDA:
 
@@ -36,6 +36,8 @@ rostopic echo /rangefinder/range
 
 ### Настройки PX4
 
+> **Hint** Для корректной работы лазерного дальномера с полетным контроллером рекомендуется использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
+
 Для использования данных с дальномера в [PX4 должен быть сконфигурирован](px4_parameters.md).
 
 При использовании EKF2 (`SYS_MC_EST_GROUP` = `ekf2`):
@@ -59,7 +61,7 @@ rospy.init_node('flight')
 
 def range_callback(msg):
     # Обработка новых данных с дальномера
-    print 'Rangefinder distance:', msg.range
+    print('Rangefinder distance:', msg.range)
 
 rospy.Subscriber('rangefinder/range', Range, range_callback)
 

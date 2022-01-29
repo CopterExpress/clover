@@ -1,0 +1,18 @@
+async_web_server_cpp:
+  debian:
+    buster: [ros-noetic-async-web-server-cpp]
+led_msgs:
+  debian:
+    buster: [ros-noetic-led-msgs]
+ros_pytest:
+  debian:
+    buster: [ros-noetic-ros-pytest]
+tf2_web_republisher:
+  debian:
+    buster: [ros-noetic-tf2-web-republisher]
+web_video_server:
+  debian:
+    buster: [ros-noetic-web-video-server]
+ws281x:
+  debian:
+    buster: [ros-noetic-ws281x]

@@ -88,6 +88,6 @@ def aruco_gen():
                     off_x + marker.x, off_y + marker.y, off_z + marker.z,
                     marker.roll, marker.pitch, marker.yaw)
 
-        output = open(source_world, 'w') if inplace else stdout
+        output = open(source_world, 'wb') if inplace else stdout
 
         save_world(world_tree, output)

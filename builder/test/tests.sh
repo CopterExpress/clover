@@ -34,6 +34,7 @@ i2cdetect -V
 butterfly -h
 # espeak --version
 mjpg_streamer --version
+systemctl --version
 
 # ros stuff
 
@@ -54,6 +55,8 @@ rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
 rosversion rosshow
+rosversion nodelet
+rosversion image_view
 
 # validate examples are present
 [[ $(ls /home/pi/examples/*) ]]

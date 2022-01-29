@@ -1,0 +1,57 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  docs:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with: { node-version: '10' }
+      - name: Setup tools
+        run: |
+          sudo sh -c "echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections"
+          sudo apt-get update && sudo apt-get install -y calibre msttcorefonts
+          builder/assets/install_gitbook.sh
+          npm install markdownlint-cli@0.28.1 -g # FIXME: https://github.com/DavidAnson/markdownlint/issues/435
+          npm install svgexport -g
+          gitbook -V
+          markdownlint -V
+      - name: Run markdownlint
+        run: markdownlint docs
+      - name: Check Assets
+        run: |
+          ./check_assets_size.py
+          ./check_unused_assets.py
+      - name: Build GitBook
+        run: |
+         gitbook install
+         gitbook build
+      - name: Generate PDF
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: |
+          for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
+          sudo apt-get -q install ghostscript
+          gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf
+          gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf
+          rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
+          rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
+          ls -lah _book/clover*.pdf
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        with:
+          branch: gh-pages
+          folder: _book
+          clean: true
+          single-commit: true # to avoid multiple copies of large pdf files

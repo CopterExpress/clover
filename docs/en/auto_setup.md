@@ -126,7 +126,7 @@ Ctrl+C
 Start a program `myprogram.py` using Python:
 
 ```bash
-python myprogram.py
+python3 myprogram.py
 ```
 
 Journal of the events related to `clover` package. Scroll the list by pressing Enter or Ctrl+V (scrolls faster):
@@ -193,7 +193,7 @@ Most of the parameters for autonomous flight are located in the following direct
   <arg name="aruco" default="true"/>.
   ```
 
-  This will acticate the ArUco marker detection module.
+  This will activate the ArUco marker detection module.
 - Open the file `aruco.launch`:
 
   ```bash
@@ -411,7 +411,7 @@ The easiest way to send the program is to copy the content of the program, creat
 - Run the program:
 
   ```bash
-  python my_program.py
+  python3 my_program.py
   ```
 
   > **Warning** After completion of the program , the drone can land incorrectly and continue to fly over the floor. In this case, you need to intercept control.

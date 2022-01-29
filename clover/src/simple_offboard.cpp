@@ -181,9 +181,10 @@ inline bool waitTransform(const string& target, const string& source,
 		ros::spinOnce();
 		r.sleep();
 	}
+	return false;
 }
 
-#define TIMEOUT(msg, timeout) (ros::Time::now() - msg.header.stamp > timeout)
+#define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
 
 bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 {
@@ -441,6 +442,10 @@ void publish(const ros::Time stamp)
 
 		// publish setpoint frame
 		if (!setpoint.child_frame_id.empty()) {
+			if (setpoint.header.stamp == position_msg.header.stamp) {
+				return; // avoid TF_REPEATED_DATA warnings
+			}
+
 			setpoint.transform.translation.x = position_msg.pose.position.x;
 			setpoint.transform.translation.y = position_msg.pose.position.y;
 			setpoint.transform.translation.z = position_msg.pose.position.z;
@@ -712,7 +717,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		if (sp_type == VELOCITY) {
-			static Vector3Stamped vel;
+			Vector3Stamped vel;
 			vel.header.frame_id = frame_id;
 			vel.header.stamp = stamp;
 			vel.vector.x = vx;
@@ -843,6 +848,7 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		busy = false;
 		return true;
 	}
+	return false;
 }
 
 int main(int argc, char **argv)

@@ -320,4 +320,4 @@ GPIO.cleanup()
 
 Особая благодарность Международному университету Ала-Тоо за финансирование наборов Clover 4.
 
-<img src = "https://pms.alatoo.edu.kg/images/logo_text.png">
+<img src="../assets/seeding_drone/ala-too.png">

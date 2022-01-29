@@ -12,6 +12,7 @@
 
 #include <ros/ros.h>
 #include <string>
+#include <vector>
 #include <boost/algorithm/string.hpp>
 
 #include <clover/SetLEDEffect.h>
@@ -29,6 +30,7 @@ ros::Timer timer;
 ros::Time start_time;
 double blink_rate, blink_fast_rate, flash_delay, fade_period, wipe_period, rainbow_period;
 double low_battery_threshold;
+std::vector<std::string> error_ignore;
 bool blink_state;
 led_msgs::SetLEDs set_leds;
 led_msgs::LEDStateArray state, start_state;
@@ -274,6 +276,10 @@ void handleMavrosState(const mavros_msgs::State& msg)
 void handleLog(const rosgraph_msgs::Log& log)
 {
 	if (log.level >= rosgraph_msgs::Log::ERROR) {
+		// check if ignored
+		for (auto const& str : error_ignore) {
+			if (log.msg.find(str) != std::string::npos) return;
+		}
 		notify("error");
 	}
 }
@@ -302,6 +308,7 @@ int main(int argc, char **argv)
 	nh_priv.param("rainbow_period", rainbow_period, 5.0);
 
 	nh_priv.param("notify/low_battery/threshold", low_battery_threshold, 3.7);
+	nh_priv.param("notify/error/ignore", error_ignore, {});
 
 	ros::service::waitForService("set_leds"); // cannot work without set_leds service
 	set_leds_srv = nh.serviceClient<led_msgs::SetLEDs>("set_leds", true);

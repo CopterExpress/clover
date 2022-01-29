@@ -39,7 +39,7 @@ cat file.py
 Run `file.py` as a Python script:
 
 ```bash
-python file.py
+python3 file.py
 ```
 
 Reboot Raspberry Pi:

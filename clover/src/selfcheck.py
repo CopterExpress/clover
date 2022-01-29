@@ -43,6 +43,8 @@ from mavros import mavlink
 
 rospy.init_node('selfcheck')
 
+os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
+
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -138,7 +140,7 @@ def mavlink_exec(cmd, timeout=3.0):
         timeout=3,
         baudrate=0,
         count=len(cmd),
-        data=map(ord, cmd.ljust(70, '\0')))
+        data=[ord(c) for c in cmd.ljust(70, '\0')])
     msg.pack(link)
     ros_msg = mavlink.convert_to_rosmsg(msg)
     mavlink_pub.publish(ros_msg)
@@ -483,6 +485,9 @@ def check_local_position():
             failure('roll is %.2f deg; place copter horizontally or redo level horizon calib',
                     math.degrees(roll))
 
+        if not tf_buffer.can_transform('base_link', pose.header.frame_id, rospy.get_rostime(), rospy.Duration(0.5)):
+            failure('can\'t transform from %s to base_link (timeout 0.5 s): is TF enabled?', pose.header.frame_id)
+
     except rospy.ROSException:
         failure('no local position')
 
@@ -609,18 +614,18 @@ def check_rangefinder():
 
 @check('Boot duration')
 def check_boot_duration():
-    output = subprocess.check_output('systemd-analyze')
+    output = subprocess.check_output('systemd-analyze').decode()
     r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
-    if duration > 15:
+    if duration > 20:
         failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
 
 
 @check('CPU usage')
 def check_cpu_usage():
-    WHITELIST = 'nodelet',
+    WHITELIST = 'nodelet', 'gzclient', 'gzserver'
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
-    output = subprocess.check_output(CMD, shell=True)
+    output = subprocess.check_output(CMD, shell=True).decode()
     processes = output.split('\n')
     for process in processes:
         if not process:
@@ -636,7 +641,7 @@ def check_cpu_usage():
 def check_clover_service():
     try:
         output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
-                                         stderr=subprocess.STDOUT)
+                                         stderr=subprocess.STDOUT).decode()
     except subprocess.CalledProcessError as e:
         failure('systemctl returned %s: %s', e.returncode, e.output)
         return
@@ -646,13 +651,22 @@ def check_clover_service():
     elif 'failed' in output:
         failure('service failed to run, check your launch-files')
 
-    r = re.compile(r'^(.*)\[(FATAL|ERROR)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
+    BLACKLIST = 'Unexpected command 520', 'Time jump detected', 'different index:'
+
+    r = re.compile(r'^(.*)\[(FATAL|ERROR| WARN)\] \[\d+.\d+\]: (.*?)(\x1b(.*))?$')
     error_count = OrderedDict()
     try:
         for line in open('/tmp/clover.err', 'r'):
+            skip = False
+            for substr in BLACKLIST:
+                if substr in line:
+                    skip = True
+            if skip:
+                continue
+
             node_error = r.search(line)
             if node_error:
-                msg = node_error.groups()[1] + ': ' + node_error.groups()[2]
+                msg = node_error.groups()[1].strip() + ': ' + node_error.groups()[2]
                 if msg in error_count:
                     error_count[msg] += 1
                 else:
@@ -751,9 +765,9 @@ def check_rpi_health():
         # <parameter>=<value>
         # In case of `get_throttled`, <value> is a hexadecimal number
         # with some of the FLAGs OR'ed together
-        output = subprocess.check_output(['vcgencmd', 'get_throttled'])
+        output = subprocess.check_output(['vcgencmd', 'get_throttled']).decode()
     except OSError:
-        failure('could not call vcgencmd binary; not a Raspberry Pi?')
+        info('could not call vcgencmd binary; not a Raspberry Pi?')
         return
 
     throttle_mask = int(output.split('=')[1], base=16)

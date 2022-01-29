@@ -31,6 +31,14 @@ function considerFrameId(e) {
 			this.getInput('Y').fieldRow[0].setValue('y');
 			this.getInput('Z').fieldRow[0].setValue('z');
 		}
+		if (this.getInput('LAT')) { // block has global coordinates
+			let global = frameId.startsWith('GLOBAL');
+			this.getInput('LAT').setVisible(global);
+			this.getInput('LON').setVisible(global);
+			this.getInput('X').setVisible(!global);
+			this.getInput('Y').setVisible(!global);
+			this.getInput('Z').fieldRow[0].setValue(frameId == 'GLOBAL' ? 'altitude' : 'z');
+		}
 	}
 	if (this.getInput('ID')) { // block has marker id field
 		this.getInput('ID').setVisible(frameId == 'ARUCO'); // toggle id field
@@ -65,6 +73,9 @@ function updateSetpointBlock(e) {
 
 Blockly.Blocks['navigate'] = {
 	init: function () {
+		let navFrameId = frameIds.slice();
+		navFrameId.push(['global', 'GLOBAL_LOCAL'])
+		navFrameId.push(['global, WGS 84 alt.', 'GLOBAL'])
 		this.appendDummyInput()
 			.appendField("navigate to point");
 		this.appendValueInput("X")
@@ -73,12 +84,20 @@ Blockly.Blocks['navigate'] = {
 		this.appendValueInput("Y")
 			.setCheck("Number")
 			.appendField("left");
+		this.appendValueInput("LAT")
+			.setCheck("Number")
+			.appendField("latitude")
+			.setVisible(false);
+		this.appendValueInput("LON")
+			.setCheck("Number")
+			.appendField("longitude")
+			.setVisible(false)
 		this.appendValueInput("Z")
 			.setCheck("Number")
 			.appendField("up");
 		this.appendDummyInput()
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown(navFrameId), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")
@@ -268,7 +287,7 @@ Blockly.Blocks['mode'] = {
 			.appendField("current flight mode");
 		this.setOutput(true, "String");
 		this.setColour(COLOR_STATE);
-		this.setTooltip("");
+		this.setTooltip("Returns current flight mode (POSCTL, OFFBOARD, etc).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -375,7 +394,7 @@ Blockly.Blocks['take_off'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("Take off on desired altitude in meters");
+		this.setTooltip("Take off on desired altitude in meters.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -391,7 +410,7 @@ Blockly.Blocks['land'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(COLOR_FLIGHT);
-		this.setTooltip("");
+		this.setTooltip("Land the drone.");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };
@@ -400,10 +419,10 @@ Blockly.Blocks['global_position'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["latitude", "LATITUDE"], ["longitude", "LONGITUDE"], ["altitude", "ALTITUDE"]]), "NAME");
+			.appendField(new Blockly.FieldDropdown([["latitude", "LAT"], ["longitude", "LON"], ["altitude", "ALT"]]), "FIELD");
 		this.setOutput(true, "Number");
-		this.setColour(230);
-		this.setTooltip("");
+		this.setColour(COLOR_STATE);
+		this.setTooltip("Returns current global position (latitude, longitude, altitude above the WGS 84 ellipsoid).");
 		this.setHelpUrl(DOCS_URL + '#' + this.type);
 	}
 };

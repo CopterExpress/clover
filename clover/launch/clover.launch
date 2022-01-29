@@ -11,8 +11,7 @@
     <arg name="rangefinder_vl53l1x" default="true"/>
     <arg name="led" default="true"/>
     <arg name="blocks" default="false"/>
-    <arg name="rc" default="true"/>
-    <arg name="shell" default="true"/>
+    <arg name="rc" default="false"/>
 
     <arg name="simulator" default="false"/> <!-- flag that we are operating on a simulated drone -->
 
@@ -37,16 +36,11 @@
     <include file="$(find clover)/launch/aruco.launch" if="$(arg aruco)"/>
 
     <!-- optical flow -->
-    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen">
+    <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow main_camera_nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen" respawn="true">
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
         <param name="roi_rad" value="0.8"/>
-    </node>
-
-    <!-- main nodelet manager -->
-    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" clear_params="true">
-        <param name="num_worker_threads" value="2"/>
     </node>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
@@ -90,9 +84,6 @@
         <!-- Send fake GCS heartbeats. Set to "true" for upstream PX4 -->
         <param name="use_fake_gcs" value="false"/>
     </node>
-
-    <!-- Shell access through ROS service -->
-    <node name="shell" pkg="clover" type="shell" output="screen" if="$(arg shell)"/>
 
     <!-- Update static directory -->
     <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">

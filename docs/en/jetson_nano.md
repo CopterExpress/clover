@@ -110,7 +110,7 @@ cd ~/catkin_ws
 catkin_make
 ```
 
-> **Hint** You may also want to add udev rules for PX4 flight controllers. Copy [the rules file](https://github.com/CopterExpress/clover/blob/master/clover/config/99-px4fmu.rules) to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules && sudo udevadm trigger`.
+> **Hint** You may also want to add udev rules for PX4 flight controllers. Copy [the rules file](https://github.com/CopterExpress/clover/blob/master/clover/udev/99-px4fmu.rules) to `/etc/udev/rules.d` and run `sudo udevadm control --reload-rules && sudo udevadm trigger`.
 
 ### Running Clover nodes
 

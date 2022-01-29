@@ -39,7 +39,8 @@ var workspace = Blockly.inject('blockly', {
 function readParams() {
 	return Promise.all([
 		ros.readParam('navigate_tolerance', true, 0.2),
-		ros.readParam('yaw_tolerance', true, 20),
+		ros.readParam('navigate_global_tolerance', true, 1),
+		ros.readParam('yaw_tolerance', true, 1),
 		ros.readParam('sleep_time', true, 0.2),
 		ros.readParam('confirm_run', true, true),
 	]);
@@ -210,7 +211,7 @@ function loadPrograms() {
 		updateChanged();
 	}, function(err) {
 		document.querySelector('.backend-fail').style.display = 'inline';
-		alert(`Error loading programs list.\n\nHave you enabled clover_blocks in clover.launch?`);
+		alert(`Error loading programs list.\n\nHave you enabled 'blocks' in clover.launch?`);
 		runButton.disabled = true;
 	})
 }

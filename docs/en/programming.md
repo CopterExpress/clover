@@ -42,17 +42,15 @@ Before the first flight it's recommended to check the Clover's configuration wit
 rosrun clover selfcheck.py
 ```
 
-In order to run a Python script use the `python` command:
+In order to run a Python script use the `python3` command:
 
 ```bash
-python flight.py
+python3 flight.py
 ```
 
 Below is a complete flight program that performs a takeoff, flies forward and lands:
 
 ```python
-#coding: utf8
-
 import rospy
 from clover import srv
 from std_srvs.srv import Trigger
