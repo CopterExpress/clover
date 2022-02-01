@@ -83,7 +83,7 @@ This is how the main QGroundControl settings window will look like:
 
 ### Setting parameters
 
-Open the *Vehicle Setup* tab and select the *Parameters* menu. You can use the *Search* field to find parameters by name.
+Open the *Vehicle Setup* tab and select the *Parameters* menu. You can use the *Search* field to find parameters by name. Recommended parameters values are given in the further documentation and also in the [parameters summary article](parameters.md).
 
 <img src="../assets/qgc-parameters.png" alt="QGroundControl parameters" class="zoom">
 
