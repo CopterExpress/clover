@@ -312,6 +312,8 @@ Landing the drone (command line):
 rosservice call /land "{}"
 ```
 
+> **Caution** In recent PX4 versions, the vehicle will be switched out of LAND mode to manual mode, if the remote control sticks are moved significantly.
+
 <!--
 ### release
 
