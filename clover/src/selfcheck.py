@@ -195,6 +195,9 @@ def check_fcu():
             failure('no connection to the FCU (check wiring)')
             return
 
+        clover_tag = re.compile(r'-cl[oe]ver\.\d+$')
+        clover_fw = False
+
         # Make sure the console is available to us
         mavlink_exec('\n')
         version_str = mavlink_exec('ver all')
@@ -204,10 +207,15 @@ def check_fcu():
         for line in version_str.split('\n'):
             if line.startswith('FW version: '):
                 info(line[len('FW version: '):])
-            elif line.startswith('FW git tag: '):
-                info(line[len('FW git tag: '):])
+            elif line.startswith('FW git tag: '): # only Clover's firmware
+                tag = line[len('FW git tag: '):]
+                clover_fw = clover_tag.search(tag)
+                info(tag)
             elif line.startswith('HW arch: '):
                 info(line[len('HW arch: '):])
+
+        if not clover_fw:
+            info('not Clover PX4 firmware, check https://clover.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
