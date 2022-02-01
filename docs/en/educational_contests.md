@@ -1,6 +1,6 @@
 # Educational contests
 
-## 1. Contest for the best educational lecture
+## 1. Contest for the best educational lecture {#lecture}
 
 The Copter Express company organizes a contest for the best educational lecture with COEX Clover 4 quadcopter kit application.
 
@@ -38,7 +38,7 @@ Based on the results of the submitted application, the jury selects the winners 
 * 4th place: $200.
 * 5th place: $100.
 
-## 2. Contest for the best school lesson
+## 2. Contest for the best school lesson {#lesson}
 
 The Copter Express company organizes a contest for the best school lesson with COEX Clover 4 quadcopter kit application.
 
@@ -76,7 +76,7 @@ Based on the results of the submitted application, the jury selects the winners 
 * 4th place: $200.
 * 5th place: $100.
 
-## 3. Contest for the best online course
+## 3. Contest for the best online course {#course}
 
 The Copter Express company organizes a contest for the best online course with COEX Clover 4 quadcopter kit application.
 
