@@ -14,7 +14,7 @@ In order to perform the sensor calibration, select the *Vehicle Setup* tab and c
 4. Put the drone in one of the orientations marked by the red outline and wait for the appropriate outline to turn yellow.
 5. Spin the drone as required until the outline turns green. Do this for all orientations.
 
-Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/compass.html.
+Read more in the PX4 docs: https://docs.px4.io/master/en/config/compass.html.
 
 ## Gyroscope
 
@@ -27,7 +27,7 @@ Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/compass.html.
 
 > **Warning** The drone should stay completely still during the calibration.
 
-Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/gyroscope.html.
+Read more in the PX4 docs: https://docs.px4.io/master/en/config/gyroscope.html.
 
 ## Accelerometer
 
@@ -38,7 +38,7 @@ Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/gyroscope.html.
 3. Put the drone in one of the orientations marked by the red outline and wait for the appropriate outline to turn yellow.
 4. Hold the drone in this orientation until the outline turns green. Do this for all orientations.
 
-Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/accelerometer.html.
+Read more in the PX4 docs: https://docs.px4.io/master/en/config/accelerometer.html.
 
 ## Level horizon
 
@@ -50,6 +50,6 @@ Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/accelerometer.ht
 4. Press *OK*.
 5. Wait for the calibration to finish.
 
-Read more in the PX4 docs: https://docs.px4.io/v1.9.0/en/config/level_horizon_calibration.html.
+Read more in the PX4 docs: https://docs.px4.io/master/en/config/level_horizon_calibration.html.
 
 **Next**: [RC setup](radio.md).
