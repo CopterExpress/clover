@@ -75,7 +75,7 @@
   * [Пилотирование со смартфона](rc.md)
   * [Настройка сети RPi](network.md)
   * [Интерфейс UART](uart.md)
-  * [Параметры PX4](px4_parameters.md)
+  * [Параметры PX4](parameters.md)
   * [Работа с логами PX4](flight_logs.md)
   * [Прошивка PX4](firmware.md)
   * [Протокол MAVLink](mavlink.md)
