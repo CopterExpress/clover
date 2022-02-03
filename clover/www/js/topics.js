@@ -1,5 +1,6 @@
 const url = 'ws://' + location.hostname + ':9090';
 const ros = new ROSLIB.Ros({ url: url });
+const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
 ros.on('connection', function () {
 	document.body.classList.add('connected');
@@ -52,6 +53,15 @@ function viewTopic(topic) {
 	new ROSLIB.Topic({ ros: ros, name: topic }).subscribe(function(msg) {
 		document.title = topic;
 		if (mouseDown) return;
+
+		if (msg.header.stamp) {
+			if (params.date || params.offset) {
+				let date = new Date(msg.header.stamp.secs * 1e3 + msg.header.stamp.nsecs * 1e-6);
+				if (params.date) msg.header.date = date.toISOString();
+				if (params.offset) msg.header.offset = (new Date() - date) * 1e-3;
+			}
+		}
+
 		topicMessage.innerHTML = yamlStringify(msg); // JSON.stringify(msg, null, 4);
 	});
 }
@@ -62,8 +72,6 @@ topicMessage.addEventListener('mousedown', function() { mouseDown = true; });
 topicMessage.addEventListener('mouseup', function() { mouseDown = false; });
 
 function init() {
-	const params = Object.fromEntries(new URLSearchParams(window.location.search).entries());
-
 	if (!params.topic) {
 		viewTopicsList();
 	} else {
