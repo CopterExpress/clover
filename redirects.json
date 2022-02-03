@@ -66,6 +66,8 @@
         { "from": "gpio/", "to": "en/gpio.html" },
 
         { "from": "ru/microsd_images.html", "to": "image.html" },
-        { "from": "en/microsd_images.html", "to": "image.html" }
+        { "from": "en/microsd_images.html", "to": "image.html" },
+        { "from": "ru/px4_parameters.html", "to": "parameters.html" },
+        { "from": "en/px4_parameters.html", "to": "parameters.html" }
     ]
 }

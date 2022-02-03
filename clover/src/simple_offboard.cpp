@@ -873,6 +873,13 @@ int main(int argc, char **argv)
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
 
+	// Default reference frames
+	std::map<string, string> default_reference_frames;
+	default_reference_frames[body.child_frame_id] = local_frame;
+	default_reference_frames[fcu_frame] = local_frame;
+	if (!target.child_frame_id.empty()) default_reference_frames[target.child_frame_id] = local_frame;
+	reference_frames.insert(default_reference_frames.begin(), default_reference_frames.end()); // merge defaults
+
 	state_timeout = ros::Duration(nh_priv.param("state_timeout", 3.0));
 	local_position_timeout = ros::Duration(nh_priv.param("local_position_timeout", 2.0));
 	velocity_timeout = ros::Duration(nh_priv.param("velocity_timeout", 2.0));

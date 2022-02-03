@@ -485,6 +485,12 @@ def check_local_position():
             failure('roll is %.2f deg; place copter horizontally or redo level horizon calib',
                     math.degrees(roll))
 
+        if not tf_buffer.can_transform('base_link', pose.header.frame_id, rospy.get_rostime(), rospy.Duration(0.5)):
+            failure('can\'t transform from %s to base_link (timeout 0.5 s): is TF enabled?', pose.header.frame_id)
+
+        if not tf_buffer.can_transform('body', pose.header.frame_id, rospy.get_rostime(), rospy.Duration(0.5)):
+            failure('can\'t transform from %s to body (timeout 0.5 s)', pose.header.frame_id)
+
     except rospy.ROSException:
         failure('no local position')
 
@@ -614,7 +620,7 @@ def check_boot_duration():
     output = subprocess.check_output('systemd-analyze').decode()
     r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
-    if duration > 15:
+    if duration > 20:
         failure('long Raspbian boot duration: %ss (systemd-analyze for analyzing)', duration)
 
 

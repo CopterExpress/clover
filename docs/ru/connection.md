@@ -16,7 +16,7 @@
 
     Поле `connected` должно содержать значение `True`.
 
-> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](px4_parameters.md) `CBRK_USB_CHK` на 197848.
+> **Hint** Для корректной работы подключения Raspberry Pi и Pixhawk по USB необходимо установить значение [параметра](parameters.md) `CBRK_USB_CHK` на 197848.
 
 ## Подключение по UART
 
