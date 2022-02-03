@@ -320,9 +320,9 @@ int main(int argc, char **argv)
 
 	auto set_effect = nh.advertiseService("set_effect", &setEffect);
 
-	auto mavros_state_sub = nh.subscribe("/mavros/state", 1, &handleMavrosState);
-	auto battery_sub = nh.subscribe("/mavros/battery", 1, &handleBattery);
-	auto rosout_sub = nh.subscribe("/rosout_agg", 1, &handleLog);
+	auto mavros_state_sub = nh.subscribe("mavros/state", 1, &handleMavrosState);
+	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleBattery);
+	auto rosout_sub = nh.subscribe("rosout_agg", 1, &handleLog);
 
 	timer = nh.createTimer(ros::Duration(0), &proceed, false, false);
 
