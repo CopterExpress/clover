@@ -33,7 +33,7 @@
         <a href="clover_blocks" target=_blank; rel=noopener noreferrer>
             <button class="w3-button w3-xlarge w3-black w3-hover-blue" 
                 onclick="document.getElementById('id01').style.display='block'" 
-                style="font-weight:900;"> GOoooo
+                style="font-weight:900;"> GO
             </button>
         </a>
         <div class="p" style="margin-top: 20px; margin-bottom: 20px">

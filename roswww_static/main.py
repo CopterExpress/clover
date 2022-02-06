@@ -39,7 +39,7 @@ for name in packages:
         rospy.loginfo('found www path for %s package', name)
         os.symlink(path + '/www', www + '/' + name)
         if name == 'clover' or name == 'clover_blocks' or name == 'swarm_clover_blocks':
-            names.append(name)
+            continue
         else:
             others.append(name)
 
@@ -133,12 +133,10 @@ src = os.getcwd() + '/assets/'
 dst = rospkg.get_ros_home() + '/www/assets'
 os.mkdir(dst)
 try:
-    #if path already exists, remove it before copying with copytree()
     if os.path.exists(dst):
         shutil.rmtree(dst)
         shutil.copytree(src, dst)
 except OSError as e:
-    # If the error was caused because the source wasn't a directory
     if e.errno == errno.ENOTDIR:
         shutil.copy(source_dir_prompt, destination_dir_prompt)
     else:
