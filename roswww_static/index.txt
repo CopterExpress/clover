@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Add Favicon-->
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <!--Link CSS-->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
@@ -12,13 +15,11 @@
 </head>
 <body>
 
-
 <!-- Header -->
 <div class="header">
     <h1 style="font-weight: bold; font-size: 60px">Swarm in Blocks</h1>
     <h2>Package List</h2>
 </div>
-
 
 <!-- 3 part menu -->
 <div class="w3-row-padding w3-center w3-margin-top">
@@ -32,7 +33,7 @@
         <a href="clover_blocks" target=_blank; rel=noopener noreferrer>
             <button class="w3-button w3-xlarge w3-black w3-hover-blue" 
                 onclick="document.getElementById('id01').style.display='block'" 
-                style="font-weight:900;"> GO
+                style="font-weight:900;"> GOoooo
             </button>
         </a>
         <div class="p" style="margin-top: 20px; margin-bottom: 20px">
@@ -61,7 +62,6 @@
         </div>
     </div>
 </div>
-
 <div class="w3-third">
     <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans">
         <h3 style="margin-top: 30px; margin-bottom: 20px;font-weight: bold; text-decoration:none"><b>
