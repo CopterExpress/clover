@@ -57,5 +57,5 @@ chmod +x my_program.py
 When scripting languages are used, a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) should be placed at the beginning of the file, for example:
 
 ```bash
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ```
