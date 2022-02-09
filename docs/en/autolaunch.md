@@ -6,7 +6,7 @@ Software autorun
 systemd
 ---
 
-Main documentation: [https://wiki.archlinux.org/title/Systemd](https://wiki.archlinux.org/title/Systemd).
+Main documentation: https://wiki.archlinux.org/title/Systemd.
 
 All automatically started Clover software is launched as a `clover.service` systemd service.
 
@@ -54,7 +54,7 @@ The started file must have *permission* to run:
 chmod +x my_program.py
 ```
 
-When scripting languages are used, a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) should be placed at the beginning of the file, for example:
+When scripting languages are used, a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a> should be placed at the beginning of the file, for example:
 
 ```bash
 #!/usr/bin/env python3
