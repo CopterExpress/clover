@@ -6,7 +6,7 @@
 systemd
 ---
 
-Основная документация: [https://wiki.archlinux.org/index.php/Systemd_(Русский)](https://wiki.archlinux.org/index.php/Systemd_(Русский)).
+Основная документация: https://wiki.archlinux.org/index.php/Systemd_(Русский).
 
 Все автоматически стартуемое ПО Клевера запускается в виде systemd-сервиса `clover.service`.
 
@@ -54,8 +54,8 @@ roslaunch
 chmod +x my_program.py
 ```
 
-При использовании скриптовых языков вначале файла должен стоять [shebang](https://ru.wikipedia.org/wiki/Шебанг_(Unix)), например:
+При использовании скриптовых языков вначале файла должен стоять <a href="https://ru.wikipedia.org/wiki/Шебанг_(Unix)">shebang</a>, например:
 
 ```bash
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ```
