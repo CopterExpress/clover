@@ -5,9 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--Add Favicon-->
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-    <!--Link CSS-->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
@@ -15,23 +12,25 @@
 </head>
 <body>
 
+
 <!-- Header -->
 <div class="header">
     <h1 style="font-weight: bold; font-size: 60px">Swarm in Blocks</h1>
     <h2>Package List</h2>
 </div>
 
+
 <!-- 3 part menu -->
 <div class="w3-row-padding w3-center w3-margin-top">
 
 <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans">
+    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;">
         <h3 style="margin-top: 30px; margin-bottom: 20px; font-weight: bold; text-decoration:none"><b> 
                 Clover Blocks<br></b></h3>
         <i class="fa fa-cube w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
         <br>
         <a href="clover_blocks" target=_blank; rel=noopener noreferrer>
-            <button class="w3-button w3-xlarge w3-black w3-hover-blue" 
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
                 onclick="document.getElementById('id01').style.display='block'" 
                 style="font-weight:900;"> GO
             </button>
@@ -44,13 +43,13 @@
     </div>
 </div>
 <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans">
+    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;">
         <h3 style="margin-top: 30px; margin-bottom: 20px; font-weight: bold; text-decoration:none"><b>
                 Swarm Clover Blocks<br></b></h3>
         <i class="fa fa-cubes w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
         <br>
         <a href="swarm_clover_blocks" target=_blank; rel=noopener noreferrer>
-            <button class="w3-button w3-xlarge w3-black w3-hover-blue" 
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
                 onclick="document.getElementById('id01').style.display='block'" 
                 style="font-weight:900;"> GO
             </button>
@@ -62,16 +61,18 @@
         </div>
     </div>
 </div>
+
 <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans">
+    <div class="w3-card w3-container" style="min-height:400px; font-family:Dejavu Sans; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;">
         <h3 style="margin-top: 30px; margin-bottom: 20px;font-weight: bold; text-decoration:none"><b>
                 Clover Kit Tools</a><br></b></h3>
         <i class="fa fa-cogs w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
         <br>
         <a href="clover" target=_blank; rel=noopener noreferrer>
-            <button class="w3-button w3-xlarge w3-black w3-hover-blue" 
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
                 onclick="document.getElementById('id01').style.display='block'" 
                 style="font-weight:900;"> GO
+                <!-- <i fa fa-chevron-circle-right hvr-icon></i> -->
             </button>
         </a>
         <div class="p" style="margin-top: 20px; margin-bottom: 20px">
@@ -86,9 +87,11 @@
 <!-- Eazy to Swarm heading -->
 <hr>
 <div class="w3-center">
-    <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <h1 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; ">
         It's never been easier to SWARM</h1>
+    <hr style="width:200px; margin: auto; border-bottom: 2px rgb(95, 58, 180) solid;" size="1">
     <p class="w3-large">Online block programming optimzed for swarm manipulation</p>
+    
 </div>
 <br>
 
@@ -97,12 +100,14 @@
             alt="Blocos com exemplo para o Flip"
             width="620"
             height="380" 
-            title="blocos" />
+            title="blocos"
+            style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
     <img    src="./assets/formations.gif"
             alt="quatro clover montando uma formação"
             width="620"
             height="380" 
-            title="formação" />
+            title="formação" 
+            style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
 </div>
 
 <!-- Bottom -->

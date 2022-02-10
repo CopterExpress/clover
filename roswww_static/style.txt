@@ -13,9 +13,18 @@ h3{
 
 /* Header/Logo Title */
 .header {
+	width: 100%;
+	height: 40%;
+	min-height: 250px;
+	background-image: url('./assets/Header.png');
+	background-size: cover;
+    background-position: center;
+	display: flex;
+	flex-direction: column;
+	position: relative;
     padding: 30px;
     text-align: center;
-    background: #1aa7c3;
+    /* background: #1aa7c3; */
     color: white;
     font-size: 30px;
 }
@@ -38,6 +47,10 @@ h3{
     z-index: 1;
 }
 
+.w3-container{
+    background-color: rgba(240, 240, 240, 0.7);
+}
+
 .content_imgs{
     margin: 10px 20;
     text-align: center;
@@ -48,4 +61,30 @@ h3{
     margin: 10px 20;
     text-align: center;
     padding:15px;
+	transition-duration: 0.3s;
+}
+
+.button{
+	font-size: 20px;
+	background-color: rgb(0, 0, 0);
+    color: white;
+	padding: 0.45rem 1.05rem;
+	/* border-radius:0.5rem;  */
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+	margin-bottom:2rem;
+	color:var(--dark-blue);
+	transition-duration: 0.3s;
+}
+
+.button:hover{
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgb(0 0 0 / 0%);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
