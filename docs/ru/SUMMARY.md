@@ -101,6 +101,7 @@
   * [Светодиодная лента (legacy)](leds_old.md)
   * [Вклад в Клевер](contributing.md)
   * [Репозиторий пакетов COEX](packages.md)
+  * [Тестирование Клевера](testing.md)
   * [Переход на версию 0.20](migrate20.md)
   * [Переход на версию 0.22](migrate22.md)
   * [COEX DuoCam](duocam.md)
