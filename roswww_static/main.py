@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 # Copyright (C) 2020 Copter Express Technologies
 #
@@ -16,10 +16,9 @@ import shutil
 import rospy
 import rospkg
 
-#* incialização
-rospy.init_node('roswww_static')
-
 rospack = rospkg.RosPack()
+
+local_dir = os.path.dirname(os.path.abspath(__file__))
 
 www = rospkg.get_ros_home() + '/www'
 index_file = rospy.get_param('~index_file', None)
@@ -46,7 +45,7 @@ for name in packages:
 #* index.html (e bottom.html)
 
 # cabeçalho
-f = open('index.txt', 'r')
+f = open(os.path.join(local_dir,'index.txt'), 'r')
 index = ''
 for line in f:
     index += str(line)
@@ -62,7 +61,7 @@ index += '\n</body>\n</html>'
 f.close()
 
 # bottom
-f = open('bottom.txt', 'r')
+f = open(os.path.join(local_dir,'bottom.txt'), 'r')
 bottom = ''
 for line in f:
     bottom += str(line)
@@ -71,7 +70,7 @@ f.close()
 
 #* style.css
 
-f = open('style.txt', 'r')
+f = open(os.path.join(local_dir,'style.txt'), 'r')
 style = ''
 for line in f:
     style += str(line)
@@ -79,7 +78,7 @@ f.close()
 
 #* script.js
 
-f = open('script.txt', 'r')
+f = open(os.path.join(local_dir,'script.txt'), 'r')
 script = ''
 for line in f:
     script += str(line)
@@ -129,7 +128,7 @@ else:
     open(www + '/script.js', 'w').write(script)
 
 #* copy assests folder
-src = os.getcwd() + '/assets/'
+src = os.path.join(local_dir,'assets')
 dst = rospkg.get_ros_home() + '/www/assets'
 os.mkdir(dst)
 try:
