@@ -7,8 +7,14 @@ body {
     margin: 0;
 }
 
-h3{
+.subtitle{
     font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    font-size:30px;
+    margin-top: 20px; 
+    margin-bottom: 30px;
+    /* text-shadow: 1px 1px 1px rgba(146, 71, 216, 0.918); */
+    color: rgb(0, 0, 0)
 }
 
 /* Header/Logo Title */
@@ -29,32 +35,50 @@ h3{
     font-size: 30px;
 }
 
-/*Modal*/
-.modal-overlay{
-    width: 100%;
-    height: 100%;
+.w3-container {
+    background-color: rgb(235, 235, 235);
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 1em;
+    transition-duration: 0.7s;
+}
 
-    background-color: rgba(0, 0, 0, 0.7);
+.w3-container:hover {
+    background-color: rgb(235, 235, 235);
+    box-shadow: 4 0.6em 0.6em -0.4em var(--hover);
+    transform: translateY(-0.35em);
+    box-shadow: 0 0 4px 4px #fff,  /* inner white */
+                0 0 4px 4px #f0f, /* middle magenta */
+                0 0 4px 4px #0ff; /* outer cyan */
 
-    position: fixed;
-    top: 0;
+}
 
+.row{
     display: flex;
-    align-items: center;
-    justify-content: center;
-
-    visibility: hidden;
-    z-index: 1;
 }
 
-.w3-container{
-    background-color: rgba(240, 240, 240, 0.7);
+.column1 {
+    padding: 5px;
+    flex: 1 100 auto; /* flex-grow, flex-shrink, flex-basis */
 }
 
-.content_imgs{
-    margin: 10px 20;
-    text-align: center;
-    padding:8px;
+.column2 {
+    padding: 5px;
+    flex: 1 1 auto; /* flex-grow, flex-shrink, flex-basis */
+}
+
+.eazy2 {
+    display: inline-block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    text-shadow: 1px 1px 1px rgba(146, 71, 216, 0.918);
+}
+
+.Swarm {
+    margin-left: 3px;
+    font-size: 45px;
+    display: inline-block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    text-shadow: 1.4px 1.4px 1.4px rgba(27, 27, 27, 0.918);
+    color: rgb(146, 71, 216);
 }
 
 .bottom{
