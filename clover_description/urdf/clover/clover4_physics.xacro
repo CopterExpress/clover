@@ -35,7 +35,7 @@
   <xacro:property name="sqrt2" value="1.4142135623730951" />
   <xacro:property name="rotor_drag_coefficient" value="1.75e-04" />
   <xacro:property name="rolling_moment_coefficient" value="0.000001" />
-  <xacro:property name="color" value="$(arg visual_material)" />
+  <xacro:property name="color" value="DarkGrey" />
 
   <!-- Property Blocks -->
   <!-- Clover body inertia -->
