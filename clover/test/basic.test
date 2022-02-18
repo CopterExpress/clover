@@ -35,6 +35,8 @@
         <rosparam param="notify">startup: { r: 255, g: 255, b: 255 }</rosparam>
     </node>
 
+    <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" required="true"/>
+
     <param name="test_module" value="$(find clover)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>
