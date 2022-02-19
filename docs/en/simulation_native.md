@@ -145,9 +145,9 @@ Install any web server to serve Clover's web tools (`~/.ros/www` directory), e. 
 
 ```bash
 wget https://github.com/CopterExpress/clover_vm/raw/master/assets/packages/monkey_1.6.9-1_amd64.deb -O /tmp/monkey_1.6.9-1_amd64.deb
-sudo apt-get install -y /tmp/monkey_1.6.9-1_amd64.deb
+sudo dpkg -i /tmp/monkey_1.6.9-1_amd64.deb
 sed "s/pi/$USER/g" ~/catkin_ws/src/clover/builder/assets/monkey | sudo tee /etc/monkey/sites/default
-sudo -E sh -c "sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf"
+sudo sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 sudo cp ~/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system/monkey.service
 sudo systemctl enable monkey
 sudo systemctl start monkey
