@@ -310,15 +310,15 @@ int main(int argc, char **argv)
 	nh_priv.param("notify/low_battery/threshold", low_battery_threshold, 3.7);
 	nh_priv.param("notify/error/ignore", error_ignore, {});
 
-	ros::service::waitForService("set_leds"); // cannot work without set_leds service
-	set_leds_srv = nh.serviceClient<led_msgs::SetLEDs>("set_leds", true);
+	ros::service::waitForService("led/set_leds"); // cannot work without set_leds service
+	set_leds_srv = nh.serviceClient<led_msgs::SetLEDs>("led/set_leds", true);
 
 	// wait for leds count info
-	handleState(*ros::topic::waitForMessage<led_msgs::LEDStateArray>("state", nh));
+	handleState(*ros::topic::waitForMessage<led_msgs::LEDStateArray>("led/state", nh));
 
-	auto state_sub = nh.subscribe("state", 1, &handleState);
+	auto state_sub = nh.subscribe("led/state", 1, &handleState);
 
-	auto set_effect = nh.advertiseService("set_effect", &setEffect);
+	auto set_effect = nh.advertiseService("led/set_effect", &setEffect);
 
 	auto mavros_state_sub = nh.subscribe("mavros/state", 1, &handleMavrosState);
 	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleBattery);
