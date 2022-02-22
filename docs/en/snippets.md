@@ -8,12 +8,10 @@
 
 <a name="block-takeoff"></a><!-- old name of anchor -->
 
-Fly towards a point and wait for copter's arrival:
+Function to fly to a point and wait for copter's arrival:
 
 ```python
 import math
-
-#...
 
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -64,8 +62,6 @@ Wait for copter's arrival to the [navigate](simple_offboard.md#navigate) target:
 ```python
 import math
 
-# ...
-
 def wait_arrival(tolerance=0.2):
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -79,6 +75,8 @@ def wait_arrival(tolerance=0.2):
 Calculate the distance between two points (**important**: the points are to be in the same [coordinate system](frames.md)):
 
 ```python
+import math
+
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -88,6 +86,8 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 Approximation of distance (in meters) between two global coordinates (latitude/longitude):
 
 ```python
+import math
+
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
@@ -203,19 +203,16 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 from sensor_msgs.msg import BatteryState
 from mavros_msgs.msg import RCIn
 
-# ...
-
 def pose_update(pose):
     # Processing new data of copter's position
     pass
-
-# Other handler functions
-# ...
 
 rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
 rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
 rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
+
+rospy.spin()
 ```
 
 Information about MAVROS topics is available at [the link](mavros.md).
@@ -229,18 +226,13 @@ Information about MAVROS topics is available at [the link](mavros.md).
 Send an arbitrary [MAVLink message](mavlink.md) to the copter:
 
 ```python
-# ...
-
 from mavros_msgs.msg import Mavlink
 from mavros import mavlink
 from pymavlink import mavutil
 
-# ...
-
 mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
 
 # Sending a HEARTBEAT message:
-
 msg = mavutil.mavlink.MAVLink_heartbeat_message(mavutil.mavlink.MAV_TYPE_GCS, 0, 0, 0, 0, 0)
 msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
 ros_msg = mavlink.convert_to_rosmsg(msg)
@@ -281,8 +273,6 @@ Change the [flight mode](modes.md) to arbitrary one:
 ```python
 from mavros_msgs.srv import SetMode
 
-# ...
-
 set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
 
 # ...
@@ -296,8 +286,6 @@ Flip:
 
 ```python
 import math
-
-# ...
 
 PI_2 = math.pi / 2
 
@@ -337,8 +325,6 @@ from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
 
-# ...
-
 send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
 
 def calibrate_gyro():
@@ -372,8 +358,6 @@ Enable and disable [ArUco markers recognition](aruco_marker.md) dynamically (for
 import rospy
 import dynamic_reconfigure.client
 
-# ...
-
 client = dynamic_reconfigure.client.Client('aruco_detect')
 
 # Turn markers recognition off
@@ -392,8 +376,6 @@ Wait for global position to appear (finishing [GPS receiver](gps.md) initializat
 ```python
 import math
 
-# ...
-
 while not rospy.is_shutdown():
     if math.isfinite(get_telemetry().lat):
         break
@@ -408,11 +390,7 @@ Read flight controller's parameter:
 from mavros_msgs.srv import ParamGet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
-
-# ...
 
 # Read parameter of type INT
 value = param_get(param_id='COM_FLTMODE1').value.integer
@@ -429,11 +407,7 @@ Set flight controller's parameter:
 from mavros_msgs.srv import ParamSet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_set = rospy.ServiceProxy('mavros/param/set', ParamSet)
-
-# ...
 
 # Set parameter of type INT:
 param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))

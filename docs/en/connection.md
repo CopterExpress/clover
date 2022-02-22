@@ -16,7 +16,7 @@ USB connection is the preferred way to connect to the flight controller.
 
     The `connected` field should have the `True` value.s
 
-> **Hint** You need to set the `CBRK_USB_CHK` [parameter](px4_parameters.md) to 197848 for the USB connection to work.
+> **Hint** You need to set the `CBRK_USB_CHK` [parameter](parameters.md) to 197848 for the USB connection to work.
 
 ## UART connection
 

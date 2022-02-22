@@ -488,6 +488,9 @@ def check_local_position():
         if not tf_buffer.can_transform('base_link', pose.header.frame_id, rospy.get_rostime(), rospy.Duration(0.5)):
             failure('can\'t transform from %s to base_link (timeout 0.5 s): is TF enabled?', pose.header.frame_id)
 
+        if not tf_buffer.can_transform('body', pose.header.frame_id, rospy.get_rostime(), rospy.Duration(0.5)):
+            failure('can\'t transform from %s to body (timeout 0.5 s)', pose.header.frame_id)
+
     except rospy.ROSException:
         failure('no local position')
 
@@ -737,6 +740,14 @@ def check_network():
 
 @check('RPi health')
 def check_rpi_health():
+    try:
+        import shutil
+        total, used, free = shutil.disk_usage('/')
+        if free < 1024 * 1024 * 1024:
+            failure('disk space is less than 1 GB; consider removing logs (~/.ros/log/)')
+    except Exception as e:
+        info('could not check the disk free space: %s', str(e))
+
     # `vcgencmd get_throttled` output codes taken from
     # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
     # TODO: support more base platforms?

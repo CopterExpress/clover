@@ -4,9 +4,7 @@
 
 ## Включение
 
-> **Hint** Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
-
-Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
+> **Hint** Для работы Optical Flow необходим [подключенный и настроенный лазерный дальномер](laser.md).
 
 Включите Optical Flow в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
@@ -14,7 +12,7 @@
 <arg name="optical_flow" default="true"/>
 ```
 
-Optical Flow публикует данные в топик `mavros/px4flow/raw/send`. Кроме того, в топик `optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
+Optical Flow публикует данные в топик `/mavros/px4flow/raw/send`. Кроме того, в топик `/optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
 
 > **Info** Для правильной работы модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
 
