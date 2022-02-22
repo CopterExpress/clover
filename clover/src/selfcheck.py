@@ -743,6 +743,14 @@ def check_network():
 
 @check('RPi health')
 def check_rpi_health():
+    try:
+        import shutil
+        total, used, free = shutil.disk_usage('/')
+        if free < 1024 * 1024 * 1024:
+            failure('disk space is less than 1 GB; consider removing logs (~/.ros/log/)')
+    except Exception as e:
+        info('could not check the disk free space: %s', str(e))
+
     # `vcgencmd get_throttled` output codes taken from
     # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
     # TODO: support more base platforms?

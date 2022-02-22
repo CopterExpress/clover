@@ -50,6 +50,7 @@
     * [Native setup](simulation_native.md)
     * [VM setup](simulation_vm.md)
     * [Usage](simulation_usage.md)
+    * [Setup on M1 computers](simulation_m1.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * [Supplementary materials](supplementary.md)
