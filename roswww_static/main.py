@@ -15,6 +15,7 @@ import os
 import shutil
 import rospy
 import rospkg
+import errno
 
 rospack = rospkg.RosPack()
 
@@ -137,6 +138,6 @@ try:
         shutil.copytree(src, dst)
 except OSError as e:
     if e.errno == errno.ENOTDIR:
-        shutil.copy(source_dir_prompt, destination_dir_prompt)
+        shutil.copy(src, dst)
     else:
         print('Directory not copied. Error: %s' % e)
