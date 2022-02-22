@@ -51,6 +51,7 @@
     * [Сборка на собственной машине](simulation_native.md)
     * [Установка виртуальной машины](simulation_vm.md)
     * [Использование симулятора](simulation_usage.md)
+    * [Установка на компьютеры c M1](simulation_m1.md)
   * [ROS](ros.md)
   * [MAVROS](mavros.md)
 * [Дополнительные материалы](supplementary.md)
