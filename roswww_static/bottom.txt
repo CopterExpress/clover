@@ -23,7 +23,7 @@
                 </button>
                 <button aria-label="show SEMEAR website"  role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
                     <a href="http://www.semear.eesc.usp.br/wordpress/" target=_blank; rel=noopener noreferrer>
-                        <img    src="./assets/semearLOGO_c.svg"
+                        <img    src="./assets/semearLOGO.svg"
                             alt="SEMEAR"
                             width="100"
                             height="100" 
@@ -32,7 +32,7 @@
                 </button>
                 <button aria-label="show COEX website"  role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
                     <a href="https://coex.tech/" target=_blank; rel=noopener noreferrer>
-                        <img    src="./assets/coex_c.svg"
+                        <img    src="./assets/coex.svg"
                             alt="COEX"
                             width="100"
                             height="100" 
@@ -41,7 +41,7 @@
                 </button>
                 <button aria-label="show Github website" role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
                     <a href="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks" target=_blank; rel=noopener noreferrer>
-                        <img    src="./assets/github_c.svg"
+                        <img    src="./assets/github.svg"
                             alt="GitHub"
                             width="100"
                             height="100" 
@@ -50,6 +50,6 @@
                 </button>
             </div>
         </div>
-    
+
 </body>
 </html>
