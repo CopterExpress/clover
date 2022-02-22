@@ -9,7 +9,7 @@
 <img src="../assets/simulation_utm.png" width=500 class="center zoom">
 
 1. Скачайте UTM с официального сайта [mac.getutm.app](https://mac.getutm.app/) и установите его.
-2. Скачайте исходный образ установщика Ubuntu 20.04 для архитектуры ARM64 по ссылке: https://cdimage.ubuntu.com/focal/daily-live/current/focal-desktop-amd64.iso.
+2. Скачайте исходный образ установщика Ubuntu 20.04 для архитектуры ARM64 по ссылке: https://cdimage.ubuntu.com/focal/daily-live/current/focal-desktop-arm64.iso.
 3. Создайте новую виртуальную машину в UTM, выбирая следующие настройки:
 
     * **Тип**: Virtualize.

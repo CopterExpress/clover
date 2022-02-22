@@ -9,7 +9,7 @@ The recommended virtual machine hypervisor is [UTM app](https://mac.getutm.app/)
 <img src="../assets/simulation_utm.png" width=500 class="center zoom">
 
 1. Download UTM App from the official site [mac.getutm.app](https://mac.getutm.app/) and install it.
-2. Download Ubuntu Linux 20.04 installation iso-file for ARM64 architecture using the link: https://cdimage.ubuntu.com/focal/daily-live/current/focal-desktop-amd64.iso.
+2. Download Ubuntu Linux 20.04 installation iso-file for ARM64 architecture using the link: https://cdimage.ubuntu.com/focal/daily-live/current/focal-desktop-arm64.iso.
 3. Create a new virtual machine in UTM, using the following settings:
 
     * **Type**: Virtualize.
