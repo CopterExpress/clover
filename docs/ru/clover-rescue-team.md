@@ -27,8 +27,8 @@
 <br/><br/>
 
 ## <a name="idea"></a> Project Idea
-The idea of this project came immediately, it lies on the surface. A system that makes situations where pilots cannot find their flown away drone or stop it at full speed flying into a wall, a thing of the past, is something that pilots have been missing for a long time.
-The key feature of our software is that users can manage their Clover from anywhere in the world, this software replaces FTP and SSH (users can upload the code to their drone and run it directly from our site). Also, if radio communication with the Clover is lost, it can be returned to the user's or takeoff location with just one click. Moreover, the user can monitor the status in realtime, as well as location, camera data, and airborne position data of the drone. There are also functions that can be useful in emergency situations, such as landing, hovering and disarming the drone remotely from our website. A mobile version of the site with full functionality is also available! 
+
+The idea of this project came immediately, it lies on the surface. A system that makes situations where pilots cannot find their flown away drone or stop it at full speed flying into a wall, a thing of the past, is something that pilots have been missing for a long time. <br/>The key feature of our software is that users can manage their Clover from anywhere in the world, this software replaces FTP and SSH (users can upload the code to their drone and run it directly from our site). Also, if radio communication with the Clover is lost, it can be returned to the user's or takeoff location with just one click. Moreover, the user can monitor the status in realtime, as well as location, camera data, and airborne position data of the drone. There are also functions that can be useful in emergency situations, such as landing, hovering and disarming the drone remotely from our website. A mobile version of the site with full functionality is also available! 
 <br/>
 Demo video: https://youtu.be/jjeBh1ch4Xo, Link to the website: https://48c5-94-29-124-254.eu.ngrok.io/
 <br/><br/><br/>
@@ -49,7 +49,7 @@ You can learn more about how it works by visiting the repositories.
 
 ## <a name="rh"></a> Required Hardware
 
-All you need is COEX Clover 3/4, Raspberry Pi 3/4, USB WIFI Modem and RPI Camera!
+All you need is COEX Clover 3/4, Raspberry Pi 3/4, USB WIFI Modem and RPi Camera!
 
 ## <a name="oi"></a> Operating Instructions
 
