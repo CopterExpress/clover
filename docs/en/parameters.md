@@ -11,7 +11,7 @@ For changing PX4 parameters, use QGroundControl software, [connect to Clover ove
 |Parameter|Value|Comment|
 |-|-|-|
 |`SENS_FLOW_ROT`|0 (*No rotation*)|If using *PX4Flow* hardware, keep the default value|
-|`SENS_FLOW_MINHGT`|0.01|For [VL53L1X](laser.md) rangefinder|
+|`SENS_FLOW_MINHGT`|0.0|For [VL53L1X](laser.md) rangefinder|
 |`SENS_FLOW_MAXHGT`|4.0|For [VL53L1X](laser.md) rangefinder|
 |`SENS_FLOW_MAXR`|10.0||
 |`SYS_HAS_MAG`|0|If impossible to run the magnetometer (*No mags found* error)|

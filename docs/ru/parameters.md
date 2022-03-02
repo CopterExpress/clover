@@ -11,7 +11,7 @@
 |Параметр|Значение|Примечание|
 |-|-|-|
 |`SENS_FLOW_ROT`|0 (*No rotation*)|В случае использования "железного" [PX4Flow](px4flow.md), оставьте значение по умолчанию|
-|`SENS_FLOW_MINHGT`|0.01|Для [дальномера VL53L1X](laser.md)|
+|`SENS_FLOW_MINHGT`|0.0|Для [дальномера VL53L1X](laser.md)|
 |`SENS_FLOW_MAXHGT`|4.0|Для [дальномера VL53L1X](laser.md)|
 |`SENS_FLOW_MAXR`|10.0||
 |`SYS_HAS_MAG`|0|При невозможности запуска магнитометра (ошибка *No mags found*)|
