@@ -69,7 +69,9 @@ public:
 			                                 "launch Gazebo.");
 		}
 
-		role = (ros::this_node::getName() == "/gazebo") ? Role::Server : Role::Client;
+		// role = (ros::this_node::getName() == "/gazebo") ? Role::Server : Role::Client;
+		role = Role::Server;
+		ROS_INFO("Led node name: %s", ros::this_node::getName().c_str());
 		ROS_INFO_NAMED(("LedController_" + robotNamespace).c_str(), "LedController has started (as %s)", role == Role::Client ? "client" : "server");
 
 		nh.reset(new ros::NodeHandle(robotNamespace));
