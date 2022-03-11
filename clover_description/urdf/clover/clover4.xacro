@@ -26,7 +26,7 @@
       parent="base_link"
       radius="0.08"
       bulb_radius="0.006"
-      led_count="10"
+      led_count="58"
       use_plugin="true"
       z="-0.002"/>
   </xacro:if>
