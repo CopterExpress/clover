@@ -54,6 +54,9 @@
                     <specular>0 0 0 1</specular>
                     <emissive>0 0 0 1</emissive>
                 </material>
+                <light name="light_test" type="point">
+                    
+                </light>
             </visual>
         </gazebo>
         </xacro:if>
