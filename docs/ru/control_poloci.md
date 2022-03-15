@@ -261,7 +261,6 @@ def slezhka_za_narushitelem():
                     
                 t = pa[:1] + vel[:1]*(0.1/FRQ)*2.7
                 set_position(x=t[0], y=t[1], z=z, frame_id="aruco_map")
-
                 prev_pa = pa.copy()
                 prev_vel = vel.copy()
                 prev_t = now
