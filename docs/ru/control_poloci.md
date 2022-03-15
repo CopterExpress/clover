@@ -312,7 +312,6 @@ def slezhka_za_narushitelem():
                     Z = -(rospy.get_time()-st_t)*z_vel + z_st
                 t = pa[:1] + vel[:1]*(0.1/FRQ)*2.2
                 set_position(x=t[0], y=t[1], z=Z, frame_id="aruco_map")
-
                 prev_pa = pa.copy()
                 print("Z = ", Z)
                 prev_vel = vel.copy()
