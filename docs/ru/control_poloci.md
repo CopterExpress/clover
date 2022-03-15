@@ -227,7 +227,7 @@ def slezhka_za_narushitelem():
 
 ```python
     # Вычисляет на сколько надо перемещаться, за счет изменения кадров (прошлого и нынешнего)
-    while d > 0.08 or (rospy.get_time() - st_t < 0.5): 
+    while d > 1 or (rospy.get_time() - st_t < 0.5): 
         pb = get_body_pose("aruco_map")
         pa = get_aruco_pose("aruco_map")
         now = rospy.get_time()
@@ -241,17 +241,17 @@ def slezhka_za_narushitelem():
             prev_t = now
         else:
             if pb is not None:
-                d = np.linalg.norm(pb[:2]-pa[:2])
+                d = np.linalg.norm(pb[:1]-pa[:1])
             if pa is not None:
                 set_effect(r=150, g=0, b=255)
-                vel = (pa-prev_pa)/(now-prev_t+0.00001)
+                vel = (pa-prev_pa)/(now-prev_t+0.0001)
                 vel = np.clip(vel, -0.7, 0.7)
                 
                 vel = remove_0_vel(vel)
                 if prev_vel is not None:
-                    vel = vel*0.9 + prev_vel*0.1
+                    vel = vel*0.1 + prev_vel*0.1
                     
-                t = pa[:2] + vel[:2]*(1.0/FRQ)*2.7
+                t = pa[:1] + vel[:1]*(0.1/FRQ)*2.7
                 set_position(x=t[0], y=t[1], z=z, frame_id="aruco_map")
 
                 prev_pa = pa.copy()
@@ -285,24 +285,24 @@ def slezhka_za_narushitelem():
             prev_t = now
         else:
             if pb is not None:
-                d = np.linalg.norm(pb[:2]-pa[:2])
+                d = np.linalg.norm(pb[:1]-pa[:1])
             if pa is not None:
                 set_effect(r=255, g=150, b=0)
                 if np.linalg.norm(pa - prev_pa) < 0.0001 and prev_vel is not None:
                     vel = prev_vel.copy()*0.97
                 else:
-                    vel = (pa-prev_pa)/(now-prev_t+0.00001)
+                    vel = (pa-prev_pa)/(now-prev_t+0.0001)
                 if l_z > 0.5:
                     vel = np.clip(vel, -0.7, 0.7)
                 else:
                     vel = np.clip(vel, -0.5, 0.5)
 
                 vel = remove_0_vel(vel)
-                if np.linalg.norm(vel[:2]) < 0.02 and d <= 0.07:
-                    Z = -(rospy.get_time()-st_t)*(0.7) + z_st
+                if np.linalg.norm(vel[:1]) < 0.02 and d <= 0.07:
+                    Z = -(rospy.get_time()-st_t)*(0.1) + z_st
                 else:
                     Z = -(rospy.get_time()-st_t)*z_vel + z_st
-                t = pa[:2] + vel[:2]*(1.0/FRQ)*2.2
+                t = pa[:1] + vel[:1]*(0.1/FRQ)*2.2
                 set_position(x=t[0], y=t[1], z=Z, frame_id="aruco_map")
                 
                 #print("vel", vel, "pa", pa, "pb", pb, "d", d, "t", t, sep=" ")
@@ -316,13 +316,6 @@ def slezhka_za_narushitelem():
                 print("NO pa and vel")
                 
         r.sleep()
-    
-    # Если слишком низко по дальномеру
-    if l_z <= 0.09:
-        disarm()
-    else:
-        set_effect(r=255, g=0, b=0, effect="blink")
-        print("ERROR")
 ```
 
 Вывод: Мы написали довольно короткий, для поставленных перед ним задач,код. Данный код фиксирует правонарушение, регулирует вариативность определения транспортного средства и совершает преследование правонарушителя.
