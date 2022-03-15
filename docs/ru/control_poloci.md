@@ -172,6 +172,14 @@ def lenta_print():
  Создадим базовые значения
  
 ```python
+# Библиотеки
+import tf
+import tf2_ros
+import geometry_msgs.msg
+import tf2_geometry_msgs
+import numpy as np
+from geometry_msgs.msg import Vector3Stamped, Point, PointStamped
+
 ar = "aruco_13" # Айди нарушителя
 tfBuffer = tf2_ros.Buffer()
 listener = tf2_ros.TransformListener(tfBuffer)
