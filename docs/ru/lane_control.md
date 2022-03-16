@@ -1,8 +1,8 @@
 # Контроль соблюдения ПДД на выделенной полосе с дроном
 
-## Контакты
+## Автор
 
-- [Смирнов Даниил](https://github.com/londrwus), telegram: [londrwus](https://t.me/londrwus).
+- [Смирнов Даниил](https://github.com/londrwus), Telegram: [londrwus](https://t.me/londrwus).
 
 ## Введение
 
