@@ -36,7 +36,7 @@ i = -1
  Создаём скриншот с изображением с основной камеры для обработки с использованием OpenCV:
 
 ```python
-def control_poloci():
+def lane_control():
     global dict_flag, i, detect_flag, detected_blue_bus
     cv_image = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
     filtered_image = cv2.cvtColor(cv_image, cv2.COLOR_HSV2BGR)
@@ -44,7 +44,7 @@ def control_poloci():
 
 На данный момент, автобусы производятся в синем цвете. Поэтому, автобус у нас будет синего цвета.
 
-<img src="../assets/control_poloci_without_any_color.jpg" width="75%">
+<img src="../assets/lane_control_without_any_color.jpg" width="75%">
 
 Прописываем диапазоны цветов для автобуса и машины:
 
@@ -104,7 +104,7 @@ else:
 
 Данная программа будет определять машины по её оттенку. Вот что у нас в итоге получилось.
 
-<img src="../assets/control_poloci_with_color.jpg" width="75%">
+<img src="../assets/lane_control_with_color.jpg" width="75%">
 
 Вот примеры других цветовых диапазонов. Стоит подметить, что цветовые диапозоны вычисляются в HSV, а не в RGB:
 
@@ -131,40 +131,40 @@ upper_yellow = np.array([32, 200, 200])
 ```python
 Led = { "red": [255, 0, 0], "blue": [0, 0, 255] }
 count_led = 72 #Если же на вашей LED-ленте 72 светодиода, если 58 - ставьте значение 58
-Lenta = [0]*count_led
-def lenta_print():
-    global count_led, Lenta
+Led_full = [0]*count_led
+def led_print():
+    global count_led, Led_full
     set_effect(r=0, g=0, b=0)
     rospy.sleep(4)
     a = []
     for i in range(count_led):
-        a.append(LEDState(i, Led[Lenta[i][0]][0], Led[Lenta[i][0]][1], Led[Lenta[i][0]][2]))
+        a.append(LEDState(i, Led[Led_full[i][0]][0], Led[Led_full[i][0]][1], Led[Led_full[i][0]][2]))
     set_leds(a)
 ```
 
-Дополним функцию `control_poloci`:
+Дополним функцию `lane_control`:
 
 ```python
  S = sum([ dict_flag[i][0] for j in range (len(dict_flag[i]))])
  j, k = 0, 0
  print(dict_flag[i][0][0])
  for k in range(int(dict_flag[i][0][0]/S * count_led)):
-     Lenta[k+j] = ["red", dict_flag[i][0][1], dict_flag[i][0][2]]
+     Led_full[k+j] = ["red", dict_flag[i][0][1], dict_flag[i][0][2]]
  j+=k
  k = 0
  print(j, k )
  for k in range(int(dict_flag[i][1][0]/S * count_led)):
-     Lenta[k+j] = ["blue", dict_flag[i][1][1], dict_flag[i][1][2]]
+     Led_full[k+j] = ["blue", dict_flag[i][1][1], dict_flag[i][1][2]]
  j+=k
  k = 0
  print(j, k)
  
- if abs(Lenta[0][1] - Lenta[count_led/2][1]) > 50:
-     Lenta.sort(key=lambda Lenta: Lenta[1]) # сортировка по x    
+ if abs(Led_full[0][1] - Led_full[count_led/2][1]) > 50:
+     Led_full.sort(key=lambda Led_full: Led_full[1]) # сортировка по x    
  else:
-     Lenta.sort(key=lambda Lenta: Lenta[2]) # сортировка по y
+     Led_full.sort(key=lambda Led_full: Led_full[2]) # сортировка по y
  
- print(Lenta)
+ print(Led_full)
 ```
 
 После этого наша светодиодная лента будет обозначать нарушил ли данный объект ПДД или нет.
@@ -222,7 +222,7 @@ def remove_0_vel(vel): # Скорости полета в позишион
 Создадим функцию, которая будет производить весь этот полет. Для начала сделаем так, чтобы дрон находил нарушителя.
 
 ```python
-def slezhka_za_narushitelem():
+def follow_violator():
   z = 1.5
 
   navigate_wait(z=1.5, speed=1, frame_id="body", auto_arm = True)
@@ -235,6 +235,13 @@ def slezhka_za_narushitelem():
 В итоге, мы написали код, но давайте сделаем так, чтобы он постоянно двигался за ним и улучшал его позиционирование.
 
 ```python
+    FRQ = 5
+    r = rospy.Rate(FRQ)
+    prev_vel = None
+    prev_pa = None
+    prev_t = rospy.get_time()
+    st_t = rospy.get_time()
+    d = 10
     # Вычисляет на сколько надо перемещаться, за счет изменения кадров (прошлого и нынешнего)
     while d > 1 or (rospy.get_time() - st_t < 0.5): 
         pb = get_body_pose("aruco_map")
@@ -310,6 +317,7 @@ def slezhka_za_narushitelem():
                     Z = -(rospy.get_time()-st_t)*(0.1) + z_st
                 else:
                     Z = -(rospy.get_time()-st_t)*z_vel + z_st
+                    
                 t = pa[:1] + vel[:1]*(0.1/FRQ)*2.2
                 set_position(x=t[0], y=t[1], z=Z, frame_id="aruco_map")
                 prev_pa = pa.copy()
