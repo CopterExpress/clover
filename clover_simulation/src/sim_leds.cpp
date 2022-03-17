@@ -75,16 +75,10 @@ public:
 		ROS_INFO_NAMED(("LedController_" + robotNamespace).c_str(), "LedController has started (as %s)", role == Role::Client ? "client" : "server");
 
 		nh.reset(new ros::NodeHandle(robotNamespace));
-		if (role == Role::Server)
-		{
-			setLedsSrv = nh->advertiseService("led/set_leds", &LedController::setLeds, this);
-			statePublisher = nh->advertise<led_msgs::LEDStateArray>("led/state", 1, true);
-		}
-		else
-		{
-			// LED state should be published to the "led/state" topic, so we grab our data there
-			stateSubscriber = nh->subscribe<led_msgs::LEDStateArray>("led/state", 1, &LedController::handleLedsMsg, this);
-		}
+
+		setLedsSrv = nh->advertiseService("led/set_leds", &LedController::setLeds, this); // the newer service server would overwrite the previous one
+		statePublisher = nh->advertise<led_msgs::LEDStateArray>("led/state", 1, true);
+		stateSubscriber = nh->subscribe<led_msgs::LEDStateArray>("led/state", 1, &LedController::handleLedsMsg, this);
 	};
 
 	~LedController()
@@ -103,8 +97,7 @@ public:
 		ROS_DEBUG_NAMED(("LedController_" + robotNamespace).c_str(), "Registering LED visual plugin to %s (LED id=%d)", (role == Role::Client) ? "client" : "server", ledIdx);
 		registeredLeds[ledIdx] = plugin;
 		ledState.leds[ledIdx].index = ledIdx;
-		if (role == Role::Server)
-			statePublisher.publish(ledState);
+		statePublisher.publish(ledState);
 	}
 
 	void unregisterPlugin(sim_led::LedVisualPlugin* plugin)

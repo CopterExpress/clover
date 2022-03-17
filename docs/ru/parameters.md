@@ -1,20 +1,64 @@
 # Параметры PX4
 
-Основная статья: https://dev.px4.io/en/advanced/parameter_reference.html
+Полная документация по параметрам PX4: https://docs.px4.io/master/en/advanced_config/parameter_reference.html.
 
-> **Note** Это описание некоторых, наиболее важных параметров PX4 по состоянию на версию 1.8.0. Полный список см. по ссылке выше.
+Для изменения параметров PX4 используйте программу QGroundControl, [подключившись к Клеверу по Wi-Fi](gcs_bridge.md) или USB. Перейдите в панель *Vehicle Setup* (кликнув на логотип QGroundControl в левом верхнем углу и выберите меню *Parameters*.
 
-Для изменения параметров PX4 можно воспользоваться программой QGroundControl, [подключившись к Клеверу по Wi-Fi](gcs_bridge.md):
+## Рекомендованные значения
 
-![Параметры PX4 в QGroundControl](../assets/qgc-params.png)
+### Общие параметры
 
-## Основные параметры
+|Параметр|Значение|Примечание|
+|-|-|-|
+|`SENS_FLOW_ROT`|0 (*No rotation*)|В случае использования "железного" [PX4Flow](px4flow.md), оставьте значение по умолчанию|
+|`SENS_FLOW_MINHGT`|0.0|Для [дальномера VL53L1X](laser.md)|
+|`SENS_FLOW_MAXHGT`|4.0|Для [дальномера VL53L1X](laser.md)|
+|`SENS_FLOW_MAXR`|10.0||
+|`SYS_HAS_MAG`|0|При невозможности запуска магнитометра (ошибка *No mags found*)|
 
-Наиболее важные параметры вынесены в этот параграф.
+### Настройки подсистемы Estimator
 
-`SYS_MC_EST_GROUP` – выбор модуля estimator'а.
+В случае использования LPE ([прошивка COEX](firmware.md)):
 
-Это группа модулей, которая вычисляет текущее состояние (state) коптера, используя показания с датчиков. В состояние коптера входит:
+|Параметр|Значение|Примечание|
+|-|-|-|
+|`LPE_FUSION`|86|Чекбоксы: *flow* + *vis* + *land Detector* + *gyro comp*. При полете над ровным полом возможно включение *pub agl as lpos down*. <br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
+|`LPE_VIS_DELAY`|0.0||
+|`LPE_VIS_Z`|0.1||
+|`LPE_FLW_SCALE`|1.0||
+|`LPE_FLW_R`|0.2||
+|`LPE_FLW_RR`|0.0||
+|`LPE_FLW_QMIN`|10||
+|`ATT_W_EXT_HDG`|0.5|Включение использования внешнего угла по рысканью (при навигации по [карте маркеров](aruco_map.md))|
+|`ATT_EXT_HDG_M`|1 (*Vision*)||
+|`ATT_W_MAG`|0|Выключение магнитометра (при навигации внутри помещения)|
+
+В случае использования EKF2 (официальная прошивка):
+
+<!-- markdownlint-disable MD044 -->
+
+|Параметр|Значение|Примечание|
+|-|-|-|
+|`EKF2_AID_MASK`|27|Чекбоксы: (опционально) *gps* + *flow* + *vision position* + *vision yaw*.<br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
+|`EKF2_OF_DELAY`|0||
+|`EKF2_OF_QMIN`|10||
+|`EKF2_OF_N_MIN`|0.05||
+|`EKF2_OF_N_MAX`|0.2||
+|`EKF2_HGT_MODE`|2 (*Range sensor*)|При наличии [дальномера](laser.md) и полете над ровным полом|
+|`EKF2_EVA_NOISE`|0.1||
+|`EKF2_EVP_NOISE`|0.1||
+|`EKF2_EV_DELAY`|0||
+|`EKF2_MAG_TYPE`|5 (*None*)|Выключение магнитометра (при навигации внутри помещения)|
+
+<!-- markdownlint-enable MD031 -->
+
+> **Info** См. также: список параметров по умолчанию в [симуляторе](simulation.md): https://github.com/CopterExpress/clover/blob/master/clover_simulation/airframes/4500_clover.
+
+## Дополнительная информация
+
+Параметр `SYS_MC_EST_GROUP` отвечает за выбор Estimator'а.
+
+Estimator это подсистема, которая вычисляет текущее состояние (state) коптера, используя показания с датчиков. В состояние коптера входит:
 
 * угловая скорость коптера – pitch_rate, roll_rate, yaw_rate;
 * ориентация коптера (в локальной системе координат) – pitch (тангаж), roll (крен), yaw (рысканье) (одно из представлений);
@@ -57,9 +101,7 @@
 
 ## LPE + Q attitude estimator
 
-Данные параметры настраивают поведение модулей `lpe` и `q`, которые вычисляют состояние (ориентацию, позицию) коптера. Эти параметры применяются **только** если параметр `SYS_MC_EST_GROUP` установлен в значение `1` (local_position_estimator, attitude_estimator_q)
-
-TODO
+Данные параметры настраивают поведение модулей `lpe` и `q`, которые вычисляют состояние (ориентацию, позицию) коптера. Эти параметры применяются **только** если параметр `SYS_MC_EST_GROUP` установлен в значение `1` (local_position_estimator, attitude_estimator_q).
 
 ## Commander
 
@@ -68,5 +110,3 @@ TODO
 ## Sensors
 
 Включение, выключение и настройка различных датчиков.
-
-TODO
