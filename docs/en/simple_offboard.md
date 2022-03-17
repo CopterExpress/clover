@@ -1,11 +1,4 @@
-Autonomous flight (OFFBOARD)
-===
-
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/simple_offboard.md) for older images.
-
-<!-- -->
-
-> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for autonomous flights.
+# Autonomous flight
 
 The `simple_offboard` module of the `clover` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
@@ -13,8 +6,7 @@ The `simple_offboard` module of the `clover` package is intended for simplified 
 
 Main services are [`get_telemetry`](#gettelemetry) (receive telemetry data), [`navigate`](#navigate) (fly to a given point along a straight line), [`navigate_global`](#navigateglobal) (fly to a point specified as latitude and longitude along a straight line), [`land`](#land) (switch to landing mode).
 
-Python examples
----
+## Python usage
 
 You need to create proxies for services before calling them. Use the following template for your programs:
 
@@ -37,8 +29,7 @@ land = rospy.ServiceProxy('land', Trigger)
 
 Unused proxy functions may be removed from the code.
 
-API description
----
+## API description
 
 > **Note** Omitted numeric parameters are set to 0.
 
@@ -312,14 +303,9 @@ Landing the drone (command line):
 rosservice call /land "{}"
 ```
 
-<!--
-### release
+> **Caution** In recent PX4 versions, the vehicle will be switched out of LAND mode to manual mode, if the remote control sticks are moved significantly.
 
-Stop publishing setpoints to the drone (release control). Required to continue monitoring by means of [MAVROS](mavros.md).
--->
-
-Additional materials
-------------------------
+## Additional materials
 
 * [ArUco-based position estimation and navigation](aruco.md).
 * [Program samples and snippets](snippets.md).

@@ -29,7 +29,7 @@ When using **EKF2** (parameter `SYS_MC_EST_GROUP` = `ekf2`):
 * `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (for the rangefinder VL53L1X)
 * Optional: `EKF2_HGT_MODE` – range sensor (cf. [rangefinder setup](laser.md)).
 
 When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
@@ -41,7 +41,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (for the rangefinder VL53L1X)
 * Optional: `LPE_FUSION` – flag 'pub agl as lpos down' is on (see [rangefinder setup](laser.md).
 
 [The `selfcheck.py` utility](selfcheck.md) will help you verify that all settings are correctly set.
