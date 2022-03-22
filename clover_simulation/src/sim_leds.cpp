@@ -140,7 +140,8 @@ public:
 		{
 			auto indexStr = parentName.substr(lastDashPos + 1);
 			try {
-				myIndex = std::stoi(indexStr);
+				if (indexStr == "visual") myIndex = 0; // the first visual doesn't have index
+				else myIndex = std::stoi(indexStr);
 			} catch(const std::exception &e) {
 				gzwarn << "Failed to convert " << indexStr << " to integer: " << e.what() <<  ", assuming 0\n";
 				myIndex = 0;
