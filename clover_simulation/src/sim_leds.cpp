@@ -49,14 +49,9 @@ private:
 
 	std::unique_ptr<ros::NodeHandle> nh;
 
-	ros::ServiceServer setLedsSrv;
-	// Note: LED state should only be published by the /gazebo node
-	led_msgs::LEDStateArray ledState;
-	ros::Publisher statePublisher;
 	// LED state will be read from the topic to avoid creating more services
 	ros::Subscriber stateSubscriber;
 
-	bool setLeds(led_msgs::SetLEDs::Request& req, led_msgs::SetLEDs::Response& resp);
 	void handleLedsMsg(const led_msgs::LEDStateArrayConstPtr& leds);
 
 public:
@@ -74,8 +69,6 @@ public:
 
 		nh.reset(new ros::NodeHandle(robotNamespace));
 
-		setLedsSrv = nh->advertiseService("led/set_leds", &LedController::setLeds, this); // the newer service server would overwrite the previous one
-		statePublisher = nh->advertise<led_msgs::LEDStateArray>("led/state", 1, true);
 		stateSubscriber = nh->subscribe<led_msgs::LEDStateArray>("led/state", 1, &LedController::handleLedsMsg, this);
 	};
 
@@ -90,12 +83,9 @@ public:
 		std::lock_guard<std::mutex> lock(registryMutex);
 		if (totalLeds > 0) {
 			registeredLeds.resize(totalLeds);
-			ledState.leds.resize(totalLeds);
 		}
 		ROS_DEBUG_NAMED(("LedController_" + robotNamespace).c_str(), "Registering LED visual plugin to %s (LED id=%d)", (role == Role::Client) ? "client" : "server", ledIdx);
 		registeredLeds[ledIdx] = plugin;
-		ledState.leds[ledIdx].index = ledIdx;
-		statePublisher.publish(ledState);
 	}
 
 	void unregisterPlugin(sim_led::LedVisualPlugin* plugin)
@@ -186,26 +176,6 @@ public:
 	}
 
 };
-}
-
-// FIXME: These two functions basically do the same thing, maybe they can be merged?
-bool led_controller::LedController::setLeds(led_msgs::SetLEDs::Request &req, led_msgs::SetLEDs::Response &resp)
-{
-	std::lock_guard<std::mutex> lock(registryMutex);
-	for(const auto& led : req.leds)
-	{
-		if (led.index < registeredLeds.size()) {
-			auto color = GazeboColor(led.r / 255.0f, led.g / 255.0f, led.b / 255.0f);
-			auto ledPlugin = registeredLeds[led.index];
-			if (ledPlugin) ledPlugin->SetColor(color);
-			ledState.leds[led.index].r = led.r;
-			ledState.leds[led.index].g = led.g;
-			ledState.leds[led.index].b = led.b;
-		}
-	}
-	statePublisher.publish(ledState);
-	resp.success = true;
-	return true;
 }
 
 void led_controller::LedController::handleLedsMsg(const led_msgs::LEDStateArrayConstPtr& leds)
