@@ -22,7 +22,7 @@ body {
 	width: 100%;
 	height: 40%;
 	min-height: 250px;
-	background-image: url('./assets/Header.png');
+	background-image: url('./assets/background_swarm_in_blocks_3.png');
 	background-size: cover;
     background-position: center;
 	display: flex;

@@ -15,8 +15,8 @@
 
 <!-- Header -->
 <div class="header">
-    <h1 style="font-weight: bold; font-size: 60px">Swarm in Blocks</h1>
-    <h2>Package List</h2>
+    <!-- <h1 style="font-weight: bold; font-size: 60px">Swarm in Blocks</h1>
+    <h2>Package List</h2> -->
 </div>
 
 
@@ -87,7 +87,7 @@
 </div>
 </div>
 
-<!-- Eazy to Swarm heading -->
+<!-- Easy to Swarm heading -->
 <hr>
 <div class="w3-center">
     <h1 class="eazy2">
@@ -95,7 +95,7 @@
     <h1 class="Swarm">
         Swarm</h1>
     <hr style="width:200px; margin: auto; border-bottom: 2px rgb(146, 71, 216) solid;" size="1">
-    <p class="w3-large">Online block programming optimzed for swarm manipulation</p>
+    <p class="w3-large">Online block programming optimized for swarm manipulation</p>
     
 </div>
 <br>

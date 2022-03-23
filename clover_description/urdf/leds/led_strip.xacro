@@ -50,10 +50,10 @@
                 </plugin>
                 <cast_shadows>false</cast_shadows>
                 <material>
-                    <!-- <ambient>0 0 0 1</ambient> -->
-                    <diffuse>0.0 0.0 0.0 1</diffuse>
-                    <specular>0.0 0.0 0.0 1</specular>
-                    <emissive>0.0 0.0 0.0 1</emissive>
+                    <ambient>0 0 0 1</ambient>
+                    <diffuse>0 0 0 1</diffuse>
+                    <specular>0 0 0 1</specular>
+                    <emissive>0 0 0 1</emissive>
                 </material>
             </visual>
             <!-- <light name="${name}_light" type="point">
