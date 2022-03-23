@@ -7,7 +7,6 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 
-
 class LedControllerPlugin : public gazebo::ModelPlugin {
 private:
 	std::unique_ptr<ros::NodeHandle> nh;
@@ -56,12 +55,9 @@ public:
 		}
 		int totalLeds = sdf->Get<int>("ledCount");
 		ledState.leds.resize(totalLeds);
-		for (int i; i < totalLeds; i++) {
+		for (int i = 0; i < totalLeds; i++) {
 			ledState.leds[i].index = i;
 		}
-
-		ROS_INFO("LED count %d", totalLeds);
-
 
 		nh.reset(new ros::NodeHandle(ns));
 
