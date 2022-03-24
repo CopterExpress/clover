@@ -14,6 +14,7 @@ The recommended virtual machine hypervisor is [UTM app](https://mac.getutm.app/)
 
     * **Type**: Virtualize.
     * **Operating System**: Linux.
+    * **Boot ISO Image**: choose downloaded file `focal-desktop-arm64.iso`.
     * **Memory**: 4096 MB or more.
     * **CPU Cores**: 4 or more.
     * Turn on *Enable hardware OpenGL acceleration* option.
@@ -51,3 +52,5 @@ fatal: index-pack failed
 ```
 
 In this case, change the type of the network card to bridged. In the virtual machine settings, choose *Network*, and set *Network Mode* menu to *Bridged (Advanced)*.
+
+Later, if some network issues occur, change the network mode back to *Shared Network*.
