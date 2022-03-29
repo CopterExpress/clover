@@ -38,7 +38,9 @@ jobs:
          gitbook install
          gitbook build
       - name: Generate PDF
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        env:
+          GITBOOK_SKIP_PDF: ${{ secrets.GITBOOK_SKIP_PDF }}
+        if: ${{ !env.GITBOOK_SKIP_PDF && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         run: |
           for i in 1 2 3 4; do gitbook pdf ./ _book/clover.pdf && break || sleep 1; done
           sudo apt-get -q install ghostscript
@@ -47,6 +49,13 @@ jobs:
           rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
           rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
           ls -lah _book/clover*.pdf
+      - name: Download older PDFs
+        env:
+          GITBOOK_SKIP_PDF: ${{ secrets.GITBOOK_SKIP_PDF }}
+        if: ${{ env.GITBOOK_SKIP_PDF }}
+        run: |
+          wget --no-verbose https://clover.coex.tech/clover_ru.pdf -P _book/
+          wget --no-verbose https://clover.coex.tech/clover_en.pdf -P _book/
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
