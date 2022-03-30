@@ -77,14 +77,6 @@ for line in f:
     style += str(line)
 f.close()
 
-#* script.js
-
-f = open(os.path.join(local_dir,'script.txt'), 'r')
-script = ''
-for line in f:
-    script += str(line)
-f.close()
-
 
 #* Escreve nos arquivos 
 
@@ -118,15 +110,6 @@ elif index_file is not None:
 else:
     open(www + '/style.css', 'w').write(style)
 
-#* script.js
-if default_package is not None:
-    redirect_html = '<meta http-equiv=refresh content="0; url={name}/">'.format(name=default_package)
-    open(www + '/script.js', 'w').write(redirect_html)
-elif index_file is not None:
-    rospy.loginfo('symlinking script file')
-    os.symlink(index_file, www + '/script.js')
-else:
-    open(www + '/script.js', 'w').write(script)
 
 #* copy assests folder
 src = os.path.join(local_dir,'assets')

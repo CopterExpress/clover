@@ -12,11 +12,8 @@
 </head>
 <body>
 
-
 <!-- Header -->
 <div class="header">
-    <!-- <h1 style="font-weight: bold; font-size: 60px">Swarm in Blocks</h1>
-    <h2>Package List</h2> -->
 </div>
 
 
@@ -24,7 +21,7 @@
 <div class="w3-row-padding w3-center w3-margin-top">
 
 <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:400px; font-family: 'Dejavu Sans';">
+    <div class="w3-card w3-container">
         <h1 class="subtitle">
             Clover Blocks<br>
         </h1>
@@ -44,7 +41,7 @@
     </div>
 </div>
 <div class="w3-third">
-    <div class="w3-card w3-container" style="min-height:400px; font-family: 'Dejavu Sans';">
+    <div class="w3-card w3-container">
         <h1 class="subtitle">
             Swarm Clover Blocks<br>
         </h1>
@@ -65,7 +62,7 @@
 </div>
 
 <div class="w3-third">
-    <div class="w3-card w3-container"  style="min-height:400px; font-family: 'Dejavu Sans';">
+    <div class="w3-card w3-container">
         <h1 class="subtitle">
             Clover Kit Tools<br>
         </h1>
@@ -75,7 +72,6 @@
             <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
                 onclick="document.getElementById('id01').style.display='block'" 
                 style="font-weight:900;"> GO
-                <!-- <i fa fa-chevron-circle-right hvr-icon></i> -->
             </button>
         </a>
         <div class="p" style="margin-top: 30px; margin-bottom: 20px">
@@ -100,24 +96,22 @@
 </div>
 <br>
 
-<div class="row">
-    <div class="column1">
-        <img    src="./assets/swarm_clover_blocks.png"
-                alt="Swarm_Clover_Blocks"
-                width= 100%;
-                height= auto; 
-                title="Swarm_Clover_Blocks"
-                style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
+<center>
+    <div class="container">
+            <img    src="./assets/SwarmCloverBlocks.png"
+                    alt="Swarm_Clover_Blocks"
+                    width= 100%;
+                    height= auto; 
+                    title="Swarm_Clover_Blocks"
+                    style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
+            <img    src="./assets/formations.gif"
+                    alt="quatro clover montando uma formação"
+                    width= 100%%;
+                    height= auto; 
+                    title="Swarm_Clover_Blocks example working" 
+                    style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
     </div>
-    <div class="column2">
-        <img    src="./assets/formations.gif"
-                alt="quatro clover montando uma formação"
-                width= 100%%;
-                height= auto; 
-                title="Swarm_Clover_Blocks example working" 
-                style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
-    </div>
-</div>
+</center>
 
 <!-- Bottom -->
 <hr>
