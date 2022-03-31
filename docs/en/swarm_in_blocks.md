@@ -1,6 +1,6 @@
 # Swarm-in-blocks
 
-**VÍDEO**
+[![Video](https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg)](https://www.youtube.com/watch?v=5C-1rRnyiE8)
 
 ## Detailed Gitbook
 
@@ -61,7 +61,15 @@ Along with the project, we developed some features, that can be used together or
 
 - **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way a 2D or 3D image illustrating the drones' disposition can pop up on the screen when using this function.
 
+<p align="center">
+  <img width="700" height="394" src="../assets/swarm_in_blocks/swarm_preview.png">
+</p>
+
 - **First Person View (FPV):** The FPV node makes it a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
+
+<p align="center">
+  <img width="700" height="394" src="../assets/swarm_in_blocks/fpv.jpg">
+</p>
 
 All these features can be very useful for some applications and also be attractive to arouse the curiosity of the general public.
 
