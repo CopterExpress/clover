@@ -29,7 +29,7 @@ The Swarm in Blocks can be programmed either with the blocks interface or direct
 The entire Swarm in Blocks project was designed so that the user was in an intuitive and comfortable environment within the manipulation of swarms, for this, the existing platform with clover packages was completely rethought and adapted. In our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/usability/blocks-api), we have more details about the front-end design, how the user can interact with it, and achieve our main goal: Programming in blocks.
 
 <p align="center">
-  <img width="700" height="394" src="../assets/swarm_in_blocks/blocks.gif">
+  <img width="500" height="281" src="../assets/swarm_in_blocks/blocks.gif">
 </p>
 
 ### Features
@@ -50,25 +50,25 @@ Along with the project, we developed some features, that can be used together or
   - Rotate: The formation rotates around a determined axis.
 
 <p align="center">
-  <img width="700" height="394" src="../assets/swarm_in_blocks/scaling.gif">
+  <img width="500" height="281" src="../assets/swarm_in_blocks/scaling.gif">
 </p>
   
 - **LED effects:** Enjoying the LEDs included in the Clover, we made some functions to apply effects in all the swarm, creating figures and operations with the LEDs too.
 
 <p align="center">
-  <img width="700" height="394" src="../assets/swarm_in_blocks/leds.gif">
+  <img width="500" height="281" src="../assets/swarm_in_blocks/leds.gif">
 </p>
 
 - **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way a 2D or 3D image illustrating the drones' disposition can pop up on the screen when using this function.
 
 <p align="center">
-  <img width="700" height="394" src="../assets/swarm_in_blocks/swarm_preview.png">
+  <img width="300" height="300" src="../assets/swarm_in_blocks/swarm_preview.png">
 </p>
 
 - **First Person View (FPV):** The FPV node makes it a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
 
 <p align="center">
-  <img width="700" height="394" src="../assets/swarm_in_blocks/fpv.jpg">
+  <img width="500" height="281" src="../assets/swarm_in_blocks/fpv.jpg">
 </p>
 
 All these features can be very useful for some applications and also be attractive to arouse the curiosity of the general public.
