@@ -2,6 +2,10 @@
 
 **VÍDEO**
 
+## Detailed Gitbook
+
+Check our Gitbook, with the detailed informations about all that was developed by Atena Team during CopterHack 2022: https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks
+
 ## Introduction
 
 Nowadays, swarm of drones are getting more and more applications and being used in several different areas, since agriculture to surveillance and rescues, but controlling a high amount of drones usually isn't a simple task, demanding a lot of studies and a complex software. Swarm in Blocks was born looking to make a high-level interface based on the blocks language, to make simple handling swarms, without requiring advanced knowledge in all the necessary platforms, creating tools to allow a lot of applications based on the user needs and also using the Clover platform, which has a lot of advantages as being complete and intuitive, supporting all the project goals. 
@@ -42,8 +46,8 @@ All these features can be very useful for some applications and also being an at
 
 ## Conclusion
 
-Along the last months we studied a lot, grew and surpassed our limits, trying to explore some swarm applications, all to deliver the best possible project, **Swarm in Blocks**. All the motivation to facilitate such a complex task as the manipulation of swarms of drones, even through block programming, delighted us a lot and we hope it will delight all our users. We tried to resume all the project in this article, but as there are many details and needed explanations, it was made a [gitbook](), to explore them for those who are interested.
+Along the last months we studied a lot, grew and surpassed our limits, trying to explore some swarm applications, all to deliver the best possible project, **Swarm in Blocks**. All the motivation to facilitate such a complex task as the manipulation of swarms of drones, even through block programming, delighted us a lot and we hope it will delight all our users. We tried to resume all the project in this article, but as there are many details and needed explanations, it was made a [gitbook](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks), to explore them for those who are interested.
 
 For us, the results achieved were very expressive and positive, however, we believe that there is still room for improvement in the project, both considering the robustness of the swarm and the simplification of the usability of our platform. Improvement in the collision avoidance system, implementation of more formations and tests in real Clovers are some of the points that we hope to develop in future opportunities. 
 
-Finally, we thank the entire COEX team that made it possible for CopterHack 2022 to take place and all the support given during the competition. We are Team Athena, creator of the Swarm in Blocks platform and we thank you for your attention!
+Finally, we thank the entire COEX team that made it possible for CopterHack 2022 to take place and all the support given during the competition. We are Team Atena, creator of the Swarm in Blocks platform and we thank you for your attention!
