@@ -22,6 +22,22 @@ The entire Swarm in Blocks project was designed so that the user was in an intui
 
 ### Swarm Tools
 
+Along the project we developed some features, they can be used together or independently and also serve as base for the implementation of more specific and advanced innovations. Here are the list and a brief explanation of each tool, to see more details and instructions about their use, check our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/background-theory/system)!
+- **Formations:** There are some types of formation that were developed in order to create figures and other images, for uses in engineering and espectacles. They are:
+  - 2D Formations: We made functions to generate some simple geometries, allowing the user to set the amount of clovers used and the size of the figure, the geometries options made until now are *circle*, *empty square*, *full square* and *triangle*.
+  - 3D Formations: Besides the 2D figures, there are also some simple 3D geometries, which are *cube*, *sphere* and *pyramid*.
+  - Alphabet: There is also the option to generate letters and words, using our Clover swarm.
+  - 3D Figures: Lastly, we have the alternative to make other 3D formations more complex, for this we use a library called Open3D that deals with 3D data, allowing the drones to create any 3D image the user inputs, since it's in the supported formats.
+- **Transformations:** In addition to creating the formations, it's important to give the option of edit their disposition, so some operations were developed. It also makes possible executing more complex actions and activities with the Clovers. The transformations operations are:
+  - Scale: Changes the distance between the drones, increasing or decreasing the image.
+  - Translate: All the drones move the same distance in the chosen directions.
+  - Rotate: The formation rotates around a determined axis.
+- **LED effects:** Enjoying the LEDs included in the Clover, we made some functions to apply effects in all the swarm, creating figures and operations with the LEDs too.
+- **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way an 2D or 3D image ilustrating the drones disposition can pop up on the screen when using this function.
+- **First Person View (FPV):** The FPV node makes a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
+
+All these features can be very useful for some applications and also being an attractive to arouse the curiosity of the general public.
+
 ## Some demonstrations (COLOCA?)
 
 ## Conclusion
