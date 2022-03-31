@@ -1,6 +1,6 @@
 # Swarm-in-blocks
 
-**VÍDEO**
+https://youtu.be/5C-1rRnyiE8
 
 ## Detailed Gitbook
 
@@ -11,7 +11,6 @@ Check our Gitbook, with the detailed informations about all that was developed b
 Nowadays, swarm of drones are getting more and more applications and being used in several different areas, since agriculture to surveillance and rescues, but controlling a high amount of drones usually isn't a simple task, demanding a lot of studies and a complex software. Swarm in Blocks was born looking to make a high-level interface based on the blocks language, to make simple handling swarms, without requiring advanced knowledge in all the necessary platforms, creating tools to allow a lot of applications based on the user needs and also using the Clover platform, which has a lot of advantages as being complete and intuitive, supporting all the project goals. 
 
 ![arcs](../assets/swarm_in_blocks/arcs.gif)
-<img src="../assets/swarm_in_blocks/arcs.gif" width="800" height="450"/>
 
 ## Usability
 
@@ -55,7 +54,11 @@ Along the project we developed some features, they can be used together or indep
 
 - **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way an 2D or 3D image ilustrating the drones disposition can pop up on the screen when using this function.
 
+![blocks](../assets/swarm_in_blocks/swarm_preview.png)
+
 - **First Person View (FPV):** The FPV node makes a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
+
+![blocks](../assets/swarm_in_blocks/fpv.jpg)
 
 All these features can be very useful for some applications and also being an attractive to arouse the curiosity of the general public.
 
