@@ -41,3 +41,9 @@ All these features can be very useful for some applications and also being an at
 ## Some demonstrations (COLOCA?)
 
 ## Conclusion
+
+Along the last months we studied a lot, grew and surpassed our limits, trying to explore some swarm applications, all to deliver the best possible project, **Swarm in Blocks**. All the motivation to facilitate such a complex task as the manipulation of swarms of drones, even through block programming, delighted us a lot and we hope it will delight all our users. We tried to resume all the project in this article, but as there are many details and needed explanations, it was made a [gitbook](), to explore them for those who are interested.
+
+For us, the results achieved were very expressive and positive, however, we believe that there is still room for improvement in the project, both considering the robustness of the swarm and the simplification of the usability of our platform. Improvement in the collision avoidance system, implementation of more formations and tests in real Clovers are some of the points that we hope to develop in future opportunities. 
+
+Finally, we thank the entire COEX team that made it possible for CopterHack 2022 to take place and all the support given during the competition. We are Team Athena, creator of the Swarm in Blocks platform and we thank you for your attention!
