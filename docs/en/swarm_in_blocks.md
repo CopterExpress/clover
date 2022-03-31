@@ -46,16 +46,18 @@ Along the project we developed some features, they can be used together or indep
   - Scale: Changes the distance between the drones, increasing or decreasing the image.
   - Translate: All the drones move the same distance in the chosen directions.
   - Rotate: The formation rotates around a determined axis.
+
+![blocks](../assets/swarm_in_blocks/scaling.gif)
   
 - **LED effects:** Enjoying the LEDs included in the Clover, we made some functions to apply effects in all the swarm, creating figures and operations with the LEDs too.
-  
+
+![blocks](../assets/swarm_in_blocks/leds.gif)
+
 - **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way an 2D or 3D image ilustrating the drones disposition can pop up on the screen when using this function.
 
 - **First Person View (FPV):** The FPV node makes a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
 
 All these features can be very useful for some applications and also being an attractive to arouse the curiosity of the general public.
-
-![blocks](../assets/swarm_in_blocks/scaling.gif) 
 
 ## Conclusion
 
