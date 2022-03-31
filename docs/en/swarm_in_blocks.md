@@ -11,6 +11,7 @@ Check our Gitbook, with the detailed informations about all that was developed b
 Nowadays, swarm of drones are getting more and more applications and being used in several different areas, since agriculture to surveillance and rescues, but controlling a high amount of drones usually isn't a simple task, demanding a lot of studies and a complex software. Swarm in Blocks was born looking to make a high-level interface based on the blocks language, to make simple handling swarms, without requiring advanced knowledge in all the necessary platforms, creating tools to allow a lot of applications based on the user needs and also using the Clover platform, which has a lot of advantages as being complete and intuitive, supporting all the project goals. 
 
 ![arcs](../assets/swarm_in_blocks/arcs.gif)
+<img src="../assets/swarm_in_blocks/arcs.gif" width="800" height="450"/>
 
 ## Usability
 
@@ -27,6 +28,7 @@ The Swarm in Blocks can be programmed either with the blocks interface or direct
 The entire Swarm in Blocks project was designed so that the user was in an intuitive and comfortable environment within the manipulation of swarms, for this, the existing platform with clover packages was completely rethought and adapted. In our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/usability/blocks-api), we have more details of the front-end design, how the user can interact with it and achieve our main goal: Programming in blocks.
 
 ![blocks](../assets/swarm_in_blocks/blocks.gif)
+
 
 ### Features
 
