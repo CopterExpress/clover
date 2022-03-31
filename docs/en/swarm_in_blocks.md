@@ -1,9 +1,8 @@
 # Swarm-in-blocks
 
 ## Final Video
-<p align="center">
-  [<img src="https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg" width="100%">](https://www.youtube.com/watch?v=5C-1rRnyiE8)
-</p> 
+[<img src="https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg" width="50%">](https://www.youtube.com/watch?v=5C-1rRnyiE8)
+
 
 ## Detailed Gitbook
 
