@@ -2,8 +2,9 @@
 
 ## Final Video
 <p align="center">
-  <img width="500" height="281" src="https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg" width="50%">(https://www.youtube.com/watch?v=5C-1rRnyiE8)
+  [<img src="https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg" width="50%">](https://www.youtube.com/watch?v=5C-1rRnyiE8)
 </p> 
+[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
 
 ## Detailed Gitbook
 
