@@ -64,4 +64,4 @@ For us, the results achieved were very expressive and positive, however, we beli
 Finally, we thank the entire COEX team that made it possible for CopterHack 2022 to take place and all the support given during the competition. We are **Atena Team**, creator of the **Swarm in Blocks** platform and we thank you for your attention!
 
 ### The Atena Team members
-- Nome: [Github]() [LinkedIn]()
+- Nome: [Github](), [LinkedIn]()
