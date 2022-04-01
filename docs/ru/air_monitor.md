@@ -2,6 +2,8 @@
 
 [Система мониторинга воздуха](air_monitor.md), команда **С305**.
 
+<img src="https://github.com/Lukerrr/air-analysis-system/raw/master/docs/pictures/logo1.jpg" width=600>
+
 ## Информация о команде
 
 Состав команды:
@@ -26,8 +28,6 @@
 ### Презентационный ролик
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/zkYE8mLS81k/0.jpg)](https://www.youtube.com/watch?v=zkYE8mLS81k)
-
-<img src="docs/pictures/logo1.jpg" width=600>
 
 ## [Наш репозиторий](https://github.com/Lukerrr/air-analysis-system)
 
