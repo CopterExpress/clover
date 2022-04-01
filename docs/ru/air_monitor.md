@@ -8,9 +8,9 @@
 
 Состав команды:
 
-* Мамбетов Руслан - CEO, разработчик встраиваемого ПО, дизайнер печатной платы;
-* Филимонов Сергей - программист (интерфейс пользователя, визуализатор);
-* Смадыч Никита  - инженер-програмист (навигация дрона);
+* [Мамбетов Руслан](https://github.com/Ruslan2288) - CEO, разработчик встраиваемого ПО, дизайнер печатной платы;
+* [Филимонов Сергей](https://github.com/Lukerrr) - программист (интерфейс пользователя, визуализатор);
+* Смадыч Никита - инженер-программист (навигация дрона);
 * Антонов Георгий  - инженер (сборка и настройка дрона, создание 3d моделей).
 
 ## Описание проекта
@@ -33,7 +33,7 @@
 
 ### Документация к проекту
 
-* [Сборка котпера газоанализатора](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/drone_assembly.md)
+* [Сборка коптера газоанализатора](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/drone_assembly.md)
 * [Настройка коптера для автономных полётов](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/drone_config.md)
 * [Система планирования полета](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/path_planning.md)
 * [Пользовательские приложения](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/user_applications.md)
