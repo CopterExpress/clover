@@ -29,7 +29,7 @@
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/zkYE8mLS81k/0.jpg)](https://www.youtube.com/watch?v=zkYE8mLS81k)
 
-## [Наш репозиторий](https://github.com/Lukerrr/air-analysis-system)
+## [Репозиторий проекта](https://github.com/Lukerrr/air-analysis-system)
 
 ### Документация к проекту
 
