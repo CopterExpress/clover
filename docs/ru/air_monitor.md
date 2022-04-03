@@ -40,3 +40,12 @@
 * [Настройка лидара](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/setup_lidar.md)
 * [Процесс загрузки прошивки](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/firmware_upload.md)
 * [Подключение датчиков газов](https://github.com/Lukerrr/air-analysis-system/blob/master/docs/gas_sensors.md)
+
+### Ресурсы проекта
+
+* [Исходный код программ для Raspberry Pi](https://github.com/Lukerrr/airmon)
+* [Исходный код наземной станции](https://github.com/Lukerrr/airmon-control)
+* [Модели крепления лидара](https://github.com/Lukerrr/air-analysis-system/tree/master/models)
+* [Прошивка для газоанализатора (Arduino)](https://github.com/Lukerrr/air-analysis-system/tree/master/hardware/arduino_firmware)
+* [Прошивка для газоанализатора (STM)](https://github.com/Lukerrr/air-analysis-system/tree/master/hardware/stm_firmware)
+* [Gerber файлы платы газоанализатора](https://github.com/Lukerrr/air-analysis-system/tree/master/hardware/gerber_pcb_air_analysis_board)
