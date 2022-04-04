@@ -30,6 +30,7 @@ from visualization_msgs.msg import MarkerArray as VisualizationMarkerArray
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from mavros import mavlink
+import locale
 
 
 # TODO: check attitude is present
@@ -45,6 +46,8 @@ rospy.init_node('selfcheck')
 
 os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
 
+# use user's locale to convert numbers, etc
+locale.setlocale(locale.LC_ALL, '')
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -638,7 +641,7 @@ def check_cpu_usage():
             continue
         pid, cpu, cmd = process.split('\t')
 
-        if cmd.strip() not in WHITELIST and float(cpu) > 30:
+        if cmd.strip() not in WHITELIST and locale.atof(cpu) > 30:
             failure('high CPU usage (%s%%) detected: %s (PID %s)',
                     cpu.strip(), cmd.strip(), pid.strip())
 
