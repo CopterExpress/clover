@@ -75,7 +75,7 @@ from sensor_msgs.msg import Range
 
 # ...
 
-data = rospy.wait_for_message('rangefinder/range', Range)
+dist = rospy.wait_for_message('rangefinder/range', Range).range
 ```
 
 ### Data visualization
