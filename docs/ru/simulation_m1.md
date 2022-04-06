@@ -14,6 +14,7 @@
 
     * **Тип**: Virtualize.
     * **Operating System** (ОС): Linux.
+    * **Boot ISO Image** (образ для загрузки): выберите скаченный образ `focal-desktop-arm64.iso`.
     * **Memory** (память): 4096 MB или более.
     * **CPU Cores** (ядра процессора): 4 или более.
     * Включите поддержку OpenGL: *Enable hardware OpenGL acceleration*.
@@ -51,3 +52,5 @@ fatal: index-pack failed
 ```
 
 В этом случае поменяйте типа сетевой карты на Bridged. В настройках виртуальной машины выберите *Network*, в пункте *Network Mode* выберите *Bridged (Advanced)*.
+
+В дальнейшем, при возникновении проблем с сетью измените тип сети обратно на *Shared Network*.
