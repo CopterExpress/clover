@@ -1,4 +1,4 @@
-# Neural obstacle avoidance
+# Obstacle avoidance using artificial potential fields method
 
 [CopterHack-2022](copterhack2022.md), team **Stereo**.
 
