@@ -12,7 +12,7 @@ The list of team members:
 
 ### Project idea
 
-Design obstacle avoidance system using artificial potential fields method.
+Design an obstacle avoidance system using artificial potential fields method.
 
 ### The potential outcomes
 
@@ -21,7 +21,3 @@ A copter which can fly through regions with obstacles with a speed of at least 1
 ### Using Clover platform
 
 Clover will be used as a platform for obstacle avoidance algorithm deployment. We also plan to install a stereo camera on the Clover as the algorithm requires some source of 3D information about the surroundings.
-
-### Additional information at the request of participants
-
-http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf
