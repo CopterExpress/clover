@@ -12,11 +12,11 @@ The list of team members:
 
 ### Project idea
 
-Design a high-speed obstacle avoidance copter based on paper [Learning High-Speed Flight in the Wild](http://rpg.ifi.uzh.ch/docs/Loquercio21_Science.pdf).
+Design obstacle avoidance system using artificial potential fields method.
 
 ### The potential outcomes
 
-A copter which can fly through regions with obstacles with a speed of at least 15 km/h and success rate of at least 90%. In real world, such solution can be used in search-and-rescue mission (might be useful for famous Russian LizaAlert).
+A copter which can fly through regions with obstacles with a speed of at least 10 km/h and success rate of at least 95%. In real world, such solution can be used in search-and-rescue mission (might be useful for famous Russian LizaAlert).
 
 ### Using Clover platform
 
