@@ -10,9 +10,9 @@
 
 ## Модели и сборка
 
-<img class="center" src="../assets/ddrone/full_holder.png" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/full_holder.png" width="300">
 
-<img class="center" src="../assets/ddrone/full_holder_in_real.jpg" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/full_holder_in_real.jpg" width="300">
 
 Для выполнения проекта вам нужно иметь в наличии:
 
@@ -36,15 +36,15 @@
 
 Вес держателя: 90 г.
 
-<img class="center" src="../assets/ddrone/holder.png" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/holder.png" width="300">
 
 Если диаметр баллончика меньше диаметра держателя, мы используем деталь в виде дуги, размером разницей между ними. Это помогает нам устойчиво закрепить баллончик.
 
 **Схема нажатия.** Для нажатия клапана будем использовать винтовую передачу с неподвижной гайкой. К сервоприводу будут прикреплена планка с отверстиями, в которых будут входить стойки, закрепленные к гайке. Это помогает сервоприводу двигаться только по одной оси, вверх вниз. Также мы смоделировали крышку для кнопки баллончика, так как поверхность насадки не ровная.
 
-<img class="center" src="../assets/ddrone/pressing_mechanism.png" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/pressing_mechanism.png" width="300">
 
-<img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/pressing_mechanism_in_real.jpg" width="300">
 
 ## Перед запуском
 
@@ -80,11 +80,11 @@ mv visual_ddrone-master ddrone
 
 Запуск нашего дрона осуществляется с помощью [веб-сайта](https://perizatkurmanbaeva.github.io/visual_ddrone). Веб-интерфейс позволяет рисовать и кодировать нарисованное в G-code. Данные координат будут переданы для дальнейшей обработки и исполнением коптером.
 
-<img class="center" src="../assets/ddrone/screen_2.png" width="600" class="zoom">
+<img class="center" src="../assets/ddrone/screen_2.png" width="600">
 
 Мы выбрали веб-интерфейс для управления коптера, потому что он легче и ближе для пользователя.
 
-<img class="center" src="../assets/ddrone/instruction.png" width="300" class="zoom">
+<img class="center" src="../assets/ddrone/instruction.png" width="300">
 
 ## Полеты
 

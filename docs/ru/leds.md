@@ -101,12 +101,12 @@ disconnected: { effect: blink, r: 255, g: 50, b: 50 }
 
 <table>
   <tr><th>Событие</th><th>Описание</th><th>Эффект по умолчанию</th></tr>
-  <tr><td><code>startup</code></td><td>Запуск всех систем Клевера</td><td>Белый</div></td></tr>
+  <tr><td><code>startup</code></td><td>Запуск всех систем Клевера</td><td>Белый</td></tr>
   <tr><td><code>connected</code></td><td>Успешное подключение к полетному контроллеру</td><td>Эффект радуги</td></tr>
-  <tr><td><code>disconnected</code></td><td>Разрыв связи с полетным контроллером</td><td><div class=circle style="background:rgb(255,50,50)"></div>Мигание красным</div></td></tr>
+  <tr><td><code>disconnected</code></td><td>Разрыв связи с полетным контроллером</td><td><div class=circle style="background:rgb(255,50,50)"></div>Мигание красным</td></tr>
   <tr><td><code>armed</code></td><td>Переход в состояние Armed</td><td></td></tr>
   <tr><td><code>disarmed</code></td><td>Переход в состояние Disarmed</td><td></td></tr>
-  <tr><td><code>acro</code></td><td>Режим Acro</td><td><div class=circle style="background:rgb(245,155,0)"></div>Оранжевый</div></td></tr>
+  <tr><td><code>acro</code></td><td>Режим Acro</td><td><div class=circle style="background:rgb(245,155,0)"></div>Оранжевый</td></tr>
   <tr><td><code>stabilized</code></td><td>Режим Stabilized</td><td><div class=circle style="background:rgb(30,180,50)"></div>Зеленый</td></tr>
   <tr><td><code>altctl</code></td><td>Режим Altitude</td><td><div class=circle style="background:rgb(255,255,40)"></div>Желтый</td></tr>
   <tr><td><code>posctl</code></td><td>Режим Position</td><td><div class=circle style="background:rgb(50,100,220)"></div>Синий</td></tr>

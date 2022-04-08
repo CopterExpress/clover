@@ -32,7 +32,7 @@
 
 Вы можете посмотреть короткую видеопрезентацию:
 
-<iframe width="640" height="480"src="https://www.youtube.com/embed/MEJdM9arz5c" frameborder="0" ; autoplay; encrypted-media; gyroscope; picture-in-picture"> </iframe>
+<iframe width="640" height="480" src="https://www.youtube.com/embed/MEJdM9arz5c" frameborder="0" allow="autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
 
 ## Использование
 
