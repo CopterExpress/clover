@@ -1,6 +1,7 @@
 # COEX Clover
 
-<img class="center zoom big-clover" src="../assets/clover42-main.png" width="80%" alt="Clover 4.2">
+<img class="big-clover light" src="../assets/clover42-main.png" alt="Clover 4.2">
+<img class="big-clover dark" src="../assets/clover42-black.png" alt="Clover 4.2">
 
 **Clover** is an educational kit of a programmable quadcopter that consists of popular open source components, and a set of necessary documentation and libraries for working with it.
 

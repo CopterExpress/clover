@@ -1,0 +1,11 @@
+.big-clover {
+	max-width: 80% !important;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* change image for dark theme */
+html .big-clover.dark { display: none; }
+html.dark .big-clover { display: none; }
+html.dark .big-clover.dark { display: block; }
