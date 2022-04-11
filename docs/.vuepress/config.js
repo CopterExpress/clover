@@ -19,6 +19,7 @@ module.exports = {
 			'/en/': { selectLanguageName: 'English' },
 			'/ru/': { selectLanguageName: 'Русский' },
 		},
+		toggleSidebar: true,
 		repo: 'CopterExpress/clover',
 		docsBranch: 'master',
 		docsDir: 'docs',
