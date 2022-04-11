@@ -35,7 +35,10 @@ exports.readSummary = function (path) {
 			item.collapsible = true;
 
 		} else if (level == 1) {
-			if (!item.children) item.children = [];
+			if (!item.children) {
+				item.children = [];
+				if (item.path) item.children.push(item.path);
+			}
 			item.children.push(path);
 
 		} else {
