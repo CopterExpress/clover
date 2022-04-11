@@ -1,8 +1,4 @@
-const glob = require('glob');
 const sidebar = require('./sidebar');
-
-console.log(__dirname + '/..');
-let markdownFiles = glob.sync('ru/*.md', { cwd: __dirname + '/..' }).map(f => '/' + f); 
 
 module.exports = {
 	// site config
@@ -25,13 +21,6 @@ module.exports = {
 		}
 	},
 	locales: {
-		// The key is the path for the locale to be nested under.
-		// As a special case, the default locale can use '/' as its path.
-		// '/en': {
-		// 	lang: 'en-US',
-		// 	title: 'Clover',
-		// 	description: 'Clover Drone Kit'
-		// },
 		'/en/': {
 			lang: 'en',
 			title: 'Clover',
@@ -51,6 +40,5 @@ module.exports = {
 	plugins: [
 		'@vuepress/plugin-search',
 		'vuepress-plugin-copy-code2'
-		// ['@vuepress/plugin-search', {}]
 	]
 }
