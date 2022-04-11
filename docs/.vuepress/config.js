@@ -48,7 +48,10 @@ module.exports = {
 		code: {
 			lineNumbers: false
 		},
-		linkify: true
+		linkify: true,
+	},
+	extendsMarkdown(md) {
+		md.use(require('markdown-it-attrs')); // to use custom headers anchors
 	},
 	plugins: [
 		'@vuepress/plugin-search',
