@@ -44,6 +44,7 @@ module.exports = {
 	},
 	plugins: [
 		'@vuepress/plugin-search',
-		'vuepress-plugin-copy-code2'
+		'vuepress-plugin-copy-code2',
+		require('./rich-quotes')
 	]
 }
