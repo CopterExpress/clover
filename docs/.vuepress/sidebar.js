@@ -34,7 +34,7 @@ exports.readSummary = function (path) {
 			item.path = path;
 			item.collapsible = true;
 
-		} else if (level == 1) {
+		} else if (level == 1 || level == 2) {
 			if (!item.children) {
 				item.children = [];
 				if (item.path) item.children.push(item.path);
