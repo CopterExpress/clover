@@ -17,12 +17,20 @@ module.exports = {
 		sidebarDepth: 0,
 		locales: {
 			'/en/': { selectLanguageName: 'English' },
-			'/ru/': { selectLanguageName: 'Русский' },
+			'/ru/': { 
+				selectLanguageName: 'Русский',
+				tip: 'СОВЕТ',
+				warning: 'ВНИМАНИЕ',
+				danger: 'ОПАСНО',
+				toggleDarkMode: 'Переключить темную тему'
+			},
 		},
 		toggleSidebar: true,
 		repo: 'CopterExpress/clover',
 		docsBranch: 'master',
 		docsDir: 'docs',
+		lastUpdated: false,
+		contributors: false
 	},
 	locales: {
 		'/en/': {
