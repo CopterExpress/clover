@@ -39,7 +39,8 @@ module.exports = {
 	markdown: {
 		code: {
 			lineNumbers: false
-		}
+		},
+		linkify: true
 	},
 	plugins: [
 		'@vuepress/plugin-search',
