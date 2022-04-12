@@ -49,7 +49,7 @@ The rest of categories contains standard Blockly's blocks.
 
 ### take_off
 
-<img src="../assets/blocks/take-off.png" srcset="../assets/blocks/take-off.png 2x">
+<img src="../assets/blocks/take-off.png" srcset="@source/assets/blocks/take-off.png 2x">
 
 Take off to specified altitude in meters. The altitude may be an arbitrary block, that returns a number.
 
@@ -57,7 +57,7 @@ The `wait` flag specifies, if the drone should wait until take off is complete, 
 
 ### navigate
 
-<img src="../assets/blocks/navigate.png" srcset="../assets/blocks/navigate.png 2x">
+<img src="../assets/blocks/navigate.png" srcset="@source/assets/blocks/navigate.png 2x">
 
 Navigate to specified point. Coordinates are specified in meters.
 
@@ -77,7 +77,7 @@ This block allows to specify the [coordinate frame](frames.md) of the target poi
 
 ### land
 
-<img src="../assets/blocks/land.png" srcset="../assets/blocks/land.png 2x">
+<img src="../assets/blocks/land.png" srcset="@source/assets/blocks/land.png 2x">
 
 Land the drone.
 
@@ -85,31 +85,31 @@ The `wait` flag specifies, if the drone should wait until landing is complete, b
 
 ### wait
 
-<img src="../assets/blocks/wait.png" srcset="../assets/blocks/wait.png 2x">
+<img src="../assets/blocks/wait.png" srcset="@source/assets/blocks/wait.png 2x">
 
 Wait specified time period in seconds. The time period may be an arbitrary block, that returns a number.
 
 ### wait_arrival
 
-<img src="../assets/blocks/wait-arrival.png" srcset="../assets/blocks/wait-arrival.png 2x">
+<img src="../assets/blocks/wait-arrival.png" srcset="@source/assets/blocks/wait-arrival.png 2x">
 
 Wait, until the drone reaches [navigate](#navigate)-block's target point.
 
 ### get_position
 
-<img src="../assets/blocks/get-position.png" srcset="../assets/blocks/get-position.png 2x">
+<img src="../assets/blocks/get-position.png" srcset="@source/assets/blocks/get-position.png 2x">
 
 The block returns current position, velocity or yaw angle of the drone relative to the specified [coordinate frame](#relative_to).
 
 ### set_effect
 
-<img src="../assets/blocks/set-effect.png" srcset="../assets/blocks/set-effect.png 2x">
+<img src="../assets/blocks/set-effect.png" srcset="@source/assets/blocks/set-effect.png 2x">
 
 The block allows to set animations to LED strip, similarly to [`set_effect`](leds.md#set_effect) ROS-service.
 
 Example of using the block with a random color (colors-related blocks are located in *Colour* category):
 
-<img src="../assets/blocks/random-color.png" srcset="../assets/blocks/random-color.png 2x">
+<img src="../assets/blocks/random-color.png" srcset="@source/assets/blocks/random-color.png 2x">
 
 ### Work with GPIO {#GPIO}
 

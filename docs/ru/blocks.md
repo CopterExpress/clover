@@ -49,7 +49,7 @@
 
 ### take_off
 
-<img src="../assets/blocks/take-off.png" srcset="../assets/blocks/take-off.png 2x">
+<img src="../assets/blocks/take-off.png" srcset="@source/assets/blocks/take-off.png 2x">
 
 Взлететь на указанную высоту в метрах. Высота может быть произвольным блоком, возвращающим числовое значение.
 
@@ -57,7 +57,7 @@
 
 ### navigate
 
-<img src="../assets/blocks/navigate.png" srcset="../assets/blocks/navigate.png 2x">
+<img src="../assets/blocks/navigate.png" srcset="@source/assets/blocks/navigate.png 2x">
 
 Прилететь в заданную точку. Координаты точки задаются в метрах.
 
@@ -76,7 +76,7 @@
 
 ### land
 
-<img src="../assets/blocks/land.png" srcset="../assets/blocks/land.png 2x">
+<img src="../assets/blocks/land.png" srcset="@source/assets/blocks/land.png 2x">
 
 Произвести посадку.
 
@@ -84,31 +84,31 @@
 
 ### wait
 
-<img src="../assets/blocks/wait.png" srcset="../assets/blocks/wait.png 2x">
+<img src="../assets/blocks/wait.png" srcset="@source/assets/blocks/wait.png 2x">
 
 Ожидать заданное время в секундах. Время ожидания может быть произвольным блоком, возвращающим числовое значение.
 
 ### wait_arrival
 
-<img src="../assets/blocks/wait-arrival.png" srcset="../assets/blocks/wait-arrival.png 2x">
+<img src="../assets/blocks/wait-arrival.png" srcset="@source/assets/blocks/wait-arrival.png 2x">
 
 Ожидать, пока дрон долетит до целевой точки (заданной в [navigate](#navigate)-блоке).
 
 ### get_position
 
-<img src="../assets/blocks/get-position.png" srcset="../assets/blocks/get-position.png 2x">
+<img src="../assets/blocks/get-position.png" srcset="@source/assets/blocks/get-position.png 2x">
 
 Блок позволяет получить позицию, скорость и угол по рысканью дрона в заданной [системе координат](#relative_to).
 
 ### set_effect
 
-<img src="../assets/blocks/set-effect.png" srcset="../assets/blocks/set-effect.png 2x">
+<img src="../assets/blocks/set-effect.png" srcset="@source/assets/blocks/set-effect.png 2x">
 
 Блок позволяет устанавливать различные анимации на LED-ленту аналогично [ROS-сервису `set_effect`](leds.md#set_effect).
 
 Пример использования блока для установки случайного цвета (блоки, связанные с цветами находятся в категории *Colour*):
 
-<img src="../assets/blocks/random-color.png" srcset="../assets/blocks/random-color.png 2x">
+<img src="../assets/blocks/random-color.png" srcset="@source/assets/blocks/random-color.png 2x">
 
 ### Работа с GPIO {#GPIO}
 
