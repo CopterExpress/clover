@@ -341,7 +341,7 @@ should be increased up to 4 – 5.
 
 ### ESC assembly
 
-1. Stick the double-sided adhesive tape to the base of the ESC protective case ![Adhesive tape on the ESC case](../assets/escCase.png)
+1. Stick the double-sided adhesive tape to the base of the ESC protective case.
 2. Put the ESCs into protective cases. Fasten the assembly to the motor mounts of the frame. ![ESC cases top view](../assets/topESCcaseview.png)
 
 ### Installation of guard
