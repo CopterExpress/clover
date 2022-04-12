@@ -21,3 +21,11 @@ table.versions td {
 table.versions .subversion {
 	font-size: 80%;
 }
+
+.circle {
+	width: 0.8em;
+	height: 0.8em;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 0.5em;
+}
