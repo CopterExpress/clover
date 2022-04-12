@@ -56,13 +56,13 @@
 12. Install the assembled grip onto the aircraft from below.
 
     <div class="image-group">
+        <img src="../assets/mechanical_grip/mech_grip_15.png" width=300 class="zoom border">
         <img src="../assets/mechanical_grip/mech_grip_16.png" width=300 class="zoom border">
-        <img src="../assets/mechanical_grip/mech_grip_17.png" width=300 class="zoom border">
     </div>
 
 13. Insert the servo cable into the *AUX* 1-2 output on the flight controller.
 
-    <img src="../assets/mechanical_grip/mech_grip_18.png" width=300 class="zoom border center">
+    <img src="../assets/mechanical_grip/mech_grip_17.png" width=300 class="zoom border center">
 
 14. Go to the *Radio* tab to control capture with the remote control.
 15. In the *AUX 1/2 Passthrough RC channel* parameter, select the desired channel.

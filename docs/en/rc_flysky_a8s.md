@@ -66,8 +66,9 @@ Connect your receiver to the RC IN port on your flight controller:
     <img src="../assets/flysky_a8s/14_coexpix_rcin.png" width=300 class="zoom border center" alt="coex pix connection">
 </div>
 
-> **Hint** Double check that you're using the RC IN port on the COEX Pix:
-<img src="../assets/coexpix-bottom.jpg" width=300 class="zoom border center" alt="coex pix pinout">
+Double check that you're using the RC IN port on the COEX Pix:
+
+<img src="../assets/coex_pix/coexpix-bottom.jpg" width=300 class="zoom border center" alt="coex pix pinout">
 
 ## Binding your transmitter {#rc_bind}
 

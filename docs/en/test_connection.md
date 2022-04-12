@@ -10,7 +10,7 @@ Using a multimeter, check the absence of a short circuit (check the loop):
 * Test the multimeter by shorting the probes. A unit that operated properly makes a distinctive sound.
 * The red probe is connected to the “+ ”pin, the black probe — to the “-” / ”GND” pin. If the circuit is short, a sound is heard.
 
-![Loop check mode](../../assets/startPDBtest.jpg)
+![Loop check mode](../assets/startPDBtest.jpg)
 
 1\. Check OPEN CONDITION of the following circuits (absence of the multimeter sound signal):
 
