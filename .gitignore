@@ -9,3 +9,4 @@ clover_blocks/programs/*.*
 /.vscode/
 docs/.vuepress/.cache/
 docs/.vuepress/.temp/
+docs/.vuepress/dist
