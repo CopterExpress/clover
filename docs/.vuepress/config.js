@@ -17,6 +17,10 @@ module.exports = {
 			'/en/': sidebar.readSummary("./en/SUMMARY.md"),
 		},
 		sidebarDepth: 0,
+		navbar: [
+			{ text: 'Official Site', link: 'https://coex.tech' },
+			{ text: 'Support Chat', link: 'https://t.me/COEXHelpdesk' },
+		],
 		locales: {
 			'/en/': { selectLanguageName: 'English' },
 			'/ru/': { 
