@@ -8,7 +8,6 @@
   },
   "scripts": {
     "dev": "vuepress dev .",
-    "build": "vuepress build .",
-    "clear": "vuepress clear ."
+    "build": "vuepress build ."
   }
 }
