@@ -17,18 +17,24 @@ module.exports = {
 			'/en/': sidebar.readSummary("./en/SUMMARY.md"),
 		},
 		sidebarDepth: 0,
-		navbar: [
-			{ text: 'Official Site', link: 'https://coex.tech' },
-			{ text: 'Support Chat', link: 'https://t.me/COEXHelpdesk' },
-		],
 		locales: {
-			'/en/': { selectLanguageName: 'English' },
+			'/en/': { 
+				selectLanguageName: 'English',
+				navbar: [
+					{ text: 'Official Site', link: 'https://coex.tech' },
+					{ text: 'Support Chat', link: 'https://t.me/COEXHelpdesk' },
+				]
+			},
 			'/ru/': { 
 				selectLanguageName: 'Русский',
 				tip: 'СОВЕТ',
 				warning: 'ВНИМАНИЕ',
 				danger: 'ОПАСНО',
-				toggleDarkMode: 'Переключить темную тему'
+				toggleDarkMode: 'Переключить темную тему',
+				navbar: [
+					{ text: 'Сайт', link: 'https://coex.tech' },
+					{ text: 'Чат поддержки', link: 'https://t.me/COEXHelpdesk' },
+				]
 			},
 		},
 		toggleSidebar: true,
