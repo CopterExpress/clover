@@ -9,3 +9,7 @@
 html .big-clover.dark { display: none; }
 html.dark .big-clover { display: none; }
 html.dark .big-clover.dark { display: block; }
+
+img.logo {
+	transform: scale(2.5) translateX(-5%);
+}
