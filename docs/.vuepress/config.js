@@ -34,6 +34,7 @@ module.exports = {
 		lastUpdated: false,
 		contributors: false
 	},
+	pagePatterns: ['**/*.md', '!.vuepress', '!node_modules', '!ru/metodmaterials.md'],
 	locales: {
 		'/en/': {
 			lang: 'en',
