@@ -1,5 +1,7 @@
 const sidebar = require('./sidebar');
 
+const allowedTags = ['font', 'center', 'nobr']; // allow using some deprecated and non-standard html tags
+
 module.exports = {
 	// site config
 	lang: 'en-US',
@@ -52,6 +54,15 @@ module.exports = {
 	},
 	extendsMarkdown(md) {
 		md.use(require('markdown-it-attrs')); // to use custom headers anchors
+	},
+	bundlerConfig: {
+		vuePluginOptions: {
+			template: {
+				compilerOptions: {
+					isCustomElement: tag => allowedTags.includes(tag)
+				}
+			}
+		}
 	},
 	plugins: [
 		'@vuepress/plugin-search',
