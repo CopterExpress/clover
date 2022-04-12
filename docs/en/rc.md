@@ -5,7 +5,7 @@ Controlling Clover from a smartphone
 
 To control Clover from a smartphone via Wi-Fi, you have to install the appropriate application – [iOS](https://itunes.apple.com/ru/app/clever-rc/id1396166572?mt=8), Android (https://play.google.com/store/apps/details?id=express.copter.cleverrc).
 
-![CLEVER RC](../assets/IMG_4397.PNG)
+![CLEVER RC](../assets/IMG_4397.png)
 
 > **Warning** The mobile transmitter is mainly intended for indoor flights to the range not exceeding 10-15 m. Many Wi-Fi networks may also impair responsiveness and the range of the transmitter.
 

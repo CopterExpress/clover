@@ -41,7 +41,7 @@
 
 На юге Японии японский фермер и философ Масанобу Фукуока изобрел технику посадки семенных шариков. Этот метод считается естественной техникой земледелия, не требующей машин, химикатов и очень небольшого количества прополки. При использовании семенных шариков земля обрабатывается без какой-либо подготовки почвы.
 
-<img src = "../assets/seeding_drone/seedcapsules/1.jpg" width="250px" class="center" />
+<img src="../assets/seeding_drone/seedcapsules/1.jpg" width="250px" class="center" />
 
 ### Преимущества семенных шариков
 
@@ -114,39 +114,39 @@
 
 1. Установите нижние держатели бака на крепление верхней палубы и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/mechanismpictures/1.PNG" width = "400px" class = "center" />
+    <img src="../assets/seeding_drone/mechanismpictures/1.png" width="400px" class="center" />
 
 2. Установите нейлоновую стойку (40 мм) с 4 сторон крепления для деки.
 
-    <img src = "../assets/seeding_drone/mechanismpictures/2.PNG" width = "400px" class= "center" />
+    <img src="../assets/seeding_drone/mechanismpictures/2.png" width="400px" class="center" />
 
 3. Установите поручень и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/mechanismpictures/3.PNG" width = "400px" class = "center" />
+    <img src="../assets/seeding_drone/mechanismpictures/3.png" width="400px" class="center" />
 
 4. Установите верхние держатели бака на верхнее захватное крепление и закрепите винтами M3x8.
 
-    <img src = "../assets/seeding_drone/mechanismpictures/4.PNG" width = "400px" class = "center" />
+    <img src="../assets/seeding_drone/mechanismpictures/4.png" width="400px" class="center" />
 
 5. Осторожно подсоедините резервуары к держателям резервуаров.
 
-    <img src = "../assets/seeding_drone/mechanismpictures/5.PNG" width = "400px" class = "center" />
+    <img src="../assets/seeding_drone/mechanismpictures/5.png" width="400px" class="center" />
 
 6. Подсоедините серводвигатели SG90 к резервуару с помощью стяжки.
 
 Окончательный вид сеялки дрона:
 
-<img src = "../assets/seeding_drone/mechanismpictures/6.jpg" width = "400px" class = "center" />
+<img src="../assets/seeding_drone/mechanismpictures/6.jpg" width="400px" class="center" />
 
 ### Модуль GPS
 
 Мы установили модуль GPS наверх, используя 2 нейлоновые стойки (40 мм).
 
-<img src = "../assets/seeding_drone/mechanismpictures/7.jpg" alt = "" width = "400px" class = "center" />
+<img src="../assets/seeding_drone/mechanismpictures/7.jpg" alt="" width="400px" class="center" />
 
 Мы покрыли аккумулятор, чтобы защитить его от холода.
 
-<img src = "../assets/seeding_drone/mechanismpictures/8.jpg" alt = "" width = "400px" class = "center" />
+<img src="../assets/seeding_drone/mechanismpictures/8.jpg" alt="" width="400px" class="center" />
 
 ## Как управлять механизмом высева
 
@@ -158,7 +158,7 @@
 
 Сигнальные контакты серводвигателя подключены к контактам 32 и 33 аппаратной ШИМ Raspberry Pi, а питание снимается с платы распределения питания (5 В).
 
-<img src = "../assets/seeding_drone/electronicspictures/electronic1.png" width = "400px" class = "center" />
+<img src="../assets/seeding_drone/electronicspictures/electronic1.png" width="400px" class="center" />
 
 ### Пояснение кода для управления серводвигателями
 
@@ -172,7 +172,7 @@
 - Угол поворота 90° или рабочий цикл 2 мс => 2/20 * 100% = рабочий цикл 10%.
 - Угол поворота 0° или рабочий цикл 1,5 мс => 1,5 / 20 * 100% = 7,5% рабочий цикл.
 
-<img src = "../assets/seeding_drone/electronicspictures/electronic2.png" width = "400px" class = "center" />
+<img src="../assets/seeding_drone/electronicspictures/electronic2.png" width="400px" class="center" />
 
 Мы сделаем это с помощью библиотеки RPi.GPIO и написания кода Python на Raspberry Pi.
 

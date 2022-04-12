@@ -49,7 +49,7 @@ This feature allows getting rid of the system interface elements. Let's go ahead
 
 This is how the transmitter looks at this stage:
 
-<img src="../assets/IMG_4397.PNG" width="50%">
+<img src="../assets/IMG_4397.png" width="50%">
 
 If you run your application, you will see that the sticks are not functioning. This is due to the fact that *JavaScript* is disabled in our page. To enable it, write the following code:
 

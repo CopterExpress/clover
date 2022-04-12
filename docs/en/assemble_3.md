@@ -36,7 +36,7 @@ TODO
 
     Cut the remaining part of the clamp (cable tie) with scissors.
 
-    ![Preparation of motors](../assets/en/cl3_prepareMotors.JPG)
+    ![Preparation of motors](../assets/en/cl3_prepareMotors.jpg)
 
 ## Frame elements installation
 
@@ -45,7 +45,7 @@ TODO
 3. Attach the assembled unit to the frame with M3x16 screws, complying with the layout.
 4. Install the frame for the LED strip, using the slots in the leg holders.
 
-![Legs installation on the frame](../assets/en/cl3_mountElements.JPG)
+![Legs installation on the frame](../assets/en/cl3_mountElements.jpg)
 
 ## BEC voltage converter installation(to be soldered and tested)
 
@@ -93,7 +93,7 @@ TODO
             Black -> GND
             Blue -> Din
 
-![Installation of the BEC voltage Converter](../assets/en/cl3_mountBEC.JPG)
+![Installation of the BEC voltage Converter](../assets/en/cl3_mountBEC.jpg)
 
 ## 4 in 1 ESC board and the PDB power-board installation
 
@@ -108,7 +108,7 @@ TODO
 3. Install the PDB power distribution board as shown in the picture (the XT60 connector should point to the tail of the drone).
 4. Connect the wires of the PCB power supply board and ESC XT30 board.
 
- ![Power board installation](../assets/cl3_mountESC.JPG)
+ ![Power board installation](../assets/cl3_mountESC.jpg)
 
 ## Pairing the receiver and transmitter
 
@@ -125,7 +125,7 @@ TODO
     * Remove the BIND connector from the receiver.
     * Disconnect the battery.
 
-![Pairing the receiver and the remote](../assets/cl3_bindFlysky.JPG)
+![Pairing the receiver and the remote](../assets/cl3_bindFlysky.jpg)
 
 > **Hint** If the remote cannot be powered on, or is blocked, see
 article [remote faults](radioerrors.md).
@@ -145,7 +145,7 @@ article [remote faults](radioerrors.md).
 4. Check the motor rotation direction according to the scheme. Repeat for each motor. Thus, it will be clear which motor is controlled.
 5. If you have to change the rotation direction, swap any two phase wires of the motor (needs re-connection).
 
-![Checking the motors rotation direction](../assets/cl3_testMotorsFlysky.JPG)
+![Checking the motors rotation direction](../assets/cl3_testMotorsFlysky.jpg)
 
 ## Installation and connection of the Pixracer flight controller
 
@@ -162,7 +162,7 @@ article [remote faults](radioerrors.md).
 
 4. Connect the ribbon cable from the radio receiver to the RCIN connector in Pixracer.
 
-![Installation of the flight controller](../assets/cl3_mountPixracer.JPG)
+![Installation of the flight controller](../assets/cl3_mountPixracer.jpg)
 
 ## Raspberry installation
 
@@ -186,7 +186,7 @@ article [remote faults](radioerrors.md).
 
     Use an M3x16 screw and an M3 nut
 
-![Installation of Raspberry Pi Model B](../assets/cl3_mountRaspberryPi.JPG)
+![Installation of Raspberry Pi Model B](../assets/cl3_mountRaspberryPi.jpg)
 
 ## Arduino and FlySky radio receiver installation
 
@@ -200,7 +200,7 @@ article [remote faults](radioerrors.md).
         black -> GND
         orange, green -> currently not used. They are set to the unused pins of the radio receiver.
 
-![Arduino and FlySky radio receiver installation](../assets/cl3_mountArduinoandFlysky.JPG)
+![Arduino and FlySky radio receiver installation](../assets/cl3_mountArduinoandFlysky.jpg)
 
 ## RPi camera installation
 
@@ -213,7 +213,7 @@ article [remote faults](radioerrors.md).
 
 5. Install the legs into the mounts (4 pcs).
 
-![Mounting the RPi camera](../assets/en/cl3_mountRpiCamera.JPG)
+![Mounting the RPi camera](../assets/en/cl3_mountRpiCamera.jpg)
 
 ## Installation of the remaining structural elements
 
@@ -223,13 +223,13 @@ article [remote faults](radioerrors.md).
 
     Secure the upper deck with M3x8 screws (4 pcs.)
 
-![Installation of the remaining structural elements](../assets/cl3_mountOtherElements.JPG)
+![Installation of the remaining structural elements](../assets/cl3_mountOtherElements.jpg)
 
 ## USB connectors installation
 
 1. Connect Pixracer to Raspberry using the micro USB - USB cable.
 2. Connect Arduino to Raspberry using the micro USB - USB cable.
 
-![USB connectors installation](../assets/cl3_mountUSBconnectors.JPG).
+![USB connectors installation](../assets/cl3_mountUSBconnectors.jpg).
 
 Read more about connection in [article](connection.md).

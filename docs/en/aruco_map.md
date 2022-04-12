@@ -152,7 +152,7 @@ If the drone's altitude is not stable, try increasing the `MPC_Z_VEL_P` paramete
 
 ## Placing markers on the ceiling
 
-![Ceiling markers](../assets/IMG_4175.JPG)
+![Ceiling markers](../assets/IMG_4175.jpg)
 
 In order to navigate using markers on the ceiling, mount the onboard camera so that it points up and [adjust the camera frame accordingly](camera_setup.md).
 
