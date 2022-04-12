@@ -13,11 +13,11 @@
 ## Инструмент творения
 
 <div style="display: flex; flex-direction: row; justify-content: flex-end;"><div style="padding: 20px">Нажав на плюсик в левом углу экрана откроется меню в котором можно создать какой-либо элемент.
-<ui>
+<ul>
     <li><strong>Одна метка</strong> - просто одинокая метка в поле</li>
     <li><strong>Несколько меток</strong> - группа меток выстроенная в сетку</li>
     <li><strong>Сетка - инструмент</strong> к которому можно привязывать метки</li>
-</ui></div><img src="../assets/tvorec.png"></div>
+</ul></div><img src="../assets/tvorec.png"></div>
 
 ## Экспорт
 
