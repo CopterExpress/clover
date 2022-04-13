@@ -106,7 +106,6 @@ Links to demonstration videos:
 * [Presentation video](https://youtu.be/4bvOu0h3YU0)
 * [Functional review video](https://youtu.be/jjeBh1ch4Xo)
 
-
 ## <a name="bots"></a> Bots on the social networks and messengers
 
 <br/>
