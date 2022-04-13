@@ -30,7 +30,7 @@
                     <origin xyz="${radius*cos(2 * pi * link_i / links_total)} ${radius*sin(2 * pi * link_i / links_total)} 0"
                             rpy="0 0 ${2 * pi * link_i / links_total}"/>
                     <geometry>
-                        <box size="${bulb_radius} ${bulb_radius} ${bulb_radius}"/>
+                        <box size="${bulb_radius} ${bulb_radius} ${2 * bulb_radius}"/>
                     </geometry>
                 </visual>
                 <xacro:unless value="${link_i + 1 == links_total}">
@@ -39,12 +39,13 @@
             </xacro:macro>
             <xacro:loop_links link_i="0" links_total="${led_count}"/>
         </link>
-
+        
+        
         <xacro:if value="${use_plugin}">
         <gazebo reference="${name}_link">
             <visual>
                 <plugin name="${name}_controller" filename="libsim_leds.so">
-                    <robotNamespace></robotNamespace>
+                    <!-- <robotNamespace></robotNamespace> -->
                     <ledCount>${led_count}</ledCount>
                 </plugin>
                 <cast_shadows>false</cast_shadows>
@@ -55,6 +56,17 @@
                     <emissive>0 0 0 1</emissive>
                 </material>
             </visual>
+            <!-- <light name="${name}_light" type="point">
+                <attenuation>
+                    <range>20</range>
+                    <linear>0.2</linear>
+                    <constant>0.8</constant>
+                    <quadratic>0.01</quadratic>
+                </attenuation>
+                <diffuse>1.0 1.0 1.0 1</diffuse>
+                <specular>0.1 0.1 0.1 1</specular> 
+                <cast_shadows>false</cast_shadows>
+            </light>     -->
         </gazebo>
         </xacro:if>
         <gazebo reference="${name}_joint">
@@ -64,6 +76,12 @@
         <!-- <gazebo>
             <static>true</static>
         </gazebo> -->
+        <gazebo>
+            <plugin name="${name}_ros_controller" filename="libsim_leds_controller.so">
+                <robotNamespace></robotNamespace>
+                <ledCount>${led_count}</ledCount>
+            </plugin>
+        </gazebo>
     </xacro:macro>
 
 </robot>

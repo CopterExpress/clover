@@ -25,7 +25,7 @@
   </xacro:if>
 
   <!-- Gazebo plugins -->
-  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_gazebo.xacro" />
+  <xacro:include filename="clover4_gazebo.xacro" />
 
   <xacro:if value="$(arg enable_logging)">
     <!-- Instantiate a logger -->
