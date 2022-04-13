@@ -63,3 +63,64 @@
 2. Стяжкой притяните собранную схему к обратной стороне деки.
 3. Сигнальный вывод Arduino *D11* вставьте в один из выводов *AUX* на полетном контроллере.
 4. Вставьте силовой вывод электромагнитного захвата в JST 5В.
+
+## Настройка электромагнитного захвата
+
+Для управления магнитом через плату Arduino Nano, используйте код ниже:
+
+```cpp
+void setup() {
+  pinMode(11, INPUT);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  if (int duration = pulseIn(11, HIGH) > 1200) {
+    digitalWrite(13, HIGH);
+  } else {
+    digitalWrite(13, LOW);
+  }
+}
+```
+
+Для однозначного определения статуса магнитного захвата, можно подключить светодиодную ленту типа *ws281x* (входит в наборы "Клевер"). Подключите ее к питанию +5v – 5v, земле GND – GND и сигнальный контакт DIN – Arduino D12.
+
+Для управления магнитным захватом со светодиодной лентой через плату Arduino Nano используйте код ниже:
+
+```cpp
+#include <Adafruit_NeoPixel.h>
+#define NUMPIXELS 72
+#define PIN 12
+int pin = 11;
+int led = 13;
+
+unsigned long duration;
+Adafruit_NeoPixel strip (NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  strip.begin();
+  strip.setBrightness(10);
+  Serial.begin(9600);
+  pinMode(pin, INPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  duration = pulseIn(pin, HIGH);
+  Serial.println(duration);
+  delay(100);
+  if (duration >= 1500) {
+    digitalWrite(led, HIGH);
+    for (int i = -1; i < NUMPIXELS; i++) {
+      strip.setPixelColor(i, strip.Color(255, 0, 0));
+      strip.show();
+    }
+  } else { 
+    digitalWrite(led, LOW);
+    for (int i = -1; i < NUMPIXELS; i++) {
+      strip.setPixelColor(i, strip.Color(0, 255, 0));
+      strip.show();
+    }
+  }
+}
+```
