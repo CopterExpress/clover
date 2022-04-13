@@ -8,9 +8,9 @@
 
 ## Detailed Gitbook
 
-Check our Gitbook, with the detailed information about all that was developed by Atena Team during CopterHack 2022: https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks
+**Check our Gitbook, with the detailed information about all that was developed by Atena Team during CopterHack 2022: https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks**
 
-The Clover Platform was forked and adapted to work with swarms. The Swarm in Blocks project is a separated repository with all our swarm manipulation tools for clover. Link of the fork of the Clover Platform: https://github.com/Grupo-SEMEAR-USP/clover . Link of the Swarm in Blocks repository: https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks .
+>The Clover Platform was forked and adapted to work with swarms. The Swarm in Blocks project is a separated repository with all our swarm manipulation tools for clover. Link of the fork of the Clover Platform: https://github.com/Grupo-SEMEAR-USP/clover . Link of the Swarm in Blocks repository: https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks .
 
 ## Introduction
 
