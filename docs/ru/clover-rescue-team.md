@@ -101,6 +101,12 @@ The mobile version of the site has absolutely the same functionality (swipe to t
 <img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m5.jpg' width= '200px'>
 </p>
 
+Links to demonstration videos:
+
+* [Presentation video](https://youtu.be/4bvOu0h3YU0)
+* [Functional review video](https://youtu.be/jjeBh1ch4Xo)
+
+
 ## <a name="bots"></a> Bots on the social networks and messengers
 
 <br/>
@@ -115,8 +121,9 @@ Bots on the social networks is an example of what you can do based on our projec
 <img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot7.jpg' width= '288.5px'>
 </p>
 
-<a href="https://github.com/Astel2022/CRTVkbot">VK Bot Repository</a><br/>
-<a href="https://vk.com/rescueclover">Link to the bot</a>
+[VK Bot Repository](https://github.com/Astel2022/CRTVkbot)<br/>
+[Link to the bot](https://vk.com/rescueclover)<br/>
+[Demonstration video of the bot](https://youtu.be/N3oFobVCmx4)
 
 ## <a name="plans"></a> Our plans for the future
 
