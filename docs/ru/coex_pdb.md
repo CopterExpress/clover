@@ -1,6 +1,6 @@
 # COEX PDB
 
-**COEX PDB** (Power Distribution Board) – плата распределения питания для квадрокоптеров <a href="assemble_4_2.md">Клевер&nbsp;4</a>.
+**COEX PDB** (Power Distribution Board) – плата распределения питания для квадрокоптеров [Клевер&nbsp;4](assemble_4_2.md).
 
 Габаритные размеры платы: 35x35 мм.
 
