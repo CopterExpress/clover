@@ -32,7 +32,7 @@ The Swarm in Blocks can be programmed either with the blocks interface or direct
 
 ### Blocks Interface
 
-The entire Swarm in Blocks project was designed so that the user was in an intuitive and comfortable environment within the manipulation of swarms, for this, the existing platform with clover packages was completely rethought and adapted. In our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/usability/blocks-api), we have more details about the front-end design, how the user can interact with it, and achieve our main goal: Programming in blocks.
+The entire Swarm in Blocks project was designed so that the user was in an intuitive and comfortable environment within the manipulation of swarms, for this, the existing platform with clover packages was completely rethought and adapted. In our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/usability/blocks-api), we have more details about the front-end design, how the user can interact with it, and achieve our main goal: programming in blocks.
 
 <p align="center">
   <img width="500" height="281" src="../assets/swarm_in_blocks/blocks.gif">
@@ -47,9 +47,9 @@ Along with the project, we developed some features, that can be used together or
   - 2D Formations: We made functions to generate some simple geometries, allowing the user to set the number of clovers used and the size of the figure, the geometries options made until now are *circle*, *empty square*, *full square* and *triangle*.
   - 3D Formations: Besides the 2D figures, there are also some simple 3D geometries, which are *cube*, *sphere*, and *pyramid*.
   - Alphabet: There is also the option to generate letters and words, using our Clover swarm.
-  - 3D Figures: Lastly, we have the alternative to make other 3D formations more complex, for this we use a library called Open3D that deals with 3D data, allowing the drones to create any 3D image the user inputs since it's in the supported formats.
+  - 3D Figures: Lastly, we have the alternative to make other more complex 3D formations, for this we use a library called Open3D that deals with 3D data, allowing the drones to create any 3D image the user inputs since it's in the supported formats.
 
-- **Transformations:** In addition to creating the formations, it's important to give the option of editing their disposition, so some operations were developed. It also makes it possible to execute more complex actions and activities with the Clovers. The transformations operations are:
+- **Transformations:** In addition to creating the formations, it's important to give the option of editing their disposition, so some operations were developed. It also makes possible to execute more complex actions and activities with the Clovers. The transformations operations are:
   
   - Scale: Changes the distance between the drones, increasing or decreasing the image.
   - Translate: All the drones move the same distance in the chosen directions.
