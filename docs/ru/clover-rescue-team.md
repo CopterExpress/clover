@@ -31,10 +31,11 @@
 ## <a name="idea"></a> Project Idea
 
 The idea of this project came immediately, it lies on the surface. A system that makes situations where pilots cannot find their flown away drone or stop it at full speed flying into a wall, a thing of the past, is something that pilots have been missing for a long time. The key feature of our software is that users can manage their Clover from anywhere in the world, this software replaces FTP and SSH (users can upload the code to their drone and run it directly from our site). Also, if radio communication with the Clover is lost, it can be returned to the user's or takeoff location with just one click. Moreover, the user can monitor the status in realtime, as well as location, camera data, and airborne position data of the drone. There are also functions that can be useful in emergency situations, such as landing, hovering and disarming the drone remotely from our website. A mobile version of the site with full functionality is also available!
-
-<br/>
-Demo video: https://youtu.be/jjeBh1ch4Xo, Link to the website: https://48c5-94-29-124-254.eu.ngrok.io/
-<br/><br/><br/>
+<br/><br/>
+[Presentation video](https://youtu.be/4bvOu0h3YU0)<br/>
+[Functional review video](https://youtu.be/jjeBh1ch4Xo)<br/>
+[Link to the website](https://48c5-94-29-124-254.eu.ngrok.io)
+<br/><br/>
 <img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/mockup.png'>
 
 ## <a name="hiw"></a> How It Works
@@ -100,11 +101,6 @@ The mobile version of the site has absolutely the same functionality (swipe to t
 <img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m4.jpg' width= '200px'>
 <img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m5.jpg' width= '200px'>
 </p>
-
-Links to demonstration videos:
-
-* [Presentation video](https://youtu.be/4bvOu0h3YU0)
-* [Functional review video](https://youtu.be/jjeBh1ch4Xo)
 
 ## <a name="bots"></a> Bots on the social networks and messengers
 
