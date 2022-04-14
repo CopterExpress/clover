@@ -4,7 +4,6 @@ const hostname = 'clover.coex.tech';
 const allowedTags = ['font', 'center', 'nobr']; // allow using some deprecated and non-standard html tags
 
 module.exports = {
-	// site config
 	lang: 'en-US',
 	title: 'Clover',
 	description: 'Clover Drone Kit',
@@ -18,14 +17,14 @@ module.exports = {
 		},
 		sidebarDepth: 0,
 		locales: {
-			'/en/': { 
+			'/en/': {
 				selectLanguageName: 'English',
 				navbar: [
 					{ text: 'Official Site', link: 'https://coex.tech' },
 					{ text: 'Support Chat', link: 'https://t.me/COEXHelpdesk' },
 				]
 			},
-			'/ru/': { 
+			'/ru/': {
 				selectLanguageName: 'Русский',
 				tip: 'СОВЕТ',
 				warning: 'ВНИМАНИЕ',
@@ -78,6 +77,7 @@ module.exports = {
 	plugins: [
 		'@vuepress/plugin-search',
 		'vuepress-plugin-copy-code2',
+		['sitemap2', { hostname }],
 		require('./rich-quotes')
 	]
 }
