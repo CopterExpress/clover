@@ -14,6 +14,24 @@ img.logo {
 	transform: scale(2.5) translateX(-5%);
 }
 
+/* Centered images */
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Images with border */
+img.border {
+	border: 1px #e9e9e9 solid;
+	border-radius: 5px;
+}
+
+html.dark img.border {
+	border: none;
+	background: #fffffa;
+}
+
 table.versions td {
 	text-align: center;
 	background: white;
