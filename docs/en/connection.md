@@ -50,5 +50,3 @@ In order to connect to a local or a remote [SITL](sitl.md) instance set the `fcu
 <arg name="fcu_conn" default="udp"/>
 <arg name="fcu_ip" default="127.0.0.1"/>
 ```
-
-**Next**: [Using QGroundControl over Wi-Fi](gcs_bridge.md)

@@ -15,5 +15,3 @@ Technical specifications:
 * An HDMI port.
 
 Raspberry Pi is connected to the flight controller in the Clover kit and is used as a companion computer. It can be used to [connect to the drone over Wi-Fi](wifi.md), perform autonomous flights, access peripherals and much more.
-
-**Next**: [Raspberry Pi image](image.md)

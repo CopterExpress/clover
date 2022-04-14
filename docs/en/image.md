@@ -15,5 +15,3 @@ The RPi image for Clover contains all the necessary software for working with Cl
 <img src="../assets/etcher.png" class="zoom">
 
 After flashing the image on the MicroSD-card, you can [connect to the Clover over Wi-Fi](wifi.md), use [wireless connection in QGroundControl](gcs_bridge.md), gain access to the Raspberry [over SSH](ssh.md) and use all the other features.
-
-**Next:** [Connecting over Wi-Fi](wifi.md).

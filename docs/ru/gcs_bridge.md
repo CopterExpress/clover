@@ -48,5 +48,3 @@ sudo systemctl restart clover
 
 1. Измените параметр `gcs_bridge` на `udp-pb`.
 2. При открытии программы QGroundControl соединение должно установиться автоматически.
-
-**Далее**: [Доступ по SSH](ssh.md).

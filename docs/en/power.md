@@ -32,5 +32,3 @@ Further reading: https://docs.qgroundcontrol.com/en/SetupView/Power.html.
 <img src="../assets/qgc-power.png" class="zoom">
 
 Further reading: https://docs.px4.io/master/en/advanced_config/esc_calibration.html.
-
-**Next**: [Failsafe configuration](failsafe.md)

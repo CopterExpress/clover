@@ -46,5 +46,3 @@
 * **AUTO.LAND** – коптер выполняет посадку.
 
 Дополнительная информация: https://dev.px4.io/en/concept/flight_modes.html.
-
-**Далее**: [Настройка питания](power.md).

@@ -124,5 +124,3 @@ Press the *Save* button to save the changed value to the flight controller. Chan
 
 1. Set `CBRK_USB_CHK` to 197848 to allow flights with the USB cable connected.
 2. Disable safety switch check: `CBRK_IO_SAFETY` = 22027.
-
-**Next**: [Sensor calibration](calibration.md).

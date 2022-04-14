@@ -36,5 +36,3 @@ Before connecting and calibrating the RC, make sure that:
 8. When you get the *"All settings have been captured. Click Next to write the new parameters to your board"*, press *Next*.
 
 Further reading: https://docs.qgroundcontrol.com/en/SetupView/Radio.html
-
-**Next**: [Flight modes](modes.md).

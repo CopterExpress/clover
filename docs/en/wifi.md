@@ -19,5 +19,3 @@ To edit Wi-Fi settings, or to obtain more detailed information about the network
 After connecting to Clover Wi-Fi, open http://192.168.11.1 in you web browser. It contains all the basic web tools of Clover: viewing image topics, web terminal (Butterfly), and the full copy of this documentation.
 
 <img src="../assets/web.png" alt="Clover Web Interface" class="zoom">
-
-**Next**: [Connecting Raspberry Pi to the flight controller](connection.md).

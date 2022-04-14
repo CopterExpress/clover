@@ -50,5 +50,3 @@
 <arg name="fcu_conn" default="udp"/>
 <arg name="fcu_ip" default="127.0.0.1"/>
 ```
-
-**Далее**: [Подключение QGroundControl по Wi-Fi](gcs_bridge.md).

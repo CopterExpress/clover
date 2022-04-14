@@ -36,5 +36,3 @@
 8. При появлении надписи *"All settings have been captured. Click Next to write the new parameters to your board"* нажмите *Next*.
 
 Дополнительная информация: https://docs.qgroundcontrol.com/en/SetupView/Radio.html.
-
-**Далее**: [Настройка полетных режимов](modes.md).

@@ -53,5 +53,3 @@
 5. Дождитесь окончания калибровки.
 
 Дополнительная информация: https://docs.px4.io/master/en/config/level_horizon_calibration.html.
-
-**Далее**: [Настройка пульта](radio.md).

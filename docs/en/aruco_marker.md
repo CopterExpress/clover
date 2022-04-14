@@ -113,7 +113,3 @@ rospy.spin()
 ```
 
 Each message contains the marker ID, its corner points on the image and its position relative to the camera.
-
----
-
-Suggested reading: [map-based navigation](aruco_map.md)

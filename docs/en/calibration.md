@@ -51,5 +51,3 @@ Read more in the PX4 docs: https://docs.px4.io/master/en/config/accelerometer.ht
 5. Wait for the calibration to finish.
 
 Read more in the PX4 docs: https://docs.px4.io/master/en/config/level_horizon_calibration.html.
-
-**Next**: [RC setup](radio.md).
