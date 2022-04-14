@@ -22,7 +22,7 @@ Manan Dedhia,manandedhia2001@gmail.com, Mechanical. <br/>
 Harshal Warde, harshal.warde@gmail.com, Mechanical. <br/>
 Karan Pandit, karandpandit26@gmail.com, Mechanical. <br/>
 Soham P Dalvi, dalvisoham710@gmail.com, Mechanical. <br/>
-Khushi Sanghvi, khushisanghvi940@gmail.com, Electronics. <br/>
+Khushi Sanghvi, khushisanghvi940@gmail.com, Programming. <br/>
 Ankit Sawant, ankitsawant26@gmail.com, Electronics. <br/>
 Shubh Jatin Pokarne, shubhpokarne91@gmail.com, Electronics. <br/>
 Parth Sawjiyani, sawjiyaniparth@gmail.com, Marketing. <br/>
