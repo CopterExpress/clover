@@ -77,7 +77,7 @@ module.exports = {
 	plugins: [
 		'@vuepress/plugin-search',
 		'vuepress-plugin-copy-code2',
-		['sitemap2', { hostname }],
+		['sitemap2', { hostname, excludeUrls: ['/LANGS.html'] }],
 		require('./rich-quotes')
 	]
 }
