@@ -18,7 +18,7 @@ The list of team members:
 
 Artificial potential fields method is based on considering quadcopter, obstacles and target point as electric-charged points. Quadcopter and obstacles have positive charge, and target point is assigned with negative charge. This results in quadcopter "attracting" itself to the target point, while being repelled by the same-signed charges of obstacles. Using this analogy, you can compute a safe, collision-free trajectory, which can be executed by the vehicle.
 
-<img src="https://github.com/den250400/potential-fields-obstacle-avoidance/blob/main/assets/Traditional-artificial-potentials-path-planning_Q320.jpg" class="center"/>
+<img src="../assets/stereo/q320.jpg" class="center"/>
 
 It's obvious that you need some sort of geometrical information about the surrounding world if you want to avoid obstacles. This algorithm uses Intel RealSense D435 depth camera - it provides a 3D point cloud which can be easily used for potential fields computation.
 
