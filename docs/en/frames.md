@@ -9,7 +9,8 @@ Main frames in the `clover` package:
 * `base_link` is rigidly bound to the drone. It is shown by the simplified drone model on the image above;
 * `body` is bound to the drone, but its Z axis points up regardless of the drone's pitch and roll. It is shown by the red, blue and green lines in the illustration;
 * <a name="navigate_target"></a>`navigate_target` is bound to the current navigation target (as set by the [navigate](simple_offboard.md#navigate) service);
-* `setpoint` is current position setpoint.
+* `setpoint` is current position setpoint;
+* `main_camera_optical` is the coordinate system, [linked to the main camera](camera_setup.md#frame);
 
 Additional frames become available when [ArUco positioning system](aruco.md) is active:
 

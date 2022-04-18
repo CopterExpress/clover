@@ -93,7 +93,7 @@ The marker map adheres to the [ROS coordinate system convention](http://www.ros.
 
 ## VPE setup
 
-In order to enable vision position estimation you should use the following [PX4 parameters](px4_parameters.md).
+In order to enable vision position estimation you should use the following [PX4 parameters](parameters.md).
 
 If you're using **LPE** (`SYS_MC_EST_GROUP` parameter is set to `local_position_estimator,attitude_estimator_q`):
 
