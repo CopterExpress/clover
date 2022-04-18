@@ -2,6 +2,8 @@
 
 [CopterHack-2022](copterhack2022.md), команда **CopterCat**.
 
+<img src="../assets/copter_cat/logo.svg" width="500">
+
 ## Информация о команде
 
 Состав команды:
