@@ -1,6 +1,6 @@
 const sidebar = require('./sidebar');
 
-const hostname = 'clover.coex.tech';
+const hostname = 'https://clover.coex.tech/';
 const allowedTags = ['font', 'center', 'nobr']; // allow using some deprecated and non-standard html tags
 
 module.exports = {
