@@ -4,13 +4,7 @@
 
 ## Team information
 
-<p align="center">
-  <img 
-    width="300"
-    height="300"
-    src="https://user-images.githubusercontent.com/93365067/163363411-dda475aa-6000-4381-88f8-d79f9b681668.png"
-  >
-</p> 
+<img src="../assets/djs-phoenix/1.png" width="300" class="center">
 
 We are the DJS Phoenix, the official drone team of Dwarkadas. J. Sanghvi College of Engineering. <br/>
 The list of team members:
@@ -38,15 +32,11 @@ The driver will be able to see our drone, which will lead the vehicle to the par
 The drone's arms include programmable LEDs. By blinking in a relay pattern, these LEDs will direct you down the path, whether to turn right, left, continue or stop.
 The drone is equipped with sensors to maintain a safe distance in all direction and avoid obstacles. 
 <br/><br/>
-<p align="center">
-  <img 
-    width="300"
-    height="300"
-    src="https://user-images.githubusercontent.com/93365067/163357913-ee6a0f9d-4bb1-47ee-889f-b50108b3d38b.png"
-  >
-</p> 
 
-![Screenshot (257)](https://user-images.githubusercontent.com/93365067/163361462-d90597bc-dea9-4df6-9c5b-808e10940da5.png)
+<img src="../assets/djs-phoenix/2.png" width="300" class="center">
+
+<img src="../assets/djs-phoenix/3.png" class="center" alt="Screenshot (257)">
+
 ### The potential outcomes
 
 #### Problem
