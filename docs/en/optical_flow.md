@@ -1,12 +1,10 @@
 # Use of Optical Flow
 
-Running the technology "Optical Flow" offers the possibility of POSCTL flight mode, and autonomous flight operating on a camera pointed downwards that detects changes of ground texture.
+Running the "Optical Flow" function offers the possibility of POSCTL flight mode, and autonomous flight operating on a camera pointed downwards that detects changes of ground texture.
 
 ## Enabling
 
-> **Hint** It is recommended to use [special PX4 firmware for Clover](firmware.md).
-
-The use of a rangefinder is essential. [Connect and setup laser-ranging sensor VL53L1X](laser.md), according to the manual.
+> **Hint** For Optical Flow to work it's required that the laser rangefinder is [connected and configured](laser.md).
 
 Enable Optical Flow in the file `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
@@ -14,7 +12,7 @@ Enable Optical Flow in the file `~/catkin_ws/src/clover/clover/launch/clover.lau
 <arg name="optical_flow" default="true"/>
 ```
 
-Optical Flow publishes data in `mavros/px4flow/raw/send` topic. In the topic `optical_flow/debug` is also published a visualization, that can be viewed with [web_video_server](web_video_server.md).
+Optical Flow publishes data in `/mavros/px4flow/raw/send` topic. In the topic `/optical_flow/debug` is also published a visualization, that can be viewed with [web_video_server](web_video_server.md).
 
 > **Info** Correct connection and [setup](camera.md) of the camera module is needed for proper functioning.
 
@@ -31,7 +29,7 @@ When using **EKF2** (parameter `SYS_MC_EST_GROUP` = `ekf2`):
 * `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (for the rangefinder VL53L1X)
 * Optional: `EKF2_HGT_MODE` – range sensor (cf. [rangefinder setup](laser.md)).
 
 When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
@@ -43,7 +41,7 @@ When using **LPE** (parameter `SYS_MC_EST_GROUP` = `local_position_estimator, at
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation.
 * `SENS_FLOW_MAXHGT` – 4.0 (for the rangefinder VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (for the rangefinder VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (for the rangefinder VL53L1X)
 * Optional: `LPE_FUSION` – flag 'pub agl as lpos down' is on (see [rangefinder setup](laser.md).
 
 [The `selfcheck.py` utility](selfcheck.md) will help you verify that all settings are correctly set.

@@ -77,19 +77,19 @@ PX4 may be compiled from the source and automatically flashed to the flight cont
 To do this, clone the PX4 repository:
 
 ```bash
-git clone https://github.com/PX4/Firmware.git
+git clone https://github.com/PX4/PX4-Autopilot.git
 ```
 
 Select the appropriate version (tag) using `git checkout`. Then compile and upload the firmware:
 
-```
-make px4fmu-v4_default upload
+```bash
+make px4_fmu-v4_default upload
 ```
 
-Where `px4fmu-v4_default` is the required firmware variant.
+Where `px4_fmu-v4_default` is the required firmware variant.
 
 In order to upload the `v3` firmware to Pixhawk, you may need to use the `force_upload` option:
 
-```
-make px4fmu-v3_default force-upload
+```bash
+make px4_fmu-v3_default force-upload
 ```

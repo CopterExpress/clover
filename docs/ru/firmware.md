@@ -79,19 +79,19 @@ PX4 может быть собран из исходников и загруже
 Для это склонируйте репозиторий PX4:
 
 ```bash
-git clone https://github.com/PX4/Firmware.git
+git clone https://github.com/PX4/PX4-Autopilot.git
 ```
 
 Выберите необходимую версию (тэг) с помощью `git checkout`. Затем соберите и загрузите прошивку:
 
-```
-make px4fmu-v4_default upload
+```bash
+make px4_fmu-v4_default upload
 ```
 
-Где `px4fmu-v4_default` – требуемый вариант прошивки.
+Где `px4_fmu-v4_default` – требуемый вариант прошивки.
 
 Для загрузки прошивки `v3` в Pixhawk может понадобиться команда `force_upload`:
 
-```
-make px4fmu-v3_default force-upload
+```bash
+make px4_fmu-v3_default force-upload
 ```

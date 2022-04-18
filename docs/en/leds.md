@@ -158,3 +158,9 @@ Current LED strip state is published in the `/led/state` ROS topic. You can view
 ```bash
 rostopic echo /led/state
 ```
+
+Using the same topic you can get the configured number os LEDs, using Python:
+
+```python
+led_count = len(rospy.wait_for_message('led/state', LEDStateArray, timeout=10).leds)
+```

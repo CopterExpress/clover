@@ -13,7 +13,7 @@
 # copies or substantial portions of the Software.
 #
 
-set -e # Exit immidiately on non-zero result
+set -ex # exit on error, echo commands
 
 REPO=$1
 REF=$2
@@ -90,7 +90,7 @@ echo_stamp "Installing OpenCV 4.2-compatible ROS packages"
 apt install -y --no-install-recommends \
 ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
 ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
-ros-${ROS_DISTRO}-cv-camera=0.5.0-0buster \
+ros-${ROS_DISTRO}-cv-camera=0.5.1-0buster \
 ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
 ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
 apt-mark hold \
@@ -112,7 +112,7 @@ my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash
 # Don't build simulation plugins for actual drone
-catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_BLACKLIST_PACKAGES=clover_gazebo_plugins
+catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 source devel/setup.bash
 
 echo_stamp "Install clever package (for backwards compatibility)"
