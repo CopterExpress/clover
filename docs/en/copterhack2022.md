@@ -13,7 +13,7 @@ The proposed projects have to be open-source and be compatible with the Clover q
 |Place|Team|Project|Points|
 |:-:|-|-|-|
 ||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover2/docs/ru/advanced_clover_simulator.md)||
-||🇷🇺 Stereo|[Neural obstacle avoidance](https://github.com/den250400/clover/blob/neural-obstacle-avoidance/docs/en/neural-obstacle-avoidance.md)||
+||🇷🇺 Stereo|[Neural obstacle avoidance](obstacle-avoidance-potential-fields.md)||
 ||🇷🇺 Space clowns|[Copter For Space](../ru/c4s.html)||
 ||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/swarm_in_blocks.md)||
 ||🇷🇺 Clover Rescue Team|[Rescue Clover](clover-rescue-team.md)||
