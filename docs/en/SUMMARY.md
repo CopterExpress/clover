@@ -104,6 +104,7 @@
   * [Video contest](video_contest.md)
   * [Educational contests](educational_contests.md)
 * [Clover-based projects](projects.md)
+  * [The Clover Rescue Project](clover-rescue-team.md)
   * [Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)
   * [Autonomous Multirotor Landing System (AMLS)](amls.md)
   * [Drone show](clever-show.md)
