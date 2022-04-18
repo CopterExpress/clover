@@ -75,7 +75,7 @@ The plugin will collect publishing rate statistics and slow the simulation down 
 
 ### Set simulation speed
 
-Since v1.9 the PX4 SITL setup supports [setting the simulation speed](https://dev.px4.io/v1.9.0/en/simulation/#simulation_speed) by setting the `PX4_SIM_SPEED_FACTOR` environment variable. Its value is picked up by PX4 startup scripts, which in turn reconfigure it to expect a certain speedup/slowdown.
+Since v1.9 the PX4 SITL setup supports [setting the simulation speed](https://docs.px4.io/master/en/simulation/#run-simulation-faster-than-realtime) by setting the `PX4_SIM_SPEED_FACTOR` environment variable. Its value is picked up by PX4 startup scripts, which in turn reconfigure it to expect a certain speedup/slowdown.
 
 You should set its value to the actual real time factor that you get with `throttling_camera`. The real time factor may be found in the Gazebo GUI window at the bottom:
 

@@ -1,0 +1,23 @@
+<h1>
+	/var/log/clover.log
+	<a style="font-size: 0.5em; vertical-align: super; font-weight: normal" href="clover.log" download>download</a>
+</h1>
+
+<pre></pre>
+
+<script type="module">
+	var pre = document.querySelector('pre');
+
+	fetch('clover.log?' + Math.random()).then(function(response) { // random to forbid caching
+		if (response.status == 404) {
+			pre.innerHTML = '/var/log/clover.log does not exist';
+			return;
+		} else if (response.status !== 200) {
+			pre.innerHTML('Error ' + response.status);
+			return;
+		}
+		response.text().then(function(content) {
+			pre.innerHTML = content;
+		});
+	});
+</script>

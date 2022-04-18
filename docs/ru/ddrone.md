@@ -94,4 +94,4 @@ mv visual_ddrone-master ddrone
 
 Хотим выразить благодарность Международному университету Ала-Тоо за предоставленную финансовую помощь в осуществлении данного проекта.
 
-![Ala-Too University](https://my.alatoo.edu.kg/images/logo_text.png)
+![Ala-Too University](../assets/seeding_drone/ala-too.png)

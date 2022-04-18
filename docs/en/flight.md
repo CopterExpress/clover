@@ -1,6 +1,6 @@
 # Flight
 
-> **Info** See also official PX4 flying guide: https://docs.px4.io/v1.9.0/en/flying/.
+> **Info** See also official PX4 flying guide: https://docs.px4.io/master/en/flying/.
 
 This section explains the basics of manual controlling the quadcopter in different modes using radio remote control (for autonomous flying see "[Programming](programming.md)") section.
 

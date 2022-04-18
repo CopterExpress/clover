@@ -43,7 +43,7 @@ Axis or Grid configured to frame `aruco_map` will visualize the location [on the
 
 ### jsk_rviz_plugins
 
-It is also recommended to install additional useful plugins for rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). This kit allows visualizing topics like `TwistStamped` (velocity) `CameraInfo`, `PolygonArray`, and many more. To install, use command:
+It is also recommended to install additional useful plugins for rviz [jsk_rviz_plugins](https://jsk-visualization.readthedocs.io/en/latest/jsk_rviz_plugins/index.html). This kit allows visualizing topics like `TwistStamped` (velocity) `CameraInfo`, `PolygonArray`, and many more. To install, use command:
 
 ```(bash)
 sudo apt-get install ros-melodic-jsk-visualization
