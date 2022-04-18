@@ -6,17 +6,15 @@
 
 ## Detailed Gitbook
 
-**Check our Gitbook, with the detailed information about all that was developed by Atena Team during CopterHack 2022: https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks**
+**Check our Gitbook, with the detailed information about all that was developed by Atena Team during CopterHack 2022: https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks**.
 
 >The Clover Platform was forked and adapted to work with swarms. The Swarm in Blocks project is a separated repository with all our swarm manipulation tools for clover. Link of the fork of the Clover Platform: https://github.com/Grupo-SEMEAR-USP/clover . Link of the Swarm in Blocks repository: https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks .
 
 ## Introduction
 
-Nowadays, swarms of drones are getting more and more applications and being used in several different areas, from agriculture to surveillance, and rescues, but controlling a high amount of drones usually isn't a simple task, demanding a lot of studies and complex software. Swarm in Blocks was born looking to make a high-level interface based on the blocks language, to make simple handling swarms, without requiring advanced knowledge in all the necessary platforms, creating tools to allow a lot of applications based on the user needs and also using the Clover platform, which has a lot of advantages as being complete and intuitive, supporting all the project goals. 
+Nowadays, swarms of drones are getting more and more applications and being used in several different areas, from agriculture to surveillance, and rescues, but controlling a high amount of drones usually isn't a simple task, demanding a lot of studies and complex software. Swarm in Blocks was born looking to make a high-level interface based on the blocks language, to make simple handling swarms, without requiring advanced knowledge in all the necessary platforms, creating tools to allow a lot of applications based on the user needs and also using the Clover platform, which has a lot of advantages as being complete and intuitive, supporting all the project goals.
 
-<p align="center">
-  <img width="500" height="281" src="../assets/swarm_in_blocks/ring.gif">
-</p>
+<img width="500" height="281" class="center" src="../assets/swarm_in_blocks/ring.gif">
 
 ## Usability
 
@@ -32,9 +30,7 @@ The Swarm in Blocks can be programmed either with the blocks interface or direct
 
 The entire Swarm in Blocks project was designed so that the user was in an intuitive and comfortable environment within the manipulation of swarms, for this, the existing platform with clover packages was completely rethought and adapted. In our [gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/usability/blocks-api), we have more details about the front-end design, how the user can interact with it, and achieve our main goal: programming in blocks.
 
-<p align="center">
-  <img width="500" height="281" src="../assets/swarm_in_blocks/blocks.gif">
-</p>
+<img width="500" height="281" class="center" src="../assets/swarm_in_blocks/blocks.gif">
 
 ### Features
 
@@ -53,27 +49,19 @@ Along with the project, we developed some features, that can be used together or
   - Translate: All the drones move the same distance in the chosen directions.
   - Rotate: The formation rotates around a determined axis.
 
-<p align="center">
-  <img width="500" height="281" src="../assets/swarm_in_blocks/scaling.gif">
-</p>
-  
+<img width="500" height="281" class="center" src="../assets/swarm_in_blocks/scaling.gif">
+
 - **LED effects:** Enjoying the LEDs included in the Clover, we made some functions to apply effects in all the swarm, creating figures and operations with the LEDs too.
 
-<p align="center">
-  <img width="500" height="281" src="../assets/swarm_in_blocks/leds.gif">
-</p>
+<img width="500" height="281" class="center" src="../assets/swarm_in_blocks/leds.gif">
 
 - **Swarm Preview:** The main goal of this feature is to help the user to visualize how the swarm will behave in the simulation or real life, without using a lot of computational power and avoiding some problems in the simulation. This way a 2D or 3D image illustrating the drones' disposition can pop up on the screen when using this function.
 
-<p align="center">
-  <img width="300" height="300" src="../assets/swarm_in_blocks/swarm_preview.png">
-</p>
+<img width="300" height="300" class="center" src="../assets/swarm_in_blocks/swarm_preview.png">
 
 - **First Person View (FPV):** The FPV node makes it a lot easier to visualize each drone's camera individually and also control each one of them at a time using keyboard bindings.
 
-<p align="center">
-  <img width="500" height="281" src="../assets/swarm_in_blocks/fpv.jpg">
-</p>
+<img width="500" height="281" class="center" src="../assets/swarm_in_blocks/fpv.jpg">
 
 All these features can be very useful for some applications and also be attractive to arouse the curiosity of the general public.
 
@@ -81,7 +69,7 @@ All these features can be very useful for some applications and also be attracti
 
 Over the last months we studied a lot, grew, and surpassed our limits, trying to explore some swarm applications, all to deliver the best possible project: **Swarm in Blocks**. Our motivation was to facilitate such a complex task as the manipulation of swarms of drones, through block programming, and it delighted us a lot and we hope it will fascinate all our users. We tried to resume all the project and its features in this article, but as there are many details and needed explanations, it was made a [gitbook](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks), to explore them for those who are interested.
 
-For us, the results achieved were very expressive and positive, however, we believe that there is still room for improvement in the project, both considering the robustness of the swarm and the simplification of the usability of our platform. Improvement in the collision avoidance system, implementation of more formations and tests in real Clovers are some of the points that we hope to develop in future opportunities. 
+For us, the results achieved were very expressive and positive, however, we believe that there is still room for improvement in the project, both considering the robustness of the swarm and the simplification of the usability of our platform. Improvement in the collision avoidance system, implementation of more formations and tests in real Clovers are some of the points that we hope to develop in future opportunities.
 
 Finally, we thank the entire COEX team that made it possible for CopterHack 2022 to take place and all the support given during the competition. We are **Atena Team**, creator of the **Swarm in Blocks** platform and we thank you for your attention!
 
