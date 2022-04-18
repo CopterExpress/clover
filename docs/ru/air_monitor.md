@@ -1,6 +1,6 @@
 # Система мониторинга воздуха
 
-[Система мониторинга воздуха](air_monitor.md), команда **С305**.
+[CopterHack-2022](copterhack2022.md), команда **С305**.
 
 <img src="../assets/c305.jpg" width=600>
 
@@ -11,7 +11,7 @@
 * [Мамбетов Руслан](https://github.com/Ruslan2288) - CEO, разработчик встраиваемого ПО, дизайнер печатной платы;
 * [Филимонов Сергей](https://github.com/Lukerrr) - программист (интерфейс пользователя, визуализатор);
 * [Смадыч Никита](https://github.com/NikitaS2001) - инженер-программист (навигация дрона);
-* [Антонов Георгий](https://github.com/GeJudas23)  - инженер (сборка и настройка дрона, создание 3d моделей).
+* [Антонов Георгий](https://github.com/GeJudas23) - инженер (сборка и настройка дрона, создание 3d моделей).
 
 ## Описание проекта
 
@@ -27,7 +27,7 @@
 
 ### Презентационный ролик
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/zkYE8mLS81k/0.jpg)](https://www.youtube.com/watch?v=zkYE8mLS81k)
+[![](https://img.youtube.com/vi/zkYE8mLS81k/0.jpg)](https://www.youtube.com/watch?v=zkYE8mLS81k)
 
 ## [Репозиторий проекта](https://github.com/Lukerrr/air-analysis-system)
 
