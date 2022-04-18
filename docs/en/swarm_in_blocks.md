@@ -2,9 +2,7 @@
 
 ## Final Video
 
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=5C-1rRnyiE8" title="Link Title"><img img width="500" height="281" src="https://img.youtube.com/vi/5C-1rRnyiE8/0.jpg"/></a>
-</p>
+<a href="https://www.youtube.com/watch?v=5C-1rRnyiE8"><img width="500" height="281" src="../assets/swarm_in_blocks/vid.jpg" class="center"/></a>
 
 ## Detailed Gitbook
 
