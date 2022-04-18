@@ -119,6 +119,7 @@
   * [Конкурс видео](video_contest.md)
   * [Образовательные конкурсы](educational_contests.md)
 * [Проекты на базе Клевера](projects.md)
+  * [CopterCat CM4](copter_cat.md)
   * [Система мониторинга воздуха](air_monitor.md)
   * [Контроль соблюдения ПДД на выделенной полосе с дроном](lane_control.md)
   * [Система автоматической посадки (AMLS)](amls.md)
