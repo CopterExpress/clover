@@ -52,17 +52,17 @@
 
 <img src="../assets/c4s/drone_c4s.jpg">
 
-<img src="../assets/c4s/space-clowns/antennac4s.jpg">
+<img src="../assets/c4s/antennac4s.jpg">
 
 Блок электроники включает в себя всю необходимую аппаратуру для приёма и записи сигнала со спутника: SDR-приёмник, малошумящий усилитель (МШУ), блок питания МШУ, микрокомпьютер «Raspberry-Pi 4», облучатель.
 
-<img src="../assets/c4s/space-clowns/module_c4s.jpg">
+<img src="../assets/c4s/module_c4s.jpg">
 
-<img src="../assets/c4s/space-clowns/module2_c4s.jpg">
+<img src="../assets/c4s/module2_c4s.jpg">
 
 Следующим шагом стало написание программной части. Было создано ПО для автономного полёта и записи принимаемого сигнала. Запись сигнала осуществлялась на Raspberry.
 
-<img src="../assets/c4s/space-clowns/code_c4s.png">
+<img src="../assets/c4s/code_c4s.png">
 
 https://github.com/petayyyy/Lorett/ (ссылка на наш репозиторий).
 
