@@ -37,7 +37,7 @@ This guide is intended to be used on Ubuntu 20.04. Python version is 3.8.10, but
     catkin_make
     ```
 
-3. Replace your ~/catkin_ws/src/clover/clover_description folder with one in this repository. This will add RealSense D435 to quadcopter model and make other minor changes so you will be able to reproduce our results.
+3. Replace your `~/catkin_ws/src/clover/clover_description` folder with one in this repository. This will add RealSense D435 to quadcopter model and make other minor changes so you will be able to reproduce our results.
 4. Install all necessary Python packages
 
     ```bash
@@ -45,13 +45,13 @@ This guide is intended to be used on Ubuntu 20.04. Python version is 3.8.10, but
     sudo apt-get install ros-noetic-ros-numpy
     ```
 
-5. Make sure your PYTHONPATH env variable is set as
+5. Make sure your `PYTHONPATH` env variable is set as
 
-    ```
+    ```bash
     PYTHONPATH=/home/<username>/catkin_ws/devel/lib/python3/dist-packages:/opt/ros/noetic/lib/python3/dist-packages
     ```
 
-    If it's not, add the following paths to PYTHONPATH
+    If it's not, add the following paths to `PYTHONPATH`.
 
 ## Launch
 
