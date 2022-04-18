@@ -12,7 +12,7 @@ CopterHack 2022 — это международный конкурс по ра�
 
 |Место|Команда|Проект|Балл|
 |:-:|-|-|-|
-||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover2/docs/ru/advanced_clover_simulator.md)||
+||🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator.md)||
 ||🇷🇺 Stereo|[Neural obstacle avoidance](../en/obstacle-avoidance-potential-fields.html)||
 ||🇷🇺 Space clowns|[Copter For Space](c4s.md)||
 ||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/swarm_in_blocks.md)||
