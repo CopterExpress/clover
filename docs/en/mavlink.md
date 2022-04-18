@@ -29,7 +29,7 @@ Examples of MAVLink messages:
 * `GLOBAL_POSITION_INT` – global position of the quadcopter (latitude/longitude/altitude);
 * `COMMAND_LONG` – a command to the quadcopter (take off, land, toggle modes, etc).
 
-A complete list of MAVLink messages is available in [MAVLink documentation] (http://mavlink.org/messages/common).
+A complete list of MAVLink messages is available in [MAVLink documentation](https://mavlink.io/en/messages/common.html).
 
 ### System, system component
 

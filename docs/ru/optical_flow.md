@@ -4,9 +4,7 @@
 
 ## Включение
 
-> **Hint** Необходимо использование [специальной сборки PX4 для Клевера](firmware.md#прошивка-для-клевера).
-
-Необходимо использование дальномера. [Подключите и настройте дальномер VL53L1X](laser.md), используя инструкцию.
+> **Hint** Для работы Optical Flow необходим [подключенный и настроенный лазерный дальномер](laser.md).
 
 Включите Optical Flow в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
 
@@ -14,7 +12,7 @@
 <arg name="optical_flow" default="true"/>
 ```
 
-Optical Flow публикует данные в топик `mavros/px4flow/raw/send`. Кроме того, в топик `optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
+Optical Flow публикует данные в топик `/mavros/px4flow/raw/send`. Кроме того, в топик `/optical_flow/debug` публикуется визуализация, которую можно просмотреть с помощью [web_video_server](web_video_server.md).
 
 > **Info** Для правильной работы модуль камеры должен быть корректно подключен и [сконфигурирован](camera.md).
 
@@ -31,7 +29,7 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
 
 При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
@@ -43,7 +41,7 @@ Optical Flow публикует данные в топик `mavros/px4flow/raw/s
 * `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (для дальномера VL53L1X)
 * Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
