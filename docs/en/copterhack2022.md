@@ -19,7 +19,7 @@ The proposed projects have to be open-source and be compatible with the Clover q
 ||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
 ||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
 ||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)||
-||🇷🇺 С305|[Система мониторинга воздуха](https://github.com/Ruslan2288/clover/blob/master/docs/ru/air_monitor.md)|&nbsp;|
+||🇷🇺 С305|[Система мониторинга воздуха](../ru/air_monitor.html)|&nbsp;|
 |✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
 |✕|🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
 |✕|🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
