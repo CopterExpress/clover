@@ -36,7 +36,7 @@ The idea of this project came immediately, it lies on the surface. A system that
 
 [Link to the website](https://48c5-94-29-124-254.eu.ngrok.io)
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/mockup.png'>
+<img src="../assets/clover-rescue-team/mockup.png">
 
 ## <a name="hiw"></a> How It Works
 
@@ -59,7 +59,7 @@ All you need is COEX Clover 3/4, Raspberry Pi 3/4, USB WIFI Modem and RPi Camera
 
 Firstly, users need to register on our website.
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/signup.png'>
+<img src="../assets/clover-rescue-team/signup.png">
 
 After registration the main control panel and installation instructions open.
 
@@ -75,55 +75,55 @@ When the software is installed, the server will automatically start. After insta
 
 ## <a name="functions"></a> Work Example, Functions
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/main.png'><br/><br/>
+<img src="../assets/clover-rescue-team/main.png">
 
 On the website there are several commands for controlling the drone. “Get photo” allows you to get an image from the drone camera. The “Land” button lands the drone. The "Return" command returns drone to the operator, according to GPS coordinates (this requires a stable connection of the drone with 10 or more satellites). "Hover" makes the drone hover in the air. "Disarm" instantly disables the drone's motors, so you need to be careful with this command. The “Choose Code” and “Upload & Run” buttons allow users to select a code written in Python, upload it to the drone and run it. Also, users will see output of their code and all its errors. There is also interactive map with markers, blue marker the is location of the user, purple marker is the location of his drone. Also, as you can see, there is a real-time visualization of the Clover’s airborne position, as well as its altitude and the average voltage between the battery cells.
 
 ## <a name="settings"></a> Settings
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/allsettings.png'>
+<img src="../assets/clover-rescue-team/allsettings.png">
 
 In the settings users can set speed and altitude of the return.
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/s1.png'>
+<img src="../assets/clover-rescue-team/s1.png">
 
 Users can choose an action after return (hover or land).
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/s2.png'>
+<img src="../assets/clover-rescue-team/s2.png">
 
 ...And the place where the drone will return (User coordinates or takeoff coordinates).
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/s3.png'>
+<img src="../assets/clover-rescue-team/s3.png">
 
 Users can also set the period for automatically receiving photos from the drone.
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/s4.png'>
+<img src="../assets/clover-rescue-team/s4.png">
 
 At the top of the website is the status of your drone (Disconnected/Connected, disarmed, Connected, in flight).
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/status.png'>
+<img src="../assets/clover-rescue-team/status.png">
 
 ## <a name="mobile"></a> Mobile Version
 
 The mobile version of the site has absolutely the same functionality (swipe to the right/left to move between control panels).
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m1.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m2.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m3.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m4.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/m5.jpg' width= '200px'>
+<img src="../assets/clover-rescue-team/m1.jpg" width="200px">
+<img src="../assets/clover-rescue-team/m2.jpg" width="200px">
+<img src="../assets/clover-rescue-team/m3.jpg" width="200px">
+<img src="../assets/clover-rescue-team/m4.jpg" width="200px">
+<img src="../assets/clover-rescue-team/m5.jpg" width="200px">
 
 ## <a name="bots"></a> Bots on the social networks and messengers
 
 Bots on the social networks is an example of what you can do based on our project. They have the main functionality of our website and The Clover Rescue Team is still working on their features.
 
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot3.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot1.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot4.png' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot2.png' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot6.jpg' width= '200px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot5.jpg' width= '290px'>
-<img src='https://github.com/DevMBS/CRTClient/raw/main/assets/readme/bot7.jpg' width= '288.5px'>
+<img src="../assets/clover-rescue-team/bot3.jpg" width="200px">
+<img src="../assets/clover-rescue-team/bot1.jpg" width="200px">
+<img src="../assets/clover-rescue-team/bot4.png" width="200px">
+<img src="../assets/clover-rescue-team/bot2.png" width="200px">
+<img src="../assets/clover-rescue-team/bot6.jpg" width="200px">
+<img src="../assets/clover-rescue-team/bot5.jpg" width="290px">
+<img src="../assets/clover-rescue-team/bot7.jpg" width="288.5px">
 
 [VK Bot Repository](https://github.com/Astel2022/CRTVkbot)
 
