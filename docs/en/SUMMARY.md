@@ -104,6 +104,7 @@
   * [Video contest](video_contest.md)
   * [Educational contests](educational_contests.md)
 * [Clover-based projects](projects.md)
+  * [Swarm-in-blocks](swarm_in_blocks.md)
   * [Obstacle avoidance using artificial potential fields method](obstacle-avoidance-potential-fields.md)
   * [The Clover Rescue Project](clover-rescue-team.md)
   * [Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)

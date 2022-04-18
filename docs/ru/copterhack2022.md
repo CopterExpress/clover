@@ -15,7 +15,7 @@ CopterHack 2022 — это международный конкурс по ра�
 ||🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator.md)||
 ||🇷🇺 Stereo|[Neural obstacle avoidance](../en/obstacle-avoidance-potential-fields.html)||
 ||🇷🇺 Space clowns|[Copter For Space](c4s.md)||
-||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/swarm_in_blocks.md)||
+||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](../en/swarm_in_blocks.html)||
 ||🇷🇺 Clover Rescue Team|[Rescue Clover](../en/clover-rescue-team.html)||
 ||🇷🇺 CopterCat|[CopterCat](copter_cat.md)||
 ||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](../en/djs_phoenix_ikshana.html)||
