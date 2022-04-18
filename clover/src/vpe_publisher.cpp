@@ -141,11 +141,11 @@ int main(int argc, char **argv) {
 	vpe_pub = nh_priv.advertise<PoseStamped>("vpe", 1);
 	//vpe_cov_pub = nh_priv_.advertise<PoseStamped>("pose_cov_pub", 1);
 
-	if (nh_priv.param("publish_zero", false)) {
+	if (nh_priv.param("force_init", false) || nh_priv.param("publish_zero", false)) { // publish_zero is old name
 		// publish zero to initialize the local position
 		zero_timer = nh.createTimer(ros::Duration(0.1), &publishZero);
-		publish_zero_timout = ros::Duration(nh_priv.param("publish_zero_timout", 5.0));
-		publish_zero_duration = ros::Duration(nh_priv.param("publish_zero_duration", 5.0));
+		publish_zero_timout = ros::Duration(nh_priv.param("force_init_timeout", 5.0));
+		publish_zero_duration = ros::Duration(nh_priv.param("force_init_duration", 5.0));
 		local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &localPositionCallback);
 	}
 

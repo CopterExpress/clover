@@ -9,7 +9,7 @@ Before connecting and calibrating the RC, make sure that:
 
 ## Connecting the RC transmitter
 
-1. Open the *Vehicle Setup* tab and select the *Radio* menu.
+1. In QGroundControl software, go the *Vehicle Setup* panel and choose the *Radio* menu.
 2. Power on the transmitter by sliding the **POWER** slider up.
 3. Make sure the transmitter-receiver link is working.
 

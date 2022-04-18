@@ -27,28 +27,29 @@ Main article: https://docs.qgroundcontrol.com/en/SetupView/Firmware.html
 
 > **Note** Do not connect your flight controller prior to flashing.
 
-We recommend using the modified version of PX4 by CopterExpress for the Clover drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
+We recommend using the modified version of [PX4 with COEX patches](firmware.md) for the Clover drone, especially for autonomous flights. Download the latest stable version **<a class="latest-firmware v4" href="https://github.com/CopterExpress/Firmware/releases">from our GitHub</a>**.
 
-> **Info** For Pixhawk-based quadcopters there is a separate firmware version. See details in "[Pixhawk / Pixracer firmware flashing](firmware.md)" article.
+To use all the most recent PX4 functions you also can use the latest official firmware version (experimentally).
 
 Flash the flight controller with this firmware:
 
 <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
-1. Launch QGroundControl software.
-2. Open the *Vehicle Setup* tab.
-3. Select the *Firmware* menu.
+1. Disconnect the flight controller from computer (if connected).
+2. Launch QGroundControl software.
+3. Go to *Vehicle Setup* panel (click on the QGroundControl logo in the top-left corner) and select *Firmware* menu.
 4. Connect your flight controller to your PC over USB.
-5. Wait for the flight controller to connect to QGroundControl.
-6. Select *PX4 Flight Stack* in the right bar.
+5. Select *PX4 Flight Stack* in the right bar appeared.
 
-To use the recommended Copter Express firmware:
+   <img src="../assets/qgc-firmware.png" alt="QGroundControl firmware upload" class="zoom">
 
-* Check *Advanced Settings* checkbox.
-* Select *Custom firmware file...* from the dropdown list.
-* Press *OK* and select the file that you've downloaded.
+6. To use **COEX patched firmware**:
 
-To use the latest official stable firmware just press *OK*.
+   * Check *Advanced Settings* checkbox.
+   * Select *Custom firmware file...* from the dropdown list.
+   * Press *OK* and select the file that you've downloaded.
+
+   To use the latest **official stable firmware** just press *OK*.
 
 Wait for QGroundControl to finish flashing the flight controller.
 
@@ -82,7 +83,7 @@ This is how the main QGroundControl settings window will look like:
 
 ### Setting parameters
 
-Open the *Vehicle Setup* tab and select the *Parameters* menu. You can use the *Search* field to find parameters by name.
+Open the *Vehicle Setup* tab and select the *Parameters* menu. You can use the *Search* field to find parameters by name. Recommended parameters values are given in the further documentation and also in the [parameters summary article](parameters.md).
 
 <img src="../assets/qgc-parameters.png" alt="QGroundControl parameters" class="zoom">
 

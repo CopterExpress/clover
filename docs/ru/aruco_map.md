@@ -93,7 +93,7 @@ rosrun aruco_pose genmap.py 0.33 2 4 1 1 0 -o test_map.txt
 
 ## Настройка VPE
 
-Для работы механизма Vision Position Estimation необходимы следующие [настройки PX4](px4_parameters.md).
+Для работы механизма Vision Position Estimation необходимы следующие [настройки PX4](parameters.md).
 
 При использовании **LPE** (параметр `SYS_MC_EST_GROUP` = `local_position_estimator, attitude_estimator_q`):
 

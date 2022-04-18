@@ -63,3 +63,64 @@ Then connect the signal output of the circuit to the selected port and solder th
 2. Use a zip tie to pull the assembled circuit to the back of the deck.
 3. Plug the Arduino *D11* signal pin into one of the *AUX* pins on the flight controller.
 4. Plug the power wire of the electromagnetic gripper to JST 5V.
+
+## Setting up electromagnetic gripper
+
+To control the magnet through Arduino Nano, use the following code:
+
+```cpp
+void setup() {
+  pinMode(11, INPUT);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  if (int duration = pulseIn(11, HIGH) > 1200) {
+    digitalWrite(13, HIGH);
+  } else {
+    digitalWrite(13, LOW);
+  }
+}
+```
+
+To monitor the status of the electromagnetic gripper, you can connect the *ws281x* LED strip (included to Clover kit). Connect it to power +5v – 5v, ground GND – GND, and signal wire DIN – Arduino D12.
+
+To control the magnet and monitor it using the LED strip, use the following code:
+
+```cpp
+#include <Adafruit_NeoPixel.h>
+#define NUMPIXELS 72
+#define PIN 12
+int pin = 11;
+int led = 13;
+
+unsigned long duration;
+Adafruit_NeoPixel strip (NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+void setup() {
+  strip.begin();
+  strip.setBrightness(10);
+  Serial.begin(9600);
+  pinMode(pin, INPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  duration = pulseIn(pin, HIGH);
+  Serial.println(duration);
+  delay(100);
+  if (duration >= 1500) {
+    digitalWrite(led, HIGH);
+    for (int i = -1; i < NUMPIXELS; i++) {
+      strip.setPixelColor(i, strip.Color(255, 0, 0));
+      strip.show();
+    }
+  } else {
+    digitalWrite(led, LOW);
+    for (int i = -1; i < NUMPIXELS; i++) {
+      strip.setPixelColor(i, strip.Color(0, 255, 0));
+      strip.show();
+    }
+  }
+}
+```
