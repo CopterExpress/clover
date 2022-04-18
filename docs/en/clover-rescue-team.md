@@ -26,7 +26,7 @@
 * [Bots](#bots)
 * [Our plans for the future](#plans)
 
-## <a name="idea"></a> Project Idea
+## Project Idea {#idea}
 
 The idea of this project came immediately, it lies on the surface. A system that makes situations where pilots cannot find their flown away drone or stop it at full speed flying into a wall, a thing of the past, is something that pilots have been missing for a long time. The key feature of our software is that users can manage their Clover from anywhere in the world, this software replaces FTP and SSH (users can upload the code to their drone and run it directly from our site). Also, if radio communication with the Clover is lost, it can be returned to the user's or takeoff location with just one click. Moreover, the user can monitor the status in realtime, as well as location, camera data, and airborne position data of the drone. There are also functions that can be useful in emergency situations, such as landing, hovering and disarming the drone remotely from our website. A mobile version of the site with full functionality is also available!
 
@@ -38,7 +38,7 @@ The idea of this project came immediately, it lies on the surface. A system that
 
 <img src="../assets/clover-rescue-team/mockup.png">
 
-## <a name="hiw"></a> How It Works
+## How It Works {#hiw}
 
 Links to repositories:
 
@@ -51,11 +51,11 @@ The Socket.IO library is used to transfer data between the client, server and dr
 After connecting the client and the drone to the server, they are added to a unique room with their UID, and already in it they exchange data.
 You can learn more about how it works by visiting the repositories.
 
-## <a name="rh"></a> Required Hardware
+## Required Hardware {#rh}
 
 All you need is COEX Clover 3/4, Raspberry Pi 3/4, USB WIFI Modem and RPi Camera!
 
-## <a name="oi"></a> Operating Instructions
+## Operating Instructions {#oi}
 
 Firstly, users need to register on our website.
 
@@ -63,7 +63,7 @@ Firstly, users need to register on our website.
 
 After registration the main control panel and installation instructions open.
 
-## <a name="ii"></a> Installation Instructions
+## Installation Instructions {#ii}
 
 First, you need to connect to your Clover via SSH and paste the command indicated in the instructions that opened (if it is not open, you can open it by clicking on the "Instructions" button). The command looks like that:
 
@@ -73,13 +73,13 @@ wget https://48c5-94-29-124-254.eu.ngrok.io/assets/installers/install.sh && sudo
 
 When the software is installed, the server will automatically start. After installation, you can forget about manually launching the software, it will automatically start and connect to the main server after turning on the Clover!
 
-## <a name="functions"></a> Work Example, Functions
+## Work Example, Functions {#functions}
 
 <img src="../assets/clover-rescue-team/main.png">
 
 On the website there are several commands for controlling the drone. “Get photo” allows you to get an image from the drone camera. The “Land” button lands the drone. The "Return" command returns drone to the operator, according to GPS coordinates (this requires a stable connection of the drone with 10 or more satellites). "Hover" makes the drone hover in the air. "Disarm" instantly disables the drone's motors, so you need to be careful with this command. The “Choose Code” and “Upload & Run” buttons allow users to select a code written in Python, upload it to the drone and run it. Also, users will see output of their code and all its errors. There is also interactive map with markers, blue marker the is location of the user, purple marker is the location of his drone. Also, as you can see, there is a real-time visualization of the Clover’s airborne position, as well as its altitude and the average voltage between the battery cells.
 
-## <a name="settings"></a> Settings
+## Settings {#settings}
 
 <img src="../assets/clover-rescue-team/allsettings.png">
 
@@ -103,7 +103,7 @@ At the top of the website is the status of your drone (Disconnected/Connected, d
 
 <img src="../assets/clover-rescue-team/status.png">
 
-## <a name="mobile"></a> Mobile Version
+## Mobile Version {#mobile}
 
 The mobile version of the site has absolutely the same functionality (swipe to the right/left to move between control panels).
 
@@ -113,7 +113,7 @@ The mobile version of the site has absolutely the same functionality (swipe to t
 <img src="../assets/clover-rescue-team/m4.jpg" width="200px">
 <img src="../assets/clover-rescue-team/m5.jpg" width="200px">
 
-## <a name="bots"></a> Bots on the social networks and messengers
+## Bots on the social networks and messengers {#bots}
 
 Bots on the social networks is an example of what you can do based on our project. They have the main functionality of our website and The Clover Rescue Team is still working on their features.
 
@@ -131,7 +131,7 @@ Bots on the social networks is an example of what you can do based on our projec
 
 [Demonstration video of the bot](https://youtu.be/N3oFobVCmx4)
 
-## <a name="plans"></a> Our plans for the future
+## Our plans for the future {#plans}
 
 We do not plan to stop and want to continue the development. Here is a list of what will be added.
 
