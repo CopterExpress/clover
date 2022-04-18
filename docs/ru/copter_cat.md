@@ -65,8 +65,8 @@
 
 ## Разъёмы и перемычки
 
-![image](docs/assets/copterCat/board_top_nums.png)
-![image](docs/assets/copterCat/board_bottom_nums.png)
+![](../assets/copter_cat/board_top_nums.png)
+![](../assets/copter_cat/board_bottom_nums.png)
 
 1. GPIO ESP32 4 порта ввода вывода для подключения внешнего оборудования.
 2. Коннекторы RPi CM4.
