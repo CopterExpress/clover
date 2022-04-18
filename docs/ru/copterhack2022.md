@@ -18,7 +18,7 @@ CopterHack 2022 — это международный конкурс по ра�
 ||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/swarm_in_blocks.md)||
 ||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
 ||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
-||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix-Ikshana/docs/en/djs_phoenix_ikshana.md)||
+||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](../en/djs_phoenix_ikshana.html)||
 ||🇷🇺 С305|[Система мониторинга воздуха](https://github.com/Ruslan2288/clover/blob/master/docs/ru/air_monitor.md)|&nbsp;|
 |✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
 |✕|🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
