@@ -12,7 +12,7 @@ The list of team members:
 
 ## Project description
 
-<img src="https://github.com/den250400/potential-fields-obstacle-avoidance/blob/main/assets/avoidance_sim_demo.gif" class="center"/>
+<img src="https://github.com/den250400/potential-fields-obstacle-avoidance/raw/main/assets/avoidance_sim_demo.gif" class="center"/>
 
 [This](https://github.com/den250400/potential-fields-obstacle-avoidance) repository contains obstacle avoidance system for quadcopters with Raspberry Pi 4 onboard computer. The code in this repository is designed to work with [Clover Raspberry Pi image](https://clover.coex.tech/en/image.html) and [special PX4-based firmware](https://clover.coex.tech/en/firmware.html) modified for easier communication with Raspberry Pi.
 
