@@ -2,7 +2,7 @@
 
 [Система мониторинга воздуха](air_monitor.md), команда **С305**.
 
-<img src="https://github.com/Lukerrr/air-analysis-system/raw/master/docs/pictures/logo1.jpg" width=600>
+<img src="../assets/c305.jpg" width=600>
 
 ## Информация о команде
 
