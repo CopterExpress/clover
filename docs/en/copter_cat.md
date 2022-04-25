@@ -55,14 +55,14 @@ At the stage of the project: debugging and demonstration of capabilities. After:
 * Built-in antenna.
 * USB-TTL converter.
 
-### Remain
+### Remaining
 
-*USB-HUB USB2514B.
+* USB-HUB USB2514B.
 * USB-PD with physical switching.
 * Communication between ESP32 and STM32 via UART.
 * 3 power options.
 * 4 universal GPIOs from ESP32.
-*USB Type-C.
+* USB Type-C.
 * Dimensions 40x55mm, board 4 layers.
 
 ## Connectors and jumpers
