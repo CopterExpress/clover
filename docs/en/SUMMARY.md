@@ -107,6 +107,7 @@
   * [Swarm-in-blocks](swarm_in_blocks.md)
   * [Obstacle avoidance using artificial potential fields method](obstacle-avoidance-potential-fields.md)
   * [The Clover Rescue Project](clover-rescue-team.md)
+  * [CopterCat CM4](copter_cat.md)
   * [Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)
   * [Autonomous Multirotor Landing System (AMLS)](amls.md)
   * [Drone show](clever-show.md)

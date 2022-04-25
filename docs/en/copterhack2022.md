@@ -17,7 +17,7 @@ The proposed projects have to be open-source and be compatible with the Clover q
 |3|🇷🇺 Clover Rescue Team|[Rescue Clover](clover-rescue-team.md)|17.7|
 |4|🇷🇺 С305|[Система мониторинга воздуха](../ru/air_monitor.html)|17.3|
 |5|🇷🇺 Space clowns|[Copter For Space](../ru/c4s.html)|16.2|
-|6|🇷🇺 CopterCat|[CopterCat](../ru/copter_cat.html)|16.1|
+|6|🇷🇺 CopterCat|[CopterCat](copter_cat.md)|16.1|
 |7|🇷🇺 Stereo|[Neural obstacle avoidance](obstacle-avoidance-potential-fields.md)|15.85|
 |8|🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)|11.7|
 |✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
