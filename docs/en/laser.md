@@ -38,7 +38,7 @@ rostopic echo /rangefinder/range
 
 > **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
 
-PX4 should be properly [configured](px4_parameters.md) to use the rangefinder data.
+PX4 should be properly [configured](parameters.md) to use the rangefinder data.
 
 Set the following parameters when EKF2 is used (`SYS_MC_EST_GROUP` = `ekf2`):
 
@@ -75,7 +75,7 @@ from sensor_msgs.msg import Range
 
 # ...
 
-data = rospy.wait_for_message('rangefinder/range', Range)
+dist = rospy.wait_for_message('rangefinder/range', Range).range
 ```
 
 ### Data visualization

@@ -53,6 +53,7 @@ private:
 	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	bool calc_flow_gyro_;
+	float flow_gyro_default_;
 
 	void onInit()
 	{
@@ -69,6 +70,7 @@ private:
 		roi_px_ = nh_priv.param("roi", 128);
 		roi_rad_ = nh_priv.param("roi_rad", 0.0);
 		calc_flow_gyro_ = nh_priv.param("calc_flow_gyro", false);
+		flow_gyro_default_ = nh_priv.param("flow_gyro_default", NAN);
 
 		img_pub_ = it_priv.advertise("debug", 1);
 		flow_pub_ = nh.advertise<mavros_msgs::OpticalFlowRad>("mavros/px4flow/raw/send", 1);
@@ -194,9 +196,9 @@ private:
 			uint32_t integration_time_us = integration_time.toSec() * 1.0e6;
 
 			// Calculate flow gyro
-			flow_.integrated_xgyro = NAN;
-			flow_.integrated_ygyro = NAN;
-			flow_.integrated_zgyro = NAN;
+			flow_.integrated_xgyro = flow_gyro_default_;
+			flow_.integrated_ygyro = flow_gyro_default_;
+			flow_.integrated_zgyro = flow_gyro_default_;
 
 			if (calc_flow_gyro_) {
 				try {

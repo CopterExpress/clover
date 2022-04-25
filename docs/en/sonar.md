@@ -89,7 +89,7 @@ while True:
 
 ### Filtering the data
 
-To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://ru.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
+To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://en.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
 
 ```python
 import collections
