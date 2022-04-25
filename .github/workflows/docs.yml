@@ -55,7 +55,7 @@ jobs:
       - name: Download older PDFs
         if: ${{ !steps.generate-pdf.outputs.GITBOOK_PDF_OK }}
         run: |
-          rm _book/clover*.pdf
+          rm -f _book/clover*.pdf
           wget --no-verbose https://clover.coex.tech/clover_ru.pdf -P _book/
           wget --no-verbose https://clover.coex.tech/clover_en.pdf -P _book/
       - name: Deploy
