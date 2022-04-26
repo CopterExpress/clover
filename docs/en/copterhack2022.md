@@ -41,6 +41,8 @@ The proposed projects have to be open-source and be compatible with the Clover q
 
 ✕ – teams which haven't qualified for the Final.
 
+See all points by criteria in the [full table](https://docs.google.com/spreadsheets/d/1qVoXchDbaBlbFzVCyxFZDU6pp8pvC1oXasowr56tnzc).
+
 ## Company case competition
 
 Teams are welcome to dive into the development of the following company cases:
