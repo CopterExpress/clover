@@ -98,7 +98,7 @@ public:
 			ros::shutdown();
 		}
 		readLengthOverride(nh_priv_);
-		transform_timeout_ = ros::Duration(nh_priv.param("transform_timeout", 0.02));
+		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
 		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
 		auto_flip_ = nh_priv_.param("auto_flip", false);
