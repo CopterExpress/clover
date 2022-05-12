@@ -5,7 +5,7 @@ from clover.srv import SetLEDEffect
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 
-rospy.init_node('autotest_led')
+rospy.init_node('autotest_led', disable_signals=True)
 
 set_leds = rospy.ServiceProxy('led/set_leds', SetLEDs)
 set_effect = rospy.ServiceProxy('led/set_effect', SetLEDEffect)

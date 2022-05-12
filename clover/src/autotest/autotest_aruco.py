@@ -7,7 +7,7 @@ from threading import Thread
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Range
 
-rospy.init_node('autotest_aruco')
+rospy.init_node('autotest_aruco', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
