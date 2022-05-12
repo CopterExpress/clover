@@ -2,6 +2,8 @@
 
 import rospy
 import math
+import signal
+import sys
 from clover import srv
 from threading import Thread
 from std_srvs.srv import Trigger
@@ -17,6 +19,13 @@ set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
+
+def interrupt(sig, frame):
+    print('\nInterrupted, landing...')
+    land()
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, interrupt)
 
 def print_current_map_position():
     telem = get_telemetry()
