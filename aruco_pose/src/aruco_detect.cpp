@@ -71,6 +71,7 @@ private:
 	ros::Subscriber map_markers_sub_;
 	bool estimate_poses_, send_tf_, auto_flip_;
 	double length_;
+	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
 	std::string frame_id_prefix_, known_tilt_;
 	Mat camera_matrix_, dist_coeffs_;
@@ -97,6 +98,7 @@ public:
 			ros::shutdown();
 		}
 		readLengthOverride(nh_priv_);
+		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
 		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
 		auto_flip_ = nh_priv_.param("auto_flip", false);
@@ -172,7 +174,7 @@ private:
 				if (!known_tilt_.empty()) {
 					try {
 						snap_to = tf_buffer_->lookupTransform(msg->header.frame_id, known_tilt_,
-						                                      msg->header.stamp, ros::Duration(0.02));
+						                                      msg->header.stamp, transform_timeout_);
 					} catch (const tf2::TransformException& e) {
 						NODELET_WARN_THROTTLE(5, "can't snap: %s", e.what());
 					}
