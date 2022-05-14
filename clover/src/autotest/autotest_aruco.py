@@ -39,6 +39,7 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0, speed=0.5, \
         frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
+        print('\033[91mError:\033[0m {}'.format(res.message))
         return res
 
     while not rospy.is_shutdown():
