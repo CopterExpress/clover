@@ -143,7 +143,7 @@ def test_map_image(node):
     assert img.encoding in ('mono8', 'rgb8')
 
 def test_map_markers(node):
-    markers = rospy.wait_for_message('aruco_map/markers', MarkerArray, timeout=5)
+    markers = rospy.wait_for_message('aruco_map/map', MarkerArray, timeout=5)
     assert markers.markers[0].id == 1
     assert markers.markers[1].id == 2
     assert markers.markers[2].id == 3

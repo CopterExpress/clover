@@ -97,6 +97,7 @@ See examples in [`map`](map/) directory.
 #### Published
 
 * `~pose` (*geometry_msgs/PoseWithCovarianceStamped*) – estimated map pose
+* `~map` (*aruco_pose/MarkerArray*) – list of markers in the loaded map
 * `~image` (*sensor_msgs/Image*) – planarized map image
 * `~visualization` (*visualization_msgs/MarkerArray*) – markers map visualization for rviz
 * `~debug` (*sensor_msgs/Image*) – debug image with detected markers and map axis
