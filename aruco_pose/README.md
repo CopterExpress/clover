@@ -51,6 +51,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 
 * `image_raw` (*sensor_msgs/Image*) – camera image
 * `camera_info` (*sensor_msgs/CameraInfo*) – camera calibration info
+* `map_markers` (*aruco_pose/MarkerArray*) – list of markers to disable TF transform publishing
 
 #### Published
 
