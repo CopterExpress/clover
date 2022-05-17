@@ -68,6 +68,8 @@
         { "from": "ru/microsd_images.html", "to": "image.html" },
         { "from": "en/microsd_images.html", "to": "image.html" },
         { "from": "ru/px4_parameters.html", "to": "parameters.html" },
-        { "from": "en/px4_parameters.html", "to": "parameters.html" }
+        { "from": "en/px4_parameters.html", "to": "parameters.html" },
+        { "from": "ru/zerotire_vpn.html", "to": "zerotier_vpn.html" },
+        { "from": "en/zerotire_vpn.html", "to": "zerotier_vpn.html" }
     ]
 }
