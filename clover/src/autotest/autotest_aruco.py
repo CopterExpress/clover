@@ -8,6 +8,7 @@ from clover import srv
 from threading import Thread
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Range
+from aruco_pose.msg import MarkerArray
 
 rospy.init_node('autotest_aruco', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
@@ -48,20 +49,34 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0, speed=0.5, \
             return res
         rospy.sleep(0.2)
 
-input('Take off and hover 1 m above the ground [enter] ')
+markers = rospy.wait_for_message('aruco_map/map', MarkerArray, timeout=3)
+left = min(marker.pose.position.x for marker in markers.markers)
+bottom = min(marker.pose.position.y for marker in markers.markers)
+width = max(marker.pose.position.x for marker in markers.markers)
+height = max(marker.pose.position.y for marker in markers.markers)
+center_x = left + width / 2
+center_y = bottom + height / 2
+
+print('Map rect: %g %g - %g %g' % (left, bottom, width, height))
+
+input('Take off and hover 1 m [enter] ')
 navigate_wait(x=0, y=0, z=1, frame_id='body', auto_arm=True)
 print_current_map_position()
 
-input('Go to position\tx=1\ty=3\tz=2\tyaw=0 [enter] ')
-navigate_wait(x=1, y=3, z=2, frame_id='aruco_map')
+input('Go to corner %g %g 1.5 speed 1 [enter] ' % (width, height))
+navigate_wait(x=width, y=height, z=1.5, speed=1, frame_id='aruco_map')
 print_current_map_position()
 
-input('Go to position\tx=0\ty=2\tz=1.2\tyaw=1.57\twith speed 5 [enter]')
-navigate_wait(x=0, y=2, z=1.2, yaw=1.57, frame_id='aruco_map', speed=5)
+input('Go to center %g %g 1.5 speed 5 [enter] ' % (center_x, center_y))
+navigate_wait(x=center_x, y=center_y, z=1.5, speed=5, frame_id='aruco_map')
 print_current_map_position()
 
-input('Go to marker 0, z=1.5 [enter] ')
-navigate_wait(x=0, y=0, z=1.5, frame_id='aruco_0')
+input('Go to side 1 %g 2 heading top [enter] ' % (center_y))
+navigate_wait(x=1, y=center_y, z=2, yaw=1.57, frame_id='aruco_map')
+print_current_map_position()
+
+input('Go to marker 0 z=1.5 [enter] ')
+navigate_wait(x=0, y=0, z=1.5, yaw=0, frame_id='aruco_0')
 print_current_map_position()
 
 input('Perform landing [enter] ')
