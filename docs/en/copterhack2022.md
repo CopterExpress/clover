@@ -8,7 +8,11 @@ You can see the articles of the CopterHack 2021 finalist teams by the link [Copt
 
 The proposed projects have to be open-source and be compatible with the Clover quadcopter platform. Teams will work on their projects throughout the competition, bringing them closer to the state of the finished product. Industry experts will assist the participants through lectures and regular feedback.
 
-Final of the CopterHack 2022 was held on April 10, 2022. The winner team was the team 🇧🇷 **Atena - Grupo SEMEAR**. Full stream of the final on YouTube: https://www.youtube.com/watch?v=drs3Zxi8UX8.
+Final of the CopterHack 2022 was held on April 23, 2022. The winner team was the team 🇧🇷 **Atena - Grupo SEMEAR**. 
+
+## Full stream of the final
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=drs3Zxi8UX8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Aftermovie
 
