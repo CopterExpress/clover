@@ -48,6 +48,7 @@
 #include <aruco_pose/Marker.h>
 #include <aruco_pose/MarkerArray.h>
 #include <aruco_pose/DetectorConfig.h>
+#include <aruco_pose/SetMarkers.h>
 
 #include "utils.h"
 #include <memory>
@@ -69,6 +70,7 @@ private:
 	image_transport::CameraSubscriber img_sub_;
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
+	ros::ServiceServer set_markers_srv_;
 	bool estimate_poses_, send_tf_, auto_flip_;
 	double length_;
 	ros::Duration transform_timeout_;
@@ -115,6 +117,8 @@ public:
 
 		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
 		dyn_srv_->setCallback(std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2));
+
+		set_markers_srv_ = nh_priv_.advertiseService("set_length_override", &ArucoDetect::setMarkers, this);
 
 		debug_pub_ = it_priv.advertise("debug", 1);
 		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
@@ -346,6 +350,29 @@ private:
 		} else {
 			return length_;
 		}
+	}
+
+	bool setMarkers(aruco_pose::SetMarkers::Request& req, aruco_pose::SetMarkers::Response& res)
+	{
+		for (auto const& marker : req.markers) {
+			if (marker.id > 999) {
+				res.message = "Invalid marker id: " + std::to_string(marker.id);
+				ROS_ERROR("%s", res.message.c_str());
+				return true;
+			}
+			if (!std::isfinite(marker.length) || marker.length <= 0) {
+				res.message = "Invalid marker " + std::to_string(marker.id) + " length: " + std::to_string(marker.length);
+				ROS_ERROR("%s", res.message.c_str());
+				return true;
+			}
+		}
+
+		for (auto const& marker : req.markers) {
+			length_override_[marker.id] = marker.length;
+		}
+
+		res.success = true;
+		return true;
 	}
 
 	void mapMarkersCallback(const aruco_pose::MarkerArray& msg)
