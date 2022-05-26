@@ -385,7 +385,8 @@ private:
 
 	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)
 	{
-		enabled_ = config.enabled;
+		enabled_ = config.enabled && config.length > 0;
+		length_ = config.length;
 		parameters_->adaptiveThreshConstant = config.adaptiveThreshConstant;
 		parameters_->adaptiveThreshWinSizeMin = config.adaptiveThreshWinSizeMin;
 		parameters_->adaptiveThreshWinSizeMax = config.adaptiveThreshWinSizeMax;
