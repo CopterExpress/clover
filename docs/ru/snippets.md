@@ -369,15 +369,36 @@ calibrate_gyro()
 import rospy
 import dynamic_reconfigure.client
 
-client = dynamic_reconfigure.client.Client('aruco_detect')
+rospy.init_node('flight')
+aruco_client = dynamic_reconfigure.client.Client('aruco_detect')
 
-# Включить распознавание маркеров
-client.update_configuration({'enabled': False})
+# Выключить распознавание маркеров
+aruco_client.update_configuration({'enabled': False})
 
 rospy.sleep(5)
 
-# Выключить распознавание маркеров
-client.update_configuration({'enabled': True})
+# Включить распознавание маркеров
+aruco_client.update_configuration({'enabled': True})
+```
+
+### # {#optical-flow-enabled}
+
+Динамически включать и отключать [Optical Flow](optical_flow.md):
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+flow_client = dynamic_reconfigure.client.Client('optical_flow')
+
+# Выключить Optical Flow
+flow_client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Включить Optical Flow
+flow_client.update_configuration({'enabled': True})
 ```
 
 ### # {#wait-global-position}
