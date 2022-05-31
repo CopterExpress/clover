@@ -38,9 +38,9 @@ TransformStamped offset;
 
 void publishZero(const ros::TimerEvent& e)
 {
-	if (e.current_real - vpe.header.stamp < publish_zero_timout) return; // have vpe
+	if (!vpe.header.stamp.isZero() && e.current_real - vpe.header.stamp < publish_zero_timout) return; // have vpe
 
-	if (e.current_real - pose.header.stamp < publish_zero_timout) { // have local position
+	if (!pose.header.stamp.isZero() && e.current_real - pose.header.stamp < publish_zero_timout) { // have local position
 		if (got_local_pos.isZero()) {
 			ROS_INFO("got local position");
 			got_local_pos = e.current_real;
