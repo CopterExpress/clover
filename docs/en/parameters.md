@@ -39,7 +39,7 @@ In case of using EKF2 (official firmware):
 
 |Parameter|Value|Comment|
 |-|-|-|
-|`EKF2_AID_MASK`|27|Checkboxes: (optionally) *gps* + *flow* + *vision position* + *vision yaw*.<br>Details: [Optical Flow](optical_flow.md), [ArUco markers](aruco_map.md), [GPS](gps.md).|
+|`EKF2_AID_MASK`|26|Checkboxes: *flow* + *vision position* + *vision yaw*.<br>Details: [Optical Flow](optical_flow.md), [ArUco markers](aruco_map.md), [GPS](gps.md).|
 |`EKF2_OF_DELAY`|0||
 |`EKF2_OF_QMIN`|10||
 |`EKF2_OF_N_MIN`|0.05||
