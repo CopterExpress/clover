@@ -4,6 +4,7 @@ import rospy
 import math
 import signal
 import sys
+import dynamic_reconfigure.client
 from clover import srv
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Range
@@ -11,6 +12,7 @@ from aruco_pose.msg import MarkerArray
 
 rospy.init_node('autotest_aruco', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
+flow_client = dynamic_reconfigure.client.Client('optical_flow')
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 land = rospy.ServiceProxy('land', Trigger)
@@ -64,6 +66,12 @@ print_current_map_position()
 input('Go to center %g %g 1.5 speed 5 [enter] ' % (center_x, center_y))
 navigate_wait(x=center_x, y=center_y, z=1.5, speed=5, frame_id='aruco_map')
 print_current_map_position()
+
+input('Disable optical flow and keep hovering [enter] ')
+flow_client.update_configuration({'enabled': False})
+
+input('Enable optical flow back [enter] ')
+flow_client.update_configuration({'enabled': True})
 
 input('Go to side 1 %g 2 heading top [enter] ' % (center_y))
 navigate_wait(x=1, y=center_y, z=2, yaw=1.57, frame_id='aruco_map')
