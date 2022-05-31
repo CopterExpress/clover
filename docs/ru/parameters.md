@@ -39,7 +39,7 @@
 
 |Параметр|Значение|Примечание|
 |-|-|-|
-|`EKF2_AID_MASK`|27|Чекбоксы: (опционально) *gps* + *flow* + *vision position* + *vision yaw*.<br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
+|`EKF2_AID_MASK`|26|Чекбоксы: *flow* + *vision position* + *vision yaw*.<br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
 |`EKF2_OF_DELAY`|0||
 |`EKF2_OF_QMIN`|10||
 |`EKF2_OF_N_MIN`|0.05||
