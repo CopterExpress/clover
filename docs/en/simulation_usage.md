@@ -40,7 +40,7 @@ In order to enable GPS sensor, set the `gps` argument in `simulator.launch` to `
 <arg name="gps" value="true"/>
 ```
 
-Turn also on the *gps* flag in the `EKF2_AID_MASK` PX4 parameter (using QGroundControl).
+Turn also on the *use GPS* flag in the `EKF2_AID_MASK` PX4 parameter (using QGroundControl).
 
 ### Camera
 

@@ -42,7 +42,7 @@ GPS датчик необходим полетов с использование
 <arg name="gps" value="true"/>
 ```
 
-Включите также флажок *gps* в параметре PX4 `EKF2_AID_MASK` (используя QGroundControl).
+Включите также флажок *use GPS* в параметре PX4 `EKF2_AID_MASK` (используя QGroundControl).
 
 ### Камера
 
