@@ -69,6 +69,7 @@ print_current_map_position()
 
 input('Disable optical flow and keep hovering [enter] ')
 flow_client.update_configuration({'enabled': False})
+rospy.sleep(5)
 
 input('Enable optical flow back [enter] ')
 flow_client.update_configuration({'enabled': True})
