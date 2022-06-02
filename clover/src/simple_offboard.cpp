@@ -503,10 +503,10 @@ inline void checkManualControl()
 
 	if (check_kill_switch) {
 		// switch values: https://github.com/PX4/PX4-Autopilot/blob/c302514a0809b1765fafd13c014d705446ae1113/msg/manual_control_setpoint.msg#L3
-		const uint8_t SWITCH_POS_NONE = 0; // switch is not mapped
-		const uint8_t SWITCH_POS_ON = 1; // switch activated
-		const uint8_t SWITCH_POS_MIDDLE = 2; // middle position
-		const uint8_t SWITCH_POS_OFF = 3; // switch not activated
+		[[maybe_unused]] const uint8_t SWITCH_POS_NONE = 0; // switch is not mapped
+		[[maybe_unused]] const uint8_t SWITCH_POS_ON = 1; // switch activated
+		[[maybe_unused]] const uint8_t SWITCH_POS_MIDDLE = 2; // middle position
+		[[maybe_unused]] const uint8_t SWITCH_POS_OFF = 3; // switch not activated
 
 		const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
 		uint8_t kill_switch = (manual_control.buttons & (0b11 << KILL_SWITCH_BIT)) >> KILL_SWITCH_BIT;
@@ -808,7 +808,7 @@ bool setRates(SetRates::Request& req, SetRates::Response& res) {
 	return serve(RATES, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.pitch_rate, req.roll_rate, req.yaw_rate, NAN, NAN, req.thrust, NAN, "", req.auto_arm, res.success, res.message);
 }
 
-bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
+bool land([[maybe_unused]] std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 {
 	try {
 		if (busy)
