@@ -33,14 +33,14 @@ ros::Subscriber local_position_sub;
 ros::Timer zero_timer;
 PoseStamped vpe, pose;
 ros::Time got_local_pos(0);
-ros::Duration publish_zero_timout, publish_zero_duration, offset_timeout;
+ros::Duration publish_zero_timeout, publish_zero_duration, offset_timeout;
 TransformStamped offset;
 
 void publishZero(const ros::TimerEvent& e)
 {
-	if (!vpe.header.stamp.isZero() && e.current_real - vpe.header.stamp < publish_zero_timout) return; // have vpe
+	if (!vpe.header.stamp.isZero() && e.current_real - vpe.header.stamp < publish_zero_timeout) return; // have vpe
 
-	if (!pose.header.stamp.isZero() && e.current_real - pose.header.stamp < publish_zero_timout) { // have local position
+	if (!pose.header.stamp.isZero() && e.current_real - pose.header.stamp < publish_zero_timeout) { // have local position
 		if (got_local_pos.isZero()) {
 			ROS_INFO("got local position");
 			got_local_pos = e.current_real;
@@ -144,7 +144,7 @@ int main(int argc, char **argv) {
 	if (nh_priv.param("force_init", false) || nh_priv.param("publish_zero", false)) { // publish_zero is old name
 		// publish zero to initialize the local position
 		zero_timer = nh.createTimer(ros::Duration(0.1), &publishZero);
-		publish_zero_timout = ros::Duration(nh_priv.param("force_init_timeout", 5.0));
+		publish_zero_timeout = ros::Duration(nh_priv.param("force_init_timeout", 5.0));
 		publish_zero_duration = ros::Duration(nh_priv.param("force_init_duration", 5.0));
 		local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &localPositionCallback);
 	}
