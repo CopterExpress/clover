@@ -4,6 +4,8 @@ project(clover)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+add_compile_options(-Wall -Wextra -Werror)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -173,8 +175,6 @@ add_library(${PROJECT_NAME}
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(simple_offboard src/simple_offboard.cpp)
-
-target_compile_options(simple_offboard PRIVATE -Wall -Wextra)
 
 # PX4 already has rc and led targets, so we prefix ours with clover_
 add_executable(clover_rc src/rc.cpp)
