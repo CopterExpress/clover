@@ -174,6 +174,8 @@ add_library(${PROJECT_NAME}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(simple_offboard src/simple_offboard.cpp)
 
+target_compile_options(simple_offboard PRIVATE -Wall -Wextra)
+
 # PX4 already has rc and led targets, so we prefix ours with clover_
 add_executable(clover_rc src/rc.cpp)
 
