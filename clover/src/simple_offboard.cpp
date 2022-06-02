@@ -150,6 +150,9 @@ void handleState(const mavros_msgs::State& s)
 inline void publishBodyFrame()
 {
 	if (body.child_frame_id.empty()) return;
+	if (!body.header.stamp.isZero() && body.header.stamp == local_position.header.stamp) {
+		return; // avoid TF_REPEATED_DATA warnings
+	}
 
 	tf::Quaternion q;
 	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
