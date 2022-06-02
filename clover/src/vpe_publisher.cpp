@@ -109,7 +109,7 @@ void callback(const T& msg)
 	}
 }
 
-bool reset(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
+bool reset([[maybe_unused]] std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 {
 	reset_flag = true;
 	res.success = true;
