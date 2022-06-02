@@ -8,19 +8,18 @@ import sys
 from clover import srv
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Range
+from util import handle_response
 
 rospy.init_node('autotest_flight', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
-navigate = rospy.ServiceProxy('navigate', srv.Navigate)
-navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
-set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
-set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
-set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
-set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
-land = rospy.ServiceProxy('land', Trigger)\
-
-# TODO: handle_response
+navigate = handle_response(rospy.ServiceProxy('navigate', srv.Navigate))
+navigate_global = handle_response(rospy.ServiceProxy('navigate_global', srv.NavigateGlobal))
+set_position = handle_response(rospy.ServiceProxy('set_position', srv.SetPosition))
+set_velocity = handle_response(rospy.ServiceProxy('set_velocity', srv.SetVelocity))
+set_attitude = handle_response(rospy.ServiceProxy('set_attitude', srv.SetAttitude))
+set_rates = handle_response(rospy.ServiceProxy('set_rates', srv.SetRates))
+land = handle_response(rospy.ServiceProxy('land', Trigger))
 
 def interrupt(sig, frame):
     print('\nInterrupted, landing...')
@@ -36,7 +35,6 @@ def navigate_wait(x=0, y=0, z=0, yaw=nan, yaw_rate=0, speed=0.5, \
         frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
-        print('\033[91mError:\033[0m {}'.format(res.message))
         return res
 
     while not rospy.is_shutdown():
