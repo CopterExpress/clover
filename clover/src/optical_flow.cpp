@@ -236,7 +236,6 @@ private:
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 
-publish_debug:
 			// Publish debug image
 			if (img_pub_.getNumSubscribers() > 0) {
 				// publish debug image
