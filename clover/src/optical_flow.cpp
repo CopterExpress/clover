@@ -277,7 +277,7 @@ publish_debug:
 		return flow;
 	}
 
-	void paramCallback(clover::FlowConfig &config, uint32_t level)
+	void paramCallback(clover::FlowConfig &config, [[maybe_unused]] uint32_t level)
 	{
 		enabled_ = config.enabled;
 		if (!enabled_) {
