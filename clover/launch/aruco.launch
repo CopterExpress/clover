@@ -21,6 +21,7 @@
         <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
         <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
         <param name="length" value="$(arg length)"/>
+        <param name="transform_timeout" value="0.1"/>
         <!-- aruco detector parameters -->
         <param name="cornerRefinementMethod" value="2"/> <!-- contour refinement -->
         <param name="minMarkerPerimeterRate" value="0.075"/> <!-- 0.075 for 320x240, 0.0375 for 640x480 -->

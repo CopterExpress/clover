@@ -691,7 +691,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// }
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
-			// destination point and/or yaw
+			// destination point and/or attitude
 			PoseStamped ps;
 			ps.header.frame_id = frame_id;
 			ps.header.stamp = stamp;
@@ -700,7 +700,12 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ps.pose.position.z = z;
 			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
 
-			if (std::isnan(yaw)) {
+			if (sp_type == ATTITUDE) {
+				ps.pose.position.x = 0;
+				ps.pose.position.y = 0;
+				ps.pose.position.z = 0;
+				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+			} else if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
 				setpoint_yaw_rate = yaw_rate;
 			} else if (std::isinf(yaw) && yaw > 0) {
