@@ -9,13 +9,14 @@ from clover import srv
 from std_srvs.srv import Trigger
 from sensor_msgs.msg import Range
 from aruco_pose.msg import MarkerArray
+from util import handle_response
 
 rospy.init_node('autotest_aruco', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
 flow_client = dynamic_reconfigure.client.Client('optical_flow')
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
-navigate = rospy.ServiceProxy('navigate', srv.Navigate)
-land = rospy.ServiceProxy('land', Trigger)
+navigate = handle_response(rospy.ServiceProxy('navigate', srv.Navigate))
+land = handle_response(rospy.ServiceProxy('land', Trigger))
 
 def interrupt(sig, frame):
     print('\nInterrupted, landing...')
@@ -36,7 +37,6 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0, speed=0.5, \
         frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
-        print('\033[91mError:\033[0m {}'.format(res.message))
         return res
 
     while not rospy.is_shutdown():

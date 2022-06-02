@@ -5,18 +5,9 @@ import functools
 from clover.srv import SetLEDEffect
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
+from util import handle_response
 
 rospy.init_node('autotest_led', disable_signals=True)
-
-# decorator to handle response and print error message
-def handle_response(fn):
-    @functools.wraps(fn)
-    def wrapper(*args, **kwargs):
-        res = fn(*args, **kwargs)
-        if not res.success:
-            print('\033[91mError:\033[0m {}'.format(res.message))
-            return res
-    return wrapper
 
 set_leds = handle_response(rospy.ServiceProxy('led/set_leds', SetLEDs))
 set_effect = handle_response(rospy.ServiceProxy('led/set_effect', SetLEDEffect))
