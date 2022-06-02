@@ -78,8 +78,9 @@ input('Go to side 1 %g 2 heading top [enter] ' % (center_y))
 navigate_wait(x=1, y=center_y, z=2, yaw=1.57, frame_id='aruco_map')
 print_current_map_position()
 
-input('Go to marker 0 z=1.5 [enter] ')
-navigate_wait(x=0, y=0, z=1.5, yaw=0, frame_id='aruco_0')
+marker_id = markers.markers[0].id
+input('Go to marker %d z=1.5 [enter] ' % marker_id)
+navigate_wait(x=0, y=0, z=1.5, yaw=0, frame_id='aruco_%d' % marker_id)
 print_current_map_position()
 
 input('Perform landing [enter] ')
