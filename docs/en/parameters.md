@@ -22,7 +22,7 @@ In case of using LPE ([COEX patched firmware](firmware.md)):
 
 |Parameter|Value|Comment|
 |-|-|-|
-|`LPE_FUSION`|86|Checkboxes: *flow* + *vis* + *land Detector* + *gyro comp*. If flying over horizontal floor *pub agl as lpos down* checkbox is allowed.<br>Details: [Optical Flow](optical_flow.md), [ArUco markers](aruco_map.md), [GPS](gps.md).|
+|`LPE_FUSION`|86|Checkboxes: *flow* + *vis* + *land detector* + *gyro comp*. If flying over horizontal floor *pub agl as lpos down* checkbox is allowed.<br>Details: [Optical Flow](optical_flow.md), [ArUco markers](aruco_map.md), [GPS](gps.md).|
 |`LPE_VIS_DELAY`|0.0||
 |`LPE_VIS_Z`|0.1||
 |`LPE_FLW_SCALE`|1.0||

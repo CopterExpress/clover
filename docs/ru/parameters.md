@@ -22,7 +22,7 @@
 
 |Параметр|Значение|Примечание|
 |-|-|-|
-|`LPE_FUSION`|86|Чекбоксы: *flow* + *vis* + *land Detector* + *gyro comp*. При полете над ровным полом возможно включение *pub agl as lpos down*. <br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
+|`LPE_FUSION`|86|Чекбоксы: *flow* + *vis* + *land detector* + *gyro comp*. При полете над ровным полом возможно включение *pub agl as lpos down*. <br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
 |`LPE_VIS_DELAY`|0.0||
 |`LPE_VIS_Z`|0.1||
 |`LPE_FLW_SCALE`|1.0||

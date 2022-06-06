@@ -91,7 +91,7 @@ private:
 	void fakeGCSThread()
 	{
 		// Awful workaround for fixing PX4 not sending STATUSTEXTs
-		// if there is no GCS hearbeats.
+		// if there is no GCS heartbeats.
 		// TODO: use timer
 		// TODO: remove, when PX4 get this fixed.
 		ros::Publisher mavlink_pub = nh.advertise<mavros_msgs::Mavlink>("mavlink/to", 1);
