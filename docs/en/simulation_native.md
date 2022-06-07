@@ -132,6 +132,12 @@ You can test autonomous flight using example scripts in `~/catkin_ws/src/clover/
 
 ## Additional steps
 
+To make it possible to run Gazebo simulation environment without Clover (`gazebo` command), add into your `.bashrc` sourcing Gazebo's initialization script:
+
+```bash
+echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+```
+
 Optionally, install roscore systemd service to have roscore running in background:
 
 ```bash
