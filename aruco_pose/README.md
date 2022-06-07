@@ -75,6 +75,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 * `~image_width` – debug image width (default: 2000)
 * `~image_height` – debug image height (default: 2000)
 * `~image_margin` – debug image margin (default: 200)
+* `~image_axis` – whether debug image should contain axis (default: true)
 * `~dictionary` (*int*) – ArUco dictionary (default: 2) - should be the same as `dictionary` parameter of `aruco_detect` nodelet
 
 Map file has one marker per line with the following line format:
