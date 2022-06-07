@@ -3,6 +3,7 @@ roslib.js linguist-vendored
 eventemitter2.js linguist-vendored
 ros3d.js linguist-vendored
 three.min.js linguist-vendored
+json-to-pretty-yaml.js linguist-vendored
 aruco_pose/vendor/* linguist-vendored
 blockly/* linguist-vendored
 highlight/* linguist-vendored
