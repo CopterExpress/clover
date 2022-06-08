@@ -134,3 +134,4 @@ body[data-tab="python"] #python { display: block !important; }
 	padding: 10px;
 	z-index: 999999; /* overlap some Blockly's popups */
 }
+
