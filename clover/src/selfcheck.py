@@ -336,7 +336,7 @@ def is_process_running(binary, exact=False, full=False):
         if exact:
             args.append('-x')  # match exactly with the command name
         if full:
-            args.append('-f')  # use full process name to match
+            args.append('-f')  # use full command line (including arguments) to match
         args.append(binary)
         subprocess.check_output(args)
         return True
@@ -705,6 +705,10 @@ def check_image():
 
 @check('Preflight status')
 def check_preflight_status():
+    if is_process_running('px4', exact=True):
+        info('can\'t check in SITL')
+        return
+
     # Make sure the console is available to us
     mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
