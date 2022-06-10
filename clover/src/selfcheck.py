@@ -726,6 +726,10 @@ def check_preflight_status():
 
 @check('Network')
 def check_network():
+    if not os.path.exists('/etc/clover_version'):
+        # TODO:
+        return # Don't check not on Clover's image
+
     ros_hostname = os.environ.get('ROS_HOSTNAME', '').strip()
 
     if not ros_hostname:
