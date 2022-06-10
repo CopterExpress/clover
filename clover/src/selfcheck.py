@@ -534,6 +534,8 @@ def check_global_position():
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
         info('no global position')
+        if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK') & (1 << 0)):
+            failure('enabled GPS fusion may suppress vision position aiding')
 
 
 @check('Optical flow')
