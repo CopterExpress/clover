@@ -650,6 +650,9 @@ def check_cpu_usage():
 
 @check('clover.service')
 def check_clover_service():
+    if not os.path.exists('/etc/clover_version'):
+        return # Don't check not on Clover's image
+
     try:
         output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
                                          stderr=subprocess.STDOUT).decode()
