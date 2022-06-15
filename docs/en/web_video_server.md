@@ -20,7 +20,7 @@ Parameters `width`, `height`, etc. re also available. Read more about `web_video
 
 ## Browse with rqt_image_view
 
-To browse images with the rqt tools the user needs a computer with Ubuntu 18.04 and [ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu).
+To browse images with the rqt tools the user needs a computer with Ubuntu 20.04 and [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 [Connect to the Clover Wi-Fi network](wifi.md) an run `rqt_image_view` with its IP-address:
 

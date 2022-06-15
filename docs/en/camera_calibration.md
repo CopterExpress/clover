@@ -10,14 +10,14 @@ There are several tools allowing to calibrate the camera and store calculated pa
 
 Main tutorial: http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration.
 
-In order to calibrate the camera with the `camera_calibration` ROS-package you need a computer with OS GNU/Linux and [ROS Melodic](ros-install.md) installed.
+In order to calibrate the camera with the `camera_calibration` ROS-package you need a computer with OS GNU/Linux and [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) installed.
 
 <img src="../assets/camera_calibration.png" alt="ROS Camera Calibrator" class="zoom center" width=600>
 
 1. Using the Terminal, install `camera_calibration` package to your computer:
 
     ```bash
-    sudo apt-get install ros-melodic-camera-calibration
+    sudo apt-get install ros-noetic-camera-calibration
     ```
 
 2. Download the chessboard – [chessboard.pdf](../assets/chessboard.pdf). Print the chessboard on paper or open it on the computer screen.
