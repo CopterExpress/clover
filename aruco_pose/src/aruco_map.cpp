@@ -19,11 +19,13 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <memory>
 #include <ros/ros.h>
 #include <nodelet/nodelet.h>
 #include <pluginlib/class_list_macros.h>
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
+#include <dynamic_reconfigure/server.h>
 #include <tf/transform_datatypes.h>
 #include <tf2_ros/buffer.h>
 #include <tf2_ros/transform_listener.h>
@@ -41,6 +43,7 @@
 
 #include <aruco_pose/MarkerArray.h>
 #include <aruco_pose/Marker.h>
+#include <aruco_pose/MapConfig.h>
 
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
@@ -74,6 +77,7 @@ private:
 	tf2_ros::StaticTransformBroadcaster static_br_;
 	tf2_ros::Buffer tf_buffer_;
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
+	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::MapConfig>> dyn_srv_;
 	visualization_msgs::MarkerArray vis_array_;
 	std::string known_tilt_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
@@ -135,6 +139,12 @@ public:
 
 		sync_.reset(new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), image_sub_, info_sub_, markers_sub_));
 		sync_->registerCallback(boost::bind(&ArucoMap::callback, this, _1, _2, _3));
+
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::MapConfig>>(nh_priv_);
+ 		dynamic_reconfigure::Server<aruco_pose::MapConfig>::CallbackType cb;
+
+ 		cb = std::bind(&ArucoMap::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
+ 		dyn_srv_->setCallback(cb);
 
 		NODELET_INFO("ready");
 	}
@@ -508,6 +518,11 @@ publish_debug:
 
 		msg.image = image;
 		img_pub_.publish(msg.toImageMsg());
+	},
+
+	void paramCallback(aruco_pose::MapConfig &config, uint32_t level)
+ 	{
+		// https://github.com/CopterExpress/clover/commit/2cd334c474e3ed04ef65ca1ba7f08ab535a3dc6d#diff-942723f9452c398ae93f1a91427f9a7b614be5e5871f8a3e590f324d804f0d58R356
 	}
 };
 
