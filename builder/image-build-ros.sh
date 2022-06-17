@@ -28,7 +28,7 @@ apt-get install -y python3-distutils python3-rosdep python3-rosinstall-generator
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
 pip3 install -U vcstool
 
-sudo rosdep init
+# sudo rosdep init
 rosdep update
 
 # rm /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init
