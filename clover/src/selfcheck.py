@@ -30,6 +30,7 @@ from visualization_msgs.msg import MarkerArray as VisualizationMarkerArray
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from mavros import mavlink
+import locale
 
 
 # TODO: check attitude is present
@@ -45,6 +46,8 @@ rospy.init_node('selfcheck')
 
 os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
 
+# use user's locale to convert numbers, etc
+locale.setlocale(locale.LC_ALL, '')
 
 tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
@@ -195,24 +198,27 @@ def check_fcu():
             failure('no connection to the FCU (check wiring)')
             return
 
+        clover_tag = re.compile(r'-cl[oe]ver\.\d+$')
+        clover_fw = False
+
         # Make sure the console is available to us
         mavlink_exec('\n')
         version_str = mavlink_exec('ver all')
         if version_str == '':
             info('no version data available from SITL')
 
-        r = re.compile(r'^FW (git tag|version): (v?\d\.\d\.\d.*)$')
-        is_clover_firmware = False
-        for ver_line in version_str.split('\n'):
-            match = r.search(ver_line)
-            if match is not None:
-                field, version = match.groups()
-                info('firmware %s: %s' % (field, version))
-                if 'clover' in version or 'clever' in version:
-                    is_clover_firmware = True
+        for line in version_str.split('\n'):
+            if line.startswith('FW version: '):
+                info(line[len('FW version: '):])
+            elif line.startswith('FW git tag: '): # only Clover's firmware
+                tag = line[len('FW git tag: '):]
+                clover_fw = clover_tag.search(tag)
+                info(tag)
+            elif line.startswith('HW arch: '):
+                info(line[len('HW arch: '):])
 
-        if not is_clover_firmware:
-            failure('not running Clover PX4 firmware, https://clover.coex.tech/firmware')
+        if not clover_fw:
+            info('not Clover PX4 firmware, check https://clover.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
@@ -330,7 +336,7 @@ def is_process_running(binary, exact=False, full=False):
         if exact:
             args.append('-x')  # match exactly with the command name
         if full:
-            args.append('-f')  # use full process name to match
+            args.append('-f')  # use full command line (including arguments) to match
         args.append(binary)
         subprocess.check_output(args)
         return True
@@ -528,6 +534,8 @@ def check_global_position():
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
         info('no global position')
+        if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK') & (1 << 0)):
+            failure('enabled GPS fusion may suppress vision position aiding')
 
 
 @check('Optical flow')
@@ -635,13 +643,16 @@ def check_cpu_usage():
             continue
         pid, cpu, cmd = process.split('\t')
 
-        if cmd.strip() not in WHITELIST and float(cpu) > 30:
+        if cmd.strip() not in WHITELIST and locale.atof(cpu) > 30:
             failure('high CPU usage (%s%%) detected: %s (PID %s)',
                     cpu.strip(), cmd.strip(), pid.strip())
 
 
 @check('clover.service')
 def check_clover_service():
+    if not os.path.exists('/etc/clover_version'):
+        return # Don't check not on Clover's image
+
     try:
         output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
                                          stderr=subprocess.STDOUT).decode()
@@ -697,6 +708,10 @@ def check_image():
 
 @check('Preflight status')
 def check_preflight_status():
+    if is_process_running('px4', exact=True):
+        info('can\'t check in SITL')
+        return
+
     # Make sure the console is available to us
     mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
@@ -718,6 +733,10 @@ def check_preflight_status():
 
 @check('Network')
 def check_network():
+    if not os.path.exists('/etc/clover_version'):
+        # TODO:
+        return # Don't check not on Clover's image
+
     ros_hostname = os.environ.get('ROS_HOSTNAME', '').strip()
 
     if not ros_hostname:
@@ -740,6 +759,14 @@ def check_network():
 
 @check('RPi health')
 def check_rpi_health():
+    try:
+        import shutil
+        total, used, free = shutil.disk_usage('/')
+        if free < 1024 * 1024 * 1024:
+            failure('disk space is less than 1 GB; consider removing logs (~/.ros/log/)')
+    except Exception as e:
+        info('could not check the disk free space: %s', str(e))
+
     # `vcgencmd get_throttled` output codes taken from
     # https://github.com/raspberrypi/documentation/blob/JamesH65-patch-vcgencmd-vcdbg-docs/raspbian/applications/vcgencmd.md#get_throttled
     # TODO: support more base platforms?

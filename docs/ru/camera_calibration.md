@@ -10,14 +10,14 @@
 
 Основной туториал: http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration.
 
-Для калибровки камеры с использованием ROS-пакета camera_calibration необходим компьютер с установленным ОС GNU/Linux и [ROS Melodic](ros-install.md).
+Для калибровки камеры с использованием ROS-пакета camera_calibration необходим компьютер с установленным ОС GNU/Linux и [ROS Noetic](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 <img src="../assets/camera_calibration.png" alt="ROS Camera Calibrator" class="zoom center" width=600>
 
 1. Используя Терминал, установите на компьютер пакет `camera_calibration`:
 
     ```bash
-    sudo apt-get install ros-melodic-camera-calibration
+    sudo apt-get install ros-noetic-camera-calibration
     ```
 
 2. Скачайте калибровочную доску – [`chessboard.pdf`](../assets/chessboard.pdf). Распечатайте доску на принтере либо выведите ее на экран компьютера.

@@ -64,6 +64,12 @@
         <!-- <gazebo>
             <static>true</static>
         </gazebo> -->
+        <gazebo>
+            <plugin name="${name}_ros_controller" filename="libsim_leds_controller.so">
+                <robotNamespace></robotNamespace>
+                <ledCount>${led_count}</ledCount>
+            </plugin>
+        </gazebo>
     </xacro:macro>
 
 </robot>

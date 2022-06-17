@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>clover</name>
-  <version>0.21.1</version>
+  <version>0.23.0</version>
   <description>The Clover package</description>
 
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
@@ -39,6 +39,7 @@
   <depend>tf2_web_republisher</depend>
   <depend condition="$ROS_PYTHON_VERSION == 2">python-lxml</depend>
   <depend condition="$ROS_PYTHON_VERSION == 3">python3-lxml</depend>
+  <depend>dynamic_reconfigure</depend>
   <exec_depend>python-pymavlink</exec_depend>
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->

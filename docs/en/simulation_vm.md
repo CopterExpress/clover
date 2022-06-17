@@ -2,7 +2,7 @@
 
 In addition to [native installation instructions](simulation_native.md), we provide a [preconfigured developer virtual machine image](https://github.com/CopterExpress/clover_vm/releases/latest). The image contains:
 
-* Ubuntu 18.04 with XFCE lightweight desktop environment;
+* Ubuntu 20.04 with XFCE lightweight desktop environment;
 * ROS packages required to develop for the Clover platform;
 * QGroundControl;
 * preconfigured Gazebo simulation environment;
@@ -15,8 +15,6 @@ The VM is an easy way to set up a simulation environment, but can be used as a d
 ## Downloading
 
 You can download the latest VM image [in the VM releases repository](https://github.com/CopterExpress/clover_vm/releases).
-
-> **Note** The virtual machine should be used when native installation is not feasible or possible. You may experience reduced performance in programs that use 3D rendering, like rviz and Gazebo.
 
 ## Setting up the VM
 

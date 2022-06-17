@@ -11,7 +11,7 @@
 
 > **Hint** Вы можете можете использовать готовый [образ виртуальной машины](simulation_vm.md) с инструментами для Клевера.
 
-На него необходимо установить пакет `ros-melodic-desktop-full` или `ros-melodic-desktop`, используя [документацию по установке](http://wiki.ros.org/melodic/Installation/Ubuntu).
+На него необходимо установить пакет `ros-noetic-desktop-full` или `ros-noetic-desktop`, используя [документацию по установке](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 Запуск rviz
 ---

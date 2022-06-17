@@ -29,7 +29,7 @@ Optical Flow публикует данные в топик `/mavros/px4flow/raw/
 * `LPE_FLW_RR` – 0.0.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (для дальномера VL53L1X)
 * Опционально: `LPE_FUSION` – включен флажок pub agl as lpos down (см. [конфигурирование дальномера](laser.md).
 
 При использовании **EKF2** (параметр `SYS_MC_EST_GROUP` = `ekf2`):
@@ -41,7 +41,7 @@ Optical Flow публикует данные в топик `/mavros/px4flow/raw/
 * `EKF2_OF_N_MAX` - 0.2.
 * `SENS_FLOW_ROT` – No rotation (отсутствие поворота).
 * `SENS_FLOW_MAXHGT` – 4.0 (для дальномера VL53L1X)
-* `SENS_FLOW_MINHGT` – 0.01 (для дальномера VL53L1X)
+* `SENS_FLOW_MINHGT` – 0.0 (для дальномера VL53L1X)
 * Опционально: `EKF2_HGT_MODE` – range sensor (см. [конфигурирование дальномера](laser.md)).
 
 Для проверки правильности всех настроек можно [воспользоваться утилитой `selfcheck.py`](selfcheck.md).
