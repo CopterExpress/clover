@@ -29,3 +29,5 @@ rospy.sleep(5)
 
 print('Rainbow')
 set_effect(effect='rainbow')  # show rainbow
+
+# effects_list = ['fill', 'fade', 'flash', 'blink', 'blink_fast', 'wipe', 'rainbow', 'rainbow_fill']

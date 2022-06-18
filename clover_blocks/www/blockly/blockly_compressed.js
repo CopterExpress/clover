@@ -1406,5 +1406,10 @@ return Blockly;
 }));
 
 
+<<<<<<< HEAD
 //# sourceMappingURL=blockly_compressed.js.map
+
+=======
+//# sourceMappingURL=blockly_compressed.js.map
+>>>>>>> a78f6506b8dbaf1bcb2bebd475478dcd0f09044e
 

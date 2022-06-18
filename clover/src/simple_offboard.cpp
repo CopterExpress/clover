@@ -95,7 +95,7 @@ AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
 TwistStamped rates_msg;
 TransformStamped target, setpoint;
-geometry_msgs::TransformStamped body;
+geometry_msgs::TransformStamped body, initial_pose;
 
 // State
 PoseStamped nav_start;
@@ -155,9 +155,9 @@ inline void publishBodyFrame()
 	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
 	tf::quaternionTFToMsg(q, body.transform.rotation);
 
-	body.transform.translation.x = local_position.pose.position.x;
-	body.transform.translation.y = local_position.pose.position.y;
-	body.transform.translation.z = local_position.pose.position.z;
+	body.transform.translation.x = local_position.pose.position.x + initial_pose.transform.translation.x;
+	body.transform.translation.y = local_position.pose.position.y + initial_pose.transform.translation.y;
+	body.transform.translation.z = local_position.pose.position.z + initial_pose.transform.translation.z;
 	body.header.frame_id = local_position.header.frame_id;
 	body.header.stamp = local_position.header.stamp;
 	transform_broadcaster->sendTransform(body);
@@ -874,6 +874,9 @@ int main(int argc, char **argv)
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
+	nh.param("initial_pose/x", initial_pose.transform.translation.x, 0.0);
+	nh.param("initial_pose/y", initial_pose.transform.translation.y, 0.0);
+	nh.param("initial_pose/z", initial_pose.transform.translation.z, 0.0);
 
 	// Default reference frames
 	std::map<string, string> default_reference_frames;
