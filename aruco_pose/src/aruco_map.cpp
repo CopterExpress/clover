@@ -89,7 +89,7 @@ public:
 
 		// TODO: why image_transport doesn't work here?
 		img_pub_ = nh_priv_.advertise<sensor_msgs::Image>("image", 1, true);
-		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1, true);
+		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("map", 1, true);
 
 		board_ = cv::makePtr<cv::aruco::Board>();
 		board_->dictionary = cv::aruco::getPredefinedDictionary(

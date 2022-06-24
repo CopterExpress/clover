@@ -358,15 +358,36 @@ Enable and disable [ArUco markers recognition](aruco_marker.md) dynamically (for
 import rospy
 import dynamic_reconfigure.client
 
-client = dynamic_reconfigure.client.Client('aruco_detect')
+rospy.init_node('flight')
+aruco_client = dynamic_reconfigure.client.Client('aruco_detect')
 
 # Turn markers recognition off
-client.update_configuration({'enabled': False})
+aruco_client.update_configuration({'enabled': False})
 
 rospy.sleep(5)
 
 # Turn markers recognition on
-client.update_configuration({'enabled': True})
+aruco_client.update_configuration({'enabled': True})
+```
+
+### # {#optical-flow-enabled}
+
+Enable and disable [Optical Flow](optical_flow.md) dynamically:
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+flow_client = dynamic_reconfigure.client.Client('optical_flow')
+
+# Turn Optical Flow off
+flow_client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Turn Optical Flow on
+flow_client.update_configuration({'enabled': True})
 ```
 
 ### # {#wait-global-position}

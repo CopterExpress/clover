@@ -60,7 +60,7 @@ rosversion image_view
 
 # validate some versions
 [[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
-[[ $(rosversion ws281x) == "0.0.12" ]]
+[[ $(rosversion ws281x) == "0.0.13" ]]
 
 # validate examples are present
 [[ $(ls /home/pi/examples/*) ]]

@@ -336,7 +336,7 @@ def is_process_running(binary, exact=False, full=False):
         if exact:
             args.append('-x')  # match exactly with the command name
         if full:
-            args.append('-f')  # use full process name to match
+            args.append('-f')  # use full command line (including arguments) to match
         args.append(binary)
         subprocess.check_output(args)
         return True
@@ -534,6 +534,8 @@ def check_global_position():
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
     except rospy.ROSException:
         info('no global position')
+        if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK') & (1 << 0)):
+            failure('enabled GPS fusion may suppress vision position aiding')
 
 
 @check('Optical flow')
@@ -648,6 +650,9 @@ def check_cpu_usage():
 
 @check('clover.service')
 def check_clover_service():
+    if not os.path.exists('/etc/clover_version'):
+        return # Don't check not on Clover's image
+
     try:
         output = subprocess.check_output('systemctl show -p ActiveState --value clover.service'.split(),
                                          stderr=subprocess.STDOUT).decode()
@@ -703,6 +708,10 @@ def check_image():
 
 @check('Preflight status')
 def check_preflight_status():
+    if is_process_running('px4', exact=True):
+        info('can\'t check in SITL')
+        return
+
     # Make sure the console is available to us
     mavlink_exec('\n')
     cmdr_output = mavlink_exec('commander check')
@@ -724,6 +733,10 @@ def check_preflight_status():
 
 @check('Network')
 def check_network():
+    if not os.path.exists('/etc/clover_version'):
+        # TODO:
+        return # Don't check not on Clover's image
+
     ros_hostname = os.environ.get('ROS_HOSTNAME', '').strip()
 
     if not ros_hostname:

@@ -132,6 +132,12 @@ roslaunch clover_simulation simulator.launch
 
 ## Дополнительные шаги
 
+Для того, чтобы возможно было запускать среду симуляции Gazebo отдельно (команда `gazebo`), добавьте в `.bashrc` вызов соответствующего скрипта инициализации:
+
+```bash
+echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+```
+
 Опционально вы можете установить systemd-сервис для roscore для того, чтобы roscore был постоянно запущен в фоне:
 
 ```bash

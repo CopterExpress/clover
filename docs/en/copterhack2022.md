@@ -8,22 +8,32 @@ You can see the articles of the CopterHack 2021 finalist teams by the link [Copt
 
 The proposed projects have to be open-source and be compatible with the Clover quadcopter platform. Teams will work on their projects throughout the competition, bringing them closer to the state of the finished product. Industry experts will assist the participants through lectures and regular feedback.
 
+Final of the CopterHack 2022 was held on April 23, 2022. The winner team was the team 🇧🇷 **Atena - Grupo SEMEAR**.
+
+## Full stream of the final
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/drs3Zxi8UX8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Aftermovie
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sl3ANIS0sX4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Projects of the contest's participants {#participants}
 
 |Place|Team|Project|Points|
 |:-:|-|-|-|
-||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover2/docs/ru/advanced_clover_simulator.md)||
-||🇷🇺 Stereo|[Neural obstacle avoidance](https://github.com/den250400/clover/blob/neural-obstacle-avoidance/docs/en/neural-obstacle-avoidance.md)||
-||🇷🇺 Space clowns|[Copter For Space](https://github.com/slavikyd/clover/blob/patch-3/docs/ru/c4s.md)||
-||🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
-||🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
-||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](https://github.com/Grupo-SEMEAR-USP/clover/blob/Swarm_in_Blocks/docs/en/swarm_in_blocks.md)||
-||🇷🇺 Clover Rescue Team|[Rescue Clover](https://github.com/DevMBS/clover/blob/CloverRescueTeam/docs/ru/clover-rescue-team.md)||
-||🇷🇺 CopterCat|[CopterCat](https://github.com/matveylapin/clover/blob/CopterCat/docs/ru/сopter_сat.md)||
-||🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
-||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix-Ikshana/docs/en/djs_phoenix_ikshana.md)||
-||🇷🇺 SPECTRE|[SPECTRE](https://github.com/alakhmenev/clover/blob/spectre_team/docs/ru/spectre_team.md)||
-||🇷🇺 С305|[Система мониторинга воздуха](https://github.com/Ruslan2288/clover/blob/master/docs/ru/air_monitor.md)|&nbsp;|
+|1|🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](swarm_in_blocks.md)|21.6|
+|2|🇧🇾 FTL|[Advanced Clover 2](../ru/advanced_clover_simulator.html)|19.9|
+|3|🇷🇺 Clover Rescue Team|[Rescue Clover](clover-rescue-team.md)|17.7|
+|4|🇷🇺 С305|[Система мониторинга воздуха](../ru/air_monitor.html)|17.3|
+|5|🇷🇺 Space clowns|[Copter For Space](../ru/c4s.html)|16.2|
+|6|🇷🇺 CopterCat|[CopterCat](copter_cat.md)|16.1|
+|7|🇷🇺 Stereo|[Neural obstacle avoidance](obstacle-avoidance-potential-fields.md)|15.85|
+|8|🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)|11.7|
+|✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
+|✕|🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
+|✕|🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
+|✕|🇷🇺 SPECTRE|[SPECTRE](https://github.com/alakhmenev/clover/blob/spectre_team/docs/ru/spectre_team.md)||
 |✕|🇰🇬 Alatoo University Team|[Облачная платформа для симулятора Клевера](https://github.com/pteacher/clover/blob/clover_simulator/docs/ru/clover-development-studio.md)||
 |✕|🇷🇺 Clevertron|[Clevertron](https://github.com/Daniel-drone/clover/blob/Clevertron-1/docs/ru/clevertron.md)||
 |✕|🇵🇱 Edgenoon|[Neural and vision-based landing method](https://github.com/edgenoon-ai/clover/blob/neural_vision_based_landing_method/docs/en/neural_vision_based_landing_method.md)||
@@ -40,6 +50,8 @@ The proposed projects have to be open-source and be compatible with the Clover q
 |✕|🇷🇺 Scout_Drone|[Создание поисково-спасательного беспилотного летательного аппарата](https://github.com/MustafaNatur/clover/blob/Scout_Drone.md/docs/ru/scout_drone.md)|&nbsp;|
 
 ✕ – teams which haven't qualified for the Final.
+
+See all points by criteria in the [full table](https://docs.google.com/spreadsheets/d/1qVoXchDbaBlbFzVCyxFZDU6pp8pvC1oXasowr56tnzc).
 
 ## Company case competition
 

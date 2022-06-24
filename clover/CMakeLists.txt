@@ -24,6 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_ros
   image_transport
   cv_bridge
+  dynamic_reconfigure
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
@@ -126,10 +127,9 @@ generate_messages(
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/Flow.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -210,6 +210,8 @@ add_dependencies(simple_offboard ${PROJECT_NAME}_generate_messages_cpp)
 add_dependencies(clover_led ${PROJECT_NAME}_generate_messages_cpp)
 
 add_dependencies(shell ${PROJECT_NAME}_generate_messages_cpp)
+
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
