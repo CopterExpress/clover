@@ -24,9 +24,9 @@
     <xacro:led_strip
       name="led"
       parent="base_link"
-      radius="0.1"
-      bulb_radius="0.01"
-      led_count="72"
+      radius="0.08"
+      bulb_radius="0.006"
+      led_count="58"
       use_plugin="true"
       z="-0.002"/>
   </xacro:if>
