@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true" output="screen">
+        <!-- <param name="index" value="$(find my_package)/www/index.html"/> -->
+        <!-- <param name="default_package" value="my_package"/> -->
+    </node>
+</launch>
