@@ -22,6 +22,7 @@ Final of the CopterHack 2022 was held on April 23, 2022. The winner team was the
 
 |Place|Team|Project|Points|
 |:-:|-|-|-|
+<<<<<<< HEAD
 |1|🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](swarm_in_blocks.md)|21.6|
 |2|🇧🇾 FTL|[Advanced Clover 2](../ru/advanced_clover_simulator.html)|19.9|
 |3|🇷🇺 Clover Rescue Team|[Rescue Clover](clover-rescue-team.md)|17.7|
@@ -30,6 +31,16 @@ Final of the CopterHack 2022 was held on April 23, 2022. The winner team was the
 |6|🇷🇺 CopterCat|[CopterCat](copter_cat.md)|16.1|
 |7|🇷🇺 Stereo|[Neural obstacle avoidance](obstacle-avoidance-potential-fields.md)|15.85|
 |8|🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)|11.7|
+=======
+||🇧🇾 FTL|[Advanced Clover 2](../ru/advanced_clover_simulator.html)||
+||🇷🇺 Stereo|[Neural obstacle avoidance](obstacle-avoidance-potential-fields.md)||
+||🇷🇺 Space clowns|[Copter For Space](../ru/c4s.html)||
+||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](swarm_in_blocks.md)||
+||🇷🇺 Clover Rescue Team|[Rescue Clover](clover-rescue-team.md)||
+||🇷🇺 CopterCat|[CopterCat](../ru/copter_cat.html)||
+||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](djs_phoenix_ikshana.md)||
+||🇷🇺 С305|[Система мониторинга воздуха](../ru/air_monitor.html)|&nbsp;|
+>>>>>>> swarm_in_blocks
 |✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
 |✕|🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
 |✕|🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
