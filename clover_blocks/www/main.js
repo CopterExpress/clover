@@ -323,6 +323,4 @@ programSelect.addEventListener('change', function(e) {
 		}
 		updateChanged();
 	}
-
 });
-
