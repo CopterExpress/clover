@@ -22,7 +22,6 @@ CopterHack 2022 — это международный конкурс по ра�
 
 |Место|Команда|Проект|Балл|
 |:-:|-|-|-|
-<<<<<<< HEAD
 |1|🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](../en/swarm_in_blocks.html)|21.6|
 |2|🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator.md)|19.9|
 |3|🇷🇺 Clover Rescue Team|[Rescue Clover](../en/clover-rescue-team.html)|17.7|
@@ -31,16 +30,6 @@ CopterHack 2022 — это международный конкурс по ра�
 |6|🇷🇺 CopterCat|[CopterCat](copter_cat.md)|16.1|
 |7|🇷🇺 Stereo|[Neural obstacle avoidance](../en/obstacle-avoidance-potential-fields.html)|15.85|
 |8|🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](../en/djs_phoenix_ikshana.html)|11.7|
-=======
-||🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator.md)||
-||🇷🇺 Stereo|[Neural obstacle avoidance](../en/obstacle-avoidance-potential-fields.html)||
-||🇷🇺 Space clowns|[Copter For Space](c4s.md)||
-||🇧🇷 Atena - Grupo SEMEAR|[Swarm in Blocks](../en/swarm_in_blocks.html)||
-||🇷🇺 Clover Rescue Team|[Rescue Clover](../en/clover-rescue-team.html)||
-||🇷🇺 CopterCat|[CopterCat](copter_cat.md)||
-||🇮🇳 DJS Phoenix|[Autonomous valet parking drone assistance](../en/djs_phoenix_ikshana.html)||
-||🇷🇺 С305|[Система мониторинга воздуха](air_monitor.md)|&nbsp;|
->>>>>>> swarm_in_blocks
 |✕|🇷🇺 R.S.|[Drone Hawk](https://github.com/slavaroot/clover/blob/droneHawkSecurity/docs/ru/drone-hawk-security.md)||
 |✕|🇲🇾 Moopt|[IoT Water Monitoring & Optimization](https://github.com/kafechew/clover/blob/master/docs/en/moopt-uav.md)||
 |✕|🇷🇺 Дрой Ронов|[Clover Swarm](https://github.com/stinger000/clever/blob/clover_swarm_request/docs/ru/clover-swarm.md)||
