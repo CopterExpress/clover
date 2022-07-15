@@ -79,7 +79,7 @@ private:
 	tf2_ros::TransformListener tf_listener_{tf_buffer_};
 	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::MapConfig>> dyn_srv_;
 	bool enabled_ = true;
-	std::string type_, map_;
+	std::string type_;
 	visualization_msgs::MarkerArray vis_array_;
 	std::string known_tilt_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
@@ -537,7 +537,7 @@ publish_debug:
 
 		msg.image = image;
 		img_pub_.publish(msg.toImageMsg());
-	},
+	}
 
 	void paramCallback(aruco_pose::MapConfig &config, uint32_t level)
  	{
