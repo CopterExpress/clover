@@ -548,6 +548,11 @@ publish_debug:
 			loadMap(config.map);
 			publishMap();
 		}
+
+		if (config.image_axis != image_axis_) {
+			image_axis_ = config.image_axis;
+			publishMapImage();
+		}
 	}
 };
 
