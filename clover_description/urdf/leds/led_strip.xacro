@@ -44,7 +44,7 @@
         <gazebo reference="${name}_link">
             <visual>
                 <plugin name="${name}_controller" filename="libsim_leds.so">
-                    <!-- <robotNamespace></robotNamespace> -->
+                    <!-- <robotNamespace>clover0</robotNamespace> -->
                     <ledCount>${led_count}</ledCount>
                 </plugin>
                 <cast_shadows>false</cast_shadows>
@@ -66,7 +66,7 @@
         </gazebo> -->
         <gazebo>
             <plugin name="${name}_ros_controller" filename="libsim_leds_controller.so">
-                <robotNamespace></robotNamespace>
+                <!-- <robotNamespace></robotNamespace> -->
                 <ledCount>${led_count}</ledCount>
             </plugin>
         </gazebo>
