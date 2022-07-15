@@ -139,10 +139,10 @@ public:
 		sync_->registerCallback(boost::bind(&ArucoMap::callback, this, _1, _2, _3));
 
 		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::MapConfig>>(nh_priv_);
- 		dynamic_reconfigure::Server<aruco_pose::MapConfig>::CallbackType cb;
+		dynamic_reconfigure::Server<aruco_pose::MapConfig>::CallbackType cb;
 
- 		cb = std::bind(&ArucoMap::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
- 		dyn_srv_->setCallback(cb);
+		cb = std::bind(&ArucoMap::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
+		dyn_srv_->setCallback(cb);
 
 		NODELET_INFO("ready");
 	}
@@ -540,7 +540,7 @@ publish_debug:
 	}
 
 	void paramCallback(aruco_pose::MapConfig &config, uint32_t level)
- 	{
+	{
 		// https://github.com/CopterExpress/clover/commit/2cd334c474e3ed04ef65ca1ba7f08ab535a3dc6d#diff-942723f9452c398ae93f1a91427f9a7b614be5e5871f8a3e590f324d804f0d58R356
 		enabled_ = config.enabled;
 		if (type_ == "map" && config.map != map_) {
