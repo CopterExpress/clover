@@ -30,7 +30,7 @@
                     <origin xyz="${radius*cos(2 * pi * link_i / links_total)} ${radius*sin(2 * pi * link_i / links_total)} 0"
                             rpy="0 0 ${2 * pi * link_i / links_total}"/>
                     <geometry>
-                        <box size="${bulb_radius} ${bulb_radius} ${2 * bulb_radius}"/>
+                        <box size="${bulb_radius} ${bulb_radius} ${bulb_radius}"/>
                     </geometry>
                 </visual>
                 <xacro:unless value="${link_i + 1 == links_total}">
