@@ -39,7 +39,7 @@
             </xacro:macro>
             <xacro:loop_links link_i="0" links_total="${led_count}"/>
         </link>
-        
+
         <xacro:if value="${use_plugin}">
         <gazebo reference="${name}_link">
             <visual>
