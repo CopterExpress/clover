@@ -116,7 +116,7 @@ public:
 		// createStripLine();
 
 		if (type_ == "map") {
-			param(nh_priv_, "map", map_);
+			map_ = nh_priv_.param<std::string>("map" , "");
 			loadMap(map_);
 		} else if (type_ == "gridboard") {
 			createGridBoard(nh_priv_);
@@ -152,6 +152,7 @@ public:
 	              const aruco_pose::MarkerArrayConstPtr& markers)
 	{
 		if (!enabled_) return;
+		if (markers->markers.empty()) return; // map not loaded
 
 		int valid = 0;
 		int count = markers->markers.size();
@@ -278,12 +279,18 @@ publish_debug:
 		std::ifstream f(filename);
 		std::string line;
 
-		if (!f.good()) {
-			NODELET_FATAL("%s - %s", strerror(errno), filename.c_str());
-			ros::shutdown();
+		clearMarkers();
+
+		if (map_ == "") {
+			NODELET_INFO("No map loaded");
+			return;
 		}
 
-		clearMarkers();
+		if (!f.good()) {
+			NODELET_ERROR("%s - %s", strerror(errno), filename.c_str());
+			map_ = "";
+			return;
+		}
 
 		while (std::getline(f, line)) {
 			int id;
@@ -308,9 +315,10 @@ publish_debug:
 				s.putback(first);
 			} else {
 				// Probably garbage data; inform user and throw an exception, possibly killing nodelet
-				NODELET_FATAL("Malformed input: %s", line.c_str());
-				ros::shutdown();
-				throw std::runtime_error("Malformed input");
+				NODELET_ERROR("Malformed input: %s", line.c_str());
+				map_ = "";
+				clearMarkers();
+				return;
 			}
 
 			if (!(s >> id >> length >> x >> y)) {
@@ -545,7 +553,7 @@ publish_debug:
 		enabled_ = config.enabled;
 		if (type_ == "map" && config.map != map_) {
 			map_ = config.map;
-			loadMap(config.map);
+			loadMap(map_);
 			publishMap();
 		}
 
