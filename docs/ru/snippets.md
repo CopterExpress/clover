@@ -405,6 +405,8 @@ flow_client.update_configuration({'enabled': True})
 
 ### # {#aruco-map-dynamic}
 
+> **Info** Для [образа](image.md) версии > 0.23.
+
 Динамически изменить используемый файл с [картой ArUco-маркеров](aruco_map.md):
 
 <!-- markdownlint-enable MD044 -->

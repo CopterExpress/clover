@@ -394,6 +394,8 @@ flow_client.update_configuration({'enabled': True})
 
 ### # {#aruco-map-dynamic}
 
+> **Info** For [RPi image](image.md) version > 0.23.
+
 Change the used [ArUco markers map file](aruco_map.md) dynamically:
 
 <!-- markdownlint-enable MD044 -->
