@@ -390,6 +390,26 @@ rospy.sleep(5)
 flow_client.update_configuration({'enabled': True})
 ```
 
+<!-- markdownlint-disable MD044 -->
+
+### # {#aruco-map-dynamic}
+
+> **Info** For [RPi image](image.md) version > 0.23.
+
+Change the used [ArUco markers map file](aruco_map.md) dynamically:
+
+<!-- markdownlint-enable MD044 -->
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+map_client = dynamic_reconfigure.client.Client('aruco_map')
+
+map_client.update_configuration({'map': '/home/pi/catkin_ws/src/clover/aruco_pose/map/office.txt'})
+```
+
 ### # {#wait-global-position}
 
 Wait for global position to appear (finishing [GPS receiver](gps.md) initialization):
