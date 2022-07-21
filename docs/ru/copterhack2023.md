@@ -126,7 +126,7 @@ CopterHack 2023 — это международный конкурс по ра�
 * $1200 за статью журнале, индексируемом в Scopus, Web of Science.
 * $700 за статью, опубликованную в сборнике материалов конференции (Conference Proceedings), индексируемые в Scopus, Web of Science. 
 
-> **Note** [Как узнать квартиль журнала в Scopus и WOS](http://russian-science.info/kak-uznat-kvartil-i-protsentil-zhurnala-v-scopus-i-wos)).                                                                                                 
+> **Note** [Как узнать квартиль журнала в Scopus и WOS](http://russian-science.info/kak-uznat-kvartil-i-protsentil-zhurnala-v-scopus-i-wos).                                                                                                 
                                                                                                
 Правила:
 
