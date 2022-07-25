@@ -112,7 +112,7 @@ Prepare your application and send it as a Draft Pull Request to [Clover reposito
 
 10. During the contest, you will work on this document, bringing it closer to the finished state. By the end of the contest you are expected to publish your article which is supposed to be the result of your work in CopterHack.
 
-Teams-participants are supposed to be added to the special Telegram group, where one can send the project's updates and get feedback from the Jury. For all participating teams, COEX will provide a 50% discount on the Clover drone kit.
+Teams-participants are supposed to be added to the special Telegram group, where one can send the project's updates and get feedback from the Jury. For all participating teams, COEX will provide a 40% discount on the Clover drone kit.
 
 > **Info** There are no restrictions on the age, education, and number of people in a team.
 
@@ -122,9 +122,9 @@ Our participants have been engaged in advanced projects in the field of aerial r
                                                                                              
 Original articles are accepted in following nominations:
                                                                                                   
-* $3000 (USD) for an article in a magazine of first quartile (Q1), indexed in Scopus, Web of Science.
-* $1200 (USD) for an article in a magazine, indexed in Scopus, Web of Science.
-* $700 (USD) for an article, published in Comprendium (Conference Proceedings), indexed in Scopus, Web of Science. 
+* $2000 (USD) for an article in a magazine of first quartile (Q1), indexed in Scopus, Web of Science.
+* $1000 (USD) for an article in a magazine, indexed in Scopus, Web of Science.
+* $500 (USD) for an article, published in Comprendium (Conference Proceedings), indexed in Scopus, Web of Science. 
 
 > **Note** [Easy way to find quartiles for journals in Web of Science and Scopus](https://www.texpedi.com/2021/07/how-to-find-journal-quartile.html).                                                                                                 
                                                                                                
