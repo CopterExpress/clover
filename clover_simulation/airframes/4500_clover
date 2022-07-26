@@ -11,6 +11,7 @@ param set-default ATT_W_EXT_HDG 0.5
 param set-default ATT_EXT_HDG_M 1 # 0 = none, 1 = vision, 2 = mocap
 
 param set-default COM_DISARM_LAND 1.0
+param set-default COM_RCL_EXCEPT 4 # enable offboard flights without rc
 
 param set-default LPE_FLW_SCALE 1.0
 param set-default LPE_FLW_R 0.2
