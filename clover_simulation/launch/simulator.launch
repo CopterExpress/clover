@@ -21,7 +21,7 @@
     </include>
 
     <!-- PX4 instance -->
-    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)" unless="$(eval type == 'none')">
+    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" required="true" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)" unless="$(eval type == 'none')">
         <env name="PX4_SIM_MODEL" value="$(arg vehicle)"/>
         <env name="PX4_ESTIMATOR" value="$(arg est)"/>
     </node>
@@ -36,7 +36,7 @@
         <arg name="use_clover_physics" value="$(arg use_clover_physics)"/>
     </include>
 
-    <node name="jmavsim" pkg="px4" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')">
+    <node name="jmavsim" pkg="px4" required="true" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')">
         <env name="HEADLESS" value="1" if="$(eval not gui)"/>
     </node>
 
