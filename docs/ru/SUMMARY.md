@@ -109,6 +109,7 @@
     * [Виртуальная MAVLink-камера](duocam_mavlink.md)
     * [Настройка DuoCam](duocam_setup.md)
 * [Мероприятия](events.md)
+  * [CopterHack-2023](copterhack2023.md)
   * [CopterHack-2022](copterhack2022.md)
   * [CopterHack-2021](copterhack2021.md)
   * [CopterHack-2019](copterhack2019.md)
