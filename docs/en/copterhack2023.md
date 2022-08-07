@@ -14,7 +14,7 @@ The qualifying and project development stages will be held in an online format, 
 
 1. Qualifying stage. Applications are accepted on the deadline date until October 31, 2022.
 2. Projects development stage. This stage includes monthly updates and mentorship of participants. Starting date - November 1, 2022. Deadline date - February 28, 2023.
-3. All teams-participants are requirred to make the final video to proceed to the final round. Final videos are required to be uploaded until March 31, 2023.
+3. All teams-participants are required to make the final video to proceed to the final round. Final videos are required to be uploaded until March 31, 2023.
 4. The final round. Projects presentation takes place April 23, 2023.
 
 ## Conditions and criteria for evaluation the final result
@@ -121,27 +121,27 @@ Teams-participants are supposed to be added to the special Telegram group, where
 ## CopterHack 2023 projects’ papers contest
 
 Our participants have been engaged in advanced projects in the field of aerial robotics for already two years. This year we are planning to launch a new type of contest stimulating participants to present the research results running within the whole contest, at high -level international conferences as well as to publish them in Russian and international magazines in thematic areas.
-                                                                                             
+
 Original articles are accepted in following nominations:
-                                                                                                  
+
 * $2000 (USD) for an article in a magazine of first quartile (Q1), indexed in Scopus, Web of Science.
 * $1000 (USD) for an article in a magazine, indexed in Scopus, Web of Science.
-* $500 (USD) for an article, published in Comprendium (Conference Proceedings), indexed in Scopus, Web of Science. 
+* $500 (USD) for an article, published in Compendium (Conference Proceedings), indexed in Scopus, Web of Science.
 
-> **Note** [Easy way to find quartiles for journals in Web of Science and Scopus](https://www.texpedi.com/2021/07/how-to-find-journal-quartile.html).                                                                                                 
-                                                                                               
+> **Note** [Easy way to find quartiles for journals in Web of Science and Scopus](https://www.texpedi.com/2021/07/how-to-find-journal-quartile.html).
+
 Requirements:
 
-1.	The article is required to reflect the results of the project, developed within CopterHack 2023.
-2.	The article is required to be accepted for publication by the moment of application for the Contest.
-3.	It is required to indicate in the acknowledgement area that work is accomplished within the Contest.
+1. The article is required to reflect the results of the project, developed within CopterHack 2023.
+2. The article is required to be accepted for publication by the moment of application for the Contest.
+3. It is required to indicate in the acknowledgement area that work is accomplished within the Contest.
 
 **Applications deadline**: December 10, 2023. The application for the contest should be submitted through the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSf52x0CTur-wUCG2URwY-p85gEUBUvgC0mPVNot0RHVjqcLZA/viewform).
 
 **Results announcement**: December 24, 2023.
-                                                                                                  
+
 ---
 
 For all questions: [CopterHack in Telegram](https://t.me/CopterHack).
-                                                 
+
 > **Info** Please contact [Oleg Ponfilenok in Telegram](@ponfilenok) if you are interested in becoming the contest's partner or jury member.
