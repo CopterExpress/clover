@@ -1,6 +1,6 @@
 # CopterHack 2023
 
-<img src="../assets/CopterHack2023_logo.png" width=300 align=right>
+<img src="../assets/copterhack2023.svg" width=300 align=right>
 
 CopterHack 2023 — это международный конкурс по разработке проектов по летающей робототехнике с открытым исходным кодом. Основным языком конкурса является английский.
 
