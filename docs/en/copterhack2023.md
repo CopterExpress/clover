@@ -1,6 +1,6 @@
 # CopterHack 2023
 
-<img src="../assets/CopterHack2023_logo.png" width=300 align=right>
+<img src="../assets/copterhack2023.svg" width=300 align=right>
 
 CopterHack 2023 is an international open-source projects competition on aerial robotics. The main direction of the CopterHack is team competition with a free choice of the project topic. The competition’s official language is English.
 
