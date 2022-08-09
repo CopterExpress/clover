@@ -144,4 +144,4 @@ Requirements:
 
 For all questions: [CopterHack in Telegram](https://t.me/CopterHack).
 
-> **Info** Please contact [Oleg Ponfilenok in Telegram](@ponfilenok) if you are interested in becoming the contest's partner or jury member.
+> **Info** Please contact [Oleg Ponfilenok in Telegram](https://t.me/ponfilenok) if you are interested in becoming the contest's partner or jury member.
