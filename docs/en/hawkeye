@@ -1,0 +1,55 @@
+# Project name
+UAV-based Drone Delivery System
+[CopterHack-2023](copterhack2023.md), team **Team name : HawkEye**.
+
+## Team information
+
+The list of team members:
+
+Dr. Sachin Kansal
+Kartik Gupta
+Piyush Zaware
+Sanidhya
+
+(Describe the team: full name, contacts (Telegram username), role in the team).
+
+Sanidhya, Electronics/ROS simulations, @Lucifer_3009
+Piyush Zaware, Mechanical, @ProfSly
+Kartik Gupta, Programmer, @maniacalship
+
+## Project description
+Logistics and surveillance of remote and inaccessible places, in order to avail medical and essential
+food supplies
+
+### Project idea
+UAV Based delivery:
+Planning and optimizing flight plan for the UAV to deliver payload in order the UAV would use an on board processor for facial
+recognition to verify the customer's identity from the database, post which payload would be unlocked.
+Briefly describe the idea and stage of the project. We alson plan on intergrating the whole system with QR code for simplification
+of delivery mechanism.
+
+●Add/Remove/Update location of a waypoint mid flight simulation
+●Plan and optimise an automated flight path
+●Run simulations on Gazebo with compliance with ROS
+●Comply facial and gesture recognition used to verify and ease delivery acceptance proces
+
+### The potential outcomes
+●Disaster Management
+● Remote Location
+● Supply
+● Incidents
+●Disaster Relief
+● Delivery of medicines
+● delivery of food
+● rescue
+
+
+Describe how you see the project result.
+
+### Using Clover platform
+
+Describe how the Clover platform will be used in your project.
+
+### Additional information at the request of participants
+
+For example, information about the team's experience while working on projects, attach a link to articles, videos.
