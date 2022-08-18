@@ -124,8 +124,8 @@ int main(int argc, char **argv) {
 
 	nh_priv.param<string>("frame_id", frame_id, "");
 	nh_priv.param<string>("offset_frame_id", offset_frame_id, "");
-	nh_priv.param<string>("mavros/local_position/frame_id", local_frame_id, "map");
-	nh_priv.param<string>("mavros/local_position/tf/child_frame_id", child_frame_id, "base_link");
+	nh.param<string>("mavros/local_position/frame_id", local_frame_id, "map");
+	nh.param<string>("mavros/local_position/tf/child_frame_id", child_frame_id, "base_link");
 	offset_timeout = ros::Duration(nh_priv.param("offset_timeout", 3.0));
 
 	if (!frame_id.empty()) {
