@@ -28,7 +28,7 @@ RUN curl https://raw.githubusercontent.com/CopterExpress/clover/master/book.json
 
 RUN . $HOME/.nvm/nvm.sh && gitbook install
 
-CMD . $HOME/.nvm/nvm.sh && cp -r node_modules /clover && cd /clover && gitbook build \
+CMD . $HOME/.nvm/nvm.sh && export QTWEBENGINE_DISABLE_SANDBOX=1 && cp -r node_modules /clover && cd /clover && gitbook build \
   && gitbook pdf ./ _book/clover.pdf && \
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_ru_compressed.pdf _book/clover_ru.pdf && \
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/default -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages -dCompressFonts=true -r150 -sOutputFile=_book/clover_en_compressed.pdf _book/clover_en.pdf && \
