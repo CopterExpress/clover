@@ -13,3 +13,11 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t clover-docs:latest docs
+
+      - name: Test Docker image
+        run: docker run -it --rm -v .:/clover clover-docs:latest
+
+      - name: Show results
+        run: |
+          ls -lh _book
+          ls -lh *.pdf
