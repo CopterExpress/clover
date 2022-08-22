@@ -15,7 +15,7 @@ jobs:
         run: docker build -t clover-docs:latest docs
 
       - name: Test Docker image
-        run: docker run -t --rm -v `pwd`:/clover clover-docs:latest
+        run: docker run -t --rm --no-sandbox -v `pwd`:/clover clover-docs:latest
 
       - name: Show results
         run: |
