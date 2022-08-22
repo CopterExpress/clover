@@ -20,7 +20,7 @@ RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula selec
 RUN . $HOME/.nvm/nvm.sh && curl https://raw.githubusercontent.com/CopterExpress/clover/master/builder/assets/install_gitbook.sh | bash
 
 # RUN . $HOME/.nvm/nvm.sh && npm install markdownlint-cli@0.28.1 -g && PUPPETEER_SKIP_DOWNLOAD=1 npm install svgexport -g
-RUN . $HOME/.nvm/nvm.sh && npm install markdownlint-cli@0.28.1 -g && npm install svgexport -g
+RUN . $HOME/.nvm/nvm.sh && npm install markdownlint-cli@0.28.1 -g && npm install svgexport -g --unsafe-perm
 
 RUN . $HOME/.nvm/nvm.sh && node -v && gitbook -V && markdownlint -V
 
