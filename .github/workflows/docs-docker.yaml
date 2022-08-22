@@ -1,0 +1,15 @@
+name: Build docs Docker image
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ '*' ]
+
+jobs:
+  docs-docker:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t clover-docs:latest docs
