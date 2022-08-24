@@ -37,6 +37,8 @@
   <depend>rosbridge_server</depend>
   <depend>web_video_server</depend>
   <depend>tf2_web_republisher</depend>
+  <depend>libxml2</depend>
+  <depend>libxslt</depend>
   <depend condition="$ROS_PYTHON_VERSION == 2">python-lxml</depend>
   <depend condition="$ROS_PYTHON_VERSION == 3">python3-lxml</depend>
   <depend>dynamic_reconfigure</depend>
