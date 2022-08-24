@@ -30,6 +30,7 @@ import tf2_geometry_msgs
 
 import VL53L1X
 import pymavlink
+import lxml
 from pymavlink import mavutil
 import rpi_ws281x
 import pigpio
