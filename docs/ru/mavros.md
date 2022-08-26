@@ -40,6 +40,8 @@ MAVROS подписывается на определенные ROS-топики
 
 `/mavros/setpoint_position/local` — установить целевую позицию  и рысканье \(yaw\) беспилотника \(в системе координат ENU\).
 
+`/mavros/setpoint_position/global` – установить целевую позицию в глобальных координатах (ширина, долгота и высота) и рысканье беспилотника.
+
 `/mavros/setpoint_velocity/cmd_vel` — установить целевую линейную скорость беспилотника.
 
 `/mavros/setpoint_attitude/attitude` и `/mavros/setpoint_attitude/att_throttle` — установить целевую ориентацию \(Attitude\) и уровень газа.
