@@ -40,6 +40,8 @@ MAVROS подписывается на определенные ROS-топики
 
 `/mavros/setpoint_position/local` — установить целевую позицию  и рысканье \(yaw\) беспилотника \(в системе координат ENU\).
 
+`/mavros/setpoint_position/global` – установить целевую позицию в глобальных координатах (ширина, долгота и высота) и рысканье беспилотника.
+
 `/mavros/setpoint_velocity/cmd_vel` — установить целевую линейную скорость беспилотника.
 
 `/mavros/setpoint_attitude/attitude` и `/mavros/setpoint_attitude/att_throttle` — установить целевую ориентацию \(Attitude\) и уровень газа.
@@ -52,4 +54,4 @@ MAVROS подписывается на определенные ROS-топики
 
 `/mavros/setpoint_raw/attitude` — отправка пакета [SET\_ATTITUDE\_TARGET](https://mavlink.io/en/messages/common.html#SET_ATTITUDE_TARGET). Позволяет установить целевую ориентацию / угловые скорости и уровень газа. Выбор устанавливаемых величин осуществляется с помощью поля `type_mask`
 
-`/mavros/setpoint_raw/global` — отправка пакета [SET\_POSITION\_TARGET\_GLOBAL\_INT](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах \(ширина, долгота, высота\), а также скорости полета. **Не поддерживается в PX4** \([issue](https://github.com/PX4/Firmware/issues/7552)\).
+`/mavros/setpoint_raw/global` — отправка пакета [SET\_POSITION\_TARGET\_GLOBAL\_INT](https://mavlink.io/en/messages/common.html#SET_POSITION_TARGET_GLOBAL_INT). Позволяет установить целевую позицию в глобальных координатах \(ширина, долгота, высота\), а также скорости полета.
