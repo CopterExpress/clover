@@ -10,7 +10,7 @@ The simulation may be configured by a set of arguments:
 
 * `mav_id` (*integer*, default: *0*) - MAVLink identifier of the vehicle. **Note**: Multi-vehicle simulation is possible, but requires extensive changes to launch files;
 * `est` (*string*, default: *lpe*, possible values: *lpe*, *ekf2*) - PX4 estimator selection. Note that this may be overriden in the startup scripts for your craft;
-* `vehicle` (*string*, default: *clover*) - PX4 vehicle name. Depending on this parameter, different PX4 presets will be loaded. **Note**: The default value, *clover*, requires you to use [Clover-specific PX4 branch](https://github.com/CopterExpress/Firmware/tree/v1.10.1-clever);
+* `vehicle` (*string*, default: *clover*) - PX4 vehicle name. Depending on this parameter, different PX4 presets will be loaded.
 * `main_camera` (*boolean*, default: *true*) - controls whether the drone will have a vision position estimation camera;
 * `rangefinder` (*boolean*, default: *true*) - controls whether the drone will have a laser rangefinder;
 * `led` (*boolean*, default: *true*) - controls whether the drone will have a programmable LED strip;
