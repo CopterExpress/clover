@@ -66,7 +66,7 @@ PX4 will be built along with the other packages in our workspace. You may clone 
 Clone PX4 sources and make the required symlinks:
 
 ```bash
-git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
