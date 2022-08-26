@@ -41,13 +41,4 @@ UART connection is another way for the Raspberry Pi and FCU to communicate.
     sudo systemctl restart clover
     ```
 
-## SITL connection
-
-In order to connect to a local or a remote [SITL](sitl.md) instance set the `fcu_conn` parameter to `udp` and `fcu_ip` to the IP address of the SITL instance (`127.0.0.1` if you are running the instance locally):
-
-```xml
-<arg name="fcu_conn" default="udp"/>
-<arg name="fcu_ip" default="127.0.0.1"/>
-```
-
 **Next**: [Using QGroundControl over Wi-Fi](gcs_bridge.md)
