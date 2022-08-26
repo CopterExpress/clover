@@ -40,6 +40,8 @@ Messages published in the topics may be viewed with the `rostopic` utility, e.g.
 
 `/mavros/setpoint_position/local` — set target position and yaw of the drone \(in the ENU coordinate system\).
 
+`/mavros/setpoint_position/global` – set target position in global coordinates (latitude, longitude, altitude) and yaw of the drone.
+
 `/mavros/setpoint_position/cmd_vel` — set target linear velocity of the drone.
 
 `/mavros/setpoint_attitude/attitude` and `/mavros/setpoint_attitude/att_throttle` — set target attitude and throttle level.
