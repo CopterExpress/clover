@@ -66,7 +66,7 @@ sudo /usr/bin/python3 -m pip install -r ~/catkin_ws/src/clover/clover/requiremen
 Склонируйте исходный код PX4 и создайте необходимые симлинки:
 
 ```bash
-git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
