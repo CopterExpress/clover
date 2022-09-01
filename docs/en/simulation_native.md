@@ -2,7 +2,7 @@
 
 Setting up the simulation environment from scratch requires some effort, but results in the most performant setup, with less chance of driver issues.
 
-> **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh).
+<!-- > **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh). -->
 
 Prerequisites: **Ubuntu 20.04**.
 
@@ -66,7 +66,7 @@ PX4 will be built along with the other packages in our workspace. You may clone 
 Clone PX4 sources and make the required symlinks:
 
 ```bash
-git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/

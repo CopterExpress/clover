@@ -1,7 +1,5 @@
 # Working with the camera
 
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/camera.md) for older images.
-
 Make sure the camera is enabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
 
 ```xml
