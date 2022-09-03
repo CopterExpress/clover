@@ -625,6 +625,10 @@ def check_rangefinder():
 
 @check('Boot duration')
 def check_boot_duration():
+    if not os.path.exists('/etc/clover_version'):
+        info('skip check')
+        return # Don't check not on Clover's image
+
     output = subprocess.check_output('systemd-analyze').decode()
     r = re.compile(r'([\d\.]+)s\s*$', flags=re.MULTILINE)
     duration = float(r.search(output).groups()[0])
