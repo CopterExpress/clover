@@ -154,7 +154,7 @@ private:
 
 		img.convertTo(curr_, CV_32F);
 
-		if (prev_.empty()) {
+		if (prev_.empty() || (msg->header.stamp - prev_stamp_).toSec() > 0.1) { // outdated previous frame
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 			cv::createHanningWindow(hann_, curr_.size(), CV_32F);
