@@ -24,7 +24,7 @@
         <param name="fcu_url" value="udp://@$(arg fcu_ip):14580" if="$(eval fcu_conn == 'sitl')"/>
 
         <!-- hitl connection (to gazebo_mavlink_interface plugin) -->
-        <param name="fcu_url" value="udp://$(arg fcu_ip):14540" if="$(eval fcu_conn == 'hitl')"/>
+        <param name="fcu_url" value="udp://$(arg fcu_ip):14540@" if="$(eval fcu_conn == 'hitl')"/>
 
         <!-- set target_system_id -->
         <param name="target_system_id" value="$(arg fcu_sys_id)" />
