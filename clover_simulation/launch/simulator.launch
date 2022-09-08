@@ -1,5 +1,6 @@
 <launch>
     <arg name="type" default="gazebo"/> <!-- gazebo, jmavsim, none (only clover packages) -->
+    <arg name="mode" default="sitl"/> <!-- sitl or hitl -->
     <arg name="mav_id" default="0"/>
     <arg name="est" default="ekf2"/> <!-- PX4 estimator: lpe, ekf2 -->
     <arg name="vehicle" default="clover"/> <!-- PX4 vehicle configuration: clover, clover_vpe -->
@@ -21,7 +22,7 @@
     </include>
 
     <!-- PX4 instance -->
-    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" required="true" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)" unless="$(eval type == 'none')">
+    <node name="sitl_$(arg mav_id)" pkg="px4" type="px4" output="screen" required="true" args="$(find px4)/ROMFS/px4fmu_common -s etc/init.d-posix/rcS -i $(arg mav_id)" unless="$(eval type == 'none' or mode == 'hitl')">
         <env name="PX4_SIM_MODEL" value="$(arg vehicle)"/>
         <env name="PX4_ESTIMATOR" value="$(arg est)"/>
     </node>
@@ -34,6 +35,7 @@
         <arg name="led" value="$(arg led)"/>
         <arg name="gps" value="$(arg gps)"/>
         <arg name="use_clover_physics" value="$(arg use_clover_physics)"/>
+        <arg name="hitl" value="$(eval mode == 'hitl')"/>
     </include>
 
     <node name="jmavsim" pkg="px4" required="true" type="jmavsim_run.sh" output="screen" if="$(eval type == 'jmavsim')">
@@ -45,7 +47,7 @@
     <!-- Clover services -->
     <include file="$(find clover)/launch/clover.launch">
         <arg name="simulator" value="true"/>
-        <arg name="fcu_conn" value="sitl"/>
+        <arg name="fcu_conn" value="$(arg mode)"/>
         <arg name="fcu_ip" value="127.0.0.1"/>
         <arg name="gcs_bridge" value=""/>
         <arg name="web_video_server" default="false" if="$(eval type == 'jmavsim')"/>

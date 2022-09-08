@@ -7,6 +7,7 @@
   <xacro:arg name="gps" default="true"/>
   <xacro:arg name="maintain_camera_rate" default="false"/>
   <xacro:arg name="use_clover_physics" default="false"/>
+  <xacro:arg name="hitl" default="false"/>
 
   <xacro:include filename="clover4_base.xacro" />
   <xacro:include filename="../sensors/rpi_cam.urdf.xacro"/>
