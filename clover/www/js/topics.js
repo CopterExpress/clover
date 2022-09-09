@@ -54,7 +54,7 @@ function viewTopic(topic) {
 		document.title = topic;
 		if (mouseDown) return;
 
-		if (msg.header.stamp) {
+		if (msg.header && msg.header.stamp) {
 			if (params.date || params.offset) {
 				let date = new Date(msg.header.stamp.secs * 1e3 + msg.header.stamp.nsecs * 1e-6);
 				if (params.date) msg.header.date = date.toISOString();
