@@ -21,3 +21,25 @@ jobs:
       - name: Native Noetic build
         run: |
           docker run --rm -v $(pwd):/root/catkin_ws/src/clover ros:noetic-ros-base /root/catkin_ws/src/clover/builder/standalone-install.sh
+
+  noetic-raw:
+    runs-on: ubuntu-latest
+    container: ros:noetic-ros-base
+    defaults:
+      run:
+        working-directory: catkin_ws
+        shell: bash
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path: catkin_ws/src/clover
+    - name: Install pip
+      run: apt-get update && apt-get -y install python3-pip
+    - name: Install dependencies
+      run: rosdep update && rosdep install --from-paths src --ignore-src -y
+    - name: catkin_make
+      run: source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make
+    - name: Run tests
+      run: source devel/setup.bash && catkin_make run_tests && catkin_test_results
+    - name: Install
+      run: source devel/setup.bash && catkin_make install
