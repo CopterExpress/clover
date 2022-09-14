@@ -187,6 +187,8 @@ private:
 
 			array_.markers.reserve(ids.size());
 			aruco_pose::Marker marker;
+			vector<geometry_msgs::TransformStamped> transforms;
+			transforms.reserve(ids.size());
 			geometry_msgs::TransformStamped transform;
 			transform.header.stamp = msg->header.stamp;
 			transform.header.frame_id = msg->header.frame_id;
@@ -204,19 +206,32 @@ private:
 						snapOrientation(marker.pose.orientation, snap_to.transform.rotation, auto_flip_);
 					}
 
-					// TODO: check IDs are unique
 					if (send_tf_) {
 						transform.child_frame_id = getChildFrameId(ids[i]);
 
 						// check if such static transform is in the map
 						if (map_markers_ids_.find(ids[i]) == map_markers_ids_.end()) {
-							transform.transform.rotation = marker.pose.orientation;
-							fillTranslation(transform.transform.translation, tvecs[i]);
-							br_->sendTransform(transform);
+							// check if a markers with that id is already added
+							bool send = true;
+							for (auto &t : transforms) {
+								if (t.child_frame_id == transform.child_frame_id) {
+									send = false;
+									break;
+								}
+							}
+							if (send) {
+								transform.transform.rotation = marker.pose.orientation;
+								fillTranslation(transform.transform.translation, tvecs[i]);
+								transforms.push_back(transform);
+							}
 						}
 					}
 				}
 				array_.markers.push_back(marker);
+			}
+
+			if (send_tf_) {
+				br_->sendTransform(transforms);
 			}
 		}
 
