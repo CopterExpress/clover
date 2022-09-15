@@ -35,5 +35,9 @@ jobs:
       run: source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make
     - name: Run tests
       run: source devel/setup.bash && catkin_make run_tests && catkin_test_results
-    - name: Install
-      run: source devel/setup.bash && catkin_make install
+    - name: Install Bloom
+      run: apt-get -y install python3-bloom debhelper dpkg-dev
+    - name: bloom-generate
+      run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name debian --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO
+    - name: Build package
+      run: source devel/setup.bash && fakeroot debian/rules binary
