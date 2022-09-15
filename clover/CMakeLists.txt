@@ -46,6 +46,14 @@ find_package(OpenCV ${_opencv_version} REQUIRED
     imgproc
 )
 
+# Download GeographicLib datasets
+message(STATUS "Downloading GeographicLib datasets to ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_SHARE_DESTINATION}")
+add_custom_target(download_geographiclib_datasets ALL
+  COMMAND geographiclib-get-geoids -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_SHARE_DESTINATION}/GeographicLib egm96-5
+  COMMAND geographiclib-get-gravity -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_SHARE_DESTINATION}/GeographicLib egm96
+  COMMAND geographiclib-get-magnetic -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_SHARE_DESTINATION}/GeographicLib emm2015
+)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 

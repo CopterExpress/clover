@@ -29,8 +29,6 @@ jobs:
       run: apt-get update && apt-get -y install python3-pip
     - name: Install dependencies
       run: rosdep update && rosdep install --from-paths src --ignore-src -y
-    - name: Install GeographicLib datasets
-      run: wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
     - name: catkin_make
       run: source /opt/ros/$ROS_DISTRO/setup.bash && catkin_make
     - name: Run tests

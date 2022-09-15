@@ -4,6 +4,7 @@
     <node pkg="mavros" type="mavros_node" name="mavros" required="true" output="screen">
         <param name="fcu_url" value="udp://@127.0.1:14557"/>
         <rosparam command="load" file="$(find clover)/launch/mavros_config.yaml"/>
+        <env name="GEOGRAPHICLIB_DATA" value="$(eval env('CMAKE_PREFIX_PATH').split(':')[0] + '/share/GeographicLib')"/>
     </node>
 
     <node name="visualization" pkg="mavros_extras" type="visualization" required="true">
