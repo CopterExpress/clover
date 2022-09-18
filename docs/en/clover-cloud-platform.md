@@ -42,6 +42,6 @@ In our project we use Clover packages for drone simulation.
 ### <a name='info'></a>Additional information
 
 Links to our repositories:
+
 * [Frontend](https://github.com/DevMBS/clover-cloud-platform-frontend)
 * [Backend](https://github.com/Astel-d/clover-cloud-platform-backend)
-
