@@ -99,3 +99,13 @@ PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 Выделение нескольких процессорных ядер для виртуальной машины может значительно повысить производительность симуляции. В наших испытаниях виртуальная машина, для которой было выделено одно ядро, не позволяла работать в симуляторе: окно Gazebo не реагировало на пользовательский ввод, сообщения ROS терялись. После выделения четырёх ядер для этой же виртуальной машины симуляция стала работать со скоростью 0.25 от реального времени.
 
 При этом не следует пытаться выделить для виртуальной машины больше ресурсов, чем доступно на основной системе.
+
+### Изменение карты Aruco-меток в симуляторе
+
+Для того, чтобы изменить карту Aruco-меток в симуляторе, можно использовать следующую команду:
+
+```bash
+rosrun clover_simulation aruco_gen --single-model --source-world='/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover.world' '/home/clover/catkin_ws/src/clover/aruco_pose/map/map.txt' > '/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover_aruco.world'
+```
+
+В данном примере `map.txt` - имя карты меток.
