@@ -37,6 +37,7 @@
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
 #include <mavros_msgs/ManualControl.h>
+#include <mavros_msgs/Altitude.h>
 
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
@@ -54,6 +55,7 @@ using namespace clover;
 using mavros_msgs::PositionTarget;
 using mavros_msgs::AttitudeTarget;
 using mavros_msgs::Thrust;
+using mavros_msgs::Altitude;
 
 // tf2
 tf2_ros::Buffer tf_buffer;
@@ -96,10 +98,12 @@ Thrust thrust_msg;
 TwistStamped rates_msg;
 TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
+geometry_msgs::TransformStamped terrain;
 
 // State
 PoseStamped nav_start;
 PoseStamped setpoint_position, setpoint_position_transformed;
+Vector3Stamped setpoint_z, setpoint_z_transformed; // for z-only commands
 Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
 QuaternionStamped setpoint_attitude, setpoint_attitude_transformed;
 float setpoint_yaw_rate;
@@ -121,6 +125,8 @@ enum setpoint_type_t {
 enum setpoint_type_t setpoint_type = NONE;
 
 enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
+
+bool setpoint_z_valid = false;
 
 // Last received telemetry messages
 mavros_msgs::State state;
@@ -171,6 +177,15 @@ void handleLocalPosition(const PoseStamped& pose)
 	local_position = pose;
 	publishBodyFrame();
 	// TODO: terrain?, home?
+}
+
+void handleAltitude(const Altitude& alt)
+{
+	// publish terrain frame
+	if (!std::isfinite(alt.bottom_clearance)) return;
+	terrain.header.stamp = alt.header.stamp;
+	terrain.transform.translation.z = -alt.bottom_clearance;
+	transform_broadcaster->sendTransform(terrain);
 }
 
 // wait for transform without interrupting publishing setpoints
@@ -421,6 +436,18 @@ void publish(const ros::Time stamp)
 		}
 	}
 
+	if (setpoint_z_valid && setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
+		setpoint_z.header.stamp = stamp;
+		try {
+			tf_buffer.transform(setpoint_z, setpoint_z_transformed, local_frame, ros::Duration(0.05));
+			setpoint_position_transformed.pose.position.z = setpoint_z_transformed.vector.z;
+
+		} catch (const tf2::TransformException& e) {
+			ROS_WARN_THROTTLE(10, "can't transform z coordinate from %s to %s, ignoring z coordinate", 
+			                  setpoint_z.header.frame_id.c_str(), local_frame.c_str());
+		}
+	}
+
 	if (setpoint_type == POSITION) {
 		position_msg = setpoint_position_transformed;
 	}
@@ -556,7 +583,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		// look up for reference frame
 		auto search = reference_frames.find(frame_id);
-		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second;
+		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second; // when not found it's the same frame
 
 		// Serve "partial" commands
 
@@ -583,20 +610,31 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			}
 		}
 
-		if (!auto_arm && std::isfinite(yaw_rate) &&
-		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
-		    isnan(pitch) && isnan(roll) && isnan(yaw) && isnan(thrust) &&
-		    isnan(lat) && isnan(lon)) {
-			// change only the yaw rate
-			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == VELOCITY) {
-				message = "Changing yaw rate only";
+		if (!auto_arm && std::isfinite(z) &&
+		    isnan(x) && isnan(y) && isnan(vx) && isnan(vy) && isnan(vz) &&
+		    isnan(pitch) && isnan(roll) && isnan(thrust) &&
+		    isnan(lat) && isnan(lon) && isnan(yaw)) {
+			// set only the z
+			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
+				if (!waitTransform(setpoint_position.header.frame_id, frame_id, stamp, transform_timeout))
+					throw std::runtime_error("Can't transform from " + frame_id + " to " + setpoint_position.header.frame_id);
 
-				setpoint_yaw_type = YAW_RATE;
-				setpoint_yaw_rate = yaw_rate;
+				message = "Changing z only";
+
+				setpoint_z.header.frame_id = frame_id;
+				setpoint_z.header.stamp = stamp;
+				setpoint_z.vector.z = z;
+				setpoint_z_valid = true;
 				goto publish_setpoint;
+
 			} else {
-				throw std::runtime_error("Setting yaw rate is possible only when position or velocity setpoints active");
+				throw std::runtime_error("Setting z is possible only when position setpoint active");
 			}
+		}
+
+		// commands without z
+		if (isnan(z) && setpoint_z_valid && (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION)) {
+			z = 0;
 		}
 
 		// Serve normal commands
@@ -881,6 +919,7 @@ int main(int argc, char **argv)
 	nh_priv.param("check_kill_switch", check_kill_switch, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
+	nh_priv.param<string>("terrain_frame", terrain.child_frame_id, "terrain");
 	nh_priv.getParam("reference_frames", reference_frames);
 
 	// Default reference frames
@@ -915,6 +954,13 @@ int main(int argc, char **argv)
 	auto statustext_sub = nh.subscribe(mavros + "/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
 	auto manual_control_sub = nh.subscribe(mavros + "/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
 	auto local_position_sub = nh.subscribe(mavros + "/local_position/pose", 1, &handleLocalPosition);
+
+	ros::Subscriber altitude_sub;
+	if (!body.child_frame_id.empty() && !terrain.child_frame_id.empty()) {
+		terrain.header.frame_id = body.child_frame_id;
+		terrain.transform.rotation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, 0);
+		altitude_sub = nh.subscribe(mavros + "/altitude", 1, &handleAltitude);
+	}
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_position/local", 1);
