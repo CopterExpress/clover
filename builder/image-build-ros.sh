@@ -46,6 +46,11 @@ rosinstall_generator ros_base --rosdistro $ROS_DISTRO --deps --tar > noetic.rosi
 mkdir ./src
 vcs import --input noetic.rosinstall ./src
 
+# https://answers.ros.org/question/343367/catkin-package-dependencies-issue-when-installing-ros-melodic-on-raspberry-pi-4/
+sudo apt remove python-rospkg
+sudo apt remove python-catkin-pkg
+sudo apt --fix-broken install
+
 echo "--- Resolve dependencies"
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME
 
