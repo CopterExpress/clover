@@ -34,19 +34,19 @@ pip3 install -U vcstool
 # rm /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init
 # rosdep --os=debian:$VERSION_CODENAME update
 
-echo "Create Catkin workspace to build ROS package"
+echo "--- Create Catkin workspace to build ROS package"
 mkdir ~/ros_catkin_ws
 cd ~/ros_catkin_ws
 
-echo "Download ROS sources"
+echo "--- Download ROS sources"
 rosinstall_generator ros_base --rosdistro $ROS_DISTRO --deps --tar > noetic.rosinstall
 mkdir ./src
 vcs import --input noetic.rosinstall ./src
 
-echo "Resolve dependencies"
+echo "--- Resolve dependencies"
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y
 
-echo "Build ROS"
+echo "--- Build ROS"
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release
 
 source ~/ros_catkin_ws/install_isolated/setup.bash
