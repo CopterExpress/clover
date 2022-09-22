@@ -18,7 +18,7 @@ set -ex # exit on error, echo commands
 
 ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
-export ROS_OS_OVERRIDE=$VERSION_CODENAME
+export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
 
 echo "=== Building ROS from scratch"
 
