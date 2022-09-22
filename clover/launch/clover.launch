@@ -45,6 +45,7 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
         <param name="roi_rad" value="0.8"/>
+        <param name="disable_on_vpe" value="true"/>
     </node>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
