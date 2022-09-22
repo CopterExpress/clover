@@ -47,7 +47,7 @@ mkdir ./src
 vcs import --input noetic.rosinstall ./src
 
 echo "--- Resolve dependencies"
-rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y
+rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME
 
 echo "--- Build ROS"
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release
