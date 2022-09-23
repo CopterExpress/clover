@@ -73,3 +73,8 @@ echo "--- Build ROS"
 	--install-space=/opt/ros/$ROS_DISTRO
 
 source /opt/ros/$ROS_DISTRO/setup.bash
+
+echo "--- List built ROS packages"
+set +x
+rospack list-names | while read line; do echo $line `rosversion $line`; done
+set -x
