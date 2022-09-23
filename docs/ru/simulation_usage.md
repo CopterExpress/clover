@@ -105,7 +105,7 @@ PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 Для того, чтобы изменить карту ArUco-меток в симуляторе, можно использовать следующую команду:
 
 ```bash
-rosrun clover_simulation aruco_gen --single-model --source-world='/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover.world' '/home/clover/catkin_ws/src/clover/aruco_pose/map/map.txt' > '/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover_aruco.world'
+rosrun clover_simulation aruco_gen --single-model --source-world=$(catkin_find clover_simulation resources/worlds/clover.world) $(catkin_find aruco_pose map/map.txt) > $(catkin_find clover_simulation resources/worlds/clover_aruco.world)
 ```
 
-В данном примере `map.txt` - имя карты меток.
+В данном примере `map.txt` – имя карты меток.
