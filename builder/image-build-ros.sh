@@ -72,4 +72,4 @@ echo "--- Build ROS"
 	-DSETUPTOOLS_DEB_LAYOUT=OFF \
 	--install-space=/opt/ros/$ROS_DISTRO
 
-source ~/ros_catkin_ws/install_isolated/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
