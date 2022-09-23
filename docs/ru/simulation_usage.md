@@ -100,9 +100,9 @@ PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 
 При этом не следует пытаться выделить для виртуальной машины больше ресурсов, чем доступно на основной системе.
 
-### Изменение карты Aruco-меток в симуляторе
+### Изменение карты ArUco-меток в симуляторе
 
-Для того, чтобы изменить карту Aruco-меток в симуляторе, можно использовать следующую команду:
+Для того, чтобы изменить карту ArUco-меток в симуляторе, можно использовать следующую команду:
 
 ```bash
 rosrun clover_simulation aruco_gen --single-model --source-world='/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover.world' '/home/clover/catkin_ws/src/clover/aruco_pose/map/map.txt' > '/home/clover/catkin_ws/src/clover/clover_simulation/resources/worlds/clover_aruco.world'
