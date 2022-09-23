@@ -22,9 +22,9 @@ export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
 
 echo "=== Building ROS from scratch"
 
-echo "--- Adding sources"
-echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+#echo "--- Adding sources"
+#echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+#curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
 apt-get update
 apt-get install -y python3-distutils python3-rosdep python3-rosinstall-generator build-essential # python3-vcstool
@@ -51,10 +51,17 @@ mkdir ./src
 vcs import --input noetic.rosinstall ./src
 
 # https://answers.ros.org/question/343367/catkin-package-dependencies-issue-when-installing-ros-melodic-on-raspberry-pi-4/
-sudo apt remove python-rospkg
-sudo apt remove python-catkin-pkg
-#sudo apt --fix-broken install
-sudo apt-get autoremove
+#sudo apt remove python-rospkg
+#sudo apt remove python-catkin-pkg
+##sudo apt --fix-broken install
+#sudo apt-get autoremove
+
+echo "--- Install catkin_pkg"
+cd
+https://github.com/ros-infrastructure/catkin_pkg.git
+cd catkin_pkg
+python3 setup.py install
+cd ~/ros_catkin_ws
 
 echo "--- Resolve dependencies"
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME
