@@ -58,7 +58,7 @@ vcs import --input noetic.rosinstall ./src
 
 echo "--- Install catkin_pkg"
 cd
-https://github.com/ros-infrastructure/catkin_pkg.git
+git clone https://github.com/ros-infrastructure/catkin_pkg.git
 cd catkin_pkg
 python3 setup.py install
 cd ~/ros_catkin_ws
