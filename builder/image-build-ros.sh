@@ -27,7 +27,7 @@ echo "=== Building ROS from scratch"
 #curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
 apt-get update
-apt-get install -y python3-distutils python3-rosdep python3-rosinstall-generator build-essential # python3-vcstool
+apt-get install -y python3-distutils python3-rosdep python3-rosinstall-generator build-essential git # python3-vcstool
 
 # install vcstool using pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
