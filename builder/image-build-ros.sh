@@ -67,6 +67,6 @@ echo "--- Resolve dependencies"
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME --skip-keys="python3-catkin-pkg python3-catkin-pkg-modules python3-rosdep-modules"
 
 echo "--- Build ROS"
-./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release
+./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -DSETUPTOOLS_DEB_LAYOUT=OFF # https://github.com/ros/catkin/issues/863#issuecomment-290392074
 
 source ~/ros_catkin_ws/install_isolated/setup.bash
