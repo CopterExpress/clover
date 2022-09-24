@@ -81,6 +81,8 @@ set -x
 
 echo "--- Build Debian packages"
 apt-get install -y python3-bloom debhelper dpkg-dev
+LOG="$(pwd)/deb.log" # output to stdout causes 'Inappropriate ioctl for device' error
+
 for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	echo "===================================================="
 	echo ${file}
@@ -88,8 +90,10 @@ for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	rm -rf debian
 	echo "===================================================="
 
-	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO
-	fakeroot debian/rules binary
+	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO &>> $LOG
+	fakeroot debian/rules binary &>> $LOG
 	cd -
 done
+
+cat $DEB
 ls
