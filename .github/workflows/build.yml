@@ -38,6 +38,6 @@ jobs:
     - name: Install Bloom
       run: apt-get -y install python3-bloom debhelper dpkg-dev
     - name: bloom-generate
-      run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name debian --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO
+      run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name debian --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO &>> ../deb.log
     - name: Build package
-      run: source devel/setup.bash && fakeroot debian/rules binary
+      run: source devel/setup.bash && fakeroot debian/rules binary  &>> ../deb.log
