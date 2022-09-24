@@ -92,3 +92,4 @@ for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	fakeroot debian/rules binary
 	cd -
 done
+ls
