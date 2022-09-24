@@ -78,3 +78,17 @@ echo "--- List built ROS packages"
 set +x
 rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
+
+echo "--- Build Debian packages"
+apt-get install -y python3-bloom debhelper dpkg-dev
+for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
+	echo "===================================================="
+	echo ${file}
+	cd $(dirname ${file})
+	rm -rf debian
+	echo "===================================================="
+
+	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO
+	fakeroot debian/rules binary
+	cd -
+done
