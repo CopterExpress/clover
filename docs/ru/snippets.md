@@ -251,6 +251,30 @@ ros_msg = mavlink.convert_to_rosmsg(msg)
 mavlink_pub.publish(ros_msg)
 ```
 
+<!-- markdownlint-disable MD044 -->
+
+### # {#mavlink-receive}
+
+<!-- markdownlint-enable MD044 -->
+
+Подписка на все MAVLink-сообщения от полетного контроллера и их декодирование:
+
+```python
+from mavros_msgs.msg import Mavlink
+from mavros import mavlink
+from pymavlink import mavutil
+
+link = mavutil.mavlink.MAVLink('', 255, 1)
+
+def mavlink_cb(msg):
+    mav_msg = link.decode(mavlink.convert_to_bytes(msg))
+    print('msgid =', msg.msgid, mav_msg) # print message id and parsed message
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_cb)
+
+rospy.spin()
+```
+
 ### # {#rc-sub}
 
 Реакция на переключение режима на пульте радиоуправления (может быть использовано для запуска автономного полета, см. [пример](https://gist.github.com/okalachev/b709f04522d2f9af97e835baedeb806b)):
