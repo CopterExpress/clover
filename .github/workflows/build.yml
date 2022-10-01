@@ -46,6 +46,6 @@ jobs:
         done
     - uses: actions/upload-artifact@v3
       with:
-        name: debian-package
+        name: debian-packages
         path: catkin_ws/src/clover/*.deb
         retention-days: 1
