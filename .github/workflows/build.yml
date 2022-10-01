@@ -40,4 +40,4 @@ jobs:
     - name: bloom-generate
       run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name ubuntu --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO
     - name: Build package
-      run: source devel/setup.bash && fakeroot debian/rules binary
+      run: source devel/setup.bash && cd src/clover/clover && fakeroot debian/rules binary
