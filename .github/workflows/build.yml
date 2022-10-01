@@ -42,6 +42,7 @@ jobs:
           cd $(dirname ${file})
           bloom-generate rosdebian --os-name ubuntu --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO  
           fakeroot debian/rules binary
+          cd -
         done
     - uses: actions/upload-artifact@v3
       with:
