@@ -26,7 +26,7 @@ jobs:
       with:
         path: catkin_ws/src/clover
     - name: Install pip
-      run: apt-get update && apt-get -y install python3-pip
+      run: apt-get update && apt-get -y install python3-pip fakeroot
     - name: Install dependencies
       run: rosdep update && rosdep install --from-paths src --ignore-src -y
     - name: Install GeographicLib datasets
@@ -38,6 +38,6 @@ jobs:
     - name: Install Bloom
       run: apt-get -y install python3-bloom debhelper dpkg-dev
     - name: bloom-generate
-      run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name ubuntu --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO | cat
+      run: source devel/setup.bash && cd src/clover/clover && bloom-generate rosdebian --os-name ubuntu --os-version $(lsb_release -cs) --ros-distro $ROS_DISTRO
     - name: Build package
-      run: source devel/setup.bash && fakeroot debian/rules binary | cat
+      run: source devel/setup.bash && fakeroot debian/rules binary
