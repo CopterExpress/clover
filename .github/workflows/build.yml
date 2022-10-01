@@ -45,3 +45,4 @@ jobs:
       with:
         name: debian-package
         path: catkin_ws/src/clover/*.deb
+        retention-days: 1
