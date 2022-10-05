@@ -97,3 +97,13 @@ PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 The virtual machine may benefit from several CPU cores, especially if the cores are not very performant. In our tests, a four-core machine with only a single core allocated to the VM was unable to run the simulation, with constant interface freezes and dropped ROS messages. The same machine with all four cores available to the VM was able to run the simulation at 0.25 real-time speed.
 
 Do note that you should not allocate more resources than you have on your host hardware.
+
+### Changing the map of ArUco-markers in the simulator
+
+In order to change the map of ArUco-markers in the simulator, you can use the following command:
+
+```bash
+rosrun clover_simulation aruco_gen --single-model --source-world=$(catkin_find clover_simulation resources/worlds/clover.world) $(catkin_find aruco_pose map/map.txt) > $(catkin_find clover_simulation resources/worlds/clover_aruco.world)
+```
+
+In this example, `map.txt` is the name of markers name.
