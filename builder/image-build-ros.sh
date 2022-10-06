@@ -69,10 +69,11 @@ rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release \
-	-DSETUPTOOLS_DEB_LAYOUT=OFF \
-	--install-space=/opt/ros/$ROS_DISTRO
+	-DSETUPTOOLS_DEB_LAYOUT=OFF
+#	--install-space=/opt/ros/$ROS_DISTRO
 
-source /opt/ros/$ROS_DISTRO/setup.bash
+source ~/ros_catkin_ws/install_isolated/setup.bash
+#source /opt/ros/$ROS_DISTRO/setup.bash
 
 echo "--- List built ROS packages"
 set +x
