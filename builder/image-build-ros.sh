@@ -91,7 +91,7 @@ for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	cd $(dirname ${file})
 	rm -rf debian
 	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO --debug
-	fakeroot debian/rules binary
+	debian/rules binary # fakeroot is not needed as we are root
 	cd -
 done
 
