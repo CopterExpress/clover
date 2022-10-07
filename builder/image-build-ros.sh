@@ -70,10 +70,10 @@ echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release \
 	-DSETUPTOOLS_DEB_LAYOUT=OFF
-#	--install-space=/opt/ros/$ROS_DISTRO
+	--install-space=/opt/ros/$ROS_DISTRO
 
-source ~/ros_catkin_ws/install_isolated/setup.bash
-#source /opt/ros/$ROS_DISTRO/setup.bash
+# source ~/ros_catkin_ws/install_isolated/setup.bash
+source /opt/ros/$ROS_DISTRO/setup.bash
 
 echo "--- List built ROS packages"
 set +x
@@ -82,6 +82,10 @@ set -x
 
 echo "--- Build Debian packages"
 apt-get install -y python3-bloom debhelper dpkg-dev
+
+# add rosdep file to help bloom-generate resolve missing bullseye dependencies
+echo "yaml file:///etc/ros/rosdep/noetic-bullseye.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+rosdep update
 
 for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	cd $(dirname ${file})
