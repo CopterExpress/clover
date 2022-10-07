@@ -16,7 +16,7 @@ set -ex # exit on error, echo commands
 
 # http://wiki.ros.org/Installation/Source
 
-ROS_DISTRO=noetic
+export ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
 export ROS_OS_OVERRIDE=debian:11:$VERSION_CODENAME
 
@@ -86,10 +86,9 @@ apt-get install -y python3-bloom debhelper dpkg-dev
 for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	cd $(dirname ${file})
 	rm -rf debian
-	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO
+	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO --debug
 	fakeroot debian/rules binary
 	cd -
 done
 
-cat $DEB
 ls
