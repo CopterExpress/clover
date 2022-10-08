@@ -87,6 +87,8 @@ apt-get install -y python3-bloom debhelper dpkg-dev
 echo "yaml file:///etc/ros/rosdep/noetic-bullseye.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 rosdep update
 
+pip3 install setuptools==45.2.0 # https://github.com/ros/catkin/issues/863#issuecomment-1000446018
+
 for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
 	cd $(dirname ${file})
 	rm -rf debian
