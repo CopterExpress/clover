@@ -37,6 +37,9 @@
 
     <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" required="true"/>
 
+    <node pkg="topic_tools" name="main_camera_throttle" type="throttle" ns="main_camera"
+        args="messages image_raw 5.0 image_raw_throttled" required="true"/>
+
     <param name="test_module" value="$(find clover)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>

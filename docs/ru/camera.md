@@ -147,6 +147,8 @@ rospy.spin()
 
 Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить [throttling](http://wiki.ros.org/topic_tools/throttle) кадров с камеры, например, в 5 Гц (`main_camera.launch`):
 
+> **Note** Начиная с версии [образа](image.md) **0.24** топик `image_raw_throttled` доступен без дополнительной конфигурации.
+
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
     args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
