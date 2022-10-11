@@ -145,6 +145,8 @@ rospy.spin()
 
 The script will take up to 100% CPU capacity. To slow down the script artificially, you can use [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
 
+> **Note** Starting from [image](image.md) version **0.24** `image_raw_throttled` topic is available without addition configuration.
+
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"
     args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
