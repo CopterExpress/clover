@@ -1,10 +1,10 @@
 # Симуляция PX4
 
-> **Hint** Мы также предоставляем [предварительно настроенный](sitl_docker.md) симулятор, поставляемый в виде Docker-контейнера!
+> **Warning** Это статья описывает только установку PX4 и **является устаревшей**. Используйте официальную [конфигурацию для Gazebo](simulation.md) или [образ виртуальной машины](simulation_vm.md) со всем необходимым для запуска симуляции Клевера.
 
 Основная статья: https://dev.px4.io/en/simulation/
 
-Симуляция PX4 возможна в ОС GNU/Linux и macOS с использованием систем симуляции физической среды [jMAVSim](https://pixhawk.org/dev/hil/jmavsim) и [Gazebo](http://gazebosim.org).
+Симуляция PX4 возможна в ОС GNU/Linux и macOS с использованием систем симуляции физической среды [jMAVSim](https://docs.px4.io/master/en/simulation/jmavsim.html) и [Gazebo](http://gazebosim.org).
 
 jMAVSim является легковесной средой, предназначенной только для тестирование мультироторных летательных систем; Gazebo – универсальная среда для любых типов роботов.
 
@@ -198,7 +198,7 @@ catkin_make
 
 ```bash
 . devel/setup.bash
-roslaunch clover sitl.launch
+roslaunch clover_simulation simulator.launch type:=none
 ```
 
 Для того, чтобы воспользоваться функциями предоставляемыми нашим пакетом, в новом окне терминала подтяните зависимости из файла `setup`:
@@ -207,4 +207,4 @@ roslaunch clover sitl.launch
 source ~/catkin_ws/devel/setup.bash
 ```
 
-Теперь вы можете воспользоваться всеми возможностями пакета `Clover` в вашем симуляторе.
+Теперь вы можете воспользоваться всеми возможностями пакета `clover` в вашем симуляторе.

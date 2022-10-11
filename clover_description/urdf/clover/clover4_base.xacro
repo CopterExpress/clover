@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<robot name="clover" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name='enable_wind' default='false' />
+  <xacro:arg name='enable_logging' default='false' />
+  <xacro:arg name='log_file' default='clover' />
+
+  <!-- macros for gazebo plugins, sensors -->
+  <xacro:include filename="../component_snippets.urdf.xacro" />
+
+  <!-- Instantiate iris "mechanics" -->
+  <xacro:include filename="clover4_physics.xacro" />
+
+  <xacro:if value="$(arg enable_wind)">
+    <xacro:wind_plugin_macro
+        namespace="${namespace}"
+        wind_direction="0 0 1"
+        wind_force_mean="0.7"
+        xyz_offset="1 0 0"
+        wind_gust_direction="0 0 0"
+        wind_gust_duration="0"
+        wind_gust_start="0"
+        wind_gust_force_mean="0"
+        />
+  </xacro:if>
+
+  <!-- Gazebo plugins -->
+  <xacro:include filename="$(find clover_description)/urdf/clover/clover4_gazebo.xacro" />
+
+  <xacro:if value="$(arg enable_logging)">
+    <!-- Instantiate a logger -->
+    <xacro:bag_plugin_macro
+      namespace="${namespace}"
+      bag_file="$(arg log_file)"
+      rotor_velocity_slowdown_sim="${rotor_velocity_slowdown_sim}"
+    >
+    </xacro:bag_plugin_macro>
+  </xacro:if>
+
+</robot>

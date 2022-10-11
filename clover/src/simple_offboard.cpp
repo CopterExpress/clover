@@ -36,6 +36,7 @@
 #include <mavros_msgs/Thrust.h>
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
+#include <mavros_msgs/ManualControl.h>
 
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
@@ -46,6 +47,7 @@
 #include <clover/SetRates.h>
 
 using std::string;
+using std::isnan;
 using namespace geometry_msgs;
 using namespace sensor_msgs;
 using namespace clover;
@@ -59,6 +61,7 @@ std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
 std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_transform_broadcaster;
 
 // Parameters
+string mavros;
 string local_frame;
 string fcu_frame;
 ros::Duration transform_timeout;
@@ -71,9 +74,10 @@ ros::Duration state_timeout;
 ros::Duration velocity_timeout;
 ros::Duration global_position_timeout;
 ros::Duration battery_timeout;
+ros::Duration manual_control_timeout;
 float default_speed;
 bool auto_release;
-bool land_only_in_offboard, nav_from_sp;
+bool land_only_in_offboard, nav_from_sp, check_kill_switch;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -121,6 +125,7 @@ enum { YAW, YAW_RATE, TOWARDS } setpoint_yaw_type;
 // Last received telemetry messages
 mavros_msgs::State state;
 mavros_msgs::StatusText statustext;
+mavros_msgs::ManualControl manual_control;
 PoseStamped local_position;
 TwistStamped velocity;
 NavSatFix global_position;
@@ -145,6 +150,9 @@ void handleState(const mavros_msgs::State& s)
 inline void publishBodyFrame()
 {
 	if (body.child_frame_id.empty()) return;
+	if (!body.header.stamp.isZero() && body.header.stamp == local_position.header.stamp) {
+		return; // avoid TF_REPEATED_DATA warnings
+	}
 
 	tf::Quaternion q;
 	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
@@ -177,9 +185,10 @@ inline bool waitTransform(const string& target, const string& source,
 		ros::spinOnce();
 		r.sleep();
 	}
+	return false;
 }
 
-#define TIMEOUT(msg, timeout) (ros::Time::now() - msg.header.stamp > timeout)
+#define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
 
 bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 {
@@ -417,8 +426,9 @@ void publish(const ros::Time stamp)
 	}
 
 	if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
+		position_msg.header.stamp = stamp;
+
 		if (setpoint_yaw_type == YAW || setpoint_yaw_type == TOWARDS) {
-			position_msg.header.stamp = stamp;
 			position_pub.publish(position_msg);
 
 		} else {
@@ -436,6 +446,10 @@ void publish(const ros::Time stamp)
 
 		// publish setpoint frame
 		if (!setpoint.child_frame_id.empty()) {
+			if (setpoint.header.stamp == position_msg.header.stamp) {
+				return; // avoid TF_REPEATED_DATA warnings
+			}
+
 			setpoint.transform.translation.x = position_msg.pose.position.x;
 			setpoint.transform.translation.y = position_msg.pose.position.y;
 			setpoint.transform.translation.z = position_msg.pose.position.z;
@@ -484,6 +498,27 @@ void publishSetpoint(const ros::TimerEvent& event)
 	publish(event.current_real);
 }
 
+inline void checkManualControl()
+{
+	if (!manual_control_timeout.isZero() && TIMEOUT(manual_control, manual_control_timeout)) {
+		throw std::runtime_error("Manual control timeout, RC is switched off?");
+	}
+
+	if (check_kill_switch) {
+		// switch values: https://github.com/PX4/PX4-Autopilot/blob/c302514a0809b1765fafd13c014d705446ae1113/msg/manual_control_setpoint.msg#L3
+		const uint8_t SWITCH_POS_NONE = 0; // switch is not mapped
+		const uint8_t SWITCH_POS_ON = 1; // switch activated
+		const uint8_t SWITCH_POS_MIDDLE = 2; // middle position
+		const uint8_t SWITCH_POS_OFF = 3; // switch not activated
+
+		const int KILL_SWITCH_BIT = 12; // https://github.com/PX4/Firmware/blob/c302514a0809b1765fafd13c014d705446ae1113/src/modules/mavlink/mavlink_messages.cpp#L3975
+		uint8_t kill_switch = (manual_control.buttons & (0b11 << KILL_SWITCH_BIT)) >> KILL_SWITCH_BIT;
+
+		if (kill_switch == SWITCH_POS_ON)
+			throw std::runtime_error("Kill switch is on");
+	}
+}
+
 inline void checkState()
 {
 	if (TIMEOUT(state, state_timeout))
@@ -506,24 +541,87 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		if (busy)
 			throw std::runtime_error("Busy");
 
-		ENSURE_FINITE(x);
-		ENSURE_FINITE(y);
-		ENSURE_FINITE(z);
-		ENSURE_FINITE(vx);
-		ENSURE_FINITE(vy);
-		ENSURE_FINITE(vz);
-		ENSURE_FINITE(pitch);
-		ENSURE_FINITE(roll);
-		ENSURE_FINITE(pitch_rate);
-		ENSURE_FINITE(roll_rate);
-		ENSURE_FINITE(lat);
-		ENSURE_FINITE(lon);
-		ENSURE_FINITE(thrust);
-
 		busy = true;
 
 		// Checks
 		checkState();
+
+		if (auto_arm) {
+			checkManualControl();
+		}
+
+		// default frame is local frame
+		if (frame_id.empty())
+			frame_id = local_frame;
+
+		// look up for reference frame
+		auto search = reference_frames.find(frame_id);
+		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second;
+
+		// Serve "partial" commands
+
+		if (!auto_arm && std::isfinite(yaw) &&
+		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
+		    isnan(pitch) && isnan(roll) && isnan(thrust) &&
+		    isnan(lat) && isnan(lon)) {
+			// change only the yaw
+			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == VELOCITY) {
+				if (!waitTransform(setpoint_position.header.frame_id, frame_id, stamp, transform_timeout))
+					throw std::runtime_error("Can't transform from " + frame_id + " to " + setpoint_position.header.frame_id);
+
+				message = "Changing yaw only";
+
+				QuaternionStamped q;
+				q.header.frame_id = frame_id;
+				q.header.stamp = stamp;
+				q.quaternion = tf::createQuaternionMsgFromYaw(yaw); // TODO: pitch=0, roll=0 is not totally correct
+				setpoint_position.pose.orientation = tf_buffer.transform(q, setpoint_position.header.frame_id).quaternion;
+				setpoint_yaw_type = YAW;
+				goto publish_setpoint;
+			} else {
+				throw std::runtime_error("Setting yaw is possible only when position or velocity setpoints active");
+			}
+		}
+
+		if (!auto_arm && std::isfinite(yaw_rate) &&
+		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
+		    isnan(pitch) && isnan(roll) && isnan(yaw) && isnan(thrust) &&
+		    isnan(lat) && isnan(lon)) {
+			// change only the yaw rate
+			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == VELOCITY) {
+				message = "Changing yaw rate only";
+
+				setpoint_yaw_type = YAW_RATE;
+				setpoint_yaw_rate = yaw_rate;
+				goto publish_setpoint;
+			} else {
+				throw std::runtime_error("Setting yaw rate is possible only when position or velocity setpoints active");
+			}
+		}
+
+		// Serve normal commands
+
+		if (sp_type == NAVIGATE || sp_type == POSITION) {
+			ENSURE_FINITE(x);
+			ENSURE_FINITE(y);
+			ENSURE_FINITE(z);
+		} else if (sp_type == NAVIGATE_GLOBAL) {
+			ENSURE_FINITE(lat);
+			ENSURE_FINITE(lon);
+			ENSURE_FINITE(z);
+		} else if (sp_type == VELOCITY) {
+			ENSURE_FINITE(vx);
+			ENSURE_FINITE(vy);
+			ENSURE_FINITE(vz);
+		} else if (sp_type == ATTITUDE) {
+			ENSURE_FINITE(pitch);
+			ENSURE_FINITE(roll);
+			ENSURE_FINITE(thrust);
+		} else if (sp_type == RATES) {
+			ENSURE_FINITE(pitch_rate);
+			ENSURE_FINITE(roll_rate);
+			ENSURE_FINITE(thrust);
+		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			if (TIMEOUT(local_position, local_position_timeout))
@@ -548,14 +646,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			if (TIMEOUT(global_position, global_position_timeout))
 				throw std::runtime_error("No global position");
 		}
-
-		// default frame is local frame
-		if (frame_id.empty())
-			frame_id = local_frame;
-
-		// look up for reference frame
-		auto search = reference_frames.find(frame_id);
-		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second;
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == ATTITUDE) {
 			// make sure transform from frame_id to reference frame available
@@ -604,15 +694,21 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// }
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
-			// destination point and/or yaw
-			static PoseStamped ps;
+			// destination point and/or attitude
+			PoseStamped ps;
 			ps.header.frame_id = frame_id;
 			ps.header.stamp = stamp;
 			ps.pose.position.x = x;
 			ps.pose.position.y = y;
 			ps.pose.position.z = z;
+			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
 
-			if (std::isnan(yaw)) {
+			if (sp_type == ATTITUDE) {
+				ps.pose.position.x = 0;
+				ps.pose.position.y = 0;
+				ps.pose.position.z = 0;
+				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+			} else if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
 				setpoint_yaw_rate = yaw_rate;
 			} else if (std::isinf(yaw) && yaw > 0) {
@@ -623,14 +719,14 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			} else {
 				setpoint_yaw_type = YAW;
 				setpoint_yaw_rate = 0;
-				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+				ps.pose.orientation = tf::createQuaternionMsgFromYaw(yaw);
 			}
 
 			tf_buffer.transform(ps, setpoint_position, reference_frame);
 		}
 
 		if (sp_type == VELOCITY) {
-			static Vector3Stamped vel;
+			Vector3Stamped vel;
 			vel.header.frame_id = frame_id;
 			vel.header.stamp = stamp;
 			vel.vector.x = vx;
@@ -651,6 +747,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		wait_armed = auto_arm;
 
+publish_setpoint:
 		publish(stamp); // calculate initial transformed messages first
 		setpoint_timer.start();
 
@@ -691,27 +788,27 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 }
 
 bool navigate(Navigate::Request& req, Navigate::Response& res) {
-	return serve(NAVIGATE, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(NAVIGATE, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res) {
-	return serve(NAVIGATE_GLOBAL, 0, 0, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, req.lat, req.lon, 0, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(NAVIGATE_GLOBAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, req.lat, req.lon, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
-	return serve(POSITION, req.x, req.y, req.z, 0, 0, 0, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(POSITION, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setVelocity(SetVelocity::Request& req, SetVelocity::Response& res) {
-	return serve(VELOCITY, 0, 0, 0, req.vx, req.vy, req.vz, 0, 0, req.yaw, 0, 0, req.yaw_rate, 0, 0, 0, 0, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(VELOCITY, NAN, NAN, NAN, req.vx, req.vy, req.vz, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setAttitude(SetAttitude::Request& req, SetAttitude::Response& res) {
-	return serve(ATTITUDE, 0, 0, 0, 0, 0, 0, req.pitch, req.roll, req.yaw, 0, 0, 0, 0, 0, req.thrust, 0, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(ATTITUDE, NAN, NAN, NAN, NAN, NAN, NAN, req.pitch, req.roll, req.yaw, NAN, NAN, NAN, NAN, NAN, req.thrust, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setRates(SetRates::Request& req, SetRates::Response& res) {
-	return serve(RATES, 0, 0, 0, 0, 0, 0, 0, 0, 0, req.pitch_rate, req.roll_rate, req.yaw_rate, 0, 0, req.thrust, 0, "", req.auto_arm, res.success, res.message);
+	return serve(RATES, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.pitch_rate, req.roll_rate, req.yaw_rate, NAN, NAN, req.thrust, NAN, "", req.auto_arm, res.success, res.message);
 }
 
 bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
@@ -760,6 +857,7 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		busy = false;
 		return true;
 	}
+	return false;
 }
 
 int main(int argc, char **argv)
@@ -772,22 +870,32 @@ int main(int argc, char **argv)
 	static_transform_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>();
 
 	// Params
-	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
-	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
+	nh_priv.param("mavros", mavros, string("mavros")); // for case of using multiple connections
+	nh.param<string>(mavros + "/local_position/tf/frame_id", local_frame, "map");
+	nh.param<string>(mavros + "/local_position/tf/child_frame_id", fcu_frame, "base_link");
 	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("setpoint", setpoint.child_frame_id, string("setpoint"));
 	nh_priv.param("auto_release", auto_release, true);
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("nav_from_sp", nav_from_sp, true);
+	nh_priv.param("check_kill_switch", check_kill_switch, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
+
+	// Default reference frames
+	std::map<string, string> default_reference_frames;
+	default_reference_frames[body.child_frame_id] = local_frame;
+	default_reference_frames[fcu_frame] = local_frame;
+	if (!target.child_frame_id.empty()) default_reference_frames[target.child_frame_id] = local_frame;
+	reference_frames.insert(default_reference_frames.begin(), default_reference_frames.end()); // merge defaults
 
 	state_timeout = ros::Duration(nh_priv.param("state_timeout", 3.0));
 	local_position_timeout = ros::Duration(nh_priv.param("local_position_timeout", 2.0));
 	velocity_timeout = ros::Duration(nh_priv.param("velocity_timeout", 2.0));
 	global_position_timeout = ros::Duration(nh_priv.param("global_position_timeout", 10.0));
 	battery_timeout = ros::Duration(nh_priv.param("battery_timeout", 2.0));
+	manual_control_timeout = ros::Duration(nh_priv.param("manual_control_timeout", 0.0));
 
 	transform_timeout = ros::Duration(nh_priv.param("transform_timeout", 0.5));
 	telemetry_transform_timeout = ros::Duration(nh_priv.param("telemetry_transform_timeout", 0.5));
@@ -796,24 +904,25 @@ int main(int argc, char **argv)
 	arming_timeout = ros::Duration(nh_priv.param("arming_timeout", 4.0));
 
 	// Service clients
-	arming = nh.serviceClient<mavros_msgs::CommandBool>("mavros/cmd/arming");
-	set_mode = nh.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
+	arming = nh.serviceClient<mavros_msgs::CommandBool>(mavros + "/cmd/arming");
+	set_mode = nh.serviceClient<mavros_msgs::SetMode>(mavros + "/set_mode");
 
 	// Telemetry subscribers
-	auto state_sub = nh.subscribe("mavros/state", 1, &handleState);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
-	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
-	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
-	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
-	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
+	auto state_sub = nh.subscribe(mavros + "/state", 1, &handleState);
+	auto velocity_sub = nh.subscribe(mavros + "/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
+	auto global_position_sub = nh.subscribe(mavros + "/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
+	auto battery_sub = nh.subscribe(mavros + "/battery", 1, &handleMessage<BatteryState, battery>);
+	auto statustext_sub = nh.subscribe(mavros + "/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto manual_control_sub = nh.subscribe(mavros + "/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
+	auto local_position_sub = nh.subscribe(mavros + "/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
-	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);
-	position_raw_pub = nh.advertise<PositionTarget>("mavros/setpoint_raw/local", 1);
-	attitude_pub = nh.advertise<PoseStamped>("mavros/setpoint_attitude/attitude", 1);
-	attitude_raw_pub = nh.advertise<AttitudeTarget>("mavros/setpoint_raw/attitude", 1);
-	rates_pub = nh.advertise<TwistStamped>("mavros/setpoint_attitude/cmd_vel", 1);
-	thrust_pub = nh.advertise<Thrust>("mavros/setpoint_attitude/thrust", 1);
+	position_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_position/local", 1);
+	position_raw_pub = nh.advertise<PositionTarget>(mavros + "/setpoint_raw/local", 1);
+	attitude_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_attitude/attitude", 1);
+	attitude_raw_pub = nh.advertise<AttitudeTarget>(mavros + "/setpoint_raw/attitude", 1);
+	rates_pub = nh.advertise<TwistStamped>(mavros + "/setpoint_attitude/cmd_vel", 1);
+	thrust_pub = nh.advertise<Thrust>(mavros + "/setpoint_attitude/thrust", 1);
 
 	 // Service servers
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);

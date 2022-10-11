@@ -32,17 +32,25 @@ Read more in the [GPS connection](gps.md) article.
 
 ## Autonomous flight {#flight}
 
-After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts. In order to run a Python script use the `python` command:
+> **Info** For studying Python programming language, see [tutorial](https://www.learnpython.org/en/Welcome).
+
+After you've configured your positioning system, you can start writing programs for autonomous flights. Use the [SSH connection to the Raspberry Pi](ssh.md) to run your scripts.
+
+Before the first flight it's recommended to check the Clover's configuration with [selfcheck.py utility](selfcheck.md):
 
 ```bash
-python flight.py
+rosrun clover selfcheck.py
+```
+
+In order to run a Python script use the `python3` command:
+
+```bash
+python3 flight.py
 ```
 
 Below is a complete flight program that performs a takeoff, flies forward and lands:
 
 ```python
-#coding: utf8
-
 import rospy
 from clover import srv
 from std_srvs.srv import Trigger
@@ -74,7 +82,7 @@ rospy.sleep(3)
 land()
 ```
 
-> **Note** The `navigate` function call is not blocking; that is, the program will continue executing the next commands before the drone arrives at the set point. Look at the [`navigate_wait`](snippets.md#block-nav) snippet for a blocking function.
+> **Note** The `navigate` function call is not blocking; that is, the program will continue executing the next commands before the drone arrives at the set point. Look at the [`navigate_wait`](snippets.md#navigate_wait) snippet for a blocking function.
 
 Note that only the first `navigate` call has its `auto_arm` parameter set to `True`. This parameter arms the drone and transitions it to the OFFBOARD flight mode.
 
@@ -89,6 +97,8 @@ The `frame_id` parameter specifies which frame of reference will be used for the
 Read more in the [coordinate systems](frames.md) article.
 
 You can also use the ["Autonomous flight"](simple_offboard.md) article as an API reference.
+
+> **Hint** Clover supports [blocks-based programming](blocks.md) as well.
 
 ## Additional periphery
 

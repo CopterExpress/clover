@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="cmd" default="$(find xacro)/xacro $(find clover_description)/urdf/sensors/rpi_cam.urdf.xacro"/>
+    <param command="$(arg cmd)" name="camera_description"/>
+    <node name="$(anon spawn)" output="screen" pkg="gazebo_ros" type="spawn_model" args="-urdf -param camera_description -model rpi_camera -package_to_model"/>
+</launch>

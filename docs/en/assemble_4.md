@@ -29,7 +29,7 @@
 ## Installing motors
 
 1. Unbox the motors.
-2. Shorten the motor wires using wire strippers or sidecutters:
+2. Shorten the motor wires using wire strippers or side cutters:
 
     * Cut wires to 30 mm.
     * Strip 5 mm of insulation while taking care to not damage the cores
@@ -315,7 +315,7 @@ The flight controller expects PPM signal from your RC gear. Switch your transmit
     <img src="../assets/assembling_clever4/lower_deck_4.png" width=300 class="zoom border center">
 
 6. Connect the camera ribbon cable to the camera.
-7. Connect the laser rangefineder to the Raspberry Pi using the following pinout:
+7. Connect the laser rangefinder to the Raspberry Pi using the following pinout:
     * Connect **VCC** to pin 1 (**3v3**)
     * Connect **GND** to pin 9 (**Ground**)
     * Connect **SDA** to pin 3 (**GPIO2**)
@@ -391,7 +391,7 @@ Perform the quadrotor components setup according to [the "Configuration" section
 
 > **Warning** Be sure to **not** mount the propellers **until the setup is complete**. Do it only when you are ready to fly.
 
-Attach the propellers according to their rotation direction. The battery should be disconnected duting propeller installation.
+Attach the propellers according to their rotation direction. The battery should be disconnected during propeller installation.
 
 <div class="image-group">
     <img src="../assets/assembling_clever4/final_2.png" width=300 class="zoom border">
@@ -410,7 +410,7 @@ Check the quadrotor assembly:
 
 <img src="../assets/assembling_clever4/final_1.png" width=300 class="zoom border center">
 
-Be sure to install and setup the voltage indicator before flying, so as not to overdischarge the battery. To configure the indicator, use the button located at its base. The displayed numbers during setup indicate the minimum possible voltage in each [cell](gloss.md#battery-cell) of the battery, the recommended value is **3.5**.
+Be sure to install and setup the voltage indicator before flying, so as not to overdischarge the battery. To configure the indicator, use the button located at its base. The displayed numbers during setup indicate the minimum possible voltage in each [cell](glossary.md#battery-cell) of the battery, the recommended value is **3.5**.
 
 > **Info** Sound indication means that your battery is low and needs to be charged.
 

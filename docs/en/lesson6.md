@@ -86,6 +86,8 @@ How it works: Works from DC. I.e., by applying voltage from a DC source (a batte
 
 * Rapid wear
 
+### Brushless motors
+
 Brushless motors, in which the moving part is the stator, are more efficient than brush-type motors. This is achieved due to the absence of brushes. However, since motor design is much more complicated, they are more expensive.
 
 **Advantages:**

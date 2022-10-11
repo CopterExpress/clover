@@ -48,6 +48,7 @@
 #include <aruco_pose/Marker.h>
 #include <aruco_pose/MarkerArray.h>
 #include <aruco_pose/DetectorConfig.h>
+#include <aruco_pose/SetMarkers.h>
 
 #include "utils.h"
 #include <memory>
@@ -62,14 +63,17 @@ private:
 	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	std::shared_ptr<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>> dyn_srv_;
+	bool enabled_ = true;
 	cv::Ptr<cv::aruco::Dictionary> dictionary_;
 	cv::Ptr<cv::aruco::DetectorParameters> parameters_;
 	image_transport::Publisher debug_pub_;
 	image_transport::CameraSubscriber img_sub_;
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
+	ros::ServiceServer set_markers_srv_;
 	bool estimate_poses_, send_tf_, auto_flip_;
 	double length_;
+	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
 	std::string frame_id_prefix_, known_tilt_;
 	Mat camera_matrix_, dist_coeffs_;
@@ -96,6 +100,7 @@ public:
 			ros::shutdown();
 		}
 		readLengthOverride(nh_priv_);
+		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
 		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
 		auto_flip_ = nh_priv_.param("auto_flip", false);
@@ -110,17 +115,16 @@ public:
 		image_transport::ImageTransport it(nh_);
 		image_transport::ImageTransport it_priv(nh_priv_);
 
-		map_markers_sub_ = nh_.subscribe("map_markers", 1, &ArucoDetect::mapMarkersCallback, this);
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
+		dyn_srv_->setCallback(std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2));
+
+		set_markers_srv_ = nh_priv_.advertiseService("set_length_override", &ArucoDetect::setMarkers, this);
+
 		debug_pub_ = it_priv.advertise("debug", 1);
 		markers_pub_ = nh_priv_.advertise<aruco_pose::MarkerArray>("markers", 1);
 		vis_markers_pub_ = nh_priv_.advertise<visualization_msgs::MarkerArray>("visualization", 1);
 		img_sub_ = it.subscribeCamera("image_raw", 1, &ArucoDetect::imageCallback, this);
-
-		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<aruco_pose::DetectorConfig>>(nh_priv_);
-		dynamic_reconfigure::Server<aruco_pose::DetectorConfig>::CallbackType cb;
-
-		cb = std::bind(&ArucoDetect::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
-		dyn_srv_->setCallback(cb);
+		map_markers_sub_ = nh_.subscribe("map_markers", 1, &ArucoDetect::mapMarkersCallback, this);
 
 		NODELET_INFO("ready");
 	}
@@ -128,6 +132,8 @@ public:
 private:
 	void imageCallback(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr &cinfo)
 	{
+		if (!enabled_) return;
+
 		Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
 
 		vector<int> ids;
@@ -172,7 +178,7 @@ private:
 				if (!known_tilt_.empty()) {
 					try {
 						snap_to = tf_buffer_->lookupTransform(msg->header.frame_id, known_tilt_,
-						                                      msg->header.stamp, ros::Duration(0.02));
+						                                      msg->header.stamp, transform_timeout_);
 					} catch (const tf2::TransformException& e) {
 						NODELET_WARN_THROTTLE(5, "can't snap: %s", e.what());
 					}
@@ -181,6 +187,8 @@ private:
 
 			array_.markers.reserve(ids.size());
 			aruco_pose::Marker marker;
+			vector<geometry_msgs::TransformStamped> transforms;
+			transforms.reserve(ids.size());
 			geometry_msgs::TransformStamped transform;
 			transform.header.stamp = msg->header.stamp;
 			transform.header.frame_id = msg->header.frame_id;
@@ -198,19 +206,32 @@ private:
 						snapOrientation(marker.pose.orientation, snap_to.transform.rotation, auto_flip_);
 					}
 
-					// TODO: check IDs are unique
 					if (send_tf_) {
 						transform.child_frame_id = getChildFrameId(ids[i]);
 
 						// check if such static transform is in the map
 						if (map_markers_ids_.find(ids[i]) == map_markers_ids_.end()) {
-							transform.transform.rotation = marker.pose.orientation;
-							fillTranslation(transform.transform.translation, tvecs[i]);
-							br_->sendTransform(transform);
+							// check if a markers with that id is already added
+							bool send = true;
+							for (auto &t : transforms) {
+								if (t.child_frame_id == transform.child_frame_id) {
+									send = false;
+									break;
+								}
+							}
+							if (send) {
+								transform.transform.rotation = marker.pose.orientation;
+								fillTranslation(transform.transform.translation, tvecs[i]);
+								transforms.push_back(transform);
+							}
 						}
 					}
 				}
 				array_.markers.push_back(marker);
+			}
+
+			if (send_tf_) {
+				br_->sendTransform(transforms);
 			}
 		}
 
@@ -346,6 +367,29 @@ private:
 		}
 	}
 
+	bool setMarkers(aruco_pose::SetMarkers::Request& req, aruco_pose::SetMarkers::Response& res)
+	{
+		for (auto const& marker : req.markers) {
+			if (marker.id > 999) {
+				res.message = "Invalid marker id: " + std::to_string(marker.id);
+				ROS_ERROR("%s", res.message.c_str());
+				return true;
+			}
+			if (!std::isfinite(marker.length) || marker.length <= 0) {
+				res.message = "Invalid marker " + std::to_string(marker.id) + " length: " + std::to_string(marker.length);
+				ROS_ERROR("%s", res.message.c_str());
+				return true;
+			}
+		}
+
+		for (auto const& marker : req.markers) {
+			length_override_[marker.id] = marker.length;
+		}
+
+		res.success = true;
+		return true;
+	}
+
 	void mapMarkersCallback(const aruco_pose::MarkerArray& msg)
 	{
 		map_markers_ids_.clear();
@@ -356,6 +400,8 @@ private:
 
 	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)
 	{
+		enabled_ = config.enabled && config.length > 0;
+		length_ = config.length;
 		parameters_->adaptiveThreshConstant = config.adaptiveThreshConstant;
 		parameters_->adaptiveThreshWinSizeMin = config.adaptiveThreshWinSizeMin;
 		parameters_->adaptiveThreshWinSizeMax = config.adaptiveThreshWinSizeMax;

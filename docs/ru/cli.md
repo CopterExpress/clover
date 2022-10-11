@@ -39,7 +39,7 @@ cat file.py
 Запустить Python-скрипт `file.py`:
 
 ```bash
-python file.py
+python3 file.py
 ```
 
 Перезагрузить Raspberry Pi:
@@ -78,3 +78,13 @@ sudo reboot
    ```
 
 Для редактирования файлов также можно использовать и другие редакторы, например, **vim**.
+
+## Сброс изменений
+
+Для сброса изменений всех файлов, относящихся к пакету Клевера (`launch`-файлы) используйте git:
+
+```bash
+cd ~/catkin_ws/src/clover
+git checkout .
+sudo systemctl restart clover
+```

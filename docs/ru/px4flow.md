@@ -32,7 +32,7 @@
 
 Настройка камеры производится с помощью программы [QGroundControl](http://qgroundcontrol.com/). Запустите её и подключите модуль PX4FLOW к компьютеру по USB. Откройте режим `Vehicle setup` (иконка с шестерёнками); окно QGroundControl при этом будет выглядеть примерно так:
 
-![QGroundContor PX4FLOW connected](../assets/px4flow_qgc_connected.png)
+![QGroundControl PX4FLOW connected](../assets/px4flow_qgc_connected.png)
 
 Если это первое включение камеры, то вам надо будет произвести [обновление её прошивки](firmware.md) по аналогии с перепрошивкой полётного контроллера.
 

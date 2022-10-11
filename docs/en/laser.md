@@ -10,7 +10,7 @@ The [image for Raspberry Pi](image.md) contains pre-installed corresponding ROS 
 
 ### Connecting to Raspberry Pi
 
-> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
+> **Hint** Before using the rangefinder, please remove the protective film from it.
 
 Connect the rangefinder to the 3V, GND, SCL and SDA pins via the I²C interface:
 
@@ -36,7 +36,9 @@ rostopic echo /rangefinder/range
 
 ### PX4 settings
 
-PX4 should be properly [configured](px4_parameters.md) to use the rangefinder data.
+> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for best laser rangefinder support.
+
+PX4 should be properly [configured](parameters.md) to use the rangefinder data.
 
 Set the following parameters when EKF2 is used (`SYS_MC_EST_GROUP` = `ekf2`):
 
@@ -52,15 +54,18 @@ Set the following parameters when LPE is used (`SYS_MC_EST_GROUP` = `local_posit
 In order to receive data from the topic, create a subscriber:
 
 ```python
+import rospy
 from sensor_msgs.msg import Range
 
-# ...
+rospy.init_node('flight')
 
 def range_callback(msg):
     # Process data from the rangefinder
-    print 'Rangefinder distance:', msg.range
+    print('Rangefinder distance:', msg.range)
 
 rospy.Subscriber('rangefinder/range', Range, range_callback)
+
+rospy.spin()
 ```
 
 Also it's possible to read one rangefinder measurement at a time:
@@ -70,7 +75,7 @@ from sensor_msgs.msg import Range
 
 # ...
 
-data = rospy.wait_for_message('rangefinder/range', Range)
+dist = rospy.wait_for_message('rangefinder/range', Range).range
 ```
 
 ### Data visualization

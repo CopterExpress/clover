@@ -12,11 +12,11 @@ The distance gage is attached to the body using double-sided tape. For obtaining
 
 ### Connection
 
-Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and 2.2 kΩ resistors and any free GPIO pins, e.g., 23 and 24:
+Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and 2.2 kΩ resistors and any free GPIO pins, e.g., 23 and 24:
 
 <img src="../assets/raspberry-hc-sr04.png" alt="Connecting HC-SR04" height=600>
 
-> **Hint** Instead of a 2.2 kΩ resistor, you can use two 1 kΩ resistors connected in series.
+> **Hint** Instead of a 2.2 kΩ resistor, you can use two 1 kΩ resistors connected in series.
 
 <!-- -->
 
@@ -54,8 +54,8 @@ import time
 import threading
 import pigpio
 
-TRIG = 23 is the No. of the pin connected to the Trig contact of the distance gage
-TRIG = 24 is the No. of the pin connected to the Echo contact of the distance gage
+TRIG = 23  # pin connected to the Trig pin of the sonar
+ECHO = 24  # pin connected to the Echo pin of the sonar
 
 pi = pigpio.pi()
 done = threading.Event()
@@ -83,13 +83,13 @@ pi.callback(ECHO, pigpio.FALLING_EDGE, fall)
 
 while True:
     # Reading the distance:
-    print read_distance()
+    print(read_distance())
 
 ```
 
 ### Filtering the data
 
-To filter (smooth out) the data and delete [emission](https://ru.wikipedia.org/wiki/Outbreak_%28statistics%29) [Kalman filter] (https://ru.wikipedia.org/wiki/Фильтр_Калмана) or a simple [median filter](https://ru.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
+To filter (smooth out) the data and delete [outliers](https://en.wikipedia.org/wiki/Outlier), [Kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) or a simple [median filter](https://en.wikipedia.org/wiki/Median_filter) can be used. An example of median filtering implementation:
 
 ```python
 import collections
@@ -97,14 +97,14 @@ import numpy
 
 # ...
 
-history = collections.deque(maxlen=10)  # 10 - количество сэмплов для усреднения
+history = collections.deque(maxlen=10)  # 10 - number of samples for averaging
 
 def read_distance_filtered():
     history.append(read_distance())
     return numpy.median(history)
 
 while True:
-    print read_distance_filtered()
+    print(read_distance_filtered())
 ```
 
 An example of charts of initial and filtered data:

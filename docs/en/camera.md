@@ -1,7 +1,5 @@
 # Working with the camera
 
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/camera.md) for older images.
-
 Make sure the camera is enabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
 
 ```xml
@@ -133,12 +131,12 @@ def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     barcodes = pyzbar.decode(cv_image)
     for barcode in barcodes:
-        b_data = barcode.data.encode("utf-8")
+        b_data = barcode.data.decode("utf-8")
         b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 
@@ -153,3 +151,13 @@ The script will take up to 100% CPU capacity. To slow down the script artificial
 ```
 
 The topic for the subscriber in this case should be changed for `main_camera/image_raw_throttled`.
+
+## Video recording
+
+To record a video you can use [`video_recorder`](http://wiki.ros.org/image_view#image_view.2Fdiamondback.video_recorder) node from `image_view` package:
+
+```bash
+rosrun image_view video_recorder image:=/main_camera/image_raw
+```
+
+The video file will be saved to a file `output.avi`. The `image` argument contains the name of the topic to record.

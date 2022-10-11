@@ -26,21 +26,36 @@ def test_simple_offboard_services_available():
     rospy.wait_for_service('land', timeout=5)
 
 def test_web_video_server(node):
-    import urllib2
-    urllib2.urlopen("http://localhost:8080").read()
+    try:
+        # Python 2
+        import urllib2 as urllib
+    except ModuleNotFoundError:
+        # Python 3
+        import urllib.request as urllib
+    urllib.urlopen("http://localhost:8080").read()
 
-def test_shell(node):
-    execute = rospy.ServiceProxy('exec', srv.Execute)
-    execute.wait_for_service(5)
+def test_blocks(node):
+    rospy.wait_for_service('clover_blocks/run', timeout=5)
+    rospy.wait_for_service('clover_blocks/stop', timeout=5)
+    rospy.wait_for_service('clover_blocks/load', timeout=5)
+    rospy.wait_for_service('clover_blocks/store', timeout=5)
 
-    res = execute(cmd='echo foo')
-    assert res.code == 0
-    assert res.output == 'foo\n'
+    from std_msgs.msg import String
+    from clover_blocks.srv import Run
 
-    res = execute(cmd='foo')
-    assert res.code == 32512
-    assert res.output == ''
+    def wait_print():
+        try:
+            wait_print.result = rospy.wait_for_message('clover_blocks/print', String, timeout=5).data
+        except Exception as e:
+            wait_print.result = str(e)
 
-    res = execute(cmd='ls foo')
-    assert res.code == 512
-    assert res.output == ''
+    import threading
+    t = threading.Thread(target=wait_print)
+    t.start()
+    rospy.sleep(0.1)
+
+    run = rospy.ServiceProxy('clover_blocks/run', Run)
+    assert run(code='print("test")').success == True
+
+    t.join()
+    assert wait_print.result == 'test'

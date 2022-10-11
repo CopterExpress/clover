@@ -18,7 +18,7 @@
 
 [**Урок №9** «Основы радиосвязи. Принцип работы радиоаппаратуры управления»](https://github.com/CopterExpress/clover/blob/master/docs/ru/lesson9.md)
 
-[**Урок №10** «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики иприёмники»](https://github.com/CopterExpress/clover/blob/master/docs/ru/lesson10.md)
+[**Урок №10** «Аналоговая и цифровая видеотрансляция. Применяемые камеры, радиопередатчики и приёмники»](https://github.com/CopterExpress/clover/blob/master/docs/ru/lesson10.md)
 
 ## Видеоуроки
 

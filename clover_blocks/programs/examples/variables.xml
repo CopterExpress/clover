@@ -1,0 +1,137 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="]gc9ItU#$!=G*S._3$n~">start_x</variable>
+    <variable id="D9Oy(29I!!k9+(#zI,4}">start_y</variable>
+  </variables>
+  <block type="take_off" id="X]W2Bs=WFxFsco{Yr`bH" x="87" y="88">
+    <field name="WAIT">TRUE</field>
+    <value name="ALT">
+      <shadow type="math_number" id="{7ezr;C@IT-IJ3ylt?];">
+        <field name="NUM">1.5</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="IWR_j|7pUxrIGrxGLP#Z">
+        <field name="VAR" id="]gc9ItU#$!=G*S._3$n~">start_x</field>
+        <value name="VALUE">
+          <block type="get_position" id="ze{FI]Vv*E3kZ1Zw6Bmn">
+            <field name="FIELD">X</field>
+            <field name="FRAME_ID">ARUCO_MAP</field>
+            <value name="ID">
+              <shadow type="math_number" id="s~^V?k;dKa(($OG9mAK)">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="s3rE=-6+;f(Lua_uKGY[">
+            <field name="VAR" id="D9Oy(29I!!k9+(#zI,4}">start_y</field>
+            <value name="VALUE">
+              <block type="get_position" id="?t+jp;7Bk#wzoz=DY{sO">
+                <field name="FIELD">Y</field>
+                <field name="FRAME_ID">ARUCO_MAP</field>
+                <value name="ID">
+                  <shadow type="math_number" id="KybjD~@_RFIx=8Dzbz4v">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="|xj}5M(:.~`Vpq-GKi/0">
+                <value name="TEXT">
+                  <shadow type="text" id="{o^2v+y6L^1#[Y8r_sdW">
+                    <field name="TEXT">Fly to point 0, 0</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="navigate" id="-8]peWQRtTK$1X0J0w!2">
+                    <field name="FRAME_ID">ARUCO_MAP</field>
+                    <field name="WAIT">TRUE</field>
+                    <value name="X">
+                      <shadow type="math_number" id="PT`K-=?U^uL#BXouoi~G">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="Y">
+                      <shadow type="math_number" id="d_1oBZdx#`_kbWf_Qu$g">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="Z">
+                      <shadow type="math_number" id="}Y,E=*pJaG+HOSB*f=aX">
+                        <field name="NUM">1.5</field>
+                      </shadow>
+                    </value>
+                    <value name="ID">
+                      <shadow type="math_number" id=")/%?zNt|6thYwjowvbk/">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="SPEED">
+                      <shadow type="math_number" id="MH}%@OvXa*FK-Vx63RTd">
+                        <field name="NUM">0.5</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="text_print" id="IVsd5hFEwp@V?3f02p},">
+                        <value name="TEXT">
+                          <shadow type="text" id="0gcgp`mZ,9oDTS[4vWpT">
+                            <field name="TEXT">Fly to initial point</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="navigate" id=":;b$YH+6#3h/_$Fa}0w_">
+                            <field name="FRAME_ID">ARUCO_MAP</field>
+                            <field name="WAIT">TRUE</field>
+                            <value name="X">
+                              <shadow type="math_number" id=";GL$bb^Yu;vQrhxy(o:S">
+                                <field name="NUM">0</field>
+                              </shadow>
+                              <block type="variables_get" id="tsqWR~saO6UU^*iLmDZ(">
+                                <field name="VAR" id="]gc9ItU#$!=G*S._3$n~">start_x</field>
+                              </block>
+                            </value>
+                            <value name="Y">
+                              <shadow type="math_number" id="y5|y58G[s-,qnfB/@Xr%">
+                                <field name="NUM">0</field>
+                              </shadow>
+                              <block type="variables_get" id="Hfzk#prb}M2BbEWIAX3k">
+                                <field name="VAR" id="D9Oy(29I!!k9+(#zI,4}">start_y</field>
+                              </block>
+                            </value>
+                            <value name="Z">
+                              <shadow type="math_number" id="B%NGa`:z=[Kpij2$0p}T">
+                                <field name="NUM">1.5</field>
+                              </shadow>
+                            </value>
+                            <value name="ID">
+                              <shadow type="math_number" id="KaLkf?/NkD_7q@=J1G|I">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                            <value name="SPEED">
+                              <shadow type="math_number" id="Agwx#kYhdE}!dY!St:L1">
+                                <field name="NUM">0.5</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="land" id="8y]p?)Zm2}*+;0HP]p1$">
+                                <field name="WAIT">TRUE</field>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

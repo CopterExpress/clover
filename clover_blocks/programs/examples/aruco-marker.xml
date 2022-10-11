@@ -1,0 +1,64 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="take_off" id="R@=3~Fq;AxFaRO{ZDFUM" x="37" y="63">
+    <field name="WAIT">TRUE</field>
+    <value name="ALT">
+      <shadow type="math_number" id="cf8/,N48N;Fvn@EWB%,B">
+        <field name="NUM">1.5</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="controls_repeat_ext" id="qc$F96[A^%lj,-l[fhX+">
+        <value name="TIMES">
+          <shadow type="math_number" id="v0QgNIpGzMIb`P@8D@}.">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+        <statement name="DO">
+          <block type="navigate" id="]kCOMt@NSf$9:N1Fx~dE">
+            <field name="FRAME_ID">ARUCO</field>
+            <field name="WAIT">TRUE</field>
+            <value name="X">
+              <shadow type="math_number" id="}(7P5,{6%^::Gzb;kRaf">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number" id="hz#sFvY/;IL5IRLQVa.K">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="Z">
+              <shadow type="math_number" id="n0ULZn64%k.:,l(,D?TZ">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="ID">
+              <shadow type="math_number" id="P4^twyJo6as#G1}^Dlq8">
+                <field name="NUM">0</field>
+              </shadow>
+              <block type="text_prompt_ext" id="ot;{twL$8`H*Wiafz3D,">
+                <mutation type="NUMBER"></mutation>
+                <field name="TYPE">NUMBER</field>
+                <value name="TEXT">
+                  <shadow type="text" id="@P[TyPj[n1*;EcUC?lwF">
+                    <field name="TEXT">Enter marker ID</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <value name="SPEED">
+              <shadow type="math_number" id="WrsUXacZ2w)D]d?:@ec_">
+                <field name="NUM">0.5</field>
+              </shadow>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="land" id="G5+Fs.6Y4(K9Dw`wjgua">
+            <field name="WAIT">TRUE</field>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

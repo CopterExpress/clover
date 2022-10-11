@@ -32,8 +32,9 @@ monkey --version
 pigpiod -v
 i2cdetect -V
 butterfly -h
-espeak --version
+# espeak --version
 mjpg_streamer --version
+systemctl --version
 
 # ros stuff
 
@@ -43,6 +44,8 @@ rosversion aruco_pose
 rosversion vl53l1x
 rosversion mavros
 rosversion mavros_extras
+rosversion ws281x
+rosversion led_msgs
 rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
 rosversion compressed_image_transport
@@ -52,6 +55,12 @@ rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
 rosversion rosshow
+rosversion nodelet
+rosversion image_view
+
+# validate some versions
+[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
+[[ $(rosversion ws281x) == "0.0.13" ]]
 
 # validate examples are present
 [[ $(ls /home/pi/examples/*) ]]

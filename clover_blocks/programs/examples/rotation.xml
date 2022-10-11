@@ -1,0 +1,88 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="take_off" id="R@=3~Fq;AxFaRO{ZDFUM" x="162" y="112">
+    <field name="WAIT">TRUE</field>
+    <value name="ALT">
+      <shadow type="math_number" id="cf8/,N48N;Fvn@EWB%,B">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="navigate" id="[r%uJ2rw#3j.sLSBFf`N">
+        <field name="FRAME_ID">BODY</field>
+        <field name="WAIT">TRUE</field>
+        <value name="X">
+          <shadow type="math_number" id="5;@1vq|;OnlHl#FFDm/}">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="Y">
+          <shadow type="math_number" id="Jhe8@=gRxwj0oO*Q1F7V">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="Z">
+          <shadow type="math_number" id="wms+rWijPhnI/K++At;P">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="ID">
+          <shadow type="math_number" id=".^-h~@m]zg3il)O.9eFy">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="SPEED">
+          <shadow type="math_number" id="3L3FgAO(:aZp/:V%u=P7">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="set_yaw" id="nE,tYuHO--PmXN:*g@D%">
+            <field name="FRAME_ID">body</field>
+            <field name="WAIT">TRUE</field>
+            <value name="YAW">
+              <shadow type="angle" id="DoJ$Yj+fVT~cj=E%N:4+">
+                <field name="ANGLE">180</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="navigate" id="H6W4@QtAT{_xo0.fO^z4">
+                <field name="FRAME_ID">BODY</field>
+                <field name="WAIT">TRUE</field>
+                <value name="X">
+                  <shadow type="math_number" id="|.KN1m1O$/3=C,WG3sx}">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <value name="Y">
+                  <shadow type="math_number" id="oyc7mxrbA/@[_1wtPER^">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="Z">
+                  <shadow type="math_number" id="dh}ac~kErkIIFeIZB,)d">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="ID">
+                  <shadow type="math_number" id="q+{la-yiw61v9BSV-y};">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="SPEED">
+                  <shadow type="math_number" id=";dk@RJGfZ)5w*:m4kp==">
+                    <field name="NUM">0.5</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="land" id="53Ssv6^lEHoD?tBO{5Sh">
+                    <field name="WAIT">TRUE</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

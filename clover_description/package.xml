@@ -1,0 +1,27 @@
+<package format="2">
+  <name>clover_description</name>
+  <version>0.23.0</version>
+  <description>The clover_description package provides URDF models of the Clover series of quadcopters.</description>
+
+  <maintainer email="sfalexrog@gmail.com">Alexey Rogachevskiy</maintainer>
+
+  <author>Alexey Rogachevskiy</author>
+  <author>Andrey Ryabov</author>
+  <author>Arthur Golubtsov</author>
+  <author>Oleg Kalachev</author>
+  <author>Svyatoslav Zhuravlev</author>
+
+  <license>MIT</license>
+
+  <url type="website">https://github.com/CopterExpress/clover</url>
+  <url type="bugtracker">https://github.com/CopterExpress/clover/issues</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>xacro</depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+  </export>
+</package>

@@ -1,7 +1,5 @@
 # Работа с камерой
 
-> **Note** В версии образа **0.20** пакет и сервис `clever` был переименован в `clover`. Для более ранних версий см. документацию для версии [**0.19**](https://github.com/CopterExpress/clover/blob/v0.19/docs/ru/camera.md).
-
 <!-- TODO: физическое подключение -->
 
 Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
@@ -135,12 +133,12 @@ def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     barcodes = pyzbar.decode(cv_image)
     for barcode in barcodes:
-        b_data = barcode.data.encode("utf-8")
+        b_data = barcode.data.decode("utf-8")
         b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print ("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
 
@@ -155,3 +153,13 @@ rospy.spin()
 ```
 
 Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw_throttled`.
+
+## Запись видео
+
+Для записи видео может использована нода [`video_recorder`](http://wiki.ros.org/image_view#image_view.2Fdiamondback.video_recorder) из пакета `image_view`:
+
+```bash
+rosrun image_view video_recorder image:=/main_camera/image_raw
+```
+
+Видео будет сохранено в файл `output.avi`. В аргументе `image` указывается название топика для записи видео.

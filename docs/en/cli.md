@@ -39,7 +39,7 @@ cat file.py
 Run `file.py` as a Python script:
 
 ```bash
-python file.py
+python3 file.py
 ```
 
 Reboot Raspberry Pi:
@@ -78,3 +78,13 @@ You can use **nano** to edit files on the Raspberry Pi. It is one of the more us
    ```
 
 You may also use other editors like **vim** if you prefer.
+
+## Resetting changes
+
+For resetting all the changes in Clover package related files (`launch`-files), use git:
+
+```bash
+cd ~/catkin_ws/src/clover
+git checkout .
+sudo systemctl restart clover
+```

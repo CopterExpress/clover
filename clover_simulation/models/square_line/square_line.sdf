@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+    <model name="square_line">
+        <static>true</static>
+        <link name="square_link">
+            <pose>0 0 1e-3 0 0 0</pose>
+            <visual name="square_texture">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <box>
+                        <size>4.0 4.0 1e-3</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <uri>model://square_line/materials/scripts</uri>
+                        <uri>model://square_line/materials/textures</uri>
+                        <name>square_solid</name>
+                    </script>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>

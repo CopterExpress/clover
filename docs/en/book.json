@@ -1,4 +1,5 @@
 {
     "language": "en",
-    "root": "."
+    "root": ".",
+    "structure": {"glossary": "_GLOSSARY.md" }
 }

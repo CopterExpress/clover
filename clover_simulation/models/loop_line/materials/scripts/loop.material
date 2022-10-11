@@ -1,0 +1,33 @@
+material loop_dashed
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture loop_dashed.png
+				filtering none
+				scale 1.0 1.0
+			}
+		}
+	}
+}
+
+material loop_solid
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture loop_solid.png
+				filtering none
+				scale 1.0 1.0
+			}
+		}
+	}
+}

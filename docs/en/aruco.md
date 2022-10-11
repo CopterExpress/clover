@@ -1,7 +1,5 @@
 # ArUco markers
 
-> **Note** The following applies to [image versions](image.md) **0.16** and up. Older documentation is still available for [for version **0.15.1**](https://github.com/CopterExpress/clover/blob/v0.15.1/docs/en/aruco.md).
-
 [ArUco markers](https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html) are commonly used for vision-based position estimation.
 
 Examples of ArUco markers:

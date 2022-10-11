@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="camera_sensor" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="camera_sensor_base"
+      params="name width height rate horizontal_fov frame_name k1 k2 k3 p1 p2 cx cy cx_prime ros_plugin_name min_rate window_size max_st_dev">
+    <gazebo reference="${name}_link">
+      <sensor type="camera" name="${name}">
+        <camera>
+          <horizontal_fov>${horizontal_fov}</horizontal_fov>
+          <image>
+            <format>B8G8R8</format>
+            <width>${width}</width>
+            <height>${height}</height>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>1000</far>
+          </clip>
+          <distortion>
+            <k1>${k1}</k1>
+            <k2>${k2}</k2>
+            <k3>${k3}</k3>
+            <p1>${p1}</p1>
+            <p2>${p2}</p2>
+            <center>${(cx - 0.5)/ width} ${(cy - 0.5) / height}</center>
+          </distortion>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>${rate}</update_rate>
+        <visualize>1</visualize>
+        <plugin name="camera_plugin" filename="${ros_plugin_name}">
+          <alwaysOn>true</alwaysOn>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraTopicName>camera_info</cameraTopicName>
+          <updateRate>${rate}</updateRate>
+          <cameraName>${name}</cameraName>
+          <frameName>${frame_name}</frameName>
+          <CxPrime>${cx_prime}</CxPrime>
+          <Cx>${cx}</Cx>
+          <Cy>${cy}</Cy>
+          <distortionK1>${k1}</distortionK1>
+          <distortionK2>${k2}</distortionK2>
+          <distortionK3>${k3}</distortionK3>
+          <distortionT1>${p1}</distortionT1>
+          <distortionT2>${p2}</distortionT2>
+          <!-- throttling_camera specific options start here -->
+          <minUpdateRate>${min_rate}</minUpdateRate>
+          <windowSize>${window_size}</windowSize>
+          <maxStDev>${max_st_dev}</maxStDev>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="camera_sensor" params="name width height rate horizontal_fov k1:=0 k2:=0 k3:=0 p1:=0 p2:=0 do_throttling:=false">
+    <xacro:if value="${do_throttling}">
+      <xacro:property name="ros_plugin_name" value="libthrottling_camera.so"/>
+    </xacro:if>
+    <xacro:unless value="${do_throttling}">
+      <xacro:property name="ros_plugin_name" value="libgazebo_ros_camera.so"/>
+    </xacro:unless>
+    <xacro:camera_sensor_base
+      name="${name}"
+      width="${width}"
+      height="${height}"
+      rate="${rate}"
+      horizontal_fov="${horizontal_fov}"
+      frame_name="/${name}_optical"
+      k1="${k1}"
+      k2="${k2}"
+      k3="${k3}"
+      p1="${p1}"
+      p2="${p2}"
+      cx="${(width + 1.0)/2.0}"
+      cy="${(height + 1.0)/2.0}"
+      cx_prime="${(width + 1.0)/2.0}"
+      ros_plugin_name="${ros_plugin_name}"
+      min_rate="${rate * 0.95}"
+      window_size="${rate}"
+      max_st_dev="${3.0 / rate}"
+    />
+
+  </xacro:macro>
+</robot>

@@ -1,9 +1,11 @@
 PX4 Simulation
 ===
 
+> **Warning** This article is about running a standalone PX4 simulation with a generic quadcopter and **is outdated**. Consider using [our configuration](simulation.md) for a more Clover-like experience.
+
 Main article: https://dev.px4.io/en/simulation/
 
-PX4 simulation is possible in Linux and macOS with the use of physical environment simulation systems [jMAVSim](https://pixhawk.org/dev/hil/jmavsim) and [the Gazebo](http://gazebosim.org).
+PX4 simulation is possible in Linux and macOS with the use of physical environment simulation systems [jMAVSim](https://docs.px4.io/master/en/simulation/jmavsim.html) and [the Gazebo](http://gazebosim.org).
 
 jMAVSim is a lightweight environment intended only for testing multi-rotor aircraft systems; Gazebo is a versatile environment for all types of robots.
 

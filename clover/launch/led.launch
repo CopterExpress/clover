@@ -2,13 +2,17 @@
     <arg name="ws281x" default="true"/>
     <arg name="led_effect" default="true"/>
     <arg name="led_notify" default="true"/>
+    <arg name="led_count" default="72"/>
+    <arg name="gpio_pin" default="21"/>
+
+    <arg name="simulator" default="false"/>
 
     <!-- For additional help go to https://clover.coex.tech/led -->
 
     <!-- ws281x led strip driver -->
-    <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(arg ws281x)">
-        <param name="led_count" value="58"/>
-        <param name="gpio_pin" value="21"/>
+    <node pkg="ws281x" name="led" type="ws281x_node" clear_params="true" output="screen" if="$(eval ws281x and not simulator)">
+        <param name="led_count" value="$(arg led_count)"/>
+        <param name="gpio_pin" value="$(arg gpio_pin)"/>
         <param name="brightness" value="64"/>
         <param name="strip_type" value="WS2811_STRIP_GRB"/>
         <param name="target_frequency" value="800000"/>
@@ -31,8 +35,8 @@
             altctl: { r: 255, g: 255, b: 40 }
             posctl: { r: 50, g: 100, b: 220 }
             offboard: { r: 220, g: 20, b: 250 }
-            low_battery: { threshold: 3.7, effect: blink_fast, r: 255, g: 0, b: 0 }
-            error: { effect: flash, r: 255, g: 0, b: 0 }
+            low_battery: { threshold: 3.6, effect: blink_fast, r: 255, g: 0, b: 0 }
+            error: { effect: flash, r: 255, g: 0, b: 0, ignore: [ "[lpe] vision position timeout" ]}
         </rosparam>
     </node>
 </launch>

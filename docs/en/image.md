@@ -4,6 +4,8 @@ The RPi image for Clover contains all the necessary software for working with Cl
 
 ## Usage
 
+> **Info** Starting from version v0.22, the image is based on ROS Noetic and using Python 3. If you want to use ROS Melodic and Python 2, use version [v0.21.2](https://github.com/CopterExpress/clover/releases/download/v0.21.2/clover_v0.21.2.img.zip).
+
 1. Download the latest stable release of the image – **<a class="latest-image" href="https://github.com/CopterExpress/clover/releases">download</a>**.
 2. Download and install [Etcher](https://www.balena.io/etcher/), the software for flashing images (available for Windows/Linux/macOS).
 3. Put the MicroSD-card into your computer (use an adapter if necessary).

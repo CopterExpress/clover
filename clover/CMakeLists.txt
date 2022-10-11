@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0)
 project(clover)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   geometry_msgs
   sensor_msgs
+  led_msgs
   geographic_msgs
   tf
   tf2
@@ -24,13 +25,22 @@ find_package(catkin REQUIRED COMPONENTS
   tf2_ros
   image_transport
   cv_bridge
+  dynamic_reconfigure
 )
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
 find_package(GeographicLib REQUIRED)
 
-find_package(OpenCV 3 REQUIRED
+# Workaround for OpenCV 3/4 support
+set(_opencv_version 4)
+find_package(OpenCV ${_opencv_version} QUIET COMPONENTS calib3d imgproc)
+if (NOT OpenCV_FOUND)
+  message(STATUS "Did not find OpenCV 4, searching for OpenCV 3")
+  set(_opencv_version 3)
+endif()
+
+find_package(OpenCV ${_opencv_version} REQUIRED
   COMPONENTS
     calib3d
     imgproc
@@ -118,10 +128,9 @@ generate_messages(
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/Flow.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -166,13 +175,14 @@ add_library(${PROJECT_NAME}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(simple_offboard src/simple_offboard.cpp)
 
-add_executable(rc src/rc.cpp)
+# PX4 already has rc and led targets, so we prefix ours with clover_
+add_executable(clover_rc src/rc.cpp)
 
 add_executable(camera_markers src/camera_markers.cpp)
 
 add_executable(vpe_publisher src/vpe_publisher.cpp)
 
-add_executable(led src/led.cpp)
+add_executable(clover_led src/led.cpp)
 
 add_executable(shell src/shell.cpp)
 
@@ -181,21 +191,28 @@ target_link_libraries(simple_offboard
   ${GeographicLib_LIBRARIES}
 )
 
-target_link_libraries(rc ${catkin_LIBRARIES})
+# Don't change actual binary names
+set_target_properties(clover_rc PROPERTIES OUTPUT_NAME rc)
+
+set_target_properties(clover_led PROPERTIES OUTPUT_NAME led)
+
+target_link_libraries(clover_rc ${catkin_LIBRARIES})
 
 target_link_libraries(camera_markers ${catkin_LIBRARIES})
 
 target_link_libraries(vpe_publisher ${catkin_LIBRARIES})
 
-target_link_libraries(led ${catkin_LIBRARIES})
+target_link_libraries(clover_led ${catkin_LIBRARIES})
 
 target_link_libraries(shell ${catkin_LIBRARIES})
 
 add_dependencies(simple_offboard ${PROJECT_NAME}_generate_messages_cpp)
 
-add_dependencies(led ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(clover_led ${PROJECT_NAME}_generate_messages_cpp)
 
 add_dependencies(shell ${PROJECT_NAME}_generate_messages_cpp)
+
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -227,12 +244,12 @@ target_link_libraries(${PROJECT_NAME}
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
-## Mark executables and/or libraries for installation
-# install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+# Mark executables and/or libraries for installation
+install(TARGETS simple_offboard clover_rc camera_markers vpe_publisher clover_led shell clover
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
@@ -248,13 +265,25 @@ target_link_libraries(${PROJECT_NAME}
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
 
+catkin_install_python(PROGRAMS src/selfcheck.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY examples DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY www DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+# TODO: install www
+
 # Only install udev rules when building a Debian package
 # FIXME: Other operating systems may have other prefixes
 string(FIND ${CMAKE_INSTALL_PREFIX} "/opt/ros" _PREFIX_INDEX)
 if (${_PREFIX_INDEX} EQUAL 0)
   message(STATUS "Building as a Debian package - adding udev rules as installable files")
   install(FILES
-    config/99-px4fmu.rules
+    udev/99-px4fmu.rules
     DESTINATION /lib/udev/rules.d
   )
 else()

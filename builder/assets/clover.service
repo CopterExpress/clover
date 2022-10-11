@@ -8,5 +8,9 @@ ExecStart=/bin/bash -c ". /home/pi/catkin_ws/devel/setup.sh; \
                       ROS_HOSTNAME=`hostname`.local exec stdbuf -o L roslaunch clover clover.launch --wait --screen --skip-log-check \
                       2> >(tee /tmp/clover.err)"
 
+ExecStartPre=+rm /var/log/clover.log
+StandardOutput=file:/var/log/clover.log
+StandardError=file:/var/log/clover.log
+
 [Install]
 WantedBy=multi-user.target

@@ -22,11 +22,13 @@
 #include <tf2/utils.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <dynamic_reconfigure/server.h>
 #include <mavros_msgs/OpticalFlowRad.h>
 #include <sensor_msgs/Imu.h>
 #include <geometry_msgs/Vector3Stamped.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <clover/FlowConfig.h>
 
 using cv::Mat;
 
@@ -38,6 +40,7 @@ public:
 	{}
 
 private:
+	bool enabled_;
 	ros::Publisher flow_pub_, velo_pub_, shift_pub_;
 	ros::Time prev_stamp_;
 	std::string fcu_frame_id_, local_frame_id_;
@@ -53,6 +56,8 @@ private:
 	std::unique_ptr<tf2_ros::Buffer> tf_buffer_;
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	bool calc_flow_gyro_;
+	float flow_gyro_default_;
+	std::shared_ptr<dynamic_reconfigure::Server<clover::FlowConfig>> dyn_srv_;
 
 	void onInit()
 	{
@@ -69,19 +74,24 @@ private:
 		roi_px_ = nh_priv.param("roi", 128);
 		roi_rad_ = nh_priv.param("roi_rad", 0.0);
 		calc_flow_gyro_ = nh_priv.param("calc_flow_gyro", false);
+		flow_gyro_default_ = nh_priv.param("flow_gyro_default", NAN);
 
-		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 		img_pub_ = it_priv.advertise("debug", 1);
 		flow_pub_ = nh.advertise<mavros_msgs::OpticalFlowRad>("mavros/px4flow/raw/send", 1);
 		velo_pub_ = nh_priv.advertise<geometry_msgs::TwistStamped>("angular_velocity", 1);
 		shift_pub_ = nh_priv.advertise<geometry_msgs::Vector3Stamped>("shift", 1);
 
-		flow_.integrated_xgyro = NAN; // no IMU available
-		flow_.integrated_ygyro = NAN;
-		flow_.integrated_zgyro = NAN;
 		flow_.time_delta_distance_us = 0;
 		flow_.distance = -1; // no distance sensor available
 		flow_.temperature = 0;
+
+		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
+
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<clover::FlowConfig>>(nh_priv);
+		dynamic_reconfigure::Server<clover::FlowConfig>::CallbackType cb;
+
+		cb = std::bind(&OpticalFlow::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
+		dyn_srv_->setCallback(cb);
 
 		NODELET_INFO("Optical Flow initialized");
 	}
@@ -109,6 +119,8 @@ private:
 
 	void flow(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr& cinfo)
 	{
+		if (!enabled_) return;
+
 		parseCameraInfo(cinfo);
 
 		auto img = cv_bridge::toCvShare(msg, "mono8")->image;
@@ -142,7 +154,7 @@ private:
 
 		img.convertTo(curr_, CV_32F);
 
-		if (prev_.empty()) {
+		if (prev_.empty() || (msg->header.stamp - prev_stamp_).toSec() > 0.1) { // outdated previous frame
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 			cv::createHanningWindow(hann_, curr_.size(), CV_32F);
@@ -152,7 +164,7 @@ private:
 			cv::Point2d shift = cv::phaseCorrelate(prev_, curr_, hann_, &response);
 
 			// Publish raw shift in pixels
-			static geometry_msgs::Vector3Stamped shift_vec;
+			geometry_msgs::Vector3Stamped shift_vec;
 			shift_vec.header.stamp = msg->header.stamp;
 			shift_vec.header.frame_id = msg->header.frame_id;
 			shift_vec.vector.x = shift.x;
@@ -178,8 +190,8 @@ private:
 			double flow_x = atan2(points_undist[0].x, focal_length_x);
 			double flow_y = atan2(points_undist[0].y, focal_length_y);
 
-			// // Convert to FCU frame
-			static geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
+			// Convert to FCU frame
+			geometry_msgs::Vector3Stamped flow_camera, flow_fcu;
 			flow_camera.header.frame_id = msg->header.frame_id;
 			flow_camera.header.stamp = msg->header.stamp;
 			flow_camera.vector.x = flow_y; // +y means counter-clockwise rotation around Y axis
@@ -195,18 +207,21 @@ private:
 			ros::Duration integration_time = msg->header.stamp - prev_stamp_;
 			uint32_t integration_time_us = integration_time.toSec() * 1.0e6;
 
+			// Calculate flow gyro
+			flow_.integrated_xgyro = flow_gyro_default_;
+			flow_.integrated_ygyro = flow_gyro_default_;
+			flow_.integrated_zgyro = flow_gyro_default_;
+
 			if (calc_flow_gyro_) {
 				try {
 					auto flow_gyro_camera = calcFlowGyro(msg->header.frame_id, prev_stamp_, msg->header.stamp);
-					static geometry_msgs::Vector3Stamped flow_gyro_fcu;
+					geometry_msgs::Vector3Stamped flow_gyro_fcu;
 					tf_buffer_->transform(flow_gyro_camera, flow_gyro_fcu, fcu_frame_id_);
 					flow_.integrated_xgyro = flow_gyro_fcu.vector.x;
 					flow_.integrated_ygyro = flow_gyro_fcu.vector.y;
 					flow_.integrated_zgyro = flow_gyro_fcu.vector.z;
 				} catch (const tf2::TransformException& e) {
-					// Invalidate previous frame
-					prev_.release();
-					return;
+					// Transform not available, keep NANs in flow gyro
 				}
 			}
 
@@ -218,6 +233,10 @@ private:
 			flow_.quality = (uint8_t)(response * 255);
 			flow_pub_.publish(flow_);
 
+			prev_ = curr_.clone();
+			prev_stamp_ = msg->header.stamp;
+
+publish_debug:
 			// Publish debug image
 			if (img_pub_.getNumSubscribers() > 0) {
 				// publish debug image
@@ -231,15 +250,12 @@ private:
 			}
 
 			// Publish estimated angular velocity
-			static geometry_msgs::TwistStamped velo;
+			geometry_msgs::TwistStamped velo;
 			velo.header.stamp = msg->header.stamp;
 			velo.header.frame_id = fcu_frame_id_;
-			velo.twist.angular.x = flow_.integrated_x / integration_time.toSec();
-			velo.twist.angular.y = flow_.integrated_y / integration_time.toSec();
+			velo.twist.angular.x = flow_fcu.vector.x / integration_time.toSec();
+			velo.twist.angular.y = flow_fcu.vector.y / integration_time.toSec();
 			velo_pub_.publish(velo);
-
-			prev_ = curr_.clone();
-			prev_stamp_ = msg->header.stamp;
 		}
 	}
 
@@ -259,6 +275,14 @@ private:
 		flow.vector.z = -diff.z();
 
 		return flow;
+	}
+
+	void paramCallback(clover::FlowConfig &config, uint32_t level)
+	{
+		enabled_ = config.enabled;
+		if (!enabled_) {
+			prev_ = Mat(); // clear previous frame
+		}
 	}
 };
 

@@ -56,7 +56,7 @@ Prepare your article and send it as a pull request to the [Clover repository](ht
     git checkout -b new-article
     ```
 
-4. Write a new article in the [Markdown](https://en.wikipedia.org/wiki/Markdown) format and save it in the `docs/ru` or `docs/en` folder (for example, `docs/en/new_article.md`).
+4. Write a new article in the [Markdown](https://en.wikipedia.org/wiki/Markdown) format and save it in the `docs/ru` or `docs/en` folder (for example, `docs/en/new_article.md`). Don't forget to give you contacts (e-mail / Telegram / ...) in articles on your projects.
 5. Place additional visual assets in the `docs/assets` folder and add them to your article.
 6. Add a link to your article to the appropriate section in the `SUMMARY.md` file (in the same folder as in the fourth step):
 
@@ -96,3 +96,7 @@ Prepare your article and send it as a pull request to the [Clover repository](ht
 ## Easy way
 
 If the above instructions are too difficult for you, send your fixes and new articles by e-mail (<a href="mailto:okalachev@gmail.com">okalachev@gmail.com</a>) or in Telegram messenger (user <a href="tg://resolve?domain=okalachev">@okalachev</a>).
+
+## Publishing packages
+
+You also can publish a package, that extends Clover functionality, into the official [COEX Debian repository](packages.md).

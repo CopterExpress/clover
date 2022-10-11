@@ -21,7 +21,9 @@
             "ROS",
             "ROS Kinetic",
             "ROS Melodic",
+            "ROS Noetic",
             "OpenCV",
+            "OpenVPN",
             "Gazebo",
             "GitHub",
             "FPV",
@@ -106,7 +108,10 @@
             "UDP",
             "QR",
             "Li-ion",
-            "Nvidia"
+            "Nvidia",
+            "VirtualBox",
+            "VMware",
+            "DuoCam"
         ],
         "code_blocks": false
     },

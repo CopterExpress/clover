@@ -12,6 +12,7 @@
 
 #include <ros/ros.h>
 #include <string>
+#include <vector>
 #include <boost/algorithm/string.hpp>
 
 #include <clover/SetLEDEffect.h>
@@ -29,7 +30,7 @@ ros::Timer timer;
 ros::Time start_time;
 double blink_rate, blink_fast_rate, flash_delay, fade_period, wipe_period, rainbow_period;
 double low_battery_threshold;
-bool blink_state;
+std::vector<std::string> error_ignore;
 led_msgs::SetLEDs set_leds;
 led_msgs::LEDStateArray state, start_state;
 ros::ServiceClient set_leds_srv;
@@ -85,9 +86,8 @@ void proceed(const ros::TimerEvent& event)
 	set_leds.request.leds.resize(led_count);
 
 	if (current_effect.effect == "blink" || current_effect.effect == "blink_fast") {
-		blink_state = !blink_state;
-		// toggle all leds
-		if (blink_state) {
+		// enable on odd counter
+		if (counter % 2 != 0) {
 			fill(current_effect.r, current_effect.g, current_effect.b);
 		} else {
 			fill(0, 0, 0);
@@ -220,6 +220,7 @@ bool setEffect(clover::SetLEDEffect::Request& req, clover::SetLEDEffect::Respons
 	counter = 0;
 	start_state = state;
 	start_time = ros::Time::now();
+	proceed({ .current_real = start_time });
 
 	return true;
 }
@@ -274,6 +275,10 @@ void handleMavrosState(const mavros_msgs::State& msg)
 void handleLog(const rosgraph_msgs::Log& log)
 {
 	if (log.level >= rosgraph_msgs::Log::ERROR) {
+		// check if ignored
+		for (auto const& str : error_ignore) {
+			if (log.msg.find(str) != std::string::npos) return;
+		}
 		notify("error");
 	}
 }
@@ -302,6 +307,7 @@ int main(int argc, char **argv)
 	nh_priv.param("rainbow_period", rainbow_period, 5.0);
 
 	nh_priv.param("notify/low_battery/threshold", low_battery_threshold, 3.7);
+	nh_priv.param("notify/error/ignore", error_ignore, {});
 
 	ros::service::waitForService("set_leds"); // cannot work without set_leds service
 	set_leds_srv = nh.serviceClient<led_msgs::SetLEDs>("set_leds", true);

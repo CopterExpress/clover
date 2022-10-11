@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# script for running gzweb
+# usage: ./gzweb [<port>]
+
+export NVM_DIR=$HOME/.nvm
+source $NVM_DIR/nvm.sh
+npm start --prefix $HOME/gzweb -p ${1-8080}

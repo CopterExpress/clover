@@ -46,7 +46,7 @@ set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
 
-# Take off 1 м
+# Take off 1 m
 navigate(x=0, y=0, z=1, frame_id='body', auto_arm=True)
 ```
 
@@ -69,56 +69,6 @@ sudo systemctl restart clover
 The `~/catkin_ws/src/clever/` directory is renamed to `~/catkin_ws/src/clover`. Thus, configuration files (`*.launch`) are to be edited using the new path.
 
 For example, `~/catkin_ws/src/clever/clever/launch/clever.launch` file is now `~/catkin_ws/src/clover/clover/launch/clover.launch`.
-
-<!--
-## Python 3 transition
-
-Python 2 is depracated since, January 1st, 2020. The Clover platform moves to Python 3.
-
-For running flight script instead of `python` command:
-
-```bash
-python flight.py
-```
-
-use `python3` command:
-
-```bash
-python3 flight.py
-```
-
-Python 3 has certain syntax differences in comparison with the old version. Instead of `print` *operator*:
-
-```python
-print 'Clover is the best'
-```
-
-use `print` *function*:
-
-```python
-print('Clover is the best')
-```
-
-The division operator operates floating points by default (instead of integer). Python 2:
-
-```python
->>> 10 / 4
-2
-```
-
-Python 3:
-
-```python
->>> 10 / 4
-2.5
-```
-
-For strings `unicode` type is used by default (instead of `str` type).
-
-Encoding specification (`# coding: utf8`) is not necessary any more.
-
-More details on all the language changes see in [appropriate article](https://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html).
--->
 
 ## Wi-Fi network configuration
 

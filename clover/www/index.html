@@ -1,24 +1,36 @@
+<title>Clover Drone Kit Tools</title>
+
 <h1>Clover Drone Kit Tools</h1>
 
 <ul>
 	<li><a href="docs">View documentation</a> (snapshot of <a href="https://clover.coex.tech">clover.coex.tech</a>)</li>
+	<li><a href="topics.html">View topics</a></li>
 	<li><a href="" id="wvs">View image topics</a> (<code>web_video_server</code>)</li>
 	<li><a href="" id="butterfly">Open web terminal</a> (<code>Butterfly</code>)</li>
-	<li><a href="viz.html">View 3D visualization</a> (<code>ros3djs</code>)</li>
-	<li><a href="aruco_map.html">3D visualization for markers map</a> (<code>ros3djs</code>)</li>
+	<li>View <a href="viz.html">View 3D visualization</a>, <a href="aruco_map.html">3D visualization for markers map</a> (<code>ros3djs</code>)</li>
+	<li><a href="../clover_blocks/">Blocks programming</a> (<code>Blockly</code>)</li>
+	<li><a href="console.html">Clover console</a> (<code>/var/log/clover.log</code>)</li>
 </ul>
 
 <div class="version"></div>
 
-<script src="js/roslib.js"></script>
 <script type="text/javascript">
 	document.querySelector("#wvs").href = location.protocol + '//' + location.hostname + ':8080';
 	document.querySelector("#butterfly").href = location.protocol + '//' + location.hostname + ':57575';
 
+	document.querySelector("#butterfly").addEventListener('click', function(e) {
+		if (location.hostname == 'localhost' || location.hostname == '127.0.0.1') {
+			if (!confirm('Please use regular Terminal app on a local machine.\nClick OK to proceed to Butterfly anyway.')) {
+				e.preventDefault();
+			}
+		}
+	});
+
 	// Determine image version
-	var ros = new ROSLIB.Ros({ url: 'ws://' + location.hostname + ':9090' });
-	var exec = new ROSLIB.Service({ ros: ros, name : '/exec', serviceType : 'clover/Execute' });
-	exec.callService(new ROSLIB.ServiceRequest({ cmd: 'cat /etc/clover_version' }), function(result) {
-		document.querySelector('.version').innerHTML = 'Version: ' + result.output;
+	fetch('clover_version').then(function(response) {
+		if (response.status !== 200) return;
+		response.text().then(function(text) {
+			document.querySelector('.version').innerHTML = 'Version: ' + text;
+		});
 	});
 </script>

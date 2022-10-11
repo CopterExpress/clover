@@ -8,7 +8,7 @@ gitbook.events.bind('page.change', function() {
 		// look for stable release
 		let stable;
 		for (let release of data) {
-			let clever = release.name.indexOf('clever') != -1;
+			let clever = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
 			if (clever && !release.prerelease && !release.draft) {
 				stable = release;
 				break;

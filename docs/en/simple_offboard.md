@@ -1,11 +1,4 @@
-Simple OFFBOARD
-===
-
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/simple_offboard.md) for older images.
-
-<!-- -->
-
-> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for autonomous flights.
+# Autonomous flight
 
 The `simple_offboard` module of the `clover` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
@@ -13,8 +6,7 @@ The `simple_offboard` module of the `clover` package is intended for simplified 
 
 Main services are [`get_telemetry`](#gettelemetry) (receive telemetry data), [`navigate`](#navigate) (fly to a given point along a straight line), [`navigate_global`](#navigateglobal) (fly to a point specified as latitude and longitude along a straight line), [`land`](#land) (switch to landing mode).
 
-Python samples
----
+## Python usage
 
 You need to create proxies for services before calling them. Use the following template for your programs:
 
@@ -37,8 +29,7 @@ land = rospy.ServiceProxy('land', Trigger)
 
 Unused proxy functions may be removed from the code.
 
-API description
----
+## API description
 
 > **Note** Omitted numeric parameters are set to 0.
 
@@ -75,14 +66,14 @@ Displaying drone coordinates `x`, `y` and `z` in the local system of coordinates
 
 ```python
 telemetry = get_telemetry()
-print telemetry.x, telemetry.y, telemetry.z
+print(telemetry.x, telemetry.y, telemetry.z)
 ```
 
 Displaying drone altitude relative to [the ArUco map](aruco.md):
 
 ```python
 telemetry = get_telemetry(frame_id='aruco_map')
-print telemetry.z
+print(telemetry.z)
 ```
 
 Checking global position availability:
@@ -90,9 +81,9 @@ Checking global position availability:
 ```python
 import math
 if not math.isnan(get_telemetry().lat):
-    print 'Global position is available'
+    print('Global position is available')
 else:
-    print 'No global position'
+    print('No global position')
 ```
 
 Output of current telemetry (command line):
@@ -107,7 +98,7 @@ Fly to the designated point in a straight line.
 
 Parameters:
 
-* `x`, `y` — coordinates *(m)*;
+* `x`, `y`, `z` — coordinates *(m)*;
 * `yaw` — yaw angle *(radians)*;
 * `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
@@ -268,12 +259,6 @@ Flying forward (relative to the drone) at the speed of 1 m/s:
 set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 ```
 
-One possible way of flying in a circle:
-
-```python
-set_velocity(vx=0.4, vy=0.0, vz=0, yaw=float('nan'), yaw_rate=0.4, frame_id='body')
-```
-
 ### set_attitude
 
 Set pitch, roll, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
@@ -295,11 +280,13 @@ Parameters:
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 
+The positive direction of `yaw_rate` rotation (when viewed from the top) is counterclockwise,`pitch_rate` rotation is forward, `roll_rate` rotation is to the left.
+
 ### land
 
 Switch the drone to landing [mode](modes.md) (`AUTO.LAND` or similar).
 
-> **Note** Set the `COM_DISARM_LAND` [PX4 parameter](px4_parameters.md) to a value greater than 0 to enable automatic disarm after landing.
+> **Note** Set the `COM_DISARM_LAND` [PX4 parameter](parameters.md) to a value greater than 0 to enable automatic disarm after landing.
 
 Landing the drone:
 
@@ -307,7 +294,7 @@ Landing the drone:
 res = land()
 
 if res.success:
-    print 'drone is landing'
+    print('drone is landing')
 ```
 
 Landing the drone (command line):
@@ -316,14 +303,9 @@ Landing the drone (command line):
 rosservice call /land "{}"
 ```
 
-<!--
-### release
+> **Caution** In recent PX4 versions, the vehicle will be switched out of LAND mode to manual mode, if the remote control sticks are moved significantly.
 
-Stop publishing setpoints to the drone (release control). Required to continue monitoring by means of [MAVROS](mavros.md).
--->
-
-Additional materials
-------------------------
+## Additional materials
 
 * [ArUco-based position estimation and navigation](aruco.md).
 * [Program samples and snippets](snippets.md).

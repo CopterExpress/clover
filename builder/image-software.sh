@@ -64,15 +64,14 @@ echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
 echo_stamp "Install apt keys & repos"
 
 # TODO: This STDOUT consist 'OK'
-curl http://deb.coex.tech/aptly_repo_signing.key 2> /dev/null | apt-key add -
 apt-get update \
 && apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb http://deb.coex.tech/opencv3 buster main" > /etc/apt/sources.list.d/opencv3.list
-echo "deb http://deb.coex.tech/rpi-ros-melodic buster main" > /etc/apt/sources.list.d/rpi-ros-melodic.list
-echo "deb http://deb.coex.tech/clover buster main" > /etc/apt/sources.list.d/clover.list
+
+wget -O - 'http://packages.coex.tech/key.asc' | apt-key add - 
+echo 'deb http://packages.coex.tech buster main' >> /etc/apt/sources.list
 
 echo_stamp "Update apt cache"
 
@@ -80,8 +79,10 @@ echo_stamp "Update apt cache"
 apt-get update
 # && apt upgrade -y
 
+# Let's retry fetching those packages several times, just in case
 echo_stamp "Software installing"
-apt-get install --no-install-recommends -y \
+my_travis_retry apt-get install --no-install-recommends -y cmake-data=3.13.4-1 cmake=3.13.4-1 # FIXME: using older CMake due to https://travis-ci.org/github/CopterExpress/clover/jobs/764367665#L6984
+my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
 ipython \
@@ -93,31 +94,28 @@ lsof \
 git \
 dnsmasq  \
 tmux \
+tree \
 vim \
-cmake \
 libjpeg8 \
 tcpdump \
-ltrace \
 libpoco-dev \
 libzbar0 \
-python-rosdep \
-python-rosinstall-generator \
-python-wstool \
-python-rosinstall \
+python3-rosdep \
+python3-rosinstall-generator \
+python3-wstool \
+python3-rosinstall \
 build-essential \
 libffi-dev \
 monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-espeak espeak-data python-espeak \
+espeak espeak-data python-espeak python3-espeak \
 ntpdate \
 python-dev \
 python3-dev \
 python-systemd \
 mjpg-streamer \
-python3-opencv \
-&& echo_stamp "Everything was installed!" "SUCCESS" \
-|| (echo_stamp "Some packages wasn't installed!" "ERROR"; exit 1)
+python3-opencv
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
@@ -125,9 +123,10 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 
 echo_stamp "Installing pip"
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip2.py
 python3 get-pip.py
-python get-pip.py
-rm get-pip.py
+python get-pip2.py
+rm get-pip.py get-pip2.py
 #my_travis_retry pip install --upgrade pip
 #my_travis_retry pip3 install --upgrade pip
 
@@ -137,22 +136,26 @@ pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
+export CRYPTOGRAPHY_DONT_BUILD_RUST=1
+my_travis_retry pip3 install cryptography==3.4.6 # https://stackoverflow.com/a/68472128/6850197
+my_travis_retry pip3 install pyOpenSSL==20.0.1
 my_travis_retry pip3 install tornado==5.1.1
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
 
 echo_stamp "Install ws281x library"
-my_travis_retry pip install --prefer-binary rpi_ws281x
+my_travis_retry pip3 install --prefer-binary rpi_ws281x
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
 mv /root/monkey /etc/monkey/sites/default
+sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 systemctl enable monkey.service
 
 echo_stamp "Install Node.js"
 cd /home/pi
-wget https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
+wget --no-verbose https://nodejs.org/dist/v10.15.0/node-v10.15.0-linux-armv6l.tar.gz
 tar -xzf node-v10.15.0-linux-armv6l.tar.gz
 cp -R node-v10.15.0-linux-armv6l/* /usr/local/
 rm -rf node-v10.15.0-linux-armv6l/

@@ -36,7 +36,7 @@ sudo systemctl restart clover
 ## UDP-бридж без автоматического подключения
 
 1. Измените параметр `gcs_bridge` на `udp`.
-2. В QQroundControl создайте подключение со следующими настройками:
+2. В QGroundControl создайте подключение со следующими настройками:
 
     ![QGroundControl UDP connection](../assets/bridge_udp.png)
 

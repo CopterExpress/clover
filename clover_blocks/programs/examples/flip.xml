@@ -1,0 +1,308 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="MEu_bi$Xk5e(#Q`Yu=k0">start_x</variable>
+    <variable id="GtS.)8^|(~RL*T4.~#VV">start_y</variable>
+    <variable id="jksdQ,]0F47Xan8{_(?+">start_z</variable>
+  </variables>
+  <block type="procedures_defnoreturn" id="Uo{/lI4(1i[O|U^jyh]y" x="188" y="62">
+    <field name="NAME">flip</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="procedures_callnoreturn" id="G7`l2OBCg~ISh(XsrkRv">
+        <mutation name="memorize position"></mutation>
+        <next>
+          <block type="setpoint" id="8%(,J3=!CEUALDr5gFT+">
+            <field name="TYPE">RATES</field>
+            <field name="FRAME_ID">BODY</field>
+            <comment pinned="false" h="80" w="160">bump up</comment>
+            <value name="VX">
+              <shadow type="math_number" id="!@rHW+cG*U6.Py:.;qc)">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="VY">
+              <shadow type="math_number" id="n#I~l7$%1m^@Oz+w;k[H">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="VZ">
+              <shadow type="math_number" id="l0EphD#!^4jX#%UA-rxX">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="PITCH">
+              <shadow type="math_number" id="Ad.[@07QtZcb;(:^,Kjg">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="ROLL">
+              <shadow type="math_number" id="50,,4i.p6KR:e3/l|k2i">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="YAW">
+              <shadow type="math_number" id="(:O}={3*LZ#KDiC@;b[F">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="THRUST">
+              <shadow type="math_number" id="EC6yU;oHb#y-8?W`B/JC">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="ID">
+              <shadow type="math_number" id="k.X^bynEZH2dyG1=Y6lr">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="wait" id="#ga)cR4TsF[9t?;zc1H~">
+                <value name="TIME">
+                  <shadow type="math_number" id="zg5fX7[;O,lQt*Txg|tn">
+                    <field name="NUM">0.2</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="setpoint" id="j,yf}/lrx*2J}X%^5LG{">
+                    <field name="TYPE">RATES</field>
+                    <field name="FRAME_ID">BODY</field>
+                    <comment pinned="false" h="80" w="160">maximum pitch rate</comment>
+                    <value name="VX">
+                      <shadow type="math_number" id="^WF12EBPyIXhZdpsj;=D">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="VY">
+                      <shadow type="math_number" id="C/uBsz]ObzwyHxGqzUP_">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="VZ">
+                      <shadow type="math_number" id="4?)O3G/j`UuVTMImLq{T">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="PITCH">
+                      <shadow type="math_number" id="sdCVFTmVkc0v2|*3Fy~h">
+                        <field name="NUM">30</field>
+                      </shadow>
+                    </value>
+                    <value name="ROLL">
+                      <shadow type="math_number" id="V1o!AV[`!OnhrUP4~$=!">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="YAW">
+                      <shadow type="math_number" id="0e;`*B;ghV*%=ETSvzSM">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <value name="THRUST">
+                      <shadow type="math_number" id="K@VAeOH2bEwc#@7_M!@l">
+                        <field name="NUM">0.2</field>
+                      </shadow>
+                    </value>
+                    <value name="ID">
+                      <shadow type="math_number" id="c6ycgS!D}bIK8pl8oAv+">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="controls_whileUntil" id="H_6do.wf6H.E$?5;$uw8">
+                        <field name="MODE">WHILE</field>
+                        <value name="BOOL">
+                          <block type="logic_boolean" id="pu%GH9}wZvUV{RnGk6Se">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="controls_if" id="l0w?CSzU]S(K9eL-1(1r">
+                            <value name="IF0">
+                              <block type="logic_operation" id="gtXXJ7OFs=1BynL@|R{.">
+                                <field name="OP">OR</field>
+                                <value name="A">
+                                  <block type="logic_compare" id="2%9ns$Jk(8M[8$~9o(=*">
+                                    <field name="OP">GT</field>
+                                    <value name="A">
+                                      <block type="math_single" id="#gr7h89vpJyc8bnbWU9O">
+                                        <field name="OP">ABS</field>
+                                        <value name="NUM">
+                                          <shadow type="math_number" id="5paq?]87z}}+@~NALY}.">
+                                            <field name="NUM">9</field>
+                                          </shadow>
+                                          <block type="get_attitude" id="awk0-~@[jWFVQ+ZPi=Dc">
+                                            <field name="FIELD">PITCH</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id=",4p]fd#kwxy`DtCMtraW">
+                                        <field name="NUM">90</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="logic_compare" id="?TPG3^?eg4l~CKM,3DfO">
+                                    <field name="OP">GT</field>
+                                    <value name="A">
+                                      <block type="math_single" id="yS*/-+E3TMpZ]%`1j*Up">
+                                        <field name="OP">ABS</field>
+                                        <value name="NUM">
+                                          <shadow type="math_number">
+                                            <field name="NUM">9</field>
+                                          </shadow>
+                                          <block type="get_attitude" id="~E3RS!on]G(?IZ?SVA#J">
+                                            <field name="FIELD">ROLL</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="#y??I}u#OmOTK:`!pkNS">
+                                        <field name="NUM">90</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="controls_flow_statements" id="X|V=r3BDKw9fv)u5EY3.">
+                                <field name="FLOW">BREAK</field>
+                              </block>
+                            </statement>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="procedures_callnoreturn" id="?;sq{#xJ+]bD`yJ#(]o1">
+                            <mutation name="navigate to memorized position"></mutation>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="!Tv!F*.A}=]dW=C6X@-`" x="538" y="62">
+    <field name="NAME">memorize position</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="variables_set" id="s,o|q7_A/fSV+c0E)b^k">
+        <field name="VAR" id="MEu_bi$Xk5e(#Q`Yu=k0">start_x</field>
+        <value name="VALUE">
+          <block type="get_position" id="f#,.s%hV^19JJ;G/DO):">
+            <field name="FIELD">X</field>
+            <field name="FRAME_ID">MAP</field>
+            <value name="ID">
+              <shadow type="math_number" id="rJRRE#;#JFg}gY+34LVi">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="E+2Pfn3JOB{r=DQ3f1b`">
+            <field name="VAR" id="GtS.)8^|(~RL*T4.~#VV">start_y</field>
+            <value name="VALUE">
+              <block type="get_position" id="J#y+_prX(DI;j8gFO81H">
+                <field name="FIELD">Y</field>
+                <field name="FRAME_ID">MAP</field>
+                <value name="ID">
+                  <shadow type="math_number" id="_bnV`SCa:|Vl#sRlYA@}">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="t*TI?p-h#qC_kC)jM8q0">
+                <field name="VAR" id="jksdQ,]0F47Xan8{_(?+">start_z</field>
+                <value name="VALUE">
+                  <block type="get_position" id="Xh#8yLEMxT|bQ}jYvk6/">
+                    <field name="FIELD">Z</field>
+                    <field name="FRAME_ID">MAP</field>
+                    <value name="ID">
+                      <shadow type="math_number" id="z3FTv/jt^H7dVYx1`$$C">
+                        <field name="NUM">0</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="$p3=p^fBz}k5Pg1]svL," x="563" y="213">
+    <field name="NAME">navigate to memorized position</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="navigate" id="#7b*(J_t9t)V,Arb)3;R">
+        <field name="FRAME_ID">MAP</field>
+        <field name="WAIT">TRUE</field>
+        <value name="X">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="variables_get" id="X#O!NcMac+a9WKL;l7?W">
+            <field name="VAR" id="MEu_bi$Xk5e(#Q`Yu=k0">start_x</field>
+          </block>
+        </value>
+        <value name="Y">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="variables_get" id="C(=1.r0+01|e3+3qs%SD">
+            <field name="VAR" id="GtS.)8^|(~RL*T4.~#VV">start_y</field>
+          </block>
+        </value>
+        <value name="Z">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+          <block type="variables_get" id="?v;YVETEO%vUqgmiro^/">
+            <field name="VAR" id="jksdQ,]0F47Xan8{_(?+">start_z</field>
+          </block>
+        </value>
+        <value name="ID">
+          <shadow type="math_number" id="ALt.9P$^_]upK}Q9_M,5">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="SPEED">
+          <shadow type="math_number" id="ObO|OuF^d,1|Bx{Y`O-R">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="take_off" id="I1oP(b3wChmK?WgPtULz" x="563" y="612">
+    <field name="WAIT">TRUE</field>
+    <value name="ALT">
+      <shadow type="math_number" id="N1EX*JgURuG783yO+B^X">
+        <field name="NUM">2</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="procedures_callnoreturn" id="(Dc3I{36Kt@1KHN7Ef.m">
+        <mutation name="flip"></mutation>
+        <next>
+          <block type="land" id=";c+lM(v6`13$VK`~jZ|5">
+            <field name="WAIT">TRUE</field>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

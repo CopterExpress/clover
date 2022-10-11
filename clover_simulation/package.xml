@@ -1,0 +1,31 @@
+<package format="2">
+    <name>clover_simulation</name>
+    <version>0.23.0</version>
+    <description>The clover_simulation package provides worlds and launch files for Gazebo.</description>
+
+    <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
+
+    <author>Alexey Rogachevskiy</author>
+    <author>Andrey Ryabov</author>
+    <author>Arthur Golubtsov</author>
+    <author>Oleg Kalachev</author>
+    <author>Svyatoslav Zhuravlev</author>
+
+    <license>MIT</license>
+
+    <url type="website">https://github.com/CopterExpress/clover</url>
+    <url type="bugtracker">https://github.com/CopterExpress/clover/issues</url>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <depend>led_msgs</depend>
+    <depend>xacro</depend>
+    <depend>gazebo_ros</depend>
+    <depend>gazebo_plugins</depend>
+    <depend>rospy</depend>
+
+    <export>
+        <gazebo_ros gazebo_media_path="${prefix}"/>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+        <gazebo_ros gazebo_resource_path="${prefix}/resources"/>
+    </export>
+</package>

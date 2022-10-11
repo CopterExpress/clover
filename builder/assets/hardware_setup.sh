@@ -65,7 +65,7 @@ echo_stamp "#6 Turn on UART"
 # https://github.com/RPi-Distro/raspi-config/pull/75
 /usr/bin/raspi-config nonint do_serial 1
 /usr/bin/raspi-config nonint set_config_var enable_uart 1 /boot/config.txt
-/usr/bin/raspi-config nonint set_config_var dtoverlay pi3-disable-bt /boot/config.txt
+echo dtoverlay=pi3-disable-bt >> /boot/config.txt
 systemctl disable hciuart.service
 
 # After adding to Raspbian OS

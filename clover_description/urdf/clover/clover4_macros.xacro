@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2015 Fadri Furrer, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Michael Burri, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Mina Kamel, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Janosch Nikolic, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Markus Achtelik, ASL, ETH Zurich, Switzerland
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!--
+  Clover 4 base model, collision boxes, and other fun stuff. Derived heavily from multirotor_base.xacro
+  from PX4 simulation config files.
+-->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- Main multirotor link -->
+  <!-- We still allow specifying a different mass and inertia matrix.
+       Body width and height are allowed as parameters, but are ignored for the most part.
+       Color is not applicable, since the model has textures and is a compound thingy anyway.
+  -->
+  <xacro:macro name="clover4_base_macro"
+    params="robot_namespace mass body_width body_height *inertia">
+    <link name="base_link"></link>
+
+    <!-- Note: For some reason this file relies on base_link_inertia becoming base_link.
+         I don't even want to know.
+         -sfalexrog
+    -->
+    <joint name="base_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="base_link" />
+      <child link="base_link_inertia" />
+    </joint>
+
+    <link name="base_link_inertia">
+      <inertial>
+        <mass value="${mass}" />  <!-- [kg] -->
+        <origin xyz="0 0 0" />
+        <xacro:insert_block name="inertia" />
+      </inertial>
+      <visual name="body">
+        <origin xyz="0 0 0.025" rpy="0 0 0" />
+        <geometry>
+          <!-- Note: Texture files are expected to be in the same directory as the model -->
+          <mesh filename="package://clover_description/meshes/clover4/clover_body_solid.dae"
+            scale="1 1 1"/>
+        </geometry>
+      </visual>
+      <!-- Now, a person with some experience in building urdf/xacro files would say something along the lines of:
+           "Hey, a link may have multiple visual tags, each with its own material!"
+           Hear my answer, o experienced one. First, you are absolutely correct, you may add multiple visual
+           elements to a single link. Second, once you try to put some transparency on your visual elements,
+           you'll have it vanish into thin fucking air - Gazebo (as of version 9!) gives fuck all about your
+           "color" attributes and whatnot. Third, oh, you want to reference the visual element from your
+           "gazebo" tag down the line? Well fuck you, buddy, because you can only reference links and joints!
+           So yeah, good luck improving this.
+           - sfalexrog
+      -->
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${body_width} ${body_width} ${body_height}" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- This link is here for a single reason: to draw transparent parts (oh, and also to be the bane of my existence).
+         I'm going to leave helpful comments for the poor soul who's going to attempt to improve this file.
+        -sfalexrog
+    -->
+    <link name="base_guard_link">
+      <!-- So we've established we actually need a link. Now, if you look at the SDF spec for some reason
+           (much like I did), you'll notice you don't really need much for a link to exist. And that is a
+           big fucking lie. Sure, go ahead, create a link without inertial or collision properties,
+           see how far that gets you (spoiler: it will get you fucking nowhere, because Gazebo will
+           devour your puny link and all that it stands for).
+           - sfalexrog
+      -->
+      <inertial>
+        <!-- We give an oh-so-tiny mass to the link to avoid it being destroyed by Gazebo -->
+        <mass value="0.015"/> <!-- [kg] -->
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <!-- We also give it some inertia, so that the physics engine does not go crazy
+             (and to avoid it being devoured by Gazebo)
+        -->
+        <inertia 
+          ixx="${1/12 * 0.015 * 0.01 * 0.01}"
+          iyy="${1/12 * 0.015 * 0.01 * 0.01}"
+          izz="${1/12 * 0.015 * 0.01 * 0.01}"
+          ixy="0.0" ixz="0.0" iyz="0.0"
+        />
+      </inertial>
+      <!-- We may want to have proper collision tucked away here at some point, though -->
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.01" /> <!-- [m] [m] [m] -->
+        </geometry>
+      </collision>
+      <visual>
+        <!-- This origin should be the same as in "base_link_inertia" visuals -->
+        <origin xyz="0 0 0.025" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://clover_description/meshes/clover4/clover_guards_transparent.dae"
+            scale="1 1 1"/>
+        </geometry>
+        <!-- Let me reiterate that you can't put the "material" tag to any effect -->
+      </visual>
+    </link>
+
+    <!-- Now, the last thing to do is to attach the base_guard_link to base_link. Since
+         base_guard_link has no meaning by itself, it must be fixed rigidly to base_link.
+         Except Gazebo absolutely loves "optimizing away" your fixed joints and all
+         child links with them! How do we deal with that nonsense? Read on to find out!
+         - sfalexrog
+    -->
+    <joint name="base_guard_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="base_link" />
+      <child link="base_guard_link" />
+    </joint>
+
+    <!-- attach multirotor_base_plugin to the base_link -->
+    <gazebo>
+      <plugin filename="libgazebo_multirotor_base_plugin.so" name="rosbag">
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <linkName>base_link</linkName>
+        <rotorVelocitySlowdownSim>${rotor_velocity_slowdown_sim}</rotorVelocitySlowdownSim>
+      </plugin>
+    </gazebo>
+    <!-- And here's what you've been waiting for: the way to save a fixed joint from
+         Gazebo's wrath! You plead for it to save your joint, and it might answer
+        (depending on the version, apparently).
+        Note that it is done in other places as well.
+        - sfalexrog
+     -->
+    <gazebo reference="base_guard_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+      <preserveFixedJoint>true</preserveFixedJoint>
+    </gazebo>
+    <!-- ...and here's another absolutely terrible idea: you can only set a material for
+         the whole link, not for its part. And that's incompatible with URDF's material
+         definition. Yeah.
+         - sfalexrog
+    -->
+    <gazebo reference="base_guard_link">
+      <material>Polycarbonate</material>
+    </gazebo>
+    <gazebo reference="base_link">
+      <kp>10000.0</kp>
+      <kd>10.0</kd>
+      <maxVel>10.0</maxVel>
+      <minDepth>0.001</minDepth>
+   </gazebo>
+  </xacro:macro>
+
+  <!-- Rotor joint and link, modified for Clover purposes -->
+  <xacro:macro name="vertical_clover_rotor"
+    params="robot_namespace suffix direction motor_constant moment_constant parent mass_rotor radius_rotor time_constant_up time_constant_down max_rot_velocity motor_number rotor_drag_coefficient rolling_moment_coefficient mesh *origin *inertia">
+    <joint name="rotor_${motor_number}_joint" type="continuous">
+      <xacro:insert_block name="origin" />
+      <axis xyz="0 0 1" />
+      <!-- TODO(ff): not currently set because it's not yet supported -->
+      <!-- <limit effort="2000" velocity="${max_rot_velocity}" /> -->
+      <parent link="${parent}" />
+      <child link="rotor_${motor_number}" />
+
+    </joint>
+    <!-- TODO(ff): not currently set because it's not yet supported -->
+    <!-- <gazebo reference="rotor_${motor_number}_joint"> <axis> <xyz>0 0 1</xyz>
+      <limit> <velocity> ${max_rot_velocity} </velocity> </limit> </axis> </gazebo> -->
+    <link name="rotor_${motor_number}">
+      <inertial>
+        <mass value="${mass_rotor}" /> <!-- [kg] -->
+        <xacro:insert_block name="inertia" />
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://clover_description/meshes/${mesh}"
+            scale="1 1 1" />
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.005" radius="${radius_rotor}" /> <!-- [m] -->
+        </geometry>
+      </collision>
+    </link>
+    <gazebo>
+      <plugin name="${suffix}_motor_model" filename="libgazebo_motor_model.so">
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <jointName>rotor_${motor_number}_joint</jointName>
+        <linkName>rotor_${motor_number}</linkName>
+        <turningDirection>${direction}</turningDirection>
+        <timeConstantUp>${time_constant_up}</timeConstantUp>
+        <timeConstantDown>${time_constant_down}</timeConstantDown>
+        <maxRotVelocity>${max_rot_velocity}</maxRotVelocity>
+        <motorConstant>${motor_constant}</motorConstant>
+        <momentConstant>${moment_constant}</momentConstant>
+        <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>${motor_number}</motorNumber>
+        <rotorDragCoefficient>${rotor_drag_coefficient}</rotorDragCoefficient>
+        <rollingMomentCoefficient>${rolling_moment_coefficient}</rollingMomentCoefficient>
+        <motorSpeedPubTopic>/motor_speed/${motor_number}</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>${rotor_velocity_slowdown_sim}</rotorVelocitySlowdownSim>
+        <!--
+        <gazebo_joint_control_pid>
+          <p>0.1</p>
+          <i>0</i>
+          <d>0</d>
+          <iMax>0</iMax>
+          <iMin>0</iMin>
+          <cmdMax>3</cmdMax>
+          <cmdMin>-3</cmdMin>
+        </gazebo_joint_control_pid>
+      -->
+      </plugin>
+    </gazebo>
+    <!-- <gazebo reference="rotor_${motor_number}">
+      <material>Gazebo/${color}</material>
+    </gazebo> -->
+  </xacro:macro>
+</robot>
