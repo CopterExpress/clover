@@ -81,7 +81,7 @@ rospack list-names | while read line; do echo $line `rosversion $line`; done
 set -x
 
 echo "--- Build Debian packages"
-apt-get install -y python3-bloom debhelper dpkg-dev
+apt-get install -y python3-bloom debhelper dpkg-dev libtinyxml-dev
 
 # add rosdep file to help bloom-generate resolve missing bullseye dependencies
 echo "yaml file:///etc/ros/rosdep/noetic-bullseye.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
