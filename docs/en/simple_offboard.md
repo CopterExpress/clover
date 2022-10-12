@@ -103,7 +103,7 @@ Parameters:
 * `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
-* `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z`, `vx`, `vy`, `vz`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
+* `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z` and `yaw`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
 
 > **Note** If you don't want to change your current yaw set the `yaw` parameter to `NaN` (angular velocity by default is 0).
 
