@@ -24,6 +24,7 @@ def test_simple_offboard_services_available():
     rospy.wait_for_service('set_attitude', timeout=5)
     rospy.wait_for_service('set_rates', timeout=5)
     rospy.wait_for_service('land', timeout=5)
+    rospy.wait_for_service('simple_offboard/release', timeout=5)
 
 def test_web_video_server(node):
     try:
