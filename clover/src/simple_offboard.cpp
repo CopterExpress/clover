@@ -613,7 +613,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		if (!auto_arm && std::isfinite(z) &&
 		    isnan(x) && isnan(y) && isnan(vx) && isnan(vy) && isnan(vz) &&
 		    isnan(pitch) && isnan(roll) && isnan(thrust) &&
-		    isnan(lat) && isnan(lon) && isnan(yaw)) {
+		    isnan(lat) && isnan(lon)) {
 			// set only the z
 			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
 				if (!waitTransform(setpoint_position.header.frame_id, frame_id, stamp, transform_timeout))
