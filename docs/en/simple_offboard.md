@@ -305,6 +305,16 @@ rosservice call /land "{}"
 
 > **Caution** In recent PX4 versions, the vehicle will be switched out of LAND mode to manual mode, if the remote control sticks are moved significantly.
 
+### release
+
+If it's necessary to pause sending setpoint messages, use the `simple_offboard/release` service:
+
+```python
+release = rospy.ServiceProxy('simple_offboard/release', Trigger)
+
+release()
+```
+
 ## Additional materials
 
 * [ArUco-based position estimation and navigation](aruco.md).

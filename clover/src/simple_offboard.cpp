@@ -860,6 +860,13 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 	return false;
 }
 
+bool release(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
+{
+	setpoint_timer.stop();
+	res.success = true;
+	return true;
+}
+
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "simple_offboard");
@@ -933,6 +940,7 @@ int main(int argc, char **argv)
 	auto sa_serv = nh.advertiseService("set_attitude", &setAttitude);
 	auto sr_serv = nh.advertiseService("set_rates", &setRates);
 	auto ld_serv = nh.advertiseService("land", &land);
+	auto rl_serv = nh_priv.advertiseService("release", &release);
 
 	// Setpoint timer
 	setpoint_timer = nh.createTimer(ros::Duration(1 / nh_priv.param("setpoint_rate", 30.0)), &publishSetpoint, false, false);

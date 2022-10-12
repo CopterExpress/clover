@@ -305,6 +305,16 @@ rosservice call /land "{}"
 
 > **Caution** В более новых версиях PX4 коптер выйдет из режима LAND в ручной режим, если сильно перемещать стики.
 
+### release
+
+В случае необходимости приостановки отправки setpoint-сообщений, используйте сервис `simple_offboard/release`:
+
+```python
+release = rospy.ServiceProxy('simple_offboard/release', Trigger)
+
+release()
+```
+
 ## Дополнительные материалы
 
 * [Полеты в поле ArUco-маркеров](aruco.md).
