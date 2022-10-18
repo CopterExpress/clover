@@ -78,6 +78,7 @@ ros::Duration manual_control_timeout;
 float default_speed;
 bool auto_release;
 bool land_only_in_offboard, nav_from_sp, check_kill_switch;
+bool nav_feedforward;
 std::map<string, string> reference_frames;
 
 // Publishers
@@ -94,6 +95,7 @@ PositionTarget position_raw_msg;
 AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
 TwistStamped rates_msg;
+Vector3 velocity_feedforward;
 TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
 
@@ -341,7 +343,15 @@ inline float getDistance(const Point& from, const Point& to)
 	return hypot(from.x - to.x, from.y - to.y, from.z - to.z);
 }
 
-void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoint)
+inline void normalize(Vector3& vector, double length = 1.0)
+{
+	double len = hypot(vector.x, vector.y, vector.z);
+	vector.x *= length / len;
+	vector.y *= length / len;
+	vector.z *= length / len;
+}
+
+void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoint, Vector3& velocity_feedforward)
 {
 	if (wait_armed) {
 		// don't start navigating if we're waiting arming
@@ -355,6 +365,14 @@ void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoin
 	nav_setpoint.x = nav_start.pose.position.x + (setpoint_position_transformed.pose.position.x - nav_start.pose.position.x) * passed;
 	nav_setpoint.y = nav_start.pose.position.y + (setpoint_position_transformed.pose.position.y - nav_start.pose.position.y) * passed;
 	nav_setpoint.z = nav_start.pose.position.z + (setpoint_position_transformed.pose.position.z - nav_start.pose.position.z) * passed;
+
+	if (nav_feedforward) {
+		// calculate velocity feedforward
+		velocity_feedforward.x = setpoint_position_transformed.pose.position.x - nav_start.pose.position.x;
+		velocity_feedforward.y = setpoint_position_transformed.pose.position.y - nav_start.pose.position.y;
+		velocity_feedforward.z = setpoint_position_transformed.pose.position.z - nav_start.pose.position.z;
+		normalize(velocity_feedforward, speed);
+	}
 }
 
 PoseStamped globalToLocal(double lat, double lon)
@@ -412,7 +430,7 @@ void publish(const ros::Time stamp)
 
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
 		position_msg.pose.orientation = setpoint_position_transformed.pose.orientation; // copy yaw
-		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
+		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position, velocity_feedforward);
 
 		if (setpoint_yaw_type == TOWARDS) {
 			double yaw_towards = atan2(position_msg.pose.position.y - nav_start.pose.position.y,
@@ -428,19 +446,31 @@ void publish(const ros::Time stamp)
 	if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
 		position_msg.header.stamp = stamp;
 
-		if (setpoint_yaw_type == YAW || setpoint_yaw_type == TOWARDS) {
+		if (!nav_feedforward && setpoint_yaw_type == YAW || setpoint_yaw_type == TOWARDS) {
+			// simple pose setpoint without velocity feedforward and yaw rate
 			position_pub.publish(position_msg);
 
 		} else {
-			position_raw_msg.type_mask = PositionTarget::IGNORE_VX +
-			                             PositionTarget::IGNORE_VY +
-			                             PositionTarget::IGNORE_VZ +
-			                             PositionTarget::IGNORE_AFX +
+			position_raw_msg.type_mask = PositionTarget::IGNORE_AFX +
 			                             PositionTarget::IGNORE_AFY +
-			                             PositionTarget::IGNORE_AFZ +
-			                             PositionTarget::IGNORE_YAW;
+			                             PositionTarget::IGNORE_AFZ;
+
+			if (!nav_feedforward) {
+				position_raw_msg.type_mask = PositionTarget::IGNORE_VX +
+				                             PositionTarget::IGNORE_VY +
+				                             PositionTarget::IGNORE_VZ;
+
+			}
+
+			position_raw_msg.type_mask += setpoint_yaw_type == YAW_RATE ?
+				PositionTarget::IGNORE_YAW : PositionTarget::IGNORE_YAW_RATE;
+
 			position_raw_msg.yaw_rate = setpoint_yaw_rate;
+			position_raw_msg.yaw = setpoint_yaw;
 			position_raw_msg.position = position_msg.pose.position;
+			position_raw_msg.velocity.x = velocity_feedforward.x;
+			position_raw_msg.velocity.y = velocity_feedforward.y;
+			position_raw_msg.velocity.z = velocity_feedforward.z;
 			position_raw_pub.publish(position_raw_msg);
 		}
 
@@ -886,6 +916,7 @@ int main(int argc, char **argv)
 	nh_priv.param("land_only_in_offboard", land_only_in_offboard, true);
 	nh_priv.param("nav_from_sp", nav_from_sp, true);
 	nh_priv.param("check_kill_switch", check_kill_switch, true);
+	nh_priv.param("nav_feedforward", nav_feedforward, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
