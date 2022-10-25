@@ -491,3 +491,11 @@ param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
 # Изменить параметр типа FLOAT:
 param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
 ```
+
+### # {#is-simulation}
+
+Проверить, что код запущен в [симуляции Gazebo](simulation.md):
+
+```python
+is_simulation = rospy.get_param('/use_sim_time', False)
+```

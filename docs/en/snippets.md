@@ -480,3 +480,11 @@ param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
 # Set parameter of type FLOAT:
 param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
 ```
+
+### # {#is-simulation}
+
+Check, if the code is running inside a [Gazebo simulation](simulation.md):
+
+```python
+is_simulation = rospy.get_param('/use_sim_time', False)
+```
