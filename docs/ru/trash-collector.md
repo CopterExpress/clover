@@ -11,7 +11,8 @@
 * Чамбулов Азамат, chambulov2019@gmail.com, программист.
 * Кадыров Мухаммадали, @KadyrovMi, инженер.
 * Кыдыров Баястан, bayastankydyrov@gmail.com, помощник инженера.
-* Касымбек уулу Иса, isakasymbekuulu@gmail.com, дизайнер.
+* Касымбек уулу Иса, @Kyrgyz-Jesus, дизайнер.
+* Руслан Исаев, ruslan.isaev@alatoo.edu.kg, ментор.
 
 ## Описание проекта
 
