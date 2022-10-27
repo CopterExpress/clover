@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Bottom</title>
+    </head>
+<body>
+    
+        <div class="flex w-full justify-center">
+            <div role="tablist" aria-label="code filters" id="filters" class="bg-transparent border-2 border-gray-200 dark:border-gray-600 rounded flex items-center">
+                <button aria-label="show Swarm in Blocks website"  role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <a href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks" target=_blank; rel=noopener noreferrer>
+                        <img    src="./assets/Swarm_in_Blocks_w.svg"
+                            alt="Swarm in Blocks"
+                            width="100"
+                            height="100" 
+                            title="Swarm in Blocks" 
+                    /></a>
+                </button>
+                <button aria-label="show SEMEAR website"  role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <a href="http://www.semear.eesc.usp.br/wordpress/" target=_blank; rel=noopener noreferrer>
+                        <img    src="./assets/semearLOGO.svg"
+                            alt="SEMEAR"
+                            width="100"
+                            height="100" 
+                            title="SEMEAR" 
+                    /></a>
+                </button>
+                <button aria-label="show COEX website"  role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <a href="https://coex.tech/" target=_blank; rel=noopener noreferrer>
+                        <img    src="./assets/coex.svg"
+                            alt="COEX"
+                            width="100"
+                            height="100" 
+                            title="COEX" 
+                    /></a>                
+                </button>
+                <button aria-label="show Github website" role="tab" class="w-13 h-13 focus:outline-none focus:text-indigo-700 dark:focus:text-indigo-700 hover:text-indigo-700 dark:hover:text-indigo-700 text-gray-800 dark:text-gray-50 flex justify-center items-center cursor-pointer focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800">
+                    <a href="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks" target=_blank; rel=noopener noreferrer>
+                        <img    src="./assets/github.svg"
+                            alt="GitHub"
+                            width="100"
+                            height="100" 
+                            title="GitHub" 
+                    /></a>
+                </button>
+            </div>
+        </div>
+
+</body>
+</html>

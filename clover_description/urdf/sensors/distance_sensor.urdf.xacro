@@ -54,7 +54,7 @@
           </range>
         </ray>
         <plugin name="laser" filename="libgazebo_ros_range.so">
-          <robotNamespace></robotNamespace> <!-- FIXME: fill namespace? -->
+          <!-- <robotNamespace></robotNamespace> --> <!-- FIXME: fill namespace? -->
           <topicName>/rangefinder/range</topicName>
           <frameName>rangefinder</frameName>
           <radiation>infrared</radiation>

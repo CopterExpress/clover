@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Swarm in Blocks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+</div>
+
+
+<!-- 3 part menu -->
+<div class="w3-row-padding w3-center w3-margin-top">
+
+<div class="w3-third">
+    <div class="w3-card w3-container">
+        <h1 class="subtitle">
+            Clover Blocks<br>
+        </h1>
+        <i class="fa fa-cube w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <br><br>
+        <a href="clover_blocks" target=_blank; rel=noopener noreferrer>
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
+                onclick="document.getElementById('id01').style.display='block'" 
+                style="font-weight:900;"> GO
+            </button>
+        </a>
+        <div class="p" style="margin-top: 30px; margin-bottom: 20px">
+            <p>Basic Blockly Functionalities</p>
+            <p>Single-copter Manipulation</p>
+            <p>Traditional Build-in Functions</p>
+        </div>
+    </div>
+</div>
+<div class="w3-third">
+    <div class="w3-card w3-container">
+        <h1 class="subtitle">
+            Swarm Clover Blocks<br>
+        </h1>
+        <i class="fa fa-cubes w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <br><br>
+        <a href="swarm_clover_blocks" target=_blank; rel=noopener noreferrer>
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
+                onclick="document.getElementById('id01').style.display='block'" 
+                style="font-weight:900;"> GO
+            </button>
+        </a>
+        <div class="p" style="margin-top: 30px; margin-bottom: 20px">
+            <p>Multi-copter Facilities</p>
+            <p>Improved Built-in Functions</p>
+            <p>Basic Full Automation</p>
+        </div>
+    </div>
+</div>
+
+<div class="w3-third">
+    <div class="w3-card w3-container">
+        <h1 class="subtitle">
+            Clover Kit Tools<br>
+        </h1>
+        <i class="fa fa-cogs w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <br><br>
+        <a href="clover" target=_blank; rel=noopener noreferrer>
+            <button class="w3-button w3-xlarge w3-black w3-hover-grey" 
+                onclick="document.getElementById('id01').style.display='block'" 
+                style="font-weight:900;"> GO
+            </button>
+        </a>
+        <div class="p" style="margin-top: 30px; margin-bottom: 20px">
+            <p>Topics and Documentation</p>
+            <p>Cameras Acess</p>
+            <p>Web Terminal and Blockly</p>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Easy to Swarm heading -->
+<hr>
+<div class="w3-center">
+    <h1 class="eazy2">
+        It's never been easier to </h1>
+    <h1 class="Swarm">
+        Swarm</h1>
+    <hr style="width:200px; margin: auto; border-bottom: 2px rgb(146, 71, 216) solid;" size="1">
+    <p class="w3-large">Online block programming optimized for swarm manipulation</p>
+    
+</div>
+<br>
+
+<center>
+    <div class="container">
+            <img    src="./assets/SwarmCloverBlocks.png"
+                    alt="Swarm_Clover_Blocks"
+                    width= 100%;
+                    height= auto; 
+                    title="Swarm_Clover_Blocks"
+                    style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
+            <img    src="./assets/formations.gif"
+                    alt="quatro clover montando uma formação"
+                    width= 100%%;
+                    height= auto; 
+                    title="Swarm_Clover_Blocks example working" 
+                    style="box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;" />
+    </div>
+</center>
+
+<!-- Bottom -->
+<hr>
+<div class="w3-center">
+    <h2 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+        An Atena Team Implementation</h2>
+</div>
+
+<div class="bottom">
+    <object data="bottom.html" width="1000" height="300"></object>
+</div>
