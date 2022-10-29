@@ -356,7 +356,7 @@ def check_aruco():
             known_tilt += ' (ALL markers are on the floor)'
         elif known_tilt == 'map_flipped':
             known_tilt += ' (ALL markers are on the ceiling)'
-        info('aruco_detector/known_tilt = %s', known_tilt)
+        info('aruco_detect/known_tilt = %s', known_tilt)
         try:
             rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
         except rospy.ROSException:
