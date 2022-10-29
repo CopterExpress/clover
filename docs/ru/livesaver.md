@@ -31,7 +31,6 @@ Imagine in the distance a person who is drowning in water in the photographs, we
 
 ![beach_example](https://user-images.githubusercontent.com/59159103/198822196-b3411f50-f978-48b1-8fba-03e819c8dc4f.png)
 
-
 ### Using Clover platform
 
 We would like to use Clover platform because it have camera and campanion PC.
