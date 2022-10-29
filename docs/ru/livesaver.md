@@ -29,7 +29,7 @@ The idea of our project came to us right away because many people don’t know h
 
 Imagine in the distance a person who is drowning in water in the photographs, we will make it so that we can determine how far and at what angle from the center the drone should fly. Thus, we indicate a point on the photo and at the output we get two values ​​of distance (in meters) and angle (in degrees). And thus we choose the best path to the drowning man and drop the lifebuoy.
 
-![beach_example](https://user-images.githubusercontent.com/59159103/198822196-b3411f50-f978-48b1-8fba-03e819c8dc4f.png)
+![beach_example](../assets/beach_example.png)
 
 ### Using Clover platform
 
