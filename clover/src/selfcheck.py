@@ -198,27 +198,28 @@ def check_fcu():
             failure('no connection to the FCU (check wiring)')
             return
 
-        clover_tag = re.compile(r'-cl[oe]ver\.\d+$')
-        clover_fw = False
+        if not is_process_running('px4', exact=True): # can't use px4 console in SITL
+            clover_tag = re.compile(r'-cl[oe]ver\.\d+$')
+            clover_fw = False
 
-        # Make sure the console is available to us
-        mavlink_exec('\n')
-        version_str = mavlink_exec('ver all')
-        if version_str == '':
-            info('no version data available from SITL')
+            # Make sure the console is available to us
+            mavlink_exec('\n')
+            version_str = mavlink_exec('ver all')
+            if version_str == '':
+                info('no version data available from SITL')
 
-        for line in version_str.split('\n'):
-            if line.startswith('FW version: '):
-                info(line[len('FW version: '):])
-            elif line.startswith('FW git tag: '): # only Clover's firmware
-                tag = line[len('FW git tag: '):]
-                clover_fw = clover_tag.search(tag)
-                info(tag)
-            elif line.startswith('HW arch: '):
-                info(line[len('HW arch: '):])
+            for line in version_str.split('\n'):
+                if line.startswith('FW version: '):
+                    info(line[len('FW version: '):])
+                elif line.startswith('FW git tag: '): # only Clover's firmware
+                    tag = line[len('FW git tag: '):]
+                    clover_fw = clover_tag.search(tag)
+                    info(tag)
+                elif line.startswith('HW arch: '):
+                    info(line[len('HW arch: '):])
 
-        if not clover_fw:
-            info('not Clover PX4 firmware, check https://clover.coex.tech/firmware')
+            if not clover_fw:
+                info('not Clover PX4 firmware, check https://clover.coex.tech/firmware')
 
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
