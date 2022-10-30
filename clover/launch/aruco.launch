@@ -18,6 +18,7 @@
         <remap from="map_markers" to="aruco_map/map"/>
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
+        <param name="use_map_markers" value="true"/>
         <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
         <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
         <param name="length" value="$(arg length)"/>
