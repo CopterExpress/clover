@@ -256,18 +256,19 @@ def check_fcu():
         if cbrk_usb_chk != 197848:
             failure('set parameter CBRK_USB_CHK to 197848 for flying with USB connected')
 
-        try:
-            battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
-            if not battery.cell_voltage:
-                failure('cell voltage is not available, https://clover.coex.tech/power')
-            else:
-                cell = battery.cell_voltage[0]
-                if cell > 4.3 or cell < 3.0:
-                    failure('incorrect cell voltage: %.2f V, https://clover.coex.tech/power', cell)
-                elif cell < 3.7:
-                    failure('critically low cell voltage: %.2f V, recharge battery', cell)
-        except rospy.ROSException:
-            failure('no battery state')
+        if not is_process_running('px4', exact=True): # skip battery check in SITL
+            try:
+                battery = rospy.wait_for_message('mavros/battery', BatteryState, timeout=3)
+                if not battery.cell_voltage:
+                    failure('cell voltage is not available, https://clover.coex.tech/power')
+                else:
+                    cell = battery.cell_voltage[0]
+                    if cell > 4.3 or cell < 3.0:
+                        failure('incorrect cell voltage: %.2f V, https://clover.coex.tech/power', cell)
+                    elif cell < 3.7:
+                        failure('critically low cell voltage: %.2f V, recharge battery', cell)
+            except rospy.ROSException:
+                failure('no battery state')
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
