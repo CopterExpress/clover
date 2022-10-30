@@ -84,9 +84,9 @@ def check(name):
                     if 'failure' in report:
                         rospy.logerr('%s: %s', name, report['failure'])
                     elif 'info' in report:
-                        rospy.loginfo('%s: %s', name, report['info'])
+                        rospy.loginfo('\033[90m%s\033[0m: %s', name, report['info'])
                 if not thread_local.reports:
-                    rospy.loginfo('%s: OK', name)
+                    rospy.loginfo('\033[90m%s\033[0m: \033[92mOK\033[0m', name)
                 if rospy.get_param('~time', False):
                     rospy.loginfo('%s: %.1f sec', name, rospy.get_time() - start)
         return wrapper
