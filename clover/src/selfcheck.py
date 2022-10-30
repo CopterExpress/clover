@@ -413,17 +413,14 @@ def check_vpe():
         try:
             vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
         except rospy.ROSException:
-            if rospy.get_param('aruco_map/known_tilt') == 'map_flipped':
+            if not is_process_running('vpe_publisher', full=True):
+                info('no vision position estimate, vpe_publisher is not running')
+            elif rospy.get_param('aruco_map/known_tilt') == 'map_flipped':
                 failure('no vision position estimate, markers are on the ceiling')
             elif is_on_the_floor():
                 info('no vision position estimate, the drone is on the floor')
             else:
                 failure('no vision position estimate')
-            # check if vpe_publisher is running
-            try:
-                subprocess.check_output(['pgrep', '-x', 'vpe_publisher'])
-            except subprocess.CalledProcessError:
-                return  # it's not running, skip following checks
 
     # check PX4 settings
     est = get_param('SYS_MC_EST_GROUP')
