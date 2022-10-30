@@ -580,7 +580,14 @@ def check_optical_flow():
                           get_param('SENS_FLOW_MAXHGT'))
 
     except rospy.ROSException:
-        failure('no optical flow data (from Raspberry)')
+        if rospy.get_param('optical_flow/disable_on_vpe', False):
+            try:
+                rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
+                info('no optical flow as disable_on_vpe is true')
+            except:
+                failure('no optical flow on RPi, disable_on_vpe is true, but no vision pose also')
+        else:
+            failure('no optical flow on RPi')
 
 
 @check('Rangefinder')
