@@ -503,7 +503,7 @@ publish_debug:
 		vis_marker.pose.position.x = x;
 		vis_marker.pose.position.y = y;
 		vis_marker.pose.position.z = z;
-		tf::quaternionTFToMsg(q, marker.pose.orientation);
+		tf::quaternionTFToMsg(q, vis_marker.pose.orientation);
 		vis_marker.frame_locked = true;
 		vis_array_.markers.push_back(vis_marker);
 
