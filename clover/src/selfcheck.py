@@ -582,12 +582,10 @@ def check_optical_flow():
             if not numpy.isclose(scale, 1.0):
                 failure('LPE_FLW_SCALE = %.2f, but it should be 1.0', scale)
 
-            info('LPE_FLW_QMIN = %s, LPE_FLW_R = %.4f, LPE_FLW_RR = %.4f, SENS_FLOW_MINHGT = %.3f, SENS_FLOW_MAXHGT = %.3f',
+            info('LPE_FLW_QMIN = %s, LPE_FLW_R = %.4f, LPE_FLW_RR = %.4f',
                           get_param('LPE_FLW_QMIN'),
                           get_param('LPE_FLW_R'),
-                          get_param('LPE_FLW_RR'),
-                          get_param('SENS_FLOW_MINHGT'),
-                          get_param('SENS_FLOW_MAXHGT'))
+                          get_param('LPE_FLW_RR'))
         elif est == 2:
             fuse = get_param('EKF2_AID_MASK')
             if not fuse & (1 << 1):
@@ -595,12 +593,11 @@ def check_optical_flow():
             delay = get_param('EKF2_OF_DELAY')
             if delay != 0:
                 failure('EKF2_OF_DELAY = %.2f, but it should be zero', delay)
-            info('EKF2_OF_QMIN = %s, EKF2_OF_N_MIN = %.4f, EKF2_OF_N_MAX = %.4f, SENS_FLOW_MINHGT = %.3f, SENS_FLOW_MAXHGT = %.3f',
+            info('EKF2_OF_QMIN = %s, EKF2_OF_N_MIN = %.4f, EKF2_OF_N_MAX = %.4f',
                           get_param('EKF2_OF_QMIN'),
                           get_param('EKF2_OF_N_MIN'),
-                          get_param('EKF2_OF_N_MAX'),
-                          get_param('SENS_FLOW_MINHGT'),
-                          get_param('SENS_FLOW_MAXHGT'))
+                          get_param('EKF2_OF_N_MAX'))
+        info('SENS_FLOW_MINHGT = %.3f, SENS_FLOW_MAXHGT = %.3f', get_param('SENS_FLOW_MINHGT'), get_param('SENS_FLOW_MAXHGT'))
 
     except rospy.ROSException:
         if rospy.get_param('optical_flow/disable_on_vpe', False):
