@@ -15,7 +15,8 @@ import subprocess
 import re
 from collections import OrderedDict
 import traceback
-from threading import Event
+import threading
+from threading import Event, Thread, Lock
 import numpy
 import rospy
 import tf2_ros
@@ -53,38 +54,38 @@ tf_buffer = tf2_ros.Buffer()
 tf_listener = tf2_ros.TransformListener(tf_buffer)
 
 
-failures = []
-infos = []
-current_check = None
+thread_local = threading.local()
+reports_lock = Lock()
 
 
 def failure(text, *args):
     msg = text % args
-    rospy.logwarn('%s: %s', current_check, msg)
-    failures.append(msg)
+    thread_local.reports += [{'failure': msg}]
 
 
 def info(text, *args):
     msg = text % args
-    rospy.loginfo('%s: %s', current_check, msg)
-    infos.append(msg)
+    thread_local.reports += [{'info': msg}]
 
 
 def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
-            failures[:] = []
-            infos[:] = []
-            global current_check
-            current_check = name
+            thread_local.reports = []
             try:
                 fn(*args, **kwargs)
             except Exception as e:
                 traceback.print_exc()
                 rospy.logerr('%s: exception occurred', name)
                 return
-            if not failures and not infos:
-                rospy.loginfo('%s: OK', name)
+            with reports_lock:
+                for report in thread_local.reports:
+                    if 'failure' in report:
+                        rospy.logerr('%s: %s', name, report['failure'])
+                    elif 'info' in report:
+                        rospy.loginfo('%s: %s', name, report['info'])
+                if not thread_local.reports:
+                    rospy.loginfo('%s: OK', name)
         return wrapper
     return inner
 
@@ -657,7 +658,7 @@ def check_boot_duration():
 
 @check('CPU usage')
 def check_cpu_usage():
-    WHITELIST = 'nodelet', 'gzclient', 'gzserver'
+    WHITELIST = 'nodelet', 'gzclient', 'gzserver', 'selfcheck.py'
     CMD = "top -n 1 -b -i | tail -n +8 | awk '{ printf(\"%-8s\\t%-8s\\t%-8s\\n\", $1, $9, $12); }'"
     output = subprocess.check_output(CMD, shell=True).decode()
     processes = output.split('\n')
@@ -837,26 +838,47 @@ def check_board():
         info('could not open /proc/device-tree/model, not a Raspberry Pi?')
 
 
+def parallel_for(fns):
+    threads = []
+    for fn in fns:
+        thread = Thread(target=fn)
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
+
+
+def consequentially_for(fns):
+    for fn in fns:
+        fn()
+
+
 def selfcheck():
-    check_image()
-    check_board()
-    check_clover_service()
-    check_network()
-    check_fcu()
-    check_imu()
-    check_local_position()
-    check_velocity()
-    check_global_position()
-    check_preflight_status()
-    check_main_camera()
-    check_aruco()
-    check_simpleoffboard()
-    check_optical_flow()
-    check_vpe()
-    check_rangefinder()
-    check_rpi_health()
-    check_cpu_usage()
-    check_boot_duration()
+    checks = [
+        check_image,
+        check_board,
+        check_clover_service,
+        check_network,
+        check_fcu,
+        check_imu,
+        check_local_position,
+        check_velocity,
+        check_global_position,
+        check_preflight_status,
+        check_main_camera,
+        check_aruco,
+        check_simpleoffboard,
+        check_optical_flow,
+        check_vpe,
+        check_rangefinder,
+        check_rpi_health,
+        check_cpu_usage,
+        check_boot_duration,
+    ]
+    if rospy.get_param('~parallel', False):
+        parallel_for(checks)
+    else:
+        consequentially_for(checks)
 
 
 if __name__ == '__main__':
