@@ -45,7 +45,7 @@ import locale
 
 rospy.init_node('selfcheck')
 
-os.environ['ROSCONSOLE_FORMAT']='[${severity}]: ${message}'
+os.environ['ROSCONSOLE_FORMAT']='${message}'
 
 # use user's locale to convert numbers, etc
 locale.setlocale(locale.LC_ALL, '')
