@@ -207,9 +207,9 @@ def pose_update(pose):
     # Processing new data of copter's position
     pass
 
-rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
-rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
-rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
+rospy.Subscriber('mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 rospy.spin()
@@ -349,7 +349,7 @@ from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
 
-send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+send_command = rospy.ServiceProxy('mavros/cmd/command', CommandLong)
 
 def calibrate_gyro():
     rospy.loginfo('Calibrate gyro')
