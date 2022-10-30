@@ -71,7 +71,7 @@ private:
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
 	ros::ServiceServer set_markers_srv_;
-	bool estimate_poses_, send_tf_, auto_flip_;
+	bool estimate_poses_, send_tf_, auto_flip_, use_map_markers_;
 	double length_;
 	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
@@ -95,6 +95,7 @@ public:
 		dictionary = nh_priv_.param("dictionary", 2);
 		estimate_poses_ = nh_priv_.param("estimate_poses", true);
 		send_tf_ = nh_priv_.param("send_tf", true);
+		use_map_markers_ = nh_priv_.param("use_map_markers", true);
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
 			NODELET_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
@@ -395,6 +396,11 @@ private:
 		map_markers_ids_.clear();
 		for (auto const& marker : msg.markers) {
 			map_markers_ids_.insert(marker.id);
+			if (use_map_markers_) {
+				if (length_override_.find(marker.id) == length_override_.end()) {
+					length_override_[marker.id] = marker.length;
+				}
+			}
 		}
 	}
 
