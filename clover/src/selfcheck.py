@@ -71,6 +71,7 @@ def info(text, *args):
 def check(name):
     def inner(fn):
         def wrapper(*args, **kwargs):
+            start = rospy.get_time()
             thread_local.reports = []
             try:
                 fn(*args, **kwargs)
@@ -86,6 +87,8 @@ def check(name):
                         rospy.loginfo('%s: %s', name, report['info'])
                 if not thread_local.reports:
                     rospy.loginfo('%s: OK', name)
+                if rospy.get_param('~time', False):
+                    rospy.loginfo('%s: %.1f sec', name, rospy.get_time() - start)
         return wrapper
     return inner
 
