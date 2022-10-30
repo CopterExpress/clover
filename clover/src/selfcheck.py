@@ -440,7 +440,7 @@ def check_vpe():
         delay = get_param('LPE_VIS_DELAY')
         if delay != 0:
             failure('LPE_VIS_DELAY parameter is %s, but it should be zero', delay)
-        info('LPE_VIS_XY is %.2f m, LPE_VIS_Z is %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
+        info('LPE_VIS_XY = %.2f m, LPE_VIS_Z = %.2f m', get_param('LPE_VIS_XY'), get_param('LPE_VIS_Z'))
     elif est == 2:
         fuse = get_param('EKF2_AID_MASK')
         if not fuse & (1 << 3):
@@ -449,8 +449,8 @@ def check_vpe():
             failure('vision yaw fusion is disabled, change EKF2_AID_MASK parameter')
         delay = get_param('EKF2_EV_DELAY')
         if delay != 0:
-            failure('EKF2_EV_DELAY is %.2f, but it should be zero', delay)
-        info('EKF2_EVA_NOISE is %.3f, EKF2_EVP_NOISE is %.3f',
+            failure('EKF2_EV_DELAY=%.2f, but it should be zero', delay)
+        info('EKF2_EVA_NOISE = %.3f, EKF2_EVP_NOISE = %.3f',
             get_param('EKF2_EVA_NOISE'),
             get_param('EKF2_EVP_NOISE'))
 
@@ -566,7 +566,7 @@ def check_optical_flow():
         # check PX4 settings
         rot = get_param('SENS_FLOW_ROT')
         if rot != 0:
-            failure('SENS_FLOW_ROT parameter is %s, but it should be zero', rot)
+            failure('SENS_FLOW_ROT = %s, but it should be zero', rot)
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             fuse = get_param('LPE_FUSION')
@@ -576,9 +576,9 @@ def check_optical_flow():
                 failure('flow gyro compensation is disabled, change LPE_FUSION parameter')
             scale = get_param('LPE_FLW_SCALE')
             if not numpy.isclose(scale, 1.0):
-                failure('LPE_FLW_SCALE parameter is %.2f, but it should be 1.0', scale)
+                failure('LPE_FLW_SCALE = %.2f, but it should be 1.0', scale)
 
-            info('LPE_FLW_QMIN is %s, LPE_FLW_R is %.4f, LPE_FLW_RR is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+            info('LPE_FLW_QMIN = %s, LPE_FLW_R = %.4f, LPE_FLW_RR = %.4f, SENS_FLOW_MINHGT = %.3f, SENS_FLOW_MAXHGT = %.3f',
                           get_param('LPE_FLW_QMIN'),
                           get_param('LPE_FLW_R'),
                           get_param('LPE_FLW_RR'),
@@ -590,8 +590,8 @@ def check_optical_flow():
                 failure('optical flow fusion is disabled, change EKF2_AID_MASK parameter')
             delay = get_param('EKF2_OF_DELAY')
             if delay != 0:
-                failure('EKF2_OF_DELAY is %.2f, but it should be zero', delay)
-            info('EKF2_OF_QMIN is %s, EKF2_OF_N_MIN is %.4f, EKF2_OF_N_MAX is %.4f, SENS_FLOW_MINHGT is %.3f, SENS_FLOW_MAXHGT is %.3f',
+                failure('EKF2_OF_DELAY = %.2f, but it should be zero', delay)
+            info('EKF2_OF_QMIN = %s, EKF2_OF_N_MIN = %.4f, EKF2_OF_N_MAX = %.4f, SENS_FLOW_MINHGT = %.3f, SENS_FLOW_MAXHGT = %.3f',
                           get_param('EKF2_OF_QMIN'),
                           get_param('EKF2_OF_N_MIN'),
                           get_param('EKF2_OF_N_MAX'),
