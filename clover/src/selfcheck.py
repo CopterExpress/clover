@@ -362,7 +362,7 @@ def check_aruco():
             known_tilt += ' (ALL markers are on the ceiling)'
         info('aruco_detect/known_tilt = %s', known_tilt)
         try:
-            markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
+            markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=0.8)
         except rospy.ROSException:
             failure('no markers detection')
             return
@@ -379,13 +379,13 @@ def check_aruco():
         info('aruco_map/known_tilt = %s', known_tilt)
 
         try:
-            visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=1)
+            visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=0.8)
             info('map has %s markers', len(visualization.markers))
         except:
             failure('cannot read aruco_map/visualization topic')
 
         try:
-            rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
+            rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=0.8)
         except rospy.ROSException:
             if not markers:
                 info('no map detection as no markers detection')
@@ -409,10 +409,10 @@ def is_on_the_floor():
 def check_vpe():
     vis = None
     try:
-        vis = rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=1)
+        vis = rospy.wait_for_message('mavros/vision_pose/pose', PoseStamped, timeout=0.8)
     except rospy.ROSException:
         try:
-            vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
+            vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=0.8)
         except rospy.ROSException:
             if not is_process_running('vpe_publisher', full=True):
                 info('no vision position estimate, vpe_publisher is not running')
@@ -550,7 +550,7 @@ def check_velocity():
 @check('Global position (GPS)')
 def check_global_position():
     try:
-        rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=1)
+        rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=0.8)
     except rospy.ROSException:
         info('no global position')
         if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK') & (1 << 0)):
