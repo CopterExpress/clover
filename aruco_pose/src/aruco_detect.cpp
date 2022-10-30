@@ -72,6 +72,7 @@ private:
 	ros::Subscriber map_markers_sub_;
 	ros::ServiceServer set_markers_srv_;
 	bool estimate_poses_, send_tf_, auto_flip_, use_map_markers_;
+	bool waiting_for_map_;
 	double length_;
 	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
@@ -95,7 +96,8 @@ public:
 		dictionary = nh_priv_.param("dictionary", 2);
 		estimate_poses_ = nh_priv_.param("estimate_poses", true);
 		send_tf_ = nh_priv_.param("send_tf", true);
-		use_map_markers_ = nh_priv_.param("use_map_markers", true);
+		use_map_markers_ = nh_priv_.param("use_map_markers", false);
+		waiting_for_map_ = use_map_markers_;
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
 			NODELET_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
@@ -134,6 +136,7 @@ private:
 	void imageCallback(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr &cinfo)
 	{
 		if (!enabled_) return;
+		if (waiting_for_map_) return;
 
 		Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
 
@@ -402,6 +405,7 @@ private:
 				}
 			}
 		}
+		waiting_for_map_ = false;
 	}
 
 	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)
