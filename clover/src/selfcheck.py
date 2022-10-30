@@ -396,6 +396,14 @@ def check_aruco():
         info('aruco_map is not running')
 
 
+def is_on_the_floor():
+    try:
+        dist = rospy.wait_for_message('rangefinder/range', Range, timeout=1)
+        return dist.range < 0.3
+    except rospy.ROSException:
+        return False
+
+
 @check('Vision position estimate')
 def check_vpe():
     vis = None
@@ -405,7 +413,12 @@ def check_vpe():
         try:
             vis = rospy.wait_for_message('mavros/mocap/pose', PoseStamped, timeout=1)
         except rospy.ROSException:
-            failure('no VPE or MoCap messages')
+            if rospy.get_param('aruco_map/known_tilt') == 'map_flipped':
+                failure('no vision position estimate, markers are on the ceiling')
+            elif is_on_the_floor():
+                info('no vision position estimate, the drone is on the floor')
+            else:
+                failure('no vision position estimate')
             # check if vpe_publisher is running
             try:
                 subprocess.check_output(['pgrep', '-x', 'vpe_publisher'])
