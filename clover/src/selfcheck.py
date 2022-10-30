@@ -347,6 +347,8 @@ def is_process_running(binary, exact=False, full=False):
 
 @check('ArUco markers')
 def check_aruco():
+    markers = None
+
     if is_process_running('aruco_detect', full=True):
         try:
             info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
@@ -359,7 +361,7 @@ def check_aruco():
             known_tilt += ' (ALL markers are on the ceiling)'
         info('aruco_detect/known_tilt = %s', known_tilt)
         try:
-            rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
+            markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=1)
         except rospy.ROSException:
             failure('no markers detection')
             return
@@ -384,7 +386,12 @@ def check_aruco():
         try:
             rospy.wait_for_message('aruco_map/pose', PoseWithCovarianceStamped, timeout=1)
         except rospy.ROSException:
-            failure('no map detection')
+            if not markers:
+                info('no map detection as no markers detection')
+            elif not markers.markers:
+                info('no map detection as no markers detected')
+            else:
+                failure('no map detection')
     else:
         info('aruco_map is not running')
 
