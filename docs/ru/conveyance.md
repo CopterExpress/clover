@@ -28,3 +28,5 @@
 ### Дополнительная информация по желанию участников
 
 Учавствуем в CopterHack третий год. Этот проект является частью чего-то большего :)
+
+![Ala-Too International University1](../assets/seeding_drone/ala-too.png)
