@@ -15,7 +15,7 @@ def long_callback(fn):
         # perform image processing
         # ...
 
-    rospy.Subscriber('main_camera/image_raw', Image, image_callback)
+    rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
     """
     e = Event()
 
