@@ -22,6 +22,7 @@ from clover.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetV
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 from aruco_pose.msg import Marker, MarkerArray, Point2D
+from clover import long_callback
 
 import dynamic_reconfigure.client
 
