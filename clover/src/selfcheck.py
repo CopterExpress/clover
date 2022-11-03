@@ -78,7 +78,6 @@ def check(name):
             except Exception as e:
                 traceback.print_exc()
                 rospy.logerr('%s: exception occurred', name)
-                return
             with reports_lock:
                 for report in thread_local.reports:
                     if 'failure' in report:
