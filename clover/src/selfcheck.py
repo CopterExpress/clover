@@ -171,12 +171,21 @@ def mavlink_exec(cmd, timeout=3.0):
 
 
 def read_diagnostics(name, key):
-    diagnostics = rospy.wait_for_message('/diagnostics', DiagnosticArray, timeout=3.0)
-    for status in diagnostics.status:
-        if status.name.lower() == name.lower():
-            for value in status.values:
-                if value.key.lower() == key.lower():
-                    return value.value
+    e = Event()
+    def cb(msg):
+        for status in msg.status:
+            if status.name.lower() == name.lower():
+                for value in status.values:
+                    if value.key.lower() == key.lower():
+                        cb.value = value.value
+                        e.set()
+                        return
+
+    cb.value = None
+    sub = rospy.Subscriber('/diagnostics', DiagnosticArray, cb)
+    e.wait(1.0)  # wait to read all the diagnostics from nodes publishing them
+    sub.unregister()
+    return cb.value
 
 
 BOARD_ROTATIONS = {
