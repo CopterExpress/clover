@@ -61,6 +61,7 @@ std::shared_ptr<tf2_ros::TransformBroadcaster> transform_broadcaster;
 std::shared_ptr<tf2_ros::StaticTransformBroadcaster> static_transform_broadcaster;
 
 // Parameters
+string mavros;
 string local_frame;
 string fcu_frame;
 ros::Duration transform_timeout;
@@ -149,6 +150,9 @@ void handleState(const mavros_msgs::State& s)
 inline void publishBodyFrame()
 {
 	if (body.child_frame_id.empty()) return;
+	if (!body.header.stamp.isZero() && body.header.stamp == local_position.header.stamp) {
+		return; // avoid TF_REPEATED_DATA warnings
+	}
 
 	tf::Quaternion q;
 	q.setRPY(0, 0, tf::getYaw(local_position.pose.orientation));
@@ -690,7 +694,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// }
 
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
-			// destination point and/or yaw
+			// destination point and/or attitude
 			PoseStamped ps;
 			ps.header.frame_id = frame_id;
 			ps.header.stamp = stamp;
@@ -699,7 +703,12 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ps.pose.position.z = z;
 			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
 
-			if (std::isnan(yaw)) {
+			if (sp_type == ATTITUDE) {
+				ps.pose.position.x = 0;
+				ps.pose.position.y = 0;
+				ps.pose.position.z = 0;
+				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+			} else if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
 				setpoint_yaw_rate = yaw_rate;
 			} else if (std::isinf(yaw) && yaw > 0) {
@@ -851,6 +860,13 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 	return false;
 }
 
+bool release(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
+{
+	setpoint_timer.stop();
+	res.success = true;
+	return true;
+}
+
 int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "simple_offboard");
@@ -861,8 +877,9 @@ int main(int argc, char **argv)
 	static_transform_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>();
 
 	// Params
-	nh.param<string>("mavros/local_position/tf/frame_id", local_frame, "map");
-	nh.param<string>("mavros/local_position/tf/child_frame_id", fcu_frame, "base_link");
+	nh_priv.param("mavros", mavros, string("mavros")); // for case of using multiple connections
+	nh.param<string>(mavros + "/local_position/tf/frame_id", local_frame, "map");
+	nh.param<string>(mavros + "/local_position/tf/child_frame_id", fcu_frame, "base_link");
 	nh_priv.param("target_frame", target.child_frame_id, string("navigate_target"));
 	nh_priv.param("setpoint", setpoint.child_frame_id, string("setpoint"));
 	nh_priv.param("auto_release", auto_release, true);
@@ -872,6 +889,13 @@ int main(int argc, char **argv)
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.getParam("reference_frames", reference_frames);
+
+	// Default reference frames
+	std::map<string, string> default_reference_frames;
+	default_reference_frames[body.child_frame_id] = local_frame;
+	default_reference_frames[fcu_frame] = local_frame;
+	if (!target.child_frame_id.empty()) default_reference_frames[target.child_frame_id] = local_frame;
+	reference_frames.insert(default_reference_frames.begin(), default_reference_frames.end()); // merge defaults
 
 	state_timeout = ros::Duration(nh_priv.param("state_timeout", 3.0));
 	local_position_timeout = ros::Duration(nh_priv.param("local_position_timeout", 2.0));
@@ -887,25 +911,25 @@ int main(int argc, char **argv)
 	arming_timeout = ros::Duration(nh_priv.param("arming_timeout", 4.0));
 
 	// Service clients
-	arming = nh.serviceClient<mavros_msgs::CommandBool>("mavros/cmd/arming");
-	set_mode = nh.serviceClient<mavros_msgs::SetMode>("mavros/set_mode");
+	arming = nh.serviceClient<mavros_msgs::CommandBool>(mavros + "/cmd/arming");
+	set_mode = nh.serviceClient<mavros_msgs::SetMode>(mavros + "/set_mode");
 
 	// Telemetry subscribers
-	auto state_sub = nh.subscribe("mavros/state", 1, &handleState);
-	auto velocity_sub = nh.subscribe("mavros/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
-	auto global_position_sub = nh.subscribe("mavros/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
-	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleMessage<BatteryState, battery>);
-	auto statustext_sub = nh.subscribe("mavros/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
-	auto manual_control_sub = nh.subscribe("mavros/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
-	auto local_position_sub = nh.subscribe("mavros/local_position/pose", 1, &handleLocalPosition);
+	auto state_sub = nh.subscribe(mavros + "/state", 1, &handleState);
+	auto velocity_sub = nh.subscribe(mavros + "/local_position/velocity_body", 1, &handleMessage<TwistStamped, velocity>);
+	auto global_position_sub = nh.subscribe(mavros + "/global_position/global", 1, &handleMessage<NavSatFix, global_position>);
+	auto battery_sub = nh.subscribe(mavros + "/battery", 1, &handleMessage<BatteryState, battery>);
+	auto statustext_sub = nh.subscribe(mavros + "/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
+	auto manual_control_sub = nh.subscribe(mavros + "/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
+	auto local_position_sub = nh.subscribe(mavros + "/local_position/pose", 1, &handleLocalPosition);
 
 	// Setpoint publishers
-	position_pub = nh.advertise<PoseStamped>("mavros/setpoint_position/local", 1);
-	position_raw_pub = nh.advertise<PositionTarget>("mavros/setpoint_raw/local", 1);
-	attitude_pub = nh.advertise<PoseStamped>("mavros/setpoint_attitude/attitude", 1);
-	attitude_raw_pub = nh.advertise<AttitudeTarget>("mavros/setpoint_raw/attitude", 1);
-	rates_pub = nh.advertise<TwistStamped>("mavros/setpoint_attitude/cmd_vel", 1);
-	thrust_pub = nh.advertise<Thrust>("mavros/setpoint_attitude/thrust", 1);
+	position_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_position/local", 1);
+	position_raw_pub = nh.advertise<PositionTarget>(mavros + "/setpoint_raw/local", 1);
+	attitude_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_attitude/attitude", 1);
+	attitude_raw_pub = nh.advertise<AttitudeTarget>(mavros + "/setpoint_raw/attitude", 1);
+	rates_pub = nh.advertise<TwistStamped>(mavros + "/setpoint_attitude/cmd_vel", 1);
+	thrust_pub = nh.advertise<Thrust>(mavros + "/setpoint_attitude/thrust", 1);
 
 	 // Service servers
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);
@@ -916,6 +940,7 @@ int main(int argc, char **argv)
 	auto sa_serv = nh.advertiseService("set_attitude", &setAttitude);
 	auto sr_serv = nh.advertiseService("set_rates", &setRates);
 	auto ld_serv = nh.advertiseService("land", &land);
+	auto rl_serv = nh_priv.advertiseService("release", &release);
 
 	// Setpoint timer
 	setpoint_timer = nh.createTimer(ros::Duration(1 / nh_priv.param("setpoint_rate", 30.0)), &publishSetpoint, false, false);

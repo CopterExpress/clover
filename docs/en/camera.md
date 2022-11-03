@@ -1,7 +1,5 @@
 # Working with the camera
 
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/camera.md) for older images.
-
 Make sure the camera is enabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
 
 ```xml
@@ -146,6 +144,8 @@ rospy.spin()
 ```
 
 The script will take up to 100% CPU capacity. To slow down the script artificially, you can use [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
+
+> **Note** Starting from [image](image.md) version **0.24** `image_raw_throttled` topic is available without addition configuration.
 
 ```xml
 <node pkg="topic_tools" name="cam_throttle" type="throttle"

@@ -83,11 +83,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  SetMarkers.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -120,6 +119,7 @@ generate_messages(
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
   cfg/Detector.cfg
+  cfg/Map.cfg
 )
 
 ###################################
@@ -251,4 +251,5 @@ if (CATKIN_ENABLE_TESTING)
   add_rostest(test/test_node_failure.test)
   add_rostest(test/largemap.test)
   add_rostest(test/crash_opencv.test)
+  add_rostest(test/duplicate.test)
 endif()

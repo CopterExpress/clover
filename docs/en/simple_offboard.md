@@ -1,11 +1,4 @@
-Autonomous flight (OFFBOARD)
-===
-
-> **Note** In the image version **0.20** `clever` package was renamed to `clover`. See [previous version of the article](https://github.com/CopterExpress/clover/blob/v0.19/docs/en/simple_offboard.md) for older images.
-
-<!-- -->
-
-> **Hint** We recommend using our [custom PX4 firmware for Clover](firmware.md#modified-firmware-for-clover) for autonomous flights.
+# Autonomous flight
 
 The `simple_offboard` module of the `clover` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
@@ -13,8 +6,7 @@ The `simple_offboard` module of the `clover` package is intended for simplified 
 
 Main services are [`get_telemetry`](#gettelemetry) (receive telemetry data), [`navigate`](#navigate) (fly to a given point along a straight line), [`navigate_global`](#navigateglobal) (fly to a point specified as latitude and longitude along a straight line), [`land`](#land) (switch to landing mode).
 
-Python examples
----
+## Python usage
 
 You need to create proxies for services before calling them. Use the following template for your programs:
 
@@ -37,8 +29,7 @@ land = rospy.ServiceProxy('land', Trigger)
 
 Unused proxy functions may be removed from the code.
 
-API description
----
+## API description
 
 > **Note** Omitted numeric parameters are set to 0.
 
@@ -112,7 +103,7 @@ Parameters:
 * `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
-* `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z`, `vx`, `vy`, `vz`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
+* `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z` and `yaw`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
 
 > **Note** If you don't want to change your current yaw set the `yaw` parameter to `NaN` (angular velocity by default is 0).
 
@@ -295,7 +286,7 @@ The positive direction of `yaw_rate` rotation (when viewed from the top) is coun
 
 Switch the drone to landing [mode](modes.md) (`AUTO.LAND` or similar).
 
-> **Note** Set the `COM_DISARM_LAND` [PX4 parameter](px4_parameters.md) to a value greater than 0 to enable automatic disarm after landing.
+> **Note** Set the `COM_DISARM_LAND` [PX4 parameter](parameters.md) to a value greater than 0 to enable automatic disarm after landing.
 
 Landing the drone:
 
@@ -312,14 +303,19 @@ Landing the drone (command line):
 rosservice call /land "{}"
 ```
 
-<!--
+> **Caution** In recent PX4 versions, the vehicle will be switched out of LAND mode to manual mode, if the remote control sticks are moved significantly.
+
 ### release
 
-Stop publishing setpoints to the drone (release control). Required to continue monitoring by means of [MAVROS](mavros.md).
--->
+If it's necessary to pause sending setpoint messages, use the `simple_offboard/release` service:
 
-Additional materials
-------------------------
+```python
+release = rospy.ServiceProxy('simple_offboard/release', Trigger)
+
+release()
+```
+
+## Additional materials
 
 * [ArUco-based position estimation and navigation](aruco.md).
 * [Program samples and snippets](snippets.md).

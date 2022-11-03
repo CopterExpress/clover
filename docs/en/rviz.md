@@ -11,7 +11,7 @@ To use rviz and rqt, a PC running Ubuntu Linux (or a virtual machine such as [Pa
 
 > **Hint** You can use the [preconfigured virtual machine image](simulation_vm.md) with ROS and Clover toolkit.
 
-Install package `ros-melodic-desktop-full` or `ros-melodic-desktop` using the [installation documentation](http://wiki.ros.org/melodic/Installation/Ubuntu).
+Install package `ros-noetic-desktop-full` or `ros-noetic-desktop` using the [installation documentation](http://wiki.ros.org/noetic/Installation/Ubuntu).
 
 Start rviz
 ---
@@ -43,7 +43,7 @@ Axis or Grid configured to frame `aruco_map` will visualize the location [on the
 
 ### jsk_rviz_plugins
 
-It is also recommended to install additional useful plugins for rviz [jsk_rviz_plugins](https://jsk-docs.readthedocs.io/en/latest/jsk_visualization/doc/jsk_rviz_plugins/index.html). This kit allows visualizing topics like `TwistStamped` (velocity) `CameraInfo`, `PolygonArray`, and many more. To install, use command:
+It is also recommended to install additional useful plugins for rviz [jsk_rviz_plugins](https://jsk-visualization.readthedocs.io/en/latest/jsk_rviz_plugins/index.html). This kit allows visualizing topics like `TwistStamped` (velocity) `CameraInfo`, `PolygonArray`, and many more. To install, use command:
 
 ```(bash)
 sudo apt-get install ros-melodic-jsk-visualization

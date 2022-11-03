@@ -17,12 +17,10 @@
 
 <a name="block-takeoff"></a><!-- old name of anchor -->
 
-Полет в точку и ожидание окончания полета:
+Функция для полета в точку и ожидание окончания полета:
 
 ```python
 import math
-
-# ...
 
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -74,8 +72,6 @@ land_wait()
 ```python
 import math
 
-# ...
-
 def wait_arrival(tolerance=0.2):
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -91,8 +87,6 @@ def wait_arrival(tolerance=0.2):
 ```python
 import math
 
-# ...
-
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -103,8 +97,6 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 
 ```python
 import math
-
-# ...
 
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
@@ -221,19 +213,16 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 from sensor_msgs.msg import BatteryState
 from mavros_msgs.msg import RCIn
 
-# ...
-
 def pose_update(pose):
     # Обработка новых данных о позиции коптера
     pass
 
-# Остальные функции-обработчики
-# ...
-
-rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
-rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
-rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
+rospy.Subscriber('mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
+
+rospy.spin()
 ```
 
 Информацию по топикам MAVROS см. по [ссылке](mavros.md).
@@ -247,13 +236,9 @@ rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 Пример отправки произвольного [MAVLink-сообщения](mavlink.md) коптеру:
 
 ```python
-# ...
-
 from mavros_msgs.msg import Mavlink
 from mavros import mavlink
 from pymavlink import mavutil
-
-# ...
 
 mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
 
@@ -264,6 +249,30 @@ msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
 ros_msg = mavlink.convert_to_rosmsg(msg)
 
 mavlink_pub.publish(ros_msg)
+```
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#mavlink-receive}
+
+<!-- markdownlint-enable MD044 -->
+
+Подписка на все MAVLink-сообщения от полетного контроллера и их декодирование:
+
+```python
+from mavros_msgs.msg import Mavlink
+from mavros import mavlink
+from pymavlink import mavutil
+
+link = mavutil.mavlink.MAVLink('', 255, 1)
+
+def mavlink_cb(msg):
+    mav_msg = link.decode(mavlink.convert_to_bytes(msg))
+    print('msgid =', msg.msgid, mav_msg) # print message id and parsed message
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_cb)
+
+rospy.spin()
 ```
 
 ### # {#rc-sub}
@@ -299,8 +308,6 @@ rospy.spin()
 ```python
 from mavros_msgs.srv import SetMode
 
-# ...
-
 set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
 
 # ...
@@ -314,8 +321,6 @@ set_mode(custom_mode='STABILIZED')
 
 ```python
 import math
-
-# ...
 
 PI_2 = math.pi / 2
 
@@ -355,9 +360,7 @@ from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
 
-# ...
-
-send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+send_command = rospy.ServiceProxy('mavros/cmd/command', CommandLong)
 
 def calibrate_gyro():
     rospy.loginfo('Calibrate gyro')
@@ -390,17 +393,56 @@ calibrate_gyro()
 import rospy
 import dynamic_reconfigure.client
 
-# ...
+rospy.init_node('flight')
+aruco_client = dynamic_reconfigure.client.Client('aruco_detect')
 
-client = dynamic_reconfigure.client.Client('aruco_detect')
-
-# Turn markers recognition off
-client.update_configuration({'enabled': False})
+# Выключить распознавание маркеров
+aruco_client.update_configuration({'enabled': False})
 
 rospy.sleep(5)
 
-# Turn markers recognition on
-client.update_configuration({'enabled': True})
+# Включить распознавание маркеров
+aruco_client.update_configuration({'enabled': True})
+```
+
+### # {#optical-flow-enabled}
+
+Динамически включать и отключать [Optical Flow](optical_flow.md):
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+flow_client = dynamic_reconfigure.client.Client('optical_flow')
+
+# Выключить Optical Flow
+flow_client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Включить Optical Flow
+flow_client.update_configuration({'enabled': True})
+```
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#aruco-map-dynamic}
+
+> **Info** Для [образа](image.md) версии > 0.23.
+
+Динамически изменить используемый файл с [картой ArUco-маркеров](aruco_map.md):
+
+<!-- markdownlint-enable MD044 -->
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+map_client = dynamic_reconfigure.client.Client('aruco_map')
+
+map_client.update_configuration({'map': '/home/pi/catkin_ws/src/clover/aruco_pose/map/office.txt'})
 ```
 
 ### # {#wait-global-position}
@@ -409,8 +451,6 @@ client.update_configuration({'enabled': True})
 
 ```python
 import math
-
-# ...
 
 while not rospy.is_shutdown():
     if math.isfinite(get_telemetry().lat):
@@ -426,11 +466,7 @@ while not rospy.is_shutdown():
 from mavros_msgs.srv import ParamGet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
-
-# ...
 
 # Считать параметр типа INT
 value = param_get(param_id='COM_FLTMODE1').value.integer
@@ -447,15 +483,19 @@ value = param_get(param_id='MPC_Z_P').value.float
 from mavros_msgs.srv import ParamSet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_set = rospy.ServiceProxy('mavros/param/set', ParamSet)
-
-# ...
 
 # Изменить параметр типа INT:
 param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
 
 # Изменить параметр типа FLOAT:
 param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
+```
+
+### # {#is-simulation}
+
+Проверить, что код запущен в [симуляции Gazebo](simulation.md):
+
+```python
+is_simulation = rospy.get_param('/use_sim_time', False)
 ```

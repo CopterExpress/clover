@@ -12,6 +12,7 @@
     <arg name="led" default="true"/>
     <arg name="blocks" default="false"/>
     <arg name="rc" default="false"/>
+    <arg name="force_init" default="true"/> <!-- force estimator to init by publishing zero pose -->
 
     <arg name="simulator" default="false"/> <!-- flag that we are operating on a simulated drone -->
 
@@ -33,7 +34,10 @@
     </node>
 
     <!-- aruco markers -->
-    <include file="$(find clover)/launch/aruco.launch" if="$(arg aruco)"/>
+    <include file="$(find clover)/launch/aruco.launch" if="$(eval aruco or force_init)">
+        <arg name="force_init" value="$(arg force_init)"/>
+        <arg name="disable" value="$(eval not aruco)"/>
+    </include>
 
     <!-- optical flow -->
     <node pkg="nodelet" type="nodelet" name="optical_flow" args="load clover/optical_flow main_camera_nodelet_manager" if="$(arg optical_flow)" clear_params="true" output="screen" respawn="true">
@@ -41,15 +45,13 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
         <param name="roi_rad" value="0.8"/>
+        <param name="disable_on_vpe" value="false"/>
     </node>
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clover" type="simple_offboard" output="screen" clear_params="true">
-        <param name="reference_frames/body" value="map"/>
-        <param name="reference_frames/base_link" value="map"/>
-        <param name="reference_frames/navigate_target" value="map"/>
         <param name="reference_frames/main_camera_optical" value="map"/>
     </node>
 

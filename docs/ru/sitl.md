@@ -4,7 +4,7 @@
 
 Основная статья: https://dev.px4.io/en/simulation/
 
-Симуляция PX4 возможна в ОС GNU/Linux и macOS с использованием систем симуляции физической среды [jMAVSim](https://pixhawk.org/dev/hil/jmavsim) и [Gazebo](http://gazebosim.org).
+Симуляция PX4 возможна в ОС GNU/Linux и macOS с использованием систем симуляции физической среды [jMAVSim](https://docs.px4.io/master/en/simulation/jmavsim.html) и [Gazebo](http://gazebosim.org).
 
 jMAVSim является легковесной средой, предназначенной только для тестирование мультироторных летательных систем; Gazebo – универсальная среда для любых типов роботов.
 

@@ -19,7 +19,7 @@ The frontend files are located in [`www`](./www/) subdirectory. The frontend app
 ### Services
 
 * `~run` ([*clover_blocks/Run*](srv/Run.srv)) – run Blockly-generated program (in Python).
-* `~stop` ([*std_srvs/Trigger*](http://docs.ros.org/melodic/api/std_srvs/html/srv/Trigger.html)) – terminate the running program.
+* `~stop` ([*std_srvs/Trigger*](http://docs.ros.org/noetic/api/std_srvs/html/srv/Trigger.html)) – terminate the running program.
 * `~store` ([*clover_blocks/load*](srv/Store.srv)) – store a user program (to `<package_path>/programs` by default).
 * `~load` ([*clover_blocks/load*](srv/Load.srv)) – load all the stored programs.
 
@@ -45,11 +45,11 @@ http://<hostname>/clover_blocks/?navigate_tolerance=0.5&sleep_time=0.1
 
 #### Published
 
-* `~running` ([*std_msgs/Bool*](http://docs.ros.org/melodic/api/std_msgs/html/msg/Bool.html)) – indicates if the program is currently running.
-* `~block` ([*std_msgs/String*](http://docs.ros.org/melodic/api/std_msgs/html/msg/String.html)) – current executing block (maximum topic rate is limited).
-* `~error` ([*std_msgs/String*](http://docs.ros.org/melodic/api/std_msgs/html/msg/String.html)) – user program errors and exceptions.
+* `~running` ([*std_msgs/Bool*](http://docs.ros.org/noetic/api/std_msgs/html/msg/Bool.html)) – indicates if the program is currently running.
+* `~block` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – current executing block (maximum topic rate is limited).
+* `~error` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – user program errors and exceptions.
 * `~prompt` ([*clover_blocks/Prompt*](msg/Prompt.msg)) – user input request (includes random request ID string).
 
 This topic is published from the frontend side:
 
-* `~prompt/<request_id>` ([*std_msgs/String*](http://docs.ros.org/melodic/api/std_msgs/html/msg/String.html)) – user input response.
+* `~prompt/<request_id>` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – user input response.

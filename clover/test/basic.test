@@ -23,10 +23,7 @@
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped" required="true"/>
 
-    <node name="simple_offboard" pkg="clover" type="simple_offboard" required="true" output="screen">
-        <param name="reference_frames/body" value="map"/>
-        <param name="reference_frames/base_link" value="map"/>
-    </node>
+    <node name="simple_offboard" pkg="clover" type="simple_offboard" required="true" output="screen"/>
 
     <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" required="true"/>
 
@@ -37,6 +34,11 @@
     <node pkg="clover" name="led_effect" type="led" ns="led" clear_params="true" output="screen" required="true">
         <rosparam param="notify">startup: { r: 255, g: 255, b: 255 }</rosparam>
     </node>
+
+    <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" required="true"/>
+
+    <node pkg="topic_tools" name="main_camera_throttle" type="throttle" ns="main_camera"
+        args="messages image_raw 5.0 image_raw_throttled" required="true"/>
 
     <param name="test_module" value="$(find clover)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>

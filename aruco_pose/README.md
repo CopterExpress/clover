@@ -51,6 +51,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 
 * `image_raw` (*sensor_msgs/Image*) – camera image
 * `camera_info` (*sensor_msgs/CameraInfo*) – camera calibration info
+* `map_markers` (*aruco_pose/MarkerArray*) – list of markers to disable TF transform publishing
 
 #### Published
 
@@ -74,6 +75,7 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 * `~image_width` – debug image width (default: 2000)
 * `~image_height` – debug image height (default: 2000)
 * `~image_margin` – debug image margin (default: 200)
+* `~image_axis` – whether debug image should contain axis (default: true)
 * `~dictionary` (*int*) – ArUco dictionary (default: 2) - should be the same as `dictionary` parameter of `aruco_detect` nodelet
 
 Map file has one marker per line with the following line format:
@@ -97,6 +99,7 @@ See examples in [`map`](map/) directory.
 #### Published
 
 * `~pose` (*geometry_msgs/PoseWithCovarianceStamped*) – estimated map pose
+* `~map` (*aruco_pose/MarkerArray*) – list of markers in the loaded map
 * `~image` (*sensor_msgs/Image*) – planarized map image
 * `~visualization` (*visualization_msgs/MarkerArray*) – markers map visualization for rviz
 * `~debug` (*sensor_msgs/Image*) – debug image with detected markers and map axis

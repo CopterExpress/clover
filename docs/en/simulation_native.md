@@ -2,7 +2,7 @@
 
 Setting up the simulation environment from scratch requires some effort, but results in the most performant setup, with less chance of driver issues.
 
-> **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh).
+<!-- > **Hint** See up-to-date commands set for installation Clover simulation software in the script, that builds the virtual machine image with the simulator: [`install_software.sh`](https://github.com/CopterExpress/clover_vm/blob/master/scripts/install_software.sh). -->
 
 Prerequisites: **Ubuntu 20.04**.
 
@@ -66,7 +66,7 @@ PX4 will be built along with the other packages in our workspace. You may clone 
 Clone PX4 sources and make the required symlinks:
 
 ```bash
-git clone --recursive --depth 1 --branch v1.12.0 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
+git clone --recursive --depth 1 --branch v1.12.3 https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot
 ln -s ~/PX4-Autopilot ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
@@ -132,6 +132,12 @@ You can test autonomous flight using example scripts in `~/catkin_ws/src/clover/
 
 ## Additional steps
 
+To make it possible to run Gazebo simulation environment without Clover (`gazebo` command), add into your `.bashrc` sourcing Gazebo's initialization script:
+
+```bash
+echo "source /usr/share/gazebo/setup.sh" >> ~/.bashrc
+```
+
 Optionally, install roscore systemd service to have roscore running in background:
 
 ```bash
@@ -144,10 +150,10 @@ sudo systemctl start roscore
 Install any web server to serve Clover's web tools (`~/.ros/www` directory), e. g. Monkey:
 
 ```bash
-wget https://github.com/CopterExpress/clover_vm/raw/master/assets/packages/monkey_1.6.9-1_amd64.deb -O /tmp/monkey_1.6.9-1_amd64.deb
-sudo apt-get install -y /tmp/monkey_1.6.9-1_amd64.deb
+wget https://github.com/CopterExpress/clover_vm/raw/master/assets/packages/monkey_1.6.9-1_$(dpkg --print-architecture).deb -P /tmp
+sudo dpkg -i /tmp/monkey_*.deb
 sed "s/pi/$USER/g" ~/catkin_ws/src/clover/builder/assets/monkey | sudo tee /etc/monkey/sites/default
-sudo -E sh -c "sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf"
+sudo sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
 sudo cp ~/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system/monkey.service
 sudo systemctl enable monkey
 sudo systemctl start monkey

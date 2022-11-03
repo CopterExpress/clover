@@ -8,12 +8,10 @@
 
 <a name="block-takeoff"></a><!-- old name of anchor -->
 
-Fly towards a point and wait for copter's arrival:
+Function to fly to a point and wait for copter's arrival:
 
 ```python
 import math
-
-#...
 
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -64,8 +62,6 @@ Wait for copter's arrival to the [navigate](simple_offboard.md#navigate) target:
 ```python
 import math
 
-# ...
-
 def wait_arrival(tolerance=0.2):
     while not rospy.is_shutdown():
         telem = get_telemetry(frame_id='navigate_target')
@@ -79,6 +75,8 @@ def wait_arrival(tolerance=0.2):
 Calculate the distance between two points (**important**: the points are to be in the same [coordinate system](frames.md)):
 
 ```python
+import math
+
 def get_distance(x1, y1, z1, x2, y2, z2):
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 ```
@@ -88,6 +86,8 @@ def get_distance(x1, y1, z1, x2, y2, z2):
 Approximation of distance (in meters) between two global coordinates (latitude/longitude):
 
 ```python
+import math
+
 def get_distance_global(lat1, lon1, lat2, lon2):
     return math.hypot(lat1 - lat2, lon1 - lon2) * 1.113195e5
 ```
@@ -203,19 +203,16 @@ from geometry_msgs.msg import PoseStamped, TwistStamped
 from sensor_msgs.msg import BatteryState
 from mavros_msgs.msg import RCIn
 
-# ...
-
 def pose_update(pose):
     # Processing new data of copter's position
     pass
 
-# Other handler functions
-# ...
-
-rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
-rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
-rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
+rospy.Subscriber('mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
+
+rospy.spin()
 ```
 
 Information about MAVROS topics is available at [the link](mavros.md).
@@ -229,23 +226,42 @@ Information about MAVROS topics is available at [the link](mavros.md).
 Send an arbitrary [MAVLink message](mavlink.md) to the copter:
 
 ```python
-# ...
-
 from mavros_msgs.msg import Mavlink
 from mavros import mavlink
 from pymavlink import mavutil
 
-# ...
-
 mavlink_pub = rospy.Publisher('mavlink/to', Mavlink, queue_size=1)
 
 # Sending a HEARTBEAT message:
-
 msg = mavutil.mavlink.MAVLink_heartbeat_message(mavutil.mavlink.MAV_TYPE_GCS, 0, 0, 0, 0, 0)
 msg.pack(mavutil.mavlink.MAVLink('', 2, 1))
 ros_msg = mavlink.convert_to_rosmsg(msg)
 
 mavlink_pub.publish(ros_msg)
+```
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#mavlink-receive}
+
+<!-- markdownlint-enable MD044 -->
+
+Subscribe to all MAVLink messages from the flight controller and decode them:
+
+```python
+from mavros_msgs.msg import Mavlink
+from mavros import mavlink
+from pymavlink import mavutil
+
+link = mavutil.mavlink.MAVLink('', 255, 1)
+
+def mavlink_cb(msg):
+    mav_msg = link.decode(mavlink.convert_to_bytes(msg))
+    print('msgid =', msg.msgid, mav_msg) # print message id and parsed message
+
+mavlink_sub = rospy.Subscriber('mavlink/from', Mavlink, mavlink_cb)
+
+rospy.spin()
 ```
 
 ### # {#rc-sub}
@@ -281,8 +297,6 @@ Change the [flight mode](modes.md) to arbitrary one:
 ```python
 from mavros_msgs.srv import SetMode
 
-# ...
-
 set_mode = rospy.ServiceProxy('mavros/set_mode', SetMode)
 
 # ...
@@ -296,8 +310,6 @@ Flip:
 
 ```python
 import math
-
-# ...
 
 PI_2 = math.pi / 2
 
@@ -337,9 +349,7 @@ from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
 
-# ...
-
-send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+send_command = rospy.ServiceProxy('mavros/cmd/command', CommandLong)
 
 def calibrate_gyro():
     rospy.loginfo('Calibrate gyro')
@@ -372,17 +382,56 @@ Enable and disable [ArUco markers recognition](aruco_marker.md) dynamically (for
 import rospy
 import dynamic_reconfigure.client
 
-# ...
-
-client = dynamic_reconfigure.client.Client('aruco_detect')
+rospy.init_node('flight')
+aruco_client = dynamic_reconfigure.client.Client('aruco_detect')
 
 # Turn markers recognition off
-client.update_configuration({'enabled': False})
+aruco_client.update_configuration({'enabled': False})
 
 rospy.sleep(5)
 
 # Turn markers recognition on
-client.update_configuration({'enabled': True})
+aruco_client.update_configuration({'enabled': True})
+```
+
+### # {#optical-flow-enabled}
+
+Enable and disable [Optical Flow](optical_flow.md) dynamically:
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+flow_client = dynamic_reconfigure.client.Client('optical_flow')
+
+# Turn Optical Flow off
+flow_client.update_configuration({'enabled': False})
+
+rospy.sleep(5)
+
+# Turn Optical Flow on
+flow_client.update_configuration({'enabled': True})
+```
+
+<!-- markdownlint-disable MD044 -->
+
+### # {#aruco-map-dynamic}
+
+> **Info** For [RPi image](image.md) version > 0.23.
+
+Change the used [ArUco markers map file](aruco_map.md) dynamically:
+
+<!-- markdownlint-enable MD044 -->
+
+```python
+import rospy
+import dynamic_reconfigure.client
+
+rospy.init_node('flight')
+map_client = dynamic_reconfigure.client.Client('aruco_map')
+
+map_client.update_configuration({'map': '/home/pi/catkin_ws/src/clover/aruco_pose/map/office.txt'})
 ```
 
 ### # {#wait-global-position}
@@ -391,8 +440,6 @@ Wait for global position to appear (finishing [GPS receiver](gps.md) initializat
 
 ```python
 import math
-
-# ...
 
 while not rospy.is_shutdown():
     if math.isfinite(get_telemetry().lat):
@@ -408,11 +455,7 @@ Read flight controller's parameter:
 from mavros_msgs.srv import ParamGet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
-
-# ...
 
 # Read parameter of type INT
 value = param_get(param_id='COM_FLTMODE1').value.integer
@@ -429,15 +472,19 @@ Set flight controller's parameter:
 from mavros_msgs.srv import ParamSet
 from mavros_msgs.msg import ParamValue
 
-# ...
-
 param_set = rospy.ServiceProxy('mavros/param/set', ParamSet)
-
-# ...
 
 # Set parameter of type INT:
 param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
 
 # Set parameter of type FLOAT:
 param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
+```
+
+### # {#is-simulation}
+
+Check, if the code is running inside a [Gazebo simulation](simulation.md):
+
+```python
+is_simulation = rospy.get_param('/use_sim_time', False)
 ```

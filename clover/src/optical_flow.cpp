@@ -22,11 +22,14 @@
 #include <tf2/utils.h>
 #include <tf2_ros/transform_listener.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <dynamic_reconfigure/server.h>
 #include <mavros_msgs/OpticalFlowRad.h>
 #include <sensor_msgs/Imu.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Vector3Stamped.h>
 #include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/TwistStamped.h>
+#include <clover/FlowConfig.h>
 
 using cv::Mat;
 
@@ -38,6 +41,7 @@ public:
 	{}
 
 private:
+	bool enabled_;
 	ros::Publisher flow_pub_, velo_pub_, shift_pub_;
 	ros::Time prev_stamp_;
 	std::string fcu_frame_id_, local_frame_id_;
@@ -54,6 +58,10 @@ private:
 	std::unique_ptr<tf2_ros::TransformListener> tf_listener_;
 	bool calc_flow_gyro_;
 	float flow_gyro_default_;
+	bool disable_on_vpe_;
+	ros::Subscriber vpe_sub_;
+	ros::Time last_vpe_time_;
+	std::shared_ptr<dynamic_reconfigure::Server<clover::FlowConfig>> dyn_srv_;
 
 	void onInit()
 	{
@@ -83,6 +91,17 @@ private:
 
 		img_sub_ = it.subscribeCamera("image_raw", 1, &OpticalFlow::flow, this);
 
+		disable_on_vpe_ = nh_priv.param("disable_on_vpe", false);
+		if (disable_on_vpe_) {
+			vpe_sub_ = nh.subscribe("mavros/vision_pose/pose", 1, &OpticalFlow::vpeCallback, this);
+		}
+
+		dyn_srv_ = std::make_shared<dynamic_reconfigure::Server<clover::FlowConfig>>(nh_priv);
+		dynamic_reconfigure::Server<clover::FlowConfig>::CallbackType cb;
+
+		cb = std::bind(&OpticalFlow::paramCallback, this, std::placeholders::_1, std::placeholders::_2);
+		dyn_srv_->setCallback(cb);
+
 		NODELET_INFO("Optical Flow initialized");
 	}
 
@@ -109,6 +128,14 @@ private:
 
 	void flow(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr& cinfo)
 	{
+		if (!enabled_) return;
+
+		if (disable_on_vpe_ &&
+			!last_vpe_time_.isZero() &&
+			(msg->header.stamp - last_vpe_time_).toSec() < 0.1) {
+			return;
+		}
+
 		parseCameraInfo(cinfo);
 
 		auto img = cv_bridge::toCvShare(msg, "mono8")->image;
@@ -142,7 +169,7 @@ private:
 
 		img.convertTo(curr_, CV_32F);
 
-		if (prev_.empty()) {
+		if (prev_.empty() || (msg->header.stamp - prev_stamp_).toSec() > 0.1) { // outdated previous frame
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 			cv::createHanningWindow(hann_, curr_.size(), CV_32F);
@@ -224,6 +251,14 @@ private:
 			prev_ = curr_.clone();
 			prev_stamp_ = msg->header.stamp;
 
+			// Publish estimated angular velocity
+			geometry_msgs::TwistStamped velo;
+			velo.header.stamp = msg->header.stamp;
+			velo.header.frame_id = fcu_frame_id_;
+			velo.twist.angular.x = flow_fcu.vector.x / integration_time.toSec();
+			velo.twist.angular.y = flow_fcu.vector.y / integration_time.toSec();
+			velo_pub_.publish(velo);
+
 publish_debug:
 			// Publish debug image
 			if (img_pub_.getNumSubscribers() > 0) {
@@ -236,14 +271,6 @@ publish_debug:
 				out_msg.image = img;
 				img_pub_.publish(out_msg.toImageMsg());
 			}
-
-			// Publish estimated angular velocity
-			geometry_msgs::TwistStamped velo;
-			velo.header.stamp = msg->header.stamp;
-			velo.header.frame_id = fcu_frame_id_;
-			velo.twist.angular.x = flow_fcu.vector.x / integration_time.toSec();
-			velo.twist.angular.y = flow_fcu.vector.y / integration_time.toSec();
-			velo_pub_.publish(velo);
 		}
 	}
 
@@ -263,6 +290,18 @@ publish_debug:
 		flow.vector.z = -diff.z();
 
 		return flow;
+	}
+
+	void paramCallback(clover::FlowConfig &config, uint32_t level)
+	{
+		enabled_ = config.enabled;
+		if (!enabled_) {
+			prev_ = Mat(); // clear previous frame
+		}
+	}
+
+	void vpeCallback(const geometry_msgs::PoseStamped& vpe) {
+		last_vpe_time_ = vpe.header.stamp;
 	}
 };
 

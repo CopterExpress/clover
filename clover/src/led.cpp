@@ -31,7 +31,6 @@ ros::Time start_time;
 double blink_rate, blink_fast_rate, flash_delay, fade_period, wipe_period, rainbow_period;
 double low_battery_threshold;
 std::vector<std::string> error_ignore;
-bool blink_state;
 led_msgs::SetLEDs set_leds;
 led_msgs::LEDStateArray state, start_state;
 ros::ServiceClient set_leds_srv;
@@ -87,9 +86,8 @@ void proceed(const ros::TimerEvent& event)
 	set_leds.request.leds.resize(led_count);
 
 	if (current_effect.effect == "blink" || current_effect.effect == "blink_fast") {
-		blink_state = !blink_state;
-		// toggle all leds
-		if (blink_state) {
+		// enable on odd counter
+		if (counter % 2 != 0) {
 			fill(current_effect.r, current_effect.g, current_effect.b);
 		} else {
 			fill(0, 0, 0);
@@ -222,6 +220,7 @@ bool setEffect(clover::SetLEDEffect::Request& req, clover::SetLEDEffect::Respons
 	counter = 0;
 	start_state = state;
 	start_time = ros::Time::now();
+	proceed({ .current_real = start_time });
 
 	return true;
 }
@@ -320,8 +319,8 @@ int main(int argc, char **argv)
 
 	auto set_effect = nh.advertiseService("set_effect", &setEffect);
 
-	auto mavros_state_sub = nh.subscribe("/mavros/state", 1, &handleMavrosState);
-	auto battery_sub = nh.subscribe("/mavros/battery", 1, &handleBattery);
+	auto mavros_state_sub = nh.subscribe("mavros/state", 1, &handleMavrosState);
+	auto battery_sub = nh.subscribe("mavros/battery", 1, &handleBattery);
 	auto rosout_sub = nh.subscribe("/rosout_agg", 1, &handleLog);
 
 	timer = nh.createTimer(ros::Duration(0), &proceed, false, false);

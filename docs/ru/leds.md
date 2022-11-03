@@ -158,3 +158,9 @@ rosservice call /led/set_leds "leds:
 ```bash
 rostopic echo /led/state
 ```
+
+Используя этот же топик можно получить общее выставленное в настройках количество светодиодов:
+
+```python
+led_count = len(rospy.wait_for_message('led/state', LEDStateArray, timeout=10).leds)
+```

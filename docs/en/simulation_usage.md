@@ -40,6 +40,8 @@ In order to enable GPS sensor, set the `gps` argument in `simulator.launch` to `
 <arg name="gps" value="true"/>
 ```
 
+Turn also on the *use GPS* flag in the `EKF2_AID_MASK` PX4 parameter (using QGroundControl).
+
 ### Camera
 
 If you don't need the camera when flying using GPS, it may be disabled in `simulator.launch` file:
@@ -75,7 +77,7 @@ The plugin will collect publishing rate statistics and slow the simulation down 
 
 ### Set simulation speed
 
-Since v1.9 the PX4 SITL setup supports [setting the simulation speed](https://dev.px4.io/v1.9.0/en/simulation/#simulation_speed) by setting the `PX4_SIM_SPEED_FACTOR` environment variable. Its value is picked up by PX4 startup scripts, which in turn reconfigure it to expect a certain speedup/slowdown.
+Since v1.9 the PX4 SITL setup supports [setting the simulation speed](https://docs.px4.io/master/en/simulation/#run-simulation-faster-than-realtime) by setting the `PX4_SIM_SPEED_FACTOR` environment variable. Its value is picked up by PX4 startup scripts, which in turn reconfigure it to expect a certain speedup/slowdown.
 
 You should set its value to the actual real time factor that you get with `throttling_camera`. The real time factor may be found in the Gazebo GUI window at the bottom:
 
@@ -95,3 +97,13 @@ PX4_SIM_SPEED_FACTOR=0.42 roslaunch clover_simulation simulator.launch
 The virtual machine may benefit from several CPU cores, especially if the cores are not very performant. In our tests, a four-core machine with only a single core allocated to the VM was unable to run the simulation, with constant interface freezes and dropped ROS messages. The same machine with all four cores available to the VM was able to run the simulation at 0.25 real-time speed.
 
 Do note that you should not allocate more resources than you have on your host hardware.
+
+### Changing the map of ArUco-markers in the simulator
+
+In order to change the map of ArUco-markers in the simulator, you can use the following command:
+
+```bash
+rosrun clover_simulation aruco_gen --single-model --source-world=$(catkin_find clover_simulation resources/worlds/clover.world) $(catkin_find aruco_pose map/map.txt) > $(catkin_find clover_simulation resources/worlds/clover_aruco.world)
+```
+
+In this example, `map.txt` is the name of markers name.

@@ -6,7 +6,7 @@ import tf2_geometry_msgs
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from sensor_msgs.msg import Image
 from aruco_pose.msg import MarkerArray
-from visualization_msgs.msg import MarkerArray as VisMarkerArray
+from visualization_msgs.msg import MarkerArray as VisMarkerArray, Marker as VisMarker
 
 
 @pytest.fixture
@@ -143,7 +143,7 @@ def test_map_image(node):
     assert img.encoding in ('mono8', 'rgb8')
 
 def test_map_markers(node):
-    markers = rospy.wait_for_message('aruco_map/markers', MarkerArray, timeout=5)
+    markers = rospy.wait_for_message('aruco_map/map', MarkerArray, timeout=5)
     assert markers.markers[0].id == 1
     assert markers.markers[1].id == 2
     assert markers.markers[2].id == 3
@@ -199,6 +199,36 @@ def test_map_markers(node):
 
 def test_map_visualization(node):
     vis = rospy.wait_for_message('aruco_map/visualization', VisMarkerArray, timeout=5)
+    assert len(vis.markers) == 7
+    assert vis.markers[0].header.frame_id == 'aruco_map'
+    assert vis.markers[0].type == VisMarker.CUBE
+    assert vis.markers[0].action == VisMarker.ADD
+    assert vis.markers[0].pose.position.x == 0
+    assert vis.markers[0].pose.position.y == 0
+    assert vis.markers[0].pose.position.z == 0
+    assert vis.markers[0].pose.orientation.x == 0
+    assert vis.markers[0].pose.orientation.y == 0
+    assert vis.markers[0].pose.orientation.z == 0
+    assert vis.markers[0].pose.orientation.w == 1
+    assert vis.markers[0].scale.x == approx(0.33)
+    assert vis.markers[0].scale.y == approx(0.33)
+    assert vis.markers[0].scale.z == approx(0.001)
+    assert vis.markers[1].pose.position.x == 1
+    assert vis.markers[1].pose.position.y == 0
+    assert vis.markers[1].pose.position.z == 0
+    assert vis.markers[1].pose.orientation.x == 0
+    assert vis.markers[1].pose.orientation.y == 0
+    assert vis.markers[1].pose.orientation.z == 0
+    assert vis.markers[1].pose.orientation.w == 1
+    # non-zero yaw marker:
+    assert vis.markers[4].scale.x == approx(0.5)
+    assert vis.markers[4].pose.position.x == approx(0.5)
+    assert vis.markers[4].pose.position.y == 2
+    assert vis.markers[4].pose.position.z == 0
+    assert vis.markers[4].pose.orientation.x == 0
+    assert vis.markers[4].pose.orientation.y == 0
+    assert vis.markers[4].pose.orientation.z == approx(0.5646424733950354)
+    assert vis.markers[4].pose.orientation.w == approx(0.8253356149096783)
 
 def test_map_debug(node):
     img = rospy.wait_for_message('aruco_map/debug', Image, timeout=5)
