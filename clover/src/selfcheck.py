@@ -28,6 +28,7 @@ from mavros_msgs.msg import State, OpticalFlowRad, Mavlink
 from mavros_msgs.srv import ParamGet
 from geometry_msgs.msg import PoseStamped, TwistStamped, PoseWithCovarianceStamped, Vector3Stamped
 from visualization_msgs.msg import MarkerArray as VisualizationMarkerArray
+from diagnostic_msgs.msg import DiagnosticArray
 import tf.transformations as t
 from aruco_pose.msg import MarkerArray
 from mavros import mavlink
@@ -169,6 +170,15 @@ def mavlink_exec(cmd, timeout=3.0):
     return mavlink_recv
 
 
+def read_diagnostics(name, key):
+    diagnostics = rospy.wait_for_message('/diagnostics', DiagnosticArray, timeout=3.0)
+    for status in diagnostics.status:
+        if status.name.lower() == name.lower():
+            for value in status.values:
+                if value.key.lower() == key.lower():
+                    return value.value
+
+
 BOARD_ROTATIONS = {
     0: 'no rotation',
     1: 'yaw 45°',
@@ -287,6 +297,12 @@ def check_fcu():
                         failure('critically low cell voltage: %.2f V, recharge battery', cell)
             except rospy.ROSException:
                 failure('no battery state')
+
+        # time sync check
+        try:
+            info('time sync offset: %.2f s', float(read_diagnostics('mavros: Time Sync', 'Estimated time offset (s)')))
+        except rospy.ROSException:
+            failure('cannot read time sync offset')
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
