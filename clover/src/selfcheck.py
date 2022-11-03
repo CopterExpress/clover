@@ -35,15 +35,6 @@ from mavros import mavlink
 import locale
 
 
-# TODO: check attitude is present
-# TODO: disk free space
-# TODO: map, base_link, body
-# TODO: rc service
-# TODO: perform commander check, ekf2 status on PX4
-# TODO: check if FCU params setter succeed
-# TODO: selfcheck ROS service (with blacklists for checks)
-
-
 rospy.init_node('selfcheck')
 
 os.environ['ROSCONSOLE_FORMAT']='${message}'
