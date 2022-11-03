@@ -764,7 +764,10 @@ def check_image():
     try:
         info('version: %s', open('/etc/clover_version').read().strip())
     except IOError:
-        info('no /etc/clover_version file, not the Clover image?')
+        try:
+            info('VM version: %s', open('/etc/clover_vm_version').read().strip())
+        except IOError:
+            info('no /etc/clover_version file, not the Clover image?')
 
 
 @check('Preflight status')
