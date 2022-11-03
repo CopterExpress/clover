@@ -14,7 +14,7 @@ The `clover` service must be restarted after the launch-file has been edited:
 sudo systemctl restart clover
 ```
 
-You may use rqt or [web_video_server](web_video_server.md) to view the camera stream.
+You may use [rqt](rviz.md) or [web_video_server](web_video_server.md) to view the camera stream.
 
 ## Troubleshooting
 
@@ -52,8 +52,6 @@ The [SD card image](image.md) comes with a preinstalled [OpenCV](https://opencv.
 
 ### Python
 
-Main article: http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython.
-
 An example of creating a subscriber for a topic with an image from the main camera for processing with OpenCV:
 
 ```python
@@ -61,12 +59,14 @@ import rospy
 import cv2
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from clover import long_callback
 
-rospy.init_node('computer_vision_sample')
+rospy.init_node('cv')
 bridge = CvBridge()
 
+@long_callback
 def image_callback(data):
-    cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
+    img = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     # Do any image processing with cv2...
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback)
@@ -74,19 +74,31 @@ image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback)
 rospy.spin()
 ```
 
+> **Note** Image processing may take significant time to finish. This can cause an [issue](https://github.com/ros/ros_comm/issues/1901) in rospy library, which would lead to processing stale camera frames. To solve this problem you need to use `long_callback` decorator from `clover` library, as in the example above.
+
+#### Limiting CPU usage
+
+When using the `main_camera/image_raw` topic, the script will process the maximum number of frames from the camera, actively utilizing the CPU (up to 100%). In tasks, where processing each camera frame is not critical, you can use the topic, where the frames are published at rate 5 Hz: `main_camera/image_raw_throttled`:
+
+```python
+image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback, queue_size=1)
+```
+
+#### Publishing images
+
 To debug image processing, you can publish a separate topic with the processed image:
 
 ```python
 image_pub = rospy.Publisher('~debug', Image)
 ```
 
-Publishing the processed image (at the end of the image_callback function):
+Publishing the processed image:
 
 ```python
-image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
+image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 ```
 
-The obtained images can be viewed using [web_video_server](web_video_server.md).
+The published images can be viewed using [web_video_server](web_video_server.md) or [rqt](rviz.md).
 
 #### Retrieving one frame
 
@@ -97,7 +109,7 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
-rospy.init_node('computer_vision_sample')
+rospy.init_node('cv')
 bridge = CvBridge()
 
 # ...
@@ -119,40 +131,32 @@ QR codes recognition in Python:
 ```python
 import rospy
 from pyzbar import pyzbar
+import cv2
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
+from clover import long_callback
 
+rospy.init_node('cv')
 bridge = CvBridge()
 
-rospy.init_node('barcode_test')
-
-# Image subscriber callback function
-def image_callback(data):
-    cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
-    barcodes = pyzbar.decode(cv_image)
+@long_callback
+def image_callback(msg):
+    img = bridge.imgmsg_to_cv2(msg, 'bgr8')
+    barcodes = pyzbar.decode(img)
     for barcode in barcodes:
-        b_data = barcode.data.decode("utf-8")
+        b_data = barcode.data.decode('utf-8')
         b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        print('Found {} with data {} with center at x={}, y={}'.format(b_type, b_data, xc, yc))
 
-image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
+image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback, queue_size=1)
 
 rospy.spin()
 ```
 
-The script will take up to 100% CPU capacity. To slow down the script artificially, you can use [throttling](http://wiki.ros.org/topic_tools/throttle) of frames from the camera, for example, at 5 Hz (`main_camera.launch`):
-
-> **Note** Starting from [image](image.md) version **0.24** `image_raw_throttled` topic is available without addition configuration.
-
-```xml
-<node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
-```
-
-The topic for the subscriber in this case should be changed for `main_camera/image_raw_throttled`.
+> **Hint** See other computer vision examples in the `~/examples` directory of the [RPi image](image.md).
 
 ## Video recording
 
