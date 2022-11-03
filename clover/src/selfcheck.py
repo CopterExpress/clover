@@ -301,7 +301,7 @@ def check_fcu():
         # time sync check
         try:
             info('time sync offset: %.2f s', float(read_diagnostics('mavros: Time Sync', 'Estimated time offset (s)')))
-        except rospy.ROSException:
+        except:
             failure('cannot read time sync offset')
 
     except rospy.ROSException:
