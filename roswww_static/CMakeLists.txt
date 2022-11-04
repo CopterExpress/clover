@@ -19,4 +19,5 @@ catkin_install_python(PROGRAMS src/update
 message(status "CATKIN_ENV: ${CATKIN_ENV}")
 
 add_custom_target(roswww_static ALL
-    COMMAND ${CATKIN_ENV} ${CMAKE_CURRENT_SOURCE_DIR}/src/update)
+    COMMAND ${CMAKE_COMMAND} -E env ROSWWW_STATIC_DEFAULT=${ROSWWW_STATIC_DEFAULT}
+    ${CATKIN_ENV} ${CMAKE_CURRENT_SOURCE_DIR}/src/update)

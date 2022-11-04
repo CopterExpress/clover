@@ -230,6 +230,9 @@ target_link_libraries(${PROJECT_NAME}
   ${OpenCV_LIBRARIES}
 )
 
+# Set Clover to default www page
+set(ROSWWW_STATIC_DEFAULT ${PROJECT_NAME})
+
 #############
 ## Install ##
 #############
