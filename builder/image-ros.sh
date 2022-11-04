@@ -111,17 +111,9 @@ my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${RO
 my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash
-
-tree
-
-# At first whitelist nothing to initialize the workspace:
-catkin_make -DCATKIN_WHITELIST_PACKAGES="<nothing>"
+# Don't build simulation plugins for actual drone
+catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 source devel/setup.bash
-
-tree
-
-# Build everything:
-catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCATKIN_WHITELIST_PACKAGES=""
 
 echo_stamp "Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
