@@ -24,6 +24,7 @@ www = rospkg.get_ros_home() + '/www'
 index_file = None # rospy.get_param('~index_file', None)
 default_package = None # rospy.get_param('~default_package', None)
 
+print('roswww_static: putting symlinks to ', www)
 shutil.rmtree(www, ignore_errors=True)  # reset www directory content
 os.mkdir(www)
 
