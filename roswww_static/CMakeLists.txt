@@ -5,6 +5,11 @@ find_package(catkin REQUIRED)
 
 catkin_package()
 
+macro(roswww_static_make_default)
+  message(STATUS "roswww_static: make ${PROJECT_NAME} package default")
+  set(ROSWWW_STATIC_DEFAULT ${PROJECT_NAME} CACHE STRING "Default roswww_static package")
+endmacro()
+
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 catkin_install_python(PROGRAMS update
@@ -14,4 +19,4 @@ catkin_install_python(PROGRAMS update
 message(status "CATKIN_ENV: ${CATKIN_ENV}")
 
 add_custom_target(roswww_static ALL
-    COMMAND ${CATKIN_ENV} ${CMAKE_CURRENT_SOURCE_DIR}/update)
+    COMMAND ${CATKIN_ENV} ${CMAKE_CURRENT_SOURCE_DIR}/src/update)
