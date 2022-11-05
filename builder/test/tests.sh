@@ -12,6 +12,9 @@ python3 --version
 ipython --version
 ipython3 --version
 
+# `python` is python2 for now
+[[ $(python -c 'import sys;print(sys.version_info.major)') == "2" ]]
+
 # ptvsd does not have a stand-alone binary
 python -m ptvsd --version
 python3 -m ptvsd --version
