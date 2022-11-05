@@ -48,7 +48,6 @@ fi
 roscore -h
 rosversion clover
 rosversion aruco_pose
-rosversion vl53l1x
 rosversion mavros
 rosversion mavros_extras
 rosversion ws281x
@@ -65,15 +64,14 @@ rosversion rosshow
 rosversion nodelet
 rosversion image_view
 
-# validate some versions
-[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 [[ $(rosversion ws281x) == "0.0.13" ]]
 
-if [ $VM ]; then
-	H="/home/clover"
-else
-	H="/home/pi"
+if [ -z $VM ]; then
+	rosversion vl53l1x
+	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 fi
+
+[ $VM ] && H="/home/clover" || H="/home/pi"
 
 # validate examples are present
 [[ $(ls $H/examples/*) ]]
