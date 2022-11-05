@@ -6,7 +6,7 @@ Note: you should configure your web server to make it follow symlinks.
 
 ## Instructions
 
-* Run `update` node and it will generate the symlinks and index file: `rosrun roswww_static update`.
+* Run `update` script and it will generate the symlinks and index file: `rosrun roswww_static update`.
 * Point your static web server path to `~/.ros/www`.
 
 You can rerun `update` if the list of installed packages changes.
