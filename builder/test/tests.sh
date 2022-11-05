@@ -10,10 +10,6 @@ python2 --version
 python3 --version
 ipython3 --version
 
-# ptvsd does not have a stand-alone binary
-python -m ptvsd --version
-python3 -m ptvsd --version
-
 node -v
 npm -v
 
@@ -38,6 +34,10 @@ if [ -z $VM ]; then
 	pip2 --version
 	# `python` is python2 for now
 	[[ $(python -c 'import sys;print(sys.version_info.major)') == "2" ]]
+
+	# ptvsd does not have a stand-alone binary
+	python -m ptvsd --version
+	python3 -m ptvsd --version
 
 	pigpiod -v
 	i2cdetect -V
