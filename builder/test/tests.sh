@@ -22,7 +22,6 @@ pip --version
 pip3 --version
 tcpdump --version
 monkey --version
-butterfly -h
 # espeak --version
 mjpg_streamer --version
 systemctl --version
@@ -41,6 +40,7 @@ if [ -z $VM ]; then
 
 	pigpiod -v
 	i2cdetect -V
+	butterfly -h
 fi
 
 # ros stuff
