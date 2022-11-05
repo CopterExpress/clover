@@ -6,14 +6,9 @@ set -ex
 
 # validate required software is installed
 
-python --version
 python2 --version
 python3 --version
-ipython --version
 ipython3 --version
-
-# `python` is python2 for now
-[[ $(python -c 'import sys;print(sys.version_info.major)') == "2" ]]
 
 # ptvsd does not have a stand-alone binary
 python -m ptvsd --version
@@ -28,16 +23,25 @@ lsof -v
 git --version
 vim --version
 pip --version
-pip2 --version
 pip3 --version
 tcpdump --version
 monkey --version
-pigpiod -v
-i2cdetect -V
 butterfly -h
 # espeak --version
 mjpg_streamer --version
 systemctl --version
+
+if [ -z $VM ]; then
+	# rpi only software
+	python --version
+	ipython --version
+	pip2 --version
+	# `python` is python2 for now
+	[[ $(python -c 'import sys;print(sys.version_info.major)') == "2" ]]
+
+	pigpiod -v
+	i2cdetect -V
+fi
 
 # ros stuff
 
@@ -65,5 +69,11 @@ rosversion image_view
 [[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 [[ $(rosversion ws281x) == "0.0.13" ]]
 
+if [ $VM ]; then
+	H="/home/clover"
+else
+	H="/home/pi"
+fi
+
 # validate examples are present
-[[ $(ls /home/pi/examples/*) ]]
+[[ $(ls $H/examples/*) ]]
