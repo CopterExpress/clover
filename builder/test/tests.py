@@ -2,6 +2,7 @@
 
 # validate all required modules installed
 
+import os
 import rospy
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import Range, BatteryState
@@ -32,9 +33,11 @@ import tf2_geometry_msgs
 import VL53L1X
 import pymavlink
 from pymavlink import mavutil
-import rpi_ws281x
-import pigpio
 # from espeak import espeak
 from pyzbar import pyzbar
 
 print(cv2.getBuildInformation())
+
+if not os.environ.get('VM'):
+    import rpi_ws281x
+    import pigpio
