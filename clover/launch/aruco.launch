@@ -53,4 +53,8 @@
         <param name="force_init" value="$(arg force_init)"/>
         <param name="offset_frame_id" value="aruco_map"/>
     </node>
+
+    <!-- run map_flipped frame if placement is ceiling -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame"
+        args="0 0 0 3.1415926 3.1415926 0 map map_flipped" if="$(eval placement == 'ceiling')"/>
 </launch>
