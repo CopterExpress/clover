@@ -54,7 +54,6 @@ rosversion ws281x
 rosversion led_msgs
 rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
-rosversion compressed_image_transport
 rosversion rosbridge_server
 rosversion rosserial
 rosversion usb_cam
@@ -67,6 +66,7 @@ rosversion image_view
 [[ $(rosversion ws281x) == "0.0.13" ]]
 
 if [ -z $VM ]; then
+	rosversion compressed_image_transport
 	rosversion vl53l1x
 	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 fi
