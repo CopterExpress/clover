@@ -55,7 +55,7 @@ rosversion led_msgs
 rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
 rosversion compressed_image_transport
-rosversion rosbridge_suite
+rosversion rosbridge_server
 rosversion rosserial
 rosversion usb_cam
 rosversion cv_camera
