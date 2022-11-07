@@ -65,7 +65,8 @@ public:
 		}
 
 		role = (ros::this_node::getName() == "/gazebo") ? Role::Server : Role::Client;
-		ROS_INFO_NAMED(("LedController_" + robotNamespace).c_str(), "LedController has started (as %s)", role == Role::Client ? "client" : "server");
+		ROS_INFO_NAMED(("LedController_" + robotNamespace).c_str(), "LedController has started (as %s) in namespace '%s'",
+			role == Role::Client ? "client" : "server", robotNamespace.c_str());
 
 		nh.reset(new ros::NodeHandle(robotNamespace));
 
@@ -109,7 +110,6 @@ LedController& get(std::string robotNamespace)
 	std::lock_guard<std::mutex> lock(controllerMutex);
 	auto it = controllers.find(robotNamespace);
 	if (it == controllers.end()) {
-		gzwarn << "Creating new LED controller for namespace " << robotNamespace << "\n";
 		controllers[robotNamespace].reset(new LedController(robotNamespace));
 		return *controllers[robotNamespace];
 	}
