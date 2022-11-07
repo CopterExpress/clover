@@ -55,7 +55,6 @@ rosversion led_msgs
 rosversion dynamic_reconfigure
 rosversion tf2_web_republisher
 rosversion rosbridge_server
-rosversion rosserial
 rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
@@ -68,6 +67,7 @@ if [ -z $VM ]; then
 	rosversion compressed_image_transport
 	rosversion rosshow
 	rosversion vl53l1x
+	rosversion rosserial
 	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 fi
 
