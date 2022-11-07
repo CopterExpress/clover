@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="roswww_static" name="roswww_static" type="update">
+        <param name="default_package" value="clover"/>
+    </node>
+</launch>

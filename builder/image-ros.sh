@@ -127,6 +127,9 @@ gitbook install
 gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
+echo_stamp "Update www"
+roslaunch clover www.launch
+
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-dynamic-reconfigure \

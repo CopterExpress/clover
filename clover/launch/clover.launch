@@ -85,8 +85,4 @@
         <param name="use_fake_gcs" value="false"/>
     </node>
 
-    <!-- Update static directory -->
-    <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">
-        <param name="default_package" value="clover"/>
-    </node>
 </launch>
