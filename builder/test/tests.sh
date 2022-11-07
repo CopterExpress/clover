@@ -59,7 +59,6 @@ rosversion rosserial
 rosversion usb_cam
 rosversion cv_camera
 rosversion web_video_server
-rosversion rosshow
 rosversion nodelet
 rosversion image_view
 
@@ -67,6 +66,7 @@ rosversion image_view
 
 if [ -z $VM ]; then
 	rosversion compressed_image_transport
+	rosversion rosshow
 	rosversion vl53l1x
 	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 fi
