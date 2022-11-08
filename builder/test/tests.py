@@ -35,6 +35,7 @@ import pymavlink
 from pymavlink import mavutil
 # from espeak import espeak
 from pyzbar import pyzbar
+import docopt
 
 print(cv2.getBuildInformation())
 
