@@ -9,7 +9,7 @@
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 
-import os
+import os, sys
 import math
 import subprocess
 import re
@@ -50,6 +50,16 @@ thread_local = threading.local()
 reports_lock = Lock()
 
 
+# formatting colors
+if sys.stdout.isatty():
+    GREY = '\033[90m'
+    GREEN = '\033[92m'
+    RED = '\033[31m'
+    END = '\033[0m'
+else:
+    GREY = GREEN = RED = END = ''
+
+
 def failure(text, *args):
     msg = text % args
     thread_local.reports += [{'failure': msg}]
@@ -75,9 +85,9 @@ def check(name):
                     if 'failure' in report:
                         rospy.logerr('%s: %s', name, report['failure'])
                     elif 'info' in report:
-                        rospy.loginfo('\033[90m%s\033[0m: %s', name, report['info'])
+                        rospy.loginfo(GREY + name + END + ': ' + report['info'])
                 if not thread_local.reports:
-                    rospy.loginfo('\033[90m%s\033[0m: \033[92mOK\033[0m', name)
+                    rospy.loginfo(GREY + name + END + ': ' + GREEN + 'OK' + END)
                 if rospy.get_param('~time', False):
                     rospy.loginfo('%s: %.1f sec', name, rospy.get_time() - start)
         return wrapper
@@ -87,7 +97,7 @@ def check(name):
 def ff(value, precision=2):
     # safely format float or int
     if value is None:
-        return '\033[31m???\033[0m'
+        return RED + '???' + END
     if isinstance(value, float):
         return ('{:.' + str(precision + 1) + '}').format(value)
     elif isinstance(value, int):
