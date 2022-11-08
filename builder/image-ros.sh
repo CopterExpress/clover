@@ -128,6 +128,7 @@ gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Update www"
+source devel/setup.bash
 rosrun clover www
 
 echo_stamp "Installing additional ROS packages"
