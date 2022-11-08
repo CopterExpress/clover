@@ -1,5 +1,5 @@
 <launch>
-    <node pkg="roswww_static" name="roswww_static" type="update">
+    <node pkg="roswww_static" name="roswww_static" type="update" output="screen">
         <param name="default_package" value="clover"/>
     </node>
 </launch>
