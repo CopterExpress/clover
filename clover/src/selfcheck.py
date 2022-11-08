@@ -450,7 +450,7 @@ def check_vpe():
         except rospy.ROSException:
             if not is_process_running('vpe_publisher', full=True):
                 info('no vision position estimate, vpe_publisher is not running')
-            elif rospy.get_param('aruco_map/known_tilt') == 'map_flipped':
+            elif rospy.get_param('aruco_map/known_tilt', '') == 'map_flipped':
                 failure('no vision position estimate, markers are on the ceiling')
             elif is_on_the_floor():
                 info('no vision position estimate, the drone is on the floor')
