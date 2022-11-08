@@ -21,7 +21,7 @@ center_pub = rospy.Publisher('~center', Image, queue_size=1)
 
 def get_color_name(h):
     if h < 15: return 'red'
-    if h < 30: return 'orange'
+    elif h < 30: return 'orange'
     elif h < 60: return 'yellow'
     elif h < 90: return 'green'
     elif h < 120: return 'cyan'
