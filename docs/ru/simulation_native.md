@@ -164,7 +164,7 @@ sudo systemctl start monkey
 Создайте директорию `~/.ros/www` следующей командой:
 
 ```bash
-roslaunch clover www.launch
+rosrun clover www
 ```
 
 При обновлении набора пакетов, содержащих веб-часть (через каталог `www`), также необходимо выполнение данной команды.

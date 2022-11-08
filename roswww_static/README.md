@@ -13,5 +13,7 @@ You can rerun `update` if the list of installed packages changes.
 
 ## Parameters
 
-* `index` – path for index page, otherwise packages list would be generated.
-* `default_package` – if set then the index page would redirect to this package's page.
+Parameters are passed through environment variables:
+
+* `ROSWWW_INDEX` – path for index page, otherwise packages list would be generated.
+* `ROSWWW_DEFAULT` – if set then the index page would redirect to this package's page.
