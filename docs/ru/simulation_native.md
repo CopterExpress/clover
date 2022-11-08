@@ -147,6 +147,8 @@ sudo systemctl enable roscore
 sudo systemctl start roscore
 ```
 
+### Конфигурация веб-инструментов
+
 Установите любой веб-сервер, чтобы раздавать веб-инструменты Клевера (директория `~/.ros/www`), например, Monkey:
 
 ```bash
@@ -158,3 +160,11 @@ sudo cp ~/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system
 sudo systemctl enable monkey
 sudo systemctl start monkey
 ```
+
+Создайте директорию `~/.ros/www` следующей командой:
+
+```bash
+roslaunch clover www.launch
+```
+
+При обновлении набора пакетов, содержащих веб-часть (через каталог `www`), также необходимо выполнение данной команды.

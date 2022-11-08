@@ -147,6 +147,8 @@ sudo systemctl enable roscore
 sudo systemctl start roscore
 ```
 
+### Web tools setup
+
 Install any web server to serve Clover's web tools (`~/.ros/www` directory), e. g. Monkey:
 
 ```bash
@@ -158,3 +160,11 @@ sudo cp ~/catkin_ws/src/clover/builder/assets/monkey.service /etc/systemd/system
 sudo systemctl enable monkey
 sudo systemctl start monkey
 ```
+
+Create `~/.ros/www` using the following command:
+
+```bash
+roslaunch clover www.launch
+```
+
+If the set of packages containing a web part (through `www` directory) is changed, the above command also must be run.
