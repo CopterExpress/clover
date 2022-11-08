@@ -386,7 +386,7 @@ def check_aruco():
 
     if is_process_running('aruco_detect', full=True):
         try:
-            info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
+            info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length', '?'))
         except KeyError:
             failure('aruco_detect/length parameter is not set')
         known_tilt = rospy.get_param('aruco_detect/known_tilt', '')
