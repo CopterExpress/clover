@@ -71,6 +71,18 @@ if [ -z $VM ]; then
 	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
 fi
 
+# test basic ros tool work
+roscd
+rosrun
+rosmsg
+rossrv
+rosnode
+rostopic
+rosservice
+rosparam
+roslaunch
+
+# determine user home directory
 [ $VM ] && H="/home/clover" || H="/home/pi"
 
 # validate examples are present
