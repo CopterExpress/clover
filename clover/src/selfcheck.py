@@ -234,6 +234,7 @@ def check_fcu():
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+            info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
             return
 
         if not is_process_running('px4', exact=True): # can't use px4 console in SITL
@@ -316,6 +317,7 @@ def check_fcu():
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
+        info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
 
 
 def describe_direction(v):
