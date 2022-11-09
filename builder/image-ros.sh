@@ -139,9 +139,6 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-cmake-modules \
     ros-${ROS_DISTRO}-image-view
 
-echo_stamp "Update www"
-rosrun clover www
-
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
@@ -153,6 +150,9 @@ catkin_make run_tests #&& catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
+
+echo_stamp "Update www"
+sudo -u pi "source devel/setup.bash && rosrun clover www"
 
 echo_stamp "Make \$HOME/examples symlink"
 ln -s "$(catkin_find clover examples --first-only)" /home/pi
