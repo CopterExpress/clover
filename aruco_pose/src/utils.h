@@ -107,7 +107,7 @@ inline bool isFlipped(tf::Quaternion& q)
 }
 
 /* Set roll and pitch from "from" to "to", keeping yaw */
-inline void snapOrientation(geometry_msgs::Quaternion& to, const geometry_msgs::Quaternion& from, bool auto_flip = false)
+inline void applyVertical(geometry_msgs::Quaternion& to, const geometry_msgs::Quaternion& from, bool auto_flip = false)
 {
 	tf::Quaternion _from, _to;
 	tf::quaternionMsgToTF(from, _from);
