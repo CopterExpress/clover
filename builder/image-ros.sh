@@ -129,6 +129,8 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Update www"
 source /home/pi/catkin_ws/devel/setup.bash
+echo $PATH
+ls -la /opt/ros/noetic/bin
 rosrun clover www
 
 echo_stamp "Installing additional ROS packages"
