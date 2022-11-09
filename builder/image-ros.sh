@@ -127,12 +127,6 @@ gitbook install
 gitbook build
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
-echo_stamp "Update www"
-source /home/pi/catkin_ws/devel/setup.bash
-echo $PATH
-ls -la /opt/ros/noetic/bin
-rosrun clover www
-
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-dynamic-reconfigure \
@@ -144,6 +138,9 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rosshow \
     ros-${ROS_DISTRO}-cmake-modules \
     ros-${ROS_DISTRO}-image-view
+
+echo_stamp "Update www"
+rosrun clover www
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
