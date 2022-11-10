@@ -19,8 +19,9 @@ rospack = rospkg.RosPack()
 
 www = rospkg.get_ros_home() + '/www'
 index_file = os.environ.get('ROSWWW_INDEX')
-default_package =  os.environ.get('ROSWWW_DEFAULT')
+default_package = os.environ.get('ROSWWW_DEFAULT')
 
+print('using www dir: ' + www)
 shutil.rmtree(www, ignore_errors=True)  # reset www directory content
 os.mkdir(www)
 
