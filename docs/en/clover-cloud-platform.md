@@ -6,9 +6,9 @@
 
 The list of team members:
 
-* Кирилл Лещинский / Kirill Leshchinskiy, [@k_leshchinskiy](https://t.me/k_leshchinskiy) - TeamLead.
-* Кузнецов Михаил / Mikhail Kuznetsov, [@bruhfloppa](https://t.me/bruhfloppa) - Frontend.
-* Даниил Валишин / Daniil Valishin, [@Astel_1](https://t.me/Astel_1) - Backend.
+* Кирилл Лещинский / Kirill Leshchinskiy, [@k_leshchinskiy](https://t.me/k_leshchinskiy) - Team Lead.
+* Кузнецов Михаил / Mikhail Kuznetsov, [@bruhfloppa](https://t.me/bruhfloppa) - Frontend Developer.
+* Даниил Валишин / Daniil Valishin, [@Astel_1](https://t.me/Astel_1) - Backend Developer.
 
 ## Project description
 
@@ -41,7 +41,4 @@ In our project we use Clover packages for drone simulation.
 
 ### <a name='info'></a>Additional information
 
-Links to our repositories:
-
-* [Frontend](https://github.com/DevMBS/clover-cloud-platform-frontend)
-* [Backend](https://github.com/Astel-d/clover-cloud-platform-backend)
+[Link to our organization with project repositories](https://github.com/Clover-Cloud-Platform)
