@@ -9,7 +9,7 @@
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 
-import os
+import os, sys
 import math
 import subprocess
 import re
@@ -50,6 +50,16 @@ thread_local = threading.local()
 reports_lock = Lock()
 
 
+# formatting colors
+if sys.stdout.isatty():
+    GREY = '\033[90m'
+    GREEN = '\033[92m'
+    RED = '\033[31m'
+    END = '\033[0m'
+else:
+    GREY = GREEN = RED = END = ''
+
+
 def failure(text, *args):
     msg = text % args
     thread_local.reports += [{'failure': msg}]
@@ -75,9 +85,9 @@ def check(name):
                     if 'failure' in report:
                         rospy.logerr('%s: %s', name, report['failure'])
                     elif 'info' in report:
-                        rospy.loginfo('\033[90m%s\033[0m: %s', name, report['info'])
+                        rospy.loginfo(GREY + name + END + ': ' + report['info'])
                 if not thread_local.reports:
-                    rospy.loginfo('\033[90m%s\033[0m: \033[92mOK\033[0m', name)
+                    rospy.loginfo(GREY + name + END + ': ' + GREEN + 'OK' + END)
                 if rospy.get_param('~time', False):
                     rospy.loginfo('%s: %.1f sec', name, rospy.get_time() - start)
         return wrapper
@@ -87,7 +97,7 @@ def check(name):
 def ff(value, precision=2):
     # safely format float or int
     if value is None:
-        return '\033[31m???\033[0m'
+        return RED + '???' + END
     if isinstance(value, float):
         return ('{:.' + str(precision + 1) + '}').format(value)
     elif isinstance(value, int):
@@ -224,6 +234,7 @@ def check_fcu():
         state = rospy.wait_for_message('mavros/state', State, timeout=3)
         if not state.connected:
             failure('no connection to the FCU (check wiring)')
+            info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
             return
 
         if not is_process_running('px4', exact=True): # can't use px4 console in SITL
@@ -306,6 +317,7 @@ def check_fcu():
 
     except rospy.ROSException:
         failure('no MAVROS state (check wiring)')
+        info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
 
 
 def describe_direction(v):
@@ -386,7 +398,7 @@ def check_aruco():
 
     if is_process_running('aruco_detect', full=True):
         try:
-            info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length'))
+            info('aruco_detect/length = %g m', rospy.get_param('aruco_detect/length', '?'))
         except KeyError:
             failure('aruco_detect/length parameter is not set')
         known_tilt = rospy.get_param('aruco_detect/known_tilt', '')
@@ -450,7 +462,7 @@ def check_vpe():
         except rospy.ROSException:
             if not is_process_running('vpe_publisher', full=True):
                 info('no vision position estimate, vpe_publisher is not running')
-            elif rospy.get_param('aruco_map/known_tilt') == 'map_flipped':
+            elif rospy.get_param('aruco_map/known_tilt', '') == 'map_flipped':
                 failure('no vision position estimate, markers are on the ceiling')
             elif is_on_the_floor():
                 info('no vision position estimate, the drone is on the floor')
