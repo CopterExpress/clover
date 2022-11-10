@@ -206,7 +206,7 @@ public:
 			try {
 				geometry_msgs::TransformStamped vertical = tf_buffer_.lookupTransform(markers->header.frame_id,
 				                                           known_vertical_, markers->header.stamp, ros::Duration(0.02));
-				applyVertical(transform_.transform.rotation, vertical.transform.rotation, auto_flip_);
+				applyVertical(transform_.transform.rotation, vertical.transform.rotation, flip_vertical_, auto_flip_);
 			} catch (const tf2::TransformException& e) {
 				NODELET_WARN_THROTTLE(1, "can't retrieve known vertical: %s", e.what());
 			}

@@ -71,7 +71,7 @@ private:
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
 	ros::ServiceServer set_markers_srv_;
-	bool estimate_poses_, send_tf_, auto_flip_, use_map_markers_;
+	bool estimate_poses_, send_tf_, flip_vertical_, auto_flip_, use_map_markers_;
 	bool waiting_for_map_;
 	double length_;
 	ros::Duration transform_timeout_;
@@ -106,6 +106,7 @@ public:
 		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
 		known_vertical_ = nh_priv_.param("known_vertical", nh_priv_.param("known_tilt", std::string(""))); // known_tilt is an old name
+		flip_vertical_ = nh_priv_.param<bool>("flip_vertical", false);
 		auto_flip_ = nh_priv_.param("auto_flip", false);
 
 		frame_id_prefix_ = nh_priv_.param<std::string>("frame_id_prefix", "aruco_");
@@ -207,7 +208,7 @@ private:
 
 					// apply known vertical (if enabled and vertical frame available)
 					if (!known_vertical_.empty() && !vertical.header.frame_id.empty()) {
-						applyVertical(marker.pose.orientation, vertical.transform.rotation, auto_flip_);
+						applyVertical(marker.pose.orientation, vertical.transform.rotation, false, auto_flip_);
 					}
 
 					if (send_tf_) {

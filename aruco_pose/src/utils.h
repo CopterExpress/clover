@@ -107,17 +107,16 @@ inline bool isFlipped(tf::Quaternion& q)
 }
 
 /* Apply a vertical to an orientation */
-inline void applyVertical(geometry_msgs::Quaternion& orientation, const geometry_msgs::Quaternion& vertical, bool auto_flip = false)
+inline void applyVertical(geometry_msgs::Quaternion& orientation, const geometry_msgs::Quaternion& vertical,
+                          bool flip_vertical = false, bool auto_flip = false)
 {
 	tf::Quaternion _vertical, _orientation;
 	tf::quaternionMsgToTF(vertical, _vertical);
 	tf::quaternionMsgToTF(orientation, _orientation);
 
-	if (auto_flip) {
-		if (!isFlipped(_vertical)) {
-			static const tf::Quaternion flip = tf::createQuaternionFromRPY(M_PI, 0, 0);
-			_vertical *= flip; // flip vertical
-		}
+	if (flip_vertical || (auto_flip && !isFlipped(_orientation))) {
+		static const tf::Quaternion flip = tf::createQuaternionFromRPY(M_PI, 0, 0);
+		_vertical *= flip; // flip vertical
 	}
 
 	auto diff = tf::Matrix3x3(_orientation).transposeTimes(tf::Matrix3x3(_vertical));
