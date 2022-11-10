@@ -51,10 +51,10 @@ sed -i "/direction_y/s/default=\".*\"/default=\"\"/" /home/pi/catkin_ws/src/clov
 
 После того, как вы заполните карту, необходимо применить ее — для этого отредактируйте файл `aruco.launch`, расположенный в `~/catkin_ws/src/clover/clover/launch/`. Измените в нем строку `<param name="map" value="$(find aruco_pose)/map/map_name.txt"/>`, где `map_name.txt` название вашего файла с картой.
 
-При использовании маркеров,  не привязанных к горизонтальным плоскостям(пол, потолок), необходимо отключить параметр `known_tilt` как в модуле `aruco_detect`, так и в модуле `aruco_map` в том же файле. Для того, чтобы сделать это автоматически, введите:
+При использовании маркеров, не привязанных к горизонтальным плоскостям (пол, потолок), необходимо также сделать пустым значение аргумента `placement` в том же файле:
 
-```bash
-sed -i "/known_tilt/s/value=\".*\"/value=\"\"/" /home/pi/catkin_ws/src/clover/clover/launch/aruco.launch
+```xml
+<arg name="placement" default=""/>
 ```
 
 После всех настроек вызовите `sudo systemctl restart clover` для перезагрузки сервиса `clover`.

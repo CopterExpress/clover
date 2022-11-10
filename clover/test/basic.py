@@ -3,6 +3,7 @@ import rospy
 import pytest
 from mavros_msgs.msg import State
 from clover import srv
+import time
 
 @pytest.fixture()
 def node():
@@ -60,3 +61,18 @@ def test_blocks(node):
 
     t.join()
     assert wait_print.result == 'test'
+
+def test_long_callback():
+    from clover import long_callback
+    from time import sleep
+
+    # very basic test for long_callback
+    @long_callback
+    def cb(i):
+        cb.counter += i
+    cb.counter = 0
+    cb(2)
+    sleep(0.1)
+    cb(3)
+    sleep(1)
+    assert cb.counter == 5
