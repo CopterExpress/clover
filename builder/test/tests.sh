@@ -88,3 +88,8 @@ roslaunch -h
 
 # validate examples are present
 [[ $(ls $H/examples/*) ]]
+
+# validate web tools present
+[ -d $H/.ros/www ]
+[ "$(readlink $H/.ros/www/clover)" = "$H/catkin_ws/src/clover/clover/www" ]
+[ "$(readlink $H/.ros/www/clover_blocks)" = "$H/catkin_ws/src/clover/clover_blocks/www" ]
