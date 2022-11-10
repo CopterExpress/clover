@@ -402,11 +402,13 @@ def check_aruco():
         except KeyError:
             failure('aruco_detect/length parameter is not set')
         known_vertical = rospy.get_param('aruco_detect/known_vertical', '')
-        if known_vertical == 'map':
-            known_vertical += ' (ALL markers are on the floor)'
-        elif known_vertical == 'map_flipped':
-            known_vertical += ' (ALL markers are on the ceiling)'
+        flip_vertical = str(rospy.get_param('aruco_detect/flip_vertical', False))
+        if known_vertical == 'map' and not flip_vertical:
+            flip_vertical += ' (all markers are on the floor)'
+        elif known_vertical == 'map' and flip_vertical:
+            flip_vertical += ' (all markers are on the ceiling)'
         info('aruco_detect/known_vertical = %s', known_vertical)
+        info('aruco_detect/flip_vertical = %s', flip_vertical)
         try:
             markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=0.8)
         except rospy.ROSException:
@@ -418,11 +420,13 @@ def check_aruco():
 
     if is_process_running('aruco_map', full=True):
         known_vertical = rospy.get_param('aruco_map/known_vertical', '')
-        if known_vertical == 'map':
-            known_vertical += ' (marker\'s map is on the floor)'
-        elif known_vertical == 'map_flipped':
-            known_vertical += ' (marker\'s map is on the ceiling)'
+        flip_vertical = str(rospy.get_param('aruco_map/flip_vertical', False))
+        if known_vertical == 'map' and not flip_vertical:
+            flip_vertical += ' (markers map is on the floor)'
+        elif known_vertical == 'map' and flip_vertical:
+            flip_vertical += ' (markers map is on the ceiling)'
         info('aruco_map/known_vertical = %s', known_vertical)
+        info('aruco_map/flip_vertical = %s', flip_vertical)
 
         try:
             visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=0.8)
@@ -462,7 +466,8 @@ def check_vpe():
         except rospy.ROSException:
             if not is_process_running('vpe_publisher', full=True):
                 info('no vision position estimate, vpe_publisher is not running')
-            elif rospy.get_param('aruco_map/known_vertical', '') == 'map_flipped':
+            elif rospy.get_param('aruco_map/known_vertical', '') == 'map' \
+                   and rospy.get_param('aruco_map/flip_vertical', False):
                 failure('no vision position estimate, markers are on the ceiling')
             elif is_on_the_floor():
                 info('no vision position estimate, the drone is on the floor')
