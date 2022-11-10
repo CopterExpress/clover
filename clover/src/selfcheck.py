@@ -605,6 +605,10 @@ def check_global_position():
 
 @check('Optical flow')
 def check_optical_flow():
+    if not is_process_running('optical_flow', full=True):
+        info('optical_flow is not running')
+        return
+
     # TODO:check FPS!
     try:
         rospy.wait_for_message('mavros/px4flow/raw/send', OpticalFlowRad, timeout=0.5)
