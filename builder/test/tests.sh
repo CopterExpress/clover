@@ -80,11 +80,11 @@ roscd
 rosrun
 rosmsg
 rossrv
-rosnode
-rostopic
-rosservice
+rosnode || [ $? -eq 64 ] # usage output code is 64
+rostopic || [ $? -eq 64 ]
+rosservice || [ $? -eq 64 ]
 rosparam
-roslaunch
+roslaunch -h
 
 # validate examples are present
 [[ $(ls $H/examples/*) ]]
