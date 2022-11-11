@@ -71,12 +71,12 @@ private:
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
 	ros::ServiceServer set_markers_srv_;
-	bool estimate_poses_, send_tf_, auto_flip_, use_map_markers_;
+	bool estimate_poses_, send_tf_, flip_vertical_, auto_flip_, use_map_markers_;
 	bool waiting_for_map_;
 	double length_;
 	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
-	std::string frame_id_prefix_, known_tilt_;
+	std::string frame_id_prefix_, known_vertical_;
 	Mat camera_matrix_, dist_coeffs_;
 	aruco_pose::MarkerArray array_;
 	std::unordered_set<int> map_markers_ids_;
@@ -105,7 +105,8 @@ public:
 		readLengthOverride(nh_priv_);
 		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
-		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		known_vertical_ = nh_priv_.param("known_vertical", nh_priv_.param("known_tilt", std::string(""))); // known_tilt is an old name
+		flip_vertical_ = nh_priv_.param<bool>("flip_vertical", false);
 		auto_flip_ = nh_priv_.param("auto_flip", false);
 
 		frame_id_prefix_ = nh_priv_.param<std::string>("frame_id_prefix", "aruco_");
@@ -144,7 +145,7 @@ private:
 		vector<vector<cv::Point2f>> corners, rejected;
 		vector<cv::Vec3d> rvecs, tvecs;
 		vector<cv::Point3f> obj_points;
-		geometry_msgs::TransformStamped snap_to;
+		geometry_msgs::TransformStamped vertical;
 
 		// Detect markers
 		cv::aruco::detectMarkers(image, dictionary_, corners, ids, parameters_, rejected);
@@ -179,12 +180,12 @@ private:
 					}
 				}
 
-				if (!known_tilt_.empty()) {
+				if (!known_vertical_.empty()) {
 					try {
-						snap_to = tf_buffer_->lookupTransform(msg->header.frame_id, known_tilt_,
-						                                      msg->header.stamp, transform_timeout_);
+						vertical = tf_buffer_->lookupTransform(msg->header.frame_id, known_vertical_,
+						                                       msg->header.stamp, transform_timeout_);
 					} catch (const tf2::TransformException& e) {
-						NODELET_WARN_THROTTLE(5, "can't snap: %s", e.what());
+						NODELET_WARN_THROTTLE(5, "can't retrieve known vertical: %s", e.what());
 					}
 				}
 			}
@@ -205,9 +206,9 @@ private:
 				if (estimate_poses_) {
 					fillPose(marker.pose, rvecs[i], tvecs[i]);
 
-					// snap orientation (if enabled and snap frame available)
-					if (!known_tilt_.empty() && !snap_to.header.frame_id.empty()) {
-						snapOrientation(marker.pose.orientation, snap_to.transform.rotation, auto_flip_);
+					// apply known vertical (if enabled and vertical frame available)
+					if (!known_vertical_.empty() && !vertical.header.frame_id.empty()) {
+						applyVertical(marker.pose.orientation, vertical.transform.rotation, false, auto_flip_);
 					}
 
 					if (send_tf_) {
