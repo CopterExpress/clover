@@ -108,7 +108,7 @@ inline bool isFlipped(tf::Quaternion& q)
 
 /* Apply a vertical to an orientation */
 inline void applyVertical(geometry_msgs::Quaternion& orientation, const geometry_msgs::Quaternion& vertical,
-                          bool flip_vertical = false, bool auto_flip = false)
+                          bool flip_vertical = false, bool auto_flip = false) // editorconfig-checker-disable-line
 {
 	tf::Quaternion _vertical, _orientation;
 	tf::quaternionMsgToTF(vertical, _vertical);
