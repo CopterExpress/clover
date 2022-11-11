@@ -19,8 +19,8 @@
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="use_map_markers" value="true"/>
-        <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
-        <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
+        <param name="known_vertical" value="map" if="$(eval placement == 'floor' or placement == 'ceiling')"/>
+        <param name="flip_vertical" value="true" if="$(eval placement == 'ceiling')"/>
         <param name="length" value="$(arg length)"/>
         <param name="transform_timeout" value="0.1"/>
         <!-- aruco detector parameters -->
@@ -36,8 +36,8 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="markers" to="aruco_detect/markers"/>
         <param name="map" value="$(find aruco_pose)/map/$(arg map)"/>
-        <param name="known_tilt" value="map" if="$(eval placement == 'floor')"/>
-        <param name="known_tilt" value="map_flipped" if="$(eval placement == 'ceiling')"/>
+        <param name="known_vertical" value="map" if="$(eval placement == 'floor' or placement == 'ceiling')"/>
+        <param name="flip_vertical" value="true" if="$(eval placement == 'ceiling')"/>
         <param name="image_axis" value="true"/>
         <param name="frame_id" value="aruco_map_detected" if="$(arg aruco_vpe)"/>
         <param name="frame_id" value="aruco_map" unless="$(arg aruco_vpe)"/>
@@ -53,8 +53,4 @@
         <param name="force_init" value="$(arg force_init)"/>
         <param name="offset_frame_id" value="aruco_map"/>
     </node>
-
-    <!-- run map_flipped frame if placement is ceiling -->
-    <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame"
-        args="0 0 0 3.1415926 3.1415926 0 map map_flipped" if="$(eval placement == 'ceiling')"/>
 </launch>
