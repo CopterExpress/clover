@@ -402,13 +402,14 @@ def check_aruco():
         except KeyError:
             failure('aruco_detect/length parameter is not set')
         known_vertical = rospy.get_param('aruco_detect/known_vertical', '')
-        flip_vertical = str(rospy.get_param('aruco_detect/flip_vertical', False))
+        flip_vertical = rospy.get_param('aruco_detect/flip_vertical', False)
+        description = ''
         if known_vertical == 'map' and not flip_vertical:
-            flip_vertical += ' (all markers are on the floor)'
+            description = ' (all markers are on the floor)'
         elif known_vertical == 'map' and flip_vertical:
-            flip_vertical += ' (all markers are on the ceiling)'
+            description = ' (all markers are on the ceiling)'
         info('aruco_detect/known_vertical = %s', known_vertical)
-        info('aruco_detect/flip_vertical = %s', flip_vertical)
+        info('aruco_detect/flip_vertical = %s%s', flip_vertical, description)
         try:
             markers = rospy.wait_for_message('aruco_detect/markers', MarkerArray, timeout=0.8)
         except rospy.ROSException:
@@ -420,13 +421,14 @@ def check_aruco():
 
     if is_process_running('aruco_map', full=True):
         known_vertical = rospy.get_param('aruco_map/known_vertical', '')
-        flip_vertical = str(rospy.get_param('aruco_map/flip_vertical', False))
+        flip_vertical = rospy.get_param('aruco_map/flip_vertical', False)
+        description = ''
         if known_vertical == 'map' and not flip_vertical:
-            flip_vertical += ' (markers map is on the floor)'
+            description += ' (markers map is on the floor)'
         elif known_vertical == 'map' and flip_vertical:
-            flip_vertical += ' (markers map is on the ceiling)'
+            description += ' (markers map is on the ceiling)'
         info('aruco_map/known_vertical = %s', known_vertical)
-        info('aruco_map/flip_vertical = %s', flip_vertical)
+        info('aruco_map/flip_vertical = %s%s', flip_vertical, description)
 
         try:
             visualization = rospy.wait_for_message('aruco_map/visualization', VisualizationMarkerArray, timeout=0.8)
