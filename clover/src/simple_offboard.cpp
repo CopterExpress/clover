@@ -93,7 +93,7 @@ PoseStamped position_msg;
 PositionTarget position_raw_msg;
 AttitudeTarget att_raw_msg;
 Thrust thrust_msg;
-TwistStamped rates_msg;
+//TwistStamped rates_msg;
 TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
 
@@ -102,7 +102,7 @@ PoseStamped nav_start;
 PoseStamped setpoint_position, setpoint_position_transformed;
 Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
 QuaternionStamped setpoint_attitude, setpoint_attitude_transformed;
-float setpoint_yaw_rate;
+Vector3 setpoint_rates;
 float nav_speed;
 bool busy = false;
 bool wait_armed = false;
@@ -391,7 +391,7 @@ void publish(const ros::Time stamp)
 
 	position_raw_msg.header.stamp = stamp;
 	thrust_msg.header.stamp = stamp;
-	rates_msg.header.stamp = stamp;
+	//rates_msg.header.stamp = stamp;
 
 	try {
 		// transform position and/or yaw
@@ -439,7 +439,7 @@ void publish(const ros::Time stamp)
 			                             PositionTarget::IGNORE_AFY +
 			                             PositionTarget::IGNORE_AFZ +
 			                             PositionTarget::IGNORE_YAW;
-			position_raw_msg.yaw_rate = setpoint_yaw_rate;
+			position_raw_msg.yaw_rate = setpoint_rates.z;
 			position_raw_msg.position = position_msg.pose.position;
 			position_raw_pub.publish(position_raw_msg);
 		}
@@ -470,7 +470,7 @@ void publish(const ros::Time stamp)
 		position_raw_msg.type_mask += setpoint_yaw_type == YAW ? PositionTarget::IGNORE_YAW_RATE : PositionTarget::IGNORE_YAW;
 		position_raw_msg.velocity = setpoint_velocity_transformed.vector;
 		position_raw_msg.yaw = tf2::getYaw(setpoint_position_transformed.pose.orientation);
-		position_raw_msg.yaw_rate = setpoint_yaw_rate;
+		position_raw_msg.yaw_rate = setpoint_rates.z;
 		position_raw_pub.publish(position_raw_msg);
 	}
 
@@ -487,7 +487,7 @@ void publish(const ros::Time stamp)
 		att_raw_msg.header.stamp = stamp;
 		att_raw_msg.header.frame_id = fcu_frame;
 		att_raw_msg.type_mask = AttitudeTarget::IGNORE_ATTITUDE;
-		att_raw_msg.body_rate = rates_msg.twist.angular;
+		att_raw_msg.body_rate = setpoint_rates;
 		att_raw_msg.thrust = thrust_msg.thrust;
 		attitude_raw_pub.publish(att_raw_msg);
 	}
@@ -592,7 +592,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				message = "Changing yaw rate only";
 
 				setpoint_yaw_type = YAW_RATE;
-				setpoint_yaw_rate = yaw_rate;
+				setpoint_rates.z = yaw_rate;
 				goto publish_setpoint;
 			} else {
 				throw std::runtime_error("Setting yaw rate is possible only when position or velocity setpoints active");
@@ -704,21 +704,22 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
 
 			if (sp_type == ATTITUDE) {
+				setpoint_yaw_type = YAW;
 				ps.pose.position.x = 0;
 				ps.pose.position.y = 0;
 				ps.pose.position.z = 0;
 				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
 			} else if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
-				setpoint_yaw_rate = yaw_rate;
+				setpoint_rates.z = yaw_rate;
 			} else if (std::isinf(yaw) && yaw > 0) {
 				// yaw towards
 				setpoint_yaw_type = TOWARDS;
 				yaw = 0;
-				setpoint_yaw_rate = 0;
+				setpoint_rates.z = 0;
 			} else {
 				setpoint_yaw_type = YAW;
-				setpoint_yaw_rate = 0;
+				setpoint_rates.z = 0;
 				ps.pose.orientation = tf::createQuaternionMsgFromYaw(yaw);
 			}
 
@@ -740,9 +741,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		if (sp_type == RATES) {
-			rates_msg.twist.angular.x = roll_rate;
-			rates_msg.twist.angular.y = pitch_rate;
-			rates_msg.twist.angular.z = yaw_rate;
+			setpoint_yaw_type = YAW_RATE;
+			setpoint_rates.x = roll_rate;
+			setpoint_rates.y = pitch_rate;
+			setpoint_rates.z = yaw_rate;
 		}
 
 		wait_armed = auto_arm;
@@ -948,7 +950,7 @@ int main(int argc, char **argv)
 	position_msg.header.frame_id = local_frame;
 	position_raw_msg.header.frame_id = local_frame;
 	position_raw_msg.coordinate_frame = PositionTarget::FRAME_LOCAL_NED;
-	rates_msg.header.frame_id = fcu_frame;
+	//rates_msg.header.frame_id = fcu_frame;
 
 	ROS_INFO("ready");
 	ros::spin();
