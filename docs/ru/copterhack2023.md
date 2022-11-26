@@ -22,7 +22,7 @@ CopterHack 2023 — это международный конкурс по ра�
 ||🇰🇬 LiveSavers|[LiveSavers](https://github.com/Sarvar00/clover/blob/livesavers/docs/ru/livesaver.md)||
 ||🇷🇺 C305|[Система радио-навигации](https://github.com/Lukerrr/clover-c305/blob/nav_beacon/docs/ru/nav-beacon.md)||
 ||🇷🇺 XenCOM|[Bound by fate](https://github.com/xenkek/clover/blob/xenkek-patch-1/docs/ru/bound_by_fate.md)||
-||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](https://github.com/ssmith-81/clover/blob/MoCap_Clover/docs/en/MoCap-Clover)||
+||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](https://github.com/ssmith-81/clover/blob/MoCap_Clover/docs/en/mocap_clover.md)||
 ||🇧🇷 Atena|[Swarm in Blocks 2](https://github.com/Grupo-SEMEAR-USP/clover/blob/swarm_in_blocks_2/docs/en/swarm_in_blocks_2.md)||
 ||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover3/docs/ru/advanced_clover_simulator_platform.md)||
 ||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](https://github.com/Juli-Shvetsova/clover/blob/liceu128-1/docs/ru/liceu128.md)||
