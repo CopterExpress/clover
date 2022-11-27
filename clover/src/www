@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+export ROSWWW_DEFAULT=clover
+rosrun roswww_static update
