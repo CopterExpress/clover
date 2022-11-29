@@ -25,7 +25,7 @@
 using std::string;
 using namespace geometry_msgs;
 
-bool reset_flag = false;
+bool reset_flag = true; // offset should be reset on the start
 string local_frame_id, frame_id, child_frame_id, offset_frame_id;
 tf2_ros::Buffer tf_buffer;
 ros::Publisher vpe_pub;
