@@ -33,4 +33,4 @@
 
 Например, информация об опыте работы команды над проектами, прикрепить ссылку на статьи, видео.
 
-[API Repo](https://github.com/mikemka/clover)
+[Repo](https://github.com/mikemka/clover)
