@@ -1,0 +1,6 @@
+<launch>
+    <node name="simple_offboard" pkg="clover" type="simple_offboard" required="true" output="screen"/>
+
+    <param name="test_module" value="$(find clover)/test/offboard.py"/>
+    <test test-name="offboard_test" pkg="ros_pytest" type="ros_pytest_runner"/>
+</launch>
