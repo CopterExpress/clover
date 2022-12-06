@@ -23,6 +23,7 @@
 #include <tf2_ros/static_transform_broadcaster.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 #include <std_srvs/Trigger.h>
+#include <geometry_msgs/PointStamped.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Vector3Stamped.h>
@@ -100,8 +101,9 @@ geometry_msgs::TransformStamped body;
 // State
 PoseStamped nav_start;
 PoseStamped setpoint_position, setpoint_position_transformed;
+PointStamped setpoint_altitude;
 Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
-QuaternionStamped setpoint_attitude, setpoint_attitude_transformed;
+QuaternionStamped setpoint_attitude, setpoint_attitude_transformed; // attitude or only the yaw
 Vector3 setpoint_rates;
 float nav_speed;
 bool busy = false;
@@ -393,21 +395,44 @@ void publish(const ros::Time stamp)
 	thrust_msg.header.stamp = stamp;
 	//rates_msg.header.stamp = stamp;
 
-	try {
-		// transform position and/or yaw
-		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION || setpoint_type == VELOCITY || setpoint_type == ATTITUDE) {
-			setpoint_position.header.stamp = stamp;
+	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
+		setpoint_position.header.stamp = stamp;
+		// transform xy
+		try {
 			tf_buffer.transform(setpoint_position, setpoint_position_transformed, local_frame, ros::Duration(0.05));
+		} catch (tf2::TransformException& ex) {
+			// can't transform xy, use last known
+			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
+		// transform altitude
+		try {
+			setpoint_position_transformed.pose.position.z = tf_buffer.transform(setpoint_altitude, local_frame, ros::Duration(0.05)).point.z;
+		} catch (tf2::TransformException& ex) {
+			// can't transform altitude, use last known
+			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
+		}
+	}
 
-		// transform velocity
-		if (setpoint_type == VELOCITY) {
-			setpoint_velocity.header.stamp = stamp;
+	if (setpoint_yaw_type == YAW) {
+		setpoint_attitude.header.stamp = stamp;
+		// transform yaw
+		try {
+			setpoint_position_transformed.pose.orientation = tf_buffer.transform(setpoint_attitude, local_frame, ros::Duration(0.05)).quaternion;
+		} catch (tf2::TransformException& ex) {
+			// can't transform yaw, use last known
+			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
+		}
+	}
+
+	// transform velocity
+	if (setpoint_type == VELOCITY) {
+		setpoint_velocity.header.stamp = stamp;
+		try {
 			tf_buffer.transform(setpoint_velocity, setpoint_velocity_transformed, local_frame, ros::Duration(0.05));
+		} catch (tf2::TransformException& ex) {
+			// can't transform velocity, use last known
+			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
-
-	} catch (const tf2::TransformException& e) {
-		ROS_WARN_THROTTLE(10, "can't transform");
 	}
 
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
@@ -560,6 +585,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		// Serve "partial" commands
 
+		/*
 		if (!auto_arm && std::isfinite(yaw) &&
 		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
 		    isnan(pitch) && isnan(roll) && isnan(thrust) &&
@@ -582,6 +608,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				throw std::runtime_error("Setting yaw is possible only when position or velocity setpoints active");
 			}
 		}
+		*/
 
 		if (!auto_arm && std::isfinite(yaw_rate) &&
 		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
@@ -724,6 +751,10 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			}
 
 			tf_buffer.transform(ps, setpoint_position, reference_frame);
+			setpoint_altitude.header = setpoint_position.header;
+			setpoint_altitude.point.z = setpoint_position.pose.position.z;
+			setpoint_attitude.header = setpoint_position.header;
+			setpoint_attitude.quaternion = setpoint_position.pose.orientation;
 		}
 
 		if (sp_type == VELOCITY) {
@@ -756,6 +787,7 @@ publish_setpoint:
 		// publish target frame
 		if (!target.child_frame_id.empty()) {
 			if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
+				// TODO: check if position and altitude frame_id are the same
 				target.header.frame_id = setpoint_position.header.frame_id;
 				target.header.stamp = stamp;
 				target.transform.translation.x = setpoint_position.pose.position.x;
