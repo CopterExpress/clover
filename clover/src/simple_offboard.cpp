@@ -46,6 +46,7 @@
 #include <clover/SetVelocity.h>
 #include <clover/SetAttitude.h>
 #include <clover/SetRates.h>
+#include <clover/State.h>
 
 using std::string;
 using std::isnan;
@@ -82,7 +83,7 @@ bool land_only_in_offboard, nav_from_sp, check_kill_switch;
 std::map<string, string> reference_frames;
 
 // Publishers
-ros::Publisher attitude_pub, attitude_raw_pub, position_pub, position_raw_pub, rates_pub, thrust_pub;
+ros::Publisher attitude_pub, attitude_raw_pub, position_pub, position_raw_pub, rates_pub, thrust_pub, state_pub;
 
 // Service clients
 ros::ServiceClient arming, set_mode;
@@ -106,6 +107,7 @@ Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
 QuaternionStamped setpoint_attitude, setpoint_attitude_transformed; // attitude or only the yaw
 Vector3 setpoint_rates;
 float nav_speed;
+float setpoint_lat, setpoint_lon;
 bool busy = false;
 bool wait_armed = false;
 bool nav_from_sp_flag = false;
@@ -553,6 +555,44 @@ inline void checkState()
 		throw std::runtime_error("No connection to FCU, https://clover.coex.tech/connection");
 }
 
+void publishState()
+{
+	clover::State msg;
+	msg.mode = setpoint_type;
+	msg.yaw_mode = setpoint_yaw_type;
+	msg.x = setpoint_position.pose.position.x;
+	msg.y = setpoint_position.pose.position.y;
+	msg.z = setpoint_position.pose.position.z;
+	msg.speed = nav_speed;
+	msg.lat = setpoint_lat;
+	msg.lon = setpoint_lon;
+	msg.vx = setpoint_velocity.vector.x;
+	msg.vy = setpoint_velocity.vector.y;
+	msg.vz = setpoint_velocity.vector.z;
+
+	double roll, pitch, yaw;
+	tf2::getEulerYPR(setpoint_attitude.quaternion, yaw, pitch, roll);
+	msg.roll = roll;
+	msg.pitch = pitch;
+	msg.yaw = yaw;
+
+	msg.roll_rate = setpoint_rates.x;
+	msg.pitch_rate = setpoint_rates.y;
+	msg.yaw_rate = setpoint_rates.z;
+	msg.thrust = thrust_msg.thrust;
+
+	if (setpoint_type == VELOCITY) {
+		msg.xy_frame_id = setpoint_velocity.header.frame_id;
+		msg.z_frame_id = setpoint_velocity.header.frame_id;
+	} else {
+		msg.xy_frame_id = setpoint_position.header.frame_id;
+		msg.z_frame_id = setpoint_altitude.header.frame_id;
+	}
+	msg.yaw_frame_id = setpoint_attitude.header.frame_id;
+
+	state_pub.publish(msg);
+}
+
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
 
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
@@ -691,6 +731,8 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			auto xy_in_req_frame = tf_buffer.transform(pose_local, frame_id);
 			x = xy_in_req_frame.pose.position.x;
 			y = xy_in_req_frame.pose.position.y;
+			setpoint_lat = lat;
+			setpoint_lon = lon;
 		}
 
 		// Everything fine - switch setpoint type
@@ -798,6 +840,8 @@ publish_setpoint:
 			}
 		}
 
+		publishState();
+
 		if (auto_arm) {
 			offboardAndArm();
 			wait_armed = false;
@@ -897,6 +941,8 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 bool release(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 {
 	setpoint_timer.stop();
+	setpoint_type = NONE;
+	publishState();
 	res.success = true;
 	return true;
 }
@@ -964,6 +1010,9 @@ int main(int argc, char **argv)
 	attitude_raw_pub = nh.advertise<AttitudeTarget>(mavros + "/setpoint_raw/attitude", 1);
 	rates_pub = nh.advertise<TwistStamped>(mavros + "/setpoint_attitude/cmd_vel", 1);
 	thrust_pub = nh.advertise<Thrust>(mavros + "/setpoint_attitude/thrust", 1);
+
+	// State publisher
+	state_pub = nh_priv.advertise<clover::State>("state", 1, true);
 
 	 // Service servers
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);

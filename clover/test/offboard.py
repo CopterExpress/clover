@@ -5,11 +5,15 @@ import threading
 import mavros_msgs.msg
 from geometry_msgs.msg import PoseStamped
 from clover import srv
+from clover.msg import State
 from math import nan
 
 @pytest.fixture()
 def node():
     return rospy.init_node('offboard_test', anonymous=True)
+
+def get_state():
+    return rospy.wait_for_message('/simple_offboard/state', State, timeout=1)
 
 def test_offboard(node):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
@@ -68,5 +72,13 @@ def test_offboard(node):
     threading.Thread(target=publish_local_position, daemon=True).start()
     rospy.sleep(0.5)
 
-    res = navigate()
+    res = navigate(z=1, frame_id='map')
     assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.z == 1
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
