@@ -90,7 +90,6 @@ ros::ServiceClient arming, set_mode;
 
 // Containers
 ros::Timer setpoint_timer;
-tf::Quaternion tq;
 PoseStamped position_msg;
 PositionTarget position_raw_msg;
 //TwistStamped rates_msg;
