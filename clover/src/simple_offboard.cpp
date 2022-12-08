@@ -424,17 +424,6 @@ void publish(const ros::Time stamp)
 		}
 	}
 
-	// transform velocity
-	if (setpoint_type == VELOCITY) {
-		setpoint_velocity.header.stamp = stamp;
-		try {
-			tf_buffer.transform(setpoint_velocity, setpoint_velocity_transformed, local_frame, ros::Duration(0.05));
-		} catch (tf2::TransformException& ex) {
-			// can't transform velocity, use last known
-			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
-		}
-	}
-
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
 		position_msg.pose.orientation = setpoint_position_transformed.pose.orientation; // copy yaw
 		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
@@ -486,6 +475,16 @@ void publish(const ros::Time stamp)
 	}
 
 	if (setpoint_type == VELOCITY) {
+		// transform velocity to local frame
+		setpoint_velocity.header.stamp = stamp;
+		try {
+			tf_buffer.transform(setpoint_velocity, setpoint_velocity_transformed, local_frame, ros::Duration(0.05));
+		} catch (tf2::TransformException& ex) {
+			// can't transform velocity, use last known
+			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
+		}
+
+		// publish velocity
 		position_raw_msg.type_mask = PositionTarget::IGNORE_PX +
 		                             PositionTarget::IGNORE_PY +
 		                             PositionTarget::IGNORE_PZ +
