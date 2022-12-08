@@ -93,7 +93,6 @@ ros::Timer setpoint_timer;
 tf::Quaternion tq;
 PoseStamped position_msg;
 PositionTarget position_raw_msg;
-AttitudeTarget att_raw_msg;
 //TwistStamped rates_msg;
 TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
@@ -514,6 +513,7 @@ void publish(const ros::Time stamp)
 		// thrust_pub.publish(thrust_msg);
 		// mavros rates topics waits for rates in local frame
 		// use rates in body frame for simplicity
+		AttitudeTarget att_raw_msg;
 		att_raw_msg.header.stamp = stamp;
 		att_raw_msg.header.frame_id = fcu_frame;
 		att_raw_msg.type_mask = AttitudeTarget::IGNORE_ATTITUDE;
