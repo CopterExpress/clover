@@ -777,7 +777,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				ps.pose.position.x = 0;
 				ps.pose.position.y = 0;
 				ps.pose.position.z = 0;
-				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw); // this function actually has Euler YPR axes
 			} else if (std::isnan(yaw)) {
 				setpoint_yaw_type = YAW_RATE;
 				setpoint_rates.z = yaw_rate;
