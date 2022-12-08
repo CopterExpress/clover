@@ -17,6 +17,7 @@ def get_state():
 
 def test_offboard(node):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
+    set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
     get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
     res = navigate()
     assert res.success == False
