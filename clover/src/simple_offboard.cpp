@@ -685,10 +685,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ENSURE_FINITE(pitch);
 			ENSURE_FINITE(roll);
 			ENSURE_FINITE(thrust);
-		} else if (sp_type == RATES) {
-			ENSURE_FINITE(pitch_rate);
-			ENSURE_FINITE(roll_rate);
-			ENSURE_FINITE(thrust);
 		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
@@ -811,14 +807,16 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		if (sp_type == ATTITUDE || sp_type == RATES) {
-			thrust_msg.thrust = thrust;
+			// keep current value if NaN
+			thrust_msg.thrust = isnan(thrust) ? thrust_msg.thrust : thrust;
 		}
 
 		if (sp_type == RATES) {
 			setpoint_yaw_type = YAW_RATE;
-			setpoint_rates.x = roll_rate;
-			setpoint_rates.y = pitch_rate;
-			setpoint_rates.z = yaw_rate;
+			// keep current values if NaN
+			setpoint_rates.x = isnan(roll_rate) ? setpoint_rates.x : roll_rate;
+			setpoint_rates.y = isnan(pitch_rate) ? setpoint_rates.y : pitch_rate;
+			setpoint_rates.z = isnan(yaw_rate) ? setpoint_rates.z : yaw_rate; // TODO: consider always
 		}
 
 		wait_armed = auto_arm;

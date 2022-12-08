@@ -18,6 +18,7 @@ def get_state():
 def test_offboard(node):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
+    set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
     get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
     res = navigate()
     assert res.success == False
@@ -94,3 +95,34 @@ def test_offboard(node):
     assert state.pitch == approx(0.2)
     assert state.yaw == approx(0.3)
     assert state.thrust == approx(0.5)
+
+    # test set_rates
+    res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=0.3, thrust=0.5)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_RATES
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.roll_rate == approx(0)
+    assert state.pitch_rate == approx(0)
+    assert state.yaw_rate == approx(0.3)
+    assert state.thrust == approx(0.5)
+
+    res = set_rates(roll_rate=0.3, pitch_rate=0.2, yaw_rate=0.1, thrust=0.4)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_RATES
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.roll_rate == approx(0.3)
+    assert state.pitch_rate == approx(0.2)
+    assert state.yaw_rate == approx(0.1)
+    assert state.thrust == approx(0.4)
+
+    res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=nan, thrust=0.3)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_RATES
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.roll_rate == approx(0.3)
+    assert state.pitch_rate == approx(0.2)
+    assert state.yaw_rate == approx(0.1)
+    assert state.thrust == approx(0.3)
