@@ -759,8 +759,8 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// 	}
 		// }
 
+		// Transform position and attitude
 		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
-			// destination point and/or attitude
 			PoseStamped ps;
 			ps.header.frame_id = frame_id;
 			ps.header.stamp = stamp;
@@ -796,6 +796,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			setpoint_attitude.quaternion = setpoint_position.pose.orientation;
 		}
 
+		// Transform velocity
 		if (sp_type == VELOCITY) {
 			Vector3Stamped vel;
 			vel.header.frame_id = frame_id;
