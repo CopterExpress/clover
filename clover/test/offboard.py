@@ -95,6 +95,14 @@ def test_offboard(node):
     assert state.pitch == approx(0.2)
     assert state.yaw == approx(0.3)
     assert state.thrust == approx(0.5)
+    msg = rospy.wait_for_message('/mavros/setpoint_attitude/attitude', PoseStamped, timeout=3)
+    # Tait-Bryan ZYX angle (rzyx) converted to quaternion
+    assert msg.pose.orientation.x == approx(0.0342708)
+    assert msg.pose.orientation.y == approx(0.10602051)
+    assert msg.pose.orientation.z == approx(0.14357218)
+    assert msg.pose.orientation.w == approx(0.98334744)
+    msg = rospy.wait_for_message('/mavros/setpoint_attitude/thrust', mavros_msgs.msg.Thrust, timeout=3)
+    assert msg.thrust == approx(0.5)
 
     # test set_rates
     res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=0.3, thrust=0.5)
