@@ -82,3 +82,14 @@ def test_offboard(node):
     assert state.xy_frame_id == 'map'
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
+
+    # test set_attitude
+    res = set_attitude(roll=0.1, pitch=0.2, yaw=0.3, thrust=0.5)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_ATTITUDE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.roll == approx(0.1)
+    assert state.pitch == approx(0.2)
+    assert state.yaw == approx(0.3)
+    assert state.thrust == approx(0.5)
