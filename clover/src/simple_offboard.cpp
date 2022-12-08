@@ -399,6 +399,7 @@ void publish(const ros::Time stamp)
 
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
 		setpoint_position.header.stamp = stamp;
+		setpoint_altitude.header.stamp = stamp;
 		// transform xy
 		try {
 			tf_buffer.transform(setpoint_position, setpoint_position_transformed, local_frame, ros::Duration(0.05));
