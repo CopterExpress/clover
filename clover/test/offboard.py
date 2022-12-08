@@ -105,7 +105,7 @@ def test_offboard(node):
     assert msg.thrust == approx(0.5)
 
     # test set_rates
-    res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=0.3, thrust=0.5)
+    res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=0.3, thrust=0.6)
     assert res.success == True
     state = get_state()
     assert state.mode == State.MODE_RATES
@@ -113,7 +113,9 @@ def test_offboard(node):
     assert state.roll_rate == approx(0)
     assert state.pitch_rate == approx(0)
     assert state.yaw_rate == approx(0.3)
-    assert state.thrust == approx(0.5)
+    assert state.thrust == approx(0.6)
+    msg = rospy.wait_for_message('/mavros/setpoint_raw/attitude', mavros_msgs.msg.AttitudeTarget, timeout=3)
+    assert msg.thrust == approx(0.6)
 
     res = set_rates(roll_rate=0.3, pitch_rate=0.2, yaw_rate=0.1, thrust=0.4)
     assert res.success == True
