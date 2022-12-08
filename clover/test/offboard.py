@@ -6,7 +6,7 @@ import mavros_msgs.msg
 from geometry_msgs.msg import PoseStamped
 from clover import srv
 from clover.msg import State
-from math import nan
+from math import nan, inf
 
 @pytest.fixture()
 def node():
@@ -134,3 +134,7 @@ def test_offboard(node):
     assert state.pitch_rate == approx(0.2)
     assert state.yaw_rate == approx(0.1)
     assert state.thrust == approx(0.3)
+
+    res = set_rates(roll_rate=inf)
+    assert res.success == False
+    assert res.message == 'roll_rate argument cannot be Inf'

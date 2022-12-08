@@ -596,6 +596,8 @@ void publishState()
 
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
 
+#define ENSURE_NON_INF(var) { if (std::isinf(var)) throw std::runtime_error(#var " argument cannot be Inf"); }
+
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
            float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
            float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
@@ -685,6 +687,11 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ENSURE_FINITE(pitch);
 			ENSURE_FINITE(roll);
 			ENSURE_FINITE(thrust);
+		} else if (sp_type == RATES) {
+			ENSURE_NON_INF(pitch_rate);
+			ENSURE_NON_INF(roll_rate);
+			ENSURE_NON_INF(yaw_rate);
+			ENSURE_NON_INF(thrust);
 		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
