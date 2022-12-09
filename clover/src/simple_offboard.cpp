@@ -98,7 +98,7 @@ geometry_msgs::TransformStamped body;
 
 // State
 PoseStamped nav_start;
-PoseStamped setpoint_position, setpoint_position_transformed;
+PoseStamped setpoint_position;
 PointStamped setpoint_altitude;
 Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
 QuaternionStamped setpoint_attitude, setpoint_attitude_transformed; // attitude or only the yaw
@@ -109,6 +109,9 @@ float setpoint_lat, setpoint_lon;
 bool busy = false;
 bool wait_armed = false;
 bool nav_from_sp_flag = false;
+
+// Last published
+PoseStamped setpoint_position_local;
 
 enum setpoint_type_t {
 	NONE,
@@ -350,13 +353,13 @@ void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoin
 		nav_start.header.stamp = stamp;
 	}
 
-	float distance = getDistance(nav_start.pose.position, setpoint_position_transformed.pose.position);
+	float distance = getDistance(nav_start.pose.position, setpoint_position_local.pose.position);
 	float time = distance / speed;
 	float passed = std::min((stamp - nav_start.header.stamp).toSec() / time, 1.0);
 
-	nav_setpoint.x = nav_start.pose.position.x + (setpoint_position_transformed.pose.position.x - nav_start.pose.position.x) * passed;
-	nav_setpoint.y = nav_start.pose.position.y + (setpoint_position_transformed.pose.position.y - nav_start.pose.position.y) * passed;
-	nav_setpoint.z = nav_start.pose.position.z + (setpoint_position_transformed.pose.position.z - nav_start.pose.position.z) * passed;
+	nav_setpoint.x = nav_start.pose.position.x + (setpoint_position_local.pose.position.x - nav_start.pose.position.x) * passed;
+	nav_setpoint.y = nav_start.pose.position.y + (setpoint_position_local.pose.position.y - nav_start.pose.position.y) * passed;
+	nav_setpoint.z = nav_start.pose.position.z + (setpoint_position_local.pose.position.z - nav_start.pose.position.z) * passed;
 }
 
 PoseStamped globalToLocal(double lat, double lon)
@@ -399,14 +402,14 @@ void publish(const ros::Time stamp)
 		setpoint_altitude.header.stamp = stamp;
 		// transform xy
 		try {
-			tf_buffer.transform(setpoint_position, setpoint_position_transformed, local_frame, ros::Duration(0.05));
+			tf_buffer.transform(setpoint_position, setpoint_position_local, local_frame, ros::Duration(0.05));
 		} catch (tf2::TransformException& ex) {
 			// can't transform xy, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
 		// transform altitude
 		try {
-			setpoint_position_transformed.pose.position.z = tf_buffer.transform(setpoint_altitude, local_frame, ros::Duration(0.05)).point.z;
+			setpoint_position_local.pose.position.z = tf_buffer.transform(setpoint_altitude, local_frame, ros::Duration(0.05)).point.z;
 		} catch (tf2::TransformException& ex) {
 			// can't transform altitude, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
@@ -417,7 +420,7 @@ void publish(const ros::Time stamp)
 		setpoint_attitude.header.stamp = stamp;
 		// transform yaw
 		try {
-			setpoint_position_transformed.pose.orientation = tf_buffer.transform(setpoint_attitude, local_frame, ros::Duration(0.05)).quaternion;
+			setpoint_position_local.pose.orientation = tf_buffer.transform(setpoint_attitude, local_frame, ros::Duration(0.05)).quaternion;
 		} catch (tf2::TransformException& ex) {
 			// can't transform yaw, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
@@ -425,7 +428,7 @@ void publish(const ros::Time stamp)
 	}
 
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
-		position_msg.pose.orientation = setpoint_position_transformed.pose.orientation; // copy yaw
+		position_msg.pose.orientation = setpoint_position_local.pose.orientation; // copy yaw
 		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
 
 		if (setpoint_yaw_type == TOWARDS) {
@@ -436,7 +439,7 @@ void publish(const ros::Time stamp)
 	}
 
 	if (setpoint_type == POSITION) {
-		position_msg = setpoint_position_transformed;
+		position_msg = setpoint_position_local;
 	}
 
 	if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
@@ -493,13 +496,13 @@ void publish(const ros::Time stamp)
 		                             PositionTarget::IGNORE_AFZ;
 		position_raw_msg.type_mask += setpoint_yaw_type == YAW ? PositionTarget::IGNORE_YAW_RATE : PositionTarget::IGNORE_YAW;
 		position_raw_msg.velocity = setpoint_velocity_transformed.vector;
-		position_raw_msg.yaw = tf2::getYaw(setpoint_position_transformed.pose.orientation);
+		position_raw_msg.yaw = tf2::getYaw(setpoint_position_local.pose.orientation);
 		position_raw_msg.yaw_rate = setpoint_rates.z;
 		position_raw_pub.publish(position_raw_msg);
 	}
 
 	if (setpoint_type == ATTITUDE) {
-		attitude_pub.publish(setpoint_position_transformed);
+		attitude_pub.publish(setpoint_position_local);
 		Thrust thrust_msg;
 		thrust_msg.header.stamp = stamp;
 		thrust_msg.thrust = setpoint_thrust;
