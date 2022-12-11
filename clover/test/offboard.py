@@ -17,6 +17,7 @@ def get_state():
 
 def test_offboard(node):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
+    set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
     set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
     get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
@@ -85,6 +86,19 @@ def test_offboard(node):
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
 
+    # test set_velocity
+    res = set_velocity(vx=1, frame_id='body')
+    state = get_state()
+    assert state.mode == State.MODE_VELOCITY
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.vx == 1
+    assert state.vy == 0
+    assert state.vz == 0
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
+
     # test set_attitude
     res = set_attitude(roll=0.1, pitch=0.2, yaw=0.3, thrust=0.5)
     assert res.success == True
@@ -95,6 +109,7 @@ def test_offboard(node):
     assert state.pitch == approx(0.2)
     assert state.yaw == approx(0.3)
     assert state.thrust == approx(0.5)
+    assert state.yaw_frame_id == 'map'
     msg = rospy.wait_for_message('/mavros/setpoint_attitude/attitude', PoseStamped, timeout=3)
     # Tait-Bryan ZYX angle (rzyx) converted to quaternion
     assert msg.pose.orientation.x == approx(0.0342708)
