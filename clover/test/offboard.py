@@ -136,6 +136,11 @@ def test_offboard(node):
     assert state.pitch_rate == approx(0.2)
     assert state.yaw_rate == approx(0.1)
     assert state.thrust == approx(0.3)
+    msg = rospy.wait_for_message('/mavros/setpoint_raw/attitude', mavros_msgs.msg.AttitudeTarget, timeout=3)
+    assert msg.type_mask == mavros_msgs.msg.AttitudeTarget.IGNORE_ATTITUDE
+    assert msg.body_rate.x == approx(0.3)
+    assert msg.body_rate.y == approx(0.2)
+    assert msg.body_rate.z == approx(0.1)
 
     res = set_rates(roll_rate=inf)
     assert res.success == False
