@@ -7,15 +7,28 @@ from geometry_msgs.msg import PoseStamped
 from clover import srv
 from clover.msg import State
 from math import nan, inf
+import tf2_ros
+import tf2_geometry_msgs
 
 @pytest.fixture()
 def node():
     return rospy.init_node('offboard_test', anonymous=True)
 
+@pytest.fixture
+def tf_buffer():
+    buf = tf2_ros.Buffer()
+    tf2_ros.TransformListener(buf)
+    return buf
+
 def get_state():
     return rospy.wait_for_message('/simple_offboard/state', State, timeout=1)
 
-def test_offboard(node):
+def get_navigate_target(tf_buffer):
+    target = tf_buffer.lookup_transform('map', 'navigate_target', rospy.get_rostime(), rospy.Duration(1))
+    assert target.child_frame_id == 'navigate_target'
+    return target
+
+def test_offboard(node, tf_buffer):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
     set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
@@ -85,6 +98,15 @@ def test_offboard(node):
     assert state.xy_frame_id == 'map'
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
+    target = get_navigate_target(tf_buffer)
+    assert target.header.frame_id == 'map'
+    assert target.transform.translation.x == 0
+    assert target.transform.translation.y == 0
+    assert target.transform.translation.z == 1
+    assert target.transform.rotation.x == 0
+    assert target.transform.rotation.y == 0
+    assert target.transform.rotation.z == 0
+    assert target.transform.rotation.w == 1
 
     # test set_velocity
     res = set_velocity(vx=1, frame_id='body')
