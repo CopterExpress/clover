@@ -98,11 +98,12 @@ geometry_msgs::TransformStamped body;
 
 // State
 PoseStamped nav_start;
-PoseStamped setpoint_position;
+PointStamped setpoint_position;
 PointStamped setpoint_altitude;
-Vector3Stamped setpoint_velocity, setpoint_velocity_transformed;
-QuaternionStamped setpoint_attitude, setpoint_attitude_transformed; // attitude or only the yaw
+Vector3Stamped setpoint_velocity;
+float setpoint_yaw, setpoint_pitch, setpoint_roll;
 Vector3 setpoint_rates;
+string yaw_frame_id;
 float setpoint_thrust;
 float nav_speed;
 float setpoint_lat, setpoint_lon;
@@ -111,7 +112,9 @@ bool wait_armed = false;
 bool nav_from_sp_flag = false;
 
 // Last published
-PoseStamped setpoint_position_local;
+PoseStamped setpoint_pose_local;
+Vector3Stamped setpoint_velocity_local;
+float yaw_local;
 
 enum setpoint_type_t {
 	NONE,
@@ -120,7 +123,8 @@ enum setpoint_type_t {
 	POSITION,
 	VELOCITY,
 	ATTITUDE,
-	RATES
+	RATES,
+	_PARTIAL // for partial updates only
 };
 
 enum setpoint_type_t setpoint_type = NONE;
@@ -353,13 +357,13 @@ void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoin
 		nav_start.header.stamp = stamp;
 	}
 
-	float distance = getDistance(nav_start.pose.position, setpoint_position_local.pose.position);
+	float distance = getDistance(nav_start.pose.position, setpoint_pose_local.pose.position);
 	float time = distance / speed;
 	float passed = std::min((stamp - nav_start.header.stamp).toSec() / time, 1.0);
 
-	nav_setpoint.x = nav_start.pose.position.x + (setpoint_position_local.pose.position.x - nav_start.pose.position.x) * passed;
-	nav_setpoint.y = nav_start.pose.position.y + (setpoint_position_local.pose.position.y - nav_start.pose.position.y) * passed;
-	nav_setpoint.z = nav_start.pose.position.z + (setpoint_position_local.pose.position.z - nav_start.pose.position.z) * passed;
+	nav_setpoint.x = nav_start.pose.position.x + (setpoint_pose_local.pose.position.x - nav_start.pose.position.x) * passed;
+	nav_setpoint.y = nav_start.pose.position.y + (setpoint_pose_local.pose.position.y - nav_start.pose.position.y) * passed;
+	nav_setpoint.z = nav_start.pose.position.z + (setpoint_pose_local.pose.position.z - nav_start.pose.position.z) * passed;
 }
 
 PoseStamped globalToLocal(double lat, double lon)
@@ -390,56 +394,92 @@ PoseStamped globalToLocal(double lat, double lon)
 	return pose;
 }
 
+// publish navigate_target frame
+void publishTarget(ros::Time stamp, bool _static = false)
+{
+	bool single_frame = (setpoint_position.header.frame_id == setpoint_altitude.header.frame_id) && 
+		setpoint_altitude.header.frame_id == yaw_frame_id;
+
+	if (_static && single_frame) {
+		// publish at user's command, if all frames are the same
+		target.header.frame_id = setpoint_position.header.frame_id;
+		target.header.stamp = stamp;
+		target.transform.translation.x = setpoint_position.point.x;
+		target.transform.translation.y = setpoint_position.point.y;
+		target.transform.translation.z = setpoint_position.point.z;
+		// TODO: handle yaw forward/yaw_rate
+		target.transform.rotation = tf::createQuaternionMsgFromYaw(setpoint_yaw);
+	} else if (!_static) {
+		// publish at each iteration, if frames are different
+		target.header = setpoint_pose_local.header;
+		target.transform.translation.x = setpoint_pose_local.pose.position.x;
+		target.transform.translation.y = setpoint_pose_local.pose.position.y;
+		target.transform.translation.z = setpoint_pose_local.pose.position.z;
+		// TODO: handle yaw forward/yaw_rate
+		target.transform.rotation = tf::createQuaternionMsgFromYaw(yaw_local);
+	}
+
+	static_transform_broadcaster->sendTransform(target);
+}
+
 void publish(const ros::Time stamp)
 {
 	if (setpoint_type == NONE) return;
 
 	position_raw_msg.header.stamp = stamp;
-	//rates_msg.header.stamp = stamp;
 
+	// transform position
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
 		setpoint_position.header.stamp = stamp;
 		setpoint_altitude.header.stamp = stamp;
 		// transform xy
 		try {
-			tf_buffer.transform(setpoint_position, setpoint_position_local, local_frame, ros::Duration(0.05));
+			auto xy = tf_buffer.transform(setpoint_position, local_frame, ros::Duration(0.05));
+			setpoint_pose_local.header = xy.header;
+			setpoint_pose_local.pose.position.x = xy.point.x;
+			setpoint_pose_local.pose.position.y = xy.point.y;
 		} catch (tf2::TransformException& ex) {
 			// can't transform xy, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
 		// transform altitude
 		try {
-			setpoint_position_local.pose.position.z = tf_buffer.transform(setpoint_altitude, local_frame, ros::Duration(0.05)).point.z;
+			setpoint_pose_local.pose.position.z = tf_buffer.transform(setpoint_altitude, local_frame, ros::Duration(0.05)).point.z;
 		} catch (tf2::TransformException& ex) {
 			// can't transform altitude, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
 	}
 
+	// transform yaw
 	if (setpoint_yaw_type == YAW) {
-		setpoint_attitude.header.stamp = stamp;
-		// transform yaw
 		try {
-			setpoint_position_local.pose.orientation = tf_buffer.transform(setpoint_attitude, local_frame, ros::Duration(0.05)).quaternion;
+			QuaternionStamped q;
+			q.header.stamp = stamp;
+			q.header.frame_id = yaw_frame_id;
+			q.quaternion = tf::createQuaternionMsgFromYaw(setpoint_yaw);
+			yaw_local = tf2::getYaw(tf_buffer.transform(q, local_frame, ros::Duration(0.05)).quaternion);
 		} catch (tf2::TransformException& ex) {
 			// can't transform yaw, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
 		}
 	}
 
+	// compute navigate setpoint
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
-		position_msg.pose.orientation = setpoint_position_local.pose.orientation; // copy yaw
+		position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_local); // copy yaw
 		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
 
 		if (setpoint_yaw_type == TOWARDS) {
 			double yaw_towards = atan2(position_msg.pose.position.y - nav_start.pose.position.y,
 			                           position_msg.pose.position.x - nav_start.pose.position.x);
-			position_msg.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 0, yaw_towards);
+			position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_towards);
 		}
 	}
 
 	if (setpoint_type == POSITION) {
-		position_msg = setpoint_position_local;
+		position_msg = setpoint_pose_local;
+		position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_local);
 	}
 
 	if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
@@ -475,13 +515,16 @@ void publish(const ros::Time stamp)
 			setpoint.header.stamp = position_msg.header.stamp;
 			transform_broadcaster->sendTransform(setpoint);
 		}
+
+		// publish dynamic target frame
+		publishTarget(stamp);
 	}
 
 	if (setpoint_type == VELOCITY) {
 		// transform velocity to local frame
 		setpoint_velocity.header.stamp = stamp;
 		try {
-			tf_buffer.transform(setpoint_velocity, setpoint_velocity_transformed, local_frame, ros::Duration(0.05));
+			setpoint_velocity_local = tf_buffer.transform(setpoint_velocity, local_frame, ros::Duration(0.05));
 		} catch (tf2::TransformException& ex) {
 			// can't transform velocity, use last known
 			ROS_WARN_THROTTLE(10, "can't transform: %s", ex.what());
@@ -495,14 +538,19 @@ void publish(const ros::Time stamp)
 		                             PositionTarget::IGNORE_AFY +
 		                             PositionTarget::IGNORE_AFZ;
 		position_raw_msg.type_mask += setpoint_yaw_type == YAW ? PositionTarget::IGNORE_YAW_RATE : PositionTarget::IGNORE_YAW;
-		position_raw_msg.velocity = setpoint_velocity_transformed.vector;
-		position_raw_msg.yaw = tf2::getYaw(setpoint_position_local.pose.orientation);
+		position_raw_msg.velocity = setpoint_velocity_local.vector;
+		position_raw_msg.yaw = yaw_local;
 		position_raw_msg.yaw_rate = setpoint_rates.z;
 		position_raw_pub.publish(position_raw_msg);
 	}
 
 	if (setpoint_type == ATTITUDE) {
-		attitude_pub.publish(setpoint_position_local);
+		PoseStamped msg;
+		msg.header.stamp = stamp;
+		msg.header.frame_id = local_frame;
+		msg.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(setpoint_roll, setpoint_pitch, yaw_local);
+		attitude_pub.publish(msg);
+
 		Thrust thrust_msg;
 		thrust_msg.header.stamp = stamp;
 		thrust_msg.thrust = setpoint_thrust;
@@ -564,21 +612,18 @@ void publishState()
 	clover::State msg;
 	msg.mode = setpoint_type;
 	msg.yaw_mode = setpoint_yaw_type;
-	msg.x = setpoint_position.pose.position.x;
-	msg.y = setpoint_position.pose.position.y;
-	msg.z = setpoint_position.pose.position.z;
+	msg.x = setpoint_position.point.x;
+	msg.y = setpoint_position.point.y;
+	msg.z = setpoint_position.point.z;
 	msg.speed = nav_speed;
 	msg.lat = setpoint_lat;
 	msg.lon = setpoint_lon;
 	msg.vx = setpoint_velocity.vector.x;
 	msg.vy = setpoint_velocity.vector.y;
 	msg.vz = setpoint_velocity.vector.z;
-
-	double roll, pitch, yaw;
-	tf2::getEulerYPR(setpoint_attitude.quaternion, yaw, pitch, roll);
-	msg.roll = roll;
-	msg.pitch = pitch;
-	msg.yaw = yaw;
+	msg.roll = setpoint_roll;
+	msg.pitch = setpoint_pitch;
+	msg.yaw = setpoint_yaw;
 
 	msg.roll_rate = setpoint_rates.x;
 	msg.pitch_rate = setpoint_rates.y;
@@ -592,9 +637,13 @@ void publishState()
 		msg.xy_frame_id = setpoint_position.header.frame_id;
 		msg.z_frame_id = setpoint_altitude.header.frame_id;
 	}
-	msg.yaw_frame_id = setpoint_attitude.header.frame_id;
+	msg.yaw_frame_id = yaw_frame_id;
 
 	state_pub.publish(msg);
+}
+
+inline float safe(float value) {
+	return std::isfinite(value) ? value : 0;
 }
 
 #define ENSURE_FINITE(var) { if (!std::isfinite(var)) throw std::runtime_error(#var " argument cannot be NaN or Inf"); }
@@ -629,72 +678,39 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		auto search = reference_frames.find(frame_id);
 		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second;
 
-		// Serve "partial" commands
-
-		/*
-		if (!auto_arm && std::isfinite(yaw) &&
-		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
-		    isnan(pitch) && isnan(roll) && isnan(thrust) &&
-		    isnan(lat) && isnan(lon)) {
-			// change only the yaw
-			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == VELOCITY) {
-				if (!waitTransform(setpoint_position.header.frame_id, frame_id, stamp, transform_timeout))
-					throw std::runtime_error("Can't transform from " + frame_id + " to " + setpoint_position.header.frame_id);
-
-				message = "Changing yaw only";
-
-				QuaternionStamped q;
-				q.header.frame_id = frame_id;
-				q.header.stamp = stamp;
-				q.quaternion = tf::createQuaternionMsgFromYaw(yaw); // TODO: pitch=0, roll=0 is not totally correct
-				setpoint_position.pose.orientation = tf_buffer.transform(q, setpoint_position.header.frame_id).quaternion;
-				setpoint_yaw_type = YAW;
-				goto publish_setpoint;
-			} else {
-				throw std::runtime_error("Setting yaw is possible only when position or velocity setpoints active");
-			}
-		}
-		*/
-
-		if (!auto_arm && std::isfinite(yaw_rate) &&
-		    isnan(x) && isnan(y) && isnan(z) && isnan(vx) && isnan(vy) && isnan(vz) &&
-		    isnan(pitch) && isnan(roll) && isnan(yaw) && isnan(thrust) &&
-		    isnan(lat) && isnan(lon)) {
-			// change only the yaw rate
-			if (setpoint_type == POSITION || setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == VELOCITY) {
-				message = "Changing yaw rate only";
-
-				setpoint_yaw_type = YAW_RATE;
-				setpoint_rates.z = yaw_rate;
-				goto publish_setpoint;
-			} else {
-				throw std::runtime_error("Setting yaw rate is possible only when position or velocity setpoints active");
-			}
-		}
-
-		// Serve normal commands
-
 		if (sp_type == NAVIGATE || sp_type == POSITION) {
-			ENSURE_FINITE(x);
-			ENSURE_FINITE(y);
-			ENSURE_FINITE(z);
+			ENSURE_NON_INF(x);
+			ENSURE_NON_INF(y);
+			ENSURE_NON_INF(z);
 		} else if (sp_type == NAVIGATE_GLOBAL) {
 			ENSURE_FINITE(lat);
 			ENSURE_FINITE(lon);
-			ENSURE_FINITE(z);
+			ENSURE_NON_INF(z);
 		} else if (sp_type == VELOCITY) {
-			ENSURE_FINITE(vx);
-			ENSURE_FINITE(vy);
-			ENSURE_FINITE(vz);
+			ENSURE_NON_INF(vx);
+			ENSURE_NON_INF(vy);
+			ENSURE_NON_INF(vz);
 		} else if (sp_type == ATTITUDE) {
-			ENSURE_FINITE(pitch);
-			ENSURE_FINITE(roll);
-			ENSURE_FINITE(thrust);
+			ENSURE_NON_INF(pitch);
+			ENSURE_NON_INF(roll);
+			ENSURE_NON_INF(thrust);
 		} else if (sp_type == RATES) {
 			ENSURE_NON_INF(pitch_rate);
 			ENSURE_NON_INF(roll_rate);
 			ENSURE_NON_INF(yaw_rate);
 			ENSURE_NON_INF(thrust);
+		}
+
+		ENSURE_NON_INF(yaw_rate);
+
+		if (isfinite(x) != isfinite(y)) {
+			throw std::runtime_error("x and y can be set only together");
+		}
+
+		if (isfinite(yaw_rate)) {
+			if (sp_type == _PARTIAL && setpoint_type == ATTITUDE) {
+				throw std::runtime_error("Yaw rate cannot be set in attitude mode.");
+			}
 		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
@@ -769,65 +785,120 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// 	}
 		// }
 
-		// Transform position and attitude
-		if (sp_type == POSITION || sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == VELOCITY || sp_type == ATTITUDE) {
-			PoseStamped ps;
-			ps.header.frame_id = frame_id;
-			ps.header.stamp = stamp;
-			ps.pose.position.x = x;
-			ps.pose.position.y = y;
-			ps.pose.position.z = z;
-			ps.pose.orientation.w = 1.0; // Ensure quaternion is always valid
+		// handle position
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
 
-			if (sp_type == ATTITUDE) {
-				setpoint_yaw_type = YAW;
-				ps.pose.position.x = 0;
-				ps.pose.position.y = 0;
-				ps.pose.position.z = 0;
-				ps.pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw); // this function actually has Euler YPR axes
-			} else if (std::isnan(yaw)) {
-				setpoint_yaw_type = YAW_RATE;
-				setpoint_rates.z = yaw_rate;
-			} else if (std::isinf(yaw) && yaw > 0) {
-				// yaw towards
-				setpoint_yaw_type = TOWARDS;
-				yaw = 0;
-				setpoint_rates.z = 0;
-			} else {
-				setpoint_yaw_type = YAW;
-				setpoint_rates.z = 0;
-				ps.pose.orientation = tf::createQuaternionMsgFromYaw(yaw);
+			PointStamped desired;
+			desired.header.frame_id = frame_id;
+			desired.header.stamp = stamp;
+			desired.point.x = safe(x);
+			desired.point.y = safe(y);
+			desired.point.z = safe(z);
+
+			// transform to reference frame
+			desired = tf_buffer.transform(desired, reference_frame);
+
+			// set horizontal position
+			if (isfinite(x) && isfinite(y)) {
+				setpoint_position = desired;
+			} else if (setpoint_position.header.frame_id.empty()) {
+				 // TODO: use transform for current stamp
+				setpoint_position.header = local_position.header;
+				setpoint_position.point = local_position.pose.position;
 			}
 
-			tf_buffer.transform(ps, setpoint_position, reference_frame);
-			setpoint_altitude.header = setpoint_position.header;
-			setpoint_altitude.point.z = setpoint_position.pose.position.z;
-			setpoint_attitude.header = setpoint_position.header;
-			setpoint_attitude.quaternion = setpoint_position.pose.orientation;
+			// set altitude
+			if (isfinite(z)) {
+				setpoint_altitude = desired;
+			} else if (setpoint_altitude.header.frame_id.empty()) {
+				setpoint_altitude.header = local_position.header;
+				setpoint_altitude.point = local_position.pose.position;
+			}
 		}
-
-		// Transform velocity
+		
+		// handle velocity
 		if (sp_type == VELOCITY) {
-			Vector3Stamped vel;
-			vel.header.frame_id = frame_id;
-			vel.header.stamp = stamp;
-			vel.vector.x = vx;
-			vel.vector.y = vy;
-			vel.vector.z = vz;
-			tf_buffer.transform(vel, setpoint_velocity, reference_frame);
+			// TODO: allow setting different modes by altitude and xy
+			Vector3Stamped desired;
+			desired.header.frame_id = frame_id;
+			desired.header.stamp = stamp;
+			desired.vector.x = safe(vx);
+			desired.vector.y = safe(vy);
+			desired.vector.z = safe(vz);
+
+			// transform to reference frame
+			desired = tf_buffer.transform(desired, reference_frame);
+			setpoint_velocity.header = desired.header;
+
+			// set horizontal velocity
+			if (isfinite(vx) && isfinite(vy)) {
+				setpoint_velocity.vector.x = desired.vector.x;
+				setpoint_velocity.vector.y = desired.vector.y;
+			}
+
+			// set vertical velocity
+			if (isfinite(vz)) {
+				setpoint_velocity.vector.z = desired.vector.z;
+			}
 		}
 
-		if (sp_type == ATTITUDE || sp_type == RATES) {
-			// keep current value if NaN
-			setpoint_thrust = isnan(thrust) ? setpoint_thrust : thrust;
+		// handle yaw
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == ATTITUDE) {
+			if (isfinite(yaw)) {
+				setpoint_yaw_type = YAW;
+				QuaternionStamped desired;
+				desired.header.frame_id = frame_id;
+				desired.header.stamp = stamp;
+				desired.quaternion = tf::createQuaternionMsgFromYaw(yaw);
+
+				// transform to reference frame
+				desired = tf_buffer.transform(desired, reference_frame);
+				setpoint_yaw = tf2::getYaw(desired.quaternion);
+				yaw_frame_id = reference_frame;
+
+			} else if (isinf(yaw) && yaw > 0) {
+				// yaw towards
+				setpoint_yaw_type = TOWARDS;
+
+			} else if (yaw_frame_id.empty()) {
+				// yaw is nan and not set previously
+				setpoint_yaw_type = YAW;
+				setpoint_yaw = tf2::getYaw(local_position.pose.orientation);
+				yaw_frame_id = local_position.header.frame_id;
+			}
 		}
 
-		if (sp_type == RATES) {
-			setpoint_yaw_type = YAW_RATE;
-			// keep current values if NaN
-			setpoint_rates.x = isnan(roll_rate) ? setpoint_rates.x : roll_rate;
-			setpoint_rates.y = isnan(pitch_rate) ? setpoint_rates.y : pitch_rate;
-			setpoint_rates.z = isnan(yaw_rate) ? setpoint_rates.z : yaw_rate; // TODO: consider always
+		// handle roll
+		if (isfinite(roll)) {
+			setpoint_roll = roll;
+		}
+
+		// handle pitch
+		if (isfinite(pitch)) {
+			setpoint_pitch = pitch;
+		}
+
+		// handle yaw rate
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == RATES) { // TODO: simplify: isfinite(yaw_rate)
+			if (isnan(yaw) && isfinite(yaw_rate)) {
+				setpoint_yaw_type = YAW_RATE;
+				setpoint_rates.z = yaw_rate;
+			}
+		}
+
+		// handle pitch rate
+		if (isfinite(roll_rate)) {
+			setpoint_rates.x = roll_rate;
+		}
+
+		// handle roll rate
+		if (isfinite(pitch_rate)) {
+			setpoint_rates.y = pitch_rate;
+		}
+
+		// handle thrust
+		if (isfinite(thrust)) {
+			setpoint_thrust = thrust;
 		}
 
 		wait_armed = auto_arm;
@@ -836,20 +907,7 @@ publish_setpoint:
 		publish(stamp); // calculate initial transformed messages first
 		setpoint_timer.start();
 
-		// publish target frame
-		if (!target.child_frame_id.empty()) {
-			if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
-				// TODO: check if position and altitude frame_id are the same
-				target.header.frame_id = setpoint_position.header.frame_id;
-				target.header.stamp = stamp;
-				target.transform.translation.x = setpoint_position.pose.position.x;
-				target.transform.translation.y = setpoint_position.pose.position.y;
-				target.transform.translation.z = setpoint_position.pose.position.z;
-				target.transform.rotation = setpoint_position.pose.orientation;
-				static_transform_broadcaster->sendTransform(target);
-			}
-		}
-
+		publishTarget(stamp, true);
 		publishState();
 
 		if (auto_arm) {
