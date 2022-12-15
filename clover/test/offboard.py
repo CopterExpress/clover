@@ -75,6 +75,9 @@ def test_offboard(node, tf_buffer):
     local_position_pub = rospy.Publisher('/mavros/local_position/pose', PoseStamped, latch=True, queue_size=1)
     local_position_msg = PoseStamped()
     local_position_msg.header.frame_id = 'map'
+    local_position_msg.pose.position.x = 1
+    local_position_msg.pose.position.y = 2
+    local_position_msg.pose.position.z = 3
     local_position_msg.pose.orientation.w = 1
 
     def publish_local_position():
@@ -88,11 +91,20 @@ def test_offboard(node, tf_buffer):
     threading.Thread(target=publish_local_position, daemon=True).start()
     rospy.sleep(0.5)
 
-    res = navigate(z=1, frame_id='map')
+    # check body frame
+    body = tf_buffer.lookup_transform('map', 'body', rospy.get_rostime(), rospy.Duration(1))
+    assert body.child_frame_id == 'body'
+    assert body.transform.translation.x == 1
+    assert body.transform.translation.y == 2
+    assert body.transform.translation.z == 3
+
+    res = navigate(x=3, y=2, z=1, frame_id='map')
     assert res.success == True
     state = get_state()
     assert state.mode == State.MODE_NAVIGATE
     assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 3
+    assert state.y == 2
     assert state.z == 1
     assert state.yaw == 0
     assert state.xy_frame_id == 'map'
@@ -100,8 +112,8 @@ def test_offboard(node, tf_buffer):
     assert state.yaw_frame_id == 'map'
     target = get_navigate_target(tf_buffer)
     assert target.header.frame_id == 'map'
-    assert target.transform.translation.x == 0
-    assert target.transform.translation.y == 0
+    assert target.transform.translation.x == 3
+    assert target.transform.translation.y == 2
     assert target.transform.translation.z == 1
     assert target.transform.rotation.x == 0
     assert target.transform.rotation.y == 0
