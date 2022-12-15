@@ -815,7 +815,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				setpoint_altitude.point = local_position.pose.position;
 			}
 		}
-		
+
 		// handle velocity
 		if (sp_type == VELOCITY) {
 			// TODO: allow setting different modes by altitude and xy
