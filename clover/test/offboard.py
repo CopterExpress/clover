@@ -139,6 +139,37 @@ def test_offboard(node, tf_buffer):
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
 
+    # auto_arm should invalidate the setpoint
+    res = navigate(x=nan, y=nan, z=1, frame_id='map', auto_arm=True)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 1
+    assert state.y == 2
+    assert state.z == 1
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
+
+    # set_attitude should invalidate the setpoint
+    res = set_attitude()
+    assert res.success == True
+
+    res = navigate(x=5, y=6, z=nan, frame_id='map')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 3
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
+
     # test set_velocity
     res = set_velocity(vx=1, frame_id='body')
     state = get_state()
