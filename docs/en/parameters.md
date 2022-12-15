@@ -60,8 +60,8 @@ The `SYS_MC_EST_GROUP` parameter defines the estimator subsystem to use.
 
 Estimator subsystem is a group of modules that calculates the current state of the copter using readings from the sensors. The copter state includes:
 
-* Angle rate of the copter – pitch_rate, roll_rate, yaw_rate;
-* Copter orientation (in the local coordinate system) – pitch, roll, yaw (one of presentations);
+* Angle rate of the copter – roll_rate, pitch_rate, yaw_rate;
+* Copter orientation (in the local coordinate system) – roll, pitch, yaw (one of presentations);
 * Copter position (in the local coordinate system) – x, y, z;
 * Copter speed (in the local coordinate system) – vx, vy, vz;
 * Global coordinates of the copter – latitude, longitude, altitude;

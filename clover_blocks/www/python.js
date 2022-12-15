@@ -328,11 +328,11 @@ Blockly.Python.setpoint = function(block) {
 	} else if (type == 'ATTITUDE') {
 		rosDefinitions.setAttitude = true;
 		simpleOffboard();
-		return `set_attitude(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
+		return `set_attitude(roll=${roll}, pitch=${pitch}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
 	} else if (type == 'RATES') {
 		rosDefinitions.setRates = true;
 		simpleOffboard();
-		return `set_rates(pitch_rate=${pitch}, roll_rate=${roll}, yaw_rate=${yaw}, thrust=${thrust})\n`;
+		return `set_rates(roll_rate=${roll}, pitch_rate=${pitch}, yaw_rate=${yaw}, thrust=${thrust})\n`;
 	}
 }
 

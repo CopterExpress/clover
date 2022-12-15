@@ -59,8 +59,8 @@ function updateSetpointBlock(e) {
 	this.getInput('VY').setVisible(velocity);
 	this.getInput('VZ').setVisible(velocity);
 	this.getInput('YAW').setVisible(attitude);
-	this.getInput('PITCH').setVisible(attitude);
 	this.getInput('ROLL').setVisible(attitude);
+	this.getInput('PITCH').setVisible(attitude);
 	this.getInput('THRUST').setVisible(attitude);
 	this.getInput('RELATIVE_TO').setVisible(type != 'RATES');
 
@@ -163,13 +163,13 @@ Blockly.Blocks['setpoint'] = {
 		this.appendValueInput("VZ")
 			.setCheck("Number")
 			.appendField("vz");
-		this.appendValueInput("PITCH")
-			.setCheck("Number")
-			.appendField("pitch")
-			.setVisible(false);
 		this.appendValueInput("ROLL")
 			.setCheck("Number")
 			.appendField("roll")
+			.setVisible(false);
+		this.appendValueInput("PITCH")
+			.setCheck("Number")
+			.appendField("pitch")
 			.setVisible(false);
 		this.appendValueInput("YAW")
 			.setCheck("Number")
@@ -247,7 +247,7 @@ Blockly.Blocks['get_attitude'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["pitch", "PITCH"], ["roll", "ROLL"], ["pitch rate", "PITCH_RATE"], ["roll rate", "ROLL_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
+			.appendField(new Blockly.FieldDropdown([["roll", "ROLL"], ["pitch", "PITCH"], ["roll rate", "ROLL_RATE"], ["pitch rate", "PITCH_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("Returns current orientation or angle rates in degree or degree per second (not radian).");

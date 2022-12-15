@@ -51,11 +51,11 @@ Response format:
 * `lat, lon` – drone latitude and longitude *(degrees)*, requires [GPS](gps.md) module;
 * `alt` – altitude in the global coordinate system (according to [WGS-84](https://ru.wikipedia.org/wiki/WGS_84) standard, not <abbr title="Above Mean Sea Level">AMSL</abbr>!), requires [GPS](gps.md) module;
 * `vx, vy, vz` – drone velocity *(m/s)*;
-* `pitch` – pitch angle *(radians)*;
 * `roll` – roll angle *(radians)*;
+* `pitch` – pitch angle *(radians)*;
 * `yaw` — yaw angle *(radians)*;
-* `pitch_rate` — angular pitch velocity *(rad/s)*;
 * `roll_rate` – angular roll velocity *(rad/s)*;
+* `pitch_rate` — angular pitch velocity *(rad/s)*;
 * `yaw_rate` – angular yaw velocity *(rad/s)*;
 * `voltage` – total battery voltage *(V)*;
 * `cell_voltage` – battery cell voltage *(V)*.
@@ -261,22 +261,22 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 
 ### set_attitude
 
-Set pitch, roll, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
+Set roll, pitch, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
 
 Parameters:
 
-* `pitch`, `roll`, `yaw` – requested pitch, roll, and yaw angle *(radians)*;
+* `roll`, `pitch`, `yaw` – requested roll, pitch, and yaw angle *(radians)*;
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for `yaw` (Default value: `map`).
 
 ### set_rates
 
-Set pitch, roll, and yaw rates and the throttle level (similar to [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform aerobatic tricks (e.g., flips).
+Set roll, pitch, and yaw rates and the throttle level (similar to [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform aerobatic tricks (e.g., flips).
 
 Parameters:
 
-* `pitch_rate`, `roll_rate`, `yaw_rate` – pitch, roll, and yaw rates *(rad/s)*;
+* `roll_rate`, `pitch_rate`, `yaw_rate` – pitch, roll, and yaw rates *(rad/s)*;
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 

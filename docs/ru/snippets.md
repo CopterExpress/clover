@@ -154,7 +154,7 @@ new_pose = tf_buffer.transform(pose, frame_id, transform_timeout)
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+flipped = abs(telem.roll) > PI_2 or abs(telem.pitch) > PI_2
 ```
 
 ### # {#angle-hor}
@@ -165,7 +165,7 @@ flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
+flipped = not -PI_2 <= telem.roll <= PI_2 or not -PI_2 <= telem.pitch <= PI_2
 angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
 if flipped:
     angle_to_horizon = math.pi - angle_to_horizon
@@ -335,7 +335,7 @@ def flip():
 
     while True:
         telem = get_telemetry()
-        flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+        flipped = abs(telem.roll) > PI_2 or abs(telem.pitch) > PI_2
         if flipped:
             break
 

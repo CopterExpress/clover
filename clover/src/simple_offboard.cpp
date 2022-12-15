@@ -101,7 +101,7 @@ PoseStamped nav_start;
 PointStamped setpoint_position;
 PointStamped setpoint_altitude;
 Vector3Stamped setpoint_velocity;
-float setpoint_yaw, setpoint_pitch, setpoint_roll;
+float setpoint_yaw, setpoint_roll, setpoint_pitch;
 Vector3 setpoint_rates;
 string yaw_frame_id;
 float setpoint_thrust;
@@ -216,11 +216,11 @@ bool getTelemetry(GetTelemetry::Request& req, GetTelemetry::Response& res)
 	res.vx = NAN;
 	res.vy = NAN;
 	res.vz = NAN;
-	res.pitch = NAN;
 	res.roll = NAN;
+	res.pitch = NAN;
 	res.yaw = NAN;
-	res.pitch_rate = NAN;
 	res.roll_rate = NAN;
+	res.pitch_rate = NAN;
 	res.yaw_rate = NAN;
 	res.voltage = NAN;
 	res.cell_voltage = NAN;
@@ -659,7 +659,7 @@ inline float safe(float value) {
 #define ENSURE_NON_INF(var) { if (std::isinf(var)) throw std::runtime_error(#var " argument cannot be Inf"); }
 
 bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, float vy, float vz,
-           float pitch, float roll, float yaw, float pitch_rate, float roll_rate, float yaw_rate, // editorconfig-checker-disable-line
+           float roll, float pitch, float yaw, float roll_rate, float pitch_rate, float yaw_rate, // editorconfig-checker-disable-line
            float lat, float lon, float thrust, float speed, string frame_id, bool auto_arm, // editorconfig-checker-disable-line
            uint8_t& success, string& message) // editorconfig-checker-disable-line
 {
@@ -699,12 +699,12 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ENSURE_NON_INF(vy);
 			ENSURE_NON_INF(vz);
 		} else if (sp_type == ATTITUDE) {
-			ENSURE_NON_INF(pitch);
 			ENSURE_NON_INF(roll);
+			ENSURE_NON_INF(pitch);
 			ENSURE_NON_INF(thrust);
 		} else if (sp_type == RATES) {
-			ENSURE_NON_INF(pitch_rate);
 			ENSURE_NON_INF(roll_rate);
+			ENSURE_NON_INF(pitch_rate);
 			ENSURE_NON_INF(yaw_rate);
 			ENSURE_NON_INF(thrust);
 		}
@@ -968,11 +968,11 @@ bool setVelocity(SetVelocity::Request& req, SetVelocity::Response& res) {
 }
 
 bool setAttitude(SetAttitude::Request& req, SetAttitude::Response& res) {
-	return serve(ATTITUDE, NAN, NAN, NAN, NAN, NAN, NAN, req.pitch, req.roll, req.yaw, NAN, NAN, NAN, NAN, NAN, req.thrust, NAN, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(ATTITUDE, NAN, NAN, NAN, NAN, NAN, NAN, req.roll, req.pitch, req.yaw, NAN, NAN, NAN, NAN, NAN, req.thrust, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setRates(SetRates::Request& req, SetRates::Response& res) {
-	return serve(RATES, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.pitch_rate, req.roll_rate, req.yaw_rate, NAN, NAN, req.thrust, NAN, "", req.auto_arm, res.success, res.message);
+	return serve(RATES, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.roll_rate, req.pitch_rate, req.yaw_rate, NAN, NAN, req.thrust, NAN, "", req.auto_arm, res.success, res.message);
 }
 
 bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)

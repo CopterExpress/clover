@@ -74,12 +74,12 @@ navigate(yaw=-math.pi / 2, frame_id='navigate_target')
 rospy.sleep(3)
 
 input('Use set_attitude to fly backwards [enter]')
-set_attitude(pitch=-0.3, roll=0, yaw=0, thrust=0.5, frame_id='body')
+set_attitude(roll=0, pitch=-0.3, yaw=0, thrust=0.5, frame_id='body')
 rospy.sleep(0.3)
 set_position(frame_id='body')
 
 input('Use set_attitude to fly right [enter]')
-set_attitude(pitch=0, roll=0.3, yaw=0, thrust=0.5, frame_id='body')
+set_attitude(roll=0.3, pitch=0, yaw=0, thrust=0.5, frame_id='body')
 rospy.sleep(0.5)
 set_position(frame_id='body')
 
