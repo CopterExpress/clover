@@ -620,7 +620,7 @@ void publishState()
 	} else {
 		msg.x = setpoint_position.point.x;
 		msg.y = setpoint_position.point.y;
-		msg.z = setpoint_position.point.z;
+		msg.z = setpoint_altitude.point.z;
 	}
 
 	msg.speed = nav_speed;
