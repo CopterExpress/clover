@@ -106,7 +106,7 @@ Vector3 setpoint_rates;
 string yaw_frame_id;
 float setpoint_thrust;
 float nav_speed;
-float setpoint_lat, setpoint_lon;
+float setpoint_lat = NAN, setpoint_lon = NAN;
 bool busy = false;
 bool wait_armed = false;
 bool nav_from_sp_flag = false;
@@ -612,9 +612,17 @@ void publishState()
 	clover::State msg;
 	msg.mode = setpoint_type;
 	msg.yaw_mode = setpoint_yaw_type;
-	msg.x = setpoint_position.point.x;
-	msg.y = setpoint_position.point.y;
-	msg.z = setpoint_position.point.z;
+
+	if (setpoint_position.header.frame_id.empty()) {
+		msg.x = NAN;
+		msg.y = NAN;
+		msg.z = NAN;
+	} else {
+		msg.x = setpoint_position.point.x;
+		msg.y = setpoint_position.point.y;
+		msg.z = setpoint_position.point.z;
+	}
+
 	msg.speed = nav_speed;
 	msg.lat = setpoint_lat;
 	msg.lon = setpoint_lon;
@@ -623,7 +631,7 @@ void publishState()
 	msg.vz = setpoint_velocity.vector.z;
 	msg.roll = setpoint_roll;
 	msg.pitch = setpoint_pitch;
-	msg.yaw = setpoint_yaw;
+	msg.yaw = !yaw_frame_id.empty() ? setpoint_yaw : NAN;
 
 	msg.roll_rate = setpoint_rates.x;
 	msg.pitch_rate = setpoint_rates.y;
@@ -763,6 +771,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		if (sp_type != NAVIGATE && sp_type != NAVIGATE_GLOBAL) {
 			nav_from_sp_flag = false;
+		}
+
+		if (auto_arm || sp_type == VELOCITY || sp_type == ATTITUDE || sp_type == RATES) {
+			// invalidate position setpoint
+			setpoint_position.header.frame_id = "";
+			setpoint_altitude.header.frame_id = "";
+			yaw_frame_id = "";
 		}
 
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
@@ -907,7 +922,10 @@ publish_setpoint:
 		publish(stamp); // calculate initial transformed messages first
 		setpoint_timer.start();
 
-		publishTarget(stamp, true);
+		if (setpoint_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+			publishTarget(stamp, true);
+		}
+
 		publishState();
 
 		if (auto_arm) {
@@ -986,9 +1004,7 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 		auto start = ros::Time::now();
 		while (ros::ok()) {
 			if (state.mode == "AUTO.LAND") {
-				res.success = true;
-				busy = false;
-				return true;
+				break;
 			}
 			if (ros::Time::now() - start > land_timeout)
 				throw std::runtime_error("Land request timed out");
@@ -996,6 +1012,16 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 			ros::spinOnce();
 			r.sleep();
 		}
+
+		// invalidate position setpoint
+		setpoint_position.header.frame_id = "";
+		setpoint_altitude.header.frame_id = "";
+		yaw_frame_id = "";
+		publishState();
+
+		res.success = true;
+		busy = false;
+		return true;
 
 	} catch (const std::exception& e) {
 		res.message = e.what();
