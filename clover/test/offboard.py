@@ -120,6 +120,25 @@ def test_offboard(node, tf_buffer):
     assert target.transform.rotation.z == 0
     assert target.transform.rotation.w == 1
 
+    # try to set only the y
+    res = navigate(x=nan, y=1, z=nan)
+    assert res.success == False
+    assert res.message.startswith('x and y can be set only together')
+
+    # set z in body frame
+    res = navigate(x=nan, y=nan, z=1, frame_id='body')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 3
+    assert state.y == 2
+    assert state.z == 4
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
+
     # test set_velocity
     res = set_velocity(vx=1, frame_id='body')
     state = get_state()
