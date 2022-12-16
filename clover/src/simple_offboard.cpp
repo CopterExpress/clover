@@ -918,8 +918,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 		wait_armed = auto_arm;
 
-publish_setpoint:
-		publish(stamp); // calculate initial transformed messages first
+		// publish setpoint
 		setpoint_timer.start();
 
 		if (setpoint_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
