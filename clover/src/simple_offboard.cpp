@@ -686,14 +686,14 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		auto search = reference_frames.find(frame_id);
 		const string& reference_frame = search == reference_frames.end() ? frame_id : search->second;
 
-		if (sp_type == NAVIGATE || sp_type == POSITION) {
-			ENSURE_NON_INF(x);
-			ENSURE_NON_INF(y);
-			ENSURE_NON_INF(z);
-		} else if (sp_type == NAVIGATE_GLOBAL) {
+		ENSURE_NON_INF(x);
+		ENSURE_NON_INF(y);
+		ENSURE_NON_INF(z);
+		ENSURE_NON_INF(yaw_rate);
+
+		if (sp_type == NAVIGATE_GLOBAL) {
 			ENSURE_FINITE(lat);
 			ENSURE_FINITE(lon);
-			ENSURE_NON_INF(z);
 		} else if (sp_type == VELOCITY) {
 			ENSURE_NON_INF(vx);
 			ENSURE_NON_INF(vy);
@@ -708,8 +708,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			ENSURE_NON_INF(yaw_rate);
 			ENSURE_NON_INF(thrust);
 		}
-
-		ENSURE_NON_INF(yaw_rate);
 
 		if (isfinite(x) != isfinite(y)) {
 			throw std::runtime_error("x and y can be set only together");
@@ -735,9 +733,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
 			if (yaw_rate != 0 && !std::isnan(yaw))
 				throw std::runtime_error("Yaw value should be NaN for setting yaw rate");
-
-			if (std::isnan(yaw_rate) && std::isnan(yaw))
-				throw std::runtime_error("Both yaw and yaw_rate cannot be NaN");
 		}
 
 		if (sp_type == NAVIGATE_GLOBAL) {
@@ -958,6 +953,10 @@ bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res)
 	return serve(NAVIGATE_GLOBAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, req.lat, req.lon, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
+bool setAltitude(SetAltitude::Request& req, SetAltitude::Response& res) {
+	return serve(NAVIGATE, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
+}
+
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
 	return serve(POSITION, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
@@ -1114,6 +1113,7 @@ int main(int argc, char **argv)
 	auto gt_serv = nh.advertiseService("get_telemetry", &getTelemetry);
 	auto na_serv = nh.advertiseService("navigate", &navigate);
 	auto ng_serv = nh.advertiseService("navigate_global", &navigateGlobal);
+	auto sl_serv = nh.advertiseService("set_altitude", &setAltitude);
 	auto sp_serv = nh.advertiseService("set_position", &setPosition);
 	auto sv_serv = nh.advertiseService("set_velocity", &setVelocity);
 	auto sa_serv = nh.advertiseService("set_attitude", &setAttitude);

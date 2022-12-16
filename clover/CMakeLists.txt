@@ -91,6 +91,7 @@ add_service_files(
   GetTelemetry.srv
   Navigate.srv
   NavigateGlobal.srv
+  SetAltitude.srv
   SetPosition.srv
   SetVelocity.srv
   SetAttitude.srv
