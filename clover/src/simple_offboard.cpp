@@ -397,7 +397,7 @@ PoseStamped globalToLocal(double lat, double lon)
 // publish navigate_target frame
 void publishTarget(ros::Time stamp, bool _static = false)
 {
-	bool single_frame = (setpoint_position.header.frame_id == setpoint_altitude.header.frame_id) && 
+	bool single_frame = (setpoint_position.header.frame_id == setpoint_altitude.header.frame_id) &&
 		setpoint_altitude.header.frame_id == yaw_frame_id;
 
 	if (_static && single_frame) {
