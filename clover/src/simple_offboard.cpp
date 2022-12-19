@@ -38,6 +38,7 @@
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/StatusText.h>
 #include <mavros_msgs/ManualControl.h>
+#include <mavros_msgs/Altitude.h>
 
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
@@ -57,6 +58,7 @@ using namespace clover;
 using mavros_msgs::PositionTarget;
 using mavros_msgs::AttitudeTarget;
 using mavros_msgs::Thrust;
+using mavros_msgs::Altitude;
 
 // tf2
 tf2_ros::Buffer tf_buffer;
@@ -96,6 +98,7 @@ PositionTarget position_raw_msg;
 //TwistStamped rates_msg;
 TransformStamped target, setpoint;
 geometry_msgs::TransformStamped body;
+geometry_msgs::TransformStamped terrain;
 
 // State
 PoseStamped nav_start;
@@ -196,6 +199,20 @@ inline bool waitTransform(const string& target, const string& source,
 		r.sleep();
 	}
 	return false;
+}
+
+void handleAltitude(const Altitude& alt)
+{
+	// publish terrain frame
+	if (!std::isfinite(alt.bottom_clearance)) return;
+	// terrain.header.stamp = alt.header.stamp;
+
+	if (!waitTransform(local_frame, body.child_frame_id, alt.header.stamp, ros::Duration(0.1))) return;
+
+	auto t = tf_buffer.lookupTransform(local_frame, body.child_frame_id, alt.header.stamp);
+	t.child_frame_id = terrain.child_frame_id;
+	t.transform.translation.z -= alt.bottom_clearance;
+	static_transform_broadcaster->sendTransform(t);
 }
 
 #define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
@@ -1078,6 +1095,7 @@ int main(int argc, char **argv)
 	nh_priv.param("check_kill_switch", check_kill_switch, true);
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
+	nh_priv.param<string>("terrain_frame", terrain.child_frame_id, "terrain");
 	nh_priv.getParam("reference_frames", reference_frames);
 
 	// Default reference frames
@@ -1112,6 +1130,12 @@ int main(int argc, char **argv)
 	auto statustext_sub = nh.subscribe(mavros + "/statustext/recv", 1, &handleMessage<mavros_msgs::StatusText, statustext>);
 	auto manual_control_sub = nh.subscribe(mavros + "/manual_control/control", 1, &handleMessage<mavros_msgs::ManualControl, manual_control>);
 	auto local_position_sub = nh.subscribe(mavros + "/local_position/pose", 1, &handleLocalPosition);
+
+	ros::Subscriber altitude_sub;
+	if (!body.child_frame_id.empty() && !terrain.child_frame_id.empty()) {
+		terrain.header.frame_id = local_frame;
+		altitude_sub = nh.subscribe(mavros + "/altitude", 1, &handleAltitude);
+	}
 
 	// Setpoint publishers
 	position_pub = nh.advertise<PoseStamped>(mavros + "/setpoint_position/local", 1);
