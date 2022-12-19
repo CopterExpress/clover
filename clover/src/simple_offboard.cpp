@@ -42,6 +42,7 @@
 #include <clover/GetTelemetry.h>
 #include <clover/Navigate.h>
 #include <clover/NavigateGlobal.h>
+#include <clover/SetAltitude.h>
 #include <clover/SetPosition.h>
 #include <clover/SetVelocity.h>
 #include <clover/SetAttitude.h>
