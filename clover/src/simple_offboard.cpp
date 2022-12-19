@@ -721,6 +721,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			}
 		}
 
+		// set_altitude
+		if (sp_type == _PARTIAL && isfinite(z)) {
+			if (setpoint_type == VELOCITY || setpoint_type == ATTITUDE || setpoint_type == RATES) {
+				throw std::runtime_error("Altitude cannot be set in velocity, attitude or rates mode.");
+			}
+		}
+
 		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL) {
 			if (TIMEOUT(local_position, local_position_timeout))
 				throw std::runtime_error("No local position, check settings");
@@ -764,13 +771,15 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		// Everything fine - switch setpoint type
-		setpoint_type = sp_type;
+		if (sp_type != _PARTIAL) {
+			setpoint_type = sp_type;
+		}
 
-		if (sp_type != NAVIGATE && sp_type != NAVIGATE_GLOBAL) {
+		if (setpoint_type != NAVIGATE && setpoint_type != NAVIGATE_GLOBAL) {
 			nav_from_sp_flag = false;
 		}
 
-		if (auto_arm || sp_type == VELOCITY || sp_type == ATTITUDE || sp_type == RATES) {
+		if (auto_arm || setpoint_type == VELOCITY || setpoint_type == ATTITUDE || setpoint_type == RATES) {
 			// invalidate position setpoint
 			setpoint_position.header.frame_id = "";
 			setpoint_altitude.header.frame_id = "";
@@ -802,7 +811,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		// }
 
 		// handle position
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
 
 			PointStamped desired;
 			desired.header.frame_id = frame_id;
@@ -922,7 +931,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		publish(stamp); // calculate initial transformed messages first
 		setpoint_timer.start();
 
-		if (setpoint_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION) {
+		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
 			publishTarget(stamp, true);
 		}
 
@@ -960,7 +969,7 @@ bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res)
 }
 
 bool setAltitude(SetAltitude::Request& req, SetAltitude::Response& res) {
-	return serve(NAVIGATE, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
+	return serve(_PARTIAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
 }
 
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
