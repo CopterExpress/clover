@@ -96,9 +96,9 @@ def test_offboard(node, tf_buffer):
     # check body frame
     body = tf_buffer.lookup_transform('map', 'body', rospy.get_rostime(), rospy.Duration(1))
     assert body.child_frame_id == 'body'
-    assert body.transform.translation.x == 1
-    assert body.transform.translation.y == 2
-    assert body.transform.translation.z == 3
+    assert body.transform.translation.x == approx(1)
+    assert body.transform.translation.y == approx(2)
+    assert body.transform.translation.z == approx(3)
 
     res = navigate(x=3, y=2, z=1, frame_id='map')
     assert res.success == True
@@ -114,9 +114,9 @@ def test_offboard(node, tf_buffer):
     assert state.yaw_frame_id == 'map'
     target = get_navigate_target(tf_buffer)
     assert target.header.frame_id == 'map'
-    assert target.transform.translation.x == 3
-    assert target.transform.translation.y == 2
-    assert target.transform.translation.z == 1
+    assert target.transform.translation.x == approx(3)
+    assert target.transform.translation.y == approx(2)
+    assert target.transform.translation.z == approx(1)
     assert target.transform.rotation.x == 0
     assert target.transform.rotation.y == 0
     assert target.transform.rotation.z == 0
