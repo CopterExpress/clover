@@ -30,6 +30,8 @@ def get_navigate_target(tf_buffer):
 
 def test_offboard(node, tf_buffer):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
+    set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
+    set_altitude = rospy.ServiceProxy('set_altitude', srv.SetAltitude)
     set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
     set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
@@ -184,6 +186,48 @@ def test_offboard(node, tf_buffer):
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
 
+    # test set_altitude
+    res = set_altitude(z=7, frame_id='test')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 7
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+    assert state.yaw_frame_id == 'map'
+
+    # test set_position
+    res = set_position(x=nan, y=nan, z=13, yaw=nan, yaw_rate=nan, frame_id='test2')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_POSITION
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 13
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test2'
+    assert state.yaw_frame_id == 'map'
+
+    # set_altitude should not change the mode
+    res = set_altitude(z=3, frame_id='test')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_POSITION
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 3
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+    assert state.yaw_frame_id == 'map'
+
     # test set_velocity
     res = set_velocity(vx=1, frame_id='body')
     state = get_state()
@@ -196,6 +240,11 @@ def test_offboard(node, tf_buffer):
     assert state.xy_frame_id == 'map'
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
+
+    # set_altitude should not work in velocity mode
+    res = set_altitude(z=3, frame_id='test')
+    assert res.success == False
+    assert res.message.startswith('Altitude cannot be set in')
 
     # test set_attitude
     res = set_attitude(roll=0.1, pitch=0.2, yaw=0.3, thrust=0.5)
