@@ -724,7 +724,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		} else if (sp_type == RATES) {
 			ENSURE_NON_INF(roll_rate);
 			ENSURE_NON_INF(pitch_rate);
-			ENSURE_NON_INF(yaw_rate);
 			ENSURE_NON_INF(thrust);
 		}
 
