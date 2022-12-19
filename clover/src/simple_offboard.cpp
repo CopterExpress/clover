@@ -691,6 +691,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		ENSURE_NON_INF(y);
 		ENSURE_NON_INF(z);
 		ENSURE_NON_INF(yaw_rate);
+		ENSURE_NON_INF(speed); // TODO: allow inf
 
 		if (sp_type == NAVIGATE_GLOBAL) {
 			ENSURE_FINITE(lat);
@@ -784,7 +785,11 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			} else {
 				nav_start = local_position;
 			}
-			nav_speed = speed;
+
+			if (!isnan(speed)) {
+				nav_speed = speed;
+			}
+
 			nav_from_sp_flag = true;
 		}
 
