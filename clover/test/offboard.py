@@ -32,6 +32,8 @@ def test_offboard(node, tf_buffer):
     navigate = rospy.ServiceProxy('navigate', srv.Navigate)
     set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
     set_altitude = rospy.ServiceProxy('set_altitude', srv.SetAltitude)
+    set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)
+    set_yaw_rate = rospy.ServiceProxy('set_yaw_rate', srv.SetYawRate)
     set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
     set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
@@ -173,7 +175,7 @@ def test_offboard(node, tf_buffer):
     res = set_attitude()
     assert res.success == True
 
-    res = navigate(x=5, y=6, z=nan, frame_id='map')
+    res = navigate(x=5, y=6, z=nan, yaw=nan, frame_id='map')
     assert res.success == True
     state = get_state()
     assert state.mode == State.MODE_NAVIGATE
@@ -200,8 +202,57 @@ def test_offboard(node, tf_buffer):
     assert state.z_frame_id == 'test'
     assert state.yaw_frame_id == 'map'
 
+    # test set_yaw
+    res = set_yaw(yaw=0.5, frame_id='test2')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 7
+    assert state.yaw == 0.5
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+    assert state.yaw_frame_id == 'test2'
+
+    # test set_yaw_rate
+    res = set_yaw_rate(yaw_rate=2)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 7
+    assert state.yaw_rate == 2
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+
+    # navigate(yaw=nan) should keep yaw rate mode
+    res = navigate(x=nan, y=nan, z=nan, yaw=nan)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 7
+    assert state.yaw_rate == 2
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+
+    # set_yaw(nan) should change back to yaw mode
+    res = set_yaw(yaw=nan)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.yaw == 0
+    assert state.yaw_frame_id == 'map'
+
     # test set_position
-    res = set_position(x=nan, y=nan, z=13, yaw=nan, yaw_rate=nan, frame_id='test2')
+    res = set_position(x=nan, y=nan, z=13, yaw=nan, frame_id='test2')
     assert res.success == True
     state = get_state()
     assert state.mode == State.MODE_POSITION
@@ -227,6 +278,20 @@ def test_offboard(node, tf_buffer):
     assert state.xy_frame_id == 'map'
     assert state.z_frame_id == 'test'
     assert state.yaw_frame_id == 'map'
+
+    # set_yaw should not change the main mode
+    res = set_yaw(yaw=1, frame_id='test2')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_POSITION
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 5
+    assert state.y == 6
+    assert state.z == 3
+    assert state.yaw == 1
+    assert state.xy_frame_id == 'map'
+    assert state.z_frame_id == 'test'
+    assert state.yaw_frame_id == 'test2'
 
     # test set_velocity
     res = set_velocity(vx=1, frame_id='body')
@@ -266,6 +331,23 @@ def test_offboard(node, tf_buffer):
     msg = rospy.wait_for_message('/mavros/setpoint_attitude/thrust', mavros_msgs.msg.Thrust, timeout=3)
     assert msg.thrust == approx(0.5)
 
+    # set_yaw should work in attitude mode
+    res = set_yaw(yaw=0.7, frame_id='test2')
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_ATTITUDE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.roll == approx(0.1)
+    assert state.pitch == approx(0.2)
+    assert state.yaw == approx(0.7)
+    assert state.thrust == approx(0.5)
+    assert state.yaw_frame_id == 'test2'
+
+    # set_yaw_rate should not work in attitude mode
+    res = set_yaw_rate(yaw_rate=0.3)
+    assert res.success == False
+    assert res.message.startswith('Yaw rate cannot be set in')
+
     # test set_rates
     res = set_rates(roll_rate=nan, pitch_rate=nan, yaw_rate=0.3, thrust=0.6)
     assert res.success == True
@@ -303,6 +385,17 @@ def test_offboard(node, tf_buffer):
     assert msg.body_rate.x == approx(0.3)
     assert msg.body_rate.y == approx(0.2)
     assert msg.body_rate.z == approx(0.1)
+
+    # set_yaw_rate should work in rates mode
+    res = set_yaw_rate(yaw_rate=0.4)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_RATES
+    assert state.yaw_mode == State.YAW_MODE_YAW_RATE
+    assert state.roll_rate == approx(0.3)
+    assert state.pitch_rate == approx(0.2)
+    assert state.yaw_rate == approx(0.4)
+    assert state.thrust == approx(0.3)
 
     res = set_rates(roll_rate=inf)
     assert res.success == False

@@ -92,6 +92,8 @@ add_service_files(
   Navigate.srv
   NavigateGlobal.srv
   SetAltitude.srv
+  SetYaw.srv
+  SetYawRate.srv
   SetPosition.srv
   SetVelocity.srv
   SetAttitude.srv

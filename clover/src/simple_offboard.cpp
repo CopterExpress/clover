@@ -44,6 +44,8 @@
 #include <clover/Navigate.h>
 #include <clover/NavigateGlobal.h>
 #include <clover/SetAltitude.h>
+#include <clover/SetYaw.h>
+#include <clover/SetYawRate.h>
 #include <clover/SetPosition.h>
 #include <clover/SetVelocity.h>
 #include <clover/SetAttitude.h>
@@ -128,7 +130,9 @@ enum setpoint_type_t {
 	VELOCITY,
 	ATTITUDE,
 	RATES,
-	_PARTIAL // for partial updates only
+	_ALTITUDE,
+	_YAW,
+	_YAW_RATE,
 };
 
 enum setpoint_type_t setpoint_type = NONE;
@@ -728,13 +732,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		if (isfinite(yaw_rate)) {
-			if (sp_type == _PARTIAL && setpoint_type == ATTITUDE) {
+			if (sp_type > RATES && setpoint_type == ATTITUDE) {
 				throw std::runtime_error("Yaw rate cannot be set in attitude mode.");
 			}
 		}
 
 		// set_altitude
-		if (sp_type == _PARTIAL && isfinite(z)) {
+		if (sp_type == _ALTITUDE) {
 			if (setpoint_type == VELOCITY || setpoint_type == ATTITUDE || setpoint_type == RATES) {
 				throw std::runtime_error("Altitude cannot be set in velocity, attitude or rates mode.");
 			}
@@ -751,17 +755,13 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				speed = default_speed;
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
-			if (yaw_rate != 0 && !std::isnan(yaw))
-				throw std::runtime_error("Yaw value should be NaN for setting yaw rate");
-		}
-
 		if (sp_type == NAVIGATE_GLOBAL) {
 			if (TIMEOUT(global_position, global_position_timeout))
 				throw std::runtime_error("No global position");
 		}
 
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == ATTITUDE) {
+		// if any value need to be transformed to reference frame
+		if (isfinite(x) || isfinite(y) || isfinite(z) || isfinite(vx) || isfinite(vy) || isfinite(vz) || isfinite(yaw)) {
 			// make sure transform from frame_id to reference frame available
 			if (!waitTransform(reference_frame, frame_id, stamp, transform_timeout))
 				throw std::runtime_error("Can't transform from " + frame_id + " to " + reference_frame);
@@ -783,7 +783,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		// Everything fine - switch setpoint type
-		if (sp_type != _PARTIAL) {
+		if (sp_type <= RATES) {
 			setpoint_type = sp_type;
 		}
 
@@ -813,14 +813,6 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 
 			nav_from_sp_flag = true;
 		}
-
-		// if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY) {
-		// 	if (std::isnan(yaw) && yaw_rate == 0) {
-		// 		// keep yaw unchanged
-		//		// TODO: this is incorrect, because we need yaw in desired frame
-		// 		yaw = tf2::getYaw(local_position.pose.orientation);
-		// 	}
-		// }
 
 		// handle position
 		if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL || setpoint_type == POSITION) {
@@ -880,7 +872,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		// handle yaw
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == ATTITUDE) {
+		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == ATTITUDE || sp_type == _YAW) {
 			if (isfinite(yaw)) {
 				setpoint_yaw_type = YAW;
 				QuaternionStamped desired;
@@ -897,8 +889,8 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 				// yaw towards
 				setpoint_yaw_type = TOWARDS;
 
-			} else if (yaw_frame_id.empty()) {
-				// yaw is nan and not set previously
+			} else if (yaw_frame_id.empty() || sp_type == _YAW) {
+				// yaw is nan and not set previously OR set_yaw(yaw=nan) was called
 				setpoint_yaw_type = YAW;
 				setpoint_yaw = tf2::getYaw(local_position.pose.orientation);
 				yaw_frame_id = local_position.header.frame_id;
@@ -916,11 +908,9 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		}
 
 		// handle yaw rate
-		if (sp_type == NAVIGATE || sp_type == NAVIGATE_GLOBAL || sp_type == POSITION || sp_type == VELOCITY || sp_type == RATES) { // TODO: simplify: isfinite(yaw_rate)
-			if (isnan(yaw) && isfinite(yaw_rate)) {
-				setpoint_yaw_type = YAW_RATE;
-				setpoint_rates.z = yaw_rate;
-			}
+		if (isfinite(yaw_rate)) {
+			setpoint_yaw_type = YAW_RATE;
+			setpoint_rates.z = yaw_rate;
 		}
 
 		// handle pitch rate
@@ -973,23 +963,31 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 }
 
 bool navigate(Navigate::Request& req, Navigate::Response& res) {
-	return serve(NAVIGATE, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(NAVIGATE, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, NAN, NAN, NAN, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool navigateGlobal(NavigateGlobal::Request& req, NavigateGlobal::Response& res) {
-	return serve(NAVIGATE_GLOBAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, req.lat, req.lon, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(NAVIGATE_GLOBAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, NAN, req.lat, req.lon, NAN, req.speed, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setAltitude(SetAltitude::Request& req, SetAltitude::Response& res) {
-	return serve(_PARTIAL, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
+	return serve(_ALTITUDE, NAN, NAN, req.z, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
+}
+
+bool setYaw(SetYaw::Request& req, SetYaw::Response& res) {
+	return serve(_YAW, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, false, res.success, res.message);
+}
+
+bool setYawRate(SetYawRate::Request& req, SetYawRate::Response& res) {
+	return serve(_YAW_RATE, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, "", false, res.success, res.message);
 }
 
 bool setPosition(SetPosition::Request& req, SetPosition::Response& res) {
-	return serve(POSITION, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(POSITION, req.x, req.y, req.z, NAN, NAN, NAN, NAN, NAN, req.yaw, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setVelocity(SetVelocity::Request& req, SetVelocity::Response& res) {
-	return serve(VELOCITY, NAN, NAN, NAN, req.vx, req.vy, req.vz, NAN, NAN, req.yaw, NAN, NAN, req.yaw_rate, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
+	return serve(VELOCITY, NAN, NAN, NAN, req.vx, req.vy, req.vz, NAN, NAN, req.yaw, NAN, NAN, NAN, NAN, NAN, NAN, NAN, req.frame_id, req.auto_arm, res.success, res.message);
 }
 
 bool setAttitude(SetAttitude::Request& req, SetAttitude::Response& res) {
@@ -1148,6 +1146,8 @@ int main(int argc, char **argv)
 	auto na_serv = nh.advertiseService("navigate", &navigate);
 	auto ng_serv = nh.advertiseService("navigate_global", &navigateGlobal);
 	auto sl_serv = nh.advertiseService("set_altitude", &setAltitude);
+	auto ya_serv = nh.advertiseService("set_yaw", &setYaw);
+	auto yr_serv = nh.advertiseService("set_yaw_rate", &setYawRate);
 	auto sp_serv = nh.advertiseService("set_position", &setPosition);
 	auto sv_serv = nh.advertiseService("set_velocity", &setVelocity);
 	auto sa_serv = nh.advertiseService("set_attitude", &setAttitude);
