@@ -707,24 +707,20 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 		ENSURE_NON_INF(x);
 		ENSURE_NON_INF(y);
 		ENSURE_NON_INF(z);
-		ENSURE_NON_INF(yaw_rate);
 		ENSURE_NON_INF(speed); // TODO: allow inf
+		ENSURE_NON_INF(vx);
+		ENSURE_NON_INF(vy);
+		ENSURE_NON_INF(vz);
+		ENSURE_NON_INF(roll);
+		ENSURE_NON_INF(pitch);
+		ENSURE_NON_INF(roll_rate);
+		ENSURE_NON_INF(pitch_rate);
+		ENSURE_NON_INF(yaw_rate);
+		ENSURE_NON_INF(thrust);
 
 		if (sp_type == NAVIGATE_GLOBAL) {
 			ENSURE_FINITE(lat);
 			ENSURE_FINITE(lon);
-		} else if (sp_type == VELOCITY) {
-			ENSURE_NON_INF(vx);
-			ENSURE_NON_INF(vy);
-			ENSURE_NON_INF(vz);
-		} else if (sp_type == ATTITUDE) {
-			ENSURE_NON_INF(roll);
-			ENSURE_NON_INF(pitch);
-			ENSURE_NON_INF(thrust);
-		} else if (sp_type == RATES) {
-			ENSURE_NON_INF(roll_rate);
-			ENSURE_NON_INF(pitch_rate);
-			ENSURE_NON_INF(thrust);
 		}
 
 		if (isfinite(x) != isfinite(y)) {
