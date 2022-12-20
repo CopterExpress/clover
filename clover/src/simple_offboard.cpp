@@ -1036,7 +1036,9 @@ bool land(std_srvs::Trigger::Request& req, std_srvs::Trigger::Response& res)
 			r.sleep();
 		}
 
-		// invalidate position setpoint
+		// stop setpoints and invalidate position setpoint
+		setpoint_timer.stop();
+		setpoint_type = NONE;
 		setpoint_position.header.frame_id = "";
 		setpoint_altitude.header.frame_id = "";
 		yaw_frame_id = "";
