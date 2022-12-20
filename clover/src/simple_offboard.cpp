@@ -183,7 +183,7 @@ void handleLocalPosition(const PoseStamped& pose)
 {
 	local_position = pose;
 	publishBodyFrame();
-	// TODO: terrain?, home?
+	// TODO: home?
 }
 
 // wait for transform without interrupting publishing setpoints
