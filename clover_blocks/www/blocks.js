@@ -15,6 +15,7 @@ const COLOR_GPIO = 200;
 const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
 var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"], ["map", "MAP"]];
+var frameIdsWithTerrain = frameIds.concat([["terrain", "TERRAIN"]]);
 
 function considerFrameId(e) {
 	if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
@@ -22,7 +23,7 @@ function considerFrameId(e) {
 	var frameId = this.getFieldValue('FRAME_ID');
 	// set appropriate coordinates labels
 	if (this.getInput('X')) { // block has x-y-z fields
-		if (frameId == 'BODY' || frameId == 'NAVIGATE_TARGET' || frameId == 'BASE_LINK') {
+		if (frameId == 'BODY' || frameId == 'NAVIGATE_TARGET' || frameId == 'BASE_LINK' || frameId == 'TERRAIN') {
 			this.getInput('X').fieldRow[0].setValue('forward');
 			this.getInput('Y').fieldRow[0].setValue('left');
 			this.getInput('Z').fieldRow[0].setValue('up');
@@ -73,7 +74,7 @@ function updateSetpointBlock(e) {
 
 Blockly.Blocks['navigate'] = {
 	init: function () {
-		let navFrameId = frameIds.slice();
+		let navFrameId = frameIdsWithTerrain.slice();
 		navFrameId.push(['global', 'GLOBAL_LOCAL'])
 		navFrameId.push(['global, WGS 84 alt.', 'GLOBAL'])
 		this.appendDummyInput()
@@ -213,7 +214,7 @@ Blockly.Blocks['get_position'] = {
 			.appendField("current")
 			.appendField(new Blockly.FieldDropdown([["x", "X"], ["y", "Y"], ["z", "Z"], ["vx", "VX"], ["vy", "VY"], ["vz", "VZ"]]), "FIELD")
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown(frameIdsWithTerrain), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")
@@ -509,7 +510,7 @@ Blockly.Blocks['distance'] = {
 			.appendField("z");
 		this.appendDummyInput()
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown([["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]]), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown([["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"], ["terrain", "TERRAIN"]]), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")
