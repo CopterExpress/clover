@@ -83,6 +83,9 @@ function generateROSDefinitions() {
 		if (rosDefinitions.navigateGlobal) {
 			code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
 		}
+		if (rosDefinitions.setYaw) {
+			code += `set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)\n`;
+		}
 		if (rosDefinitions.setVelocity) {
 			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
 		}
@@ -276,10 +279,11 @@ Blockly.Python.angle = function(block) {
 }
 
 Blockly.Python.set_yaw = function(block) {
+	rosDefinitions.setYaw = true;
 	simpleOffboard();
 	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
 	let frameId = buildFrameId(block);
-	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id=${frameId})\n`;
+	let code = `set_yaw(yaw=${yaw}, frame_id=${frameId})\n`;
 	if (block.getFieldValue('WAIT') == 'TRUE') {
 		rosDefinitions.waitYaw = true;
 		simpleOffboard();
