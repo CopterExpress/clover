@@ -5,7 +5,7 @@
 # - cuts out a central square from the camera image;
 # - publishes this cropped image to the topic `/cv/center`;
 # - computes the average color of it;
-# - prints its name to the console. 
+# - prints its name to the console.
 
 import rospy
 import cv2

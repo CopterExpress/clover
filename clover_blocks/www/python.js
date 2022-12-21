@@ -81,7 +81,7 @@ function generateROSDefinitions() {
 		code += `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)\n`;
 		code += `navigate = rospy.ServiceProxy('navigate', srv.Navigate)\n`;
 		if (rosDefinitions.navigateGlobal) {
-		code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
+			code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
 		}
 		if (rosDefinitions.setVelocity) {
 			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
