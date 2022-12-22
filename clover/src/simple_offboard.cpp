@@ -525,7 +525,7 @@ void publish(const ros::Time stamp)
 
 		// publish setpoint frame
 		if (!setpoint.child_frame_id.empty()) {
-			if (setpoint.header.stamp == position_msg.header.stamp) {
+			if (setpoint.header.stamp >= position_msg.header.stamp) {
 				return; // avoid TF_REPEATED_DATA warnings
 			}
 
