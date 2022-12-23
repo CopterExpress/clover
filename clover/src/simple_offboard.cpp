@@ -489,14 +489,13 @@ void publish(const ros::Time stamp)
 
 	// compute navigate setpoint
 	if (setpoint_type == NAVIGATE || setpoint_type == NAVIGATE_GLOBAL) {
-		position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_local); // copy yaw
-		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
-
 		if (setpoint_yaw_type == TOWARDS) {
-			double yaw_towards = atan2(position_msg.pose.position.y - nav_start.pose.position.y,
-			                           position_msg.pose.position.x - nav_start.pose.position.x);
-			position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_towards);
+			yaw_local = atan2(position_msg.pose.position.y - nav_start.pose.position.y,
+			                  position_msg.pose.position.x - nav_start.pose.position.x);
 		}
+
+		position_msg.pose.orientation = tf::createQuaternionMsgFromYaw(yaw_local);
+		getNavigateSetpoint(stamp, nav_speed, position_msg.pose.position);
 	}
 
 	if (setpoint_type == POSITION) {
