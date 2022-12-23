@@ -372,7 +372,7 @@ inline float getDistance(const Point& from, const Point& to)
 	return hypot(from.x - to.x, from.y - to.y, from.z - to.z);
 }
 
-void getNavigateSetpoint(const ros::Time& stamp, float speed, Point& nav_setpoint)
+void getNavigateSetpoint(const ros::Time& stamp, const float speed, Point& nav_setpoint)
 {
 	if (wait_armed) {
 		// don't start navigating if we're waiting arming
