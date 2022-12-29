@@ -419,8 +419,20 @@ PoseStamped globalToLocal(double lat, double lon)
 // publish navigate_target frame
 void publishTarget(ros::Time stamp, bool _static = false)
 {
-	bool single_frame = (setpoint_position.header.frame_id == setpoint_altitude.header.frame_id) &&
-		setpoint_altitude.header.frame_id == yaw_frame_id;
+	bool single_frame = (setpoint_position.header.frame_id == setpoint_altitude.header.frame_id);
+
+	// handle yaw for target frame
+	if (setpoint_yaw_type == YAW || setpoint_yaw_type == YAW_RATE) { // use last set yaw for yaw_rate
+		if (setpoint_altitude.header.frame_id == yaw_frame_id) {
+			target.transform.rotation = tf::createQuaternionMsgFromYaw(setpoint_yaw);
+		} else {
+			single_frame = false;
+			target.transform.rotation = tf::createQuaternionMsgFromYaw(yaw_local);
+		}
+	} else if (setpoint_yaw_type == TOWARDS) {
+		single_frame = false;
+		target.transform.rotation = tf::createQuaternionMsgFromYaw(yaw_local);
+	}
 
 	if (_static && single_frame) {
 		// publish at user's command, if all frames are the same
@@ -429,16 +441,13 @@ void publishTarget(ros::Time stamp, bool _static = false)
 		target.transform.translation.x = setpoint_position.point.x;
 		target.transform.translation.y = setpoint_position.point.y;
 		target.transform.translation.z = setpoint_position.point.z;
-		// TODO: handle yaw forward/yaw_rate
-		target.transform.rotation = tf::createQuaternionMsgFromYaw(setpoint_yaw);
+
 	} else if (!_static) {
 		// publish at each iteration, if frames are different
 		target.header = setpoint_pose_local.header;
 		target.transform.translation.x = setpoint_pose_local.pose.position.x;
 		target.transform.translation.y = setpoint_pose_local.pose.position.y;
 		target.transform.translation.z = setpoint_pose_local.pose.position.z;
-		// TODO: handle yaw forward/yaw_rate
-		target.transform.rotation = tf::createQuaternionMsgFromYaw(yaw_local);
 	}
 
 	static_transform_broadcaster->sendTransform(target);
