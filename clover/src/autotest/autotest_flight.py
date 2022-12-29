@@ -2,7 +2,7 @@
 
 import rospy
 import math
-from math import nan
+from math import nan, inf
 import signal
 import sys
 from clover import srv
@@ -92,8 +92,8 @@ set_yaw_rate(yaw_rate=-1)
 rospy.sleep(2 * math.pi)
 set_position(frame_id='body')
 
-input('Return to start point [enter]')
-navigate_wait(x=start.x, y=start.y, z=start.z, yaw=start.yaw, speed=1, frame_id='map')
+input('Return to start point heading forward [enter]')
+navigate_wait(x=start.x, y=start.y, z=start.z, yaw=inf, speed=1, frame_id='map')
 
 input('Land [enter]')
 land()
