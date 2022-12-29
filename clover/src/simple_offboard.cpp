@@ -892,7 +892,7 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			} else if (yaw_frame_id.empty() || sp_type == _YAW) {
 				// yaw is nan and not set previously OR set_yaw(yaw=nan) was called
 				setpoint_yaw_type = YAW;
-				setpoint_yaw = tf2::getYaw(local_position.pose.orientation);
+				setpoint_yaw = tf2::getYaw(local_position.pose.orientation); // set yaw to current yaw
 				yaw_frame_id = local_position.header.frame_id;
 			}
 		}
