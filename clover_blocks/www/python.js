@@ -276,10 +276,11 @@ Blockly.Python.angle = function(block) {
 }
 
 Blockly.Python.set_yaw = function(block) {
+	rosDefinitions.setYaw = true;
 	simpleOffboard();
 	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
 	let frameId = buildFrameId(block);
-	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id=${frameId})\n`;
+	let code = `set_yaw(yaw=${yaw}, frame_id=${frameId})\n`;
 	if (block.getFieldValue('WAIT') == 'TRUE') {
 		rosDefinitions.waitYaw = true;
 		simpleOffboard();
@@ -328,11 +329,11 @@ Blockly.Python.setpoint = function(block) {
 	} else if (type == 'ATTITUDE') {
 		rosDefinitions.setAttitude = true;
 		simpleOffboard();
-		return `set_attitude(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
+		return `set_attitude(roll=${roll}, pitch=${pitch}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
 	} else if (type == 'RATES') {
 		rosDefinitions.setRates = true;
 		simpleOffboard();
-		return `set_rates(pitch_rate=${pitch}, roll_rate=${roll}, yaw_rate=${yaw}, thrust=${thrust})\n`;
+		return `set_rates(roll_rate=${roll}, pitch_rate=${pitch}, yaw_rate=${yaw}, thrust=${thrust})\n`;
 	}
 }
 
