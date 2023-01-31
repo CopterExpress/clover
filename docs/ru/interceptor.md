@@ -40,7 +40,7 @@
 ### Текущее состояние проекта
 
 Проект был реализован с базовым функционалом как дипломная работа бакалавриата
-по специальности "Программная инженерия". [Исходный код для дрона](https://github.com/deadln/clover-interceptor), [исходный код нейросети](https://github.com/deadln/yolov5-clover-interceptor/tree/ros-integration), [дипломная работа](https://github.com/deadln/clover-interceptor/blob/master/090304_18И0180_Шмаков%20Г.И..pdf), [презентация защиты](https://github.com/deadln/clover-interceptor/blob/master/Диплом%20презентация%20финал.pdf).
+по специальности "Программная инженерия". [Исходный код для дрона](https://github.com/deadln/clover-interceptor), [исходный код нейросети](https://github.com/deadln/yolov5-clover-interceptor/tree/ros-integration), [дипломная работа](https://github.com/deadln/clover-interceptor/blob/master/docs/090304_18И0180_Шмаков%20Г.И..pdf), [презентация защиты](https://github.com/deadln/clover-interceptor/blob/master/docs/Диплом%20презентация%20финал.pdf).
 
 <img src="../assets/interceptor/copter.jpg" title="Дрон-перехватчик">
 
