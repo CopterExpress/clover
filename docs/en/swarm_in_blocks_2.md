@@ -7,9 +7,12 @@
 The list of team members:
 
 - José Carlos Andrade do Nascimento: [GitHub](https://github.com/joseCarlosAndrade), [LinkedIn](https://www.linkedin.com/in/jos%C3%A9-carlos-andrade-do-nascimento-71186421a)
-- Guilherme Soares Silvestre : [GitHub](https://github.com/guisoares9), [LinkedIn](https://www.linkedin.com/in/guilherme-soares-silvestre-76570118b/)
 - Felipe Tommaselli: [GitHub](https://github.com/Felipe-Tommaselli), [LinkedIn](https://www.linkedin.com/in/felipe-tommaselli-385a9b1a4/)
-- João Aires C. F. Marsicano: [GitHub](https://github.com/Playergeek181), [LinkedIn](https://www.linkedin.com/in/joao-aires-correa-fernandes-marciano-53b426195/)
+- Gabriel Ribeiro Rodrigues Dessotti: [GitHub](https://github.com/dessotti1), [LinkedIn](https://www.linkedin.com/in/gabriel-ribeiro-rodrigues-dessotti-8884a3216)
+- Nathan Fernandes Vilas Boas: [GitHub](https://github.com/uspnathan), [LinkedIn](https://www.linkedin.com/mwlite/in/nathan-fernandes-vilas-boas-047616262)
+- Agnes Bressan: [GitHub](https://github.com/AgnesBressan), [LinkedIn](https://www.linkedin.com/in/agnes-bressan-148615262/)
+- Matheus Martins: [GitHub](https://github.com/MatheusDrm), [LinkedIn](https://www.linkedin.com/in/matheus-martins-9aba09212/)
+- Lucas Sales Duarte: [GitHub](https://github.com/LucasDuarte026), [LinkedIn](https://www.linkedin.com/in/lucas-sales-duarte-a963071a1/)
 
 ## Project description
 
