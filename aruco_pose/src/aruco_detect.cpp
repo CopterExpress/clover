@@ -50,6 +50,7 @@
 #include <aruco_pose/DetectorConfig.h>
 #include <aruco_pose/SetMarkers.h>
 
+#include "draw.h"
 #include "utils.h"
 #include <memory>
 #include <functional>
@@ -264,8 +265,7 @@ private:
 			cv::aruco::drawDetectedMarkers(debug, corners, ids); // draw markers
 			if (estimate_poses_)
 				for (unsigned int i = 0; i < ids.size(); i++)
-					cv::aruco::drawAxis(debug, camera_matrix_, dist_coeffs_,
-					                    rvecs[i], tvecs[i], getMarkerLength(ids[i]));
+					_drawAxis(debug, camera_matrix_, dist_coeffs_, rvecs[i], tvecs[i], getMarkerLength(ids[i]));
 
 			cv_bridge::CvImage out_msg;
 			out_msg.header.frame_id = msg->header.frame_id;

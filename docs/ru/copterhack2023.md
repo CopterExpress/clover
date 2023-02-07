@@ -16,7 +16,7 @@ CopterHack 2023 — это международный конкурс по ра�
 ||🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
 ||🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix_chetak/docs/ru/djs_phoenix_chetak.md)||
 ||🇷🇺 FSOTM|[Дрон-перехватчик](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
-||🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/trash-collector.md)||
+||🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
 ||🇷🇺 Digital otters|[Digital otters](https://github.com/Mentalsupernova/clover_cool/blob/new-article.md/docs/ru/new-article.md)||
 ||🇷🇺 Light Flight|[Сопровождение БПЛА при посадке](https://github.com/SirSerow/clover_inertial_ns/blob/inertial-1/Description.md)||
 ||🇰🇬 LiveSavers|[LiveSavers](https://github.com/Sarvar00/clover/blob/livesavers/docs/ru/livesaver.md)||
