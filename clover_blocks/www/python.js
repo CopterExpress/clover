@@ -83,6 +83,9 @@ function generateROSDefinitions() {
 		if (rosDefinitions.navigateGlobal) {
 			code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
 		}
+		if (rosDefinitions.setYaw) {
+			code += `set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)\n`;
+		}
 		if (rosDefinitions.setVelocity) {
 			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
 		}
