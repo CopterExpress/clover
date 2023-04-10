@@ -7,6 +7,7 @@ from mavros_msgs.srv import SetMode
 from geometry_msgs.msg import PoseStamped
 from clover import srv
 from clover.msg import State
+from std_srvs.srv import Trigger
 from math import nan, inf
 import tf2_ros
 import tf2_geometry_msgs
@@ -39,6 +40,8 @@ def test_offboard(node, tf_buffer):
     set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
     set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
     get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
+    land = rospy.ServiceProxy('land', Trigger)
+
     res = navigate()
     assert res.success == False
     assert res.message.startswith('State timeout')
@@ -427,3 +430,8 @@ def test_offboard(node, tf_buffer):
     res = set_rates(roll_rate=inf)
     assert res.success == False
     assert res.message == 'roll_rate argument cannot be Inf'
+
+    # test land service
+    res = land()
+    assert res.success == True
+    assert state_msg.mode == 'AUTO.LAND' # check that the mode was set correctly
