@@ -800,7 +800,8 @@ bool serve(enum setpoint_type_t sp_type, float x, float y, float z, float vx, fl
 			nav_from_sp_flag = false;
 		}
 
-		if (auto_arm || setpoint_type == VELOCITY || setpoint_type == ATTITUDE || setpoint_type == RATES) {
+		bool to_auto_arm = auto_arm && (state.mode != "OFFBOARD" || !state.armed);
+		if (to_auto_arm || setpoint_type == VELOCITY || setpoint_type == ATTITUDE || setpoint_type == RATES) {
 			// invalidate position setpoint
 			setpoint_position.header.frame_id = "";
 			setpoint_altitude.header.frame_id = "";
