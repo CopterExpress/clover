@@ -3,6 +3,7 @@ import pytest
 from pytest import approx
 import threading
 import mavros_msgs.msg
+from mavros_msgs.srv import SetMode
 from geometry_msgs.msg import PoseStamped
 from clover import srv
 from clover.msg import State
@@ -45,6 +46,7 @@ def test_offboard(node, tf_buffer):
     telem = get_telemetry()
     assert telem.connected == False
 
+    # mocked state publisher
     state_pub = rospy.Publisher('/mavros/state', mavros_msgs.msg.State, latch=True, queue_size=1)
     state_msg = mavros_msgs.msg.State(mode='OFFBOARD', armed=True)
 
@@ -58,6 +60,13 @@ def test_offboard(node, tf_buffer):
     # start publishing state
     threading.Thread(target=publish_state, daemon=True).start()
     rospy.sleep(0.5)
+
+    # set_mode service mock
+    def set_mode(req):
+        state_msg.mode = req.custom_mode # set mocked mode to requested
+        return True,
+
+    rospy.Service('/mavros/set_mode', SetMode, set_mode)
 
     telem = get_telemetry()
     assert telem.connected == False
@@ -157,7 +166,23 @@ def test_offboard(node, tf_buffer):
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'test'
 
-    # auto_arm should invalidate the setpoint
+    # auto_arm should not invalidate the setpoint if not effective
+    res = navigate(x=nan, y=nan, z=1, frame_id='map', auto_arm=True)
+    assert res.success == True
+    state = get_state()
+    assert state.mode == State.MODE_NAVIGATE
+    assert state.yaw_mode == State.YAW_MODE_YAW
+    assert state.x == 1
+    assert state.y == 2
+    assert state.z == 1
+    assert state.yaw == 0
+    assert state.xy_frame_id == 'test'
+    assert state.z_frame_id == 'map'
+    assert state.yaw_frame_id == 'map'
+
+    # auto_arm should invalidate the setpoint if effective
+    state_msg.mode = 'STABILIZED' # pretend we are not in OFFBOARD mode
+    rospy.sleep(1)
     res = navigate(x=nan, y=nan, z=1, frame_id='map', auto_arm=True)
     assert res.success == True
     state = get_state()
@@ -170,6 +195,8 @@ def test_offboard(node, tf_buffer):
     assert state.xy_frame_id == 'map'
     assert state.z_frame_id == 'map'
     assert state.yaw_frame_id == 'map'
+    state_msg.mode = 'OFFBOARD'
+    rospy.sleep(1)
 
     # set_attitude should invalidate the setpoint
     res = set_attitude()

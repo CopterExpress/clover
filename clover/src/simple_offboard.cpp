@@ -30,6 +30,7 @@
 #include <geometry_msgs/QuaternionStamped.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <sensor_msgs/BatteryState.h>
+#include <sensor_msgs/Range.h>
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/PositionTarget.h>
@@ -86,6 +87,7 @@ float default_speed;
 bool auto_release;
 bool land_only_in_offboard, nav_from_sp, check_kill_switch;
 std::map<string, string> reference_frames;
+string terrain_frame_mode;
 
 // Publishers
 ros::Publisher attitude_pub, attitude_raw_pub, position_pub, position_raw_pub, rates_pub, thrust_pub, state_pub;
@@ -205,18 +207,27 @@ inline bool waitTransform(const string& target, const string& source,
 	return false;
 }
 
+void publishTerrain(const double distance, const ros::Time& stamp)
+{
+	if (!waitTransform(local_frame, body.child_frame_id, stamp, ros::Duration(0.1))) return;
+
+	auto t = tf_buffer.lookupTransform(local_frame, body.child_frame_id, stamp);
+	t.child_frame_id = terrain.child_frame_id;
+	t.transform.translation.z -= distance;
+	static_transform_broadcaster->sendTransform(t);
+}
+
 void handleAltitude(const Altitude& alt)
 {
-	// publish terrain frame
 	if (!std::isfinite(alt.bottom_clearance)) return;
-	// terrain.header.stamp = alt.header.stamp;
+	publishTerrain(alt.bottom_clearance, alt.header.stamp);
+}
 
-	if (!waitTransform(local_frame, body.child_frame_id, alt.header.stamp, ros::Duration(0.1))) return;
-
-	auto t = tf_buffer.lookupTransform(local_frame, body.child_frame_id, alt.header.stamp);
-	t.child_frame_id = terrain.child_frame_id;
-	t.transform.translation.z -= alt.bottom_clearance;
-	static_transform_broadcaster->sendTransform(t);
+void handleRange(const Range& range)
+{
+	if (!std::isfinite(range.range)) return;
+	// TODO: check it's facing down
+	publishTerrain(range.range, range.header.stamp);
 }
 
 #define TIMEOUT(msg, timeout) (msg.header.stamp.isZero() || (ros::Time::now() - msg.header.stamp > timeout))
@@ -1101,6 +1112,7 @@ int main(int argc, char **argv)
 	nh_priv.param("default_speed", default_speed, 0.5f);
 	nh_priv.param<string>("body_frame", body.child_frame_id, "body");
 	nh_priv.param<string>("terrain_frame", terrain.child_frame_id, "terrain");
+	nh_priv.param<string>("terrain_frame_mode", terrain_frame_mode, "altitude");
 	nh_priv.getParam("reference_frames", reference_frames);
 
 	// Default reference frames
@@ -1139,7 +1151,15 @@ int main(int argc, char **argv)
 	ros::Subscriber altitude_sub;
 	if (!body.child_frame_id.empty() && !terrain.child_frame_id.empty()) {
 		terrain.header.frame_id = local_frame;
-		altitude_sub = nh.subscribe(mavros + "/altitude", 1, &handleAltitude);
+		if (terrain_frame_mode == "altitude") {
+			altitude_sub = nh.subscribe(mavros + "/altitude", 1, &handleAltitude);
+		} else if (terrain_frame_mode == "range") {
+			string range_topic = nh_priv.param("range_topic", string("rangefinder/range"));
+			altitude_sub = nh.subscribe(range_topic, 1, &handleRange);
+		} else {
+			ROS_FATAL("Unknown terrain_frame_mode: %s, valid values: altitude, range", terrain_frame_mode.c_str());
+			ros::shutdown();
+		}
 	}
 
 	// Setpoint publishers
