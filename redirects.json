@@ -65,6 +65,7 @@
         { "from": "clover_vm/", "to": "en/simulation_vm.html" },
         { "from": "gpio/", "to": "en/gpio.html" },
         { "from": "blocks/", "to": "en/blocks.html" },
+        { "from": "red_circle/", "to": "en/camera.html" },
 
         { "from": "ru/microsd_images.html", "to": "image.html" },
         { "from": "en/microsd_images.html", "to": "image.html" },

@@ -15,6 +15,7 @@ const COLOR_GPIO = 200;
 const DOCS_URL = 'https://clover.coex.tech/en/blocks.html';
 
 var frameIds = [["body", "BODY"], ["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"], ["map", "MAP"]];
+var frameIdsWithTerrain = frameIds.concat([["terrain", "TERRAIN"]]);
 
 function considerFrameId(e) {
 	if (!(e instanceof Blockly.Events.Change || e instanceof Blockly.Events.Create)) return;
@@ -22,7 +23,7 @@ function considerFrameId(e) {
 	var frameId = this.getFieldValue('FRAME_ID');
 	// set appropriate coordinates labels
 	if (this.getInput('X')) { // block has x-y-z fields
-		if (frameId == 'BODY' || frameId == 'NAVIGATE_TARGET' || frameId == 'BASE_LINK') {
+		if (frameId == 'BODY' || frameId == 'NAVIGATE_TARGET' || frameId == 'BASE_LINK' || frameId == 'TERRAIN') {
 			this.getInput('X').fieldRow[0].setValue('forward');
 			this.getInput('Y').fieldRow[0].setValue('left');
 			this.getInput('Z').fieldRow[0].setValue('up');
@@ -59,8 +60,8 @@ function updateSetpointBlock(e) {
 	this.getInput('VY').setVisible(velocity);
 	this.getInput('VZ').setVisible(velocity);
 	this.getInput('YAW').setVisible(attitude);
-	this.getInput('PITCH').setVisible(attitude);
 	this.getInput('ROLL').setVisible(attitude);
+	this.getInput('PITCH').setVisible(attitude);
 	this.getInput('THRUST').setVisible(attitude);
 	this.getInput('RELATIVE_TO').setVisible(type != 'RATES');
 
@@ -73,7 +74,7 @@ function updateSetpointBlock(e) {
 
 Blockly.Blocks['navigate'] = {
 	init: function () {
-		let navFrameId = frameIds.slice();
+		let navFrameId = frameIdsWithTerrain.slice();
 		navFrameId.push(['global', 'GLOBAL_LOCAL'])
 		navFrameId.push(['global, WGS 84 alt.', 'GLOBAL'])
 		this.appendDummyInput()
@@ -163,13 +164,13 @@ Blockly.Blocks['setpoint'] = {
 		this.appendValueInput("VZ")
 			.setCheck("Number")
 			.appendField("vz");
-		this.appendValueInput("PITCH")
-			.setCheck("Number")
-			.appendField("pitch")
-			.setVisible(false);
 		this.appendValueInput("ROLL")
 			.setCheck("Number")
 			.appendField("roll")
+			.setVisible(false);
+		this.appendValueInput("PITCH")
+			.setCheck("Number")
+			.appendField("pitch")
 			.setVisible(false);
 		this.appendValueInput("YAW")
 			.setCheck("Number")
@@ -213,7 +214,7 @@ Blockly.Blocks['get_position'] = {
 			.appendField("current")
 			.appendField(new Blockly.FieldDropdown([["x", "X"], ["y", "Y"], ["z", "Z"], ["vx", "VX"], ["vy", "VY"], ["vz", "VZ"]]), "FIELD")
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown(frameIds), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown(frameIdsWithTerrain), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")
@@ -247,7 +248,7 @@ Blockly.Blocks['get_attitude'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("current")
-			.appendField(new Blockly.FieldDropdown([["pitch", "PITCH"], ["roll", "ROLL"], ["pitch rate", "PITCH_RATE"], ["roll rate", "ROLL_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
+			.appendField(new Blockly.FieldDropdown([["roll", "ROLL"], ["pitch", "PITCH"], ["roll rate", "ROLL_RATE"], ["pitch rate", "PITCH_RATE"], ["yaw rate", "YAW_RATE"]]), "FIELD");
 		this.setOutput(true, "Number");
 		this.setColour(COLOR_STATE);
 		this.setTooltip("Returns current orientation or angle rates in degree or degree per second (not radian).");
@@ -268,6 +269,19 @@ Blockly.Blocks['voltage'] = {
 	}
 };
 
+Blockly.Blocks['get_rc'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("RC channel")
+		this.appendValueInput("CHANNEL")
+			.setCheck("Number");
+		this.setInputsInline(true);
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_STATE);
+		this.setTooltip("Returns current RC channel value.");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+}
 
 Blockly.Blocks['armed'] = {
 	init: function () {
@@ -509,7 +523,7 @@ Blockly.Blocks['distance'] = {
 			.appendField("z");
 		this.appendDummyInput()
 			.appendField("relative to")
-			.appendField(new Blockly.FieldDropdown([["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"]]), "FRAME_ID");
+			.appendField(new Blockly.FieldDropdown([["markers map", "ARUCO_MAP"], ["marker", "ARUCO"], ["last navigate target", "NAVIGATE_TARGET"], ["terrain", "TERRAIN"]]), "FRAME_ID");
 		this.appendValueInput("ID")
 			.setCheck("Number")
 			.appendField("with ID")

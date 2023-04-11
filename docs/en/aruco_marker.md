@@ -72,12 +72,6 @@ Sample code to fly to a point 1 metre to the left and 2 metres above marker with
 navigate(frame_id='aruco_7', x=-1, y=0, z=2)
 ```
 
-Sample code to rotate counterclockwise while hovering 1.5 metres above marker id 10:
-
-```python
-navigate(frame_id='aruco_10', x=0, y=0, z=1.5, yaw_rate=0.5)
-```
-
 Note that if the required marker isn't detected for 0.5 seconds after the `navigate` command, the command will be ignored.
 
 These frames may also be used in other services that accept TF frames (like `get_telemetry`). The following code will get the drone's position relative to the marker with id 3:
