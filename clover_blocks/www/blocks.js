@@ -269,6 +269,19 @@ Blockly.Blocks['voltage'] = {
 	}
 };
 
+Blockly.Blocks['get_rc'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("RC channel")
+		this.appendValueInput("CHANNEL")
+			.setCheck("Number");
+		this.setInputsInline(true);
+		this.setOutput(true, "Number");
+		this.setColour(COLOR_STATE);
+		this.setTooltip("Returns current RC channel value.");
+		this.setHelpUrl(DOCS_URL + '#' + this.type);
+	}
+}
 
 Blockly.Blocks['armed'] = {
 	init: function () {

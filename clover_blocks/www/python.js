@@ -402,6 +402,12 @@ Blockly.Python.voltage = function(block) {
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 }
 
+Blockly.Python.get_rc = function(block) {
+	Blockly.Python.definitions_['import_rcin'] = 'from mavros_msgs.msg import RCIn';
+	var channel = Blockly.Python.valueToCode(block, 'CHANNEL', Blockly.Python.ORDER_NONE);
+	return [`rospy.wait_for_message('mavros/rc/in', RCIn).channels[${channel}]`, Blockly.Python.ORDER_FUNCTION_CALL]
+}
+
 function parseColor(color) {
 	return {
 		r: parseInt(color.substr(2, 2), 16),
