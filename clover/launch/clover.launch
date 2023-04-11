@@ -51,6 +51,7 @@
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clover" type="simple_offboard" output="screen" clear_params="true">
         <param name="reference_frames/main_camera_optical" value="map"/>
+        <param name="terrain_frame_mode" value="range"/>
     </node>
 
     <!-- main camera -->
