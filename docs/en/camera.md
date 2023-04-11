@@ -1,5 +1,7 @@
 # Working with the camera
 
+> **Note** The following applies to [image versions](image.md) **0.24** and up. Older documentation is still available for [for version **0.23**](https://github.com/CopterExpress/clover/blob/v0.23/docs/en/camera.md).
+
 Make sure the camera is enabled in the `~/catkin_ws/src/clover/clover/launch/clover.launch` file:
 
 ```xml
