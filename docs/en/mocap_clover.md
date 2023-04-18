@@ -2,6 +2,10 @@
 
 [CopterHack-2023](copterhack2023.md), team **Clover with Motion Capture System**.
 
+<p align="center">
+  <img src="../assets/mocap_clover/semi_logo.png"  width="70%" height="70%">
+</p>
+
 ## Team information
 
 The list of team members:
