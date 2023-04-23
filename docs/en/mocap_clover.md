@@ -26,27 +26,29 @@ In this article, we will provide an overview of motion capture systems for track
 
 The Clover with the Motion Capture System educational document is divided into three main sections outside of the Introduction and Conclusion. Each section and its purpose are listed:
 
-Hardware: The main goal in this section is to educate the reader on the MoCap system hardware and software. This can be further divided into several steps including camera placement, marker plcement, and system calibration. A summary of the process is provided:
+1. Hardware: The main goal in this section is to educate the reader on the MoCap system hardware and software. This can be further divided into several steps including camera placement, marker plcement, and system calibration. A summary of the process is provided:
 
-1. Camera Placement: Position the motion capture cameras in strategic locations around the area where the UAV will be flying. The number of cameras and their placement will depend on the size of the area and the desired capture volume. Typically, cameras are placed on tripods or mounted on walls or ceilings at specific heights and angles to capture the UAV's movements from different perspectives.
-2. Marker Placement: Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. The markers are typically attached to the UAV's body, wings, and other relevant parts in a way that ensures they are clearly visible to the motion capture cameras from multiple angles. AN example placement on the Clover is shown in the educational document.
-3. System Calibration: Perform system calibration to establish the spatial relationship between the cameras and the markers. This involves capturing a calibration sequence, during which a known pattern or object is moved in the capture volume. The system uses this data to calculate the precise positions and orientations of the cameras and markers in 3D space, which is crucial for accurate motion capture.
-4. Testing and Validation: After setting up the cameras and markers, perform test flights with the UAV to validate the accuracy of the motion capture system. Analyze the captured data to ensure that the UAV's movements are accurately captured and that the system is functioning correctly.
-5. Fine-tuning: Fine-tune the motion capture system as needed based on the test results. This may involve adjusting camera angles, marker placements, or calibration settings to improve the accuracy and reliability of the system.
-6. Data Collection: Once the motion capture system is properly set up and calibrated, you can start collecting data for your UAV research. The system will continuously track the positions and movements of the markers on the UAV in real-time, providing precise data that can be used for various analyses and experiments.
-7. Data Analysis: Analyze the captured data using appropriate software to extract relevant information for your UAV research. This may involve tracking the UAV's position, velocity, acceleration, orientation, and other parameters, and analyzing how they change over time or in response to different conditions or inputs.
+    - Camera Placement: Position the motion capture cameras in strategic locations around the area where the UAV will be flying. The number of cameras and their placement will depend on the size of the area and the desired capture volume. Typically, cameras are placed on tripods or mounted on walls or ceilings at specific heights and angles to capture the UAV's movements from different perspectives. A simple 4-camera setup example is provided in the educational document.
+    - Marker Placement: Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. The markers are typically attached to the UAV's body, wings, and other relevant parts in a way that ensures they are clearly visible to the motion capture cameras from multiple angles. An example placement on the Clover is shown in the educational document.
+    - System Calibration: Perform system calibration to establish the spatial relationship between the cameras and the markers. This involves capturing a calibration sequence, during which a known pattern or object is moved in the capture volume. The system uses this data to calculate the precise positions and orientations of the cameras and markers in 3D space, which is crucial for accurate motion capture.
+    - Testing and Validation: After setting up the cameras and markers, perform test flights with the UAV to validate the accuracy of the MoCap system. Analyze the captured data to ensure that the UAV's movements are accurately captured and that the system is functioning correctly.
+    - Fine-tuning: Fine-tune the motion capture system as needed based on the test results. This may involve adjusting camera angles, marker placements, or calibration settings to improve the accuracy and reliability of the system.
+    - Data Collection: Once the motion capture system is properly set up and calibrated, you can start collecting data for your UAV research. The system will continuously track the positions and movements of the markers on the UAV in real-time, providing precise data that can be used for various analyses and experiments.
+    - Data Analysis: Analyze the captured data using appropriate software to extract relevant information for your UAV research. This may involve tracking the UAV's position, velocity, acceleration, orientation, and other parameters, and analyzing how they change over time or in response to different conditions or inputs.
 
 Overall, setting up a motion capture system for UAV research requires careful planning, precise marker placement, accurate system calibration, and thorough validation to ensure accurate and reliable data collection for your research purposes.
 
-Data Transfer: With the data aquired from the MoCap system, the main goal in this section is to transfer it to the raspberry Pi onboard the Clover and then remap it to the flight controller/PX4 for control. A summary of the steps are listed:
+2. Data Transfer: With the data aquired from the MoCap system, the main goal in this section is to transfer it to the raspberry Pi onboard the Clover and remap it to the flight controller/PX4 for control. A summary of the steps are listed:
 
-1. Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time.
+    - Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time. and can be viewd through the motive software.
 
-2. Data Transmission: The pose data is transmitted from the motion capture system to a Raspberry Pi, which acts as an intermediary for processing and relaying the data to the flight controller onboard the UAV. This can be done using wireless communication protocols such as Wi-Fi, Bluetooth, or other suitable methods.
+    - Data Transmission: The pose data is transmitted from the motion capture system to a Raspberry Pi using VRPN and a ROS network. While this works, I have implemented a strictly UDP data transmission method where highlighting the setup process and ease of use will be a future development, both configurations can be seen in the elow figures. The Raspberry Pi acts as an intermediary for processing and relaying the data to the flight controller onboard the UAV using MAVROS. The connection can be established using USB or UART, I chose UART in my setups.
+    
+    images
 
-3. Data Processing: The Raspberry Pi receives the pose data from the motion capture system and processes it to extract the relevant information, such as position and orientation. This may involve parsing the data, converting it into a suitable format, and performing any necessary computations or filtering to obtain accurate pose information.
+    - Data Processing: The Raspberry Pi receives the pose data from the motion capture system and processes it to extract the relevant information, such as position and orientation. This may involve parsing the data, converting it into a suitable format, and performing any necessary computations or filtering to obtain accurate pose information.
 
-4. Data Remapping: Once the pose data is processed, the Raspberry Pi maps it to the appropriate format required by the flight controller onboard the UAV. This may involve converting the pose data into the proper coordinate system or units used by the flight controller, and ensuring that the data is in a compatible format for further processing.
+    - Data Remapping: Once the pose data is processed, the Raspberry Pi maps it to the appropriate format required by the flight controller onboard the UAV. This may involve converting the pose data into the proper coordinate system or units used by the flight controller, and ensuring that the data is in a compatible format for further processing.
 
 5. Data Transmission to Flight Controller: The remapped pose data is then transmitted from the Raspberry Pi to the flight controller onboard the UAV. This can be achieved through a wired or wireless connection, depending on the specific hardware and communication options available on the UAV.
 
@@ -90,6 +92,7 @@ In summary, low-level controller tuning is crucial for UAV applications as it di
 
 ## Conclusion
 
+Over the course of this project I was able to extend my knowledge with robotic application side with many ups and downs along the way. This greatly helped me with my research when testing development become important. The motivation behind this documentation improve this experience for other researchers, robotic developers or hobbyiests that 
 
 
 
