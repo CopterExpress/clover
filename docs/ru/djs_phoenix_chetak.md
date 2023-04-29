@@ -19,30 +19,29 @@ The list of team members:
 * Khushi Sanghvi, @Cryptoknigghtt, Programmer
 * Harshil Shah, @divine_fossil, Programmer
 * Omkar Parab, @Omkar_parab21, Programmer
-* Isha Shah, @isha_s_shah, Programmer
 * Madhura Korgaonkar, @Madhura221, Programmer
 * Shruti Shah, @Shrutishah22, Programmer
 * Aditi Dubey, @aditi_0503, Marketing
 * Krisha Lakhani, @krishalakhani, Marketing 
-* Vividha Jagtap, @vividha_jagtap, Marketing
-## Project Description
-Since they became more robust in recent years, autonomous drones have been used for a wider range of functions in a variety of commercial enterprises. They are still far from completely utilising their physical potential, though. In fact, to fully assess their environment and have enough time to avoid obstacles, the majority of autonomous drones only fly at low speeds close to hover conditions. Autonomous drone's flight range might be extended by faster and more agile flying, which would also let them avoid dynamic impediments more quickly and navigate more easily in small places. Drones can go across complicated areas like racetracks at amazing speeds, as demonstrated by human pilots. However, in terms of speed, adaptability, and robustness, autonomous drone performance is still far below that of humans, necessitating a significant amount of study and innovation to close this gap.
-### Project Idea
-Our idea is to build an autonomous racing drone so, our system is composed of five functional groups: Sensor interface, perception, state estimation, planning and control, and drone interface . In the following, a brief introduction to the functionality of our proposed perception, state estimation, and planning and control system is given.
-* Perception
-Of the two stereo camera pairs available on the drone, only the two central forward-facing cameras are used for gate detection  and, in combination with IMU measurements, to run VIO. The advantage is that the amount of image data to be processed is reduced while maintaining a very large field of view.
-* State Estimation 
-In order to compensate for a drifting VIO estimate, the output of the gate detection and VIO are fused together with the measurements from the downward-facing laser rangefinder (LRF) using an Extended Kalman Filter (EKF) Algorithm . The EKF estimates a global map of the gates and, since the gates are stationary, uses the gate detections to align the VIO estimate with the global gate map, ie, compensates for the VIO drift.
-* Planning and control
-The global gate map and the latency-compensated state estimate of the vehicle are used to plan a near time-optimal path through the next N gates starting from the vehicles current state.The path is re-planned every time<br/>
-(i) the vehicle passes through a gate<br/>
-(ii) the estimate of the gate map<br/>
-(iii) the VIO drift are updated significantly, i.e. large changes in the gate positions or VIO drift.
 
-### The Potential Outcomes
-Using the Clover Platform, we'll build an autonomous drone which will be utilised for racing. The objective of our challenge is to create a completely autonomous drone that can outperform the best human pilot at navigating a race course using machine vision. Autonomous racing drones present fundamental challenges in real-time state estimation, perception, planning, and control due to the high speeds at which drones must fly to outperform the best human pilots, the difficult visual environments (such as low light, motion blur), and the limited computational power of drones.
-### The Clover Platform
-The Clover platform will be applied in numerous contexts. OpenCV and ROS for the drone are simulated and implemented using the COEX Clover platform. It aids in the integration of our Raspberry Pi and ROS.
+## Project Description
+This year, our team DJS Phoenix, presents to you a fully Autonomous Racing Drone. The drone scans for ArUco tags on the gates and passes through them.
+
+### Project Idea
+This project proposes to develop an autonomous racing drone that can navigate through complex courses at high speeds while avoiding obstacles and detecting changes in the environment.In racing competitions, autonomous drones can compete in high-speed, precision races that challenge their agility, speed, and accuracy. These competitions could be held in indoor arenas or outdoor tracks, and they could attract enthusiasts and spectators from all over the world. With their advanced capabilities, autonomous racing drones could usher in a new era of racing events that are more exciting and challenging than ever before.From racing competitions to search and rescue operations, the autonomous racing drone can be used in a wide range of applications that benefit individuals, businesses, and society as a whole.
+
+## Potential OutCome
+
+### Problem
+In many industries and applications, there is a need for fast, efficient, and safe movement of goods and information.Drones have become an increasingly popular tool for a wide range of applications, from aerial photography to surveying and monitoring. However, operating a drone requires a certain level of skill and experience, which can be a barrier for individuals or businesses who want to take advantage of this technology. Additionally, traditional drones can be expensive and time-consuming to operate, limiting their accessibility and effectiveness. Therefore, there is a need for a more user-friendly and affordable solution that can expand the use of drones to new audiences and applications.
+
+### Solution
+The solution to the above problem statement is an autonomous racing drone. An autonomous racing drone is equipped with a camera that scans the ArUco tags for gate detection which is supported by software used in autonomous flights that enable it to navigate through a predetermined course while avoiding obstacles and achieving high speeds. Unlike traditional drones, an autonomous racing drone does not require manual control, making it an ideal solution for those who do not have the skills or experience to operate a drone.Its autonomous capabilities make it a more accessible and user-friendly solution than traditional drones, enabling individuals or businesses to take advantage of this technology without requiring extensive training or expertise.
+
+![image](https://user-images.githubusercontent.com/93365067/235303281-f63e379d-c156-45ad-b554-2c84bd82781d.png)
+
+
 ### Additional Information
 In 2017, a student committee for DJS Phoenix was formed. In India, our team has participated in a number of contests, including IDRL (fourth overall), IIT BOMBAY TECHFEST (sixth rank), and TECHNOXIAN (second place out of 50 national teams).In COPTERHACK-2021, our team participated, and we placed eighth internationally. We are back with improved concepts after learning from the previous season.
     
+For morInfo checkout gitbook
