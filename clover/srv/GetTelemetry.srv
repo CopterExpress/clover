@@ -13,11 +13,11 @@ float32 alt
 float32 vx
 float32 vy
 float32 vz
-float32 pitch
 float32 roll
+float32 pitch
 float32 yaw
-float32 pitch_rate
 float32 roll_rate
+float32 pitch_rate
 float32 yaw_rate
 float32 voltage
 float32 cell_voltage

@@ -1,4 +1,4 @@
-flask==1.1.1
-geopy==1.11.0
-smbus2==0.3.0
-VL53L1X==0.0.5
+flask
+geopy
+smbus2
+VL53L1X

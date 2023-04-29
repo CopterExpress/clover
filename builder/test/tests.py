@@ -36,6 +36,8 @@ from pymavlink import mavutil
 # from espeak import espeak
 from pyzbar import pyzbar
 import docopt
+import geopy
+import flask
 
 print(cv2.getBuildInformation())
 

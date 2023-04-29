@@ -49,7 +49,7 @@ echo_stamp() {
 my_travis_retry() {
   local result=0
   local count=1
-  local max_count=50
+  local max_count=5
   while [ $count -le $max_count ]; do
     [ $result -ne 0 ] && {
       echo -e "\nThe command \"$@\" failed. Retrying, $count of $max_count.\n" >&2

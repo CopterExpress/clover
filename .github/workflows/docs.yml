@@ -81,5 +81,8 @@ jobs:
     needs: docs
     steps:
       - name: Deploy to GitHub Pages
+        env:
+          FREEZE_DOCS: ${{ secrets.FREEZE_DOCS }}
+        if: ${{ !env.FREEZE_DOCS }}
         id: deployment
         uses: actions/deploy-pages@v1

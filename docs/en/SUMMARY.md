@@ -36,7 +36,7 @@
   * [Optical Flow](optical_flow.md)
   * [Autonomous flight (OFFBOARD)](simple_offboard.md)
   * [Coordinate systems (frames)](frames.md)
-  * [Code snippets](snippets.md)
+  * [Code examples](snippets.md)
   * [Interfacing with a laser rangefinder](laser.md)
   * [LED strip](leds.md)
   * [Working with GPIO](gpio.md)

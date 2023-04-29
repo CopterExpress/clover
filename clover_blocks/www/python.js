@@ -81,7 +81,10 @@ function generateROSDefinitions() {
 		code += `get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)\n`;
 		code += `navigate = rospy.ServiceProxy('navigate', srv.Navigate)\n`;
 		if (rosDefinitions.navigateGlobal) {
-		code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
+			code += `navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)\n`;
+		}
+		if (rosDefinitions.setYaw) {
+			code += `set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)\n`;
 		}
 		if (rosDefinitions.setVelocity) {
 			code += `set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)\n`;
@@ -276,10 +279,11 @@ Blockly.Python.angle = function(block) {
 }
 
 Blockly.Python.set_yaw = function(block) {
+	rosDefinitions.setYaw = true;
 	simpleOffboard();
 	let yaw = Blockly.Python.valueToCode(block, 'YAW', Blockly.Python.ORDER_NONE);
 	let frameId = buildFrameId(block);
-	let code = `navigate(x=float('nan'), y=float('nan'), z=float('nan'), yaw=${yaw}, frame_id=${frameId})\n`;
+	let code = `set_yaw(yaw=${yaw}, frame_id=${frameId})\n`;
 	if (block.getFieldValue('WAIT') == 'TRUE') {
 		rosDefinitions.waitYaw = true;
 		simpleOffboard();
@@ -328,11 +332,11 @@ Blockly.Python.setpoint = function(block) {
 	} else if (type == 'ATTITUDE') {
 		rosDefinitions.setAttitude = true;
 		simpleOffboard();
-		return `set_attitude(pitch=${pitch}, roll=${roll}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
+		return `set_attitude(roll=${roll}, pitch=${pitch}, yaw=${yaw}, thrust=${thrust}, frame_id=${frameId})\n`;
 	} else if (type == 'RATES') {
 		rosDefinitions.setRates = true;
 		simpleOffboard();
-		return `set_rates(pitch_rate=${pitch}, roll_rate=${roll}, yaw_rate=${yaw}, thrust=${thrust})\n`;
+		return `set_rates(roll_rate=${roll}, pitch_rate=${pitch}, yaw_rate=${yaw}, thrust=${thrust})\n`;
 	}
 }
 
@@ -396,6 +400,12 @@ Blockly.Python.voltage = function(block) {
 	simpleOffboard();
 	var code = `get_telemetry().${block.getFieldValue('TYPE').toLowerCase()}`;
 	return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+}
+
+Blockly.Python.get_rc = function(block) {
+	Blockly.Python.definitions_['import_rcin'] = 'from mavros_msgs.msg import RCIn';
+	var channel = Blockly.Python.valueToCode(block, 'CHANNEL', Blockly.Python.ORDER_NONE);
+	return [`rospy.wait_for_message('mavros/rc/in', RCIn).channels[${channel}]`, Blockly.Python.ORDER_FUNCTION_CALL]
 }
 
 function parseColor(color) {

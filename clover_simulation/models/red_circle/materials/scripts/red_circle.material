@@ -1,0 +1,16 @@
+material red_circle
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			texture_unit
+			{
+				texture red_circle.png
+				filtering none
+				scale 1.0 1.0
+			}
+		}
+	}
+}

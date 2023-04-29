@@ -80,11 +80,10 @@ catkin_python_setup()
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  State.msg
+)
 
 ## Generate services in the 'srv' folder
 add_service_files(
@@ -92,6 +91,9 @@ add_service_files(
   GetTelemetry.srv
   Navigate.srv
   NavigateGlobal.srv
+  SetAltitude.srv
+  SetYaw.srv
+  SetYawRate.srv
   SetPosition.srv
   SetVelocity.srv
   SetAttitude.srv
@@ -306,4 +308,5 @@ endif()
 if (CATKIN_ENABLE_TESTING)
   find_package(rostest REQUIRED)
   add_rostest(test/basic.test)
+  add_rostest(test/offboard.test)
 endif()

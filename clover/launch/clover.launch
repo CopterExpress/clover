@@ -45,12 +45,13 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
         <param name="roi_rad" value="0.8"/>
-        <param name="disable_on_vpe" value="false"/>
+        <param name="disable_on_vpe" value="true"/>
     </node>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clover" type="simple_offboard" output="screen" clear_params="true">
         <param name="reference_frames/main_camera_optical" value="map"/>
+        <param name="terrain_frame_mode" value="range"/>
     </node>
 
     <!-- main camera -->

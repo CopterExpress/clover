@@ -2,7 +2,7 @@
 
 import rospy
 import math
-from math import nan
+from math import nan, inf
 import signal
 import sys
 from clover import srv
@@ -15,6 +15,8 @@ rospy.init_node('autotest_flight', disable_signals=True) # disable signals to al
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = handle_response(rospy.ServiceProxy('navigate', srv.Navigate))
 navigate_global = handle_response(rospy.ServiceProxy('navigate_global', srv.NavigateGlobal))
+set_yaw = handle_response(rospy.ServiceProxy('set_yaw', srv.SetYaw))
+set_yaw_rate = handle_response(rospy.ServiceProxy('set_yaw_rate', srv.SetYawRate))
 set_position = handle_response(rospy.ServiceProxy('set_position', srv.SetPosition))
 set_velocity = handle_response(rospy.ServiceProxy('set_velocity', srv.SetVelocity))
 set_attitude = handle_response(rospy.ServiceProxy('set_attitude', srv.SetAttitude))
@@ -28,11 +30,8 @@ def interrupt(sig, frame):
 
 signal.signal(signal.SIGINT, interrupt)
 
-def navigate_wait(x=0, y=0, z=0, yaw=nan, yaw_rate=0, speed=0.5, \
-        frame_id='body', tolerance=0.2, auto_arm=False):
-
-    res = navigate(x=x, y=y, z=z, yaw=yaw, yaw_rate=yaw_rate, speed=speed, \
-        frame_id=frame_id, auto_arm=auto_arm)
+def navigate_wait(x=0, y=0, z=0, yaw=nan, speed=0.5, frame_id='body', tolerance=0.2, auto_arm=False):
+    res = navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
         return res
@@ -69,17 +68,17 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 rospy.sleep(2)
 set_position(frame_id='body')
 
-input('Rotate right 90° [enter] ')
-navigate(yaw=-math.pi / 2, frame_id='navigate_target')
+input('Rotate right 90° using set_yaw [enter] ')
+set_yaw(yaw=-math.pi / 2, frame_id='navigate_target')
 rospy.sleep(3)
 
 input('Use set_attitude to fly backwards [enter]')
-set_attitude(pitch=-0.3, roll=0, yaw=0, thrust=0.5, frame_id='body')
+set_attitude(roll=0, pitch=-0.3, yaw=0, thrust=0.5, frame_id='body')
 rospy.sleep(0.3)
 set_position(frame_id='body')
 
 input('Use set_attitude to fly right [enter]')
-set_attitude(pitch=0, roll=0.3, yaw=0, thrust=0.5, frame_id='body')
+set_attitude(roll=0.3, pitch=0, yaw=0, thrust=0.5, frame_id='body')
 rospy.sleep(0.5)
 set_position(frame_id='body')
 
@@ -88,13 +87,13 @@ set_rates(roll_rate=1.2, thrust=0.5)
 rospy.sleep(0.4)
 set_position(frame_id='body')
 
-input('Rotate 360° to the right using yaw_rate [enter]')
-set_position(x=nan, y=nan, z=nan, frame_id='body', yaw=nan, yaw_rate=-1)
+input('Rotate 360° to the right using set_yaw_rate [enter]')
+set_yaw_rate(yaw_rate=-1)
 rospy.sleep(2 * math.pi)
 set_position(frame_id='body')
 
-input('Return to start point [enter]')
-navigate_wait(x=start.x, y=start.y, z=start.z, yaw=start.yaw, speed=1, frame_id='map')
+input('Return to start point heading forward [enter]')
+navigate_wait(x=start.x, y=start.y, z=start.z, yaw=inf, speed=1, frame_id='map')
 
 input('Land [enter]')
 land()
