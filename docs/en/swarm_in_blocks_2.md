@@ -79,7 +79,9 @@ As already mentioned, of the various problems that can increase the complexity o
 
 And many other solutions are also featured on our platform, for more information please check the solutions described clearly and in detail throughout our **Gitbook**. We recommend reading in order to understand the fundamental precepts of our platform. 
 
-> 📖 **Acess our [Gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/background-theory/system)!**
+> 📖 **Access our [Gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/background-theory/system)!**
+
+> 💻 **Access our [Github](https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks.git)!**
 
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
 
@@ -231,7 +233,7 @@ Atena Team 2023 (Swarm in Blocks 2.0):
 - Nathan Fernandes Vilas Boas : [Github](https://github.com/uspnathan), [LinkedIn](https://www.linkedin.com/mwlite/in/nathan-fernandes-vilas-boas-047616262)
 
 <p align="center">
-    <img width="500" src="assets/atena_team.JPG"/>
+    <img width="500" src="../assets/atena_team.JPG"/>
 </p>
 
 
