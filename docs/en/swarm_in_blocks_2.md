@@ -1,8 +1,13 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
-<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="assets/header/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
-  <br /><br /><strong>Swarm in Blocks</strong>
-</h1>
 
+<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks">
+<img align="center" src="assets/header/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
+
+<br /><br />
+
+<strong>Swarm in Blocks</strong>
+
+</h1>
 
 <!-- markdownlint-disable -->
 ## Project Status[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#project-status)
@@ -231,6 +236,10 @@ Atena Team 2023 (Swarm in Blocks 2.0):
 - Matheus Della Rocca Martins : [Github](https://github.com/MatheusDrm), [LinkedIn](https://www.linkedin.com/in/matheus-martins-9aba09212/)
 - Nathan Fernandes Vilas Boas : [Github](https://github.com/uspnathan), [LinkedIn](https://www.linkedin.com/mwlite/in/nathan-fernandes-vilas-boas-047616262)
 
+<p align="center">
+    <img width="500" src="assets/atena_team.JPG"/>
+</p>
+
 
 In honor of Atena Team 2022:
 
@@ -241,9 +250,6 @@ In honor of Atena Team 2022:
 - José Carlos Andrade do Nascimento: [Github](https://github.com/joseCarlosAndrade), [LinkedIn](https://www.linkedin.com/in/jos%C3%A9-carlos-andrade-do-nascimento-71186421a)
 - Rafael Saud C. Ferro: [Github](https://github.com/Rafael-Saud), [LinkedIn](https://www.linkedin.com/in/rafael-saud/)
 
-<p align="center">
-    <img width="700" src="assets/atena_team.png"/>
-</p>
 
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
 
