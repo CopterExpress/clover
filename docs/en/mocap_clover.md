@@ -7,11 +7,16 @@
   <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="../assets/mocap_clover/semi_logo.png" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
 </div>
 
+## Team information
+
+The list of team members:
+
+* Sean Smith, @ssmith_81, roboticist and developer: [Github](https://github.com/ssmith-81), [Linkedin](https://www.linkedin.com/in/sean-smith-61920915a/).
 
 ## Educational Document
-My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:
+**My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
 
-This page gives a broad overview on the motivation and purpose behind this project, if the user is interested in the technical details and implementation then refer to the educational Gitbook document.
+This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
 ## Introduction
 Aerial robotics has become a common focus in research and industy over the past few decades. Many technical developments in research require a controlled test environment to isolate certain chanarteristics of the system for analysis. This typically takes place indoors to eliminate unwanted disturbances allowing results to be more predictable. Removing localization and pose feedback concerns can be accomplished with motion capture (MoCap) systems that track unmanned aerial vehicles (UAVs) pose with high precision as stated:
@@ -107,16 +112,14 @@ In summary, low-level controller tuning is crucial for UAV applications as it di
 
 ## Conclusion
 
-Over the course of this project I was able to extend my knowledge with robotic application side with many ups and downs along the way. This greatly helped me with my research when testing development become important. The motivation behind this documentation improve this experience for other researchers, robotic developers or hobbyiests that 
+Over the course of this project I was able to extend my knowledge in robotic applications while enduring many ups and downs along the way. This greatly helped me with my research when testing controller development was required. The motivation behind this documentation is to improve this experience for other researchers, robotic developers, or hobbyiests that have a desire to learn fundamental robotic application which is beginning to shape the world we know today. These details can be explored in a gibook (link) for those who are interested.
+
+I provided as many details as possible on the interworking components required to achieve an indoor autonomous flight setup with the COEX CLover platform. With an extensive bakground in UAV control, I tried to provide a basic understanding of this for the readers benefit. There are many more sections I would like to include along with improving upon the existing ones. A few examples include firmware testing with hardware in the loop simulations, advanced trajectory generation, and an extensive list of flight examples for the Gazebo simulator with application to hardware.
+
+Lastly, I would like to thank the entire COEX team that made this project possible by providing a wonderful platform with support. I would like to give a special thanks to [Oleg Kalachev](https://github.com/okalachev) for helping me debug and succeed through applied learning. With that being said, I hope you all enjoy the resourceful content provided, and I plan on releasing more detailed documents on other interesting topics as I progress through my research and development.
 
 
-
-## Team information
-
-The list of team members:
-
-* Sean Smith, @ssmith_81, engineer and developer: [Github](https://github.com/ssmith-81), [Linkedin](www.linkedin.com/in/sean-smith-uav).
-
+<!--
 ## Project description
 
 This project is an educational reference and detailed tutorial on how to setup the OptiTrack Motion Capture (MoCap) system with the COEX Clover platform. 
@@ -149,4 +152,4 @@ implementing external sensor feedback although it is specific for Clover owners.
 ### Additional information at the request of participants
 I am a masters student looking to implement this project in my research.
 
-
+-->
