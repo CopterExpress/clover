@@ -1,13 +1,13 @@
-# Project name
+# Project Video
 
-[CopterHack-2023](copterhack2023.md), team **Clover with Motion Capture System**.
+[CopterHack-2023](copterhack2023.md), team **Clover with Motion Capture System**. Click logo for project video.
 
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="../assets/mocap_clover/semi_logo.png" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
 </div>
 
-## Team information
+## Team Information
 
 The list of team members:
 
@@ -15,6 +15,7 @@ The list of team members:
 
 ## Educational Document
 **My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
+https://0406hockey.gitbook.io/mocap-clover/
 
 This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
@@ -112,7 +113,7 @@ In summary, low-level controller tuning is crucial for UAV applications as it di
 
 ## Conclusion
 
-Over the course of this project I was able to extend my knowledge in robotic applications while enduring many ups and downs along the way. This greatly helped me with my research when testing controller development was required. The motivation behind this documentation is to improve this experience for other researchers, robotic developers, or hobbyiests that have a desire to learn fundamental robotic application which is beginning to shape the world we know today. These details can be explored in a gibook (link) for those who are interested.
+Over the course of this project I was able to extend my knowledge in robotic applications while enduring many ups and downs along the way. This greatly helped me with my research when testing controller development was required. The motivation behind this documentation is to improve this experience for other researchers, robotic developers, or hobbyiests that have a desire to learn fundamental robotic application which is beginning to shape the world we know today. These details can be explored in a [gibook](https://0406hockey.gitbook.io/mocap-clover/) for those who are interested.
 
 I provided as many details as possible on the interworking components required to achieve an indoor autonomous flight setup with the COEX CLover platform. With an extensive bakground in UAV control, I tried to provide a basic understanding of this for the readers benefit. There are many more sections I would like to include along with improving upon the existing ones. A few examples include firmware testing with hardware in the loop simulations, advanced trajectory generation, and an extensive list of flight examples for the Gazebo simulator with application to hardware.
 
