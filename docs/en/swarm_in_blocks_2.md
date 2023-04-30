@@ -1,5 +1,5 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
-<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="assets/header/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
+<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/header/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
   <br /><br /><strong>Swarm in Blocks</strong>
 </h1>
 
@@ -40,7 +40,7 @@ Swarm in Blocks (from it's origin in 2022) was born looking to make a *high-leve
 In 2023, Swarm in Blocks has taken an even bigger step, looking to fulfill our biggest vision **"It's never been easier to Swarm"**, we talk to transcend the local scope of the past project and explore the biggest problems for implementing a Swarm. For Copterhack 2023, we present Swarm in Blocks 2.0, an even more complete platform with the purpose of facing the biggest difficulties of a Swarm in a simple and polished way.
 
 <p align="center">
-    <img width="600" src="assets/intro/clovers_leds.gif" />
+    <img width="600" src="../assets/intro/clovers_leds.gif" />
 </p>
 
 ### Swarm in Blocks 2022
@@ -50,11 +50,11 @@ In 2023, Swarm in Blocks has taken an even bigger step, looking to fulfill our b
 Swarm in Blocks is a CopterHack 2022 project. It's a high-level interface based on the blocks language, which consists of fitting code parts, like a puzzle. Each script represents a functionality, for example, conditional structures, loops, or functions that receive parameters and return an instruction to the swarm. 
 
 <p align="center">
-    <img width="500" src="assets/intro/blocksIDE.gif" />
+    <img width="500" src="../assets/intro/blocksIDE.gif" />
 </p>
 
 <p align="center">
-    <img width="500" src="assets/intro/ring.gif" />
+    <img width="500" src="../assets/intro/ring.gif" />
 </p>
 
 
@@ -124,7 +124,7 @@ With our vision of solving the problems that most plague the deployment of a rea
 Like last year, we really wanted to make it easier for the user to go through our platform. That's why this year we decided to restructure our Homepage, gathering our main features and functionalities.
 
 <p align="center">
-    <img width="700" src="assets/homepage/homepage.gif"/>
+    <img width="700" src="../assets/homepage/homepage.gif"/>
 </p>
 
 ### Swarm Station
@@ -133,7 +133,7 @@ Like last year, we really wanted to make it easier for the user to go through ou
 The main feature from our platform is the *Swarm Station*, which is a **3d Web Visualizer** that shows in real time all the necessary information regarding the drones state, such as real time positioning and visualization, which clover is connected, the topics available and a lot more. Also, you can define a safe area to ensure each drones safety, forcing them to land in case they cross the forbidden area. The front end runs completely on the web browser, saving processing and installation resources. It also comes with a web terminal, allowing the user to open several instances of a terminal emulation in just one click.
 
 <p align="center">
-    <img width="700" src="assets/swarm_station/vid01.gif"/>
+    <img width="700" src="../assets/swarm_station/vid01.gif"/>
 </p>
 
 This package uses the ROS suite `rosbridge_server` to establish a communication between the ROS environment and the web server. 
@@ -161,7 +161,7 @@ To turn on the collision avoidance, it is necessary to run:
     rosrun swarm_collision_avoidance swarm_collision_avoidance_node.py
 
 <p align="center">
-    <img width="600" src="assets/collision.gif" />
+    <img width="600" src="../assets/collision.gif" />
 </p>
 
 
@@ -176,7 +176,7 @@ The Raspberry package was developed to instantiate a node that will be responsib
 This package is a reformulation of one of the CopterHack 2022 implementations, the **Swarm First Person Viewer**. This year, we decided to restart its structure, making it run also completely on the web to integrate with the Swarm Station. It also depends on the `rosbridge_websocket` running on the port `9090` (default).
 
 <p align="center"> 
-    <img width="600" src="assets/fpv_2023.gif"/>
+    <img width="600" src="../assets/fpv_2023.gif"/>
 </p>
 
 
@@ -195,7 +195,7 @@ To launch it, you need to first stop clover's default daemon, and then connect a
  
 
 <p align="center">
-    <img width="500" src="assets/swarm_real/swarm.gif"/>
+    <img width="500" src="../assets/swarm_real/swarm.gif"/>
 </p>
 
 > **Note:** We are aware that in the video the calibration of the drone control is not ideal, however, the objective of this test was really to validate the operation of the swarm in a real environment (which was actually done).
@@ -242,7 +242,7 @@ In honor of Atena Team 2022:
 - Rafael Saud C. Ferro: [Github](https://github.com/Rafael-Saud), [LinkedIn](https://www.linkedin.com/in/rafael-saud/)
 
 <p align="center">
-    <img width="700" src="assets/atena_team.png"/>
+    <img width="700" src="../assets/atena_team.png"/>
 </p>
 
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
