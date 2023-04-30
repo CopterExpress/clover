@@ -7,18 +7,28 @@
   <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="../assets/mocap_clover/semi_logo.png" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
 </div>
 
+# Table of Contents
+1. [Team Information](#item-one)
+2. [Educational Document](#item-two)
+3. [Introduction](#item-three)
+4. [Project Description](#item-four)
+5. [Conclusion](#item-five)
+
+<a id="item-one"></a>
 ## Team Information
 
 The list of team members:
 
 * Sean Smith, @ssmith_81, roboticist and developer: [Github](https://github.com/ssmith-81), [Linkedin](https://www.linkedin.com/in/sean-smith-61920915a/).
 
+<a id="item-two"></a>
 ## Educational Document
 **My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
 https://0406hockey.gitbook.io/mocap-clover/
 
 This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
+<a id="item-three"></a>
 ## Introduction
 Aerial robotics has become a common focus in research and industy over the past few decades. Many technical developments in research require a controlled test environment to isolate certain chanarteristics of the system for analysis. This typically takes place indoors to eliminate unwanted disturbances allowing results to be more predictable. Removing localization and pose feedback concerns can be accomplished with motion capture (MoCap) systems that track unmanned aerial vehicles (UAVs) pose with high precision as stated:
 
@@ -26,6 +36,7 @@ Aerial robotics has become a common focus in research and industy over the past 
 
 This enables researchers to study the dynamics and behavior of UAVs in different environments, evaluate their performance, and develop advanced control algorithms for improved flight stability, autonomy, and safety. Research facilities around the world tend to built research drones from the ground up using off-the-shelf components with open source platforms such as PX4. While the end goal is the same: transfering pose feedback to the flight controller along with high level commands, the platforms and methods can vary significantly depeding on factors such as onboard and offboard computing frameworks and data transfer methods. Many developers have a detailed background and understanding of the theoretical components of their research, however, adapting hardware configurations to their own platform such as sensor feedback and sensor fusion is not obvious. The purpose of this project is to provide detailed documentation on integrating the Clover platform with the MoCap system along with examples to farmiliarize users with the hardware, sensor fusion, high and low level controller development, and trajectoy tracking.
 
+<a id="item-four"></a>
 ## Project Description
 In this article, we will provide an overview of MoCap systems for tracking UAV pose in research applications, highlighting their significance, advantages, and potential impacts in the field of UAV controller development.
 
@@ -34,6 +45,12 @@ In this article, we will provide an overview of MoCap systems for tracking UAV p
 The Motion Capture System educational document is divided into three main sections outside of the Introduction and Conclusion. Each section and its purpose is listed:
 
 1. **Hardware**: The main goal in this section is to educate the reader on the MoCap system hardware and software. This can be further divided into several steps including camera placement, marker plcement, and system calibration. A summary of the process is provided:
+
+    | Task      | Description |
+    | ----------- | ----------- |
+    | Camera Placement      | Position the motion capture cameras in strategic locations around the area where the UAV will be flying. The number of cameras and their placement will depend on the size of the area and the desired capture volume. Typically, cameras are placed on tripods or mounted on walls or ceilings at specific heights and angles to capture the UAV's movements from different perspectives. **A simple 4-camera setup example is provided in the educational document**. |
+    | Marker Placement   | Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. **An example placement on the Clover is shown in the educational document**.
+    | System Calibration | Perform system calibration to establish the spatial relationship between the cameras and the markers. This involves capturing a calibration sequence, during which a known pattern or object is moved in the capture volume. The system uses this data to calculate the precise positions and orientations of the cameras and markers in 3D space, which is crucial for accurate motion capture.  |
 
     - Camera Placement: Position the motion capture cameras in strategic locations around the area where the UAV will be flying. The number of cameras and their placement will depend on the size of the area and the desired capture volume. Typically, cameras are placed on tripods or mounted on walls or ceilings at specific heights and angles to capture the UAV's movements from different perspectives. A simple 4-camera setup example is provided in the educational document.
     - Marker Placement: Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. The markers are typically attached to the UAV's body, wings, and other relevant parts in a way that ensures they are clearly visible to the motion capture cameras from multiple angles. An example placement on the Clover is shown in the educational document.
@@ -107,10 +124,9 @@ Overall, sending pose feedback from a motion capture system to a Raspberry Pi an
 
     - Adaptability and Robustness: UAV operations can be subject to varying environmental conditions, payload configurations, or operational requirements. Proper low-level controller tuning allows for adaptability and robustness, enabling the UAV to perform reliably and accurately across a wide range of conditions or mission requirements. Tuning the controller parameters can help account for changes in payload mass, wind conditions, or other external factors, ensuring stable and responsive flight performance.
 
-    - Safety Compliance and Regulatory Requirements: UAV operations are subject to safety regulations and compliance requirements, which may include specific guidelines for control system tuning. Proper low-level controller tuning ensures that the UAV's flight control system complies with safety standards, regulatory requirements, and manufacturer specifications, reducing the risk of accidents or violations.
-
 In summary, low-level controller tuning is crucial for UAV applications as it directly affects flight stability, control precision, payload performance, energy efficiency, adaptability, and compliance with safety and regulatory requirements. It is an essential step in optimizing the performance and safety of UAV operations, ensuring reliable and effective flight control for various applications across different industries and domains.
 
+<a id="item-five"></a>
 ## Conclusion
 
 Over the course of this project I was able to extend my knowledge in robotic applications while enduring many ups and downs along the way. This greatly helped me with my research when testing controller development was required. The motivation behind this documentation is to improve this experience for other researchers, robotic developers, or hobbyiests that have a desire to learn fundamental robotic application which is beginning to shape the world we know today. These details can be explored in a [gibook](https://0406hockey.gitbook.io/mocap-clover/) for those who are interested.
