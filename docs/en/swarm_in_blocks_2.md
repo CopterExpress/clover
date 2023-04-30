@@ -246,9 +246,5 @@ In honor of Atena Team 2022:
 - José Carlos Andrade do Nascimento: [Github](https://github.com/joseCarlosAndrade), [LinkedIn](https://www.linkedin.com/in/jos%C3%A9-carlos-andrade-do-nascimento-71186421a)
 - Rafael Saud C. Ferro: [Github](https://github.com/Rafael-Saud), [LinkedIn](https://www.linkedin.com/in/rafael-saud/)
 
-<p align="center">
-    <img width="700" src="../assets/atena_team.png"/>
-</p>
-
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
 
