@@ -42,7 +42,7 @@ The solution to the above problem statement is an autonomous racing drone. An au
 
 
 ### Additional Information
-In 2017, a student committee for DJS Phoenix was formed. In India, our team has participated in a number of contests, including IDRL (fourth overall), IIT BOMBAY TECHFEST (sixth rank), and TECHNOXIAN (second place out of 50 national teams).In COPTERHACK-2021, our team participated, and we placed eighth internationally. We are back with improved concepts after learning from the previous season.
+In 2017, a student committee for DJS Phoenix was formed. In India, our team has participated in a number of contests, including IDRL-IIT GandhiNagar (sixth rank), IDRL-SVPCET Nagpur(second rank) and TECHNOXIAN (second place out of 50 national teams) .In COPTERHACK-2021, our team participated, and we placed eighth internationally. We are back with improved concepts after learning from the previous season.
     
 For more information checkout gitbook
 https://djs-phoenix.gitbook.io/chetak-faster-than-you-can-imagine/
