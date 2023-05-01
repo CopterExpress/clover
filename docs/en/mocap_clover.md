@@ -80,7 +80,7 @@ With the data acquired from the MoCap system, the main goal in this section is t
     <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/clover1.gif" width="80%" height="80%">
 </p>
 
-- Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time. and can be viewed through the motive software.
+- Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time and can be viewed through the motive software.
 
 - Data Transmission: The pose data is transmitted from the motion capture system to a Raspberry Pi using VRPN and a ROS network. While this works, I have implemented a strictly UDP data transmission method where highlighting the setup process and ease of use will be a future development, both configurations can be seen in the below figures. The Raspberry Pi acts as an intermediary for processing and relaying the data to the flight controller onboard the UAV using MAVROS. The connection can be established using USB or UART, I chose UART in my setups.
     
