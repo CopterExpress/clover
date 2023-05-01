@@ -137,7 +137,7 @@ In summary, trajectory tracking is crucial for UAV applications as it enables pr
 2. **Clover adaptive auto-tuning**: The second example shows the user how to implement the adaptive auto-tune module provided by PX4 to tune the low-level controllers or attitude control module. You can take a look into how this is accomplished with the Clover platform in the [auto-tuning section](https://0406hockey.gitbook.io/mocap-clover/examples/auto-tuning).
 
 <p align="center">
-    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/px4_control_structure.jpg">
+    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/px4_control_structure.jpg" width="80%" height="80%">
     </p>
     <p align = "center">
     <em>Fig.3 - Cascaded PX4 control system [<a href="https://docs.px4.io/v1.12/en/flight_stack/controller_diagrams.html#multicopter-control-architecture">reference</a>].</em>
