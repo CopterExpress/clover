@@ -52,14 +52,16 @@ The Motion Capture System educational document is divided into three main sectio
     | Marker Placement   | Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. **An example placement on the Clover is shown in the educational document**.
     | System Calibration | Perform system calibration to establish the spatial relationship between the cameras and the markers. This involves capturing a calibration sequence, during which a known pattern or object is moved in the capture volume. The system uses this data to calculate the precise positions and orientations of the cameras and markers in 3D space, which is crucial for accurate motion capture.  |
 
-    - Camera Placement: Position the motion capture cameras in strategic locations around the area where the UAV will be flying. The number of cameras and their placement will depend on the size of the area and the desired capture volume. Typically, cameras are placed on tripods or mounted on walls or ceilings at specific heights and angles to capture the UAV's movements from different perspectives. A simple 4-camera setup example is provided in the educational document.
-    - Marker Placement: Attach OptiTrack markers to the UAV in specific locations. OptiTrack markers are small reflective spheres that are used as reference points for the motion capture system to track the UAV's position and movements. The markers are typically attached to the UAV's body, wings, and other relevant parts in a way that ensures they are clearly visible to the motion capture cameras from multiple angles. An example placement on the Clover is shown in the educational document.
-    - System Calibration: Perform system calibration to establish the spatial relationship between the cameras and the markers. This involves capturing a calibration sequence, during which a known pattern or object is moved in the capture volume. The system uses this data to calculate the precise positions and orientations of the cameras and markers in 3D space, which is crucial for accurate motion capture.
+    With these components completed correctly, you are well on your way to commanding indoor autonomous missions like this:
+     <p align="center">
+    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/drone_approach copy.png" width="80%" height="90%">
+    </p>
+<!--
     - Testing and Validation: After setting up the cameras and markers, perform test flights with the UAV to validate the accuracy of the MoCap system. Analyze the captured data to ensure that the UAV's movements are accurately captured and that the system is functioning correctly.
     - Fine-tuning: Fine-tune the motion capture system as needed based on the test results. This may involve adjusting camera angles, marker placements, or calibration settings to improve the accuracy and reliability of the system.
     - Data Collection: Once the motion capture system is properly set up and calibrated, you can start collecting data for your UAV research. The system will continuously track the positions and movements of the markers on the UAV in real-time, providing precise data that can be used for various analyses and experiments.
     - Data Analysis: Analyze the captured data using appropriate software to extract relevant information for your UAV research. This may involve tracking the UAV's position, velocity, acceleration, orientation, and other parameters, and analyzing how they change over time or in response to different conditions or inputs.
-
+-->
 Overall, configuring a motion capture system for UAV research requires careful planning, precise marker placement, accurate system calibration, and thorough validation to ensure accurate and reliable data collection for your research purposes.
 
 2. **Data Transfer**: With the data acquired from the MoCap system, the main goal in this section is to transfer it to the raspberry Pi onboard the Clover and remap it to the flight controller/PX4 for control. A summary of the steps are listed:
