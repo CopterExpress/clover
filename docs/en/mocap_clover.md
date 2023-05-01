@@ -15,21 +15,21 @@
 5. [Conclusion](#item-five)
 
 <a id="item-one"></a>
-## Team Information
+# Team Information
 
 The list of team members:
 
 * Sean Smith, @ssmith_81, roboticist and developer: [Github](https://github.com/ssmith-81), [Linkedin](https://www.linkedin.com/in/sean-smith-61920915a/).
 
 <a id="item-two"></a>
-## Educational Document
+# Educational Document
 **My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
 https://0406hockey.gitbook.io/mocap-clover/
 
 This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
 <a id="item-three"></a>
-## Introduction
+# Introduction
 Aerial robotics has become a common focus in research and industy over the past few decades. Many technical developments in research require a controlled test environment to isolate certain chanarteristics of the system for analysis. This typically takes place indoors to eliminate unwanted disturbances allowing results to be more predictable. Removing localization and pose feedback concerns can be accomplished with motion capture (MoCap) systems that track unmanned aerial vehicles (UAVs) pose with high precision as stated:
 
 "OptiTrack’s drone and ground robot tracking systems consistently produce positional error less than 0.3mm and rotational error less than 0.05°" [[reference](https://optitrack.com/applications/robotics/#:~:text=Exceptional%203D%20precision%20and%20accuracy&text=OptiTrack's%20drone%20and%20ground%20robot,error%20less%20than%200.05%C2%B0)].
@@ -40,10 +40,11 @@ This enables researchers to study the dynamics and behavior of UAVs in different
 ## Project Description
 In this article, we will provide an overview of MoCap systems for tracking UAV pose in research applications, highlighting their significance, advantages, and potential impacts in the field of UAV controller development.
 
-### Document structure
+## Document structure
 
 The Motion Capture System educational document is divided into three main sections outside of the Introduction and Conclusion. Each section and its purpose is listed:
 
+### Hardware
 1. **Hardware**: The main goal in this section is to educate the reader on the MoCap system hardware and software. This can be further divided into several steps including camera placement, marker plcement, and system calibration. A summary of the process is provided:
 
     | Task      | Description |
@@ -65,6 +66,10 @@ The Motion Capture System educational document is divided into three main sectio
 Overall, configuring a motion capture system for UAV research requires careful planning, precise marker placement, accurate system calibration, and thorough validation to ensure accurate and reliable data collection for your research purposes.
 
 2. **Data Transfer**: With the data acquired from the MoCap system, the main goal in this section is to transfer it to the raspberry Pi onboard the Clover and remap it to the flight controller/PX4 for control. A summary of the steps are listed:
+
+    <p align="center">
+    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/clover1.gif" width="80%" height="90%">
+    </p>
 
     - Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time. and can be viewed through the motive software.
 
