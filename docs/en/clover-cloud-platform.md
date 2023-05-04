@@ -1,5 +1,7 @@
 # Clover Cloud Platform
 
+[CopterHack-2023](copterhack2023.md), team **Clover Cloud Team**.
+
 The list of our team members:
 
 * Кирилл Лещинский / Kirill Leshchinskiy, [@k_leshchinskiy](https://t.me/k_leshchinskiy) - Team Lead.
@@ -56,7 +58,7 @@ Let's dive into the sea of functionality that our platform offers. Detailed desc
 
 First, you should create an account on our site. You can do this by clicking on this [link](https://clovercloud.software/signup).
 
-### Instance managment
+### Instance management
 
 After creating an account, you will be taken to the [dashboard](https://clovercloud.software/instances). Here you can create, start, stop and delete workspaces.
 
@@ -64,7 +66,7 @@ After creating an account, you will be taken to the [dashboard](https://clovercl
 
 <p align="center">
 
-![instance managment](https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/instances.gif)
+![instance management](https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/instances.gif)
 
 </p>
 
