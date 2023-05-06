@@ -1,10 +1,9 @@
 # Project Video
 
 [CopterHack-2023](copterhack2023.md), team **Clover with Motion Capture System**. Click logo for project video.
-https://drive.google.com/file/d/1iLHMqA9LrejfPiUH3vF0SUOtVIT1WVjv/view?usp=share_link
-https://drive.google.com/uc?export=view&id=1CUxrGQCLycjWMAcU3KT4sOhSdIFi4tUW
+
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="https://drive.google.com/uc?export=view&id=1iLHMqA9LrejfPiUH3vF0SUOtVIT1WVjv" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
+  <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="https://drive.google.com/uc?export=view&id=12tLALOEjZl_eA25paPRR7u-itAWZUR4q" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
 </div>
 
 ## Table of Contents
@@ -70,9 +69,9 @@ The main goal in this section is to educate the reader on the MoCap system hardw
 
 With these components completed correctly, you are well on your way to commanding indoor autonomous missions like this:
      <p align="center">
-    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1A63lI7oZlhwXqIyqM1Dvf346vBlaXhAt" width="80%" height="90%">
+    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1JeUll_hmLKFamq0JEGqo8c3a8D6kdgEe" width="60%" height="50%">
     </p>
-   https://drive.google.com/file/d/1A63lI7oZlhwXqIyqM1Dvf346vBlaXhAt/view?usp=share_link
+   
 <!--
     - Testing and Validation: After setting up the cameras and markers, perform test flights with the UAV to validate the accuracy of the MoCap system. Analyze the captured data to ensure that the UAV's movements are accurately captured and that the system is functioning correctly.
     - Fine-tuning: Fine-tune the motion capture system as needed based on the test results. This may involve adjusting camera angles, marker placements, or calibration settings to improve the accuracy and reliability of the system.
@@ -87,7 +86,7 @@ Overall, configuring a motion capture system for UAV research requires careful p
 With the data acquired from the MoCap system, the main goal in this section is to transfer it to the Raspberry Pi onboard the Clover and remap it to the flight controller/PX4 for control. A summary of the steps are listed:
 
 <p align="center">
-    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1bGXuqMJ9MxXE-9EE-UkTX4iEulXR4hZA" width="80%" height="80%">
+    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1B0OMIGveFZNyE1_UHpmBOukeFVgl-bTV" width="50%" height="50%">
 </p>
 
 * Data Acquisition: The motion capture system continuously tracks the position and orientation (pose) of the UAV using markers attached to the UAV and cameras positioned in the capture volume. The system calculates the 3D pose of the UAV in real-time and can be viewed through the motive software.
@@ -159,7 +158,7 @@ Here's a summary of the importance of low-level controller performance for UAV a
 * *Adaptability and Robustness*: UAV operations can be subject to varying environmental conditions, payload configurations, or operational requirements. Proper low-level controller tuning allows for adaptability and robustness, enabling the UAV to perform reliably and accurately across a wide range of conditions or mission requirements. Tuning the controller parameters can help account for changes in payload mass, wind conditions, or other external factors, ensuring stable and responsive flight performance.
 
 <p align="center">
-    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1twlCp6Nvqc8w7oRCZ3-KVecc_fR7Msv9" width="80%" height="80%">
+    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1ech31B2JvYLcW9c7W67IguuQT-S53AFF" width="50%" height="50%">
 </p>
 
 In summary, low-level controller tuning is crucial for UAV applications as it directly affects flight stability, control precision, payload performance, energy efficiency, adaptability, and compliance with safety and regulatory requirements. It is an essential step in optimizing the performance and safety of UAV operations, ensuring reliable and effective flight control for various applications across different industries and domains.
