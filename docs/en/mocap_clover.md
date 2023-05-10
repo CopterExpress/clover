@@ -19,23 +19,20 @@
 * [Auto-Tuning](#item-auto)
 * [Conclusion](#item-last)
 
-<a id="item-one"></a>
-## Team Information 
+## Team Information {#item-one}
 
 The list of team members:
 
 * Sean Smith, @ssmith_81, roboticist and developer: [GitHub](https://github.com/ssmith-81), [Linkedin](https://www.linkedin.com/in/sean-smith-61920915a/).
 
-<a id="item-two"></a>
-## Educational Document 
+## Educational Document {#item-two}
 
 **My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
 [MoCap Clover Gitbook](https://0406hockey.gitbook.io/mocap-clover/)
 
 This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
-<a id="item-three"></a>
-## Introduction 
+## Introduction {#item-three}
 
 Aerial robotics has become a common focus in research and industry over the past few decades. Many technical developments in research require a controlled test environment to isolate certain characteristics of the system for analysis. This typically takes place indoors to eliminate unwanted disturbances allowing results to be more predictable. Removing localization and pose feedback concerns can be accomplished with motion capture (MoCap) systems that track unmanned aerial vehicles (UAVs) pose with high precision as stated:
 
@@ -47,8 +44,7 @@ This enables researchers to study the dynamics and behavior of UAVs in different
 
 <!-- markdownlint-enable MD044 -->
 
-<a id="item-four"></a>
-## Project Description 
+## Project Description {#item-four}
 
 In this article, we will provide an overview of MoCap systems for tracking UAV pose in research applications, highlighting their significance, advantages, and potential impacts in the field of UAV controller development.
 
@@ -56,8 +52,7 @@ In this article, we will provide an overview of MoCap systems for tracking UAV p
 
 The Motion Capture System educational document is divided into three main sections outside of the Introduction and Conclusion. Each section and its purpose is listed:
 
-<a id="item-hardware"></a>
-### Hardware 
+### Hardware {#item-hardware}
 
 The main goal in this section is to educate the reader on the MoCap system hardware and software. This can be further divided into several steps including camera placement, marker placement, and system calibration. A summary of the process is provided:
 
@@ -71,7 +66,7 @@ With these components completed correctly, you are well on your way to commandin
      <p align="center">
     <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1JeUll_hmLKFamq0JEGqo8c3a8D6kdgEe" width="60%" height="50%">
     </p>
-   
+
 <!--
     - Testing and Validation: After setting up the cameras and markers, perform test flights with the UAV to validate the accuracy of the MoCap system. Analyze the captured data to ensure that the UAV's movements are accurately captured and that the system is functioning correctly.
     - Fine-tuning: Fine-tune the motion capture system as needed based on the test results. This may involve adjusting camera angles, marker placements, or calibration settings to improve the accuracy and reliability of the system.
@@ -80,8 +75,7 @@ With these components completed correctly, you are well on your way to commandin
 -->
 Overall, configuring a motion capture system for UAV research requires careful planning, precise marker placement, accurate system calibration, and thorough validation to ensure accurate and reliable data collection for your research purposes. For more information, refer to the [informative documentation](https://0406hockey.gitbook.io/mocap-clover/hardware/motion-capture-setup-optitrack).
 
-<a id="item-transfer"></a>
-### Data Transfer 
+### Data Transfer {#item-transfer}
 
 With the data acquired from the MoCap system, the main goal in this section is to transfer it to the Raspberry Pi onboard the Clover and remap it to the flight controller/PX4 for control. A summary of the steps are listed:
 
@@ -106,8 +100,7 @@ With the data acquired from the MoCap system, the main goal in this section is t
 
 Overall, sending pose feedback from a motion capture system to a Raspberry Pi and remapping the data to the flight controller onboard a UAV involves acquiring, processing, and transmitting the pose data in a compatible format to enable real-time closed-loop control of the UAV based on the motion capture system's feedback.
 
-<a id="item-examples"></a>
-### Examples 
+### Examples {#item-examples}
 
 This section provides two practical examples to help the user better understand the Clover platform, sensor fusion, UAV applications such as trajectory tracking, high level commands, and low level control. The reader will become familiar with an abundance of state-of-the-art open source UAV platforms/technologies such as:
 
@@ -163,8 +156,7 @@ Here's a summary of the importance of low-level controller performance for UAV a
 
 In summary, low-level controller tuning is crucial for UAV applications as it directly affects flight stability, control precision, payload performance, energy efficiency, adaptability, and compliance with safety and regulatory requirements. It is an essential step in optimizing the performance and safety of UAV operations, ensuring reliable and effective flight control for various applications across different industries and domains.
 
-<a id="item-last"></a>
-## Conclusion 
+## Conclusion {#item-last}
 
 Over the course of this project I was able to extend my knowledge in robotic applications while enduring many ups and downs along the way. This greatly helped me with my research when testing controller development was required. The motivation behind this documentation is to improve this experience for other researchers, robotic developers, or hobbyists that have a desire to learn fundamental robotic application which is beginning to shape the world we know today. These details can be explored in a [GitBook](https://0406hockey.gitbook.io/mocap-clover/) for those who are interested.
 
