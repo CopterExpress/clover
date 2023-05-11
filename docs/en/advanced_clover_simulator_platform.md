@@ -5,14 +5,14 @@
 ## Team Information
 
 ```cpp
-#include "veryIntrestingCommandDescription.h"
+#include "veryInterestingCommandDescription.h"
 ```
 
 Team members:
 
-- Maxim Ramanouski, [@max8rr8](https://t.me/max8rr8)
+- Maxim Ramanouski, [@max8rr8](https://t.me/max8rr8).
 
-Country: Belarus
+Country: Belarus.
 
 ## Project Description
 
@@ -22,17 +22,19 @@ Last year at CopterHack 2022, we created a [project](../ru/advanced_clover_simul
 
 The idea of the project is to combine CloverIDE and CloverSim (a tool for running Clover simulations). Thus, a platform is planned that allows developing products based on Clover using a simulator and an advanced IDE. The platform will include the following features:
 
-- Add a web interface that allows using CloverSim without touching the command line
-- Work both in the browser (without installing anything) and from cli
-- Have a course that covers different aspects of clover
-- Simplify installation, especially in WSL
-- Running a simulation on a remote device (more powerful computer or cloud)
+- Add a web interface that allows using CloverSim without touching the command line.
+- Work both in the browser (without installing anything) and from CLI.
+- Have a course that covers different aspects of clover.
+- Simplify installation, especially in WSL.
+- Running a simulation on a remote device (more powerful computer or cloud).
 
 ### Project videos
 
-Video presentation of the project: [link](https://www.youtube.com/watch?v=T4RU9sfxsSI)
-Live presentation at CopterHack: TBD
-CLI demonstration: [link](https://www.youtube.com/watch?v=Ao-ukR58sSQ)
+Video presentation of the project: [link](https://www.youtube.com/watch?v=T4RU9sfxsSI).
+
+Live presentation at CopterHack: TBD.
+
+CLI demonstration: [link](https://www.youtube.com/watch?v=Ao-ukR58sSQ).
 
 ## Installation
 
@@ -83,20 +85,20 @@ We also have video demonstration/tutorial: [link](https://www.youtube.com/watch?
 
 We also have developed a learning course based on CloverSim: [link](https://github.com/FTL-team/CloverSim_course). It currently has the following tasks:
 
-- 1_thesquare - First task of CloverSim course with goal to fly square
-- 2_iseeall - Task that teaches how to interact with camera
-- 3_landmid - Find and land onto randomly positioned object
-- 4_flybyline - Flying along the line
-- 5_posknown - Find position of objects relative to ArUco map
+- 1_thesquare - First task of CloverSim course with goal to fly square.
+- 2_iseeall - Task that teaches how to interact with camera.
+- 3_landmid - Find and land onto randomly positioned object.
+- 4_flybyline - Flying along the line.
+- 5_posknown - Find position of objects relative to ArUco map.
 
 ## More details
 
 At this point, our platform consists of four major parts:
 
-- [CloverSim](https://github.com/FTL-team/clover_sim) - tool that manages simulation
-- [CloverSim Basefs](https://github.com/FTL-team/clover_sim_basefs) - container image that is used in simulator
-- [Clover IDE](https://github.com/FTL-team/cloverIDE) - clover ide tools and theia
-- [CloverSim course](https://github.com/FTL-team/CloverSim_course) - course with tasks based on our platform
+- [CloverSim](https://github.com/FTL-team/clover_sim) - tool that manages simulation.
+- [CloverSim Basefs](https://github.com/FTL-team/clover_sim_basefs) - container image that is used in simulator.
+- [Clover IDE](https://github.com/FTL-team/cloverIDE) - clover ide tools and theia.
+- [CloverSim course](https://github.com/FTL-team/CloverSim_course) - course with tasks based on our platform.
 
 ### CloverSim
 
@@ -104,42 +106,42 @@ The simulation architecture is a continuation of work from CopterHack 2022, but 
 
 There are three major difference in simulator architecture
 
-- replacement of `systemd-nspawn` with `runc` provides us higher degree of container control and seemingless support of non-systemd systems, for example WSL
-- migration to squash fs images, which greatly reduced size of installed CloverSim from 13 gigabytes to just 3.5 gigabytes.
-- tasks are now mounted instead of being copied and also build before starting.
+- Replacement of `systemd-nspawn` with `runc` provides us higher degree of container control and seemingless support of non-systemd systems, for example WSL.
+- Migration to squash fs images, which greatly reduced size of installed CloverSim from 13 gigabytes to just 3.5 gigabytes.
+- Tasks are now mounted instead of being copied and also build before starting.
 
-Because of the way catkin_make works, it is incredibly slow when new packages are added (whole cmake cofiguration is rerun for all packages). catkin_make provides a way to build only some packages, but it caches this packages and to reset this cache you need to recompile whole catkin_make. But we have found a solution: `catkin_make -DCATKIN_WHITELIST_PACKAGES="task;CloverSim" --build build_CloverSim` This command, builds only CloverSim and task package in separate build directory, this drastically reduces time that catkin_make takes, and keeps expected behavior of catkin_make without arguments.
+Because of the way catkin_make works, it is incredibly slow when new packages are added (whole cmake configuration is rerun for all packages). catkin_make provides a way to build only some packages, but it caches this packages and to reset this cache you need to recompile whole catkin_make. But we have found a solution: `catkin_make -DCATKIN_WHITELIST_PACKAGES="task;CloverSim" --build build_CloverSim` This command, builds only CloverSim and task package in separate build directory, this drastically reduces time that catkin_make takes, and keeps expected behavior of catkin_make without arguments.
 
 There are also differences in tool that launches simulation:
 
-- client-server architecture allows us to create webui and run CloverSim on server
-- more robust error handling improves user experience
-- rewritten in rust, better reliability and development experience
+- Client-server architecture allows us to create web UI and run CloverSim on server.
+- More robust error handling improves user experience.
+- Rewritten in rust, better reliability and development experience.
 
 ### CloverSim basefs
 
 Version 2 integrates CloverIDE into system. We also updated clover in simulator to v0.23 and added web terminal. Basefs is now squashed and doesn't require additional installation. It also uses patched(by us) version of gzweb that is more suitable for our use-case:
 
-- Unlike original GZWeb assets can be dynamically loaded, which is required to support dynamically generated tasks
-- It also implements multiple bugfixes for rendering, UI
-- Fixed performance, original gzweb had two constantly running loops that used 200% of cpu. We fixed this by instead using synchronization primitives
-- Clover LED strip is rendered, our gzweb connects to ROS and pulls LED data from there to render LED strip like Gazebo does
-- Users can now follow-objects like in Gazebo better actually)
-- Reconnect on disconnect, when simulator is restarted gzweb looses connection and it now can automatically reconnect
+- Unlike original GZWeb assets can be dynamically loaded, which is required to support dynamically generated tasks.
+- It also implements multiple bugfixes for rendering, UI.
+- Fixed performance, original gzweb had two constantly running loops that used 200% of cpu. We fixed this by instead using synchronization primitives.
+- Clover LED strip is rendered, our gzweb connects to ROS and pulls LED data from there to render LED strip like Gazebo does.
+- Users can now follow-objects like in Gazebo better actually.
+- Reconnect on disconnect, when simulator is restarted gzweb looses connection and it now can automatically reconnect.
 
-Patched gzweb available there: [FTL-team/gzweb](https://github.com/FTL-team/gzweb)
+Patched gzweb available there: [FTL-team/gzweb](https://github.com/FTL-team/gzweb).
 
 ### CloverIDE
 
 CloverIDE got some updates too:
 
-- we have updated theia and extensions used
-- better C++ support via clangd
-- Clover IDE tools can now reconnect after simulator restart
-- Copter Status now displays LED strip status
-- Tools ui has better support for different themes
+- We have updated theia and extensions used.
+- Better C++ support via clangd.
+- Clover IDE tools can now reconnect after simulator restart.
+- Copter Status now displays LED strip status.
+- Tools ui has better support for different themes.
 
-But the most important change is CloverSim integration, there are new tools(task description, simulator control and gzweb). While gzweb tool is just an iframe (though it's very cool to have it in IDE).
+But the most important change is CloverSim integration, there are new tools (task description, simulator control and gzweb). While gzweb tool is just an iframe (though it's very cool to have it in IDE).
 
 Task description and simulator control are more interesting as they have to interact with both IDE and CloverSim, to maintain different versions support we use quite interesting trick, extension webview after being initialized dynamically loads JavaScript from CloverSim. That provides better integration between two.
 
@@ -149,8 +151,4 @@ CloverSim course is a new part of our platform. It uses robust task API of Clove
 
 ## Conclusion
 
-This project is a final (or maybe there is more?) project of our advanced
-clover saga. AdavnceClover is a project that is easy to use and greatly
-improves experience during learning about clover, participating in clover based
-competitions and development clover based projects. We thank COEX team for
-their support and look forward to further cooperation.
+This project is a final (or maybe there is more?) project of our advanced clover saga. AdvancedClover is a project that is easy to use and greatly improves experience during learning about clover, participating in clover based competitions and development clover based projects. We thank COEX team for their support and look forward to further cooperation.
