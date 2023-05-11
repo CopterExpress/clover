@@ -46,7 +46,7 @@ In 2023, Swarm in Blocks has taken an even bigger step, looking to fulfill our b
 
 
 
-Swarm in Blocks is a CopterHack 2022 project. It's a high-level interface based on the blocks language, which consists of fitting code parts, like a puzzle. Each script represents a functionality, for example, conditional structures, loops, or functions that receive parameters and return an instruction to the swarm. 
+Swarm in Blocks is a CopterHack 2022 project. It's a high-level interface based on the blocks language, which consists of fitting code parts, like a puzzle. Each script represents a functionality, for example, conditional structures, loops, or functions that receive parameters and return an instruction to the swarm.
 
 <p align="center">
     <img width="500" src="../assets/intro/blocksIDE.gif" />
@@ -77,7 +77,7 @@ As already mentioned, of the various problems that can increase the complexity o
 | Difficulty configuring physical drones for swarm  | Our complete documentation with pre-designed settings for swarms in our repo image  |
 | Lack of a center for reports of successful tests with swarms of drones for the Clover platform describing the test conditions (odometry, etc.)  | Show off section in our Gitbook  |
 
-And many other solutions are also featured on our platform, for more information please check the solutions described clearly and in detail throughout our **Gitbook**. We recommend reading in order to understand the fundamental precepts of our platform. 
+And many other solutions are also featured on our platform, for more information please check the solutions described clearly and in detail throughout our **Gitbook**. We recommend reading in order to understand the fundamental precepts of our platform.
 
 > 📖 **Access our [Gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/background-theory/system)!**
 
@@ -91,9 +91,9 @@ And many other solutions are also featured on our platform, for more information
 
 
 
-Our platform was made to be extremely intuitive and easy to use. To start (after completing the installation we suggested in our gitbook), you can run the command: 
+Our platform was made to be extremely intuitive and easy to use. To start (after completing the installation we suggested in our gitbook), you can run the command:
 
-    roslaunch swarm_in_blocks simulation.launch num:=2 
+    roslaunch swarm_in_blocks simulation.launch num:=2
 
 After that, you can open your browser and access our homepage by typing `localhost` in the search bar.
 
@@ -137,19 +137,19 @@ The main feature from our platform is the *Swarm Station*, which is a **3d Web V
     <img width="700" src="../assets/swarm_station/vid01.gif"/>
 </p>
 
-This package uses the ROS suite `rosbridge_server` to establish a communication between the ROS environment and the web server. 
+This package uses the ROS suite `rosbridge_server` to establish a communication between the ROS environment and the web server.
 
-To run it, we recommend using **Firefox** browser to assure stability. But feel free to test it on other navigators. 
+To run it, we recommend using **Firefox** browser to assure stability. But feel free to test it on other navigators.
 
 If you launched our `simulation.launch` from the `swarm_in_blocks` package, then you just have to run
 
     roslaunch swarm_station swarm_station.launch
 
 Otherwise, you have to make sure that the `rosbridge_websocket` is running on port `9090`:
-    
-    roslanch rosbridge_server rosbridge_websocket.launch port:=9090 
-    
-For more detailed instructions on how to use each single feature from the Swarm Station, check our [Gitbook page about the station](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/). 
+
+    roslaunch rosbridge_server rosbridge_websocket.launch port:=9090
+
+For more detailed instructions on how to use each single feature from the Swarm Station, check our [Gitbook page about the station](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/).
 
 
 ### Swarm Collision Avoidance
@@ -176,24 +176,24 @@ The Raspberry package was developed to instantiate a node that will be responsib
 
 This package is a reformulation of one of the CopterHack 2022 implementations, the **Swarm First Person Viewer**. This year, we decided to restart its structure, making it run also completely on the web to integrate with the Swarm Station. It also depends on the `rosbridge_websocket` running on the port `9090` (default).
 
-<p align="center"> 
+<p align="center">
     <img width="600" src="../assets/fpv_2023.gif"/>
 </p>
 
 
 ### Real Swarm
 
-In order to fly a real swarm using clover, we decided to take an approach of putting every clover on the same ROS network / environment so that the master could talk to each one of them. 
+In order to fly a real swarm using clover, we decided to take an approach of putting every clover on the same ROS network / environment so that the master could talk to each one of them.
 
-We did this by separating each drone topics / nodes / services with namespaces. The goal is to achieve the same effect as the simulation that we've done in **CopterHACK 2022**, so each drone would have its own `/cloverID` namespace, and the ID is the identifier for each drone. 
+We did this by separating each drone topics / nodes / services with namespaces. The goal is to achieve the same effect as the simulation that we've done in **CopterHACK 2022**, so each drone would have its own `/cloverID` namespace, and the ID is the identifier for each drone.
 
-In other wods, instead of just `simple_offboard` node for a single drone, we'd now have `/clover0/simple_offboard`, `/clover1/simple_offboard` and so on.
+In other words, instead of just `simple_offboard` node for a single drone, we'd now have `/clover0/simple_offboard`, `/clover1/simple_offboard` and so on.
 
-To launch it, you need to first stop clover's default daemon, and then connect all raspberrys to the same network. After that, you should connect all their `roscore` to the same IP address (the master's), and then launch the `realClover.launch` file passing the `ID` arguement as a parameter. Again, for more detailed information on how this works, please check out our [gitbook](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/):
+To launch it, you need to first stop clover's default daemon, and then connect all Raspberries to the same network. After that, you should connect all their `roscore` to the same IP address (the master's), and then launch the `realClover.launch` file passing the `ID` argument as a parameter. Again, for more detailed information on how this works, please check out our [gitbook](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/):
 
     sudo systemctl stop clover
     roslaunch rasp_pkg realClover.launch ID:=0
- 
+
 
 <p align="center">
     <img width="500" src="../assets/swarm_real/swarm.gif"/>
@@ -220,7 +220,7 @@ Finally, we thank the entire COEX team that made CopterHack 2023 possible and al
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
 
 ---
-## The Atena Team 
+## The Atena Team
 
 Atena Team 2023 (Swarm in Blocks 2.0):
 
@@ -247,4 +247,3 @@ In honor of Atena Team 2022:
 - Rafael Saud C. Ferro: [Github](https://github.com/Rafael-Saud), [LinkedIn](https://www.linkedin.com/in/rafael-saud/)
 
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
-
