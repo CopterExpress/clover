@@ -64,7 +64,7 @@ The main goal in this section is to educate the reader on the MoCap system hardw
 
 With these components completed correctly, you are well on your way to commanding indoor autonomous missions like this:
      <p align="center">
-    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=1JeUll_hmLKFamq0JEGqo8c3a8D6kdgEe" width="60%" height="50%">
+    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/drone_approach_small.jpg" width="60%" height="50%">
     </p>
 
 <!--
