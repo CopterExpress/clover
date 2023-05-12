@@ -3,7 +3,7 @@
 [CopterHack-2023](copterhack2023.md), team **Clover with Motion Capture System**. Click logo for project video.
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="https://drive.google.com/uc?export=view&id=12tLALOEjZl_eA25paPRR7u-itAWZUR4q" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
+  <a href="https://www.youtube.com/watch?v=jOovjo0aBpQ&t=4s&ab_channel=SeanSmith"><img src="../assets/mocap_clover/semi_logo_small.jpg" width="70%" height="70%" alt="IMAGE ALT TEXT"></a>
 </div>
 
 ## Table of Contents
@@ -87,8 +87,8 @@ With the data acquired from the MoCap system, the main goal in this section is t
 * Data Transmission: The pose data is transmitted from the motion capture system to a Raspberry Pi using VRPN and a ROS network. While this works, I have implemented a strictly UDP data transmission method where highlighting the setup process and ease of use will be a future development, both configurations can be seen in the below figures. The Raspberry Pi acts as an intermediary for processing and relaying the data to the flight controller onboard the UAV using MAVROS. The connection can be established using USB or UART, I chose UART in my setups.
 
  <p align="center">
-       <img src="https://drive.google.com/uc?export=view&id=1z5DwwlgFGA1aKNj9Siic-VhDawqY3zaD" width="49%" alt="ROS Block"/>
-       <img src="https://drive.google.com/uc?export=view&id=1NfNHzcZejGOSDN4cndYzld2P5a3FjJW1" width="49%" alt="ROS Block"/>
+       <img src="../assets/mocap_clover/block_ROS.jpg" width="49%" alt="ROS Block"/>
+       <img src="../assets/mocap_clover/block_udp.jpg" width="49%" alt="ROS Block"/>
        <em>Fig.1(a) - Left figure: ROS network experimental setup topology. Legend: Black dotted line is the provided local network; Blue solid line is the Clover pose transmission where the final transmission from laptop to Pi is over a ROS network; Red line is hardware connections; MAVLink arrow is communication via a MAVLink protocol. .</em> <br>
        <em>Fig.1(b) - Right figure: UDP transmission experimental setup topology. Legend: Black dotted line is the provided local network; Black solid line is the UDP client-server drone pose transmission; Light blue line is the pose data transmission; Red line is hardware connections; Purple line is communication via secure shell protocol and ROS network communication; MAVLink arrow is communication via a MAVLink protocol. .</em>
  </p>
@@ -136,7 +136,7 @@ In summary, trajectory tracking is crucial for UAV applications as it enables pr
 1. **Clover adaptive auto-tuning**: The second example shows the user how to implement the adaptive auto-tune module provided by PX4 to tune the low-level controllers or attitude control module. You can take a look into how this is accomplished with the Clover platform in the [auto-tuning section](https://0406hockey.gitbook.io/mocap-clover/examples/auto-tuning).
 
 <p align="center">
-    <img title="Figure-8" alt="Alt text" src="https://drive.google.com/uc?export=view&id=18LuhU4PcS173qbQb5QKc2Rt8QKoDQaKX" width="80%" height="80%">
+    <img title="Figure-8" alt="Alt text" src="../assets/mocap_clover/px4_control_structure.jpg" width="80%" height="80%">
     </p>
     <p align = "center">
     <em>Fig.3 - Cascaded PX4 control system [<a href="https://docs.px4.io/v1.12/en/flight_stack/controller_diagrams.html#multicopter-control-architecture">reference</a>].</em>
