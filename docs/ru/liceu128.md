@@ -1,33 +1,40 @@
-# Платформа для зарядки квадрокоптера
+# "QCS" - the network of Clover charging stations
 
-[CopterHack-2023](copterhack2023.md), команда **Лицей №128**.
+### Network realisation
 
-## Информация о команде
+Our charging stations use Python web server created with Django framework. On that server we storage information about charging stations:
+- Position (GPS + ArUco marker)
+- Possibility to drone landing
+- Drone info (If it's on it)
 
-Состав команды:
+To connect to server we use API with special personal key for every drone and station. It can be regenerated if secured key became public.
 
-* Олег Шерстобитов, @kulumuluu, инженер конструктор.
-* Юлия Бахтина, @UlyaBakhtina , инженер конструктор.
-* Михаил Константинов,@mikemka, программист.
-* Юлия Швецова, @Juli_Phil.
+If you want to test station without drone you can use API Debug page. You must be in your account to open it.
 
-## Описание проекта
+### Electronics in the station
 
-### Идея проекта
+There are Arduino Mega and Wemos D1 on the station. 
 
-Создать зарядную платформу для беспилотника, которая позволит автоматически заряжать дрон.
-На платформе будут реализованы выравнивающий и стыковочный механизмы.
+![scheme](https://github.com/Juli-Shvetsova/clover/assets/78372613/3ab05a79-0046-463b-83dd-4db06115909b)
 
-### Планируемые результаты
+Wemos D1 connect with server to collect information, do tasks. Arduino Mega recieve signals from Wemos and make physical updates such as moving landing platform, LED indication and other more.
 
-Созданная платформа поможет реализовать беспроводную зарядку летательных аппаратов, поможет в дальнейшем развитии направления БПЛА, реализации сервисов доставки грузов при помощи квадрокоптеров, реализации различных мониторингов при помощи беспилотников.
+After completing mission Wemos send request to a server to confirm updates on the server.
 
-### Использование платформы "Клевер"
+### Clover flight
 
-Все испытания данной платформе будут проводиться с использованием платформы "Клевер".
+We're using recursive landing algorhytm to achieve success landing. Small ArUco marker is on the landing platform. Camera can use this marker on the ~25cm height. Next drone use standart landing.
 
-### Дополнительная информация по желанию участников
+### Visit our landing and API page
 
-Например, информация об опыте работы команды над проектами, прикрепить ссылку на статьи, видео.
+[https://qcs.pythonanywhere.com/](https://qcs.pythonanywhere.com/)
 
-[Repo](https://github.com/mikemka/clover).
+### Source code
+
+Of that project is in our [GitHub page](https://github.com/qcs-charge/)
+
+> CH2023, Lyceum 128
+
+> - Mikhail Konstantinov, [@mikemka](https://t.me/mikemka/), programmer
+> - Julia Shvecova, [@Juli_Phil](https://t.me/Juli_Phil/), science adviser
+> - Oleg Sherstobitov, [@kulumuluu](https://t.me/kulumuluu/), constructor
