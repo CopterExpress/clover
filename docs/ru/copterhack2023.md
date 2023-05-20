@@ -12,23 +12,23 @@ CopterHack 2023 — это международный конкурс по ра�
 
 |Место|Команда|Проект|Балл|
 |:-:|-|-|-|
-||🇷🇺 Clover Cloud Team|[Clover Cloud Platform](https://github.com/DevMBS/clover/blob/clover-cloud-platform/docs/en/clover-cloud-platform.md)||
-||🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
-||🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](https://github.com/DJSPhoenix/clover/blob/DJSPhoenix_chetak/docs/ru/djs_phoenix_chetak.md)||
-||🇷🇺 FSOTM|[Дрон-перехватчик](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
-||🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
-||🇷🇺 Digital otters|[Digital otters](https://github.com/Mentalsupernova/clover_cool/blob/new-article.md/docs/ru/new-article.md)||
-||🇷🇺 Light Flight|[Сопровождение БПЛА при посадке](https://github.com/SirSerow/clover_inertial_ns/blob/inertial-1/Description.md)||
-||🇰🇬 LiveSavers|[LiveSavers](https://github.com/Sarvar00/clover/blob/livesavers/docs/ru/livesaver.md)||
-||🇷🇺 C305|[Система радио-навигации](https://github.com/Lukerrr/clover-c305/blob/nav_beacon/docs/ru/nav-beacon.md)||
-||🇷🇺 XenCOM|[Bound by fate](https://github.com/xenkek/clover/blob/xenkek-patch-1/docs/ru/bound_by_fate.md)||
-||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](https://github.com/ssmith-81/clover/blob/MoCap_Clover/docs/en/mocap_clover.md)||
+||🇷🇺 Clover Cloud Team|[Clover Cloud Platform](../en/clover-cloud-platform.html)||
+||🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](../en/djs_phoenix_chetak.html)||
+||🇷🇺 C305|[Система радио-навигации](nav-beacon.md)||
+||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](../en/mocap_clover.html)||
 ||🇧🇷 Atena|[Swarm in Blocks 2](https://github.com/Grupo-SEMEAR-USP/clover/blob/swarm_in_blocks_2/docs/en/swarm_in_blocks_2.md)||
-||🇧🇾 FTL|[Advanced Clover 2](https://github.com/FTL-team/clover/blob/FTL-advancedClover3/docs/ru/advanced_clover_simulator_platform.md)||
-||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](https://github.com/Juli-Shvetsova/clover/blob/liceu128-1/docs/ru/liceu128.md)||
-||🇷🇺 Ava_Clover|[DoubleClover](https://github.com/bessiaka/clover/blob/Ava_Clover/docs/ru/soosocta.md)||
-||🇷🇺 TPU_1|[Совместная транспортировка груза](https://github.com/shamoleg/clover/blob/tpu_1/docs/ru/tpu_1.md)||
-||🇷🇺 TPU_2|[Алгоритм полета сквозь лесную местность](https://github.com/shamoleg/clover/blob/tpu_2/docs/ru/tpu_2.md)|&nbsp;|
+||🇧🇾 FTL|[Advanced Clover 2](../en/advanced_clover_simulator_platform.html)||
+||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](liceu128.md)||
+|✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
+|✕|🇷🇺 FSOTM|[Дрон-перехватчик](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
+|✕|🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
+|✕|🇷🇺 Digital otters|[Digital otters](https://github.com/Mentalsupernova/clover_cool/blob/new-article.md/docs/ru/new-article.md)||
+|✕|🇷🇺 Light Flight|[Сопровождение БПЛА при посадке](https://github.com/SirSerow/clover_inertial_ns/blob/inertial-1/Description.md)||
+|✕|🇰🇬 LiveSavers|[LiveSavers](https://github.com/Sarvar00/clover/blob/livesavers/docs/ru/livesaver.md)||
+|✕|🇷🇺 XenCOM|[Bound by fate](https://github.com/xenkek/clover/blob/xenkek-patch-1/docs/ru/bound_by_fate.md)||
+|✕|🇷🇺 Ava_Clover|[DoubleClover](https://github.com/bessiaka/clover/blob/Ava_Clover/docs/ru/soosocta.md)||
+|✕|🇷🇺 TPU_1|[Совместная транспортировка груза](https://github.com/shamoleg/clover/blob/tpu_1/docs/ru/tpu_1.md)||
+|✕|🇷🇺 TPU_2|[Алгоритм полета сквозь лесную местность](https://github.com/shamoleg/clover/blob/tpu_2/docs/ru/tpu_2.md)|&nbsp;|
 
 ## Этапы CopterHack 2023
 
