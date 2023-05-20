@@ -18,7 +18,7 @@ CopterHack 2023 — это международный конкурс по ра�
 ||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](../en/mocap_clover.html)||
 ||🇧🇷 Atena|[Swarm in Blocks 2](https://github.com/Grupo-SEMEAR-USP/clover/blob/swarm_in_blocks_2/docs/en/swarm_in_blocks_2.md)||
 ||🇧🇾 FTL|[Advanced Clover 2](../en/advanced_clover_simulator_platform.html)||
-||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](liceu128.md)||
+||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](../en/liceu128.html)||
 |✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
 |✕|🇷🇺 FSOTM|[Дрон-перехватчик](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
 |✕|🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||

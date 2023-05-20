@@ -18,7 +18,7 @@ The proposed projects are supposed to be open-source and be compatible with the 
 ||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](mocap_clover.md)||
 ||🇧🇷 Atena|[Swarm in Blocks 2](https://github.com/Grupo-SEMEAR-USP/clover/blob/swarm_in_blocks_2/docs/en/swarm_in_blocks_2.md)||
 ||🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator_platform.md)||
-||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](../ru/liceu128.html)||
+||🇷🇺 Lyceum №128|[Network of Clover charging stations](liceu128.md)||
 |✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
 |✕|🇷🇺 FSOTM|[Drone Interceptor](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
 |✕|🇰🇬 Homelesses|[Trash Collector](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
