@@ -34,13 +34,13 @@ This year, our team DJS Phoenix, presents to you a fully Autonomous Racing Drone
 
 ### Project Idea
 
-This project proposes to develop an autonomous racing drone that can navigate through complex courses at high speeds while avoiding obstacles and detecting changes in the environment.In racing competitions, autonomous drones can compete in high-speed, precision races that challenge their agility, speed, and accuracy. These competitions could be held in indoor arenas or outdoor tracks, and they could attract enthusiasts and spectators from all over the world. With their advanced capabilities, autonomous racing drones could usher in a new era of racing events that are more exciting and challenging than ever before.From racing competitions to search and rescue operations, the autonomous racing drone can be used in a wide range of applications that benefit individuals, businesses, and society as a whole.
+This project proposes to develop an autonomous racing drone that can navigate through complex courses at high speeds while avoiding obstacles and detecting changes in the environment. In racing competitions, autonomous drones can compete in high-speed, precision races that challenge their agility, speed, and accuracy. These competitions could be held in indoor arenas or outdoor tracks, and they could attract enthusiasts and spectators from all over the world. With their advanced capabilities, autonomous racing drones could usher in a new era of racing events that are more exciting and challenging than ever before. From racing competitions to search and rescue operations, the autonomous racing drone can be used in a wide range of applications that benefit individuals, businesses, and society as a whole.
 
 ## Potential Outcome
 
 ### Problem
 
-In many industries and applications, there is a need for fast, efficient, and safe movement of goods and information.Drones have become an increasingly popular tool for a wide range of applications, from aerial photography to surveying and monitoring. However, operating a drone requires a certain level of skill and experience, which can be a barrier for individuals or businesses who want to take advantage of this technology. Additionally, traditional drones can be expensive and time-consuming to operate, limiting their accessibility and effectiveness. Therefore, there is a need for a more user-friendly and affordable solution that can expand the use of drones to new audiences and applications.
+In many industries and applications, there is a need for fast, efficient, and safe movement of goods and information. Drones have become an increasingly popular tool for a wide range of applications, from aerial photography to surveying and monitoring. However, operating a drone requires a certain level of skill and experience, which can be a barrier for individuals or businesses who want to take advantage of this technology. Additionally, traditional drones can be expensive and time-consuming to operate, limiting their accessibility and effectiveness. Therefore, there is a need for a more user-friendly and affordable solution that can expand the use of drones to new audiences and applications.
 
 ### Solution
 
@@ -50,6 +50,6 @@ The solution to the above problem statement is an autonomous racing drone. An au
 
 ### Additional Information
 
-In 2017, a student committee for DJS Phoenix was formed. In India, our team has participated in a number of contests, including IDRL-IIT GandhiNagar (sixth rank), IDRL-SVPCET Nagpur(second rank) and TECHNOXIAN (second place out of 50 national teams) .In COPTERHACK-2021, our team participated, and we placed eighth internationally. We are back with improved concepts after learning from the previous season.
+In 2017, a student committee for DJS Phoenix was formed. In India, our team has participated in a number of contests, including IDRL-IIT GandhiNagar (sixth rank), IDRL-SVPCET Nagpur(second rank) and TECHNOXIAN (second place out of 50 national teams). In CopterHack-2021, our team participated, and we placed eighth internationally. We are back with improved concepts after learning from the previous season.
 
 For more information checkout gitbook: https://djs-phoenix.gitbook.io/chetak-faster-than-you-can-imagine/.

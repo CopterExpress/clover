@@ -26,7 +26,7 @@ The list of our team members:
 
 Clover Cloud Platform is an innovative platform that enables users to access COEX Clover drone simulation online, without the need to download any programs or virtual machines.
 
->**Visit our [documentation](https://docs.clovercloud.software) to learn all about the platform, its development and how to use it.**
+> **Note** Visit our [documentation](https://docs.clovercloud.software) to learn all about the platform, its development and how to use it.
 
 ## Unleash Your Coding Power: Develop Autonomous Flight Code at Lightning Speed on Clover Cloud Platform
 
@@ -41,9 +41,7 @@ So why wait to unleash your coding power? Sign up for our platform today and dis
 Our platform is incredibly user-friendly and provides seamless access to the simulation in just a few clicks. Together with a simulator that displays simulation data accurately and without delay, there is a map editor allows users to edit the ArUco marker map and add or modify other objects on the scene directly within the simulation window. Additionally, users can create pre-configured workspaces complete with autonomous flight code and simulation scene configuration. Each user can also create their templates or apply a pre-made one to their workspace in just a few clicks. In addition to its other features, Clover Cloud Platform provides users with a convenient code editor for autonomous flight coding. Users can write code in the built-in editor and run it directly from the editor, viewing program output in real-time in the terminal. The platform also includes a file manager that simplifies file manipulation tasks, further enhancing the user's overall experience. With these tools at your fingertips, Clover Cloud Platform delivers an unparalleled level of accessibility and convenience for autonomous flight simulation.
 
 <p align="center">
-
-![Workspace screenshot](https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/workspace.png)
-
+  <img src="https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/workspace.png" alt="Workspace screenshot">
 </p>
 
 ## The CodeSandbox for COEX Clover
@@ -65,9 +63,7 @@ After creating an account, you will be taken to the [dashboard](https://clovercl
 >Workspaces are containers with Gazebo simulator and our software that provide data flow for simulation visualization, as well as handle requests from file manager, code editor and terminal.
 
 <p align="center">
-
-![instance management](https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/instances.gif)
-
+  <img src="https://raw.githubusercontent.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/master/docs/instances.gif" alt="Instance management">
 </p>
 
 ### Workspace overview
@@ -75,9 +71,7 @@ After creating an account, you will be taken to the [dashboard](https://clovercl
 In the workspace, in addition to the simulator, you have a file manager, code editor and terminal. There is also an editing mode in the simulator - one of the key features of our project. It allows you to quickly and conveniently edit the simulation scene, namely: move ArUco markers, change their size, change id of the marker, load instead of marker picture, add new markers or delete them. You can also add 3d objects to the scene and change their position, size and color. Below is an example of working with our workspace.
 
 <p align="center">
-
-![workspace overview](https://github.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/raw/master/docs/workspace.gif)
-
+  <img src="https://github.com/Clover-Cloud-Platform/clover-cloud-platform-frontend/raw/master/docs/workspace.gif" alt="Workspace overview">
 </p>
 
 ### Templates
@@ -87,8 +81,11 @@ Templates are another key feature of our platform.Is there something you can't d
 ## About the development of the platform
 
 Our team has worked tirelessly to develop a simple yet multifunctional platform. We utilized the most modern standards and tools and implemented numerous optimization methods to ensure seamless performance and error-free operation. The frontend programming language chosen was JavaScript with the React framework, as a design system we utilizing Material Design style for an elegant and intuitive user interface. With the help of GitHub Actions the website is being built and deployed to Firebase hosting. The platform's backend is written in Python and contains multiple simultaneously running scripts. User data is secured and stored in a MongoDB database. Communication between the server and site is enabled through web sockets and the socket.io library, guaranteeing lightning-fast data transfer with minimal lag.
->You can view the source code of our platform by clicking on the links below.<br/>
-[Repository with the frontend-side code](https://github.com/Clover-Cloud-Platform/clover-cloud-platform-frontend)<br/>
+
+You can view the source code of our platform by clicking on the links below:
+
+[Repository with the frontend-side code](https://github.com/Clover-Cloud-Platform/clover-cloud-platform-frontend)
+
 [Repository with the backend-side code](https://github.com/Clover-Cloud-Platform/clover-cloud-platform-backend)
 
 ## Conclusion

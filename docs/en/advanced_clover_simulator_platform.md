@@ -46,26 +46,33 @@ The CloverSim platform offers a seamless workflow for users:
 
 1. Users can effortlessly select or create a workspace and task and
    launch them with ease.
+
    ![Step 1 screenshot](../assets/ftl/acp_workflow1.png)
+
 2. After launching the simulation, users are presented with CloverSim WebUI that
    provides them with an intuitive way to view their scores and progress,
    control the simulator, and access task descriptions and scoring information.
    From it users can open terminal, gzweb and more importantly they can easily
    access the CloverSim IDE to solve task.
+
    ![Step 2 screenshot](../assets/ftl/acp_workflow2.png)
+
 3. The IDE provides a full suite of tools and features for writing and
    debugging code. One example is autocompletion to help streamline the
    development process, making it more efficient and effective.
+
    ![Step 3 screenshot](../assets/ftl/acp_workflow3.png)
+
 4. Users can launch their programs with ease and monitor its progress via
    the GZWeb, CopterStatus, and SimulatorStatus views of the IDE.
+
    ![Step 4 screenshot](../assets/ftl/acp_workflow4.png)
 
 5. Users can track their progress and scores in real-time and effortlessly
   restart the simulator if necessary. Additionally, different randomization
   seed can be set to check various inputs and outcomes.
 
-We also have video demonstration/tutorial: [link](https://www.youtube.com/watch?v=aPOPHD3M3ZM)
+We also have video demonstration/tutorial: [link](https://www.youtube.com/watch?v=aPOPHD3M3ZM).
 
 ## More features
 

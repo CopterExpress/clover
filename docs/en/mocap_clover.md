@@ -28,7 +28,7 @@ The list of team members:
 ## Educational Document {#item-two}
 
 **My Gitbook, with detailed step by step analysis of the proposed project during the CopterHack 2023 competition can be found:**
-[MoCap Clover Gitbook](https://0406hockey.gitbook.io/mocap-clover/)
+[MoCap Clover Gitbook](https://0406hockey.gitbook.io/mocap-clover/).
 
 This page gives a broad overview on the motivation and purpose behind this project, it also provides research and industry based knowledge around UAV application that the reader may find interesting. If the user is interested in the technical details and implementation then refer to the educational Gitbook document.
 
