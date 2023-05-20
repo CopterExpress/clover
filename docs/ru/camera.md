@@ -1,6 +1,6 @@
 # Работа с камерой
 
-> **Note** Документация для версий [образа](image.md), начиная с версии **0.24**. Для более ранних версий см. [документацию для версии **0.23**](https://github.com/CopterExpress/clover/blob/v0.23/docs/ru/camera.md).
+> **Note** Эта статья описывает работу с [образом версии **0.24**](https://github.com/CopterExpress/clover/releases/tag/v0.24), который пока находится в стадии тестирования. Для версии **0.23** доступна [более старая документация](https://github.com/CopterExpress/clover/blob/f78a03ec8943b596d5a99b893188a159d5319888/docs/ru/camera.md).
 
 <!-- TODO: физическое подключение -->
 
