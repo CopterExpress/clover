@@ -44,7 +44,7 @@ In case of using EKF2 (official firmware):
 |`EKF2_OF_QMIN`|10||
 |`EKF2_OF_N_MIN`|0.05||
 |`EKF2_OF_N_MAX`|0.2||
-|`EKF2_HGT_MODE`|2 (*Range sensor*)|If the [rangefinder](laser.md) is present and flying over horizontal floor|
+|`EKF2_HGT_MODE`|3 (*Vision*)|If the [rangefinder](laser.md) is present and flying over horizontal floor – 2 (*Range sensor*)|
 |`EKF2_EVA_NOISE`|0.1||
 |`EKF2_EVP_NOISE`|0.1||
 |`EKF2_EV_DELAY`|0||
@@ -60,8 +60,8 @@ The `SYS_MC_EST_GROUP` parameter defines the estimator subsystem to use.
 
 Estimator subsystem is a group of modules that calculates the current state of the copter using readings from the sensors. The copter state includes:
 
-* Angle rate of the copter – pitch_rate, roll_rate, yaw_rate;
-* Copter orientation (in the local coordinate system) – pitch, roll, yaw (one of presentations);
+* Angle rate of the copter – roll_rate, pitch_rate, yaw_rate;
+* Copter orientation (in the local coordinate system) – roll, pitch, yaw (one of presentations);
 * Copter position (in the local coordinate system) – x, y, z;
 * Copter speed (in the local coordinate system) – vx, vy, vz;
 * Global coordinates of the copter – latitude, longitude, altitude;

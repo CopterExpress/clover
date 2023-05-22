@@ -120,6 +120,7 @@
   * [Конкурс видео](video_contest.md)
   * [Образовательные конкурсы](educational_contests.md)
 * [Проекты на базе Клевера](projects.md)
+  * [Система радионавигации](nav-beacon.md)
   * [Advanced Clover Simulator](advanced_clover_simulator.md)
   * [Copter For Space](c4s.md)
   * [CopterCat CM4](copter_cat.md)

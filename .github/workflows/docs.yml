@@ -11,10 +11,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 defaults:
   run:
     shell: bash
@@ -75,6 +71,9 @@ jobs:
 
   deploy-docs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    concurrency:
+        group: "pages"
+        cancel-in-progress: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -82,5 +81,8 @@ jobs:
     needs: docs
     steps:
       - name: Deploy to GitHub Pages
+        env:
+          FREEZE_DOCS: ${{ secrets.FREEZE_DOCS }}
+        if: ${{ !env.FREEZE_DOCS }}
         id: deployment
         uses: actions/deploy-pages@v1

@@ -1,5 +1,7 @@
 # Автономный полет
 
+> **Note** Эта статья описывает работу с [образом версии **0.24**](https://github.com/CopterExpress/clover/releases/tag/v0.24), который пока находится в стадии тестирования. Для версии **0.23** доступна [более старая документация](https://github.com/CopterExpress/clover/blob/f78a03ec8943b596d5a99b893188a159d5319888/docs/ru/simple_offboard.md).
+
 Модуль `simple_offboard` пакета `clover` предназначен для упрощенного программирования автономного полета дрона ([режим](modes.md) `OFFBOARD`). Он позволяет устанавливать желаемые полетные задачи и автоматически трансформирует [систему координат](frames.md).
 
 `simple_offboard` является высокоуровневым способом взаимодействия с полетным контроллером. Для более низкоуровневой работы см. [mavros](mavros.md).
@@ -20,6 +22,9 @@ rospy.init_node('flight')
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
+set_altitude = rospy.ServiceProxy('set_altitude', srv.SetAltitude)
+set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)
+set_yaw_rate = rospy.ServiceProxy('set_yaw_rate', srv.SetYawRate)
 set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
 set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
@@ -51,11 +56,11 @@ land = rospy.ServiceProxy('land', Trigger)
 * `lat, lon` – широта, долгота *(градусы)*, необходимо наличие [GPS](gps.md);
 * `alt` – высота в глобальной системе координат (стандарт [WGS-84](https://ru.wikipedia.org/wiki/WGS_84), не <abbr title="Above Mean Sea Level, выше среднего уровня моря">AMSL</abbr>!), необходимо наличие [GPS](gps.md);
 * `vx, vy, vz` – скорость коптера *(м/с)*;
-* `pitch` – угол по тангажу *(радианы)*;
 * `roll` – угол по крену *(радианы)*;
+* `pitch` – угол по тангажу *(радианы)*;
 * `yaw` – угол по рысканью *(радианы)*;
-* `pitch_rate` – угловая скорость по тангажу *(рад/с)*;
 * `roll_rate` – угловая скорость по крену *(рад/с)*;
+* `pitch_rate` – угловая скорость по тангажу *(рад/с)*;
 * `yaw_rate` – угловая скорость по рысканью *(рад/с)*;
 * `voltage` – общее напряжение аккумулятора *(В)*;
 * `cell_voltage` – напряжение аккумулятора на ячейку *(В)*.
@@ -100,7 +105,6 @@ rosservice call /get_telemetry "{frame_id: ''}"
 
 * `x`, `y`, `z` – координаты *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
-* `yaw_rate` – угловая скорость по рысканью (применяется при установке yaw в `NaN`) *(рад/с)*;
 * `speed` – скорость полета (скорость движения setpoint) *(м/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 * `frame_id` – [система координат](frames.md), в которой заданы `x`, `y`, `z` и `yaw` (по умолчанию: `map`).
@@ -119,7 +123,7 @@ navigate(x=0, y=0, z=1.5, speed=0.5, frame_id='body', auto_arm=True)
 navigate(x=5, y=0, z=3, speed=0.8)
 ```
 
-Полет в точку 5:0 без изменения угла по рысканью (`yaw` = `NaN`, `yaw_rate` = 0):
+Полет в точку 5:0 без изменения угла по рысканью:
 
 ```python
 navigate(x=5, y=0, z=3, speed=0.8, yaw=float('nan'))
@@ -149,22 +153,10 @@ navigate(yaw=math.radians(-90), frame_id='body')
 navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map')
 ```
 
-Вращение на месте со скоростью 0.5 рад/c (против часовой):
-
-```python
-navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='body')
-```
-
-Полет вперед 3 метра со скоростью 0.5 м/с, вращаясь по рысканью со скоростью 0.2 рад/с:
-
-```python
-navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='body')
-```
-
 Взлет на высоту 2 м (командная строка):
 
 ```bash
-rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
+rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
 ```
 
 > **Note** При программировании миссии дрона в терминах "вперед-назад-влево-вправо" рекомендуется использовать систему координат `navigate_target` вместо `body`, чтобы не учитывать неточность прилета дрона в предыдущую целевую точку при вычислении следующей.
@@ -178,12 +170,11 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed
 * `lat`, `lon` – широта и долгота *(градусы)*;
 * `z` – высота *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
-* `yaw_rate` – угловая скорость по рысканью (при установке yaw в `NaN`) *(рад/с)*;
 * `speed` – скорость полета (скорость движения setpoint) *(м/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 * `frame_id` – [система координат](frames.md), в которой заданы `z` и `yaw` (по умолчанию: `map`).
 
-> **Note** Для полета без изменения угла по рысканью достаточно установить `yaw` в `NaN` (значение угловой скорости по умолчанию – 0).
+> **Note** Для полета без изменения угла по рысканью достаточно установить `yaw` в `NaN`.
 
 Полет в глобальную точку со скоростью 5 м/с, оставаясь на текущей высоте (`yaw` установится в 0, коптер сориентируется передом на восток):
 
@@ -191,7 +182,7 @@ rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed
 navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='body')
 ```
 
-Полет в глобальную точку без изменения угла по рысканью (`yaw` = `NaN`, `yaw_rate` = 0):
+Полет в глобальную точку без изменения угла по рысканью:
 
 ```python
 navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), frame_id='body')
@@ -200,7 +191,71 @@ navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), fr
 Полет в глобальную точку (командная строка):
 
 ```bash
-rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
+rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
+```
+
+### set_altitude
+
+Изменить целевую высоту полета. Сервис используется для независимой установки высоты (и системы координат для расчета высота) в режимах полета [`navigate`](#navigate) и [`set_position`](#setposition).
+
+Параметры:
+
+* `z` – высота полета *(м)*;
+* `frame_id` – [система координат](frames.md) для расчета высоты полета.
+
+Установить высоту полета в 2 м относительно пола:
+
+```python
+set_altitude(z=2, frame_id='terrain')
+```
+
+Установить высоту полета в 1 м относительно [маркерного поля](aruco.md):
+
+```python
+set_altitude(z=1, frame_id='aruco_map')
+```
+
+### set_yaw
+
+Изменить целевой угол по рысканью (и систему координат для его расчета), оставив предыдущую команду в силе.
+
+Параметры:
+
+* yaw – угол по рысканью *(радианы)*;
+* frame_id – [система координат](frames.md) для расчета угла по рысканью.
+
+Повернуться на 90 градусов по часовой (продолжая выполнять предыдущую команду):
+
+```python
+set_yaw(yaw=math.radians(-90), frame_id='body')
+```
+
+Установить угол по рысканью в ноль в системе координат [маркерного поля](aruco.md):
+
+```python
+set_yaw(yaw=0, frame_id='aruco_map')
+```
+
+Остановить вращение по рысканью (при использовании [`set_yaw_rate`](#setyawrate)):
+
+```python
+set_yaw(yaw=float('nan'))
+```
+
+### set_yaw_rate
+
+Изменить целевую угловую скорость по рысканью, оставив предыдущую команду в силе.
+
+Параметры:
+
+* yaw_rate – угловая скорость по рысканью *(рад/с)*.
+
+Положительное направление вращения (при виде сверху) – против часовой.
+
+Начать вращение на месте со скоростью 0.5 рад/c против часовой (продолжая выполнять предыдущую команду):
+
+```python
+set_yaw_rate(yaw_rate=0.5)
 ```
 
 ### set_position
@@ -213,7 +268,6 @@ rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 
 
 * `x`, `y`, `z` – координаты точки *(м)*;
 * `yaw` – угол по рысканью *(радианы)*;
-* `yaw_rate` – угловая скорость по рысканью (при установке yaw в NaN) *(рад/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 * `frame_id` – [система координат](frames.md), в которой заданы `x`, `y`, `z` и `yaw` (по умолчанию: `map`).
 
@@ -235,19 +289,12 @@ set_position(x=0, y=0, z=3, frame_id='body')
 set_position(x=1, y=0, z=0, frame_id='body')
 ```
 
-Вращение на месте со скоростью 0.5 рад/c:
-
-```python
-set_position(x=0, y=0, z=0, frame_id='body', yaw=float('nan'), yaw_rate=0.5)
-```
-
 ### set_velocity
 
 Установить скорости и рысканье.
 
 * `vx`, `vy`, `vz` – требуемая скорость полета *(м/с)*;
 * `yaw` – угол по рысканью *(радианы)*;
-* `yaw_rate` – угловая скорость по рысканью (при установке yaw в NaN) *(рад/с)*;
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 * `frame_id` – [система координат](frames.md), в которой заданы `vx`, `vy`, `vz` и `yaw` (по умолчанию: `map`).
 
@@ -265,7 +312,7 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 
 Параметры:
 
-* `pitch`, `roll`, `yaw` – необходимый угол по тангажу, крену и рысканью *(радианы)*;
+* `roll`, `pitch`, `yaw` – необходимый угол по тангажу, крену и рысканью *(радианы)*;
 * `thrust` – уровень газа от 0 (нет газа, пропеллеры остановлены) до 1 (полный газ);
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 * `frame_id` – [система координат](frames.md), в которой задан `yaw` (по умолчанию: `map`).
@@ -276,7 +323,7 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 
 Параметры:
 
-* `pitch_rate`, `roll_rate`, `yaw_rate` – угловая скорость по тангажу, крену и рыканью *(рад/с)*;
+* `roll_rate`, `pitch_rate`, `yaw_rate` – угловая скорость по тангажу, крену и рыканью *(рад/с)*;
 * `thrust` – уровень газа от 0 (нет газа, пропеллеры остановлены) до 1 (полный газ).
 * `auto_arm` – перевести коптер в `OFFBOARD` и заармить автоматически (**коптер взлетит**);
 

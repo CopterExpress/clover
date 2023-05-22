@@ -49,7 +49,7 @@ echo_stamp() {
 my_travis_retry() {
   local result=0
   local count=1
-  local max_count=50
+  local max_count=5
   while [ $count -le $max_count ]; do
     [ $result -ne 0 ] && {
       echo -e "\nThe command \"$@\" failed. Retrying, $count of $max_count.\n" >&2
@@ -150,6 +150,9 @@ catkin_make run_tests #&& catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
+
+echo_stamp "Update www"
+sudo -u pi sh -c ". devel/setup.sh && rosrun clover www"
 
 echo_stamp "Make \$HOME/examples symlink"
 ln -s "$(catkin_find clover examples --first-only)" /home/pi

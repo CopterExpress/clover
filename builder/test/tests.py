@@ -2,6 +2,7 @@
 
 # validate all required modules installed
 
+import os
 import rospy
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import Range, BatteryState
@@ -22,6 +23,7 @@ from clover.srv import GetTelemetry, Navigate, NavigateGlobal, SetPosition, SetV
 from led_msgs.srv import SetLEDs
 from led_msgs.msg import LEDStateArray, LEDState
 from aruco_pose.msg import Marker, MarkerArray, Point2D
+from clover import long_callback
 
 import dynamic_reconfigure.client
 
@@ -31,9 +33,14 @@ import tf2_geometry_msgs
 import VL53L1X
 import pymavlink
 from pymavlink import mavutil
-import rpi_ws281x
-import pigpio
 # from espeak import espeak
 from pyzbar import pyzbar
+import docopt
+import geopy
+import flask
 
 print(cv2.getBuildInformation())
+
+if not os.environ.get('VM'):
+    import rpi_ws281x
+    import pigpio

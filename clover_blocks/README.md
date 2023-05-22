@@ -47,6 +47,7 @@ http://<hostname>/clover_blocks/?navigate_tolerance=0.5&sleep_time=0.1
 
 * `~running` ([*std_msgs/Bool*](http://docs.ros.org/noetic/api/std_msgs/html/msg/Bool.html)) – indicates if the program is currently running.
 * `~block` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – current executing block (maximum topic rate is limited).
+* `~print` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – user program output messages (published in *print* blocks).
 * `~error` ([*std_msgs/String*](http://docs.ros.org/noetic/api/std_msgs/html/msg/String.html)) – user program errors and exceptions.
 * `~prompt` ([*clover_blocks/Prompt*](msg/Prompt.msg)) – user input request (includes random request ID string).
 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+    <model name="red_circle">
+        <static>true</static>
+        <link name="red_circle_link">
+            <pose>0 0 1e-3 0 0 0</pose>
+            <visual name="red_circle_texture">
+                <cast_shadows>false</cast_shadows>
+                <geometry>
+                    <box>
+                        <size>0.4 0.4 1e-3</size>
+                    </box>
+                </geometry>
+                <material>
+                    <script>
+                        <uri>model://red_circle/materials/scripts</uri>
+                        <uri>model://red_circle/materials/textures</uri>
+                        <name>red_circle</name>
+                    </script>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>

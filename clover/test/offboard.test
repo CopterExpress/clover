@@ -1,0 +1,10 @@
+<launch>
+    <node name="simple_offboard" pkg="clover" type="simple_offboard" required="true" output="screen"/>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="test_frame" args="10 20 30 0 0 0 map test"/>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="test2_frame" args="100 200 300 0 0 0 map test2"/>
+
+    <param name="test_module" value="$(find clover)/test/offboard.py"/>
+    <test test-name="offboard_test" pkg="ros_pytest" type="ros_pytest_runner"/>
+</launch>

@@ -1,5 +1,7 @@
 # Autonomous flight
 
+> **Note** The following applies to the [image version **0.24**](https://github.com/CopterExpress/clover/releases/tag/v0.24), which is not yet released. Older documentation is still available for [for version **0.23**](https://github.com/CopterExpress/clover/blob/f78a03ec8943b596d5a99b893188a159d5319888/docs/en/simple_offboard.md).
+
 The `simple_offboard` module of the `clover` package is intended for simplified programming of the autonomous drone flight (`OFFBOARD` [flight mode](modes.md)). It allows setting the desired flight tasks, and automatically transforms [coordinates between frames](frames.md).
 
 `simple_offboard` is a high level system for interacting with the flight controller. For a more low level system, see [mavros](mavros.md).
@@ -20,6 +22,9 @@ rospy.init_node('flight') # 'flight' is name of your ROS node
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
+set_altitude = rospy.ServiceProxy('set_altitude', srv.SetAltitude)
+set_yaw = rospy.ServiceProxy('set_yaw', srv.SetYaw)
+set_yaw_rate = rospy.ServiceProxy('set_yaw_rate', srv.SetYawRate)
 set_position = rospy.ServiceProxy('set_position', srv.SetPosition)
 set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
@@ -51,11 +56,11 @@ Response format:
 * `lat, lon` – drone latitude and longitude *(degrees)*, requires [GPS](gps.md) module;
 * `alt` – altitude in the global coordinate system (according to [WGS-84](https://ru.wikipedia.org/wiki/WGS_84) standard, not <abbr title="Above Mean Sea Level">AMSL</abbr>!), requires [GPS](gps.md) module;
 * `vx, vy, vz` – drone velocity *(m/s)*;
-* `pitch` – pitch angle *(radians)*;
 * `roll` – roll angle *(radians)*;
+* `pitch` – pitch angle *(radians)*;
 * `yaw` — yaw angle *(radians)*;
-* `pitch_rate` — angular pitch velocity *(rad/s)*;
 * `roll_rate` – angular roll velocity *(rad/s)*;
+* `pitch_rate` — angular pitch velocity *(rad/s)*;
 * `yaw_rate` – angular yaw velocity *(rad/s)*;
 * `voltage` – total battery voltage *(V)*;
 * `cell_voltage` – battery cell voltage *(V)*.
@@ -100,7 +105,6 @@ Parameters:
 
 * `x`, `y`, `z` — coordinates *(m)*;
 * `yaw` — yaw angle *(radians)*;
-* `yaw_rate` – angular yaw velocity (will be used if yaw is set to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for values `x`, `y`, `z` and `yaw`. Example: `map`, `body`, `aruco_map`. Default value: `map`.
@@ -119,7 +123,7 @@ Flying in a straight line to point 5:0 (altitude 2) in the local system of coord
 navigate(x=5, y=0, z=3, speed=0.8)
 ```
 
-Flying to point 5:0 without changing the yaw angle (`yaw` = `NaN`, `yaw_rate` = 0):
+Flying to point 5:0 without changing the yaw angle:
 
 ```python
 navigate(x=5, y=0, z=3, speed=0.8, yaw=float('nan'))
@@ -149,22 +153,10 @@ Flying to point 3:2 (with the altitude of 2 m) in the [ArUco map](aruco.md) coor
 navigate(x=3, y=2, z=2, speed=1, frame_id='aruco_map')
 ```
 
-Rotating on the spot at the speed of 0.5 rad/s (counterclockwise):
-
-```python
-navigate(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0.5, frame_id='body')
-```
-
-Flying 3 meters forwards at the speed of 0.5 m/s, yaw-rotating at the speed of 0.2 rad/s:
-
-```python
-navigate(x=3, y=0, z=0, speed=0.5, yaw=float('nan'), yaw_rate=0.2, frame_id='body')
-```
-
 Ascending to the altitude of 2 m (command line):
 
 ```(bash)
-rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, yaw_rate: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
+rosservice call /navigate "{x: 0.0, y: 0.0, z: 2, yaw: 0.0, speed: 0.5, frame_id: 'body', auto_arm: true}"
 ```
 
 > **Note** Consider using the `navigate_target` frame instead of `body` for missions that primarily use relative movements forward/back/left/right. This negates inaccuracies in relative point calculations.
@@ -178,7 +170,6 @@ Parameters:
 * `lat`, `lon` — latitude and longitude *(degrees)*;
 * `z` — altitude *(m)*;
 * `yaw` — yaw angle *(radians)*;
-* `yaw_rate` – angular yaw velocity (used for setting the yaw to `NaN`) *(rad/s)*;
 * `speed` – flight speed (setpoint speed) *(m/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for `z` and `yaw` (Default value: `map`).
@@ -191,7 +182,7 @@ Flying to a global point at the speed of 5 m/s, while maintaining current altitu
 navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, frame_id='body')
 ```
 
-Flying to a global point without changing the yaw angle (`yaw` = `NaN`, `yaw_rate` = 0):
+Flying to a global point without changing the yaw angle:
 
 ```python
 navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), frame_id='body')
@@ -200,7 +191,71 @@ navigate_global(lat=55.707033, lon=37.725010, z=0, speed=5, yaw=float('nan'), fr
 Flying to a global point (command line):
 
 ```bash
-rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, yaw_rate: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
+rosservice call /navigate_global "{lat: 55.707033, lon: 37.725010, z: 0.0, yaw: 0.0, speed: 5.0, frame_id: 'body', auto_arm: false}"
+```
+
+### set_altitude
+
+Change the desired flight altitude. The service is used to set the altitude and its coordinate system independently, after calling [`navigate`](#navigate) or [`set_position`](#setposition).
+
+Parameters:
+
+* `z` – flight altitude *(m)*;
+* `frame_id` – [coordinate system](frames.md) for computing the altitude.
+
+Set the desired altitude to 2 m relative to the floor:
+
+```python
+set_altitude(z=2, frame_id='terrain')
+```
+
+Set the desired altitude to 1 m relative to [the ArUco map](aruco.md):
+
+```python
+set_altitude(z=1, frame_id='aruco_map')
+```
+
+### set_yaw
+
+Change the desired yaw angle (and its coordinate system), keeping the previous command in effect.
+
+Parameters:
+
+* `yaw` — yaw angle *(radians)*;
+* `frame_id` – [coordinate system](frames.md) for computing the yaw.
+
+Rotate by 90 degrees clockwise (the previous command continues):
+
+```python
+set_yaw(yaw=math.radians(-90), frame_id='body')
+```
+
+Set the desired yaw angle to zero relative to [the ArUco map](aruco.md):
+
+```python
+set_yaw(yaw=0, frame_id='aruco_map')
+```
+
+Stop yaw rotation (caused by [`set_yaw_rate`](#setyawrate) call):
+
+```python
+set_yaw(yaw=float('nan'))
+```
+
+### set_yaw_rate
+
+The the desired angular yaw velocity, keeping the previous command in effect.
+
+Parameters:
+
+* `yaw_rate` – angular yaw velocity *(rad/s)*;
+
+The positive direction of `yaw_rate` rotation (when viewed from the top) is counterclockwise.
+
+Start yaw rotation at 0.5 rad/s (the previous command continues):
+
+```python
+set_yaw_rate(yaw_rate=0.5)
 ```
 
 ### set_position
@@ -213,7 +268,6 @@ Parameters:
 
 * `x`, `y`, `z` — point coordinates *(m)*;
 * `yaw` — yaw angle *(radians)*;
-* `yaw_rate` – angular yaw velocity (used for setting the yaw to NaN) *(rad/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for `x`, `y`, `z` and `yaw` parameters (Default value: `map`).
 
@@ -235,19 +289,12 @@ Assigning the target point 1 m ahead of the current position:
 set_position(x=1, y=0, z=0, frame_id='body')
 ```
 
-Rotating on the spot at the speed of 0.5 rad/s:
-
-```python
-set_position(x=0, y=0, z=0, frame_id='body', yaw=float('nan'), yaw_rate=0.5)
-```
-
 ### set_velocity
 
 Set speed and yaw setpoints.
 
 * `vx`, `vy`, `vz` – flight speed *(m/s)*;
 * `yaw` — yaw angle *(radians)*;
-* `yaw_rate` – angular yaw velocity (used for setting the yaw to NaN) *(rad/s)*;
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for `vx`, `vy`, `vz` and `yaw` (Default value: `map`).
 
@@ -261,26 +308,26 @@ set_velocity(vx=1, vy=0.0, vz=0, frame_id='body')
 
 ### set_attitude
 
-Set pitch, roll, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
+Set roll, pitch, yaw and throttle level (similar to [the `STABILIZED` mode](modes.md)). This service may be used for lower level control of the drone behavior, or controlling the drone when no reliable data on its position is available.
 
 Parameters:
 
-* `pitch`, `roll`, `yaw` – requested pitch, roll, and yaw angle *(radians)*;
+* `roll`, `pitch`, `yaw` – requested roll, pitch, and yaw angle *(radians)*;
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` mode and arm automatically (**the drone will take off**);
 * `frame_id` – [coordinate system](frames.md) for `yaw` (Default value: `map`).
 
 ### set_rates
 
-Set pitch, roll, and yaw rates and the throttle level (similar to [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform aerobatic tricks (e.g., flips).
+Set roll, pitch, and yaw rates and the throttle level (similar to [the `ACRO` mode](modes.md)). This is the lowest drone control level (excluding direct control of motor rotation speed). This service may be used to automatically perform aerobatic tricks (e.g., flips).
 
 Parameters:
 
-* `pitch_rate`, `roll_rate`, `yaw_rate` – pitch, roll, and yaw rates *(rad/s)*;
+* `roll_rate`, `pitch_rate`, `yaw_rate` – pitch, roll, and yaw rates *(rad/s)*;
 * `thrust` — throttle level, ranges from 0 (no throttle, propellers are stopped) to 1 (full throttle).
 * `auto_arm` – switch the drone to `OFFBOARD` and arm automatically (**the drone will take off**);
 
-The positive direction of `yaw_rate` rotation (when viewed from the top) is counterclockwise,`pitch_rate` rotation is forward, `roll_rate` rotation is to the left.
+The positive direction of `yaw_rate` rotation (when viewed from the top) is counterclockwise, `pitch_rate` rotation is forward, `roll_rate` rotation is to the left.
 
 ### land
 

@@ -31,7 +31,7 @@ param set-default EKF2_OF_DELAY 0
 param set-default EKF2_OF_QMIN 10
 param set-default EKF2_OF_N_MIN 0.05
 param set-default EKF2_OF_N_MAX 0.2
-param set-default EKF2_HGT_MODE 2 # 0 = baro, 1 = gps, 2 = range, 3 = vision
+param set-default EKF2_HGT_MODE 3 # 0 = baro, 1 = gps, 2 = range, 3 = vision
 param set-default EKF2_EVA_NOISE 0.1
 param set-default EKF2_EVP_NOISE 0.1
 param set-default EKF2_EV_DELAY 0
