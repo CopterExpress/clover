@@ -233,7 +233,7 @@ Atena Team 2023 (Swarm in Blocks 2.0):
 - Nathan Fernandes Vilas Boas : [Github](https://github.com/uspnathan), [LinkedIn](https://www.linkedin.com/mwlite/in/nathan-fernandes-vilas-boas-047616262)
 
 <p align="center">
-    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/atena_team.jpg"/>
+    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/atena_team.JPG"/>
 </p>
 
 
