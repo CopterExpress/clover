@@ -1,10 +1,11 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
-<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/swarm_in_blocks_2/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
+<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/swarm_in_blocks_2/capa_swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
   <br /><br /><strong>Swarm in Blocks</strong>
 </h1>
 
 <!-- markdownlint-disable -->
 ## Project Status[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#project-status)
+
 <table class="no-border">
   <tr>
     <td><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Grupo-SEMEAR-USP/swarm_in_blocks"></td>
@@ -16,6 +17,7 @@
 </table>
 
 ## Final Video ![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)
+
 <p align="center">
   <a href="https://www.youtube.com/watch?v=QFKgrqIAO1E&ab_channel=SwarminBlocks" title="Final Video 2023"><img img width="500" height="281" src="https://img.youtube.com/vi/QFKgrqIAO1E/maxresdefault.jpg" /></a>
 </p>
@@ -23,6 +25,7 @@
 ---
 
 ## Table of contents[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#table-of-contents)
+
 - [Introduction](#Introduction)
 - [Getting started](#getting-started)
 - [Usage modes](#Usage-modes)
@@ -39,7 +42,7 @@ Swarm in Blocks (from it's origin in 2022) was born looking to make a *high-leve
 In 2023, Swarm in Blocks has taken an even bigger step, looking to fulfill our biggest vision **"It's never been easier to Swarm"**, we talk to transcend the local scope of the past project and explore the biggest problems for implementing a Swarm. For Copterhack 2023, we present Swarm in Blocks 2.0, an even more complete platform with the purpose of facing the biggest difficulties of a Swarm in a simple and polished way.
 
 <p align="center">
-    <img width="600" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/intro/clovers_leds.gif" />
+    <img width="600" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/intro/clovers_leds.gif" />
 </p>
 
 ### Swarm in Blocks 2022
@@ -49,11 +52,11 @@ In 2023, Swarm in Blocks has taken an even bigger step, looking to fulfill our b
 Swarm in Blocks is a CopterHack 2022 project. It's a high-level interface based on the blocks language, which consists of fitting code parts, like a puzzle. Each script represents a functionality, for example, conditional structures, loops, or functions that receive parameters and return an instruction to the swarm.
 
 <p align="center">
-    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/intro/blocksIDE.gif" />
+    <img width="500" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/intro/blocksIDE.gif" />
 </p>
 
 <p align="center">
-    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/intro/ring.gif" />
+    <img width="500" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/intro/ring.gif" />
 </p>
 
 
@@ -70,7 +73,7 @@ As already mentioned, of the various problems that can increase the complexity o
 | Problem | Our Solution |
 | -------- | -------- |
 | Possible collision between drones (lack of safety especially for large Swarms)  | Collision Avoidance System  |
-| Giant clutter to keep track of all Clovers in a swarm individually (several terminals, many simulateneous computers with several people to keep track of)  | Swarm Station  |
+| Giant clutter to keep track of all Clovers in a swarm individually (several terminals, many simultaneous computers with several people to keep track of)  | Swarm Station  |
 | Lack of basic features for handling a swarm pre-implemented in the Clover platform (such as access to battery data and raspberry computational power)  | Full integration of low level data in our Swarm Station  |
 | Lack of security in indoor tests regarding the limitation of physical space (walls and objects) in the Swarm region  | Safe Area Pop Up in Swarm Station  |
 | Decentralization of information and platforms for access  | Web Homepage  |
@@ -125,7 +128,7 @@ With our vision of solving the problems that most plague the deployment of a rea
 Like last year, we really wanted to make it easier for the user to go through our platform. That's why this year we decided to restructure our Homepage, gathering our main features and functionalities.
 
 <p align="center">
-    <img width="700" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/homepage/homepage.gif"/>
+    <img width="700" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/homepage/homepage.gif"/>
 </p>
 
 ### Swarm Station
@@ -134,7 +137,7 @@ Like last year, we really wanted to make it easier for the user to go through ou
 The main feature from our platform is the *Swarm Station*, which is a **3d Web Visualizer** that shows in real time all the necessary information regarding the drones state, such as real time positioning and visualization, which clover is connected, the topics available and a lot more. Also, you can define a safe area to ensure each drones safety, forcing them to land in case they cross the forbidden area. The front end runs completely on the web browser, saving processing and installation resources. It also comes with a web terminal, allowing the user to open several instances of a terminal emulation in just one click.
 
 <p align="center">
-    <img width="700" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/swarm_station/vid01.gif"/>
+    <img width="700" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/swarm_station/vid01.gif"/>
 </p>
 
 This package uses the ROS suite `rosbridge_server` to establish a communication between the ROS environment and the web server.
@@ -162,7 +165,7 @@ To turn on the collision avoidance, it is necessary to run:
     rosrun swarm_collision_avoidance swarm_collision_avoidance_node.py
 
 <p align="center">
-    <img width="600" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/collision.gif" />
+    <img width="600" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/collision.gif" />
 </p>
 
 
@@ -177,7 +180,7 @@ The Raspberry package was developed to instantiate a node that will be responsib
 This package is a reformulation of one of the CopterHack 2022 implementations, the **Swarm First Person Viewer**. This year, we decided to restart its structure, making it run also completely on the web to integrate with the Swarm Station. It also depends on the `rosbridge_websocket` running on the port `9090` (default).
 
 <p align="center">
-    <img width="600" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/fpv_2023.gif"/>
+    <img width="600" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/fpv_2023.gif"/>
 </p>
 
 
@@ -196,7 +199,7 @@ To launch it, you need to first stop clover's default daemon, and then connect a
 
 
 <p align="center">
-    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/swarm_real/swarm.gif"/>
+    <img width="500" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/swarm_real/swarm.gif"/>
 </p>
 
 > **Note:** We are aware that in the video the calibration of the drone control is not ideal, however, the objective of this test was really to validate the operation of the swarm in a real environment (which was actually done).
@@ -220,6 +223,7 @@ Finally, we thank the entire COEX team that made CopterHack 2023 possible and al
 <div align="right">[ <a href="#table-of-contents">↑ to top ↑</a> ]</div>
 
 ---
+
 ## The Atena Team
 
 Atena Team 2023 (Swarm in Blocks 2.0):
@@ -233,9 +237,8 @@ Atena Team 2023 (Swarm in Blocks 2.0):
 - Nathan Fernandes Vilas Boas : [Github](https://github.com/uspnathan), [LinkedIn](https://www.linkedin.com/mwlite/in/nathan-fernandes-vilas-boas-047616262)
 
 <p align="center">
-    <img width="500" src="https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks/blob/master/assets/atena_team.JPG"/>
+    <img width="500" src="https://raw.githubusercontent.com/Grupo-SEMEAR-USP/swarm_in_blocks/master/assets/atena_team.JPG"/>
 </p>
-
 
 In honor of Atena Team 2022:
 
