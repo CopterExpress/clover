@@ -108,6 +108,7 @@
   * [Clover Cloud Platform](clover-cloud-platform.md)
   * [Autonomous Racing Drone](djs_phoenix_chetak.md)
   * [Motion Capture System](mocap_clover.md)
+  * [Swarm in Blocks 2](swarm_in_blocks_2.md)
   * [Advanced Clover 2](advanced_clover_simulator_platform.md)
   * [Network of charging stations](liceu128.md)
   * [Swarm-in-blocks](swarm_in_blocks.md)

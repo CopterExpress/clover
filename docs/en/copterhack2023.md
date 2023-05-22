@@ -16,7 +16,7 @@ The proposed projects are supposed to be open-source and be compatible with the 
 ||🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](djs_phoenix_chetak.md)||
 ||🇷🇺 C305|[Система радио-навигации](../ru/nav-beacon.html)||
 ||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](mocap_clover.md)||
-||🇧🇷 Atena|[Swarm in Blocks 2](https://github.com/Grupo-SEMEAR-USP/clover/blob/swarm_in_blocks_2/docs/en/swarm_in_blocks_2.md)||
+||🇧🇷 Atena|[Swarm in Blocks 2](swarm_in_blocks_2.md)||
 ||🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator_platform.md)||
 ||🇷🇺 Lyceum №128|[Network of Clover charging stations](liceu128.md)||
 |✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
