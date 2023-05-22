@@ -1,5 +1,5 @@
 <h1 align="center" style="display: block; font-size: 2.5em; font-weight: bold; margin-block-start: 1em; margin-block-end: 1em;">
-<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/header/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
+<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/swarm_in_blocks_2/Capa_Swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
   <br /><br /><strong>Swarm in Blocks</strong>
 </h1>
 
