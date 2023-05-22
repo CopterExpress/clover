@@ -3,6 +3,8 @@
   <br /><br /><strong>Swarm in Blocks</strong>
 </h1>
 
+[CopterHack-2023](copterhack2023.md), team **Atena**.
+
 <!-- markdownlint-disable -->
 ## Project Status[![](https://raw.githubusercontent.com/aregtech/areg-sdk/master/docs/img/pin.svg)](#project-status)
 
