@@ -16,7 +16,7 @@ Country: Belarus.
 
 ## Project Description
 
-Last year at CopterHack 2022, we created a [project](../ru/advanced_clover_simulator.md) that simplified the simulation of Clover, and in 2021, we created a [project](../ru/advanced_clover.md) that simplified the development of products for Clover (IDE and library for writing). The time has come to combine them and achieve unlimited power.
+Last year at CopterHack 2022, we created a [project](../ru/advanced_clover_simulator.html) that simplified the simulation of Clover, and in 2021, we created a [project](../ru/advanced_clover.html) that simplified the development of products for Clover (IDE and library for writing). The time has come to combine them and achieve unlimited power.
 
 ### Project Idea
 
