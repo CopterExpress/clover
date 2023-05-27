@@ -1,6 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 
-<a name="logo" href="https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/introduction/swarm-in-blocks"><img align="center" src="../assets/swarm_in_blocks_2/capa_swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
+<a name="logo" href="https://swarm-in-blocks.gitbook.io/swarm-in-blocks/introduction/swarm-in-blocks"><img align="center" src="../assets/swarm_in_blocks_2/capa_swarm_23_banner.png" alt="Swarm in Blocks" style="width:100%;height:100%"/></a>
 
 <h1 align="center" style="display: block; font-size: 2.5em; margin-block-start: 1em; margin-block-end: 1em;">
   Swarm in Blocks
@@ -82,7 +82,7 @@ As already mentioned, of the various problems that can increase the complexity o
 
 And many other solutions are also featured on our platform, for more information please check the solutions described clearly and in detail throughout our **Gitbook**. We recommend reading in order to understand the fundamental precepts of our platform.
 
-📖 **Access our [Gitbook](https://app.gitbook.com/s/C9O11TiXK1JPnlrpilLg/background-theory/system)!**
+📖 **Access our [Gitbook](https://swarm-in-blocks.gitbook.io/swarm-in-blocks/background-theory/systems)!**
 
 💻 **Access our [GitHub](https://github.com/Grupo-SEMEAR-USP/swarm_in_blocks.git)!**
 
