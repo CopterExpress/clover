@@ -8,17 +8,23 @@ CopterHack 2023 — это международный конкурс по ра�
 
 На конкурс принимаются проекты с открытым исходным кодом и совместимые с платформой квадрокоптера "Клевер". На протяжении конкурса команды работают на собственными идеями и разработками, приближая их к состоянию готового продукта. В этом участникам помогают эксперты отрасли через лекции и регулярную обратную связь.
 
+Финал конкурса CopterHack 2022 прошел 27 мая 2023. Победителями стала команда 🇷🇺 **[Clover Cloud Platform](../en/clover-cloud-platform.html)**.
+
+## Полный стрим финала
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Hdl6Sah7nkE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Проекты участников конкурса {#participants}
 
 |Место|Команда|Проект|Балл|
 |:-:|-|-|-|
-||🇷🇺 Clover Cloud Team|[Clover Cloud Platform](../en/clover-cloud-platform.html)||
-||🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](../en/djs_phoenix_chetak.html)||
-||🇷🇺 C305|[Система радио-навигации](nav-beacon.md)||
-||🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](../en/mocap_clover.html)||
-||🇧🇷 Atena|[Swarm in Blocks 2](../en/swarm_in_blocks_2.html)||
-||🇧🇾 FTL|[Advanced Clover 2](../en/advanced_clover_simulator_platform.html)||
-||🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](../en/liceu128.html)||
+|1|🇷🇺 Clover Cloud Team|[Clover Cloud Platform](../en/clover-cloud-platform.html)|21.7|
+|2|🇧🇾 FTL|[Advanced Clover 2](../en/advanced_clover_simulator_platform.html)|21|
+|3|🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](../en/mocap_clover.html)|20.5|
+|4|🇧🇷 Atena|[Swarm in Blocks 2](../en/swarm_in_blocks_2.html)|20.3|
+|5|🇷🇺 C305|[Система радио-навигации](nav-beacon.md)|17.5|
+|6|🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](../en/djs_phoenix_chetak.html)|14.6|
+|7|🇷🇺 Лицей №128|[Платформа для зарядки квадрокоптера](../en/liceu128.html)|13.7|
 |✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
 |✕|🇷🇺 FSOTM|[Дрон-перехватчик](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
 |✕|🇰🇬 Бездомные|[Дрон-бездомный](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
@@ -29,6 +35,8 @@ CopterHack 2023 — это международный конкурс по ра�
 |✕|🇷🇺 Ava_Clover|[DoubleClover](https://github.com/bessiaka/clover/blob/Ava_Clover/docs/ru/soosocta.md)||
 |✕|🇷🇺 TPU_1|[Совместная транспортировка груза](https://github.com/shamoleg/clover/blob/tpu_1/docs/ru/tpu_1.md)||
 |✕|🇷🇺 TPU_2|[Алгоритм полета сквозь лесную местность](https://github.com/shamoleg/clover/blob/tpu_2/docs/ru/tpu_2.md)|&nbsp;|
+
+Смотрите все оценки по критериям в [полной таблице](https://docs.google.com/spreadsheets/d/1qTpW8zFVdSEGnbtOvMgQD6DcYwu8URFt1RKOCeUaOe8).
 
 ## Этапы CopterHack 2023
 
