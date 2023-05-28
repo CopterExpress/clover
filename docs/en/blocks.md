@@ -2,7 +2,7 @@
 
 <img src="../assets/blocks/blockly.svg" width=200 align="right">
 
-Visual blocks programming feature has been added to the [RPi image](image.md), starting with the version **0.21**. Blocks programming is implemented using [Google Blockly](https://developers.google.com/blockly) platform. Blocks programming integration can lower the entry barrier to a minimum.
+Visual blocks programming feature has been added to the [RPi image](image.md), starting with the version **0.21**. Blocks programming is implemented using [Google Blockly](https://developers.google.com/blockly) library. Blocks programming integration can lower the entry barrier to a minimum.
 
 ## Configuration
 
