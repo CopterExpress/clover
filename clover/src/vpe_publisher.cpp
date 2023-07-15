@@ -100,14 +100,14 @@ void callback(const T& msg)
 				if (!frame_id.empty()) {
 					// calculate from TF
 					offset = tf_buffer.lookupTransform(local_frame_id, frame_id,
-													   msg->header.stamp, ros::Duration(0.02));
+					                                   msg->header.stamp, ros::Duration(0.02));
 					offset.header.frame_id = vpe.header.frame_id;
 					offset.child_frame_id = offset_frame_id;
 
 				} else {
 					// calculate transform between pose in vpe frame and pose in local frame
 					TransformStamped local_pose = tf_buffer.lookupTransform(local_frame_id, child_frame_id,
-																		  msg->header.stamp, ros::Duration(0.02));
+					                                                        msg->header.stamp, ros::Duration(0.02));
 					keepYaw(local_pose.transform.rotation);
 
 					tf::Transform vpeTransform, poseTransform;
