@@ -140,7 +140,7 @@ private:
 		if (!enabled_) return;
 		if (waiting_for_map_) return;
 
-		Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
+		Mat image = cv_bridge::toCvShare(msg)->image;
 
 		vector<int> ids;
 		vector<vector<cv::Point2f>> corners, rejected;
