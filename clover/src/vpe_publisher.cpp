@@ -101,7 +101,7 @@ void callback(const T& msg)
 					// calculate from TF
 					offset = tf_buffer.lookupTransform(local_frame_id, frame_id,
 					                                   msg->header.stamp, ros::Duration(0.02));
-					offset.header.frame_id = vpe.header.frame_id;
+					// offset.header.frame_id = vpe.header.frame_id;
 					offset.child_frame_id = offset_frame_id;
 
 				} else {
