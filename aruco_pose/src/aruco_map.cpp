@@ -83,7 +83,7 @@ private:
 	visualization_msgs::MarkerArray vis_array_;
 	std::string known_vertical_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
-	bool flip_vertical_, auto_flip_, image_axis_;
+	bool flip_vertical_, auto_flip_, image_axis_, put_markers_count_to_covariance_;
 
 public:
 	virtual void onInit()
@@ -111,6 +111,7 @@ public:
 		image_height_ = nh_priv_.param("image_height", 2000);
 		image_margin_ = nh_priv_.param("image_margin", 200);
 		image_axis_ = nh_priv_.param("image_axis", true);
+		put_markers_count_to_covariance_ = nh_priv_.param("put_markers_count_to_covariance", false);
 		markers_parent_frame_ = nh_priv_.param<std::string>("markers/frame_id", transform_.child_frame_id);
 		markers_frame_ = nh_priv_.param<std::string>("markers/child_frame_id_prefix", "");
 
@@ -176,6 +177,11 @@ public:
 				cv::Point2f(marker.c4.x, marker.c4.y)
 			};
 			corners.push_back(marker_corners);
+		}
+
+		if (put_markers_count_to_covariance_) {
+			// HACK: pass markers count using covariance field
+			pose_.pose.covariance[0] = markers->markers.size();
 		}
 
 		if (known_vertical_.empty()) {
