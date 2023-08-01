@@ -181,7 +181,16 @@ public:
 
 		if (put_markers_count_to_covariance_) {
 			// HACK: pass markers count using covariance field
-			pose_.pose.covariance[0] = markers->markers.size();
+			int valid_markers = 0;
+			for (auto const &marker : markers->markers) {
+				for (auto const &board_marker : board_->ids) {
+					if (board_marker == marker.id) {
+						valid_markers++;
+						break;
+					}
+				}
+			}
+			pose_.pose.covariance[0] = valid_markers;
 		}
 
 		if (known_vertical_.empty()) {
