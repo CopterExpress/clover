@@ -33,6 +33,7 @@ import tf2_geometry_msgs
 import VL53L1X
 import pymavlink
 from pymavlink import mavutil
+from image_geometry import PinholeCameraModel, StereoCameraModel
 # from espeak import espeak
 from pyzbar import pyzbar
 import docopt
