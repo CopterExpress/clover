@@ -60,4 +60,24 @@ domain-needed
 quiet-dhcp6
 EOF
 
+echo_stamp "#4 Build the RTL8814AU Wi-Fi adapter driver"
+cd /home/pi
+git clone https://github.com/aircrack-ng/rtl8812au.git --depth=1
+cd rtl8812au
+echo kernel version: $(uname -r)
+echo kernel version from procfs: $(cat /proc/version)
+echo version: $(git describe --tags --always)
+sed -i 's/CONFIG_PLATFORM_I386_PC = y/CONFIG_PLATFORM_I386_PC = n/g' Makefile # https://github.com/aircrack-ng/rtl8812au#for-raspberry-rpi
+sed -i 's/CONFIG_PLATFORM_ARM_RPI = n/CONFIG_PLATFORM_ARM_RPI = y/g' Makefile
+# sed -i 's/CONFIG_PLATFORM_ARM64_RPI = n/CONFIG_PLATFORM_ARM64_RPI = y/g' Makefile
+apt-cache policy raspberrypi-kernel-headers
+apt-get install -y raspberrypi-kernel-headers dkms
+ls /lib/modules
+KERNEL_VERSION=$(cd /lib/modules && echo *-v7l+) # can't use `uname` as it gives incorrect value in emulated environment
+echo make
+make KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
+echo make install
+make install KERNEL_VER=$KERNEL_VERSION KVER=$KERNEL_VERSION
+# TODO: rm -rf /home/pi/rtl8812au
+
 echo_stamp "#4 End of network installation"
