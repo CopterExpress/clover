@@ -17,6 +17,7 @@ from cv_bridge import CvBridge
 from clover import long_callback, srv
 import tf2_ros
 import tf2_geometry_msgs
+import image_geometry
 
 rospy.init_node('cv', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
@@ -32,21 +33,14 @@ mask_pub = rospy.Publisher('~mask', Image, queue_size=1)
 point_pub = rospy.Publisher('~red_circle', PointStamped, queue_size=1)
 
 # read camera info
-camera_info = rospy.wait_for_message('main_camera/camera_info', CameraInfo)
-camera_matrix = np.float64(camera_info.K).reshape(3, 3)
-distortion = np.float64(camera_info.D).flatten()
+camera_model = image_geometry.PinholeCameraModel()
+camera_model.fromCameraInfo(rospy.wait_for_message('main_camera/camera_info', CameraInfo))
 
 
 def img_xy_to_point(xy, dist):
-    xy = cv2.undistortPoints(xy, camera_matrix, distortion, P=camera_matrix)[0][0]
-
-    # Shift points to center
-    xy -= camera_info.width // 2, camera_info.height // 2
-
-    fx = camera_matrix[0, 0]
-    fy = camera_matrix[1, 1]
-
-    return Point(x=xy[0] * dist / fx, y=xy[1] * dist / fy, z=dist)
+    xy_rect = camera_model.rectifyPoint(xy)
+    ray = camera_model.projectPixelTo3dRay(xy_rect)
+    return Point(x=ray[0] * dist, y=ray[1] * dist, z=dist)
 
 def get_center_of_mass(mask):
     M = cv2.moments(mask)
