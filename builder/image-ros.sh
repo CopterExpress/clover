@@ -178,6 +178,9 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
+echo "List of all downloaded deb-files"
+ls /var/cache/apt/archives
+
 #echo_stamp "Removing local apt mirror"
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
