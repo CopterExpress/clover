@@ -27,3 +27,9 @@ jobs:
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload image to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: image
+          path: images/clover_*.zip
+          retention-days: 1
