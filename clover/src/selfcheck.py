@@ -263,7 +263,7 @@ def check_fcu():
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             info('selected estimator: LPE')
-            fuse = get_param('LPE_FUSION')
+            fuse = int(get_param('LPE_FUSION'))
             if fuse & (1 << 4):
                 info('LPE_FUSION: land detector fusion is enabled')
             else:
@@ -493,7 +493,7 @@ def check_vpe():
             failure('vision yaw weight is zero, change ATT_W_EXT_HDG parameter')
         else:
             info('vision yaw weight: %s', ff(vision_yaw_w))
-        fuse = get_param('LPE_FUSION')
+        fuse = int(get_param('LPE_FUSION'))
         if not fuse & (1 << 2):
             failure('vision position fusion is disabled, change LPE_FUSION parameter')
         delay = get_param('LPE_VIS_DELAY')
@@ -501,7 +501,7 @@ def check_vpe():
             failure('LPE_VIS_DELAY = %s, but it should be zero', delay)
         info('LPE_VIS_XY = %s m, LPE_VIS_Z = %s m', get_paramf('LPE_VIS_XY'), get_paramf('LPE_VIS_Z'))
     elif est == 2:
-        fuse = get_param('EKF2_AID_MASK')
+        fuse = int(get_param('EKF2_AID_MASK'))
         if not fuse & (1 << 3):
             failure('vision position fusion is disabled, change EKF2_AID_MASK parameter')
         if not fuse & (1 << 4):
@@ -612,7 +612,7 @@ def check_global_position():
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=0.8)
     except rospy.ROSException:
         info('no global position')
-        if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK', 0) & (1 << 0)):
+        if get_param('SYS_MC_EST_GROUP') == 2 and (int(get_param('EKF2_AID_MASK', 0)) & (1 << 0)):
             failure('enabled GPS fusion may suppress vision position aiding')
 
 
@@ -632,7 +632,7 @@ def check_optical_flow():
             failure('SENS_FLOW_ROT = %s, but it should be zero', rot)
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
-            fuse = get_param('LPE_FUSION')
+            fuse = int(get_param('LPE_FUSION'))
             if not fuse & (1 << 1):
                 failure('optical flow fusion is disabled, change LPE_FUSION parameter')
             if not fuse & (1 << 1):
@@ -646,7 +646,7 @@ def check_optical_flow():
                           get_paramf('LPE_FLW_R', 4),
                           get_paramf('LPE_FLW_RR', 4))
         elif est == 2:
-            fuse = get_param('EKF2_AID_MASK', 0)
+            fuse = int(get_param('EKF2_AID_MASK', 0))
             if not fuse & (1 << 1):
                 failure('optical flow fusion is disabled, change EKF2_AID_MASK parameter')
             delay = get_param('EKF2_OF_DELAY', 0)
@@ -690,7 +690,7 @@ def check_rangefinder():
 
     est = get_param('SYS_MC_EST_GROUP')
     if est == 1:
-        fuse = get_param('LPE_FUSION', 0)
+        fuse = int(get_param('LPE_FUSION', 0))
         if not fuse & (1 << 5):
             info('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
         else:
