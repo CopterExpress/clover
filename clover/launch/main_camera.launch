@@ -6,6 +6,7 @@
     <arg name="device" default="/dev/video0"/> <!-- v4l2 device -->
     <arg name="throttled_topic" default="true"/> <!-- enable throttled image topic -->
     <arg name="throttled_topic_rate" default="5.0"/> <!-- throttled image topic rate -->
+    <arg name="rectify" default="false"/> <!-- enable rectification -->
     <arg name="simulator" default="false"/>
 
     <node if="$(eval direction_z == 'down' and direction_y == 'backward')" pkg="tf2_ros" type="static_transform_publisher" name="main_camera_frame" args="0.05 0 -0.07 -1.5707963 0 3.1415926 base_link main_camera_optical"/>
@@ -49,4 +50,11 @@
     <!-- image topic throttled -->
     <node pkg="topic_tools" name="main_camera_throttle" type="throttle" ns="main_camera"
         args="messages image_raw $(arg throttled_topic_rate) image_raw_throttled" if="$(arg throttled_topic)"/>
+
+    <!-- rectified image topic -->
+    <node pkg="nodelet" type="nodelet" name="rectify" args="load image_proc/rectify main_camera_nodelet_manager" if="$(arg rectify)">
+        <remap from="image_mono" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <remap from="image_rect" to="main_camera/image_rect"/>
+    </node>
 </launch>
