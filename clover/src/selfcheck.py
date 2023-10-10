@@ -316,7 +316,13 @@ def check_fcu():
             failure('cannot read time sync offset')
 
     except rospy.ROSException:
-        failure('no MAVROS state (check wiring)')
+        failure('no MAVROS state')
+        fcu_url = rospy.get_param('mavros/fcu_url', '?')
+        if fcu_url == '/dev/px4fmu':
+            if not os.path.exists('/lib/udev/rules.d/99-px4fmu.rules'):
+                info('udev rules are not installed, install udev rules or change usb_device to /dev/ttyACM0 in mavros.launch')
+            else:
+                info('udev did\'t recognize px4fmu device, check wiring or change usb_device to /dev/ttyACM0 in mavros.launch')
         info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
 
 
