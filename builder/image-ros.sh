@@ -138,7 +138,8 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rosshow \
     ros-${ROS_DISTRO}-cmake-modules \
     ros-${ROS_DISTRO}-image-view \
-    ros-${ROS_DISTRO}-image-geometry
+    ros-${ROS_DISTRO}-image-geometry \
+    ros-${ROS_DISTRO}-nodelet-topic-tools
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
