@@ -39,16 +39,26 @@
 
 |Параметр|Значение|Примечание|
 |-|-|-|
-|`EKF2_AID_MASK`|26|Чекбоксы: *flow* + *vision position* + *vision yaw*.<br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
+|`EKF2_AID_MASK`\*|26|Чекбоксы: *flow* + *vision position* + *vision yaw*.<br>Подробнее: [Optical Flow](optical_flow.md), [ArUco-маркеры](aruco_map.md), [GPS](gps.md).|
 |`EKF2_OF_DELAY`|0||
 |`EKF2_OF_QMIN`|10||
 |`EKF2_OF_N_MIN`|0.05||
 |`EKF2_OF_N_MAX`|0.2||
-|`EKF2_HGT_MODE`|3 (*Vision*)|При наличии [дальномера](laser.md) и полете над ровным полом — 2 (*Range sensor*)|
+|`EKF2_HGT_MODE`\*|3 (*Vision*)|При наличии [дальномера](laser.md) и полете над ровным полом — 2 (*Range sensor*)|
 |`EKF2_EVA_NOISE`|0.1||
 |`EKF2_EVP_NOISE`|0.1||
 |`EKF2_EV_DELAY`|0||
 |`EKF2_MAG_TYPE`|5 (*None*)|Выключение магнитометра (при навигации внутри помещения)|
+
+\* — начиная с версии PX4 1.14 помеченные звездочкой параметры заменены на следующие:
+
+|Параметр|Значение|Примечание|
+|-|-|-|
+|`EKF2_EV_CTRL`|11|Чекбоксы: *Horizontal position* + *Vertical position* + *Yaw*|
+|`EKF2_GPS_CTRL`|0|Все чекбоксы сняты|
+|`EKF2_BARO_CTRL`|0 (*Disabled*)|Барометр отключен|
+|`EKF2_OF_CTRL`|1 (*Enabled*)|Optical flow включен|
+|`EKF2_HGT_REF`|3 (*Vision*)|При наличии [дальномера](laser.md) и полете над ровным полом — 2 (*Range sensor*)|
 
 <!-- markdownlint-enable MD031 -->
 
