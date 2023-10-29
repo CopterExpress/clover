@@ -66,7 +66,7 @@
 #### Камера направлена вверх, шлейф вперёд
 
 ```xml
-<arg name="direction_z" default="down"/>
+<arg name="direction_z" default="up"/>
 <arg name="direction_y" default="forward"/>
 ```
 
