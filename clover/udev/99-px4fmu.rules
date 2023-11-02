@@ -1,17 +1,54 @@
-# PixHawk (px4fmu-v2), px4fmu-v3
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0011", ATTRS{product}=="PX4 FMU v2.x", SYMLINK+="px4fmu"
-# PixRacer (px4fmu-v4)
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0012", ATTRS{product}=="PX4 FMU v4.x", SYMLINK+="px4fmu"
-# px4fmu-v5
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0032", ATTRS{product}=="PX4 FMU v5.x", SYMLINK+="px4fmu"
-# auav
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0021", ATTRS{product}=="PX4 AUAV x2.1", SYMLINK+="px4fmu"
-# crazyflie
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0016", ATTRS{product}=="PX4 Crazyflie v2.0", SYMLINK+="px4fmu"
-# px4fmu-v4pro
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0013", ATTRS{product}=="PX4 FMU v4.x PRO", SYMLINK+="px4fmu"
-# Omnibus
-SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="PX4 OmnibusF4SD", SYMLINK+="px4fmu"
-# CUAV X7 Pro
-SUBSYSTEM=="tty", ATTRS{idVendor}=="3163", ATTRS{idProduct}=="004c", ATTRS{product}=="PX4 CUAV X7Pro", SYMLINK+="px4fmu"
+# Source files: PX4-Autopilot/boards/**/nuttx-config/nsh/defconfig
 
+# Additional info:
+# https://docs.px4.io/main/en/flight_controller/
+# https://github.com/mavlink/qgroundcontrol/blob/master/src/comm/USBBoardInfo.json
+
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="PX4 GNF405", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="PX4 OmnibusF4SD", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0016", ATTRS{product}=="PX4 Crazyflie v2.0", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1FC9", ATTRS{idProduct}=="001c", ATTRS{product}=="PX4 FMUK66 v3.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1FC9", ATTRS{idProduct}=="001c", ATTRS{product}=="PX4 FMUK66 E", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1FC9", ATTRS{idProduct}=="001d", ATTRS{product}=="PX4 FMURT1062 v1.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0001", ATTRS{product}=="DiatoneMambaF405 MK2", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="a32f", ATTRS{product}=="PX4 FMU ModalAI FCv1", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="a330", ATTRS{product}=="PX4 FMU ModalAI FCv2", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0012", ATTRS{product}=="PX4 FMU UVify Core", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="0050", ATTRS{product}=="PX4 KakuteH7", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="0050", ATTRS{product}=="PX4 KakuteH7v2", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="004b", ATTRS{product}=="PX4 DurandalV1", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0050", ATTRS{product}=="PX4 KakuteF7", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="0050", ATTRS{product}=="PX4 KakuteH7Mini-nand", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="004E", ATTRS{product}=="PX4 PIX32V5", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0061", ATTRS{product}=="PX4 ATL Mantis-EDU", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3163", ATTRS{idProduct}=="004c", ATTRS{product}=="PX4 CUAV Nora", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3163", ATTRS{idProduct}=="004c", ATTRS{product}=="PX4 CUAV X7Pro", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1B8C", ATTRS{idProduct}=="0036", ATTRS{product}=="MatekH743-mini", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1B8C", ATTRS{idProduct}=="0036", ATTRS{product}=="MatekH743", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="120A", ATTRS{idProduct}=="1004", ATTRS{product}=="Matekgnssm9nf4", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="1013", ATTRS{product}=="MatekH743", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="0037", ATTRS{product}=="PX4 FMU SmartAP AIRLink", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2DAE", ATTRS{idProduct}=="1058", ATTRS{product}=="CubeOrange+", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2DAE", ATTRS{idProduct}=="1012", ATTRS{product}=="CubeYellow", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2DAE", ATTRS{idProduct}=="1016", ATTRS{product}=="CubeOrange", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3185", ATTRS{idProduct}=="0035", ATTRS{product}=="PX4 FMU v6X.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3185", ATTRS{idProduct}=="0038", ATTRS{product}=="PX4 FMU v6C.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3185", ATTRS{idProduct}=="0033", ATTRS{product}=="PX4 FMU v5X.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1B8C", ATTRS{idProduct}=="0036", ATTRS{product}=="PX4 FMU v6U.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0013", ATTRS{product}=="PX4 FMU v4.x PRO", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0011", ATTRS{product}=="PX4 FMU v2.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0012", ATTRS{product}=="PX4 FMU v4.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0032", ATTRS{product}=="PX4 FMU v5.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3162", ATTRS{idProduct}=="004b", ATTRS{product}=="PX4 SP RACING H7 EXTREME", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0030", ATTRS{product}=="MindPX FMU v2.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="3185", ATTRS{idProduct}=="0039", ATTRS{product}=="ARK FMU v6X.x", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0016", ATTRS{product}=="PX4 FreeFly RTK GPS", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="1024", ATTRS{product}=="mRoControlZeroH7 OEM", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="1017", ATTRS{product}=="mRoPixracerPro", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="1023", ATTRS{product}=="mRoControlZeroH7", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="008D", ATTRS{product}=="mRoControlZeroF7", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0021", ATTRS{product}=="PX4 AUAV X2.1", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="1022", ATTRS{product}=="mRoControlZero Classic", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="26ac", ATTRS{idProduct}=="0088", ATTRS{product}=="mRo x2.1-777", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="35a7", ATTRS{idProduct}=="0002", ATTRS{product}=="FCC-R1", SYMLINK+="px4fmu"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="35a7", ATTRS{idProduct}=="0001", ATTRS{product}=="FCC-K1", SYMLINK+="px4fmu"

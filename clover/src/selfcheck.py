@@ -107,7 +107,7 @@ def ff(value, precision=2):
 param_get = rospy.ServiceProxy('mavros/param/get', ParamGet)
 
 
-def get_param(name, default=None):
+def get_param(name, default=None, strict=True):
     try:
         res = param_get(param_id=name)
     except rospy.ServiceException as e:
@@ -115,7 +115,8 @@ def get_param(name, default=None):
         return None
 
     if not res.success:
-        failure('unable to retrieve PX4 parameter %s', name)
+        if strict:
+            failure('unable to retrieve PX4 parameter %s', name)
         return default
     else:
         if res.value.integer != 0:
@@ -263,7 +264,7 @@ def check_fcu():
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
             info('selected estimator: LPE')
-            fuse = get_param('LPE_FUSION')
+            fuse = int(get_param('LPE_FUSION'))
             if fuse & (1 << 4):
                 info('LPE_FUSION: land detector fusion is enabled')
             else:
@@ -316,7 +317,13 @@ def check_fcu():
             failure('cannot read time sync offset')
 
     except rospy.ROSException:
-        failure('no MAVROS state (check wiring)')
+        failure('no MAVROS state')
+        fcu_url = rospy.get_param('mavros/fcu_url', '?')
+        if fcu_url == '/dev/px4fmu':
+            if not os.path.exists('/lib/udev/rules.d/99-px4fmu.rules'):
+                info('udev rules are not installed, install udev rules or change usb_device to /dev/ttyACM0 in mavros.launch')
+            else:
+                info('udev did\'t recognize px4fmu device, check wiring or change usb_device to /dev/ttyACM0 in mavros.launch')
         info('fcu_url = %s', rospy.get_param('mavros/fcu_url', '?'))
 
 
@@ -487,7 +494,7 @@ def check_vpe():
             failure('vision yaw weight is zero, change ATT_W_EXT_HDG parameter')
         else:
             info('vision yaw weight: %s', ff(vision_yaw_w))
-        fuse = get_param('LPE_FUSION')
+        fuse = int(get_param('LPE_FUSION'))
         if not fuse & (1 << 2):
             failure('vision position fusion is disabled, change LPE_FUSION parameter')
         delay = get_param('LPE_VIS_DELAY')
@@ -495,11 +502,22 @@ def check_vpe():
             failure('LPE_VIS_DELAY = %s, but it should be zero', delay)
         info('LPE_VIS_XY = %s m, LPE_VIS_Z = %s m', get_paramf('LPE_VIS_XY'), get_paramf('LPE_VIS_Z'))
     elif est == 2:
-        fuse = get_param('EKF2_AID_MASK')
-        if not fuse & (1 << 3):
-            failure('vision position fusion is disabled, change EKF2_AID_MASK parameter')
-        if not fuse & (1 << 4):
-            failure('vision yaw fusion is disabled, change EKF2_AID_MASK parameter')
+        ev_ctrl = get_param('EKF2_EV_CTRL', strict=False)
+        if ev_ctrl is not None: # PX4 after v1.14
+            ev_ctrl = int(ev_ctrl)
+            if not ev_ctrl & (1 << 0):
+                failure('vision horizontal position fusion is disabled, change EKF2_EV_CTRL parameter')
+            if not ev_ctrl & (1 << 1):
+                failure('vision vertical position fusion is disabled, change EKF2_EV_CTRL parameter')
+            if not ev_ctrl & (1 << 3):
+                failure('vision yaw fusion is disabled, change EKF2_EV_CTRL parameter')
+        else: # PX4 before v1.14
+            fuse = int(get_param('EKF2_AID_MASK'))
+            if not fuse & (1 << 3):
+                failure('vision position fusion is disabled, change EKF2_AID_MASK parameter')
+            if not fuse & (1 << 4):
+                failure('vision yaw fusion is disabled, change EKF2_AID_MASK parameter')
+
         delay = get_param('EKF2_EV_DELAY')
         if delay != 0:
             failure('EKF2_EV_DELAY = %.2f, but it should be zero', delay)
@@ -606,8 +624,14 @@ def check_global_position():
         rospy.wait_for_message('mavros/global_position/global', NavSatFix, timeout=0.8)
     except rospy.ROSException:
         info('no global position')
-        if get_param('SYS_MC_EST_GROUP') == 2 and (get_param('EKF2_AID_MASK', 0) & (1 << 0)):
-            failure('enabled GPS fusion may suppress vision position aiding')
+        if get_param('SYS_MC_EST_GROUP') == 2:
+            gps_ctrl = get_param('EKF2_GPS_CTRL', strict=False)
+            if gps_ctrl is not None: # PX4 after v1.14
+                if int(gps_ctrl) & (1 << 0):
+                    failure('GPS fusion enabled may suppress vision position aiding, change EKF2_GPS_CTRL')
+            else: # PX4 before v1.14
+                if int(get_param('EKF2_AID_MASK', 0)) & (1 << 0):
+                    failure('GPS fusion enabled may suppress vision position aiding, change EKF2_AID_MASK')
 
 
 @check('Optical flow')
@@ -626,7 +650,7 @@ def check_optical_flow():
             failure('SENS_FLOW_ROT = %s, but it should be zero', rot)
         est = get_param('SYS_MC_EST_GROUP')
         if est == 1:
-            fuse = get_param('LPE_FUSION')
+            fuse = int(get_param('LPE_FUSION'))
             if not fuse & (1 << 1):
                 failure('optical flow fusion is disabled, change LPE_FUSION parameter')
             if not fuse & (1 << 1):
@@ -640,9 +664,14 @@ def check_optical_flow():
                           get_paramf('LPE_FLW_R', 4),
                           get_paramf('LPE_FLW_RR', 4))
         elif est == 2:
-            fuse = get_param('EKF2_AID_MASK', 0)
-            if not fuse & (1 << 1):
-                failure('optical flow fusion is disabled, change EKF2_AID_MASK parameter')
+            of_ctrl = get_param('EKF2_OF_CTRL', strict=False)
+            if of_ctrl is not None: # PX4 after v1.14
+                if of_ctrl == 0:
+                    failure('optical flow fusion is disabled, change EKF2_OF_CTRL')
+            else: # PX4 before v1.14
+                fuse = int(get_param('EKF2_AID_MASK', 0))
+                if not fuse & (1 << 1):
+                    failure('optical flow fusion is disabled, change EKF2_AID_MASK parameter')
             delay = get_param('EKF2_OF_DELAY', 0)
             if delay != 0:
                 failure('EKF2_OF_DELAY = %.2f, but it should be zero', delay)
@@ -684,23 +713,26 @@ def check_rangefinder():
 
     est = get_param('SYS_MC_EST_GROUP')
     if est == 1:
-        fuse = get_param('LPE_FUSION', 0)
+        fuse = int(get_param('LPE_FUSION', 0))
         if not fuse & (1 << 5):
             info('"pub agl as lpos down" in LPE_FUSION is disabled, NOT operating over flat surface')
         else:
             info('"pub agl as lpos down" in LPE_FUSION is enabled, operating over flat surface')
 
     elif est == 2:
-        hgt = get_param('EKF2_HGT_MODE')
+        hgt = get_param('EKF2_HGT_REF', strict=False)
+        if hgt is None: # PX4 before v1.14
+            hgt = get_param('EKF2_HGT_MODE')
         if hgt != 2:
             info('EKF2_HGT_MODE != Range sensor, NOT operating over flat surface')
         else:
             info('EKF2_HGT_MODE = Range sensor, operating over flat surface')
-        aid = get_param('EKF2_RNG_AID')
-        if aid != 1:
-            info('EKF2_RNG_AID != 1, range sensor aiding disabled')
-        else:
-            info('EKF2_RNG_AID = 1, range sensor aiding enabled')
+        aid = get_param('EKF2_RNG_AID', strict=False)
+        if aid is not None: # PX4 before v1.14
+            if aid != 1:
+                info('EKF2_RNG_AID != 1, range sensor aiding disabled')
+            else:
+                info('EKF2_RNG_AID = 1, range sensor aiding enabled')
 
 
 @check('Boot duration')
