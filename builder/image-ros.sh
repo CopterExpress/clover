@@ -125,6 +125,8 @@ cd /home/pi/catkin_ws/src/clover
 builder/assets/install_gitbook.sh
 gitbook install
 gitbook build
+# replace assets copy to assets symlink to save space
+rm -rf _book/assets && ln -s ../docs/assets _book/assets
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 
 echo_stamp "Installing additional ROS packages"
