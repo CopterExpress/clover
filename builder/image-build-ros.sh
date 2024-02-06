@@ -23,16 +23,16 @@ export ROS_OS_OVERRIDE=debian:11:$VERSION_CODENAME
 echo "=== Building ROS from scratch"
 
 #echo "--- Adding sources"
-echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+# echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+# curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
 cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d # https://askubuntu.com/a/1408456
 apt-get update
-apt-get install -y python3-distutils python3-rosdep python3-rosinstall-generator build-essential git # python3-vcstool
+apt-get install -y python3-distutils build-essential git # python3-vcstool
 
 # install vcstool using pip
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
-pip3 install -U vcstool
+pip3 install -U vcstool rosdep rosinstall-generator
 
 # sudo rosdep init
 rm /etc/ros/rosdep/sources.list.d/20-default.list
