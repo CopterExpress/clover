@@ -32,7 +32,7 @@ apt-get install -y python3-distutils build-essential git python3-pip # python3-v
 
 # install vcstool using pip
 # curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
-pip3 install -U vcstool rosdep rosinstall-generator
+pip3 install -U --break-system-packages vcstool rosdep rosinstall-generator
 
 # sudo rosdep init
 rm /etc/ros/rosdep/sources.list.d/20-default.list
