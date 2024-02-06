@@ -65,7 +65,7 @@ python3 setup.py install
 cd ~/ros_catkin_ws
 
 echo "--- Resolve dependencies"
-rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME --skip-keys="python3-catkin-pkg python3-catkin-pkg-modules python3-rosdep-modules"
+rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME --skip-keys="python3-catkin-pkg python3-catkin-pkg-modules python3-rosdep-modules log4cxx"
 
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
