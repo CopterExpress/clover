@@ -28,11 +28,11 @@ echo "=== Building ROS from scratch"
 
 cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d # https://askubuntu.com/a/1408456
 apt-get update
-apt-get install -y python3-distutils build-essential git # python3-vcstool
+apt-get install -y python3-distutils build-essential git python3-pip # python3-vcstool
 
 # install vcstool using pip
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
-pip3 install -U --break-system-packages vcstool rosdep rosinstall-generator
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
+pip3 install -U vcstool rosdep rosinstall-generator
 
 # sudo rosdep init
 rm /etc/ros/rosdep/sources.list.d/20-default.list
