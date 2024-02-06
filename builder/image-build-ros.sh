@@ -23,8 +23,8 @@ export ROS_OS_OVERRIDE=debian:11:$VERSION_CODENAME
 echo "=== Building ROS from scratch"
 
 #echo "--- Adding sources"
-#echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
-#curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
 cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d # https://askubuntu.com/a/1408456
 apt-get update
