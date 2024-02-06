@@ -61,7 +61,7 @@ get_image() {
   # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL>
   local BUILD_DIR=$(dirname $1)
   local RPI_ZIP_NAME=$(basename $2)
-  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/\.xz//')
+  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
     echo_stamp "Downloading original Linux distribution"
@@ -72,7 +72,7 @@ get_image() {
   echo_stamp "Unzipping Linux distribution image"
   apt-get update --allow-releaseinfo-change
   apt-get install -y xz-utils
-  unxz ${BUILD_DIR}/${RPI_ZIP_NAME}
+  unxz --stdout ${BUILD_DIR}/${RPI_ZIP_NAME} > $1
 }
 
 get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
