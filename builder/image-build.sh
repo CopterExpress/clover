@@ -69,10 +69,9 @@ get_image() {
     echo_stamp "Downloading complete" "SUCCESS" \
   else echo_stamp "Linux distribution already donwloaded"; fi
 
-  echo_stamp "Unzipping Linux distribution image" \
-  && unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1 \
-  && echo_stamp "Unzipping complete" "SUCCESS" \
-  || (echo_stamp "Unzipping was failed!" "ERROR"; exit 1)
+  echo_stamp "Unzipping Linux distribution image"
+  apt-get update && apt-get install -y xz-utils
+  xz -d -v ${BUILD_DIR}/${RPI_ZIP_NAME}
 }
 
 get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
