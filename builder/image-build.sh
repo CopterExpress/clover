@@ -71,7 +71,7 @@ get_image() {
 
   echo_stamp "Unzipping Linux distribution image"
   apt-get update && apt-get install -y xz-utils
-  xz -d -v ${BUILD_DIR}/${RPI_ZIP_NAME}
+  unxz ${BUILD_DIR}/${RPI_ZIP_NAME}
 }
 
 get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
