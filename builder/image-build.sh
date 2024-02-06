@@ -70,7 +70,7 @@ get_image() {
   else echo_stamp "Linux distribution already donwloaded"; fi
 
   echo_stamp "Unzipping Linux distribution image"
-  apt-get update
+  apt-get update --allow-releaseinfo-change
   apt-get install -y xz-utils
   unxz ${BUILD_DIR}/${RPI_ZIP_NAME}
 }
