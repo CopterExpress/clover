@@ -61,7 +61,7 @@ get_image() {
   # TEMPLATE: get_image <IMAGE_PATH> <RPI_DONWLOAD_URL>
   local BUILD_DIR=$(dirname $1)
   local RPI_ZIP_NAME=$(basename $2)
-  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
+  local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/\.xz//')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
     echo_stamp "Downloading original Linux distribution"
