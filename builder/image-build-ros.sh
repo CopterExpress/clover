@@ -83,8 +83,8 @@ set -x
 echo "--- Build Debian packages"
 apt-get install -y python3-bloom debhelper dpkg-dev libtinyxml-dev
 
-# add rosdep file to help bloom-generate resolve missing bullseye dependencies
-echo "yaml file:///etc/ros/rosdep/noetic-bullseye.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+# add rosdep file to help bloom-generate resolve missing bookworm dependencies
+echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 rosdep update
 
 pip3 install setuptools==45.2.0 # https://github.com/ros/catkin/issues/863#issuecomment-1000446018
