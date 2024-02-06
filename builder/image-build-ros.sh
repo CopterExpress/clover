@@ -35,7 +35,7 @@ apt-get install -y python3-distutils build-essential git python3-pip # python3-v
 pip3 install -U --break-system-packages vcstool rosdep rosinstall-generator
 
 # sudo rosdep init
-rm /etc/ros/rosdep/sources.list.d/20-default.list
+# rm /etc/ros/rosdep/sources.list.d/20-default.list
 rosdep init
 rosdep update
 
