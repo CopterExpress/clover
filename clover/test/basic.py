@@ -3,6 +3,7 @@ import rospy
 import pytest
 from mavros_msgs.msg import State
 from clover import srv
+import time
 
 @pytest.fixture()
 def node():
@@ -24,6 +25,7 @@ def test_simple_offboard_services_available():
     rospy.wait_for_service('set_attitude', timeout=5)
     rospy.wait_for_service('set_rates', timeout=5)
     rospy.wait_for_service('land', timeout=5)
+    rospy.wait_for_service('simple_offboard/release', timeout=5)
 
 def test_web_video_server(node):
     try:
@@ -59,3 +61,18 @@ def test_blocks(node):
 
     t.join()
     assert wait_print.result == 'test'
+
+def test_long_callback():
+    from clover import long_callback
+    from time import sleep
+
+    # very basic test for long_callback
+    @long_callback
+    def cb(i):
+        cb.counter += i
+    cb.counter = 0
+    cb(2)
+    sleep(0.1)
+    cb(3)
+    sleep(1)
+    assert cb.counter == 5

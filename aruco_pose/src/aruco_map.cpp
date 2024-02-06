@@ -81,9 +81,9 @@ private:
 	bool enabled_ = true;
 	std::string type_;
 	visualization_msgs::MarkerArray vis_array_;
-	std::string known_tilt_, map_, markers_frame_, markers_parent_frame_;
+	std::string known_vertical_, map_, markers_frame_, markers_parent_frame_;
 	int image_width_, image_height_, image_margin_;
-	bool auto_flip_, image_axis_;
+	bool flip_vertical_, auto_flip_, image_axis_, put_markers_count_to_covariance_;
 
 public:
 	virtual void onInit()
@@ -104,12 +104,14 @@ public:
 
 		type_ = nh_priv_.param<std::string>("type", "map");
 		transform_.child_frame_id = nh_priv_.param<std::string>("frame_id", "aruco_map");
-		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		known_vertical_ = nh_priv_.param("known_vertical", nh_priv_.param("known_tilt", std::string(""))); // known_tilt is an old name
+		flip_vertical_ = nh_priv_.param<bool>("flip_vertical", false);
 		auto_flip_ = nh_priv_.param("auto_flip", false);
 		image_width_ = nh_priv_.param("image_width" , 2000);
 		image_height_ = nh_priv_.param("image_height", 2000);
 		image_margin_ = nh_priv_.param("image_margin", 200);
 		image_axis_ = nh_priv_.param("image_axis", true);
+		put_markers_count_to_covariance_ = nh_priv_.param("put_markers_count_to_covariance", false);
 		markers_parent_frame_ = nh_priv_.param<std::string>("markers/frame_id", transform_.child_frame_id);
 		markers_frame_ = nh_priv_.param<std::string>("markers/child_frame_id_prefix", "");
 
@@ -177,7 +179,21 @@ public:
 			corners.push_back(marker_corners);
 		}
 
-		if (known_tilt_.empty()) {
+		if (put_markers_count_to_covariance_) {
+			// HACK: pass markers count using covariance field
+			int valid_markers = 0;
+			for (auto const &marker : markers->markers) {
+				for (auto const &board_marker : board_->ids) {
+					if (board_marker == marker.id) {
+						valid_markers++;
+						break;
+					}
+				}
+			}
+			pose_.pose.covariance[0] = valid_markers;
+		}
+
+		if (known_vertical_.empty()) {
 			// simple estimation
 			valid = cv::aruco::estimatePoseBoard(corners, ids, board_, camera_matrix_, dist_coeffs_,
 			                                     rvec, tvec, false);
@@ -191,7 +207,7 @@ public:
 
 		} else {
 			Mat obj_points, img_points;
-			// estimation with "snapping"
+			// estimation with known vertical
 			cv::aruco::getBoardObjectAndImagePoints(board_, corners, ids, obj_points, img_points);
 			if (obj_points.empty()) goto publish_debug;
 
@@ -203,11 +219,11 @@ public:
 
 			fillTransform(transform_.transform, rvec, tvec);
 			try {
-				geometry_msgs::TransformStamped snap_to = tf_buffer_.lookupTransform(markers->header.frame_id,
-				                                          known_tilt_, markers->header.stamp, ros::Duration(0.02));
-				snapOrientation(transform_.transform.rotation, snap_to.transform.rotation, auto_flip_);
+				geometry_msgs::TransformStamped vertical = tf_buffer_.lookupTransform(markers->header.frame_id,
+				                                           known_vertical_, markers->header.stamp, ros::Duration(0.02));
+				applyVertical(transform_.transform.rotation, vertical.transform.rotation, flip_vertical_, auto_flip_);
 			} catch (const tf2::TransformException& e) {
-				NODELET_WARN_THROTTLE(1, "can't snap: %s", e.what());
+				NODELET_WARN_THROTTLE(1, "can't retrieve known vertical: %s", e.what());
 			}
 
 			geometry_msgs::TransformStamped shift;
@@ -503,7 +519,7 @@ publish_debug:
 		vis_marker.pose.position.x = x;
 		vis_marker.pose.position.y = y;
 		vis_marker.pose.position.z = z;
-		tf::quaternionTFToMsg(q, marker.pose.orientation);
+		tf::quaternionTFToMsg(q, vis_marker.pose.orientation);
 		vis_marker.frame_locked = true;
 		vis_array_.markers.push_back(vis_marker);
 

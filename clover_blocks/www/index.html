@@ -69,8 +69,8 @@
 				<value name="VX"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 				<value name="VY"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 				<value name="VZ"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
-				<value name="PITCH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 				<value name="ROLL"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+				<value name="PITCH"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 				<value name="YAW"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
 				<value name="THRUST"><shadow type="math_number"><field name="NUM">0.5</field></shadow></value>
 				<value name="ID"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
@@ -100,6 +100,9 @@
 			<block type="mode"></block>
 			<block type="armed"></block>
 			<block type="voltage"></block>
+			<block type="get_rc">
+				<value name="CHANNEL"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+			</block>
 		</category>
 		<category name="LED" colour="#02d754">
 			<block type="set_effect">

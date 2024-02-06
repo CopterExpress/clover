@@ -37,6 +37,19 @@
 
     <node name="clover_blocks" pkg="clover_blocks" type="clover_blocks" output="screen" required="true"/>
 
+    <node pkg="topic_tools" name="main_camera_throttle" type="throttle" ns="main_camera"
+        args="messages image_raw 5.0 image_raw_throttled" required="true"/>
+
+    <node pkg="nodelet" type="nodelet" name="main_camera_nodelet_manager" args="manager" output="screen" required="true">
+        <param name="num_worker_threads" value="2"/>
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="rectify" args="load image_proc/rectify main_camera_nodelet_manager" required="true">
+        <remap from="image_mono" to="main_camera/image_raw"/>
+        <remap from="camera_info" to="main_camera/camera_info"/>
+        <remap from="image_rect" to="main_camera/image_rect"/>
+    </node>
+
     <param name="test_module" value="$(find clover)/test/basic.py"/>
     <test test-name="basic_test" pkg="ros_pytest" type="ros_pytest_runner"/>
 </launch>

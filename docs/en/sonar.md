@@ -1,14 +1,14 @@
-# Working with the ultrasonic distance gage
+# Working with the ultrasonic distance sensor
 
-Ultrasonic distance gage (*"sonar"*) is a distance gage based on the principle of measuring the time of a sound wave (about 40 kHz) propagation to the obstacle and back. The sonar can measure the distance up to 1.5 – 3 m with the accuracy of several centimeters.
+Ultrasonic distance sensor (*"sonar"*) is a distance sensor based on the principle of measuring the time of a sound wave (about 40 kHz) propagation to the obstacle and back. The sonar can measure the distance up to 1.5 – 3 m with the accuracy of several centimeters.
 
-## Distance gage HC-SR04
+## HC-SR04 distance sensor
 
 <img src="../assets/hc-sr04.jpg" alt="hc-sr04" width=200>
 
 ## Installation
 
-The distance gage is attached to the body using double-sided tape. For obtaining acceptable results, the use of vibro-insulation is required. A piece of PU foam may be used for vibro-insulation.
+The distance sensor is attached to the body using double-sided tape. For obtaining acceptable results, the use of vibro-insulation is required. A piece of PU foam may be used for vibro-insulation.
 
 ### Connection
 
@@ -24,17 +24,17 @@ Connect HC-SR04 to Raspberry Pi according to the connection diagram. Use 1.0 and
 
 ### Reading the data
 
-To read the data from distance gage HC-SR04 library for working with <abbr title="General-Purpose Input/Output">GPIO</abbr> is used – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). This library is pre-installed in the [Clover image](image.md), starting with version **v0.14**. For older versions of the image, use [an installation guide](http://abyz.me.uk/rpi/pigpio/download.html).
+To read the data from distance sensor HC-SR04 library for working with <abbr title="General-Purpose Input/Output">GPIO</abbr> is used – [`pigpio`](http://abyz.me.uk/rpi/pigpio/index.html). This library is pre-installed in the [Clover image](image.md), starting with version **v0.14**. For older versions of the image, use [an installation guide](http://abyz.me.uk/rpi/pigpio/download.html).
 
 To work with `pigpio`, start appropriate daemon:
 
-```(bash)
+```bash
 sudo systemctl start pigpiod.service
 ```
 
 You can also enable `pigpiod` auto launch on system startup:
 
-```(bash)
+```bash
 sudo systemctl enable pigpiod.service
 ```
 
@@ -113,15 +113,15 @@ An example of charts of initial and filtered data:
 
 The source code of the ROS-node used for building the chart can be found [on Gist](https://gist.github.com/okalachev/feb2d7235f5c9636802c3cda43add253).
 
-## Distance gage RCW-0001
+## RCW-0001 distance sensor
 
 <img src="../assets/rcw-0001.jpg" width=200>
 
-Ultrasonic distance gage RCW-0001 is compatible with distance gage HC-SR04. Use the instruction above to connect and work with it.
+The RCW-0001 distance sensor is compatible with distance sensor HC-SR04. Use the instruction above to connect and work with it.
 
 ## Flight
 
-An example of a flight program with the use of [simple_offboard](simple_offboard.md), which makes the copter fly forward until the connected ultrasonic distance gage detects an obstacle:
+An example of a flight program with the use of [simple_offboard](simple_offboard.md), which makes the copter fly forward until the connected ultrasonic distance sensor detects an obstacle:
 
 ```python
 set_velocity(vx=0.5, frame_id='body', auto_arm=True) # flying forward at the velocity of 0.5 mps

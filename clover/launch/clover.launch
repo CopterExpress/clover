@@ -45,13 +45,13 @@
         <remap from="camera_info" to="main_camera/camera_info"/>
         <param name="calc_flow_gyro" value="true"/>
         <param name="roi_rad" value="0.8"/>
+        <param name="disable_on_vpe" value="true"/>
     </node>
-
-    <node pkg="tf2_ros" type="static_transform_publisher" name="map_flipped_frame" args="0 0 0 3.1415926 3.1415926 0 map map_flipped"/>
 
     <!-- simplified offboard control -->
     <node name="simple_offboard" pkg="clover" type="simple_offboard" output="screen" clear_params="true">
         <param name="reference_frames/main_camera_optical" value="map"/>
+        <param name="terrain_frame_mode" value="range"/>
     </node>
 
     <!-- main camera -->
@@ -72,6 +72,9 @@
         <param name="pass_statuses" type="yaml" value="[0, 6, 7, 11]"/>
     </node>
 
+    <!-- rangefinder's frame -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="rangefinder_frame" args="0 0 -0.05 0 1.5707963268 0 base_link rangefinder" if="$(arg rangefinder_vl53l1x)"/>
+
     <!-- led strip -->
     <include file="$(find clover)/launch/led.launch" if="$(arg led)">
         <arg name="simulator" value="$(arg simulator)"/>
@@ -86,8 +89,4 @@
         <param name="use_fake_gcs" value="false"/>
     </node>
 
-    <!-- Update static directory -->
-    <node pkg="roswww_static" name="roswww_static" type="main.py" clear_params="true">
-        <param name="default_package" value="clover"/>
-    </node>
 </launch>

@@ -198,6 +198,15 @@ This page contains models and drawings of some of the drone parts. They can be u
     </tr>
 </table>
 
+### 3D print
+
+#### Mechanical gripper
+
+* **Left claw**: [`grip_left.stl`](https://github.com/CopterExpress/clover/raw/master/docs/assets/stl/grip_left.stl).
+* **Right claw**: [`grip_right.stl`](https://github.com/CopterExpress/clover/raw/master/docs/assets/stl/grip_right.stl).
+
+Material: SBS Glass. Infill: 100%. Quantity: 1 pcs.
+
 ## Clover 4
 
 ### 3D print

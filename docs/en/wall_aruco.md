@@ -49,10 +49,10 @@ If you are using the marker map, where the markers have equal distances along th
 
 After you fill out the map, you need to apply it. To do it, edit the file `aruco.launch`, located in `~/catkin_ws/src/clover/clover/launch/`. Change the line `<param name="map" value="$(find aruco_pose)/map/map_name.txt"/>`, where `map_name.txt` is the name of your map file.
 
-If you are using markers that are not linked to horizontal surfaces (floor, ceiling), you must disable the parameter `known_tilt` both in the module `aruco_detect` and `aruco_map` in the same file. To do it automatically, enter:
+If you are using markers that are not linked to horizontal surfaces (floor, ceiling), you must blank the `placement` argument in the same file:
 
-```bash
-sed -i "/known_tilt/s/value=\".*\"/value=\"\"/" /home/pi/catkin_ws/src/clover/clover/launch/aruco.launch
+```xml
+<arg name="placement" default=""/>
 ```
 
 After all the settings, call `sudo systemctl restart clover` to restart the `clover` service.

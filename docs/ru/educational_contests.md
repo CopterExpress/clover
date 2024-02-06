@@ -26,7 +26,7 @@
 
 Прием заявок осуществляется через [Google Форму](https://docs.google.com/forms/d/e/1FAIpQLScE2kN5dO2OYNSM8hOYzOa5Qvh2uDdd9Fjx8OnL1W93bfEBgw/viewform).
 
-Дедлайн подачи заявок: 1 сентября 2022 года.
+Дедлайн подачи заявок: 30 ноября 2022 года.
 
 ### Призы
 
@@ -64,7 +64,7 @@
 
 Прием заявок осуществляется через [Google Форму](https://docs.google.com/forms/d/e/1FAIpQLSdelVy6yQ1iN6u88KeiEIKGj7gGaM0xccSt2tiYKB46ICmjkQ/viewform).
 
-Дедлайн подачи заявок: 1 сентября 2022 года.
+Дедлайн подачи заявок: 30 ноября 2022 года.
 
 ### Призы
 
@@ -106,7 +106,7 @@
 
 Прием заявок осуществляется через [Google Форму](https://docs.google.com/forms/d/e/1FAIpQLSdf2Q68X4hPnFE9f3EP95AxPNnzHKqIsFHtTRT6EBKiH93wzg/viewform).
 
-Дедлайн подачи заявок: 1 сентября 2022 года
+Дедлайн подачи заявок: 30 ноября 2022 года
 
 ### Призы
 

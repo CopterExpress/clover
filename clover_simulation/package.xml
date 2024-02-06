@@ -1,6 +1,6 @@
-<package format="2">
+<package format="3">
     <name>clover_simulation</name>
-    <version>0.23.0</version>
+    <version>0.24.0</version>
     <description>The clover_simulation package provides worlds and launch files for Gazebo.</description>
 
     <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
@@ -22,6 +22,8 @@
     <depend>gazebo_ros</depend>
     <depend>gazebo_plugins</depend>
     <depend>rospy</depend>
+    <depend condition="$ROS_PYTHON_VERSION == 2">python-docopt</depend>
+    <depend condition="$ROS_PYTHON_VERSION == 3">python3-docopt</depend>
 
     <export>
         <gazebo_ros gazebo_media_path="${prefix}"/>

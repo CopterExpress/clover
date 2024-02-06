@@ -43,7 +43,8 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 * `~frame_id_prefix` (*string*) – prefix for TF transforms names, marker's ID is appended (default: `aruco_`)
 * `~length` (*double*) – markers' sides length
 * `~length_override` (*map*) – lengths of markers with specified ids
-* `~known_tilt` (*string*) – known tilt (pitch and roll) of all the markers as a frame
+* `~known_vertical` (*string*) – known vertical (Z axis) of all the markers as a frame
+* `~flip_vertical` – flip vertical vector
 
 ### Topics
 
@@ -71,7 +72,8 @@ It's recommended to run it within the same nodelet manager with the camera nodel
 
 * `~map` – path to text file with markers list
 * `~frame_id` – published frame id (default: `aruco_map`)
-* `~known_tilt` – known tilt (pitch and roll) of markers map as a frame
+* `~known_vertical` – known vertical (Z axis) of markers map as a frame
+* `~flip_vertical` – flip vertical vector
 * `~image_width` – debug image width (default: 2000)
 * `~image_height` – debug image height (default: 2000)
 * `~image_margin` – debug image margin (default: 200)

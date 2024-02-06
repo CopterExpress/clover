@@ -8,6 +8,36 @@ To learn more about the articles of the CopterHack finalist teams follow the lin
 
 The proposed projects are supposed to be open-source and be compatible with the Clover quadcopter platform. Teams-participants are supposed to work on their projects throughout the competition, bringing them closer to the state of the finished product while being assisted by industry experts through lectures and regular feedback.
 
+Final of the CopterHack 2022 was held on May 27, 2023. The winner team was the team 🇷🇺 **[Clover Cloud Platform](clover-cloud-platform.md)**.
+
+## Full stream of the final
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Hdl6Sah7nkE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Projects of the contest's participants {#participants}
+
+|Place|Team|Project|Points|
+|:-:|-|-|-|
+|1|🇷🇺 Clover Cloud Team|[Clover Cloud Platform](clover-cloud-platform.md)|21.7|
+|2|🇧🇾 FTL|[Advanced Clover 2](advanced_clover_simulator_platform.md)|21|
+|3|🇨🇦 Clover with Motion Capture System|[Clover with Motion Capture System](mocap_clover.md)|20.5|
+|4|🇧🇷 Atena|[Swarm in Blocks 2](swarm_in_blocks_2.md)|20.3|
+|5|🇷🇺 C305|[Система радио-навигации](../ru/nav-beacon.html)|17.5|
+|6|🇮🇳 DJS PHOENIX|[Autonomous Racing Drone](djs_phoenix_chetak.md)|14.6|
+|7|🇷🇺 Lyceum №128|[Network of Clover charging stations](liceu128.md)|13.7|
+|✕|🇰🇬 Zavarka|[Система обмена грузами с помощью конвейера](https://github.com/aiurobotics/clover/blob/conveyance/docs/ru/conveyance.md)||
+|✕|🇷🇺 FSOTM|[Drone Interceptor](https://github.com/deadln/clover/blob/interceptor/docs/ru/interceptor.md)||
+|✕|🇰🇬 Homelesses|[Trash Collector](https://github.com/Isa-jesus/clover/blob/trash-collector/docs/ru/show_maker.md)||
+|✕|🇷🇺 Digital otters|[Digital otters](https://github.com/Mentalsupernova/clover_cool/blob/new-article.md/docs/ru/new-article.md)||
+|✕|🇷🇺 Light Flight|[Сопровождение БПЛА при посадке](https://github.com/SirSerow/clover_inertial_ns/blob/inertial-1/Description.md)||
+|✕|🇰🇬 LiveSavers|[LiveSavers](https://github.com/Sarvar00/clover/blob/livesavers/docs/ru/livesaver.md)||
+|✕|🇷🇺 XenCOM|[Bound by fate](https://github.com/xenkek/clover/blob/xenkek-patch-1/docs/ru/bound_by_fate.md)||
+|✕|🇷🇺 Ava_Clover|[DoubleClover](https://github.com/bessiaka/clover/blob/Ava_Clover/docs/ru/soosocta.md)||
+|✕|🇷🇺 TPU_1|[Совместная транспортировка груза](https://github.com/shamoleg/clover/blob/tpu_1/docs/ru/tpu_1.md)||
+|✕|🇷🇺 TPU_2|[Алгоритм полета сквозь лесную местность](https://github.com/shamoleg/clover/blob/tpu_2/docs/ru/tpu_2.md)|&nbsp;|
+
+See all points by criteria in the [full table](https://docs.google.com/spreadsheets/d/1qTpW8zFVdSEGnbtOvMgQD6DcYwu8URFt1RKOCeUaOe8).
+
 ## CopterHack 2023 stages
 
 The qualifying and project development stages will be held in an online format, however, the final round will be in a hybrid mode (offline + online). The competition involves monthly updates from the teams with regular feedback from the jury. All teams are required to prepare a final video and presentation on the project's results to participate in the final stage.

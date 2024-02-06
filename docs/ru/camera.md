@@ -1,5 +1,7 @@
 # Работа с камерой
 
+> **Note** Эта статья описывает работу с [образом версии **0.24**](https://github.com/CopterExpress/clover/releases/tag/v0.24), который пока находится в стадии тестирования. Для версии **0.23** доступна [более старая документация](https://github.com/CopterExpress/clover/blob/f78a03ec8943b596d5a99b893188a159d5319888/docs/ru/camera.md).
+
 <!-- TODO: физическое подключение -->
 
 Для работы с основной камерой необходимо убедиться что она включена в файле `~/catkin_ws/src/clover/clover/launch/clover.launch`:
@@ -54,8 +56,6 @@ raspistill -o test.jpg
 
 ### Python
 
-Основная статья: http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython.
-
 Пример создания подписчика на топик с изображением с основной камеры для обработки с использованием OpenCV:
 
 ```python
@@ -63,12 +63,14 @@ import rospy
 import cv2
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from clover import long_callback
 
-rospy.init_node('computer_vision_sample')
+rospy.init_node('cv')
 bridge = CvBridge()
 
+@long_callback
 def image_callback(data):
-    cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
+    img = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     # Do any image processing with cv2...
 
 image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback)
@@ -76,19 +78,31 @@ image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback)
 rospy.spin()
 ```
 
+> **Note** Обработка изображения может занимать значительное время. Это может вызвать [проблему](https://github.com/ros/ros_comm/issues/1901) в библиотеке rospy, которая приведет к обработке устаревших кадров с камеры. Для решения этой проблемы необходимо использовать декоратор `long_callback` из библиотеки `clover`, как в примере выше.
+
+#### Ограничение использования CPU
+
+При использовании топика `main_camera/image_raw` скрипт будет обрабатывать максимальное количество кадров с камеры, активно используя CPU (вплоть до 100%). В задачах, где обработка каждого кадра не критична, можно использовать топик, где кадры публикуются с частотой 5 Гц: `main_camera/image_raw_throttled`:
+
+```python
+image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback, queue_size=1)
+```
+
+#### Публикация изображений
+
 Для отладки обработки изображения можно публиковать отдельный топик с обработанным изображением:
 
 ```python
 image_pub = rospy.Publisher('~debug', Image)
 ```
 
-Публикация обработанного изображения (в конце функции image_callback):
+Публикация обработанного изображения:
 
 ```python
-image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
+image_pub.publish(bridge.cv2_to_imgmsg(img, 'bgr8'))
 ```
 
-Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md).
+Получаемые изображения можно просматривать используя [web_video_server](web_video_server.md) или [rqt](rviz.md).
 
 #### Получение одного кадра
 
@@ -99,12 +113,12 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
-rospy.init_node('computer_vision_sample')
+rospy.init_node('cv')
 bridge = CvBridge()
 
 # ...
 
-# Получение кадра:
+# Retrieve a frame:
 img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image), 'bgr8')
 ```
 
@@ -121,38 +135,32 @@ img = bridge.imgmsg_to_cv2(rospy.wait_for_message('main_camera/image_raw', Image
 ```python
 import rospy
 from pyzbar import pyzbar
+import cv2
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
+from clover import long_callback
 
+rospy.init_node('cv')
 bridge = CvBridge()
 
-rospy.init_node('barcode_test')
-
-# Image subscriber callback function
-def image_callback(data):
-    cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
-    barcodes = pyzbar.decode(cv_image)
+@long_callback
+def image_callback(msg):
+    img = bridge.imgmsg_to_cv2(msg, 'bgr8')
+    barcodes = pyzbar.decode(img)
     for barcode in barcodes:
-        b_data = barcode.data.decode("utf-8")
+        b_data = barcode.data.decode('utf-8')
         b_type = barcode.type
         (x, y, w, h) = barcode.rect
         xc = x + w/2
         yc = y + h/2
-        print("Found {} with data {} with center at x={}, y={}".format(b_type, b_data, xc, yc))
+        print('Found {} with data {} with center at x={}, y={}'.format(b_type, b_data, xc, yc))
 
-image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback, queue_size=1)
+image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback, queue_size=1)
 
 rospy.spin()
 ```
 
-Скрипт будет занимать 100% процессора. Для искусственного замедления работы скрипта можно запустить [throttling](http://wiki.ros.org/topic_tools/throttle) кадров с камеры, например, в 5 Гц (`main_camera.launch`):
-
-```xml
-<node pkg="topic_tools" name="cam_throttle" type="throttle"
-    args="messages main_camera/image_raw 5.0 main_camera/image_raw_throttled"/>
-```
-
-Топик для подписчика в этом случае необходимо поменять на `main_camera/image_raw_throttled`.
+> **Hint** Смотрите другие примеры по работе с компьютерным зрением в каталоге `~/examples` [образа для RPi](image.md).
 
 ## Запись видео
 

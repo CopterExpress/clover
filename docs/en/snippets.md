@@ -144,7 +144,7 @@ Determine whether the copter is turned upside-down:
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+flipped = abs(telem.roll) > PI_2 or abs(telem.pitch) > PI_2
 ```
 
 ### # {#angle-hor}
@@ -155,8 +155,8 @@ Calculate the copter horizontal angle:
 PI_2 = math.pi / 2
 telem = get_telemetry()
 
-flipped = not -PI_2 <= telem.pitch <= PI_2 or not -PI_2 <= telem.roll <= PI_2
-angle_to_horizon = math.atan(math.hypot(math.tan(telem.pitch), math.tan(telem.roll)))
+flipped = not -PI_2 <= telem.roll <= PI_2 or not -PI_2 <= telem.pitch <= PI_2
+angle_to_horizon = math.atan(math.hypot(math.tan(telem.roll), math.tan(telem.pitch)))
 if flipped:
     angle_to_horizon = math.pi - angle_to_horizon
 ```
@@ -207,9 +207,9 @@ def pose_update(pose):
     # Processing new data of copter's position
     pass
 
-rospy.Subscriber('/mavros/local_position/pose', PoseStamped, pose_update)
-rospy.Subscriber('/mavros/local_position/velocity', TwistStamped, velocity_update)
-rospy.Subscriber('/mavros/battery', BatteryState, battery_update)
+rospy.Subscriber('mavros/local_position/pose', PoseStamped, pose_update)
+rospy.Subscriber('mavros/local_position/velocity', TwistStamped, velocity_update)
+rospy.Subscriber('mavros/battery', BatteryState, battery_update)
 rospy.Subscriber('mavros/rc/in', RCIn, rc_callback)
 
 rospy.spin()
@@ -324,7 +324,7 @@ def flip():
 
     while True:
         telem = get_telemetry()
-        flipped = abs(telem.pitch) > PI_2 or abs(telem.roll) > PI_2
+        flipped = abs(telem.roll) > PI_2 or abs(telem.pitch) > PI_2
         if flipped:
             break
 
@@ -349,7 +349,7 @@ from pymavlink import mavutil
 from mavros_msgs.srv import CommandLong
 from mavros_msgs.msg import State
 
-send_command = rospy.ServiceProxy('/mavros/cmd/command', CommandLong)
+send_command = rospy.ServiceProxy('mavros/cmd/command', CommandLong)
 
 def calibrate_gyro():
     rospy.loginfo('Calibrate gyro')
@@ -479,4 +479,12 @@ param_set(param_id='COM_FLTMODE1', value=ParamValue(integer=8))
 
 # Set parameter of type FLOAT:
 param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
+```
+
+### # {#is-simulation}
+
+Check, if the code is running inside a [Gazebo simulation](simulation.md):
+
+```python
+is_simulation = rospy.get_param('/use_sim_time', False)
 ```

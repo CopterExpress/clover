@@ -50,6 +50,7 @@
 #include <aruco_pose/DetectorConfig.h>
 #include <aruco_pose/SetMarkers.h>
 
+#include "draw.h"
 #include "utils.h"
 #include <memory>
 #include <functional>
@@ -71,11 +72,12 @@ private:
 	ros::Publisher markers_pub_, vis_markers_pub_;
 	ros::Subscriber map_markers_sub_;
 	ros::ServiceServer set_markers_srv_;
-	bool estimate_poses_, send_tf_, auto_flip_;
+	bool estimate_poses_, send_tf_, flip_vertical_, auto_flip_, use_map_markers_;
+	bool waiting_for_map_;
 	double length_;
 	ros::Duration transform_timeout_;
 	std::unordered_map<int, double> length_override_;
-	std::string frame_id_prefix_, known_tilt_;
+	std::string frame_id_prefix_, known_vertical_;
 	Mat camera_matrix_, dist_coeffs_;
 	aruco_pose::MarkerArray array_;
 	std::unordered_set<int> map_markers_ids_;
@@ -95,6 +97,8 @@ public:
 		dictionary = nh_priv_.param("dictionary", 2);
 		estimate_poses_ = nh_priv_.param("estimate_poses", true);
 		send_tf_ = nh_priv_.param("send_tf", true);
+		use_map_markers_ = nh_priv_.param("use_map_markers", false);
+		waiting_for_map_ = use_map_markers_;
 		if (estimate_poses_ && !nh_priv_.getParam("length", length_)) {
 			NODELET_FATAL("can't estimate marker's poses as ~length parameter is not defined");
 			ros::shutdown();
@@ -102,7 +106,8 @@ public:
 		readLengthOverride(nh_priv_);
 		transform_timeout_ = ros::Duration(nh_priv_.param("transform_timeout", 0.02));
 
-		known_tilt_ = nh_priv_.param<std::string>("known_tilt", "");
+		known_vertical_ = nh_priv_.param("known_vertical", nh_priv_.param("known_tilt", std::string(""))); // known_tilt is an old name
+		flip_vertical_ = nh_priv_.param<bool>("flip_vertical", false);
 		auto_flip_ = nh_priv_.param("auto_flip", false);
 
 		frame_id_prefix_ = nh_priv_.param<std::string>("frame_id_prefix", "aruco_");
@@ -133,14 +138,15 @@ private:
 	void imageCallback(const sensor_msgs::ImageConstPtr& msg, const sensor_msgs::CameraInfoConstPtr &cinfo)
 	{
 		if (!enabled_) return;
+		if (waiting_for_map_) return;
 
-		Mat image = cv_bridge::toCvShare(msg, "bgr8")->image;
+		Mat image = cv_bridge::toCvShare(msg)->image;
 
 		vector<int> ids;
 		vector<vector<cv::Point2f>> corners, rejected;
 		vector<cv::Vec3d> rvecs, tvecs;
 		vector<cv::Point3f> obj_points;
-		geometry_msgs::TransformStamped snap_to;
+		geometry_msgs::TransformStamped vertical;
 
 		// Detect markers
 		cv::aruco::detectMarkers(image, dictionary_, corners, ids, parameters_, rejected);
@@ -175,12 +181,12 @@ private:
 					}
 				}
 
-				if (!known_tilt_.empty()) {
+				if (!known_vertical_.empty()) {
 					try {
-						snap_to = tf_buffer_->lookupTransform(msg->header.frame_id, known_tilt_,
-						                                      msg->header.stamp, transform_timeout_);
+						vertical = tf_buffer_->lookupTransform(msg->header.frame_id, known_vertical_,
+						                                       msg->header.stamp, transform_timeout_);
 					} catch (const tf2::TransformException& e) {
-						NODELET_WARN_THROTTLE(5, "can't snap: %s", e.what());
+						NODELET_WARN_THROTTLE(5, "can't retrieve known vertical: %s", e.what());
 					}
 				}
 			}
@@ -201,9 +207,9 @@ private:
 				if (estimate_poses_) {
 					fillPose(marker.pose, rvecs[i], tvecs[i]);
 
-					// snap orientation (if enabled and snap frame available)
-					if (!known_tilt_.empty() && !snap_to.header.frame_id.empty()) {
-						snapOrientation(marker.pose.orientation, snap_to.transform.rotation, auto_flip_);
+					// apply known vertical (if enabled and vertical frame available)
+					if (!known_vertical_.empty() && !vertical.header.frame_id.empty()) {
+						applyVertical(marker.pose.orientation, vertical.transform.rotation, false, auto_flip_);
 					}
 
 					if (send_tf_) {
@@ -259,8 +265,7 @@ private:
 			cv::aruco::drawDetectedMarkers(debug, corners, ids); // draw markers
 			if (estimate_poses_)
 				for (unsigned int i = 0; i < ids.size(); i++)
-					cv::aruco::drawAxis(debug, camera_matrix_, dist_coeffs_,
-					                    rvecs[i], tvecs[i], getMarkerLength(ids[i]));
+					_drawAxis(debug, camera_matrix_, dist_coeffs_, rvecs[i], tvecs[i], getMarkerLength(ids[i]));
 
 			cv_bridge::CvImage out_msg;
 			out_msg.header.frame_id = msg->header.frame_id;
@@ -395,7 +400,13 @@ private:
 		map_markers_ids_.clear();
 		for (auto const& marker : msg.markers) {
 			map_markers_ids_.insert(marker.id);
+			if (use_map_markers_) {
+				if (length_override_.find(marker.id) == length_override_.end()) {
+					length_override_[marker.id] = marker.length;
+				}
+			}
 		}
+		waiting_for_map_ = false;
 	}
 
 	void paramCallback(aruco_pose::DetectorConfig &config, uint32_t level)

@@ -13,7 +13,12 @@ from util import handle_response
 
 rospy.init_node('autotest_aruco', disable_signals=True) # disable signals to allow interrupting with ctrl+c
 
-flow_client = dynamic_reconfigure.client.Client('optical_flow')
+try:
+    flow_client = dynamic_reconfigure.client.Client('optical_flow', timeout=2)
+except rospy.ROSException:
+    flow_client = None
+    print('Cannot configure optical flow, skip')
+
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = handle_response(rospy.ServiceProxy('navigate', srv.Navigate))
 land = handle_response(rospy.ServiceProxy('land', Trigger))
@@ -30,11 +35,8 @@ def print_current_map_position():
     dist = rospy.wait_for_message('rangefinder/range', Range).range
     print('Map position:\tx={:.1f}\ty={:.1f}\tz={:.1f}\tyaw={:.1f}\tdist={:.2f}'.format(telem.x, telem.y, telem.z, telem.yaw, dist))
 
-def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), yaw_rate=0, speed=0.5, \
-        frame_id='body', tolerance=0.2, auto_arm=False):
-
-    res = navigate(x=x, y=y, z=z, yaw=yaw, yaw_rate=yaw_rate, speed=speed, \
-        frame_id=frame_id, auto_arm=auto_arm)
+def navigate_wait(x=0, y=0, z=0, yaw=math.nan, speed=0.5, frame_id='body', tolerance=0.2, auto_arm=False):
+    res = navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
     if not res.success:
         return res
@@ -67,12 +69,13 @@ input('Go to center %g %g 1.5 speed 5 [enter] ' % (center_x, center_y))
 navigate_wait(x=center_x, y=center_y, z=1.5, speed=5, frame_id='aruco_map')
 print_current_map_position()
 
-input('Disable optical flow and keep hovering [enter] ')
-flow_client.update_configuration({'enabled': False})
-rospy.sleep(5)
+if flow_client:
+    input('Disable optical flow and keep hovering [enter] ')
+    flow_client.update_configuration({'enabled': False})
+    rospy.sleep(5)
 
-input('Enable optical flow back [enter] ')
-flow_client.update_configuration({'enabled': True})
+    input('Enable optical flow back [enter] ')
+    flow_client.update_configuration({'enabled': True})
 
 input('Go to side 1 %g 2 heading top [enter] ' % (center_y))
 navigate_wait(x=1, y=center_y, z=2, yaw=1.57, frame_id='aruco_map')

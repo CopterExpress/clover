@@ -20,7 +20,7 @@ The main goal of the contest is aerial robotics popularization  and community de
 * Third parties can provide technical support for recording a lecture.
 * The status of the participant is unlimited (student, representative of a general education institution, representative of the industry, amateur).
 
-Applications deadline: September 1, 2022.
+Applications deadline: November 30, 2022.
 
 ### How to apply?
 
@@ -64,7 +64,7 @@ The main goal of the contest is aerial robotics popularization  and community de
 
 The application to the contest is performed via the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdelVy6yQ1iN6u88KeiEIKGj7gGaM0xccSt2tiYKB46ICmjkQ/viewform).
 
-Applications deadline: September 1, 2022.
+Applications deadline: November 30, 2022.
 
 ### Prizes
 
@@ -105,7 +105,7 @@ The course is evaluated according to a separate, publicly available lesson submi
 
 The application to the contest is performed via the [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdf2Q68X4hPnFE9f3EP95AxPNnzHKqIsFHtTRT6EBKiH93wzg/viewform) where the link to the video course should be attached.
 
-Applications deadline: September 1, 2022.
+Applications deadline: November 30, 2022.
 
 ### Prizes
 

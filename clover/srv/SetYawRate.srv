@@ -1,0 +1,4 @@
+float32 yaw_rate
+---
+bool success
+string message

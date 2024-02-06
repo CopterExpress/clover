@@ -37,3 +37,7 @@ apt-cache show openvpn
 
 echo "Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
+
+echo "Largest packages installed"
+sudo -E sh -c 'apt-get install -y debian-goodies'
+dpigs -H -n 100
