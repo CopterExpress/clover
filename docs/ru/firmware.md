@@ -17,6 +17,10 @@ Pixhawk, Pixracer и [COEX Pix](coex_pix.md) можно прошить, испо
 </ul>
 </div>
 
+> **Warning** Если вы используете (или выбрали для прошивки) сборку с версией ниже, чем `v1.10` (например `v1.8.2-clover.13`), то во избежание ошибок конфигурирования полётного контроллера, используйте QGroundControl версии `v4.2.0` (или ниже), в противном случае при изменении параметров полётного контроллера будут появляться уведомления "Missing params: 1:BAT1_N_CELLS, 1:BAT1_V_EMPTY, 1:BAT1_V_CHARGED" и настроить параметры аккумуляторного блока в полётном контроллере вам не удастся.
+> Параметры аккумуляторного блока в прошивке начиная с `v1.15` и выше не смогут быть настроены с помощью QGroundControl версии `v4.2.0`, для настройки следут использовать версию не ниже чем `v4.3.0`.
+> Подробнее про совместимость старых параметров `BAT_` и новых `BAT1_` в сборках от `v1.10` до `v1.14` см. в [этой статье](https://docs.px4.io/v1.11/en/config/battery.html#parameter-migration-notes).
+
 <script type="text/javascript">
     // get latest release from GitHub
     fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(function(res) {
@@ -25,6 +29,7 @@ Pixhawk, Pixracer и [COEX Pix](coex_pix.md) можно прошить, испо
         // look for stable release
         let stable;
         for (let release of data) {
+            let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
             let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
             if (clover && !release.prerelease && !release.draft) {
                 stable = release;

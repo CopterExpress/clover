@@ -17,6 +17,10 @@ It is advisable to use a specialized build of PX4 with the necessary fixes and b
 </ul>
 </div>
 
+> **Warning** If you are using an assembly with a version lower than `v1.10` (for example, `v1.8.2-clover.13`), then to avoid configuration errors of the flight controller, use QGroundControl version `v4.2.0` (or lower), otherwise, when changing the parameters of the flight controller, notifications "Missing params: 1:BAT1_N_CELLS, 1:BAT1_V_EMPTY, 1:BAT1_V_CHARGED" will appear and you will not be able to adjust the parameters of the battery pack in the flight controller.
+> The parameters of the battery pack in the firmware starting from `v1.15` and higher cannot be configured using the QGroundControl version `v4.2.0`, for configuration, use a version not lower than `v4.3.0`.
+> For more information about the compatibility of the old `BAT_` and new `BAT1_` parameters in builds from `v1.10` to `v1.14`, see [this article](https://docs.px4.io/v1.11/en/config/battery.html#parameter-migration-notes).
+
 <script type="text/javascript">
     // get latest release from GitHub
     fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(function(res) {
