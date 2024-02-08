@@ -30,7 +30,6 @@ Pixhawk, Pixracer и [COEX Pix](coex_pix.md) можно прошить, испо
         let stable;
         for (let release of data) {
             let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
-            let clover = (release.name.indexOf('clover') != -1) || (release.name.indexOf('clever') != -1);
             if (clover && !release.prerelease && !release.draft) {
                 stable = release;
                 break;
