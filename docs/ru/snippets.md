@@ -500,7 +500,7 @@ param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
 is_simulation = rospy.get_param('/use_sim_time', False)
 ```
 
-### # #{simulator-interaction}
+### # {#simulator-interaction}
 
 Переместить физический объект (линк) в Gazebo (а также поменять его скорости) можно при помощи сервиса `gazebo/set_link_state` (тип [`SetLinkState`](http://docs.ros.org/en/api/gazebo_msgs/html/srv/SetLinkState.html)). Например, если добавить в мир объект куб (линк `unit_box::link`), то так можно переместить его в точку (1, 2, 3):
 

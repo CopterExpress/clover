@@ -489,7 +489,7 @@ Check, if the code is running inside a [Gazebo simulation](simulation.md):
 is_simulation = rospy.get_param('/use_sim_time', False)
 ```
 
-### # #{simulator-interaction}
+### # {#simulator-interaction}
 
 You can move a physical object (link) in Gazebo (as well as change its velocity) using the `gazebo/set_link_state` service (of the type [`SetLinkState`](http://docs.ros.org/en/api/gazebo_msgs/html/srv/SetLinkState.html)). For example, if you add a cube to the world (link `unit_box::link`), you can move it to the point (1, 2, 3):
 
