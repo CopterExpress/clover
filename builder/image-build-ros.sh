@@ -72,7 +72,7 @@ wget https://github.com/ros/rosconsole/pull/58.patch
 patch -p1 -d src/rosconsole < 58.patch
 
 wget https://github.com/ros/ros_comm/pull/2353.patch
-patch -p1 -d src/ros_comm < 2353.patch
+patch -p2 -d src/ros_comm < 2353.patch
 
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
