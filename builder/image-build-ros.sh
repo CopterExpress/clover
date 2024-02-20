@@ -67,6 +67,13 @@ vcs import --input noetic.rosinstall ./src
 echo "--- Resolve dependencies"
 rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:bullseye --skip-keys="python3-catkin-pkg-modules libboost-thread python3-rosdep-modules"
 
+echo "--- Apply patches"
+wget https://github.com/ros/rosconsole/pull/58.patch
+patch -p1 -d src/rosconsole < 58.patch
+
+wget https://github.com/ros/ros_comm/pull/2353.patch
+patch -p1 -d src/ros_comm < 2353.patch
+
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
 ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release
