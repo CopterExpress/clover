@@ -18,7 +18,7 @@ set -ex # exit on error, echo commands
 
 export ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
-export ROS_OS_OVERRIDE=debian:11:$VERSION_CODENAME
+export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
 
 echo "=== Building ROS from scratch"
 
@@ -26,9 +26,9 @@ echo "=== Building ROS from scratch"
 # echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
 # curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
-cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d # https://askubuntu.com/a/1408456
+#cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d # https://askubuntu.com/a/1408456
 apt-get update
-apt-get install -y python3-distutils build-essential git python3-pip # python3-vcstool
+apt-get install -y python3-distutils build-essential git python3-pip python3-rosinstall-generator python3-vcstools
 
 # install vcstool using pip
 # curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py && rm get-pip.py
@@ -37,7 +37,7 @@ pip3 install -U --break-system-packages vcstool rosdep rosinstall-generator catk
 # sudo rosdep init
 # rm /etc/ros/rosdep/sources.list.d/20-default.list
 rosdep init
-rosdep update
+rosdep update --os=debian:bullseye
 
 # rm /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init
 # rosdep --os=debian:$VERSION_CODENAME update
@@ -57,45 +57,45 @@ vcs import --input noetic.rosinstall ./src
 ##sudo apt --fix-broken install
 #sudo apt-get autoremove
 
-echo "--- Install catkin_pkg"
-cd
-git clone https://github.com/ros-infrastructure/catkin_pkg.git
-cd catkin_pkg
-python3 setup.py install
-cd ~/ros_catkin_ws
+#echo "--- Install catkin_pkg"
+#cd
+#git clone https://github.com/ros-infrastructure/catkin_pkg.git
+#cd catkin_pkg
+#python3 setup.py install
+#cd ~/ros_catkin_ws
 
 echo "--- Resolve dependencies"
-rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:$VERSION_CODENAME --skip-keys="python3-catkin-pkg python3-catkin-pkg-modules python3-rosdep-modules log4cxx"
+rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:bullseye --skip-keys="python3-catkin-pkg-modules libboost-thread python3-rosdep-modules"
 
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
-./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release \
-	-DSETUPTOOLS_DEB_LAYOUT=OFF \
-	--install-space=/opt/ros/$ROS_DISTRO
+./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release
+#	-DSETUPTOOLS_DEB_LAYOUT=OFF \
+#	--install-space=/opt/ros/$ROS_DISTRO
 
 # source ~/ros_catkin_ws/install_isolated/setup.bash
-source /opt/ros/$ROS_DISTRO/setup.bash
-
-echo "--- List built ROS packages"
-set +x
-rospack list-names | while read line; do echo $line `rosversion $line`; done
-set -x
-
-echo "--- Build Debian packages"
-apt-get install -y python3-bloom debhelper dpkg-dev libtinyxml-dev
-
-# add rosdep file to help bloom-generate resolve missing bookworm dependencies
-echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
-rosdep update
-
-pip3 install setuptools==45.2.0 # https://github.com/ros/catkin/issues/863#issuecomment-1000446018
-
-for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
-	cd $(dirname ${file})
-	rm -rf debian
-	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO --debug
-	debian/rules binary # fakeroot is not needed as we are root
-	cd -
-done
+#source /opt/ros/$ROS_DISTRO/setup.bash
+#
+#echo "--- List built ROS packages"
+#set +x
+#rospack list-names | while read line; do echo $line `rosversion $line`; done
+#set -x
+#
+#echo "--- Build Debian packages"
+#apt-get install -y python3-bloom debhelper dpkg-dev libtinyxml-dev
+#
+## add rosdep file to help bloom-generate resolve missing bookworm dependencies
+#echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+#rosdep update
+#
+#pip3 install setuptools==45.2.0 # https://github.com/ros/catkin/issues/863#issuecomment-1000446018
+#
+#for file in `find . -name "package.xml" -not -path "*/debian/*"`; do
+#	cd $(dirname ${file})
+#	rm -rf debian
+#	bloom-generate rosdebian --os-name debian --os-version $VERSION_CODENAME --ros-distro $ROS_DISTRO --debug
+#	debian/rules binary # fakeroot is not needed as we are root
+#	cd -
+#done
 
 ls
