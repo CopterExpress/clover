@@ -43,6 +43,7 @@
   <depend condition="$ROS_PYTHON_VERSION == 3">python3-lxml</depend>
   <depend>dynamic_reconfigure</depend>
   <depend>image_proc</depend>
+  <depend>image_geometry</depend>
   <exec_depend>python-pymavlink</exec_depend>
   <test_depend>ros_pytest</test_depend>
 

@@ -131,7 +131,6 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
-    ros-${ROS_DISTRO}-dynamic-reconfigure \
     ros-${ROS_DISTRO}-rosbridge-suite \
     ros-${ROS_DISTRO}-rosserial \
     ros-${ROS_DISTRO}-usb-cam \
@@ -140,7 +139,6 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rosshow \
     ros-${ROS_DISTRO}-cmake-modules \
     ros-${ROS_DISTRO}-image-view \
-    ros-${ROS_DISTRO}-image-geometry \
     ros-${ROS_DISTRO}-nodelet-topic-tools \
     ros-${ROS_DISTRO}-stereo-msgs
 
