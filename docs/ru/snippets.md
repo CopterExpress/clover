@@ -499,3 +499,23 @@ param_set(param_id='MPC_Z_P', value=ParamValue(real=1.5))
 ```python
 is_simulation = rospy.get_param('/use_sim_time', False)
 ```
+
+### # {#simulator-interaction}
+
+Переместить физический объект (линк) в Gazebo (а также поменять его скорости) можно при помощи сервиса `gazebo/set_link_state` (тип [`SetLinkState`](http://docs.ros.org/en/api/gazebo_msgs/html/srv/SetLinkState.html)). Например, если добавить в мир объект куб (линк `unit_box::link`), то так можно переместить его в точку (1, 2, 3):
+
+```python
+import rospy
+from geometry_msgs.msg import Point, Pose, Quaternion
+from gazebo_msgs.srv import SetLinkState
+from gazebo_msgs.msg import LinkState
+
+rospy.init_node('flight')
+
+set_link_state = rospy.ServiceProxy('gazebo/set_link_state', SetLinkState)
+
+# Переместить линк в Gazebo
+set_link_state(LinkState(link_name='unit_box::link', pose=Pose(position=Point(1, 2, 3), orientation=Quaternion(0, 0, 0, 1))))
+```
+
+> **Info** Простую анимацию объектов в Gazebo можно реализовать [с помощью акторов](http://classic.gazebosim.org/tutorials?tut=actor&cat=build_robot).

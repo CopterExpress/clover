@@ -488,3 +488,23 @@ Check, if the code is running inside a [Gazebo simulation](simulation.md):
 ```python
 is_simulation = rospy.get_param('/use_sim_time', False)
 ```
+
+### # {#simulator-interaction}
+
+You can move a physical object (link) in Gazebo (as well as change its velocity) using the `gazebo/set_link_state` service (of the type [`SetLinkState`](http://docs.ros.org/en/api/gazebo_msgs/html/srv/SetLinkState.html)). For example, if you add a cube to the world (link `unit_box::link`), you can move it to the point (1, 2, 3):
+
+```python
+import rospy
+from geometry_msgs.msg import Point, Pose, Quaternion
+from gazebo_msgs.srv import SetLinkState
+from gazebo_msgs.msg import LinkState
+
+rospy.init_node('flight')
+
+set_link_state = rospy.ServiceProxy('gazebo/set_link_state', SetLinkState)
+
+# Change link's position
+set_link_state(LinkState(link_name='unit_box::link', pose=Pose(position=Point(1, 2, 3), orientation=Quaternion(0, 0, 0, 1))))
+```
+
+> **Info** Simple object animation in Gazebo can be implemented [using actors](http://classic.gazebosim.org/tutorials?tut=actor&cat=build_robot).

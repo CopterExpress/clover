@@ -17,6 +17,8 @@ It is advisable to use a specialized build of PX4 with the necessary fixes and b
 </ul>
 </div>
 
+> **Warning** If you are using the firmware version older than *v1.10* (for example, `v1.8.2-clover.13`), then in order to avoid configuration errors, use [QGroundControl version *v4.2.0*](https://github.com/mavlink/qgroundcontrol/releases/tag/v4.2.0) (or older). See [detailed information](https://docs.px4.io/v1.11/en/config/battery.html#parameter-migration-notes) about changes in the firmware parameters that cause errors in newer versions of QGroundControl.
+
 <script type="text/javascript">
     // get latest release from GitHub
     fetch('https://api.github.com/repos/CopterExpress/Firmware/releases').then(function(res) {
