@@ -19,7 +19,7 @@ set -ex # exit on error, echo commands
 export ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
 export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
-export CLOVER_DEPS="tf tf2 tf2_ros tf2_geometry_msgs geometry_msgs sensor_msgs visualization_msgs geographiclib mavros mavros_extras cv_camera cv_bridge rosbridge_server web_video_server tf2_web_republisher libxml2 libxslt python3-lxml dynamic_reconfigure image_transport image_proc image_geometry python-pymavlink ros_pytest"
+export CLOVER_DEPS="tf tf2 tf2_ros tf2_geometry_msgs geometry_msgs sensor_msgs visualization_msgs libgeographiclib-dev mavros mavros_extras cv_camera cv_bridge rosbridge_server web_video_server tf2_web_republisher libxml2 libxslt python3-lxml dynamic_reconfigure image_transport image_proc image_geometry python-pymavlink ros_pytest"
 export CLOVER_DEPS="$CLOVER_DEPS rostest python3-docopt image_publisher"
 
 echo "=== Building ROS from scratch"
