@@ -16,7 +16,7 @@ Connect the rangefinder to the 3V, GND, SCL and SDA pins via the I²C interface:
 
 <img src="../assets/raspberry-vl53l1x.png" alt="Connecting VL53L1X" height=600>
 
-If the pin marked GND is occupied, you can use any other ground pin (look at the [pinout](https://pinout.xyz) for reference).
+If the pin marked GND is busy, you can use any other ground pin (look at the [pinout](https://pinout.xyz) for reference).
 
 > **Hint** You can connect several peripheral devices via the I²C interface simultaneously. Use a parallel connection for that.
 
