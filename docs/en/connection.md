@@ -29,7 +29,7 @@ UART connection is another way for the Raspberry Pi and FCU to communicate.
 If the pin marked GND is busy, you can use any other ground pin (look at the [pinout](https://pinout.xyz) for reference).
 
 1. Connect the TELEM 2 port on the flight controller using a UART cable to the Raspberry Pi pins following this instruction: the black cable (*GND*) to Ground, the green cable (*UART_RX*) to *GPIO14*, the yellow cable (*UART_TX*) to *GPIO15*. Do not connect the red cable (*5V*).
-2. In PX4 of version v1.9.0 or higher, set parameter values: `MAV_1_CONFIG` to TELEM 2, `SER_TEL2_BAUND` to 921600 8N1. In PX4 of version [prior to v1.9.0](https://github.com/mavlink/qgroundcontrol/issues/6905#issuecomment-464549610) the parameter `SYS_COMPANION` should be set to `Companion Link (921600 baud, 8N1)`, to set it correctly use the old version of QGC v3.3.1.
+2. In PX4 of version v1.9.0 or higher, set parameter values: `MAV_1_CONFIG` to TELEM 2, `SER_TEL2_BAUND` to 921600 8N1. In PX4 of version [prior to v1.9.0](https://github.com/mavlink/qgroundcontrol/issues/6905#issuecomment-464549610) the parameter `SYS_COMPANION` should be set to `Companion Link (921600 baud, 8N1)`, to set it correctly use the old version of QGC [v3.3.1](https://github.com/mavlink/qgroundcontrol/releases/tag/v3.3.1).
 3. [Connect to the Raspberry Pi over SSH](ssh.md).
 4. Check the presence of the parameters `enable_uart=1` and `dtoverlay=pi 3-disable-bt` in the file `/boot/config.txt` by [running the following command on the Raspberry Pi](cli.md):
 
@@ -58,5 +58,7 @@ If the pin marked GND is busy, you can use any other ground pin (look at the [pi
     ```
 
     The `connected` field should have the `True` value.
+
+Read more in the PX4 docs: https://docs.px4.io/main/en/peripherals/serial_configuration.html.
 
 **Next**: [Using QGroundControl over Wi-Fi](gcs_bridge.md)

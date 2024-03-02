@@ -29,7 +29,7 @@
 Если обозначенный пин GND занят, можно использовать другой свободный, используя [распиновку](https://pinout.xyz).
 
 1. Подключите Raspberry Pi к полетному контроллеру по UART. Для этого соедините кабелем порт TELEM 2 на полетном контроллере к пинам на Raspberry Pi следующем образом: черный провод (GND) к Ground, зеленый (*UART_RX*) к *GPIO14*, желтый (*UART_TX*) к *GPIO15*. Красный провод (*5V*) подключать не нужно.
-2. В PX4 версии v1.9.0 и выше измените значения параметров PX4: `MAV_1_CONFIG` на TELEM 2, `SER_TEL2_BAUND` на 921600 8N1. В PX4 [до версии v1.9.0](https://github.com/mavlink/qgroundcontrol/issues/6905#issuecomment-464549610) необходима установка параметра `SYS_COMPANION` в значение `Companion Link (921600 baud, 8N1)`, для его корректной установки используйте старую версию QGC v3.3.1.
+2. В PX4 версии v1.9.0 и выше измените значения параметров PX4: `MAV_1_CONFIG` на TELEM 2, `SER_TEL2_BAUND` на 921600 8N1. В PX4 [до версии v1.9.0](https://github.com/mavlink/qgroundcontrol/issues/6905#issuecomment-464549610) необходима установка параметра `SYS_COMPANION` в значение `Companion Link (921600 baud, 8N1)`, для его корректной установки используйте старую версию QGC [v3.3.1](https://github.com/mavlink/qgroundcontrol/releases/tag/v3.3.1).
 3. [Подключитесь в Raspberry Pi по SSH](ssh.md).
 4. Проверьте наличие параметров `enable_uart=1` и `dtoverlay=pi3-disable-bt` в файле `/boot/config.txt`, [выполнив команду на Raspberry Pi](cli.md):
 
@@ -58,5 +58,7 @@
     ```
 
     Поле `connected` должно содержать значение `True`.
+
+Дополнительная информация: https://docs.px4.io/main/en/peripherals/serial_configuration.html.
 
 **Далее**: [Подключение QGroundControl по Wi-Fi](gcs_bridge.md).
