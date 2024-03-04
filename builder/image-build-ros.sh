@@ -74,6 +74,7 @@ apt-get install -y liborocos-kdl1.5 geographiclib-tools libgeographiclib-dev
 
 echo "-- Install geographiclib datasets"
 wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
+chmod +x install_geographiclib_datasets.sh
 ./install_geographiclib_datasets.sh
 
 echo "--- Apply patches"
