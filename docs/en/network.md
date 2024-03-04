@@ -113,7 +113,7 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     sudo systemctl start dnsmasq
     ```
 
-> **Caution** Before restarting services, it is necessary to reload the configuration of daemons, without daemon-reload, because network services will not turn on and access to Raspberry Pi will break!
+    > **Caution** Before restarting services, it is necessary to reload the configuration of daemons, without daemon-reload, because network services will not turn on and access to Raspberry Pi will break!
 
 4. Restart the `dhcpcd` service.
 
