@@ -85,7 +85,7 @@ wget https://github.com/ros/ros_comm/pull/2353.patch
 patch -p2 -d src/ros_comm < 2353.patch
 
 wget https://github.com/AJahueyM/web_video_server/commit/5b722eb0822bcc3fe45fefe7b393b87bfe004417.patch
-patch -p2 -d src/web_video_server < 5b722eb0822bcc3fe45fefe7b393b87bfe004417.patch
+patch -p1 -d src/web_video_server < 5b722eb0822bcc3fe45fefe7b393b87bfe004417.patch
 
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
