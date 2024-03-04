@@ -67,7 +67,14 @@ vcs import --input noetic.rosinstall ./src
 #cd ~/ros_catkin_ws
 
 echo "--- Resolve dependencies"
-rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:bullseye --skip-keys="python3-catkin-pkg-modules libboost-thread python3-rosdep-modules"
+rosdep install --from-paths ./src --ignore-packages-from-source --rosdistro $ROS_DISTRO -y --os=debian:bullseye --skip-keys="python3-catkin-pkg-modules libboost-thread python3-rosdep-modules" || true
+
+echo "--- Install missing dependencies"
+apt-get install -y liborocos-kdl1.5 geographiclib-tools libgeographiclib-dev
+
+echo "-- Install geographiclib datasets"
+wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
+./install_geographiclib_datasets.sh
 
 echo "--- Apply patches"
 wget https://github.com/ros/rosconsole/pull/58.patch
@@ -75,6 +82,9 @@ patch -p1 -d src/rosconsole < 58.patch
 
 wget https://github.com/ros/ros_comm/pull/2353.patch
 patch -p2 -d src/ros_comm < 2353.patch
+
+wget https://github.com/AJahueyM/web_video_server/commit/5b722eb0822bcc3fe45fefe7b393b87bfe004417.patch
+patch -p2 -d src/web_video_server < 5b722eb0822bcc3fe45fefe7b393b87bfe004417.patch
 
 echo "--- Build ROS"
 # https://github.com/ros/catkin/issues/863#issuecomment-290392074
