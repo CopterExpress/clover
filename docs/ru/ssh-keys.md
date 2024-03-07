@@ -114,7 +114,6 @@ Host 192.168.11.1
     ServerAliveInterval 2
     ServerAliveCountMax 3
     StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
 ```
 
 Эта настройка:
@@ -125,7 +124,7 @@ Host 192.168.11.1
  * если ключ по каким-то причинам не подойдёт (был заменён на одном ноутбуке, но забыт заменить на другом), то SSH-терминал перейдёт к аутентификации по паролю (настройки `PreferredAuthentications`, `PubkeyAuthentication`, `PasswordAuthentication`)
  * если связь с RPi не может установиться (WiFi ещё не включился), то SSH-подключение не зависнет, а быстро завершится (настройка `ConnectTimeout`)
  * если связь с RPi будет внезапно разорвана, то SSH-подключение не зависнет, а быстро завершится (настройки `TCPKeepAlive`, `ServerAliveInterval`, `ServerAliveCountMax`); 
- * уникальные SSH-отпечатки RPi-микрокомпьютеров (*fingerprints*) о которых упоминалось выше, проверяться больше не будут (настройки `StrictHostKeyChecking` и `UserKnownHostsFile`).
+ * уникальные SSH-отпечатки RPi-микрокомпьютеров (*fingerprints*) о которых упоминалось выше, проверяться больше не будут (настройка `StrictHostKeyChecking`).
 
 Таким образом будет решено множество неудобств, связанных с использованием SSH-подключений.
 
