@@ -67,7 +67,7 @@
 </div>
 
 > **Hint** Убедитесь, что провод, идущий в COEX Pix, подключен к порту RC IN:
-<img src="../assets/coexpix-bottom.jpg" width=300 class="zoom border center" alt="coex pix pinout">
+<img src="../assets/coex_pix/coexpix-bottom.jpg" width=300 class="zoom border center" alt="coex pix pinout">
 
 ## Сопряжение приёмника с пультом {#rc_bind}
 
