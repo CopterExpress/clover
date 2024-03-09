@@ -124,13 +124,13 @@ Host 192.168.11.1
 
 This setting:
 
- * affects the operation of the SSH terminal when connected to a computer with the IP address `192.168.11.1`;
- * if the user name is not specified, the name `pi` will be used automatically;
- * the private key `~/.ssh/id_clover` will be used automatically;
- * if the key does not fit for some reason (it was replaced on one laptop, but forgot to replace it on another), then the SSH terminal will switch to password authentication (settings `PreferredAuthentications`, `PubkeyAuthentication`, `PasswordAuthentication`);
- * if communication with RPi cannot be established (WiFi is not yet connected), then the SSH connection will not hang, but will be completed quickly (setting `ConnectTimeout`);
- * if the connection with RPi is suddenly severed, the SSH connection will not hang, but will be completed quickly (settings `TCPKeepAlive`, `ServerAliveInterval`, `ServerAliveCountMax`);
- * the unique SSH *fingerprints* of the RPi microcomputers mentioned above will no longer be checked (the settings `StrictHostKeyChecking`).
+* affects the operation of the SSH terminal when connected to a computer with the IP address `192.168.11.1`;
+* if the user name is not specified, the name `pi` will be used automatically;
+* the private key `~/.ssh/id_clover` will be used automatically;
+* if the key does not fit for some reason (it was replaced on one laptop, but forgot to replace it on another), then the SSH terminal will switch to password authentication (settings `PreferredAuthentications`, `PubkeyAuthentication`, `PasswordAuthentication`);
+* if communication with RPi cannot be established (WiFi is not yet connected), then the SSH connection will not hang, but will be completed quickly (setting `ConnectTimeout`);
+* if the connection with RPi is suddenly severed, the SSH connection will not hang, but will be completed quickly (settings `TCPKeepAlive`, `ServerAliveInterval`, `ServerAliveCountMax`);
+* the unique SSH *fingerprints* of the RPi microcomputers mentioned above will no longer be checked (the settings `StrictHostKeyChecking`).
 
 This will solve a lot of inconveniences associated with using SSH connections.
 
