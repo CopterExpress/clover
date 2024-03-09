@@ -187,4 +187,3 @@ In the screenshot above, nodes have been found on the network:
  * `192.168.11.160` - the `clover-dev` virtual machine from which the scan was performed.
 
 If all the checks listed above have been passed, then your virtual machine running in the VirtualBox environment is ready to work.
-
