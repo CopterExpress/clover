@@ -65,7 +65,7 @@ touch ~/.ssh/config ~/.ssh/known_hosts
 chmod 600 ~/.ssh/config ~/.ssh/known_hosts
 ```
 
-> **Hint** The `.ssh` directory in the user's home folder is the standard storage location for both key pairs and SSH connection settings, so we prohibit access to it by the Others group (*outsiders*). Modern Linux distributions check access rights to files in the `.ssh` directory and may refuse authentication by key pairs. 
+> **Hint** The `.ssh` directory in the user's home folder is the standard storage location for both key pairs and SSH connection settings, so we prohibit access to it by the Others group (*outsiders*). Modern Linux distributions check access rights to files in the `.ssh` directory and may refuse authentication by key pairs.
 
 ### Generating an SSH key pair
 
