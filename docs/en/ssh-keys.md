@@ -128,8 +128,8 @@ This setting:
  * if the user name is not specified, the name `pi` will be used automatically;
  * the private key `~/.ssh/id_clover` will be used automatically;
  * if the key does not fit for some reason (it was replaced on one laptop, but forgot to replace it on another), then the SSH terminal will switch to password authentication (settings `PreferredAuthentications`, `PubkeyAuthentication`, `PasswordAuthentication`);
- * if communication with RPi cannot be established (WiFi is not yet connected), then the SSH connection will not hang, but will be completed quickly (setting `ConnectTimeout');
- * if the connection with RPi is suddenly severed, the SSH connection will not hang, but will be completed quickly (settings `TCPKeepAlive`, `ServerAliveInterval`, `ServerAliveCountMax');
+ * if communication with RPi cannot be established (WiFi is not yet connected), then the SSH connection will not hang, but will be completed quickly (setting `ConnectTimeout`);
+ * if the connection with RPi is suddenly severed, the SSH connection will not hang, but will be completed quickly (settings `TCPKeepAlive`, `ServerAliveInterval`, `ServerAliveCountMax`);
  * the unique SSH *fingerprints* of the RPi microcomputers mentioned above will no longer be checked (the settings `StrictHostKeyChecking`).
 
 This will solve a lot of inconveniences associated with using SSH connections.
@@ -142,7 +142,7 @@ Now, to connect to RPi from a Linux terminal, you just need to type `ssh 1[TAB][
 
 ## Copying files using SSH
 
-To copy a file `circle_flight.py ` from the laptop to the RPi to the user's home folder `pi`, you can also use SSH. To do this, type the command in the command shell:
+To copy a file `circle_flight.py` from the laptop to the RPi to the user's home folder `pi`, you can also use SSH. To do this, type the command in the command shell:
 
 ```bash
 # first we specify 'what' we copy, and then 'where'
