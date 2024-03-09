@@ -167,7 +167,7 @@ Raspberry shutdown command:
 ssh 192.168.11.1 'sudo shutdown now'
 ```
 
-Example of a python script' startup command:
+Example of a Python script' startup command:
 
 ```bash
 ssh -t 192.168.11.1 'ROS_HOSTNAME=`hostname`.local && . /opt/ros/noetic/setup.bash && . /home/pi/catkin_ws/devel/setup.bash && python3 examples/get_telemetry.py'
