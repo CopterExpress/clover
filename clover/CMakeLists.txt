@@ -30,6 +30,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
+# https://github.com/mavlink/mavros/blob/7f1a8/mavros/CMakeLists.txt#L42
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};/usr/share/cmake/geographiclib")
 find_package(GeographicLib REQUIRED)
 
 # Workaround for OpenCV 3/4 support
