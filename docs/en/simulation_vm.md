@@ -20,9 +20,13 @@ You can download the latest VM image [in the VM releases repository](https://git
 
 You need to use a VM manager that supports OVF format, like [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [VMware Player](https://www.vmware.com/products/workstation-player.html) or [VMware Workstation](https://www.vmware.com/products/workstation-pro.html).
 
-> **Note** At the time of writing VirtualBox had issues running the VM, particularly with 3D applications. We recommend using VMware Player or VMware Workstation if possible. The following steps assume you're using VMware Player.
+Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it may be supported by your hardware but turned off by default).
 
-Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it may be supported by your hardware but turned off by default). The steps to enable virtualization differ from manufacturer to manufacturer, but should be described in your system manual. Consult your system's manufacturer if you're having trouble turning virtualization on.
+<img src="../assets/simulation_setup_vm/bios-virtualization-option.jpg" alt="BIOS Virtualization Setup" height=400 class="border center">
+
+The steps to enable virtualization differ from manufacturer to manufacturer, but should be described in your system manual. Consult your system's manufacturer if you're having trouble turning virtualization on.
+
+### Configuring virtual machine in the VMware Player environment
 
 1. Import the OVA archive into your virtualization environment. Use the **Open a Virtual Machine** option in VMware Player:
 
@@ -64,3 +68,6 @@ Make sure that you have hardware virtualization enabled in your BIOS/UEFI (it ma
     ![vmware-netcfg interface](../assets/simulation_setup_vm/09_netcfg.png)
 
     Select `vmnet0` in the networks list, set it to *Bridged*, and choose the adapter you are planning to use to connect to drone in the drop-down menu.
+
+### Configuring virtual machine in the VirtualBox environment
+
