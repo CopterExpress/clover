@@ -8,7 +8,7 @@ Basic information on working with SSH can be found in the section [SSH access to
 
 SSH (*secure shell*) is a network protocol that allows you to remotely control the operating system on the computer you are connected to. It is similar to a protocol such as *telnet*, but allows you to encrypt network traffic during interaction. Thus, the transfer of passwords and other secret information is hidden. The Raspberry Pi operating system supports SSH communication, like many other common Linux-based systems.
 
-SSH allows you not only to organize work in the command shell, but also to transfer files, as well as tunnel transmitted data from other protocols, such as information from a video camera or telemetry. In addition, SSH supports several authentication modes (that is, verification of the connecting user), with its help it is possible to connect to the Clover not only using a password, but also password-free access (authentication by a key pair, i.e. ssh keys).
+SSH allows you not only to organize work in the command shell, but also to transfer files, as well as tunnel transmitted data from other protocols, such as information from a video camera or telemetry. In addition, SSH supports several authentication modes (that is, verification of the connecting user), with its help it is possible to connect to the Clover not only using a password, but also password-free access (authentication by a key pair, i.e. SSH keys).
 
 ## Password authentication
 
@@ -18,7 +18,7 @@ Authentication [by password](ssh.md ) on the image of RPi for Clover is enabled 
 
 When connecting to RPi for the first time, you will see the notification with a suggestion to save a unique *fingerprint*. The stored information is accumulated on computers from which SSH login to RPi is performed, and is checked for sudden substitution.
 
-On Linux and Unix (Mac OS) the first ssh-connection to the RPi looks like this:
+On Linux and Unix (Mac OS) the first SSH-connection to the RPi looks like this:
 
 ```bash
 ssh pi@192.168.11.1
@@ -36,7 +36,7 @@ whoami
 exit
 ```
 
-In graphical programs in Windows, you will periodically see windows with similar warnings.
+In graphical programs in Windows, you will periodically see window with similar warnings.
 
 <img src="../assets/ssh-keys-known_hosts-fingerprint.png" alt="Сохранение отпечатка в Windows" class="border center">
 
@@ -44,7 +44,7 @@ In graphical programs in Windows, you will periodically see windows with similar
 
 ## Authentication using SSH keys
 
-SSH keys are a convenient, fast alternative way to connect to the Raspberry Pi, which does not require entering a password. In particular, when operating with Clover, this method is convenient because it saves time, and therefore battery power, and the time limit allocated for events in flight zones. In addition, using ssh keys opens up opportunities for convenient use of other programs that you would hardly use if you needed to type a password every time.
+SSH keys are a convenient, fast alternative way to connect to the Raspberry Pi, which does not require entering a password. In particular, when operating with Clover, this method is convenient because it saves time, and therefore battery power, and the time limit allocated for events in flight zones. In addition, using SSH keys opens up opportunities for convenient use of other programs that you would hardly use if you needed to type a password every time.
 
 The SSH key is divided into two parts: the pair consists of a so-called *private* and *public* key. The key is generated once. One part of the key (open) is transferred once to the remote computer to which the connection will be made, the second part of the key (private) is stored on the computer that will connect, the private part of the key is not transferred anywhere.
 
