@@ -182,8 +182,8 @@ ip a
 
 In the screenshot above, nodes have been found on the network:
 
- * `192.168.11.1` - Raspberry Pi microcomputer;
- * `192.168.11.117` - laptop with an Intel network adapter;
- * `192.168.11.160` - the `clover-dev` virtual machine from which the scan was performed.
+* `192.168.11.1` - Raspberry Pi microcomputer;
+* `192.168.11.117` - laptop with an Intel network adapter;
+* `192.168.11.160` - the `clover-dev` virtual machine from which the scan was performed.
 
 If all the checks listed above have been passed, then your virtual machine running in the VirtualBox environment is ready to work.
