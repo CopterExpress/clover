@@ -21,7 +21,7 @@
         { "from": "connection.html", "to": "en/connection.html" },
         { "from": "wifi.html", "to": "ru/wifi.html" },
         { "from": "ssh.html", "to": "ru/ssh.html" },
-        { "from": "ssh-keys.html", "to": "ru/ssh-keys.html" },
+        { "from": "ssh_keys.html", "to": "ru/ssh_keys.html" },
         { "from": "network.html", "to": "ru/network.html" },
         { "from": "gcs_bridge.html", "to": "ru/gcs_bridge.html" },
         { "from": "rc.html", "to": "ru/rc.html" },

@@ -26,7 +26,7 @@
   * [Подключение к Pixracer](connection.md)
   * [QGroundControl по Wi-Fi](gcs_bridge.md)
   * [SSH-доступ](ssh.md)
-    * [Использование SSH-ключей](ssh-keys.md)
+    * [Использование SSH-ключей](ssh_keys.md)
   * [Командная строка](cli.md)
   * [Автоматическая проверка](selfcheck.md)
   * [Просмотр видеострима с камер](web_video_server.md)
