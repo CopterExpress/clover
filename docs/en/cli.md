@@ -30,6 +30,16 @@ Print path to the current directory:
 pwd
 ```
 
+Go to the user's home directory:
+
+```bash
+# all three commands are equivalent, where the tilde character (~) is an abbreviated
+# path entry to the home directory, and the $HOME variable stores this path
+cd
+cd ~
+cd $HOME
+```
+
 Print contents of the `file.py` file:
 
 ```bash

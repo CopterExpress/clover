@@ -13,9 +13,9 @@ ssh pi@192.168.11.1
 
 Password: `raspberry`.
 
-For SSH access from Windows, you may use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).
+For SSH access from Windows, you may use [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). You can also gain SSH access from your smartphone using the [Termius](https://www.termius.com) app.
 
-You can also gain SSH access from your smart-phone using the [Termius](https://www.termius.com) app.
+> **Hint** To avoid entering the password each time you connect via SSH, see [the article on using SSH keys](ssh_keys.md).
 
 Read more: https://www.raspberrypi.org/documentation/remote-access/ssh/README.md
 
