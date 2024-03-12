@@ -12,7 +12,7 @@ SSH allows you not only to organize work in the command shell, but also to trans
 
 ## Password authentication
 
-Authentication [by password](ssh.md ) on the image of RPi for Clover is enabled by default and the password can be used to enter into the command shell of the minicomputer. On computers with Linux operating systems (and primarily on servers connected to the Internet), the ability to login with a password is usually disabled, since there is a more secure authentication method.
+Authentication [by password](ssh.md) on the image of RPi for Clover is enabled by default and the password can be used to enter into the command shell of the minicomputer. On computers with Linux operating systems (and primarily on servers connected to the Internet), the ability to login with a password is usually disabled, since there is a more secure authentication method.
 
 > **Hint** It is not recommended to disable logging into Clover by password, since you can completely lose access to the command shell over the network.
 
