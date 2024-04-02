@@ -85,8 +85,6 @@ my_travis_retry apt-get install --no-install-recommends -y cmake-data cmake
 my_travis_retry apt-get install --no-install-recommends -y \
 unzip \
 zip \
-ipython \
-ipython3 \
 screen \
 byobu  \
 nmap \
@@ -113,6 +111,8 @@ espeak espeak-data \
 ntpdate \
 mjpg-streamer \
 python3-opencv
+#ipython \
+#ipython3 \
 #python-dev \
 #python3-dev \
 #python-systemd \
