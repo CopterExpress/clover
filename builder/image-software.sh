@@ -94,7 +94,6 @@ dnsmasq  \
 tmux \
 tree \
 vim \
-libjpeg8 \
 tcpdump \
 libpoco-dev \
 libzbar0 \
@@ -117,6 +116,7 @@ python3-opencv
 #python3-dev \
 #python-systemd \
 #python-espeak python3-espeak \
+#libjpeg8 \
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
