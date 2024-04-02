@@ -104,7 +104,7 @@ python3-rosinstall \
 build-essential \
 libffi-dev \
 monkey \
-pigpio python-pigpio python3-pigpio \
+pigpio \
 i2c-tools \
 espeak espeak-data \
 ntpdate \
@@ -117,6 +117,7 @@ python3-opencv
 #python-systemd \
 #python-espeak python3-espeak \
 #libjpeg8 \
+#python-pigpio python3-pigpio
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
