@@ -109,13 +109,14 @@ libffi-dev \
 monkey \
 pigpio python-pigpio python3-pigpio \
 i2c-tools \
-espeak espeak-data python-espeak python3-espeak \
+espeak espeak-data \
 ntpdate \
-python-dev \
-python3-dev \
-python-systemd \
 mjpg-streamer \
 python3-opencv
+#python-dev \
+#python3-dev \
+#python-systemd \
+#python-espeak python3-espeak \
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
