@@ -14,6 +14,8 @@
 
 set -ex # Exit immidiately on non-zero result
 
+. /etc/os-release # set $VERSION_CODENAME to Debian release code name
+
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
   # TYPE: SUCCESS, ERROR, INFO
@@ -68,10 +70,10 @@ apt-get update \
 && apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
+echo "deb http://packages.ros.org/ros/ubuntu $VERSION_CODENAME main" > /etc/apt/sources.list.d/ros-latest.list
 
-wget -O - 'http://packages.coex.tech/key.asc' | apt-key add - 
-echo 'deb http://packages.coex.tech buster main' >> /etc/apt/sources.list
+wget -O - 'http://packages.coex.tech/key.asc' | apt-key add -
+echo "deb http://packages.coex.tech $VERSION_CODENAME main" >> /etc/apt/sources.list
 
 echo_stamp "Update apt cache"
 
