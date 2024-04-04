@@ -136,12 +136,12 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rosserial \
     ros-${ROS_DISTRO}-usb-cam \
     ros-${ROS_DISTRO}-vl53l1x \
-    ros-${ROS_DISTRO}-ws281x \
     ros-${ROS_DISTRO}-rosshow \
     ros-${ROS_DISTRO}-cmake-modules \
     ros-${ROS_DISTRO}-image-view \
     ros-${ROS_DISTRO}-nodelet-topic-tools \
     ros-${ROS_DISTRO}-stereo-msgs
+    #ros-${ROS_DISTRO}-ws281x \
 
 # TODO move GeographicLib datasets to Mavros debian package
 echo_stamp "Install GeographicLib datasets (needed for mavros)" \
