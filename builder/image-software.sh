@@ -12,7 +12,7 @@
 # copies or substantial portions of the Software.
 #
 
-set -e # Exit immidiately on non-zero result
+set -ex # Exit immidiately on non-zero result
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
