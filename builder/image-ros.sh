@@ -86,19 +86,19 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 # This is sort of a hack to force "custom" packages to be installed - the ones built by COEX, linked against OpenCV 4.2
 # I **wish** OpenCV would not be such a mess, but, well, here we are.
-echo_stamp "Installing OpenCV 4.2-compatible ROS packages"
-apt install -y --no-install-recommends \
-ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
-ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
-ros-${ROS_DISTRO}-cv-camera=0.5.1-0buster \
-ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
-ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
-apt-mark hold \
-ros-${ROS_DISTRO}-compressed-image-transport \
-ros-${ROS_DISTRO}-cv-bridge \
-ros-${ROS_DISTRO}-cv-camera \
-ros-${ROS_DISTRO}-image-publisher \
-ros-${ROS_DISTRO}-web-video-server
+# echo_stamp "Installing OpenCV 4.2-compatible ROS packages"
+# apt install -y --no-install-recommends \
+# ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
+# ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
+# ros-${ROS_DISTRO}-cv-camera=0.5.1-0buster \
+# ros-${ROS_DISTRO}-image-publisher=1.15.3-0buster \
+# ros-${ROS_DISTRO}-web-video-server=0.2.1-0buster
+# apt-mark hold \
+# ros-${ROS_DISTRO}-compressed-image-transport \
+# ros-${ROS_DISTRO}-cv-bridge \
+# ros-${ROS_DISTRO}-cv-camera \
+# ros-${ROS_DISTRO}-image-publisher \
+# ros-${ROS_DISTRO}-web-video-server
 
 echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
 my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
