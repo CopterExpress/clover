@@ -110,11 +110,11 @@ pigpio \
 i2c-tools \
 espeak espeak-data \
 ntpdate \
-mjpg-streamer \
 python3-opencv \
 python3-pip \
 libboost-all-dev
-#python-pip
+#mjpg-streamer \
+#python-pip \
 #ipython \
 #ipython3 \
 #python-dev \
