@@ -111,7 +111,7 @@ ntpdate \
 mjpg-streamer \
 python3-opencv \
 python3-pip \
-python-pip
+#python-pip
 #ipython \
 #ipython3 \
 #python-dev \
@@ -135,7 +135,7 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 # #my_travis_retry pip3 install --upgrade pip
 
 echo_stamp "Make sure both pip and pip3 are installed"
-pip --version
+#pip --version
 pip3 --version
 
 echo_stamp "Install and enable Butterfly (web terminal)"
