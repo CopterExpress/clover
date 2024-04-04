@@ -111,6 +111,7 @@ ntpdate \
 mjpg-streamer \
 python3-opencv \
 python3-pip \
+libboost-all-dev
 #python-pip
 #ipython \
 #ipython3 \
