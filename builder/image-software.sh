@@ -109,7 +109,9 @@ i2c-tools \
 espeak espeak-data \
 ntpdate \
 mjpg-streamer \
-python3-opencv
+python3-opencv \
+python3-pip \
+python-pip
 #ipython \
 #ipython3 \
 #python-dev \
@@ -123,14 +125,14 @@ python3-opencv
 sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sed -i "s/updates_available//" /home/pi/.byobu/status
 
-echo_stamp "Installing pip"
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip2.py
-python3 get-pip.py
-python get-pip2.py
-rm get-pip.py get-pip2.py
-#my_travis_retry pip install --upgrade pip
-#my_travis_retry pip3 install --upgrade pip
+# echo_stamp "Installing pip"
+# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip2.py
+# python3 get-pip.py
+# python get-pip2.py
+# rm get-pip.py get-pip2.py
+# #my_travis_retry pip install --upgrade pip
+# #my_travis_retry pip3 install --upgrade pip
 
 echo_stamp "Make sure both pip and pip3 are installed"
 pip --version
