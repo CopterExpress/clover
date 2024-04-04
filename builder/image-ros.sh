@@ -23,6 +23,7 @@ NUMBER_THREADS=$5
 
 # Current ROS distribution
 ROS_DISTRO=noetic
+. /etc/os-release # set $VERSION_CODENAME to Debian release code name
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
@@ -106,7 +107,7 @@ my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
-my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:buster \
+my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:$VERSION_CODENAME \
   --skip-keys=gazebo_ros --skip-keys=gazebo_plugins
 my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
