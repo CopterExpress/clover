@@ -733,3 +733,9 @@ realsense2_camera:
 realsense2_description:
   debian:
     bookworm: [ros-noetic-realsense2-description]
+log4cxx:
+  debian:
+    bookworm: [liblog4cxx-dev]
+geographiclib:
+  debian:
+    bookworm: [libgeographiclib-dev]
