@@ -70,7 +70,7 @@ apt-get update \
 && apt-get install --no-install-recommends -y dirmngr > /dev/null \
 && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
+# echo "deb http://packages.ros.org/ros/ubuntu buster main" > /etc/apt/sources.list.d/ros-latest.list
 
 wget -O - 'http://packages.coex.tech/key.asc' | apt-key add -
 echo "deb http://packages.coex.tech $VERSION_CODENAME main" >> /etc/apt/sources.list
@@ -99,7 +99,6 @@ vim \
 tcpdump \
 libpoco-dev \
 libzbar0 \
-python3-rosdep \
 python3-rosinstall-generator \
 python3-wstool \
 python3-rosinstall \
@@ -140,6 +139,9 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 echo_stamp "Make sure both pip and pip3 are installed"
 #pip --version
 pip3 --version
+
+echo_stamp "Install rosdep"
+my_travis_retry pip3 install --break-system-packages -U rosdep
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
