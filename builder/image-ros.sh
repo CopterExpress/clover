@@ -78,7 +78,7 @@ echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sourc
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
-my_travis_retry sudo -u pi rosdep update
+my_travis_retry sudo -u pi rosdep update --os=debian:$VERSION_CODENAME
 
 export ROS_IP='127.0.0.1' # needed for running tests
 
