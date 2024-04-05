@@ -106,10 +106,13 @@ build-essential \
 libffi-dev \
 pigpio \
 i2c-tools \
-espeak espeak-data \
+espeak espeak-data python3-espeak \
 ntpdate \
 python3-opencv \
 python3-pip \
+python3-pigpio \
+python3-dev \
+python3-systemd \
 libboost-all-dev
 #monkey \
 #mjpg-streamer \
@@ -117,11 +120,10 @@ libboost-all-dev
 #ipython \
 #ipython3 \
 #python-dev \
-#python3-dev \
 #python-systemd \
-#python-espeak python3-espeak \
+#python-espeak \
 #libjpeg8 \
-#python-pigpio python3-pigpio
+#python-pigpio
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
