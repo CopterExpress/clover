@@ -24,6 +24,7 @@ NUMBER_THREADS=$5
 # Current ROS distribution
 ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
+export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
