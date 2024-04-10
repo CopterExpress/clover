@@ -202,6 +202,9 @@ rosserial_msgs:
 rosserial_python:
   debian:
     bookworm: [ros-noetic-rosserial-python]
+rosserial_server:
+  debian:
+    bookworm: [ros-noetic-rosserial-server]
 rosservice:
   debian:
     bookworm: [ros-noetic-rosservice]
