@@ -136,7 +136,6 @@ touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/w
 
 echo_stamp "Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
-    ros-${ROS_DISTRO}-rosbridge-suite \
     ros-${ROS_DISTRO}-rosserial \
     ros-${ROS_DISTRO}-usb-cam \
     ros-${ROS_DISTRO}-vl53l1x \
