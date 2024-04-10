@@ -64,7 +64,7 @@ if [ -z $VM ]; then
 	rosversion rosshow
 	rosversion vl53l1x
 	rosversion rosserial
-	[[ $(rosversion cv_camera) == "0.5.1" ]] # patched version with init fix
+	[[ $(rosversion cv_camera) == "0.6.1" ]] # patched version with init fix
 fi
 
 # determine user home directory
