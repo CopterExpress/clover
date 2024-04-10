@@ -54,7 +54,7 @@ my_travis_retry() {
   local max_count=5
   while [ $count -le $max_count ]; do
     [ $result -ne 0 ] && {
-      echo -e "\nThe command \"$@\" failed. Retrying, $count of $max_count.\n" >&2
+      echo -e "\nThe command \"$*\" failed. Retrying, $count of $max_count.\n" >&2
     }
     # ! { } ignores set -e, see https://stackoverflow.com/a/4073372
     ! { "$@"; result=$?; }
@@ -64,7 +64,7 @@ my_travis_retry() {
   done
 
   [ $count -gt $max_count ] && {
-    echo -e "\nThe command \"$@\" failed $max_count times.\n" >&2
+    echo -e "\nThe command \"$*\" failed $max_count times.\n" >&2
   }
 
   return $result
