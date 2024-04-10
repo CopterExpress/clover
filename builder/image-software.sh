@@ -158,11 +158,11 @@ systemctl enable butterfly.socket
 echo_stamp "Install ws281x library"
 my_travis_retry pip3 install --break-system-packages --prefer-binary rpi_ws281x
 
-# echo_stamp "Setup Monkey"
-# mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
-# mv /root/monkey /etc/monkey/sites/default
-# sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
-# systemctl enable monkey.service
+echo_stamp "Setup Monkey"
+mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
+mv /root/monkey /etc/monkey/sites/default
+sed -i 's/SymLink Off/SymLink On/' /etc/monkey/monkey.conf
+systemctl enable monkey.service
 
 echo_stamp "Install Node.js"
 cd /home/pi
