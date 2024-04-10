@@ -27,8 +27,6 @@ systemctl --version
 if [ -z $VM ]; then
 	# rpi only software
 	python --version
-	ipython --version
-	pip2 --version
 	[[ $(python -c 'import sys;print(sys.version_info.major)') == "3" ]]
 
 	# ptvsd does not have a stand-alone binary
