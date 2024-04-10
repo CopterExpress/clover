@@ -6,7 +6,6 @@ set -ex
 
 # validate required software is installed
 
-python2 --version
 python3 --version
 ipython3 --version
 
@@ -30,8 +29,7 @@ if [ -z $VM ]; then
 	python --version
 	ipython --version
 	pip2 --version
-	# `python` is python2 for now
-	[[ $(python -c 'import sys;print(sys.version_info.major)') == "2" ]]
+	[[ $(python -c 'import sys;print(sys.version_info.major)') == "3" ]]
 
 	# ptvsd does not have a stand-alone binary
 	python -m ptvsd --version
