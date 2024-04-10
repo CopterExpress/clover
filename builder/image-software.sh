@@ -114,8 +114,8 @@ python3-pigpio \
 python3-dev \
 python3-systemd \
 libboost-all-dev \
-monkey
-#mjpg-streamer \
+monkey \
+mjpg-streamer
 #python-pip \
 #ipython \
 #ipython3 \
