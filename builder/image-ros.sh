@@ -71,7 +71,7 @@ my_travis_retry() {
 }
 
 echo_stamp "Install ROS"
-my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base
+my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base ros-${ROS_DISTRO}-catkin
 source /opt/ros/noetic/setup.bash
 export ROS_IP='127.0.0.1' # needed for running tests
 
