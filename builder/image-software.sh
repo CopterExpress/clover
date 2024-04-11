@@ -134,21 +134,24 @@ echo_stamp "Make sure pip is installed"
 pip --version
 pip3 --version
 
+echo "Enable installing packages with pip"
+mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old
+
 echo_stamp "Install rosdep"
-my_travis_retry pip3 install --break-system-packages -U rosdep
+my_travis_retry pip3 install -U rosdep
 
 echo_stamp "Install and enable Butterfly (web terminal)"
 echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
 export CRYPTOGRAPHY_DONT_BUILD_RUST=1
-my_travis_retry pip3 install --break-system-packages cryptography==3.4.6 # https://stackoverflow.com/a/68472128/6850197
-my_travis_retry pip3 install --break-system-packages pyOpenSSL==20.0.1
-my_travis_retry pip3 install --break-system-packages tornado==5.1.1
-my_travis_retry pip3 install --break-system-packages butterfly
-my_travis_retry pip3 install --break-system-packages butterfly[systemd]
+my_travis_retry pip3 install cryptography==3.4.6 # https://stackoverflow.com/a/68472128/6850197
+my_travis_retry pip3 install pyOpenSSL==20.0.1
+my_travis_retry pip3 install tornado==5.1.1
+my_travis_retry pip3 install butterfly
+my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
 
 echo_stamp "Install ws281x library"
-my_travis_retry pip3 install --break-system-packages --prefer-binary rpi_ws281x
+my_travis_retry pip3 install --prefer-binary rpi_ws281x
 
 echo_stamp "Setup Monkey"
 mv /etc/monkey/sites/default /etc/monkey/sites/default.orig
@@ -166,11 +169,11 @@ rm node-v10.15.0-linux-armv6l.tar.gz
 
 echo_stamp "Installing ptvsd"
 #my_travis_retry pip install ptvsd
-my_travis_retry pip3 install --break-system-packages ptvsd
+my_travis_retry pip3 install ptvsd
 
 echo_stamp "Installing pyzbar"
 #my_travis_retry pip install pyzbar
-my_travis_retry pip3 install --break-system-packages pyzbar
+my_travis_retry pip3 install pyzbar
 
 echo_stamp "Add .vimrc"
 cat << EOF > /home/pi/.vimrc

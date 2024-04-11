@@ -70,9 +70,6 @@ my_travis_retry() {
   return $result
 }
 
-echo "Enable installing packages with pip"
-mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old
-
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
