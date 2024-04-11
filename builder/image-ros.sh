@@ -72,11 +72,14 @@ my_travis_retry() {
 
 echo_stamp "Install ROS"
 my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base
+source /opt/ros/noetic/setup.bash
 export ROS_IP='127.0.0.1' # needed for running tests
 
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
-echo_stamp "Init rosdep"
-my_travis_retry rosdep init
+#echo_stamp "Init rosdep"
+#my_travis_retry rosdep init
+
+echo_stamp "Update rosdep"
 # FIXME: Re-add this after missing packages are built
 echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
