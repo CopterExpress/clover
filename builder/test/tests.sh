@@ -43,6 +43,7 @@ fi
 
 roscore -h
 catkin_find
+tree /home/pi/catkin_ws
 rosversion clover
 rosversion aruco_pose
 rosversion mavros
