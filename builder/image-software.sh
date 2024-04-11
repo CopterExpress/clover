@@ -105,25 +105,17 @@ python3-wstool \
 python3-rosinstall \
 build-essential \
 libffi-dev \
-pigpio \
+monkey \
+pigpio python3-pigpio \
 i2c-tools \
 espeak espeak-data python3-espeak \
 ntpdate \
-python3-opencv \
-python3-pip \
-python3-pigpio \
+mjpg-streamer \
 python3-dev \
 python3-systemd \
-libboost-all-dev \
-monkey \
-mjpg-streamer
-#python-pip \
-#ipython \
-#python-dev \
-#python-systemd \
-#python-espeak \
+python3-opencv \
+python3-pip
 #libjpeg8 \
-#python-pigpio
 
 # Deny byobu to check available updates
 sed -i "s/updates_available//" /usr/share/byobu/status/status
