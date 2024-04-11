@@ -80,6 +80,9 @@ my_travis_retry rosdep update
 echo_stamp "Populate rosdep for ROS user"
 my_travis_retry sudo -u pi ROS_OS_OVERRIDE=debian:$VERSION_CODENAME rosdep update
 
+echo_stamp "Install ROS"
+my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base
+
 export ROS_IP='127.0.0.1' # needed for running tests
 
 # echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
