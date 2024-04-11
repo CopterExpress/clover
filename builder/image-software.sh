@@ -130,8 +130,8 @@ sed -i "s/updates_available//" /usr/share/byobu/status/status
 # #my_travis_retry pip install --upgrade pip
 # #my_travis_retry pip3 install --upgrade pip
 
-echo_stamp "Make sure both pip and pip3 are installed"
-#pip --version
+echo_stamp "Make sure pip is installed"
+pip --version
 pip3 --version
 
 echo_stamp "Install rosdep"
