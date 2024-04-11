@@ -35,7 +35,7 @@ if [ -z $VM ]; then
 
 	pigpiod -v
 	i2cdetect -V
-	butterfly -h
+	/usr/local/bin/butterfly.server.py --help
 	mjpg_streamer --version
 fi
 
