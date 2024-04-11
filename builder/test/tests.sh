@@ -42,6 +42,7 @@ fi
 # ros stuff
 
 roscore -h
+catkin_find
 rosversion clover
 rosversion aruco_pose
 rosversion mavros
