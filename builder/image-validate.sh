@@ -20,6 +20,7 @@ export ROS_DISTRO='noetic'
 export ROS_IP='127.0.0.1'
 source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
+env
 roscore &
 
 cd /home/pi/catkin_ws/src/clover/builder/test/
