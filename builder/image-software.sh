@@ -137,9 +137,6 @@ pip3 --version
 echo "Enable installing packages with pip"
 mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old
 
-echo_stamp "Install rosdep"
-my_travis_retry pip3 install -U rosdep
-
 echo_stamp "Install and enable Butterfly (web terminal)"
 # echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
 # export CRYPTOGRAPHY_DONT_BUILD_RUST=1

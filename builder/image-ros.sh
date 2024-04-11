@@ -70,6 +70,10 @@ my_travis_retry() {
   return $result
 }
 
+echo_stamp "Install ROS"
+my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base
+export ROS_IP='127.0.0.1' # needed for running tests
+
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 echo_stamp "Init rosdep"
 my_travis_retry rosdep init
@@ -79,11 +83,6 @@ my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"
 my_travis_retry sudo -u pi ROS_OS_OVERRIDE=debian:$VERSION_CODENAME rosdep update
-
-echo_stamp "Install ROS"
-my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base
-
-export ROS_IP='127.0.0.1' # needed for running tests
 
 # echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
 cd /home/pi/catkin_ws/src/clover
