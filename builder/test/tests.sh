@@ -63,7 +63,7 @@ rosversion image_view
 [[ $(rosversion ws281x) == "0.0.13" ]]
 
 if [ -z $VM ]; then
-	rosversion compressed_image_transport
+	# rosversion compressed_image_transport
 	rosversion rosshow
 	rosversion vl53l1x
 	rosversion rosserial
