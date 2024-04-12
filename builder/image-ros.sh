@@ -80,8 +80,8 @@ my_travis_retry pip3 install -U rosdep
 # export ROS_IP='127.0.0.1' # needed for running tests
 
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
-#echo_stamp "Init rosdep"
-#my_travis_retry rosdep init
+echo_stamp "Init rosdep"
+my_travis_retry rosdep init
 
 echo_stamp "Update rosdep"
 # FIXME: Re-add this after missing packages are built
