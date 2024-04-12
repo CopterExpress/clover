@@ -70,10 +70,14 @@ my_travis_retry() {
   return $result
 }
 
-echo_stamp "Install ROS"
-my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base ros-${ROS_DISTRO}-catkin
-source /opt/ros/noetic/setup.bash
-export ROS_IP='127.0.0.1' # needed for running tests
+echo_stamp "Install rosdep"
+my_travis_retry pip3 install -U rosdep
+ls /etc/ros/rosdep/sources.list.d/
+
+# echo_stamp "Install ROS"
+# my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base ros-${ROS_DISTRO}-catkin
+# source /opt/ros/noetic/setup.bash
+# export ROS_IP='127.0.0.1' # needed for running tests
 
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
 #echo_stamp "Init rosdep"
@@ -154,6 +158,7 @@ echo_stamp "Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
 echo_stamp "Running tests"
+export ROS_IP='127.0.0.1' # needed for running tests
 cd /home/pi/catkin_ws
 # FIXME: Investigate failing tests
 catkin_make run_tests #&& catkin_test_results
