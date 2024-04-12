@@ -118,7 +118,7 @@ echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
 my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:$VERSION_CODENAME \
-  --skip-keys="gazebo_ros gazebo_plugins python3-catkin-pkg-modules python3-rosdep-modules"
+  --skip-keys="gazebo_ros gazebo_plugins"
 my_travis_retry pip3 install wheel
 my_travis_retry pip3 install -r /home/pi/catkin_ws/src/clover/clover/requirements.txt
 source /opt/ros/${ROS_DISTRO}/setup.bash

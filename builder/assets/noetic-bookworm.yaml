@@ -742,3 +742,9 @@ log4cxx:
 geographiclib:
   debian:
     bookworm: [libgeographiclib-dev]
+python3-catkin-pkg-modules:
+  debian:
+    bookworm: []
+python3-rosdep-modules:
+  debian:
+    bookworm: []
