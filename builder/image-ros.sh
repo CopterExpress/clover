@@ -72,7 +72,7 @@ my_travis_retry() {
 
 echo_stamp "Install rosdep"
 my_travis_retry pip3 install -U rosdep
-ls /etc/ros/rosdep/sources.list.d/
+# ls /etc/ros/rosdep/sources.list.d/
 
 # echo_stamp "Install ROS"
 # my_travis_retry apt-get install -y ros-${ROS_DISTRO}-ros-base ros-${ROS_DISTRO}-catkin
