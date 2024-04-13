@@ -736,3 +736,6 @@ realsense2_camera:
 realsense2_description:
   debian:
     buster: [ros-noetic-realsense2-description]
+geographiclib:
+  debian:
+    buster: [libgeographic-dev]
