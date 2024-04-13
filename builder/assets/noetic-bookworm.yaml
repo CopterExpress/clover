@@ -748,3 +748,6 @@ python3-catkin-pkg-modules:
 python3-rosdep-modules:
   debian:
     bookworm: []
+liborocos-kdl:
+  debian:
+    bookworm: [liborocos-kdl1.5]
