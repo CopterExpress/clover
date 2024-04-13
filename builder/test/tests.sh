@@ -29,9 +29,8 @@ if [ -z $VM ]; then
 	python --version
 	[[ $(python -c 'import sys;print(sys.version_info.major)') == "3" ]]
 
-	# ptvsd does not have a stand-alone binary
-	python -m ptvsd --version
-	python3 -m ptvsd --version
+	python -m debugpy --version
+	python3 -m debugpy --version
 
 	pigpiod -v
 	i2cdetect -V

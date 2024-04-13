@@ -150,8 +150,8 @@ cp -R node-v10.15.0-linux-armv6l/* /usr/local/
 rm -rf node-v10.15.0-linux-armv6l/
 rm node-v10.15.0-linux-armv6l.tar.gz
 
-echo_stamp "Installing ptvsd"
-my_travis_retry pip3 install ptvsd
+echo_stamp "Installing debugpy"
+my_travis_retry pip3 install debugpy
 
 echo_stamp "Installing pyzbar"
 my_travis_retry pip3 install pyzbar
