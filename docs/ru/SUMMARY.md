@@ -58,6 +58,7 @@
   * [COEX Pix](coex_pix.md)
   * [COEX PDB](coex_pdb.md)
   * [COEX GPS](coex_gps.md)
+  * [Использование SSH-ключей](ssh_keys.md)
   * [Радио-телеметрия](radio_telemetry.md)
   * [Камера Hawk Eye](hawk_eye.md)
   * [Гид по автономному полету](auto_setup.md)

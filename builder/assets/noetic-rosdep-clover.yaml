@@ -986,6 +986,7 @@ log4cxx:
     bookworm: [liblog4cxx-dev]
 geographiclib:
   debian:
+    buster: [libgeographic-dev]
     bookworm: [libgeographiclib-dev]
 python3-catkin-pkg-modules:
   debian:

@@ -16,6 +16,7 @@
         <remap from="image_raw" to="main_camera/image_raw"/>
         <remap from="camera_info" to="main_camera/camera_info"/>
         <remap from="map_markers" to="aruco_map/map"/>
+        <param name="dictionary" value="2"/> <!-- DICT_4X4_250 -->
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
         <param name="use_map_markers" value="true"/>
