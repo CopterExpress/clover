@@ -78,7 +78,7 @@ echo_stamp "Init rosdep"
 my_travis_retry rosdep init
 
 echo_stamp "Update rosdep"
-echo "yaml file:///etc/ros/rosdep/noetic-bookworm.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
+echo "yaml file:///etc/ros/rosdep/noetic-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/20-default.list
 my_travis_retry rosdep update
 
 echo_stamp "Populate rosdep for ROS user"

@@ -1,738 +1,998 @@
 async_web_server_cpp:
   debian:
     buster: [ros-noetic-async-web-server-cpp]
+    bookworm: [ros-noetic-async-web-server-cpp]
 led_msgs:
   debian:
     buster: [ros-noetic-led-msgs]
+    bookworm: [ros-noetic-led-msgs]
 ros_pytest:
   debian:
     buster: [ros-noetic-ros-pytest]
+    bookworm: [ros-noetic-ros-pytest]
 tf2_web_republisher:
   debian:
     buster: [ros-noetic-tf2-web-republisher]
+    bookworm: [ros-noetic-tf2-web-republisher]
 web_video_server:
   debian:
     buster: [ros-noetic-web-video-server]
+    bookworm: [ros-noetic-web-video-server]
 ws281x:
   debian:
     buster: [ros-noetic-ws281x]
+    bookworm: [ros-noetic-ws281x]
 catkin:
   debian:
     buster: [ros-noetic-catkin]
+    bookworm: [ros-noetic-catkin]
 genmsg:
   debian:
     buster: [ros-noetic-genmsg]
+    bookworm: [ros-noetic-genmsg]
 gencpp:
   debian:
     buster: [ros-noetic-gencpp]
+    bookworm: [ros-noetic-gencpp]
 geneus:
   debian:
     buster: [ros-noetic-geneus]
+    bookworm: [ros-noetic-geneus]
 genlisp:
   debian:
     buster: [ros-noetic-genlisp]
+    bookworm: [ros-noetic-genlisp]
 gennodejs:
   debian:
     buster: [ros-noetic-gennodejs]
+    bookworm: [ros-noetic-gennodejs]
 genpy:
   debian:
     buster: [ros-noetic-genpy]
+    bookworm: [ros-noetic-genpy]
 bond_core:
   debian:
     buster: [ros-noetic-bond-core]
+    bookworm: [ros-noetic-bond-core]
 cmake_modules:
   debian:
     buster: [ros-noetic-cmake-modules]
+    bookworm: [ros-noetic-cmake-modules]
 class_loader:
   debian:
     buster: [ros-noetic-class-loader]
+    bookworm: [ros-noetic-class-loader]
 common_msgs:
   debian:
     buster: [ros-noetic-common-msgs]
+    bookworm: [ros-noetic-common-msgs]
 common_tutorials:
   debian:
     buster: [ros-noetic-common-tutorials]
+    bookworm: [ros-noetic-common-tutorials]
 cpp_common:
   debian:
     buster: [ros-noetic-cpp-common]
+    bookworm: [ros-noetic-cpp-common]
 desktop:
   debian:
     buster: [ros-noetic-desktop]
+    bookworm: [ros-noetic-desktop]
 diagnostics:
   debian:
     buster: [ros-noetic-diagnostics]
+    bookworm: [ros-noetic-diagnostics]
 executive_smach:
   debian:
     buster: [ros-noetic-executive-smach]
+    bookworm: [ros-noetic-executive-smach]
 geometry:
   debian:
     buster: [ros-noetic-geometry]
+    bookworm: [ros-noetic-geometry]
 geometry_tutorials:
   debian:
     buster: [ros-noetic-geometry-tutorials]
+    bookworm: [ros-noetic-geometry-tutorials]
 gl_dependency:
   debian:
     buster: [ros-noetic-gl-dependency]
+    bookworm: [ros-noetic-gl-dependency]
 image_common:
   debian:
     buster: [ros-noetic-image-common]
+    bookworm: [ros-noetic-image-common]
 image_pipeline:
   debian:
     buster: [ros-noetic-image-pipeline]
+    bookworm: [ros-noetic-image-pipeline]
 image_transport_plugins:
   debian:
     buster: [ros-noetic-image-transport-plugins]
+    bookworm: [ros-noetic-image-transport-plugins]
 laser_pipeline:
   debian:
     buster: [ros-noetic-laser-pipeline]
+    bookworm: [ros-noetic-laser-pipeline]
 mavlink:
   debian:
     buster: [ros-noetic-mavlink]
+    bookworm: [ros-noetic-mavlink]
 media_export:
   debian:
     buster: [ros-noetic-media-export]
+    bookworm: [ros-noetic-media-export]
 message_generation:
   debian:
     buster: [ros-noetic-message-generation]
+    bookworm: [ros-noetic-message-generation]
 message_runtime:
   debian:
     buster: [ros-noetic-message-runtime]
+    bookworm: [ros-noetic-message-runtime]
 mk:
   debian:
     buster: [ros-noetic-mk]
+    bookworm: [ros-noetic-mk]
 nodelet_core:
   debian:
     buster: [ros-noetic-nodelet-core]
+    bookworm: [ros-noetic-nodelet-core]
 orocos_kdl:
   debian:
     buster: [ros-noetic-orocos-kdl]
+    bookworm: [ros-noetic-orocos-kdl]
 perception:
   debian:
     buster: [ros-noetic-perception]
+    bookworm: [ros-noetic-perception]
 perception_pcl:
   debian:
     buster: [ros-noetic-perception-pcl]
+    bookworm: [ros-noetic-perception-pcl]
 python_orocos_kdl:
   debian:
     buster: [ros-noetic-python-orocos-kdl]
+    bookworm: [ros-noetic-python-orocos-kdl]
 qt_dotgraph:
   debian:
     buster: [ros-noetic-qt-dotgraph]
+    bookworm: [ros-noetic-qt-dotgraph]
 qt_gui:
   debian:
     buster: [ros-noetic-qt-gui]
+    bookworm: [ros-noetic-qt-gui]
 qt_gui_py_common:
   debian:
     buster: [ros-noetic-qt-gui-py-common]
+    bookworm: [ros-noetic-qt-gui-py-common]
 qwt_dependency:
   debian:
     buster: [ros-noetic-qwt-dependency]
+    bookworm: [ros-noetic-qwt-dependency]
 robot:
   debian:
     buster: [ros-noetic-robot]
+    bookworm: [ros-noetic-robot]
 ros:
   debian:
     buster: [ros-noetic-ros]
+    bookworm: [ros-noetic-ros]
 ros_base:
   debian:
     buster: [ros-noetic-ros-base]
+    bookworm: [ros-noetic-ros-base]
 ros_comm:
   debian:
     buster: [ros-noetic-ros-comm]
+    bookworm: [ros-noetic-ros-comm]
 ros_core:
   debian:
     buster: [ros-noetic-ros-core]
+    bookworm: [ros-noetic-ros-core]
 ros_environment:
   debian:
     buster: [ros-noetic-ros-environment]
+    bookworm: [ros-noetic-ros-environment]
 ros_tutorials:
   debian:
     buster: [ros-noetic-ros-tutorials]
+    bookworm: [ros-noetic-ros-tutorials]
 rosapi:
   debian:
     buster: [ros-noetic-rosapi]
+    bookworm: [ros-noetic-rosapi]
 rosbag_migration_rule:
   debian:
     buster: [ros-noetic-rosbag-migration-rule]
+    bookworm: [ros-noetic-rosbag-migration-rule]
 rosbash:
   debian:
     buster: [ros-noetic-rosbash]
+    bookworm: [ros-noetic-rosbash]
 rosboost_cfg:
   debian:
     buster: [ros-noetic-rosboost-cfg]
+    bookworm: [ros-noetic-rosboost-cfg]
 rosbridge_server:
   debian:
     buster: [ros-noetic-rosbridge-server]
+    bookworm: [ros-noetic-rosbridge-server]
 rosbridge_suite:
   debian:
     buster: [ros-noetic-rosbridge-suite]
+    bookworm: [ros-noetic-rosbridge-suite]
 rosbuild:
   debian:
     buster: [ros-noetic-rosbuild]
+    bookworm: [ros-noetic-rosbuild]
 rosclean:
   debian:
     buster: [ros-noetic-rosclean]
+    bookworm: [ros-noetic-rosclean]
 roscpp_core:
   debian:
     buster: [ros-noetic-roscpp-core]
+    bookworm: [ros-noetic-roscpp-core]
 roscpp_traits:
   debian:
     buster: [ros-noetic-roscpp-traits]
+    bookworm: [ros-noetic-roscpp-traits]
 roscreate:
   debian:
     buster: [ros-noetic-roscreate]
+    bookworm: [ros-noetic-roscreate]
 rosgraph:
   debian:
     buster: [ros-noetic-rosgraph]
+    bookworm: [ros-noetic-rosgraph]
 roslang:
   debian:
     buster: [ros-noetic-roslang]
+    bookworm: [ros-noetic-roslang]
 roslint:
   debian:
     buster: [ros-noetic-roslint]
+    bookworm: [ros-noetic-roslint]
 roslisp:
   debian:
     buster: [ros-noetic-roslisp]
+    bookworm: [ros-noetic-roslisp]
 rosmake:
   debian:
     buster: [ros-noetic-rosmake]
+    bookworm: [ros-noetic-rosmake]
 rosmaster:
   debian:
     buster: [ros-noetic-rosmaster]
+    bookworm: [ros-noetic-rosmaster]
 rospack:
   debian:
     buster: [ros-noetic-rospack]
+    bookworm: [ros-noetic-rospack]
 roslib:
   debian:
     buster: [ros-noetic-roslib]
+    bookworm: [ros-noetic-roslib]
 rosparam:
   debian:
     buster: [ros-noetic-rosparam]
+    bookworm: [ros-noetic-rosparam]
 rospy:
   debian:
     buster: [ros-noetic-rospy]
+    bookworm: [ros-noetic-rospy]
 rosserial:
   debian:
     buster: [ros-noetic-rosserial]
+    bookworm: [ros-noetic-rosserial]
 rosserial_msgs:
   debian:
     buster: [ros-noetic-rosserial-msgs]
+    bookworm: [ros-noetic-rosserial-msgs]
 rosserial_python:
   debian:
     buster: [ros-noetic-rosserial-python]
+    bookworm: [ros-noetic-rosserial-python]
 rosservice:
   debian:
     buster: [ros-noetic-rosservice]
+    bookworm: [ros-noetic-rosservice]
 rostime:
   debian:
     buster: [ros-noetic-rostime]
+    bookworm: [ros-noetic-rostime]
 roscpp_serialization:
   debian:
     buster: [ros-noetic-roscpp-serialization]
+    bookworm: [ros-noetic-roscpp-serialization]
 python_qt_binding:
   debian:
     buster: [ros-noetic-python-qt-binding]
+    bookworm: [ros-noetic-python-qt-binding]
 roslaunch:
   debian:
     buster: [ros-noetic-roslaunch]
+    bookworm: [ros-noetic-roslaunch]
 rosunit:
   debian:
     buster: [ros-noetic-rosunit]
+    bookworm: [ros-noetic-rosunit]
 angles:
   debian:
     buster: [ros-noetic-angles]
+    bookworm: [ros-noetic-angles]
 libmavconn:
   debian:
     buster: [ros-noetic-libmavconn]
+    bookworm: [ros-noetic-libmavconn]
 rosconsole:
   debian:
     buster: [ros-noetic-rosconsole]
+    bookworm: [ros-noetic-rosconsole]
 pluginlib:
   debian:
     buster: [ros-noetic-pluginlib]
+    bookworm: [ros-noetic-pluginlib]
 qt_gui_cpp:
   debian:
     buster: [ros-noetic-qt-gui-cpp]
+    bookworm: [ros-noetic-qt-gui-cpp]
 resource_retriever:
   debian:
     buster: [ros-noetic-resource-retriever]
+    bookworm: [ros-noetic-resource-retriever]
 rosconsole_bridge:
   debian:
     buster: [ros-noetic-rosconsole-bridge]
+    bookworm: [ros-noetic-rosconsole-bridge]
 roslz4:
   debian:
     buster: [ros-noetic-roslz4]
+    bookworm: [ros-noetic-roslz4]
 rosserial_client:
   debian:
     buster: [ros-noetic-rosserial-client]
+    bookworm: [ros-noetic-rosserial-client]
 rostest:
   debian:
     buster: [ros-noetic-rostest]
+    bookworm: [ros-noetic-rostest]
 rqt_action:
   debian:
     buster: [ros-noetic-rqt-action]
+    bookworm: [ros-noetic-rqt-action]
 rqt_bag:
   debian:
     buster: [ros-noetic-rqt-bag]
+    bookworm: [ros-noetic-rqt-bag]
 rqt_bag_plugins:
   debian:
     buster: [ros-noetic-rqt-bag-plugins]
+    bookworm: [ros-noetic-rqt-bag-plugins]
 rqt_common_plugins:
   debian:
     buster: [ros-noetic-rqt-common-plugins]
+    bookworm: [ros-noetic-rqt-common-plugins]
 rqt_console:
   debian:
     buster: [ros-noetic-rqt-console]
+    bookworm: [ros-noetic-rqt-console]
 rqt_dep:
   debian:
     buster: [ros-noetic-rqt-dep]
+    bookworm: [ros-noetic-rqt-dep]
 rqt_graph:
   debian:
     buster: [ros-noetic-rqt-graph]
+    bookworm: [ros-noetic-rqt-graph]
 rqt_gui:
   debian:
     buster: [ros-noetic-rqt-gui]
+    bookworm: [ros-noetic-rqt-gui]
 rqt_logger_level:
   debian:
     buster: [ros-noetic-rqt-logger-level]
+    bookworm: [ros-noetic-rqt-logger-level]
 rqt_moveit:
   debian:
     buster: [ros-noetic-rqt-moveit]
+    bookworm: [ros-noetic-rqt-moveit]
 rqt_msg:
   debian:
     buster: [ros-noetic-rqt-msg]
+    bookworm: [ros-noetic-rqt-msg]
 rqt_nav_view:
   debian:
     buster: [ros-noetic-rqt-nav-view]
+    bookworm: [ros-noetic-rqt-nav-view]
 rqt_plot:
   debian:
     buster: [ros-noetic-rqt-plot]
+    bookworm: [ros-noetic-rqt-plot]
 rqt_pose_view:
   debian:
     buster: [ros-noetic-rqt-pose-view]
+    bookworm: [ros-noetic-rqt-pose-view]
 rqt_publisher:
   debian:
     buster: [ros-noetic-rqt-publisher]
+    bookworm: [ros-noetic-rqt-publisher]
 rqt_py_console:
   debian:
     buster: [ros-noetic-rqt-py-console]
+    bookworm: [ros-noetic-rqt-py-console]
 rqt_reconfigure:
   debian:
     buster: [ros-noetic-rqt-reconfigure]
+    bookworm: [ros-noetic-rqt-reconfigure]
 rqt_robot_dashboard:
   debian:
     buster: [ros-noetic-rqt-robot-dashboard]
+    bookworm: [ros-noetic-rqt-robot-dashboard]
 rqt_robot_monitor:
   debian:
     buster: [ros-noetic-rqt-robot-monitor]
+    bookworm: [ros-noetic-rqt-robot-monitor]
 rqt_robot_plugins:
   debian:
     buster: [ros-noetic-rqt-robot-plugins]
+    bookworm: [ros-noetic-rqt-robot-plugins]
 rqt_robot_steering:
   debian:
     buster: [ros-noetic-rqt-robot-steering]
+    bookworm: [ros-noetic-rqt-robot-steering]
 rqt_runtime_monitor:
   debian:
     buster: [ros-noetic-rqt-runtime-monitor]
+    bookworm: [ros-noetic-rqt-runtime-monitor]
 rqt_service_caller:
   debian:
     buster: [ros-noetic-rqt-service-caller]
+    bookworm: [ros-noetic-rqt-service-caller]
 rqt_shell:
   debian:
     buster: [ros-noetic-rqt-shell]
+    bookworm: [ros-noetic-rqt-shell]
 rqt_srv:
   debian:
     buster: [ros-noetic-rqt-srv]
+    bookworm: [ros-noetic-rqt-srv]
 rqt_tf_tree:
   debian:
     buster: [ros-noetic-rqt-tf-tree]
+    bookworm: [ros-noetic-rqt-tf-tree]
 rqt_top:
   debian:
     buster: [ros-noetic-rqt-top]
+    bookworm: [ros-noetic-rqt-top]
 rqt_topic:
   debian:
     buster: [ros-noetic-rqt-topic]
+    bookworm: [ros-noetic-rqt-topic]
 rqt_web:
   debian:
     buster: [ros-noetic-rqt-web]
+    bookworm: [ros-noetic-rqt-web]
 smach:
   debian:
     buster: [ros-noetic-smach]
+    bookworm: [ros-noetic-smach]
 smclib:
   debian:
     buster: [ros-noetic-smclib]
+    bookworm: [ros-noetic-smclib]
 std_msgs:
   debian:
     buster: [ros-noetic-std-msgs]
+    bookworm: [ros-noetic-std-msgs]
 actionlib_msgs:
   debian:
     buster: [ros-noetic-actionlib-msgs]
+    bookworm: [ros-noetic-actionlib-msgs]
 bond:
   debian:
     buster: [ros-noetic-bond]
+    bookworm: [ros-noetic-bond]
 diagnostic_msgs:
   debian:
     buster: [ros-noetic-diagnostic-msgs]
+    bookworm: [ros-noetic-diagnostic-msgs]
 geometry_msgs:
   debian:
     buster: [ros-noetic-geometry-msgs]
+    bookworm: [ros-noetic-geometry-msgs]
 eigen_conversions:
   debian:
     buster: [ros-noetic-eigen-conversions]
+    bookworm: [ros-noetic-eigen-conversions]
 kdl_conversions:
   debian:
     buster: [ros-noetic-kdl-conversions]
+    bookworm: [ros-noetic-kdl-conversions]
 nav_msgs:
   debian:
     buster: [ros-noetic-nav-msgs]
+    bookworm: [ros-noetic-nav-msgs]
 rosbridge_msgs:
   debian:
     buster: [ros-noetic-rosbridge-msgs]
+    bookworm: [ros-noetic-rosbridge-msgs]
 rosgraph_msgs:
   debian:
     buster: [ros-noetic-rosgraph-msgs]
+    bookworm: [ros-noetic-rosgraph-msgs]
 rosmsg:
   debian:
     buster: [ros-noetic-rosmsg]
+    bookworm: [ros-noetic-rosmsg]
 rqt_py_common:
   debian:
     buster: [ros-noetic-rqt-py-common]
+    bookworm: [ros-noetic-rqt-py-common]
 shape_msgs:
   debian:
     buster: [ros-noetic-shape-msgs]
+    bookworm: [ros-noetic-shape-msgs]
 smach_msgs:
   debian:
     buster: [ros-noetic-smach-msgs]
+    bookworm: [ros-noetic-smach-msgs]
 std_srvs:
   debian:
     buster: [ros-noetic-std-srvs]
+    bookworm: [ros-noetic-std-srvs]
 tf2_msgs:
   debian:
     buster: [ros-noetic-tf2-msgs]
+    bookworm: [ros-noetic-tf2-msgs]
 tf2:
   debian:
     buster: [ros-noetic-tf2]
+    bookworm: [ros-noetic-tf2]
 tf2_eigen:
   debian:
     buster: [ros-noetic-tf2-eigen]
+    bookworm: [ros-noetic-tf2-eigen]
 trajectory_msgs:
   debian:
     buster: [ros-noetic-trajectory-msgs]
+    bookworm: [ros-noetic-trajectory-msgs]
 control_msgs:
   debian:
     buster: [ros-noetic-control-msgs]
+    bookworm: [ros-noetic-control-msgs]
 urdf_parser_plugin:
   debian:
     buster: [ros-noetic-urdf-parser-plugin]
+    bookworm: [ros-noetic-urdf-parser-plugin]
 urdfdom_py:
   debian:
     buster: [ros-noetic-urdfdom-py]
+    bookworm: [ros-noetic-urdfdom-py]
 uuid_msgs:
   debian:
     buster: [ros-noetic-uuid-msgs]
+    bookworm: [ros-noetic-uuid-msgs]
 geographic_msgs:
   debian:
     buster: [ros-noetic-geographic-msgs]
+    bookworm: [ros-noetic-geographic-msgs]
 vision_opencv:
   debian:
     buster: [ros-noetic-vision-opencv]
+    bookworm: [ros-noetic-vision-opencv]
 visualization_msgs:
   debian:
     buster: [ros-noetic-visualization-msgs]
+    bookworm: [ros-noetic-visualization-msgs]
 visualization_tutorials:
   debian:
     buster: [ros-noetic-visualization-tutorials]
+    bookworm: [ros-noetic-visualization-tutorials]
 viz:
   debian:
     buster: [ros-noetic-viz]
+    bookworm: [ros-noetic-viz]
 webkit_dependency:
   debian:
     buster: [ros-noetic-webkit-dependency]
+    bookworm: [ros-noetic-webkit-dependency]
 xmlrpcpp:
   debian:
     buster: [ros-noetic-xmlrpcpp]
+    bookworm: [ros-noetic-xmlrpcpp]
 roscpp:
   debian:
     buster: [ros-noetic-roscpp]
+    bookworm: [ros-noetic-roscpp]
 bondcpp:
   debian:
     buster: [ros-noetic-bondcpp]
+    bookworm: [ros-noetic-bondcpp]
 bondpy:
   debian:
     buster: [ros-noetic-bondpy]
+    bookworm: [ros-noetic-bondpy]
 nodelet:
   debian:
     buster: [ros-noetic-nodelet]
+    bookworm: [ros-noetic-nodelet]
 nodelet_tutorial_math:
   debian:
     buster: [ros-noetic-nodelet-tutorial-math]
+    bookworm: [ros-noetic-nodelet-tutorial-math]
 pluginlib_tutorials:
   debian:
     buster: [ros-noetic-pluginlib-tutorials]
+    bookworm: [ros-noetic-pluginlib-tutorials]
 roscpp_tutorials:
   debian:
     buster: [ros-noetic-roscpp-tutorials]
+    bookworm: [ros-noetic-roscpp-tutorials]
 rosout:
   debian:
     buster: [ros-noetic-rosout]
+    bookworm: [ros-noetic-rosout]
 camera_calibration:
   debian:
     buster: [ros-noetic-camera-calibration]
+    bookworm: [ros-noetic-camera-calibration]
 diagnostic_aggregator:
   debian:
     buster: [ros-noetic-diagnostic-aggregator]
+    bookworm: [ros-noetic-diagnostic-aggregator]
 diagnostic_updater:
   debian:
     buster: [ros-noetic-diagnostic-updater]
+    bookworm: [ros-noetic-diagnostic-updater]
 diagnostic_common_diagnostics:
   debian:
     buster: [ros-noetic-diagnostic-common-diagnostics]
+    bookworm: [ros-noetic-diagnostic-common-diagnostics]
 dynamic_reconfigure:
   debian:
     buster: [ros-noetic-dynamic-reconfigure]
+    bookworm: [ros-noetic-dynamic-reconfigure]
 filters:
   debian:
     buster: [ros-noetic-filters]
+    bookworm: [ros-noetic-filters]
 joint_state_publisher:
   debian:
     buster: [ros-noetic-joint-state-publisher]
+    bookworm: [ros-noetic-joint-state-publisher]
 message_filters:
   debian:
     buster: [ros-noetic-message-filters]
+    bookworm: [ros-noetic-message-filters]
 rosauth:
   debian:
     buster: [ros-noetic-rosauth]
+    bookworm: [ros-noetic-rosauth]
 rosbag_storage:
   debian:
     buster: [ros-noetic-rosbag-storage]
+    bookworm: [ros-noetic-rosbag-storage]
 rosnode:
   debian:
     buster: [ros-noetic-rosnode]
+    bookworm: [ros-noetic-rosnode]
 rospy_tutorials:
   debian:
     buster: [ros-noetic-rospy-tutorials]
+    bookworm: [ros-noetic-rospy-tutorials]
 rosshow:
   debian:
     buster: [ros-noetic-rosshow]
+    bookworm: [ros-noetic-rosshow]
 rostopic:
   debian:
     buster: [ros-noetic-rostopic]
+    bookworm: [ros-noetic-rostopic]
 rqt_gui_cpp:
   debian:
     buster: [ros-noetic-rqt-gui-cpp]
+    bookworm: [ros-noetic-rqt-gui-cpp]
 rqt_gui_py:
   debian:
     buster: [ros-noetic-rqt-gui-py]
+    bookworm: [ros-noetic-rqt-gui-py]
 self_test:
   debian:
     buster: [ros-noetic-self-test]
+    bookworm: [ros-noetic-self-test]
 smach_ros:
   debian:
     buster: [ros-noetic-smach-ros]
+    bookworm: [ros-noetic-smach-ros]
 tf2_py:
   debian:
     buster: [ros-noetic-tf2-py]
+    bookworm: [ros-noetic-tf2-py]
 topic_tools:
   debian:
     buster: [ros-noetic-topic-tools]
+    bookworm: [ros-noetic-topic-tools]
 rosbag:
   debian:
     buster: [ros-noetic-rosbag]
+    bookworm: [ros-noetic-rosbag]
 actionlib:
   debian:
     buster: [ros-noetic-actionlib]
+    bookworm: [ros-noetic-actionlib]
 actionlib_tutorials:
   debian:
     buster: [ros-noetic-actionlib-tutorials]
+    bookworm: [ros-noetic-actionlib-tutorials]
 diagnostic_analysis:
   debian:
     buster: [ros-noetic-diagnostic-analysis]
+    bookworm: [ros-noetic-diagnostic-analysis]
 nodelet_topic_tools:
   debian:
     buster: [ros-noetic-nodelet-topic-tools]
+    bookworm: [ros-noetic-nodelet-topic-tools]
 roswtf:
   debian:
     buster: [ros-noetic-roswtf]
+    bookworm: [ros-noetic-roswtf]
 rqt_launch:
   debian:
     buster: [ros-noetic-rqt-launch]
+    bookworm: [ros-noetic-rqt-launch]
 sensor_msgs:
   debian:
     buster: [ros-noetic-sensor-msgs]
+    bookworm: [ros-noetic-sensor-msgs]
 camera_calibration_parsers:
   debian:
     buster: [ros-noetic-camera-calibration-parsers]
+    bookworm: [ros-noetic-camera-calibration-parsers]
 cv_bridge:
   debian:
     buster: [ros-noetic-cv-bridge]
+    bookworm: [ros-noetic-cv-bridge]
 image_geometry:
   debian:
     buster: [ros-noetic-image-geometry]
+    bookworm: [ros-noetic-image-geometry]
 image_transport:
   debian:
     buster: [ros-noetic-image-transport]
+    bookworm: [ros-noetic-image-transport]
 camera_info_manager:
   debian:
     buster: [ros-noetic-camera-info-manager]
+    bookworm: [ros-noetic-camera-info-manager]
 compressed_depth_image_transport:
   debian:
     buster: [ros-noetic-compressed-depth-image-transport]
+    bookworm: [ros-noetic-compressed-depth-image-transport]
 compressed_image_transport:
   debian:
     buster: [ros-noetic-compressed-image-transport]
+    bookworm: [ros-noetic-compressed-image-transport]
 cv_camera:
   debian:
     buster: [ros-noetic-cv-camera]
+    bookworm: [ros-noetic-cv-camera]
 image_proc:
   debian:
     buster: [ros-noetic-image-proc]
+    bookworm: [ros-noetic-image-proc]
 image_publisher:
   debian:
     buster: [ros-noetic-image-publisher]
+    bookworm: [ros-noetic-image-publisher]
 map_msgs:
   debian:
     buster: [ros-noetic-map-msgs]
+    bookworm: [ros-noetic-map-msgs]
 mavros_msgs:
   debian:
     buster: [ros-noetic-mavros-msgs]
+    bookworm: [ros-noetic-mavros-msgs]
 pcl_msgs:
   debian:
     buster: [ros-noetic-pcl-msgs]
+    bookworm: [ros-noetic-pcl-msgs]
 pcl_conversions:
   debian:
     buster: [ros-noetic-pcl-conversions]
+    bookworm: [ros-noetic-pcl-conversions]
 polled_camera:
   debian:
     buster: [ros-noetic-polled-camera]
+    bookworm: [ros-noetic-polled-camera]
 rqt_image_view:
   debian:
     buster: [ros-noetic-rqt-image-view]
+    bookworm: [ros-noetic-rqt-image-view]
 stereo_msgs:
   debian:
     buster: [ros-noetic-stereo-msgs]
+    bookworm: [ros-noetic-stereo-msgs]
 image_view:
   debian:
     buster: [ros-noetic-image-view]
+    bookworm: [ros-noetic-image-view]
 rosbridge_library:
   debian:
     buster: [ros-noetic-rosbridge-library]
+    bookworm: [ros-noetic-rosbridge-library]
 stereo_image_proc:
   debian:
     buster: [ros-noetic-stereo-image-proc]
+    bookworm: [ros-noetic-stereo-image-proc]
 tf2_ros:
   debian:
     buster: [ros-noetic-tf2-ros]
+    bookworm: [ros-noetic-tf2-ros]
 depth_image_proc:
   debian:
     buster: [ros-noetic-depth-image-proc]
+    bookworm: [ros-noetic-depth-image-proc]
 mavros:
   debian:
     buster: [ros-noetic-mavros]
+    bookworm: [ros-noetic-mavros]
 tf:
   debian:
     buster: [ros-noetic-tf]
+    bookworm: [ros-noetic-tf]
 interactive_markers:
   debian:
     buster: [ros-noetic-interactive-markers]
+    bookworm: [ros-noetic-interactive-markers]
 interactive_marker_tutorials:
   debian:
     buster: [ros-noetic-interactive-marker-tutorials]
+    bookworm: [ros-noetic-interactive-marker-tutorials]
 laser_geometry:
   debian:
     buster: [ros-noetic-laser-geometry]
+    bookworm: [ros-noetic-laser-geometry]
 laser_assembler:
   debian:
     buster: [ros-noetic-laser-assembler]
+    bookworm: [ros-noetic-laser-assembler]
 laser_filters:
   debian:
     buster: [ros-noetic-laser-filters]
+    bookworm: [ros-noetic-laser-filters]
 pcl_ros:
   debian:
     buster: [ros-noetic-pcl-ros]
+    bookworm: [ros-noetic-pcl-ros]
 tf2_geometry_msgs:
   debian:
     buster: [ros-noetic-tf2-geometry-msgs]
+    bookworm: [ros-noetic-tf2-geometry-msgs]
 image_rotate:
   debian:
     buster: [ros-noetic-image-rotate]
+    bookworm: [ros-noetic-image-rotate]
 tf2_kdl:
   debian:
     buster: [ros-noetic-tf2-kdl]
-tf2_web_republisher:
-  debian:
-    buster: [ros-noetic-tf2-web-republisher]
+    bookworm: [ros-noetic-tf2-kdl]
 tf_conversions:
   debian:
     buster: [ros-noetic-tf-conversions]
+    bookworm: [ros-noetic-tf-conversions]
 theora_image_transport:
   debian:
     buster: [ros-noetic-theora-image-transport]
+    bookworm: [ros-noetic-theora-image-transport]
 turtlesim:
   debian:
     buster: [ros-noetic-turtlesim]
+    bookworm: [ros-noetic-turtlesim]
 turtle_actionlib:
   debian:
     buster: [ros-noetic-turtle-actionlib]
+    bookworm: [ros-noetic-turtle-actionlib]
 turtle_tf:
   debian:
     buster: [ros-noetic-turtle-tf]
+    bookworm: [ros-noetic-turtle-tf]
 turtle_tf2:
   debian:
     buster: [ros-noetic-turtle-tf2]
+    bookworm: [ros-noetic-turtle-tf2]
 urdf:
   debian:
     buster: [ros-noetic-urdf]
+    bookworm: [ros-noetic-urdf]
 kdl_parser:
   debian:
     buster: [ros-noetic-kdl-parser]
+    bookworm: [ros-noetic-kdl-parser]
 kdl_parser_py:
   debian:
     buster: [ros-noetic-kdl-parser-py]
+    bookworm: [ros-noetic-kdl-parser-py]
 mavros_extras:
   debian:
     buster: [ros-noetic-mavros-extras]
+    bookworm: [ros-noetic-mavros-extras]
 robot_state_publisher:
   debian:
     buster: [ros-noetic-robot-state-publisher]
+    bookworm: [ros-noetic-robot-state-publisher]
 rviz:
   debian:
     buster: [ros-noetic-rviz]
+    bookworm: [ros-noetic-rviz]
 librviz_tutorial:
   debian:
     buster: [ros-noetic-librviz-tutorial]
+    bookworm: [ros-noetic-librviz-tutorial]
 rqt_rviz:
   debian:
     buster: [ros-noetic-rqt-rviz]
+    bookworm: [ros-noetic-rqt-rviz]
 rviz_plugin_tutorials:
   debian:
     buster: [ros-noetic-rviz-plugin-tutorials]
+    bookworm: [ros-noetic-rviz-plugin-tutorials]
 rviz_python_tutorial:
   debian:
     buster: [ros-noetic-rviz-python-tutorial]
+    bookworm: [ros-noetic-rviz-python-tutorial]
 urdf_tutorial:
   debian:
     buster: [ros-noetic-urdf-tutorial]
+    bookworm: [ros-noetic-urdf-tutorial]
 usb_cam:
   debian:
     buster: [ros-noetic-usb-cam]
+    bookworm: [ros-noetic-usb-cam]
 visualization_marker_tutorials:
   debian:
     buster: [ros-noetic-visualization-marker-tutorials]
+    bookworm: [ros-noetic-visualization-marker-tutorials]
 vl53l1x:
   debian:
     buster: [ros-noetic-vl53l1x]
+    bookworm: [ros-noetic-vl53l1x]
 xacro:
   debian:
     buster: [ros-noetic-xacro]
+    bookworm: [ros-noetic-xacro]
 ddynamic_reconfigure:
   debian:
     buster: [ros-noetic-ddynamic-reconfigure]
+    bookworm: [ros-noetic-ddynamic-reconfigure]
 librealsense2:
   debian:
     buster: [ros-noetic-librealsense2]
+    bookworm: [ros-noetic-librealsense2]
 realsense2_camera:
   debian:
     buster: [ros-noetic-realsense2-camera]
+    bookworm: [ros-noetic-realsense2-camera]
 realsense2_description:
   debian:
     buster: [ros-noetic-realsense2-description]
+    bookworm: [ros-noetic-realsense2-description]
+rosserial_server:
+  debian:
+    bookworm: [ros-noetic-rosserial-server]
+log4cxx:
+  debian:
+    bookworm: [liblog4cxx-dev]
+geographiclib:
+  debian:
+    bookworm: [libgeographiclib-dev]
+python3-catkin-pkg-modules:
+  debian:
+    bookworm: []
+python3-rosdep-modules:
+  debian:
+    bookworm: []
+liborocos-kdl:
+  debian:
+    bookworm: [liborocos-kdl1.5]
