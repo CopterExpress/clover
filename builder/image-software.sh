@@ -121,15 +121,6 @@ python3-pip
 sed -i "s/updates_available//" /usr/share/byobu/status/status
 # sed -i "s/updates_available//" /home/pi/.byobu/status
 
-# echo_stamp "Installing pip"
-# curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-# curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip2.py
-# python3 get-pip.py
-# python get-pip2.py
-# rm get-pip.py get-pip2.py
-# #my_travis_retry pip install --upgrade pip
-# #my_travis_retry pip3 install --upgrade pip
-
 echo_stamp "Make sure pip is installed"
 pip --version
 pip3 --version
@@ -138,11 +129,6 @@ echo "Enable installing packages with pip"
 mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old
 
 echo_stamp "Install and enable Butterfly (web terminal)"
-# echo_stamp "Workaround for tornado >= 6.0 breaking butterfly"
-# export CRYPTOGRAPHY_DONT_BUILD_RUST=1
-# my_travis_retry pip3 install cryptography==3.4.6 # https://stackoverflow.com/a/68472128/6850197
-# my_travis_retry pip3 install pyOpenSSL==20.0.1
-# my_travis_retry pip3 install tornado==5.1.1
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
@@ -165,11 +151,9 @@ rm -rf node-v10.15.0-linux-armv6l/
 rm node-v10.15.0-linux-armv6l.tar.gz
 
 echo_stamp "Installing ptvsd"
-#my_travis_retry pip install ptvsd
 my_travis_retry pip3 install ptvsd
 
 echo_stamp "Installing pyzbar"
-#my_travis_retry pip install pyzbar
 my_travis_retry pip3 install pyzbar
 
 echo_stamp "Add .vimrc"
