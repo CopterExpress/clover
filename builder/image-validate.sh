@@ -21,7 +21,6 @@ export ROS_IP='127.0.0.1'
 source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 env
-roscore &
 
 cd /home/pi/catkin_ws/src/clover/builder/test/
 ./tests.sh
@@ -36,8 +35,6 @@ apt-cache show openvpn
 # echo "Largest packages installed"
 # sudo -E sh -c 'apt-get install -y debian-goodies'
 # dpigs -H -n 100
-
-killall --wait roscore
 
 echo "Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
