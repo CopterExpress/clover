@@ -104,8 +104,8 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 # ros-${ROS_DISTRO}-image-publisher \
 # ros-${ROS_DISTRO}-web-video-server
 
-echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
-my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
+#echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+#my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
 
 echo_stamp "Build and install Clover"
 cd /home/pi/catkin_ws
