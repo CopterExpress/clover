@@ -154,7 +154,7 @@ echo_stamp "Running tests"
 export ROS_IP='127.0.0.1' # needed for running tests
 cd /home/pi/catkin_ws
 # FIXME: Investigate failing tests
-catkin_make run_tests #&& catkin_test_results
+catkin_make run_tests && catkin_test_results
 
 echo_stamp "Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
