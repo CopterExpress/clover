@@ -188,7 +188,7 @@ EOF
 # Restore original sources.list
 #mv /var/sources.list.bak /etc/apt/sources.list
 # Clean apt cache
-apt-get clean -qq > /dev/null
+apt-get clean
 # Remove local mirror repository key
 #apt-key del COEX-MIRROR
 
