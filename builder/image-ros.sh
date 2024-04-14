@@ -186,5 +186,6 @@ EOF
 
 echo_stamp "Cleanup apt"
 apt-get clean
+apt-get autoremove --purge -y
 
 echo_stamp "END of ROS INSTALLATION"
