@@ -58,4 +58,7 @@ sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
 echo_stamp "Move /etc/ld.so.preload out of the way"
 mv /etc/ld.so.preload /etc/ld.so.preload.disabled-for-build
 
+echo_stamp "Setup apt so it store all the downloaded packages"
+echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/02keep-debs
+
 echo_stamp "End of init image"
