@@ -192,4 +192,7 @@ apt-get clean
 echo_stamp "Cleanup pip"
 pip3 cache purge
 
+echo_stamp "Cleanup /tmp"
+rm -rf /tmp/*
+
 echo_stamp "END of ROS INSTALLATION"
