@@ -189,4 +189,7 @@ echo_stamp "Cleanup apt"
 apt-get autoremove --purge -y
 apt-get clean
 
+echo_stamp "Cleanup pip"
+pip3 cache purge
+
 echo_stamp "END of ROS INSTALLATION"
