@@ -185,7 +185,7 @@ source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
 echo_stamp "Cleanup apt"
-apt-get clean
 apt-get autoremove --purge -y
+apt-get clean
 
 echo_stamp "END of ROS INSTALLATION"
