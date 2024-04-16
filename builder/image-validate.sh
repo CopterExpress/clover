@@ -35,5 +35,10 @@ echo "Largest packages installed"
 sudo -E sh -c 'apt-get install -y debian-goodies'
 dpigs -H -n 100
 
+echo "Cleanup apt"
+apt-get autoremove --purge -y
+apt-get clean
+rm -rf /var/cache/apt/*
+
 echo "Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
