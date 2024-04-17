@@ -16,7 +16,7 @@
 set -e # Exit immidiately on non-zero result
 
 # https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
-SOURCE_IMAGE="https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-2023-12-11/2023-12-11-raspios-bookworm-armhf-lite.img.xz"
+SOURCE_IMAGE="https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf-lite.img.xz"
 
 export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
