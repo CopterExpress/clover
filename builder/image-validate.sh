@@ -12,9 +12,10 @@
 # copies or substantial portions of the Software.
 #
 
-set -ex
+set -ex # exit on error, echo commands
 
-echo "Run image tests"
+
+echo "--- Run image tests"
 
 export ROS_DISTRO='noetic'
 export ROS_IP='127.0.0.1'

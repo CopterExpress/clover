@@ -15,36 +15,10 @@
 
 set -ex # exit on error, echo commands
 
-REPO=$1
-REF=$2
-INSTALL_ROS_PACK_SOURCES=$3
-DISCOVER_ROS_PACK=$4
-NUMBER_THREADS=$5
-
 # Current ROS distribution
 ROS_DISTRO=noetic
 . /etc/os-release # set $VERSION_CODENAME to Debian release code name
 export ROS_OS_OVERRIDE=debian:$VERSION_CODENAME
-
-echo_stamp() {
-  # TEMPLATE: echo_stamp <TEXT> <TYPE>
-  # TYPE: SUCCESS, ERROR, INFO
-
-  # More info there https://www.shellhacks.com/ru/bash-colors/
-
-  TEXT="$(date '+[%Y-%m-%d %H:%M:%S]') $1"
-  TEXT="\e[1m$TEXT\e[0m" # BOLD
-
-  case "$2" in
-    SUCCESS)
-    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
-    ERROR)
-    TEXT="\e[31m${TEXT}\e[0m";; # RED
-    *)
-    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
-  esac
-  echo -e ${TEXT}
-}
 
 # https://gist.github.com/letmaik/caa0f6cc4375cbfcc1ff26bd4530c2a3
 # https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/templates/header.sh
@@ -70,27 +44,27 @@ my_travis_retry() {
   return $result
 }
 
-echo_stamp "Install rosdep"
+echo "--- Install rosdep"
 my_travis_retry pip3 install -U rosdep
 
 # TODO: 'kinetic-rosdep-clover.yaml' should add only if we use our repo?
-echo_stamp "Init rosdep"
+echo "--- Init rosdep"
 my_travis_retry rosdep init
 
-echo_stamp "Update rosdep"
+echo "--- Update rosdep"
 echo "yaml file:///etc/ros/rosdep/${ROS_DISTRO}-rosdep-clover.yaml" >> /etc/ros/rosdep/sources.list.d/10-clover.list
 my_travis_retry rosdep update
 
-echo_stamp "Populate rosdep for ROS user"
+echo "--- Populate rosdep for ROS user"
 my_travis_retry sudo -u pi ROS_OS_OVERRIDE=debian:$VERSION_CODENAME rosdep update
 
-# echo_stamp "Reconfiguring Clover repository for simplier unshallowing"
+# echo "Reconfiguring Clover repository for simplier unshallowing"
 cd /home/pi/catkin_ws/src/clover
 git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 
 # This is sort of a hack to force "custom" packages to be installed - the ones built by COEX, linked against OpenCV 4.2
 # I **wish** OpenCV would not be such a mess, but, well, here we are.
-# echo_stamp "Installing OpenCV 4.2-compatible ROS packages"
+# echo "--- Installing OpenCV 4.2-compatible ROS packages"
 # apt install -y --no-install-recommends \
 # ros-${ROS_DISTRO}-compressed-image-transport=1.14.0-0buster \
 # ros-${ROS_DISTRO}-cv-bridge=1.15.0-0buster \
@@ -104,10 +78,10 @@ git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 # ros-${ROS_DISTRO}-image-publisher \
 # ros-${ROS_DISTRO}-web-video-server
 
-#echo_stamp "Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
+#echo "--- Installing libboost-dev" # https://travis-ci.org/github/CopterExpress/clover/jobs/766318908#L6536
 #my_travis_retry apt-get install -y --no-install-recommends libboost-dev libboost-all-dev
 
-echo_stamp "Build and install Clover"
+echo "--- Build and install Clover"
 cd /home/pi/catkin_ws
 # Don't try to install gazebo_ros
 my_travis_retry rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} --os=debian:$VERSION_CODENAME \
@@ -118,12 +92,12 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 catkin_make -j2 -DCMAKE_BUILD_TYPE=RelWithDebInfo
 source devel/setup.bash
 
-echo_stamp "Install clever package (for backwards compatibility)"
+echo "--- Install clever package (for backwards compatibility)"
 cd /home/pi/catkin_ws/src/clover/builder/assets/clever
 ./setup.py install
 rm -rf build  # remove build artifacts
 
-echo_stamp "Build Clover documentation"
+echo "--- Build Clover documentation"
 cd /home/pi/catkin_ws/src/clover
 builder/assets/install_gitbook.sh
 gitbook install
@@ -133,7 +107,7 @@ rm -rf _book/assets && ln -s ../docs/assets _book/assets
 touch node_modules/CATKIN_IGNORE docs/CATKIN_IGNORE _book/CATKIN_IGNORE clover/www/CATKIN_IGNORE apps/CATKIN_IGNORE # ignore documentation files by catkin
 npm cache clean --force
 
-echo_stamp "Installing additional ROS packages"
+echo "--- Installing additional ROS packages"
 my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rosbridge-suite \
     ros-${ROS_DISTRO}-rosserial \
@@ -147,36 +121,36 @@ my_travis_retry apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-stereo-msgs
 
 # TODO move GeographicLib datasets to Mavros debian package
-echo_stamp "Install GeographicLib datasets (needed for mavros)" \
+echo "--- Install GeographicLib datasets (needed for mavros)" \
 && wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash
 
-echo_stamp "Running tests"
+echo "--- Running tests"
 export ROS_IP='127.0.0.1' # needed for running tests
 cd /home/pi/catkin_ws
 # FIXME: Investigate failing tests
 catkin_make run_tests #&& catkin_test_results
 
-echo_stamp "Change permissions for catkin_ws"
+echo "--- Change permissions for catkin_ws"
 chown -Rf pi:pi /home/pi/catkin_ws
 
-echo_stamp "Update www"
+echo "--- Update www"
 sudo -u pi sh -c ". devel/setup.sh && rosrun clover www"
 
-echo_stamp "Make \$HOME/examples symlink"
+echo "--- Make \$HOME/examples symlink"
 ln -s "$(catkin_find clover examples --first-only)" /home/pi
 chown -Rf pi:pi /home/pi/examples
 
-echo_stamp "Make systemd services symlinks"
+echo "--- Make systemd services symlinks"
 ln -s /home/pi/catkin_ws/src/clover/builder/assets/clover.service /lib/systemd/system/
 ln -s /home/pi/catkin_ws/src/clover/builder/assets/roscore.service /lib/systemd/system/
 # validate
 [ -f /lib/systemd/system/clover.service ]
 [ -f /lib/systemd/system/roscore.service ]
 
-echo_stamp "Make udev rules symlink"
+echo "--- Make udev rules symlink"
 ln -s "$(catkin_find clover udev --first-only)"/* /lib/udev/rules.d/
 
-echo_stamp "Setup ROS environment"
+echo "--- Setup ROS environment"
 cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
@@ -185,14 +159,12 @@ source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
 
-echo_stamp "Cleanup apt"
+echo "--- Cleanup apt"
 apt-get autoremove --purge -y
 apt-get clean
 
-echo_stamp "Cleanup pip"
+echo "--- Cleanup pip"
 pip3 cache purge
 
-echo_stamp "Cleanup /tmp"
+echo "--- Cleanup /tmp"
 rm -rf /tmp/*
-
-echo_stamp "END of ROS INSTALLATION"
