@@ -12,7 +12,7 @@
 # copies or substantial portions of the Software.
 #
 
-set -e # Exit immidiately on non-zero result
+set -ex # Exit immidiately on non-zero result
 
 echo_stamp() {
   # TEMPLATE: echo_stamp <TEXT> <TYPE>
@@ -34,8 +34,10 @@ echo_stamp() {
   echo -e ${TEXT}
 }
 
-echo_stamp "Write Clover information"
+echo_stamp "Move /etc/ld.so.preload out of the way"
+mv /etc/ld.so.preload /etc/ld.so.preload.disabled-for-build
 
+echo_stamp "Write Clover information"
 # Clover image version
 echo "$1" >> /etc/clover_version
 # Origin image file name
@@ -56,8 +58,5 @@ cat /etc/fstab
 echo_stamp "Set max space for syslogs"
 # https://unix.stackexchange.com/questions/139513/how-to-clear-journalctl
 sed -i 's/#SystemMaxUse=/SystemMaxUse=200M/' /etc/systemd/journald.conf
-
-echo_stamp "Move /etc/ld.so.preload out of the way"
-mv /etc/ld.so.preload /etc/ld.so.preload.disabled-for-build
 
 echo_stamp "End of init image"
