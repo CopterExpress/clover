@@ -111,6 +111,7 @@ i2c-tools \
 espeak espeak-data python3-espeak \
 ntpdate \
 mjpg-streamer \
+xxd \
 python3-dev \
 python3-systemd \
 python3-opencv \

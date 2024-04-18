@@ -22,6 +22,7 @@ pip3 --version
 tcpdump --version
 monkey --version
 espeak --version
+xxd --version
 systemctl --version
 
 if [ -z $VM ]; then
