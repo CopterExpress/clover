@@ -12,9 +12,10 @@
 # copies or substantial portions of the Software.
 #
 
-set -ex
+set -ex # exit on error, echo commands
 
-echo "Run image tests"
+
+echo "--- Run image tests"
 
 export ROS_DISTRO='noetic'
 export ROS_IP='127.0.0.1'
@@ -35,9 +36,9 @@ systemctl stop roscore
 apt-cache show gst-rtsp-launch
 apt-cache show openvpn
 
-echo "Move /etc/ld.so.preload back to its original position"
+echo "--- Move /etc/ld.so.preload back to its original position"
 mv /etc/ld.so.preload.disabled-for-build /etc/ld.so.preload
 
-echo "Largest packages installed"
+echo "--- Largest packages installed"
 sudo -E sh -c 'apt-get install -y debian-goodies'
 dpigs -H -n 100

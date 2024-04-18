@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -ex
+set -ex # exit on error, echo commands
 
 # TODO: validate versions
 

@@ -13,7 +13,7 @@
 # copies or substantial portions of the Software.
 #
 
-set -e # Exit immidiately on non-zero result
+set -ex # exit on error, echo commands
 
 # https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit
 SOURCE_IMAGE="https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip"
@@ -22,33 +22,13 @@ export DEBIAN_FRONTEND=${DEBIAN_FRONTEND:='noninteractive'}
 export LANG=${LANG:='C.UTF-8'}
 export LC_ALL=${LC_ALL:='C.UTF-8'}
 
-echo_stamp() {
-  # TEMPLATE: echo_stamp <TEXT> <TYPE>
-  # TYPE: SUCCESS, ERROR, INFO
-
-  # More info there https://www.shellhacks.com/ru/bash-colors/
-
-  TEXT="$(date '+[%Y-%m-%d %H:%M:%S]') $1"
-  TEXT="\e[1m$TEXT\e[0m" # BOLD
-
-  case "$2" in
-    SUCCESS)
-    TEXT="\e[32m${TEXT}\e[0m";; # GREEN
-    ERROR)
-    TEXT="\e[31m${TEXT}\e[0m";; # RED
-    *)
-    TEXT="\e[34m${TEXT}\e[0m";; # BLUE
-  esac
-  echo -e ${TEXT}
-}
-
 BUILDER_DIR="/builder"
 REPO_DIR="${BUILDER_DIR}/repo"
 SCRIPTS_DIR="${REPO_DIR}/builder"
 IMAGES_DIR="${REPO_DIR}/images"
 
-[[ ! -d ${SCRIPTS_DIR} ]] && (echo_stamp "Directory ${SCRIPTS_DIR} doesn't exist" "ERROR"; exit 1)
-[[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo_stamp "Directory ${IMAGES_DIR} was created successful" "SUCCESS"
+[[ ! -d ${SCRIPTS_DIR} ]] && (echo "Error: directory ${SCRIPTS_DIR} doesn't exist"; exit 1)
+[[ ! -d ${IMAGES_DIR} ]] && mkdir ${IMAGES_DIR} && echo "Directory ${IMAGES_DIR} was created successful"
 
 if [[ -z ${TRAVIS_TAG} ]]; then IMAGE_VERSION="$(cd ${REPO_DIR}; git log --format=%h -1)"; else IMAGE_VERSION="${TRAVIS_TAG}"; fi
 # IMAGE_VERSION="${TRAVIS_TAG:=$(cd ${REPO_DIR}; git log --format=%h -1)}"
@@ -64,15 +44,15 @@ get_image() {
   local RPI_IMAGE_NAME=$(echo ${RPI_ZIP_NAME} | sed 's/zip/img/')
 
   if [ ! -e "${BUILD_DIR}/${RPI_ZIP_NAME}" ]; then
-    echo_stamp "Downloading original Linux distribution"
+    echo "--- Downloading original Linux distribution"
     wget --progress=dot:giga -O ${BUILD_DIR}/${RPI_ZIP_NAME} $2
-    echo_stamp "Downloading complete" "SUCCESS" \
-  else echo_stamp "Linux distribution already donwloaded"; fi
+    echo "--- Downloading complete" "SUCCESS"
+  else
+    echo "Linux distribution already downloaded"
+  fi
 
-  echo_stamp "Unzipping Linux distribution image" \
-  && unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1 \
-  && echo_stamp "Unzipping complete" "SUCCESS" \
-  || (echo_stamp "Unzipping was failed!" "ERROR"; exit 1)
+  echo "--- Unzipping Linux distribution image"
+  unzip -p ${BUILD_DIR}/${RPI_ZIP_NAME} ${RPI_IMAGE_NAME} > $1
 }
 
 get_image ${IMAGE_PATH} ${SOURCE_IMAGE}
