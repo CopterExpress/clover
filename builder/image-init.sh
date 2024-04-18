@@ -48,11 +48,9 @@ sed -i "19a${MAGIC_SCRIPT}" /etc/rc.local
 # It needs for autosizer.sh & maybe that is correct
 echo_stamp "Change boot partition"
 sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/cmdline.txt
-sed -i 's/root=[^ ]*/root=\/dev\/mmcblk0p2/' /boot/firmware/cmdline.txt
 sed -i 's/.*  \/boot/firmware  vfat    defaults          0       2$/\/dev\/mmcblk0p1  \/boot/firmware  vfat  defaults          0       2/' /etc/fstab
 sed -i 's/.*  \/               ext4    defaults,noatime  0       1$/\/dev\/mmcblk0p2  \/               ext4    defaults,noatime  0       1/' /etc/fstab
 cat /boot/cmdline.txt
-cat /boot/firmware/cmdline.txt
 cat /etc/fstab
 
 echo_stamp "Set max space for syslogs"
