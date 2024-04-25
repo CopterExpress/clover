@@ -19,12 +19,12 @@ jobs:
           docker run --privileged --rm -v /dev:/dev -v $(pwd):/builder/repo -e TRAVIS_TAG="${{ github.event.release.tag_name }}" sfalexrog/img-tool:qemu-update
       - name: Compress image
         run: |
-          cd images && sudo chmod -R 777 . && zip -9 $(echo clover_*).zip clover_* && ls -l . && unzip -l clover_*.zip
+          cd images && sudo chmod -R 777 . && zip -9 $(echo *_*).zip *_* && ls -l . && unzip -l *_*.zip
       - name: Upload image
         uses: softprops/action-gh-release@v1
         if: ${{ github.event_name == 'release' }}
         with:
-          files: images/clover_*.zip
+          files: images/*_*.zip
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
