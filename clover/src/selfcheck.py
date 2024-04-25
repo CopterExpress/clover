@@ -303,6 +303,14 @@ def check_fcu():
                     failure('cell voltage is not available, https://clover.coex.tech/power')
                 else:
                     cell = battery.cell_voltage[0]
+                    # number of cells 1 means this is overall voltage
+                    if len(battery.cell_voltage) == 1:
+                        n_cells = get_param('BAT1_N_CELLS', strict=False)
+                        if n_cells is None:
+                            # older PX4
+                            n_cells = get_param('BAT_N_CELLS', strict=True)
+                        cell /= n_cells
+
                     if cell > 4.3 or cell < 3.0:
                         failure('incorrect cell voltage: %.2f V, https://clover.coex.tech/power', cell)
                     elif cell < 3.7:
