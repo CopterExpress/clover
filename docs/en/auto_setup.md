@@ -210,7 +210,7 @@ Most of the parameters for autonomous flight are located in the following direct
   <arg name="aruco_vpe" default="true"/>`
   ```
 
-- Generate the ArUco markers field. See the article [Map-based navigation with ArUco markers] (aruco_map.md # marker map settings) for details. To generate markers, you need to enter a command with specific values.
+- Generate the ArUco markers field. See the article [Map-based navigation with ArUco markers](aruco_map.md#marker-map-definition) for details. To generate markers, you need to enter a command with specific values.
 
   Here is the example generating command where:
 
