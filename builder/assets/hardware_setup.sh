@@ -20,8 +20,7 @@ set -e # Exit immidiately on non-zero result
 ##################################################
 
 echo "--- Enable sshd"
-touch /boot/ssh
-# /usr/bin/raspi-config nonint do_ssh 0
+/usr/bin/raspi-config nonint do_ssh 0
 
 echo "--- GPIO enabled by default"
 
