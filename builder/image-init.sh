@@ -17,6 +17,9 @@ set -ex # exit on error, echo commands
 echo "--- Move /etc/ld.so.preload out of the way"
 mv /etc/ld.so.preload /etc/ld.so.preload.disabled-for-build
 
+echo "--- Create pi user"
+echo "pi:$6$c70VpvPsVNCG0YR5$l5vWWLsLko9Kj65gcQ8qvMkuOoRkEagI90qi3F/Y7rm8eNYZHW8CY6BOIKwMH7a3YYzZYL90zf304cAHLFaZE0" > /boot/firmware/userconf.txt
+
 echo "--- Write Clover information"
 # Clover image version
 echo "$1" >> /etc/clover_version
