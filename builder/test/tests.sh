@@ -58,7 +58,7 @@ rosversion web_video_server
 rosversion nodelet
 rosversion image_view
 
-[[ $(rosversion ws281x) == "0.0.13" ]]
+[[ $(rosversion ws281x) == "0.0.15" ]]
 
 if [ -z $VM ]; then
 	# rosversion compressed_image_transport
