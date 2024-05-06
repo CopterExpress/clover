@@ -109,6 +109,7 @@ echo "--- Enable installing packages with pip"
 mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.old
 
 echo "--- Install and enable Butterfly (web terminal)"
+export CRYPTOGRAPHY_DONT_BUILD_RUST=1
 my_travis_retry pip3 install butterfly
 my_travis_retry pip3 install butterfly[systemd]
 systemctl enable butterfly.socket
