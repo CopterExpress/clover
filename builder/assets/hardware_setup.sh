@@ -13,6 +13,8 @@
 # copies or substantial portions of the Software.
 #
 
+# https://www.raspberrypi.com/documentation/computers/configuration.html
+
 set -e # Exit immidiately on non-zero result
 
 ##################################################
@@ -33,17 +35,14 @@ echo "--- Enable SPI"
 echo  "--- Enable raspicam"
 /usr/bin/raspi-config nonint do_camera 0
 
-echo "--- Enable UART"
+echo "--- Setup UART"
 # Temporary solution
 # https://github.com/RPi-Distro/raspi-config/pull/75
-/usr/bin/raspi-config nonint do_serial 1
-/usr/bin/raspi-config nonint set_config_var enable_uart 1 /boot/firmware/config.txt
+/usr/bin/raspi-config nonint do_serial_hw 0
+/usr/bin/raspi-config nonint do_serial_cons 1
+
 echo dtoverlay=pi3-disable-bt >> /boot/firmware/config.txt
 systemctl disable hciuart.service
-
-# After adding to Raspbian OS
-# https://github.com/RPi-Distro/raspi-config/commit/d6d9ecc0d9cbe4aaa9744ae733b9cb239e79c116
-#/usr/bin/raspi-config nonint do_serial 2
 
 echo "--- Enable v4l2 driver"
 # http://robocraft.ru/blog/electronics/3158.html

@@ -29,6 +29,7 @@ echo "${2%.*}" >> /etc/clover_origin
 echo "--- Write magic script to /etc/rc.local"
 MAGIC_SCRIPT="sudo /root/init_rpi.sh; sudo sed -i '/sudo \\\/root\\\/init_rpi.sh/d' /etc/rc.local && sudo reboot"
 sed -i "19a${MAGIC_SCRIPT}" /etc/rc.local
+# TODO: remake to oneshot systemd service
 
 # It needs for autosizer.sh & maybe that is correct
 echo "--- Change boot partition"
