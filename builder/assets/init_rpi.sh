@@ -15,6 +15,9 @@
 
 set -e # Exit immidiately on non-zero result
 
+echo "--- Fix home directory permissions"
+chmod +rx /home/pi
+
 NEW_SSID='clover-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
 echo "--- Creating Wi-Fi AP with SSID=${NEW_SSID}"
 nmcli con add type wifi ifname wlan0 mode ap con-name clover ssid $NEW_SSID autoconnect true
