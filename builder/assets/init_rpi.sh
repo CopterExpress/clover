@@ -21,12 +21,12 @@ chmod +rx /home/pi
 NEW_SSID='clover-'$(head -c 100 /dev/urandom | xxd -ps -c 100 | sed -e "s/[^0-9]//g" | cut -c 1-4)
 echo "--- Creating Wi-Fi AP with SSID=${NEW_SSID}"
 nmcli con add type wifi ifname wlan0 mode ap con-name clover ssid $NEW_SSID autoconnect true
-nmcli con modify TEST-AP 802-11-wireless.band bg
-# nmcli con modify TEST-AP 802-11-wireless.channel 6
-nmcli con modify TEST-AP ipv4.method shared ipv4.address 192.168.11.1/24
-nmcli con modify TEST-AP ipv6.method disabled
-nmcli con modify TEST-AP wifi-sec.key-mgmt wpa-psk
-nmcli con modify TEST-AP wifi-sec.psk "cloverwifi"
+nmcli con modify clover 802-11-wireless.band bg
+# nmcli con modify clover 802-11-wireless.channel 6
+nmcli con modify clover ipv4.method shared ipv4.address 192.168.11.1/24
+nmcli con modify clover ipv6.method disabled
+nmcli con modify clover wifi-sec.key-mgmt wpa-psk
+nmcli con modify clover wifi-sec.psk "cloverwifi"
 systemctl disable dnsmasq # disable dnsmasq to avoid conflicts with NetworkManager's dnsmasq
 
 NEW_HOSTNAME=$(echo ${NEW_SSID} | tr '[:upper:]' '[:lower:]')
