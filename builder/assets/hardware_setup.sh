@@ -15,8 +15,6 @@
 
 # https://www.raspberrypi.com/documentation/computers/configuration.html
 
-set -e # Exit immidiately on non-zero result
-
 ##################################################
 # Configure hardware interfaces
 ##################################################
