@@ -19,7 +19,7 @@
         <param name="dictionary" value="2"/> <!-- DICT_4X4_250 -->
         <param name="estimate_poses" value="true"/>
         <param name="send_tf" value="true"/>
-        <param name="use_map_markers" value="true"/>
+        <param name="use_map_markers" value="$(arg aruco_map)"/>
         <param name="known_vertical" value="map" if="$(eval placement == 'floor' or placement == 'ceiling')"/>
         <param name="flip_vertical" value="true" if="$(eval placement == 'ceiling')"/>
         <param name="length" value="$(arg length)"/>

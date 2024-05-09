@@ -22,12 +22,12 @@ jobs:
       #     cd images && sudo chmod -R 777 . && zip -9 $(echo clover_*).zip clover_* && ls -lh . && unzip -l clover_*.zip
       - name: Compress image using 7-Zip
         run: |
-          cd images && sudo chmod -R 777 . && 7z a -mx=9 $(echo clover_*).7z clover_* && ls -lh . && 7z l clover_*.7z
+          cd images && sudo chmod -R 777 . && 7z a -mx=9 $(echo *_*).7z *_* && ls -lh . && 7z l *_*.7z
       - name: Upload image
         uses: softprops/action-gh-release@v1
         if: ${{ github.event_name == 'release' }}
         with:
-          files: images/clover_*.zip
+          files: images/*_*.zip
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: image
-          path: images/clover_*.7z
+          path: images/*_*.7z
           retention-days: 1

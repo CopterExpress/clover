@@ -113,7 +113,9 @@
             "VMware",
             "DuoCam"
         ],
-        "code_blocks": false
+        "code_blocks": false,
+        "html_elements": false
     },
-    "MD045": false
+    "MD045": false,
+    "MD051": false
 }
