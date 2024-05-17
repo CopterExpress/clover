@@ -59,6 +59,7 @@
 |`EKF2_BARO_CTRL`|0 (*Disabled*)|Барометр отключен|
 |`EKF2_OF_CTRL`|1 (*Enabled*)|Optical flow включен|
 |`EKF2_HGT_REF`|3 (*Vision*)|При наличии [дальномера](laser.md) и полете над ровным полом — 2 (*Range sensor*)|
+|`EKF2_RNG_CTRL`|2 (*Enabled*)|Дальномер включен|
 
 <!-- markdownlint-enable MD031 -->
 

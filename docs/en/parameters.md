@@ -59,6 +59,7 @@ In case of using EKF2 (official firmware):
 |`EKF2_BARO_CTRL`|0 (*Disabled*)|Barometer is disabled|
 |`EKF2_OF_CTRL`|1 (*Enabled*)|Optical flow is enabled|
 |`EKF2_HGT_REF`|3 (*Vision*)|If the [rangefinder](laser.md) is present and flying over horizontal floor – 2 (*Range sensor*)|
+|`EKF2_RNG_CTRL`|2 (*Enabled*)|Range sensor is enabled|
 
 <!-- markdownlint-enable MD031 -->
 
