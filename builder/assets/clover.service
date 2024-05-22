@@ -5,7 +5,7 @@ Requires=roscore.service
 [Service]
 User=pi
 ExecStart=/bin/bash -c ". /home/pi/catkin_ws/devel/setup.sh; \
-                      ROS_HOSTNAME=`hostname`.local exec stdbuf -o L roslaunch clover clover.launch --wait --screen --skip-log-check \
+                      ROS_HOSTNAME=`hostname`.local ROS_OS_OVERRIDE=debian:bookworm exec stdbuf -o L roslaunch clover clover.launch --wait --screen --skip-log-check \
                       2> >(tee /tmp/clover.err)"
 
 ExecStartPre=+rm /var/log/clover.log

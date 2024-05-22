@@ -155,6 +155,7 @@ cat << EOF >> /home/pi/.bashrc
 LANG='C.UTF-8'
 LC_ALL='C.UTF-8'
 export ROS_HOSTNAME=\`hostname\`.local
+export ROS_OS_OVERRIDE=debian:bookworm
 source /opt/ros/${ROS_DISTRO}/setup.bash
 source /home/pi/catkin_ws/devel/setup.bash
 EOF
