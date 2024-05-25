@@ -166,7 +166,7 @@ def load(req):
         return {'names': [], 'programs': [], 'message': str(e)}
 
 
-name_regexp = re.compile(r'^[a-zA-Z-_.]{0,20}$')
+name_regexp = re.compile(r'^[a-zA-Z1-9-_.]{0,30}$')
 
 def store(req):
     if not name_regexp.match(req.name):
