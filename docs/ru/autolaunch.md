@@ -42,7 +42,7 @@ roslaunch
 
 Список объявленных для запуска нод / программ указывается в файле `/home/pi/catkin_ws/src/clover/clover/launch/clover.launch`.
 
-Вы можете добавить собственную ноду в список автозапускаемых. Для этого разместите ваш запускаемый файл (например, `my_program.py`) в каталог `/home/pi/catkin_ws/src/clover/clover/src`. Затем добавьте запуск вашей ноды в `clover.launch`, например:
+Вы можете добавить собственную ноду в список автозапускаемых. Для этого разместите ваш запускаемый файл (например, `my_program.py`) в каталог `/home/pi/catkin_ws/src/clover/clover`. Затем добавьте запуск вашей ноды в `clover.launch`, например:
 
 ```xml
 <node name="my_program" pkg="clover" type="my_program.py" output="screen"/>

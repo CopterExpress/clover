@@ -42,7 +42,7 @@ Main documentation: http://wiki.ros.org/roslaunch.
 
 The list of nodes / programs declared for running is specified in file `/home/pi/catkin_ws/src/clover/clover/launch/clover.launch`.
 
-You can add your own node to the list of automatically launched ones. To do this, place your executable file (e.g. `my_program.py`) into folder `/home/pi/catkin_ws/src/clover/clover/src`. Then add the start of your node to `clover.launch`, for example:
+You can add your own node to the list of automatically launched ones. To do this, place your executable file (e.g. `my_program.py`) into folder `/home/pi/catkin_ws/src/clover/clover`. Then add the start of your node to `clover.launch`, for example:
 
 ```xml
 <node name="my_program" pkg="clover" type="my_program.py" output="screen"/>
