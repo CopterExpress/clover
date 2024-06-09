@@ -64,7 +64,7 @@ function viewTopic(topic) {
 			}
 		}
 
-		let txt = `<div class=counter>${counter} received</div>${yamlStringify(msg)}`; // JSON.stringify(msg, null, 4);
+		let txt = `<div class=counter>${counter} received</div>${YAML.stringify(msg)}`; // JSON.stringify(msg, null, 4);
 		topicMessage.innerHTML = txt;
 	});
 }
