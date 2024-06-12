@@ -11,7 +11,7 @@ jobs:
   # melodic:
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v4
   #     - name: Native Melodic build
   #       run: |
   #         docker run --rm -v $(pwd):/root/catkin_ws/src/clover ros:melodic-ros-base /root/catkin_ws/src/clover/builder/standalone-install.sh
@@ -23,7 +23,7 @@ jobs:
         working-directory: catkin_ws
         shell: bash
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         path: catkin_ws/src/clover
     - name: Install requirements

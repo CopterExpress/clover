@@ -11,7 +11,7 @@ jobs:
   editorconfig:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: .editorconfig Linter
         run: |
           wget --no-verbose https://github.com/okalachev/editorconfig-checker/releases/download/1.2.1-disable-spaces-amount/ec-linux-amd64
