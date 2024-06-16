@@ -1,0 +1,65 @@
+# Generated from fisheye_cam.yaml by rescale_camera_info.py
+camera_matrix:
+  cols: 3
+  data:
+  - 5049.522495820976
+  - 0.0
+  - 4860.0
+  - 0.0
+  - 2846.313734946246
+  - 2050.3125
+  - 0.0
+  - 0.0
+  - 1.0
+  rows: 3
+camera_name: main_camera_optical
+distortion_coefficients:
+  cols: 8
+  data:
+  - 0.215356885
+  - -0.117472846
+  - -0.000306197672
+  - -0.000109444025
+  - -0.00453657258
+  - 0.573090623
+  - -0.127574577
+  - -0.0286125589
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  - 0.0
+  rows: 1
+distortion_model: plumb_bob
+image_height: 1944
+image_width: 2592
+projection_matrix:
+  cols: 4
+  data:
+  - 5049.522495820976
+  - 0.0
+  - 4926.52466622439
+  - 0.0
+  - 0.0
+  - 2846.313734946246
+  - 1876.4165670318075
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  - 0.0
+  rows: 3
+rectification_matrix:
+  cols: 3
+  data:
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  - 1
+  rows: 3
