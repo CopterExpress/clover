@@ -3,7 +3,12 @@
 
     <arg name="direction_z" default="down"/> <!-- direction the camera points: down, up -->
     <arg name="direction_y" default="backward"/> <!-- direction the camera cable points: backward, forward -->
-    <arg name="device" default="/dev/video0"/> <!-- v4l2 device -->
+    <arg name="type" default="libcamera"/> <!-- camera interface: libcamera, v4l2 -->
+    <arg name="camera_id" default="0"/> <!-- libcamera camera id -->
+    <arg name="device" default="/dev/video0"/> <!-- v4l2 device path -->
+    <arg name="width" default="320"/>
+    <arg name="height" default="240"/>
+    <arg name="fps" default="40"/>
     <arg name="throttled_topic" default="true"/> <!-- enable throttled image topic -->
     <arg name="throttled_topic_rate" default="5.0"/> <!-- throttled image topic rate -->
     <arg name="rectify" default="false"/> <!-- enable rectification -->
@@ -26,20 +31,34 @@
         <param name="num_worker_threads" value="2"/>
     </node>
 
-    <!-- camera node -->
-    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet main_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg device)" clear_params="true" unless="$(arg simulator)" respawn="true">
+    <!-- camera node using libcamera -->
+    <node pkg="nodelet" type="nodelet" name="main_camera" args="load libcamera_ros/LibcameraRos main_camera_nodelet_manager" output="screen" clear_params="true" if="$(eval not simulator and type == 'libcamera')" respawn="true">
+        <param name="camera_name" value=""/>
+        <param name="camera_id" value="$(arg camera_id)"/>
+        <param name="frame_id" value="main_camera_optical"/>
+        <param name="calib_url" type="string" value="file://$(find clover)/camera_info/fisheye_cam_$(arg width)x$(arg height).yaml"/>
+        <param name="stream_role" value="still"/>
+        <param name="pixel_format" value="RGB888"/>
+        <param name="use_ros_time" value="true"/>
+        <param name="resolution/width" value="$(arg width)"/>
+        <param name="resolution/height" value="$(arg height)"/>
+
+        <!-- see: https://github.com/ctu-mrs/libcamera_ros/blob/b3645/config/param.yaml#L19 -->
+        <param name="control/fps" value="$(arg fps)"/>
+    </node>
+
+    <!-- old camera node for v4l2 (cv_camera) -->
+    <node pkg="nodelet" type="nodelet" name="main_camera" args="load cv_camera/CvCameraNodelet main_camera_nodelet_manager" launch-prefix="rosrun clover waitfile $(arg device)" clear_params="true" if="$(eval not simulator and type == 'v4l2')" respawn="true">
         <param name="device_path" value="$(arg device)"/>
         <param name="frame_id" value="main_camera_optical"/>
         <param name="camera_info_url" value="file://$(find clover)/camera_info/fisheye_cam.yaml"/>
 
         <param name="rate" value="100"/> <!-- poll rate -->
-        <param name="cv_cap_prop_fps" value="40"/> <!-- camera FPS -->
+        <param name="cv_cap_prop_fps" value="$(arg fps)"/> <!-- camera FPS -->
         <param name="capture_delay" value="0.02"/> <!-- approximate delay on frame retrieving -->
         <param name="rescale_camera_info" value="true"/> <!-- automatically rescale camera calibration info -->
-
-        <!-- camera resolution -->
-        <param name="image_width" value="320"/>
-        <param name="image_height" value="240"/>
+        <param name="image_width" value="$(arg width)"/>
+        <param name="image_height" value="$(arg height)"/>
     </node>
 
     <!-- camera visualization markers -->
