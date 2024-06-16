@@ -997,3 +997,6 @@ python3-rosdep-modules:
 liborocos-kdl:
   debian:
     bookworm: [liborocos-kdl1.5]
+libcamera_ros:
+  debian:
+    bookworm: [ros-noetic-libcamera-ros]
