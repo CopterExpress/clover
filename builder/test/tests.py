@@ -25,7 +25,7 @@ from led_msgs.msg import LEDStateArray, LEDState
 from aruco_pose.msg import Marker, MarkerArray, Point2D
 from vision_msgs.msg import BoundingBox2D, BoundingBox2DArray, BoundingBox3D, BoundingBox3DArray, \
     Classification2D, Classification3D, Detection2D, Detection2DArray, Detection3D, Detection3DArray, \
-    ObjectHypothesis, ObjectHypothesisWithPose, VisionInfo,
+    ObjectHypothesis, ObjectHypothesisWithPose, VisionInfo
 
 from clover import long_callback
 
