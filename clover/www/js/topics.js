@@ -64,8 +64,11 @@ function viewTopic(topic) {
 			}
 		}
 
-		let txt = `<div class=counter>${counter} received</div>${YAML.stringify(msg)}`; // JSON.stringify(msg, null, 4);
-		topicMessage.innerHTML = txt;
+		let width = Number(params.width) || 100;
+		let indent = Number(params.indent) || 2;
+		let txt = YAML.stringify(msg, { lineWidth: width, indent: indent });
+		let html = `<div class=counter>${counter} received</div>${txt}`; // JSON.stringify(msg, null, 4);
+		topicMessage.innerHTML = html;
 	});
 }
 
