@@ -61,6 +61,7 @@ rosversion web_video_server
 rosversion nodelet
 rosversion image_view
 rosversion stereo_msgs
+rosversion vision_msgs
 
 [[ $(rosversion ws281x) == "0.0.13" ]]
 

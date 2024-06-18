@@ -6,6 +6,9 @@ import os
 import rospy
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import Range, BatteryState
+from vision_msgs.msg import BoundingBox2D, BoundingBox2DArray, BoundingBox3D, BoundingBox3DArray, \
+    Classification2D, Classification3D, Detection2D, Detection2DArray, Detection3D, Detection3DArray, \
+    ObjectHypothesis, ObjectHypothesisWithPose, VisionInfo
 
 import cv2
 import cv2.aruco
