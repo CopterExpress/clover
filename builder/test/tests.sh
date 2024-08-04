@@ -62,6 +62,7 @@ rosversion nodelet
 rosversion image_view
 rosversion stereo_msgs
 rosversion vision_msgs
+rosversion angles
 
 [[ $(rosversion ws281x) == "0.0.13" ]]
 
