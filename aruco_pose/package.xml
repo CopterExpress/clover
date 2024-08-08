@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="3">
   <name>aruco_pose</name>
-  <version>0.24.0</version>
+  <version>0.25.0</version>
   <description>Positioning with ArUco markers</description>
 
   <maintainer email="okalachev@gmail.com">Oleg Kalachev</maintainer>
