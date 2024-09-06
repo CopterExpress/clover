@@ -74,6 +74,8 @@ ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
 
 > **Hint** Вы можете использовать более позднюю версию PX4 с большим риском, что что-то не заработает.
 
+<!-- -->
+
 > **Note** Если процесс клонирования завершится с ошибкой сети (`fatal: fetch-pack: invalid index-pack output`), используйте версию HTTP 1.1 `git config --global http.version HTTP/1.1` (после клонирования верните 2 версию командой `git config --global http.version HTTP/2`). Альтернативным решением будет принудительное клонирование репозитория и субмодулей через SSH командой `git config --global url."git@github.com:".insteadOf https://github.com/` (требует генерации и установки SSH ключа в настройках профиля GitHub).
 
 ## Установка зависимостей PX4
