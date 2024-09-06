@@ -74,6 +74,10 @@ ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
 
 > **Hint** You may use more recent PX4 version, but there would be more risk of something would not be working.
 
+<!-- -->
+
+> **Note** If clone fails with network error (`fatal: fetch-pack: invalid index-pack output`), set HTTP version 1.1 using `git config --global http.version HTTP/1.1` command (don't forget to return it back after clone using `git config --global http.version HTTP/2`). Alternative solution is cloning the repository and submodules through SSH using `git config --global url."git@github.com:".insteadOf https://github.com/` command (requires setting up valid SSH key in GitHub profile settings).
+
 ## Install PX4 prerequisites
 
 PX4 comes with its own script for dependency installation. We may as well leverage it:
