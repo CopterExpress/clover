@@ -45,7 +45,7 @@
 |`EKF2_OF_N_MIN`|0.05||
 |`EKF2_OF_N_MAX`|0.2||
 |`EKF2_HGT_MODE`\*|3 (*Vision*)|При наличии [дальномера](laser.md) и полете над ровным полом — 2 (*Range sensor*)|
-|`EKF2_EVA_NOISE`|0.1||
+|`EKF2_EVA_NOISE`|0.1 rad или 5 deg||
 |`EKF2_EVP_NOISE`|0.1||
 |`EKF2_EV_DELAY`|0||
 |`EKF2_MAG_TYPE`|5 (*None*)|Выключение магнитометра (при навигации внутри помещения)|
