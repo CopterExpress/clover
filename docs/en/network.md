@@ -70,8 +70,11 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
 4. Restart the `dhcpcd` service.
 
     ```bash
+    sudo systemctl daemon-reload
     sudo systemctl restart dhcpcd
     ```
+
+> **Caution** Before restarting services, it is necessary to reload the configuration of daemons, without daemon-reload, because network services will not turn on and access to Raspberry Pi will break!
 
 ## Switching the adapter to the access point mode
 
@@ -109,6 +112,8 @@ On our [RPi image](image.md) the Wi-Fi adapter is configured to use the [access 
     sudo systemctl enable dnsmasq
     sudo systemctl start dnsmasq
     ```
+
+    > **Caution** Before restarting services, it is necessary to reload the configuration of daemons, without daemon-reload, because network services will not turn on and access to Raspberry Pi will break!
 
 4. Restart the `dhcpcd` service.
 
