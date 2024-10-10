@@ -72,7 +72,7 @@ ln -s ~/PX4-Autopilot/Tools/sitl_gazebo ~/catkin_ws/src/
 ln -s ~/PX4-Autopilot/mavlink ~/catkin_ws/src/
 ```
 
-> **Hint** You may use more recent PX4 version, but there would be more risk of something would not be working.
+> **Hint** You may use more recent PX4 version, but something may not work as expected in that case.
 
 <!-- -->
 
