@@ -119,10 +119,10 @@ Build your workspace:
 
 ```bash
 cd ~/catkin_ws
-catkin_make
+catkin_make -j1
 ```
 
-> **Note** If building fails with RAM issues (`c++: fatal error: Killed signal terminated program cc1plus`), reduce the number of parallel jobs using `-j` key. For example, to use only two parallel jobs use `catkin_make -j2` command.
+> **Note** The `-j1` flag means that the build will not use parallel processes, as building with parallel processes on a virtual machine may run out of memory. If you have enough memory, you may not use this flag.
 
 ## Run the simulator
 

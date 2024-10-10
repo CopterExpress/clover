@@ -29,7 +29,7 @@ The recommended virtual machine hypervisor is [UTM app](https://mac.getutm.app/)
 
         <img src="../assets/simulation_ubuntu_account.png" width=400 class="center zoom">
 
-6. Finish the installation and run the system.
+6. Finish the installation and run the system (you need to eject the virtual CD or choose *Boot from next volume* in the boot menu).
 7. Install the simulation using the [native setup manual](simulation_native.md).
 
 ### Troubleshooting
