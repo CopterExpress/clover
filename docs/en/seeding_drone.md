@@ -2,6 +2,7 @@
 
 > **Info** The article is temporarily hidden at the request of the authors.
 
+<!-- markdownlint-disable MD012 -->
 <!--
 
 [CopterHack-2021](copterhack2021.md), team **MINIONS**.

@@ -2,6 +2,7 @@
 
 > **Info** Статья временно скрыта по просьбе авторов.
 
+<!-- markdownlint-disable MD012 -->
 <!--
 
 [CopterHack-2021](copterhack2021.md), команда **MINIONS**.
