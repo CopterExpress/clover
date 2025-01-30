@@ -70,8 +70,11 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 4. Перезапустите службу `dhcpcd`.
 
     ```bash
+    sudo systemctl daemon-reload
     sudo systemctl restart dhcpcd
     ```
+
+> **Caution** Перед перезапуском службы необходимо обновлять конфигурацию сервисов, без daemon-reload сетевые службы не включатся и доступ к Raspberry Pi пропадёт!
 
 ## Переключение адаптера в режим точки доступа
 
@@ -106,13 +109,17 @@ Wi-Fi адаптер на Raspberry Pi имеет два основных реж
 3. Включите службу `dnsmasq`.
 
     ```bash
+    sudo systemctl daemon-reload
     sudo systemctl enable dnsmasq
     sudo systemctl start dnsmasq
     ```
 
+    > **Caution** Перед перезапуском службы необходимо обновлять конфигурацию сервисов, без daemon-reload сетевые службы не включатся и доступ к Raspberry Pi пропадёт!
+
 4. Перезапустите службу `dhcpcd`.
 
     ```bash
+    sudo systemctl daemon-reload
     sudo systemctl start dhcpcd
     ```
 
