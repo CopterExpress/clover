@@ -66,7 +66,7 @@ jobs:
           wget --no-verbose https://clover.coex.tech/clover_en.pdf -P _book/
       - name: Upload artifact
         # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _book
 
@@ -86,4 +86,4 @@ jobs:
           FREEZE_DOCS: ${{ secrets.FREEZE_DOCS }}
         if: ${{ !env.FREEZE_DOCS }}
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
