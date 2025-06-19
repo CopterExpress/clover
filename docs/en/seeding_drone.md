@@ -1,10 +1,5 @@
 # Seed spreading quadcopter
 
-> **Info** The article is temporarily hidden at the request of the authors.
-
-<!-- markdownlint-disable MD012 -->
-<!--
-
 [CopterHack-2021](copterhack2021.md), team **MINIONS**.
 
 Have you ever wondered what a world without trees would look like? Close your eyes, and try to imagine a desolate Earth. There'd be no more paper, and everyone would have to resort to technological use - that is, if anyone was left. Trees are a crucial factor to our existence not only because they produce paper, lumber and chewing gum, but because they serve an important role in the carbon cycle.
@@ -325,5 +320,3 @@ GPIO.cleanup()
 Special thanks to International Ala-Too University for funding the Clover 4 kits.
 
 <img src="../assets/seeding_drone/ala-too.png">
-
--->
