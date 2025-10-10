@@ -24,4 +24,4 @@ For manual package installation and running see [`clover` package documentation]
 
 While the Clover platform source code is available under the MIT License, note, that the [documentation](docs/) is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
 
-The main image for autonomous flight was taken from [Clover](https://github.com/CopterExpress/clover). We would like to express our special thanks to them. The nodes for the autonomous flight of PowerBelow were created by us personally.
+**The main image for autonomous flight was taken from [Clover](https://github.com/CopterExpress/clover). We would like to express our special thanks to them. The nodes for the autonomous flight of PowerBelow were created by us personally.**
