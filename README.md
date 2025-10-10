@@ -11,7 +11,7 @@ Image features:
 * Raspbian Buster
 * [ROS Noetic](http://wiki.ros.org/noetic)
 * Configured networking
-* OpenCV
+* [OpenCV](https://opencv.org/)
 * [`mavros`](http://wiki.ros.org/mavros)
 * Periphery drivers for ROS ([GPIO](https://clover.coex.tech/en/gpio.html), [LED strip](https://clover.coex.tech/en/leds.html), etc)
 * `aruco_pose` package for marker-assisted navigation
