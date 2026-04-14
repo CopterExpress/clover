@@ -51,6 +51,6 @@ The sticks on the screen of the application work just like real sticks. To arm t
 Malfunctions
 ---
 
-* If the interface of the transmitter displays a surely incorrect voltage (e.g., > 5 V), check that the value of PX4 parameter `BAT_N_CELLS` matches the actual number of battery cells. If the displayed voltage is still incorrect, calibrate the battery (TODO: link).
+* If the interface of the transmitter displays a surely incorrect voltage (e.g., > 5 V), check that the value of PX4 parameter `BAT_N_CELLS` matches the actual number of battery cells. If the displayed voltage is still incorrect, calibrate the [power sensor](power.md).
 
 * If instead of mode PX4, text "DISCONNECTED FROM FCU" is displayed, check [Raspberry Pi connection to Pixhawk](connection.md).

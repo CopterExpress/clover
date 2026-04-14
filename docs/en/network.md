@@ -166,7 +166,7 @@ network={
 }
 ```
 
-Inside the config file, general `wpa_supplicant` settings, and the settings for the adapter configuration are specified. The configuration file also contains `network` section with the basic settings of the Wi-Fi network, such as network SSID, password, adapter operating mode. There may be several `network` sections, but only the first valid one is used. For example, if the first section contains a connection to an unavailable network, the adapter will be configured according to a next valid section, if there is one. Read more about the syntax of `wpa_supplicant.conf` [TODO WIKI].
+Inside the config file, general `wpa_supplicant` settings, and the settings for the adapter configuration are specified. The configuration file also contains `network` section with the basic settings of the Wi-Fi network, such as network SSID, password, adapter operating mode. There may be several `network` sections, but only the first valid one is used. For example, if the first section contains a connection to an unavailable network, the adapter will be configured according to a next valid section, if there is one. Read more about the syntax of `wpa_supplicant.conf` in the [Debian manual page](https://manpages.debian.org/buster/wpasupplicant/wpa_supplicant.conf.5.en.html).
 
 #### wpa_passphrase
 

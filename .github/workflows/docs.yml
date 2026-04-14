@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with: { node-version: '10' }
       - name: Setup tools
         run: |
@@ -57,7 +57,7 @@ jobs:
           rm _book/clover_ru.pdf && mv _book/clover_ru_compressed.pdf _book/clover_ru.pdf
           rm _book/clover_en.pdf && mv _book/clover_en_compressed.pdf _book/clover_en.pdf
           ls -lah _book/clover*.pdf
-          echo '::set-output name=GITBOOK_PDF_OK::1'
+          echo 'GITBOOK_PDF_OK=1' >> "$GITHUB_OUTPUT"
       - name: Download older PDFs
         if: ${{ !steps.generate-pdf.outputs.GITBOOK_PDF_OK }}
         run: |

@@ -66,11 +66,11 @@ Flying forward for 1m:
 navigate(x=1.5, frame_id='body')
 ```
 
-[Navigation using ArUco-markers](aruco_marker.md) and [using VPE] are available when using Optical Flow.
+[Navigation using ArUco-markers](aruco_marker.md) and [using VPE](aruco_map.md) are available when using Optical Flow.
 
 ## Additional settings
 
-<!-- TODO: статья по пидам -->
+For additional background on PID tuning, see the [PID tuning guide](calibratePID.md).
 
 If the copter has an unstable position, try to increase the *P* coefficient of speed PID controller - parameters are `MPC_XY_VEL_P` and `MPC_Z_VEL_P`.
 

@@ -118,7 +118,7 @@ Press the *Save* button to save the changed value to the flight controller. Chan
 * `MC_ROLLRATE_I` = 0.050
 * `MC_ROLLRATE_D` = 0.0025
 
-> **Hint** Note that you should fine-tune the PID parameters for each drone individually.  <!-- TODO: add PID article link -->
+> **Hint** Note that you should fine-tune the PID parameters for each drone individually. See the [PID tuning guide](calibratePID.md).
 
 #### Circuit breaker parameters
 
